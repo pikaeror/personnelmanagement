@@ -1,0 +1,15 @@
+﻿<template>
+    <div id='app-root' v-bind:class="{'container-grid' : sidebar, 'container-grid-nosidebar' : !sidebar}"  >
+        <div class="top-menu">
+            <top-menu />
+        </div>
+        <div v-bind:class="{'side-bar' : sidebar, 'side-bar-no' : !sidebar}" >
+            <side-bar />
+        </div>
+        <div class="main">
+            <router-view></router-view>
+        </div>
+    </div>
+</template>
+
+<script src="./app.ts"></script>

@@ -1,0 +1,792 @@
+﻿<template>
+    <div>
+        <div class="pmrequest-title pmrequest-row">
+            Запросы
+        </div>
+        <div class="pmrequest-row">
+            <el-select placeholder="Запрос по" class="pmrequest-select" v-model="type" @change="onTypeChange">
+                <el-option v-for="option in options" :key="option.value" :value="option.value" :label="option.label">
+                </el-option>
+            </el-select>
+        </div>
+        <div v-if="type == 1">
+            <div class="pmrequest-row">
+                <div class="pmrequest-label">
+                    Поиск по:
+                </div>
+
+            </div>
+            <div class="pmrequest-row">
+                <div class="pmrequest-label">
+                    Подразделению
+                </div>
+                <el-button @click="addStructure" size="mini">Добавить подразделение</el-button>
+            </div>
+
+            <div class="pmrequest-structure-element" v-for="(sub, key, index) in structureTrees">
+                {{key + 1}} - {{sub.tree}}
+                <el-button size="mini" @click="removeStructure(sub.id)">Удалить</el-button>
+            </div>
+
+            <div class="pmrequest-row">
+                <div class="pmrequest-label">
+                    Меткам групп подразделений
+                </div>
+                <el-select v-model="structuretype" class="pmrequest-select" placeholder="Метки группы подразделений" multiple filterable no-match-text="Не найдено">
+                    <el-option v-for="stype in structuretypes" :title="stype.name"
+                               :key="stype.id" :label="stype.name" :value="stype.id">
+                    </el-option>
+                </el-select>
+            </div>
+            <div class="pmrequest-row">
+                <div class="pmrequest-label">
+                    Должностям
+                </div>
+                <el-select v-model="positiontype" class="pmrequest-select" placeholder="Наименования должностей" multiple filterable no-match-text="Не найдено">
+                    <el-option v-for="ptype in positiontypes" :title="ptype.name"
+                               :key="ptype.id" :label="shortifyTitle(ptype.name)" :value="ptype.id">
+                    </el-option>
+                </el-select>
+            </div>
+            <div class="pmrequest-row">
+                <div class="pmrequest-label">
+                    Предельным званиям
+                </div>
+                <el-select v-model="rank" class="pmrequest-select" placeholder="Предельные звания" multiple filterable no-match-text="Не найдено" :disabled="ranksexpanded">
+                    <el-option v-for="r in ranks" :title="r.name"
+                               :key="r.id" :label="r.name" :value="r.id">
+                    </el-option>
+                </el-select>
+                <el-checkbox class="pmrequest-marginleft" v-model="ranksexpanded">
+
+                </el-checkbox>
+                <div class="pmrequest-label">
+                    Расширенный вывод по званиям
+                </div>
+            </div>
+            <div class="pmrequest-row pmrequest-label">
+                <el-checkbox v-model="civilonly">Только гражданские</el-checkbox>
+            </div>
+            <div class="pmrequest-row">
+                <div class="pmrequest-label">
+                    Категориям
+                </div>
+                <el-select v-model="positioncategory" class="pmrequest-select" placeholder="Категории" multiple filterable no-match-text="Не найдено">
+                    <el-option v-for="pcategory in positioncategories" :title="pcategory.name"
+                               :key="pcategory.id" :label="pcategory.name" :value="pcategory.id">
+                    </el-option>
+                </el-select>
+            </div>
+            <div class="pmrequest-row pmrequest-label">
+                <el-checkbox v-model="notopchs">Не относятся к ОПЧС</el-checkbox>
+            </div>
+            <div class="pmrequest-row pmrequest-label">
+                Класс гос. служащего
+            </div>
+            <div class="pmrequest-row">
+                <div class="pmrequest-label">
+                    От максимального класса гос. служащего
+                </div>
+                <el-input v-model="civilclasshigh" class="pmrequest-input-num" type="number" clearable></el-input>
+                <div class="pmrequest-label">
+                    До минимального
+                </div>
+                <el-input v-model="civilclasslow" class="pmrequest-input-num" type="number" clearable></el-input>
+
+            </div>
+            <div class="pmrequest-row">
+                <div class="pmrequest-label">
+                    Источникам финансирования
+                </div>
+                <el-select v-model="sof" class="pmrequest-select" placeholder="Источники финансирования" multiple filterable no-match-text="Не найдено">
+                    <el-option v-for="s in sofs" :title="s.name"
+                               :key="s.id" :label="s.name" :value="s.id">
+                    </el-option>
+                </el-select>
+            </div>
+            <div class="pmrequest-row">
+                <div class="pmrequest-label">
+                    Меткам родов деятельности
+                </div>
+                <el-select v-model="mrd" class="pmrequest-select" placeholder="Метки рода деятельности" multiple filterable no-match-text="Не найдено">
+                    <el-option v-for="m in mrds" :title="m.name"
+                               :key="m.id" :label="m.name" :value="m.id">
+                    </el-option>
+                </el-select>
+            </div>
+            <div class="pmrequest-block">
+                <div class="pmrequest-row">
+                    <el-checkbox v-model="replacedbycivil" @change="replacedbycivilnot = false">Только те, которые могут замещаться гражданским</el-checkbox>
+
+                </div>
+                <div class="pmrequest-row">
+                    <el-checkbox v-model="replacedbycivilnot" @change="replacedbycivil = false">Только те, которые не могут замещаться гражданским</el-checkbox>
+                </div>
+            </div>
+            <div class="pmrequest-block">
+                <div class="pmrequest-row">
+                    <el-checkbox v-model="decertificate">Имеется дата разаттестации</el-checkbox>
+                </div>
+                <div class="pmrequest-row">
+                    <el-checkbox v-model="decertificateexpired">Должность должна быть разаттестована к текущей дате</el-checkbox>
+                </div>
+            </div>
+
+            <div class="pmrequest-block">
+                <div class="pmrequest-row">
+                    <el-checkbox v-model="replacedbycivildateavailable">Имеется срок окончания замещения</el-checkbox>
+                </div>
+                <div class="pmrequest-row">
+                    <el-checkbox v-model="replacedbycivildateexpired">Срок окончания замещения истек</el-checkbox>
+                </div>
+            </div>
+
+            <div class="pmrequest-block">
+                <div class="pmrequest-row">
+                    <el-checkbox v-model="signed">Приказ подписан</el-checkbox>
+                </div>
+                <div class="pmrequest-row">
+                    <el-checkbox v-model="notsigned">Приказ не подписан</el-checkbox>
+                </div>
+                <!--<div class="pmrequest-row">
+                <el-checkbox v-model="willbesigned">Должность будет введена, и приказ подписан</el-checkbox>
+            </div>
+            <div class="pmrequest-row">
+                <el-checkbox v-model="willbenotsigned">Должность будет введена, но приказ не подписан</el-checkbox>
+            </div>-->
+            </div>
+            <div class="pmrequest-row">
+
+            </div>
+            <div class="pmrequest-row">
+                Параметры вывода
+            </div>
+            <div class="pmrequest-row">
+                <el-checkbox v-model="displaytreeseparately">Подразделения в отдельные стобцы</el-checkbox>
+            </div>
+
+            <div class="pmrequest-row">
+                <el-button @click="request" :disabled="loading">Запрос</el-button>
+                <div v-if="loading" class="pmrequest-spinner fingerprint-spinner">
+                    <div class="spinner-ring"></div>
+                    <div class="spinner-ring"></div>
+                    <div class="spinner-ring"></div>
+                    <div class="spinner-ring"></div>
+                    <div class="spinner-ring"></div>
+                    <div class="spinner-ring"></div>
+                    <div class="spinner-ring"></div>
+                    <div class="spinner-ring"></div>
+                    <div class="spinner-ring"></div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+        <div v-if="type == 2">
+            <div class="pmrequest-row">
+                <el-checkbox v-model="structurecountmode">Режим предоставления сведений о штатной численности</el-checkbox>
+            </div>
+            <div class="pmrequest-row">
+                <el-checkbox v-model="structurecountallinclusive" :disabled="structureselfcount">Подсчитывать все входящие подразделения, вне зависимости от типа</el-checkbox>
+            </div>
+
+            <div v-if="!structurecountmode">
+                <b>Параметры для основного режима</b>
+                <div>
+                    <el-checkbox v-model="structuresub">Включать подчиненные подразделения подразделений, прошедших фильтрацию</el-checkbox>
+                </div>
+                <div>
+                    Уровень вложенности для пункта выше. 0, если неограниченный
+                    <el-input v-model="structuresublevel" type="number" :disabled="!structuresub"></el-input>
+                </div>
+                <div>
+                    <el-checkbox v-model="structureselfcount" :disabled="structurecountallinclusive">Не включать численность подчиненных подразделений</el-checkbox>
+                </div>
+            </div>
+            <br />
+            <div class="pmrequest-row">
+                <div class="pmrequest-label">
+                    Поиск по:
+                </div>
+
+            </div>
+            <div class="pmrequest-row">
+                <div class="pmrequest-label">
+                    Подразделению
+                </div>
+                <el-button @click="addStructure" size="mini">Добавить подразделение</el-button>
+            </div>
+
+            <div class="pmrequest-structure-element" v-for="(sub, key, index) in structureTrees">
+                {{key + 1}} - {{sub.tree}}
+                <el-button size="mini" @click="removeStructure(sub.id)">Удалить</el-button>
+            </div>
+
+            <div class="pmrequest-row">
+                <div class="pmrequest-label">
+                    Метки типов подразделений
+                </div>
+                <el-select v-model="structuretype" class="pmrequest-select" placeholder="Метки типов подразделений" multiple filterable no-match-text="Не найдено">
+                    <el-option v-for="stype in structuretypes" :title="stype.name"
+                               :key="stype.id" :label="stype.name" :value="stype.id">
+                    </el-option>
+                </el-select>
+            </div>
+            <div class="pmrequest-row">
+                <div class="pmrequest-label">
+                    Разряду подразделения
+                </div>
+                <!--<el-input v-model="structurerank" type="number" clearable></el-input>-->
+                <el-select v-model="structurerank" class="pmrequest-select" placeholder="Разряды подразделений" multiple filterable no-match-text="Не найдено">
+                    <el-option v-for="i in 4"
+                               :key="i-1" :label="i-1" :value="i-1">
+                    </el-option>
+                </el-select>
+            </div>
+            <div class="pmrequest-row">
+                <div class="pmrequest-label">
+                    Областям
+                </div>
+                <el-select v-model="structureregion" class="pmrequest-select" placeholder="Области" multiple filterable no-match-text="Не найдено">
+                    <el-option v-for="sregion in structureregions" :title="sregion.name"
+                               :key="sregion.id" :label="sregion.name" :value="sregion.id">
+                    </el-option>
+                </el-select>
+            </div>
+            <div class="pmrequest-row">
+                <div class="pmrequest-label">
+                    Населенный пункт
+                </div>
+                <el-input v-model="structurecity" clearable></el-input>
+            </div>
+            <div class="pmrequest-row">
+                <div class="pmrequest-label">
+                    Улица
+                </div>
+                <el-input v-model="structurestreet" clearable></el-input>
+            </div>
+            <div class="pmrequest-row">
+
+            </div>
+            <div class="pmrequest-row">
+                Параметры вывода
+            </div>
+            <div class="pmrequest-row">
+                <el-checkbox v-model="displaytreeseparately" :disabled="structurecountmode">Подразделения в отдельные стобцы</el-checkbox>
+            </div>
+
+
+            <div class="pmrequest-row">
+                <el-button @click="request" :disabled="loading">Запрос</el-button>
+                <div v-if="loading" class="pmrequest-spinner fingerprint-spinner">
+                    <div class="spinner-ring"></div>
+                    <div class="spinner-ring"></div>
+                    <div class="spinner-ring"></div>
+                    <div class="spinner-ring"></div>
+                    <div class="spinner-ring"></div>
+                    <div class="spinner-ring"></div>
+                    <div class="spinner-ring"></div>
+                    <div class="spinner-ring"></div>
+                    <div class="spinner-ring"></div>
+
+                </div>
+            </div>
+
+        </div>
+
+        <div v-if="type == 3">
+            <div class="pmrequest-row">
+                <div class="pmrequest-label">
+                    Поиск по:
+                </div>
+
+            </div>
+            <div class="pmrequest-row">
+                <div class="pmrequest-label">
+                    Подразделению
+                </div>
+                <el-button @click="addStructure" size="mini">Добавить подразделение</el-button>
+            </div>
+
+            <div class="pmrequest-structure-element" v-for="(sub, key, index) in structureTrees">
+                {{key + 1}} - {{sub.tree}}
+                <el-button size="mini" @click="removeStructure(sub.id)">Удалить</el-button>
+            </div>
+
+            <div class="pmrequest-row">
+                <div class="pmrequest-label">
+                    Метки типов подразделений
+                </div>
+                <el-select v-model="structuretype" class="pmrequest-select" placeholder="Метки типов подразделений" multiple filterable no-match-text="Не найдено">
+                    <el-option v-for="stype in structuretypes" :title="stype.name"
+                               :key="stype.id" :label="stype.name" :value="stype.id">
+                    </el-option>
+                </el-select>
+            </div>
+            <!--<div class="pmrequest-row">
+            <div class="pmrequest-label">
+                Разряду подразделения
+            </div>
+            <el-select v-model="structurerank" class="pmrequest-select" placeholder="Разряды подразделений" multiple filterable no-match-text="Не найдено">
+                <el-option v-for="i in 4"
+                           :key="i-1" :label="i-1" :value="i-1">
+                </el-option>
+            </el-select>
+        </div>
+        <div class="pmrequest-row">
+            <div class="pmrequest-label">
+                Областям
+            </div>
+            <el-select v-model="structureregion" class="pmrequest-select" placeholder="Области" multiple filterable no-match-text="Не найдено">
+                <el-option v-for="sregion in structureregions" :title="sregion.name"
+                           :key="sregion.id" :label="sregion.name" :value="sregion.id">
+                </el-option>
+            </el-select>
+        </div>
+        <div class="pmrequest-row">
+            <div class="pmrequest-label">
+                Населенный пункт
+            </div>
+            <el-input v-model="structurecity" clearable></el-input>
+        </div>
+        <div class="pmrequest-row">
+            <div class="pmrequest-label">
+                Улица
+            </div>
+            <el-input v-model="structurestreet" clearable></el-input>
+        </div>
+        <div class="pmrequest-row">
+
+        </div>
+        <div class="pmrequest-row">
+            Параметры вывода
+        </div>
+        <div class="pmrequest-row">
+            <el-checkbox v-model="displaytreeseparately" :disabled="structurecountmode">Подразделения в отдельные стобцы</el-checkbox>
+        </div>-->
+
+
+        <div class="pmrequest-row">
+            <el-button @click="request" :disabled="loading">Запрос</el-button>
+            <div v-if="loading" class="pmrequest-spinner fingerprint-spinner">
+                <div class="spinner-ring"></div>
+                <div class="spinner-ring"></div>
+                <div class="spinner-ring"></div>
+                <div class="spinner-ring"></div>
+                <div class="spinner-ring"></div>
+                <div class="spinner-ring"></div>
+                <div class="spinner-ring"></div>
+                <div class="spinner-ring"></div>
+                <div class="spinner-ring"></div>
+
+            </div>
+        </div>
+
+    </div>
+
+
+        <el-dialog :visible.sync="exceldialogvisible" width="60%" append-to-body>
+            <div v-if="!newdisplay">
+                <div class="pmrequest-row">
+                    <div v-if="pmresultsingleranksdisplay">
+                        <div>
+                            По званиям
+                        </div>
+                        <div v-for="singlerank in pmresultsingleranks" class="pmrequest-singlerank">
+                            <div>
+                                <b>{{singlerank.rank}}</b>
+                            </div>
+                            <div>
+                                {{singlerank.uprankready}}
+                            </div>
+                            <div>
+                                Предельное звание — {{singlerank.defaultcount}}
+                            </div>
+                            <div>
+                                Максимальное предельное звание — {{singlerank.maxcount}}
+                            </div>
+                            <div>
+                                Максимально возможное количество — {{singlerank.absolutecount}}
+                            </div>
+
+                            <div>
+                                Минимально возможное количество — {{singlerank.mincount}}
+                            </div>
+
+                        </div>
+                        <div class="pmrequest-singlerank">
+                            <div>
+                                <b>Гражданские должности</b>
+                            </div>
+                            <div v-for="civilPart in civil">
+                                {{civilPart.name}} — {{civilPart.count}}
+                            </div>
+                        </div>
+                    </div>
+                    <div v-else>
+                        <table class="pmrequest-label">
+                            <tr v-for="singlerank in pmresultsingleranks" class="pmrequest-table-tr ">
+                                <td class="pmrequest-table-td">
+                                    {{singlerank.rank}}
+                                </td>
+                                <td class="pmrequest-table-td">
+                                    {{singlerank.defaultcount}}
+                                </td>
+                                <td v-for="uprankmappart in singlerank.uprankmappart" class="pmrequest-table-td">
+                                    {{uprankmappart}}
+                                </td>
+                            </tr>
+                        </table>
+
+                        Дано:
+                        <table class="pmrequest-table">
+                            <tr v-for="singlerank in pmresultsingleranks" class="pmrequest-table-tr ">
+                                <td class="pmrequest-table-td">
+                                    {{singlerank.rank}}
+                                </td>
+                                <td class="pmrequest-table-td">
+                                    {{singlerank.defaultcount}}
+                                </td>
+                                <td class="pmrequest-table-td">
+                                    {{singlerank.uprankready}}
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="pmrequest-row">
+                    Итого — {{count}}
+                </div>
+            </div>
+            <!--NEW-->
+            <div v-else>
+                <div v-if="pmresultsingleranksdisplay">
+                    <div class="pmrequest-singlerank-new" v-for="singlerank in pmresultsingleranks">
+                        <div class="pmrequest-singlerank-title">
+                            <div>
+                                СВЕДЕНИЯ
+                            </div>
+                            <div>
+                                о штатной численности со специальным званием "{{singlerank.rank}}"
+                            </div>
+                        </div>
+                        <table class="pmrequest-tablenew">
+                            <tr>
+                                <td>
+                                    Общее количество со специальным званием "{{singlerank.rank}}"
+                                </td>
+                                <td class="pmrequest-tablenew-td-border">
+                                    <b>{{singlerank.maxcount}} ед.</b>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <b>из них:</b>
+                                </td>
+                                <td class="pmrequest-tablenew-noborder">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    имеют предельное звание "{{singlerank.rank}}"
+                                </td>
+                                <td class="pmrequest-tablenew-td-border">
+                                    {{singlerank.defaultcount}} ед.
+                                </td>
+                            </tr>
+                            <tr v-if="singlerank.unitedlengthmax > 0">
+                                <td class="pmrequest-tablenew-td-border pmrequest-tablenew-td-back-green">
+                                    повышаются до звания "{{singlerank.rank}}" со звания:
+                                </td>
+                                <td class="pmrequest-tablenew-td-back-red">
+                                    со звания "{{singlerank.rank}}" повышаются до звания:
+                                </td>
+                            </tr>
+                            <tr v-for="i in singlerank.unitedlengthmax">
+                                <td class="pmrequest-tablenew-td-border">
+                                    <table class="pmrequest-tablenew-sub">
+                                        <tr v-if="getComefrominfo(singlerank, i) != null">
+                                            <td class="pmrequest-tablenew-td-subfield">
+                                                {{getComefrominfo(singlerank, i).name}}
+                                                <template v-if="getComefrominfo(singlerank, i).up == 1">
+                                                    (на 1 звание)
+                                                </template>
+                                                <template v-else>
+                                                    (на {{getComefrominfo(singlerank, i).up}} звания)
+                                                </template>
+                                            </td>
+                                            <td class="pmrequest-tablenew-td-back-green pmrequest-tablenew-td-subnumber">
+                                                {{getComefrominfo(singlerank, i).value}} ед.
+                                            </td>
+                                        </tr>
+                                        <tr v-else>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                    </table>
+                                </td>
+                                <td>
+                                    <table class="pmrequest-tablenew-sub">
+                                        <tr v-if="getUpinfo(singlerank, i) != null">
+                                            <td class="pmrequest-tablenew-td-subfield">
+                                                {{getUpinfo(singlerank, i).name}}
+                                                <template v-if="getUpinfo(singlerank, i).up == 1">
+                                                    (на 1 звание)
+                                                </template>
+                                                <template v-else>
+                                                    (на {{getUpinfo(singlerank, i).up}} звания)
+                                                </template>
+                                            </td>
+                                            <td class="pmrequest-tablenew-td-back-red pmrequest-tablenew-td-subnumber">
+                                                {{getUpinfo(singlerank, i).value}} ед.
+                                            </td>
+                                        </tr>
+                                        <tr v-else>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div v-else>
+                    <div class="pmrequest-singlerank-title">
+                        <div>
+                            СВЕДЕНИЯ
+                        </div>
+                        <div>
+                            о штатной численности подразделения с учетом повышения штатно-должностной категории
+                        </div>
+                    </div>
+                    <table class="pmrequest-tablenew">
+                        <tr>
+                            <td style="width: 27%;">
+                                Звание
+                            </td>
+                            <td class="pmrequest-tablenew-td-border-left">
+                                <div class="pmrequest-tablenew-text-middle pmrequest-tablenew-td-border-bottom" style="margin-left: -6px;">
+                                    Количество штатных должностей с:
+                                </div>
+                                <div>
+                                    <table class="pmrequest-autowidth" style="margin-left: -6px;">
+                                        <tr>
+                                            <td v-for="i in absoluteup+1" class="pmrequest-tablenew-td-autowidth " :style="tableautowidth(absoluteup)+1">
+                                                <template v-if="i == 1">
+                                                    предельным званием
+                                                </template>
+                                                <template v-else-if="i == 2">
+                                                    повышением на {{i-1}} звание
+                                                </template>
+                                                <template v-else>
+                                                    повышением на {{i-1}} звания
+                                                </template>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </td>
+
+                        </tr>
+                        <tr v-for="singlerank in pmresultsingleranks" class="pmrequest-table-tr pmrequest-tablenew-back-brown">
+                            <td>
+                                {{singlerank.rank}}
+                            </td>
+                            <td>
+                                <table class="pmrequest-autowidth" style="margin-left: -6px;">
+                                    <tr>
+                                        <td v-for="i in absoluteup+1" class="pmrequest-tablenew-td-autowidth pmrequest-tablenew-td-heightmax" :style="tableautowidth(absoluteup)+1">
+                                            <template v-if="i == 1">
+                                                {{singlerank.defaultcount}}
+                                            </template>
+                                            <template v-else>
+                                                {{singlerank.sumunited[i-2]}}
+                                            </template>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr class="pmrequest-tablenew-back-silver">
+                            <td>
+                                Переменный состав:
+                            </td>
+                            <td>
+                                <table class="pmrequest-autowidth" style="margin-left: -6px;">
+                                    <tr>
+                                        <td v-for="i in absoluteup+1" class="pmrequest-tablenew-td-subnumber " :style="tableautowidth(absoluteup+1)">
+                                            {{countvar}}
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+
+                        </tr>
+                        <tr v-for="singlerank in pmresultsingleranks" v-if="singlerank.defaultcountvar > 0" class="pmrequest-table-tr pmrequest-tablenew-back-silver">
+                            <td>
+                                {{singlerank.rank}}
+                            </td>
+                            <td>
+                                <table class="pmrequest-autowidth" style="margin-left: -6px;">
+                                    <tr>
+                                        <td v-for="i in absoluteup+1" class="pmrequest-tablenew-td-autowidth pmrequest-tablenew-td-heightmax" :style="tableautowidth(absoluteup)+1">
+                                            {{singlerank.defaultcountvar}}
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr v-for="civilPart in civil" class="pmrequest-tablenew-back-green">
+                            <td>
+                                {{civilPart.name}}
+                            </td>
+                            <td>
+                                <table class="pmrequest-autowidth" style="margin-left: -6px;">
+                                    <tr>
+                                        <td v-for="i in absoluteup+1" class="pmrequest-tablenew-td-subnumber " :style="tableautowidth(absoluteup+1)">
+                                            <template v-if="i == 1">
+                                                {{civilPart.count}}
+                                            </template>
+                                            <template v-else>
+                                                {{civilPart.count}}
+                                            </template>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                ИТОГО
+                            </td>
+                            <td>
+                                <table class="pmrequest-autowidth" style="margin-left: -6px;">
+                                    <tr>
+                                        <td v-for="i in absoluteup+1" class="pmrequest-tablenew-td-subnumber " :style="tableautowidth(absoluteup+1)">
+                                            {{count}}
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                    <br />
+                    <table class="pmrequest-tablenew">
+                        <tr>
+                            <td>
+                                Звание
+                            </td>
+                            <td class="pmrequest-tablenew-td-border-left">
+                                Количество штатных ед.
+                            </td>
+                            <td style="width: 50%;">
+                                <div class="pmrequest-tablenew-td-autowidth pmrequest-tablenew-td-border-bottom">
+                                    Из них имеют возможность подняться на:
+                                </div>
+                                <div>
+                                    <table class="pmrequest-autowidth ">
+                                        <tr>
+                                            <td v-for="i in absoluteup" class="pmrequest-tablenew-td-autowidth " :style="tableautowidth(absoluteup)">
+                                                <!---->
+                                                <template v-if="i == 1">
+                                                    1 уровень
+                                                </template>
+                                                <template v-else>
+                                                    {{i}} уровня
+                                                </template>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr v-for="singlerank in pmresultsingleranks" class="pmrequest-table-tr pmrequest-tablenew-back-brown">
+                            <td>
+                                {{singlerank.rank}}
+                            </td>
+                            <td class="pmrequest-tablenew-td-border-left">
+                                {{singlerank.defaultcount}}
+                            </td>
+                            <td>
+                                <table class="pmrequest-autowidth">
+                                    <tr>
+                                        <td v-for="i in absoluteup" class="pmrequest-tablenew-td-subnumber " :style="tableautowidth(absoluteup)">
+                                            <template v-if="getUpinfo(singlerank, i) != null">
+                                                {{getUpinfo(singlerank, i).value}}
+                                            </template>
+                                            <template v-else>
+                                                -
+                                            </template>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr class="pmrequest-tablenew-back-silver">
+                            <td>
+                                Переменный состав
+                            </td>
+                            <td class="pmrequest-tablenew-td-border-left">
+                                {{countvar}}
+                            </td>
+                            <td>
+                                <table class="pmrequest-autowidth">
+                                    <tr>
+                                        <td v-for="i in absoluteup" class="pmrequest-tablenew-td-subnumber " :style="tableautowidth(absoluteup)">
+                                            -
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr v-for="singlerank in pmresultsingleranks" v-if="singlerank.defaultcountvar > 0" class="pmrequest-table-tr pmrequest-tablenew-back-silver">
+                            <td>
+                                {{singlerank.rank}}
+                            </td>
+                            <td class="pmrequest-tablenew-td-border-left">
+                                {{singlerank.defaultcountvar}}
+                            </td>
+                            <td>
+                                <table class="pmrequest-autowidth">
+                                    <tr>
+                                        <td v-for="i in absoluteup" class="pmrequest-tablenew-td-subnumber " :style="tableautowidth(absoluteup)">
+                                            {{singlerank.defaultcountvar}}
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr v-for="civilPart in civil" class="pmrequest-tablenew-back-green">
+                            <td>
+                                {{civilPart.name}}
+                            </td>
+                            <td class="pmrequest-tablenew-td-border-left">
+                                {{civilPart.count}}
+                            </td>
+                            <td>
+                                <table class="pmrequest-autowidth">
+                                    <tr>
+                                        <td v-for="i in absoluteup" class="pmrequest-tablenew-td-subnumber " :style="tableautowidth(absoluteup)">
+                                            -
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <el-button @click="downloadExcel">Скачать Excel</el-button>
+        </el-dialog>
+
+    </div>
+</template>
+<script src="./pmrequestpanel.ts"></script>

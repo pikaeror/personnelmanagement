@@ -1,0 +1,46 @@
+﻿<template>
+    <div v-if="visible > 0" class="widget">
+        <i @click="close" class="el-icon-close widget-close"></i>
+        <div class="widget-title">
+            {{title}}
+        </div>
+        <div class="widget-content widget-content-inline">
+            <div v-for="department in departments" class="department" v-if="!isDeletedSigned(department)">
+                <el-dropdown class="department-settings" placement="top" @command="handleCommand">
+                    <div>Действия</div>
+                    <el-dropdown-menu slot="dropdown">
+                        <!--<el-dropdown-item v-if="hasAccessToEdit" :command="addDepartmentID(department.id)">Добавить подотдел</el-dropdown-item>-->
+                        <el-dropdown-item v-if="hasAccessToEdit" :command="renameDepartmentID(department.id)">Переименовать отдел</el-dropdown-item>
+                        <el-dropdown-item v-if="hasAccessToEdit" :command="removeDepartmentID(department.id)">Упразднить отдел</el-dropdown-item>
+                    </el-dropdown-menu>
+                </el-dropdown>
+
+                <div @click="openDepartment($event, department.id, department.name)" class="department-name">
+                    {{department.name}}
+                    <span class="department-notsignedandcreated" v-if="isNotSignedAndCreated(department)"> (Создан, но приказ не подписан)</span>
+                    <span class="department-issignedandwillbecreated" v-if="isSignedAndWillBeCreated(department)"> (Будет создан)</span>
+                    <span class="department-isnotsignedandwillbecreated" v-if="isNotSignedAndWillBeCreated(department)"> (Будет создан, но приказ не подписан)</span>
+                    <span class="department-isdeletedunsigned" v-if="isDeletedUnsigned(department)"> (Упразднен, но приказ не подписан)</span>
+                    <span class="department-iswillbedeletedsigned" v-if="isWillBeDeletedSigned(department)"> (Будет упразднен)</span>
+                    <span class="department-iswillbedeletedunsigned" v-if="isWillBeDeletedUnsigned(department)"> (Будет упразднен, но приказ не подписан)</span>
+                    <span class="department-iswillbedeletedunsigned" v-if="isRenamedNotSigned(department)"> (Переименован, но приказ не подписан)</span>
+                    <span class="department-iswillbedeletedunsigned" v-if="isWillBeRenamed(department)"> (Будет переименован)</span>
+                    <span class="department-iswillbedeletedunsigned" v-if="isWillBeRenamedNotSigned(department)"> (Будет переименован, но приказ не подписан)</span>
+                </div>
+
+            </div>
+            <div v-if="hasAccessToEdit" class="department">
+                <div class="department-name department-addnew"  @click="addDepartment">
+                    <i class="el-icon-plus"></i>
+                </div>
+            </div>
+
+        </div>
+
+        <el-dialog :visible.sync="modalDepartmentManagingPanelVisible" width="40%" v-draggable>
+            <departmentmanagingpanel :visible.sync="modalDepartmentManagingPanelVisible" :parent="departmentManagingParent" :structure="departmentManagingStructure" 
+                                    :type="departmentManagingType" />
+        </el-dialog>
+    </div>
+</template>
+<script src="./departmentslist.ts"></script>

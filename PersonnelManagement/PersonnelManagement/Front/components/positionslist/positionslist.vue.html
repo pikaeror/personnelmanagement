@@ -1,0 +1,486 @@
+﻿<template>
+    <!--<div v-if="visible > 0" class="widget" style="overflow-y: scroll; max-height: 900px;">-->
+    <div v-if="visible > 0" class="widget" style="overflow-y: scroll; max-height: 900px;">
+        <div class="widget-title">
+            {{grandparent}}
+        </div>
+        
+        <div v-for="posdepgroup in posdepgroups">
+            <i @click="close" class="el-icon-close widget-close"></i>
+            <div class="widget-title-block">
+                <div class="widget-title-block-left">
+                    <div class="widget-info">
+                        Численность по бюджетам
+                    </div>
+                    <div v-if="structureinfo != null">
+                        <div title="В скобках указана численность должностей, приказы которых еще не подписаны" v-for="sofReady in structureinfo.sofsReady ">
+                            {{sofReady}}
+                        </div>
+                    </div>
+                </div>
+                <div class="widget-title-block-middle">
+                    <div class="widget-title">
+                        <template v-if="posdepgroup.padding">
+                            Подбивка
+                        </template>
+                        <template v-else>
+                            {{title}}
+                        </template>
+                    </div>
+                </div>
+                <div class="widget-title-block-right">
+                    <div>
+                        <div class="widget-info">
+                            Общая численность
+                        </div>
+                        <div v-if="structureinfo != null" title="В скобках указана численность должностей, приказы которых еще не подписаны">
+                            {{+structureinfo.positionCountSigned.toFixed(2)}}<span v-if="structureinfo.positionCountUnsigned.toFixed(2) != 0">({{+structureinfo.positionCountUnsigned.toFixed(2)}})</span>
+                        </div>
+                    </div>
+                    <div v-if="structureinfo != null && (structureinfo.varCountSigned > 0 || structureinfo.varCountUnsigned > 0)">
+                        <div class="widget-info">
+                            Переменный состав
+                        </div>
+                        <div title="В скобках указана численность должностей, приказы которых еще не подписаны">
+                            {{+structureinfo.varCountSigned.toFixed(2)}}({{+structureinfo.varCountUnsigned.toFixed(2)}})
+                        </div>
+                    </div>
+                    <el-popover placement="bottom"
+                                width="300"
+                                trigger="click">
+                        <div slot="reference" class="widget-title-block-addremove-openlist">
+                            
+                            <div class="widget-title-block-addremove-div widget-title-block-add" v-if="structureinfo != null && structureinfo.positionAddFuture > 0">
+                                <span>вводится</span> <span>+{{+structureinfo.positionAddFuture.toFixed(2)}}</span> 
+                            </div>
+                            <div class="widget-title-block-addremove-div widget-title-block-remove" v-if="structureinfo != null && structureinfo.positionRemoveFuture > 0">
+                                <span>сокращается</span> <span class="widget-title-block-addremove-label">-{{+structureinfo.positionRemoveFuture.toFixed(2)}}</span> 
+                             </div /> 
+                        </div>
+                        <!--<el-button slot="reference" class="position-additional" @click="loadAdditionaldata(posdep)"><div>Подробнее</div></el-button>-->
+                        <div class="widget-title-block-addremove-list">
+                            <div v-if="structureinfo != null">
+                                <div class="widget-title-block-addremove-excelbutton" @click="excelAddRemove()">
+                                    Excel
+                                </div>
+                                <div v-for="addremove in structureinfo.positionFutureDetailed">
+                                    <label class="widget-title-block-addremove">
+                                        {{addremove.split('c')[0]}}
+                                    </label>
+                                    <label class="widget-title-block-addremove-date">
+                                        с {{addremove.split('c')[1]}}
+                                    </label>
+
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </el-popover>
+                </div>
+            </div>
+            
+            <div class="widget-content widget-content-inline">
+                <!--Кнопка для введения новой должности-->
+                <div v-if="!lastNonSubAnyNew">
+                    <div v-if="hasAccessToEdit && !personsMode()" class="position">
+                        <el-dropdown class="position-name position-addnew" placement="top" @command="handleExtended">
+                            <span class="el-dropdown-link position-plus">
+                                <i class="el-icon-plus "></i>
+                            </span>
+                            <el-dropdown-menu slot="dropdown">
+                                <el-dropdown-item :command="addNewPosition">Ввести должность</el-dropdown-item>
+                                <!--<el-dropdown-item :command="addNewDepartment">Создать подотдел</el-dropdown-item>-->
+                            </el-dropdown-menu>
+                        </el-dropdown>
+                    </div>
+                </div>
+
+                <!--Кнопка для перевода в распоряжение начальника-->
+                <div v-if="!lastNonSubAnyNew && personsMode()">
+                    <div v-if="hasAccessToEdit && transfer" class="position-person" @click="appointPersonToStructure()">
+                        <div class="position-name position-transfer">
+                            Перевести в распоряжение начальника подразделения
+                        </div>
+
+                    </div>
+                </div>
+
+                <template v-for="posdep in posdepgroup.posdeps">
+                    <div v-if="!personsMode()">
+                        <!--COMPACT VIEW-->
+                        <div v-bind:class="{'department-div': !posdep.isposition }" v-if="compactView()">
+                            <!--COMPACT POSITION-->
+                            <div v-bind:class="{'position-expiresoon' : posdep.expiresoon, 'position-willbeadded' : isDecreeAddSigned(posdep), 'position-willbedeleted' : isDecreeDeleteSigned(posdep), 'position-head': posdep.headingthisstructure}" class="position">
+                                <div class="position-photo" v-bind:class="{'position-nophoto': !hasPhoto(posdep)}">
+                                    <!--v-bind:style="{'background-image': photoCompact(posdep)}"-->
+                                </div>
+                                <div class="position-grid-compact">
+                                    <!--top part of compact position-->
+                                    <div class="position-grid-top-compact">
+                                        <div class="position-sof-compact">
+                                            <div v-for="str in posdep.sofmapstring">{{str}}</div>
+                                        </div>
+                                        <div class="position-name-compact">
+                                            <div class="position-nameblock-compact">
+                                                <div class="position-nameblock-name-compact">
+                                                    <!--{{positiontypeToString(posdep.positiontype)}}-->
+                                                    <div :title="positiontypeToString(posdep.positiontype)">
+                                                        {{positiontypeToStringShort(posdep.positiontype)}}
+                                                    </div>
+                                                </div>
+                                                <div class="position-nameblock-rank-compact">
+                                                    {{rankToString(posdep.rankcap)}}
+                                                </div>
+                                                <div class="position-nameblock-category-compact">
+                                                    {{positioncategoryToString(posdep.positioncategory)}}
+                                                </div>
+                                                <div class="position-nameblock-compact-bottom">
+
+                                                </div>
+                                                <div class="position-nameblock-replaced-compact" v-if="posdep.replacedbycivilquantity > 0">
+                                                    Может замещаться гражданским персоналом: {{posdep.replacedbycivilquantity}}
+                                                    <span class="position-nameblock-name-alt-compact" v-if="posdep.replacedbycivilpositiontypeobject != null && positiontypeGetId(posdep.positiontype) != posdep.replacedbycivilpositiontype">
+                                                        ({{positiontypeToString(posdep.replacedbycivilpositiontypeobject)}})
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="position-quantity-compact">
+                                            <span class="position-nameblock-compact-quantity">{{posdep.quantity}}</span>
+                                            <div v-for="str in posdep.altranksquantitystring">
+                                                {{str}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--bottom part of compact position-->
+                                    <div class="position-grid-bottom-compact">
+                                        <div class="position-dateactiveblock-compact">
+                                            <div v-for="str in posdep.dateactive" class="position-dateactive-descr-green">{{str}}</div>
+
+                                        </div>
+                                        <div class="position-dateinactiveblock-compact">
+                                            <div v-for="str in posdep.dateinactive" class="position-dateinactive-descr-red">{{str}}</div>
+                                        </div>
+
+                                    </div>
+                                    <span class="position-isnotsignedandwillbecreated" v-if="isDeletedUnsigned(posdep) || isNotSignedAndWillBeCreated(posdep) || isNotSignedAndCreated(posdep) || isWillBeDeletedUnsigned(posdep)"> (Приказ не подписан)</span>
+                                </div>
+                                <el-dropdown v-if="!posdep.headingthisstructure" class="position-settings" placement="top" @command="handleCommand">
+                                    <div>Действия</div>
+                                    <el-dropdown-menu slot="dropdown">
+                                        <!--<el-dropdown-item v-if="hasAccessToEdit" :command="addDepartmentID(department.id)">Добавить подотдел</el-dropdown-item>-->
+                                        <el-dropdown-item v-if="hasAccessToEdit && isUnsignedCreate(posdep)" :command="renamedecreePositionID(posdep.id)">Редактировать должность</el-dropdown-item>
+                                        <el-dropdown-item v-if="hasAccessToEdit && !isUnsigned(posdep)" :command="renamePositionID(posdep.id)">Изменить должность</el-dropdown-item>
+                                        <el-dropdown-item v-if="hasAccessToEdit && isUnsigned(posdep)" :command="removedecreePositionID(posdep.id)">Убрать из проекта приказа</el-dropdown-item>
+                                        <el-dropdown-item v-if="hasAccessToEdit && !isUnsigned(posdep)" :command="removePositionID(posdep.id)">Сократить должность</el-dropdown-item>
+
+                                    </el-dropdown-menu>
+                                </el-dropdown>
+                                <el-popover placement="right"
+                                            title="Описание должности"
+                                            width="300"
+                                            trigger="hover">
+                                    <el-button slot="reference" class="position-info"><div>Инфо</div></el-button>
+                                    <div class="positionslist-inforow">Предельное звание — {{rankToString(posdep.rankcap)}}</div>
+                                    <div class="positionslist-inforow">Категория — {{positioncategoryToString(posdep.positioncategory)}}</div>
+                                    <div class="positionslist-inforow">Источник финансирования — {{sofToString(posdep.sof)}}</div>
+                                </el-popover>
+
+                            </div>
+                        </div>
+                        <!--NOT COMPACT VIEW-->
+                        <div v-bind:class="{'department-div': !posdep.isposition }" v-else>
+                            <!--NOT COMPACT POSITION-->
+                            <div v-bind:class="{'position-expiresoon' : posdep.expiresoon, 'position-willbeadded' : isDecreeAddSigned(posdep), 'position-willbedeleted' : isDecreeDeleteSigned(posdep), 'position-head' : posdep.headingthisstructure}" class="position">
+                                <!-- Оставить для прохождения службы    <div class="position-photo" v-bind:class="{'position-nophoto': !hasPhoto(posdep)}" v-bind:style="{'background-image': photoSrc(posdep)}">
+                    </div>-->
+                                <div class="position-grid">
+                                    <div class="position-grid-main">
+                                        <div class="position-leftblock">
+                                            <div class="position-sof">
+                                                <div v-for="str in posdep.sofmapstring">{{str}}</div>
+                                            </div>
+                                            <div class="position-mrd">
+                                                <div class="position-mrd-title">Метки рода деятельности</div>
+                                                <div v-for="str in posdep.mrds">
+                                                    {{str}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="position-name">
+                                            <div class="position-nameblock">
+
+                                                <div class="position-nameblock-name">
+                                                    <div :title="positiontypeToString(posdep.positiontype)">
+                                                        {{positiontypeToStringShort(posdep.positiontype)}}
+                                                        <span v-if="posdep.part > 0">
+                                                            ({{posdep.partval}} ставки)
+                                                        </span>
+                                                    </div>
+
+
+                                                    <div class="position-nameblock-name-alt" v-if="posdep.replacedbycivilpositiontypeobject != null && positiontypeGetId(posdep.positiontype) != posdep.replacedbycivilpositiontype">
+                                                        ({{positiontypeToString(posdep.replacedbycivilpositiontypeobject)}})
+                                                    </div>
+                                                </div>
+                                                <div class="position-nameblock-rank">
+                                                    {{rankToString(posdep.rankcap)}}
+                                                </div>
+                                                <div class="position-nameblock-category">
+                                                    {{positioncategoryToString(posdep.positioncategory)}}
+                                                    {{displayClassCivilIfAvaiable(posdep)}}
+                                                </div>
+
+                                                <div class="position-nameblock-replaced" v-if="posdep.replacedbycivilpositiontypeobject != null">
+                                                    Может быть замещен категорией {{positioncategoryReplacedToString(posdep.replacedbycivilpositioncategoryobjects)}} {{displayClassIfAvaiable(posdep)}}
+                                                </div>
+                                                <div>
+                                                    <el-checkbox v-if="displayAltranksInterface(posdep)" v-model="posdep.displayaltrank" @change="markAltrank(posdep.displayaltrank, posdep.id)"><span style="font-size: 10px;">{{posdep.altranksgroup}}</span></el-checkbox>
+                                                    <div v-if="posdep.displayaltrank" v-for="altrank in posdep.altranks" style="font-size: 10px;">
+                                                        {{altrank}}
+                                                    </div>
+                                                </div>
+                                                <div class="position-nameblock-notice">
+                                                    {{posdep.notice}}
+                                                </div>
+                                                <span class="position-isnotsignedandwillbecreated" v-if="isDecreeAddSigned(posdep)"> (Приказ на введение не подписан)</span>
+                                                <span class="position-isnotsignedandwillbecreated" v-if="isDecreeDeleteSigned(posdep)"> (Приказ на упразднение не подписан)</span>
+                                            </div>
+                                        </div>
+                                        <div class="position-rightblock">
+                                            <div>
+                                                <!--Когда дата активна-->
+                                                <div v-if="isSignedAndWillBeCreated(posdep)">
+                                                    <div class="position-dateactive-descr">Вводится с </div><div class="position-dateactive position-dateactive-descr-green">{{beautifyDate(getDecreeStartDate(posdep))}}</div>
+                                                </div>
+                                                <div v-else>
+                                                    <div class="position-dateactive-descr">Введена с </div><div class="position-dateactive ">{{beautifyDate(getDecreeStartDate(posdep))}}</div>
+                                                </div>
+
+                                            </div>
+                                            <div v-if="hasElementInactiveDate(posdep)">
+                                                <div class="position-dateinactive-descr ">Сокращается с </div><div class="position-dateinactive position-dateinactive-descr-red">{{beautifyDate(getElementInactiveDate(posdep))}}</div>
+                                            </div>
+                                            <div v-if="posdep.decertificate">
+                                                <div class="position-dateinactive-descr">Подлежит разаттестации с </div><div class="position-dateinactive">{{beautifyDate(getElementDecertificateDate(posdep))}}</div>
+                                            </div>
+                                            <div v-if="posdep.replacedbycivildatelimit">
+                                                <div class="position-dateinactive-descr">Может замещаться гражданским персоналом по </div><div class="position-dateinactive">{{beautifyDate(getElementReplacedbycivilDate(posdep))}}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <el-dropdown v-if="!posdep.headingthisstructure" class="position-settings" placement="top" @command="handleCommand">
+                                    <div>Действия</div>
+                                    <el-dropdown-menu slot="dropdown">
+                                        <!--<el-dropdown-item v-if="hasAccessToEdit" :command="addDepartmentID(department.id)">Добавить подотдел</el-dropdown-item>-->
+                                        <el-dropdown-item v-if="hasAccessToEdit && isUnsignedCreate(posdep)" :command="renamedecreePositionID(posdep.id)">Редактировать должность</el-dropdown-item>
+                                        <el-dropdown-item v-if="hasAccessToEdit && !isUnsigned(posdep)" :command="renamePositionID(posdep.id)">Изменить должность</el-dropdown-item>
+                                        <el-dropdown-item v-if="hasAccessToEdit && isUnsigned(posdep)" :command="removedecreePositionID(posdep.id)">Убрать из проекта приказа</el-dropdown-item>
+                                        <el-dropdown-item v-if="hasAccessToEdit && !isUnsigned(posdep)" :command="removePositionID(posdep.id)">Сократить должность</el-dropdown-item>
+                                        <el-dropdown-item :command="decertificatePositionID(posdep.id)">Изменить дату разаттестации</el-dropdown-item>
+                                    </el-dropdown-menu>
+                                </el-dropdown>
+                                <div v-else class="position-settings">
+                                    Начальник
+                                </div>
+                                <el-popover placement="right"
+                                            width="300"
+                                            trigger="click">
+                                    <el-button slot="reference" class="position-additional" @click="loadAdditionaldata(posdep)"><div>Подробнее</div></el-button>
+                                    <div>
+                                        <div class="position-history-title">
+                                            История изменений
+                                        </div>
+                                        <div class="positionslist-inforow" v-for="order in order_list">
+                                            {{order.name}}
+                                        </div>
+                                        </div>
+
+                                    <div class="position-curation" v-if="posdep.curator > 0">
+                                        <div class="position-curation-title">
+                                            Курирует
+                                        </div>
+                                        <div class="position-curation-element" v-for="curationstructuretree in curationstructuretrees">
+                                            <div>
+                                                {{curationstructuretree.tree}}
+                                            </div>
+                                            <div class="position-curation-elementname">
+                                                {{curationstructuretree.name}}
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="position-heading" v-if="posdep.head > 0">
+                                        <div class="position-heading-title">
+                                            Возглавляет
+                                        </div>
+                                        <div class="position-heading-element" v-if="headingstructuretree != null">
+                                            <div>
+                                                {{headingstructuretree.tree}}
+                                            </div>
+                                            <div class="position-heading-elementname">
+                                                {{headingstructuretree.name}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </el-popover>
+
+                            </div>
+                        </div>
+                        <div v-if="posdep.lastnonsub">
+                            <!--Кнопка для введения новой должности-->
+                            <div v-if="hasAccessToEdit" class="position">
+                                <el-dropdown class="position-name position-addnew" placement="top" @command="handleExtended">
+                                    <span class="el-dropdown-link position-plus">
+                                        <i class="el-icon-plus "></i>
+                                    </span>
+                                    <el-dropdown-menu slot="dropdown">
+                                        <el-dropdown-item :command="addNewPosition">Ввести должность</el-dropdown-item>
+                                        <!--<el-dropdown-item :command="addNewDepartment">Создать подотдел</el-dropdown-item>-->
+                                    </el-dropdown-menu>
+                                </el-dropdown>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div v-else>
+
+                        <!--Структура в лицах -->
+                        <div v-bind:class="{'department-div': !posdep.isposition }">
+                            <div @click="selectPosdep(posdep)" v-bind:class="{'position-person-expiresoon' : posdep.expiresoon, 'position-person-willbeadded' : isDecreeAddSigned(posdep), 'position-person-willbedeleted' : isDecreeDeleteSigned(posdep), 'position-person-head' : posdep.headingthisstructure}" class="position-person">
+                                <!-- Оставить для прохождения службы    <div class="position-photo" v-bind:class="{'position-nophoto': !hasPhoto(posdep)}" v-bind:style="{'background-image': photoSrc(posdep)}">
+                    </div>-->
+                                <div class="position-person-grid" >
+                                    <div class="position-person-grid-main">
+                                        <div class="position-person-leftblock">
+                                            <div class="position-person-sof">
+                                                <div v-for="str in posdep.sofmapstring">{{str}}</div>
+                                            </div>
+                                        </div>
+                                        <div class="position-person-nameblock">
+                                            <div class="position-person-nameblock-name" :title="positiontypeToString(posdep.positiontype)">
+                                                {{positiontypeToStringShort(posdep.positiontype)}}
+                                                <span v-if="posdep.part > 0">
+                                                    ({{posdep.partval}} ставки)
+                                                </span>
+                                                <span v-if="posdep.replacedbycivilpositiontypeobject != null && positiontypeGetId(posdep.positiontype) != posdep.replacedbycivilpositiontype">
+                                                    ({{positiontypeToString(posdep.replacedbycivilpositiontypeobject)}})
+                                                </span>
+                                                <span>
+                                                    ({{rankToString(posdep.rankcap)}})
+                                                </span>
+                                            </div>
+                                            <div class="position-person-nameblock-category">
+                                                {{positioncategoryToString(posdep.positioncategory)}}
+                                                {{displayClassCivilIfAvaiable(posdep)}}
+                                            </div>
+                                            <div class="position-person-nameblock-replaced" v-if="posdep.replacedbycivilpositiontypeobject != null">
+                                                Может быть замещен категорией {{positioncategoryReplacedToString(posdep.replacedbycivilpositioncategoryobjects)}} {{displayClassIfAvaiable(posdep)}}
+                                            </div>
+                                        </div>
+                                        <div class="position-person-rightblock">
+                                            <!--<el-button size="mini" class="position-person-button" @click="appoint(posdep)">Назначить</el-button>-->
+                                            <template v-if="getPerson(posdep) != null">
+                                                <!--<el-button size="mini" class="position-person-button" @click="takeoff(getPerson(posdep))">Снять</el-button>-->
+                                            </template>
+
+                                        </div>
+
+                                    </div>
+                                    <div class="position-person-grid-person">
+                                        <div v-if="getPerson(posdep) != null" >
+                                            <div class="position-person-grid-person-top">
+                                                <div>
+                                                    {{getPerson(posdep).surname}} {{getPerson(posdep).name}} {{getPerson(posdep).fathername}} ({{getPerson(posdep).age}} лет {{beautifyDate(getPerson(posdep).birthdateString)}})
+                                                </div>
+                                                <div>
+                                                    <span v-if="getPerson(posdep).actualRank != null">{{getPerson(posdep).actualRank.name.toLowerCase()}}</span>
+                                                </div>
+                                            </div>
+                                            <div class="position-person-grid-person-bottom">
+                                                <div>
+                                                    
+                                                </div>
+                                                <div>
+                                                    <div v-if="hasPhotopreview(getPerson(posdep).id)">
+                                                        <img :src="getPhotopreview(getPerson(posdep).id).photo64" class="position-person-grid-person-bottom-image"  />
+                                                    </div>
+                                                </div>
+                                                <div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="position-person-noperson" v-else>
+                                            Вакант
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+
+                </template>
+
+            </div>
+
+        </div>
+        <div>
+            <div v-if="(structureInfos != null & structureInfos.length > 0) || previous != null" class="widget-title">
+                Подразделения
+            </div>
+            <div class="widget-content widget-content-inline">
+                <div v-if="previous != null" @click="openStructureInfo($event, previous)"  class="position-structure">
+                    <div class="position-structure-back">
+                        ←
+                    </div>
+                </div>
+                <div v-if="structureInfos != null & structureInfos.length > 0" v-for="info in structureInfos" class="position-structure" @click="openStructureInfo($event, info)">
+                    <div class="position-structure-title">
+                        {{info.name}}
+                    </div>
+                    <div title="В скобках указана численность должностей, приказы которых еще не подписаны">
+                        Общая численность {{+info.positionCountSigned.toFixed(2)}}
+                        <span v-if="info.positionCountUnsigned.toFixed(2) != 0">({{+info.positionCountUnsigned.toFixed(2)}})</span>
+                    </div>
+                    <div>
+                        Численность по бюджетам:
+                    </div>
+                    <div title="В скобках указана численность должностей, приказы которых еще не подписаны" v-for="sofReady in info.sofsReady ">
+                        {{sofReady}}
+                    </div>
+                    <br />
+                    <div v-if="info != null && (info.positionAddFuture > 0 || info.positionRemoveFuture > 0) ">
+                        Вводится {{+info.positionAddFuture.toFixed(2)}}, сокращается {{+info.positionRemoveFuture.toFixed(2)}}
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        
+        <el-dialog :visible.sync="positionManagingPanelVisible" width="50%" @close="onPositionManagingPanelClose" v-draggable>
+        <positionmanagingpanel :visible.sync="positionManagingPanelVisible" :visiblevar.sync="modalPositionManagingPanelVisible" :id="positionManagingId" :department="positionManagingDepartment"
+        :type="positionManagingType" />
+        </el-dialog>
+
+        <el-dialog :visible.sync="modalDecertificatePanelVisible" width="40%" v-draggable>
+            <div class="positionmanagementpanel-title">
+                Дата разаттестации
+            </div>
+            <el-checkbox v-model="decertificateBool">
+                Подлежит разаттестации
+            </el-checkbox>
+            <div>Дата разаттестации:</div> <el-input suffix-icon="el-icon-date" v-model="decertificateDate" type="date" :disabled="!decertificateBool"></el-input>
+            <div id="positionmanagementpanel-yesno">
+                <el-button id="positionmanagementpanel-yes" @click="decertificateokbutton">Ок</el-button>
+                <el-button id="positionmanagementpanel-no" @click="decertificatecancelbutton">Отмена</el-button>
+            </div>
+        </el-dialog>
+    </div>
+</template>
+<script src="./positionslist.ts"></script>

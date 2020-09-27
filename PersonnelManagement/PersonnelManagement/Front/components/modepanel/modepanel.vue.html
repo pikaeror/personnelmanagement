@@ -1,0 +1,27 @@
+﻿<template>
+    <!--<div v-if="visible > 0" class="widget" style="overflow-y: scroll; max-height: 900px;">-->
+    <div v-if="visible > 0" class="widget" style="overflow-y: scroll; max-height: 900px;">
+        <div class="widget-title">
+            Выберите режим работы
+        </div>
+        <div class="modepanel-container ">
+            <div class="modepanel-element modepanel-element-org" @click="org()" v-if="structureModeAccess()">
+                Организационно-штатная работа
+            </div>
+            <div class="modepanel-element modepanel-element-eld" @click="eld()" v-if="personnelRead()">
+                Электронное личное дело
+            </div>
+            <div class="modepanel-element modepanel-element-candidates" @click="candidates()" v-if="personnelRead()">
+                Кандидаты
+            </div>
+            <div class="modepanel-element modepanel-element-people" @click="people()" v-if="structureRead()">
+                Структура в лицах
+            </div>
+            <div class="modepanel-element modepanel-element-eld" @click="decree()" v-if="personnelRead()">
+                Почта
+            </div>
+            <div v-if="!structureEdit() && !personnelRead()"><i>Загрузка...</i></div>
+        </div>
+    </div>
+</template>
+<script src="./modepanel.ts"></script>

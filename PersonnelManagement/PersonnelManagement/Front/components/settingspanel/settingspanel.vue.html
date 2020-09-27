@@ -1,0 +1,27 @@
+﻿<template>
+    <div>
+        <div class="settingspanel-title">Настройки</div>
+        <el-tabs v-model="activeName" @tab-click="handleClick">
+            <el-tab-pane label="Дата" name="first">
+                <div class="settingspanel-datetitle">
+                    Укажите дату для просмотра актуальных данных на ее момент
+                </div>
+                
+                <el-input type="date" v-model="timemachineDate"></el-input>
+                <div class="settingspanel-datebuttons">
+                    <el-button @click="saveChanges">Сохранить изменения</el-button>
+                    <el-button @click="restoreCurrentDate">Текущая дата</el-button>
+                </div>
+                
+            </el-tab-pane>
+            <el-tab-pane label="Внешний вид" name="second">
+                <el-checkbox v-model="positionCompact">Компактный вид должностей</el-checkbox>
+                <br />
+                <!--<el-checkbox v-model="sidebarDisplay">Отображать боковую панель</el-checkbox>
+                <br />-->
+                <el-button @click="appearanceChange">Сохранить изменения</el-button>
+            </el-tab-pane>
+        </el-tabs>
+    </div>
+</template>
+<script src="./settingspanel.ts"></script>

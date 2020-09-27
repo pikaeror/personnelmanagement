@@ -1,0 +1,17 @@
+﻿<template>
+    <div id="departmentmanagementpanel">
+        {{intromessage}}
+        <el-input v-model="name" v-bind:class="{'departmentmanagementpanel-freezed': displayinput}" id="departmentmanagementpanel-input" :placeholder="getplaceholdername" ref="inputdepartmentmanagementname"></el-input>
+
+        <el-checkbox v-model="datecustom">
+            Дата вступления в силу отличается от даты вступления в силу приказа:
+        </el-checkbox>
+        <el-input suffix-icon="el-icon-date" v-model="dateactive" type="date" :disabled="!datecustom"></el-input>
+
+        <div id="departmentmanagementpanel-yesno">
+            <el-button id="departmentmanagementpanel-yes" @click="okbutton">Ок</el-button>
+            <el-button id="departmentmanagementpanel-no" @click="cancelbutton">Отмена</el-button>
+        </div>
+    </div>
+</template>
+<script src="./departmentmanagingpanel.ts"></script>

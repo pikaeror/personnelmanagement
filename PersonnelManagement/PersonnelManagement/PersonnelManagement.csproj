@@ -1,0 +1,245 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <DockerComposeProjectPath>..\docker-compose.dcproj</DockerComposeProjectPath>
+    <TypeScriptToolsVersion>3.0</TypeScriptToolsVersion>
+    <UserSecretsId>e866cb99-be82-4859-9abf-66ea7ee79b02</UserSecretsId>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DefineConstants>DEBUG;TRACE;RELEASE;NETCOREAPP2_0</DefineConstants>
+    <DebugType>full</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+    <Optimize>false</Optimize>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Front\components\NewFolder1\**" />
+    <Compile Remove="Front\components\NewFolder2\**" />
+    <Content Remove="Front\components\NewFolder1\**" />
+    <Content Remove="Front\components\NewFolder2\**" />
+    <EmbeddedResource Remove="Front\components\NewFolder1\**" />
+    <EmbeddedResource Remove="Front\components\NewFolder2\**" />
+    <None Remove="Front\components\NewFolder1\**" />
+    <None Remove="Front\components\NewFolder2\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Front\boot.d.ts" />
+    <None Remove="Front\boot.ts" />
+    <None Remove="Front\classes\academicvacation.ts" />
+    <None Remove="Front\classes\appointtype.ts" />
+    <None Remove="Front\classes\area.ts" />
+    <None Remove="Front\classes\areaother.ts" />
+    <None Remove="Front\classes\certificate.ts" />
+    <None Remove="Front\classes\changedocumentstype.ts" />
+    <None Remove="Front\classes\citysubstate.ts" />
+    <None Remove="Front\classes\citytype.ts" />
+    <None Remove="Front\classes\countrycities.ts" />
+    <None Remove="Front\classes\drivercategory.ts" />
+    <None Remove="Front\classes\drivertype.ts" />
+    <None Remove="Front\classes\educationadditionaltype.ts" />
+    <None Remove="Front\classes\educationdocument.ts" />
+    <None Remove="Front\classes\educationlevel.ts" />
+    <None Remove="Front\classes\educationmaternity.ts" />
+    <None Remove="Front\classes\educationperiod.ts" />
+    <None Remove="Front\classes\educationpositiontype.ts" />
+    <None Remove="Front\classes\educationstage.ts" />
+    <None Remove="Front\classes\educationtype.ts" />
+    <None Remove="Front\classes\educationtypeblock.ts" />
+    <None Remove="Front\classes\externalorderwhotype.ts" />
+    <None Remove="Front\classes\fire.ts" />
+    <None Remove="Front\classes\holiday.ts" />
+    <None Remove="Front\classes\illcode.ts" />
+    <None Remove="Front\classes\illregime.ts" />
+    <None Remove="Front\classes\interrupttype.ts" />
+    <None Remove="Front\classes\jobperiod.ts" />
+    <None Remove="Front\classes\link.ts" />
+    <None Remove="Front\classes\normativ.ts" />
+    <None Remove="Front\classes\OrderHistrory\DecreeHistroryElementToAppending.ts" />
+    <None Remove="Front\classes\OrderHistrory\FullHistory.ts" />
+    <None Remove="Front\classes\ordernumbertype.ts" />
+    <None Remove="Front\classes\pension.ts" />
+    <None Remove="Front\classes\permissiontype.ts" />
+    <None Remove="Front\classes\personadditionalagreement.ts" />
+    <None Remove="Front\classes\persondecree.ts" />
+    <None Remove="Front\classes\persondecreeblock.ts" />
+    <None Remove="Front\classes\persondecreeblockintro.ts" />
+    <None Remove="Front\classes\persondecreeblocksub.ts" />
+    <None Remove="Front\classes\persondecreeblocksubtype.ts" />
+    <None Remove="Front\classes\persondecreeblocktype.ts" />
+    <None Remove="Front\classes\persondecreelevel.ts" />
+    <None Remove="Front\classes\persondecreeoperation.ts" />
+    <None Remove="Front\classes\persondecreetype.ts" />
+    <None Remove="Front\classes\persondispanserization.ts" />
+    <None Remove="Front\classes\persondriver.ts" />
+    <None Remove="Front\classes\personeducation.ts" />
+    <None Remove="Front\classes\personeducationpart.ts" />
+    <None Remove="Front\classes\personill.ts" />
+    <None Remove="Front\classes\personjobprivelege.ts" />
+    <None Remove="Front\classes\personjobprivelegeperiod.ts" />
+    <None Remove="Front\classes\personpenalty.ts" />
+    <None Remove="Front\classes\personpermission.ts" />
+    <None Remove="Front\classes\personpfl.ts" />
+    <None Remove="Front\classes\personphysical.ts" />
+    <None Remove="Front\classes\personprivelege.ts" />
+    <None Remove="Front\classes\personreward.ts" />
+    <None Remove="Front\classes\persontransfer.ts" />
+    <None Remove="Front\classes\personvvk.ts" />
+    <None Remove="Front\classes\physicalfield.ts" />
+    <None Remove="Front\classes\positionmanagement.ts" />
+    <None Remove="Front\classes\prooftype.ts" />
+    <None Remove="Front\classes\region.ts" />
+    <None Remove="Front\classes\reward.ts" />
+    <None Remove="Front\classes\rewardmoney.ts" />
+    <None Remove="Front\classes\rewardtype.ts" />
+    <None Remove="Front\classes\rights.ts" />
+    <None Remove="Front\classes\rightsstructure.ts" />
+    <None Remove="Front\classes\role.ts" />
+    <None Remove="Front\classes\science.ts" />
+    <None Remove="Front\classes\setpersondatatype.ts" />
+    <None Remove="Front\classes\streettype.ts" />
+    <None Remove="Front\classes\structure.ts" />
+    <None Remove="Front\classes\subject.ts" />
+    <None Remove="Front\classes\subjectcategory.ts" />
+    <None Remove="Front\classes\subjectgender.ts" />
+    <None Remove="Front\classes\transfertype.ts" />
+    <None Remove="Front\classes\user.ts" />
+    <None Remove="Front\components\adminpanel\adminpanel.ts" />
+    <None Remove="Front\components\app\app.ts" />
+    <None Remove="Front\components\candidates\candidates.ts" />
+    <None Remove="Front\components\decreeoperationelement\decreeoperationelement.vue.html" />
+    <None Remove="Front\components\decreeoperationelement\derceeoperationelement.ts" />
+    <None Remove="Front\components\decreeoperationtemplatecreator\decreeoperationtemplatecreator.ts" />
+    <None Remove="Front\components\home\home.ts" />
+    <None Remove="Front\components\login\login.ts" />
+    <None Remove="Front\components\modepanel\modepanel.ts" />
+    <None Remove="Front\components\pmrequestpanel\FormGeneratorByRequestStructureType.ts" />
+    <None Remove="Front\components\sidebar\sidebar.ts" />
+    <None Remove="Front\components\topmenu\topmenu.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\dist\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="DocumentFormat.OpenXml" Version="2.8.1" />
+    <PackageReference Include="Hangfire.AspNetCore" Version="1.6.17" />
+    <PackageReference Include="HangFire.Core" Version="1.6.17" />
+    <PackageReference Include="Hangfire.MemoryStorage.Core" Version="1.4.0" />
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.5" />
+    <PackageReference Include="Microsoft.TypeScript.MSBuild" Version="4.0.3">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.4" />
+    <PackageReference Include="Moment.js" Version="2.24.0" />
+    <PackageReference Include="MySql.Data.EntityFrameworkCore.Design" Version="6.10.5" />
+    <PackageReference Include="NodaTime" Version="2.4.8" />
+    <PackageReference Include="Npm" Version="3.5.2" />
+    <PackageReference Include="Pomelo.EntityFrameworkCore.MySQL" Version="2.0.1" />
+    <PackageReference Include="TimePeriodLibrary.NET" Version="2.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="Front\boot.d.ts" />
+    <TypeScriptCompile Include="Front\boot.ts" />
+    <TypeScriptCompile Include="Front\classes\academicvacation.ts" />
+    <TypeScriptCompile Include="Front\classes\appointtype.ts" />
+    <TypeScriptCompile Include="Front\classes\area.ts" />
+    <TypeScriptCompile Include="Front\classes\areaother.ts" />
+    <TypeScriptCompile Include="Front\classes\certificate.ts" />
+    <TypeScriptCompile Include="Front\classes\changedocumentstype.ts" />
+    <TypeScriptCompile Include="Front\classes\citysubstate.ts" />
+    <TypeScriptCompile Include="Front\classes\citytype.ts" />
+    <TypeScriptCompile Include="Front\classes\countrycities.ts" />
+    <TypeScriptCompile Include="Front\classes\drivercategory.ts" />
+    <TypeScriptCompile Include="Front\classes\drivertype.ts" />
+    <TypeScriptCompile Include="Front\classes\educationadditionaltype.ts" />
+    <TypeScriptCompile Include="Front\classes\educationdocument.ts" />
+    <TypeScriptCompile Include="Front\classes\educationlevel.ts" />
+    <TypeScriptCompile Include="Front\classes\educationmaternity.ts" />
+    <TypeScriptCompile Include="Front\classes\educationperiod.ts" />
+    <TypeScriptCompile Include="Front\classes\educationpositiontype.ts" />
+    <TypeScriptCompile Include="Front\classes\educationstage.ts" />
+    <TypeScriptCompile Include="Front\classes\educationtype.ts" />
+    <TypeScriptCompile Include="Front\classes\educationtypeblock.ts" />
+    <TypeScriptCompile Include="Front\classes\externalorderwhotype.ts" />
+    <TypeScriptCompile Include="Front\classes\fire.ts" />
+    <TypeScriptCompile Include="Front\classes\holiday.ts" />
+    <TypeScriptCompile Include="Front\classes\illcode.ts" />
+    <TypeScriptCompile Include="Front\classes\illregime.ts" />
+    <TypeScriptCompile Include="Front\classes\interrupttype.ts" />
+    <TypeScriptCompile Include="Front\classes\jobperiod.ts" />
+    <TypeScriptCompile Include="Front\classes\link.ts" />
+    <TypeScriptCompile Include="Front\classes\normativ.ts" />
+    <TypeScriptCompile Include="Front\classes\OrderHistrory\DecreeHistroryElementToAppending.ts" />
+    <TypeScriptCompile Include="Front\classes\OrderHistrory\FullHistory.ts" />
+    <TypeScriptCompile Include="Front\classes\ordernumbertype.ts" />
+    <TypeScriptCompile Include="Front\classes\pension.ts" />
+    <TypeScriptCompile Include="Front\classes\permissiontype.ts" />
+    <TypeScriptCompile Include="Front\classes\personadditionalagreement.ts" />
+    <TypeScriptCompile Include="Front\classes\persondecree.ts" />
+    <TypeScriptCompile Include="Front\classes\persondecreeblock.ts" />
+    <TypeScriptCompile Include="Front\classes\persondecreeblockintro.ts" />
+    <TypeScriptCompile Include="Front\classes\persondecreeblocksub.ts" />
+    <TypeScriptCompile Include="Front\classes\persondecreeblocksubtype.ts" />
+    <TypeScriptCompile Include="Front\classes\persondecreeblocktype.ts" />
+    <TypeScriptCompile Include="Front\classes\persondecreelevel.ts" />
+    <TypeScriptCompile Include="Front\classes\persondecreeoperation.ts" />
+    <TypeScriptCompile Include="Front\classes\persondecreetype.ts" />
+    <TypeScriptCompile Include="Front\classes\persondispanserization.ts" />
+    <TypeScriptCompile Include="Front\classes\persondriver.ts" />
+    <TypeScriptCompile Include="Front\classes\personeducation.ts" />
+    <TypeScriptCompile Include="Front\classes\personeducationpart.ts" />
+    <TypeScriptCompile Include="Front\classes\personill.ts" />
+    <TypeScriptCompile Include="Front\classes\personjobprivelege.ts" />
+    <TypeScriptCompile Include="Front\classes\personjobprivelegeperiod.ts" />
+    <TypeScriptCompile Include="Front\classes\personpenalty.ts" />
+    <TypeScriptCompile Include="Front\classes\personpermission.ts" />
+    <TypeScriptCompile Include="Front\classes\personpfl.ts" />
+    <TypeScriptCompile Include="Front\classes\personphysical.ts" />
+    <TypeScriptCompile Include="Front\classes\personprivelege.ts" />
+    <TypeScriptCompile Include="Front\classes\personreward.ts" />
+    <TypeScriptCompile Include="Front\classes\persontransfer.ts" />
+    <TypeScriptCompile Include="Front\classes\personvvk.ts" />
+    <TypeScriptCompile Include="Front\classes\physicalfield.ts" />
+    <TypeScriptCompile Include="Front\classes\positionmanagement.ts" />
+    <TypeScriptCompile Include="Front\classes\prooftype.ts" />
+    <TypeScriptCompile Include="Front\classes\region.ts" />
+    <TypeScriptCompile Include="Front\classes\reward.ts" />
+    <TypeScriptCompile Include="Front\classes\rewardmoney.ts" />
+    <TypeScriptCompile Include="Front\classes\rewardtype.ts" />
+    <TypeScriptCompile Include="Front\classes\rights.ts" />
+    <TypeScriptCompile Include="Front\classes\rightsstructure.ts" />
+    <TypeScriptCompile Include="Front\classes\role.ts" />
+    <TypeScriptCompile Include="Front\classes\science.ts" />
+    <TypeScriptCompile Include="Front\classes\setpersondatatype.ts" />
+    <TypeScriptCompile Include="Front\classes\streettype.ts" />
+    <TypeScriptCompile Include="Front\classes\structure.ts" />
+    <TypeScriptCompile Include="Front\classes\subject.ts" />
+    <TypeScriptCompile Include="Front\classes\subjectcategory.ts" />
+    <TypeScriptCompile Include="Front\classes\subjectgender.ts" />
+    <TypeScriptCompile Include="Front\classes\transfertype.ts" />
+    <TypeScriptCompile Include="Front\classes\user.ts" />
+    <TypeScriptCompile Include="Front\components\adminpanel\adminpanel.ts" />
+    <TypeScriptCompile Include="Front\components\app\app.ts" />
+    <TypeScriptCompile Include="Front\components\candidates\candidates.ts" />
+    <TypeScriptCompile Include="Front\components\decreeoperationelement\decreeoperationelement.vue.html" />
+    <TypeScriptCompile Include="Front\components\decreeoperationelement\derceeoperationelement.ts" />
+    <TypeScriptCompile Include="Front\components\decreeoperationtemplatecreator\decreeoperationtemplatecreator.ts" />
+    <TypeScriptCompile Include="Front\components\home\home.ts" />
+    <TypeScriptCompile Include="Front\components\login\login.ts" />
+    <TypeScriptCompile Include="Front\components\modepanel\modepanel.ts" />
+    <TypeScriptCompile Include="Front\components\pmrequestpanel\FormGeneratorByRequestStructureType.ts" />
+    <TypeScriptCompile Include="Front\components\sidebar\sidebar.ts" />
+    <TypeScriptCompile Include="Front\components\topmenu\topmenu.ts" />
+  </ItemGroup>
+
+</Project>

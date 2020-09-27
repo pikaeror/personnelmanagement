@@ -1,0 +1,47 @@
+Scaffold-DbContext "server=localhost;port=3306;userid=admin;treattinyasboolean=True;password=FVSH6S6aB4srgReT;database=pm;convert zero datetime=True;" Pomelo.EntityFrameworkCore.MySql -OutputDir Models -f   
+    ---- Ёта обновл€ет миграцию по базе данных.
+
+	public pmContext(DbContextOptions<pmContext> options) : base(options) { }
+
+Scaffold-DbContext "server=192.168.1.16;port=3306;userid=admin;treattinyasboolean=True;password=qazwsxedc098;database=cert;convert zero datetime=True;" Pomelo.EntityFrameworkCore.MySql -OutputDir Udostoverenia -f   
+
+public certContext(DbContextOptions<certContext> options) : base(options) { }
+
+	1 схема, син€€
+
+	#FFFFFF - белый
+	#97B1ED - светлее
+	#5981DD - основной
+	#2659D0 - темнее
+	#0A3597 - самый темный
+
+	3 схема
+	#c9c9c9 - темнее
+    #e3e3e3 - светлее
+    #9ad3de - €рко-голубое
+    #89bdd3 - синее
+
+	3 схема
+	#f4f4f4 - Ѕумажный
+	#dcd0c0 - Ўелковый
+	#c0b283 - Ѕледное золото
+	#373737 - ”гольный
+	
+	
+	
+
+	÷вета на дизайн
+
+	//"element-ui": "2.0.11",
+
+
+IP 172.26.200.89
+
+Login admin
+Password 1qaz2wsx3edc098
+
+MySQL
+login admin
+password FVSH6S6aB4srgReT
+
+я - w888.erc.by

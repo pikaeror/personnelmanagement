@@ -1,0 +1,442 @@
+﻿<template>
+    <div id="positionmanagementpanel">
+        <div class="positionmanagementpanel-title">
+            {{intromessage}}
+        </div>
+        <br />
+        <el-checkbox v-bind:class="{'positionmanagementpanel-freezed': !displayOnNewPosition}" v-model="nodecree">
+            Без изменения приказа
+        </el-checkbox>
+        <el-input v-if="!ispositionpanel" v-model="name" v-bind:class="{'positionmanagementpanel-freezed': displayinput}" id="positionmanagementpanel-input" :placeholder="getplaceholdername" ref="inputpositionmanagementname"></el-input>
+        <div class="positionmanagementpanel-flexrow" v-else>
+            <el-select v-model="positiontype" v-bind:class="{'positionmanagementpanel-freezed': displayinput}" class="positionmanagementpanel-rankcap positionmanagementpanel-margin positionmanagementpanel-flexrow-element-40" @change="onTypeChange"
+                       :placeholder="getplaceholdername" ref="inputpositionmanagementpositiontype" :title="positiontypeTitle" filterable :filter-method="filterMethod" no-data-text="Не найдено" no-match-text="Не найдено">
+                <el-option v-for="ptype in filteredPositiontypes" :title="ptype.name"
+                           :key="ptype.id" :label="shortifyTitle(ptype.name)" :value="ptype.id">
+                </el-option>
+            </el-select>
+            <el-button v-bind:class="{'positionmanagementpanel-freezed': !displayOnNewPosition}" @click="modalNewPositiontypeVisible = true" title="Добавить новое наименование должности">+</el-button>
+            <div class="positionmanagementpanel-flexrow positionmanagementpanel-flexrow-element-50">
+                <div v-bind:class="{'positionmanagementpanel-freezed': !displayOnCount}" class="positionmanagementpanel-label positionmanagementpanel-flexrow-element-60">Количество должностей</div>
+                <el-input v-bind:class="{'positionmanagementpanel-freezed': !displayOnCount}" class="positionmanagementpanel-flexrow-element-40" v-model="quantity" @input="onNumChange" type="number"></el-input>
+            </div>
+        </div>
+
+        <el-dialog :visible.sync="modalNewPositiontypeVisible" width="40%" v-draggable append-to-body>
+            <div>
+                <div>
+                    Добавление нового наименования должности
+                </div>
+                Наименование должности
+                <el-input v-model="newPositiontypeName"></el-input>
+                Сокращенное наименование должности+
+                <el-input v-model="newPositiontypeNameshort"></el-input>
+                Значимость от 0 до 100 (чем выше значимость, тем выше в списке)<el-input v-model="newPositiontypePriority" type="number"></el-input>
+                <el-button class="adminpanel-submit" @click="addPositiontype">Добавить</el-button>
+            </div>
+        </el-dialog>
+
+        <div class="positionmanagementpanel-flexrow positionmanagementpanel-flexrow-text positionmanagementpanel-flexrow-text-first">
+            <el-checkbox v-bind:class="{'positionmanagementpanel-freezed': !displayOnNewPosition}" v-model="opchs">
+                Входит в ОПЧС
+            </el-checkbox>
+        </div>
+
+        <div v-bind:class="{'positionmanagementpanel-freezed': !displayOnNewPosition}">
+            <div v-bind:class="{'positionmanagementpanel-freezed': !displayOnNewPosition}">Наименование должности для документов</div>
+            <div class="positionmanagementpanel-document-flexrow">
+                <el-select class="positionmanagementpanel-document-select"
+                           filterable :filter-method="filterMethodSubject" no-data-text="Не найдено" no-match-text="Не найдено" clearable v-model="subject1" placeholder="Часть">
+                    <el-option v-for="subject in filteredSubjects"
+                               :key="subject.id" :label="subject.name1" :value="subject.id">
+                    </el-option>
+                </el-select>
+                <el-select class="positionmanagementpanel-document-select"
+                           filterable :filter-method="filterMethodSubject" no-data-text="Не найдено" no-match-text="Не найдено" clearable v-model="subject2" placeholder="Часть">
+                    <el-option v-for="subject in filteredSubjects"
+                               :key="subject.id" :label="subject.name1" :value="subject.id">
+                    </el-option>
+                </el-select>
+                <el-select class="positionmanagementpanel-document-select"
+                           filterable :filter-method="filterMethodSubject" no-data-text="Не найдено" no-match-text="Не найдено" clearable v-model="subject3" placeholder="Часть">
+                    <el-option v-for="subject in filteredSubjects"
+                               :key="subject.id" :label="subject.name1" :value="subject.id">
+                    </el-option>
+                </el-select>
+                <el-select class="positionmanagementpanel-document-select"
+                           filterable :filter-method="filterMethodSubject" no-data-text="Не найдено" no-match-text="Не найдено" clearable v-model="subject4" placeholder="Часть">
+                    <el-option v-for="subject in filteredSubjects"
+                               :key="subject.id" :label="subject.name1" :value="subject.id">
+                    </el-option>
+                </el-select>
+                <el-select class="positionmanagementpanel-document-select"
+                           filterable :filter-method="filterMethodSubject" no-data-text="Не найдено" no-match-text="Не найдено" clearable v-model="subject5" placeholder="Часть">
+                    <el-option v-for="subject in filteredSubjects"
+                               :key="subject.id" :label="subject.name1" :value="subject.id">
+                    </el-option>
+                </el-select>
+                <el-select class="positionmanagementpanel-document-select"
+                           filterable :filter-method="filterMethodSubject" no-data-text="Не найдено" no-match-text="Не найдено" clearable v-model="subject6" placeholder="Часть">
+                    <el-option v-for="subject in filteredSubjects"
+                               :key="subject.id" :label="subject.name1" :value="subject.id">
+                    </el-option>
+                </el-select>
+                <el-select class="positionmanagementpanel-document-select"
+                           filterable :filter-method="filterMethodSubject" no-data-text="Не найдено" no-match-text="Не найдено" clearable v-model="subject7" placeholder="Часть">
+                    <el-option v-for="subject in filteredSubjects"
+                               :key="subject.id" :label="subject.name1" :value="subject.id">
+                    </el-option>
+                </el-select>
+                <el-select class="positionmanagementpanel-document-select"
+                           filterable :filter-method="filterMethodSubject" no-data-text="Не найдено" no-match-text="Не найдено" clearable v-model="subject8" placeholder="Часть">
+                    <el-option v-for="subject in filteredSubjects"
+                               :key="subject.id" :label="subject.name1" :value="subject.id">
+                    </el-option>
+                </el-select>
+                <el-select class="positionmanagementpanel-document-select"
+                           filterable :filter-method="filterMethodSubject" no-data-text="Не найдено" no-match-text="Не найдено" clearable v-model="subject9" placeholder="Часть">
+                    <el-option v-for="subject in filteredSubjects"
+                               :key="subject.id" :label="subject.name1" :value="subject.id">
+                    </el-option>
+                </el-select>
+                <el-select class="positionmanagementpanel-document-select"
+                           filterable :filter-method="filterMethodSubject" no-data-text="Не найдено" no-match-text="Не найдено" clearable v-model="subject10" placeholder="Часть">
+                    <el-option v-for="subject in filteredSubjects"
+                               :key="subject.id" :label="subject.name1" :value="subject.id">
+                    </el-option>
+                </el-select>
+
+            </div>
+            <div class="positionmanagementpanel-document-structure">
+                Полное наименование подразделения
+            </div>
+            <div>
+                Вторая часть составной должности (пусто, если должность не составная)
+            </div>
+            <div class="positionmanagementpanel-document-flexrow">
+                <el-select class="positionmanagementpanel-document-select"
+                           filterable :filter-method="filterMethodSubject" no-data-text="Не найдено" no-match-text="Не найдено" clearable v-model="subject11" placeholder="Часть">
+                    <el-option v-for="subject in filteredSubjects"
+                               :key="subject.id" :label="subject.name1" :value="subject.id">
+                    </el-option>
+                </el-select>
+                <el-select class="positionmanagementpanel-document-select"
+                           filterable :filter-method="filterMethodSubject" no-data-text="Не найдено" no-match-text="Не найдено" clearable v-model="subject12" placeholder="Часть">
+                    <el-option v-for="subject in filteredSubjects"
+                               :key="subject.id" :label="subject.name1" :value="subject.id">
+                    </el-option>
+                </el-select>
+                <el-select class="positionmanagementpanel-document-select"
+                           filterable :filter-method="filterMethodSubject" no-data-text="Не найдено" no-match-text="Не найдено" clearable v-model="subject13" placeholder="Часть">
+                    <el-option v-for="subject in filteredSubjects"
+                               :key="subject.id" :label="subject.name1" :value="subject.id">
+                    </el-option>
+                </el-select>
+                <el-select class="positionmanagementpanel-document-select"
+                           filterable :filter-method="filterMethodSubject" no-data-text="Не найдено" no-match-text="Не найдено" clearable v-model="subject14" placeholder="Часть">
+                    <el-option v-for="subject in filteredSubjects"
+                               :key="subject.id" :label="subject.name1" :value="subject.id">
+                    </el-option>
+                </el-select>
+                <el-select class="positionmanagementpanel-document-select"
+                           filterable :filter-method="filterMethodSubject" no-data-text="Не найдено" no-match-text="Не найдено" clearable v-model="subject15" placeholder="Часть">
+                    <el-option v-for="subject in filteredSubjects"
+                               :key="subject.id" :label="subject.name1" :value="subject.id">
+                    </el-option>
+                </el-select>
+                <el-select class="positionmanagementpanel-document-select"
+                           filterable :filter-method="filterMethodSubject" no-data-text="Не найдено" no-match-text="Не найдено" clearable v-model="subject16" placeholder="Часть">
+                    <el-option v-for="subject in filteredSubjects"
+                               :key="subject.id" :label="subject.name1" :value="subject.id">
+                    </el-option>
+                </el-select>
+                <el-select class="positionmanagementpanel-document-select"
+                           filterable :filter-method="filterMethodSubject" no-data-text="Не найдено" no-match-text="Не найдено" clearable v-model="subject17" placeholder="Часть">
+                    <el-option v-for="subject in filteredSubjects"
+                               :key="subject.id" :label="subject.name1" :value="subject.id">
+                    </el-option>
+                </el-select>
+                <el-select class="positionmanagementpanel-document-select"
+                           filterable :filter-method="filterMethodSubject" no-data-text="Не найдено" no-match-text="Не найдено" clearable v-model="subject18" placeholder="Часть">
+                    <el-option v-for="subject in filteredSubjects"
+                               :key="subject.id" :label="subject.name1" :value="subject.id">
+                    </el-option>
+                </el-select>
+                <el-select class="positionmanagementpanel-document-select"
+                           filterable :filter-method="filterMethodSubject" no-data-text="Не найдено" no-match-text="Не найдено" clearable v-model="subject19" placeholder="Часть">
+                    <el-option v-for="subject in filteredSubjects"
+                               :key="subject.id" :label="subject.name1" :value="subject.id">
+                    </el-option>
+                </el-select>
+                <el-select class="positionmanagementpanel-document-select"
+                           filterable :filter-method="filterMethodSubject" no-data-text="Не найдено" no-match-text="Не найдено" clearable v-model="subject20" placeholder="Часть">
+                    <el-option v-for="subject in filteredSubjects"
+                               :key="subject.id" :label="subject.name1" :value="subject.id">
+                    </el-option>
+                </el-select>
+            </div>
+        </div>
+
+
+        <div class="positionmanagementpanel-flexrow">
+            <div v-bind:class="{'positionmanagementpanel-freezed': !displayOnNewPosition}" class="positionmanagementpanel-flexrow-text positionmanagementpanel-flexrow-text-first positionmanagementpanel-flexrow-element-33">Предельное звание</div>
+            <el-select v-bind:class="{'positionmanagementpanel-freezed': !displayOnNewPosition}" class="positionmanagementpanel-rankcap positionmanagementpanel-margin positionmanagementpanel-flexrow-element-66" v-model="rankcap" clearable @change="onRankChange" placeholder="Предельное звание" filterable no-data-text="Не найдено" no-match-text="Не найдено" :filter-method="filterRanks">
+                <el-option v-for="rank in filteredRanks"
+                           :key="rank.id" :label="rank.name" :value="rank.id">
+                </el-option>
+            </el-select>
+        </div>
+
+        <div class="positionmanagementpanel-flexrow">
+            <div v-bind:class="{'positionmanagementpanel-freezed': !displayOnNewPosition}" class="positionmanagementpanel-flexrow-text positionmanagementpanel-flexrow-text-first positionmanagementpanel-flexrow-element-33">Категория</div>
+            <el-select v-bind:class="{'positionmanagementpanel-freezed': !displayOnNewPosition}" :disabled="positioncategoryDisabled" class="positionmanagementpanel-rankcap positionmanagementpanel-margin positionmanagementpanel-flexrow-element-66" v-model="positioncategory" @change="onPositionCategoryChange()" placeholder="Категория" filterable no-data-text="Не найдено" no-match-text="Не найдено">
+                <el-option v-for="positioncategoryElement in positioncategoriesFiltred"
+                           :key="positioncategoryElement.id" :label="positioncategoryElement.name" :value="positioncategoryElement.id">
+                </el-option>
+            </el-select>
+        </div>
+
+        <div v-if="containsCivilClass() && displayOnNewPosition">
+            <div class="positionmanagementpanel-flexrow ">
+                <div class="positionmanagementpanel-flexrow ">
+                    <div class="positionmanagementpanel-flexrow-text positionmanagementpanel-flexrow-text-first positionmanagementpanel-flexrow-element-66">Минимальный класс</div>
+                    <el-select class="positionmanagementpanel-rankcap positionmanagementpanel-margin positionmanagementpanel-flexrow-element-33" v-model="civilranklow" placeholder="Минимальный класс">
+                        <el-option v-for="i in this.civilclass"
+                                   :key="i" :label="i" :value="i">
+                        </el-option>
+                    </el-select>
+                </div>
+                <div class="positionmanagementpanel-flexrow ">
+                    <div class="positionmanagementpanel-flexrow-text positionmanagementpanel-flexrow-text-first positionmanagementpanel-flexrow-element-66">Максимальный класс</div>
+                    <el-select class="positionmanagementpanel-rankcap positionmanagementpanel-margin positionmanagementpanel-flexrow-element-33" v-model="civilrankhigh" placeholder="Максимальный класс">
+                        <el-option v-for="i in this.civilclass"
+                                   :key="i" :label="i" :value="i">
+                        </el-option>
+                    </el-select>
+                </div>
+            </div>
+        </div>
+
+        <div class="positionmanagementpanel-flexrow">
+            <div v-bind:class="{'positionmanagementpanel-freezed': !displayOnNewPosition}" class="positionmanagementpanel-flexrow-text positionmanagementpanel-flexrow-text-first positionmanagementpanel-flexrow-element-33">Источник финансирования</div>
+            <el-select v-bind:class="{'positionmanagementpanel-freezed': !displayOnNewPosition}" class="positionmanagementpanel-rankcap positionmanagementpanel-margin positionmanagementpanel-flexrow-element-66" v-model="sof" placeholder="Источник финансирования" filterable no-data-text="Не найдено" no-match-text="Не найдено" :filter-method="filterSofs">
+                <el-option v-for="sourceoffinancing in filteredSofs"
+                           :key="sourceoffinancing.id" :label="sourceoffinancing.name" :value="sourceoffinancing.id">
+                </el-option>
+            </el-select>
+        </div>
+
+        <div class="positionmanagementpanel-flexrow">
+            <div v-bind:class="{'positionmanagementpanel-freezed': !displayOnNewPosition}" class="positionmanagementpanel-flexrow-text positionmanagementpanel-flexrow-text-first positionmanagementpanel-flexrow-element-33">Метка рода деятельности</div>
+            <el-select v-bind:class="{'positionmanagementpanel-freezed': !displayOnNewPosition}" class="positionmanagementpanel-rankcap positionmanagementpanel-margin positionmanagementpanel-flexrow-element-66" multiple v-model="mrd" placeholder="Метка рода деятельности" filterable no-data-text="Не найдено" no-match-text="Не найдено">
+                <el-option v-for="mrdElement in mrds"
+                           :key="mrdElement.id" :label="mrdElement.name" :value="mrdElement.id">
+                </el-option>
+            </el-select>
+        </div>
+
+        <el-select v-bind:class="{'positionmanagementpanel-freezed': !displayOnNewPosition}" class="positionmanagementpanel-rankcap positionmanagementpanel-margin" v-model="altrank" clearable @change="onAltrankChange" placeholder="Если...">
+            <el-option v-for="altrankconditiongroup in altrankconditiongroups"
+                       :key="altrankconditiongroup.id" :label="altrankconditiongroup.name" :value="altrankconditiongroup.id">
+            </el-option>
+        </el-select>
+        <div class="positionmanagementpanel-margin positionmanagementpanel-left positionmanagementpanel-left-margin" v-for="altrank in altranks">
+            {{altrank.altrankconditionname}} —
+            <el-select v-bind:class="{'positionmanagementpanel-freezed': !displayOnNewPosition}" class="positionmanagementpanel-rankcap positionmanagementpanel-left-margin" v-model="altrank.rank" clearable placeholder="Звание">
+                <el-option v-for="rank in ranks"
+                           :key="rank.id" :label="rank.name" :value="rank.id">
+                </el-option>
+            </el-select>
+
+        </div>
+
+        <div v-bind:class="{'positionmanagementpanel-freezed': !displayOnNewPosition}" class="positionmanagementpanel-fromit">Из них</div>
+        <div class="positionmanagementpanel-flexrow">
+            <el-checkbox v-bind:class="{'positionmanagementpanel-freezed': !displayOnNewPosition}" :disabled="positioncivil" v-model="replacedbycivil" @change="onReplacedChange">
+                Может замещаться гражданским персоналом
+            </el-checkbox>
+            <el-select v-bind:class="{'positionmanagementpanel-freezed': !displayOnNewPosition}" :disabled="!positionReplaced" class="positionmanagementpanel-rankcap positionmanagementpanel-margin positionmanagementpanel-left-margin" @change="onReplacedByCivilPositionCategoryChange" v-model="replacedbycivilpositioncategory" placeholder="Какой категорией может заменяться">
+                <el-option v-for="positioncategoryElement in positioncategoriesCivil"
+                           :key="positioncategoryElement.id" :label="positioncategoryElement.name" :value="positioncategoryElement.id">
+                </el-option>
+            </el-select>
+        </div>
+
+        <div class="positionmanagementpanel-replacedbycivil" v-if="isReplacedByCivil()">
+            <div class="positionmanagementpanel-flexrow ">
+                <el-select v-model="replacedbycivilpositiontype" :disabled="!positionReplaced" v-bind:class="{'positionmanagementpanel-freezed': displayinput}" class="positionmanagementpanel-rankcap positionmanagementpanel-margin positionmanagementpanel-flexrow-element-50" @change="onReplacedByCivilTypeChange" :title="replacedbycivilpositiontypeTitle" placeholder="Название должности при замещении" filterable :filter-method="filterMethod">
+                    <el-option v-for="ptype in filteredPositiontypes" :title="ptype.name"
+                               :key="ptype.id" :label="shortifyTitle(ptype.name)" :value="ptype.id">
+                    </el-option>
+                </el-select>
+                <div class="positionmanagementpanel-flexrow positionmanagementpanel-flexrow-element-50">
+                    <div v-bind:class="{'positionmanagementpanel-freezed': !displayOnCount}" class=" positionmanagementpanel-flexrow-text-first positionmanagementpanel-label positionmanagementpanel-flexrow-element-60">Количество должностей</div>
+                    <el-input v-bind:class="{'positionmanagementpanel-freezed': !displayOnCount}" class="positionmanagementpanel-flexrow-element-40" @input="onCivilNumChange" v-model="replacedbycivilquantity"></el-input>
+                </div>
+            </div>
+
+            <div v-if="containsClass()">
+                <div class="positionmanagementpanel-flexrow ">
+                    <div class="positionmanagementpanel-flexrow ">
+                        <div class="positionmanagementpanel-flexrow-text positionmanagementpanel-flexrow-text-first positionmanagementpanel-flexrow-element-66">Минимальный класс</div>
+                        <el-select class="positionmanagementpanel-rankcap positionmanagementpanel-margin positionmanagementpanel-flexrow-element-33" v-model="civilranklow" placeholder="Минимальный класс">
+                            <el-option v-for="i in this.replacedbycivilclass"
+                                       :key="i" :label="i" :value="i">
+                            </el-option>
+                        </el-select>
+                    </div>
+                    <div class="positionmanagementpanel-flexrow ">
+                        <div class="positionmanagementpanel-flexrow-text positionmanagementpanel-flexrow-text-first positionmanagementpanel-flexrow-element-66">Максимальный класс</div>
+                        <el-select class="positionmanagementpanel-rankcap positionmanagementpanel-margin positionmanagementpanel-flexrow-element-33" v-model="civilrankhigh" placeholder="Максимальный класс">
+                            <el-option v-for="i in this.replacedbycivilclass"
+                                       :key="i" :label="i" :value="i">
+                            </el-option>
+                        </el-select>
+                    </div>
+                </div>
+            </div>
+
+            Из них :
+            <div class="positionmanagementpanel-rbcd" v-for="rbcd in replacedbycivildates">
+                <div class="positionmanagementpanel-flexrow ">
+                    <el-checkbox v-model="rbcd.civildecree">Имеет номер и дату приказа</el-checkbox>
+                    <el-input :disabled="!rbcd.civildecree" v-model="rbcd.civildecreenumber"></el-input>
+                    <el-input :disabled="!rbcd.civildecree" v-model="rbcd.civildecreedate" type="date"></el-input>
+                </div>
+                <div class="positionmanagementpanel-flexrow ">
+                    <el-checkbox v-model="rbcd.replaced" @change="updatePositionParts">Замещается гражданским персоналом до </el-checkbox>
+                    <el-input :disabled="!rbcd.replaced" @input="updatePositionParts" v-model="rbcd.date" type="date"></el-input>
+                </div>
+            </div>
+
+            <!--<el-checkbox v-model="replacedbycivildatelimit">
+            Дата замещения гражданским персоналом до:
+        </el-checkbox>
+        <el-input suffix-icon="el-icon-date" v-model="replacedbycivildate" type="date" :disabled="!replacedbycivildatelimit"></el-input>-->
+
+
+        </div>
+
+
+        <el-input v-if="ispositionpanel" type="textarea" :rows="2" v-model="notice" class="positionmanagementpanel-rankcap positionmanagementpanel-margin" v-bind:class="{'positionmanagementpanel-freezed': displayinput}" placeholder="Примечание (опционально. Указание СО и заметок)"></el-input>
+
+        <!--<el-checkbox v-bind:class="{'positionmanagementpanel-freezed': !displayOnNewPosition}" v-model="decertificate">
+        Подлежит разаттестации с:
+    </el-checkbox>
+    <el-input v-bind:class="{'positionmanagementpanel-freezed': !displayOnNewPosition}" suffix-icon="el-icon-date" v-model="decertificatedate" type="date" :disabled="!decertificate"></el-input>-->
+        <div>
+            <el-checkbox v-bind:class="{'positionmanagementpanel-freezed': !displayOnNewPosition}" v-model="curator">
+                Курирует подразделения
+            </el-checkbox>
+        </div>
+        <div class="positionmanagementpanel-curation" v-if="curator">
+            <div class="positionmanagementpanel-curation-element" v-for="(sub, key, index) in curationStructureTrees">
+                {{key + 1}} - {{sub.tree}}
+                <el-button size="mini" @click="upCuration(key)">Вверх</el-button>
+                <el-button size="mini" @click="downCuration(key)">Вниз</el-button>
+                <el-button size="mini" @click="removeCuration(sub.id)">Удалить</el-button>
+            </div>
+            <el-button @click="addCuration" size="mini">Добавить курируемое подразделение</el-button>
+        </div>
+
+        <div>
+            <el-checkbox v-bind:class="{'positionmanagementpanel-freezed': !displayOnNewPosition}" v-model="head">
+                Возглавляет подразделение
+            </el-checkbox>
+        </div>
+        <div class="positionmanagementpanel-head" v-if="head">
+            <div v-if="headingStructureTree != null">
+                {{headingStructureTree.tree}}
+                <el-button @click="removeHeading" size="mini">Убрать подразделение</el-button>
+            </div>
+            <el-button @click="addHeading" size="mini">Добавить подразделение</el-button>
+        </div>
+
+
+        <el-checkbox v-if="displayProlonged" v-model="datecustom">
+            Дата вступления в силу отличается от даты вступления в силу приказа/подлежит разаттестации
+        </el-checkbox>
+        <!--<el-input suffix-icon="el-icon-date" v-model="dateactive" type="date" :disabled="!datecustom"></el-input>-->
+        <div v-if="datecustom">
+            <table class="positionmanagementpanel-table">
+                <thead class="positionmanagementpanel-thead">
+                    <tr>
+                        <td>Номер</td>
+                        <td>Может замещаться гражданским</td>
+                        <td>Замещается гражданским до</td>
+                        <td>Разаттестуется</td>
+                        <td>Дата вступления в силу отличается от даты вступления в силу приказа</td>
+                    </tr>
+                </thead>
+                <tbody class="positionmanagementpanel-tbody">
+                    <tr class="positionmanagementpanel-tr" v-for="part in positionParts">
+                        <td>
+                            {{part.id}}
+                        </td>
+                        <td>
+                            <span v-if="!positioncivil && part.civil">
+                                Да
+                            </span>
+                            <span v-else>
+                                Нет
+                            </span>
+                        </td>
+                        <td>
+                            <span v-if="!positioncivil && part.civildatelimit">
+                                {{beautifyDate(part.civildate)}}
+                            </span>
+                            <span v-else>
+                                -
+                            </span>
+                        </td>
+                        <td>
+                            <div v-if="!positioncivil">
+                                <div class="positionmanagementpanel-flexrow">
+                                    <el-checkbox v-model="part.decertificate"></el-checkbox>
+                                    <el-input :disabled="!part.decertificate" v-model="part.decertificatedate" type="date"></el-input>
+                                </div>
+
+                            </div>
+                            <div v-else>
+                                -
+                            </div>
+                        </td>
+                        <td>
+                            <div class="positionmanagementpanel-flexrow">
+                                <el-checkbox @change="changecustomcheckbox(part)" v-model="part.custom"></el-checkbox>
+                                <el-input :disabled="!part.custom" v-model="part.customdate" @focus="focusid = part.id" :input="changecustomdate(part)" type="date"></el-input>
+                            </div>
+
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+
+        <div id="positionmanagementpanel-yesno">
+            <el-button id="positionmanagementpanel-yes" @click="okbutton" :disabled="loadingPosition">Ок</el-button>
+
+            <el-button id="positionmanagementpanel-no" @click="cancelbutton">Отмена</el-button>
+
+        </div>
+        <div v-if="loadingPosition" class="loading-spinner fingerprint-spinner">
+            <div class="spinner-ring"></div>
+            <div class="spinner-ring"></div>
+            <div class="spinner-ring"></div>
+            <div class="spinner-ring"></div>
+            <div class="spinner-ring"></div>
+            <div class="spinner-ring"></div>
+            <div class="spinner-ring"></div>
+            <div class="spinner-ring"></div>
+            <div class="spinner-ring"></div>
+
+        </div>
+
+
+
+
+    </div>
+
+</template>
+<script src="./positionmanagingpanel.ts"></script>

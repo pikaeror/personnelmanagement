@@ -1,0 +1,487 @@
+﻿.printServlist-body {
+    width: 21cm;
+    margin: 0px;
+    max-width: 21cm;
+    background-color: white;
+    color: black;
+    font-family: "Times New Roman", Times, serif;
+}
+
+.printServlist-topinfo {
+    margin-right: 3mm;
+    margin-left: 5mm;
+    font-size: 3mm;
+    display: flex;
+    justify-content: space-between;
+}
+
+.printServlist-topinfo-left {
+}
+
+.printServlist-topinfo-right {
+}
+
+
+.printServlist-testfield {
+    font-size: 20px;
+}
+
+.printServlist-topmchs {
+    text-align: center;
+    margin-top: 10mm;
+    font-size: 4mm;
+    font-weight:bold;
+}
+
+.printServlist-title{
+    text-align: center;
+    margin-top: 10mm;
+    font-size: 8mm;
+}
+
+.printServlist-personalnumber {
+    display: flex;
+    justify-content: center;
+    margin-top: 3mm;
+    font-weight: 600;
+}
+
+.printServlist-personalnumber-input{
+    border-bottom: 3px dotted black;
+    margin-top: -1mm;
+    padding: 0px;
+    width: 40mm;
+}
+
+.printServlist-surname {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    margin-top: 5mm;
+}
+
+.printServlist-surname-field {
+    width: 190mm;
+    align-self: center;
+    border-bottom: 1px solid black;
+}
+
+.printServlist-surname-description {
+    align-self: center;
+    font-size: 3mm;
+}
+
+.printServlist-name {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    margin-top: 2mm;
+}
+
+.printServlist-name-field {
+    width: 190mm;
+    align-self: center;
+    border-bottom: 1px solid black;
+}
+
+.printServlist-name-description {
+    align-self: center;
+    font-size: 3mm;
+}
+
+.printServlist-ranktable {
+    
+    border-bottom: 1mm solid black;
+    margin-top: 5mm;
+}
+
+.printServlist-ranktable thead tr {
+    font-size: 2.46mm;
+}
+
+.printServlist-ranktable thead tr th {
+    
+    border-top: 1mm solid black;
+    border-bottom: 1mm solid black;
+    text-align: center;
+}
+
+.printServlist-ranktable tbody tr {
+    
+}
+
+.printServlist-ranktable-head-rank{
+    width: 65mm;
+}
+
+.printServlist-ranktable-head-datenum {
+    height: 20mm;
+    padding: 2mm;
+}
+
+.printServlist-ranktable tbody tr td {
+}
+
+.printServlist-ranktable-thead-tr{
+
+}
+
+.printServlist-ranktable-thead-td {
+}
+
+.printServlist-ranktable-tbody-tr {
+    height: 10mm;
+}
+
+.printServlist-ranktable-tbody-td {
+    
+}
+
+.printServlist-ranktable-left {
+    border-right: 0.5mm solid black;
+}
+
+.printServlist-ranktable-right {
+    border-left: 0.5mm solid black;
+}
+
+.printServlist-ranktable-middle {
+    border-right: 1mm solid black !important;
+}
+
+.printServlist-voenkomat{
+    margin-top: 6mm;
+    font-size: 4mm;
+    margin-left: 3mm;
+}
+
+.printServlist-relation {
+    margin-top: 2.2mm;
+    font-size: 4mm;
+    margin-left: 3mm;
+}
+
+.printServlist-pagenum {
+    font-size: 3.5mm;
+    display: flex;
+    justify-content: flex-end;
+    page-break-before:always;
+    margin-right: 3mm;
+}
+
+.printServlist-second-table-birth-right{
+
+}
+
+.printServlist-second-table-birth-right-p {
+    background-image: linear-gradient(#FFF 95%, #000 5%);
+    background-size: 100% 6mm;
+    width: 20mm;
+    height: 30mm;
+    line-height: 6mm;
+}
+
+.printServlist-table-margintop{
+    margin-top: 5mm;
+}
+
+.printServlist-table {
+    font-size: 3mm;
+    border-top: 1mm solid black;
+    border-bottom: 1mm solid black;
+    width: 210mm;
+}
+
+.printServlist-table tr td{
+    font-size: 3mm;
+}
+
+.printServlist-table tr{
+    height: 7mm;
+}
+
+.printServlist-table-topborderfat{
+    border-top: 1mm solid black;
+}
+
+.printServlist-table-bottomborderthin td {
+    border-bottom: 0.5mm solid black;
+}
+
+.printServlist-table th{
+    border-top: 1mm solid black;
+}
+
+.printServlist-table-bordertop {
+    border-top: 0.5mm solid black;
+}
+
+.printServlist-table-bordertopfat {
+    border-top: 1mm solid black;
+}
+
+.printServlist-table-borderright {
+    border-right: 0.5mm solid black;
+}
+
+.printServlist-table-borderbottomfat {
+    border-bottom: 1mm solid black;
+}
+
+.printServlist-table-borderbottom {
+    border-bottom: 0.5mm solid black;
+}
+
+.printServlist-tablesimple{
+
+}
+
+.printServlist-tablesimple tr td{
+    height: 7mm;
+}
+
+
+.printServlist-third-description {
+    font-size: 4.3mm;
+    margin-left: 5mm;
+    text-align: justify;
+    text-justify: inter-word;
+    margin-right: 3mm;
+}
+
+.printServlist-fourth-description {
+    font-size: 4.3mm;
+    margin-left: 5mm;
+    text-align: justify;
+    text-justify: inter-word;
+    margin-right: 3mm;
+}
+
+.printServlist-fifth-description {
+    font-size: 4.3mm;
+    margin-left: 5mm;
+    text-align: justify;
+    text-justify: inter-word;
+    margin-right: 3mm;
+    margin-top: 5mm;
+}
+
+.printServlist-fifth-description-2 {
+    font-size: 4.3mm;
+    margin-left: 5mm;
+    text-align: justify;
+    text-justify: inter-word;
+    margin-right: 3mm;
+    margin-top: 20mm;
+}
+
+.printServlist-sixth-description {
+    font-size: 4.3mm;
+    margin-left: 5mm;
+    text-align: justify;
+    text-justify: inter-word;
+    margin-right: 3mm;
+}
+
+.printServlist-seventh-description {
+    font-size: 4.3mm;
+    margin-left: 5mm;
+    text-align: justify;
+    text-justify: inter-word;
+    margin-right: 3mm;
+}
+
+.printServlist-eight-description {
+    font-size: 4.3mm;
+    margin-left: 5mm;
+    text-align: justify;
+    text-justify: inter-word;
+    margin-right: 3mm;
+}
+
+.printServlist-ninth-description {
+    font-size: 4.3mm;
+    margin-left: 5mm;
+    text-align: justify;
+    text-justify: inter-word;
+    margin-right: 3mm;
+    margin-top: 5mm;
+}
+
+.printServlist-tenth-description {
+    font-size: 4.3mm;
+    margin-left: 5mm;
+    text-align: justify;
+    text-justify: inter-word;
+    margin-right: 3mm;
+}
+
+.printServlist-eleventh-description {
+    font-size: 4.3mm;
+    margin-left: 5mm;
+    text-align: justify;
+    text-justify: inter-word;
+    margin-right: 3mm;
+    margin-top: 5mm;
+}
+
+.printServlist-twelveth-description {
+    font-size: 4.3mm;
+    margin-left: 5mm;
+    text-align: justify;
+    text-justify: inter-word;
+    margin-right: 3mm;
+    margin-top: 5mm;
+}
+
+.printServlist-dottedbottom{
+    display:inline-block;
+    border-bottom: 0.5mm dotted black;
+}
+
+.printServlist-solidbottom {
+    display: inline-block;
+    border-bottom: 0.25mm solid black;
+}
+
+.printServlist-listdate {
+    margin-top: 6mm;
+    font-size: 4mm;
+    margin-left: 3mm;
+}
+
+.printServlist-pmsign {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    margin-top: 8mm;
+}
+
+.printServlist-pmsign-field {
+    width: 210mm;
+    align-self: center;
+    border-bottom: 1px solid black;
+}
+
+.printServlist-pmsign-description {
+    align-self: center;
+    font-size: 3mm;
+}
+
+.printServlist-signflex{
+    display: flex;
+    justify-content: space-between;
+    
+}
+
+.printServlist-officersign {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    margin-top: 2mm;
+}
+
+.printServlist-listcreatedate{
+    margin-left: 3mm;
+    margin-top: 8mm;
+}
+
+.printServlist-listcreatedate-solidstart{
+    margin-left: 5mm;
+}
+
+.printServlist-officersign-field {
+    width: 90mm;
+    align-self: center;
+    border-bottom: 1px solid black;
+    margin-top: 5mm;
+}
+
+.printServlist-officersign-description {
+    align-self: center;
+    font-size: 3mm;
+}
+
+.printServlist-workersign {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    margin-top: 16mm;
+}
+
+
+.printServlist-workersign-field {
+    width: 90mm;
+    align-self: center;
+    border-bottom: 1px solid black;
+    margin-top: 5mm;
+}
+
+.printServlist-workersign-description {
+    align-self: center;
+    font-size: 3mm;
+}
+
+.printServlist-mp {
+    margin-left: 3mm;
+    margin-top: 8mm;
+}
+
+.printServlist-signs {
+    margin-top: 5mm;
+    display: flex;
+    justify-content: space-between;
+}
+
+.printServlist-signs-left {
+    margin-top: 5mm;
+    margin-left: 3mm;
+    width: 60mm;
+}
+
+.printServlist-signs-right {
+    
+}
+
+.printServlist-signrow{
+    width: 130mm;
+}
+
+.flex_full {
+    display: flex;
+    width: 100%;
+}
+
+.flex-container_general {
+    display: flex;
+    width: 80%;
+}
+
+.flex-item_input {
+    width: 35%;
+    padding: 1%;
+    margin: 5px;
+}
+
+.flex-item_text {
+    white-space: pre;
+    width: auto;
+    padding: 1%;
+    margin: 10px;
+}
+.flex-item_buttom {
+    padding: 1%;
+    margin: 10px;
+}
+
+.dellll_buttom {
+    float: right;
+    border:;
+    margin-right: .5rem;
+    i{ margin-left: 5rem; }
+}

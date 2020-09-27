@@ -1,0 +1,43 @@
+﻿<template>
+    <div class="pm-component">
+        <div>
+            <h1>Cотрудники</h1>
+            
+        </div>
+        <div>
+            <ul v-if="persons.length">
+                <li  v-for="person in persons">
+                    <b>Имя</b> {{person.name}} <br /> <b>Фамилия</b> {{person.surname}} <br /> <b>Дата рождения</b> {{getDOB(person)}}
+                </li>
+            </ul>
+        </div>
+        <form>
+            <div class="el-row el-col-xs-4">
+                <el-input v-model="newPersonName"  placeholder="Имя" />
+            </div>
+            <div class="el-row el-col-xs-4">
+                <el-input v-model="newPersonSurname" placeholder="Фамилия" />
+            </div>
+            <div class="el-row el-col-xs-4">
+                <masked-input type="text"
+                              name="date"
+                              class="el-input__inner"
+                              v-model="newPersonDate"
+                              :mask="[/[0-9]/, /[0-9]/, '.', /[0-1]/, /[0-9]/, '.', /[1-2]/, /[0-9]/, /[0-9]/, /[0-9]/]"
+                              :guide="true"
+                              placeholder="Дата рождения"
+                              placeholderChar="_">
+                </masked-input>
+            </div>
+            <div class="el-row el-col-xs-6">
+                <el-button v-on:click="addPerson($event)" type="primary">
+                    Добавить
+                </el-button>
+            </div>
+            
+        </form>
+        <br />
+        <br />
+    </div>
+</template>
+<script src="./test.ts"></script>

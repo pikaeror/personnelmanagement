@@ -1,0 +1,139 @@
+﻿<template>
+    <div v-if="visible > 0" class="widget" style="overflow-y: scroll; max-height: 900px;">
+        <div class="eld-top-block">
+            <div class="eld-title">
+                Почта
+            </div>
+            <div class="eld-search-and-create">
+                <div>
+                    <el-button @click="createMenuToggle()" type="success" plain>Создать</el-button>
+                    <!--<el-dialog :visible.sync="decreecreator" width="50%" @close="close()" v-draggable>
+                    <decreeoperationtemplatecreator :visible="decreecreator"></decreeoperationtemplatecreator>
+                </el-dialog>-->
+                </div>
+            </div>
+        </div>
+
+        <div class="eld-eld">
+            <!--Здесь боковая панель-->
+            <div class="eld-eld-side-mail">
+                <div class="eld-eld-side-element" style="background-color: lightgray;"><strong>Предложения</strong></div>
+                <div v-bind:class="{'eld-eld-side-element-selected': menuid == 2}" class="eld-eld-side-element" style="background-color: lightgray;" @click="setMenuid(2)">Мои документы</div>
+                <div v-bind:class="{'eld-eld-side-element-selected': menuid == 3}" class="eld-eld-side-element" style="background-color: lightgray;" @click="setMenuid(3)">Входящие</div>
+                <div v-bind:class="{'eld-eld-side-element-selected': menuid == 4}" class="eld-eld-side-element" style="background-color: lightgray;" @click="setMenuid(4)">Исходящие</div>
+                <div v-bind:class="{'eld-eld-side-element-selected': menuid == 5}" class="eld-eld-side-element" style="background-color: lightgray;" @click="setMenuid(5)">Отработанные</div>
+                <div v-bind:class="{'eld-eld-side-element-selected': menuid == 6}" class="eld-eld-side-element" style="background-color: lightgray;" @click="setMenuid(6)">Архив</div>
+                <div class="eld-eld-side-element"></div>
+                <div class="eld-eld-side-element" style="background-color: darkgray;"><strong>Приказы</strong></div>
+                <div v-bind:class="{'eld-eld-side-element-selected': menuid == 14}" class="eld-eld-side-element" style="background-color: darkgray;" @click="setMenuid(7)">В работе</div>
+                <div v-bind:class="{'eld-eld-side-element-selected': menuid == 9}" class="eld-eld-side-element" style="background-color: darkgray;" @click="setMenuid(8)">Мои подписанные приказы</div>
+                <div v-bind:class="{'eld-eld-side-element-selected': menuid == 10}" class="eld-eld-side-element" style="background-color: darkgray;" @click="setMenuid(9)">Все подписанные приказы</div>
+                <div v-bind:class="{'eld-eld-side-element-selected': menuid == 11}" class="eld-eld-side-element" style="background-color: darkgray;" @click="setMenuid(10)">Выписки</div>
+                <template slot-scope="scope">
+                    <el-button type="default" @click="handleSaveRow">Save</el-button>
+                    <el-button type="primary" @click="handleEditRow">Edit</el-button>
+                </template>
+            </div>
+            <div class="eld-eld-main">
+                <!--Шапка главного меню-->
+                <div class="eld-eld-main-head">
+                    <div style="display: flex; ">
+                        <el-button class="eld-eld-main-head-partbutton" size="mini" @click="send">Направить</el-button>
+                        <el-button class="eld-eld-main-head-partbutton" size="mini" @click="deleted">Удалить</el-button>
+                        <el-button class="eld-eld-main-head-partbutton" size="mini" @click="">Прочитанно/Не прочитанно</el-button>
+                        <el-button class="eld-eld-main-head-partbutton" size="mini" @click="explorer">Переместить в папку</el-button>
+                        <el-button class="eld-eld-main-head-partbutton" size="mini" @click="unit">Объединить</el-button>
+                    </div>
+                </div>
+                <div visible="update"></div>
+                <template>
+                    <el-table ref="multipleTable" :data="viewpersondecrees" style="width: 100%" border :row-class-name="tableRowClassName" @selection-change="handleSelectionChange" @row-dblclick="rowClicked">
+                        <el-table-column property="marked" type="selection" width="55">
+                        </el-table-column>
+                        <el-table-column property="getDate" label="ДАТА" sortable width="110" :filters="datefiltervariants" :filter-method="filterHandler">
+                        </el-table-column>
+                        <el-table-column property="getNumber" label="№" sortable width="80">
+                        </el-table-column>
+                        <el-table-column property="getName" label="Название" width="450">
+                        </el-table-column>
+                        <el-table-column property="getPlace" label="Подразделение" width="550">
+                        </el-table-column>
+                        <el-table-column property="getFIO" label="ФИО работника" width="200">
+                        </el-table-column>
+                        <el-table-column label="Действия">
+                            <template slot-scope="scope">
+                                <el-button type="default" @click="handleSaveRow(scope.$index)">Save</el-button>
+                                <el-button type="primary" @click="handleEditRow(scope.$index)">Edit</el-button>
+                            </template>
+                            <!--<div slot-scope="{row}">
+                            <el-button size="mini">Edit</el-button>
+                            <el-button size="mini">Delete</el-button>
+                        </div>-->
+                        </el-table-column>
+                    </el-table>
+                </template>
+
+            </div>
+        </div>
+        <el-dialog width="900px" :visible.sync="dialogVisibleSend">
+            <div>
+                Введите полностью или частично фамилию, логин или подразделение для поиска кадровика, которому будет направлен проекты приказа
+                <div v-for="decree in multipleSelection">
+                    <div>
+                        &#128504 {{decree.number}}; <el-button size="mini" type="danger" icon="el-icon-delete" @click="deleteDecreeFromList(decree)"></el-button>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <el-input placeholder="Поле поиска" class="eld-search-input" v-model="usersearch"></el-input>
+                <el-button @click="searchUsers(usersearch)">Поиск</el-button>
+            </div>
+            <div v-if="hasUserSearchResults()" class="eld-search-main">
+                <br />
+                <div class="eld-search-main-title">
+                    Результаты поиска
+                </div>
+                <div v-for="user in usersSearch" class="eld-search-element-user" @click="selectUser(user.id)">
+                    <div>
+                        {{user.surname}} {{user.firstname}} {{user.patronymic}}
+                    </div>
+                    <div>
+                        {{user.positionString}}
+                    </div>
+                    <div>
+                        {{user.structureTreeString}}
+                        <div>
+                            {{user.structureString}}
+                        </div>
+
+                    </div>
+                    <div>
+                        <el-button size="mini" type="success" @click="selectUser(user.id)">Направить</el-button>
+                    </div>
+                </div>
+                <div class="eld-search-element-button">
+                    <el-button type="warning" plain @click="closeUserSearch()">Закрыть</el-button>
+                </div>
+
+            </div>
+        </el-dialog>
+
+        <el-dialog width="900px" :visible.sync="dialogVisibleExplorer">
+            <div>
+                Выберите папку для переноса следующих приказов:
+                <div v-for="decree in multipleSelection">
+                    <div>
+                        &#128504 {{decree.number}}; <el-button size="mini" type="danger" icon="el-icon-delete" @click="deleteDecreeFromList(decree)"></el-button>
+                    </div>
+                </div>
+            </div>
+            <div v-for="folder in explorerFolder">
+                <el-button size="mini" type="success" @click="FolderSelected(folder)">
+                    {{folder}}
+                </el-button>
+            </div>
+        </el-dialog>
+        <!--<derceeoperationelementcreator :visible="decreecreator"></derceeoperationelementcreator>-->
+    </div>
+</template>
+<script src="./derceeoperationelement.ts"></script>

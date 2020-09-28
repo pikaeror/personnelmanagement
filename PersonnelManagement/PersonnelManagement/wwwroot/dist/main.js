@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "9d344c61b9b0ae2c6869"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "c47ff42a487fd764f2fa"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -2017,7 +2017,7 @@ var Component = __webpack_require__(3)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\Projects\\MCHS\\archive\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\structuremanagingpanel\\structuremanagingpanel.vue.html"
+Component.options.__file = "D:\\GIT\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\structuremanagingpanel\\structuremanagingpanel.vue.html"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] structuremanagingpanel.vue.html: functional components are not supported with templates, they should use render functions.")}
 
@@ -7856,6 +7856,13 @@ let derceeoperationelement = class derceeoperationelement extends __WEBPACK_IMPO
             let index = this.fullpersondecrees.findIndex(p => p.id == r.id);
             this.fullpersondecrees[index].marked = this.fullpersondecrees[index].marked == true ? false : true;
         });
+        /*if (val) {
+            val.forEach(row => {
+                this.$refs.multipleTable.toggleRowSelection(row);
+            });
+        } else {
+            this.$refs.multipleTable.clearSelection();
+        }*/
         //this.reload();
     }
     filterHandler(value, row, column) {
@@ -8187,48 +8194,11 @@ __WEBPACK_IMPORTED_MODULE_0_vue__["default"].component(__WEBPACK_IMPORTED_MODULE
 __WEBPACK_IMPORTED_MODULE_0_vue__["default"].component(__WEBPACK_IMPORTED_MODULE_2_element_ui__["Autocomplete"].name, __WEBPACK_IMPORTED_MODULE_2_element_ui__["Autocomplete"]);
 __WEBPACK_IMPORTED_MODULE_0_vue__["default"].use(__WEBPACK_IMPORTED_MODULE_2_element_ui___default.a);
 let decreeoperationtemplatecreator = class decreeoperationtemplatecreator extends __WEBPACK_IMPORTED_MODULE_0_vue__["default"] {
-    onDecreeDatesignedChange(value, oldValue) {
-        this.decreeDateactive = this.decreeDatesigned;
-    }
     data() {
         return {
-            modalAdminVisible: false,
-            modalStructureManagingPanelTopMenuVisible: false,
-            modalSettingsPanelVisible: false,
-            modalPmrequestPanelVisible: false,
-            modalAboutPanelVisible: false,
-            sidebarDisplay: true,
-            featured: [],
-            structureeditorAccess: "0",
-            removeStructureAvailable: false,
-            removeStructure: "removestructure",
-            renameStructureAvailable: false,
-            renameStructure: "renamestructure",
-            modalDecreesMenuVisible: false,
-            modalDecreeMenuVisible: false,
-            decreeButtonName: "Создать приказ",
-            decreeId: 0,
-            decreeNumber: "",
-            decreeNickname: "",
-            decreeName: "",
-            decreeDateactive: this.toDateInputValue(new Date()),
-            decreeDatesigned: this.toDateInputValue(new Date()),
-            addStructureAvailable: false,
-            decreesList: [],
-            decreeCreateName: "",
-            decreeOperations: [],
             focused: false,
             decreesActionsDisabled: false,
             modalDecreesSignedMenuVisible: false,
-            decreeFilterNumber: "",
-            decreeFilterNickname: "",
-            decreeFilterName: "",
-            decreeFilterDateactiveStart: "",
-            decreeFilterDateactiveEnd: "",
-            decreeFilterDatesignedStart: "",
-            decreeFilterDatesignedEnd: "",
-            decreesSignedList: [],
-            decreeSignedOperations: [],
             modalDecreeMenuSignedVisible: false,
             modalPersondecreesMenuVisible: false,
             modalPersondecreeMenuVisible: false,
@@ -8278,7 +8248,8 @@ let decreeoperationtemplatecreator = class decreeoperationtemplatecreator extend
             //this.$store.commit("setEldSelectedperson", 0);
         }
         //this.input_decree.creatorObject.structureString
-        setInterval(this.fetchPersondecreeBlocks, 5000);
+        this.persondecreeSelectUpdate(this.input_decree.id);
+        //setInterval(this.fetchPersondecreeBlocks, 5000);
     }
     get modeselectstructure() {
         return this.$store.state.modeselectstructure;
@@ -8412,9 +8383,9 @@ let decreeoperationtemplatecreator = class decreeoperationtemplatecreator extend
     /**
      * Visible if button is pressed and mode is not enabled;
      */
-    get pmrequestManagingPanelVisible() {
+    /*get pmrequestManagingPanelVisible(): boolean {
         return this.modalPmrequestPanelVisible && !this.modeselectstructure;
-    }
+    }*/
     logout() {
         __WEBPACK_IMPORTED_MODULE_0_vue__["default"].logout();
     }
@@ -8433,6 +8404,7 @@ let decreeoperationtemplatecreator = class decreeoperationtemplatecreator extend
     updateMethod() {
         this.update = !this.update;
         this.update = !this.update;
+        this.update = !this.update ? true : true;
     }
     fetchPersondecreeBlocks(id = -1) {
         if (this.input_decree == null)
@@ -8511,9 +8483,10 @@ let decreeoperationtemplatecreator = class decreeoperationtemplatecreator extend
                     p.countrycitiesList.push(baseCountrycities);
                 }
             });
-            this.persondecreeBlocks = result;
+            if (result.length != 0 || result != null)
+                this.persondecreeBlocks = result;
+            this.updateMethod();
         });
-        //this.updateMethod();
     }
     /**
      * Превращает строку из чисел, разделенными "," в массив
@@ -8722,6 +8695,7 @@ let decreeoperationtemplatecreator = class decreeoperationtemplatecreator extend
                     //this.lastSearchFio = fio;
                 }
             });
+            this.block_list_ubdate(block);
         });
     }
     multipersonAddAdditional(block) {
@@ -8764,7 +8738,7 @@ let decreeoperationtemplatecreator = class decreeoperationtemplatecreator extend
             method: 'post',
             body: JSON.stringify({
                 person: personid,
-                persondecree: this.persondecreeId,
+                persondecree: this.input_decree.id,
                 status: 1,
                 personreward: persondecreeblock.samplePersonreward,
                 intro: persondecreeblock.intro,
@@ -8821,7 +8795,7 @@ let decreeoperationtemplatecreator = class decreeoperationtemplatecreator extend
             if (persondecreeblock.person != null) {
                 //persondecreeblock.selectPerson(this.person.id, persondecreeblock);
             }
-            this.persondecreeSelectUpdate(this.persondecreeId);
+            this.persondecreeSelectUpdate(this.input_decree.id);
         });
     }
     closeSearch() {
@@ -8951,9 +8925,7 @@ let decreeoperationtemplatecreator = class decreeoperationtemplatecreator extend
         this.fetchPersondecreeOperations(id);
         this.fetchPersondecreeBlocks(id);
         this.fetchPersondecree(id);
-    }
-    onPersondecreeDatesignedChange(value, oldValue) {
-        this.decreeDateactive = this.decreeDatesigned;
+        this.updateMethod();
     }
     searchPersons(fio) {
         fetch('api/Person/Search' + fio, { credentials: 'include' })
@@ -9110,6 +9082,7 @@ let decreeoperationtemplatecreator = class decreeoperationtemplatecreator extend
             this.input_decree.id = id;
             //alert(result.creatorObject);
             this.input_decree.creatorObject = result.creatorObject;
+            this.input_decree = result;
         });
     }
     displayIt() {
@@ -9348,7 +9321,7 @@ let decreeoperationtemplatecreator = class decreeoperationtemplatecreator extend
             if (this.person != null) {
                 this.selectPerson(this.person.id);
             }
-            this.persondecreeSelectUpdate(this.persondecreeId);
+            this.persondecreeSelectUpdate(this.input_decree.id);
         });
     }
     prepareToImport(person) {
@@ -9611,9 +9584,10 @@ let decreeoperationtemplatecreator = class decreeoperationtemplatecreator extend
             if (this.person != null) {
                 this.selectPerson(this.person.id);
             }
-            this.persondecreeSelectUpdate(this.persondecreeId);
+            this.persondecreeSelectUpdate(this.input_decree.id);
+            /*this.fetchPersondecreeBlocks();
+            this.updateMethod();*/
         });
-        this.fetchPersondecreeBlocks();
     }
     deletePersondecreeblock(block) {
         if (!confirm("Вы уверены?")) {
@@ -9639,9 +9613,10 @@ let decreeoperationtemplatecreator = class decreeoperationtemplatecreator extend
             if (this.person != null) {
                 this.selectPerson(this.person.id);
             }
-            this.persondecreeSelectUpdate(this.persondecreeId);
+            this.persondecreeSelectUpdate(this.input_decree.id);
+            /*this.fetchPersondecreeBlocks();
+            this.updateMethod();*/
         });
-        this.fetchPersondecreeBlocks();
     }
     persondecreeUpdate() {
         let csharpDateCreated = new Date(this.persondecreeDatecreated);
@@ -9660,6 +9635,92 @@ let decreeoperationtemplatecreator = class decreeoperationtemplatecreator extend
             this.fetchPersondecree(decree.id);
             __WEBPACK_IMPORTED_MODULE_0_vue__["default"].notify("S:Данные проекта приказа зарезервированы");
         });
+    }
+    selectPersonBlockNonAuto(id, block) {
+        fetch('api/Person/Single' + id, { credentials: 'include' })
+            .then(response => {
+            return response.json();
+        })
+            .then(person => {
+            if (person != null) {
+                this.prepareToImport(person);
+                block.person = person;
+                block.personssearch = [];
+                block.fiosearch = "";
+                block.nonperson = ""; // Если был человек не из МЧС, убираем.
+                // Если присвоить
+                if (block.persondecreeblocktype == 14) {
+                    block.persondecreeblocksub = null; // Обнуляем список доступных званий для выбора
+                }
+                // Если предоставить (отпуск)
+                if (block.persondecreeblocktype == 15) {
+                    this.persondecreeblocksubChange(block);
+                    this.jobperiodvacationinitializeAll(block);
+                }
+                //this.addPersonblockelement(block); - отрубаем автоматическое дополнение. Но тогда для добавления отдельно должна быть кнопка.
+                this.block_list_ubdate(block);
+            }
+            //this.block_list_ubdate(block);
+        });
+    }
+    jobperiodvacationinitializeAll(persondecreeblock) {
+        if (persondecreeblock == null || persondecreeblock.person == null || persondecreeblock.person.jobperiods == null) {
+            return;
+        }
+        let lastJobperiod = null;
+        persondecreeblock.person.jobperiods.forEach(p => {
+            let least = 2000;
+            if (p.vacationdaystransferleft > p.vacationdaysgivenclear) {
+                least = p.vacationdaysgivenclear;
+            }
+            else {
+                least = p.vacationdaystransferleft;
+            }
+            p.vacationselecteddays = least;
+            lastJobperiod = p;
+            p.vacationselectedshow = true;
+            p.vacationmax = least;
+        });
+        if (lastJobperiod != null) {
+            lastJobperiod.vacationselected = 1;
+            lastJobperiod.vacationselectedshow = false;
+        }
+    }
+    block_list_ubdate(block) {
+        let new_blocks = [];
+        let index = 0;
+        this.persondecreeBlocks.forEach(r => {
+            if (r.id == block.id) {
+                r = block;
+                return;
+                //new_blocks.push(block);
+            }
+            else {
+                new_blocks.push(r);
+            }
+            index += 1;
+        });
+        this.persondecreeBlocks[index] = block;
+        this.updateMethod();
+        //this.persondecreeBlocks = new_blocks;
+    }
+    /**
+     * Активация режима выбора должности
+     * @param persondecreeblock
+     */
+    selectPosition(persondecreeblock) {
+        let appearance = {
+            positioncompact: this.$store.state.positioncompact,
+            sidebardisplay: 1,
+        };
+        this.$store.commit("setdecreeoperationtemplatecreatorVisible", false);
+        this.$store.commit("setdecreeoperationelementVisible", false);
+        this.visible = false;
+        this.modalPersondecreeMenuVisible = false;
+        this.modalPersondecreesMenuVisible = false;
+        this.$store.commit("setModeappointpersondecree", true);
+        this.currentPersondecreeblock = persondecreeblock;
+        this.$store.commit("updateUserAppearance", appearance);
     }
 };
 __decorate([
@@ -28666,7 +28727,7 @@ var Component = __webpack_require__(3)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\Projects\\MCHS\\archive\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\adminpanel\\adminpanel.vue.html"
+Component.options.__file = "D:\\GIT\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\adminpanel\\adminpanel.vue.html"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] adminpanel.vue.html: functional components are not supported with templates, they should use render functions.")}
 
@@ -28700,7 +28761,7 @@ var Component = __webpack_require__(3)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\Projects\\MCHS\\archive\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\app\\app.vue.html"
+Component.options.__file = "D:\\GIT\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\app\\app.vue.html"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] app.vue.html: functional components are not supported with templates, they should use render functions.")}
 
@@ -28734,7 +28795,7 @@ var Component = __webpack_require__(3)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\Projects\\MCHS\\archive\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\candidates\\candidates.vue.html"
+Component.options.__file = "D:\\GIT\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\candidates\\candidates.vue.html"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] candidates.vue.html: functional components are not supported with templates, they should use render functions.")}
 
@@ -28768,7 +28829,7 @@ var Component = __webpack_require__(3)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\Projects\\MCHS\\archive\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\decreeoperationelement\\decreeoperationelement.vue.html"
+Component.options.__file = "D:\\GIT\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\decreeoperationelement\\decreeoperationelement.vue.html"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] decreeoperationelement.vue.html: functional components are not supported with templates, they should use render functions.")}
 
@@ -28802,7 +28863,7 @@ var Component = __webpack_require__(3)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\Projects\\MCHS\\archive\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\decreeoperationtemplatecreator\\decreeoperationtemplatecreator.vue.html"
+Component.options.__file = "D:\\GIT\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\decreeoperationtemplatecreator\\decreeoperationtemplatecreator.vue.html"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] decreeoperationtemplatecreator.vue.html: functional components are not supported with templates, they should use render functions.")}
 
@@ -28836,7 +28897,7 @@ var Component = __webpack_require__(3)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\Projects\\MCHS\\archive\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\departmentmanagingpanel\\departmentmanagingpanel.vue.html"
+Component.options.__file = "D:\\GIT\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\departmentmanagingpanel\\departmentmanagingpanel.vue.html"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] departmentmanagingpanel.vue.html: functional components are not supported with templates, they should use render functions.")}
 
@@ -28870,7 +28931,7 @@ var Component = __webpack_require__(3)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\Projects\\MCHS\\archive\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\departmentslist\\departmentslist.vue.html"
+Component.options.__file = "D:\\GIT\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\departmentslist\\departmentslist.vue.html"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] departmentslist.vue.html: functional components are not supported with templates, they should use render functions.")}
 
@@ -28904,7 +28965,7 @@ var Component = __webpack_require__(3)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\Projects\\MCHS\\archive\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\eld\\eld.vue.html"
+Component.options.__file = "D:\\GIT\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\eld\\eld.vue.html"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] eld.vue.html: functional components are not supported with templates, they should use render functions.")}
 
@@ -28938,7 +28999,7 @@ var Component = __webpack_require__(3)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\Projects\\MCHS\\archive\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\home\\home.vue.html"
+Component.options.__file = "D:\\GIT\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\home\\home.vue.html"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] home.vue.html: functional components are not supported with templates, they should use render functions.")}
 
@@ -28972,7 +29033,7 @@ var Component = __webpack_require__(3)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\Projects\\MCHS\\archive\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\login\\login.vue.html"
+Component.options.__file = "D:\\GIT\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\login\\login.vue.html"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] login.vue.html: functional components are not supported with templates, they should use render functions.")}
 
@@ -29006,7 +29067,7 @@ var Component = __webpack_require__(3)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\Projects\\MCHS\\archive\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\modepanel\\modepanel.vue.html"
+Component.options.__file = "D:\\GIT\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\modepanel\\modepanel.vue.html"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] modepanel.vue.html: functional components are not supported with templates, they should use render functions.")}
 
@@ -29040,7 +29101,7 @@ var Component = __webpack_require__(3)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\Projects\\MCHS\\archive\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\notemplate\\notemplate.vue.html"
+Component.options.__file = "D:\\GIT\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\notemplate\\notemplate.vue.html"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] notemplate.vue.html: functional components are not supported with templates, they should use render functions.")}
 
@@ -29074,7 +29135,7 @@ var Component = __webpack_require__(3)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\Projects\\MCHS\\archive\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\pmrequestpanel\\pmrequestpanel.vue.html"
+Component.options.__file = "D:\\GIT\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\pmrequestpanel\\pmrequestpanel.vue.html"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] pmrequestpanel.vue.html: functional components are not supported with templates, they should use render functions.")}
 
@@ -29108,7 +29169,7 @@ var Component = __webpack_require__(3)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\Projects\\MCHS\\archive\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\positionmanagingpanel\\positionmanagingpanel.vue.html"
+Component.options.__file = "D:\\GIT\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\positionmanagingpanel\\positionmanagingpanel.vue.html"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] positionmanagingpanel.vue.html: functional components are not supported with templates, they should use render functions.")}
 
@@ -29142,7 +29203,7 @@ var Component = __webpack_require__(3)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\Projects\\MCHS\\archive\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\positionslist\\positionslist.vue.html"
+Component.options.__file = "D:\\GIT\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\positionslist\\positionslist.vue.html"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] positionslist.vue.html: functional components are not supported with templates, they should use render functions.")}
 
@@ -29176,7 +29237,7 @@ var Component = __webpack_require__(3)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\Projects\\MCHS\\archive\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\settingspanel\\settingspanel.vue.html"
+Component.options.__file = "D:\\GIT\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\settingspanel\\settingspanel.vue.html"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] settingspanel.vue.html: functional components are not supported with templates, they should use render functions.")}
 
@@ -29210,7 +29271,7 @@ var Component = __webpack_require__(3)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\Projects\\MCHS\\archive\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\sidebar\\sidebar.vue.html"
+Component.options.__file = "D:\\GIT\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\sidebar\\sidebar.vue.html"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] sidebar.vue.html: functional components are not supported with templates, they should use render functions.")}
 
@@ -29244,7 +29305,7 @@ var Component = __webpack_require__(3)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\Projects\\MCHS\\archive\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\topmenu\\topmenu.vue.html"
+Component.options.__file = "D:\\GIT\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\topmenu\\topmenu.vue.html"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] topmenu.vue.html: functional components are not supported with templates, they should use render functions.")}
 
@@ -50247,7 +50308,6 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_c('el-table-column', {
     attrs: {
-      "property": "marked",
       "type": "selection",
       "width": "55"
     }
@@ -53151,7 +53211,418 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           }
         }
       }, [_vm._v("Удалить")])], 1)])])]) : _vm._e()
-    }), _vm._v(" "), _c('br')], 2)]) : _vm._e(), _vm._v(" "), _c('hr'), _vm._v(" "), _c('div', [_c('el-button', {
+    }), _vm._v(" "), _c('br')], 2)]) : _vm._e(), _vm._v(" "), (persondecreeBlock.persondecreeblocktype == 4) ? _c('div', [_c('div', [_c('div', [_vm._v("\n                        Кого\n                    ")]), _vm._v(" "), _c('div', [_c('el-input', {
+      staticClass: "eld-eld-body-select-medium",
+      attrs: {
+        "placeholder": "Фамилия Имя Отчество"
+      },
+      on: {
+        "input": function($event) {
+          _vm.searchPersonsBlock(persondecreeBlock)
+        }
+      },
+      model: {
+        value: (persondecreeBlock.fiosearch),
+        callback: function($$v) {
+          persondecreeBlock.fiosearch = $$v
+        },
+        expression: "persondecreeBlock.fiosearch"
+      }
+    })], 1), _vm._v(" "), (_vm.hasSearchResultsBlock(persondecreeBlock)) ? _c('div', {
+      staticClass: "eld-search-main"
+    }, [_c('div', {
+      staticClass: "eld-search-main-title"
+    }, [_vm._v("\n                            Результаты поиска\n                        ")]), _vm._v(" "), _vm._l((persondecreeBlock.personssearch), function(person) {
+      return _c('div', {
+        staticClass: "eld-search-element",
+        on: {
+          "click": function($event) {
+            _vm.selectPersonBlockNonAuto(person.id, persondecreeBlock)
+          }
+        }
+      }, [_c('div', [_vm._v("\n                                " + _vm._s(person.surname) + " " + _vm._s(person.name) + " " + _vm._s(person.fathername) + "\n                            ")]), _vm._v(" "), _c('div', [_vm._v("\n                                " + _vm._s(person.positiontypestring) + "\n                            ")]), _vm._v(" "), (_vm.hasPhotopreviewBlock(person.id, persondecreeBlock)) ? _c('div', [_c('img', {
+        staticClass: "eld-search-element-image",
+        attrs: {
+          "src": _vm.getPhotopreviewBlock(person.id, persondecreeBlock).photo64
+        }
+      })]) : _vm._e(), _vm._v(" "), _c('div', [_c('div', [_vm._v("\n                                    " + _vm._s(person.structuretree) + "\n                                ")])])])
+    })], 2) : _vm._e(), _vm._v(" "), (persondecreeBlock.person != null) ? _c('div', [_vm._v("\n                        Кого – " + _vm._s(persondecreeBlock.person.surname4 + " " + persondecreeBlock.person.name4 + " " + persondecreeBlock.person.fathername4) + "\n                    ")]) : _vm._e()]), _vm._v(" "), (persondecreeBlock.person != null) ? _c('div', [(persondecreeBlock.person.military) ? _c('div', [_c('div', [_vm._v("\n                            По какому подпункту\n                        ")]), _vm._v(" "), _c('el-select', {
+      staticClass: "eld-eld-body-select-long",
+      attrs: {
+        "clearable": "",
+        "placeholder": "Подпункт положения"
+      },
+      model: {
+        value: (persondecreeBlock.persondecreeblocksub),
+        callback: function($$v) {
+          persondecreeBlock.persondecreeblocksub = $$v
+        },
+        expression: "persondecreeBlock.persondecreeblocksub"
+      }
+    }, _vm._l((_vm.fires), function(fire) {
+      return (fire.civil == 0) ? _c('el-option', {
+        key: fire.id,
+        attrs: {
+          "label": fire.selectdescription,
+          "value": fire.id
+        }
+      }) : _vm._e()
+    }))], 1) : _c('div', [_c('div', [_vm._v("\n                            По какому подпункту\n                        ")]), _vm._v(" "), _c('el-select', {
+      staticClass: "eld-eld-body-select-long",
+      attrs: {
+        "clearable": "",
+        "placeholder": "Подпункт положения"
+      },
+      model: {
+        value: (persondecreeBlock.persondecreeblocksub),
+        callback: function($$v) {
+          persondecreeBlock.persondecreeblocksub = $$v
+        },
+        expression: "persondecreeBlock.persondecreeblocksub"
+      }
+    }, _vm._l((_vm.fires), function(fire) {
+      return (fire.civil == 1) ? _c('el-option', {
+        key: fire.id,
+        attrs: {
+          "label": fire.selectdescription,
+          "value": fire.id
+        }
+      }) : _vm._e()
+    }))], 1)]) : _vm._e(), _vm._v(" "), _c('div', [_vm._v("\n                    Дата\n                ")]), _vm._v(" "), _c('el-input', {
+      staticClass: "eld-eld-body-row-short",
+      attrs: {
+        "type": "date"
+      },
+      model: {
+        value: (persondecreeBlock.optiondate1String),
+        callback: function($$v) {
+          persondecreeBlock.optiondate1String = $$v
+        },
+        expression: "persondecreeBlock.optiondate1String"
+      }
+    }), _vm._v(" "), _c('div', [_vm._v("\n                    Выплатить компенсацию за неиспользованные дни основного отпуска за этот год. (число дней. Оставить пустым или 0, если нет)\n                ")]), _vm._v(" "), _c('el-input', {
+      staticClass: "eld-eld-body-row-short",
+      attrs: {
+        "type": "number"
+      },
+      model: {
+        value: (persondecreeBlock.optionnumber2),
+        callback: function($$v) {
+          persondecreeBlock.optionnumber2 = $$v
+        },
+        expression: "persondecreeBlock.optionnumber2"
+      }
+    }), _vm._v(" "), _c('div', [_vm._v("\n                    Удержать денежное довольствие за дни использованного основного отпуска за этот год. (число дней. Оставить пустым или 0, если нет)\n                ")]), _vm._v(" "), _c('el-input', {
+      staticClass: "eld-eld-body-row-short",
+      attrs: {
+        "type": "number"
+      },
+      model: {
+        value: (persondecreeBlock.optionnumber3),
+        callback: function($$v) {
+          persondecreeBlock.optionnumber3 = $$v
+        },
+        expression: "persondecreeBlock.optionnumber3"
+      }
+    }), _vm._v(" "), _c('div', [_c('el-switch', {
+      attrs: {
+        "inactive-value": 0,
+        "active-value": 1,
+        "active-text": "С правом ношения установленной формы одежды и знаков различия."
+      },
+      model: {
+        value: (persondecreeBlock.optionnumber4),
+        callback: function($$v) {
+          persondecreeBlock.optionnumber4 = $$v
+        },
+        expression: "persondecreeBlock.optionnumber4"
+      }
+    })], 1), _vm._v(" "), _c('div', [_c('el-switch', {
+      attrs: {
+        "inactive-value": 0,
+        "active-value": 12,
+        "active-text": "Присвоить «Майор внутренней службы».",
+        "disabled": persondecreeBlock.person == null || persondecreeBlock.person.major == 0 || !_vm.fireForMajor(persondecreeBlock.persondecreeblocksub)
+      },
+      model: {
+        value: (persondecreeBlock.optionnumber5),
+        callback: function($$v) {
+          persondecreeBlock.optionnumber5 = $$v
+        },
+        expression: "persondecreeBlock.optionnumber5"
+      }
+    })], 1), _vm._v(" "), _c('div', [_c('el-switch', {
+      attrs: {
+        "inactive-value": 0,
+        "active-value": 11,
+        "active-text": "За многолетнюю безупречную службу в органах и подразделениях по чрезвычайным ситуациям"
+      },
+      model: {
+        value: (persondecreeBlock.optionnumber9),
+        callback: function($$v) {
+          persondecreeBlock.optionnumber9 = $$v
+        },
+        expression: "persondecreeBlock.optionnumber9"
+      }
+    })], 1), _vm._v(" "), (persondecreeBlock.optionnumber9 != null && persondecreeBlock.optionnumber9 > 0) ? _c('div', [_c('div', [_vm._v("\n                        Вид поощрения\n                    ")]), _vm._v(" "), _c('el-select', {
+      staticClass: "eld-eld-body-select-medium",
+      attrs: {
+        "clearable": "",
+        "placeholder": "Вид поощрения"
+      },
+      on: {
+        "change": function($event) {
+          _vm.firerewardchange(persondecreeBlock)
+        }
+      },
+      model: {
+        value: (persondecreeBlock.optionnumber6),
+        callback: function($$v) {
+          persondecreeBlock.optionnumber6 = $$v
+        },
+        expression: "persondecreeBlock.optionnumber6"
+      }
+    }, _vm._l((_vm.persondecreeblocksubtypes), function(persondecreeblocksubtype) {
+      return (persondecreeblocksubtype.persondecreeblocktype == 1) ? _c('el-option', {
+        key: persondecreeblocksubtype.id,
+        attrs: {
+          "label": persondecreeblocksubtype.name,
+          "value": persondecreeblocksubtype.id
+        }
+      }) : _vm._e()
+    })), _vm._v(" "), (persondecreeBlock.optionnumber6 == 4) ? _c('div', [_c('div', [_vm._v("\n                            Список нагрудных знаков\n                        ")]), _vm._v(" "), _c('el-select', {
+      staticClass: "eld-eld-body-select-medium",
+      attrs: {
+        "clearable": "",
+        "placeholder": "Награда"
+      },
+      model: {
+        value: (persondecreeBlock.optionnumber7),
+        callback: function($$v) {
+          persondecreeBlock.optionnumber7 = $$v
+        },
+        expression: "persondecreeBlock.optionnumber7"
+      }
+    }, _vm._l((_vm.rewards), function(reward) {
+      return (reward.rewardtype == 1 && _vm.rewardChestsign(reward)) ? _c('el-option', {
+        key: reward.id,
+        attrs: {
+          "label": reward.name,
+          "value": reward.id
+        }
+      }) : _vm._e()
+    }))], 1) : _vm._e(), _vm._v(" "), (persondecreeBlock.optionnumber6 == 3) ? _c('div', [_c('div', [_vm._v("\n                            Список медалей\n                        ")]), _vm._v(" "), _c('el-select', {
+      staticClass: "eld-eld-body-select-medium",
+      attrs: {
+        "clearable": "",
+        "placeholder": "Награда"
+      },
+      model: {
+        value: (persondecreeBlock.optionnumber7),
+        callback: function($$v) {
+          persondecreeBlock.optionnumber7 = $$v
+        },
+        expression: "persondecreeBlock.optionnumber7"
+      }
+    }, _vm._l((_vm.rewards), function(reward) {
+      return (reward.rewardtype == 1 && _vm.rewardMedal(reward)) ? _c('el-option', {
+        key: reward.id,
+        attrs: {
+          "label": reward.name,
+          "value": reward.id
+        }
+      }) : _vm._e()
+    }))], 1) : _vm._e(), _vm._v(" "), (persondecreeBlock.optionnumber6 == 1) ? _c('div', [_c('div', [_vm._v("\n                            Звание\n                        ")]), _vm._v(" "), _c('el-select', {
+      staticClass: "eld-eld-body-select-medium",
+      attrs: {
+        "clearable": "",
+        "placeholder": "Звание"
+      },
+      model: {
+        value: (persondecreeBlock.optionnumber7),
+        callback: function($$v) {
+          persondecreeBlock.optionnumber7 = $$v
+        },
+        expression: "persondecreeBlock.optionnumber7"
+      }
+    }, _vm._l((_vm.ranks), function(rank) {
+      return (rank.decreeupone == 1) ? _c('el-option', {
+        key: rank.id,
+        attrs: {
+          "label": rank.name,
+          "value": rank.id
+        }
+      }) : _vm._e()
+    }))], 1) : _vm._e(), _vm._v(" "), (persondecreeBlock.optionnumber6 == 2) ? _c('div', [_c('div', [_vm._v("\n                            Звание\n                        ")]), _vm._v(" "), _c('el-select', {
+      staticClass: "eld-eld-body-select-medium",
+      attrs: {
+        "clearable": "",
+        "placeholder": "Звание"
+      },
+      model: {
+        value: (persondecreeBlock.optionnumber7),
+        callback: function($$v) {
+          persondecreeBlock.optionnumber7 = $$v
+        },
+        expression: "persondecreeBlock.optionnumber7"
+      }
+    }, _vm._l((_vm.ranks), function(rank) {
+      return (rank.decreeupfast == 1) ? _c('el-option', {
+        key: rank.id,
+        attrs: {
+          "label": rank.name,
+          "value": rank.id
+        }
+      }) : _vm._e()
+    }))], 1) : _vm._e(), _vm._v(" "), (persondecreeBlock.optionnumber6 == 5 || persondecreeBlock.optionnumber6 == 6) ? _c('div', [_c('div', [_vm._v("\n                            Подразделение\n                        ")]), _vm._v(" "), _c('el-select', {
+      staticClass: "eld-eld-body-select-medium",
+      attrs: {
+        "clearable": "",
+        "placeholder": "Подразделение"
+      },
+      model: {
+        value: (persondecreeBlock.optionnumber7),
+        callback: function($$v) {
+          persondecreeBlock.optionnumber7 = $$v
+        },
+        expression: "persondecreeBlock.optionnumber7"
+      }
+    }, _vm._l((_vm.structuresRewardAllowedToSelect), function(structure) {
+      return _c('el-option', {
+        key: structure.id,
+        attrs: {
+          "label": structure.name2,
+          "value": structure.id
+        }
+      })
+    }))], 1) : _vm._e(), _vm._v(" "), (persondecreeBlock.optionnumber6 == 7) ? _c('div', [_c('div', [_c('div', [_vm._v("\n                                Вид поощрения деньгами\n                            ")]), _vm._v(" "), _c('el-select', {
+      staticClass: "eld-eld-body-select-medium",
+      attrs: {
+        "clearable": "",
+        "placeholder": "Вид поощрения деньгами"
+      },
+      model: {
+        value: (persondecreeBlock.optionnumber7),
+        callback: function($$v) {
+          persondecreeBlock.optionnumber7 = $$v
+        },
+        expression: "persondecreeBlock.optionnumber7"
+      }
+    }, _vm._l((_vm.rewardmoneys), function(rewardmoney) {
+      return _c('el-option', {
+        key: rewardmoney.id,
+        attrs: {
+          "label": rewardmoney.name,
+          "value": rewardmoney.id
+        }
+      })
+    }))], 1), _vm._v(" "), _c('div', [_c('div', [_vm._v("\n                                В размере\n                            ")]), _vm._v(" "), _c('el-input', {
+      staticClass: "eld-eld-body-row-mediumshort",
+      model: {
+        value: (persondecreeBlock.optionstring3),
+        callback: function($$v) {
+          persondecreeBlock.optionstring3 = $$v
+        },
+        expression: "persondecreeBlock.optionstring3"
+      }
+    }), _vm._v(" "), _c('span', [_vm._v(_vm._s(_vm.getRewardmoneytype(persondecreeBlock.optionnumber7)))])], 1)]) : _vm._e(), _vm._v(" "), (persondecreeBlock.optionnumber6 == 8) ? _c('div', [_c('div', [_vm._v("\n                            Тип взыскания\n                        ")]), _vm._v(" "), _c('el-select', {
+      staticClass: "eld-eld-body-select-medium",
+      attrs: {
+        "clearable": "",
+        "placeholder": "Вид снимаемого взыскания"
+      },
+      model: {
+        value: (persondecreeBlock.optionnumber7),
+        callback: function($$v) {
+          persondecreeBlock.optionnumber7 = $$v
+        },
+        expression: "persondecreeBlock.optionnumber7"
+      }
+    }, _vm._l((_vm.penalties), function(penalty) {
+      return _c('el-option', {
+        key: penalty.id,
+        attrs: {
+          "label": penalty.name,
+          "value": penalty.id
+        }
+      })
+    })), _vm._v(" "), _c('div', [_vm._v("\n                            Основание\n                        ")]), _vm._v(" "), _c('el-input', {
+      staticClass: "eld-eld-body-row-medium",
+      model: {
+        value: (persondecreeBlock.optionstring4),
+        callback: function($$v) {
+          persondecreeBlock.optionstring4 = $$v
+        },
+        expression: "persondecreeBlock.optionstring4"
+      }
+    })], 1) : _vm._e()], 1) : _vm._e(), _vm._v(" "), _c('div', [_vm._v("\n                    Основание\n                ")]), _vm._v(" "), _c('el-input', {
+      staticClass: "eld-eld-body-row-long",
+      model: {
+        value: (persondecreeBlock.optionstring1),
+        callback: function($$v) {
+          persondecreeBlock.optionstring1 = $$v
+        },
+        expression: "persondecreeBlock.optionstring1"
+      }
+    }), _vm._v(" "), _c('div', [_c('br'), _vm._v(" "), _c('el-button', {
+      attrs: {
+        "type": "primary",
+        "plain": ""
+      },
+      on: {
+        "click": function($event) {
+          _vm.addPersonblockelement(persondecreeBlock)
+        }
+      }
+    }, [_vm._v("Сформировать пункт приказа")])], 1), _vm._v(" "), _c('div', {
+      staticClass: "persondecreeoperation-part-list-title"
+    }, [_vm._v("\n                    Проект приказа\n                ")]), _vm._v(" "), _c('div', [(persondecreeBlock.index != null && persondecreeBlock.index != 0) ? _c('span', [_vm._v(_vm._s(persondecreeBlock.index) + ".")]) : _vm._e(), _vm._v(" УВОЛИТЬ:\n                ")]), _vm._v(" "), _c('div', [_vm._l((persondecreeBlock.persondecreeblocksubs), function(persondecreeblocksub) {
+      return (persondecreeblocksub.persondecreeblock == persondecreeBlock.id) ? _c('div', {
+        staticClass: "persondecreeoperation-part-list-element"
+      }, [_c('div', _vm._l((_vm.persondecreeOperations), function(decreeoperation) {
+        return (decreeoperation.persondecreeblocksub == persondecreeblocksub.id) ? _c('div', {
+          staticClass: "persondecreeoperation-part-list-element persondecreeoperation-part-list-element-margin-big"
+        }, [_c('div', [(decreeoperation.fireobject != null) ? _c('div', [(decreeoperation.personobject != null && decreeoperation.personobject.military) ? _c('div', [_c('div', {
+          staticClass: "persondecreeoperation-part-list-element-intro persondecreeoperation-part-list-element-indent"
+        }, [_c('span', {
+          attrs: {
+            "if": "persondecreeBlock.index != null && persondecreeBlock.index != 0 && persondecreeblocksub.index != 0"
+          }
+        }, [_vm._v(_vm._s(persondecreeBlock.index) + "." + _vm._s(persondecreeblocksub.index) + ".")]), _vm._v("\n                                                " + _vm._s(decreeoperation.fireobject.type) + " по п.п. " + _vm._s(decreeoperation.fireobject.pointsubpoint) + " Положения о прохождении службы в органах\n                                                и подразделениях по чрезвычайным ситуациям Республики Беларусь (" + _vm._s(decreeoperation.fireobject.description) + ")\n\n                                            ")]), _vm._v(" "), _c('div', {
+          staticClass: "persondecreeoperation-part-list-element-indent"
+        }, [(decreeoperation.personobject.actualRank != null) ? _c('span', [_vm._v(_vm._s(decreeoperation.personobject.actualRank.name4) + " ")]) : _vm._e(), _vm._v("\n                                                " + _vm._s(decreeoperation.personobject.surname4) + " " + _vm._s(decreeoperation.personobject.name4) + "\n                                                " + _vm._s(decreeoperation.personobject.fathername4) + _vm._s(_vm.commaspaceifnotnull(decreeoperation.personobject.positiontree4)) + " " + _vm._s(decreeoperation.personobject.positiontree4)), (decreeoperation.optiondate1 != null) ? _c('span', [_vm._v(", " + _vm._s(_vm.printDateDocument(decreeoperation.optiondate1)))]) : _vm._e(), _vm._v(" "), (decreeoperation.optionnumber4 != null && decreeoperation.optionnumber4 > 0) ? _c('span', [_vm._v("c правом ношения установленной формы одежды и знаков отличия")]) : _vm._e(), _vm._v(" "), (decreeoperation.optionnumber5 != null && decreeoperation.optionnumber5 > 0) ? _c('span', [_vm._v("c присвоением очередного специального звания «майор внутренней службы»")]) : _vm._e(), _vm._v(".\n                                            ")])]) : _c('div', [_c('div', {
+          staticClass: "persondecreeoperation-part-list-element-intro persondecreeoperation-part-list-element-indent"
+        }, [_c('span', {
+          attrs: {
+            "if": "persondecreeBlock.index != null && persondecreeBlock.index != 0 && persondecreeblocksub.index != 0"
+          }
+        }, [_vm._v(_vm._s(persondecreeBlock.index) + "." + _vm._s(persondecreeblocksub.index) + ".")]), _vm._v("\n                                                по пункту " + _vm._s(decreeoperation.fireobject.subpoint) + " статьи " + _vm._s(decreeoperation.fireobject.point) + "\n                                                Трудового кодекса Республики Беларусь (" + _vm._s(decreeoperation.fireobject.description) + ")\n\n                                            ")]), _vm._v(" "), _c('div', {
+          staticClass: "persondecreeoperation-part-list-element-indent"
+        }, [(decreeoperation.personobject.actualRank != null) ? _c('span', [_vm._v(_vm._s(decreeoperation.personobject.actualRank.name4) + " ")]) : _vm._e(), _vm._v("\n                                                " + _vm._s(decreeoperation.personobject.surname4) + " " + _vm._s(decreeoperation.personobject.name4) + "\n                                                " + _vm._s(decreeoperation.personobject.fathername4) + _vm._s(_vm.commaspaceifnotnull(decreeoperation.personobject.positiontree4)) + " " + _vm._s(decreeoperation.personobject.positiontree4)), (decreeoperation.optiondate1 != null) ? _c('span', [_vm._v(", " + _vm._s(_vm.printDateDocument(decreeoperation.optiondate1)))]) : _vm._e(), _vm._v(".\n\n                                            ")]), _vm._v(" "), _c('div', {
+          staticClass: "persondecreeoperation-part-list-element-indent"
+        }, [_vm._v("\n                                                " + _vm._s(decreeoperation.optionstring2) + "\n                                            ")])]), _vm._v(" "), (decreeoperation.optionnumber6 != null && decreeoperation.optionnumber6 > 0 && decreeoperation.optionnumber9 != null && decreeoperation.optionnumber9 > 0) ? _c('div', {
+          staticClass: "persondecreeoperation-part-list-element-indent"
+        }, [_vm._v("\n                                            За многолетнюю безупречную службу в органах и подразделениях по чрезвычайным ситуациям\n                                            "), _vm._v("\n                                            " + _vm._s(_vm.getPersondecreeblocksubtype(decreeoperation.optionnumber6)) + "\n                                            "), (decreeoperation.optionstring3 != null && decreeoperation.optionstring3.length > 0 && decreeoperation.optionnumber6 != 7) ? _c('span', [_vm._v(" " + _vm._s(decreeoperation.subvaluestring1))]) : _vm._e(), _vm._v(" "), (_vm.RewardNotOne(decreeoperation.optionstring3) || decreeoperation.optionnumber7 != 1) ? _c('span', [_vm._v(_vm._s(decreeoperation.optionstring3) + " ")]) : _vm._e(), _vm._v(" "), (decreeoperation.optionnumber6 == 7) ? _c('span', [_vm._v("\n                                                " + _vm._s(_vm.getRewardmoneytype(decreeoperation.optionnumber7, decreeoperation.optionstring3)) + "\n\n                                                "), (decreeoperation.optionnumber8 > 0) ? _c('span', [_vm._v(" каждого")]) : _vm._e()]) : _vm._e(), _vm._v(" "), (decreeoperation.optionnumber6 == 4 || decreeoperation.optionnumber6 == 3) ? _c('span', [_vm._v("\n                                                " + _vm._s(_vm.cutRewardString(_vm.getReward(decreeoperation.optionnumber7))) + "\n                                            ")]) : _vm._e(), _vm._v(" "), (decreeoperation.optionnumber6 == 5 || decreeoperation.optionnumber6 == 6) ? _c('span', [_vm._v("\n                                                " + _vm._s(_vm.getStructureName2(decreeoperation.optionnumber7)) + "\n                                            ")]) : _vm._e(), _vm._v(" "), (decreeoperation.optionnumber7 != null && decreeoperation.optionnumber7 > 0 && (decreeoperation.optionnumber6 == 1 || decreeoperation.optionnumber6 == 2)) ? _c('span', {
+          staticClass: "persondecreeoperation-part-list-element-sub-sub"
+        }, [_vm._v("\n                                                «" + _vm._s(_vm.getRank(decreeoperation.optionnumber7)) + "»\n                                            ")]) : _vm._e(), _vm._v(".\n                                        ")]) : _vm._e(), _vm._v(" "), _c('div', {
+          staticClass: "persondecreeoperation-part-list-element-margin-big"
+        }, [(decreeoperation.optionnumber2 != null && decreeoperation.optionnumber2 != 0) ? _c('div', {
+          staticClass: "persondecreeoperation-part-list-element-indent"
+        }, [_vm._v("\n                                                Выплатить компенсацию за " + _vm._s(decreeoperation.optionnumber2) + " " + _vm._s(_vm.getDayString(decreeoperation.optionnumber2)) + " неиспользованного основного отпуска за " + _vm._s(_vm.year(decreeoperation.optiondate1)) + " год.\n                                            ")]) : _vm._e(), _vm._v(" "), (decreeoperation.optionnumber2 != null && decreeoperation.optionnumber3 != 0) ? _c('div', {
+          staticClass: "persondecreeoperation-part-list-element-indent"
+        }, [_vm._v("\n                                                Удержать денежное довольствие на " + _vm._s(decreeoperation.optionnumber3) + " " + _vm._s(_vm.getDayString(decreeoperation.optionnumber3)) + " использованного основного отпуска за " + _vm._s(_vm.year(decreeoperation.optiondate1)) + " год.\n                                            ")]) : _vm._e(), _vm._v(" "), _c('div', [_vm._v("\n                                                Основание: " + _vm._s(decreeoperation.optionstring1) + ".\n                                            ")])])]) : _vm._e()]), _vm._v(" "), _c('div', [_c('div', [_c('div', [_c('el-button', {
+          attrs: {
+            "size": "mini",
+            "type": "warning"
+          },
+          on: {
+            "click": function($event) {
+              _vm.removePersondecreeoperation(decreeoperation)
+            }
+          }
+        }, [_vm._v("Удалить")])], 1)])])]) : _vm._e()
+      })), _vm._v(" "), _c('div')]) : _vm._e()
+    }), _vm._v(" "), _c('br')], 2)], 1) : _vm._e(), _vm._v(" "), _c('hr'), _vm._v(" "), _c('div', [_c('el-button', {
       attrs: {
         "type": "danger"
       },

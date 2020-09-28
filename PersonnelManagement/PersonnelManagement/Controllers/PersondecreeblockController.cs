@@ -52,6 +52,21 @@ namespace PersonnelManagement.Controllers
             return empty;
         }
 
+        /*// GET: api/Persondecreeblock/5
+        [HttpGet("Ubdate/")]
+        public IEnumerable<PersondecreeblockManagement> GetDecreeBlocks([FromRoute] int id)
+        {
+            string sessionid = Request.Cookies[Keys.COOKIES_SESSION];
+            if (IdentityService.IsLogined(sessionid, repository))
+            {
+                User user = IdentityService.GetUserBySessionID(sessionid, repository);
+                //bool isAllowedToReadStructure = repository.isAllowedToReadStructure(user, id);
+                return repository.GetPersondecreeblock(user, id, true);
+            }
+            List<PersondecreeblockManagement> empty = new List<PersondecreeblockManagement>();
+            return empty;
+        }*/
+
         // POST: api/Persondecreeblock
         [HttpPost]
         public IActionResult PostDecree([FromBody] PersondecreeblockManagement persondecreeblock)

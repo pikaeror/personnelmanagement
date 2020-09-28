@@ -687,6 +687,318 @@
                         <br />
                     </div>
                 </div>
+                <!--Уволить-->
+                <div v-if="persondecreeBlock.persondecreeblocktype == 4">
+                    <!--Система поиска людей-->
+                    <div>
+                        <div>
+                            Кого
+                        </div>
+                        <div>
+                            <el-input placeholder="Фамилия Имя Отчество" class="eld-eld-body-select-medium" v-model="persondecreeBlock.fiosearch" @input="searchPersonsBlock(persondecreeBlock)"></el-input>
+                            <!--<el-button @click="searchPersonsBlock(persondecreeBlock)">Поиск</el-button>-->
+                        </div>
+                        <div v-if="hasSearchResultsBlock(persondecreeBlock)" class="eld-search-main">
+                            <div class="eld-search-main-title">
+                                Результаты поиска
+                            </div>
+                            <div v-for="person in persondecreeBlock.personssearch" class="eld-search-element" @click="selectPersonBlockNonAuto(person.id, persondecreeBlock)">
+                                <div>
+                                    {{person.surname}} {{person.name}} {{person.fathername}}
+                                </div>
+                                <div>
+                                    {{person.positiontypestring}}
+                                </div>
+                                <div v-if="hasPhotopreviewBlock(person.id, persondecreeBlock)">
+                                    <img :src="getPhotopreviewBlock(person.id, persondecreeBlock).photo64" class="eld-search-element-image" />
+                                </div>
+                                <div>
+                                    <div>
+                                        {{person.structuretree}}
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                        <div v-if="persondecreeBlock.person != null">
+                            Кого – {{persondecreeBlock.person.surname4 + " " + persondecreeBlock.person.name4 + " " + persondecreeBlock.person.fathername4}}
+                        </div>
+                    </div>
+
+                    <div v-if="persondecreeBlock.person != null">
+                        <!--Если военный-->
+                        <div v-if="persondecreeBlock.person.military">
+                            <div>
+                                По какому подпункту
+                            </div>
+                            <el-select clearable placeholder="Подпункт положения" v-model="persondecreeBlock.persondecreeblocksub" class="eld-eld-body-select-long">
+                                <el-option v-for="fire in fires" v-if="fire.civil == 0"
+                                           :key="fire.id" :label="fire.selectdescription" :value="fire.id">
+                                </el-option>
+                            </el-select>
+                        </div>
+                        <!--Если гражданский-->
+                        <div v-else>
+                            <div>
+                                По какому подпункту
+                            </div>
+                            <el-select clearable placeholder="Подпункт положения" v-model="persondecreeBlock.persondecreeblocksub" class="eld-eld-body-select-long">
+                                <el-option v-for="fire in fires" v-if="fire.civil == 1"
+                                           :key="fire.id" :label="fire.selectdescription" :value="fire.id">
+                                </el-option>
+                            </el-select>
+                        </div>
+                    </div>
+
+                    <div>
+                        Дата
+                    </div>
+                    <el-input v-model="persondecreeBlock.optiondate1String" class="eld-eld-body-row-short" type="date"></el-input>
+                    <div>
+                        Выплатить компенсацию за неиспользованные дни основного отпуска за этот год. (число дней. Оставить пустым или 0, если нет)
+                    </div>
+                    <el-input v-model="persondecreeBlock.optionnumber2" class="eld-eld-body-row-short" type="number"></el-input>
+                    <div>
+                        Удержать денежное довольствие за дни использованного основного отпуска за этот год. (число дней. Оставить пустым или 0, если нет)
+                    </div>
+                    <el-input v-model="persondecreeBlock.optionnumber3" class="eld-eld-body-row-short" type="number"></el-input>
+                    <div>
+                        <el-switch v-model="persondecreeBlock.optionnumber4" :inactive-value="0" :active-value="1" active-text="С правом ношения установленной формы одежды и знаков различия."></el-switch>
+                    </div>
+                    <div>
+                        <el-switch v-model="persondecreeBlock.optionnumber5" :inactive-value="0" :active-value="12" active-text="Присвоить «Майор внутренней службы»."
+                                   :disabled="persondecreeBlock.person == null || persondecreeBlock.person.major == 0 || !fireForMajor(persondecreeBlock.persondecreeblocksub) "></el-switch>
+                    </div>
+                    <div>
+                        <el-switch v-model="persondecreeBlock.optionnumber9" :inactive-value="0" :active-value="11" active-text="За многолетнюю безупречную службу в органах и подразделениях по чрезвычайным ситуациям"></el-switch>
+                    </div>
+                    <div v-if="persondecreeBlock.optionnumber9 != null && persondecreeBlock.optionnumber9 > 0">
+                        <div>
+                            Вид поощрения
+                        </div>
+                        <el-select clearable placeholder="Вид поощрения" v-model="persondecreeBlock.optionnumber6" class="eld-eld-body-select-medium" @change="firerewardchange(persondecreeBlock)">
+                            <el-option v-for="persondecreeblocksubtype in persondecreeblocksubtypes" v-if="persondecreeblocksubtype.persondecreeblocktype == 1"
+                                       :key="persondecreeblocksubtype.id" :label="persondecreeblocksubtype.name" :value="persondecreeblocksubtype.id">
+                            </el-option>
+                        </el-select>
+
+                        <!--Нагрудный знак-->
+                        <div v-if="persondecreeBlock.optionnumber6 == 4">
+                            <div>
+                                Список нагрудных знаков
+                            </div>
+                            <el-select clearable placeholder="Награда" v-model="persondecreeBlock.optionnumber7" class="eld-eld-body-select-medium">
+                                <el-option v-for="reward in rewards" v-if="reward.rewardtype == 1 && rewardChestsign(reward)"
+                                           :key="reward.id" :label="reward.name" :value="reward.id">
+                                </el-option>
+                            </el-select>
+                        </div>
+                        <!--Медаль-->
+                        <div v-if="persondecreeBlock.optionnumber6 == 3">
+                            <div>
+                                Список медалей
+                            </div>
+                            <el-select clearable placeholder="Награда" v-model="persondecreeBlock.optionnumber7" class="eld-eld-body-select-medium">
+                                <el-option v-for="reward in rewards" v-if="reward.rewardtype == 1 && rewardMedal(reward)"
+                                           :key="reward.id" :label="reward.name" :value="reward.id">
+                                </el-option>
+                            </el-select>
+                        </div>
+                        <!--На одну ступень выше-->
+                        <div v-if="persondecreeBlock.optionnumber6 == 1">
+                            <div>
+                                Звание
+                            </div>
+                            <el-select clearable placeholder="Звание" v-model="persondecreeBlock.optionnumber7" class="eld-eld-body-select-medium">
+                                <el-option v-for="rank in ranks" v-if="rank.decreeupone == 1"
+                                           :key="rank.id" :label="rank.name" :value="rank.id">
+                                </el-option>
+                            </el-select>
+                        </div>
+                        <!--Досрочно-->
+                        <div v-if="persondecreeBlock.optionnumber6 == 2">
+                            <div>
+                                Звание
+                            </div>
+                            <el-select clearable placeholder="Звание" v-model="persondecreeBlock.optionnumber7" class="eld-eld-body-select-medium">
+                                <el-option v-for="rank in ranks" v-if="rank.decreeupfast == 1"
+                                           :key="rank.id" :label="rank.name" :value="rank.id">
+                                </el-option>
+                            </el-select>
+                        </div>
+                        <!--Грамота и почетная грамота-->
+                        <div v-if="persondecreeBlock.optionnumber6 == 5 || persondecreeBlock.optionnumber6 == 6">
+                            <div>
+                                Подразделение
+                            </div>
+                            <el-select clearable placeholder="Подразделение" v-model="persondecreeBlock.optionnumber7" class="eld-eld-body-select-medium">
+                                <el-option v-for="structure in structuresRewardAllowedToSelect"
+                                           :key="structure.id" :label="structure.name2" :value="structure.id">
+                                </el-option>
+                            </el-select>
+                        </div>
+                        <!--Денежное награждение-->
+                        <div v-if="persondecreeBlock.optionnumber6 == 7">
+                            <div>
+                                <div>
+                                    Вид поощрения деньгами
+                                </div>
+                                <el-select clearable placeholder="Вид поощрения деньгами" v-model="persondecreeBlock.optionnumber7" class="eld-eld-body-select-medium">
+                                    <el-option v-for="rewardmoney in rewardmoneys"
+                                               :key="rewardmoney.id" :label="rewardmoney.name" :value="rewardmoney.id">
+                                    </el-option>
+                                </el-select>
+                            </div>
+
+                            <div>
+                                <div>
+                                    В размере
+                                </div>
+                                <el-input v-model="persondecreeBlock.optionstring3" class="eld-eld-body-row-mediumshort"></el-input> <span v-if="">{{getRewardmoneytype(persondecreeBlock.optionnumber7)}}</span>
+                            </div>
+                        </div>
+                        <!--Снять взыскание-->
+                        <div v-if="persondecreeBlock.optionnumber6 == 8">
+                            <div>
+                                Тип взыскания
+                            </div>
+                            <el-select clearable placeholder="Вид снимаемого взыскания" v-model="persondecreeBlock.optionnumber7" class="eld-eld-body-select-medium">
+                                <el-option v-for="penalty in penalties"
+                                           :key="penalty.id" :label="penalty.name" :value="penalty.id">
+                                </el-option>
+                            </el-select>
+                            <div>
+                                Основание
+                            </div>
+                            <el-input v-model="persondecreeBlock.optionstring4" class="eld-eld-body-row-medium"></el-input>
+                        </div>
+                    </div>
+                    <div>
+                        Основание
+                    </div>
+                    <el-input v-model="persondecreeBlock.optionstring1" class="eld-eld-body-row-long"></el-input>
+
+                    <div>
+                        <br />
+                        <el-button type="primary" plain @click="addPersonblockelement(persondecreeBlock)">Сформировать пункт приказа</el-button>
+                    </div>
+                    <!--Вывод списка-->
+                    <div class="persondecreeoperation-part-list-title">
+                        Проект приказа
+                    </div>
+                    <div>
+                        <span v-if="persondecreeBlock.index != null && persondecreeBlock.index != 0">{{persondecreeBlock.index}}.</span> УВОЛИТЬ:
+                    </div>
+                    <div>
+                        <div v-for="persondecreeblocksub in persondecreeBlock.persondecreeblocksubs" v-if=" persondecreeblocksub.persondecreeblock == persondecreeBlock.id"
+                             class="persondecreeoperation-part-list-element">
+                            <div>
+                                <div v-for="decreeoperation in persondecreeOperations" v-if="decreeoperation.persondecreeblocksub == persondecreeblocksub.id" class="persondecreeoperation-part-list-element persondecreeoperation-part-list-element-margin-big">
+                                    <div>
+                                        <div v-if="decreeoperation.fireobject != null">
+
+
+                                            <!--Увольняем человека со званием-->
+                                            <div v-if="decreeoperation.personobject != null && decreeoperation.personobject.military">
+                                                <div class="persondecreeoperation-part-list-element-intro persondecreeoperation-part-list-element-indent">
+                                                    <span if="persondecreeBlock.index != null && persondecreeBlock.index != 0 && persondecreeblocksub.index != 0">{{persondecreeBlock.index}}.{{persondecreeblocksub.index}}.</span>
+                                                    {{decreeoperation.fireobject.type }} по п.п. {{decreeoperation.fireobject.pointsubpoint}} Положения о прохождении службы в органах
+                                                    и подразделениях по чрезвычайным ситуациям Республики Беларусь ({{decreeoperation.fireobject.description}})
+
+                                                </div>
+                                                <!--v-if="decreeoperation.personobject != null && decreeoperation.personobject.actualRank != null"-->
+                                                <div class="persondecreeoperation-part-list-element-indent">
+                                                    <span v-if="decreeoperation.personobject.actualRank != null">{{decreeoperation.personobject.actualRank.name4}} </span>
+                                                    {{decreeoperation.personobject.surname4}} {{decreeoperation.personobject.name4}}
+                                                    {{decreeoperation.personobject.fathername4}}{{commaspaceifnotnull(decreeoperation.personobject.positiontree4)}} {{decreeoperation.personobject.positiontree4}}<span v-if="decreeoperation.optiondate1 != null">, {{printDateDocument(decreeoperation.optiondate1)}}</span>
+                                                    <span v-if="decreeoperation.optionnumber4 != null && decreeoperation.optionnumber4 > 0">c правом ношения установленной формы одежды и знаков отличия</span>
+                                                    <span v-if="decreeoperation.optionnumber5 != null && decreeoperation.optionnumber5 > 0">c присвоением очередного специального звания «майор внутренней службы»</span>.
+                                                </div>
+                                                <!--<div class="persondecreeoperation-part-list-element-indent">
+                                        {{decreeoperation.optionstring2}}
+                                    </div>-->
+
+                                            </div>
+
+                                            <!--Увольняем человека без звания-->
+                                            <div v-else>
+                                                <div class="persondecreeoperation-part-list-element-intro persondecreeoperation-part-list-element-indent">
+                                                    <span if="persondecreeBlock.index != null && persondecreeBlock.index != 0 && persondecreeblocksub.index != 0">{{persondecreeBlock.index}}.{{persondecreeblocksub.index}}.</span>
+                                                    по пункту {{decreeoperation.fireobject.subpoint}} статьи {{decreeoperation.fireobject.point}}
+                                                    Трудового кодекса Республики Беларусь ({{decreeoperation.fireobject.description}})
+
+                                                </div>
+                                                <!--v-if="decreeoperation.personobject != null && decreeoperation.personobject.actualRank != null"-->
+                                                <div class="persondecreeoperation-part-list-element-indent">
+                                                    <span v-if="decreeoperation.personobject.actualRank != null">{{decreeoperation.personobject.actualRank.name4}} </span>
+                                                    {{decreeoperation.personobject.surname4}} {{decreeoperation.personobject.name4}}
+                                                    {{decreeoperation.personobject.fathername4}}{{commaspaceifnotnull(decreeoperation.personobject.positiontree4)}} {{decreeoperation.personobject.positiontree4}}<span v-if="decreeoperation.optiondate1 != null">, {{printDateDocument(decreeoperation.optiondate1)}}</span>.
+
+                                                </div>
+                                                <div class="persondecreeoperation-part-list-element-indent">
+                                                    {{decreeoperation.optionstring2}}
+                                                </div>
+                                            </div>
+                                            <div v-if="decreeoperation.optionnumber6 != null && decreeoperation.optionnumber6 > 0 && decreeoperation.optionnumber9 != null && decreeoperation.optionnumber9 > 0" class="persondecreeoperation-part-list-element-indent">
+                                                За многолетнюю безупречную службу в органах и подразделениях по чрезвычайным ситуациям
+                                                <!--{{decreeoperation.optionstring2}}-->
+                                                {{getPersondecreeblocksubtype(decreeoperation.optionnumber6)}}
+                                                <span v-if="decreeoperation.optionstring3 != null && decreeoperation.optionstring3.length > 0 && decreeoperation.optionnumber6 != 7"> {{decreeoperation.subvaluestring1}}</span>
+                                                <!--Общая часть-->
+                                                <span v-if="RewardNotOne(decreeoperation.optionstring3) || decreeoperation.optionnumber7 != 1">{{decreeoperation.optionstring3}} </span>
+                                                <!--Денежное награждение-->
+                                                <span v-if="decreeoperation.optionnumber6 == 7">
+                                                    {{getRewardmoneytype(decreeoperation.optionnumber7, decreeoperation.optionstring3)}}
+
+                                                    <span v-if="decreeoperation.optionnumber8 > 0"> каждого</span>
+                                                </span>
+                                                <!--Юбилейная медаль или нагрудный знак-->
+                                                <span v-if="decreeoperation.optionnumber6 == 4 || decreeoperation.optionnumber6 == 3">
+                                                    {{cutRewardString(getReward(decreeoperation.optionnumber7))}}
+                                                </span>
+                                                <!--Наградить грамотой или почетной грамотой-->
+                                                <span v-if="decreeoperation.optionnumber6 == 5 || decreeoperation.optionnumber6 == 6">
+                                                    {{getStructureName2(decreeoperation.optionnumber7)}}
+                                                </span>
+                                                <!--Звания на одну ступень выше или досрочно-->
+                                                <span v-if="decreeoperation.optionnumber7 != null && decreeoperation.optionnumber7 > 0 && (decreeoperation.optionnumber6 == 1 || decreeoperation.optionnumber6 == 2)" class="persondecreeoperation-part-list-element-sub-sub">
+                                                    «{{getRank(decreeoperation.optionnumber7)}}»
+                                                </span>.
+                                            </div>
+                                            <div class="persondecreeoperation-part-list-element-margin-big">
+                                                <div class="persondecreeoperation-part-list-element-indent" v-if="decreeoperation.optionnumber2 != null && decreeoperation.optionnumber2 != 0">
+                                                    Выплатить компенсацию за {{decreeoperation.optionnumber2}} {{getDayString(decreeoperation.optionnumber2)}} неиспользованного основного отпуска за {{year(decreeoperation.optiondate1 )}} год.
+                                                </div>
+                                                <div class="persondecreeoperation-part-list-element-indent" v-if="decreeoperation.optionnumber2 != null && decreeoperation.optionnumber3 != 0">
+                                                    Удержать денежное довольствие на {{decreeoperation.optionnumber3}} {{getDayString(decreeoperation.optionnumber3)}} использованного основного отпуска за {{year(decreeoperation.optiondate1)}} год.
+                                                </div>
+                                                <div>
+                                                    Основание: {{decreeoperation.optionstring1}}.
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div>
+                                        <div>
+                                            <div>
+                                                <!--<el-button size="mini" type="warning" @click="updatePersonreward(persondecreeBlock, decreeoperation)">Редактировать</el-button>-->
+                                                <el-button size="mini" type="warning" @click="removePersondecreeoperation(decreeoperation)">Удалить</el-button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+
+                            </div>
+
+                        </div>
+                        <br />
+                    </div>
+                </div>
 
 
                 <hr />

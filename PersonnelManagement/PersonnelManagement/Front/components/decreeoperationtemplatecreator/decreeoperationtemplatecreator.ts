@@ -117,50 +117,11 @@ export default class decreeoperationtemplatecreator extends Vue {
     @Prop({ default: null })
     input_decree: Persondecree;
 
-    modalAdminVisible: boolean;
-    sidebarDisplay: boolean;
-    modalStructureManagingPanelTopMenuVisible: boolean;
-    modalSettingsPanelVisible: boolean;
-    modalPmrequestPanelVisible: boolean;
-    modalAboutPanelVisible: boolean;
-    addStructureAvailable: boolean;
-
-    structureeditorAccess: string;
-    removeStructureAvailable: boolean;
-    removeStructure: string;
-
-    renameStructureAvailable: boolean;
-    renameStructure: string;
-
-    modalDecreesMenuVisible: boolean;
-
-    modalDecreeMenuVisible: boolean;
-    decreeId: number;
-    decreeButtonName: string;
-    decreeNumber: string;
-    decreeNickname: string;
-    decreeName: string;
-    decreeDateactive: string;
-    decreeDatesigned: string;
-
-    decreesList: Decreemanagement[];
-    decreeCreateName: string;
-    decreeOperations: Decreeoperation[];
-
     focused: boolean;
 
     decreesActionsDisabled: boolean;
 
     modalDecreesSignedMenuVisible: boolean;
-    decreeFilterNumber: string;
-    decreeFilterNickname: string;
-    decreeFilterName: string;
-    decreeFilterDateactiveStart: string;
-    decreeFilterDateactiveEnd: string;
-    decreeFilterDatesignedStart: string;
-    decreeFilterDatesignedEnd: string;
-    decreesSignedList: Decreemanagement[];
-    decreeSignedOperations: Decreeoperation[];
     modalDecreeMenuSignedVisible: boolean;
 
     modalPersondecreesMenuVisible: boolean;
@@ -215,57 +176,13 @@ export default class decreeoperationtemplatecreator extends Vue {
 
     update: boolean;
 
-    onDecreeDatesignedChange(value: string, oldValue: string) {
-        this.decreeDateactive = this.decreeDatesigned;
-    }
-
     data() {
         return {
-            modalAdminVisible: false,
-            modalStructureManagingPanelTopMenuVisible: false,
-            modalSettingsPanelVisible: false,
-            modalPmrequestPanelVisible: false,
-            modalAboutPanelVisible: false,
-            sidebarDisplay: true,
-            featured: [],
-            structureeditorAccess: "0",
-
-            removeStructureAvailable: false,
-            removeStructure: "removestructure",
-
-            renameStructureAvailable: false,
-            renameStructure: "renamestructure",
-
-            modalDecreesMenuVisible: false,
-
-            modalDecreeMenuVisible: false,
-            decreeButtonName: "Создать приказ",
-
-            decreeId: 0,
-            decreeNumber: "",
-            decreeNickname: "",
-            decreeName: "",
-            decreeDateactive: this.toDateInputValue(new Date()),
-            decreeDatesigned: this.toDateInputValue(new Date()),
-
-            addStructureAvailable: false,
-            decreesList: [],
-            decreeCreateName: "",
-            decreeOperations: [],
             focused: false,
 
             decreesActionsDisabled: false,
 
             modalDecreesSignedMenuVisible: false,
-            decreeFilterNumber: "",
-            decreeFilterNickname: "",
-            decreeFilterName: "",
-            decreeFilterDateactiveStart: "",
-            decreeFilterDateactiveEnd: "",
-            decreeFilterDatesignedStart: "",
-            decreeFilterDatesignedEnd: "",
-            decreesSignedList: [],
-            decreeSignedOperations: [],
             modalDecreeMenuSignedVisible: false,
 
             modalPersondecreesMenuVisible: false,
@@ -326,7 +243,8 @@ export default class decreeoperationtemplatecreator extends Vue {
             //this.$store.commit("setEldSelectedperson", 0);
         }
         //this.input_decree.creatorObject.structureString
-        setInterval(this.fetchPersondecreeBlocks, 5000);
+        this.persondecreeSelectUpdate(this.input_decree.id);
+        //setInterval(this.fetchPersondecreeBlocks, 5000);
     }
 
     get modeselectstructure(): boolean {
@@ -504,9 +422,9 @@ export default class decreeoperationtemplatecreator extends Vue {
     /**
      * Visible if button is pressed and mode is not enabled; 
      */
-    get pmrequestManagingPanelVisible(): boolean {
+    /*get pmrequestManagingPanelVisible(): boolean {
         return this.modalPmrequestPanelVisible && !this.modeselectstructure;
-    }
+    }*/
 
     logout() {
         (<any>Vue).logout();
@@ -532,6 +450,7 @@ export default class decreeoperationtemplatecreator extends Vue {
     updateMethod() {
         this.update = !this.update;
         this.update = !this.update;
+        this.update = !this.update ? true : true;
     }
 
     fetchPersondecreeBlocks(id: number = -1) {
@@ -619,9 +538,10 @@ export default class decreeoperationtemplatecreator extends Vue {
 
                     }
                 })
-                this.persondecreeBlocks = result;
+                if (result.length != 0 || result != null)
+                    this.persondecreeBlocks = result;
+                this.updateMethod();
             });
-        //this.updateMethod();
     }
 
     /**
@@ -847,6 +767,7 @@ export default class decreeoperationtemplatecreator extends Vue {
 
                         }
                     })
+                this.block_list_ubdate(block);
             })
     }
 
@@ -894,7 +815,7 @@ export default class decreeoperationtemplatecreator extends Vue {
             method: 'post',
             body: JSON.stringify(<Persondecreeoperation>{
                 person: personid,
-                persondecree: this.persondecreeId,
+                persondecree: this.input_decree.id,
                 status: 1, // Создание
                 personreward: persondecreeblock.samplePersonreward,
                 intro: persondecreeblock.intro,
@@ -954,7 +875,7 @@ export default class decreeoperationtemplatecreator extends Vue {
                     //persondecreeblock.selectPerson(this.person.id, persondecreeblock);
                 }
 
-                this.persondecreeSelectUpdate(this.persondecreeId);
+                this.persondecreeSelectUpdate(this.input_decree.id);
             });
     }
 
@@ -1094,11 +1015,9 @@ export default class decreeoperationtemplatecreator extends Vue {
         this.fetchPersondecreeOperations(id);
         this.fetchPersondecreeBlocks(id);
         this.fetchPersondecree(id);
+        this.updateMethod();
     }
 
-    onPersondecreeDatesignedChange(value: string, oldValue: string) {
-        this.decreeDateactive = this.decreeDatesigned;
-    }
 
     searchPersons(fio: string) {
         fetch('api/Person/Search' + fio, { credentials: 'include' })
@@ -1267,6 +1186,8 @@ export default class decreeoperationtemplatecreator extends Vue {
                 this.input_decree.id = id;
                 //alert(result.creatorObject);
                 this.input_decree.creatorObject = result.creatorObject;
+
+                this.input_decree = result;
             });
     }
 
@@ -1523,7 +1444,8 @@ export default class decreeoperationtemplatecreator extends Vue {
                 if (this.person != null) {
                     this.selectPerson(this.person.id);
                 }
-                this.persondecreeSelectUpdate(this.persondecreeId);
+                this.persondecreeSelectUpdate(this.input_decree.id);
+
             });
     }
 
@@ -1818,9 +1740,11 @@ export default class decreeoperationtemplatecreator extends Vue {
                 if (this.person != null) {
                     this.selectPerson(this.person.id);
                 }
-                this.persondecreeSelectUpdate(this.persondecreeId);
+                this.persondecreeSelectUpdate(this.input_decree.id);
+                /*this.fetchPersondecreeBlocks();
+                this.updateMethod();*/
             });
-        this.fetchPersondecreeBlocks();
+        
     }
 
     deletePersondecreeblock(block: Persondecreeblock) {
@@ -1849,9 +1773,11 @@ export default class decreeoperationtemplatecreator extends Vue {
                 if (this.person != null) {
                     this.selectPerson(this.person.id);
                 }
-                this.persondecreeSelectUpdate(this.persondecreeId);
+                this.persondecreeSelectUpdate(this.input_decree.id);
+                /*this.fetchPersondecreeBlocks();
+                this.updateMethod();*/
             });
-        this.fetchPersondecreeBlocks();
+        
     }
 
     persondecreeUpdate() {
@@ -1871,5 +1797,104 @@ export default class decreeoperationtemplatecreator extends Vue {
             this.fetchPersondecree(decree.id);
             (<any>Vue).notify("S:Данные проекта приказа зарезервированы");
         })
+    }
+
+    selectPersonBlockNonAuto(id: number, block: Persondecreeblock) {
+        fetch('api/Person/Single' + id, { credentials: 'include' })
+            .then(response => {
+                return response.json() as Promise<Person>;
+            })
+            .then(person => {
+                if (person != null) {
+                    this.prepareToImport(person);
+                    block.person = person;
+
+                    block.personssearch = [];
+                    block.fiosearch = "";
+                    block.nonperson = ""; // Если был человек не из МЧС, убираем.
+
+                    // Если присвоить
+                    if (block.persondecreeblocktype == 14) {
+                        block.persondecreeblocksub = null; // Обнуляем список доступных званий для выбора
+                    }
+
+                    // Если предоставить (отпуск)
+                    if (block.persondecreeblocktype == 15) {
+                        this.persondecreeblocksubChange(block);
+                        this.jobperiodvacationinitializeAll(block);
+                    }
+
+                    //this.addPersonblockelement(block); - отрубаем автоматическое дополнение. Но тогда для добавления отдельно должна быть кнопка.
+                    this.block_list_ubdate(block);
+                }
+                //this.block_list_ubdate(block);
+            })
+    }
+
+    jobperiodvacationinitializeAll(persondecreeblock: Persondecreeblock) {
+        if (persondecreeblock == null || persondecreeblock.person == null || persondecreeblock.person.jobperiods == null) {
+            return;
+        }
+
+        let lastJobperiod: Jobperiod = null;
+
+        persondecreeblock.person.jobperiods.forEach(p => {
+            let least: number = 2000;
+            if (p.vacationdaystransferleft > p.vacationdaysgivenclear) {
+                least = p.vacationdaysgivenclear;
+            } else {
+                least = p.vacationdaystransferleft;
+            }
+            p.vacationselecteddays = least;
+            lastJobperiod = p;
+            p.vacationselectedshow = true;
+            p.vacationmax = least;
+        })
+
+        if (lastJobperiod != null) {
+            lastJobperiod.vacationselected = 1;
+            lastJobperiod.vacationselectedshow = false;
+        }
+    }
+
+    block_list_ubdate(block: Persondecreeblock) {
+        let new_blocks = [];
+        let index = 0
+        this.persondecreeBlocks.forEach(r => {
+            if (r.id == block.id) {
+                r = block;
+                return;
+                //new_blocks.push(block);
+            } else {
+                new_blocks.push(r);
+            }
+            index += 1;
+        })
+        this.persondecreeBlocks[index] = block;
+        this.updateMethod();
+        //this.persondecreeBlocks = new_blocks;
+    }
+
+    /**
+     * Активация режима выбора должности
+     * @param persondecreeblock
+     */
+    selectPosition(persondecreeblock: Persondecreeblock) {
+
+
+        let appearance = {
+            positioncompact: this.$store.state.positioncompact,
+            sidebardisplay: 1,
+        }
+
+        this.$store.commit("setdecreeoperationtemplatecreatorVisible", false);
+        this.$store.commit("setdecreeoperationelementVisible", false);
+        this.visible = false;
+        this.modalPersondecreeMenuVisible = false;
+        this.modalPersondecreesMenuVisible = false;
+        this.$store.commit("setModeappointpersondecree", true);
+        this.currentPersondecreeblock = persondecreeblock;
+
+        this.$store.commit("updateUserAppearance", appearance);
     }
 }

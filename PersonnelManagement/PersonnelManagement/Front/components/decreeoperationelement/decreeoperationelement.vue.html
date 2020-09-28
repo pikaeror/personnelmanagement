@@ -46,9 +46,10 @@
                     </div>
                 </div>
                 <div visible="update"></div>
+                <!--property="marked"  @selection-change="handleSelectionChange"-->
                 <template>
                     <el-table ref="multipleTable" :data="viewpersondecrees" style="width: 100%" border :row-class-name="tableRowClassName" @selection-change="handleSelectionChange" @row-dblclick="rowClicked">
-                        <el-table-column property="marked" type="selection" width="55">
+                        <el-table-column type="selection" width="55">
                         </el-table-column>
                         <el-table-column property="getDate" label="ДАТА" sortable width="110" :filters="datefiltervariants" :filter-method="filterHandler">
                         </el-table-column>
@@ -66,9 +67,9 @@
                                 <el-button type="primary" @click="handleEditRow(scope.$index)">Edit</el-button>
                             </template>
                             <!--<div slot-scope="{row}">
-                            <el-button size="mini">Edit</el-button>
-                            <el-button size="mini">Delete</el-button>
-                        </div>-->
+                    <el-button size="mini">Edit</el-button>
+                    <el-button size="mini">Delete</el-button>
+                </div>-->
                         </el-table-column>
                     </el-table>
                 </template>

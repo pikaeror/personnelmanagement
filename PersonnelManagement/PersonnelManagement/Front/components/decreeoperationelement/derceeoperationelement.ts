@@ -126,6 +126,13 @@ export default class derceeoperationelement extends Vue {
             let index: number = this.fullpersondecrees.findIndex(p => p.id == r.id);
             this.fullpersondecrees[index].marked = this.fullpersondecrees[index].marked == true ? false : true;
         })
+        /*if (val) {
+            val.forEach(row => {
+                this.$refs.multipleTable.toggleRowSelection(row);
+            });
+        } else {
+            this.$refs.multipleTable.clearSelection();
+        }*/
         //this.reload();
     }
     filterHandler(value, row, column) {

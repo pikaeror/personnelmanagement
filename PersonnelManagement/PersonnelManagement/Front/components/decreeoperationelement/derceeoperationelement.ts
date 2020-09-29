@@ -251,6 +251,7 @@ export default class derceeoperationelement extends Vue {
                 })
                 .then(result => {
                     this.open(result);
+                    this.fetchPersondecreesActive();
                 });
         })
         /*fetch('api/Persondecree/GetLustDecreeByUser', { credentials: 'include' })
@@ -367,6 +368,7 @@ export default class derceeoperationelement extends Vue {
     }
 
     unit() {
+        this.persondecreesUnite();
         this.dialogVisibleUnit = true;
     }
 
@@ -423,5 +425,19 @@ export default class derceeoperationelement extends Vue {
 
     closeUserSearch() {
         this.usersSearch = [];
+    }
+
+    persondecreesUnite() {
+        let str: string = "1"; // первый номер будет означать тип операции по отношению к выбранным проектам приказов
+        this.multipleSelection.forEach(p => {
+            str += "_" + p.id;
+        });
+        fetch('api/Persondecree/Action' + str, { credentials: 'include' })
+            .then(response => {
+                return response.json() as Promise<string>;
+            })
+            .then(result => {
+                this.fetchPersondecreesActive();
+            })
     }
 }

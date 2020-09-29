@@ -258,9 +258,13 @@ const store = new Vuex.Store({
         departmentsListTitle: "Список отделов",
         forceDepartmentUpdate: false,
         positionsListId: 0,
+
         decreeoperationelementVisible: 0,
         decreeoperationtemplatecreatorVisible: false,
         persondecree: null,
+        mailmodeprevios: false,
+        chosenPosition: null,
+
         eldVisible: 0,
         eldId: 0,
         eldPosition: 0,
@@ -390,6 +394,14 @@ const store = new Vuex.Store({
 
         setpersondecree(state, n) {
             state.persondecree = n;
+        },
+
+        setmailmodeprevios(state, n) {
+            state.mailmodeprevios = n;
+        },
+
+        setchosenPosition(state, n) {
+            state.chosenPosition = n;
         },
 
         setEldId(state, n) {
@@ -1191,8 +1203,8 @@ const store = new Vuex.Store({
                     'Content-Type': 'application/json'
                 })
             }).then(x => {
-                //state.sidebarDisplay = n.sidebardisplay;
-                //state.positioncompact = n.positioncompact;
+                state.sidebarDisplay = n.sidebardisplay;
+                state.positioncompact = n.positioncompact;
             });
         },
         setSidebarDisplay(state, n) {

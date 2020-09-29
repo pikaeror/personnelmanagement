@@ -90,6 +90,8 @@ import Countycities from '../../classes/countrycities'
 import Countrycities from '../../classes/countrycities';
 import Ordernumbertype from '../../classes/ordernumbertype';
 import Link from '../../classes/link';
+import PosDep from '../positionslist/positionslist';
+import Positiontype from '../../classes/positiontype';
 
 Vue.component(Button.name, Button);
 Vue.component(Input.name, Input);
@@ -244,7 +246,7 @@ export default class decreeoperationtemplatecreator extends Vue {
         }
         //this.input_decree.creatorObject.structureString
         this.persondecreeSelectUpdate(this.input_decree.id);
-        //setInterval(this.fetchPersondecreeBlocks, 5000);
+        setInterval(this.persondecreeSelectUpdate, 10000);
     }
 
     get modeselectstructure(): boolean {
@@ -419,6 +421,10 @@ export default class decreeoperationtemplatecreator extends Vue {
         return this.$store.state.structuresalldocument;
     }
 
+    get chosenPosition(): boolean{
+        return this.$store.state.chosenPosition != null;
+    }
+
     /**
      * Visible if button is pressed and mode is not enabled; 
      */
@@ -437,6 +443,7 @@ export default class decreeoperationtemplatecreator extends Vue {
     @Watch('visible')
     onVisibleChange(value: boolean, oldValue: boolean) {
         if (value) {
+            //this.update = true;
         }
     }
 
@@ -457,6 +464,7 @@ export default class decreeoperationtemplatecreator extends Vue {
         if (this.input_decree == null)
             return;
         let value: number = id < 0 ? this.input_decree.id : id;
+        this.update = false;
         fetch('api/Persondecreeblock/' + value, { credentials: 'include' })
             .then(response => {
                 return response.json() as Promise<Persondecreeblock[]>;
@@ -540,7 +548,8 @@ export default class decreeoperationtemplatecreator extends Vue {
                 })
                 if (result.length != 0 || result != null)
                     this.persondecreeBlocks = result;
-                this.updateMethod();
+                //this.updateMethod();
+                this.update = true;
             });
     }
 
@@ -1011,7 +1020,7 @@ export default class decreeoperationtemplatecreator extends Vue {
         this.persondecreeSelectUpdate(id);
     }
 
-    persondecreeSelectUpdate(id: number) {
+    persondecreeSelectUpdate(id: number = this.input_decree.id) {
         this.fetchPersondecreeOperations(id);
         this.fetchPersondecreeBlocks(id);
         this.fetchPersondecree(id);
@@ -1059,6 +1068,7 @@ export default class decreeoperationtemplatecreator extends Vue {
     }
 
     fetchPersondecreeOperations(decree: number) {
+        this.update = false;
         fetch('api/Persondecreeoperation/' + decree, { credentials: 'include' })
             .then(response => {
                 return response.json() as Promise<Persondecreeoperation[]>;
@@ -1163,10 +1173,13 @@ export default class decreeoperationtemplatecreator extends Vue {
                 })
 
                 this.persondecreeOperations = result;
+                //this.updateMethod();
+                this.update = true;
             });
     }
 
     fetchPersondecree(id: number) {
+        this.update = false;
         fetch('api/Persondecree/' + id, { credentials: 'include' })
             .then(response => {
                 return response.json() as Promise<Persondecree>;
@@ -1188,6 +1201,8 @@ export default class decreeoperationtemplatecreator extends Vue {
                 this.input_decree.creatorObject = result.creatorObject;
 
                 this.input_decree = result;
+                //this.updateMethod();
+                this.update = true;
             });
     }
 
@@ -1825,6 +1840,7 @@ export default class decreeoperationtemplatecreator extends Vue {
                     }
 
                     //this.addPersonblockelement(block); - отрубаем автоматическое дополнение. Но тогда для добавления отдельно должна быть кнопка.
+                    this.persondecreeSelectUpdate(this.input_decree.id);
                     this.block_list_ubdate(block);
                 }
                 //this.block_list_ubdate(block);
@@ -1889,12 +1905,28 @@ export default class decreeoperationtemplatecreator extends Vue {
 
         this.$store.commit("setdecreeoperationtemplatecreatorVisible", false);
         this.$store.commit("setdecreeoperationelementVisible", false);
-        this.visible = false;
+        this.$store.commit("setmailmodeprevios", true);
+
+        //this.visible = false;
         this.modalPersondecreeMenuVisible = false;
         this.modalPersondecreesMenuVisible = false;
         this.$store.commit("setModeappointpersondecree", true);
         this.currentPersondecreeblock = persondecreeblock;
 
         this.$store.commit("updateUserAppearance", appearance);
+    }
+
+    setPositionByBlock(persondecreeblock: Persondecreeblock) {
+        fetch('api/Positions/Solo' + this.$store.state.chosenPosition.id, { credentials: 'include' })
+            .then(response => response.json() as Promise<Position>)
+            .then(data => {
+                fetch('api/Positiontype/Current/' + data.positiontype, { credentials: 'include' })
+                    .then(response => response.json() as Promise<Positiontype>)
+                    .then(data => {
+                        persondecreeblock.samplePositiontype = data;
+                    })
+                persondecreeblock.samplePosition = data;
+            })
+        //persondecreeblock.samplePosition
     }
 }

@@ -552,20 +552,23 @@
                             <br />
                             <el-button @click="selectPosition(persondecreeBlock)" type="primary" plain>Назначить на должность</el-button>
                         </div>
-                        <!--<div v-if="persondecreeBlock.samplePositiontype != null">
-                {{persondecreeBlock.samplePositiontype.name2}}
-            </div>
-            <div v-else>
-                {{persondecreeBlock.optionstring1}}
-            </div>-->
+                        <!--<div v-if="chosenPosition()">
+                            {{setPositionByBlock(persondecreeBlock)}}
+                            {{persondecreeBlock.samplePositiontype.name2}}
+                        </div>
+                        <div v-else>
+                            {{persondecreeBlock.optionstring1}}
+                        </div>-->
+                    <div v-if="chosenPosition">
+                        {{setPositionByBlock(persondecreeBlock)}}
+                        {{persondecreeBlock.samplePositiontype.name}}
                         <div>
                             {{persondecreeBlock.optionstring1}}
-
-
                         </div>
                         <div>
                             {{persondecreeBlock.optionstring2}}
                         </div>
+                    </div>
 
 
                         <div>

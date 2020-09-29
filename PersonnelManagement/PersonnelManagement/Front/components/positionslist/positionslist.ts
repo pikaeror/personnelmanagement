@@ -2200,7 +2200,15 @@ export default class PositionslistComponent extends Vue {
 
         // Если назначаем на должность через проекты приказов ЭЛД
         if (this.$store.state.modeappointpersondecree) {
-            this.$store.commit("setModeappointedpersondecree", position.id);
+            if (this.$store.state.mailmodeprevios) {
+                this.$store.commit("setdecreeoperationtemplatecreatorVisible", this.$store.state.persondecree != null ? true : false);
+                this.$store.commit("setdecreeoperationelementVisible", true);
+                this.$store.commit("setmailmodeprevios", false);
+                this.$store.commit("setchosenPosition", position);
+            } else {
+                this.$store.commit("setModeappointedpersondecree", position.id);
+            }
+
             this.$store.commit("setModeappointpersondecree", false);
 
             let appearance = {

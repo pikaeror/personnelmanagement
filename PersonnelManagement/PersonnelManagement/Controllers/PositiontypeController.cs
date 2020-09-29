@@ -91,5 +91,25 @@ namespace PersonnelManagement.Controllers
             }
             //return new ObjectResult(Keys.ERROR_SHORT + ":Произошла какая-то оказия");
         }
+
+        [HttpGet("Current/{id}")]
+        public Positiontype GetDataByID([FromRoute] int id)
+        {
+            string sessionid = Request.Cookies[Keys.COOKIES_SESSION];
+            if (IdentityService.IsLogined(sessionid, repository))
+            {
+                User user = IdentityService.GetUserBySessionID(sessionid, repository);
+                bool hasAccess = IdentityService.CanReadCommonData(user);
+                if (hasAccess)
+                {
+                    if (repository.PositiontypesLocal() == null)
+                    {
+                        repository.UpdatePositiontypesLocal();
+                    }
+                    return repository.PositiontypesLocal().Values.Where(r => r.Id == id).ToList()[0];
+                }
+            }
+            return new Positiontype();
+        }
     }
 }

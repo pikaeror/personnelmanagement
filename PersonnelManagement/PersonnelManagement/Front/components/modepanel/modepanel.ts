@@ -85,6 +85,8 @@ export default class CandidatesComponent extends Vue {
 
         this.$store.commit("updateUserAppearance", appearance);
         this.$store.commit("setModepanelVisible", 0);
+        this.$store.commit("setpersondecree", null);
+        this.$store.commit("setmailmodeprevios", false);
         this.orgMode();
 
         fetch('api/Identity/Fullmode1', { credentials: 'include' })
@@ -104,6 +106,8 @@ export default class CandidatesComponent extends Vue {
 
         this.$store.commit("updateUserAppearance", appearance);
         this.$store.commit("setModepanelVisible", 0);
+        this.$store.commit("setpersondecree", null);
+        this.$store.commit("setmailmodeprevios", false);
         this.peopleMode();
         this.toggleEld();
 
@@ -124,6 +128,7 @@ export default class CandidatesComponent extends Vue {
 
         this.$store.commit("updateUserAppearance", appearance);
         this.$store.commit("setModepanelVisible", 0);
+
         this.decreeMode();
         this.toggleDecreeOperationElement();
 
@@ -145,6 +150,8 @@ export default class CandidatesComponent extends Vue {
 
         this.$store.commit("updateUserAppearance", appearance);
         this.$store.commit("setModepanelVisible", 0);
+        this.$store.commit("setpersondecree", null);
+        this.$store.commit("setmailmodeprevios", false);
         this.peopleMode();
         this.toggleCandidates();
 
@@ -165,6 +172,8 @@ export default class CandidatesComponent extends Vue {
 
         this.$store.commit("updateUserAppearance", appearance);
         this.$store.commit("setModepanelVisible", 0);
+        this.$store.commit("setpersondecree", null);
+        this.$store.commit("setmailmodeprevios", false);
         this.peopleMode();
 
         fetch('api/Identity/Fullmode4', { credentials: 'include' })

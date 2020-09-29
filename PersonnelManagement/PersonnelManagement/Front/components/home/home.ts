@@ -94,6 +94,7 @@ export default class HomeComponent extends Vue {
     }
 
     close() {
-        this.$store.commit("setdecreeoperationtemplatecreatorVisible", this.$store.state.decreeoperationtemplatecreatorVisible ? false : true);
+        this.$store.commit("setdecreeoperationtemplatecreatorVisible", false);
+        //this.$store.commit("setmailmodeprevios", false);
     }
 }

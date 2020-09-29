@@ -1205,10 +1205,13 @@ export default class TopmenuComponent extends Vue {
             sidebardisplay: 0,
         }
 
-        this.$store.commit("setEldVisible", 1);
-        this.$store.commit("setPositionsListId", 0);
+        /*this.$store.commit("setEldVisible", 1);
+        this.$store.commit("setPositionsListId", 0);*/
 
         this.$store.commit("updateUserAppearance", appearance);
+
+        this.$store.commit("setdecreeoperationtemplatecreatorVisible", false);
+        this.$store.commit("setdecreeoperationelementVisible", false);
     }
 
     modeName(): string {

@@ -1187,8 +1187,24 @@ export default class SidebarComponent extends Vue {
     }
 
     isSelected(structureid: number): boolean {
-        return (structureid == this.$store.state.positionsListId || structureid == -this.$store.state.positionsListId);
+        return (structureid == this.$store.state.positionsListId || structureid == -this.$store.state.positionsListId || structureid == this.$store.state.setFeatured);
     }
+    currentselected(id: number) {
+        return Number.parseInt(this.$store.state.currentstructuretree.split('f')[1]) == id;
+    }
+
+    currentopened(id: number) {
+        let value: boolean = false;
+        this.$store.state.currentstructuretree.split('f')[0].split('_').forEach(r => {
+            let k: number = Number.parseInt(r) < 0 ? Number.parseInt(r) * -1 : Number.parseInt(r);
+            if (id == k) {
+                value = true;
+                return;
+            }
+        })
+        return value;
+    }
+
 
     onStructureManagingPanelClose() {
         if (!this.$store.state.modeselectstructure) {

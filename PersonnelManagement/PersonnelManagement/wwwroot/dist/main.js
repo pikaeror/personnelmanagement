@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "c47ff42a487fd764f2fa"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "5a8f697080b7f90bba58"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -2367,6 +2367,8 @@ const store = new __WEBPACK_IMPORTED_MODULE_3_vuex__["default"].Store({
         decreeoperationelementVisible: 0,
         decreeoperationtemplatecreatorVisible: false,
         persondecree: null,
+        mailmodeprevios: false,
+        chosenPosition: null,
         eldVisible: 0,
         eldId: 0,
         eldPosition: 0,
@@ -2492,6 +2494,12 @@ const store = new __WEBPACK_IMPORTED_MODULE_3_vuex__["default"].Store({
         },
         setpersondecree(state, n) {
             state.persondecree = n;
+        },
+        setmailmodeprevios(state, n) {
+            state.mailmodeprevios = n;
+        },
+        setchosenPosition(state, n) {
+            state.chosenPosition = n;
         },
         setEldId(state, n) {
             state.eldId = n;
@@ -3245,8 +3253,8 @@ const store = new __WEBPACK_IMPORTED_MODULE_3_vuex__["default"].Store({
                     'Content-Type': 'application/json'
                 })
             }).then(x => {
-                //state.sidebarDisplay = n.sidebardisplay;
-                //state.positioncompact = n.positioncompact;
+                state.sidebarDisplay = n.sidebardisplay;
+                state.positioncompact = n.positioncompact;
             });
         },
         setSidebarDisplay(state, n) {
@@ -7975,6 +7983,7 @@ let derceeoperationelement = class derceeoperationelement extends __WEBPACK_IMPO
             })
                 .then(result => {
                 this.open(result);
+                this.fetchPersondecreesActive();
             });
         });
         /*fetch('api/Persondecree/GetLustDecreeByUser', { credentials: 'include' })
@@ -8081,6 +8090,7 @@ let derceeoperationelement = class derceeoperationelement extends __WEBPACK_IMPO
         this.multipleSelection = new_listdecree;
     }
     unit() {
+        this.persondecreesUnite();
         this.dialogVisibleUnit = true;
     }
     searchUsers(search) {
@@ -8134,6 +8144,19 @@ let derceeoperationelement = class derceeoperationelement extends __WEBPACK_IMPO
     }
     closeUserSearch() {
         this.usersSearch = [];
+    }
+    persondecreesUnite() {
+        let str = "1"; // первый номер будет означать тип операции по отношению к выбранным проектам приказов
+        this.multipleSelection.forEach(p => {
+            str += "_" + p.id;
+        });
+        fetch('api/Persondecree/Action' + str, { credentials: 'include' })
+            .then(response => {
+            return response.json();
+        })
+            .then(result => {
+            this.fetchPersondecreesActive();
+        });
     }
 };
 __decorate([
@@ -8249,7 +8272,7 @@ let decreeoperationtemplatecreator = class decreeoperationtemplatecreator extend
         }
         //this.input_decree.creatorObject.structureString
         this.persondecreeSelectUpdate(this.input_decree.id);
-        //setInterval(this.fetchPersondecreeBlocks, 5000);
+        setInterval(this.persondecreeSelectUpdate, 10000);
     }
     get modeselectstructure() {
         return this.$store.state.modeselectstructure;
@@ -8380,6 +8403,9 @@ let decreeoperationtemplatecreator = class decreeoperationtemplatecreator extend
     get structuresalldocument() {
         return this.$store.state.structuresalldocument;
     }
+    get chosenPosition() {
+        return this.$store.state.chosenPosition != null;
+    }
     /**
      * Visible if button is pressed and mode is not enabled;
      */
@@ -8394,6 +8420,7 @@ let decreeoperationtemplatecreator = class decreeoperationtemplatecreator extend
     }
     onVisibleChange(value, oldValue) {
         if (value) {
+            //this.update = true;
         }
     }
     onInputDecreeChange(value) {
@@ -8410,6 +8437,7 @@ let decreeoperationtemplatecreator = class decreeoperationtemplatecreator extend
         if (this.input_decree == null)
             return;
         let value = id < 0 ? this.input_decree.id : id;
+        this.update = false;
         fetch('api/Persondecreeblock/' + value, { credentials: 'include' })
             .then(response => {
             return response.json();
@@ -8485,7 +8513,8 @@ let decreeoperationtemplatecreator = class decreeoperationtemplatecreator extend
             });
             if (result.length != 0 || result != null)
                 this.persondecreeBlocks = result;
-            this.updateMethod();
+            //this.updateMethod();
+            this.update = true;
         });
     }
     /**
@@ -8921,7 +8950,7 @@ let decreeoperationtemplatecreator = class decreeoperationtemplatecreator extend
         this.modalPersondecreeMenuVisible = true;
         this.persondecreeSelectUpdate(id);
     }
-    persondecreeSelectUpdate(id) {
+    persondecreeSelectUpdate(id = this.input_decree.id) {
         this.fetchPersondecreeOperations(id);
         this.fetchPersondecreeBlocks(id);
         this.fetchPersondecree(id);
@@ -8961,6 +8990,7 @@ let decreeoperationtemplatecreator = class decreeoperationtemplatecreator extend
         return true;
     }
     fetchPersondecreeOperations(decree) {
+        this.update = false;
         fetch('api/Persondecreeoperation/' + decree, { credentials: 'include' })
             .then(response => {
             return response.json();
@@ -9060,9 +9090,12 @@ let decreeoperationtemplatecreator = class decreeoperationtemplatecreator extend
                 operationPrev = operation;
             });
             this.persondecreeOperations = result;
+            //this.updateMethod();
+            this.update = true;
         });
     }
     fetchPersondecree(id) {
+        this.update = false;
         fetch('api/Persondecree/' + id, { credentials: 'include' })
             .then(response => {
             return response.json();
@@ -9083,6 +9116,8 @@ let decreeoperationtemplatecreator = class decreeoperationtemplatecreator extend
             //alert(result.creatorObject);
             this.input_decree.creatorObject = result.creatorObject;
             this.input_decree = result;
+            //this.updateMethod();
+            this.update = true;
         });
     }
     displayIt() {
@@ -9658,6 +9693,7 @@ let decreeoperationtemplatecreator = class decreeoperationtemplatecreator extend
                     this.jobperiodvacationinitializeAll(block);
                 }
                 //this.addPersonblockelement(block); - отрубаем автоматическое дополнение. Но тогда для добавления отдельно должна быть кнопка.
+                this.persondecreeSelectUpdate(this.input_decree.id);
                 this.block_list_ubdate(block);
             }
             //this.block_list_ubdate(block);
@@ -9715,12 +9751,26 @@ let decreeoperationtemplatecreator = class decreeoperationtemplatecreator extend
         };
         this.$store.commit("setdecreeoperationtemplatecreatorVisible", false);
         this.$store.commit("setdecreeoperationelementVisible", false);
-        this.visible = false;
+        this.$store.commit("setmailmodeprevios", true);
+        //this.visible = false;
         this.modalPersondecreeMenuVisible = false;
         this.modalPersondecreesMenuVisible = false;
         this.$store.commit("setModeappointpersondecree", true);
         this.currentPersondecreeblock = persondecreeblock;
         this.$store.commit("updateUserAppearance", appearance);
+    }
+    setPositionByBlock(persondecreeblock) {
+        fetch('api/Positions/Solo' + this.$store.state.chosenPosition.id, { credentials: 'include' })
+            .then(response => response.json())
+            .then(data => {
+            fetch('api/Positiontype/Current/' + data.positiontype, { credentials: 'include' })
+                .then(response => response.json())
+                .then(data => {
+                persondecreeblock.samplePositiontype = data;
+            });
+            persondecreeblock.samplePosition = data;
+        });
+        //persondecreeblock.samplePosition
     }
 };
 __decorate([
@@ -17070,7 +17120,8 @@ let HomeComponent = class HomeComponent extends __WEBPACK_IMPORTED_MODULE_0_vue_
         return this.$store.state.persondecree;
     }
     close() {
-        this.$store.commit("setdecreeoperationtemplatecreatorVisible", this.$store.state.decreeoperationtemplatecreatorVisible ? false : true);
+        this.$store.commit("setdecreeoperationtemplatecreatorVisible", false);
+        //this.$store.commit("setmailmodeprevios", false);
     }
 };
 HomeComponent = __decorate([
@@ -17208,6 +17259,8 @@ let CandidatesComponent = class CandidatesComponent extends __WEBPACK_IMPORTED_M
         };
         this.$store.commit("updateUserAppearance", appearance);
         this.$store.commit("setModepanelVisible", 0);
+        this.$store.commit("setpersondecree", null);
+        this.$store.commit("setmailmodeprevios", false);
         this.orgMode();
         fetch('api/Identity/Fullmode1', { credentials: 'include' });
         //.then(response => {
@@ -17223,6 +17276,8 @@ let CandidatesComponent = class CandidatesComponent extends __WEBPACK_IMPORTED_M
         };
         this.$store.commit("updateUserAppearance", appearance);
         this.$store.commit("setModepanelVisible", 0);
+        this.$store.commit("setpersondecree", null);
+        this.$store.commit("setmailmodeprevios", false);
         this.peopleMode();
         this.toggleEld();
         fetch('api/Identity/Fullmode2', { credentials: 'include' });
@@ -17255,6 +17310,8 @@ let CandidatesComponent = class CandidatesComponent extends __WEBPACK_IMPORTED_M
         };
         this.$store.commit("updateUserAppearance", appearance);
         this.$store.commit("setModepanelVisible", 0);
+        this.$store.commit("setpersondecree", null);
+        this.$store.commit("setmailmodeprevios", false);
         this.peopleMode();
         this.toggleCandidates();
         fetch('api/Identity/Fullmode3', { credentials: 'include' });
@@ -17271,6 +17328,8 @@ let CandidatesComponent = class CandidatesComponent extends __WEBPACK_IMPORTED_M
         };
         this.$store.commit("updateUserAppearance", appearance);
         this.$store.commit("setModepanelVisible", 0);
+        this.$store.commit("setpersondecree", null);
+        this.$store.commit("setmailmodeprevios", false);
         this.peopleMode();
         fetch('api/Identity/Fullmode4', { credentials: 'include' });
         //.then(response => {
@@ -21252,7 +21311,15 @@ let PositionslistComponent = class PositionslistComponent extends __WEBPACK_IMPO
         else 
         // Если назначаем на должность через проекты приказов ЭЛД
         if (this.$store.state.modeappointpersondecree) {
-            this.$store.commit("setModeappointedpersondecree", position.id);
+            if (this.$store.state.mailmodeprevios) {
+                this.$store.commit("setdecreeoperationtemplatecreatorVisible", this.$store.state.persondecree != null ? true : false);
+                this.$store.commit("setdecreeoperationelementVisible", true);
+                this.$store.commit("setmailmodeprevios", false);
+                this.$store.commit("setchosenPosition", position);
+            }
+            else {
+                this.$store.commit("setModeappointedpersondecree", position.id);
+            }
             this.$store.commit("setModeappointpersondecree", false);
             let appearance = {
                 positioncompact: this.$store.state.positioncompact,
@@ -22364,7 +22431,21 @@ let SidebarComponent = class SidebarComponent extends __WEBPACK_IMPORTED_MODULE_
         this.dropdownvisible = change;
     }
     isSelected(structureid) {
-        return (structureid == this.$store.state.positionsListId || structureid == -this.$store.state.positionsListId);
+        return (structureid == this.$store.state.positionsListId || structureid == -this.$store.state.positionsListId || structureid == this.$store.state.setFeatured);
+    }
+    currentselected(id) {
+        return Number.parseInt(this.$store.state.currentstructuretree.split('f')[1]) == id;
+    }
+    currentopened(id) {
+        let value = false;
+        this.$store.state.currentstructuretree.split('f')[0].split('_').forEach(r => {
+            let k = Number.parseInt(r) < 0 ? Number.parseInt(r) * -1 : Number.parseInt(r);
+            if (id == k) {
+                value = true;
+                return;
+            }
+        });
+        return value;
     }
     onStructureManagingPanelClose() {
         if (!this.$store.state.modeselectstructure) {
@@ -23966,9 +24047,11 @@ let TopmenuComponent = class TopmenuComponent extends __WEBPACK_IMPORTED_MODULE_
             positioncompact: this.$store.state.positioncompact,
             sidebardisplay: 0,
         };
-        this.$store.commit("setEldVisible", 1);
-        this.$store.commit("setPositionsListId", 0);
+        /*this.$store.commit("setEldVisible", 1);
+        this.$store.commit("setPositionsListId", 0);*/
         this.$store.commit("updateUserAppearance", appearance);
+        this.$store.commit("setdecreeoperationtemplatecreatorVisible", false);
+        this.$store.commit("setdecreeoperationelementVisible", false);
     }
     modeName() {
         if (this.$store.state.mode == "0") {
@@ -50103,7 +50186,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.createMenuToggle()
       }
     }
-  }, [_vm._v("Создать")])], 1)])]), _vm._v(" "), _c('div', {
+  }, [_vm._v("Создать предложение")])], 1)])]), _vm._v(" "), _c('div', {
     staticClass: "eld-eld"
   }, [_c('div', {
     staticClass: "eld-eld-side-mail"
@@ -50292,7 +50375,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "visible": "update"
     }
-  }), _vm._v(" "), [_c('el-table', {
+  }), _vm._v(" "), (_vm.viewpersondecrees.length > 0) ? [_c('el-table', {
     ref: "multipleTable",
     staticStyle: {
       "width": "100%"
@@ -50345,31 +50428,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "label": "ФИО работника",
       "width": "200"
     }
-  }), _vm._v(" "), _c('el-table-column', {
-    attrs: {
-      "label": "Действия"
-    }
-  }, [
-    [_c('el-button', {
-      attrs: {
-        "type": "default"
-      },
-      on: {
-        "click": function($event) {
-          _vm.handleSaveRow(_vm.scope.$index)
-        }
-      }
-    }, [_vm._v("Save")]), _vm._v(" "), _c('el-button', {
-      attrs: {
-        "type": "primary"
-      },
-      on: {
-        "click": function($event) {
-          _vm.handleEditRow(_vm.scope.$index)
-        }
-      }
-    }, [_vm._v("Edit")])]
-  ], 2)], 1)]], 2)]), _vm._v(" "), _c('el-dialog', {
+  })], 1)] : _vm._e()], 2)]), _vm._v(" "), _c('el-dialog', {
     attrs: {
       "width": "900px",
       "visible": _vm.dialogVisibleSend
@@ -50380,7 +50439,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       }
     }
   }, [_c('div', [_vm._v("\n            Введите полностью или частично фамилию, логин или подразделение для поиска кадровика, которому будет направлен проекты приказа\n            "), _vm._l((_vm.multipleSelection), function(decree) {
-    return _c('div', [_c('div', [_vm._v("\n                    🗸 " + _vm._s(decree.number) + "; "), _c('el-button', {
+    return _c('div', [_c('div', [_vm._v("\n                    🗸 " + _vm._s(decree.number) + " " + _vm._s(decree.getName) + " от " + _vm._s(decree.getDate) + "; "), _c('el-button', {
       attrs: {
         "size": "mini",
         "type": "danger",
@@ -50456,7 +50515,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       }
     }
   }, [_c('div', [_vm._v("\n            Выберите папку для переноса следующих приказов:\n            "), _vm._l((_vm.multipleSelection), function(decree) {
-    return _c('div', [_c('div', [_vm._v("\n                    🗸 " + _vm._s(decree.number) + "; "), _c('el-button', {
+    return _c('div', [_c('small', [_vm._v("\n                    🗸 " + _vm._s(decree.number) + " " + _vm._s(decree.getName) + " от " + _vm._s(decree.getDate) + "; "), _c('el-button', {
       attrs: {
         "size": "mini",
         "type": "danger",
@@ -53063,7 +53122,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           _vm.selectPosition(persondecreeBlock)
         }
       }
-    }, [_vm._v("Назначить на должность")])], 1), _vm._v(" "), _c('div', [_vm._v("\n                        " + _vm._s(persondecreeBlock.optionstring1) + "\n\n\n                    ")]), _vm._v(" "), _c('div', [_vm._v("\n                        " + _vm._s(persondecreeBlock.optionstring2) + "\n                    ")]), _vm._v(" "), _c('div', [_vm._v("\n                        С какого числа (оставить пустым, если совпадает с датой приказа)\n                    ")]), _vm._v(" "), _c('el-input', {
+    }, [_vm._v("Назначить на должность")])], 1), _vm._v(" "), (_vm.chosenPosition) ? _c('div', [_vm._v("\n                    " + _vm._s(_vm.setPositionByBlock(persondecreeBlock)) + "\n                    " + _vm._s(persondecreeBlock.samplePositiontype.name) + "\n                    "), _c('div', [_vm._v("\n                        " + _vm._s(persondecreeBlock.optionstring1) + "\n                    ")]), _vm._v(" "), _c('div', [_vm._v("\n                        " + _vm._s(persondecreeBlock.optionstring2) + "\n                    ")])]) : _vm._e(), _vm._v(" "), _c('div', [_vm._v("\n                        С какого числа (оставить пустым, если совпадает с датой приказа)\n                    ")]), _vm._v(" "), _c('el-input', {
       staticClass: "eld-eld-body-row-short",
       attrs: {
         "type": "date"

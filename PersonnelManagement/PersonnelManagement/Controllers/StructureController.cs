@@ -41,6 +41,24 @@ namespace PersonnelManagement.Controllers
             return structureData;
         }
 
+        // GET: api/Structure/All
+        [HttpGet("All")]
+        public IEnumerable<Structure> GetAllStructure()
+        {
+            string sessionid = Request.Cookies[Keys.COOKIES_SESSION];
+            if (IdentityService.IsLogined(sessionid, repository))
+            {
+                User user = IdentityService.GetUserBySessionID(sessionid, repository);
+                bool hasAccess = IdentityService.CanReadCommonData(user);
+                if (hasAccess)
+                {
+                    return repository.Structures;
+                }
+            }
+            List<Structure> empty = new List<Structure>();
+            return empty;
+        }
+
         // GET: api/Structure/Featured
         [HttpGet("Featured")]
         public List<FeaturedStructure> GetFeaturedStructures()

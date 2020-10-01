@@ -74,6 +74,8 @@ export default class derceeoperationelement extends Vue {
     userSelected: User;
     usersearch: string;
 
+    rowcontextmenuVisible: boolean;
+
     data() {
         return {
             menuid: 0,
@@ -111,6 +113,8 @@ export default class derceeoperationelement extends Vue {
             usersSearch: [],
             userSelected: null,
             usersearch: "",
+
+            rowcontextmenuVisible: false,
         }
     }
 
@@ -152,6 +156,19 @@ export default class derceeoperationelement extends Vue {
         this.datefiltervariants += "]";
         //this.datefiltervariants.toString
         return outputlist;
+    }
+    rowContextmenu(row, column, event) {
+        this.rowcontextmenuVisible = false;
+        this.rowcontextmenuVisible = true;
+       /* 
+        event.preventDefault();
+        this.$nextTick(() => {
+            this.$refs.contextbutton.init(row, column, event);
+        })*/
+    }
+    foo() { // 取消鼠标监听事件 菜单栏
+        this.rowcontextmenuVisible = false;
+        document.removeEventListener('click', this.foo);
     }
 
     mounted() {
@@ -226,6 +243,7 @@ export default class derceeoperationelement extends Vue {
         }).then(x => {
             (<any>Vue).notify("S:Проект приказа создан");
         })
+        //this.viewpersondecrees.length
     }
 
     createMenuToggle() {

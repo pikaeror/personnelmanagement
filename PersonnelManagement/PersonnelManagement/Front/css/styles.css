@@ -74,11 +74,12 @@ body {
     
 }
 
-    .checkbox-big .el-checkbox__inner {
-        width: 30px;
-        height: 30px;
-        border: 1px solid black !important;
-    }
+
+.checkbox-big .el-checkbox__inner {
+    width: 30px;
+    height: 30px;
+    border: 1px solid black !important;
+}
 
 .checkbox-big .el-checkbox__inner::after{
     height: 15px;
@@ -3111,6 +3112,7 @@ eld-eld-body-row-flex-vertical{
     max-width: 800px;
     width: 800px;
 }
+
 
 .eld-eld-body-select-medium {
     max-width: 400px;

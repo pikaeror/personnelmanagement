@@ -180,6 +180,8 @@ export default class decreeoperationtemplatecreator extends Vue {
 
     data() {
         return {
+            input_decree: this.input_decree,
+
             focused: false,
 
             decreesActionsDisabled: false,
@@ -1928,5 +1930,17 @@ export default class decreeoperationtemplatecreator extends Vue {
                 persondecreeblock.samplePosition = data;
             })
         //persondecreeblock.samplePosition
+    }
+
+    getAppointtype(appointtype: number): string {
+        if (appointtype == null || appointtype == 0) {
+            return "";
+        }
+        let atype: Appointtype = this.appointtypes.find(at => at.id == appointtype);
+        if (atype != null) {
+            return atype.name;
+        } else {
+            return "";
+        }
     }
 }

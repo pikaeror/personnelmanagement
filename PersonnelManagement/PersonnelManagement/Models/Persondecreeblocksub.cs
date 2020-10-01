@@ -19,5 +19,7 @@ namespace PersonnelManagement.Models
         public string Subvaluestring1 { get; set; }
         public string Subvaluestring2 { get; set; }
         public int Parentpersondecreeblocksub { get; set; }
+        public DateTime? Subvaluedate1 { get; set; }
+        public DateTime? Subvaluedate2 { get; set; }
     }
 }

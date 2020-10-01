@@ -7,6 +7,7 @@ import Positiontype from './positiontype';
 import Structure from './structure';
 import Fire from './fire';
 import Countrycities from './countrycities';
+import Personjob from './personjob';
 
 export default class Persondecreeoperation {
     id: number;
@@ -78,12 +79,18 @@ export default class Persondecreeoperation {
     optionarray1Array: number[]; // массив айдишников number
     optionarraypersonArray: number[]; // массив айдишников person
     optionarraypersonObjects: Person[]; // массив person, заключенных в optionarrayperson 
+    personFromStructure: Person[];
+    checkboxdismiss: boolean;
+    checkboxdirect: boolean;
+    
+
 
     intronum: number = 0; // Записывается последовательно номер фабулы (1, 2 ...) для каждой первой операции в списке с одинаковой фабулой. 
     persondecreeblocksubtypenum: number = 0; // Аналогично верхнему.
     persondecreeoptionnumber1num: number = 0; // Аналогично верхнему
 
     status: number; // 1 - Добавить, 2 - удалить, 3 - обновить
+    personjob: Personjob;
     personobject: Person;
     personreward: Personreward;
     personpenalty: Personpenalty;

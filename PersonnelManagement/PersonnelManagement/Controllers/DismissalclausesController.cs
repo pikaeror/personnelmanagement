@@ -10,20 +10,18 @@ using PersonnelManagement.Services;
 namespace PersonnelManagement.Controllers
 {
     [Produces("application/json")]
-    [Route("api/Persondecreeblocktype")]
-    public class PersondecreeblocktypeController : Controller
+    [Route("api/Dismissalclauses")]
+    public class DismissalclausesController : ControllerBase
     {
-
         private Repository repository;
 
-
-        public PersondecreeblocktypeController(Repository repository)
+        public DismissalclausesController(Repository repository)
         {
             this.repository = repository;
         }
 
         [HttpGet()]
-        public IEnumerable<Persondecreeblocktype> GetData()
+        public IEnumerable<Dismissalclauses> GetData()
         {
             string sessionid = Request.Cookies[Keys.COOKIES_SESSION];
             if (IdentityService.IsLogined(sessionid, repository))
@@ -32,10 +30,11 @@ namespace PersonnelManagement.Controllers
                 bool hasAccess = IdentityService.CanReadCommonData(user);
                 if (hasAccess)
                 {
-                    return repository.Persondecreeblocktypes;
+                    IEnumerable<Dismissalclauses> areas = repository.Dismissalclauses;
+                    return areas;
                 }
             }
-            List<Persondecreeblocktype> empty = new List<Persondecreeblocktype>();
+            List<Dismissalclauses> empty = new List<Dismissalclauses>();
             return empty;
         }
     }

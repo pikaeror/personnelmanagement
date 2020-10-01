@@ -1121,6 +1121,9 @@ export default class SidebarComponent extends Vue {
             this.$store.commit("setModeselectstructure", false);
             return;
         }
+        if (this.$store.state.modeappointpersondecreeStructure) {
+            this.$store.commit("setModeappointedpersondecreeStructure", structure.id);
+        }
         //alert(id);
         //this.$store.commit("setDepartmentsListId", id);
         //this.$store.commit("setDepartmentsListTitle", name);

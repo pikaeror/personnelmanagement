@@ -438,5 +438,27 @@ namespace PersonnelManagement.Controllers
             //return new ObjectResult(Keys.ERROR_SHORT + ":Произошла какая-то оказия");
         }
 
+        // GET: api/Person/SearchForStructure id
+        /// <summary>
+        /// Поиск личных дел по номеру подразделения
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet("Structure/SearchFor/{id}")]
+        public IEnumerable<Person> SearchPersonForStructure([FromRoute] int id)
+        {
+            string sessionid = Request.Cookies[Keys.COOKIES_SESSION];
+            User user = null;
+            if (IdentityService.IsLogined(sessionid, repository))
+            {
+                user = IdentityService.GetUserBySessionID(sessionid, repository);
+                List<Person> persons = repository.GetPersonsForStructure(user, id, true);
+
+                return persons;
+            }
+            List<Person> empty = new List<Person>();
+            //return empty;
+            return empty;
+        }
     }
 }

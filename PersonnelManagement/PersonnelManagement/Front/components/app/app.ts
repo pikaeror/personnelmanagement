@@ -80,6 +80,7 @@ export default class AppComponent extends Vue {
         this.updateEducationstages();
         this.updateEducationpositiontypes();
         this.updateRoles();
+        this.updateDismissalclauses();
         
         setInterval(this.checkSidebar, 400);
         setInterval(this.updateUserRights, 1500);
@@ -528,6 +529,10 @@ export default class AppComponent extends Vue {
 
     updateFires() {
         this.$store.commit("updateFires");
+    }
+
+    updateDismissalclauses() {
+        this.$store.commit("updateDismissalclauses");
     }
 
     updateAppointtypes() {

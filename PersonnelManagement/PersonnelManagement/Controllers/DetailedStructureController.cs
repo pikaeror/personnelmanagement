@@ -453,12 +453,10 @@ namespace PersonnelManagement.Controllers
                     List<string> structures = repository.GetStructuresAllDocument(user);
                     return structures;
                 }
-
                 return new List<string>();
             }
             return new List<string>();
         }
-
 
         [HttpPost()]
         public IActionResult ManageStructure([FromBody]StructureManagement structureManagement)

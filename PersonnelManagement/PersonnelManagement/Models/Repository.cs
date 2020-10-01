@@ -88,6 +88,7 @@ namespace PersonnelManagement.Models
         public IQueryable<Sheetdata> Sheetdatas => context.Sheetdata;
         public IQueryable<Sheetpolitics> Sheetpolitics => context.Sheetpolitics;
         public IQueryable<Personpenalty> Personpenalties => context.Personpenalty;
+        public IQueryable<Dismissalclauses> Dismissalclauses => context.Dismissalclauses;
         public IQueryable<Personworktrip> Personworktrips => context.Personworktrip;
         public IQueryable<Penalty> Penalties => context.Penalty;
         public IQueryable<Country> Countries => context.Country;
@@ -15516,6 +15517,24 @@ namespace PersonnelManagement.Models
             return certificateManager;
         }
 
+        public List<Person> GetPersonsForStructure(User user, int id, bool excludeRemoved = true)
+        {
+            List<Person> persons = new List<Person>();
+            if (PersonsLocal() == null)
+            {
+                UpdatePersonsLocal();
+            }
+            // Меняем на StartsWith, чтобы в первую очередь искало по фамилиям, потом имени, а уже потом отчеству.
+            persons = PersonsLocal().Values.Where(p => p.Structure == id).ToList();
+            //persons.AddRange(PersonManager.PersonsToPersonManagers(this, user, PersonsLocal().Values.Where(p => (p.Surname + " " + p.Name + " " + p.Fathername).ToLower().Contains(fioPrepared)), fastSearch));
+
+            if (excludeRemoved)
+            {
+                persons = persons.Where(p => p.Removed == 0).ToList();
+            }
+            return persons;
+        }
+
         public IEnumerable<Persondecree> GetPersondecreesActiveOld(User user)
         {
             //return Decrees.Where(d => d.User.GetValueOrDefault() == user.Id).Where(d => d.Declined == 0).Where(d => d.Signed == 0);
@@ -16170,7 +16189,7 @@ namespace PersonnelManagement.Models
                     // предоставление дополнительного дня отдыха
                     else if (decreeoperation.Persondecreeblocksubtype == 12)
                     {
-
+                        
                     }
                 }
                 // Командировать
@@ -16184,6 +16203,22 @@ namespace PersonnelManagement.Models
                         //personworktrip.Tripdate =
                     }
                     
+                }
+                else if (decreeoperation.Persondecreeblocktype == 16)
+                {
+
+                }
+                else if (decreeoperation.Persondecreeblocktype == 17)
+                {
+
+                }
+                else if (decreeoperation.Persondecreeblocktype == 18)
+                {
+
+                }
+                else if (decreeoperation.Persondecreeblocktype == 19)
+                {
+
                 }
             }
             
@@ -16447,7 +16482,7 @@ namespace PersonnelManagement.Models
                 && (persondecreeoperation.Optionarrayperson == null || persondecreeoperation.Optionarrayperson.Length == 0)){
                 return null;
             }
-
+                 
             PersonManager personManager = null;
 
             Persondecreeoperation decreeoperation = new Persondecreeoperation();
@@ -16470,8 +16505,6 @@ namespace PersonnelManagement.Models
                 }
             }
 
-            
-            
             decreeoperation.Intro = persondecreeoperation.Intro;
             decreeoperation.Persondecreeblocksubtype = persondecreeoperation.Persondecreeblocksubtype; // Тип подблока, например 6 - "наградить грамотой"
             decreeoperation.Persondecreeblocktype = persondecreeoperation.Persondecreeblocktype;
@@ -16976,73 +17009,207 @@ namespace PersonnelManagement.Models
             // Установить
             if (persondecreeoperation.Persondecreeblocktype == 10)
             {
-                // Пытаемся найти, есть ли уже такой подпункт
-                //Persondecreeblocksub existingPersondecreeblocksub = persondecreeblocksubs.FirstOrDefault(p => p.Persondecreeblocksubtype == persondecreeoperation.Persondecreeblocksubtype);
-                Persondecreeblocksub existingPersondecreeblocksub = persondecreeblocksubs.FirstOrDefault(p => p.Persondecreeblocksubtype == persondecreeoperation.Persondecreeblocksubtype
-                         && p.Subvaluenumber1 == persondecreeoperation.Subvaluenumber1 && p.Subvaluenumber2 == persondecreeoperation.Subvaluenumber2
-                         && p.Subvaluestring1.Equals(persondecreeoperation.Subvaluestring1) && p.Subvaluestring2.Equals(persondecreeoperation.Subvaluestring2));
-                // Подпункт существует
-                if (existingPersondecreeblocksub != null)
+                if (persondecreeoperation.Optionnumber11 == 0)
                 {
-                    decreeoperation.Persondecreeblocksub = existingPersondecreeblocksub.Id;
+                    // Пытаемся найти, есть ли уже такой подпункт
+                    //Persondecreeblocksub existingPersondecreeblocksub = persondecreeblocksubs.FirstOrDefault(p => p.Persondecreeblocksubtype == persondecreeoperation.Persondecreeblocksubtype);
+                    Persondecreeblocksub existingPersondecreeblocksub = persondecreeblocksubs.FirstOrDefault(p => p.Subvaluestring1 == persondecreeoperation.Optionstring3);
+                    if (existingPersondecreeblocksub != null)
+                    {
+                        decreeoperation.Persondecreeblocksub = existingPersondecreeblocksub.Id;
+
+                        existingPersondecreeblocksub = persondecreeblocksubs.FirstOrDefault(p => p.Subvaluedate1 == persondecreeoperation.Optiondate1
+                             && p.Subvaluedate2 == persondecreeoperation.Optiondate2);
+                        if (existingPersondecreeblocksub != null)
+                        {
+                            decreeoperation.Persondecreeblocksub = existingPersondecreeblocksub.Id;
+
+                            existingPersondecreeblocksub = persondecreeblocksubs.FirstOrDefault(p => p.Subvaluenumber1 == persondecreeoperation.Optionnumber2 && p.Parentpersondecreeblocksub == decreeoperation.Persondecreeblocksub);
+                            if (existingPersondecreeblocksub != null)
+                            {
+                                decreeoperation.Persondecreeblocksub = existingPersondecreeblocksub.Id;
+                            }
+                            else
+                            {
+                                Persondecreeblocksub persondecreeblocksubsubsub = new Persondecreeblocksub();
+                                persondecreeblocksubsubsub.Persondecreeblock = persondecreeoperation.Persondecreeblock;
+                                persondecreeblocksubsubsub.Persondecreeblocksubtype = persondecreeoperation.Persondecreeblocksubtype;
+                                persondecreeblocksubsubsub.Subvaluenumber1 = persondecreeoperation.Optionnumber2;
+                                persondecreeblocksubsubsub.Subvaluenumber2 = persondecreeoperation.Subvaluenumber2;
+                                persondecreeblocksubsubsub.Subvaluestring1 = persondecreeoperation.Optionstring4;
+                                persondecreeblocksubsubsub.Subvaluestring2 = persondecreeoperation.Subvaluestring2;
+                                persondecreeblocksubsubsub.Parentpersondecreeblocksub = decreeoperation.Persondecreeblocksub;
+
+
+                                context.Persondecreeblocksub.Add(persondecreeblocksubsubsub);
+                                SaveChanges();
+                                decreeoperation.Persondecreeblocksub = persondecreeblocksubsubsub.Id;
+
+                            }
+                        }
+                        else
+                        {
+                            Persondecreeblocksub persondecreeblocksubsub = new Persondecreeblocksub();
+                            persondecreeblocksubsub.Persondecreeblock = persondecreeoperation.Persondecreeblock;
+                            persondecreeblocksubsub.Persondecreeblocksubtype = persondecreeoperation.Persondecreeblocksubtype;
+                            persondecreeblocksubsub.Subvaluenumber1 = persondecreeoperation.Subvaluenumber1;
+                            persondecreeblocksubsub.Subvaluenumber2 = persondecreeoperation.Subvaluenumber2;
+                            persondecreeblocksubsub.Subvaluedate1 = persondecreeoperation.Optiondate1;
+                            persondecreeblocksubsub.Subvaluedate2 = persondecreeoperation.Optiondate2;
+                            persondecreeblocksubsub.Parentpersondecreeblocksub = decreeoperation.Persondecreeblocksub;
+
+                            context.Persondecreeblocksub.Add(persondecreeblocksubsub);
+                            SaveChanges();
+                            decreeoperation.Persondecreeblocksub = persondecreeblocksubsub.Id;
+
+                            Persondecreeblocksub persondecreeblocksubsubsub = new Persondecreeblocksub();
+                            persondecreeblocksubsubsub.Persondecreeblock = persondecreeoperation.Persondecreeblock;
+                            persondecreeblocksubsubsub.Persondecreeblocksubtype = persondecreeoperation.Persondecreeblocksubtype;
+                            persondecreeblocksubsubsub.Subvaluenumber1 = persondecreeoperation.Optionnumber2;
+                            persondecreeblocksubsubsub.Subvaluenumber2 = persondecreeoperation.Subvaluenumber2;
+                            persondecreeblocksubsubsub.Subvaluestring1 = persondecreeoperation.Optionstring4;
+                            persondecreeblocksubsubsub.Subvaluestring2 = persondecreeoperation.Subvaluestring2;
+                            persondecreeblocksubsubsub.Parentpersondecreeblocksub = persondecreeblocksubsub.Id;
+
+                            context.Persondecreeblocksub.Add(persondecreeblocksubsubsub);
+                            SaveChanges();
+                            decreeoperation.Persondecreeblocksub = persondecreeblocksubsubsub.Id;
+
+                        }
+                    }
+                    else
+                    {
+                        Persondecreeblocksub persondecreeblocksub = new Persondecreeblocksub();
+                        persondecreeblocksub.Persondecreeblock = persondecreeoperation.Persondecreeblock;
+                        persondecreeblocksub.Persondecreeblocksubtype = persondecreeoperation.Persondecreeblocksubtype;
+                        persondecreeblocksub.Subvaluenumber1 = persondecreeoperation.Subvaluenumber1;
+                        persondecreeblocksub.Subvaluenumber2 = persondecreeoperation.Subvaluenumber2;
+                        persondecreeblocksub.Subvaluestring1 = persondecreeoperation.Optionstring3;
+                        persondecreeblocksub.Subvaluestring2 = persondecreeoperation.Subvaluestring2;
+
+                        context.Persondecreeblocksub.Add(persondecreeblocksub);
+                        SaveChanges();
+                        decreeoperation.Persondecreeblocksub = persondecreeblocksub.Id;
+
+                        Persondecreeblocksub persondecreeblocksubsub = new Persondecreeblocksub();
+                        persondecreeblocksubsub.Persondecreeblock = persondecreeoperation.Persondecreeblock;
+                        persondecreeblocksubsub.Persondecreeblocksubtype = persondecreeoperation.Persondecreeblocksubtype;
+                        persondecreeblocksubsub.Subvaluenumber1 = persondecreeoperation.Subvaluenumber1;
+                        persondecreeblocksubsub.Subvaluenumber2 = persondecreeoperation.Subvaluenumber2;
+                        persondecreeblocksubsub.Subvaluedate1 = persondecreeoperation.Optiondate1;
+                        persondecreeblocksubsub.Subvaluedate2 = persondecreeoperation.Optiondate2;
+                        persondecreeblocksubsub.Parentpersondecreeblocksub = persondecreeblocksub.Id;
+
+                        context.Persondecreeblocksub.Add(persondecreeblocksubsub);
+                        SaveChanges();
+                        decreeoperation.Persondecreeblocksub = persondecreeblocksubsub.Id;
+
+                        Persondecreeblocksub persondecreeblocksubsubsub = new Persondecreeblocksub();
+                        persondecreeblocksubsubsub.Persondecreeblock = persondecreeoperation.Persondecreeblock;
+                        persondecreeblocksubsubsub.Persondecreeblocksubtype = persondecreeoperation.Persondecreeblocksubtype;
+                        persondecreeblocksubsubsub.Subvaluenumber1 = persondecreeoperation.Optionnumber2;
+                        persondecreeblocksubsubsub.Subvaluenumber2 = persondecreeoperation.Subvaluenumber2;
+                        persondecreeblocksubsubsub.Subvaluestring1 = persondecreeoperation.Optionstring4;
+                        persondecreeblocksubsubsub.Subvaluestring2 = persondecreeoperation.Subvaluestring2;
+                        persondecreeblocksubsubsub.Parentpersondecreeblocksub = persondecreeblocksubsub.Id;
+
+                        context.Persondecreeblocksub.Add(persondecreeblocksubsubsub);
+                        SaveChanges();
+                        decreeoperation.Persondecreeblocksub = persondecreeblocksubsubsub.Id;
+
+                        // Фабул не было
+                        if (persondecreeblockintros.Count == 0)
+                        {
+                            // Подпунктов не было
+                            if (persondecreeblocksubs.Count() == 0)
+                            {
+                                persondecreeblocksub.Priority = 1;
+                                persondecreeblocksub.Index = 1;
+                            }
+                            else
+                            {
+                                int maxPriority = persondecreeblocksubs.Max(p => p.Priority) + 1;
+                                int maxIndex = persondecreeblocksubs.Max(p => p.Index) + 1;
+
+                                persondecreeblocksub.Priority = maxPriority;
+                                persondecreeblocksub.Index = maxIndex;
+                            }
+                        }
+                    }
                 }
                 else
                 {
-                    Persondecreeblocksub persondecreeblocksub = new Persondecreeblocksub();
-                    persondecreeblocksub.Persondecreeblock = persondecreeoperation.Persondecreeblock;
-                    persondecreeblocksub.Persondecreeblocksubtype = persondecreeoperation.Persondecreeblocksubtype;
-                    persondecreeblocksub.Subvaluenumber1 = persondecreeoperation.Subvaluenumber1;
-                    persondecreeblocksub.Subvaluenumber2 = persondecreeoperation.Subvaluenumber2;
-                    persondecreeblocksub.Subvaluestring1 = persondecreeoperation.Subvaluestring1;
-                    persondecreeblocksub.Subvaluestring2 = persondecreeoperation.Subvaluestring2;
-                    //persondecreeblocksub.Persondecreeblockintro = existingPersondecreeblockintro.Id; - фабулы нет
-
-                    // Фабул не было
-                    if (persondecreeblockintros.Count == 0)
+                    // Пытаемся найти, есть ли уже такой подпункт
+                    //Persondecreeblocksub existingPersondecreeblocksub = persondecreeblocksubs.FirstOrDefault(p => p.Persondecreeblocksubtype == persondecreeoperation.Persondecreeblocksubtype);
+                    Persondecreeblocksub existingPersondecreeblocksub = persondecreeblocksubs.FirstOrDefault(p => p.Persondecreeblocksubtype == persondecreeoperation.Persondecreeblocksubtype
+                             && p.Subvaluenumber1 == persondecreeoperation.Subvaluenumber1 && p.Subvaluenumber2 == persondecreeoperation.Subvaluenumber2
+                             && p.Subvaluestring1.Equals(persondecreeoperation.Subvaluestring1) && p.Subvaluestring2.Equals(persondecreeoperation.Subvaluestring2));
+                    // Подпункт существует
+                    if (existingPersondecreeblocksub != null)
                     {
-                        // Подпунктов не было
-                        if (persondecreeblocksubs.Count() == 0)
-                        {
-                            persondecreeblocksub.Priority = 1;
-                            persondecreeblocksub.Index = 1;
-                        }
-                        else
-                        {
-                            int maxPriority = persondecreeblocksubs.Max(p => p.Priority) + 1;
-                            int maxIndex = persondecreeblocksubs.Max(p => p.Index) + 1;
-
-                            persondecreeblocksub.Priority = maxPriority;
-                            persondecreeblocksub.Index = maxIndex;
-                        }
-
+                        decreeoperation.Persondecreeblocksub = existingPersondecreeblocksub.Id;
                     }
-                    // Были фабулы
                     else
                     {
+                        Persondecreeblocksub persondecreeblocksub = new Persondecreeblocksub();
+                        persondecreeblocksub.Persondecreeblock = persondecreeoperation.Persondecreeblock;
+                        persondecreeblocksub.Persondecreeblocksubtype = persondecreeoperation.Persondecreeblocksubtype;
+                        persondecreeblocksub.Subvaluenumber1 = persondecreeoperation.Subvaluenumber1;
+                        persondecreeblocksub.Subvaluenumber2 = persondecreeoperation.Subvaluenumber2;
+                        persondecreeblocksub.Subvaluestring1 = persondecreeoperation.Subvaluestring1;
+                        persondecreeblocksub.Subvaluestring2 = persondecreeoperation.Subvaluestring2;
+                        //persondecreeblocksub.Persondecreeblockintro = existingPersondecreeblockintro.Id; - фабулы нет
 
-                        if (persondecreeblocksubs.Count() == 0)
+                        // Фабул не было
+                        if (persondecreeblockintros.Count == 0)
                         {
-                            int maxPriority = persondecreeblockintros.Max(p => p.Priority) + 1;
-                            int maxIndex = persondecreeblockintros.Max(p => p.Index) + 1;
+                            // Подпунктов не было
+                            if (persondecreeblocksubs.Count() == 0)
+                            {
+                                persondecreeblocksub.Priority = 1;
+                                persondecreeblocksub.Index = 1;
+                            }
+                            else
+                            {
+                                int maxPriority = persondecreeblocksubs.Max(p => p.Priority) + 1;
+                                int maxIndex = persondecreeblocksubs.Max(p => p.Index) + 1;
 
-                            persondecreeblocksub.Priority = maxPriority;
-                            persondecreeblocksub.Index = maxIndex;
+                                persondecreeblocksub.Priority = maxPriority;
+                                persondecreeblocksub.Index = maxIndex;
+                            }
+
                         }
+                        // Были фабулы
                         else
                         {
-                            int maxPriority = persondecreeblocksubs.Max(p => p.Priority) + 1;
-                            int maxIndex = persondecreeblocksubs.Max(p => p.Index) + 1;
 
-                            persondecreeblocksub.Priority = maxPriority;
-                            persondecreeblocksub.Index = maxIndex;
+                            if (persondecreeblocksubs.Count() == 0)
+                            {
+                                int maxPriority = persondecreeblockintros.Max(p => p.Priority) + 1;
+                                int maxIndex = persondecreeblockintros.Max(p => p.Index) + 1;
+
+                                persondecreeblocksub.Priority = maxPriority;
+                                persondecreeblocksub.Index = maxIndex;
+                            }
+                            else
+                            {
+                                int maxPriority = persondecreeblocksubs.Max(p => p.Priority) + 1;
+                                int maxIndex = persondecreeblocksubs.Max(p => p.Index) + 1;
+
+                                persondecreeblocksub.Priority = maxPriority;
+                                persondecreeblocksub.Index = maxIndex;
+                            }
                         }
+                        context.Persondecreeblocksub.Add(persondecreeblocksub);
+                        SaveChanges();
+                        decreeoperation.Persondecreeblocksub = persondecreeblocksub.Id;
+                        existingPersondecreeblocksub = persondecreeblocksub; // Вписываем после создания
                     }
-                    context.Persondecreeblocksub.Add(persondecreeblocksub);
-                    SaveChanges();
-                    decreeoperation.Persondecreeblocksub = persondecreeblocksub.Id;
-                    existingPersondecreeblocksub = persondecreeblocksub; // Вписываем после создания
+
                 }
+
             }
+
 
             // Заключить контракты с
             if (persondecreeoperation.Persondecreeblocktype == 11)
@@ -17218,7 +17385,7 @@ namespace PersonnelManagement.Models
                 }
                 //decreeoperation.Subvaluestring1 = persondecreeoperation.Subvaluestring1;
                 //decreeoperation.Subvaluestring2 = persondecreeoperation.Subvaluestring2;
-
+                List<Persondecreeblocksub> t = persondecreeblocksubs.ToList();
                 // Пытаемся найти, есть ли уже такой подпункт
                 //Persondecreeblocksub existingPersondecreeblocksub = persondecreeblocksubs.FirstOrDefault(p => p.Persondecreeblocksubtype == persondecreeoperation.Persondecreeblocksubtype);
                 Persondecreeblocksub existingPersondecreeblocksub = persondecreeblocksubs.FirstOrDefault(p => p.Persondecreeblocksubtype == persondecreeoperation.Persondecreeblocksubtype
@@ -17355,6 +17522,288 @@ namespace PersonnelManagement.Models
                     SaveChanges();
                     decreeoperation.Persondecreeblocksub = persondecreeblocksub.Id;
                     existingPersondecreeblocksub = persondecreeblocksub; // Вписываем после создания
+                }
+            }
+
+            // Отчислить
+            if (persondecreeoperation.Persondecreeblocktype == 18)
+            {
+                switch(persondecreeoperation.Optionnumber11){
+                    case 1:
+                        {
+                            // Пытаемся найти, есть ли уже такой подпункт
+                            //Persondecreeblocksub existingPersondecreeblocksub = persondecreeblocksubs.FirstOrDefault(p => p.Persondecreeblocksubtype == persondecreeoperation.Persondecreeblocksubtype);
+                            Persondecreeblocksub existingPersondecreeblocksub = persondecreeblocksubs.FirstOrDefault(p => p.Persondecreeblocksubtype == persondecreeoperation.Persondecreeblocksubtype &&
+                            p.Subvaluenumber1 == persondecreeoperation.Optionnumber7);
+                            // Подпункт существует
+                            if (existingPersondecreeblocksub != null)
+                            {
+                                decreeoperation.Persondecreeblocksub = existingPersondecreeblocksub.Id;
+
+                                existingPersondecreeblocksub = persondecreeblocksubs.FirstOrDefault(p => p.Subvaluedate1 == persondecreeoperation.Optiondate1 &&
+                                p.Subvaluenumber1 == persondecreeoperation.Optionnumber8);
+                                if (existingPersondecreeblocksub != null)
+                                {
+                                    decreeoperation.Persondecreeblocksub = existingPersondecreeblocksub.Id;
+                                }
+                                else
+                                {
+                                    Persondecreeblocksub persondecreeblocksubsub = new Persondecreeblocksub();
+                                    persondecreeblocksubsub.Persondecreeblock = persondecreeoperation.Persondecreeblock;
+                                    persondecreeblocksubsub.Persondecreeblocksubtype = persondecreeoperation.Persondecreeblocksubtype;
+                                    persondecreeblocksubsub.Subvaluenumber1 = persondecreeoperation.Optionnumber8;
+                                    persondecreeblocksubsub.Subvaluenumber2 = persondecreeoperation.Subvaluenumber2;
+                                    persondecreeblocksubsub.Subvaluedate1 = persondecreeoperation.Optiondate1;
+                                    persondecreeblocksubsub.Parentpersondecreeblocksub = decreeoperation.Persondecreeblocksub;
+                                    //decreeoperation.personobject.personeducations.personeducationparts.educationperiod.course
+                                    context.Persondecreeblocksub.Add(persondecreeblocksubsub);
+                                    SaveChanges();
+                                    decreeoperation.Persondecreeblocksub = persondecreeblocksubsub.Id;
+                                }
+                            }
+                            else
+                            {
+                                Persondecreeblocksub persondecreeblocksub = new Persondecreeblocksub();
+                                persondecreeblocksub.Persondecreeblock = persondecreeoperation.Persondecreeblock;
+                                persondecreeblocksub.Persondecreeblocksubtype = persondecreeoperation.Persondecreeblocksubtype;
+                                persondecreeblocksub.Subvaluenumber1 = persondecreeoperation.Optionnumber7;
+                                persondecreeblocksub.Subvaluenumber2 = persondecreeoperation.Optionnumber3;
+                                persondecreeblocksub.Subvaluestring1 = persondecreeoperation.Subvaluestring1;
+                                persondecreeblocksub.Subvaluestring2 = persondecreeoperation.Subvaluestring2;
+                                persondecreeblocksub.Parentpersondecreeblocksub = persondecreeoperation.Persondecreeblock;
+
+
+                                context.Persondecreeblocksub.Add(persondecreeblocksub);
+                                SaveChanges();
+                                decreeoperation.Persondecreeblocksub = persondecreeblocksub.Id;
+
+                                Persondecreeblocksub persondecreeblocksubsub = new Persondecreeblocksub();
+                                persondecreeblocksubsub.Persondecreeblock = persondecreeoperation.Persondecreeblock;
+                                persondecreeblocksubsub.Persondecreeblocksubtype = persondecreeoperation.Persondecreeblocksubtype;
+                                persondecreeblocksubsub.Subvaluenumber1 = persondecreeoperation.Optionnumber8;
+                                persondecreeblocksubsub.Subvaluenumber2 = persondecreeoperation.Subvaluenumber2;
+                                persondecreeblocksubsub.Subvaluedate1 = persondecreeoperation.Optiondate1;
+                                persondecreeblocksubsub.Parentpersondecreeblocksub = persondecreeblocksub.Id;
+
+
+                                context.Persondecreeblocksub.Add(persondecreeblocksubsub);
+                                SaveChanges();
+                                decreeoperation.Persondecreeblocksub = persondecreeblocksubsub.Id;
+
+                                // Фабул не было
+                                if (persondecreeblockintros.Count == 0)
+                                {
+                                    // Подпунктов не было
+                                    if (persondecreeblocksubs.Count() == 0)
+                                    {
+                                        persondecreeblocksub.Priority = 1;
+                                        persondecreeblocksub.Index = 1;
+                                    }
+                                    else
+                                    {
+                                        int maxPriority = persondecreeblocksubs.Max(p => p.Priority) + 1;
+                                        int maxIndex = persondecreeblocksubs.Max(p => p.Index) + 1;
+
+                                        persondecreeblocksub.Priority = maxPriority;
+                                        persondecreeblocksub.Index = maxIndex;
+                                    }
+                                }
+                            }
+                            break;
+                        }
+                    case 2:
+                        {
+
+                            break;
+                        }
+                    default: 
+                        break;
+                }
+
+            }
+
+            if (persondecreeoperation.Persondecreeblocktype == 19)
+            {
+                // Пытаемся найти, есть ли уже такой подпункт
+                //Persondecreeblocksub existingPersondecreeblocksub = persondecreeblocksubs.FirstOrDefault(p => p.Persondecreeblocksubtype == persondecreeoperation.Persondecreeblocksubtype);
+                Persondecreeblocksub existingPersondecreeblocksub = persondecreeblocksubs.FirstOrDefault(p => p.Subvaluestring1 == persondecreeoperation.Optionstring1);
+                if (existingPersondecreeblocksub != null)
+                {
+                    decreeoperation.Persondecreeblocksub = existingPersondecreeblocksub.Id;
+
+                    existingPersondecreeblocksub = persondecreeblocksubs.FirstOrDefault(p => p.Subvaluedate1 == persondecreeoperation.Optiondate1);
+                    if (existingPersondecreeblocksub != null)
+                    {
+                        decreeoperation.Persondecreeblocksub = existingPersondecreeblocksub.Id;
+                    }
+                    else
+                    {
+                        Persondecreeblocksub persondecreeblocksubsub = new Persondecreeblocksub();
+                        persondecreeblocksubsub.Persondecreeblock = persondecreeoperation.Persondecreeblock;
+                        persondecreeblocksubsub.Subvaluedate1 = persondecreeoperation.Optiondate1;
+                        persondecreeblocksubsub.Parentpersondecreeblocksub = decreeoperation.Persondecreeblocksub;
+                        persondecreeblocksubsub.Subvaluestring1 = persondecreeoperation.Optionstring2;
+                        persondecreeblocksubsub.Parentpersondecreeblocksub = decreeoperation.Persondecreeblocksub;
+
+                        context.Persondecreeblocksub.Add(persondecreeblocksubsub);
+                        SaveChanges();
+                        decreeoperation.Persondecreeblocksub = persondecreeblocksubsub.Id;
+                    }
+                }
+                else
+                {
+                    Persondecreeblocksub persondecreeblocksub = new Persondecreeblocksub();
+                    persondecreeblocksub.Persondecreeblock = persondecreeoperation.Persondecreeblock;
+                    persondecreeblocksub.Persondecreeblocksubtype = persondecreeoperation.Persondecreeblocksubtype;
+                    persondecreeblocksub.Subvaluestring1 = persondecreeoperation.Optionstring1;
+                    persondecreeblocksub.Parentpersondecreeblocksub = decreeoperation.Persondecreeblocksub;
+
+                    context.Persondecreeblocksub.Add(persondecreeblocksub);
+                    SaveChanges();
+                    decreeoperation.Persondecreeblocksub = persondecreeblocksub.Id;
+
+                    Persondecreeblocksub persondecreeblocksubsub = new Persondecreeblocksub();
+                    persondecreeblocksubsub.Persondecreeblock = persondecreeoperation.Persondecreeblock;
+                    persondecreeblocksubsub.Persondecreeblocksubtype = persondecreeoperation.Persondecreeblocksubtype;
+                    persondecreeblocksubsub.Subvaluedate1 = persondecreeoperation.Optiondate1;
+                    persondecreeblocksubsub.Subvaluestring1 = persondecreeoperation.Optionstring2;
+                    persondecreeblocksubsub.Parentpersondecreeblocksub = persondecreeblocksub.Id;
+
+                    context.Persondecreeblocksub.Add(persondecreeblocksubsub);
+                    SaveChanges();
+                    decreeoperation.Persondecreeblocksub = persondecreeblocksubsub.Id;
+
+                    // Фабул не было
+                    if (persondecreeblockintros.Count == 0)
+                    {
+                        // Подпунктов не было
+                        if (persondecreeblocksubs.Count() == 0)
+                        {
+                            persondecreeblocksub.Priority = 1;
+                            persondecreeblocksub.Index = 1;
+                        }
+                        else
+                        {
+                            int maxPriority = persondecreeblocksubs.Max(p => p.Priority) + 1;
+                            int maxIndex = persondecreeblocksubs.Max(p => p.Index) + 1;
+
+                            persondecreeblocksub.Priority = maxPriority;
+                            persondecreeblocksub.Index = maxIndex;
+                        }
+                    }
+                }
+            }
+
+            if (persondecreeoperation.Persondecreeblocktype == 20)
+            {
+                // Пытаемся найти, есть ли уже такой подпункт
+                //Persondecreeblocksub existingPersondecreeblocksub = persondecreeblocksubs.FirstOrDefault(p => p.Persondecreeblocksubtype == persondecreeoperation.Persondecreeblocksubtype);
+                Persondecreeblocksub existingPersondecreeblocksub = persondecreeblocksubs.FirstOrDefault(p => p.Subvaluestring1 == persondecreeoperation.Optionstring1);
+                if (existingPersondecreeblocksub != null)
+                {
+                    decreeoperation.Persondecreeblocksub = existingPersondecreeblocksub.Id;
+
+                    existingPersondecreeblocksub = persondecreeblocksubs.FirstOrDefault(p => p.Subvaluenumber1 == persondecreeoperation.Optionnumber1 && p.Subvaluenumber2 == persondecreeoperation.Optionnumber2);
+                    if (existingPersondecreeblocksub != null)
+                    {
+                        decreeoperation.Persondecreeblocksub = existingPersondecreeblocksub.Id;
+                        
+                        existingPersondecreeblocksub = persondecreeblocksubs.FirstOrDefault(p => p.Subvaluedate1 == persondecreeoperation.Optiondate1);
+                        if (existingPersondecreeblocksub != null)
+                        {
+                            decreeoperation.Persondecreeblocksub = existingPersondecreeblocksub.Id;
+                        }
+                        else
+                        {
+                            Persondecreeblocksub persondecreeblocksubsubsub = new Persondecreeblocksub();
+                            persondecreeblocksubsubsub.Persondecreeblock = persondecreeoperation.Persondecreeblock;
+                            persondecreeblocksubsubsub.Persondecreeblocksubtype = persondecreeoperation.Persondecreeblocksubtype;
+                            persondecreeblocksubsubsub.Subvaluedate1 = persondecreeoperation.Optiondate1;
+                            persondecreeblocksubsubsub.Subvaluestring1 = persondecreeoperation.Optionstring2;
+                            persondecreeblocksubsubsub.Parentpersondecreeblocksub = decreeoperation.Persondecreeblocksub;
+
+
+                            context.Persondecreeblocksub.Add(persondecreeblocksubsubsub);
+                            SaveChanges();
+                            decreeoperation.Persondecreeblocksub = persondecreeblocksubsubsub.Id;
+
+                        }
+                    }
+                    else
+                    {
+                        Persondecreeblocksub persondecreeblocksubsub = new Persondecreeblocksub();
+                        persondecreeblocksubsub.Persondecreeblock = persondecreeoperation.Persondecreeblock;
+                        persondecreeblocksubsub.Subvaluenumber1 = persondecreeoperation.Optionnumber1;
+                        persondecreeblocksubsub.Subvaluenumber1 = persondecreeoperation.Optionnumber2;
+                        persondecreeblocksubsub.Parentpersondecreeblocksub = decreeoperation.Persondecreeblocksub;
+
+                        context.Persondecreeblocksub.Add(persondecreeblocksubsub);
+                        SaveChanges();
+                        decreeoperation.Persondecreeblocksub = persondecreeblocksubsub.Id;
+
+                        Persondecreeblocksub persondecreeblocksubsubsub = new Persondecreeblocksub();
+                        persondecreeblocksubsubsub.Persondecreeblock = persondecreeoperation.Persondecreeblock;
+                        persondecreeblocksubsubsub.Persondecreeblocksubtype = persondecreeoperation.Persondecreeblocksubtype;
+                        persondecreeblocksubsubsub.Subvaluedate1 = persondecreeoperation.Optiondate1;
+                        persondecreeblocksubsubsub.Subvaluestring1 = persondecreeoperation.Optionstring2;
+                        persondecreeblocksubsubsub.Parentpersondecreeblocksub = persondecreeblocksubsub.Id;
+
+                        context.Persondecreeblocksub.Add(persondecreeblocksubsubsub);
+                        SaveChanges();
+                        decreeoperation.Persondecreeblocksub = persondecreeblocksubsubsub.Id;
+                    }
+                }
+                else
+                {
+                    Persondecreeblocksub persondecreeblocksub = new Persondecreeblocksub();
+                    persondecreeblocksub.Persondecreeblock = persondecreeoperation.Persondecreeblock;
+                    persondecreeblocksub.Persondecreeblocksubtype = persondecreeoperation.Persondecreeblocksubtype;
+                    persondecreeblocksub.Subvaluestring1 = persondecreeoperation.Optionstring1;
+
+                    context.Persondecreeblocksub.Add(persondecreeblocksub);
+                    SaveChanges();
+                    decreeoperation.Persondecreeblocksub = persondecreeblocksub.Id;
+
+                    Persondecreeblocksub persondecreeblocksubsub = new Persondecreeblocksub();
+                    persondecreeblocksubsub.Persondecreeblock = persondecreeoperation.Persondecreeblock;
+                    persondecreeblocksubsub.Persondecreeblocksubtype = persondecreeoperation.Persondecreeblocksubtype;
+                    persondecreeblocksubsub.Subvaluenumber1 = persondecreeoperation.Optionnumber1;
+                    persondecreeblocksubsub.Subvaluenumber2 = persondecreeoperation.Optionnumber2;
+                    persondecreeblocksubsub.Parentpersondecreeblocksub = persondecreeblocksub.Id;
+
+                    context.Persondecreeblocksub.Add(persondecreeblocksubsub);
+                    SaveChanges();
+                    decreeoperation.Persondecreeblocksub = persondecreeblocksubsub.Id;
+
+                    Persondecreeblocksub persondecreeblocksubsubsub = new Persondecreeblocksub();
+                    persondecreeblocksubsubsub.Persondecreeblock = persondecreeoperation.Persondecreeblock;
+                    persondecreeblocksubsubsub.Persondecreeblocksubtype = persondecreeoperation.Persondecreeblocksubtype;
+                    persondecreeblocksubsubsub.Subvaluedate1 = persondecreeoperation.Optiondate1;
+                    persondecreeblocksubsubsub.Subvaluestring1 = persondecreeoperation.Optionstring2;
+                    persondecreeblocksubsubsub.Parentpersondecreeblocksub = persondecreeblocksubsub.Id;
+
+                    context.Persondecreeblocksub.Add(persondecreeblocksubsubsub);
+                    SaveChanges();
+                    decreeoperation.Persondecreeblocksub = persondecreeblocksubsubsub.Id;
+
+                    // Фабул не было
+                    if (persondecreeblockintros.Count == 0)
+                    {
+                        // Подпунктов не было
+                        if (persondecreeblocksubs.Count() == 0)
+                        {
+                            persondecreeblocksub.Priority = 1;
+                            persondecreeblocksub.Index = 1;
+                        }
+                        else
+                        {
+                            int maxPriority = persondecreeblocksubs.Max(p => p.Priority) + 1;
+                            int maxIndex = persondecreeblocksubs.Max(p => p.Index) + 1;
+
+                            persondecreeblocksub.Priority = maxPriority;
+                            persondecreeblocksub.Index = maxIndex;
+                        }
+                    }
                 }
             }
 

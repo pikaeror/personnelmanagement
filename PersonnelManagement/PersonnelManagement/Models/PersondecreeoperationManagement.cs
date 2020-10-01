@@ -18,6 +18,7 @@ namespace PersonnelManagement.Models
         public Positiontype Positiontypeobject { get; set; }
         public Structure Structureobject { get; set; }
         public Fire Fireobject { get; set; }
+        public List<Person> personFromStructure { get; set; }
         public List<PersonManager> OptionarraypersonObjects { get; set; } = new List<PersonManager>(); // ЭЛД, сгрупированные в дополнении к этой операции. 
                                                                         // Единственная группировка на данный момент - командировка нескольких людей в одно место назначения
 

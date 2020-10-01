@@ -25,14 +25,14 @@
                 <div v-bind:class="{'eld-eld-side-element-selected': menuid == 6}" class="eld-eld-side-element" style="background-color: lightgray;" @click="setMenuid(6)">Архив</div>
                 <div class="eld-eld-side-element"></div>
                 <div class="eld-eld-side-element" style="background-color: darkgray;"><strong>Приказы</strong></div>
-                <div v-bind:class="{'eld-eld-side-element-selected': menuid == 14}" class="eld-eld-side-element" style="background-color: darkgray;" @click="setMenuid(7)">В работе</div>
-                <div v-bind:class="{'eld-eld-side-element-selected': menuid == 9}" class="eld-eld-side-element" style="background-color: darkgray;" @click="setMenuid(8)">Мои подписанные приказы</div>
-                <div v-bind:class="{'eld-eld-side-element-selected': menuid == 10}" class="eld-eld-side-element" style="background-color: darkgray;" @click="setMenuid(9)">Все подписанные приказы</div>
-                <div v-bind:class="{'eld-eld-side-element-selected': menuid == 11}" class="eld-eld-side-element" style="background-color: darkgray;" @click="setMenuid(10)">Выписки</div>
-                <template slot-scope="scope">
+                <div v-bind:class="{'eld-eld-side-element-selected': menuid == 7}" class="eld-eld-side-element" style="background-color: darkgray;" @click="setMenuid(7)">В работе</div>
+                <div v-bind:class="{'eld-eld-side-element-selected': menuid == 8}" class="eld-eld-side-element" style="background-color: darkgray;" @click="setMenuid(8)">Мои подписанные приказы</div>
+                <div v-bind:class="{'eld-eld-side-element-selected': menuid == 9}" class="eld-eld-side-element" style="background-color: darkgray;" @click="setMenuid(9)">Все подписанные приказы</div>
+                <div v-bind:class="{'eld-eld-side-element-selected': menuid == 10}" class="eld-eld-side-element" style="background-color: darkgray;" @click="setMenuid(10)">Выписки</div>
+                <!--<template slot-scope="scope">
                     <el-button type="default" @click="handleSaveRow">Save</el-button>
                     <el-button type="primary" @click="handleEditRow">Edit</el-button>
-                </template>
+                </template>-->
             </div>
             <div class="eld-eld-main">
                 <!--Шапка главного меню-->
@@ -46,28 +46,37 @@
                     </div>
                 </div>
                 <div visible="update"></div>
-                <!--property="marked"  @selection-change="handleSelectionChange"-->
-                <template v-if="viewpersondecrees.length > 0">
-                    <el-table ref="multipleTable" :data="viewpersondecrees" style="width: 100%" border :row-class-name="tableRowClassName" @selection-change="handleSelectionChange" @row-dblclick="rowClicked">
-                        <el-table-column type="selection" width="55">
-                        </el-table-column>
-                        <el-table-column property="getDate" label="ДАТА" sortable width="110" :filters="datefiltervariants" :filter-method="filterHandler">
-                        </el-table-column>
-                        <el-table-column property="getNumber" label="№" sortable width="80">
-                        </el-table-column>
-                        <el-table-column property="getName" label="Название" width="450">
-                        </el-table-column>
-                        <el-table-column property="getPlace" label="Подразделение" width="550">
-                        </el-table-column>
-                        <el-table-column property="getFIO" label="ФИО работника" width="200">
-                        </el-table-column>
-                        <!--<el-table-column label="Действия">
-                            <template slot-scope="scope">
-                                <el-button type="default" @click="handleSaveRow(scope.$index)">Save</el-button>
-                                <el-button type="primary" @click="handleEditRow(scope.$index)">Edit</el-button>
-                            </template>
-                        </el-table-column>-->
-                    </el-table>
+                <!--property="marked"  @selection-change="handleSelectionChange"   :filters="datefiltervariants"  -->
+                <template>
+                    <div v-if="viewpersondecrees.length > 0">
+                        <el-table ref="multipleTable" :data="viewpersondecrees" style="width: 99%" height="100%" border :row-class-name="tableRowClassName" @selection-change="handleSelectionChange" @row-dblclick="rowClicked" @row-contextmenu="rowContextmenu">
+                            <el-table-column type="selection" width="55">
+                            </el-table-column>
+                            <el-table-column property="getDate" label="ДАТА" sortable width="110" :filter-method="filterHandler">
+                            </el-table-column>
+                            <el-table-column property="getNumber" label="№" sortable width="80">
+                            </el-table-column>
+                            <el-table-column property="getName" label="Название" width="450">
+                            </el-table-column>
+                            <el-table-column property="getPlace" label="Подразделение" width="550">
+                            </el-table-column>
+                            <el-table-column property="getFIO" label="ФИО работника" width="200">
+                            </el-table-column>
+                            <el-table-column type="expand">
+                                <template slot-scope="props">
+                                    <p>State: </p>
+                                    <p>City: </p>
+                                    <p>Address: </p>
+                                    <p>Zip: </p>
+                                    <el-button type="default" @click="handleSaveRow(scope.$index)">Save</el-button>
+                                </template>
+                            </el-table-column>
+                        </el-table>
+                        <context-button v-if="rowcontextmenuVisible" @foo="foo" ref="contextbutton">123</context-button>
+                    </div>
+                    <div v-else class="eld-title">
+                        Папка пуста.
+                    </div>
                 </template>
 
             </div>

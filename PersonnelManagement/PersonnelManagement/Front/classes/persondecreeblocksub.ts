@@ -16,7 +16,12 @@ export default class Persondecreeblocksub {
     subvaluenumber2: number;
     subvaluestring1: string;
     subvaluestring2: string;
-
+    subvaluestring3: string;
+    parentpersondecreeblocksub: number;
+    
+    subvaluedate1: Date;
+    subvaluedate2: Date;
+    
     status: number; // 1 - Добавить.
 
 

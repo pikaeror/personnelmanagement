@@ -7957,6 +7957,4 @@ export default class EldComponent extends Vue {
             return personjob.jobpositionplace
         }
     }
-
-    
 }

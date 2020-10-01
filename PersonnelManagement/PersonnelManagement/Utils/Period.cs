@@ -228,7 +228,7 @@ namespace PersonnelManagement.Utils
         /// <returns></returns>
         public static int YearDiff(DateTime start, DateTime end)
         {
-            DateDiff dateDiff = new DateDiff(start.AddDays(-1), end);
+            DateDiff dateDiff = new DateDiff(start, end.AddDays(1));
             return dateDiff.ElapsedYears;
         }
 
@@ -240,7 +240,7 @@ namespace PersonnelManagement.Utils
         /// <returns></returns>
         public static int MonthDiff(DateTime start, DateTime end)
         {
-            DateDiff dateDiff = new DateDiff(start.AddDays(-1), end);
+            DateDiff dateDiff = new DateDiff(start, end.AddDays(1));
             return dateDiff.ElapsedMonths;
         }
 
@@ -252,7 +252,7 @@ namespace PersonnelManagement.Utils
         /// <returns></returns>
         public static int DayDiff(DateTime start, DateTime end)
         {
-            DateDiff dateDiff = new DateDiff(start.AddDays(-1), end);
+            DateDiff dateDiff = new DateDiff(start, end.AddDays(1));
             return dateDiff.ElapsedDays;
         }
     }

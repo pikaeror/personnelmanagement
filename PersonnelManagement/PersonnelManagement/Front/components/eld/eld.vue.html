@@ -19,7 +19,6 @@
                             </el-select>
                             <el-button type="success" @click="createPersonNew()">Создать</el-button>
                         </div>
-                        
                     </div>
                 </div>
                 <div class="eld-search">
@@ -31,10 +30,7 @@
                         <el-input placeholder="Фамилия Имя Отчество" class="eld-search-input" v-model="fiosearch" @keyup.enter.native="searchPersons(fiosearch)"></el-input>
                         <el-button @click="searchPersons(fiosearch)" type="primary">Поиск</el-button>
                     </div>
-                    
                 </div>
-
-
             </div>
         </div>
 
@@ -61,9 +57,7 @@
                     <!--<div>
                         {{person.structurename}}
                     </div>-->
-
                 </div>
-
                 <div>
                     <el-button v-if="isAppointButtonActive(person)" @click="appointPerson(person)">Назначить</el-button>
                 </div>
@@ -71,9 +65,7 @@
             <div class="eld-search-element-button">
                 <el-button type="warning" plain @click="closeSearch()">Закрыть</el-button>
             </div>
-            
         </div>
-
         <!--Здесь отображается ЭЛД, которое можно редактировать-->
         <div v-if="person != null" class="eld-eld">
             <!--Здесь боковая панель-->
@@ -1742,6 +1734,7 @@
                                     <el-input v-model="personeducationQualification" type="textarea" :rows="3"></el-input>
                                 </div>
                             </div>
+                            
 
 
                             <div class="eld-eld-body-row-flex" style="margin-top: 10px;">
@@ -2114,6 +2107,14 @@
                                 </div>
                             </div>
 
+                            <div class="eld-eld-body-row-flex">
+                                <div>
+                                    <el-button @click="selectPosition()" type="primary" plain>Выбрать должность из орг-штатной структуры</el-button>
+                                </div>
+                            </div>
+
+                            
+                                
                             <div class="eld-eld-body-row-flex">
                                 <div>
                                     <div style="margin-top: 20px;">
@@ -2755,14 +2756,6 @@
                                             Место службы <br />
                                             <el-autocomplete v-model="personjobServicetypestr" class="eld-eld-body-row-medium" :fetch-suggestions="servicetypeSearch"></el-autocomplete>
                                         </div>
-                                        <!--<div v-if="personjobJobtype != null && personjobJobtype == 2" class="eld-eld-body-row-medium">
-                                            Вид службы
-                                            <el-select clearable placeholder="Вид службы" v-model="personjobServicetype" class="eld-eld-body-select-medium">
-                                                <el-option v-for="servicetype in servicetypes"
-                                                           :key="servicetype.id" :label="servicetype.name" :value="servicetype.id">
-                                                </el-option>
-                                            </el-select>
-                                        </div>-->
                                     </div>
                                          <div>
                                                 <div>
@@ -2782,10 +2775,6 @@
                                                     </div>
                                             </div>
                                             <div>
-                                                
-                                                <!--<div>
-                    <el-checkbox v-model="personjobMchs">В МЧС</el-checkbox>
-                </div>-->
                                             </div>
                                         </div>
                                 </div>

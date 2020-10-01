@@ -1241,6 +1241,10 @@ namespace PersonnelManagement.Models
                 entity.Property(e => e.Titleofarticles)
                     .HasColumnName("titleofarticles")
                     .HasMaxLength(350);
+
+                entity.Property(e => e.Type)
+                    .HasColumnName("type")
+                    .HasColumnType("int(11)");
             });
 
             modelBuilder.Entity<Drivercategory>(entity =>
@@ -2988,6 +2992,14 @@ namespace PersonnelManagement.Models
                     .HasColumnName("priority")
                     .HasColumnType("int(11)")
                     .HasDefaultValueSql("'0'");
+
+                entity.Property(e => e.Subvaluedate1)
+                    .HasColumnName("subvaluedate1")
+                    .HasColumnType("datetime");
+
+                entity.Property(e => e.Subvaluedate2)
+                    .HasColumnName("subvaluedate2")
+                    .HasColumnType("datetime");
 
                 entity.Property(e => e.Subvaluenumber1)
                     .HasColumnName("subvaluenumber1")

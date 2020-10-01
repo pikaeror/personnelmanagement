@@ -88,6 +88,7 @@ import Countycities from '../../classes/countrycities'
 import Countrycities from '../../classes/countrycities';
 import Ordernumbertype from '../../classes/ordernumbertype';
 import Link from '../../classes/link';
+import Dismissalclauses from '../../classes/dismissalclauses';
 
 Vue.component(Button.name, Button);
 Vue.component(Input.name, Input);
@@ -125,6 +126,7 @@ export default class TopmenuComponent extends Vue {
     featured: FeaturedStructure[];
     addStructureAvailable: boolean;
 
+    num: number;
     structureeditorAccess: string;
     removeStructureAvailable: boolean;
     removeStructure: string;
@@ -159,6 +161,7 @@ export default class TopmenuComponent extends Vue {
     decreeFilterDateactiveEnd: string;
     decreeFilterDatesignedStart: string;
     decreeFilterDatesignedEnd: string;
+
     decreesSignedList: Decreemanagement[];
     decreeSignedOperations: Decreeoperation[];
     modalDecreeMenuSignedVisible: boolean;
@@ -177,12 +180,14 @@ export default class TopmenuComponent extends Vue {
     persondecreeDatecreated: string;
     persondecreeDatesigned: string;
     persondecreeCreatorObject: User;
+    personFromStructure: Person[];
     persondecreeBlocks: Persondecreeblock[];
     persondecreesNewblock: number;
     persondecreeBlocksubs: Persondecreeblocksub[];
     persondecreesNewblocksub: number;
     persondecreesActionmenu: boolean;
 
+    numberStructure: number;
     fiosearch: string;
     person: Person;
     personssearch: Person[];
@@ -207,6 +212,7 @@ export default class TopmenuComponent extends Vue {
     structuresReward: Structure[];
     structuresRewardAllowedToSelect: Structure[];
     structuresElders: Structure[];
+    persondecreeblocksubsMass: number[];
 
     personvacationHolidays: number;
     //rewardmoneys: Rewardmoney[];
@@ -252,6 +258,7 @@ export default class TopmenuComponent extends Vue {
 
             decreesActionsDisabled: false,
 
+            num: 0,
             modalDecreesSignedMenuVisible: false,
             decreeFilterNumber: "",
             decreeFilterNickname: "",
@@ -260,6 +267,7 @@ export default class TopmenuComponent extends Vue {
             decreeFilterDateactiveEnd: "",
             decreeFilterDatesignedStart: "",
             decreeFilterDatesignedEnd: "",
+            personFromStructure: [],
             decreesSignedList: [],
             decreeSignedOperations: [],
             modalDecreeMenuSignedVisible: false,
@@ -397,6 +405,10 @@ export default class TopmenuComponent extends Vue {
 
     get penalties(): Penalty[] {
         return this.$store.state.penalties;
+    }
+
+    get dismissalclauses(): Dismissalclauses[] {
+        return this.$store.state.dismissalclauses;
     }
 
     get countries(): Country[] {
@@ -1154,7 +1166,7 @@ export default class TopmenuComponent extends Vue {
     }
 
     get displaySelectmodewarning(): boolean {
-        return (this.$store.state.modeselectcuration || this.$store.state.modeselectheading || this.$store.state.modeselectstructure || this.$store.state.modeappointpersondecree || this.$store.state.modeappointpersonstructuredecree);
+        return (this.$store.state.modeselectcuration || this.$store.state.modeselectheading || this.$store.state.modeselectstructure || this.$store.state.modeappointpersondecree || this.$store.state.modeappointpersonstructuredecree || this.$store.state.modeappointpersondecreeStructure);
     }
 
     get displayAppointpersonmodewarning(): boolean {
@@ -1254,6 +1266,19 @@ export default class TopmenuComponent extends Vue {
             return false;
         }
         //if (this.$store.state.)
+    }
+
+    successmode() {
+        if(this.num == 1){
+            this.numberStructure = this.$store.state.modeappointedpersondecreeStructure;
+        }else
+        this.searchForStructure(this.$store.state.modeappointedpersondecreeStructure, this.currentPersondecreeblock);
+        this.$store.commit("setModeappointedpersondecreeStructure", 0);
+        this.$store.commit("setModeappointpersondecreeStructure", false);
+        this.modalPersondecreeMenuVisible = true;
+        this.modalPersondecreesMenuVisible = true;
+        this.num = 0;
+        return;
     }
 
     structureModeAccess(): boolean {
@@ -2335,10 +2360,12 @@ export default class TopmenuComponent extends Vue {
                 if (person != null) {
                     this.prepareToImport(person);
                     block.person = person;
+                    this.personFromStructure = [];
+                    this.personFromStructure.push(block.person);
 
                     block.personssearch = [];
                     block.fiosearch = "";
-                    block.nonperson = ""; // Если был человек не из МЧС, убираем.
+                    block.nonperson = ""; // Если был чiеловек не из МЧС, убираем.
 
                     // Если присвоить
                     if (block.persondecreeblocktype == 14) {
@@ -2348,7 +2375,7 @@ export default class TopmenuComponent extends Vue {
                     // Если предоставить (отпуск)
                     if (block.persondecreeblocktype == 15) {
                         this.persondecreeblocksubChange(block);
-                        this.jobperiodvacationinitializeAll(block);
+                     //   this.jobperiodvacationinitialzeAll(block);
                     }
 
                     //this.addPersonblockelement(block); - отрубаем автоматическое дополнение. Но тогда для добавления отдельно должна быть кнопка.
@@ -2395,8 +2422,7 @@ export default class TopmenuComponent extends Vue {
     }
 
     multipersonRemove(person: Person, block: Persondecreeblock) {
-        block.optionarraypersonArray = block.optionarraypersonArray.filter(p => p != person.id);
-        block.optionarraypersonObjects = block.optionarraypersonObjects.filter(p => p.id != person.id);
+        this.personFromStructure.splice(this.personFromStructure.indexOf(person), 1);
     }
 
     multicountryAddAdditional(block: Persondecreeblock) {
@@ -2405,7 +2431,6 @@ export default class TopmenuComponent extends Vue {
 
     addPersonblockelement(persondecreeblock: Persondecreeblock) {
         //this.addPersonreward(persondecreeblock);
-
         // Поощрить
         if (persondecreeblock.persondecreeblocktype == 1) {
             // Премировать деньгами в размере
@@ -2416,6 +2441,13 @@ export default class TopmenuComponent extends Vue {
                     persondecreeblock.optionnumber2 = 0;
                 }
             } 
+        }
+        // Установить
+        if (persondecreeblock.persondecreeblocktype == 10){
+            if (persondecreeblock.persondecreeblocksub == 5){
+                persondecreeblock.optionnumber11 = 0;
+            } else
+            persondecreeblock.optionnumber11 = 1;
         }
         // Предоставить
         if (persondecreeblock.persondecreeblocktype == 15) {
@@ -2430,54 +2462,84 @@ export default class TopmenuComponent extends Vue {
         if (persondecreeblock.persondecreeblocktype == 15) {
             persondecreeblock.optionstring6 = Countrycities.countrycitiesListToString(persondecreeblock.countrycitiesList);
         }
+
+        // Зачислить
+        if (persondecreeblock.persondecreeblocktype == 17) {
+            persondecreeblock.optionnumber1 = this.numberStructure;
+        }
+        
+        if(persondecreeblock.persondecreeblocktype == 18){
+            if(persondecreeblock.checkboxdirect)
+            persondecreeblock.optionnumber8 = 1;
+            else
+            persondecreeblock.optionnumber8 = 0;
+
+            if(persondecreeblock.checkboxdismiss)
+            persondecreeblock.optionnumber7 = 1;
+            else
+            persondecreeblock.optionnumber7 = 0;
+
+            persondecreeblock.optionnumber11 = 1;
+            
+        }
+        // Увеличить
+        if (persondecreeblock.persondecreeblocktype == 19){
+            persondecreeblock.persondecreeblocksubtype = 1;
+            persondecreeblock.optionnumber11 = 1;
+        }
+
+        let t: any = <Persondecreeoperation>{
+            person: personid,
+            persondecree: this.persondecreeId,
+            status: 1, // Создание
+            personreward: persondecreeblock.samplePersonreward,
+            intro: persondecreeblock.intro,
+            optionnumber1: this.prepareNumToExport(persondecreeblock.optionnumber1),
+            optionnumber2: this.prepareNumToExport(persondecreeblock.optionnumber2),
+            optionnumber3: this.prepareNumToExport(persondecreeblock.optionnumber3),
+            optionnumber4: this.prepareNumToExport(persondecreeblock.optionnumber4),
+            optionnumber5: this.prepareNumToExport(persondecreeblock.optionnumber5),
+            optionnumber6: this.prepareNumToExport(persondecreeblock.optionnumber6),
+            optionnumber7: this.prepareNumToExport(persondecreeblock.optionnumber7),
+            optionnumber8: this.prepareNumToExport(persondecreeblock.optionnumber8),
+            optionnumber9: this.prepareNumToExport(persondecreeblock.optionnumber9),
+            optionnumber10: this.prepareNumToExport(persondecreeblock.optionnumber10),
+            optionnumber11: this.prepareNumToExport(persondecreeblock.optionnumber11),
+            optionstring1: persondecreeblock.optionstring1,
+            optionstring2: persondecreeblock.optionstring2,
+            optionstring3: persondecreeblock.optionstring3,
+            optionstring4: persondecreeblock.optionstring4,
+            optionstring5: persondecreeblock.optionstring5,
+            optionstring6: persondecreeblock.optionstring6,
+            optionstring7: persondecreeblock.optionstring7,
+            optionstring8: persondecreeblock.optionstring8,
+            optiondate1: this.prepareDateToExportNullable(persondecreeblock.optiondate1String),
+            optiondate2: this.prepareDateToExportNullable(persondecreeblock.optiondate2String),
+            optiondate3: this.prepareDateToExportNullable(persondecreeblock.optiondate3String),
+            optiondate4: this.prepareDateToExportNullable(persondecreeblock.optiondate4String),
+            optiondate5: this.prepareDateToExportNullable(persondecreeblock.optiondate5String),
+            optiondate6: this.prepareDateToExportNullable(persondecreeblock.optiondate6String),
+            optiondate7: this.prepareDateToExportNullable(persondecreeblock.optiondate7String),
+            optiondate8: this.prepareDateToExportNullable(persondecreeblock.optiondate8String),
+            subvaluenumber1: this.prepareNumToExport(persondecreeblock.subvaluenumber1),
+            subvaluenumber2: this.prepareNumToExport(persondecreeblock.subvaluenumber2),
+            subvaluestring1: persondecreeblock.subvaluestring1,
+            subvaluestring2: persondecreeblock.subvaluestring2,
+            nonperson: persondecreeblock.nonperson,
+            optionarray1: this.prepareArrayNumberToExportNullable(persondecreeblock.optionarray1Array),
+            optionarrayperson: this.prepareArrayNumberToExportNullable(persondecreeblock.optionarraypersonArray),
+
+            //subjecttype: 1, // Награды - устарело
+            persondecreeblock: this.prepareNumToExport(persondecreeblock.id),
+            persondecreeblocktype: this.prepareNumToExport(persondecreeblock.persondecreeblocktype),
+            persondecreeblocksubtype: this.prepareNumToExport(persondecreeblock.persondecreeblocksub), // тип поощрения. У нас будет только вид, потому что единовременно может быть только один вид поощрения
+
+            personFromStructure: this.personFromStructure,
+        };
+
         fetch('/api/Persondecreeoperation', {
             method: 'post',
-            body: JSON.stringify(<Persondecreeoperation>{
-                person: personid,
-                persondecree: this.persondecreeId,
-                status: 1, // Создание
-                personreward: persondecreeblock.samplePersonreward,
-                intro: persondecreeblock.intro,
-                optionnumber1: this.prepareNumToExport(persondecreeblock.optionnumber1),
-                optionnumber2: this.prepareNumToExport(persondecreeblock.optionnumber2),
-                optionnumber3: this.prepareNumToExport(persondecreeblock.optionnumber3),
-                optionnumber4: this.prepareNumToExport(persondecreeblock.optionnumber4),
-                optionnumber5: this.prepareNumToExport(persondecreeblock.optionnumber5),
-                optionnumber6: this.prepareNumToExport(persondecreeblock.optionnumber6),
-                optionnumber7: this.prepareNumToExport(persondecreeblock.optionnumber7),
-                optionnumber8: this.prepareNumToExport(persondecreeblock.optionnumber8),
-                optionnumber9: this.prepareNumToExport(persondecreeblock.optionnumber9),
-                optionnumber10: this.prepareNumToExport(persondecreeblock.optionnumber10),
-                optionnumber11: this.prepareNumToExport(persondecreeblock.optionnumber11),
-                optionstring1: persondecreeblock.optionstring1,
-                optionstring2: persondecreeblock.optionstring2,
-                optionstring3: persondecreeblock.optionstring3,
-                optionstring4: persondecreeblock.optionstring4,
-                optionstring5: persondecreeblock.optionstring5,
-                optionstring6: persondecreeblock.optionstring6,
-                optionstring7: persondecreeblock.optionstring7,
-                optionstring8: persondecreeblock.optionstring8,
-                optiondate1: this.prepareDateToExportNullable(persondecreeblock.optiondate1String),
-                optiondate2: this.prepareDateToExportNullable(persondecreeblock.optiondate2String),
-                optiondate3: this.prepareDateToExportNullable(persondecreeblock.optiondate3String),
-                optiondate4: this.prepareDateToExportNullable(persondecreeblock.optiondate4String),
-                optiondate5: this.prepareDateToExportNullable(persondecreeblock.optiondate5String),
-                optiondate6: this.prepareDateToExportNullable(persondecreeblock.optiondate6String),
-                optiondate7: this.prepareDateToExportNullable(persondecreeblock.optiondate7String),
-                optiondate8: this.prepareDateToExportNullable(persondecreeblock.optiondate8String),
-                subvaluenumber1: this.prepareNumToExport(persondecreeblock.subvaluenumber1),
-                subvaluenumber2: this.prepareNumToExport(persondecreeblock.subvaluenumber2),
-                subvaluestring1: persondecreeblock.subvaluestring1,
-                subvaluestring2: persondecreeblock.subvaluestring2,
-                nonperson: persondecreeblock.nonperson,
-                optionarray1: this.prepareArrayNumberToExportNullable(persondecreeblock.optionarray1Array),
-                optionarrayperson: this.prepareArrayNumberToExportNullable(persondecreeblock.optionarraypersonArray),
-
-                //subjecttype: 1, // Награды - устарело
-                persondecreeblock: this.prepareNumToExport(persondecreeblock.id),
-                persondecreeblocktype: this.prepareNumToExport(persondecreeblock.persondecreeblocktype),
-                persondecreeblocksubtype: this.prepareNumToExport(persondecreeblock.persondecreeblocksub), // тип поощрения. У нас будет только вид, потому что единовременно может быть только один вид поощрения
-            }),
+            body: JSON.stringify(t),
             credentials: 'include',
             headers: new Headers({
                 'Accept': 'application/json',
@@ -2601,6 +2663,7 @@ export default class TopmenuComponent extends Vue {
         if (!confirm("Вы уверены?")) {
             return;
         }
+        this.personFromStructure = [];
         fetch('/api/Persondecreeblock', {
             method: 'post',
             body: JSON.stringify(<Persondecreeblock>{
@@ -3028,6 +3091,21 @@ export default class TopmenuComponent extends Vue {
         return true;
     }
 
+    selectAllPersonInStructure(persondecreeblock: Persondecreeblock, num: number) {
+        let appearance = {
+            positioncompact: this.$store.state.positioncompact,
+            sidebardisplay: 1,
+        }
+        this.num = num;
+        this.$store.commit("setEldVisible", 0);
+        this.modalPersondecreeMenuVisible = false;
+        this.modalPersondecreesMenuVisible = false;
+        this.$store.commit("setModeappointpersondecreeStructure", true);
+        this.currentPersondecreeblock = persondecreeblock;
+        this.$store.commit("updateUserAppearance", appearance);
+    }
+    
+
     changeFullmode() {
         fetch('api/Identity/Fullmode0', { credentials: 'include' })
             //.then(response => {
@@ -3167,6 +3245,30 @@ export default class TopmenuComponent extends Vue {
         }
     }
 
+    searchForStructure(id: number, block: Persondecreeblock) {
+        fetch('api/Person/Structure/SearchFor/' + id, { credentials: 'include' })
+            .then(response => {
+                return response.json() as Promise<Person[]>;
+            })
+            .then(result => {
+                this.personFromStructure = []
+                result.forEach(element => this.personFromStructure.push(element))
+                block.person = result[0];
+            })
+    }
+
+    getStructure(id: number, block: Persondecreeblock) {
+        fetch('api/Person/Structure/SearchFor/' + id, { credentials: 'include' })
+            .then(response => {
+                return response.json() as Promise<Person[]>;
+            })
+            .then(result => {
+                this.personFromStructure = []
+                result.forEach(element => this.personFromStructure.push(element))
+                block.person = result[0];
+            })
+    }
+
     /**
      * Активация режима выбора подразделения, к которому прикомандировать
      * @param persondecreeblock
@@ -3183,7 +3285,6 @@ export default class TopmenuComponent extends Vue {
         this.modalPersondecreesMenuVisible = false;
         this.$store.commit("setModeappointpersonstructuredecree", true);
         this.currentPersondecreeblock = persondecreeblock;
-
         this.$store.commit("updateUserAppearance", appearance);
     }
 
@@ -3401,6 +3502,10 @@ export default class TopmenuComponent extends Vue {
         } else {
             return "суток";
         }
+    }
+
+    getAllPersondecreeblocksubs(persondecreeblocksubs: number): boolean{
+        return true;
     }
 
     /**
@@ -3818,7 +3923,7 @@ export default class TopmenuComponent extends Vue {
      * или дополнительный день отдыха за ранее отработанное время
      * @param persondecreeoperation
      */
-    provideblocksubtext(persondecreeblocksub: Persondecreeblocksub): string {
+    provideblocksubtext(persondecreeblocksub: Persondecreeblocksub,decreeoperation: Persondecreeblock): string {
         let str: string = "";
         if (persondecreeblocksub.persondecreeblocksubtype > 0) {
             // отпуск
@@ -3837,11 +3942,94 @@ export default class TopmenuComponent extends Vue {
             // дополнительный день отдыха
             } else if (persondecreeblocksub.persondecreeblocksubtype == 12) {
                 str += "дополнительный день отдыха за ранее отработанное время:";
+            } else if (persondecreeblocksub.persondecreeblocksubtype == 15){
+                str += "дополнительныe дни отдыха за ранее отработанное время:"; 
             }
             
         }
         return str;
     }
+
+
+     /**
+     * Здесь генерируем текст на вроде "часть основного отпуска за 2020 год" или "часть основного отпуска за 2019 и 2020 года"
+     * или дополнительный день отдыха за ранее отработанное время
+     * @param persondecreeoperation
+     */
+    provideSetSubBlockText(persondecreeblocksub: Persondecreeblocksub, decreeoperation: Persondecreeblock) : string {
+        let str: string = "";
+        if(persondecreeblocksub.persondecreeblocksubtype == 1){
+            str +="в соответствии со статьей 43 Закона Республики Беларусь от 14 июня 2003 г. «О государственной службе в Республике Беларусь» стаж государственной службы";
+            return str;
+        }
+        if(persondecreeblocksub.persondecreeblocksubtype == 2){
+            str += "с " + this.printDateDocument(decreeoperation.optiondate1) + " (на период действия дисциплинарного взыскания) ежемесячную премию в размере " + decreeoperation.optionnumber2 + " % оклада денежного содержания.";
+            return str;
+        }
+        if(persondecreeblocksub.persondecreeblocksubtype == 3){
+            str += "стаж работы "
+            return str;
+        }
+        if(persondecreeblocksub.persondecreeblocksubtype == 4){
+            str += "выслуга лет"
+            return str;
+        }
+        if(persondecreeblocksub.persondecreeblocksubtype == 5){
+            str += "в соответствии с приказом МЧС Республики Беларусь от 31.01.2012 № 240 дсп «Об утверждении инструкции о порядке и условиях выплаты денежного довольствия лицам рядового и начальствующего состава органов и подразделений по чрезвычайным ситуациям Республики Беларусь» за высокие показатели в учебе по итогам "
+            + decreeoperation.optionstring3 + " учебного года повышение должностного оклада с ";
+            let count: number;
+            return str;
+        }
+    }
+    
+    provideDeductSubBlockText(persondecreeblocksub: Persondecreeblocksub) : string {
+        let str: string = "в соответствии с подпунктом ";
+        if(persondecreeblocksub){
+            if(this.dismissalclauses[persondecreeblocksub.persondecreeblocksubtype].paragraph > 170 && this.dismissalclauses[persondecreeblocksub.persondecreeblocksubtype].paragraph < 180){
+                str += this.dismissalclauses[persondecreeblocksub.persondecreeblocksubtype].paragraph + "." + this.dismissalclauses[persondecreeblocksub.persondecreeblocksubtype].subparagraph + " пункта " + this.dismissalclauses[persondecreeblocksub.persondecreeblocksubtype].paragraph + " Положении о прохождении службы в органах и подразделениях по чрезвычайным ситуациям Республики Беларусь (" + this.dismissalclauses[persondecreeblocksub.persondecreeblocksubtype].titleofarticles + ") ";
+                if(persondecreeblocksub.subvaluenumber1 == 1){
+                    str += " и уволить в запас (с постановкой на воинский учёт) из органов подразделений по чрезвычайным ситуациям по подпункту ";
+                    if(this.dismissalclauses[persondecreeblocksub.subvaluenumber2].paragraph > 170 && this.dismissalclauses[persondecreeblocksub.subvaluenumber2].paragraph < 180){
+                        str += this.dismissalclauses[persondecreeblocksub.subvaluenumber2].paragraph + "." + this.dismissalclauses[persondecreeblocksub.subvaluenumber2].subparagraph + " пункта " + this.dismissalclauses[persondecreeblocksub.subvaluenumber2].paragraph + " Положении о прохождении службы в органах и подразделениях по чрезвычайным ситуациям Республики Беларусь (" + this.dismissalclauses[persondecreeblocksub.subvaluenumber2].titleofarticles + ") ";
+                        return str;
+                    }else if(this.dismissalclauses[persondecreeblocksub.subvaluenumber2].paragraph > 0 && this.dismissalclauses[persondecreeblocksub.subvaluenumber2].paragraph < 7){
+                        str += this.dismissalclauses[persondecreeblocksub.subvaluenumber2].paragraph + "." + this.dismissalclauses[persondecreeblocksub.subvaluenumber2].subparagraph + " пункта " + this.dismissalclauses[persondecreeblocksub.subvaluenumber2].paragraph + " статьи 79 Кодекса Республики Беларусь об образовании (" + this.dismissalclauses[persondecreeblocksub.subvaluenumber2].titleofarticles + ") ";
+                        return str;
+                    }else
+                    return str;
+                }else
+                return str;
+            } else if(this.dismissalclauses[persondecreeblocksub.persondecreeblocksubtype].paragraph > 0 && this.dismissalclauses[persondecreeblocksub.persondecreeblocksubtype].paragraph < 7){
+                str += this.dismissalclauses[persondecreeblocksub.persondecreeblocksubtype].paragraph + "." + this.dismissalclauses[persondecreeblocksub.persondecreeblocksubtype].subparagraph + " пункта " + this.dismissalclauses[persondecreeblocksub.persondecreeblocksubtype].paragraph + " статьи 79 Кодекса Республики Беларусь об образовании (" + this.dismissalclauses[persondecreeblocksub.persondecreeblocksubtype].titleofarticles + ") ";
+                if(persondecreeblocksub.subvaluenumber1 == 1){
+                    str += " и уволить в запас (с постановкой на воинский учёт) из органов подразделений по чрезвычайным ситуациям по подпункту ";
+                    if(this.dismissalclauses[persondecreeblocksub.subvaluenumber2].paragraph > 170 && this.dismissalclauses[persondecreeblocksub.subvaluenumber2].paragraph < 180){
+                        str += this.dismissalclauses[persondecreeblocksub.subvaluenumber2].paragraph + "." + this.dismissalclauses[persondecreeblocksub.subvaluenumber2].subparagraph + " пункта " + this.dismissalclauses[persondecreeblocksub.subvaluenumber2].paragraph + " Положении о прохождении службы в органах и подразделениях по чрезвычайным ситуациям Республики Беларусь (" + this.dismissalclauses[persondecreeblocksub.subvaluenumber2].titleofarticles + ") ";
+                        return str;
+                    }else if(this.dismissalclauses[persondecreeblocksub.subvaluenumber2].paragraph > 0 && this.dismissalclauses[persondecreeblocksub.subvaluenumber2].paragraph < 7){
+                        str += this.dismissalclauses[persondecreeblocksub.subvaluenumber2].paragraph + "." + this.dismissalclauses[persondecreeblocksub.subvaluenumber2].subparagraph + " пункта " + this.dismissalclauses[persondecreeblocksub.subvaluenumber2].paragraph + " статьи 79 Кодекса Республики Беларусь об образовании (" + this.dismissalclauses[persondecreeblocksub.subvaluenumber2].titleofarticles + ") ";
+                        return str;
+                    }else
+                    return str;
+                }else
+                return str;
+            }else
+            return str;
+        }
+    }
+
+    provideUpSubBlockText(persondecreeblocksub: Persondecreeblocksub): string{
+        let str = "";
+        str += "в соответствии с пунктом "+ persondecreeblocksub.subvaluestring1 +" приказа Министерства по чрезвычайным ситуациям Республики Беларусь «Об оплате труда лиц рядового и начальствующего состава органов и подразделений по чрезвычайным ситуациям Республики Беларусь» от 09.07.2013 № 180 дсп должностной оклад курсантам, признанным в соответствии с законодательством детьми-сиротами, детьми, оставшимися без попечения родителей, а также лицами из числа детей-сирот и детей, оставшихся без попечения родителей, "
+        return str;
+    }
+
+    provideRestoreSubBlockText(persondecreeblocksub: Persondecreeblocksub): string{
+        let str = "";
+        str += "в соответствии с пунктом 2 статьи 80 Кодекса Республики Беларусь об образовании на факультет заочного обучения по специальности « "+ persondecreeblocksub.subvaluestring1 +" » (на условиях оплаты):"
+        return str;
+    }
+    
 
     isSocialVacation(persondecreeoperation: Persondecreeoperation): boolean {
         let vacationtype: Vacationtype = this.getVacationtype(persondecreeoperation.subvaluenumber1);

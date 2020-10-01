@@ -47,6 +47,7 @@ import Prooftype from './classes/prooftype';
 import Holiday from './classes/holiday';
 import Persondecreeblocktype from './classes/persondecreeblocktype';
 import Persondecreeblocksubtype from './classes/persondecreeblocksubtype';
+import Structure from './classes/Structure';
 import Region from './classes/region';
 import Area from './classes/area';
 import Fire from './classes/fire';
@@ -72,6 +73,7 @@ import Educationstage from './classes/educationstage';
 import Educationpositiontype from './classes/educationpositiontype';
 import Role from './classes/role';
 import User from './classes/user';
+import Dismissalclauses from './classes/dismissalclauses';
 
 import VueRouter from 'vue-router';
 Vue.use(VueRouter);
@@ -298,6 +300,7 @@ const store = new Vuex.Store({
         positiontypes: Positiontype[""],
         positioncategories: Positioncategory[""],
         mrds: Mrd[""],
+        dismissalclauses: Dismissalclauses[""],
         altrankconditiongroups: Altrankconditiongroup[""],
         altrankconditions: Altrankcondition[""],
         decree: null,
@@ -354,6 +357,7 @@ const store = new Vuex.Store({
         ordernumbertypes: Ordernumbertype[""],
         structuresalldocument: String[""],
         streettypes: Streettype[""],
+        structures: Structure[""],
         citytypes: Citytype[""],
         areaothers: Areaother[""],
         externalorderwhotypes: Externalorderwhotype[""],
@@ -367,6 +371,7 @@ const store = new Vuex.Store({
         /**
          * Modes
          */
+        modeselectstructureforCPU: false,
         modeselectcuration: false,
         modeselectedcuration: 0,
         modeselectheading: false,
@@ -378,6 +383,8 @@ const store = new Vuex.Store({
         modeappointedperson: 0,
         modeappointpersondecree: false, // Режим назначения на должность для приказа
         modeappointedpersondecree: 0,
+        modeappointpersondecreeStructure: false, // Режим назначения на должность для приказа
+        modeappointedpersondecreeStructure: 0,
         modeappointpersonstructuredecree: false, // Режим прикомандирования к подразделению/начальнику подразделения для приказа
         modeappointedpersonstructuredecree: 0,
         modecopystring: "", // String with copy data. "s=1" means copy structure with id 1 and all substructrures with the same or null type and all positions inclusive.
@@ -906,6 +913,17 @@ const store = new Vuex.Store({
                 })
         },
 
+        updateStructureresAll(state) {
+            fetch('api/Structure/All', { credentials: 'include' })
+                .then(response => {
+                    return response.json() as Promise<Structure[]>;
+                })
+                .then(result => {
+                    //alert(JSON.stringify(result));
+                    state.structures = result;
+                })
+        },
+
         updateRegions(state) {
             fetch('api/Region', { credentials: 'include' })
                 .then(response => {
@@ -936,6 +954,17 @@ const store = new Vuex.Store({
                 .then(result => {
                     //alert(JSON.stringify(result));
                     state.fires = result;
+                })
+        },
+        
+        updateDismissalclauses(state) {
+            fetch('api/Dismissalclauses', { credentials: 'include' })
+                .then(response => {
+                    return response.json() as Promise<Dismissalclauses[]>;
+                })
+                .then(result => {
+                    //alert(JSON.stringify(result));
+                    state.dismissalclauses = result;
                 })
         },
 
@@ -1242,6 +1271,15 @@ const store = new Vuex.Store({
         },
         setModeappointpersondecree(state, n) {
             state.modeappointpersondecree = n;
+        },
+        setModeappointpersondecreeStructure(state, n) {
+            state.modeappointpersondecreeStructure = n;
+        },
+        setModeappointpersondecreeStructureForCPU(state, n) {
+            state.modeselectstructureforCPU = n;
+        },
+        setModeappointedpersondecreeStructure(state, n) {
+            state.modeappointedpersondecreeStructure = n;
         },
         setModeappointedpersondecree(state, n) {
             state.modeappointedpersondecree = n;

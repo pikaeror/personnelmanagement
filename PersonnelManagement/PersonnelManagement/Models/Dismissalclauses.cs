@@ -10,5 +10,6 @@ namespace PersonnelManagement.Models
         public int? Subparagraph { get; set; }
         public string Titleofarticles { get; set; }
         public int? Persondecreeblocktype { get; set; }
+        public int? Type { get; set; }
     }
 }

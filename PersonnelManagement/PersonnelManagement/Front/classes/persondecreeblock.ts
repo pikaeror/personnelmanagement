@@ -65,9 +65,11 @@ export default class Persondecreeblock {
     optionarray1Array: number[]; // массив айдишников number
     optionarraypersonArray: number[]; // массив айдишников person
     optionarraypersonObjects: Person[]; // массив person, заключенных в optionarrayperson 
+    checkboxdismiss: boolean = false;
+    checkboxdirect: boolean = false;
 
     index: number; // Номер блока.
-
+    persondecreeblocksubtype: number;
     persondecreeblocksubs: Persondecreeblocksub[];
     persondecreeblockintros: Persondecreeblockintro[];
 

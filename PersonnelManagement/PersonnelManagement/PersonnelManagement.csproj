@@ -41,6 +41,7 @@
     <None Remove="Front\classes\citysubstate.ts" />
     <None Remove="Front\classes\citytype.ts" />
     <None Remove="Front\classes\countrycities.ts" />
+    <None Remove="Front\classes\dismissalclauses.ts" />
     <None Remove="Front\classes\drivercategory.ts" />
     <None Remove="Front\classes\drivertype.ts" />
     <None Remove="Front\classes\educationadditionaltype.ts" />
@@ -159,6 +160,7 @@
     <TypeScriptCompile Include="Front\classes\citysubstate.ts" />
     <TypeScriptCompile Include="Front\classes\citytype.ts" />
     <TypeScriptCompile Include="Front\classes\countrycities.ts" />
+    <TypeScriptCompile Include="Front\classes\dismissalclauses.ts" />
     <TypeScriptCompile Include="Front\classes\drivercategory.ts" />
     <TypeScriptCompile Include="Front\classes\drivertype.ts" />
     <TypeScriptCompile Include="Front\classes\educationadditionaltype.ts" />

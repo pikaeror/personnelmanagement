@@ -96,23 +96,22 @@ namespace PersonnelManagement.Controllers
                 return new ObjectResult(Keys.ERROR_SHORT + ":Отказано в доступе");
             }
 
-
-            // Добавляем новый элемент в проект приказа
             if (persondecreeoperation.Status == 1)
             {
-                repository.AddPersonDecreeoperation(user, persondecreeoperation);
+                persondecreeoperation.personFromStructure.ForEach(element =>
+                {
+                    persondecreeoperation.Person = element.Id;
+                    repository.AddPersonDecreeoperation(user, persondecreeoperation);
+                });
                 return new ObjectResult(Keys.SUCCESS_SHORT + ":Добавлено!");
-                
             } else if (persondecreeoperation.Status == 2)
             {
                 repository.RemovePersonDecreeoperation(user, persondecreeoperation);
                 return new ObjectResult(Keys.SUCCESS_SHORT + ":Удалено!");
-
             } else if (persondecreeoperation.Status == 3)
             {
                 repository.UpdatePersonDecreeoperation(user, persondecreeoperation);
                 return new ObjectResult(Keys.SUCCESS_SHORT + ":Обновлено!");
-
             }
             ///**
             // * Means, we remove decree operation with its subject
@@ -124,6 +123,5 @@ namespace PersonnelManagement.Controllers
             //}
             return new ObjectResult(Keys.ERROR_SHORT + ":Произошла какая-то оказия");
         }
-
     }
 }

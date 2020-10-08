@@ -106,6 +106,12 @@ namespace PersonnelManagement.Models
         public string pension_A { get; set; } = null;
         public string pension_B { get; set; } = null;
 
+        public int appending_days { get; set; } = 0;
+        
+        public string pension_A_with { get; set; } = null;
+        public string pension_B_with { get; set; } = null;
+
+
         public PersonManager(Person person)
         {
 

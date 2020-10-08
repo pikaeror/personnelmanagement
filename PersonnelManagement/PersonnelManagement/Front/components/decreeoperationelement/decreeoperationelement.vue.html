@@ -40,7 +40,7 @@
                     <div style="display: flex; ">
                         <el-button class="eld-eld-main-head-partbutton" size="mini" @click="send">Направить</el-button>
                         <el-button class="eld-eld-main-head-partbutton" size="mini" @click="deleted">Удалить</el-button>
-                        <el-button class="eld-eld-main-head-partbutton" size="mini" @click="">Прочитанно/Не прочитанно</el-button>
+                        <el-button class="eld-eld-main-head-partbutton" size="mini" @click="">Прочитано/Не прочитано</el-button>
                         <el-button class="eld-eld-main-head-partbutton" size="mini" @click="explorer">Переместить в папку</el-button>
                         <el-button class="eld-eld-main-head-partbutton" size="mini" @click="unit">Объединить</el-button>
                     </div>
@@ -62,7 +62,7 @@
                             </el-table-column>
                             <el-table-column property="getFIO" label="ФИО работника" width="200">
                             </el-table-column>
-                            <el-table-column type="expand">
+                            <!--<el-table-column type="expand">
                                 <template slot-scope="props">
                                     <p>State: </p>
                                     <p>City: </p>
@@ -70,7 +70,7 @@
                                     <p>Zip: </p>
                                     <el-button type="default" @click="handleSaveRow(scope.$index)">Save</el-button>
                                 </template>
-                            </el-table-column>
+                            </el-table-column>-->
                         </el-table>
                         <context-button v-if="rowcontextmenuVisible" @foo="foo" ref="contextbutton">123</context-button>
                     </div>

@@ -11923,7 +11923,8 @@ namespace PersonnelManagement.Models
             }
             //mark_version
             CustomDate JOBS = new CustomDate(0, 0, 0);
-            if(personManager.Pensions == null  || personManager.Pensions.Length == 0)
+            int appending_days = 1;
+            if (personManager.Pensions == null  || personManager.Pensions.Length == 0)
             {
                 personManager.pension_A = "0 0 0 ";
                 personManager.pension_B = "0 0 0 ";
@@ -11937,7 +11938,7 @@ namespace PersonnelManagement.Models
                 List<Pension> ptr = personManager.Pensions.ToList();
                 ptr.Sort((a, b) => b.Start.Ticks.CompareTo(a.Start.Ticks));
                 personManager.Pensions = ptr.ToArray();
-                DateTime prrevios_end_date = ptr.First().Start.AddDays(1);
+                DateTime prrevios_end_date = ptr.First().End.AddDays(1);
                 int plused = 0;
                 List<double> time_v = new List<double>() { 0.0, 0.0, 0.0 };
 
@@ -11992,6 +11993,7 @@ namespace PersonnelManagement.Models
                             d_education += time_v[2];
                         }
                     }
+                    appending_days += (Math.Abs(total) > 1) && (pension.JobMilitary) ? 1 : 0;
                     plused = 0;
                     prrevios_end_date = pension.Start;
                 }
@@ -12021,6 +12023,11 @@ namespace PersonnelManagement.Models
                 ptr = personManager.Pensions.ToList();
                 ptr.Sort((a, b) => a.Start.Ticks.CompareTo(b.Start.Ticks));
                 personManager.Pensions = ptr.ToArray();
+                personManager.appending_days = appending_days;
+                A.add(new CustomDate(Day: appending_days));
+                personManager.pension_A_with = A.Year.ToString() + " " + A.Month.ToString() + " " + A.Day.ToString() + " ";
+                B.add(new CustomDate(Day: appending_days));
+                personManager.pension_B_with = B.Year.ToString() + " " + B.Month.ToString() + " " + B.Day.ToString() + " ";
             }
 
             if (personManager.Numpersonal != null && personManager.Numpersonal.Length > 0 && !fastSearch)

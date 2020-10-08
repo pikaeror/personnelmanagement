@@ -15,6 +15,7 @@ export default class Persondecree {
     transfer: number;
     persondecreelevel: number;
     signed: number;
+    mailexplorerid: number;
 
     creatorObject: User;
 

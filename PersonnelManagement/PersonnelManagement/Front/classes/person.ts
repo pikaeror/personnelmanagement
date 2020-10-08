@@ -203,6 +203,11 @@ export default class Person {
     pension_A: string;
     pension_B: string;
 
+    appending_days: number;
+
+    pension_A_with: string;
+    pension_B_with: string;
+
     toDateInputValue(date: Date): string {
         var local = new Date(date);
         local.setMinutes(date.getMinutes() - date.getTimezoneOffset());

@@ -17,5 +17,6 @@ namespace PersonnelManagement.Models
         public sbyte Transfer { get; set; }
         public sbyte Signed { get; set; }
         public int Persondecreelevel { get; set; }
+        public int Mailexplorerid { get; set; }
     }
 }

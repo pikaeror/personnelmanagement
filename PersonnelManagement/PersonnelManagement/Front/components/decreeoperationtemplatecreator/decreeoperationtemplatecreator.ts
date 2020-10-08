@@ -248,7 +248,7 @@ export default class decreeoperationtemplatecreator extends Vue {
         }
         //this.input_decree.creatorObject.structureString
         this.persondecreeSelectUpdate(this.input_decree.id);
-        setInterval(this.persondecreeSelectUpdate, 10000);
+        //setInterval(this.persondecreeSelectUpdate, 10000);
     }
 
     get modeselectstructure(): boolean {

@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "38fd3e9aad2a399f0cc5"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "565829df6d33506f7279"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -8352,7 +8352,7 @@ let decreeoperationtemplatecreator = class decreeoperationtemplatecreator extend
         }
         //this.input_decree.creatorObject.structureString
         this.persondecreeSelectUpdate(this.input_decree.id);
-        setInterval(this.persondecreeSelectUpdate, 10000);
+        //setInterval(this.persondecreeSelectUpdate, 10000);
     }
     get modeselectstructure() {
         return this.$store.state.modeselectstructure;
@@ -16143,6 +16143,12 @@ let EldComponent = class EldComponent extends __WEBPACK_IMPORTED_MODULE_0_vue__[
             (parseInt(time_list[1]) == 0 ? '' : (time_list[1] + ' ' + this.getMonthString(parseInt(time_list[1])) + ' ')) +
             (parseInt(time_list[2]) == 0 ? '' : (time_list[2] + ' ' + this.getDayString(parseInt(time_list[2]))));
         return experienceString;
+    }
+    getDataToString(data_period) {
+        let time_list = data_period.split(' ');
+        return (parseInt(time_list[0]) == 0 ? '' : (time_list[0] + ' ' + this.getYearString(parseInt(time_list[0])) + ' ')) +
+            (parseInt(time_list[1]) == 0 ? '' : (time_list[1] + ' ' + this.getMonthString(parseInt(time_list[1])) + ' ')) +
+            (parseInt(time_list[2]) == 0 ? '' : (time_list[2] + ' ' + this.getDayString(parseInt(time_list[2]))));
     }
     differenceBetweenTwoDays(date1, date2) {
         if (date1 == null || date2 == null) {
@@ -24198,7 +24204,6 @@ let TopmenuComponent = class TopmenuComponent extends __WEBPACK_IMPORTED_MODULE_
     successmode() {
         if (this.num == 1) {
             this.numberStructure = this.$store.state.modeappointedpersondecreeStructure;
-            this.getStructureName(this.numberStructure);
         }
         else
             this.searchForStructure(this.$store.state.modeappointedpersondecreeStructure, this.currentPersondecreeblock);
@@ -25774,7 +25779,6 @@ let TopmenuComponent = class TopmenuComponent extends __WEBPACK_IMPORTED_MODULE_
         if (structureid == null || structureid == 0) {
             return "";
         }
-        let v = this.$store.state.structures;
         let structure = this.structuresReward.find(t => t.id == structureid);
         if (structure != null) {
             return structure.name;
@@ -45693,7 +45697,15 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "colspan": "6"
     }
-  }, [_vm._v("\n                                    Итого: " + _vm._s(_vm.pension_A) + "\n                                ")])]), _vm._v(" "), _vm._m(30), _vm._v(" "), _vm._l((_vm.person.pensions), function(pension) {
+  }, [_vm._v("\n                                    Сумма: " + _vm._s(_vm.getDataToString(_vm.person.pension_A)) + "\n                                ")])]), _vm._v(" "), _c('tr', [_c('td', {
+    attrs: {
+      "colspan": "6"
+    }
+  }, [_vm._v("\n                                    Дополнительных дней: " + _vm._s(_vm.person.appending_days) + "\n                                ")])]), _vm._v(" "), _c('tr', [_c('td', {
+    attrs: {
+      "colspan": "6"
+    }
+  }, [_vm._v("\n                                    Итого: " + _vm._s(_vm.getDataToString(_vm.person.pension_A_with)) + "\n                                ")])]), _vm._v(" "), _vm._m(30), _vm._v(" "), _vm._l((_vm.person.pensions), function(pension) {
     return (pension.education && !pension.educationConsider) ? _c('tr', [_c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(pension.positionplace) + "\n                                    ")])]), _vm._v(" "), _c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(pension.orderstring) + "\n                                    ")])]), _vm._v(" "), _c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(_vm.printDate(pension.start)) + " – " + _vm._s(_vm.printDate(pension.end)) + "\n                                    ")])]), _vm._v(" "), _c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(_vm.getExperienceFullPension(pension.yearsbeforecoef, pension.monthsbeforecoef, pension.daysbeforecoef)) + "\n                                    ")])]), _vm._v(" "), _c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(pension.coef) + "\n                                    ")])]), _vm._v(" "), _c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(_vm.getExperienceFullPension(pension.yearsaftercoef, pension.monthsaftercoef, pension.daysaftercoef)) + "\n                                    ")])])]) : _vm._e()
   })], 2), _vm._v(" "), _c('table', {
     staticClass: "eld-eld-table"
@@ -45709,7 +45721,15 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "colspan": "6"
     }
-  }, [_vm._v("\n                                    Итого: " + _vm._s(_vm.pension_B) + "\n                                ")])]), _vm._v(" "), _vm._m(38), _vm._v(" "), _vm._l((_vm.person.pensions), function(pension) {
+  }, [_vm._v("\n                                    Сумма: " + _vm._s(_vm.getDataToString(_vm.person.pension_B)) + "\n                                ")])]), _vm._v(" "), _c('tr', [_c('td', {
+    attrs: {
+      "colspan": "6"
+    }
+  }, [_vm._v("\n                                    Дополнительных дней: " + _vm._s(_vm.person.appending_days) + "\n                                ")])]), _vm._v(" "), _c('tr', [_c('td', {
+    attrs: {
+      "colspan": "6"
+    }
+  }, [_vm._v("\n                                    Итого: " + _vm._s(_vm.getDataToString(_vm.person.pension_B_with)) + "\n                                ")])]), _vm._v(" "), _vm._m(38), _vm._v(" "), _vm._l((_vm.person.pensions), function(pension) {
     return (pension.education && !pension.educationConsider) ? _c('tr', [_c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(pension.positionplace) + "\n                                    ")])]), _vm._v(" "), _c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(pension.orderstring) + "\n                                    ")])]), _vm._v(" "), _c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(_vm.printDate(pension.start)) + " – " + _vm._s(_vm.printDate(pension.end)) + "\n                                    ")])]), _vm._v(" "), _c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(_vm.getExperienceFullPension(pension.yearsbeforecoef, pension.monthsbeforecoef, pension.daysbeforecoef)) + "\n                                    ")])]), _vm._v(" "), _c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(pension.coef) + "\n                                    ")])]), _vm._v(" "), _c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(_vm.getExperienceFullPension(pension.yearsaftercoef, pension.monthsaftercoef, pension.daysaftercoef)) + "\n                                    ")])])]) : _vm._e()
   })], 2)])]) : _vm._e()]) : _vm._e(), _vm._v(" "), (_vm.menuid == 9) ? _c('div', [_c('div', {
     staticClass: "eld-eld-title"
@@ -51686,22 +51706,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "label": "ФИО работника",
       "width": "200"
     }
-  }), _vm._v(" "), _c('el-table-column', {
-    attrs: {
-      "type": "expand"
-    }
-  }, [
-    [_c('p', [_vm._v("State: ")]), _vm._v(" "), _c('p', [_vm._v("City: ")]), _vm._v(" "), _c('p', [_vm._v("Address: ")]), _vm._v(" "), _c('p', [_vm._v("Zip: ")]), _vm._v(" "), _c('el-button', {
-      attrs: {
-        "type": "default"
-      },
-      on: {
-        "click": function($event) {
-          _vm.handleSaveRow(_vm.scope.$index)
-        }
-      }
-    }, [_vm._v("Save")])]
-  ], 2)], 1), _vm._v(" "), (_vm.rowcontextmenuVisible) ? _c('context-button', {
+  })], 1), _vm._v(" "), (_vm.rowcontextmenuVisible) ? _c('context-button', {
     ref: "contextbutton",
     on: {
       "foo": _vm.foo

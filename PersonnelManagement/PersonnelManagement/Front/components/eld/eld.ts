@@ -6908,6 +6908,13 @@ export default class EldComponent extends Vue {
         return experienceString;
     }
 
+    getDataToString(data_period: string): string {
+        let time_list = data_period.split(' ');
+        return (parseInt(time_list[0]) == 0 ? '' : (time_list[0] + ' ' + this.getYearString(parseInt(time_list[0])) + ' ')) +
+            (parseInt(time_list[1]) == 0 ? '' : (time_list[1] + ' ' + this.getMonthString(parseInt(time_list[1])) + ' ')) +
+            (parseInt(time_list[2]) == 0 ? '' : (time_list[2] + ' ' + this.getDayString(parseInt(time_list[2]))));
+    }
+
     differenceBetweenTwoDays(date1: Date, date2: Date): number {
         if (date1 == null || date2 == null) {
             return 0;

@@ -49,6 +49,8 @@ namespace PersonnelManagement.Models
         public virtual DbSet<Jobtype> Jobtype { get; set; }
         public virtual DbSet<Languageskill> Languageskill { get; set; }
         public virtual DbSet<Languagetype> Languagetype { get; set; }
+        public virtual DbSet<Mailexplorer> Mailexplorer { get; set; }
+        public virtual DbSet<Mailfolder> Mailfolder { get; set; }
         public virtual DbSet<Mrd> Mrd { get; set; }
         public virtual DbSet<Normativ> Normativ { get; set; }
         public virtual DbSet<Ordernumbertype> Ordernumbertype { get; set; }
@@ -1797,6 +1799,51 @@ namespace PersonnelManagement.Models
                     .HasDefaultValueSql("''");
             });
 
+            modelBuilder.Entity<Mailexplorer>(entity =>
+            {
+                entity.ToTable("mailexplorer");
+
+                entity.HasIndex(e => e.Id)
+                    .HasName("id_UNIQUE")
+                    .IsUnique();
+
+                entity.Property(e => e.Id)
+                    .HasColumnName("id")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.AccessForReading)
+                    .HasColumnName("access_for_reading")
+                    .HasMaxLength(450);
+
+                entity.Property(e => e.FolderCreator).HasColumnName("folder_creator");
+
+                entity.Property(e => e.FolderOwner).HasColumnName("folder_owner");
+            });
+
+            modelBuilder.Entity<Mailfolder>(entity =>
+            {
+                entity.HasKey(e => e.Idmailfolder);
+
+                entity.ToTable("mailfolder");
+
+                entity.HasIndex(e => e.Idmailfolder)
+                    .HasName("idmailfolder_UNIQUE")
+                    .IsUnique();
+
+                entity.HasIndex(e => e.Name)
+                    .HasName("name_UNIQUE")
+                    .IsUnique();
+
+                entity.Property(e => e.Idmailfolder)
+                    .HasColumnName("idmailfolder")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Name)
+                    .IsRequired()
+                    .HasColumnName("name")
+                    .HasMaxLength(45);
+            });
+
             modelBuilder.Entity<Mrd>(entity =>
             {
                 entity.ToTable("mrd");
@@ -2631,6 +2678,11 @@ namespace PersonnelManagement.Models
                 entity.Property(e => e.Datesigned)
                     .HasColumnName("datesigned")
                     .HasColumnType("datetime");
+
+                entity.Property(e => e.Mailexplorerid)
+                    .HasColumnName("mailexplorerid")
+                    .HasColumnType("int(11)")
+                    .HasDefaultValueSql("'0'");
 
                 entity.Property(e => e.Name)
                     .IsRequired()

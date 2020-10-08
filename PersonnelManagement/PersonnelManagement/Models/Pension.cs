@@ -79,7 +79,7 @@ namespace PersonnelManagement.Models
                         pension.Coef = personjob.Personjobprivelege.Coef;
                     } else
                     {
-                        pension.Coef = 1;
+                        pension.Coef = 1; 
                     }
                     
                     pension.Daysbeforecoef = days;
@@ -99,7 +99,13 @@ namespace PersonnelManagement.Models
             foreach (Personeducation personeducation in personeducations)
             {
                 List<Personeducation> personeducationParts = personeducation.GeneratePersoneducationsByPeriods(userDate, personjobs);
-
+                bool flag_all_appending = false;
+                if (personeducationParts != null && personeducationParts.Count > 0)
+                {
+                    personeducationParts.Sort((x, y) => y.Datestart.CompareTo(x.Datestart));
+                    flag_all_appending = personeducationParts.First().Consider;
+                }
+                
                 foreach(Personeducation personeducationPart in personeducationParts)
                 {
                     Pension pension = new Pension();
@@ -131,6 +137,7 @@ namespace PersonnelManagement.Models
                     //pension.End = personeducation.End.GetValueOrDefault();
                     pension.EducationMilitary = personeducationPart.Military;
                     pension.EducationConsider = personeducationPart.Consider;
+                    pension.EducationConsider = flag_all_appending;
                     pension.Coef = 1;
 
                     // Если образование не-военное, то засчитывается только с 17 лет

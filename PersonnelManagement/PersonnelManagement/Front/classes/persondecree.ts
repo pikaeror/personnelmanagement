@@ -19,6 +19,10 @@ export default class Persondecree {
 
     creatorObject: User;
 
+    creatorfolder: number;
+    ownerfolder: number;
+    accessforreading: string;
+
     // Только на стороне фронтэнда
     marked: boolean;
 

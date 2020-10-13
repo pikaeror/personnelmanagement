@@ -29,10 +29,6 @@
                 <div v-bind:class="{'eld-eld-side-element-selected': menuid == 8}" class="eld-eld-side-element" style="background-color: darkgray;" @click="setMenuid(8)">Мои подписанные приказы</div>
                 <div v-bind:class="{'eld-eld-side-element-selected': menuid == 9}" class="eld-eld-side-element" style="background-color: darkgray;" @click="setMenuid(9)">Все подписанные приказы</div>
                 <div v-bind:class="{'eld-eld-side-element-selected': menuid == 10}" class="eld-eld-side-element" style="background-color: darkgray;" @click="setMenuid(10)">Выписки</div>
-                <!--<template slot-scope="scope">
-                    <el-button type="default" @click="handleSaveRow">Save</el-button>
-                    <el-button type="primary" @click="handleEditRow">Edit</el-button>
-                </template>-->
             </div>
             <div class="eld-eld-main">
                 <!--Шапка главного меню-->
@@ -43,6 +39,7 @@
                         <el-button class="eld-eld-main-head-partbutton" size="mini" @click="">Прочитано/Не прочитано</el-button>
                         <el-button class="eld-eld-main-head-partbutton" size="mini" @click="explorer">Переместить в папку</el-button>
                         <el-button class="eld-eld-main-head-partbutton" size="mini" @click="unit">Объединить</el-button>
+                        <el-button class="eld-eld-main-head-partbutton" size="mini" @click="sbdWorker">test</el-button>
                     </div>
                 </div>
                 <div visible="update"></div>
@@ -62,15 +59,12 @@
                             </el-table-column>
                             <el-table-column property="getFIO" label="ФИО работника" width="200">
                             </el-table-column>
-                            <!--<el-table-column type="expand">
-                                <template slot-scope="props">
-                                    <p>State: </p>
-                                    <p>City: </p>
-                                    <p>Address: </p>
-                                    <p>Zip: </p>
-                                    <el-button type="default" @click="handleSaveRow(scope.$index)">Save</el-button>
+                            <el-table-column type="expand" label="Выписки" width="90">
+                                <template slot-scope="props" disabled="signed == 1">
+                                    <el-button type="default" @click="handleSaveRow(scope.$index)">сформировать выписки</el-button>
+                                    <el-button type="default" @click="handleSaveRow(scope.$index)">отправить выписки</el-button>
                                 </template>
-                            </el-table-column>-->
+                            </el-table-column>
                         </el-table>
                         <context-button v-if="rowcontextmenuVisible" @foo="foo" ref="contextbutton">123</context-button>
                     </div>

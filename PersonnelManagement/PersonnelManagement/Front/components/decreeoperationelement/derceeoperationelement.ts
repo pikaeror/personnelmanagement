@@ -12,6 +12,7 @@ import Persondecreeblocksub from '../../classes/persondecreeblocksub'
 import Persondecreeblocksubtype from '../../classes/persondecreeblocksubtype'
 import User from '../../classes/user';
 import Persondecree from '../../classes/persondecree';
+import mailexplorer from '../../classes/Mail/mailexplorer';
 
 Vue.component(Button.name, Button);
 Vue.component(Input.name, Input);
@@ -58,6 +59,7 @@ export default class derceeoperationelement extends Vue {
 
     datefiltervariants: string;
 
+    full_explorers: mailexplorer[];
     fullpersondecrees: Persondecree[];
     viewpersondecrees: Persondecree[];
 
@@ -98,6 +100,7 @@ export default class derceeoperationelement extends Vue {
 
             datefiltervariants: "",
 
+            full_explorers: [],
             fullpersondecrees: [],
             viewpersondecrees: [],
 
@@ -182,13 +185,26 @@ export default class derceeoperationelement extends Vue {
     @Watch('visible')
     onVisibleChange(value: boolean, oldValue: boolean) {
         if (value) {
-            this.fetchPersondecreesActive();
+            this.fetchMailExplorer()
+            //this.fetchPersondecreesActive();
             this.setMenuid(2);
         }
+    }
+    fetchMailExplorer() {
+        fetch('api/MailController/Full', { credentials: 'include' })
+            .then(response => {
+                return response.json() as Promise<mailexplorer[]>;
+            })
+            .then(resualt => {
+                this.full_explorers = resualt;
+                this.fetchPersondecreesActive();
+            })
     }
 
     fetchPersondecreesActive() {
         let time_value = this.multipleSelection;
+        this.fetchMailExplorer();
+        let time_explorer = this.full_explorers;
         fetch('api/Persondecree/FullByUser', { credentials: 'include' })
             .then(response => {
                 return response.json() as Promise<Persondecree[]>;
@@ -196,6 +212,18 @@ export default class derceeoperationelement extends Vue {
             .then(result => {
                 //alert('mark');
                 result.forEach(r => {
+                    var exp: mailexplorer[] = time_explorer.filter(q => q.Id.toString() == r.mailexplorerid.toString());
+                    var t = null;
+                    time_explorer.forEach(q => {
+                        if (q.Id == r.mailexplorerid) {
+                            t = q;
+                            return;
+                        }
+                        t = null;
+                    });
+                    /*r.creatorfolder = exp.FolderCreator;
+                    r.ownerfolder = exp.FolderOwner;
+                    r.accessforreading = exp.AccessForReading;*/
                     if (this.fullpersondecrees != null) {
                         let preloadedPersondecree: Persondecree = this.fullpersondecrees.find(p => p.id == r.id);
                         if (preloadedPersondecree != null) {
@@ -219,6 +247,7 @@ export default class derceeoperationelement extends Vue {
                         (((r.name == null || r.name == "") || (r.nickname == null || r.nickname == "")) ? '' : ' / ') +
                         r.nickname;
                     r.getNumber = r.number.toString() + (r.numbertype == "" ? '' : (' ' + r.numbertype.toUpperCase()));
+                    
                 });
                 this.fullpersondecrees = result;
                 this.reload();
@@ -269,7 +298,7 @@ export default class derceeoperationelement extends Vue {
                 })
                 .then(result => {
                     this.open(result);
-                    this.fetchPersondecreesActive();
+                    this.fetchMailExplorer();
                 });
         })
         /*fetch('api/Persondecree/GetLustDecreeByUser', { credentials: 'include' })
@@ -321,24 +350,74 @@ export default class derceeoperationelement extends Vue {
         this.viewpersondecrees = [];
         if (folder == 2) {
             this.fullpersondecrees.forEach(r => {
-                if (r.signed == 0 && r.creator == r.owner && r.creator == this.$store.state.user.id)
-                    this.viewpersondecrees.push(r)
+                if (r.creator == this.$store.state.user.id && folder - 1 == r.creatorfolder) {
+                    this.viewpersondecrees.push(r);
+                } else if (r.owner == this.$store.state.user.id && folder - 1 == r.ownerfolder) {
+                    this.viewpersondecrees.push(r);
+                }
+                /*if (r.creatorfolder == folder - 1 && r.creator == r.owner && r.creator == this.$store.state.user.id)
+                    this.viewpersondecrees.push(r)*/
             })
         } else if (folder == 3) {
             this.fullpersondecrees.forEach(r => {
+                if (r.creator == this.$store.state.user.id && folder - 1 == r.creatorfolder) {
+                    this.viewpersondecrees.push(r);
+                } else if (r.owner == this.$store.state.user.id && folder - 1 == r.ownerfolder) {
+                    this.viewpersondecrees.push(r);
+                }
+            })
+            /*this.fullpersondecrees.forEach(r => {
                 if (r.signed == 0 && r.creator != r.owner && r.owner == this.$store.state.user.id)
                     this.viewpersondecrees.push(r)
-            })
+            })*/
         } else if (folder == 4) {
             this.fullpersondecrees.forEach(r => {
+                if (r.creator == this.$store.state.user.id && folder - 1 == r.creatorfolder) {
+                    this.viewpersondecrees.push(r);
+                } else if (r.owner == this.$store.state.user.id && folder - 1 == r.ownerfolder) {
+                    this.viewpersondecrees.push(r);
+                }
+            })
+            /*this.fullpersondecrees.forEach(r => {
                 if (r.signed == 0 && r.creator != r.owner && r.creator == this.$store.state.user.id)
                     this.viewpersondecrees.push(r)
+            })*/
+        } else if (folder == 5) {
+            this.fullpersondecrees.forEach(r => {
+                if (r.creator == this.$store.state.user.id && folder - 1 == r.creatorfolder) {
+                    this.viewpersondecrees.push(r);
+                } else if (r.owner == this.$store.state.user.id && folder - 1 == r.ownerfolder) {
+                    this.viewpersondecrees.push(r);
+                }
+            })
+        } else if (folder == 6) {
+            this.fullpersondecrees.forEach(r => {
+                if (r.creator == this.$store.state.user.id && folder - 1 == r.creatorfolder) {
+                    this.viewpersondecrees.push(r);
+                } else if (r.owner == this.$store.state.user.id && folder - 1 == r.ownerfolder) {
+                    this.viewpersondecrees.push(r);
+                }
+            })
+        } else if (folder == 7) {
+            this.fullpersondecrees.forEach(r => {
+                if (r.creator == this.$store.state.user.id && folder - 1 == r.creatorfolder) {
+                    this.viewpersondecrees.push(r);
+                } else if (r.owner == this.$store.state.user.id && folder - 1 == r.ownerfolder) {
+                    this.viewpersondecrees.push(r);
+                }
             })
         } else if (folder == 8) {
             this.fullpersondecrees.forEach(r => {
+                if (r.creator == this.$store.state.user.id && folder - 1 == r.creatorfolder) {
+                    this.viewpersondecrees.push(r);
+                } else if (r.owner == this.$store.state.user.id && folder - 1 == r.ownerfolder) {
+                    this.viewpersondecrees.push(r);
+                }
+            })
+            /*this.fullpersondecrees.forEach(r => {
                 if (r.signed == 1 && r.creator == this.$store.state.user.id)
                     this.viewpersondecrees.push(r)
-            })
+            })*/
         } else if (folder == 9) {
             this.fullpersondecrees.forEach(r => {
                 if (r.signed == 1)
@@ -434,7 +513,7 @@ export default class derceeoperationelement extends Vue {
             })
         }).then(x => {
             this.persondecreeId = 0;
-            this.fetchPersondecreesActive();
+            this.fetchMailExplorer();
             this.usersSearch = [];
             (<any>Vue).notify("S:Проект приказа направлен на кадровика");
         })
@@ -455,7 +534,20 @@ export default class derceeoperationelement extends Vue {
                 return response.json() as Promise<string>;
             })
             .then(result => {
-                this.fetchPersondecreesActive();
+                this.fetchMailExplorer();
             })
+    }
+
+    sbdWorker() {
+        if (this.$store.state.user.id != 1)
+            return;
+        fetch('/api/MailController/DefaultWorker', {
+            method: 'post',
+            credentials: 'include',
+            headers: new Headers({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            })
+        });
     }
 }

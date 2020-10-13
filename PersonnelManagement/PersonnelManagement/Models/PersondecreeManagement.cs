@@ -32,6 +32,7 @@ namespace PersonnelManagement.Models
             Numbertype = persondecree.Numbertype;
             Transfer = persondecree.Transfer;
             Signed = persondecree.Signed;
+            Mailexplorerid = persondecree.Mailexplorerid;
 
             CreatorObject = null;
         }

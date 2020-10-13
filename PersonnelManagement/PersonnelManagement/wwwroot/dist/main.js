@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "565829df6d33506f7279"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "72b24851dd9c2856bbe0"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -7903,6 +7903,7 @@ let derceeoperationelement = class derceeoperationelement extends __WEBPACK_IMPO
             persondecreesNewblocksub: null,
             persondecreesActionmenu: false,
             datefiltervariants: "",
+            full_explorers: [],
             fullpersondecrees: [],
             viewpersondecrees: [],
             multipleSelection: [],
@@ -7977,12 +7978,25 @@ let derceeoperationelement = class derceeoperationelement extends __WEBPACK_IMPO
     }
     onVisibleChange(value, oldValue) {
         if (value) {
-            this.fetchPersondecreesActive();
+            this.fetchMailExplorer();
+            //this.fetchPersondecreesActive();
             this.setMenuid(2);
         }
     }
+    fetchMailExplorer() {
+        fetch('api/MailController/Full', { credentials: 'include' })
+            .then(response => {
+            return response.json();
+        })
+            .then(resualt => {
+            this.full_explorers = resualt;
+            this.fetchPersondecreesActive();
+        });
+    }
     fetchPersondecreesActive() {
         let time_value = this.multipleSelection;
+        this.fetchMailExplorer();
+        let time_explorer = this.full_explorers;
         fetch('api/Persondecree/FullByUser', { credentials: 'include' })
             .then(response => {
             return response.json();
@@ -7990,6 +8004,18 @@ let derceeoperationelement = class derceeoperationelement extends __WEBPACK_IMPO
             .then(result => {
             //alert('mark');
             result.forEach(r => {
+                var exp = time_explorer.filter(q => q.Id.toString() == r.mailexplorerid.toString());
+                var t = null;
+                time_explorer.forEach(q => {
+                    if (q.Id == r.mailexplorerid) {
+                        t = q;
+                        return;
+                    }
+                    t = null;
+                });
+                /*r.creatorfolder = exp.FolderCreator;
+                r.ownerfolder = exp.FolderOwner;
+                r.accessforreading = exp.AccessForReading;*/
                 if (this.fullpersondecrees != null) {
                     let preloadedPersondecree = this.fullpersondecrees.find(p => p.id == r.id);
                     if (preloadedPersondecree != null) {
@@ -8062,7 +8088,7 @@ let derceeoperationelement = class derceeoperationelement extends __WEBPACK_IMPO
             })
                 .then(result => {
                 this.open(result);
-                this.fetchPersondecreesActive();
+                this.fetchMailExplorer();
             });
         });
         /*fetch('api/Persondecree/GetLustDecreeByUser', { credentials: 'include' })
@@ -8108,27 +8134,87 @@ let derceeoperationelement = class derceeoperationelement extends __WEBPACK_IMPO
         this.viewpersondecrees = [];
         if (folder == 2) {
             this.fullpersondecrees.forEach(r => {
-                if (r.signed == 0 && r.creator == r.owner && r.creator == this.$store.state.user.id)
+                if (r.creator == this.$store.state.user.id && folder - 1 == r.creatorfolder) {
                     this.viewpersondecrees.push(r);
+                }
+                else if (r.owner == this.$store.state.user.id && folder - 1 == r.ownerfolder) {
+                    this.viewpersondecrees.push(r);
+                }
+                /*if (r.creatorfolder == folder - 1 && r.creator == r.owner && r.creator == this.$store.state.user.id)
+                    this.viewpersondecrees.push(r)*/
             });
         }
         else if (folder == 3) {
             this.fullpersondecrees.forEach(r => {
-                if (r.signed == 0 && r.creator != r.owner && r.owner == this.$store.state.user.id)
+                if (r.creator == this.$store.state.user.id && folder - 1 == r.creatorfolder) {
                     this.viewpersondecrees.push(r);
+                }
+                else if (r.owner == this.$store.state.user.id && folder - 1 == r.ownerfolder) {
+                    this.viewpersondecrees.push(r);
+                }
             });
+            /*this.fullpersondecrees.forEach(r => {
+                if (r.signed == 0 && r.creator != r.owner && r.owner == this.$store.state.user.id)
+                    this.viewpersondecrees.push(r)
+            })*/
         }
         else if (folder == 4) {
             this.fullpersondecrees.forEach(r => {
-                if (r.signed == 0 && r.creator != r.owner && r.creator == this.$store.state.user.id)
+                if (r.creator == this.$store.state.user.id && folder - 1 == r.creatorfolder) {
                     this.viewpersondecrees.push(r);
+                }
+                else if (r.owner == this.$store.state.user.id && folder - 1 == r.ownerfolder) {
+                    this.viewpersondecrees.push(r);
+                }
+            });
+            /*this.fullpersondecrees.forEach(r => {
+                if (r.signed == 0 && r.creator != r.owner && r.creator == this.$store.state.user.id)
+                    this.viewpersondecrees.push(r)
+            })*/
+        }
+        else if (folder == 5) {
+            this.fullpersondecrees.forEach(r => {
+                if (r.creator == this.$store.state.user.id && folder - 1 == r.creatorfolder) {
+                    this.viewpersondecrees.push(r);
+                }
+                else if (r.owner == this.$store.state.user.id && folder - 1 == r.ownerfolder) {
+                    this.viewpersondecrees.push(r);
+                }
+            });
+        }
+        else if (folder == 6) {
+            this.fullpersondecrees.forEach(r => {
+                if (r.creator == this.$store.state.user.id && folder - 1 == r.creatorfolder) {
+                    this.viewpersondecrees.push(r);
+                }
+                else if (r.owner == this.$store.state.user.id && folder - 1 == r.ownerfolder) {
+                    this.viewpersondecrees.push(r);
+                }
+            });
+        }
+        else if (folder == 7) {
+            this.fullpersondecrees.forEach(r => {
+                if (r.creator == this.$store.state.user.id && folder - 1 == r.creatorfolder) {
+                    this.viewpersondecrees.push(r);
+                }
+                else if (r.owner == this.$store.state.user.id && folder - 1 == r.ownerfolder) {
+                    this.viewpersondecrees.push(r);
+                }
             });
         }
         else if (folder == 8) {
             this.fullpersondecrees.forEach(r => {
-                if (r.signed == 1 && r.creator == this.$store.state.user.id)
+                if (r.creator == this.$store.state.user.id && folder - 1 == r.creatorfolder) {
                     this.viewpersondecrees.push(r);
+                }
+                else if (r.owner == this.$store.state.user.id && folder - 1 == r.ownerfolder) {
+                    this.viewpersondecrees.push(r);
+                }
             });
+            /*this.fullpersondecrees.forEach(r => {
+                if (r.signed == 1 && r.creator == this.$store.state.user.id)
+                    this.viewpersondecrees.push(r)
+            })*/
         }
         else if (folder == 9) {
             this.fullpersondecrees.forEach(r => {
@@ -8215,7 +8301,7 @@ let derceeoperationelement = class derceeoperationelement extends __WEBPACK_IMPO
                 })
             }).then(x => {
                 this.persondecreeId = 0;
-                this.fetchPersondecreesActive();
+                this.fetchMailExplorer();
                 this.usersSearch = [];
                 __WEBPACK_IMPORTED_MODULE_0_vue__["default"].notify("S:Проект приказа направлен на кадровика");
             });
@@ -8234,7 +8320,19 @@ let derceeoperationelement = class derceeoperationelement extends __WEBPACK_IMPO
             return response.json();
         })
             .then(result => {
-            this.fetchPersondecreesActive();
+            this.fetchMailExplorer();
+        });
+    }
+    sbdWorker() {
+        if (this.$store.state.user.id != 1)
+            return;
+        fetch('/api/MailController/DefaultWorker', {
+            method: 'post',
+            credentials: 'include',
+            headers: new Headers({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            })
         });
     }
 };
@@ -51632,7 +51730,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     on: {
       "click": function($event) {}
     }
-  }, [_vm._v("Прочитанно/Не прочитанно")]), _vm._v(" "), _c('el-button', {
+  }, [_vm._v("Прочитано/Не прочитано")]), _vm._v(" "), _c('el-button', {
     staticClass: "eld-eld-main-head-partbutton",
     attrs: {
       "size": "mini"
@@ -51648,7 +51746,15 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     on: {
       "click": _vm.unit
     }
-  }, [_vm._v("Объединить")])], 1)]), _vm._v(" "), _c('div', {
+  }, [_vm._v("Объединить")]), _vm._v(" "), _c('el-button', {
+    staticClass: "eld-eld-main-head-partbutton",
+    attrs: {
+      "size": "mini"
+    },
+    on: {
+      "click": _vm.sbdWorker
+    }
+  }, [_vm._v("test")])], 1)]), _vm._v(" "), _c('div', {
     attrs: {
       "visible": "update"
     }
@@ -51706,7 +51812,33 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "label": "ФИО работника",
       "width": "200"
     }
-  })], 1), _vm._v(" "), (_vm.rowcontextmenuVisible) ? _c('context-button', {
+  }), _vm._v(" "), _c('el-table-column', {
+    attrs: {
+      "type": "expand",
+      "label": "Выписки",
+      "width": "90"
+    }
+  }, [
+    [_c('el-button', {
+      attrs: {
+        "type": "default"
+      },
+      on: {
+        "click": function($event) {
+          _vm.handleSaveRow(_vm.scope.$index)
+        }
+      }
+    }, [_vm._v("сформировать выписки")]), _vm._v(" "), _c('el-button', {
+      attrs: {
+        "type": "default"
+      },
+      on: {
+        "click": function($event) {
+          _vm.handleSaveRow(_vm.scope.$index)
+        }
+      }
+    }, [_vm._v("отправить выписки")])]
+  ], 2)], 1), _vm._v(" "), (_vm.rowcontextmenuVisible) ? _c('context-button', {
     ref: "contextbutton",
     on: {
       "foo": _vm.foo

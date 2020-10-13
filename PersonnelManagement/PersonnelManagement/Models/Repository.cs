@@ -48,6 +48,8 @@ namespace PersonnelManagement.Models
         public IQueryable<Positioncategoryrank> Positioncategoryranks => context.Positioncategoryrank;
         public IQueryable<Decree> Decrees => context.Decree;
         public IQueryable<Decreeoperation> Decreeoperations => context.Decreeoperation;
+        public IQueryable<Mailexplorer> Mailexplorers => context.Mailexplorer;
+        public IQueryable<Mailfolder> Mailfolders => context.Mailfolder;
         public IQueryable<Mrd> Mrds => context.Mrd;
         public IQueryable<Positionmrd> Positionmrds => context.Positionmrd;
         public IQueryable<Altrankcondition> Altrankconditions  => context.Altrankcondition;
@@ -421,6 +423,62 @@ namespace PersonnelManagement.Models
                 SourceoffinancingsLocalObjectNew.Add(sourceoffinancing.Id, sourceoffinancing);
             }
             SourceoffinancingsLocalObject = SourceoffinancingsLocalObjectNew;
+        }
+
+        
+        private static long MailexplorerGetLastTime = -MAILEXPLORER_GET_DELAY - 1;
+        private const long MAILEXPLORER_GET_DELAY = 90000; // in ms, 90 секунд, так как явление крайне редкое
+        private static Dictionary<int, Mailexplorer> MailexplorersLocalObject = null;
+        /// <summary>
+        /// Локальная версия таблицы из базы данных, которую мы или периодически обновляем или обновляем после внесения изменений. Необходима для улучшения быстродействия (уменьшения запросов в базу данных)
+        /// </summary>
+        /// <returns></returns>
+        public Dictionary<int, Mailexplorer> MailexplorersLocal() // 
+        {
+            if (stopWatch.ElapsedMilliseconds > MailexplorerGetLastTime + MAILEXPLORER_GET_DELAY)
+            {
+                UpdateMailexplorersLocal();
+            }
+            return MailexplorersLocalObject;
+        }
+        public void UpdateMailexplorersLocal()
+        {
+            MailexplorerGetLastTime = stopWatch.ElapsedMilliseconds;
+            List<Mailexplorer> MailexplorersList = Mailexplorers.ToList();
+            Dictionary<int, Mailexplorer> MailexplorersLocalObjectNew = new Dictionary<int, Mailexplorer>();
+            foreach (Mailexplorer mrd in MailexplorersList)
+            {
+                MailexplorersLocalObjectNew.Add(mrd.Id, mrd);
+            }
+            MailexplorersLocalObject = MailexplorersLocalObjectNew;
+        }
+
+
+        private static long MailfolderGetLastTime = -MAILFOLDER_GET_DELAY - 1;
+        private const long MAILFOLDER_GET_DELAY = 140000; // in ms, 90 секунд, так как явление крайне редкое
+        private static Dictionary<int, Mailfolder> MailfoldersLocalObject = null;
+        /// <summary>
+        /// Локальная версия таблицы из базы данных, которую мы или периодически обновляем или обновляем после внесения изменений. Необходима для улучшения быстродействия (уменьшения запросов в базу данных)
+        /// </summary>
+        /// <returns></returns>
+        public Dictionary<int, Mailfolder> MailfoldersLocal() // 
+        {
+            if (stopWatch.ElapsedMilliseconds > MailfolderGetLastTime + MAILFOLDER_GET_DELAY)
+            {
+                UpdateMailfoldersLocal();
+            }
+            return MailfoldersLocalObject;
+        }
+        public void UpdateMailfoldersLocal()
+        {
+            MailfolderGetLastTime = stopWatch.ElapsedMilliseconds;
+            List<Mailfolder> MailfoldersList = Mailfolders.ToList();
+            Dictionary<int, Mailfolder> MailfoldersLocalObjectNew = new Dictionary<int, Mailfolder>();
+            foreach (Mailfolder mrd in MailfoldersList)
+            {
+                MailfoldersLocalObjectNew.Add(mrd.Idmailfolder, mrd);
+            }
+            MailfoldersLocalObject = MailfoldersLocalObjectNew;
         }
 
 

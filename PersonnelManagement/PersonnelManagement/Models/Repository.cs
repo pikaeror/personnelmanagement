@@ -15662,6 +15662,7 @@ namespace PersonnelManagement.Models
             decree.Nickname = decreeManagement.Nickname;
             decree.Datesigned = null; // Если нуль, значит, не подписано
             decree.Datecreated = DateTime.Now.Date;
+            decree.Mailexplorerid = decreeManagement.Mailexplorerid;
             context.Persondecree.Add(decree);
             context.SaveChanges();
 

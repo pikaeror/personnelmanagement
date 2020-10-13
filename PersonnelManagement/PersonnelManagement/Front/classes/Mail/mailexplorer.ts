@@ -1,6 +1,6 @@
-﻿export default class mailexplorer {
-    Id: number;
-    FolderCreator: number;
-    FolderOwner: number;
-    AccessForReading: string;
+﻿export default class Mailexplorer {
+    id: number;
+    folderCreator: number;
+    folderOwner: number;
+    accessForReading: string;
 }

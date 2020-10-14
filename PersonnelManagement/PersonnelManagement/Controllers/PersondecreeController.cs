@@ -105,7 +105,7 @@ namespace PersonnelManagement.Controllers
 
         // GET: api/Persondecree/Action
         [HttpGet("Action{str}")]
-        public IActionResult PerformAction([FromRoute] string str)
+        public IActionResult PerformAction([FromRoute] string str, [FromBody] Mailexplorer folder)
         {
             string sessionid = Request.Cookies[Keys.COOKIES_SESSION];
             User user = null;
@@ -137,7 +137,7 @@ namespace PersonnelManagement.Controllers
                 switch (operation)
                 {
                     case 1:
-                        repository.PersondecreesUnite(user, ids);
+                        repository.PersondecreesUnite(user, ids, folder);
                         break;
                     default:
                         break;

@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "b439d2a99d9c75855fa8"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "271ea61ecc87ab7bf138"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -2017,7 +2017,7 @@ var Component = __webpack_require__(3)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\Projects\\MCHS\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\structuremanagingpanel\\structuremanagingpanel.vue.html"
+Component.options.__file = "D:\\GIT\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\structuremanagingpanel\\structuremanagingpanel.vue.html"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] structuremanagingpanel.vue.html: functional components are not supported with templates, they should use render functions.")}
 
@@ -7926,18 +7926,10 @@ let derceeoperationelement = class derceeoperationelement extends __WEBPACK_IMPO
     }
     handleSelectionChange(val) {
         this.multipleSelection = val;
-        this.multipleSelection.forEach(r => {
-            let index = this.fullpersondecrees.findIndex(p => p.id == r.id);
+        /*this.multipleSelection.forEach(r => {
+            let index: number = this.fullpersondecrees.findIndex(p => p.id == r.id);
             this.fullpersondecrees[index].marked = this.fullpersondecrees[index].marked == true ? false : true;
-        });
-        /*if (val) {
-            val.forEach(row => {
-                this.$refs.multipleTable.toggleRowSelection(row);
-            });
-        } else {
-            this.$refs.multipleTable.clearSelection();
-        }*/
-        //this.reload();
+        })*/
     }
     filterHandler(value, row, column) {
         const property = column['property'];
@@ -7984,6 +7976,7 @@ let derceeoperationelement = class derceeoperationelement extends __WEBPACK_IMPO
         }
     }
     fetchMailExplorer() {
+        let time_value = this.multipleSelection;
         fetch('api/MailController/Full', { credentials: 'include' })
             .then(response => {
             return response.json();
@@ -7992,12 +7985,12 @@ let derceeoperationelement = class derceeoperationelement extends __WEBPACK_IMPO
             this.full_explorers = resualt;
             this.fullpersondecrees = this.fetchPersondecreesActive();
             this.reload();
+            this.multipleSelection = time_value;
         });
         return this.fullpersondecrees;
     }
     fetchPersondecreesActive() {
-        // let time_value = this.multipleSelection;
-        this.fetchMailExplorer();
+        let time_value = this.multipleSelection;
         let time_explorer = this.full_explorers;
         fetch('api/Persondecree/FullByUser', { credentials: 'include' })
             .then(response => {
@@ -8007,8 +8000,6 @@ let derceeoperationelement = class derceeoperationelement extends __WEBPACK_IMPO
             //alert('mark');
             result.forEach(r => {
                 var exp = time_explorer.find(q => q.id == r.mailexplorerid);
-                if (exp.id >= 181)
-                    var l = 'debug';
                 r.creatorfolder = exp.folderCreator;
                 r.ownerfolder = exp.folderOwner;
                 r.accessforreading = exp.accessForReading;
@@ -8039,8 +8030,8 @@ let derceeoperationelement = class derceeoperationelement extends __WEBPACK_IMPO
                 r.getNumber = r.number.toString() + (r.numbertype == "" ? '' : (' ' + r.numbertype.toUpperCase()));
             });
             this.fullpersondecrees = result;
-            // this.reload();
-            // this.multipleSelection = time_value;
+            this.reload();
+            this.multipleSelection = time_value;
         });
         return this.fullpersondecrees;
     }
@@ -8099,28 +8090,6 @@ let derceeoperationelement = class derceeoperationelement extends __WEBPACK_IMPO
                 });
             });
         });
-        /*fetch('/api/Persondecree', {
-            method: 'post',
-            body: JSON.stringify(<Persondecree>{
-                persondecreeManagementStatus: 1, // Добавить
-                nickname: "",
-            }),
-            credentials: 'include',
-            headers: new Headers({
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            })
-        }).then(x => {
-            (<any>Vue).notify("S:Проект приказа создан");
-            fetch('api/Persondecree/GetLustDecreeByUser', { credentials: 'include' })
-                .then(response => {
-                    return response.json() as Promise<Persondecree>;
-                })
-                .then(result => {
-                    this.open(result);
-                    this.fetchMailExplorer();
-                });
-        })*/
     }
     open(decree) {
         this.$store.commit("setpersondecree", decree);
@@ -8264,9 +8233,13 @@ let derceeoperationelement = class derceeoperationelement extends __WEBPACK_IMPO
         this.dialogVisibleExplorer = true;
     }
     FolderSelected(folder) {
+        let explorer = [];
+        this.multipleSelection.forEach(r => {
+            explorer.push(this.full_explorers.find(h => h.id == r.mailexplorerid));
+        });
         fetch('api/MailController/ChangeFolder/' + (this.explorerFolder.indexOf(folder) + 1).toString(), {
             method: 'post',
-            body: JSON.stringify(this.multipleSelection),
+            body: JSON.stringify(explorer),
             credentials: 'include',
             headers: new Headers({
                 'Accept': 'application/json',
@@ -8315,30 +8288,44 @@ let derceeoperationelement = class derceeoperationelement extends __WEBPACK_IMPO
         }
     }
     selectUser(id) {
-        this.multipleSelection.forEach(q => {
+        fetch('api/MailController/Send/' + (id).toString(), {
+            method: 'post',
+            body: JSON.stringify(this.multipleSelection),
+            credentials: 'include',
+            headers: new Headers({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            })
+        }).then(x => {
+            this.multipleSelection = [];
+            this.fetchMailExplorer();
+            this.usersSearch = [];
+            this.dialogVisibleSend = false;
+        });
+        /*this.multipleSelection.forEach(q => {
             if (q == null) {
                 return; // Нету проекта приказа
             }
             //this.disableDecrees();
             fetch('/api/Persondecree', {
                 method: 'post',
-                body: JSON.stringify({
+                body: JSON.stringify(<Persondecree>{
                     id: q.id,
-                    persondecreeManagementStatus: 7,
+                    persondecreeManagementStatus: 7, // Перенаправляем проект приказа на другого кадровика
                     owner: id,
                 }),
                 credentials: 'include',
                 headers: new Headers({
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
                 })
             }).then(x => {
                 this.persondecreeId = 0;
                 this.fetchMailExplorer();
                 this.usersSearch = [];
-                __WEBPACK_IMPORTED_MODULE_0_vue__["default"].notify("S:Проект приказа направлен на кадровика");
-            });
-        });
+                (<any>Vue).notify("S:Проект приказа направлен на кадровика");
+            })
+        })*/
     }
     closeUserSearch() {
         this.usersSearch = [];
@@ -29216,7 +29203,7 @@ var Component = __webpack_require__(3)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\Projects\\MCHS\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\adminpanel\\adminpanel.vue.html"
+Component.options.__file = "D:\\GIT\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\adminpanel\\adminpanel.vue.html"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] adminpanel.vue.html: functional components are not supported with templates, they should use render functions.")}
 
@@ -29250,7 +29237,7 @@ var Component = __webpack_require__(3)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\Projects\\MCHS\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\app\\app.vue.html"
+Component.options.__file = "D:\\GIT\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\app\\app.vue.html"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] app.vue.html: functional components are not supported with templates, they should use render functions.")}
 
@@ -29284,7 +29271,7 @@ var Component = __webpack_require__(3)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\Projects\\MCHS\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\candidates\\candidates.vue.html"
+Component.options.__file = "D:\\GIT\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\candidates\\candidates.vue.html"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] candidates.vue.html: functional components are not supported with templates, they should use render functions.")}
 
@@ -29318,7 +29305,7 @@ var Component = __webpack_require__(3)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\Projects\\MCHS\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\decreeoperationelement\\decreeoperationelement.vue.html"
+Component.options.__file = "D:\\GIT\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\decreeoperationelement\\decreeoperationelement.vue.html"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] decreeoperationelement.vue.html: functional components are not supported with templates, they should use render functions.")}
 
@@ -29352,7 +29339,7 @@ var Component = __webpack_require__(3)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\Projects\\MCHS\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\decreeoperationtemplatecreator\\decreeoperationtemplatecreator.vue.html"
+Component.options.__file = "D:\\GIT\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\decreeoperationtemplatecreator\\decreeoperationtemplatecreator.vue.html"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] decreeoperationtemplatecreator.vue.html: functional components are not supported with templates, they should use render functions.")}
 
@@ -29386,7 +29373,7 @@ var Component = __webpack_require__(3)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\Projects\\MCHS\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\departmentmanagingpanel\\departmentmanagingpanel.vue.html"
+Component.options.__file = "D:\\GIT\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\departmentmanagingpanel\\departmentmanagingpanel.vue.html"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] departmentmanagingpanel.vue.html: functional components are not supported with templates, they should use render functions.")}
 
@@ -29420,7 +29407,7 @@ var Component = __webpack_require__(3)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\Projects\\MCHS\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\departmentslist\\departmentslist.vue.html"
+Component.options.__file = "D:\\GIT\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\departmentslist\\departmentslist.vue.html"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] departmentslist.vue.html: functional components are not supported with templates, they should use render functions.")}
 
@@ -29454,7 +29441,7 @@ var Component = __webpack_require__(3)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\Projects\\MCHS\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\eld\\eld.vue.html"
+Component.options.__file = "D:\\GIT\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\eld\\eld.vue.html"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] eld.vue.html: functional components are not supported with templates, they should use render functions.")}
 
@@ -29488,7 +29475,7 @@ var Component = __webpack_require__(3)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\Projects\\MCHS\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\home\\home.vue.html"
+Component.options.__file = "D:\\GIT\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\home\\home.vue.html"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] home.vue.html: functional components are not supported with templates, they should use render functions.")}
 
@@ -29522,7 +29509,7 @@ var Component = __webpack_require__(3)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\Projects\\MCHS\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\login\\login.vue.html"
+Component.options.__file = "D:\\GIT\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\login\\login.vue.html"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] login.vue.html: functional components are not supported with templates, they should use render functions.")}
 
@@ -29556,7 +29543,7 @@ var Component = __webpack_require__(3)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\Projects\\MCHS\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\modepanel\\modepanel.vue.html"
+Component.options.__file = "D:\\GIT\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\modepanel\\modepanel.vue.html"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] modepanel.vue.html: functional components are not supported with templates, they should use render functions.")}
 
@@ -29590,7 +29577,7 @@ var Component = __webpack_require__(3)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\Projects\\MCHS\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\notemplate\\notemplate.vue.html"
+Component.options.__file = "D:\\GIT\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\notemplate\\notemplate.vue.html"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] notemplate.vue.html: functional components are not supported with templates, they should use render functions.")}
 
@@ -29624,7 +29611,7 @@ var Component = __webpack_require__(3)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\Projects\\MCHS\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\pmrequestpanel\\pmrequestpanel.vue.html"
+Component.options.__file = "D:\\GIT\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\pmrequestpanel\\pmrequestpanel.vue.html"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] pmrequestpanel.vue.html: functional components are not supported with templates, they should use render functions.")}
 
@@ -29658,7 +29645,7 @@ var Component = __webpack_require__(3)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\Projects\\MCHS\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\positionmanagingpanel\\positionmanagingpanel.vue.html"
+Component.options.__file = "D:\\GIT\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\positionmanagingpanel\\positionmanagingpanel.vue.html"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] positionmanagingpanel.vue.html: functional components are not supported with templates, they should use render functions.")}
 
@@ -29692,7 +29679,7 @@ var Component = __webpack_require__(3)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\Projects\\MCHS\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\positionslist\\positionslist.vue.html"
+Component.options.__file = "D:\\GIT\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\positionslist\\positionslist.vue.html"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] positionslist.vue.html: functional components are not supported with templates, they should use render functions.")}
 
@@ -29726,7 +29713,7 @@ var Component = __webpack_require__(3)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\Projects\\MCHS\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\settingspanel\\settingspanel.vue.html"
+Component.options.__file = "D:\\GIT\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\settingspanel\\settingspanel.vue.html"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] settingspanel.vue.html: functional components are not supported with templates, they should use render functions.")}
 
@@ -29760,7 +29747,7 @@ var Component = __webpack_require__(3)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\Projects\\MCHS\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\sidebar\\sidebar.vue.html"
+Component.options.__file = "D:\\GIT\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\sidebar\\sidebar.vue.html"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] sidebar.vue.html: functional components are not supported with templates, they should use render functions.")}
 
@@ -29794,7 +29781,7 @@ var Component = __webpack_require__(3)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\Projects\\MCHS\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\topmenu\\topmenu.vue.html"
+Component.options.__file = "D:\\GIT\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\topmenu\\topmenu.vue.html"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] topmenu.vue.html: functional components are not supported with templates, they should use render functions.")}
 
@@ -51742,7 +51729,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('el-button', {
     staticClass: "eld-eld-main-head-partbutton",
     attrs: {
-      "size": "mini"
+      "size": "mini",
+      "disabled": _vm.menuid == 9 || _vm.menuid == 8
     },
     on: {
       "click": _vm.send
@@ -51750,7 +51738,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_vm._v("Направить")]), _vm._v(" "), _c('el-button', {
     staticClass: "eld-eld-main-head-partbutton",
     attrs: {
-      "size": "mini"
+      "size": "mini",
+      "disabled": _vm.menuid == 9 || _vm.menuid == 8
     },
     on: {
       "click": _vm.deleted
@@ -51758,15 +51747,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_vm._v("Удалить")]), _vm._v(" "), _c('el-button', {
     staticClass: "eld-eld-main-head-partbutton",
     attrs: {
-      "size": "mini"
-    },
-    on: {
-      "click": function($event) {}
-    }
-  }, [_vm._v("Прочитано/Не прочитано")]), _vm._v(" "), _c('el-button', {
-    staticClass: "eld-eld-main-head-partbutton",
-    attrs: {
-      "size": "mini"
+      "size": "mini",
+      "disabled": _vm.menuid == 9 || _vm.menuid == 8 || _vm.menuid == 10
     },
     on: {
       "click": _vm.explorer
@@ -51774,7 +51756,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_vm._v("Переместить в папку")]), _vm._v(" "), _c('el-button', {
     staticClass: "eld-eld-main-head-partbutton",
     attrs: {
-      "size": "mini"
+      "size": "mini",
+      "disabled": _vm.menuid == 9 || _vm.menuid == 8 || _vm.menuid == 8
     },
     on: {
       "click": _vm.unit

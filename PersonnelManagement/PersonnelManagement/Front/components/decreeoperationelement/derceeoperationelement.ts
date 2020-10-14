@@ -129,18 +129,10 @@ export default class derceeoperationelement extends Vue {
     }
     handleSelectionChange(val) {
         this.multipleSelection = val;
-        this.multipleSelection.forEach(r => {
+        /*this.multipleSelection.forEach(r => {
             let index: number = this.fullpersondecrees.findIndex(p => p.id == r.id);
             this.fullpersondecrees[index].marked = this.fullpersondecrees[index].marked == true ? false : true;
-        })
-        /*if (val) {
-            val.forEach(row => {
-                this.$refs.multipleTable.toggleRowSelection(row);
-            });
-        } else {
-            this.$refs.multipleTable.clearSelection();
-        }*/
-        //this.reload();
+        })*/
     }
     filterHandler(value, row, column) {
         const property = column['property'];
@@ -169,7 +161,7 @@ export default class derceeoperationelement extends Vue {
             this.$refs.contextbutton.init(row, column, event);
         })*/
     }
-    foo() { // 取消鼠标监听事件 菜单栏
+    foo() {
         this.rowcontextmenuVisible = false;
         document.removeEventListener('click', this.foo);
     }
@@ -191,6 +183,7 @@ export default class derceeoperationelement extends Vue {
         }
     }
     fetchMailExplorer() {
+        let time_value = this.multipleSelection;
         fetch('api/MailController/Full', { credentials: 'include' })
             .then(response => {
                 return response.json() as Promise<Mailexplorer[]>;
@@ -199,13 +192,13 @@ export default class derceeoperationelement extends Vue {
                 this.full_explorers = resualt;
                 this.fullpersondecrees = this.fetchPersondecreesActive();
                 this.reload();
+                this.multipleSelection = time_value;
             })
         return this.fullpersondecrees;
     }
 
     fetchPersondecreesActive() {
-        // let time_value = this.multipleSelection;
-        this.fetchMailExplorer();
+        let time_value = this.multipleSelection;
         let time_explorer = this.full_explorers;
         fetch('api/Persondecree/FullByUser', { credentials: 'include' })
             .then(response => {
@@ -215,8 +208,6 @@ export default class derceeoperationelement extends Vue {
                 //alert('mark');
                 result.forEach(r => {
                     var exp: Mailexplorer = time_explorer.find(q => q.id == r.mailexplorerid);
-                    if (exp.id >= 181)
-                        var l = 'debug'; 
                     r.creatorfolder = exp.folderCreator;
                     r.ownerfolder = exp.folderOwner;
                     r.accessforreading = exp.accessForReading;
@@ -246,8 +237,8 @@ export default class derceeoperationelement extends Vue {
                     
                 });
                 this.fullpersondecrees = result;
-                // this.reload();
-                // this.multipleSelection = time_value;
+                this.reload();
+                this.multipleSelection = time_value;
             });
         return this.fullpersondecrees;
     }
@@ -308,29 +299,6 @@ export default class derceeoperationelement extends Vue {
                     });
             })
         })
-
-        /*fetch('/api/Persondecree', {
-            method: 'post',
-            body: JSON.stringify(<Persondecree>{
-                persondecreeManagementStatus: 1, // Добавить
-                nickname: "",
-            }),
-            credentials: 'include',
-            headers: new Headers({
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            })
-        }).then(x => {
-            (<any>Vue).notify("S:Проект приказа создан");
-            fetch('api/Persondecree/GetLustDecreeByUser', { credentials: 'include' })
-                .then(response => {
-                    return response.json() as Promise<Persondecree>;
-                })
-                .then(result => {
-                    this.open(result);
-                    this.fetchMailExplorer();
-                });
-        })*/
     }
 
     open(decree: Persondecree) {
@@ -472,10 +440,14 @@ export default class derceeoperationelement extends Vue {
         this.dialogVisibleExplorer = true;
     }
     FolderSelected(folder) {
+        let explorer = [];
+        this.multipleSelection.forEach(r => {
+            explorer.push(this.full_explorers.find(h => h.id == r.mailexplorerid))
+        })
         fetch('api/MailController/ChangeFolder/' + (this.explorerFolder.indexOf(folder) + 1).toString(),
             {
                 method: 'post',
-                body: JSON.stringify(this.multipleSelection),
+                body: JSON.stringify(explorer),
                 credentials: 'include',
                 headers: new Headers({
                     'Accept': 'application/json',
@@ -527,30 +499,45 @@ export default class derceeoperationelement extends Vue {
     }
 
     selectUser(id: number) {
-        this.multipleSelection.forEach(q => {
-        if (q == null) {
-            return; // Нету проекта приказа
-        }
-        //this.disableDecrees();
-        fetch('/api/Persondecree', {
-            method: 'post',
-            body: JSON.stringify(<Persondecree>{
-                id: q.id,
-                persondecreeManagementStatus: 7, // Перенаправляем проект приказа на другого кадровика
-                owner: id,
-            }),
-            credentials: 'include',
-            headers: new Headers({
+        fetch('api/MailController/Send/' + (id).toString(),
+            {
+                method: 'post',
+                body: JSON.stringify(this.multipleSelection),
+                credentials: 'include',
+                headers: new Headers({
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                })
+            }).then(x => {
+                this.multipleSelection = [];
+                this.fetchMailExplorer();
+                this.usersSearch = [];
+                this.dialogVisibleSend = false;
+            })
+        /*this.multipleSelection.forEach(q => {
+            if (q == null) {
+                return; // Нету проекта приказа
+            }
+            //this.disableDecrees();
+            fetch('/api/Persondecree', {
+                method: 'post',
+                body: JSON.stringify(<Persondecree>{
+                    id: q.id,
+                    persondecreeManagementStatus: 7, // Перенаправляем проект приказа на другого кадровика
+                    owner: id,
+                }),
+                credentials: 'include',
+                headers: new Headers({
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
+                })
+            }).then(x => {
+                this.persondecreeId = 0;
+                this.fetchMailExplorer();
+                this.usersSearch = [];
+                (<any>Vue).notify("S:Проект приказа направлен на кадровика");
             })
-        }).then(x => {
-            this.persondecreeId = 0;
-            this.fetchMailExplorer();
-            this.usersSearch = [];
-            (<any>Vue).notify("S:Проект приказа направлен на кадровика");
-        })
-        })
+        })*/
     }
 
     closeUserSearch() {

@@ -34,11 +34,11 @@
                 <!--Шапка главного меню-->
                 <div class="eld-eld-main-head">
                     <div style="display: flex; ">
-                        <el-button class="eld-eld-main-head-partbutton" size="mini" @click="send">Направить</el-button>
-                        <el-button class="eld-eld-main-head-partbutton" size="mini" @click="deleted">Удалить</el-button>
-                        <el-button class="eld-eld-main-head-partbutton" size="mini" @click="">Прочитано/Не прочитано</el-button>
-                        <el-button class="eld-eld-main-head-partbutton" size="mini" @click="explorer">Переместить в папку</el-button>
-                        <el-button class="eld-eld-main-head-partbutton" size="mini" @click="unit">Объединить</el-button>
+                        <el-button class="eld-eld-main-head-partbutton" size="mini" @click="send" :disabled="menuid == 9 || menuid == 8">Направить</el-button>
+                        <el-button class="eld-eld-main-head-partbutton" size="mini" @click="deleted" :disabled="menuid == 9 || menuid == 8">Удалить</el-button>
+                        <!--<el-button class="eld-eld-main-head-partbutton" size="mini" @click="">Прочитано/Не прочитано</el-button>-->
+                        <el-button class="eld-eld-main-head-partbutton" size="mini" @click="explorer" :disabled="menuid == 9 || menuid == 8 || menuid == 10">Переместить в папку</el-button>
+                        <el-button class="eld-eld-main-head-partbutton" size="mini" @click="unit" :disabled="menuid == 9 || menuid == 8 || menuid == 8">Объединить</el-button>
                         <el-button class="eld-eld-main-head-partbutton" size="mini" @click="sbdWorker">test</el-button>
                     </div>
                 </div>

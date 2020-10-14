@@ -52,6 +52,23 @@ namespace PersonnelManagement.Controllers
             return null;
         }
 
+        [HttpGet("Update")]
+        public Mailexplorer Update([FromBody] Mailexplorer body)
+        {
+            string sessionid = Request.Cookies[Keys.COOKIES_SESSION];
+            User user = null;
+            if (IdentityService.IsLogined(sessionid, repository))
+            {
+                // return repository.GetDecree 
+                user = IdentityService.GetUserBySessionID(sessionid, repository);
+                var time = repository.GetContext().Mailexplorer.First(r => r.Id == body.Id);
+                time = body;
+                repository.GetContext().SaveChanges();
+                return time;
+            }
+            return null;
+        }
+
         [HttpPost("ChangeFolder/{id}")]
         public void ChangeFolder([FromRoute] uint id, [FromBody] IEnumerable<Mailexplorer> body)
         {
@@ -69,6 +86,28 @@ namespace PersonnelManagement.Controllers
                         time.FolderCreator = id;
                     else if (decree.Owner == user.Id)
                         time.FolderOwner = id;
+                    repository.GetContext().SaveChanges();
+                });
+            }
+        }
+
+        [HttpPost("Send/{id}")]
+        public void Send([FromRoute] int id, [FromBody] IEnumerable<Persondecree> body)
+        {
+            string sessionid = Request.Cookies[Keys.COOKIES_SESSION];
+            User user = null;
+            if (IdentityService.IsLogined(sessionid, repository))
+            {
+                // return repository.GetDecree 
+                user = IdentityService.GetUserBySessionID(sessionid, repository);
+
+                body.ToList().ForEach(i => {
+                    var decree = repository.GetContext().Persondecree.First(r => r.Id == i.Id);
+                    var time = repository.GetContext().Mailexplorer.First(r => r.Id == i.Mailexplorerid);
+                    if (decree.Creator == user.Id)
+                        time.FolderCreator = 3;
+                    time.FolderOwner = 2;
+                    decree.Owner = id;
                     repository.GetContext().SaveChanges();
                 });
             }

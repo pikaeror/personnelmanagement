@@ -104,7 +104,7 @@ namespace PersonnelManagement.Controllers
         }
 
         // GET: api/Persondecree/Action
-        [HttpGet("Action{str}")]
+        [HttpPost("Action{str}")]
         public IActionResult PerformAction([FromRoute] string str, [FromBody] Mailexplorer folder)
         {
             string sessionid = Request.Cookies[Keys.COOKIES_SESSION];

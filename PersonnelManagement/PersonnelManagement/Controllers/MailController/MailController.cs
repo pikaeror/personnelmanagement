@@ -52,7 +52,7 @@ namespace PersonnelManagement.Controllers
             return null;
         }
 
-        [HttpGet("Update")]
+        [HttpPost("Update")]
         public Mailexplorer Update([FromBody] Mailexplorer body)
         {
             string sessionid = Request.Cookies[Keys.COOKIES_SESSION];
@@ -61,8 +61,10 @@ namespace PersonnelManagement.Controllers
             {
                 // return repository.GetDecree 
                 user = IdentityService.GetUserBySessionID(sessionid, repository);
-                var time = repository.GetContext().Mailexplorer.First(r => r.Id == body.Id);
-                time = body;
+                var time = repository.GetContext().Mailexplorer.SingleOrDefault(r => r.Id == body.Id);
+                time.FolderCreator = body.FolderCreator;
+                time.FolderOwner = body.FolderOwner;
+                //repository.GetContext().Mailexplorer.U
                 repository.GetContext().SaveChanges();
                 return time;
             }

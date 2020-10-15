@@ -46,7 +46,7 @@
                 <!--property="marked"  @selection-change="handleSelectionChange"   :filters="datefiltervariants"  -->
                 <template>
                     <div v-if="viewpersondecrees.length > 0">
-                        <el-table ref="multipleTable" :data="viewpersondecrees" style="width: 99%" height="100%" border :row-class-name="tableRowClassName" @selection-change="handleSelectionChange" @row-dblclick="rowClicked" @row-contextmenu="rowContextmenu">
+                        <el-table ref="multipleTable" :data="viewpersondecrees" style="width: 99%; height: 700px" height="100%" border :row-class-name="tableRowClassName" @selection-change="handleSelectionChange" @row-dblclick="rowClicked" @row-contextmenu="rowContextmenu">
                             <el-table-column type="selection" width="55">
                             </el-table-column>
                             <el-table-column property="getDate" label="ДАТА" sortable width="110" :filter-method="filterHandler">
@@ -76,12 +76,12 @@
             </div>
         </div>
         <el-dialog width="900px" :visible.sync="dialogVisibleSend">
-            <div>
+            <div style="margin-bottom: 10px">
                 Введите полностью или частично фамилию, логин или подразделение для поиска кадровика, которому будет направлен проекты приказа
                 <div v-for="decree in multipleSelection">
-                    <div>
+                    <small style="margin-bottom: 5px">
                         &#128504 {{decree.number}} {{decree.getName}} от {{decree.getDate}}; <el-button size="mini" type="danger" icon="el-icon-delete" @click="deleteDecreeFromList(decree)"></el-button>
-                    </div>
+                    </small>
                 </div>
             </div>
             <div>
@@ -119,23 +119,52 @@
         </el-dialog>
 
         <el-dialog width="900px" :visible.sync="dialogVisibleExplorer">
-            <div>
+            <div style="margin-bottom: 10px">
                 Выберите папку для переноса следующих приказов:
                 <div v-for="decree in multipleSelection">
-                    <small>
+                    <small style="margin-bottom: 5px">
                         &#128504 {{decree.number}} {{decree.getName}} от {{decree.getDate}}; <el-button size="mini" type="danger" icon="el-icon-delete" @click="deleteDecreeFromList(decree)"></el-button>
                     </small>
                 </div>
             </div>
-            <div v-for="folder in explorerFolder">
-
-                <el-button size="mini" type="success" @click="FolderSelected(folder)">
-                    {{folder}}
-                </el-button>
-
+            <div style="display: flex; ">
+                <div v-for="folder in explorerFolder">
+                    <div style="margin-right: 10px; margin-left: 10px">
+                        <el-button size="mini" type="success" @click="FolderSelected(folder)">
+                            {{folder}}
+                        </el-button>
+                    </div>
+                </div>
             </div>
         </el-dialog>
         <!--<derceeoperationelementcreator :visible="decreecreator"></derceeoperationelementcreator>-->
+
+        <el-dialog width="900px" :visible.sync="dialogVisibleUnit">
+            <div style="margin-bottom: 10px">
+                Выберите проекты приказов для объединения:
+                <div v-for="decree in multipleSelection">
+                    <small style="margin-bottom: 5px">
+                        &#128504 {{decree.number}} {{decree.getName}} от {{decree.getDate}}; <el-button size="mini" type="danger" icon="el-icon-delete" @click="deleteDecreeFromList(decree)"></el-button>
+                    </small>
+                </div>
+            </div>
+            <div style="display: flex; ">
+                <div v-for="folder in explorerFolder">
+                    <div style="margin-right: 10px; margin-left: 10px">
+                        <el-button size="mini" type="success" @click="FolderSelectedByUnit(folder)">
+                            {{folder}}
+                        </el-button>
+                    </div>
+                </div>
+                <div v-if="viewpersondecreesunit.length > 0">
+                    <div v-for="decree in viewpersondecreesunit">
+                        <small style="margin-bottom: 5px">
+                            {{decree.number}} {{decree.getName}} от {{decree.getDate}}; <el-button size="mini" @click="addToUnitList(decree)">Добавить к объединению</el-button>
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </el-dialog>
     </div>
 </template>
 <script src="./derceeoperationelement.ts"></script>

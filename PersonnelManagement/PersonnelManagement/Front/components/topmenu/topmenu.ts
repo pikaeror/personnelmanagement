@@ -3469,7 +3469,14 @@ export default class TopmenuComponent extends Vue {
                 str += "_" + p.id;
             }
         });
-        fetch('api/Persondecree/Action' + str, { credentials: 'include' })
+        fetch('api/Persondecree/Action' + str, {
+            method: 'post',
+            credentials: 'include',
+            headers: new Headers({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            })
+        })
             .then(response => {
                 return response.json() as Promise<string>;
             })

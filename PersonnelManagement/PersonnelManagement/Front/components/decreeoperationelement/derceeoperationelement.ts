@@ -69,6 +69,8 @@ export default class derceeoperationelement extends Vue {
 
     dialogVisibleSend: boolean;
     dialogVisibleUnit: boolean;
+    viewpersondecreesunit: Persondecree[];
+    menuunitid: number;
     dialogVisibleExplorer: boolean;
     explorerFolder: ["Мои документы", "Входящие", "Исходящие", "Отработанные", "Архив", "В работе"];
 
@@ -110,6 +112,8 @@ export default class derceeoperationelement extends Vue {
 
             dialogVisibleSend: false,
             dialogVisibleUnit: false,
+            viewpersondecreesunit: [],
+            menuunitid: 0,
             dialogVisibleExplorer: false,
             explorerFolder: ["Мои документы", "Входящие", "Исходящие", "Отработанные", "Архив", "В работе"],
 
@@ -332,18 +336,27 @@ export default class derceeoperationelement extends Vue {
 
     setMenuid(id: number) {
         this.menuid = id;
-        this.filterbyfolders(id);
+        this.viewpersondecrees = this.filterbyfolders(id);
         this.getDateList();
     }
 
+    FolderSelectedByUnit(id) {
+        this.menuunitid = (this.explorerFolder.indexOf(id) + 1);
+        this.viewpersondecreesunit = this.filterbyfolders(this.menuunitid);
+    }
+
+    addToUnitList(decree: Persondecree) {
+        this.multipleSelection.push(decree);
+    }
+
     filterbyfolders(folder: number) {
-        this.viewpersondecrees = [];
+        var time = [];
         if (folder == 2) {
             this.fullpersondecrees.forEach(r => {
                 if (r.creator == this.$store.state.user.id && folder - 1 == r.creatorfolder) {
-                    this.viewpersondecrees.push(r);
+                    time.push(r);
                 } else if (r.owner == this.$store.state.user.id && folder - 1 == r.ownerfolder) {
-                    this.viewpersondecrees.push(r);
+                    time.push(r);
                 }
                 /*if (r.creatorfolder == folder - 1 && r.creator == r.owner && r.creator == this.$store.state.user.id)
                     this.viewpersondecrees.push(r)*/
@@ -351,9 +364,9 @@ export default class derceeoperationelement extends Vue {
         } else if (folder == 3) {
             this.fullpersondecrees.forEach(r => {
                 if (r.creator == this.$store.state.user.id && folder - 1 == r.creatorfolder) {
-                    this.viewpersondecrees.push(r);
+                    time.push(r);
                 } else if (r.owner == this.$store.state.user.id && folder - 1 == r.ownerfolder) {
-                    this.viewpersondecrees.push(r);
+                    time.push(r);
                 }
             })
             /*this.fullpersondecrees.forEach(r => {
@@ -363,9 +376,9 @@ export default class derceeoperationelement extends Vue {
         } else if (folder == 4) {
             this.fullpersondecrees.forEach(r => {
                 if (r.creator == this.$store.state.user.id && folder - 1 == r.creatorfolder) {
-                    this.viewpersondecrees.push(r);
+                    time.push(r);
                 } else if (r.owner == this.$store.state.user.id && folder - 1 == r.ownerfolder) {
-                    this.viewpersondecrees.push(r);
+                    time.push(r);
                 }
             })
             /*this.fullpersondecrees.forEach(r => {
@@ -375,33 +388,33 @@ export default class derceeoperationelement extends Vue {
         } else if (folder == 5) {
             this.fullpersondecrees.forEach(r => {
                 if (r.creator == this.$store.state.user.id && folder - 1 == r.creatorfolder) {
-                    this.viewpersondecrees.push(r);
+                    time.push(r);
                 } else if (r.owner == this.$store.state.user.id && folder - 1 == r.ownerfolder) {
-                    this.viewpersondecrees.push(r);
+                    time.push(r);
                 }
             })
         } else if (folder == 6) {
             this.fullpersondecrees.forEach(r => {
                 if (r.creator == this.$store.state.user.id && folder - 1 == r.creatorfolder) {
-                    this.viewpersondecrees.push(r);
+                    time.push(r);
                 } else if (r.owner == this.$store.state.user.id && folder - 1 == r.ownerfolder) {
-                    this.viewpersondecrees.push(r);
+                    time.push(r);
                 }
             })
         } else if (folder == 7) {
             this.fullpersondecrees.forEach(r => {
                 if (r.creator == this.$store.state.user.id && folder - 1 == r.creatorfolder) {
-                    this.viewpersondecrees.push(r);
+                    time.push(r);
                 } else if (r.owner == this.$store.state.user.id && folder - 1 == r.ownerfolder) {
-                    this.viewpersondecrees.push(r);
+                    time.push(r);
                 }
             })
         } else if (folder == 8) {
             this.fullpersondecrees.forEach(r => {
                 if (r.creator == this.$store.state.user.id && folder - 1 == r.creatorfolder) {
-                    this.viewpersondecrees.push(r);
+                    time.push(r);
                 } else if (r.owner == this.$store.state.user.id && folder - 1 == r.ownerfolder) {
-                    this.viewpersondecrees.push(r);
+                    time.push(r);
                 }
             })
             /*this.fullpersondecrees.forEach(r => {
@@ -411,9 +424,10 @@ export default class derceeoperationelement extends Vue {
         } else if (folder == 9) {
             this.fullpersondecrees.forEach(r => {
                 if (r.signed == 1)
-                    this.viewpersondecrees.push(r)
+                    time.push(r)
             })
         }
+        return time;
     }
 
     rowClicked(row) {
@@ -470,8 +484,8 @@ export default class derceeoperationelement extends Vue {
     }
 
     unit() {
-        this.persondecreesUnite();
         this.dialogVisibleUnit = true;
+        //this.persondecreesUnite();
     }
 
     searchUsers(search: string) {
@@ -548,14 +562,35 @@ export default class derceeoperationelement extends Vue {
         let str: string = "1"; // первый номер будет означать тип операции по отношению к выбранным проектам приказов
         this.multipleSelection.forEach(p => {
             str += "_" + p.id;
+            var time: Mailexplorer = this.full_explorers.find(r => r.id == p.mailexplorerid);
+            if (this.$store.state.user.id == p.creator)
+                time.folderCreator = (this.explorerFolder.indexOf("Отработанные") + 1);
+            else
+                time.folderOwner = (this.explorerFolder.indexOf("Отработанные") + 1);
+            fetch('api/MailController/Update', {
+                method: 'post',
+                body: JSON.stringify(time),
+                credentials: 'include',
+                headers: new Headers({
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                })
+            }).then(response => {
+                return response.json() as Promise<Mailexplorer>;
+            })
         });
-        fetch('api/Persondecree/Action' + str, { credentials: 'include' })
-            .then(response => {
+        fetch('api/Persondecree/Action' + str, {
+            method: 'post',
+            credentials: 'include',
+            headers: new Headers({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            })
+        }).then(response => {
                 return response.json() as Promise<string>;
-            })
-            .then(result => {
+        }).then(result => {
                 this.fetchMailExplorer();
-            })
+        })
     }
 
     sbdWorker() {

@@ -290,18 +290,31 @@
                                         <div>
                                             <div>
                                                 <!--<el-button size="mini" type="warning" @click="updatePersonreward(persondecreeBlock, decreeoperation)">Редактировать</el-button>-->
-                                                <el-button size="mini" type="warning" @click="removePersondecreeoperation(decreeoperation)">Удалить</el-button>
+                                                <el-button size="mini" style="margin-bottom: 10px" type="warning" @click="removePersondecreeoperation(decreeoperation)">Удалить</el-button>
+                                                <el-select v-model="value10"
+                                                           multiple
+                                                           filterable
+                                                           allow-create
+                                                           default-first-option
+                                                           placeholder="Редактировать список получателей данного пункта"
+                                                           style="width: 400px">
+                                                    <el-option v-for="item in options5"
+                                                               :key="item.value"
+                                                               :label="item.label"
+                                                               :value="item.value">
+                                                    </el-option>
+                                                </el-select>
                                             </div>
                                         </div>
 
                                     </div>
                                 </div>
                             </div>
-                            <div>
+                            <!--<div>
                                 <div>
 
                                 </div>
-                            </div>
+                            </div>-->
 
                         </div>
                         <!--Подпункты без фабул-->
@@ -381,10 +394,6 @@
                                     </div>
                                 </div>
                             </div>
-                            <div>
-
-                            </div>
-
                         </div>
                         <br />
                     </div>

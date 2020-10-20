@@ -3,6 +3,7 @@ using PersonnelManagement.Models;
 using PersonnelManagement.Services;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 
 namespace PersonnelManagement.Controllers
 {
@@ -48,6 +49,33 @@ namespace PersonnelManagement.Controllers
                 repository.GetContext().Mailexplorer.Add(time);
                 repository.GetContext().SaveChanges();
                 return time;
+            }
+            return null;
+        }
+
+        [HttpGet("rand")]
+        public IEnumerable<Structure> rand()
+        {
+            string sessionid = Request.Cookies[Keys.COOKIES_SESSION];
+            User user = null;
+            if (IdentityService.IsLogined(sessionid, repository))
+            {
+                // return repository.GetDecree 
+                user = IdentityService.GetUserBySessionID(sessionid, repository);
+                Random rand = new Random();
+                int count = rand.Next(2, 6);
+                int full_structures = repository.StructuresLocal().Count;
+                List<Structure> output = new List<Structure>(){ };
+                for(int k = 0; k < count; k++)
+                {
+                    int y = rand.Next(full_structures);
+                    while( output.Find(r => r.Id == y) != null )
+                    {
+                        y = rand.Next(full_structures);
+                    }
+                    output.Add(repository.StructuresLocal().Values.First(r => r.Id == y));
+                }
+                return output;
             }
             return null;
         }

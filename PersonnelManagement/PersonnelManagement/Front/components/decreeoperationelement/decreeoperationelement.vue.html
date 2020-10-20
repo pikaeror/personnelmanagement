@@ -18,17 +18,17 @@
             <!--Здесь боковая панель-->
             <div class="eld-eld-side-mail">
                 <div class="eld-eld-side-element" style="background-color: lightgray;"><strong>Предложения</strong></div>
-                <div v-bind:class="{'eld-eld-side-element-selected': menuid == 2}" class="eld-eld-side-element" style="background-color: lightgray;" @click="setMenuid(2)">Мои документы</div>
-                <div v-bind:class="{'eld-eld-side-element-selected': menuid == 3}" class="eld-eld-side-element" style="background-color: lightgray;" @click="setMenuid(3)">Входящие</div>
-                <div v-bind:class="{'eld-eld-side-element-selected': menuid == 4}" class="eld-eld-side-element" style="background-color: lightgray;" @click="setMenuid(4)">Исходящие</div>
-                <div v-bind:class="{'eld-eld-side-element-selected': menuid == 5}" class="eld-eld-side-element" style="background-color: lightgray;" @click="setMenuid(5)">Отработанные</div>
-                <div v-bind:class="{'eld-eld-side-element-selected': menuid == 6}" class="eld-eld-side-element" style="background-color: lightgray;" @click="setMenuid(6)">Архив</div>
+                <div v-bind:class="{'eld-eld-side-element-selected': menuid == 2}" class="eld-eld-side-element" style="background-color: lightgray;" @click="set_menu_id(2)">Мои документы</div>
+                <div v-bind:class="{'eld-eld-side-element-selected': menuid == 3}" class="eld-eld-side-element" style="background-color: lightgray;" @click="set_menu_id(3)">Входящие</div>
+                <div v-bind:class="{'eld-eld-side-element-selected': menuid == 4}" class="eld-eld-side-element" style="background-color: lightgray;" @click="set_menu_id(4)">Исходящие</div>
+                <div v-bind:class="{'eld-eld-side-element-selected': menuid == 5}" class="eld-eld-side-element" style="background-color: lightgray;" @click="set_menu_id(5)">Отработанные</div>
+                <div v-bind:class="{'eld-eld-side-element-selected': menuid == 6}" class="eld-eld-side-element" style="background-color: lightgray;" @click="set_menu_id(6)">Архив</div>
                 <div class="eld-eld-side-element"></div>
                 <div class="eld-eld-side-element" style="background-color: darkgray;"><strong>Приказы</strong></div>
-                <div v-bind:class="{'eld-eld-side-element-selected': menuid == 7}" class="eld-eld-side-element" style="background-color: darkgray;" @click="setMenuid(7)">В работе</div>
-                <div v-bind:class="{'eld-eld-side-element-selected': menuid == 8}" class="eld-eld-side-element" style="background-color: darkgray;" @click="setMenuid(8)">Мои подписанные приказы</div>
-                <div v-bind:class="{'eld-eld-side-element-selected': menuid == 9}" class="eld-eld-side-element" style="background-color: darkgray;" @click="setMenuid(9)">Все подписанные приказы</div>
-                <div v-bind:class="{'eld-eld-side-element-selected': menuid == 10}" class="eld-eld-side-element" style="background-color: darkgray;" @click="setMenuid(10)">Выписки</div>
+                <div v-bind:class="{'eld-eld-side-element-selected': menuid == 7}" class="eld-eld-side-element" style="background-color: darkgray;" @click="set_menu_id(7)">В работе</div>
+                <div v-bind:class="{'eld-eld-side-element-selected': menuid == 8}" class="eld-eld-side-element" style="background-color: darkgray;" @click="set_menu_id(8)">Мои подписанные приказы</div>
+                <div v-bind:class="{'eld-eld-side-element-selected': menuid == 9}" class="eld-eld-side-element" style="background-color: darkgray;" @click="set_menu_id(9)">Все подписанные приказы</div>
+                <div v-bind:class="{'eld-eld-side-element-selected': menuid == 10}" class="eld-eld-side-element" style="background-color: darkgray;" @click="set_menu_id(10)">Выписки</div>
             </div>
             <div class="eld-eld-main">
                 <!--Шапка главного меню-->
@@ -60,13 +60,22 @@
                             <el-table-column property="getFIO" label="ФИО работника" width="200">
                             </el-table-column>
                             <el-table-column type="expand" label="Выписки" width="90">
-                                <template slot-scope="props" disabled="signed == 1">
-                                    <el-button type="default" @click="handleSaveRow(scope.$index)">сформировать выписки</el-button>
-                                    <el-button type="default" @click="handleSaveRow(scope.$index)">отправить выписки</el-button>
+                                <template slot-scope="props">
+                                    <div> <!--v-if="props.row.signed == 1"-->
+                                        <div v-for="i in rand_list">
+                                            <div style="margin-bottom: 4px">
+                                                <small>
+                                                    &#8658 {{i.nameshortened}} <el-button size="mini" type="danger" icon="el-icon-delete" @click="delrand(i)"></el-button>
+                                                </small>
+                                            </div>
+                                        </div>
+                                        <el-button type="default" @click="random">Отобразить список получателей</el-button>
+                                        <el-button type="default" @click="handleSaveRow(scope.$index)">сформировать выписки</el-button>
+                                        <el-button type="default" @click="handleSaveRow(scope.$index)">отправить выписки</el-button>
+                                    </div>
                                 </template>
                             </el-table-column>
                         </el-table>
-                        <context-button v-if="rowcontextmenuVisible" @foo="foo" ref="contextbutton">123</context-button>
                     </div>
                     <div v-else class="eld-title">
                         Папка пуста.
@@ -75,13 +84,17 @@
 
             </div>
         </div>
-        <el-dialog width="900px" :visible.sync="dialogVisibleSend">
+        <el-dialog width="900px" :visible.sync="dialogVisibleSend" :title="title_text_f">
             <div style="margin-bottom: 10px">
-                Введите полностью или частично фамилию, логин или подразделение для поиска кадровика, которому будет направлен проекты приказа
+                <h4>
+                    Введите полностью или частично фамилию, логин или подразделение для поиска кадровика, которому будут направлены проекты приказов:
+                </h4>
                 <div v-for="decree in multipleSelection">
-                    <small style="margin-bottom: 5px">
-                        &#128504 {{decree.number}} {{decree.getName}} от {{decree.getDate}}; <el-button size="mini" type="danger" icon="el-icon-delete" @click="deleteDecreeFromList(decree)"></el-button>
-                    </small>
+                    <div style="margin-bottom: 4px">
+                        <small>
+                            &#8658 {{decree.number}} {{decree.getName}} от {{decree.getDate}}; <el-button size="mini" type="danger" icon="el-icon-delete" @click="deleteDecreeFromList(decree)"></el-button>
+                        </small>
+                    </div>
                 </div>
             </div>
             <div>
@@ -118,49 +131,75 @@
             </div>
         </el-dialog>
 
-        <el-dialog width="900px" :visible.sync="dialogVisibleExplorer">
+        <el-dialog width="900px" :visible.sync="dialogVisibleExplorer" :title="title_text_s">
             <div style="margin-bottom: 10px">
                 Выберите папку для переноса следующих приказов:
-                <div v-for="decree in multipleSelection">
-                    <small style="margin-bottom: 5px">
-                        &#128504 {{decree.number}} {{decree.getName}} от {{decree.getDate}}; <el-button size="mini" type="danger" icon="el-icon-delete" @click="deleteDecreeFromList(decree)"></el-button>
-                    </small>
+                <div style="display: flex; margin-bottom: 4px">
+                    <div v-for="folder in explorerFolder">
+                        <div style="margin-right: 10px; margin-left: 10px">
+                            <el-button size="mini" type="success" @click="FolderSelected(folder)">
+                                {{folder}}
+                            </el-button>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div style="display: flex; ">
-                <div v-for="folder in explorerFolder">
-                    <div style="margin-right: 10px; margin-left: 10px">
-                        <el-button size="mini" type="success" @click="FolderSelected(folder)">
-                            {{folder}}
-                        </el-button>
+                <div v-for="decree in multipleSelection">
+                    <div style="margin-bottom: 4px">
+                        <small>
+                            &#8658 {{decree.number}} {{decree.getName}} от {{decree.getDate}}; <el-button size="mini" type="danger" icon="el-icon-delete" @click="deleteDecreeFromList(decree)"></el-button>
+                        </small>
                     </div>
                 </div>
             </div>
         </el-dialog>
-        <!--<derceeoperationelementcreator :visible="decreecreator"></derceeoperationelementcreator>-->
 
-        <el-dialog width="900px" :visible.sync="dialogVisibleUnit">
+        <el-dialog width="900px" :visible.sync="dialogVisibleUnit" :title="title_text_t">
+            <h5>Введите данные по объединенному приказу:</h5>
+            <div v-if="unit_decree != null">
+                <div class="persondecreeoperation-row"><div class="persondecreeoperation-row-text">Название приказа:</div> <el-input v-model="unit_decree.name"></el-input></div>
+                <div class="persondecreeoperation-row"><div class="persondecreeoperation-row-text">Рабочее название приказа:</div> <el-input v-model="unit_decree.nickname"></el-input></div>
+            </div>
             <div style="margin-bottom: 10px">
                 Выберите проекты приказов для объединения:
                 <div v-for="decree in multipleSelection">
-                    <small style="margin-bottom: 5px">
-                        &#128504 {{decree.number}} {{decree.getName}} от {{decree.getDate}}; <el-button size="mini" type="danger" icon="el-icon-delete" @click="deleteDecreeFromList(decree)"></el-button>
-                    </small>
-                </div>
-            </div>
-            <div style="display: flex; ">
-                <div v-for="folder in explorerFolder">
-                    <div style="margin-right: 10px; margin-left: 10px">
-                        <el-button size="mini" type="success" @click="FolderSelectedByUnit(folder)">
-                            {{folder}}
-                        </el-button>
+                    <div style="margin-bottom: 4px">
+                        <small>
+                            &#8658 {{decree.number}} {{decree.getName}} от {{decree.getDate}}; <el-button size="mini" type="danger" icon="el-icon-delete" @click="deleteDecreeFromList(decree)"></el-button>
+                        </small>
                     </div>
                 </div>
-                <div v-if="viewpersondecreesunit.length > 0">
-                    <div v-for="decree in viewpersondecreesunit">
-                        <small style="margin-bottom: 5px">
-                            {{decree.number}} {{decree.getName}} от {{decree.getDate}}; <el-button size="mini" @click="addToUnitList(decree)">Добавить к объединению</el-button>
-                        </small>
+                <div style="margin-top: 10px" v-if="multipleSelection.length > 1">
+                    <el-button size="mini" @click="persondecreesUnite" icon="el-icon-share">Объеденить</el-button>
+                </div>
+            </div>
+            <div>
+                <div v-if="unit_dialog">
+                    <div style="margin-top: 10px">
+                        <el-button size="mini" @click="switch_k">Отобразить папки с приказами</el-button>
+                    </div>
+                </div>
+                <div v-else>
+                    <div style="display: flex; margin-bottom: 10px">
+                        <div v-for="folder in explorerFolder">
+                            <div style="margin-right: 10px; margin-left: 10px">
+                                <el-button size="mini" type="success" @click="FolderSelectedByUnit(folder)">
+                                    {{folder}}
+                                </el-button>
+                            </div>
+                        </div>
+                    </div>
+                    <div v-if="viewpersondecreesunit.length > 0">
+                        <div v-for="decree in viewpersondecreesunit">
+                            <small style="margin-bottom: 5px">
+                                {{decree.number}} {{decree.getName}} от {{decree.getDate}}; <el-button size="mini" @click="addToUnitList(decree)">Добавить к объединению</el-button>
+                            </small>
+                        </div>
+                    </div>
+                    <div v-else class="eld-title">
+                        Папка пуста.
+                    </div>
+                    <div style="margin-top: 10px" v-if="multipleSelection.length > 1">
+                        <el-button size="mini" @click="persondecreesUnite" icon="el-icon-share">Объеденить</el-button>
                     </div>
                 </div>
             </div>

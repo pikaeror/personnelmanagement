@@ -105,7 +105,7 @@ namespace PersonnelManagement.Controllers
 
         // GET: api/Persondecree/Action
         [HttpPost("Action{str}")]
-        public IActionResult PerformAction([FromRoute] string str, [FromBody] Mailexplorer folder)
+        public IActionResult PerformAction([FromRoute] string str, [FromBody] Persondecree folder)
         {
             string sessionid = Request.Cookies[Keys.COOKIES_SESSION];
             User user = null;
@@ -142,7 +142,11 @@ namespace PersonnelManagement.Controllers
                     default:
                         break;
                 }
-                return new ObjectResult(Keys.SUCCESS_SHORT + ":Выполнено");
+                return new ObjectResult(Keys.SUCCESS_SHORT + "Приказ " +
+                    ((folder != null) ? ((folder.Name != "" || folder.Nickname != "") ? "" :
+                    ((folder.Name) +
+                    ((folder.Name != "" && folder.Nickname != "") ? " / " : "") +
+                    folder.Nickname + " ")) : "") + "создан. Помещён в папку 'В работе'");
             }
             return new ObjectResult(Keys.ERROR_SHORT + ":Отказано в доступе");
         }

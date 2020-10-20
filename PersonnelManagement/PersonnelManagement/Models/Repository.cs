@@ -18600,7 +18600,7 @@ namespace PersonnelManagement.Models
         /// </summary>
         /// <param name="user"></param>
         /// <param name="persondecreeIds"></param>
-        public void PersondecreesUnite(User user, IEnumerable<int> persondecreeIds, Mailexplorer folder = null)
+        public void PersondecreesUnite(User user, IEnumerable<int> persondecreeIds, Persondecree folder = null)
         {
             Mailexplorer for_new_decree = new Mailexplorer() { FolderCreator = 6, AccessForReading = user.Id.ToString(), FolderOwner = 0 };
             context.Mailexplorer.Add(for_new_decree);
@@ -18613,8 +18613,10 @@ namespace PersonnelManagement.Models
             unitedPersondecree.Datecreated = date;
             unitedPersondecree.Datesigned = date;
             unitedPersondecree.Mailexplorerid = for_new_decree.Id;
-            unitedPersondecree.Nickname = "Объединенный проект приказа " + date.ToString("dd MMMM yyyy");
-            
+            unitedPersondecree.Nickname = (folder == null || folder.Nickname == "") ? "Объединенный проект приказа " + date.ToString("dd MMMM yyyy") : folder.Nickname;
+            unitedPersondecree.Name = (folder == null || folder.Nickname == "") ? "" : folder.Name;
+
+
             context.Persondecree.Add(unitedPersondecree);
             SaveChanges();
             UpdatePersondecreesLocal();

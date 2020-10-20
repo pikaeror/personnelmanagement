@@ -13,6 +13,7 @@ import Persondecreeblocksubtype from '../../classes/persondecreeblocksubtype'
 import User from '../../classes/user';
 import Persondecree from '../../classes/persondecree';
 import Mailexplorer from '../../classes/Mail/mailexplorer';
+import Structure from '../../classes/Structure';
 
 Vue.component(Button.name, Button);
 Vue.component(Input.name, Input);
@@ -73,16 +74,21 @@ export default class derceeoperationelement extends Vue {
     menuunitid: number;
     dialogVisibleExplorer: boolean;
     explorerFolder: ["Мои документы", "Входящие", "Исходящие", "Отработанные", "Архив", "В работе"];
+    unit_dialog: boolean;
+    privios_lens: number;
+    unit_decree: Persondecree = new Persondecree();
 
     usersSearch: User[];
     userSelected: User;
     usersearch: string;
 
     rowcontextmenuVisible: boolean;
+    rand_list: Structure[];
+    previos: Persondecree;
 
     data() {
         return {
-            menuid: 0,
+            menuid: 2,
             update: true,
 
             persondecreeOperations: [],
@@ -116,12 +122,22 @@ export default class derceeoperationelement extends Vue {
             menuunitid: 0,
             dialogVisibleExplorer: false,
             explorerFolder: ["Мои документы", "Входящие", "Исходящие", "Отработанные", "Архив", "В работе"],
+            unit_dialog: true,
+            privios_lens: 0,
+            unit_decree: null,
 
             usersSearch: [],
             userSelected: null,
             usersearch: "",
 
             rowcontextmenuVisible: false,
+
+            rand_list: [],
+            previos: null,
+
+            title_text_f: 'Направить:',
+            title_text_s: 'Переместить:',
+            title_text_t: 'Объеденить:',
         }
     }
 
@@ -178,12 +194,39 @@ export default class derceeoperationelement extends Vue {
         //setInterval(this.fetchPersondecreesActive, 20000);
     }
 
+    /*random(decree) {
+        *//*/if (decree.id == this.previos.id)
+            return this.rand_list;*//*
+        let time = [];
+        fetch('api/MailController/rand', { credentials: 'include' })
+            .then(response => {
+                return response.json() as Promise<Structure[]>;
+            })
+            .then(resualt => {
+                time = resualt;
+                resualt[0].nameshortened
+                this.rand_list = resualt;
+            })
+
+    }*/
+
+    delrand(structure) {
+        let time = [];
+        this.rand_list.forEach(r => {
+            if (r.id != structure.id) {
+                time.push(r);
+            }
+        })
+        this.rand_list = time;
+    }
+
     @Watch('visible')
     onVisibleChange(value: boolean, oldValue: boolean) {
         if (value) {
+            this.menuid = 2;
             this.fetchMailExplorer()
             //this.fetchPersondecreesActive();
-            this.setMenuid(2);
+            this.set_menu_id(2);
         }
     }
     fetchMailExplorer() {
@@ -327,26 +370,40 @@ export default class derceeoperationelement extends Vue {
     }
 
     reload() {
-        this.setMenuid(this.menuid);
+        this.set_menu_id(this.menuid);
         this.getDateList();
         this.update = false;
         this.update = true;
         /*this.getDateList();*/
     }
 
+    set_menu_id(id: number) {
+        this.setMenuid(1);
+        setTimeout(() => {
+            this.setMenuid(id);
+        }, 500);
+    }
+
     setMenuid(id: number) {
+        this.rand_list = [];
         this.menuid = id;
+        this.multipleSelection = [];
         this.viewpersondecrees = this.filterbyfolders(id);
         this.getDateList();
     }
 
+    switch_k() {
+        this.unit_dialog = false;
+    }
+
     FolderSelectedByUnit(id) {
-        this.menuunitid = (this.explorerFolder.indexOf(id) + 1);
+        this.menuunitid = (this.explorerFolder.indexOf(id) + 2);
         this.viewpersondecreesunit = this.filterbyfolders(this.menuunitid);
     }
 
     addToUnitList(decree: Persondecree) {
-        this.multipleSelection.push(decree);
+        if (this.multipleSelection.find(r => r.id == decree.id) == undefined)
+            this.multipleSelection.push(decree);
     }
 
     filterbyfolders(folder: number) {
@@ -431,7 +488,17 @@ export default class derceeoperationelement extends Vue {
     }
 
     rowClicked(row) {
-        this.open(row);
+        let list_access: string[] = row.accessforreading.split('_');
+        let k = list_access.find(r => parseInt(r) == this.$store.state.user.id);
+        if (k != undefined)
+            this.open(row);
+        else
+            this.$notify({
+                title: 'Нет прав',
+                message: 'Отказано в доступе',
+                type: 'warning'
+            });
+        
     }
 
     canSelectRow(row) {
@@ -485,6 +552,8 @@ export default class derceeoperationelement extends Vue {
 
     unit() {
         this.dialogVisibleUnit = true;
+        this.unit_dialog = true;
+        this.unit_decree = new Persondecree();
         //this.persondecreesUnite();
     }
 
@@ -581,15 +650,19 @@ export default class derceeoperationelement extends Vue {
         });
         fetch('api/Persondecree/Action' + str, {
             method: 'post',
+            body: JSON.stringify(this.unit_decree),
             credentials: 'include',
             headers: new Headers({
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             })
         }).then(response => {
-                return response.json() as Promise<string>;
+            return response.json() as Promise<string>;
         }).then(result => {
-                this.fetchMailExplorer();
+            (<any>Vue).notify(result);
+            this.fetchMailExplorer();
+            this.viewpersondecreesunit = [];
+            this.dialogVisibleUnit = false;
         })
     }
 

@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "21aa12e7156557be851d"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "ec434559c568768467bc"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -54698,7 +54698,33 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
               _vm.removePersondecreeoperation(decreeoperation)
             }
           }
-        }, [_vm._v("Удалить")])], 1)]) : _vm._e()
+        }, [_vm._v("Удалить")]), _vm._v(" "), _c('el-select', {
+          staticStyle: {
+            "width": "400px"
+          },
+          attrs: {
+            "multiple": "",
+            "filterable": "",
+            "allow-create": "",
+            "default-first-option": "",
+            "placeholder": "Редактировать список получателей данного пункта"
+          },
+          model: {
+            value: (_vm.value10),
+            callback: function($$v) {
+              _vm.value10 = $$v
+            },
+            expression: "value10"
+          }
+        }, _vm._l((_vm.options5), function(item) {
+          return _c('el-option', {
+            key: item.value,
+            attrs: {
+              "label": item.label,
+              "value": item.value
+            }
+          })
+        }))], 1)]) : _vm._e()
       })], 2)]) : _vm._e()
     }), _vm._v(" "), _c('br')], 2)]) : _vm._e(), _vm._v(" "), (persondecreeBlock.persondecreeblocktype == 2) ? _c('div', [_c('div', [_c('div', [_vm._v("\n                        За что\n                    ")]), _vm._v(" "), _c('el-input', {
       staticClass: "eld-eld-body-row-medium",
@@ -54791,7 +54817,33 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
             _vm.removePersondecreeoperation(decreeoperation)
           }
         }
-      }, [_vm._v("Удалить")])], 1)])])]) : _vm._e()
+      }, [_vm._v("Удалить")]), _vm._v(" "), _c('el-select', {
+        staticStyle: {
+          "width": "400px"
+        },
+        attrs: {
+          "multiple": "",
+          "filterable": "",
+          "allow-create": "",
+          "default-first-option": "",
+          "placeholder": "Редактировать список получателей данного пункта"
+        },
+        model: {
+          value: (_vm.value10),
+          callback: function($$v) {
+            _vm.value10 = $$v
+          },
+          expression: "value10"
+        }
+      }, _vm._l((_vm.options5), function(item) {
+        return _c('el-option', {
+          key: item.value,
+          attrs: {
+            "label": item.label,
+            "value": item.value
+          }
+        })
+      }))], 1)])])]) : _vm._e()
     }), _vm._v(" "), _c('br')], 2)], 1) : _vm._e(), _vm._v(" "), (persondecreeBlock.persondecreeblocktype == 3) ? _c('div', [_c('div', [_c('div', [_vm._v("\n                        Кого\n                    ")]), _vm._v(" "), _c('div', [_c('el-input', {
       staticClass: "eld-eld-body-select-medium",
       attrs: {
@@ -55024,7 +55076,33 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
             _vm.removePersondecreeoperation(decreeoperation)
           }
         }
-      }, [_vm._v("Удалить")])], 1)])])]) : _vm._e()
+      }, [_vm._v("Удалить")]), _vm._v(" "), _c('el-select', {
+        staticStyle: {
+          "width": "400px"
+        },
+        attrs: {
+          "multiple": "",
+          "filterable": "",
+          "allow-create": "",
+          "default-first-option": "",
+          "placeholder": "Редактировать список получателей данного пункта"
+        },
+        model: {
+          value: (_vm.value10),
+          callback: function($$v) {
+            _vm.value10 = $$v
+          },
+          expression: "value10"
+        }
+      }, _vm._l((_vm.options5), function(item) {
+        return _c('el-option', {
+          key: item.value,
+          attrs: {
+            "label": item.label,
+            "value": item.value
+          }
+        })
+      }))], 1)])])]) : _vm._e()
     }), _vm._v(" "), _c('br')], 2)]) : _vm._e(), _vm._v(" "), (persondecreeBlock.persondecreeblocktype == 4) ? _c('div', [_c('div', [_c('div', [_vm._v("\n                        Кого\n                    ")]), _vm._v(" "), _c('div', [_c('el-input', {
       staticClass: "eld-eld-body-select-medium",
       attrs: {
@@ -55434,7 +55512,33 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
               _vm.removePersondecreeoperation(decreeoperation)
             }
           }
-        }, [_vm._v("Удалить")])], 1)])])]) : _vm._e()
+        }, [_vm._v("Удалить")]), _vm._v(" "), _c('el-select', {
+          staticStyle: {
+            "width": "400px"
+          },
+          attrs: {
+            "multiple": "",
+            "filterable": "",
+            "allow-create": "",
+            "default-first-option": "",
+            "placeholder": "Редактировать список получателей данного пункта"
+          },
+          model: {
+            value: (_vm.value10),
+            callback: function($$v) {
+              _vm.value10 = $$v
+            },
+            expression: "value10"
+          }
+        }, _vm._l((_vm.options5), function(item) {
+          return _c('el-option', {
+            key: item.value,
+            attrs: {
+              "label": item.label,
+              "value": item.value
+            }
+          })
+        }))], 1)])])]) : _vm._e()
       })), _vm._v(" "), _c('div')]) : _vm._e()
     }), _vm._v(" "), _c('br')], 2)], 1) : _vm._e(), _vm._v(" "), _c('hr'), _vm._v(" "), _c('div', [_c('el-button', {
       attrs: {

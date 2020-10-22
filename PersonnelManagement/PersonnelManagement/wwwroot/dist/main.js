@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "ec434559c568768467bc"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "63207cab653a8bfb8cbc"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -7942,7 +7942,7 @@ let derceeoperationelement = class derceeoperationelement extends __WEBPACK_IMPO
             previos: null,
             title_text_f: 'Направить:',
             title_text_s: 'Переместить:',
-            title_text_t: 'Объеденить:',
+            title_text_t: 'Объединить:',
         };
     }
     tableRowClassName({ row, rowIndex }) {
@@ -8414,6 +8414,14 @@ fetch('api/MailController/rand', { credentials: 'include' })
         this.usersSearch = [];
     }
     persondecreesUnite() {
+        if (this.unit_decree.nickname == null || this.unit_decree.nickname == "") {
+            this.$notify({
+                title: 'Проверьте данные',
+                message: 'Введите рабочее название приказа',
+                type: 'warning'
+            });
+            return;
+        }
         let str = "1"; // первый номер будет означать тип операции по отношению к выбранным проектам приказов
         this.multipleSelection.forEach(p => {
             str += "_" + p.id;
@@ -51872,7 +51880,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "eld-eld-main-head-partbutton",
     attrs: {
       "size": "mini",
-      "disabled": _vm.menuid == 9 || _vm.menuid == 8 || _vm.menuid == 8
+      "disabled": _vm.menuid == 9 || _vm.menuid == 8 || _vm.menuid == 8 || _vm.multipleSelection.length < 2
     },
     on: {
       "click": _vm.unit
@@ -52146,23 +52154,14 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.dialogVisibleUnit = $event
       }
     }
-  }, [_c('h5', [_vm._v("Введите данные по объединенному приказу:")]), _vm._v(" "), (_vm.unit_decree != null) ? _c('div', [_c('div', {
+  }, [(_vm.unit_decree != null) ? _c('div', [_c('div', {
     staticClass: "persondecreeoperation-row"
   }, [_c('div', {
-    staticClass: "persondecreeoperation-row-text"
-  }, [_vm._v("Название приказа:")]), _vm._v(" "), _c('el-input', {
-    model: {
-      value: (_vm.unit_decree.name),
-      callback: function($$v) {
-        _vm.unit_decree.name = $$v
-      },
-      expression: "unit_decree.name"
+    staticClass: "persondecreeoperation-row-text",
+    staticStyle: {
+      "margin-top": "10px"
     }
-  })], 1), _vm._v(" "), _c('div', {
-    staticClass: "persondecreeoperation-row"
-  }, [_c('div', {
-    staticClass: "persondecreeoperation-row-text"
-  }, [_vm._v("Рабочее название приказа:")]), _vm._v(" "), _c('el-input', {
+  }, [_vm._v("Введите рабочее название объединённого приказа:")]), _vm._v(" "), _c('el-input', {
     model: {
       value: (_vm.unit_decree.nickname),
       callback: function($$v) {
@@ -52174,10 +52173,14 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticStyle: {
       "margin-bottom": "10px"
     }
-  }, [_vm._v("\n            Выберите проекты приказов для объединения:\n            "), _vm._l((_vm.multipleSelection), function(decree) {
+  }, [_c('h5', [_vm._v("Выбранные для объединения проекты приказов:")]), _vm._v(" "), _vm._l((_vm.multipleSelection), function(decree) {
     return _c('div', [_c('div', {
       staticStyle: {
-        "margin-bottom": "4px"
+        "margin-bottom": "4px",
+        "box-shadow": "5px 5px 3px rgba(0,0,0,0.6)",
+        "padding": "10px",
+        "border-radius": "10px",
+        "background": "#eeece0"
       }
     }, [_c('small', [_vm._v("\n                        ⇒ " + _vm._s(decree.number) + " " + _vm._s(decree.getName) + " от " + _vm._s(decree.getDate) + "; "), _c('el-button', {
       attrs: {
@@ -52197,24 +52200,14 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_c('el-button', {
     attrs: {
-      "size": "mini",
-      "icon": "el-icon-share"
+      "icon": "el-icon-document",
+      "type": "primary",
+      "round": ""
     },
     on: {
       "click": _vm.persondecreesUnite
     }
-  }, [_vm._v("Объеденить")])], 1) : _vm._e()], 2), _vm._v(" "), _c('div', [(_vm.unit_dialog) ? _c('div', [_c('div', {
-    staticStyle: {
-      "margin-top": "10px"
-    }
-  }, [_c('el-button', {
-    attrs: {
-      "size": "mini"
-    },
-    on: {
-      "click": _vm.switch_k
-    }
-  }, [_vm._v("Отобразить папки с приказами")])], 1)]) : _c('div', [_c('div', {
+  }, [_vm._v("Объединить")])], 1) : _vm._e()], 2), _vm._v(" "), _c('div', [(_vm.unit_dialog) ? _c('div') : _c('div', [_c('div', {
     staticStyle: {
       "display": "flex",
       "margin-bottom": "10px"
@@ -52259,13 +52252,14 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_c('el-button', {
     attrs: {
-      "size": "mini",
-      "icon": "el-icon-share"
+      "icon": "el-icon-document",
+      "type": "primary",
+      "round": ""
     },
     on: {
       "click": _vm.persondecreesUnite
     }
-  }, [_vm._v("Объеденить")])], 1) : _vm._e()])])])], 1) : _vm._e()
+  }, [_vm._v("Объединить")])], 1) : _vm._e()])])])], 1) : _vm._e()
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "eld-eld-side-element",
@@ -54643,7 +54637,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
             }
           }, [_vm._v("Удалить")]), _vm._v(" "), _c('el-select', {
             staticStyle: {
-              "width": "400px"
+              "width": "200px"
             },
             attrs: {
               "multiple": "",
@@ -54698,33 +54692,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
               _vm.removePersondecreeoperation(decreeoperation)
             }
           }
-        }, [_vm._v("Удалить")]), _vm._v(" "), _c('el-select', {
-          staticStyle: {
-            "width": "400px"
-          },
-          attrs: {
-            "multiple": "",
-            "filterable": "",
-            "allow-create": "",
-            "default-first-option": "",
-            "placeholder": "Редактировать список получателей данного пункта"
-          },
-          model: {
-            value: (_vm.value10),
-            callback: function($$v) {
-              _vm.value10 = $$v
-            },
-            expression: "value10"
-          }
-        }, _vm._l((_vm.options5), function(item) {
-          return _c('el-option', {
-            key: item.value,
-            attrs: {
-              "label": item.label,
-              "value": item.value
-            }
-          })
-        }))], 1)]) : _vm._e()
+        }, [_vm._v("Удалить")])], 1)]) : _vm._e()
       })], 2)]) : _vm._e()
     }), _vm._v(" "), _c('br')], 2)]) : _vm._e(), _vm._v(" "), (persondecreeBlock.persondecreeblocktype == 2) ? _c('div', [_c('div', [_c('div', [_vm._v("\n                        За что\n                    ")]), _vm._v(" "), _c('el-input', {
       staticClass: "eld-eld-body-row-medium",
@@ -54817,33 +54785,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
             _vm.removePersondecreeoperation(decreeoperation)
           }
         }
-      }, [_vm._v("Удалить")]), _vm._v(" "), _c('el-select', {
-        staticStyle: {
-          "width": "400px"
-        },
-        attrs: {
-          "multiple": "",
-          "filterable": "",
-          "allow-create": "",
-          "default-first-option": "",
-          "placeholder": "Редактировать список получателей данного пункта"
-        },
-        model: {
-          value: (_vm.value10),
-          callback: function($$v) {
-            _vm.value10 = $$v
-          },
-          expression: "value10"
-        }
-      }, _vm._l((_vm.options5), function(item) {
-        return _c('el-option', {
-          key: item.value,
-          attrs: {
-            "label": item.label,
-            "value": item.value
-          }
-        })
-      }))], 1)])])]) : _vm._e()
+      }, [_vm._v("Удалить")])], 1)])])]) : _vm._e()
     }), _vm._v(" "), _c('br')], 2)], 1) : _vm._e(), _vm._v(" "), (persondecreeBlock.persondecreeblocktype == 3) ? _c('div', [_c('div', [_c('div', [_vm._v("\n                        Кого\n                    ")]), _vm._v(" "), _c('div', [_c('el-input', {
       staticClass: "eld-eld-body-select-medium",
       attrs: {
@@ -55076,33 +55018,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
             _vm.removePersondecreeoperation(decreeoperation)
           }
         }
-      }, [_vm._v("Удалить")]), _vm._v(" "), _c('el-select', {
-        staticStyle: {
-          "width": "400px"
-        },
-        attrs: {
-          "multiple": "",
-          "filterable": "",
-          "allow-create": "",
-          "default-first-option": "",
-          "placeholder": "Редактировать список получателей данного пункта"
-        },
-        model: {
-          value: (_vm.value10),
-          callback: function($$v) {
-            _vm.value10 = $$v
-          },
-          expression: "value10"
-        }
-      }, _vm._l((_vm.options5), function(item) {
-        return _c('el-option', {
-          key: item.value,
-          attrs: {
-            "label": item.label,
-            "value": item.value
-          }
-        })
-      }))], 1)])])]) : _vm._e()
+      }, [_vm._v("Удалить")])], 1)])])]) : _vm._e()
     }), _vm._v(" "), _c('br')], 2)]) : _vm._e(), _vm._v(" "), (persondecreeBlock.persondecreeblocktype == 4) ? _c('div', [_c('div', [_c('div', [_vm._v("\n                        Кого\n                    ")]), _vm._v(" "), _c('div', [_c('el-input', {
       staticClass: "eld-eld-body-select-medium",
       attrs: {
@@ -55512,33 +55428,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
               _vm.removePersondecreeoperation(decreeoperation)
             }
           }
-        }, [_vm._v("Удалить")]), _vm._v(" "), _c('el-select', {
-          staticStyle: {
-            "width": "400px"
-          },
-          attrs: {
-            "multiple": "",
-            "filterable": "",
-            "allow-create": "",
-            "default-first-option": "",
-            "placeholder": "Редактировать список получателей данного пункта"
-          },
-          model: {
-            value: (_vm.value10),
-            callback: function($$v) {
-              _vm.value10 = $$v
-            },
-            expression: "value10"
-          }
-        }, _vm._l((_vm.options5), function(item) {
-          return _c('el-option', {
-            key: item.value,
-            attrs: {
-              "label": item.label,
-              "value": item.value
-            }
-          })
-        }))], 1)])])]) : _vm._e()
+        }, [_vm._v("Удалить")])], 1)])])]) : _vm._e()
       })), _vm._v(" "), _c('div')]) : _vm._e()
     }), _vm._v(" "), _c('br')], 2)], 1) : _vm._e(), _vm._v(" "), _c('hr'), _vm._v(" "), _c('div', [_c('el-button', {
       attrs: {

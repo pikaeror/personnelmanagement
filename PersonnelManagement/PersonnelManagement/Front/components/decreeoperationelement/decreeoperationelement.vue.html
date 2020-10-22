@@ -38,7 +38,7 @@
                         <el-button class="eld-eld-main-head-partbutton" size="mini" @click="deleted" :disabled="menuid == 9 || menuid == 8">Удалить</el-button>
                         <!--<el-button class="eld-eld-main-head-partbutton" size="mini" @click="">Прочитано/Не прочитано</el-button>-->
                         <el-button class="eld-eld-main-head-partbutton" size="mini" @click="explorer" :disabled="menuid == 9 || menuid == 8 || menuid == 10">Переместить в папку</el-button>
-                        <el-button class="eld-eld-main-head-partbutton" size="mini" @click="unit" :disabled="menuid == 9 || menuid == 8 || menuid == 8">Объединить</el-button>
+                        <el-button class="eld-eld-main-head-partbutton" size="mini" @click="unit" :disabled="menuid == 9 || menuid == 8 || menuid == 8 || multipleSelection.length < 2">Объединить</el-button>
                         <el-button class="eld-eld-main-head-partbutton" size="mini" @click="sbdWorker">test</el-button>
                     </div>
                 </div>
@@ -154,29 +154,28 @@
         </el-dialog>
 
         <el-dialog width="900px" :visible.sync="dialogVisibleUnit" :title="title_text_t">
-            <h5>Введите данные по объединенному приказу:</h5>
             <div v-if="unit_decree != null">
-                <div class="persondecreeoperation-row"><div class="persondecreeoperation-row-text">Название приказа:</div> <el-input v-model="unit_decree.name"></el-input></div>
-                <div class="persondecreeoperation-row"><div class="persondecreeoperation-row-text">Рабочее название приказа:</div> <el-input v-model="unit_decree.nickname"></el-input></div>
+                <!--<div class="persondecreeoperation-row"><div class="persondecreeoperation-row-text">Название приказа:</div> <el-input v-model="unit_decree.name"></el-input></div>-->
+                <div class="persondecreeoperation-row"><div class="persondecreeoperation-row-text" style="margin-top: 10px">Введите рабочее название объединённого приказа:</div> <el-input v-model="unit_decree.nickname"></el-input></div>
             </div>
             <div style="margin-bottom: 10px">
-                Выберите проекты приказов для объединения:
+                <h5>Выбранные для объединения проекты приказов:</h5>
                 <div v-for="decree in multipleSelection">
-                    <div style="margin-bottom: 4px">
+                    <div style="margin-bottom: 4px; box-shadow: 5px 5px 3px rgba(0,0,0,0.6); padding: 10px; border-radius: 10px; background: #eeece0;">
                         <small>
                             &#8658 {{decree.number}} {{decree.getName}} от {{decree.getDate}}; <el-button size="mini" type="danger" icon="el-icon-delete" @click="deleteDecreeFromList(decree)"></el-button>
                         </small>
                     </div>
                 </div>
                 <div style="margin-top: 10px" v-if="multipleSelection.length > 1">
-                    <el-button size="mini" @click="persondecreesUnite" icon="el-icon-share">Объеденить</el-button>
+                    <el-button @click="persondecreesUnite" icon="el-icon-document" type="primary" round>Объединить</el-button>
                 </div>
             </div>
             <div>
                 <div v-if="unit_dialog">
-                    <div style="margin-top: 10px">
+                    <!--<div style="margin-top: 10px">
                         <el-button size="mini" @click="switch_k">Отобразить папки с приказами</el-button>
-                    </div>
+                    </div>-->
                 </div>
                 <div v-else>
                     <div style="display: flex; margin-bottom: 10px">
@@ -199,7 +198,7 @@
                         Папка пуста.
                     </div>
                     <div style="margin-top: 10px" v-if="multipleSelection.length > 1">
-                        <el-button size="mini" @click="persondecreesUnite" icon="el-icon-share">Объеденить</el-button>
+                        <el-button @click="persondecreesUnite" icon="el-icon-document" type="primary" round>Объединить</el-button>
                     </div>
                 </div>
             </div>

@@ -18613,13 +18613,14 @@ namespace PersonnelManagement.Models
             unitedPersondecree.Datecreated = date;
             unitedPersondecree.Datesigned = date;
             unitedPersondecree.Mailexplorerid = for_new_decree.Id;
-            unitedPersondecree.Nickname = (folder == null || folder.Nickname == "") ? "Объединенный проект приказа " + date.ToString("dd MMMM yyyy") : folder.Nickname;
-            unitedPersondecree.Name = (folder == null || folder.Nickname == "") ? "" : folder.Name;
+            unitedPersondecree.Nickname = (folder == null || folder.Nickname == "" || folder.Nickname == null) ? "Объединенный проект приказа " + date.ToString("dd MMMM yyyy") : folder.Nickname;
+            unitedPersondecree.Name = (folder == null || folder.Name == "" || folder.Nickname == null) ? "" : folder.Name;
 
 
             context.Persondecree.Add(unitedPersondecree);
             SaveChanges();
             UpdatePersondecreesLocal();
+            folder = unitedPersondecree;
 
             Dictionary<int, Persondecreeblock> persondecreeblocks = new Dictionary<int, Persondecreeblock>(); // Блоки, которые входят в объединенный проект приказа.
                                                                                                               // Ключ - тип блока

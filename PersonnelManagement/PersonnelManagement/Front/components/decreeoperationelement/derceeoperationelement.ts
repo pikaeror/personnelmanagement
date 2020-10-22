@@ -137,7 +137,7 @@ export default class derceeoperationelement extends Vue {
 
             title_text_f: 'Направить:',
             title_text_s: 'Переместить:',
-            title_text_t: 'Объеденить:',
+            title_text_t: 'Объединить:',
         }
     }
 
@@ -628,6 +628,14 @@ export default class derceeoperationelement extends Vue {
     }
 
     persondecreesUnite() {
+        if (this.unit_decree.nickname == null || this.unit_decree.nickname == "") {
+            this.$notify({
+                title: 'Проверьте данные',
+                message: 'Введите рабочее название приказа',
+                type: 'warning'
+            });
+            return;
+        }
         let str: string = "1"; // первый номер будет означать тип операции по отношению к выбранным проектам приказов
         this.multipleSelection.forEach(p => {
             str += "_" + p.id;

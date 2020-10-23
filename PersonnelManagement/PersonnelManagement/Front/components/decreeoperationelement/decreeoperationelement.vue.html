@@ -90,7 +90,7 @@
                     Введите полностью или частично фамилию, логин или подразделение для поиска кадровика, которому будут направлены проекты приказов:
                 </h4>
                 <div v-for="decree in multipleSelection">
-                    <div style="margin-bottom: 4px">
+                    <div style="margin-bottom: 4px; box-shadow: 5px 5px 3px rgba(0,0,0,0.6); padding: 10px; border-radius: 10px; background: #eeece0;">
                         <small>
                             &#8658 {{decree.number}} {{decree.getName}} от {{decree.getDate}}; <el-button size="mini" type="danger" icon="el-icon-delete" @click="deleteDecreeFromList(decree)"></el-button>
                         </small>
@@ -144,7 +144,7 @@
                     </div>
                 </div>
                 <div v-for="decree in multipleSelection">
-                    <div style="margin-bottom: 4px">
+                    <div style="margin-bottom: 4px; box-shadow: 5px 5px 3px rgba(0,0,0,0.6); padding: 10px; border-radius: 10px; background: #eeece0;">
                         <small>
                             &#8658 {{decree.number}} {{decree.getName}} от {{decree.getDate}}; <el-button size="mini" type="danger" icon="el-icon-delete" @click="deleteDecreeFromList(decree)"></el-button>
                         </small>

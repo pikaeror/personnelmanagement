@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "63207cab653a8bfb8cbc"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "c23ed5e4b667663fe658"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -8421,6 +8421,7 @@ fetch('api/MailController/rand', { credentials: 'include' })
                 type: 'warning'
             });
             return;
+            //this.multipleSelection.length;
         }
         let str = "1"; // первый номер будет означать тип операции по отношению к выбранным проектам приказов
         this.multipleSelection.forEach(p => {
@@ -52022,7 +52023,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('h4', [_vm._v("\n                Введите полностью или частично фамилию, логин или подразделение для поиска кадровика, которому будут направлены проекты приказов:\n            ")]), _vm._v(" "), _vm._l((_vm.multipleSelection), function(decree) {
     return _c('div', [_c('div', {
       staticStyle: {
-        "margin-bottom": "4px"
+        "margin-bottom": "4px",
+        "box-shadow": "5px 5px 3px rgba(0,0,0,0.6)",
+        "padding": "10px",
+        "border-radius": "10px",
+        "background": "#eeece0"
       }
     }, [_c('small', [_vm._v("\n                        ⇒ " + _vm._s(decree.number) + " " + _vm._s(decree.getName) + " от " + _vm._s(decree.getDate) + "; "), _c('el-button', {
       attrs: {
@@ -52129,7 +52134,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   })), _vm._v(" "), _vm._l((_vm.multipleSelection), function(decree) {
     return _c('div', [_c('div', {
       staticStyle: {
-        "margin-bottom": "4px"
+        "margin-bottom": "4px",
+        "box-shadow": "5px 5px 3px rgba(0,0,0,0.6)",
+        "padding": "10px",
+        "border-radius": "10px",
+        "background": "#eeece0"
       }
     }, [_c('small', [_vm._v("\n                        ⇒ " + _vm._s(decree.number) + " " + _vm._s(decree.getName) + " от " + _vm._s(decree.getDate) + "; "), _c('el-button', {
       attrs: {

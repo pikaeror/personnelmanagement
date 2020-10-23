@@ -635,6 +635,7 @@ export default class derceeoperationelement extends Vue {
                 type: 'warning'
             });
             return;
+            //this.multipleSelection.length;
         }
         let str: string = "1"; // первый номер будет означать тип операции по отношению к выбранным проектам приказов
         this.multipleSelection.forEach(p => {

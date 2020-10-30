@@ -3606,6 +3606,14 @@ eld-eld-body-row-flex-vertical{
     padding-left: 15px;
 }
 
+.persondecreeblock-element {
+    /*border-top: 3px solid #EEE;
+    border-bottom: 3px solid #EEE;*/
+    padding: 5px;
+    /*margin-top: 10px;
+    padding-left: 15px;*/
+}
+
 .persondecreeblock-title {
     text-align: center;
     font-size: 20px;

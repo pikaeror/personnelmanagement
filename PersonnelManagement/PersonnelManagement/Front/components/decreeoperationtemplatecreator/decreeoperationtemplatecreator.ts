@@ -466,7 +466,7 @@ export default class decreeoperationtemplatecreator extends Vue {
         if (this.input_decree == null)
             return;
         let value: number = id < 0 ? this.input_decree.id : id;
-        this.update = false;
+        //this.update = false;
         fetch('api/Persondecreeblock/' + value, { credentials: 'include' })
             .then(response => {
                 return response.json() as Promise<Persondecreeblock[]>;
@@ -551,7 +551,7 @@ export default class decreeoperationtemplatecreator extends Vue {
                 if (result.length != 0 || result != null)
                     this.persondecreeBlocks = result;
                 //this.updateMethod();
-                this.update = true;
+                //this.update = true;
             });
     }
 
@@ -797,7 +797,6 @@ export default class decreeoperationtemplatecreator extends Vue {
 
     addPersonblockelement(persondecreeblock: Persondecreeblock) {
         //this.addPersonreward(persondecreeblock);
-
         // Поощрить
         if (persondecreeblock.persondecreeblocktype == 1) {
             // Премировать деньгами в размере
@@ -808,6 +807,13 @@ export default class decreeoperationtemplatecreator extends Vue {
                     persondecreeblock.optionnumber2 = 0;
                 }
             }
+        }
+        // Установить
+        if (persondecreeblock.persondecreeblocktype == 10) {
+            if (persondecreeblock.persondecreeblocksub == 5) {
+                persondecreeblock.optionnumber11 = 0;
+            } else
+                persondecreeblock.optionnumber11 = 1;
         }
         // Предоставить
         if (persondecreeblock.persondecreeblocktype == 15) {
@@ -822,54 +828,84 @@ export default class decreeoperationtemplatecreator extends Vue {
         if (persondecreeblock.persondecreeblocktype == 15) {
             persondecreeblock.optionstring6 = Countrycities.countrycitiesListToString(persondecreeblock.countrycitiesList);
         }
+
+        // Зачислить
+        if (persondecreeblock.persondecreeblocktype == 17) {
+            persondecreeblock.optionnumber1 = null;
+        }
+
+        if (persondecreeblock.persondecreeblocktype == 18) {
+            if (persondecreeblock.checkboxdirect)
+                persondecreeblock.optionnumber8 = 1;
+            else
+                persondecreeblock.optionnumber8 = 0;
+
+            if (persondecreeblock.checkboxdismiss)
+                persondecreeblock.optionnumber7 = 1;
+            else
+                persondecreeblock.optionnumber7 = 0;
+
+            persondecreeblock.optionnumber11 = 1;
+
+        }
+        // Увеличить
+        if (persondecreeblock.persondecreeblocktype == 19) {
+            persondecreeblock.persondecreeblocksubtype = 1;
+            persondecreeblock.optionnumber11 = 1;
+        }
+
+        let t: any = <Persondecreeoperation>{
+            person: personid,
+            persondecree: this.input_decree.id,
+            status: 1, // Создание
+            personreward: persondecreeblock.samplePersonreward,
+            intro: persondecreeblock.intro,
+            optionnumber1: this.prepareNumToExport(persondecreeblock.optionnumber1),
+            optionnumber2: this.prepareNumToExport(persondecreeblock.optionnumber2),
+            optionnumber3: this.prepareNumToExport(persondecreeblock.optionnumber3),
+            optionnumber4: this.prepareNumToExport(persondecreeblock.optionnumber4),
+            optionnumber5: this.prepareNumToExport(persondecreeblock.optionnumber5),
+            optionnumber6: this.prepareNumToExport(persondecreeblock.optionnumber6),
+            optionnumber7: this.prepareNumToExport(persondecreeblock.optionnumber7),
+            optionnumber8: this.prepareNumToExport(persondecreeblock.optionnumber8),
+            optionnumber9: this.prepareNumToExport(persondecreeblock.optionnumber9),
+            optionnumber10: this.prepareNumToExport(persondecreeblock.optionnumber10),
+            optionnumber11: this.prepareNumToExport(persondecreeblock.optionnumber11),
+            optionstring1: persondecreeblock.optionstring1,
+            optionstring2: persondecreeblock.optionstring2,
+            optionstring3: persondecreeblock.optionstring3,
+            optionstring4: persondecreeblock.optionstring4,
+            optionstring5: persondecreeblock.optionstring5,
+            optionstring6: persondecreeblock.optionstring6,
+            optionstring7: persondecreeblock.optionstring7,
+            optionstring8: persondecreeblock.optionstring8,
+            optiondate1: this.prepareDateToExportNullable(persondecreeblock.optiondate1String),
+            optiondate2: this.prepareDateToExportNullable(persondecreeblock.optiondate2String),
+            optiondate3: this.prepareDateToExportNullable(persondecreeblock.optiondate3String),
+            optiondate4: this.prepareDateToExportNullable(persondecreeblock.optiondate4String),
+            optiondate5: this.prepareDateToExportNullable(persondecreeblock.optiondate5String),
+            optiondate6: this.prepareDateToExportNullable(persondecreeblock.optiondate6String),
+            optiondate7: this.prepareDateToExportNullable(persondecreeblock.optiondate7String),
+            optiondate8: this.prepareDateToExportNullable(persondecreeblock.optiondate8String),
+            subvaluenumber1: this.prepareNumToExport(persondecreeblock.subvaluenumber1),
+            subvaluenumber2: this.prepareNumToExport(persondecreeblock.subvaluenumber2),
+            subvaluestring1: persondecreeblock.subvaluestring1,
+            subvaluestring2: persondecreeblock.subvaluestring2,
+            nonperson: persondecreeblock.nonperson,
+            optionarray1: this.prepareArrayNumberToExportNullable(persondecreeblock.optionarray1Array),
+            optionarrayperson: this.prepareArrayNumberToExportNullable(persondecreeblock.optionarraypersonArray),
+
+            //subjecttype: 1, // Награды - устарело
+            persondecreeblock: persondecreeblock.id,
+            persondecreeblocktype: persondecreeblock.persondecreeblocktype,
+            persondecreeblocksubtype: persondecreeblock.persondecreeblocksub, // тип поощрения. У нас будет только вид, потому что единовременно может быть только один вид поощрения
+
+            personFromStructure: persondecreeblock.allpersonsintoblock,
+        };
+
         fetch('/api/Persondecreeoperation', {
             method: 'post',
-            body: JSON.stringify(<Persondecreeoperation>{
-                person: personid,
-                persondecree: this.input_decree.id,
-                status: 1, // Создание
-                personreward: persondecreeblock.samplePersonreward,
-                intro: persondecreeblock.intro,
-                optionnumber1: this.prepareNumToExport(persondecreeblock.optionnumber1),
-                optionnumber2: this.prepareNumToExport(persondecreeblock.optionnumber2),
-                optionnumber3: this.prepareNumToExport(persondecreeblock.optionnumber3),
-                optionnumber4: this.prepareNumToExport(persondecreeblock.optionnumber4),
-                optionnumber5: this.prepareNumToExport(persondecreeblock.optionnumber5),
-                optionnumber6: this.prepareNumToExport(persondecreeblock.optionnumber6),
-                optionnumber7: this.prepareNumToExport(persondecreeblock.optionnumber7),
-                optionnumber8: this.prepareNumToExport(persondecreeblock.optionnumber8),
-                optionnumber9: this.prepareNumToExport(persondecreeblock.optionnumber9),
-                optionnumber10: this.prepareNumToExport(persondecreeblock.optionnumber10),
-                optionnumber11: this.prepareNumToExport(persondecreeblock.optionnumber11),
-                optionstring1: persondecreeblock.optionstring1,
-                optionstring2: persondecreeblock.optionstring2,
-                optionstring3: persondecreeblock.optionstring3,
-                optionstring4: persondecreeblock.optionstring4,
-                optionstring5: persondecreeblock.optionstring5,
-                optionstring6: persondecreeblock.optionstring6,
-                optionstring7: persondecreeblock.optionstring7,
-                optionstring8: persondecreeblock.optionstring8,
-                optiondate1: this.prepareDateToExportNullable(persondecreeblock.optiondate1String),
-                optiondate2: this.prepareDateToExportNullable(persondecreeblock.optiondate2String),
-                optiondate3: this.prepareDateToExportNullable(persondecreeblock.optiondate3String),
-                optiondate4: this.prepareDateToExportNullable(persondecreeblock.optiondate4String),
-                optiondate5: this.prepareDateToExportNullable(persondecreeblock.optiondate5String),
-                optiondate6: this.prepareDateToExportNullable(persondecreeblock.optiondate6String),
-                optiondate7: this.prepareDateToExportNullable(persondecreeblock.optiondate7String),
-                optiondate8: this.prepareDateToExportNullable(persondecreeblock.optiondate8String),
-                subvaluenumber1: this.prepareNumToExport(persondecreeblock.subvaluenumber1),
-                subvaluenumber2: this.prepareNumToExport(persondecreeblock.subvaluenumber2),
-                subvaluestring1: persondecreeblock.subvaluestring1,
-                subvaluestring2: persondecreeblock.subvaluestring2,
-                nonperson: persondecreeblock.nonperson,
-                optionarray1: this.prepareArrayNumberToExportNullable(persondecreeblock.optionarray1Array),
-                optionarrayperson: this.prepareArrayNumberToExportNullable(persondecreeblock.optionarraypersonArray),
-
-                //subjecttype: 1, // Награды - устарело
-                persondecreeblock: this.prepareNumToExport(persondecreeblock.id),
-                persondecreeblocktype: this.prepareNumToExport(persondecreeblock.persondecreeblocktype),
-                persondecreeblocksubtype: this.prepareNumToExport(persondecreeblock.persondecreeblocksub), // тип поощрения. У нас будет только вид, потому что единовременно может быть только один вид поощрения
-            }),
+            body: JSON.stringify(t),
             credentials: 'include',
             headers: new Headers({
                 'Accept': 'application/json',
@@ -877,10 +913,7 @@ export default class decreeoperationtemplatecreator extends Vue {
             })
         })
             .then(response => { return response.json(); })
-            .then((response) => {
-
-            })
-            .then(x => {
+            .then(resualt => {
                 this.rerenderSearch();
                 if (persondecreeblock.person != null) {
                     //persondecreeblock.selectPerson(this.person.id, persondecreeblock);
@@ -1026,7 +1059,7 @@ export default class decreeoperationtemplatecreator extends Vue {
         this.fetchPersondecreeOperations(id);
         this.fetchPersondecreeBlocks(id);
         this.fetchPersondecree(id);
-        this.updateMethod();
+        //this.updateMethod();
     }
 
 
@@ -1070,7 +1103,7 @@ export default class decreeoperationtemplatecreator extends Vue {
     }
 
     fetchPersondecreeOperations(decree: number) {
-        this.update = false;
+        //this.update = false;
         fetch('api/Persondecreeoperation/' + decree, { credentials: 'include' })
             .then(response => {
                 return response.json() as Promise<Persondecreeoperation[]>;
@@ -1176,12 +1209,12 @@ export default class decreeoperationtemplatecreator extends Vue {
 
                 this.persondecreeOperations = result;
                 //this.updateMethod();
-                this.update = true;
+                //this.update = true;
             });
     }
 
     fetchPersondecree(id: number) {
-        this.update = false;
+        //this.update = false;
         fetch('api/Persondecree/' + id, { credentials: 'include' })
             .then(response => {
                 return response.json() as Promise<Persondecree>;
@@ -1204,7 +1237,7 @@ export default class decreeoperationtemplatecreator extends Vue {
 
                 this.input_decree = result;
                 //this.updateMethod();
-                this.update = true;
+                //this.update = true;
             });
     }
 
@@ -1274,28 +1307,26 @@ export default class decreeoperationtemplatecreator extends Vue {
         }
     }
 
-    selectPersonBlock(id: number, block: Persondecreeblock) {
-        fetch('api/Person/Single' + id, { credentials: 'include' })
-            .then(response => {
-                return response.json() as Promise<Person>;
-            })
-            .then(person => {
-                if (person != null) {
-                    //this.prepareToImport(person);
-                    block.person = person;
+    selectPersonBlock(person: Person, block: Persondecreeblock) {
+        if (person != null) {
+            //this.prepareToImport(person);
+            if (block.allpersonsintoblock == null || block.allpersonsintoblock == [])
+                block.allpersonsintoblock = [person];
+            else {
+                if (block.allpersonsintoblock.find(r => r.id == person.id) == null)
+                    block.allpersonsintoblock.push(person);
+            }
+            block.person = person;
 
-                    block.personssearch = [];
-                    block.fiosearch = "";
-                    block.nonperson = ""; // Если был человек не из МЧС, убираем.
+            block.personssearch = [];
+            block.fiosearch = "";
+            block.nonperson = ""; // Если был человек не из МЧС, убираем.
 
-                    // Если присвоить
-                    if (block.persondecreeblocktype == 14) {
-                        block.persondecreeblocksub = null; // Обнуляем список доступных званий для выбора
-                    }
-
-                    this.addPersonblockelement(block);
-                }
-            })
+            // Если присвоить
+            if (block.persondecreeblocktype == 14) {
+                block.persondecreeblocksub = null; // Обнуляем список доступных званий для выбора
+            }
+        }
     }
 
     getPersondecreeblocksubname(block: Persondecreeblocksub): string {
@@ -1758,8 +1789,8 @@ export default class decreeoperationtemplatecreator extends Vue {
                     this.selectPerson(this.person.id);
                 }
                 this.persondecreeSelectUpdate(this.input_decree.id);
-                /*this.fetchPersondecreeBlocks();
-                this.updateMethod();*/
+                this.fetchPersondecreeBlocks();
+                /*this.updateMethod();*/
             });
         
     }

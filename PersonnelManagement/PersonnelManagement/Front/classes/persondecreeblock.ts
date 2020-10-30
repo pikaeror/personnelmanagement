@@ -84,4 +84,6 @@ export default class Persondecreeblock {
     searchiteration: number = 0; // Для поиска
     personssearchadditional: boolean = true; // Для командирования. 
     countrycitiesList: Countrycities[] = new Array();
+
+    allpersonsintoblock: Person[];
 }

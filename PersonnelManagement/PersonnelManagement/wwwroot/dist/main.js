@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "1f336afba2a3a84d364b"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "729c207f9209e224ca93"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -9106,7 +9106,7 @@ let decreeoperationtemplatecreator = class decreeoperationtemplatecreator extend
             persondecreeblock.persondecreeblocksubtype = 1;
             persondecreeblock.optionnumber11 = 1;
         }
-        let t = {
+        let transfer = {
             person: personid,
             persondecree: this.input_decree.id,
             status: 1,
@@ -9154,7 +9154,52 @@ let decreeoperationtemplatecreator = class decreeoperationtemplatecreator extend
         };
         fetch('/api/Persondecreeoperation', {
             method: 'post',
-            body: JSON.stringify(t),
+            body: JSON.stringify({
+                person: personid,
+                persondecree: this.input_decree.id,
+                status: 1,
+                personreward: persondecreeblock.samplePersonreward,
+                intro: persondecreeblock.intro,
+                optionnumber1: this.prepareNumToExport(persondecreeblock.optionnumber1),
+                optionnumber2: this.prepareNumToExport(persondecreeblock.optionnumber2),
+                optionnumber3: this.prepareNumToExport(persondecreeblock.optionnumber3),
+                optionnumber4: this.prepareNumToExport(persondecreeblock.optionnumber4),
+                optionnumber5: this.prepareNumToExport(persondecreeblock.optionnumber5),
+                optionnumber6: this.prepareNumToExport(persondecreeblock.optionnumber6),
+                optionnumber7: this.prepareNumToExport(persondecreeblock.optionnumber7),
+                optionnumber8: this.prepareNumToExport(persondecreeblock.optionnumber8),
+                optionnumber9: this.prepareNumToExport(persondecreeblock.optionnumber9),
+                optionnumber10: this.prepareNumToExport(persondecreeblock.optionnumber10),
+                optionnumber11: this.prepareNumToExport(persondecreeblock.optionnumber11),
+                optionstring1: persondecreeblock.optionstring1,
+                optionstring2: persondecreeblock.optionstring2,
+                optionstring3: persondecreeblock.optionstring3,
+                optionstring4: persondecreeblock.optionstring4,
+                optionstring5: persondecreeblock.optionstring5,
+                optionstring6: persondecreeblock.optionstring6,
+                optionstring7: persondecreeblock.optionstring7,
+                optionstring8: persondecreeblock.optionstring8,
+                optiondate1: this.prepareDateToExportNullable(persondecreeblock.optiondate1String),
+                optiondate2: this.prepareDateToExportNullable(persondecreeblock.optiondate2String),
+                optiondate3: this.prepareDateToExportNullable(persondecreeblock.optiondate3String),
+                optiondate4: this.prepareDateToExportNullable(persondecreeblock.optiondate4String),
+                optiondate5: this.prepareDateToExportNullable(persondecreeblock.optiondate5String),
+                optiondate6: this.prepareDateToExportNullable(persondecreeblock.optiondate6String),
+                optiondate7: this.prepareDateToExportNullable(persondecreeblock.optiondate7String),
+                optiondate8: this.prepareDateToExportNullable(persondecreeblock.optiondate8String),
+                subvaluenumber1: this.prepareNumToExport(persondecreeblock.subvaluenumber1),
+                subvaluenumber2: this.prepareNumToExport(persondecreeblock.subvaluenumber2),
+                subvaluestring1: persondecreeblock.subvaluestring1,
+                subvaluestring2: persondecreeblock.subvaluestring2,
+                nonperson: persondecreeblock.nonperson,
+                optionarray1: this.prepareArrayNumberToExportNullable(persondecreeblock.optionarray1Array),
+                optionarrayperson: this.prepareArrayNumberToExportNullable(persondecreeblock.optionarraypersonArray),
+                //subjecttype: 1, // Награды - устарело
+                persondecreeblock: persondecreeblock.id,
+                persondecreeblocktype: persondecreeblock.persondecreeblocktype,
+                persondecreeblocksubtype: persondecreeblock.persondecreeblocksub,
+                personFromStructure: persondecreeblock.allpersonsintoblock,
+            }),
             credentials: 'include',
             headers: new Headers({
                 'Accept': 'application/json',
@@ -9523,6 +9568,9 @@ let decreeoperationtemplatecreator = class decreeoperationtemplatecreator extend
     }
     selectPersonBlock(person, block) {
         if (person != null) {
+            block.personssearch = [];
+            block.fiosearch = "";
+            block.nonperson = ""; // Если был человек не из МЧС, убираем.
             //this.prepareToImport(person);
             if (block.allpersonsintoblock == null || block.allpersonsintoblock == [])
                 block.allpersonsintoblock = [person];
@@ -9531,9 +9579,9 @@ let decreeoperationtemplatecreator = class decreeoperationtemplatecreator extend
                     block.allpersonsintoblock.push(person);
             }
             block.person = person;
-            block.personssearch = [];
+            /*block.personssearch = [];
             block.fiosearch = "";
-            block.nonperson = ""; // Если был человек не из МЧС, убираем.
+            block.nonperson = ""; // Если был человек не из МЧС, убираем.*/
             // Если присвоить
             if (block.persondecreeblocktype == 14) {
                 block.persondecreeblocksub = null; // Обнуляем список доступных званий для выбора
@@ -10013,33 +10061,33 @@ let decreeoperationtemplatecreator = class decreeoperationtemplatecreator extend
             __WEBPACK_IMPORTED_MODULE_0_vue__["default"].notify("S:Данные проекта приказа зарезервированы");
         });
     }
-    selectPersonBlockNonAuto(id, block) {
-        fetch('api/Person/Single' + id, { credentials: 'include' })
+    selectPersonBlockNonAuto(person, block) {
+        /*fetch('api/Person/Single' + id, { credentials: 'include' })
             .then(response => {
-            return response.json();
-        })
-            .then(person => {
-            if (person != null) {
-                this.prepareToImport(person);
-                block.person = person;
-                block.personssearch = [];
-                block.fiosearch = "";
-                block.nonperson = ""; // Если был человек не из МЧС, убираем.
-                // Если присвоить
-                if (block.persondecreeblocktype == 14) {
-                    block.persondecreeblocksub = null; // Обнуляем список доступных званий для выбора
-                }
-                // Если предоставить (отпуск)
-                if (block.persondecreeblocktype == 15) {
-                    this.persondecreeblocksubChange(block);
-                    this.jobperiodvacationinitializeAll(block);
-                }
-                //this.addPersonblockelement(block); - отрубаем автоматическое дополнение. Но тогда для добавления отдельно должна быть кнопка.
-                this.persondecreeSelectUpdate(this.input_decree.id);
-                this.block_list_ubdate(block);
+                return response.json() as Promise<Person>;
+            })
+            .then(person => {*/
+        if (person != null) {
+            this.prepareToImport(person);
+            block.person = person;
+            block.personssearch = [];
+            block.fiosearch = "";
+            block.nonperson = ""; // Если был человек не из МЧС, убираем.
+            // Если присвоить
+            if (block.persondecreeblocktype == 14) {
+                block.persondecreeblocksub = null; // Обнуляем список доступных званий для выбора
             }
-            //this.block_list_ubdate(block);
-        });
+            // Если предоставить (отпуск)
+            if (block.persondecreeblocktype == 15) {
+                this.persondecreeblocksubChange(block);
+                this.jobperiodvacationinitializeAll(block);
+            }
+            //this.addPersonblockelement(block); - отрубаем автоматическое дополнение. Но тогда для добавления отдельно должна быть кнопка.
+            this.persondecreeSelectUpdate(this.input_decree.id);
+            this.block_list_ubdate(block);
+        }
+        //this.block_list_ubdate(block);
+        //})
     }
     jobperiodvacationinitializeAll(persondecreeblock) {
         if (persondecreeblock == null || persondecreeblock.person == null || persondecreeblock.person.jobperiods == null) {
@@ -54781,7 +54829,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         },
         expression: "persondecreeBlock.optionstring2"
       }
-    }), _vm._v(" "), _c('div', [_c('div', [_vm._v("\n                            На кого\n                        ")]), _vm._v(" "), _c('div', [_c('el-input', {
+    }), _vm._v(" "), _c('div', [_c('div', [_vm._v("\n                            Кого\n                        ")]), _vm._v(" "), _c('div', [_c('el-input', {
       staticClass: "eld-eld-body-select-medium",
       attrs: {
         "placeholder": "Фамилия Имя Отчество"
@@ -54816,7 +54864,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           "src": _vm.getPhotopreviewBlock(person.id, persondecreeBlock).photo64
         }
       })]) : _vm._e(), _vm._v(" "), _c('div', [_c('div', [_vm._v("\n                                        " + _vm._s(person.structuretree) + "\n                                    ")])])])
-    })], 2) : _vm._e(), _vm._v(" "), (persondecreeBlock.person != null) ? _c('div', [_vm._v("\n                            1234567890-=\n                            ")]) : _vm._e()]), _vm._v(" "), _c('div', [_c('br'), _vm._v(" "), _c('el-button', {
+    })], 2) : _vm._e(), _vm._v(" "), (persondecreeBlock.person != null) ? _c('div', [_vm._v("\n                            Кого – " + _vm._s(persondecreeBlock.person.surname4 + " " + persondecreeBlock.person.name4 + " " + persondecreeBlock.person.fathername4) + "\n                        ")]) : _vm._e(), _vm._v(" "), (persondecreeBlock.nonperson != null && persondecreeBlock.nonperson.length > 0) ? _c('div', [_vm._v("\n                            Кого — " + _vm._s(persondecreeBlock.nonperson) + "\n                        ")]) : _vm._e()]), _vm._v(" "), _c('div', [_c('br'), _vm._v(" "), _c('el-button', {
       attrs: {
         "type": "primary",
         "plain": ""
@@ -54870,7 +54918,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         staticClass: "eld-search-element",
         on: {
           "click": function($event) {
-            _vm.selectPersonBlockNonAuto(person.id, persondecreeBlock)
+            _vm.selectPersonBlock(person, persondecreeBlock)
           }
         }
       }, [_c('div', [_vm._v("\n                                    " + _vm._s(person.surname) + " " + _vm._s(person.name) + " " + _vm._s(person.fathername) + "\n                                ")]), _vm._v(" "), _c('div', [_vm._v("\n                                    " + _vm._s(person.positiontypestring) + "\n                                ")]), _vm._v(" "), (_vm.hasPhotopreviewBlock(person.id, persondecreeBlock)) ? _c('div', [_c('img', {
@@ -54879,7 +54927,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           "src": _vm.getPhotopreviewBlock(person.id, persondecreeBlock).photo64
         }
       })]) : _vm._e(), _vm._v(" "), _c('div', [_c('div', [_vm._v("\n                                        " + _vm._s(person.structuretree) + "\n                                    ")])])])
-    })], 2) : _vm._e(), _vm._v(" "), (persondecreeBlock.person != null) ? _c('div', [_vm._v("\n                            Кого – " + _vm._s(persondecreeBlock.person.surname4 + " " + persondecreeBlock.person.name4 + " " + persondecreeBlock.person.fathername4) + "\n                        ")]) : _vm._e()]), _vm._v(" "), _c('div', [(persondecreeBlock.person != null) ? _c('div', [(persondecreeBlock.person.military) ? _c('div', [_c('div', [_vm._v("\n                                    В связи с чем\n                                ")]), _vm._v(" "), _c('el-select', {
+    })], 2) : _vm._e(), _vm._v(" "), (persondecreeBlock.person != null) ? _c('div', [_vm._v("\n                            Кого – " + _vm._s(persondecreeBlock.person.surname4 + " " + persondecreeBlock.person.name4 + " " + persondecreeBlock.person.fathername4) + "\n                        ")]) : _vm._e(), _vm._v(" "), (persondecreeBlock.nonperson != null && persondecreeBlock.nonperson.length > 0) ? _c('div', [_vm._v("\n                            Кого — " + _vm._s(persondecreeBlock.nonperson) + "\n                        ")]) : _vm._e()]), _vm._v(" "), _c('div', [(persondecreeBlock.person != null) ? _c('div', [(persondecreeBlock.person.military) ? _c('div', [_c('div', [_vm._v("\n                                    В связи с чем\n                                ")]), _vm._v(" "), _c('el-select', {
       staticClass: "eld-eld-body-select-long",
       attrs: {
         "placeholder": "В связи с"

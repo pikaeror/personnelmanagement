@@ -854,7 +854,7 @@ export default class decreeoperationtemplatecreator extends Vue {
             persondecreeblock.optionnumber11 = 1;
         }
 
-        let t: any = <Persondecreeoperation>{
+        let transfer: any = <Persondecreeoperation>{
             person: personid,
             persondecree: this.input_decree.id,
             status: 1, // Создание
@@ -905,7 +905,7 @@ export default class decreeoperationtemplatecreator extends Vue {
 
         fetch('/api/Persondecreeoperation', {
             method: 'post',
-            body: JSON.stringify(t),
+            body: JSON.stringify(transfer),
             credentials: 'include',
             headers: new Headers({
                 'Accept': 'application/json',
@@ -1309,6 +1309,9 @@ export default class decreeoperationtemplatecreator extends Vue {
 
     selectPersonBlock(person: Person, block: Persondecreeblock) {
         if (person != null) {
+            block.personssearch = [];
+            block.fiosearch = "";
+            block.nonperson = ""; // Если был человек не из МЧС, убираем.
             //this.prepareToImport(person);
             if (block.allpersonsintoblock == null || block.allpersonsintoblock == [])
                 block.allpersonsintoblock = [person];
@@ -1318,9 +1321,9 @@ export default class decreeoperationtemplatecreator extends Vue {
             }
             block.person = person;
 
-            block.personssearch = [];
+            /*block.personssearch = [];
             block.fiosearch = "";
-            block.nonperson = ""; // Если был человек не из МЧС, убираем.
+            block.nonperson = ""; // Если был человек не из МЧС, убираем.*/
 
             // Если присвоить
             if (block.persondecreeblocktype == 14) {
@@ -1847,12 +1850,12 @@ export default class decreeoperationtemplatecreator extends Vue {
         })
     }
 
-    selectPersonBlockNonAuto(id: number, block: Persondecreeblock) {
-        fetch('api/Person/Single' + id, { credentials: 'include' })
+    selectPersonBlockNonAuto(person: Person, block: Persondecreeblock) {
+        /*fetch('api/Person/Single' + id, { credentials: 'include' })
             .then(response => {
                 return response.json() as Promise<Person>;
             })
-            .then(person => {
+            .then(person => {*/
                 if (person != null) {
                     this.prepareToImport(person);
                     block.person = person;
@@ -1877,7 +1880,7 @@ export default class decreeoperationtemplatecreator extends Vue {
                     this.block_list_ubdate(block);
                 }
                 //this.block_list_ubdate(block);
-            })
+            //})
     }
 
     jobperiodvacationinitializeAll(persondecreeblock: Persondecreeblock) {

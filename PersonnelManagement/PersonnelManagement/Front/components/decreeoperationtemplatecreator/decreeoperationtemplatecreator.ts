@@ -854,11 +854,12 @@ export default class decreeoperationtemplatecreator extends Vue {
             persondecreeblock.optionnumber11 = 1;
         }
 
-        let transfer: any = <Persondecreeoperation>{
+        let transfer: Persondecreeoperation = <Persondecreeoperation>{
             person: personid,
             persondecree: this.input_decree.id,
             status: 1, // Создание
             personreward: persondecreeblock.samplePersonreward,
+            //personreward: { },
             intro: persondecreeblock.intro,
             optionnumber1: this.prepareNumToExport(persondecreeblock.optionnumber1),
             optionnumber2: this.prepareNumToExport(persondecreeblock.optionnumber2),
@@ -902,6 +903,7 @@ export default class decreeoperationtemplatecreator extends Vue {
 
             personFromStructure: persondecreeblock.allpersonsintoblock,
         };
+        let t = JSON.stringify(transfer);
 
         fetch('/api/Persondecreeoperation', {
             method: 'post',

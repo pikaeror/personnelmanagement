@@ -12,13 +12,14 @@ namespace PersonnelManagement.Models
         public int Status { get; set; } // 1 - добавить, 2 - удалить, 3 - обновить
                                         //
         public Personreward Personreward { get; set; }
+        public Personjob Personjob { get; set; }
         public PersonManager Personobject { get; set; }
         public Personpenalty Personpenalty { get; set; }
         public Position Positionobject { get; set; }
         public Positiontype Positiontypeobject { get; set; }
         public Structure Structureobject { get; set; }
         public Fire Fireobject { get; set; }
-        public List<Person> personFromStructure { get; set; } = new List<Person>();
+        public List<Person> personFromStructure { get; set; }
         public List<PersonManager> OptionarraypersonObjects { get; set; } = new List<PersonManager>(); // ЭЛД, сгрупированные в дополнении к этой операции. 
                                                                         // Единственная группировка на данный момент - командировка нескольких людей в одно место назначения
 
@@ -74,11 +75,13 @@ namespace PersonnelManagement.Models
 
             Personreward = null;
             Personpenalty = null;
+            Personjob = null;
             Personobject = null;
             Positionobject = null;
             Positiontypeobject = null;
             Structureobject = null;
             Fireobject = null;
+            personFromStructure = new List<Person>();
             OptionarraypersonObjects = new List<PersonManager>();
         }
 

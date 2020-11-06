@@ -104,18 +104,20 @@ namespace PersonnelManagement.Controllers
                     repository.AddPersonDecreeoperation(user, persondecreeoperation);
                 });
                 return new ObjectResult(Keys.SUCCESS_SHORT + ":Добавлено!");
-            } else if (persondecreeoperation.Status == 2)
+            }
+            else if (persondecreeoperation.Status == 2)
             {
                 repository.RemovePersonDecreeoperation(user, persondecreeoperation);
                 return new ObjectResult(Keys.SUCCESS_SHORT + ":Удалено!");
-            } else if (persondecreeoperation.Status == 3)
+            }
+            else if (persondecreeoperation.Status == 3)
             {
                 repository.UpdatePersonDecreeoperation(user, persondecreeoperation);
                 return new ObjectResult(Keys.SUCCESS_SHORT + ":Обновлено!");
             }
             ///**
             // * Means, we remove decree operation with its subject
-            // */
+            // 
             //if (decreeoperationManagement.MetaStatus == Keys.DECREE_OPERATION_META_REMOVE)
             //{
             //    repository.RemoveDecreeOperationWithItsSubject(decreeoperationManagement);

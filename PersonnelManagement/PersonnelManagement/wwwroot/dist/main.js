@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "729c207f9209e224ca93"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "fd10ecd3eea40a939399"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -9111,6 +9111,7 @@ let decreeoperationtemplatecreator = class decreeoperationtemplatecreator extend
             persondecree: this.input_decree.id,
             status: 1,
             personreward: persondecreeblock.samplePersonreward,
+            //personreward: { },
             intro: persondecreeblock.intro,
             optionnumber1: this.prepareNumToExport(persondecreeblock.optionnumber1),
             optionnumber2: this.prepareNumToExport(persondecreeblock.optionnumber2),
@@ -9152,54 +9153,10 @@ let decreeoperationtemplatecreator = class decreeoperationtemplatecreator extend
             persondecreeblocksubtype: persondecreeblock.persondecreeblocksub,
             personFromStructure: persondecreeblock.allpersonsintoblock,
         };
+        let t = JSON.stringify(transfer);
         fetch('/api/Persondecreeoperation', {
             method: 'post',
-            body: JSON.stringify({
-                person: personid,
-                persondecree: this.input_decree.id,
-                status: 1,
-                personreward: persondecreeblock.samplePersonreward,
-                intro: persondecreeblock.intro,
-                optionnumber1: this.prepareNumToExport(persondecreeblock.optionnumber1),
-                optionnumber2: this.prepareNumToExport(persondecreeblock.optionnumber2),
-                optionnumber3: this.prepareNumToExport(persondecreeblock.optionnumber3),
-                optionnumber4: this.prepareNumToExport(persondecreeblock.optionnumber4),
-                optionnumber5: this.prepareNumToExport(persondecreeblock.optionnumber5),
-                optionnumber6: this.prepareNumToExport(persondecreeblock.optionnumber6),
-                optionnumber7: this.prepareNumToExport(persondecreeblock.optionnumber7),
-                optionnumber8: this.prepareNumToExport(persondecreeblock.optionnumber8),
-                optionnumber9: this.prepareNumToExport(persondecreeblock.optionnumber9),
-                optionnumber10: this.prepareNumToExport(persondecreeblock.optionnumber10),
-                optionnumber11: this.prepareNumToExport(persondecreeblock.optionnumber11),
-                optionstring1: persondecreeblock.optionstring1,
-                optionstring2: persondecreeblock.optionstring2,
-                optionstring3: persondecreeblock.optionstring3,
-                optionstring4: persondecreeblock.optionstring4,
-                optionstring5: persondecreeblock.optionstring5,
-                optionstring6: persondecreeblock.optionstring6,
-                optionstring7: persondecreeblock.optionstring7,
-                optionstring8: persondecreeblock.optionstring8,
-                optiondate1: this.prepareDateToExportNullable(persondecreeblock.optiondate1String),
-                optiondate2: this.prepareDateToExportNullable(persondecreeblock.optiondate2String),
-                optiondate3: this.prepareDateToExportNullable(persondecreeblock.optiondate3String),
-                optiondate4: this.prepareDateToExportNullable(persondecreeblock.optiondate4String),
-                optiondate5: this.prepareDateToExportNullable(persondecreeblock.optiondate5String),
-                optiondate6: this.prepareDateToExportNullable(persondecreeblock.optiondate6String),
-                optiondate7: this.prepareDateToExportNullable(persondecreeblock.optiondate7String),
-                optiondate8: this.prepareDateToExportNullable(persondecreeblock.optiondate8String),
-                subvaluenumber1: this.prepareNumToExport(persondecreeblock.subvaluenumber1),
-                subvaluenumber2: this.prepareNumToExport(persondecreeblock.subvaluenumber2),
-                subvaluestring1: persondecreeblock.subvaluestring1,
-                subvaluestring2: persondecreeblock.subvaluestring2,
-                nonperson: persondecreeblock.nonperson,
-                optionarray1: this.prepareArrayNumberToExportNullable(persondecreeblock.optionarray1Array),
-                optionarrayperson: this.prepareArrayNumberToExportNullable(persondecreeblock.optionarraypersonArray),
-                //subjecttype: 1, // Награды - устарело
-                persondecreeblock: persondecreeblock.id,
-                persondecreeblocktype: persondecreeblock.persondecreeblocktype,
-                persondecreeblocksubtype: persondecreeblock.persondecreeblocksub,
-                personFromStructure: persondecreeblock.allpersonsintoblock,
-            }),
+            body: JSON.stringify(transfer),
             credentials: 'include',
             headers: new Headers({
                 'Accept': 'application/json',

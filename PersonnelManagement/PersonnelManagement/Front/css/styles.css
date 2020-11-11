@@ -3537,7 +3537,8 @@ eld-eld-body-row-flex-vertical{
     margin-left: 4px;
     display: flex;
     justify-content: space-between;
-    width: 850px;
+    /*width: 850px;*/
+    width: 100%
 }
 
 .persondecreeoperation-part-list-element-indent{

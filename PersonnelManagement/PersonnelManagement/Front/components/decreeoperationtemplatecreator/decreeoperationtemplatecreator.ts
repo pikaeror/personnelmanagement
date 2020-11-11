@@ -445,7 +445,7 @@ export default class decreeoperationtemplatecreator extends Vue {
     @Watch('visible')
     onVisibleChange(value: boolean, oldValue: boolean) {
         if (value) {
-            //this.update = true;
+            this.fetchPersondecreeBlocks(this.input_decree.id);
         }
     }
 
@@ -474,78 +474,83 @@ export default class decreeoperationtemplatecreator extends Vue {
             .then(result => {
                 //alert(JSON.stringify(result));
                 result.forEach(p => {
-                    if (p.persondecreeblocksub == 0) {
-                        p.persondecreeblocksub = null; // Чтобы ничего не отображало вместо 0
-                    }
-                    if (p.persondecreeblocktype == 1) { // Наградить
-                        p.samplePersonreward = new Personreward();
-                    }
-                    if (p.optionnumber1 == 0) {
-                        p.optionnumber1 = null;
-                    }
-                    if (p.optionnumber2 == 0) {
-                        p.optionnumber2 = null;
-                    }
-                    if (p.optionnumber3 == 0) {
-                        p.optionnumber3 = null;
-                    }
-                    if (p.optionnumber4 == 0) {
-                        p.optionnumber4 = null;
-                    }
-                    if (p.optionnumber5 == 0) {
-                        p.optionnumber5 = null;
-                    }
-                    if (p.optionnumber6 == 0) {
-                        p.optionnumber6 = null;
-                    }
-                    if (p.optionnumber7 == 0) {
-                        p.optionnumber7 = null;
-                    }
-                    if (p.optionnumber8 == 0) {
-                        p.optionnumber8 = null;
-                    }
-                    if (p.optionnumber9 == 0) {
-                        p.optionnumber9 = null;
-                    }
-                    if (p.optionnumber10 == 0) {
-                        p.optionnumber10 = null;
-                    }
-                    if (p.optionnumber11 == 0) {
-                        p.optionnumber11 = null;
-                    }
+                    if (p.id == this.$store.state.chosenPersionDecreeBlock.id) {
+                        p = this.$store.state.chosenPersionDecreeBlock;
+                        this.$store.commit("setchosenpersiondecreeblock", <Persondecreeblock>{});
+                    } else {
+                        if (p.persondecreeblocksub == 0) {
+                            p.persondecreeblocksub = null; // Чтобы ничего не отображало вместо 0
+                        }
+                        if (p.persondecreeblocktype == 1) { // Наградить
+                            p.samplePersonreward = new Personreward();
+                        }
+                        if (p.optionnumber1 == 0) {
+                            p.optionnumber1 = null;
+                        }
+                        if (p.optionnumber2 == 0) {
+                            p.optionnumber2 = null;
+                        }
+                        if (p.optionnumber3 == 0) {
+                            p.optionnumber3 = null;
+                        }
+                        if (p.optionnumber4 == 0) {
+                            p.optionnumber4 = null;
+                        }
+                        if (p.optionnumber5 == 0) {
+                            p.optionnumber5 = null;
+                        }
+                        if (p.optionnumber6 == 0) {
+                            p.optionnumber6 = null;
+                        }
+                        if (p.optionnumber7 == 0) {
+                            p.optionnumber7 = null;
+                        }
+                        if (p.optionnumber8 == 0) {
+                            p.optionnumber8 = null;
+                        }
+                        if (p.optionnumber9 == 0) {
+                            p.optionnumber9 = null;
+                        }
+                        if (p.optionnumber10 == 0) {
+                            p.optionnumber10 = null;
+                        }
+                        if (p.optionnumber11 == 0) {
+                            p.optionnumber11 = null;
+                        }
 
-                    if (p.subvaluenumber1 == 0) {
-                        p.subvaluenumber1 = null;
-                    }
+                        if (p.subvaluenumber1 == 0) {
+                            p.subvaluenumber1 = null;
+                        }
 
-                    if (p.subvaluenumber2 == 0) {
-                        p.subvaluenumber2 = null;
-                    }
+                        if (p.subvaluenumber2 == 0) {
+                            p.subvaluenumber2 = null;
+                        }
 
-                    p.optiondate1String = this.toDateInputValue(p.optiondate1);
-                    p.optiondate2String = this.toDateInputValue(p.optiondate2);
-                    p.optiondate3String = this.toDateInputValue(p.optiondate3);
-                    p.optiondate4String = this.toDateInputValue(p.optiondate4);
-                    p.optiondate5String = this.toDateInputValue(p.optiondate5);
-                    p.optiondate6String = this.toDateInputValue(p.optiondate6);
-                    p.optiondate7String = this.toDateInputValue(p.optiondate7);
-                    p.optiondate8String = this.toDateInputValue(p.optiondate8);
+                        p.optiondate1String = this.toDateInputValue(p.optiondate1);
+                        p.optiondate2String = this.toDateInputValue(p.optiondate2);
+                        p.optiondate3String = this.toDateInputValue(p.optiondate3);
+                        p.optiondate4String = this.toDateInputValue(p.optiondate4);
+                        p.optiondate5String = this.toDateInputValue(p.optiondate5);
+                        p.optiondate6String = this.toDateInputValue(p.optiondate6);
+                        p.optiondate7String = this.toDateInputValue(p.optiondate7);
+                        p.optiondate8String = this.toDateInputValue(p.optiondate8);
 
-                    p.optionarraypersonArray = this.toArrayNumberInputValue(p.optionarrayperson);
-                    p.optionarray1Array = this.toArrayNumberInputValue(p.optionarray1);
+                        p.optionarraypersonArray = this.toArrayNumberInputValue(p.optionarrayperson);
+                        p.optionarray1Array = this.toArrayNumberInputValue(p.optionarray1);
 
-                    p.personssearchadditional = true;
-                    if (p.optionarraypersonArray.length > 0) {
-                        p.personssearchadditional = false;
-                    }
+                        p.personssearchadditional = true;
+                        if (p.optionarraypersonArray.length > 0) {
+                            p.personssearchadditional = false;
+                        }
 
-                    // Если пункт "предоставить" (для отпуска), то в 6ой строке может содержаться информация о странах, 
-                    if (p.persondecreeblocktype == 15) {
-                        p.countrycitiesList = new Array();
+                        // Если пункт "предоставить" (для отпуска), то в 6ой строке может содержаться информация о странах, 
+                        if (p.persondecreeblocktype == 15) {
+                            p.countrycitiesList = new Array();
 
-                        let baseCountrycities: Countrycities = new Countycities();
-                        p.countrycitiesList.push(baseCountrycities);
+                            let baseCountrycities: Countrycities = new Countycities();
+                            p.countrycitiesList.push(baseCountrycities);
 
+                        }
                     }
                 })
                 if (result.length != 0 || result != null)
@@ -1934,7 +1939,7 @@ export default class decreeoperationtemplatecreator extends Vue {
      * @param persondecreeblock
      */
     selectPosition(persondecreeblock: Persondecreeblock) {
-
+        this.$store.commit("setchosenpersiondecreeblock", persondecreeblock);
 
         let appearance = {
             positioncompact: this.$store.state.positioncompact,

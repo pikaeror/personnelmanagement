@@ -76,6 +76,8 @@ import User from './classes/user';
 import Dismissalclauses from './classes/dismissalclauses';
 
 import VueRouter from 'vue-router';
+import Persondecreeoperation from './classes/persondecreeoperation';
+import Persondecreeblock from './classes/persondecreeblock';
 Vue.use(VueRouter);
 Vue.use(Vuex);
 Vue.use(DlgDraggable);
@@ -266,6 +268,7 @@ const store = new Vuex.Store({
         persondecree: null,
         mailmodeprevios: false,
         chosenPosition: null,
+        chosenPersionDecreeBlock: <Persondecreeblock>{},
 
         eldVisible: 0,
         eldId: 0,
@@ -391,6 +394,10 @@ const store = new Vuex.Store({
 
     },
     mutations: {
+        setchosenpersiondecreeblock(state, n) {
+            state.chosenPersionDecreeBlock = n;
+        },
+
         setdecreeoperationelementVisible(state, n) {
             state.decreeoperationelementVisible = n;
         },

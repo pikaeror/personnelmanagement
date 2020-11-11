@@ -396,6 +396,19 @@
                                         <div>
                                             <!--<el-button size="mini" type="warning" @click="updatePersonreward(persondecreeBlock, decreeoperation)">Редактировать</el-button>-->
                                             <el-button size="mini" type="warning" @click="removePersondecreeoperation(decreeoperation)">Удалить</el-button>
+                                            <el-select v-model="value10"
+                                                       multiple
+                                                       filterable
+                                                       allow-create
+                                                       default-first-option
+                                                       placeholder="Редактировать список получателей данного пункта"
+                                                       style="width: 200px">
+                                                <el-option v-for="item in options5"
+                                                           :key="item.value"
+                                                           :label="item.label"
+                                                           :value="item.value">
+                                                </el-option>
+                                            </el-select>
                                         </div>
                                     </div>
                                 </div>
@@ -494,6 +507,19 @@
                                         <div>
                                             <!--<el-button size="mini" type="warning" @click="updatePersonreward(persondecreeBlock, decreeoperation)">Редактировать</el-button>-->
                                             <el-button size="mini" type="warning" @click="removePersondecreeoperation(decreeoperation)">Удалить</el-button>
+                                            <el-select v-model="value10"
+                                                       multiple
+                                                       filterable
+                                                       allow-create
+                                                       default-first-option
+                                                       placeholder="Редактировать список получателей данного пункта"
+                                                       style="width: 200px">
+                                                <el-option v-for="item in options5"
+                                                           :key="item.value"
+                                                           :label="item.label"
+                                                           :value="item.value">
+                                                </el-option>
+                                            </el-select>
                                         </div>
                                     </div>
                                 </div>
@@ -712,6 +738,19 @@
                                         <div>
                                             <!--<el-button size="mini" type="warning" @click="updatePersonreward(persondecreeBlock, decreeoperation)">Редактировать</el-button>-->
                                             <el-button size="mini" type="warning" @click="removePersondecreeoperation(decreeoperation)">Удалить</el-button>
+                                            <el-select v-model="value10"
+                                                       multiple
+                                                       filterable
+                                                       allow-create
+                                                       default-first-option
+                                                       placeholder="Редактировать список получателей данного пункта"
+                                                       style="width: 200px">
+                                                <el-option v-for="item in options5"
+                                                           :key="item.value"
+                                                           :label="item.label"
+                                                           :value="item.value">
+                                                </el-option>
+                                            </el-select>
                                         </div>
                                     </div>
                                 </div>
@@ -728,13 +767,13 @@
                             </div>
                             <div>
                                 <el-input placeholder="Фамилия Имя Отчество" class="eld-eld-body-select-medium" v-model="persondecreeBlock.fiosearch" @input="searchPersonsBlock(persondecreeBlock)"></el-input>
-                                <!--<el-button @click="searchPersonsBlock(persondecreeBlock)">Поиск</el-button>-->
+                                <!--<el-button @click="addNonEld(persondecreeBlock)">Добавить в приказ человека не из МЧС</el-button>-->
                             </div>
                             <div v-if="hasSearchResultsBlock(persondecreeBlock)" class="eld-search-main">
                                 <div class="eld-search-main-title">
                                     Результаты поиска
                                 </div>
-                                <div v-for="person in persondecreeBlock.personssearch" class="eld-search-element" @click="selectPersonBlockNonAuto(person.id, persondecreeBlock)">
+                                <div v-for="person in persondecreeBlock.personssearch" class="eld-search-element" @click="selectPersonBlock(person, persondecreeBlock)">
                                     <div>
                                         {{person.surname}} {{person.name}} {{person.fathername}}
                                     </div>
@@ -755,6 +794,9 @@
                             </div>
                             <div v-if="persondecreeBlock.person != null">
                                 Кого – {{persondecreeBlock.person.surname4 + " " + persondecreeBlock.person.name4 + " " + persondecreeBlock.person.fathername4}}
+                            </div>
+                            <div v-if="persondecreeBlock.nonperson != null && persondecreeBlock.nonperson.length > 0">
+                                Кого — {{persondecreeBlock.nonperson}}
                             </div>
                         </div>
 
@@ -928,6 +970,7 @@
                                 <div>
                                     <div v-for="decreeoperation in persondecreeOperations" v-if="decreeoperation.persondecreeblocksub == persondecreeblocksub.id" class="persondecreeoperation-part-list-element persondecreeoperation-part-list-element-margin-big">
                                         <div>
+                                            111111111111111111
                                             <div v-if="decreeoperation.fireobject != null">
 
 
@@ -1019,6 +1062,19 @@
                                                 <div>
                                                     <!--<el-button size="mini" type="warning" @click="updatePersonreward(persondecreeBlock, decreeoperation)">Редактировать</el-button>-->
                                                     <el-button size="mini" type="warning" @click="removePersondecreeoperation(decreeoperation)">Удалить</el-button>
+                                                    <el-select v-model="value10"
+                                                               multiple
+                                                               filterable
+                                                               allow-create
+                                                               default-first-option
+                                                               placeholder="Редактировать список получателей данного пункта"
+                                                               style="width: 200px">
+                                                        <el-option v-for="item in options5"
+                                                                   :key="item.value"
+                                                                   :label="item.label"
+                                                                   :value="item.value">
+                                                        </el-option>
+                                                    </el-select>
                                                 </div>
                                             </div>
                                         </div>

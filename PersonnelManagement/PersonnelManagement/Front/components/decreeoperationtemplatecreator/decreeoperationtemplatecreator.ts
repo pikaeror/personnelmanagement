@@ -904,7 +904,7 @@ export default class decreeoperationtemplatecreator extends Vue {
             //subjecttype: 1, // Награды - устарело
             persondecreeblock: persondecreeblock.id,
             persondecreeblocktype: persondecreeblock.persondecreeblocktype,
-            persondecreeblocksubtype: persondecreeblock.persondecreeblocksub, // тип поощрения. У нас будет только вид, потому что единовременно может быть только один вид поощрения
+            persondecreeblocksubtype: 3,//persondecreeblock.persondecreeblocksub, // тип поощрения. У нас будет только вид, потому что единовременно может быть только один вид поощрения
 
             personFromStructure: persondecreeblock.allpersonsintoblock,
         };

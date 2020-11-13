@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "8d7e002c9f0ea644b4f1"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "18ef54045b587aaffa3b"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -9160,7 +9160,7 @@ let decreeoperationtemplatecreator = class decreeoperationtemplatecreator extend
             //subjecttype: 1, // Награды - устарело
             persondecreeblock: persondecreeblock.id,
             persondecreeblocktype: persondecreeblock.persondecreeblocktype,
-            persondecreeblocksubtype: persondecreeblock.persondecreeblocksub,
+            persondecreeblocksubtype: 3,
             personFromStructure: persondecreeblock.allpersonsintoblock,
         };
         let t = JSON.stringify(transfer);
@@ -55542,7 +55542,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       }, [_c('div', _vm._l((_vm.persondecreeOperations), function(decreeoperation) {
         return (decreeoperation.persondecreeblocksub == persondecreeblocksub.id) ? _c('div', {
           staticClass: "persondecreeoperation-part-list-element persondecreeoperation-part-list-element-margin-big"
-        }, [_c('div', [_vm._v("\n                                        111111111111111111\n                                        "), (decreeoperation.fireobject != null) ? _c('div', [(decreeoperation.personobject != null && decreeoperation.personobject.military) ? _c('div', [_c('div', {
+        }, [_c('div', [(decreeoperation.fireobject != null) ? _c('div', [(decreeoperation.personobject != null && decreeoperation.personobject.military) ? _c('div', [_c('div', {
           staticClass: "persondecreeoperation-part-list-element-intro persondecreeoperation-part-list-element-indent"
         }, [_c('span', {
           attrs: {

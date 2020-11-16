@@ -445,14 +445,16 @@ export default class decreeoperationtemplatecreator extends Vue {
     @Watch('visible')
     onVisibleChange(value: boolean, oldValue: boolean) {
         if (value) {
-            this.fetchPersondecreeBlocks(this.input_decree.id);
+            //this.fetchPersondecreeBlocks(this.input_decree.id);
+            this.persondecreeSelectUpdate();
         }
     }
 
     @Watch('input_decree')
     onInputDecreeChange(value: Persondecree) {
         if (value) {
-            this.fetchPersondecreeBlocks(value.id);
+            //this.fetchPersondecreeBlocks(value.id);
+            this.persondecreeSelectUpdate(value.id);
         }
     }
 
@@ -1799,7 +1801,7 @@ export default class decreeoperationtemplatecreator extends Vue {
                     this.selectPerson(this.person.id);
                 }
                 this.persondecreeSelectUpdate(this.input_decree.id);
-                this.fetchPersondecreeBlocks();
+                //this.fetchPersondecreeBlocks();
                 /*this.updateMethod();*/
             });
         

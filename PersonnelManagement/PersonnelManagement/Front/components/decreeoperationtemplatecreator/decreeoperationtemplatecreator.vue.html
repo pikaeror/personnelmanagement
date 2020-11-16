@@ -157,13 +157,13 @@
                                     </div>
                                     <el-input v-model="persondecreeBlock.optionstring4" class="eld-eld-body-row-medium"></el-input>
                                     <!--<div>
-                    Объявленное приказом
-                </div>
-                <el-select clearable placeholder="Подразделение" v-model="persondecreeBlock.optionnumber2" class="eld-eld-body-select-medium">
-                    <el-option v-for="structure in structuresElders"
-                               :key="structure.id" :label="structure.name" :value="structure.id">
-                    </el-option>
-                </el-select>-->
+                        Объявленное приказом
+                    </div>
+                    <el-select clearable placeholder="Подразделение" v-model="persondecreeBlock.optionnumber2" class="eld-eld-body-select-medium">
+                        <el-option v-for="structure in structuresElders"
+                                   :key="structure.id" :label="structure.name" :value="structure.id">
+                        </el-option>
+                    </el-select>-->
                                 </div>
 
                             </div>
@@ -316,10 +316,10 @@
                                     </div>
                                 </div>
                                 <!--<div>
-                <div>
+                    <div>
 
-                </div>
-            </div>-->
+                    </div>
+                </div>-->
 
                             </div>
                             <!--Подпункты без фабул-->
@@ -570,9 +570,9 @@
                         </div>
                         <div>
                             <!--<div>
-            В связи с чем (старое)
-        </div>
-        <el-input v-model="persondecreeBlock.intro" class="eld-eld-body-row-medium"></el-input>-->
+                В связи с чем (старое)
+            </div>
+            <el-input v-model="persondecreeBlock.intro" class="eld-eld-body-row-medium"></el-input>-->
                             <!--<el-checkbox v-model="persondecreeBlock.optionnumber3">Принят по контракту</el-checkbox>-->
                             <div v-if="persondecreeBlock.person != null">
                                 <!--Для военных-->
@@ -603,12 +603,12 @@
                                 <el-button @click="selectPosition(persondecreeBlock)" type="primary" plain>Назначить на должность</el-button>
                             </div>
                             <!--<div v-if="chosenPosition()">
-            {{setPositionByBlock(persondecreeBlock)}}
-            {{persondecreeBlock.samplePositiontype.name2}}
-        </div>
-        <div v-else>
-            {{persondecreeBlock.optionstring1}}
-        </div>-->
+                {{setPositionByBlock(persondecreeBlock)}}
+                {{persondecreeBlock.samplePositiontype.name2}}
+            </div>
+            <div v-else>
+                {{persondecreeBlock.optionstring1}}
+            </div>-->
                             <div v-if="chosenPosition">
                                 {{setPositionByBlock(persondecreeBlock)}}
                                 {{persondecreeBlock.samplePositiontype.name}}
@@ -653,13 +653,13 @@
                                     <el-input class="eld-eld-body-row-short" v-model="persondecreeBlock.optionnumber7" type="number"></el-input> дней
                                 </div>
                                 <!--<div>
-                Заключить контракт сроком на (пустым, если контракт не заключается)
-            </div>
-            <div>
-                <el-input class="eld-eld-body-row-short" v-model="persondecreeBlock.optionnumber8" type="number"></el-input> лет
-                <el-input class="eld-eld-body-row-short" v-model="persondecreeBlock.optionnumber9" type="number"></el-input> месяцев
-                <el-input class="eld-eld-body-row-short" v-model="persondecreeBlock.optionnumber10" type="number"></el-input> дней
-            </div>-->
+                    Заключить контракт сроком на (пустым, если контракт не заключается)
+                </div>
+                <div>
+                    <el-input class="eld-eld-body-row-short" v-model="persondecreeBlock.optionnumber8" type="number"></el-input> лет
+                    <el-input class="eld-eld-body-row-short" v-model="persondecreeBlock.optionnumber9" type="number"></el-input> месяцев
+                    <el-input class="eld-eld-body-row-short" v-model="persondecreeBlock.optionnumber10" type="number"></el-input> дней
+                </div>-->
                                 <div>
                                     Заключить контракт с (пустым, если контракт не заключается)
                                 </div>
@@ -1092,6 +1092,414 @@
                     <div>
                         <el-button @click="deletePersondecreeblock(persondecreeBlock)" type="danger">Удалить блок</el-button>
                     </div>
+
+                    <!--Освободить-->
+                    <div v-if="persondecreeBlock.persondecreeblocktype == 5">
+                        <div>
+                            В соответствии с каким пунктом
+                        </div>
+                        <el-select placeholder="В соответствии с каким пунктом" v-model="persondecreeBlock.persondecreeblocksub" class="eld-eld-body-select-long">
+                            <el-option v-for="transfertype in transfertypes"
+                                       :key="transfertype.id" :label="transfertype.selectdescription" :value="transfertype.id">
+                            </el-option>
+                        </el-select>
+                        <!--Система поиска людей-->
+                        <div>
+                            <div>
+                                Кого
+                            </div>
+                            <div>
+                                <el-input placeholder="Фамилия Имя Отчество" class="eld-eld-body-select-medium" v-model="persondecreeBlock.fiosearch" @input="searchPersonsBlock(persondecreeBlock)"></el-input>
+                                <!--<el-button @click="addNonEld(persondecreeBlock)">Добавить в приказ человека не из МЧС</el-button>-->
+                            </div>
+                            <div v-if="hasSearchResultsBlock(persondecreeBlock)" class="eld-search-main">
+                                <div class="eld-search-main-title">
+                                    Результаты поиска
+                                </div>
+                                <div v-for="person in persondecreeBlock.personssearch" class="eld-search-element" @click="selectPersonBlock(person, persondecreeBlock)">
+                                    <div>
+                                        {{person.surname}} {{person.name}} {{person.fathername}}
+                                    </div>
+                                    <div>
+                                        {{person.positiontypestring}}
+                                    </div>
+                                    <div v-if="hasPhotopreviewBlock(person.id, persondecreeBlock)">
+                                        <img :src="getPhotopreviewBlock(person.id, persondecreeBlock).photo64" class="eld-search-element-image" />
+                                    </div>
+                                    <div>
+                                        <div>
+                                            {{person.structuretree}}
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div v-if="persondecreeBlock.person != null">
+                                Кого – {{persondecreeBlock.person.surname4 + " " + persondecreeBlock.person.name4 + " " + persondecreeBlock.person.fathername4}}
+                            </div>
+                            <div v-if="persondecreeBlock.nonperson != null && persondecreeBlock.nonperson.length > 0">
+                                Кого — {{persondecreeBlock.nonperson}}
+                            </div>
+                        </div>
+
+                        <div>
+                            По какой причине (пустым, если без указания конкретной причины)
+                        </div>
+                        <el-input class="eld-eld-body-row-medium" v-model="persondecreeBlock.optionstring1"></el-input>
+                        <div>
+                            <br />
+                            <el-button @click="selectStructure(persondecreeBlock)" type="primary" plain>Перевести в распоряжение начальника подразделения</el-button>
+                        </div>
+                        <div>
+                            {{persondecreeBlock.optionstring2}}
+                        </div>
+                        <div>
+                            Основание
+                        </div>
+                        <el-input v-model="persondecreeBlock.optionstring3" class="eld-eld-body-row-long"></el-input>
+                        <div>
+                            <br />
+                            <el-button type="primary" plain @click="addPersonblockelement(persondecreeBlock)">Сформировать пункт приказа</el-button>
+                        </div>
+                        <!--Вывод списка-->
+                        <div class="persondecreeoperation-part-list-title">
+                            Проект приказа
+                        </div>
+                        <div>
+                            <span v-if="persondecreeBlock.index != null && persondecreeBlock.index != 0">{{persondecreeBlock.index}}.</span> ОСВОБОДИТЬ:
+                        </div>
+                        <div>
+                            <div v-for="persondecreeblocksub in persondecreeBlock.persondecreeblocksubs" v-if=" persondecreeblocksub.persondecreeblock == persondecreeBlock.id"
+                                 class="persondecreeoperation-part-list-element">
+                                <div>
+                                    <div v-for="decreeoperation in persondecreeOperations" v-if="decreeoperation.persondecreeblocksub == persondecreeblocksub.id" class="persondecreeoperation-part-list-element persondecreeoperation-part-list-element-margin-big">
+                                        <div>
+                                            <div>
+                                                <div class="persondecreeoperation-part-list-element-margin persondecreeoperation-part-list-element-indent">
+                                                    <span if="persondecreeBlock.index != null && persondecreeBlock.index != 0 && persondecreeblocksub.index != 0">{{persondecreeBlock.index}}.{{persondecreeblocksub.index}}.</span>
+                                                    в соответствии с п. 52 и п.п. <span v-if="getTransfertypeObject(decreeoperation.persondecreeblocksubtype) != null"> {{getTransfertypeObject(decreeoperation.persondecreeblocksubtype).pointsubpoint}}. </span>
+                                                    Положения о прохождении службы в органах и подразделениях по чрезвычайным ситуациям Республики Беларусь
+                                                </div>
+                                                <div class="persondecreeoperation-part-list-element-margin-small persondecreeoperation-part-list-element-indent">
+                                                    <span v-if="decreeoperation.personobject.actualRank != null">{{decreeoperation.personobject.actualRank.name4}} </span>
+                                                    {{decreeoperation.personobject.surname4}} {{decreeoperation.personobject.name4}}
+                                                    {{decreeoperation.personobject.fathername4}} {{decreeoperation.optionstring1}}
+                                                    от должности {{decreeoperation.personobject.positiontree2}} и зачислить его в распоряжение начальника
+                                                    {{decreeoperation.optionstring2}}.
+                                                </div>
+                                                <div class="persondecreeoperation-part-list-element-margin-big">
+                                                    Основание: {{decreeoperation.optionstring3}}.
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div>
+                                                <div>
+                                                    <!--<el-button size="mini" type="warning" @click="updatePersonreward(persondecreeBlock, decreeoperation)">Редактировать</el-button>-->
+                                                    <el-button size="mini" type="warning" @click="removePersondecreeoperation(decreeoperation)">Удалить</el-button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <el-button @click="deletePersondecreeblock(persondecreeBlock)" type="danger">Удалить блок</el-button>
+                        </div>
+                    </div>
+                    <!--Перевести-->
+                    <div v-if="persondecreeBlock.persondecreeblocktype == 6">
+                        <div>
+                            В распоряжение
+                        </div>
+                        <el-input class="eld-eld-body-row-long" v-model="persondecreeBlock.optionstring1"></el-input>
+                        <div>
+                            Дата
+                        </div>
+                        <el-input v-model="persondecreeBlock.optiondate1String" class="eld-eld-body-row-short" type="date"></el-input>
+
+                        <!--Система поиска людей-->
+                        <div>
+                            <div>
+                                Кого
+                            </div>
+                            <div>
+                                <el-input placeholder="Фамилия Имя Отчество" class="eld-eld-body-select-medium" v-model="persondecreeBlock.fiosearch" @input="searchPersonsBlock(persondecreeBlock)"></el-input>
+                                <!--<el-button @click="addNonEld(persondecreeBlock)">Добавить в приказ человека не из МЧС</el-button>-->
+                            </div>
+                            <div v-if="hasSearchResultsBlock(persondecreeBlock)" class="eld-search-main">
+                                <div class="eld-search-main-title">
+                                    Результаты поиска
+                                </div>
+                                <div v-for="person in persondecreeBlock.personssearch" class="eld-search-element" @click="selectPersonBlock(person, persondecreeBlock)">
+                                    <div>
+                                        {{person.surname}} {{person.name}} {{person.fathername}}
+                                    </div>
+                                    <div>
+                                        {{person.positiontypestring}}
+                                    </div>
+                                    <div v-if="hasPhotopreviewBlock(person.id, persondecreeBlock)">
+                                        <img :src="getPhotopreviewBlock(person.id, persondecreeBlock).photo64" class="eld-search-element-image" />
+                                    </div>
+                                    <div>
+                                        <div>
+                                            {{person.structuretree}}
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div v-if="persondecreeBlock.person != null">
+                                Кого – {{persondecreeBlock.person.surname4 + " " + persondecreeBlock.person.name4 + " " + persondecreeBlock.person.fathername4}}
+                            </div>
+                            <div v-if="persondecreeBlock.nonperson != null && persondecreeBlock.nonperson.length > 0">
+                                Кого — {{persondecreeBlock.nonperson}}
+                            </div>
+                        </div>
+
+                        <div>
+                            Основание
+                        </div>
+                        <el-input v-model="persondecreeBlock.optionstring2" class="eld-eld-body-row-long"></el-input>
+                        <div>
+                            <br />
+                            <el-button type="primary" plain @click="addPersonblockelement(persondecreeBlock)">Сформировать пункт приказа</el-button>
+                        </div>
+                        <!--Вывод списка-->
+                        <div class="persondecreeoperation-part-list-title">
+                            Проект приказа
+                        </div>
+                        <div>
+                            <span v-if="persondecreeBlock.index != null && persondecreeBlock.index != 0">{{persondecreeBlock.index}}.</span> ПЕРЕВЕСТИ:
+                        </div>
+                        <div>
+                            <div v-for="decreeoperation in persondecreeOperations" v-if="decreeoperation.persondecreeblock == persondecreeBlock.id" class="persondecreeoperation-part-list-element">
+                                <div>
+                                    <div class="persondecreeoperation-part-list-element-margin-small persondecreeoperation-part-list-element-indent">
+                                        в распоряжение {{decreeoperation.optionstring1}}
+                                        <span v-if="decreeoperation.optiondate1 != null"> с {{printDateDocument(decreeoperation.optiondate1)}}</span>
+                                        <span v-if="decreeoperation.personobject.actualRank != null">{{decreeoperation.personobject.actualRank.name4}} </span>
+                                        {{decreeoperation.personobject.surname4}} {{decreeoperation.personobject.name4}}
+                                        {{decreeoperation.personobject.fathername4}}, освободив его
+                                        от должности {{decreeoperation.personobject.positiontype2string}} {{decreeoperation.personobject.structuretree2}}.
+                                    </div>
+                                    <div class="persondecreeoperation-part-list-element-margin-big">
+                                        Основание: {{decreeoperation.optionstring2}}.
+                                    </div>
+                                </div>
+                                <div>
+                                    <div>
+                                        <div>
+                                            <!--<el-button size="mini" type="warning" @click="updatePersonreward(persondecreeBlock, decreeoperation)">Редактировать</el-button>-->
+                                            <el-button size="mini" type="warning" @click="removePersondecreeoperation(decreeoperation)">Удалить</el-button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <br />
+                        </div>
+
+                        <div>
+                            <el-button @click="deletePersondecreeblock(persondecreeBlock)" type="danger">Удалить блок</el-button>
+                        </div>
+                    </div>
+
+                    <!--Прекратить службу-->
+                    <div v-if="persondecreeBlock.persondecreeblocktype == 7">
+                        <div>
+                            В соответствии с каким пунктом
+                        </div>
+                        <el-select placeholder="В соответствии с каким пунктом" v-model="persondecreeBlock.optionnumber1" class="eld-eld-body-select-long">
+                            <el-option v-for="interrupttype in interrupttypes"
+                                       :key="interrupttype.id" :label="interrupttype.selectdescription" :value="interrupttype.id">
+                            </el-option>
+                        </el-select>
+                        <!--Система поиска людей-->
+                        <div>
+                            <div>
+                                Кому
+                            </div>
+                            <div>
+                                <el-input placeholder="Фамилия Имя Отчество" class="eld-eld-body-select-medium" v-model="persondecreeBlock.fiosearch" @input="searchPersonsBlock(persondecreeBlock)"></el-input>
+                                <!--<el-button @click="searchPersonsBlock(persondecreeBlock)">Поиск</el-button>-->
+                            </div>
+                            <div v-if="hasSearchResultsBlock(persondecreeBlock)" class="eld-search-main">
+                                <div class="eld-search-main-title">
+                                    Результаты поиска
+                                </div>
+                                <div v-for="person in persondecreeBlock.personssearch" class="eld-search-element" @click="selectPersonBlockNonAuto(person.id, persondecreeBlock)">
+                                    <div>
+                                        {{person.surname}} {{person.name}} {{person.fathername}}
+                                    </div>
+                                    <div>
+                                        {{person.positiontypestring}}
+                                    </div>
+                                    <div v-if="hasPhotopreviewBlock(person.id, persondecreeBlock)">
+                                        <img :src="getPhotopreviewBlock(person.id, persondecreeBlock).photo64" class="eld-search-element-image" />
+                                    </div>
+                                    <div>
+                                        <div>
+                                            {{person.structuretree}}
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div v-if="persondecreeBlock.person != null">
+                                Кому – {{persondecreeBlock.person.surname3 + " " + persondecreeBlock.person.name3 + " " + persondecreeBlock.person.fathername3}}
+                            </div>
+                        </div>
+                        <div>
+                            Дата
+                        </div>
+                        <el-input v-model="persondecreeBlock.optiondate1String" class="eld-eld-body-row-short" type="date"></el-input>
+                        <div>
+                            Основание
+                        </div>
+                        <el-input v-model="persondecreeBlock.optionstring1" class="eld-eld-body-row-long"></el-input>
+                        <div>
+                            <br />
+                            <el-button type="primary" plain @click="addPersonblockelement(persondecreeBlock)">Сформировать пункт приказа</el-button>
+                        </div>
+                        <!--Вывод списка-->
+                        <div class="persondecreeoperation-part-list-title">
+                            Проект приказа
+                        </div>
+                        <div>
+                            <span v-if="persondecreeBlock.index != null && persondecreeBlock.index != 0">{{persondecreeBlock.index}}.</span> ПРЕКРАТИТЬ СЛУЖБУ:
+                        </div>
+                        <div>
+                            <div v-for="decreeoperation in persondecreeOperations" v-if="decreeoperation.persondecreeblock == persondecreeBlock.id" class="persondecreeoperation-part-list-element">
+                                <div>
+                                    <div class="persondecreeoperation-part-list-element-margin persondecreeoperation-part-list-element-indent">
+                                        в органах и подразделениях по чрезвычайным ситуациям по подпункту
+                                        <span v-if="getInterrupttypeObject(decreeoperation.optionnumber1) != null"> {{getInterrupttypeObject(decreeoperation.optionnumber1).pointsubpoint}} </span>
+                                        Положения о прохождении службы в органах и подразделениях по чрезвычайным ситуациям Республики Беларусь
+                                        <span v-if="getInterrupttypeObject(decreeoperation.optionnumber1) != null">({{getInterrupttypeObject(decreeoperation.optionnumber1).description}})</span>
+                                    </div>
+                                    <div class="persondecreeoperation-part-list-element-margin-small persondecreeoperation-part-list-element-indent">
+                                        <span v-if="decreeoperation.personobject.actualRank != null">{{decreeoperation.personobject.actualRank.name3}} </span>
+                                        {{decreeoperation.personobject.surname3}} {{decreeoperation.personobject.name3}}
+                                        {{decreeoperation.personobject.fathername3}}{{commaspaceifnotnull(decreeoperation.personobject.positiontree3)}} {{decreeoperation.personobject.positiontree3}}.
+                                    </div>
+                                    <div class="persondecreeoperation-part-list-element-margin-big">
+                                        Основание: {{decreeoperation.optionstring1}}.
+                                    </div>
+                                </div>
+                                <div>
+                                    <div>
+                                        <div>
+                                            <!--<el-button size="mini" type="warning" @click="updatePersonreward(persondecreeBlock, decreeoperation)">Редактировать</el-button>-->
+                                            <el-button size="mini" type="warning" @click="removePersondecreeoperation(decreeoperation)">Удалить</el-button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <br />
+                        </div>
+                        <div>
+                            <el-button @click="deletePersondecreeblock(persondecreeBlock)" type="danger">Удалить блок</el-button>
+                        </div>
+                    </div>
+                    <!--Отстранить-->
+                    <div v-if="persondecreeBlock.persondecreeblocktype == 8">
+                        <!--Система поиска людей-->
+                        <div>
+                            <div>
+                                Кого
+                            </div>
+                            <div>
+                                <el-input placeholder="Фамилия Имя Отчество" class="eld-eld-body-select-medium" v-model="persondecreeBlock.fiosearch" @input="searchPersonsBlock(persondecreeBlock)"></el-input>
+                                <!--<el-button @click="searchPersonsBlock(persondecreeBlock)">Поиск</el-button>-->
+                            </div>
+                            <div v-if="hasSearchResultsBlock(persondecreeBlock)" class="eld-search-main">
+                                <div class="eld-search-main-title">
+                                    Результаты поиска
+                                </div>
+                                <div v-for="person in persondecreeBlock.personssearch" class="eld-search-element" @click="selectPersonBlockNonAuto(person.id, persondecreeBlock)">
+                                    <div>
+                                        {{person.surname}} {{person.name}} {{person.fathername}}
+                                    </div>
+                                    <div>
+                                        {{person.positiontypestring}}
+                                    </div>
+                                    <div v-if="hasPhotopreviewBlock(person.id, persondecreeBlock)">
+                                        <img :src="getPhotopreviewBlock(person.id, persondecreeBlock).photo64" class="eld-search-element-image" />
+                                    </div>
+                                    <div>
+                                        <div>
+                                            {{person.structuretree}}
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div v-if="persondecreeBlock.person != null">
+                                Кого – {{persondecreeBlock.person.surname4 + " " + persondecreeBlock.person.name4 + " " + persondecreeBlock.person.fathername4}}
+                            </div>
+                        </div>
+                        <div>
+                            С какого числа
+                        </div>
+                        <el-input v-model="persondecreeBlock.optiondate1String" class="eld-eld-body-row-short" type="date"></el-input>
+                        <div>
+                            В связи с чем
+                        </div>
+                        <el-input v-model="persondecreeBlock.optionstring1" class="eld-eld-body-row-long" placeholder="В связи с ..."></el-input>
+                        <div>
+                            Основание
+                        </div>
+                        <el-input v-model="persondecreeBlock.optionstring2" class="eld-eld-body-row-long"></el-input>
+                        <div>
+                            <br />
+                            <el-button type="primary" plain @click="addPersonblockelement(persondecreeBlock)">Сформировать пункт приказа</el-button>
+                        </div>
+                        <!--Вывод списка-->
+                        <div class="persondecreeoperation-part-list-title">
+                            Проект приказа
+                        </div>
+                        <div>
+                            <span v-if="persondecreeBlock.index != null && persondecreeBlock.index != 0">{{persondecreeBlock.index}}.</span> ОТСТРАНИТЬ:
+                        </div>
+                        <div>
+                            <div v-for="decreeoperation in persondecreeOperations" v-if="decreeoperation.persondecreeblock == persondecreeBlock.id" class="persondecreeoperation-part-list-element">
+                                <div>
+                                    <div class="persondecreeoperation-part-list-element-margin-small persondecreeoperation-part-list-element-indent">
+                                        в соответствии с п. 49 Положения о прохождении службы в органах и подразделениях по чрезвычайным ситуациям Республики Беларусь от
+                                        исполнения служебных обязанностей
+                                        <span v-if="decreeoperation.personobject.actualRank != null">{{decreeoperation.personobject.actualRank.name4}} </span>
+                                        {{decreeoperation.personobject.surname4}} {{decreeoperation.personobject.name4}}
+                                        {{decreeoperation.personobject.fathername4}}{{commaspaceifnotnull(decreeoperation.personobject.positiontree4)}} {{decreeoperation.personobject.positiontree4}}<span v-if="decreeoperation.optiondate1 != null">, с {{printDateDocument(decreeoperation.optiondate1)}}</span>
+                                        {{decreeoperation.optionstring1}}.
+                                    </div>
+                                    <div class="persondecreeoperation-part-list-element-margin-big">
+                                        Основание: {{decreeoperation.optionstring2}}.
+                                    </div>
+                                </div>
+                                <div>
+                                    <div>
+                                        <div>
+                                            <!--<el-button size="mini" type="warning" @click="updatePersonreward(persondecreeBlock, decreeoperation)">Редактировать</el-button>-->
+                                            <el-button size="mini" type="warning" @click="removePersondecreeoperation(decreeoperation)">Удалить</el-button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <br />
+                        </div>
+                        <div>
+                            <el-button @click="deletePersondecreeblock(persondecreeBlock)" type="danger">Удалить блок</el-button>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>

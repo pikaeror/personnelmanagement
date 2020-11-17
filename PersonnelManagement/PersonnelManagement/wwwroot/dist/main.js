@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "18ef54045b587aaffa3b"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "b78e4f608227948a3e86"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -8739,12 +8739,14 @@ let decreeoperationtemplatecreator = class decreeoperationtemplatecreator extend
     }
     onVisibleChange(value, oldValue) {
         if (value) {
-            this.fetchPersondecreeBlocks(this.input_decree.id);
+            //this.fetchPersondecreeBlocks(this.input_decree.id);
+            this.persondecreeSelectUpdate();
         }
     }
     onInputDecreeChange(value) {
         if (value) {
-            this.fetchPersondecreeBlocks(value.id);
+            //this.fetchPersondecreeBlocks(value.id);
+            this.persondecreeSelectUpdate(value.id);
         }
     }
     updateMethod() {
@@ -9977,7 +9979,7 @@ let decreeoperationtemplatecreator = class decreeoperationtemplatecreator extend
                 this.selectPerson(this.person.id);
             }
             this.persondecreeSelectUpdate(this.input_decree.id);
-            this.fetchPersondecreeBlocks();
+            //this.fetchPersondecreeBlocks();
             /*this.updateMethod();*/
         });
     }
@@ -55617,7 +55619,467 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           _vm.deletePersondecreeblock(persondecreeBlock)
         }
       }
-    }, [_vm._v("Удалить блок")])], 1)])])
+    }, [_vm._v("Удалить блок")])], 1), _vm._v(" "), (persondecreeBlock.persondecreeblocktype == 5) ? _c('div', [_c('div', [_vm._v("\n                        В соответствии с каким пунктом\n                    ")]), _vm._v(" "), _c('el-select', {
+      staticClass: "eld-eld-body-select-long",
+      attrs: {
+        "placeholder": "В соответствии с каким пунктом"
+      },
+      model: {
+        value: (persondecreeBlock.persondecreeblocksub),
+        callback: function($$v) {
+          persondecreeBlock.persondecreeblocksub = $$v
+        },
+        expression: "persondecreeBlock.persondecreeblocksub"
+      }
+    }, _vm._l((_vm.transfertypes), function(transfertype) {
+      return _c('el-option', {
+        key: transfertype.id,
+        attrs: {
+          "label": transfertype.selectdescription,
+          "value": transfertype.id
+        }
+      })
+    })), _vm._v(" "), _c('div', [_c('div', [_vm._v("\n                            Кого\n                        ")]), _vm._v(" "), _c('div', [_c('el-input', {
+      staticClass: "eld-eld-body-select-medium",
+      attrs: {
+        "placeholder": "Фамилия Имя Отчество"
+      },
+      on: {
+        "input": function($event) {
+          _vm.searchPersonsBlock(persondecreeBlock)
+        }
+      },
+      model: {
+        value: (persondecreeBlock.fiosearch),
+        callback: function($$v) {
+          persondecreeBlock.fiosearch = $$v
+        },
+        expression: "persondecreeBlock.fiosearch"
+      }
+    })], 1), _vm._v(" "), (_vm.hasSearchResultsBlock(persondecreeBlock)) ? _c('div', {
+      staticClass: "eld-search-main"
+    }, [_c('div', {
+      staticClass: "eld-search-main-title"
+    }, [_vm._v("\n                                Результаты поиска\n                            ")]), _vm._v(" "), _vm._l((persondecreeBlock.personssearch), function(person) {
+      return _c('div', {
+        staticClass: "eld-search-element",
+        on: {
+          "click": function($event) {
+            _vm.selectPersonBlock(person, persondecreeBlock)
+          }
+        }
+      }, [_c('div', [_vm._v("\n                                    " + _vm._s(person.surname) + " " + _vm._s(person.name) + " " + _vm._s(person.fathername) + "\n                                ")]), _vm._v(" "), _c('div', [_vm._v("\n                                    " + _vm._s(person.positiontypestring) + "\n                                ")]), _vm._v(" "), (_vm.hasPhotopreviewBlock(person.id, persondecreeBlock)) ? _c('div', [_c('img', {
+        staticClass: "eld-search-element-image",
+        attrs: {
+          "src": _vm.getPhotopreviewBlock(person.id, persondecreeBlock).photo64
+        }
+      })]) : _vm._e(), _vm._v(" "), _c('div', [_c('div', [_vm._v("\n                                        " + _vm._s(person.structuretree) + "\n                                    ")])])])
+    })], 2) : _vm._e(), _vm._v(" "), (persondecreeBlock.person != null) ? _c('div', [_vm._v("\n                            Кого – " + _vm._s(persondecreeBlock.person.surname4 + " " + persondecreeBlock.person.name4 + " " + persondecreeBlock.person.fathername4) + "\n                        ")]) : _vm._e(), _vm._v(" "), (persondecreeBlock.nonperson != null && persondecreeBlock.nonperson.length > 0) ? _c('div', [_vm._v("\n                            Кого — " + _vm._s(persondecreeBlock.nonperson) + "\n                        ")]) : _vm._e()]), _vm._v(" "), _c('div', [_vm._v("\n                        По какой причине (пустым, если без указания конкретной причины)\n                    ")]), _vm._v(" "), _c('el-input', {
+      staticClass: "eld-eld-body-row-medium",
+      model: {
+        value: (persondecreeBlock.optionstring1),
+        callback: function($$v) {
+          persondecreeBlock.optionstring1 = $$v
+        },
+        expression: "persondecreeBlock.optionstring1"
+      }
+    }), _vm._v(" "), _c('div', [_c('br'), _vm._v(" "), _c('el-button', {
+      attrs: {
+        "type": "primary",
+        "plain": ""
+      },
+      on: {
+        "click": function($event) {
+          _vm.selectStructure(persondecreeBlock)
+        }
+      }
+    }, [_vm._v("Перевести в распоряжение начальника подразделения")])], 1), _vm._v(" "), _c('div', [_vm._v("\n                        " + _vm._s(persondecreeBlock.optionstring2) + "\n                    ")]), _vm._v(" "), _c('div', [_vm._v("\n                        Основание\n                    ")]), _vm._v(" "), _c('el-input', {
+      staticClass: "eld-eld-body-row-long",
+      model: {
+        value: (persondecreeBlock.optionstring3),
+        callback: function($$v) {
+          persondecreeBlock.optionstring3 = $$v
+        },
+        expression: "persondecreeBlock.optionstring3"
+      }
+    }), _vm._v(" "), _c('div', [_c('br'), _vm._v(" "), _c('el-button', {
+      attrs: {
+        "type": "primary",
+        "plain": ""
+      },
+      on: {
+        "click": function($event) {
+          _vm.addPersonblockelement(persondecreeBlock)
+        }
+      }
+    }, [_vm._v("Сформировать пункт приказа")])], 1), _vm._v(" "), _c('div', {
+      staticClass: "persondecreeoperation-part-list-title"
+    }, [_vm._v("\n                        Проект приказа\n                    ")]), _vm._v(" "), _c('div', [(persondecreeBlock.index != null && persondecreeBlock.index != 0) ? _c('span', [_vm._v(_vm._s(persondecreeBlock.index) + ".")]) : _vm._e(), _vm._v(" ОСВОБОДИТЬ:\n                    ")]), _vm._v(" "), _c('div', _vm._l((persondecreeBlock.persondecreeblocksubs), function(persondecreeblocksub) {
+      return (persondecreeblocksub.persondecreeblock == persondecreeBlock.id) ? _c('div', {
+        staticClass: "persondecreeoperation-part-list-element"
+      }, [_c('div', _vm._l((_vm.persondecreeOperations), function(decreeoperation) {
+        return (decreeoperation.persondecreeblocksub == persondecreeblocksub.id) ? _c('div', {
+          staticClass: "persondecreeoperation-part-list-element persondecreeoperation-part-list-element-margin-big"
+        }, [_c('div', [_c('div', [_c('div', {
+          staticClass: "persondecreeoperation-part-list-element-margin persondecreeoperation-part-list-element-indent"
+        }, [_c('span', {
+          attrs: {
+            "if": "persondecreeBlock.index != null && persondecreeBlock.index != 0 && persondecreeblocksub.index != 0"
+          }
+        }, [_vm._v(_vm._s(persondecreeBlock.index) + "." + _vm._s(persondecreeblocksub.index) + ".")]), _vm._v("\n                                                в соответствии с п. 52 и п.п. "), (_vm.getTransfertypeObject(decreeoperation.persondecreeblocksubtype) != null) ? _c('span', [_vm._v(" " + _vm._s(_vm.getTransfertypeObject(decreeoperation.persondecreeblocksubtype).pointsubpoint) + ". ")]) : _vm._e(), _vm._v("\n                                                Положения о прохождении службы в органах и подразделениях по чрезвычайным ситуациям Республики Беларусь\n                                            ")]), _vm._v(" "), _c('div', {
+          staticClass: "persondecreeoperation-part-list-element-margin-small persondecreeoperation-part-list-element-indent"
+        }, [(decreeoperation.personobject.actualRank != null) ? _c('span', [_vm._v(_vm._s(decreeoperation.personobject.actualRank.name4) + " ")]) : _vm._e(), _vm._v("\n                                                " + _vm._s(decreeoperation.personobject.surname4) + " " + _vm._s(decreeoperation.personobject.name4) + "\n                                                " + _vm._s(decreeoperation.personobject.fathername4) + " " + _vm._s(decreeoperation.optionstring1) + "\n                                                от должности " + _vm._s(decreeoperation.personobject.positiontree2) + " и зачислить его в распоряжение начальника\n                                                " + _vm._s(decreeoperation.optionstring2) + ".\n                                            ")]), _vm._v(" "), _c('div', {
+          staticClass: "persondecreeoperation-part-list-element-margin-big"
+        }, [_vm._v("\n                                                Основание: " + _vm._s(decreeoperation.optionstring3) + ".\n                                            ")])])]), _vm._v(" "), _c('div', [_c('div', [_c('div', [_c('el-button', {
+          attrs: {
+            "size": "mini",
+            "type": "warning"
+          },
+          on: {
+            "click": function($event) {
+              _vm.removePersondecreeoperation(decreeoperation)
+            }
+          }
+        }, [_vm._v("Удалить")])], 1)])])]) : _vm._e()
+      }))]) : _vm._e()
+    })), _vm._v(" "), _c('div', [_c('el-button', {
+      attrs: {
+        "type": "danger"
+      },
+      on: {
+        "click": function($event) {
+          _vm.deletePersondecreeblock(persondecreeBlock)
+        }
+      }
+    }, [_vm._v("Удалить блок")])], 1)], 1) : _vm._e(), _vm._v(" "), (persondecreeBlock.persondecreeblocktype == 6) ? _c('div', [_c('div', [_vm._v("\n                        В распоряжение\n                    ")]), _vm._v(" "), _c('el-input', {
+      staticClass: "eld-eld-body-row-long",
+      model: {
+        value: (persondecreeBlock.optionstring1),
+        callback: function($$v) {
+          persondecreeBlock.optionstring1 = $$v
+        },
+        expression: "persondecreeBlock.optionstring1"
+      }
+    }), _vm._v(" "), _c('div', [_vm._v("\n                        Дата\n                    ")]), _vm._v(" "), _c('el-input', {
+      staticClass: "eld-eld-body-row-short",
+      attrs: {
+        "type": "date"
+      },
+      model: {
+        value: (persondecreeBlock.optiondate1String),
+        callback: function($$v) {
+          persondecreeBlock.optiondate1String = $$v
+        },
+        expression: "persondecreeBlock.optiondate1String"
+      }
+    }), _vm._v(" "), _c('div', [_c('div', [_vm._v("\n                            Кого\n                        ")]), _vm._v(" "), _c('div', [_c('el-input', {
+      staticClass: "eld-eld-body-select-medium",
+      attrs: {
+        "placeholder": "Фамилия Имя Отчество"
+      },
+      on: {
+        "input": function($event) {
+          _vm.searchPersonsBlock(persondecreeBlock)
+        }
+      },
+      model: {
+        value: (persondecreeBlock.fiosearch),
+        callback: function($$v) {
+          persondecreeBlock.fiosearch = $$v
+        },
+        expression: "persondecreeBlock.fiosearch"
+      }
+    })], 1), _vm._v(" "), (_vm.hasSearchResultsBlock(persondecreeBlock)) ? _c('div', {
+      staticClass: "eld-search-main"
+    }, [_c('div', {
+      staticClass: "eld-search-main-title"
+    }, [_vm._v("\n                                Результаты поиска\n                            ")]), _vm._v(" "), _vm._l((persondecreeBlock.personssearch), function(person) {
+      return _c('div', {
+        staticClass: "eld-search-element",
+        on: {
+          "click": function($event) {
+            _vm.selectPersonBlock(person, persondecreeBlock)
+          }
+        }
+      }, [_c('div', [_vm._v("\n                                    " + _vm._s(person.surname) + " " + _vm._s(person.name) + " " + _vm._s(person.fathername) + "\n                                ")]), _vm._v(" "), _c('div', [_vm._v("\n                                    " + _vm._s(person.positiontypestring) + "\n                                ")]), _vm._v(" "), (_vm.hasPhotopreviewBlock(person.id, persondecreeBlock)) ? _c('div', [_c('img', {
+        staticClass: "eld-search-element-image",
+        attrs: {
+          "src": _vm.getPhotopreviewBlock(person.id, persondecreeBlock).photo64
+        }
+      })]) : _vm._e(), _vm._v(" "), _c('div', [_c('div', [_vm._v("\n                                        " + _vm._s(person.structuretree) + "\n                                    ")])])])
+    })], 2) : _vm._e(), _vm._v(" "), (persondecreeBlock.person != null) ? _c('div', [_vm._v("\n                            Кого – " + _vm._s(persondecreeBlock.person.surname4 + " " + persondecreeBlock.person.name4 + " " + persondecreeBlock.person.fathername4) + "\n                        ")]) : _vm._e(), _vm._v(" "), (persondecreeBlock.nonperson != null && persondecreeBlock.nonperson.length > 0) ? _c('div', [_vm._v("\n                            Кого — " + _vm._s(persondecreeBlock.nonperson) + "\n                        ")]) : _vm._e()]), _vm._v(" "), _c('div', [_vm._v("\n                        Основание\n                    ")]), _vm._v(" "), _c('el-input', {
+      staticClass: "eld-eld-body-row-long",
+      model: {
+        value: (persondecreeBlock.optionstring2),
+        callback: function($$v) {
+          persondecreeBlock.optionstring2 = $$v
+        },
+        expression: "persondecreeBlock.optionstring2"
+      }
+    }), _vm._v(" "), _c('div', [_c('br'), _vm._v(" "), _c('el-button', {
+      attrs: {
+        "type": "primary",
+        "plain": ""
+      },
+      on: {
+        "click": function($event) {
+          _vm.addPersonblockelement(persondecreeBlock)
+        }
+      }
+    }, [_vm._v("Сформировать пункт приказа")])], 1), _vm._v(" "), _c('div', {
+      staticClass: "persondecreeoperation-part-list-title"
+    }, [_vm._v("\n                        Проект приказа\n                    ")]), _vm._v(" "), _c('div', [(persondecreeBlock.index != null && persondecreeBlock.index != 0) ? _c('span', [_vm._v(_vm._s(persondecreeBlock.index) + ".")]) : _vm._e(), _vm._v(" ПЕРЕВЕСТИ:\n                    ")]), _vm._v(" "), _c('div', [_vm._l((_vm.persondecreeOperations), function(decreeoperation) {
+      return (decreeoperation.persondecreeblock == persondecreeBlock.id) ? _c('div', {
+        staticClass: "persondecreeoperation-part-list-element"
+      }, [_c('div', [_c('div', {
+        staticClass: "persondecreeoperation-part-list-element-margin-small persondecreeoperation-part-list-element-indent"
+      }, [_vm._v("\n                                    в распоряжение " + _vm._s(decreeoperation.optionstring1) + "\n                                    "), (decreeoperation.optiondate1 != null) ? _c('span', [_vm._v(" с " + _vm._s(_vm.printDateDocument(decreeoperation.optiondate1)))]) : _vm._e(), _vm._v(" "), (decreeoperation.personobject.actualRank != null) ? _c('span', [_vm._v(_vm._s(decreeoperation.personobject.actualRank.name4) + " ")]) : _vm._e(), _vm._v("\n                                    " + _vm._s(decreeoperation.personobject.surname4) + " " + _vm._s(decreeoperation.personobject.name4) + "\n                                    " + _vm._s(decreeoperation.personobject.fathername4) + ", освободив его\n                                    от должности " + _vm._s(decreeoperation.personobject.positiontype2string) + " " + _vm._s(decreeoperation.personobject.structuretree2) + ".\n                                ")]), _vm._v(" "), _c('div', {
+        staticClass: "persondecreeoperation-part-list-element-margin-big"
+      }, [_vm._v("\n                                    Основание: " + _vm._s(decreeoperation.optionstring2) + ".\n                                ")])]), _vm._v(" "), _c('div', [_c('div', [_c('div', [_c('el-button', {
+        attrs: {
+          "size": "mini",
+          "type": "warning"
+        },
+        on: {
+          "click": function($event) {
+            _vm.removePersondecreeoperation(decreeoperation)
+          }
+        }
+      }, [_vm._v("Удалить")])], 1)])])]) : _vm._e()
+    }), _vm._v(" "), _c('br')], 2), _vm._v(" "), _c('div', [_c('el-button', {
+      attrs: {
+        "type": "danger"
+      },
+      on: {
+        "click": function($event) {
+          _vm.deletePersondecreeblock(persondecreeBlock)
+        }
+      }
+    }, [_vm._v("Удалить блок")])], 1)], 1) : _vm._e(), _vm._v(" "), (persondecreeBlock.persondecreeblocktype == 7) ? _c('div', [_c('div', [_vm._v("\n                        В соответствии с каким пунктом\n                    ")]), _vm._v(" "), _c('el-select', {
+      staticClass: "eld-eld-body-select-long",
+      attrs: {
+        "placeholder": "В соответствии с каким пунктом"
+      },
+      model: {
+        value: (persondecreeBlock.optionnumber1),
+        callback: function($$v) {
+          persondecreeBlock.optionnumber1 = $$v
+        },
+        expression: "persondecreeBlock.optionnumber1"
+      }
+    }, _vm._l((_vm.interrupttypes), function(interrupttype) {
+      return _c('el-option', {
+        key: interrupttype.id,
+        attrs: {
+          "label": interrupttype.selectdescription,
+          "value": interrupttype.id
+        }
+      })
+    })), _vm._v(" "), _c('div', [_c('div', [_vm._v("\n                            Кому\n                        ")]), _vm._v(" "), _c('div', [_c('el-input', {
+      staticClass: "eld-eld-body-select-medium",
+      attrs: {
+        "placeholder": "Фамилия Имя Отчество"
+      },
+      on: {
+        "input": function($event) {
+          _vm.searchPersonsBlock(persondecreeBlock)
+        }
+      },
+      model: {
+        value: (persondecreeBlock.fiosearch),
+        callback: function($$v) {
+          persondecreeBlock.fiosearch = $$v
+        },
+        expression: "persondecreeBlock.fiosearch"
+      }
+    })], 1), _vm._v(" "), (_vm.hasSearchResultsBlock(persondecreeBlock)) ? _c('div', {
+      staticClass: "eld-search-main"
+    }, [_c('div', {
+      staticClass: "eld-search-main-title"
+    }, [_vm._v("\n                                Результаты поиска\n                            ")]), _vm._v(" "), _vm._l((persondecreeBlock.personssearch), function(person) {
+      return _c('div', {
+        staticClass: "eld-search-element",
+        on: {
+          "click": function($event) {
+            _vm.selectPersonBlockNonAuto(person.id, persondecreeBlock)
+          }
+        }
+      }, [_c('div', [_vm._v("\n                                    " + _vm._s(person.surname) + " " + _vm._s(person.name) + " " + _vm._s(person.fathername) + "\n                                ")]), _vm._v(" "), _c('div', [_vm._v("\n                                    " + _vm._s(person.positiontypestring) + "\n                                ")]), _vm._v(" "), (_vm.hasPhotopreviewBlock(person.id, persondecreeBlock)) ? _c('div', [_c('img', {
+        staticClass: "eld-search-element-image",
+        attrs: {
+          "src": _vm.getPhotopreviewBlock(person.id, persondecreeBlock).photo64
+        }
+      })]) : _vm._e(), _vm._v(" "), _c('div', [_c('div', [_vm._v("\n                                        " + _vm._s(person.structuretree) + "\n                                    ")])])])
+    })], 2) : _vm._e(), _vm._v(" "), (persondecreeBlock.person != null) ? _c('div', [_vm._v("\n                            Кому – " + _vm._s(persondecreeBlock.person.surname3 + " " + persondecreeBlock.person.name3 + " " + persondecreeBlock.person.fathername3) + "\n                        ")]) : _vm._e()]), _vm._v(" "), _c('div', [_vm._v("\n                        Дата\n                    ")]), _vm._v(" "), _c('el-input', {
+      staticClass: "eld-eld-body-row-short",
+      attrs: {
+        "type": "date"
+      },
+      model: {
+        value: (persondecreeBlock.optiondate1String),
+        callback: function($$v) {
+          persondecreeBlock.optiondate1String = $$v
+        },
+        expression: "persondecreeBlock.optiondate1String"
+      }
+    }), _vm._v(" "), _c('div', [_vm._v("\n                        Основание\n                    ")]), _vm._v(" "), _c('el-input', {
+      staticClass: "eld-eld-body-row-long",
+      model: {
+        value: (persondecreeBlock.optionstring1),
+        callback: function($$v) {
+          persondecreeBlock.optionstring1 = $$v
+        },
+        expression: "persondecreeBlock.optionstring1"
+      }
+    }), _vm._v(" "), _c('div', [_c('br'), _vm._v(" "), _c('el-button', {
+      attrs: {
+        "type": "primary",
+        "plain": ""
+      },
+      on: {
+        "click": function($event) {
+          _vm.addPersonblockelement(persondecreeBlock)
+        }
+      }
+    }, [_vm._v("Сформировать пункт приказа")])], 1), _vm._v(" "), _c('div', {
+      staticClass: "persondecreeoperation-part-list-title"
+    }, [_vm._v("\n                        Проект приказа\n                    ")]), _vm._v(" "), _c('div', [(persondecreeBlock.index != null && persondecreeBlock.index != 0) ? _c('span', [_vm._v(_vm._s(persondecreeBlock.index) + ".")]) : _vm._e(), _vm._v(" ПРЕКРАТИТЬ СЛУЖБУ:\n                    ")]), _vm._v(" "), _c('div', [_vm._l((_vm.persondecreeOperations), function(decreeoperation) {
+      return (decreeoperation.persondecreeblock == persondecreeBlock.id) ? _c('div', {
+        staticClass: "persondecreeoperation-part-list-element"
+      }, [_c('div', [_c('div', {
+        staticClass: "persondecreeoperation-part-list-element-margin persondecreeoperation-part-list-element-indent"
+      }, [_vm._v("\n                                    в органах и подразделениях по чрезвычайным ситуациям по подпункту\n                                    "), (_vm.getInterrupttypeObject(decreeoperation.optionnumber1) != null) ? _c('span', [_vm._v(" " + _vm._s(_vm.getInterrupttypeObject(decreeoperation.optionnumber1).pointsubpoint) + " ")]) : _vm._e(), _vm._v("\n                                    Положения о прохождении службы в органах и подразделениях по чрезвычайным ситуациям Республики Беларусь\n                                    "), (_vm.getInterrupttypeObject(decreeoperation.optionnumber1) != null) ? _c('span', [_vm._v("(" + _vm._s(_vm.getInterrupttypeObject(decreeoperation.optionnumber1).description) + ")")]) : _vm._e()]), _vm._v(" "), _c('div', {
+        staticClass: "persondecreeoperation-part-list-element-margin-small persondecreeoperation-part-list-element-indent"
+      }, [(decreeoperation.personobject.actualRank != null) ? _c('span', [_vm._v(_vm._s(decreeoperation.personobject.actualRank.name3) + " ")]) : _vm._e(), _vm._v("\n                                    " + _vm._s(decreeoperation.personobject.surname3) + " " + _vm._s(decreeoperation.personobject.name3) + "\n                                    " + _vm._s(decreeoperation.personobject.fathername3) + _vm._s(_vm.commaspaceifnotnull(decreeoperation.personobject.positiontree3)) + " " + _vm._s(decreeoperation.personobject.positiontree3) + ".\n                                ")]), _vm._v(" "), _c('div', {
+        staticClass: "persondecreeoperation-part-list-element-margin-big"
+      }, [_vm._v("\n                                    Основание: " + _vm._s(decreeoperation.optionstring1) + ".\n                                ")])]), _vm._v(" "), _c('div', [_c('div', [_c('div', [_c('el-button', {
+        attrs: {
+          "size": "mini",
+          "type": "warning"
+        },
+        on: {
+          "click": function($event) {
+            _vm.removePersondecreeoperation(decreeoperation)
+          }
+        }
+      }, [_vm._v("Удалить")])], 1)])])]) : _vm._e()
+    }), _vm._v(" "), _c('br')], 2), _vm._v(" "), _c('div', [_c('el-button', {
+      attrs: {
+        "type": "danger"
+      },
+      on: {
+        "click": function($event) {
+          _vm.deletePersondecreeblock(persondecreeBlock)
+        }
+      }
+    }, [_vm._v("Удалить блок")])], 1)], 1) : _vm._e(), _vm._v(" "), (persondecreeBlock.persondecreeblocktype == 8) ? _c('div', [_c('div', [_c('div', [_vm._v("\n                            Кого\n                        ")]), _vm._v(" "), _c('div', [_c('el-input', {
+      staticClass: "eld-eld-body-select-medium",
+      attrs: {
+        "placeholder": "Фамилия Имя Отчество"
+      },
+      on: {
+        "input": function($event) {
+          _vm.searchPersonsBlock(persondecreeBlock)
+        }
+      },
+      model: {
+        value: (persondecreeBlock.fiosearch),
+        callback: function($$v) {
+          persondecreeBlock.fiosearch = $$v
+        },
+        expression: "persondecreeBlock.fiosearch"
+      }
+    })], 1), _vm._v(" "), (_vm.hasSearchResultsBlock(persondecreeBlock)) ? _c('div', {
+      staticClass: "eld-search-main"
+    }, [_c('div', {
+      staticClass: "eld-search-main-title"
+    }, [_vm._v("\n                                Результаты поиска\n                            ")]), _vm._v(" "), _vm._l((persondecreeBlock.personssearch), function(person) {
+      return _c('div', {
+        staticClass: "eld-search-element",
+        on: {
+          "click": function($event) {
+            _vm.selectPersonBlockNonAuto(person.id, persondecreeBlock)
+          }
+        }
+      }, [_c('div', [_vm._v("\n                                    " + _vm._s(person.surname) + " " + _vm._s(person.name) + " " + _vm._s(person.fathername) + "\n                                ")]), _vm._v(" "), _c('div', [_vm._v("\n                                    " + _vm._s(person.positiontypestring) + "\n                                ")]), _vm._v(" "), (_vm.hasPhotopreviewBlock(person.id, persondecreeBlock)) ? _c('div', [_c('img', {
+        staticClass: "eld-search-element-image",
+        attrs: {
+          "src": _vm.getPhotopreviewBlock(person.id, persondecreeBlock).photo64
+        }
+      })]) : _vm._e(), _vm._v(" "), _c('div', [_c('div', [_vm._v("\n                                        " + _vm._s(person.structuretree) + "\n                                    ")])])])
+    })], 2) : _vm._e(), _vm._v(" "), (persondecreeBlock.person != null) ? _c('div', [_vm._v("\n                            Кого – " + _vm._s(persondecreeBlock.person.surname4 + " " + persondecreeBlock.person.name4 + " " + persondecreeBlock.person.fathername4) + "\n                        ")]) : _vm._e()]), _vm._v(" "), _c('div', [_vm._v("\n                        С какого числа\n                    ")]), _vm._v(" "), _c('el-input', {
+      staticClass: "eld-eld-body-row-short",
+      attrs: {
+        "type": "date"
+      },
+      model: {
+        value: (persondecreeBlock.optiondate1String),
+        callback: function($$v) {
+          persondecreeBlock.optiondate1String = $$v
+        },
+        expression: "persondecreeBlock.optiondate1String"
+      }
+    }), _vm._v(" "), _c('div', [_vm._v("\n                        В связи с чем\n                    ")]), _vm._v(" "), _c('el-input', {
+      staticClass: "eld-eld-body-row-long",
+      attrs: {
+        "placeholder": "В связи с ..."
+      },
+      model: {
+        value: (persondecreeBlock.optionstring1),
+        callback: function($$v) {
+          persondecreeBlock.optionstring1 = $$v
+        },
+        expression: "persondecreeBlock.optionstring1"
+      }
+    }), _vm._v(" "), _c('div', [_vm._v("\n                        Основание\n                    ")]), _vm._v(" "), _c('el-input', {
+      staticClass: "eld-eld-body-row-long",
+      model: {
+        value: (persondecreeBlock.optionstring2),
+        callback: function($$v) {
+          persondecreeBlock.optionstring2 = $$v
+        },
+        expression: "persondecreeBlock.optionstring2"
+      }
+    }), _vm._v(" "), _c('div', [_c('br'), _vm._v(" "), _c('el-button', {
+      attrs: {
+        "type": "primary",
+        "plain": ""
+      },
+      on: {
+        "click": function($event) {
+          _vm.addPersonblockelement(persondecreeBlock)
+        }
+      }
+    }, [_vm._v("Сформировать пункт приказа")])], 1), _vm._v(" "), _c('div', {
+      staticClass: "persondecreeoperation-part-list-title"
+    }, [_vm._v("\n                        Проект приказа\n                    ")]), _vm._v(" "), _c('div', [(persondecreeBlock.index != null && persondecreeBlock.index != 0) ? _c('span', [_vm._v(_vm._s(persondecreeBlock.index) + ".")]) : _vm._e(), _vm._v(" ОТСТРАНИТЬ:\n                    ")]), _vm._v(" "), _c('div', [_vm._l((_vm.persondecreeOperations), function(decreeoperation) {
+      return (decreeoperation.persondecreeblock == persondecreeBlock.id) ? _c('div', {
+        staticClass: "persondecreeoperation-part-list-element"
+      }, [_c('div', [_c('div', {
+        staticClass: "persondecreeoperation-part-list-element-margin-small persondecreeoperation-part-list-element-indent"
+      }, [_vm._v("\n                                    в соответствии с п. 49 Положения о прохождении службы в органах и подразделениях по чрезвычайным ситуациям Республики Беларусь от\n                                    исполнения служебных обязанностей\n                                    "), (decreeoperation.personobject.actualRank != null) ? _c('span', [_vm._v(_vm._s(decreeoperation.personobject.actualRank.name4) + " ")]) : _vm._e(), _vm._v("\n                                    " + _vm._s(decreeoperation.personobject.surname4) + " " + _vm._s(decreeoperation.personobject.name4) + "\n                                    " + _vm._s(decreeoperation.personobject.fathername4) + _vm._s(_vm.commaspaceifnotnull(decreeoperation.personobject.positiontree4)) + " " + _vm._s(decreeoperation.personobject.positiontree4)), (decreeoperation.optiondate1 != null) ? _c('span', [_vm._v(", с " + _vm._s(_vm.printDateDocument(decreeoperation.optiondate1)))]) : _vm._e(), _vm._v("\n                                    " + _vm._s(decreeoperation.optionstring1) + ".\n                                ")]), _vm._v(" "), _c('div', {
+        staticClass: "persondecreeoperation-part-list-element-margin-big"
+      }, [_vm._v("\n                                    Основание: " + _vm._s(decreeoperation.optionstring2) + ".\n                                ")])]), _vm._v(" "), _c('div', [_c('div', [_c('div', [_c('el-button', {
+        attrs: {
+          "size": "mini",
+          "type": "warning"
+        },
+        on: {
+          "click": function($event) {
+            _vm.removePersondecreeoperation(decreeoperation)
+          }
+        }
+      }, [_vm._v("Удалить")])], 1)])])]) : _vm._e()
+    }), _vm._v(" "), _c('br')], 2), _vm._v(" "), _c('div', [_c('el-button', {
+      attrs: {
+        "type": "danger"
+      },
+      on: {
+        "click": function($event) {
+          _vm.deletePersondecreeblock(persondecreeBlock)
+        }
+      }
+    }, [_vm._v("Удалить блок")])], 1)], 1) : _vm._e()])])
   })) : _vm._e(), _vm._v(" "), _c('hr'), _vm._v(" "), _c('div', [_c('el-select', {
     staticClass: "eld-eld-body-select-medium",
     attrs: {

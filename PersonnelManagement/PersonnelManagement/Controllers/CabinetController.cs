@@ -6,6 +6,10 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PersonnelManagement.Models;
 using PersonnelManagement.Services;
+using DocumentFormat.OpenXml;
+using DocumentFormat.OpenXml.Packaging;
+using DocumentFormat.OpenXml.Wordprocessing;
+using System.IO;
 
 namespace PersonnelManagement.Controllers
 {
@@ -169,6 +173,31 @@ namespace PersonnelManagement.Controllers
             }
 
             return new ObjectResult(Keys.ERROR_SHORT + ":Произошла какая-то оказия");
+        }
+
+        [HttpGet("LoginDate/{id}")]
+        public IActionResult LoginData([FromRoute] int id)
+        {
+            string sessionid = Request.Cookies[Keys.COOKIES_SESSION];
+            User user = null;
+            if (IdentityService.IsLogined(sessionid, repository))
+            {
+                user = IdentityService.GetUserBySessionID(sessionid, repository);
+                //bool isAllowedToReadCandidate = repository.isAllowedToReadCandidate(user, id);
+                //if (isAllowedToReadCandidate)
+                //{
+                CabinetdataManager cabinetdataManager = repository.GetCabinetdataManager(user, id);
+                MemoryStream mem = new MemoryStream();
+                Models.CandidatLoginData.CreateDocument(mem, repository, cabinetdataManager);
+                mem.Position = 0;
+
+                return File(mem, "application/vnd.openxmlformats-officedocument.wordprocessingml.document", cabinetdataManager.Usersurname + "_candidate.docx");
+                //}
+
+                return null;
+            }
+            //return empty;
+            return null;
         }
     }
 }

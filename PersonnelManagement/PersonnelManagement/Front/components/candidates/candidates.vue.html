@@ -148,7 +148,7 @@
                 </div>
                 <div class="candidates-cabinete-content">
                     <div class="candidates-cabinete-actions">
-                        <el-button size="medium">Распечатать данные для входа</el-button>
+                        <el-button size="medium" @click="loginData">Распечатать данные для входа</el-button>
                         <el-button size="medium" @click="predeleteCabinete()">Забраковать кандидата</el-button>
                         <div v-if="blockmode">
                             Введите причину для блокировки

@@ -47,6 +47,8 @@ import Profilerelatives from '../../classes/profilerelatives';
 import Sheetpolitics from '../../classes/sheetpolitics';
 import Declarationrelative from '../../classes/declarationrelative';
 import Declarationtabledata from '../../classes/declarationtabledata';
+
+import download from 'downloadjs';
 Vue.component(Button.name, Button);
 Vue.component(Input.name, Input);
 Vue.component(Dropdown.name, Dropdown);
@@ -345,6 +347,7 @@ export default class CandidatesComponent extends Vue {
                     this.blockmode = false;
                     this.blockreason = "";
                     this.fetchCabinetes("");
+                    this.displayCabinetes = false;
                     //this.getPhotos();
                     //this.photoToCreate = new Personphoto();
 
@@ -839,5 +842,17 @@ export default class CandidatesComponent extends Vue {
         return this.getAutobiography(activecabinete).autobiographylockunlock == 1 &&
             this.getProfile(activecabinete).profilelockunlock == 1 &&
             this.getSheet(activecabinete).sheetlockunlock == 1
+    }
+
+    loginData() {
+        fetch('/api/Cabinet/LoginDate/' + this.activecabinete.id, {
+            method: 'get',
+            credentials: 'include',
+            headers: new Headers({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            })
+        }).then(x => x.blob())
+            .then(x => download(x, this.activecabinete.usersurname + "_candidate"))
     }
 }

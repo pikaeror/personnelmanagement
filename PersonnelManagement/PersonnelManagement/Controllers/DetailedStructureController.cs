@@ -1,4 +1,6 @@
 ﻿using System;
+using System.IO;
+using System.Text;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -328,6 +330,7 @@ namespace PersonnelManagement.Controllers
                 bool isAllowedToReadStructure = repository.isAllowedToReadStructure(user, id);
                 if (isAllowedToReadStructure)
                 {
+                    writeChangesPriorety(user, id, "Up");
                     repository.UpStructure(id, user);
                     return new ObjectResult(Keys.SUCCESS_SHORT + ":Выполнено");
                 }
@@ -349,6 +352,7 @@ namespace PersonnelManagement.Controllers
                 bool isAllowedToReadStructure = repository.isAllowedToReadStructure(user, id);
                 if (isAllowedToReadStructure)
                 {
+                    writeChangesPriorety(user, id, "Down");
                     repository.DownStructure(id, user);
                     return new ObjectResult(Keys.SUCCESS_SHORT + ":Выполнено");
                 }
@@ -373,6 +377,7 @@ namespace PersonnelManagement.Controllers
                 bool isAllowedToReadStructure = repository.isAllowedToReadStructure(user, id);
                 if (isAllowedToReadStructure)
                 {
+                    writeChangesPriorety(user, id, value.ToString());
                     repository.PrioritychangeStructure(id, value, user);
                     return new ObjectResult(Keys.SUCCESS_SHORT + ":Выполнено");
                 }
@@ -511,6 +516,37 @@ namespace PersonnelManagement.Controllers
                 return new ObjectResult(Keys.SUCCESS_SHORT + ":Подразделение отредактировано");
             }
             return new ObjectResult(Keys.ERROR_SHORT + ":Произошла какая-то оказия");
+        }
+
+        private void writeChangesPriorety(User user, int structure_id, string new_priorety)
+        {
+            string path = @"c:\organizational_staff\tree\priorety\";
+            string file = @"changed_";
+            DateTime localDate = DateTime.Now;
+            file += localDate.ToString("MM_yyyy") + ".txt";
+            Structure current = repository.GetOriginalStructure(structure_id);
+            if (!System.IO.Directory.Exists(path))
+            {
+                DirectoryInfo di = System.IO.Directory.CreateDirectory(path);
+            }
+            if (!System.IO.File.Exists(path + file))
+            {
+                // Create a file to write to.
+                using (StreamWriter sw = System.IO.File.CreateText(path + file))
+                {
+                    sw.WriteLine("Date; Name; SurName; structure id; parent structure; new priorety");
+                }
+            }
+            using (StreamWriter writer = System.IO.File.AppendText(path + file))
+            {
+                writer.WriteLine("{0};{1};{2};{3};{4};{5}",
+                                localDate.ToString(),
+                                user.Firstname,
+                                user.Surname,
+                                structure_id,
+                                current.Id,
+                                new_priorety);
+            }
         }
 
     }

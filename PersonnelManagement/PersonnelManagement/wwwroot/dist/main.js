@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "a55d7d1abb7a03601a1f"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "29695deac141360ae86b"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -54393,7 +54393,34 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     on: {
       "click": _vm.persondecreeUpdate
     }
-  }, [_vm._v("Зарезервировать")]), _vm._v(" "), (_vm.update) ? _c('div', _vm._l((_vm.persondecreeBlocks), function(persondecreeBlock) {
+  }, [_vm._v("Зарезервировать")]), _vm._v(" "), _c('div', {
+    staticClass: "persondecreeoperation-row"
+  }, [_c('el-select', {
+    staticStyle: {
+      "width": "95%"
+    },
+    attrs: {
+      "filterable": "",
+      "allow-create": "",
+      "default-first-option": "",
+      "placeholder": "Выбор пункта приказа"
+    },
+    model: {
+      value: (_vm.value10),
+      callback: function($$v) {
+        _vm.value10 = $$v
+      },
+      expression: "value10"
+    }
+  }, _vm._l((_vm.persondecreeBlocks), function(item) {
+    return _c('el-option', {
+      key: _vm.getPersondecreeblockname(item),
+      attrs: {
+        "label": _vm.getPersondecreeblockname(item),
+        "value": _vm.getPersondecreeblockname(item)
+      }
+    })
+  }))], 1), _vm._v(" "), (_vm.update) ? _c('div', _vm._l((_vm.persondecreeBlocks), function(persondecreeBlock) {
     return _c('div', {
       staticClass: "persondecreeblock"
     }, [_c('div', {
@@ -55582,7 +55609,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           staticClass: "persondecreeoperation-part-list-element-indent"
         }, [_vm._v("\n                                                    " + _vm._s(decreeoperation.optionstring2) + "\n                                                ")])]), _vm._v(" "), (decreeoperation.optionnumber6 != null && decreeoperation.optionnumber6 > 0 && decreeoperation.optionnumber9 != null && decreeoperation.optionnumber9 > 0) ? _c('div', {
           staticClass: "persondecreeoperation-part-list-element-indent"
-        }, [_vm._v("\n\n                                                За многолетнюю безупречную службу в органах и подразделениях по чрезвычайным ситуациям\n                                                "), _vm._v("\n                                                " + _vm._s(_vm.getPersondecreeblocksubtype(decreeoperation.optionnumber6)) + "\n                                                "), (decreeoperation.optionstring3 != null && decreeoperation.optionstring3.length > 0 && decreeoperation.optionnumber6 != 7) ? _c('span', [_vm._v(" " + _vm._s(decreeoperation.subvaluestring1))]) : _vm._e(), _vm._v(" "), (_vm.RewardNotOne(decreeoperation.optionstring3) || decreeoperation.optionnumber7 != 1) ? _c('span', [_vm._v(_vm._s(decreeoperation.optionstring3) + " ")]) : _vm._e(), _vm._v(" "), (decreeoperation.optionnumber6 == 7) ? _c('span', [_vm._v("\n                                                    " + _vm._s(_vm.getRewardmoneytype(decreeoperation.optionnumber7, decreeoperation.optionstring3)) + "\n\n                                                    "), (decreeoperation.optionnumber8 > 0) ? _c('span', [_vm._v(" каждого")]) : _vm._e()]) : _vm._e(), _vm._v(" "), (decreeoperation.optionnumber6 == 4 || decreeoperation.optionnumber6 == 3) ? _c('span', [_vm._v("\n                                                    " + _vm._s(_vm.cutRewardString(_vm.getReward(decreeoperation.optionnumber7))) + "\n                                                ")]) : _vm._e(), _vm._v(" "), (decreeoperation.optionnumber6 == 5 || decreeoperation.optionnumber6 == 6) ? _c('span', [_vm._v("\n                                                    " + _vm._s(_vm.getStructureName2(decreeoperation.optionnumber7)) + "\n                                                ")]) : _vm._e(), _vm._v(" "), (decreeoperation.optionnumber7 != null && decreeoperation.optionnumber7 > 0 && (decreeoperation.optionnumber6 == 1 || decreeoperation.optionnumber6 == 2)) ? _c('span', {
+        }, [_vm._v("\n\n                                                За многолетнюю безупречную службу в органах и подразделениях по чрезвычайным ситуациям\n                                                "), _vm._v("\n                                                " + _vm._s(_vm.getPersondecreeblocksubtype(decreeoperation.optionnumber6)) + "\n                                                "), (decreeoperation.optionstring3 != null && decreeoperation.optionstring3.length > 0 && decreeoperation.optionnumber6 != 7) ? _c('span', [_vm._v(" " + _vm._s(decreeoperation.subvaluestring1))]) : _vm._e(), _vm._v(" "), (_vm.RewardNotOne(decreeoperation.optionstring3) || decreeoperation.optionnumber7 != 1) ? _c('span', [_vm._v(_vm._s(decreeoperation.optionstring3) + " ")]) : _vm._e(), _vm._v(" "), (decreeoperation.optionnumber6 == 7) ? _c('span', [_vm._v("\n                                                    " + _vm._s(_vm.getRewardmoneytype(decreeoperation.optionnumber7, decreeoperation.optionstring3)) + "\n\n                                                    "), (decreeoperation.optionnumber8 > 0) ? _c('span', [_vm._v("on каждого/s")]) : _vm._e()]) : _vm._e(), _vm._v(" "), (decreeoperation.optionnumber6 == 4 || decreeoperation.optionnumber6 == 3) ? _c('span', [_vm._v("\n                                                    " + _vm._s(_vm.cutRewardString(_vm.getReward(decreeoperation.optionnumber7))) + "\n                                                ")]) : _vm._e(), _vm._v(" "), (decreeoperation.optionnumber6 == 5 || decreeoperation.optionnumber6 == 6) ? _c('span', [_vm._v("\n                                                    " + _vm._s(_vm.getStructureName2(decreeoperation.optionnumber7)) + "\n                                                ")]) : _vm._e(), _vm._v(" "), (decreeoperation.optionnumber7 != null && decreeoperation.optionnumber7 > 0 && (decreeoperation.optionnumber6 == 1 || decreeoperation.optionnumber6 == 2)) ? _c('span', {
           staticClass: "persondecreeoperation-part-list-element-sub-sub"
         }, [_vm._v("\n                                                    «" + _vm._s(_vm.getRank(decreeoperation.optionnumber7)) + "»\n                                                ")]) : _vm._e(), _vm._v(".\n                                            ")]) : _vm._e(), _vm._v(" "), _c('div', {
           staticClass: "persondecreeoperation-part-list-element-margin-big"
@@ -56016,7 +56043,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         staticClass: "eld-search-element",
         on: {
           "click": function($event) {
-            _vm.selectPersonBlockNonAuto(person.id, persondecreeBlock)
+            _vm.selectPersonBlock(person, persondecreeBlock)
           }
         }
       }, [_c('div', [_vm._v("\n                                    " + _vm._s(person.surname) + " " + _vm._s(person.name) + " " + _vm._s(person.fathername) + "\n                                ")]), _vm._v(" "), _c('div', [_vm._v("\n                                    " + _vm._s(person.positiontypestring) + "\n                                ")]), _vm._v(" "), (_vm.hasPhotopreviewBlock(person.id, persondecreeBlock)) ? _c('div', [_c('img', {
@@ -56025,7 +56052,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           "src": _vm.getPhotopreviewBlock(person.id, persondecreeBlock).photo64
         }
       })]) : _vm._e(), _vm._v(" "), _c('div', [_c('div', [_vm._v("\n                                        " + _vm._s(person.structuretree) + "\n                                    ")])])])
-    })], 2) : _vm._e(), _vm._v(" "), (persondecreeBlock.person != null) ? _c('div', [_vm._v("\n                            Кого – " + _vm._s(persondecreeBlock.person.surname4 + " " + persondecreeBlock.person.name4 + " " + persondecreeBlock.person.fathername4) + "\n                        ")]) : _vm._e()]), _vm._v(" "), _c('div', [_vm._v("\n                        С какого числа\n                    ")]), _vm._v(" "), _c('el-input', {
+    })], 2) : _vm._e(), _vm._v(" "), (persondecreeBlock.person != null) ? _c('div', [_vm._v("\n                            Кого – " + _vm._s(persondecreeBlock.person.surname4 + " " + persondecreeBlock.person.name4 + " " + persondecreeBlock.person.fathername4) + "\n                        ")]) : _vm._e(), _vm._v(" "), (persondecreeBlock.nonperson != null && persondecreeBlock.nonperson.length > 0) ? _c('div', [_vm._v("\n                            Кого — " + _vm._s(persondecreeBlock.nonperson) + "\n                        ")]) : _vm._e()]), _vm._v(" "), _c('div', [_vm._v("\n                        С какого числа\n                    ")]), _vm._v(" "), _c('el-input', {
       staticClass: "eld-eld-body-row-short",
       attrs: {
         "type": "date"

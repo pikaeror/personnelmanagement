@@ -26,6 +26,20 @@
         <div class="persondecreeoperation-row"><div class="persondecreeoperation-row-text">Название приказа:</div> <el-input v-model="input_decree.name"></el-input></div>
         <div class="persondecreeoperation-row"><div class="persondecreeoperation-row-text">Рабочее название приказа:</div> <el-input v-model="input_decree.nickname"></el-input></div>
         <el-button @click="persondecreeUpdate" class="persondecrees-margintop">Зарезервировать</el-button>
+        <div class="persondecreeoperation-row">
+            <el-select v-model="value10"
+                   filterable
+                   allow-create
+                   default-first-option
+                   placeholder="Выбор пункта приказа"
+                   style="width: 95%">
+                <el-option v-for="item in persondecreeBlocks"
+                       :key="getPersondecreeblockname(item)"
+                       :label="getPersondecreeblockname(item)"
+                       :value="getPersondecreeblockname(item)">
+                </el-option>
+            </el-select>
+        </div>
 
         <div v-if="update">
             <div v-for="persondecreeBlock in persondecreeBlocks" class="persondecreeblock">
@@ -157,13 +171,13 @@
                                     </div>
                                     <el-input v-model="persondecreeBlock.optionstring4" class="eld-eld-body-row-medium"></el-input>
                                     <!--<div>
-                        Объявленное приказом
-                    </div>
-                    <el-select clearable placeholder="Подразделение" v-model="persondecreeBlock.optionnumber2" class="eld-eld-body-select-medium">
-                        <el-option v-for="structure in structuresElders"
-                                   :key="structure.id" :label="structure.name" :value="structure.id">
-                        </el-option>
-                    </el-select>-->
+                                    Объявленное приказом
+                                </div>
+                                <el-select clearable placeholder="Подразделение" v-model="persondecreeBlock.optionnumber2" class="eld-eld-body-select-medium">
+                                    <el-option v-for="structure in structuresElders"
+                                               :key="structure.id" :label="structure.name" :value="structure.id">
+                                    </el-option>
+                                </el-select>-->
                                 </div>
 
                             </div>
@@ -316,10 +330,10 @@
                                     </div>
                                 </div>
                                 <!--<div>
-                    <div>
+                                <div>
 
-                    </div>
-                </div>-->
+                                </div>
+                            </div>-->
 
                             </div>
                             <!--Подпункты без фабул-->
@@ -570,9 +584,9 @@
                         </div>
                         <div>
                             <!--<div>
-                В связи с чем (старое)
-            </div>
-            <el-input v-model="persondecreeBlock.intro" class="eld-eld-body-row-medium"></el-input>-->
+                            В связи с чем (старое)
+                        </div>
+                        <el-input v-model="persondecreeBlock.intro" class="eld-eld-body-row-medium"></el-input>-->
                             <!--<el-checkbox v-model="persondecreeBlock.optionnumber3">Принят по контракту</el-checkbox>-->
                             <div v-if="persondecreeBlock.person != null">
                                 <!--Для военных-->
@@ -603,12 +617,12 @@
                                 <el-button @click="selectPosition(persondecreeBlock)" type="primary" plain>Назначить на должность</el-button>
                             </div>
                             <!--<div v-if="chosenPosition()">
-                {{setPositionByBlock(persondecreeBlock)}}
-                {{persondecreeBlock.samplePositiontype.name2}}
-            </div>
-            <div v-else>
-                {{persondecreeBlock.optionstring1}}
-            </div>-->
+                            {{setPositionByBlock(persondecreeBlock)}}
+                            {{persondecreeBlock.samplePositiontype.name2}}
+                        </div>
+                        <div v-else>
+                            {{persondecreeBlock.optionstring1}}
+                        </div>-->
                             <div v-if="chosenPosition">
                                 {{setPositionByBlock(persondecreeBlock)}}
                                 {{persondecreeBlock.samplePositiontype.name}}
@@ -653,13 +667,13 @@
                                     <el-input class="eld-eld-body-row-short" v-model="persondecreeBlock.optionnumber7" type="number"></el-input> дней
                                 </div>
                                 <!--<div>
-                    Заключить контракт сроком на (пустым, если контракт не заключается)
-                </div>
-                <div>
-                    <el-input class="eld-eld-body-row-short" v-model="persondecreeBlock.optionnumber8" type="number"></el-input> лет
-                    <el-input class="eld-eld-body-row-short" v-model="persondecreeBlock.optionnumber9" type="number"></el-input> месяцев
-                    <el-input class="eld-eld-body-row-short" v-model="persondecreeBlock.optionnumber10" type="number"></el-input> дней
-                </div>-->
+                                Заключить контракт сроком на (пустым, если контракт не заключается)
+                            </div>
+                            <div>
+                                <el-input class="eld-eld-body-row-short" v-model="persondecreeBlock.optionnumber8" type="number"></el-input> лет
+                                <el-input class="eld-eld-body-row-short" v-model="persondecreeBlock.optionnumber9" type="number"></el-input> месяцев
+                                <el-input class="eld-eld-body-row-short" v-model="persondecreeBlock.optionnumber10" type="number"></el-input> дней
+                            </div>-->
                                 <div>
                                     Заключить контракт с (пустым, если контракт не заключается)
                                 </div>
@@ -990,8 +1004,8 @@
                                                         <span v-if="decreeoperation.optionnumber5 != null && decreeoperation.optionnumber5 > 0">c присвоением очередного специального звания «майор внутренней службы»</span>.
                                                     </div>
                                                     <!--<div class="persondecreeoperation-part-list-element-indent">
-                                        {{decreeoperation.optionstring2}}
-                                    </div>-->
+                                                    {{decreeoperation.optionstring2}}
+                                                </div>-->
 
                                                 </div>
 
@@ -1026,7 +1040,7 @@
                                                     <span v-if="decreeoperation.optionnumber6 == 7">
                                                         {{getRewardmoneytype(decreeoperation.optionnumber7, decreeoperation.optionstring3)}}
 
-                                                        <span v-if="decreeoperation.optionnumber8 > 0"> каждого</span>
+                                                        <span v-if="decreeoperation.optionnumber8 > 0">on каждого/s</span>
                                                     </span>
                                                     <!--Юбилейная медаль или нагрудный знак-->
                                                     <span v-if="decreeoperation.optionnumber6 == 4 || decreeoperation.optionnumber6 == 3">
@@ -1416,13 +1430,13 @@
                             </div>
                             <div>
                                 <el-input placeholder="Фамилия Имя Отчество" class="eld-eld-body-select-medium" v-model="persondecreeBlock.fiosearch" @input="searchPersonsBlock(persondecreeBlock)"></el-input>
-                                <!--<el-button @click="searchPersonsBlock(persondecreeBlock)">Поиск</el-button>-->
+                                <!--<el-button @click="addNonEld(persondecreeBlock)">Добавить в приказ человека не из МЧС</el-button>-->
                             </div>
                             <div v-if="hasSearchResultsBlock(persondecreeBlock)" class="eld-search-main">
                                 <div class="eld-search-main-title">
                                     Результаты поиска
                                 </div>
-                                <div v-for="person in persondecreeBlock.personssearch" class="eld-search-element" @click="selectPersonBlockNonAuto(person.id, persondecreeBlock)">
+                                <div v-for="person in persondecreeBlock.personssearch" class="eld-search-element" @click="selectPersonBlock(person, persondecreeBlock)">
                                     <div>
                                         {{person.surname}} {{person.name}} {{person.fathername}}
                                     </div>
@@ -1443,6 +1457,9 @@
                             </div>
                             <div v-if="persondecreeBlock.person != null">
                                 Кого – {{persondecreeBlock.person.surname4 + " " + persondecreeBlock.person.name4 + " " + persondecreeBlock.person.fathername4}}
+                            </div>
+                            <div v-if="persondecreeBlock.nonperson != null && persondecreeBlock.nonperson.length > 0">
+                                Кого — {{persondecreeBlock.nonperson}}
                             </div>
                         </div>
                         <div>

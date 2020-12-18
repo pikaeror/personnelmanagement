@@ -460,5 +460,23 @@ namespace PersonnelManagement.Controllers
             //return empty;
             return empty;
         }
+
+        [HttpGet("WithoutJobPlace/{devizor}")]
+        public IEnumerable<IEnumerable<Person>> PersonWithoutJobPlace([FromRoute] int devizor)
+        {
+            string sessionid = Request.Cookies[Keys.COOKIES_SESSION];
+            User user = null;
+            if (IdentityService.IsLogined(sessionid, repository))
+            {
+                user = IdentityService.GetUserBySessionID(sessionid, repository);
+                /*user.
+                *//*List<Person> persons = repository.GetPersonsForStructure(user, id, true);*//*
+
+                return persons;*/
+            }
+            List<List<Person>> empty = new List<List<Person>>();
+            //return empty;
+            return empty;
+        }
     }
 }

@@ -469,6 +469,8 @@ export default class EldComponent extends Vue {
     pension_A: string;
     pension_B: string;
 
+    peoplewhothoutjobplace: (Person[])[];
+
     data() {
         return {
             fiosearch: "",
@@ -803,6 +805,8 @@ export default class EldComponent extends Vue {
             rewardmoneys: [],
             pension_A: "",
             pension_B: "",
+
+            peoplewhothoutjobplace: [],
         }
     }
 
@@ -815,6 +819,7 @@ export default class EldComponent extends Vue {
         setInterval(this.countHolidays, 2000);
         setInterval(this.appointPosition, 1000);
         setInterval(this.autoupdatePerson, 10000);
+        setInterval(this.loadPeopleWhithoutJobPlace, 20000);
 
         this.fetchStructureRewards();
         this.fetchStructureRewardsAllowed();
@@ -7963,5 +7968,29 @@ export default class EldComponent extends Vue {
         } else {
             return personjob.jobpositionplace
         }
+    }
+
+    loadPeopleWhithoutJobPlace() {
+        let devizor: number = 3;
+        let output: (Person[])[] = [];
+        let time_list: Person[] = [];
+        fetch('api/Person/Search' + "герас", { credentials: 'include' })
+            .then(response => {
+                return response.json() as Promise<Person[]>;
+            })
+            .then(result => {
+                let count: number = 0
+                while (count < 1 + result.length / devizor) {
+                    let j: number = 0;
+                    time_list = []
+                    while ((j < devizor) && (j + count < result.length)) {
+                        time_list.push(result[j + count]);
+                        j++;
+                    }
+                    output.push(time_list);
+                    count += devizor;
+                }
+                this.peoplewhothoutjobplace = output;
+            })
     }
 }

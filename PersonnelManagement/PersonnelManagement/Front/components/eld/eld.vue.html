@@ -12,7 +12,7 @@
                             Введите ФИО или личный номер сотрудника (Примеры: Иванов Иван Иванович, Ж-02300)
                         </div>
                         <div class="eld-eld-body-row-flex">
-                            <el-input v-model="createstring"></el-input> 
+                            <el-input v-model="createstring"></el-input>
                             <el-select v-model="creategender">
                                 <el-option key="Мужской" label="Мужской" value="Мужской"></el-option>
                                 <el-option key="Женский" label="Женский" value="Женский"></el-option>
@@ -55,8 +55,8 @@
                         {{person.structuretree}}
                     </div>
                     <!--<div>
-                        {{person.structurename}}
-                    </div>-->
+                    {{person.structurename}}
+                </div>-->
                 </div>
                 <div>
                     <el-button v-if="isAppointButtonActive(person)" @click="appointPerson(person)">Назначить</el-button>
@@ -64,6 +64,41 @@
             </div>
             <div class="eld-search-element-button">
                 <el-button type="warning" plain @click="closeSearch()">Закрыть</el-button>
+            </div>
+        </div>
+
+        <!--Здесь отображается ЭЛД, которое назначены на упраздненные должности-->
+        <div v-if="person == null && peoplewhothoutjobplace.length > 0">
+            <div class="eld-top-block">
+                <div class="eld-title">
+                    Сотрудники которые не переназначены
+                </div>
+            </div>
+            <div v-for="row in peoplewhothoutjobplace">
+                <el-row :gutter="3">
+                    <div v-for="person in row">
+                        <el-col :span="8">
+                            <div class="grid-content eld-search-element" @click="selectPerson(person.id)" style="background: rgba(208, 21, 21, 0.78); margin-bottom: 4px; box-shadow: 5px 5px 3px rgba(0,0,0,0.6); padding: 10px; border-radius: 10px">
+                                <b>
+                                    <div>
+                                        {{person.surname}} {{person.name}} {{person.fathername}}
+                                    </div>
+                                    <div>
+                                        {{person.positiontypestring}}
+                                    </div>
+                                    <div v-if="hasPhotopreview(person.id)">
+                                        <img :src="getPhotopreview(person.id).photo64" class="eld-search-element-image" />
+                                    </div>
+                                    <div>
+                                        <div>
+                                            {{person.structuretree}}
+                                        </div>
+                                    </div>
+                                </b>
+                            </div>
+                        </el-col>
+                    </div>
+                </el-row>
             </div>
         </div>
         <!--Здесь отображается ЭЛД, которое можно редактировать-->
@@ -129,8 +164,8 @@
                         <label class="eld-eld-label">Подразделение </label> {{person.structuretree}}
                     </div>
                     <!--<div>
-                        <label class="eld-eld-label">Отдел </label> {{person.structurename}}
-                    </div>-->
+                    <label class="eld-eld-label">Отдел </label> {{person.structurename}}
+                </div>-->
                     <div>
                         <label class="eld-eld-label">Должность </label> {{person.positiontypestring}}
                     </div>
@@ -150,16 +185,16 @@
                             Фамилия <el-input v-model="person.surname" @input="personSurnameChange(person)"></el-input>
                         </div>
                         <!--<div class="eld-eld-body-row-mediumshort">
-                            Имя <el-input v-model="person.name" @input="personNameChange(person)"></el-input>
-                        </div>-->
+                        Имя <el-input v-model="person.name" @input="personNameChange(person)"></el-input>
+                    </div>-->
                         <!--<div class="eld-eld-body-row-mediumshort">
-                            Отчество <el-input v-model="person.fathername" @input="personFathernameChange(person)"></el-input>
-                        </div>-->
+                        Отчество <el-input v-model="person.fathername" @input="personFathernameChange(person)"></el-input>
+                    </div>-->
 
                         <div>
                             Имя
                             <div>
-                                <el-select clearable filterable no-data-text="Не найдено" no-match-text="Не найдено"  placeholder="Имя" v-model="person.namesubject" class="eld-eld-body-row-mediumshort">
+                                <el-select clearable filterable no-data-text="Не найдено" no-match-text="Не найдено" placeholder="Имя" v-model="person.namesubject" class="eld-eld-body-row-mediumshort">
                                     <el-option v-for="subject in subjects" v-if="(person.gendersubject == 0 && subject.category == 3) || (person.gendersubject == 1 && subject.category == 5)"
                                                :key="subject.id" :label="subject.name" :value="subject.id">
                                     </el-option>
@@ -184,8 +219,8 @@
                     </div>
                     <div class="eld-eld-body-row-flex">
                         <!--<div class="eld-eld-body-row-mediumshort">
-                            Пол <el-input v-model="person.gender"></el-input>
-                        </div>-->
+                        Пол <el-input v-model="person.gender"></el-input>
+                    </div>-->
                         <div>
                             Пол
                             <div>
@@ -194,7 +229,7 @@
                                     <el-option key="Женский" label="Женский" value="Женский"></el-option>
                                 </el-select>
                             </div>
-                            
+
                         </div>
                         <div class="eld-eld-body-row-mediumshort">
                             Дата рождения <el-input v-model="person.birthdateString" type="date"></el-input>
@@ -235,7 +270,7 @@
                             <el-autocomplete v-model="person.birthstate" :fetch-suggestions="regionSearch" @input="onBirthStateChange()"></el-autocomplete>
                         </div>
                         <div v-if="!isBelarusCapital(person.birthstate)">
-                            
+
                             Город/район <br />
                             <el-select clearable placeholder="город/район" v-model="person.birthcitysubstate" @change="onBirthCitysubstateChange()" class="eld-eld-body-row-mediumshort">
                                 <el-option v-for="citysubstate in citysubstates"
@@ -243,7 +278,7 @@
                                 </el-option>
                             </el-select>
                         </div>
-                        
+
                         <template v-if="!isBelarusCapital(person.birthstate) && person.birthcitysubstate == 1">
                             <div class="eld-eld-body-row-mediumshort">
                                 <!--Район <el-input v-model="person.birthsubstate"></el-input>-->
@@ -254,7 +289,7 @@
                                 <el-autocomplete v-model="person.birthcitytype" :fetch-suggestions="citytypeSearch" @input="onBirthCitytypeChange()"></el-autocomplete>
                             </div>
                         </template>
-                        
+
                         <div class="eld-eld-body-row-mediumshort" v-if="!isBelarusCapital(person.birthstate)">
                             <template v-if="person.birthcitysubstate == 2">
                                 Город
@@ -262,7 +297,7 @@
                             <template v-else>
                                 Наименование нас. пункта
                             </template>
-                            
+
                             <el-input v-model="person.birthcity" @input="onBirthCityChange()"></el-input>
                         </div>
                         <div class="eld-eld-body-row-mediumshort" v-if="!isBelarusCapital(person.birthstate)">
@@ -288,8 +323,8 @@
                             Страна <el-input v-model="person.registercountry" @input="onRegisterCountryChange()"></el-input>
                         </div>
                         <!--<div class="eld-eld-body-row-mediumshort">
-            Область <el-input v-model="person.registerstate" @input="onRegisterStateChange()"></el-input>
-        </div>-->
+                        Область <el-input v-model="person.registerstate" @input="onRegisterStateChange()"></el-input>
+                    </div>-->
                         <div class="eld-eld-body-row-mediumshort">
                             Область (г. Минск) <br />
                             <el-select clearable placeholder="Область" v-model="person.registerstatenum" class="eld-eld-body-row-mediumshort" @change="onRegisterStateNumChange()">
@@ -307,8 +342,8 @@
                             </el-select>
                         </div>
                         <!--<div class="eld-eld-body-row-mediumshort">
-            Район <el-input v-model="person.registersubstate" @input="onRegisterSubstateChange()"></el-input>
-        </div>-->
+                        Район <el-input v-model="person.registersubstate" @input="onRegisterSubstateChange()"></el-input>
+                    </div>-->
                         <div class="eld-eld-body-row-mediumshort" v-if="!isBelarusCapitalNum(person.registerstatenum) && person.registercitysubstate == 1 && person.registerstatenum != null && person.registerstatenum > 0 && person.registerstatenum < 7">
                             Район <br />
                             <el-select clearable placeholder="Район" v-model="person.registersubstatenum" class="eld-eld-body-row-mediumshort" @change="onRegisterSubstateNumChange()">
@@ -322,14 +357,14 @@
                             Тип населенного пункта
                             <el-autocomplete v-model="person.registercitytype" :fetch-suggestions="citytypeSearch" @input="onRegisterCitytypeChange()"></el-autocomplete>
                         </div>
-                        <div class="eld-eld-body-row-mediumshort" v-if="!isBelarusCapitalNum(person.registerstatenum) && person.registerstatenum != null && person.registerstatenum > 0 && person.registerstatenum < 7" >
+                        <div class="eld-eld-body-row-mediumshort" v-if="!isBelarusCapitalNum(person.registerstatenum) && person.registerstatenum != null && person.registerstatenum > 0 && person.registerstatenum < 7">
                             <span v-if="person.registercitysubstate == 1">
                                 Наименование нас. пункта
                             </span>
                             <span v-else>
                                 Город
                             </span>
-                             <el-input v-model="person.registercity" @input="onRegisterCityChange()"></el-input>
+                            <el-input v-model="person.registercity" @input="onRegisterCityChange()"></el-input>
                         </div>
                     </div>
                     <div class="eld-eld-body-row-flex">
@@ -361,8 +396,8 @@
                             Страна <el-input v-model="person.livecountry"></el-input>
                         </div>
                         <!--<div class="eld-eld-body-row-mediumshort">
-            Область <el-input v-model="person.livestate"></el-input>
-        </div>-->
+                        Область <el-input v-model="person.livestate"></el-input>
+                    </div>-->
                         <div class="eld-eld-body-row-mediumshort">
                             Область (г. Минск) <br />
                             <el-select clearable placeholder="Область" v-model="person.livestatenum" class="eld-eld-body-row-mediumshort" @change="onLiveStateNumChange()">
@@ -380,9 +415,9 @@
                             </el-select>
                         </div>
                         <!--<div class="eld-eld-body-row-mediumshort">
-            Район <el-input v-model="person.livesubstate"></el-input>
-        </div>-->
-                        <div class="eld-eld-body-row-mediumshort" v-if="!isBelarusCapitalNum(person.livestatenum) && person.livecitysubstate == 1 && person.livestatenum != null && person.livestatenum > 0 && person.livestatenum < 7" >
+                        Район <el-input v-model="person.livesubstate"></el-input>
+                    </div>-->
+                        <div class="eld-eld-body-row-mediumshort" v-if="!isBelarusCapitalNum(person.livestatenum) && person.livecitysubstate == 1 && person.livestatenum != null && person.livestatenum > 0 && person.livestatenum < 7">
                             Район <br />
                             <el-select clearable placeholder="Район" v-model="person.livesubstatenum" class="eld-eld-body-row-mediumshort">
                                 <el-option v-for="area in areas" v-if="person.livestatenum == area.region"
@@ -401,7 +436,7 @@
                             <span v-else>
                                 Город
                             </span>
-                             <el-input v-model="person.livecity"></el-input>
+                            <el-input v-model="person.livecity"></el-input>
                         </div>
                     </div>
 
@@ -679,11 +714,12 @@
                                         {{personrelative.birthadditional}}
                                     </div>
                                     <div v-if="personrelative.death">
-                                        Умер<span v-if="!personrelative.deathnodata && !personrelative.nodata && personrelative.deathcountry.length > 0">.
-                                        Место погребения {{personrelative.deathcountry}}
-                                        {{personrelative.deathstate}} {{personrelative.deathsubstate}}
-                                        {{personrelative.deathcitytype}} {{personrelative.deathcity}}
-                                        {{personrelative.deathadditional}}
+                                        Умер<span v-if="!personrelative.deathnodata && !personrelative.nodata && personrelative.deathcountry.length > 0">
+                                            .
+                                            Место погребения {{personrelative.deathcountry}}
+                                            {{personrelative.deathstate}} {{personrelative.deathsubstate}}
+                                            {{personrelative.deathcitytype}} {{personrelative.deathcity}}
+                                            {{personrelative.deathadditional}}
                                         </span>
                                     </div>
                                 </div>
@@ -745,19 +781,6 @@
                             </div>
                         </div>
                         <!--<div>
-                            <hr />
-                            <div class="eld-eld-body-subtitle">
-                                Дата и место рождения
-                            </div>
-                            <div class="eld-eld-body-row-short">
-                                Дата рождения
-                                <el-input v-model="personrelativeBirthdayString" type="date"></el-input>
-                            </div>
-                            <div class="eld-eld-body-row-medium">
-                                Место рождения
-                                <el-input v-model="personrelativeBirthplace" type="textarea" :rows="3"></el-input>
-                            </div>
-                        </div>-->
                         <hr />
                         <div class="eld-eld-body-subtitle">
                             Дата и место рождения
@@ -766,7 +789,20 @@
                             Дата рождения
                             <el-input v-model="personrelativeBirthdayString" type="date"></el-input>
                         </div>
-                        <div >
+                        <div class="eld-eld-body-row-medium">
+                            Место рождения
+                            <el-input v-model="personrelativeBirthplace" type="textarea" :rows="3"></el-input>
+                        </div>
+                    </div>-->
+                        <hr />
+                        <div class="eld-eld-body-subtitle">
+                            Дата и место рождения
+                        </div>
+                        <div class="eld-eld-body-row-short">
+                            Дата рождения
+                            <el-input v-model="personrelativeBirthdayString" type="date"></el-input>
+                        </div>
+                        <div>
                             <div class="eld-eld-body-row-flex">
                                 <!--<el-input class="eld-eld-body-row-long" v-model="person.birthlocation" type="textarea" :rows="3"></el-input>-->
                                 <div class="eld-eld-body-row-mediumshort">
@@ -794,8 +830,8 @@
                             </div>
                             <div class="eld-eld-body-row-flex">
                                 <div class="eld-eld-body-row-mediumshort" v-if="!isBelarusCapital(personrelativeBirthstate) && personrelativeBirthcitysubstate == 1">
-                                Тип населенного пункта
-                                <el-autocomplete v-model="personrelativeBirthcitytype" :fetch-suggestions="citytypeSearch" @input="onPersonrelativeBirthCitytypeChange()"></el-autocomplete>
+                                    Тип населенного пункта
+                                    <el-autocomplete v-model="personrelativeBirthcitytype" :fetch-suggestions="citytypeSearch" @input="onPersonrelativeBirthCitytypeChange()"></el-autocomplete>
                                 </div>
                                 <div class="eld-eld-body-row-mediumshort" v-if="!isBelarusCapital(personrelativeBirthstate)">
                                     <span v-if="personrelativeBirthcitysubstate == 1">
@@ -804,20 +840,20 @@
                                     <span v-else>
                                         Город
                                     </span>
-                                     <el-input v-model="personrelativeBirthcity" @input="onPersonrelativeBirthCityChange()"></el-input>
+                                    <el-input v-model="personrelativeBirthcity" @input="onPersonrelativeBirthCityChange()"></el-input>
                                 </div>
                                 <div class="eld-eld-body-row-mediumshort" v-if="!isBelarusCapital(personrelativeBirthstate)">
                                     <!--<div v-if="person.birthadditionaldisplay == null || !person.birthadditionaldisplay">
-                                        <p class="eld-eld-body-button-text eld-eld-body-row-inline-text-margin" @click="birthadditionaldisplayClick(person)">
-                                            Добавить край, станицу и т.д.
-                                        </p>
+                                    <p class="eld-eld-body-button-text eld-eld-body-row-inline-text-margin" @click="birthadditionaldisplayClick(person)">
+                                        Добавить край, станицу и т.д.
+                                    </p>
 
-                                    </div>
-                                    <div v-else>
-                                        Край, станица и т.д.
-                                        <el-input v-model="personrelativeBirthadditional"></el-input>
-                                    </div>-->
-                                    <div >
+                                </div>
+                                <div v-else>
+                                    Край, станица и т.д.
+                                    <el-input v-model="personrelativeBirthadditional"></el-input>
+                                </div>-->
+                                    <div>
                                         Край, станица и т.д.
                                         <el-input v-model="personrelativeBirthadditional"></el-input>
                                     </div>
@@ -868,7 +904,7 @@
                                             <span v-else>
                                                 Город
                                             </span>
-                                             <el-input v-model="personrelativeDeathcity" @input="onPersonrelativeBirthCityChange()"></el-input>
+                                            <el-input v-model="personrelativeDeathcity" @input="onPersonrelativeBirthCityChange()"></el-input>
                                         </div>
                                         <div class="eld-eld-body-row-mediumshort" v-if="!isBelarusCapital(personrelativeDeathstate)">
                                             Край, станица и т.д.
@@ -876,9 +912,9 @@
                                         </div>
                                     </div>
                                 </div>
-                                
+
                             </div>
-                            
+
                         </div>
                         <div v-if="!personrelativeNodata && !personrelativeDeath">
                             <hr />
@@ -939,9 +975,9 @@
                                     <span v-else>
                                         Город
                                     </span>
-                                     <el-input v-model="personrelativeLivecity"></el-input>
+                                    <el-input v-model="personrelativeLivecity"></el-input>
                                 </div>
-                                <div class="eld-eld-body-row-mediumshort" >
+                                <div class="eld-eld-body-row-mediumshort">
                                     Улица, проспект и др.
                                     <el-autocomplete v-model="personrelativeLivestreettype" :fetch-suggestions="streettypeSearch"></el-autocomplete>
                                 </div>
@@ -1001,14 +1037,14 @@
                                 </tr>
                             </thead>
                             <template v-for="personeducation in person.personeducations" v-if="personeducation.main == 1">
-                            <tr v-for="(personeducationpart, index) in personeducation.personeducationpartsCommon">
-                                <td>
-                                    <div>
-                                        {{personeducation.name}}
-                                    </div>
-                                </td>
-                                
-                                <template v-if="personeducationpart.academicvacation != null || personeducationpart.educationmaternity != null">
+                                <tr v-for="(personeducationpart, index) in personeducation.personeducationpartsCommon">
+                                    <td>
+                                        <div>
+                                            {{personeducation.name}}
+                                        </div>
+                                    </td>
+
+                                    <template v-if="personeducationpart.academicvacation != null || personeducationpart.educationmaternity != null">
                                         <td colspan="4">
                                             <div>
                                                 <div v-if="personeducationpart.academicvacation != null">
@@ -1019,102 +1055,102 @@
                                                 </div>
                                             </div>
                                         </td>
-                                </template>
-                                <template v-else>
-                                    <td>
-                                        <div>
-                                            <span v-if="personeducation.interrupted > 0">
-                                                обучался
-                                            </span>
-                                            <span v-else>
-                                                <span v-if="printDate(personeducation.end).length > 0">
-                                                    {{getEducationlevel(personeducation.educationlevel)}}
+                                    </template>
+                                    <template v-else>
+                                        <td>
+                                            <div>
+                                                <span v-if="personeducation.interrupted > 0">
+                                                    обучался
                                                 </span>
                                                 <span v-else>
-                                                    обучается
+                                                    <span v-if="printDate(personeducation.end).length > 0">
+                                                        {{getEducationlevel(personeducation.educationlevel)}}
+                                                    </span>
+                                                    <span v-else>
+                                                        обучается
+                                                    </span>
                                                 </span>
-                                            </span>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div>
-                                            {{getEducationpositionOfParts(personeducation.personeducationparts)}}
-                                        </div>
-                                    </td>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div>
+                                                {{getEducationpositionOfParts(personeducation.personeducationparts)}}
+                                            </div>
+                                        </td>
+
+                                        <td>
+                                            <div>
+                                                {{personeducation.faculty}}
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div>
+                                                {{getEducationtypeOfParts(personeducation.personeducationparts)}}
+                                                <!--{{getEducationtype(personeducation.educationtype)}}-->
+                                            </div>
+                                        </td>
+                                    </template>
 
                                     <td>
                                         <div>
-                                            {{personeducation.faculty}}
+                                            <div v-if="personeducationpart.academicvacation != null || personeducationpart.educationmaternity != null ">
+                                                <div v-if="personeducationpart.academicvacation != null">
+                                                    {{printDate(personeducationpart.academicvacation.start)}}
+                                                </div>
+                                                <div v-if="personeducationpart.educationmaternity != null">
+                                                    {{printDate(personeducationpart.educationmaternity.start)}}
+                                                </div>
+                                            </div>
+                                            <div v-else>
+                                                {{printDate(personeducation.start)}}
+                                            </div>
+
                                         </div>
                                     </td>
                                     <td>
                                         <div>
-                                            {{getEducationtypeOfParts(personeducation.personeducationparts)}}
-                                            <!--{{getEducationtype(personeducation.educationtype)}}-->
+                                            <div v-if="personeducationpart.academicvacation != null || personeducationpart.educationmaternity != null ">
+                                                <div v-if="personeducationpart.academicvacation != null">
+                                                    {{printDate(personeducationpart.academicvacation.end)}}
+                                                </div>
+                                                <div v-if="personeducationpart.educationmaternity != null">
+                                                    {{printDate(personeducationpart.educationmaternity.end)}}
+                                                </div>
+                                            </div>
+                                            <div v-else>
+                                                <div v-if="personeducation.interrupted == 1">
+                                                    {{printDate(personeducation.interruptorderdate)}}
+                                                </div>
+                                                <div v-if="personeducation.interrupted == 0">
+                                                    {{printDate(personeducation.end)}}
+                                                </div>
+                                            </div>
                                         </div>
                                     </td>
-                                </template>
-                                
-                                <td>
-                                    <div>
-                                        <div v-if="personeducationpart.academicvacation != null || personeducationpart.educationmaternity != null ">
-                                            <div v-if="personeducationpart.academicvacation != null">
-                                                {{printDate(personeducationpart.academicvacation.start)}}
-                                            </div>
-                                            <div v-if="personeducationpart.educationmaternity != null">
-                                                {{printDate(personeducationpart.educationmaternity.start)}}
-                                            </div>
-                                        </div>
-                                        <div v-else>
-                                            {{printDate(personeducation.start)}}
-                                        </div>
-                                        
-                                    </div>
-                                </td>
-                                <td>
-                                    <div>
-                                        <div v-if="personeducationpart.academicvacation != null || personeducationpart.educationmaternity != null ">
-                                            <div v-if="personeducationpart.academicvacation != null">
-                                                {{printDate(personeducationpart.academicvacation.end)}}
-                                            </div>
-                                            <div v-if="personeducationpart.educationmaternity != null">
-                                                {{printDate(personeducationpart.educationmaternity.end)}}
-                                            </div>
-                                        </div>
-                                        <div v-else>
-                                            <div v-if="personeducation.interrupted == 1">
-                                                {{printDate(personeducation.interruptorderdate)}}
-                                            </div>
-                                            <div v-if="personeducation.interrupted == 0">
-                                                {{printDate(personeducation.end)}}
-                                            </div>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div v-if="personeducation.interrupted == 0 && personeducationpart.academicvacation == null && personeducationpart.educationmaternity == null
+                                    <td>
+                                        <div v-if="personeducation.interrupted == 0 && personeducationpart.academicvacation == null && personeducationpart.educationmaternity == null
                                              && personeducation.personeducationpartsCommon.length == index + 1">
+                                            <div>
+                                                {{personeducation.speciality}}
+                                            </div>
+                                            <div>
+                                                {{personeducation.qualification}}
+                                            </div>
+                                            <div>
+                                                {{getEducationdocument(personeducation.educationdocument)}}  {{personeducation.documentseries}}{{personeducation.documentnumber}}
+                                            </div>
+                                        </div>
+
+                                    </td>
+                                    <td>
                                         <div>
-                                            {{personeducation.speciality}}
+                                            <el-button size="mini" @click="updatePersoneducationButton(person, personeducation)">Редактировать</el-button>
                                         </div>
                                         <div>
-                                            {{personeducation.qualification}}
+                                            <el-button size="mini" @click="deletePersoneducation(person, personeducation)">Удалить</el-button>
                                         </div>
-                                        <div>
-                                            {{getEducationdocument(personeducation.educationdocument)}}  {{personeducation.documentseries}}{{personeducation.documentnumber}}
-                                        </div>
-                                    </div>
-                                    
-                                </td>
-                                <td>
-                                    <div>
-                                        <el-button size="mini" @click="updatePersoneducationButton(person, personeducation)">Редактировать</el-button>
-                                    </div>
-                                    <div>
-                                        <el-button size="mini" @click="deletePersoneducation(person, personeducation)">Удалить</el-button>
-                                    </div>
-                                </td>
-                            </tr>
+                                    </td>
+                                </tr>
                             </template>
                         </table>
 
@@ -1250,11 +1286,11 @@
                                         <td>
                                             <div>
                                                 <span v-if="personeducation.interrupted > 0">
-                                                    обучался 
+                                                    обучался
                                                 </span>
                                                 <span v-else>
                                                     <span v-if="printDate(personeducation.end).length > 0">
-                                                        {{getEducationlevel(personeducation.educationlevel)}} 
+                                                        {{getEducationlevel(personeducation.educationlevel)}}
                                                     </span>
                                                     <span v-else>
                                                         обучается
@@ -1304,7 +1340,7 @@
                                             </div>
                                         </td>
                                     </template>
-                                    
+
                                     <td>
                                         <div>
                                             {{printDate(personeducationpart.start)}}
@@ -1366,7 +1402,7 @@
                                     </td>
                                 </tr>
                             </template>
-                            
+
                         </table>
                     </div>
 
@@ -1390,9 +1426,9 @@
                                         </el-option>
                                     </el-select>
                                 </div>
-                                <div v-if="personeducationEducationlevel == 5" >
+                                <div v-if="personeducationEducationlevel == 5">
                                     Степень <br />
-                                    <el-select clearable placeholder="Уровень образования" v-model="personeducationEducationstage" class="eld-eld-body-select-medium input-padding-left-small" >
+                                    <el-select clearable placeholder="Уровень образования" v-model="personeducationEducationstage" class="eld-eld-body-select-medium input-padding-left-small">
                                         <el-option v-for="educationstage in educationstages"
                                                    :key="educationstage.id" :label="educationstage.name" :value="educationstage.id">
                                         </el-option>
@@ -1415,7 +1451,7 @@
                                     </div>
                                 </div>
                             </div>
-                            
+
 
 
                             <div class="eld-eld-body-row-flex">
@@ -1423,13 +1459,13 @@
                                     Страна
                                     <!--<el-input v-model="personeducationLocation"></el-input>-->
                                     <div>
-                                        <el-autocomplete v-model="personeducationLocation"  :fetch-suggestions="countrySearch"></el-autocomplete>
+                                        <el-autocomplete v-model="personeducationLocation" :fetch-suggestions="countrySearch"></el-autocomplete>
                                     </div>
 
                                 </div>
                                 <div class="eld-eld-body-row-mediumshort">
                                     Область (г. Минск)
-                                    <el-autocomplete v-model="personeducationState" :fetch-suggestions="regionSearch" ></el-autocomplete>
+                                    <el-autocomplete v-model="personeducationState" :fetch-suggestions="regionSearch"></el-autocomplete>
                                 </div>
                                 <div class="eld-eld-body-row-mediumshort" v-if="!isBelarusCapital(personeducationState)">
                                     Тип населенного пункта
@@ -1443,14 +1479,14 @@
                             </div>
 
                             <div class="eld-eld-body-row-flex">
-                                <div class="eld-eld-body-row-medium eld-eld-body-select-medium input-padding-right-small" >
+                                <div class="eld-eld-body-row-medium eld-eld-body-select-medium input-padding-right-small">
                                     <div style="margin-top:22px;">
                                         Дата поступления
                                     </div>
                                     <div style="margin-top:10px;">
                                         <el-input v-model="personeducationStart" type="date"></el-input>
                                     </div>
-                                    
+
                                 </div>
                                 <div class="eld-eld-body-row-medium eld-eld-body-select-medium input-padding-left-small">
                                     <div style="text-align: center; margin-top: 10px;">
@@ -1468,7 +1504,7 @@
                                     <div style="display: flex; flex-direction: column; align-items: center; margin-top: 17px;">
                                         <el-checkbox class="checkbox-big" v-model="personeducationInterrupted"></el-checkbox>
                                     </div>
-                                    
+
                                 </div>
                             </div>
                             <div v-if="personeducationInterrupted">
@@ -1479,7 +1515,7 @@
                                             Приказ об отчислении
                                         </div>
                                         <div class="eld-eld-body-row-flex">
-                                            <div class="eld-eld-body-row-medium small-text-centered" >
+                                            <div class="eld-eld-body-row-medium small-text-centered">
                                                 Чей приказ
                                                 <el-input v-model="personeducationInterruptorderwho" placeholder="Чей приказ" v-bind:class="{ 'validation-error': !validatePersoneducationInterruptorderwho() }"></el-input>
                                             </div>
@@ -1495,14 +1531,14 @@
                                                 </div>
                                                 <el-input class="eld-eld-body-row-tiny" v-model="personeducationInterruptordernumber" placeholder="" v-bind:class="{ 'validation-error': !validatePersoneducationInterruptordernumber() }"></el-input>
                                             </div>
-                                            <div class="eld-eld-body-row-mediumshort small-text-centered" >
+                                            <div class="eld-eld-body-row-mediumshort small-text-centered">
                                                 Индекс (литера) приказа
                                                 <el-autocomplete v-model="personeducationInterruptordernumbertype" :fetch-suggestions="ordernumbertypeSearch"></el-autocomplete>
                                             </div>
                                         </div>
                                     </div>
-                                    
-                                    
+
+
                                 </div>
                                 <div class="eld-eld-body-row-long">
                                     Основание отчисления
@@ -1521,7 +1557,7 @@
                                             </el-option>
                                         </el-select>
                                         <div style="margin-top: -2px; text-align: center;">
-                                            <span class="eld-eld-body-button-text" style="color:#409EFF; font-size: 11px;"  @click="addEducationtypeblock">Добавить</span><small><span> / </span></small><span style="color:#FF4040; font-size: 11px;" class="eld-eld-body-button-text" @click="removeEducationtypeblock(educationtypeblock)">Удалить</span>
+                                            <span class="eld-eld-body-button-text" style="color:#409EFF; font-size: 11px;" @click="addEducationtypeblock">Добавить</span><small><span> / </span></small><span style="color:#FF4040; font-size: 11px;" class="eld-eld-body-button-text" @click="removeEducationtypeblock(educationtypeblock)">Удалить</span>
                                         </div>
                                     </div>
                                     <div>
@@ -1590,12 +1626,12 @@
                                 <div v-if="personeducationEducationtypeblocks.length == 0" style="margin-top: -2px; text-align: center;">
                                     <span class="eld-eld-body-button-text" style="color:#409EFF; font-size: 11px;" @click="addEducationtypeblock">Добавить форму обучения</span>
                                 </div>
-                                
+
                             </div>
 
                             <div class="eld-eld-body-row-flex">
                                 <div>
-                                    
+
                                     <div style="margin-top: 20px;">
                                         <div style="text-align: center; line-height: 16px;">
                                             <div>
@@ -1734,11 +1770,11 @@
                                     <el-input v-model="personeducationQualification" type="textarea" :rows="3"></el-input>
                                 </div>
                             </div>
-                            
+
 
 
                             <div class="eld-eld-body-row-flex" style="margin-top: 10px;">
-                                <div >
+                                <div>
                                     <div>
                                         Документ об образовании
                                     </div>
@@ -1758,29 +1794,29 @@
                                 </div>
                             </div>
                             <!--<div>
-        <el-checkbox v-model="personeducationCadet">Курсант (Период учебы добавляется в стаж службы)</el-checkbox>
-    </div>
-    <div v-if="personeducationCadet">
+                            <el-checkbox v-model="personeducationCadet">Курсант (Период учебы добавляется в стаж службы)</el-checkbox>
+                        </div>
+                        <div v-if="personeducationCadet">
 
-        <div class="eld-eld-body-row-long">
-            Чей приказ (в родительном падеже)
-            <el-autocomplete v-model="personeducationOrderwho" :fetch-suggestions="structuresalldocumentSearch" class="eld-eld-body-row-long" type="textarea" :rows="4"></el-autocomplete>
-        </div>
-        <div class="eld-eld-body-row-flex">
-            <div class="eld-eld-body-row-short">
-                Номер приказа
-                <el-input v-model="personeducationOrdernumber"></el-input>
-            </div>
-            <div class="eld-eld-body-row-mediumshort">
-                Индекс (литера) приказа
-                <el-autocomplete v-model="personeducationOrdernumbertype" :fetch-suggestions="ordernumbertypeSearch"></el-autocomplete>
-            </div>
-            <div class="eld-eld-body-row-short">
-                Дата приказа
-                <el-input v-model="personeducationOrderdate" type="date"></el-input>
-            </div>
-        </div>
-    </div>-->
+                            <div class="eld-eld-body-row-long">
+                                Чей приказ (в родительном падеже)
+                                <el-autocomplete v-model="personeducationOrderwho" :fetch-suggestions="structuresalldocumentSearch" class="eld-eld-body-row-long" type="textarea" :rows="4"></el-autocomplete>
+                            </div>
+                            <div class="eld-eld-body-row-flex">
+                                <div class="eld-eld-body-row-short">
+                                    Номер приказа
+                                    <el-input v-model="personeducationOrdernumber"></el-input>
+                                </div>
+                                <div class="eld-eld-body-row-mediumshort">
+                                    Индекс (литера) приказа
+                                    <el-autocomplete v-model="personeducationOrdernumbertype" :fetch-suggestions="ordernumbertypeSearch"></el-autocomplete>
+                                </div>
+                                <div class="eld-eld-body-row-short">
+                                    Дата приказа
+                                    <el-input v-model="personeducationOrderdate" type="date"></el-input>
+                                </div>
+                            </div>
+                        </div>-->
 
                             <div class="eld-eld-body-row-add">
                                 <el-button @click="completePersoneducationButton(person)" type="success">{{getPersoneducationUpdateButtonName()}}</el-button>
@@ -1917,7 +1953,7 @@
                                     Страна
                                     <!--<el-input v-model="personeducationLocation"></el-input>-->
                                     <div>
-                                        <el-autocomplete v-model="personeducationLocation"  :fetch-suggestions="countrySearch"></el-autocomplete>
+                                        <el-autocomplete v-model="personeducationLocation" :fetch-suggestions="countrySearch"></el-autocomplete>
                                     </div>
 
                                 </div>
@@ -2113,8 +2149,8 @@
                                 </div>
                             </div>
 
-                            
-                                
+
+
                             <div class="eld-eld-body-row-flex">
                                 <div>
                                     <div style="margin-top: 20px;">
@@ -2178,8 +2214,8 @@
                                 </div>
                                 <div style="margin-left: 20px;">
                                     <!--<div>
-                <el-checkbox v-model="personeducationMaternityvacation">Находился (-лась) в отпуске по уходу за детьми  (по <br /> уходу за ребенком до  достижения им возраста трех лет)</el-checkbox>
-            </div>-->
+                                    <el-checkbox v-model="personeducationMaternityvacation">Находился (-лась) в отпуске по уходу за детьми  (по <br /> уходу за ребенком до  достижения им возраста трех лет)</el-checkbox>
+                                </div>-->
                                     <div style="margin-top: 16px; width: 360px;">
                                         <div style="text-align: center; line-height: 16px;">
                                             <div>
@@ -2415,7 +2451,7 @@
                             </div>
                         </el-dialog>
 
-                        
+
                     </div>
                     <div v-if="personhealthMenu == 2">
                         <div class="eld-eld-body-subtitle">
@@ -2570,18 +2606,18 @@
                             </div>
                         </el-dialog>
                         <!--<div>
-            <el-upload class="upload-demo" drag action="/api/PersonUpload" :on-preview="handlePreview" :on-remove="handleRemove" :on-success="uploadPhoto"
-                       :before-upload="beforeFileUpload" :file-list="filelist" list-type="picture" limit="1" multiple>
-                <i class="el-icon-upload"></i>
-                <div class="el-upload__text">Перетащите файл или <em>нажмите, чтобы загрузить</em></div>
-                <div class="el-upload__tip" slot="tip">Не загружайте файлы размером более 5 мб</div>
-            </el-upload>
-            <label>Название</label>
-            <el-input v-model="photoName"></el-input>
-            <label>Описание</label>
-            <el-input v-model="photoDescription"></el-input>
-            <el-button @click="savePhotos()">Загрузить</el-button>
-        </div>-->
+                        <el-upload class="upload-demo" drag action="/api/PersonUpload" :on-preview="handlePreview" :on-remove="handleRemove" :on-success="uploadPhoto"
+                                   :before-upload="beforeFileUpload" :file-list="filelist" list-type="picture" limit="1" multiple>
+                            <i class="el-icon-upload"></i>
+                            <div class="el-upload__text">Перетащите файл или <em>нажмите, чтобы загрузить</em></div>
+                            <div class="el-upload__tip" slot="tip">Не загружайте файлы размером более 5 мб</div>
+                        </el-upload>
+                        <label>Название</label>
+                        <el-input v-model="photoName"></el-input>
+                        <label>Описание</label>
+                        <el-input v-model="photoDescription"></el-input>
+                        <el-button @click="savePhotos()">Загрузить</el-button>
+                    </div>-->
                     </div>
                     <div v-if="personhealthMenu == 4">
                         <div class="eld-eld-body-subtitle">
@@ -2665,23 +2701,23 @@
                                             {{printPersonjobPositionplace(personjob)}}
                                         </div>
                                     </div>
-                                    <!--<div v-if="personjob.jobtype == 2"> 
-                                        <div>
-                                            <div v-if="personjob.manual == 1">
-                                                <span v-if="personjob.jobposition != null && personjob.jobposition.length > 0">{{personjob.jobposition}}</span> {{personjob.serviceplace}}
+                                    <!--<div v-if="personjob.jobtype == 2">
+                                    <div>
+                                        <div v-if="personjob.manual == 1">
+                                            <span v-if="personjob.jobposition != null && personjob.jobposition.length > 0">{{personjob.jobposition}}</span> {{personjob.serviceplace}}
 
-                                            </div>
-                                            <div v-else>
-                                                {{personjob.serviceplace}}
-                                            </div>
                                         </div>
-                                    </div>-->
+                                        <div v-else>
+                                            {{personjob.serviceplace}}
+                                        </div>
+                                    </div>
+                                </div>-->
                                 </td>
                                 <td>
                                     <div>
                                         <div>
                                             <div>
-                                                <span v-if="personjob.orderwho != null && personjob.orderwho.length > 0">{{personjob.orderwho}}</span> 
+                                                <span v-if="personjob.orderwho != null && personjob.orderwho.length > 0">{{personjob.orderwho}}</span>
                                                 <span v-if="personjob.ordernumber != null && personjob.ordernumber.length > 0">№ {{personjob.ordernumber}} {{personjob.ordernumbertype}}</span>
                                                 <span v-if="printDate(personjob.orderdate).length > 0"> от {{printDate(personjob.orderdate)}}</span>
                                             </div>
@@ -2690,7 +2726,7 @@
                                                 <i>Приказ об увольнении:</i>
                                             </div>
                                             <div>
-                                                <span v-if="personjob.fireorderwho != null && personjob.fireorderwho.length > 0">{{personjob.fireorderwho}}</span> 
+                                                <span v-if="personjob.fireorderwho != null && personjob.fireorderwho.length > 0">{{personjob.fireorderwho}}</span>
                                                 <span v-if="personjob.fireordernumber != null && personjob.fireordernumber.length > 0">№ {{personjob.fireordernumber}} {{personjob.fireordernumbertype}}</span>
                                                 <span v-if="printDate(personjob.fireorderdate).length > 0"> от {{printDate(personjob.fireorderdate)}}</span>
                                             </div>
@@ -2712,7 +2748,7 @@
                                     <div v-else>
 
                                     </div>
-                                    
+
                                 </td>
                             </tr>
                         </table>
@@ -2750,33 +2786,33 @@
                                         </div>
                                         <div v-if="personjobJobtype != null && personjobJobtype == 2" class="eld-eld-body-row-inline-text-margin">
                                             <br />
-                                            в 
+                                            в
                                         </div>
                                         <div v-if="personjobJobtype != null && personjobJobtype == 2" class="eld-eld-body-row-medium input-margin-left">
                                             Место службы <br />
                                             <el-autocomplete v-model="personjobServicetypestr" class="eld-eld-body-row-medium" :fetch-suggestions="servicetypeSearch"></el-autocomplete>
                                         </div>
                                     </div>
-                                         <div>
-                                                <div>
-                                                
-                                                    <div class="eld-eld-body-row-flex">
-                                                        <div class="eld-eld-body-row-short">
-                                                            Дата начала
-                                                            <el-input v-model="personjobStart" type="date"></el-input>
-                                                        </div>
-                                                        <div class="eld-eld-body-row-short input-margin-left" v-if="!personjobActual">
-                                                            Дата окончания
-                                                            <el-input v-model="personjobEnd" type="date"></el-input>
-                                                        </div>
-                                                        <div style="margin-left: 10px; margin-top:30px;">
-                                                            <el-checkbox class="checkbox-big" v-model="personjobActual">По настоящее время</el-checkbox>
-                                                        </div>
-                                                    </div>
-                                            </div>
-                                            <div>
+                                    <div>
+                                        <div>
+
+                                            <div class="eld-eld-body-row-flex">
+                                                <div class="eld-eld-body-row-short">
+                                                    Дата начала
+                                                    <el-input v-model="personjobStart" type="date"></el-input>
+                                                </div>
+                                                <div class="eld-eld-body-row-short input-margin-left" v-if="!personjobActual">
+                                                    Дата окончания
+                                                    <el-input v-model="personjobEnd" type="date"></el-input>
+                                                </div>
+                                                <div style="margin-left: 10px; margin-top:30px;">
+                                                    <el-checkbox class="checkbox-big" v-model="personjobActual">По настоящее время</el-checkbox>
+                                                </div>
                                             </div>
                                         </div>
+                                        <div>
+                                        </div>
+                                    </div>
                                 </div>
                                 <!--Служащие и гос. служащие-->
                                 <div v-if="personjobJobtype != null && (personjobJobtype == 1 || personjobJobtype == 3)">
@@ -2786,26 +2822,26 @@
                                             <div class="eld-eld-body-row-long">
                                                 Должность (в именительном падеже)
                                                 <el-input v-model="personjobJobposition"
-                                                            placeholder="Пример: главный специалист"></el-input>
+                                                          placeholder="Пример: главный специалист"></el-input>
                                             </div>
                                             <div class="eld-eld-body-row-long">
                                                 Место работы (в родительном падеже)
                                                 <el-input v-model="personjobJobplace" type="textarea" :rows="3"
-                                                            placeholder="Пример: финансового отдела департамента по надзору за безопасным ведением работ в промышленности"></el-input>
+                                                          placeholder="Пример: финансового отдела департамента по надзору за безопасным ведением работ в промышленности"></el-input>
                                             </div>
-                                                
+
                                         </div>
                                         <!--<div v-else>
-                                            <el-input v-model="personjobJobplace" type="textarea" :rows="3"
-                                                        placeholder="Пример: главный специалист финансового отдела департамента по надзору за безопасным ведением работ в промышленности"></el-input>
-                                        </div>-->
-                                            
-                                    </div>
-                                        
-                                    <!--<div class="eld-eld-body-row-medium">
-                                        Дней отпуска (Для МЧС)
-                                        <el-input v-model="personjobVacationdays"></el-input>
+                                        <el-input v-model="personjobJobplace" type="textarea" :rows="3"
+                                                    placeholder="Пример: главный специалист финансового отдела департамента по надзору за безопасным ведением работ в промышленности"></el-input>
                                     </div>-->
+
+                                    </div>
+
+                                    <!--<div class="eld-eld-body-row-medium">
+                                    Дней отпуска (Для МЧС)
+                                    <el-input v-model="personjobVacationdays"></el-input>
+                                </div>-->
                                 </div>
                                 <!--Если служба-->
                                 <div v-if="personjobJobtype != null && personjobJobtype == 2">
@@ -2817,32 +2853,32 @@
                                         <div v-if="personjobManual">
                                             <div class="eld-eld-body-row-long">
                                                 Должность (в именительном падеже)
-                                                <el-input v-model="personjobJobposition" type="textarea" :rows="3" placeholder="Пример: старший пожарный" ></el-input>
+                                                <el-input v-model="personjobJobposition" type="textarea" :rows="3" placeholder="Пример: старший пожарный"></el-input>
                                             </div>
                                             <div class="eld-eld-body-row-long">
                                                 Место службы (в родительном падеже)
                                                 <el-input v-model="personjobJobplace" type="textarea" :rows="4"
-                                                            placeholder="Пример: военизированной пожарной части №4 по охране Советского района г. Минска управления пожарной охраны управления внутренних дел Минского горисполкома"></el-input>
+                                                          placeholder="Пример: военизированной пожарной части №4 по охране Советского района г. Минска управления пожарной охраны управления внутренних дел Минского горисполкома"></el-input>
                                             </div>
-                                                
+
                                         </div>
                                         <!--<div v-else>
-                                                
-                                            <el-input v-model="personjobServiceplace" type="textarea" :rows="4"
-                                                        placeholder="Пример: старший пожарный военизированной пожарной части №4 по охране Советского района г. Минска управления пожарной охраны управления внутренних дел Минского горисполкома"></el-input>
-                                        </div>-->
 
-                                            
+                                        <el-input v-model="personjobServiceplace" type="textarea" :rows="4"
+                                                    placeholder="Пример: старший пожарный военизированной пожарной части №4 по охране Советского района г. Минска управления пожарной охраны управления внутренних дел Минского горисполкома"></el-input>
+                                    </div>-->
+
+
                                     </div>
-                                        
-                                        
-                                        
+
+
+
                                 </div>
                                 <div>
                                     <div style="text-align:center">
                                         Приказ
                                     </div>
-                                    
+
                                     <!--GGGGGGGGGGG-->
                                     <div class="eld-eld-body-row-flex">
                                         <div class="eld-eld-body-row-medium small-text-centered">
@@ -2867,7 +2903,7 @@
                                 <div class="eld-eld-body-row-flex-spacebetween">
                                     <div class="eld-eld-body-row-mediumshort">
                                         <div style="text-align: center;">
-                                            Назначен на должность с 
+                                            Назначен на должность с
                                         </div>
                                         <div class="small-text-centered">
                                             (если дата назначения отличается от даты приказа)
@@ -2882,13 +2918,13 @@
                                         <div style="display: flex; justify-content: center;">
                                             <el-checkbox @change="personjobPersonjobprivelegeCheck" class="checkbox-big" v-model="personjobPrivelegebool"></el-checkbox>
                                         </div>
-                                        
+
                                     </div>
                                     <div class="eld-eld-body-row-mediumshort input-margin-left" v-if="personjobJobtype != null && personjobJobtype == 3" style="margin-top: 15px;">
                                         <br />
                                         Зачесть в стаж государственной службы
                                     </div>
-                                    <div v-if="personjobJobtype != null && personjobJobtype == 3" >
+                                    <div v-if="personjobJobtype != null && personjobJobtype == 3">
                                         <br /><br />
                                         <el-checkbox class="checkbox-big" v-model="personjobStatecivil"></el-checkbox>
                                     </div>
@@ -2968,29 +3004,29 @@
                                                     </el-option>
                                                 </el-select>
                                             </div>
-                                            
-                                            
+
+
                                             <div class="eld-eld-body-row-mediumshorter">
                                                 <div class="small-text-centered">
                                                     Орган принятия
                                                 </div>
                                                 <el-input v-model="personjobprivelege.documentorder"></el-input>
                                             </div>
-                                            
+
                                             <div class="eld-eld-body-row-short">
                                                 <div class="small-text-centered">
                                                     Дата
                                                 </div>
                                                 <el-input v-model="personjobprivelege.documentdateString" type="date"></el-input>
                                             </div>
-                                            
+
                                             <div class="eld-eld-body-row-tiny">
                                                 <div class="small-text-centered">
                                                     Номер
                                                 </div>
                                                 <el-input v-model="personjobprivelege.documentnumber"></el-input>
                                             </div>
-                                            
+
                                             <div class="eld-eld-body-row-shortest">
                                                 <div class="small-text-centered">
                                                     Индекс (литера)
@@ -3120,11 +3156,11 @@
 
                                         <td>
                                             <!--<div>
-                            <el-button size="mini" @click="updatePersonjobprivelegeButton(person, personjobprivelege)">Редактировать</el-button>
-                        </div>-->
+                                            <el-button size="mini" @click="updatePersonjobprivelegeButton(person, personjobprivelege)">Редактировать</el-button>
+                                        </div>-->
                                             <!--<div>
-                            <el-button size="mini" @click="deletePersonjobprivelege(person, personjobprivelege)">Удалить</el-button>
-                        </div>-->
+                                            <el-button size="mini" @click="deletePersonjobprivelege(person, personjobprivelege)">Удалить</el-button>
+                                        </div>-->
                                         </td>
                                     </tr>
                                 </table>
@@ -3327,8 +3363,8 @@
                             </div>
                         </div>
                         <!--<div class="eld-eld-body-row-add">
-        <el-button @click="addPersonjobprivelegeButton()" type="success">Добавить</el-button>
-    </div>-->
+                        <el-button @click="addPersonjobprivelegeButton()" type="success">Добавить</el-button>
+                    </div>-->
 
                         <el-dialog :visible.sync="personjobprivelegeMenuvisible" width="850px" :close-on-click-modal="false" v-draggable>
                             <div>
@@ -3978,23 +4014,23 @@
                                     <!--{{personcontract.pay}}-->
                                 </td>
                                 <!--<td>
-                                    <div>
-                                        <span v-if="personcontract.vacationdays != null && personcontract.vacationdays > 0">
-                                            {{personcontract.vacationdays}} дней
-                                        </span>
-                                    </div>
-                                </td>-->
+                                <div>
+                                    <span v-if="personcontract.vacationdays != null && personcontract.vacationdays > 0">
+                                        {{personcontract.vacationdays}} дней
+                                    </span>
+                                </div>
+                            </td>-->
                                 <!--<td>
-                                    <div v-if="personcontract.stateserviceyears != null && personcontract.stateserviceyears > 0">
-                                        {{personcontract.stateserviceyears}} лет
-                                    </div>
-                                    <div v-if="personcontract.stateservicemonths != null && personcontract.stateservicemonths > 0">
-                                        {{personcontract.stateservicemonths}} месяцев
-                                    </div>
-                                    <div v-if="personcontract.stateservicedays != null && personcontract.stateservicedays > 0">
-                                        {{personcontract.stateservicedays}} дней
-                                    </div>
-                                </td>-->
+                                <div v-if="personcontract.stateserviceyears != null && personcontract.stateserviceyears > 0">
+                                    {{personcontract.stateserviceyears}} лет
+                                </div>
+                                <div v-if="personcontract.stateservicemonths != null && personcontract.stateservicemonths > 0">
+                                    {{personcontract.stateservicemonths}} месяцев
+                                </div>
+                                <div v-if="personcontract.stateservicedays != null && personcontract.stateservicedays > 0">
+                                    {{personcontract.stateservicedays}} дней
+                                </div>
+                            </td>-->
                                 <td>
                                     <div>
                                         <span v-if="personcontract.orderwho != null && personcontract.orderwho.length > 0">{{personcontract.orderwho}}</span>
@@ -4037,32 +4073,32 @@
                                     <el-checkbox v-model="personcontractPay">Выплата (для аттестованных)</el-checkbox>
                                 </div>
                                 <!--<div>
+                                <div>
                                     <div>
-                                        <div>
-                                            Количество дней отпуска (для гражданского персонала, рабочих и служащих)
-                                        </div>
-                                        <el-input v-model="personcontractVacationdays" type="number" class="eld-eld-body-row-short"></el-input>
+                                        Количество дней отпуска (для гражданского персонала, рабочих и служащих)
                                     </div>
-                                </div>-->
+                                    <el-input v-model="personcontractVacationdays" type="number" class="eld-eld-body-row-short"></el-input>
+                                </div>
+                            </div>-->
                                 <!--<div>
-                                    <div>
-                                        Стаж государственной службы (для государственных служащих)
+                                <div>
+                                    Стаж государственной службы (для государственных служащих)
+                                </div>
+                                <div class="eld-eld-body-row-flex">
+                                    <div class="eld-eld-body-row-short">
+                                        Лет
+                                        <el-input v-model="personcontractStateserviceyears" type="number"></el-input>
                                     </div>
-                                    <div class="eld-eld-body-row-flex">
-                                        <div class="eld-eld-body-row-short">
-                                            Лет
-                                            <el-input v-model="personcontractStateserviceyears" type="number"></el-input>
-                                        </div>
-                                        <div class="eld-eld-body-row-short">
-                                            Месяцев
-                                            <el-input v-model="personcontractStateservicemonths" type="number"></el-input>
-                                        </div>
-                                        <div class="eld-eld-body-row-short">
-                                            Дней
-                                            <el-input v-model="personcontractStateservicedays" type="number"></el-input>
-                                        </div>
+                                    <div class="eld-eld-body-row-short">
+                                        Месяцев
+                                        <el-input v-model="personcontractStateservicemonths" type="number"></el-input>
                                     </div>
-                                </div>-->
+                                    <div class="eld-eld-body-row-short">
+                                        Дней
+                                        <el-input v-model="personcontractStateservicedays" type="number"></el-input>
+                                    </div>
+                                </div>
+                            </div>-->
                                 <div class="eld-eld-body-row-long">
                                     Чей приказ (в родительном падеже)
                                     <!--<el-input v-model="personjobOrderwho"></el-input>-->
@@ -4108,11 +4144,11 @@
                                 <div class="eld-eld-body-row-mediumshorter">
                                     Продолжительность отпуска
                                     <div class="eld-eld-body-row-short eld-eld-body-row-flex">
-                                        <el-input v-model="personcontract.vacationdays" type="number"></el-input> 
+                                        <el-input v-model="personcontract.vacationdays" type="number"></el-input>
                                         <div class="eld-eld-body-row-inline-text-margin">
                                             дней
                                         </div>
-                                        
+
                                     </div>
                                 </div>
                                 <div>
@@ -4120,32 +4156,32 @@
                                     <div class="eld-eld-body-button-text eld-eld-body-row-inline-text-margin" @click="completePersoncontractButtonDirect(person, personcontract)">Редактировать</div>
                                 </div>
                             </div>
-                             <div v-for="personadditionalagreement in personcontract.personadditionalagreements" class="eld-eld-body-civilduration-padding-bottom">
-                                 <div class="eld-eld-body-row-flex">
-                                     <div class="eld-eld-body-row-mediumshort">
-                                         Дополнительное соглашение
-                                     </div>
-                                     <div class="eld-eld-body-row-mediumshort eld-eld-body-row-flex">
-                                         <el-input v-model="personadditionalagreement.duration" type="number"></el-input>
-                                         <div class="eld-eld-body-row-inline-text-margin">
-                                             дней
-                                         </div>
-                                     </div>
-                                     <div class="eld-eld-body-row-mediumshort eld-eld-body-row-flex">
-                                         <div class="eld-eld-body-row-inline-text-margin" style="margin-right:8px;">
-                                             с
-                                         </div>
-                                         <el-input v-model="personadditionalagreement.datestartString" type="date"></el-input>
-                                     </div>
-                                     <div class="eld-eld-body-row-flex">
-                                         <div class="eld-eld-body-button-text eld-eld-body-row-inline-text-margin" @click="updatePersonadditionalagreement(person, personadditionalagreement)">Редактировать</div>
-                                         <div class="eld-eld-body-button-text eld-eld-body-row-inline-text-margin" @click="deletePersonadditionalagreement(person, personadditionalagreement)">Удалить</div>
-                                     </div>
-                                 </div>
-                                 
-                             </div>
+                            <div v-for="personadditionalagreement in personcontract.personadditionalagreements" class="eld-eld-body-civilduration-padding-bottom">
+                                <div class="eld-eld-body-row-flex">
+                                    <div class="eld-eld-body-row-mediumshort">
+                                        Дополнительное соглашение
+                                    </div>
+                                    <div class="eld-eld-body-row-mediumshort eld-eld-body-row-flex">
+                                        <el-input v-model="personadditionalagreement.duration" type="number"></el-input>
+                                        <div class="eld-eld-body-row-inline-text-margin">
+                                            дней
+                                        </div>
+                                    </div>
+                                    <div class="eld-eld-body-row-mediumshort eld-eld-body-row-flex">
+                                        <div class="eld-eld-body-row-inline-text-margin" style="margin-right:8px;">
+                                            с
+                                        </div>
+                                        <el-input v-model="personadditionalagreement.datestartString" type="date"></el-input>
+                                    </div>
+                                    <div class="eld-eld-body-row-flex">
+                                        <div class="eld-eld-body-button-text eld-eld-body-row-inline-text-margin" @click="updatePersonadditionalagreement(person, personadditionalagreement)">Редактировать</div>
+                                        <div class="eld-eld-body-button-text eld-eld-body-row-inline-text-margin" @click="deletePersonadditionalagreement(person, personadditionalagreement)">Удалить</div>
+                                    </div>
+                                </div>
+
+                            </div>
                             <div class="eld-eld-body-civilduration-margin">
-                                
+
                             </div>
                         </div>
                     </div>
@@ -4201,8 +4237,8 @@
                                 <td>
                                     <div v-if="personjob.id != null && personjob.id > 0">
                                         <!--<div class="checkbox-big">
-                                            <el-checkbox v-model="personjob.statecivilBool"></el-checkbox>
-                                        </div>-->
+                                        <el-checkbox v-model="personjob.statecivilBool"></el-checkbox>
+                                    </div>-->
                                         <el-button size="mini" @click="StatecivilRemoveButton(person, personjob)">Убрать</el-button>
                                     </div>
                                     <div v-else>
@@ -4257,14 +4293,14 @@
                                             </div>
 
                                             <!--<div>
-                            <el-button size="mini" @click="updatePersonjobButton(person, personjob)">Редактировать</el-button>
-                        </div>
-                        <div>
+                                            <el-button size="mini" @click="updatePersonjobButton(person, personjob)">Редактировать</el-button>
+                                        </div>
+                                        <div>
 
 
-                            <el-button size="mini" @click="deletePersonjob(person, personjob)">Удалить</el-button>
+                                            <el-button size="mini" @click="deletePersonjob(person, personjob)">Удалить</el-button>
 
-                        </div>-->
+                                        </div>-->
                                         </div>
                                         <div v-else>
                                         </div>
@@ -4281,7 +4317,7 @@
                     <div class="eld-eld-title">
                         Отпуска
                     </div>
-                    <div class="eld-eld-body-row-flex-spacebetween" >
+                    <div class="eld-eld-body-row-flex-spacebetween">
                         <div class="eld-eld-vacation-daysleft">
                             <div class="eld-eld-vacation-daysleft-title">
                                 Осталось число дней
@@ -4290,8 +4326,8 @@
                                 {{getVacationdaysleft(person)}}
                             </div>
                         </div>
-                        <div class="eld-eld-body-row-flex eld-eld-vacation-daysfull" >
-                            <div >
+                        <div class="eld-eld-body-row-flex eld-eld-vacation-daysfull">
+                            <div>
                                 <div class="eld-eld-vacation-daysfull-title">
                                     Общее число дней отпуска
                                 </div>
@@ -4299,10 +4335,10 @@
                                     {{person.vacationdayscurrentyear + person.vacationdaysleft}}
                                     <div class="eld-eld-vacation-daysfull-number-shift" v-if="person.vacationshiftdate != null">
                                         c <b>{{printDate(person.vacationshiftdate)}}</b> длительность отпуска увеличивается до <b>{{person.vacationshiftafter}}</b> дней.
-                                       <br /> Если взять отпуск до этой даты - будет положено <b>{{person.vacationshiftbefore}}</b> дней.
+                                        <br /> Если взять отпуск до этой даты - будет положено <b>{{person.vacationshiftbefore}}</b> дней.
                                     </div>
                                 </div>
-                                
+
                             </div>
                             <div class="eld-eld-vacation-daysfull-detailed">
                                 <div>
@@ -4315,7 +4351,7 @@
                                     0 – отозван из отпуска на число дней
                                 </div>
                             </div>
-                            
+
                         </div>
                         <div class="eld-eld-vacation-daysgiven">
                             <div class="eld-eld-vacation-daysgiven-title">
@@ -4421,7 +4457,7 @@
 
                                     </div>
                                 </div>
-                                
+
                             </td>
                         </tr>
                     </table>
@@ -4449,10 +4485,10 @@
                                 <el-input v-model="personvacationAllowend" type="date"></el-input>
                             </div>
                             <!--<div class="eld-eld-body-row-medium">
-                                Количество дней отпуска по контракту
-                                <el-input></el-input>
-                            </div>-->
-                            
+                            Количество дней отпуска по контракту
+                            <el-input></el-input>
+                        </div>-->
+
                         </div>
                         <div>
                             <div>
@@ -4472,7 +4508,7 @@
                                     </el-option>
                                 </el-select>
                             </template>
-                            
+
                         </div>
                         <div class="eld-eld-body-row-flex">
                             <div class="eld-eld-body-row-mediumshort">
@@ -4488,11 +4524,11 @@
                                 {{printDate(getVacationendOnCreation())}}
                             </div>
                             <div v-if="isMaternity(personvacationType)" class="eld-eld-body-row-mediumshort">
-                                Количество дней 
+                                Количество дней
                                 <div class="eld-eld-body-row-inline-text-margin">
                                     {{personvacationDuration}}
                                 </div>
-                                
+
                             </div>
                             <div v-if="isMaternity(personvacationType)">
                                 <div class="eld-eld-body-row-mediumshort">
@@ -4568,7 +4604,7 @@
                         </thead>
                         <tr v-for="personreward in person.personrewards">
                             <td>
-                                <div class="eld-eld-body-select-mediumshort" >
+                                <div class="eld-eld-body-select-mediumshort">
                                     {{getRewardtype(personreward.rewardtype)}}
                                 </div>
                             </td>
@@ -4760,7 +4796,7 @@
                                 Чей
                             </div>
                             <div class="eld-eld-body-row-flex">
-                                
+
                                 <div class="eld-eld-body-row-mediumshort">
                                     Район <br />
                                     <el-select clearable placeholder="Район" v-model="personrewardArea" class="eld-eld-body-row-mediumshort" @change="onPersonrewardAreaChange()" filterable>
@@ -4803,13 +4839,13 @@
                             <!--<el-input v-model="personrewardOrderwho" type="textarea" :rows="2"></el-input>-->
                         </div>
                         <!--<div class="eld-eld-body-row-medium">
-        Приказ, указ, распоряжение
-        <el-input v-model="personrewardOrder" type="textarea" :rows="2"></el-input>
-    </div>
-    <div class="eld-eld-body-row-short">
-        Дата приказа
-        <el-input v-model="personrewardDate" type="date"></el-input>
-    </div>-->
+                        Приказ, указ, распоряжение
+                        <el-input v-model="personrewardOrder" type="textarea" :rows="2"></el-input>
+                    </div>
+                    <div class="eld-eld-body-row-short">
+                        Дата приказа
+                        <el-input v-model="personrewardDate" type="date"></el-input>
+                    </div>-->
 
                         <div class="eld-eld-body-row-flex" v-if="personrewardRewardtype != null && personrewardRewardtype != 0 &&  getRewardtypeObject(personrewardRewardtype).thanks == 1 &&  getRewardtypeObject(personrewardRewardtype).mchs == 0">
                             <div class="eld-eld-body-row-mediumshorter">
@@ -5054,7 +5090,7 @@
                         </tr>
                     </table>
 
-                   
+
 
                     <div class="eld-eld-body-row-add">
                         <el-button @click="addPersonrankButton(person)" type="success">Добавить</el-button>
@@ -5068,13 +5104,13 @@
                         </div>
                         <div>
                             <!--<div>
-                                Звание
-                            </div>
-                            <el-select clearable placeholder="Звание" v-model="personrankType" class="eld-eld-body-select-medium">
-                                <el-option v-for="rank in ranks"
-                                           :key="rank.id" :label="rank.name" :value="rank.id">
-                                </el-option>
-                            </el-select>-->
+                            Звание
+                        </div>
+                        <el-select clearable placeholder="Звание" v-model="personrankType" class="eld-eld-body-select-medium">
+                            <el-option v-for="rank in ranks"
+                                       :key="rank.id" :label="rank.name" :value="rank.id">
+                            </el-option>
+                        </el-select>-->
 
                             <div>
                                 Звание
@@ -5128,79 +5164,79 @@
                     </div>
 
                     <!--<table class="eld-eld-table">
-        <thead>
-            <tr>
-                <td>Тип</td>
-                <td>Описание</td>
-                <td>Дата</td>
-                <td>Документ</td>
-                <td>Действия</td>
-            </tr>
-        </thead>
-        <tr v-for="personscience in person.personsciences">
-            <td>
-                <el-select clearable placeholder="Тип" v-model="personscience.sciencetype">
-                    <el-option v-for="science in sciences"
-                               :key="science.id" :label="science.name" :value="science.id">
-                    </el-option>
-                </el-select>
-            </td>
-            <td class="eld-eld-body-row-medium">
-                <el-input v-model="personscience.sciencedescription" type="textarea" :rows="2"></el-input>
-            </td>
-            <td>
-                <el-input v-model="personscience.sciencedateString" type="date"></el-input>
-            </td>
-            <td>
-                <el-input v-model="personscience.sciencediplom" type="textarea" :rows="2"></el-input>
-            </td>
-            <td>
+                    <thead>
+                        <tr>
+                            <td>Тип</td>
+                            <td>Описание</td>
+                            <td>Дата</td>
+                            <td>Документ</td>
+                            <td>Действия</td>
+                        </tr>
+                    </thead>
+                    <tr v-for="personscience in person.personsciences">
+                        <td>
+                            <el-select clearable placeholder="Тип" v-model="personscience.sciencetype">
+                                <el-option v-for="science in sciences"
+                                           :key="science.id" :label="science.name" :value="science.id">
+                                </el-option>
+                            </el-select>
+                        </td>
+                        <td class="eld-eld-body-row-medium">
+                            <el-input v-model="personscience.sciencedescription" type="textarea" :rows="2"></el-input>
+                        </td>
+                        <td>
+                            <el-input v-model="personscience.sciencedateString" type="date"></el-input>
+                        </td>
+                        <td>
+                            <el-input v-model="personscience.sciencediplom" type="textarea" :rows="2"></el-input>
+                        </td>
+                        <td>
+                            <div>
+                                <el-button size="mini" @click="updatePersonscience(person, personscience)">Редактировать</el-button>
+                            </div>
+                            <div>
+                                <el-button size="mini" @click="deletePersonscience(person, personscience)">Удалить</el-button>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+
                 <div>
-                    <el-button size="mini" @click="updatePersonscience(person, personscience)">Редактировать</el-button>
-                </div>
-                <div>
-                    <el-button size="mini" @click="deletePersonscience(person, personscience)">Удалить</el-button>
-                </div>
-            </td>
-        </tr>
-    </table>
+                    <hr />
+                    <div class="eld-eld-body-add-title">
+                        Добавить научный труд, звание или изобретение
+                    </div>
+                    <div>
+                        <div>
+                            Тип
+                        </div>
+                        <el-select clearable placeholder="Тип" v-model="personscienceSciencetype">
+                            <el-option key="1" label="Научный труд" value="1">
+                            </el-option>
+                            <el-option key="2" label="Звание" value="2">
+                            </el-option>
+                            <el-option key="3" label="Изобретение" value="3">
+                            </el-option>
+                        </el-select>
+                    </div>
+                    <div class="eld-eld-body-row-medium">
+                        Описание
+                        <el-input v-model="personscienceSciencedescription" type="textarea" :rows="3"></el-input>
+                    </div>
+                    <div class="eld-eld-body-row-short">
+                        Дата
+                        <el-input v-model="personscienceSciencedate" type="date"></el-input>
+                    </div>
+                    <div class="eld-eld-body-row-medium">
+                        Документ
+                        <el-input v-model="personscienceSciencediplom" type="textarea" :rows="2"></el-input>
+                    </div>
 
-    <div>
-        <hr />
-        <div class="eld-eld-body-add-title">
-            Добавить научный труд, звание или изобретение
-        </div>
-        <div>
-            <div>
-                Тип
-            </div>
-            <el-select clearable placeholder="Тип" v-model="personscienceSciencetype">
-                <el-option key="1" label="Научный труд" value="1">
-                </el-option>
-                <el-option key="2" label="Звание" value="2">
-                </el-option>
-                <el-option key="3" label="Изобретение" value="3">
-                </el-option>
-            </el-select>
-        </div>
-        <div class="eld-eld-body-row-medium">
-            Описание
-            <el-input v-model="personscienceSciencedescription" type="textarea" :rows="3"></el-input>
-        </div>
-        <div class="eld-eld-body-row-short">
-            Дата
-            <el-input v-model="personscienceSciencedate" type="date"></el-input>
-        </div>
-        <div class="eld-eld-body-row-medium">
-            Документ
-            <el-input v-model="personscienceSciencediplom" type="textarea" :rows="2"></el-input>
-        </div>
+                    <div class="eld-eld-body-row-add">
+                        <el-button @click="addPersonscience()" type="success">Добавить</el-button>
+                    </div>
 
-        <div class="eld-eld-body-row-add">
-            <el-button @click="addPersonscience()" type="success">Добавить</el-button>
-        </div>
-
-    </div>-->
+                </div>-->
                 </div>
                 <!--Участие в выборных органах-->
                 <div v-if="menuid == 16">
@@ -5316,7 +5352,7 @@
                                     {{getCountry(personworktrip.country)}}
                                 </div>
                             </td>
-                            <td >
+                            <td>
                                 <div class="eld-eld-body-row-short">
                                     {{printDate(personworktrip.tripdateString)}}
                                 </div>
@@ -5368,7 +5404,7 @@
                                 <el-input v-model="personworktripDays" type="number"></el-input>
                             </div>
                         </div>
-                        
+
 
                         <div class="eld-eld-body-row-add">
                             <el-button @click="completePersonworktripButton(person)" type="success">{{getPersonworktripUpdateButtonName()}}</el-button>
@@ -5407,12 +5443,12 @@
                                     {{personpenalty.orderwho}}
                                 </div>
                             </td>
-                            <td >
+                            <td>
                                 <div class="eld-eld-body-row-short">
                                     {{personpenalty.ordernumber}}
                                 </div>
                             </td>
-                            <td >
+                            <td>
                                 <div class="eld-eld-body-row-short">
                                     {{printDate(personpenalty.orderdateString)}}
                                 </div>
@@ -5657,53 +5693,53 @@
                         </table>
 
 
-                            <div class="eld-eld-body-row-add">
-                                <el-button @click="addPersondriverButton(person)" type="success">Добавить</el-button>
+                        <div class="eld-eld-body-row-add">
+                            <el-button @click="addPersondriverButton(person)" type="success">Добавить</el-button>
+                        </div>
+
+                        <el-dialog :visible.sync="persondriverMenuvisible" width="850px" :close-on-click-modal="false" v-draggable>
+
+                            <hr />
+                            <div class="eld-eld-body-add-title">
+                                {{getPersondriverUpdateName()}} водительское удостоверение
+                            </div>
+                            <div>
+                                Вид транспортного средства <br />
+                                <el-select clearable placeholder="Вид транспортного средства" v-model="persondriverDrivertype" class="eld-eld-body-select-mediumshort">
+                                    <el-option v-for="drivertype in drivertypes"
+                                               :key="drivertype.id" :label="drivertype.name" :value="drivertype.id">
+                                    </el-option>
+                                </el-select>
+                            </div>
+                            <div class="eld-eld-body-row-short">
+                                Серия
+                                <el-input v-model="persondriverSeries"></el-input>
+                            </div>
+                            <div class="eld-eld-body-row-mediumshort">
+                                Номер
+                                <el-input v-model="persondriverNumber"></el-input>
+                            </div>
+                            <div class="eld-eld-body-row-short">
+                                Дата выдачи
+                                <el-input v-model="persondriverDatestart" type="date"></el-input>
+                            </div>
+                            <div class="eld-eld-body-row-short">
+                                Дата окончания
+                                <el-input v-model="persondriverDateend" type="date"></el-input>
+                            </div>
+                            <div>
+                                Категория <br />
+                                <el-select clearable placeholder="Категория" v-model="persondriverDrivercategory" class="eld-eld-body-select-short">
+                                    <el-option v-for="drivercategory in drivercategories"
+                                               :key="drivercategory.id" :label="drivercategory.name" :value="drivercategory.id">
+                                    </el-option>
+                                </el-select>
                             </div>
 
-                            <el-dialog :visible.sync="persondriverMenuvisible" width="850px" :close-on-click-modal="false" v-draggable>
-
-                                <hr />
-                                <div class="eld-eld-body-add-title">
-                                    {{getPersondriverUpdateName()}} водительское удостоверение
-                                </div>
-                                <div>
-                                    Вид транспортного средства <br />
-                                    <el-select clearable placeholder="Вид транспортного средства" v-model="persondriverDrivertype" class="eld-eld-body-select-mediumshort">
-                                        <el-option v-for="drivertype in drivertypes"
-                                                   :key="drivertype.id" :label="drivertype.name" :value="drivertype.id">
-                                        </el-option>
-                                    </el-select>
-                                </div>
-                                <div class="eld-eld-body-row-short">
-                                    Серия
-                                    <el-input v-model="persondriverSeries"></el-input>
-                                </div>
-                                <div class="eld-eld-body-row-mediumshort">
-                                    Номер
-                                    <el-input v-model="persondriverNumber"></el-input>
-                                </div>
-                                <div class="eld-eld-body-row-short">
-                                    Дата выдачи
-                                    <el-input v-model="persondriverDatestart" type="date"></el-input>
-                                </div>
-                                <div class="eld-eld-body-row-short">
-                                    Дата окончания
-                                    <el-input v-model="persondriverDateend" type="date"></el-input>
-                                </div>
-                                <div>
-                                    Категория <br />
-                                    <el-select clearable placeholder="Категория" v-model="persondriverDrivercategory" class="eld-eld-body-select-short">
-                                        <el-option v-for="drivercategory in drivercategories"
-                                                   :key="drivercategory.id" :label="drivercategory.name" :value="drivercategory.id">
-                                        </el-option>
-                                    </el-select>
-                                </div>
-
-                                <div class="eld-eld-body-row-add">
-                                    <el-button @click="completePersondriverButton(person)" type="success">{{getPersondriverUpdateButtonName()}}</el-button>
-                                </div>
-                            </el-dialog>
+                            <div class="eld-eld-body-row-add">
+                                <el-button @click="completePersondriverButton(person)" type="success">{{getPersondriverUpdateButtonName()}}</el-button>
+                            </div>
+                        </el-dialog>
                     </div>
                     <div v-if="personotherMenu == 2">
                         <div class="eld-eld-body-subtitle">
@@ -5867,7 +5903,7 @@
                     <div>
                         <el-button @click="menuid = 25">Послужной список</el-button>
                     </div>
-                    
+
                 </div>
                 <div v-if="menuid == 22">
                     <div class="eld-eld-title">
@@ -5894,7 +5930,7 @@
                     <div>
                         <el-button @click="printServlist()">Печать</el-button>
                     </div>
-                    <div id="printServlist" class="printServlist-main" >
+                    <div id="printServlist" class="printServlist-main">
                         <div class="printServlist-body">
                             <div class="printServlist-topinfo">
                                 <div class="printServlist-topinfo-left">
@@ -6540,7 +6576,7 @@
                             </div>
                             <div class="printServlist-pmsign">
                                 <div class="printServlist-pmsign-field">
-                                    
+
                                 </div>
                                 <div class="printServlist-pmsign-description">
                                     (должность, специальное звание, подпись работника кадровой службы, составившего послужной список)
@@ -6591,8 +6627,8 @@
                                 </div>
                             </div>
                         </div>
-                        
-                        
+
+
                     </div>
 
                 </div>

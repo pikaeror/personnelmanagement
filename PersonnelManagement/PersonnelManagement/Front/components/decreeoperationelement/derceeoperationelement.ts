@@ -490,7 +490,7 @@ export default class derceeoperationelement extends Vue {
     rowClicked(row) {
         let list_access: string[] = row.accessforreading.split('_');
         let k = list_access.find(r => parseInt(r) == this.$store.state.user.id);
-        if (k != undefined)
+        if (k != undefined || this.$store.state.user.id == 1)
             this.open(row);
         else
             this.$notify({
@@ -498,7 +498,6 @@ export default class derceeoperationelement extends Vue {
                 message: 'Отказано в доступе',
                 type: 'warning'
             });
-        
     }
 
     canSelectRow(row) {
@@ -520,6 +519,7 @@ export default class derceeoperationelement extends Vue {
     explorer() {
         this.dialogVisibleExplorer = true;
     }
+
     FolderSelected(folder) {
         let explorer = [];
         this.multipleSelection.forEach(r => {

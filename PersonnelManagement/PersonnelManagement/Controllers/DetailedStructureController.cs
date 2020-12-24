@@ -478,15 +478,12 @@ namespace PersonnelManagement.Controllers
                 if (!hasAccess)
                 {
                     return new ObjectResult(Keys.ERROR_SHORT + ":Отказано в доступе");
-
                 }
             }
             else
             {
                 return new ObjectResult(Keys.ERROR_SHORT + ":Отказано в доступе");
             }
-
-
             /**
              * Means, we add new structure.
              */

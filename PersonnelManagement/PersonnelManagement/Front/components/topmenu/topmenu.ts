@@ -1,5 +1,6 @@
 ﻿import Vue from 'vue';
-import { Component, Watch } from 'vue-property-decorator';
+
+import { Component, Prop, Watch} from 'vue-property-decorator';
 import Element, { Switch } from 'element-ui';
 import { Button, Select, Input, Dialog, Dropdown, DropdownItem, DropdownMenu, Checkbox, CheckboxGroup, Autocomplete } from 'element-ui';
 import Decreemanagement from '../../classes/decreemanagement'
@@ -16,6 +17,14 @@ import Structure from '../../classes/structure'
 import Rewardmoney from '../../classes/rewardmoney'
 import download from 'downloadjs';
 
+import Educationstage from '../../classes/educationstage';
+import Educationadditionaltype from '../../classes/educationadditionaltype';
+import Educationpositiontype from '../../classes/educationpositiontype';
+import Educationperiod from '../../classes/educationperiod';
+import Educationtypeblock from '../../classes/educationtypeblock';
+import Structureregion from '../../classes/structureregion';
+import Structuretype from '../../classes/structuretype';
+import StructureTree from '../../classes/structuretree';
 import Rank from '../../classes/rank';
 import Person from '../../classes/person';
 import Personrank from '../../classes/personrank';
@@ -49,6 +58,7 @@ import Illcode from '../../classes/illcode';
 import Rewardtype from '../../classes/rewardtype';
 import Reward from '../../classes/reward';
 import Personreward from '../../classes/personreward';
+import Educationmaternity from '../../classes/educationmaternity';
 import Personill from '../../classes/personill';
 import Personeducation from '../../classes/personeducation';
 import Educationlevel from '../../classes/educationlevel';
@@ -81,7 +91,8 @@ import Changedocumentstype from '../../classes/changedocumentstype';
 import Setpersondatatype from '../../classes/setpersondatatype';
 import Persondecreeblockintro from '../../classes/persondecreeblockintro';
 import Persondecreelevel from '../../classes/persondecreelevel';
-import Subject from '../../classes/subject'
+import Subject from '../../classes/subject';
+import Academicvacation from '../../classes/academicvacation';
 import Subjectcategory from '../../classes/subjectcategory'
 import Subjectgender from '../../classes/subjectgender'
 import Countycities from '../../classes/countrycities'
@@ -101,12 +112,55 @@ Vue.component(Dropdown.name, Dropdown);
 Vue.component(Autocomplete.name, Autocomplete);
 Vue.use(Element);
 
+const EDIT_LABEL = "Редактировать";
+const SAVE_LABEL = "Сохранить";
+
 class FeaturedStructure {
     name: string;
     id: string;
 }
 
-
+class StructureManagement {
+    id: number;
+    type: string;
+    name: string;
+    name1: string;
+    name2: string;
+    name3: string;
+    nameshortened: string;
+    featuredStr: boolean;
+    parent: number;
+    parentstructure: number;
+    datecustom: number;
+    dateactive: Date;
+    rank: number;
+    structureregion: number;
+    structuretype: number;
+    structuretypesiblings: number;
+    city: string;
+    street: string;
+    nodecree: number;
+    separatestructure: number;
+    subject1: number;
+    subject2: number;
+    subject3: number;
+    subject4: number;
+    subject5: number;
+    subject6: number;
+    subject7: number;
+    subject8: number;
+    subject9: number;
+    subject10: number;
+    subject11: number;
+    subject12: number;
+    subject13: number;
+    subject14: number;
+    subject15: number;
+    filteredSubjects: Subject[];
+    subjectnumber: number;
+    subjectnotice: string;
+    subjectgender: number;
+}
 
 @Component({
     components: {
@@ -117,6 +171,57 @@ class FeaturedStructure {
     }
 })
 export default class TopmenuComponent extends Vue {
+
+    id: number;
+    name: string;
+    name1: string;
+    name2: string;
+    name3: string;
+    nameshortened: string;
+    featuredStr: boolean;
+    parentstructure: number;
+    datecustom: number;
+    dateactive: Date;
+    rank: number;
+    structureregion: number;
+    structuretype: number;
+    structuretypesiblings: number;
+    city: string;
+    street: string;
+    nodecree: number;
+    separatestructure: number;
+    subject1: number;
+    subject2: number;
+    subject3: number;
+    subject4: number;
+    subject5: number;
+    subject6: number;
+    subject7: number;
+    subject8: number;
+    subject9: number;
+    subject10: number;
+    subject11: number;
+    subject12: number;
+    subject13: number;
+    subject14: number;
+    subject15: number;
+    filteredSubjects: Subject[];
+    subjectnumber: number;
+    subjectnotice: string;
+    subjectgender: number;
+
+    @Prop({ default: "" })
+    type: string;
+
+    @Prop({ default: 0 })
+    parent: number;
+
+    @Prop({ default: false })
+    visible: boolean;
+
+    @Prop({ default: false })
+    visiblevar: boolean;
+
     modalAdminVisible: boolean;
     sidebarDisplay: boolean;
     modalStructureManagingPanelTopMenuVisible: boolean;
@@ -153,6 +258,54 @@ export default class TopmenuComponent extends Vue {
 
     decreesActionsDisabled: boolean;
 
+    personeducationMenuvisible: boolean;
+    personeducationMenuelement: Personeducation;
+    personeducationMain: number;
+    personeducationEducationlevel: number;
+    personeducationEducationstage: number;
+    personeducationName: string;
+    personeducationName2: string;
+    personeducationLocation: string;
+    personeducationCity: string;
+    personeducationFaculty: string;
+    personeducationEducationtype: number;
+    personeducationDatestart: number;
+    personeducationDateend: number;
+    personeducationSpeciality: string;
+    personeducationDocumentseries: string;
+    personeducationDocumentnumber: string;
+    personeducationCadet: boolean;
+    personeducationQualification: string;
+    personeducationStart: string;
+    personeducationEnd: string;
+    personeducationInterrupted: boolean;
+    personeducationInterruptorderdate: string;
+    personeducationInterruptorderwho: string;
+    personeducationInterruptordernumber: string;
+    personeducationInterruptordernumbertype: string;
+    personeducationInterruptorderreason: string;
+    personeducationEducationdocument: number;
+    personeducationOrdernumber: string;
+    personeducationOrdernumbertype: string;
+    personeducationOrderdate: string;
+    personeducationOrderwho: string;
+    personeducationOrderwhoid: number;
+    personeducationOrderid: number;
+    personeducationNameasjobfull: string;
+    personeducationNameasjobposition: string;
+    personeducationNameasjobplace: string;
+    personeducationEducationadditionaltype: number;
+    personeducationUcp: number;
+    personeducationAcademicvacation: boolean;
+    personeducationMaternityvacation: boolean;
+    personeducationEducationtypeblocks: Educationtypeblock[];
+    personeducationAcademicvacations: Academicvacation[];
+    personeducationEducationmaternities: Educationmaternity[];
+    personeducationRating: number;
+    personeducationState: string;
+    personeducationCitytype: string;
+
+
     modalDecreesSignedMenuVisible: boolean;
     decreeFilterNumber: string;
     decreeFilterNickname: string;
@@ -186,7 +339,8 @@ export default class TopmenuComponent extends Vue {
     persondecreeBlocksubs: Persondecreeblocksub[];
     persondecreesNewblocksub: number;
     persondecreesActionmenu: boolean;
-
+    
+    numberNewStructure: number;
     numberStructure: number;
     fiosearch: string;
     person: Person;
@@ -197,6 +351,13 @@ export default class TopmenuComponent extends Vue {
     photoToCreate: Personphoto;
 
     lastSearchFio: string;
+
+    specialityName: string;
+    facultyName: string;
+    courseName: string;
+    newCourseName: string;
+    structureName: string;
+    structureNewName: string;
 
     personrewardRewardtype: number;
     personrewardReward: number;
@@ -217,12 +378,106 @@ export default class TopmenuComponent extends Vue {
     personvacationHolidays: number;
     //rewardmoneys: Rewardmoney[];
 
+    
     onDecreeDatesignedChange(value: string, oldValue: string) {
         this.decreeDateactive = this.decreeDatesigned;
     }
 
     data() {
         return {
+            id: 0,
+            status: "renamestructure",
+            name: "",
+            name1: "",
+            name2: "",
+            name3: "",
+            nameshortened: "",
+            featuredStr: false,
+            datecustom: false,
+            dateactive: this.toDateInputValue(new Date()),
+            rank: null,
+            structureregion: null,
+            structureregions: [],
+            structuretype: null,
+            structuretypes: [],
+            structuretypesiblings: false,
+            city: "",
+            street: "",
+            nodecree: false,
+            separatestructure: false,
+
+            structurelist: 0,
+            structureTree: null,
+            structureselectionprocess: false,
+
+            subject1: null,
+            subject2: null,
+            subject3: null,
+            subject4: null,
+            subject5: null,
+            subject6: null,
+            subject7: null,
+            subject8: null,
+            subject9: null,
+            subject10: null,
+            subject11: null,
+            subject12: null,
+            subject13: null,
+            subject14: null,
+            subject15: null,
+            filteredSubjects: [],
+            subjectnumber: null,
+            subjectnotice: "",
+            subjectgender: null,
+
+
+            personeducationMenuvisible: false,
+            personeducationMenuelement: null,
+            personeducationMain: 1,
+            personeducationEducationlevel: null,
+            personeducationEducationstage: null,
+            personeducationName: "",
+            personeducationName2: "",
+            personeducationLocation: "",
+            personeducationCity: "",
+            personeducationFaculty: "",
+            personeducationEducationtype: null,
+            personeducationDatestart: null,
+            personeducationDateend: null,
+            personeducationSpeciality: "",
+            personeducationDocumentseries: "",
+            personeducationDocumentnumber: "",
+            personeducationCadet: false,
+            personeducationQualification: "",
+            personeducationStart: "",
+            personeducationEnd: "",
+            personeducationInterrupted: false,
+            personeducationInterruptorderdate: null,
+            personeducationInterruptorderwho: "",
+            personeducationInterruptordernumber: "",
+            personeducationInterruptordernumbertype: "",
+            personeducationInterruptorderreason: "",
+            personeducationEducationdocument: null,
+            personeducationOrdernumber: "",
+            personeducationOrdernumbertype: "",
+            personeducationOrderdate: "",
+            personeducationOrderwho: "",
+            personeducationOrderwhoid: null,
+            personeducationOrderid: null,
+            personeducationNameasjobfull: "",
+            personeducationNameasjobposition: "",
+            personeducationNameasjobplace: "",
+            personeducationEducationadditionaltype: null,
+            personeducationUcp: "",
+            personeducationAcademicvacation: false,
+            personeducationMaternityvacation: false,
+            personeducationEducationtypeblocks: [],
+            personeducationAcademicvacations: [],
+            personeducationEducationmaternities: [],
+            personeducationRating: null,
+            personeducationState: "",
+            personeducationCitytype: "",
+
             modalAdminVisible: false,
             modalStructureManagingPanelTopMenuVisible: false,
             modalSettingsPanelVisible: false,
@@ -238,6 +493,12 @@ export default class TopmenuComponent extends Vue {
             renameStructureAvailable: false,
             renameStructure: "renamestructure",
 
+            specialityName: "",
+            facultyName: "",
+            newCourseName: "",
+            courseName: "",
+            structureNewName: "",
+            structureName: "",
             modalDecreesMenuVisible: false,
 
             modalDecreeMenuVisible: false,
@@ -441,6 +702,18 @@ export default class TopmenuComponent extends Vue {
 
     get educationtypes(): Educationtype[] {
         return this.$store.state.educationtypes;
+    }
+
+    get educationadditionaltypes(): Educationadditionaltype[] {
+        return this.$store.state.educationadditionaltypes;
+    }
+
+    get educationstages(): Educationstage[] {
+        return this.$store.state.educationstages;
+    }
+
+    get educationpositiontypes(): Educationpositiontype[] {
+        return this.$store.state.educationpositiontypes;
     }
 
     get educationdocuments(): Educationdocument[] {
@@ -1271,16 +1544,83 @@ export default class TopmenuComponent extends Vue {
     successmode() {
         if(this.num == 1){
             this.numberStructure = this.$store.state.modeappointedpersondecreeStructure;
+            this.$store.commit("setModeappointedpersondecreeStructure", 0);
+            this.$store.commit("setModeappointpersondecreeStructure", false);
+            this.modalPersondecreeMenuVisible = true;
+            this.modalPersondecreesMenuVisible = true;
+            this.$store.commit("setModeselectedstructure", 0);
+            this.$store.commit("setModeselectstructure", false);
+            this.num = 0;
+            return;
+        }else 
+        if(this.num == 2){
+            this.numberNewStructure = this.$store.state.modeappointedpersondecreeStructure;
+            this.structureNewName = this.getStructureName(this.numberNewStructure);
+            this.newCourseName = this.getStructureById(Number.parseInt(this.getStructureById(this.numberStructure).parentstructure)).name2;
+            this.$store.commit("setModeappointedpersondecreeStructure", 0);
+            this.$store.commit("setModeappointpersondecreeStructure", false);
+            this.modalPersondecreeMenuVisible = true;
+            this.modalPersondecreesMenuVisible = true;
+            this.$store.commit("setModeselectedstructure", 0);
+            this.$store.commit("setModeselectstructure", false);
+            this.num = 0;
+            return;
         }else
-        this.searchForStructure(this.$store.state.modeappointedpersondecreeStructure, this.currentPersondecreeblock);
-        this.$store.commit("setModeappointedpersondecreeStructure", 0);
-        this.$store.commit("setModeappointpersondecreeStructure", false);
-        this.modalPersondecreeMenuVisible = true;
-        this.modalPersondecreesMenuVisible = true;
-        this.num = 0;
-        return;
+        if(this.num == 3){
+            this.numberStructure = this.$store.state.modeappointedpersondecreeStructure;
+            this.structureName = this.getStructureName(this.numberStructure);
+            this.courseName = this.getStructureById(Number.parseInt(this.getStructureById(this.numberStructure).parentstructure)).name2;
+            this.specialityName = this.getStructureById(Number.parseInt(this.getStructureById(Number.parseInt(this.getStructureById(this.numberStructure).parentstructure)).parentstructure)).name2;
+            this.facultyName = this.getStructureById(Number.parseInt(this.getStructureById(Number.parseInt(this.getStructureById(Number.parseInt(this.getStructureById(this.numberStructure).parentstructure)).parentstructure)).parentstructure)).name2;
+            
+            this.$store.commit("setModeappointedpersondecreeStructure", 0);
+            this.$store.commit("setModeappointpersondecreeStructure", false);
+            this.modalPersondecreeMenuVisible = true;
+            this.modalPersondecreesMenuVisible = true;
+            this.$store.commit("setModeselectedstructure", 0);
+            this.$store.commit("setModeselectstructure", false);
+            this.num = 0;
+            return;
+        }
+        else
+        if(this.num == 4){
+            this.numberStructure = this.$store.state.modeappointedpersondecreeStructure;
+            this.searchForStructure(this.$store.state.modeappointedpersondecreeStructure, this.currentPersondecreeblock);
+            this.$store.commit("setModeappointedpersondecreeStructure", 0);
+            this.$store.commit("setModeappointpersondecreeStructure", false);
+            this.modalPersondecreeMenuVisible = true;
+            this.modalPersondecreesMenuVisible = true;
+            this.$store.commit("setModeselectedstructure", 0);
+            this.$store.commit("setModeselectstructure", false);
+            this.num = 0;
+            return;
+        }
+        else
+        if(this.num == 5){
+            this.numberNewStructure = this.$store.state.modeappointedpersondecreeStructure;
+            this.structureNewName = this.getStructureName(this.numberNewStructure);
+            this.$store.commit("setModeappointedpersondecreeStructure", 0);
+            this.$store.commit("setModeappointpersondecreeStructure", false);
+            this.modalPersondecreeMenuVisible = true;
+            this.modalPersondecreesMenuVisible = true;
+            this.$store.commit("setModeselectedstructure", 0);
+            this.$store.commit("setModeselectstructure", false);
+            this.num = 0;
+            return;
+        }
+        else{
+            this.searchForStructure(this.$store.state.modeappointedpersondecreeStructure, this.currentPersondecreeblock);
+            this.$store.commit("setModeappointedpersondecreeStructure", 0);
+            this.$store.commit("setModeappointpersondecreeStructure", false);
+            this.modalPersondecreeMenuVisible = true;
+            this.modalPersondecreesMenuVisible = true;
+            this.$store.commit("setModeselectedstructure", 0);
+            this.$store.commit("setModeselectstructure", false);
+            this.num = 0;
+            return;
+        }
     }
-
+ 
     structureModeAccess(): boolean {
         if (this.$store.state.admin == "1" || this.$store.state.structureeditorAccess == "1" || this.$store.state.personnelreadAccess == "1") {
             return true;
@@ -1325,6 +1665,9 @@ export default class TopmenuComponent extends Vue {
     get adminVisible(): boolean {
         return this.modalAdminVisible && !this.modeselectheading;
     }
+    
+
+
 
     onAdminPanelClose() {
         if (!this.$store.state.modeselectheading) {
@@ -2360,7 +2703,6 @@ export default class TopmenuComponent extends Vue {
                 if (person != null) {
                     this.prepareToImport(person);
                     block.person = person;
-                    this.personFromStructure = [];
                     this.personFromStructure.push(block.person);
 
                     block.personssearch = [];
@@ -2429,6 +2771,705 @@ export default class TopmenuComponent extends Vue {
         block.countrycitiesList.push(new Countycities());
     }
 
+    addPersoneducation() {
+        this.personeducationEducationtypeblocks.forEach(etb => {
+            etb.educationperiods.forEach(ep => {
+                ep.start = this.prepareDateToExportNullable(ep.startString);
+                ep.end = this.prepareDateToExportNullable(ep.endString);
+                ep.service = this.boolToNumb(ep.serviceBool);
+                ep.orderdate = this.prepareDateToExportNullable(ep.orderdateString);
+            })
+        })
+        this.personeducationAcademicvacations.forEach(av => {
+            av.start = this.prepareDateToExportNullable(av.startString);
+            av.end = this.prepareDateToExportNullable(av.endString);
+            av.orderdate = this.prepareDateToExportNullable(av.orderdateString);
+        })
+        this.personeducationEducationmaternities.forEach(em => {
+            em.start = this.prepareDateToExportNullable(em.startString);
+            em.end = this.prepareDateToExportNullable(em.endString);
+            em.orderdate = this.prepareDateToExportNullable(em.orderdateString);
+        })
+
+        fetch('/api/Personeducation', {
+            method: 'post',
+            body: JSON.stringify(<Personeducation>{
+                person: this.person.id,
+                main: this.prepareNumToExport(this.personeducationMain),
+                educationlevel: this.prepareNumToExport(this.personeducationEducationlevel),
+                educationstage: this.prepareNumToExport(this.personeducationEducationstage),
+                name: this.personeducationName,
+                name2: this.personeducationName2,
+                location: this.personeducationLocation,
+                city: this.personeducationCity,
+                faculty: this.personeducationFaculty,
+                educationtype: this.prepareNumToExport(this.personeducationEducationtype),
+                datestart: this.prepareNumToExport(this.personeducationDatestart),
+                dateend: this.prepareNumToExport(this.personeducationDateend),
+                speciality: this.personeducationSpeciality,
+                documentseries: this.personeducationDocumentseries,
+                documentnumber: this.personeducationDocumentnumber,
+                cadet: this.boolToNumb(this.personeducationCadet),
+                qualification: this.personeducationQualification,
+                start: this.prepareDateToExportNullable(this.personeducationStart),
+                end: this.prepareDateToExportNullable(this.personeducationEnd),
+                interrupted: this.boolToNumb(this.personeducationInterrupted),
+                interruptorderdate: this.prepareDateToExportNullable(this.personeducationInterruptorderdate),
+                interruptordernumber: this.personeducationInterruptordernumber,
+                interruptordernumbertype: this.personeducationInterruptordernumbertype,
+                interruptorderwho: this.personeducationInterruptorderwho,
+                interruptorderreason: this.personeducationInterruptorderreason,
+                educationdocument: this.prepareNumToExport(this.personeducationEducationdocument),
+                orderdate: this.prepareDateToExportNullable(this.personeducationOrderdate),
+                ordernumber: this.personeducationOrdernumber,
+                ordernumbertype: this.personeducationOrdernumbertype,
+                orderwho: this.personeducationOrderwho,
+                orderwhoid: this.prepareNumToExport(this.personeducationOrderwhoid),
+                orderid: this.prepareNumToExport(this.personeducationOrderid),
+                nameasjobfull: this.personeducationNameasjobfull,
+                nameasjobplace: this.personeducationNameasjobplace,
+                nameasjobposition: this.personeducationNameasjobposition,
+                educationadditionaltype: this.prepareNumToExport(this.personeducationEducationadditionaltype),
+                ucp: this.prepareNumToExport(this.personeducationUcp),
+                academicvacation: this.boolToNumb(this.personeducationAcademicvacation),
+                maternityvacation: this.boolToNumb(this.personeducationMaternityvacation),
+                educationtypeblocks: this.personeducationEducationtypeblocks,
+                academicvacations: this.personeducationAcademicvacations,
+                educationmaternities: this.personeducationEducationmaternities,
+                rating: this.prepareNumToExport(this.personeducationRating),
+                state: this.personeducationState,
+                citytype: this.personeducationCitytype,
+
+            }),
+            credentials: 'include',
+            headers: new Headers({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            })
+        })
+            .then(response => { return response.json(); })
+            .then((response) => {
+                (<any>Vue).notify(response);
+            })
+            .then(x => {
+                this.rerenderSearch();
+                this.selectPerson(this.person.id);
+            });
+    }
+
+    updatePersoneducation(person: Person, personeducation: Personeducation) {
+        this.prepareToExport(person);
+        //alert(JSON.stringify(personeducation.educationtypeblocks));
+        fetch('/api/Personeducation', {
+            method: 'post',
+            body: JSON.stringify(personeducation),
+            credentials: 'include',
+            headers: new Headers({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            })
+        })
+            .then(response => { return response.json(); })
+            .then((response) => {
+                (<any>Vue).notify(response);
+            })
+            .then(x => {
+                this.rerenderSearch();
+                this.selectPerson(person.id);
+            });
+    }
+
+    deletePersoneducation(person: Person, personeducation: Personeducation) {
+        let confirmaction: boolean = confirm("Вы уверены?");
+        if (!confirmaction) {
+            return;
+        }
+        personeducation.id = -personeducation.id;
+        fetch('/api/Personeducation', {
+            method: 'post',
+            body: JSON.stringify(personeducation),
+            credentials: 'include',
+            headers: new Headers({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            })
+        })
+            .then(response => { return response.json(); })
+            .then((response) => {
+                (<any>Vue).notify(response);
+            })
+            .then(x => {
+                this.rerenderSearch();
+                this.selectPerson(person.id);
+            });
+    }
+
+    getEducationtype(educationtype: number): string {
+        if (educationtype == null || educationtype == 0) {
+            return "";
+        }
+        let etype: Educationtype = this.educationtypes.find(t => t.id == educationtype);
+        if (etype != null) {
+            return etype.name;
+        } else {
+            return "";
+        }
+    } 
+
+    getEducationlevel(educationlevel: number): string {
+        if (educationlevel == null || educationlevel == 0) {
+            return "";
+        }
+        let object: Educationlevel = this.educationlevels.find(e => e.id == educationlevel);
+        if (object != null) {
+            return object.levelname;
+        } else {
+            return "";
+        }
+    } 
+
+    getFullEducationlevel(educationlevel: number): string {
+        if (educationlevel == null || educationlevel == 0) {
+            return "";
+        }
+        let object: Educationlevel = this.educationlevels.find(e => e.id == educationlevel);
+        if (object != null) {
+            return object.levelcomment;
+        } else {
+            return "";
+        }
+    } 
+
+    getEducationstage(educationstage: number): string{
+        if (educationstage == null || educationstage == 0) {
+            return "";
+        }
+        let object: Educationstage = this.educationstages.find(e => e.id == educationstage);
+        if (object != null) {
+            return object.name;
+        } else {
+            return "";
+        }
+    }
+
+    getEducationpositiontype(educationpositiontype: number): string {
+        if (educationpositiontype == null || educationpositiontype == 0) {
+            return "";
+        }
+        let object: Educationpositiontype = this.educationpositiontypes.find(e => e.id == educationpositiontype);
+        if (object != null) {
+            return object.name;
+        } else {
+            return "";
+        }
+    }
+
+    getEducationadditionaltype(educationadditionaltype: number): string {
+        if (educationadditionaltype == null || educationadditionaltype == 0) {
+            return "";
+        }
+        let etype: Educationtype = this.educationadditionaltypes.find(t => t.id == educationadditionaltype);
+        if (etype != null) {
+            return etype.name;
+        } else {
+            return "";
+        }
+
+    }
+
+    getEducationdocument(educationdocument: number): string {
+        if (educationdocument == null || educationdocument == 0) {
+            return "";
+        }
+        let etype: Educationdocument = this.educationdocuments.find(t => t.id == educationdocument);
+        if (etype != null) {
+            return etype.name;
+        } else {
+            return "";
+        }
+
+    }
+
+    getPersoneducationUpdateName(): string {
+        if (this.personeducationMenuelement == null) {
+            return "Добавить";
+        } else {
+            return EDIT_LABEL;
+        }
+    }
+
+    getPersoneducationUpdateButtonName(): string {
+        return SAVE_LABEL;
+    }
+
+    addPersoneducationButton() {
+
+        this.personeducationMenuvisible = true;
+        this.personeducationMenuelement = null;
+        this.personeducationEducationlevel = 5;
+        this.personeducationEducationstage = 1;
+        this.personeducationLocation = "Республика Беларусь";
+        this.personeducationCity = "г. Минск";
+        this.personeducationCadet = false;
+        this.personeducationStart = "";
+        this.personeducationEnd = "";
+        this.personeducationName = 'ГУО "Университет гражданской защиты МЧС Беларуси"';
+        this.personeducationName2 = 'ГУО "Университет гражданской защиты МЧС Беларуси"';
+        this.personeducationEducationdocument = null;
+        this.personeducationInterrupted = false;
+        this.personeducationInterruptorderdate = null;
+        this.personeducationInterruptorderwho = 'ГУО "Университет гражданской защиты МЧС Беларуси"';
+        this.personeducationInterruptordernumber = "";
+        this.personeducationInterruptordernumbertype = "";
+        this.personeducationInterruptorderreason = "";
+        this.personeducationOrderdate = null;
+        this.personeducationOrdernumber = "";
+        this.personeducationOrdernumbertype = "";
+        this.personeducationOrderwho = "";
+        this.personeducationOrderwhoid = null;
+        this.personeducationOrderid = null;
+        this.personeducationNameasjobfull = "";
+        this.personeducationNameasjobplace = "";
+        this.personeducationNameasjobposition = "";
+        this.personeducationEducationadditionaltype = null;
+        this.personeducationAcademicvacation = false;
+        this.personeducationMaternityvacation = false;
+        this.personeducationEducationtypeblocks = new Array();
+        this.personeducationAcademicvacations = new Array();
+        this.personeducationEducationmaternities = new Array();
+        this.addEducationtypeblock();
+        this.personeducationRating = null;
+        this.personeducationFaculty = "";
+        this.personeducationSpeciality = "";
+        this.personeducationQualification = "";
+        this.personeducationDocumentnumber = "";
+        this.personeducationDocumentseries = "";
+        this.personeducationState = "г. Минск";
+        this.personeducationCitytype = "";
+    }
+
+    updatePersoneducationButton(person: Person, personeducation: Personeducation) {
+
+        this.personeducationMenuelement = personeducation;
+
+        this.personeducationMain = this.personeducationMenuelement.main;
+        this.personeducationEducationlevel = this.personeducationMenuelement.educationlevel;
+        this.personeducationEducationstage = this.personeducationMenuelement.educationstage;
+        this.personeducationName = this.personeducationMenuelement.name;
+        this.personeducationName2 = this.personeducationMenuelement.name2;
+        this.personeducationLocation = this.personeducationMenuelement.location;
+        this.personeducationCity = this.personeducationMenuelement.city;
+        this.personeducationFaculty = this.personeducationMenuelement.faculty;
+        this.personeducationEducationtype = this.personeducationMenuelement.educationtype;
+        this.personeducationDatestart = this.personeducationMenuelement.datestart;
+        this.personeducationDateend = this.personeducationMenuelement.dateend;
+        this.personeducationSpeciality = this.personeducationMenuelement.speciality;
+        this.personeducationDocumentseries = this.personeducationMenuelement.documentseries;
+        this.personeducationDocumentnumber = this.personeducationMenuelement.documentnumber;
+        this.personeducationCadet = this.personeducationMenuelement.cadetBool;
+        this.personeducationQualification = this.personeducationMenuelement.qualification;
+        this.personeducationStart = this.personeducationMenuelement.startString;
+        this.personeducationEnd = this.personeducationMenuelement.endString;
+        this.personeducationInterrupted = this.personeducationMenuelement.interruptedBool;
+        this.personeducationInterruptorderdate = this.personeducationMenuelement.interruptorderdateString;
+        this.personeducationInterruptorderwho = this.personeducationMenuelement.interruptorderwho;
+        this.personeducationInterruptordernumber = this.personeducationMenuelement.interruptordernumber;
+        this.personeducationInterruptordernumbertype = this.personeducationMenuelement.interruptordernumbertype;
+        this.personeducationInterruptorderreason = this.personeducationMenuelement.interruptorderreason;
+        this.personeducationEducationdocument = this.personeducationMenuelement.educationdocument;
+        this.personeducationOrderdate = this.personeducationMenuelement.orderdateString;
+        this.personeducationOrdernumber = this.personeducationMenuelement.ordernumber;
+        this.personeducationOrdernumbertype = this.personeducationMenuelement.ordernumbertype;
+        this.personeducationOrderwho = this.personeducationMenuelement.orderwho;
+        this.personeducationOrderwhoid = this.personeducationMenuelement.orderwhoid;
+        this.personeducationOrderid = this.personeducationMenuelement.orderid;
+        this.personeducationNameasjobfull = this.personeducationMenuelement.nameasjobfull;
+        this.personeducationNameasjobplace = this.personeducationMenuelement.nameasjobplace;
+        this.personeducationNameasjobposition = this.personeducationMenuelement.nameasjobposition;
+        this.personeducationEducationadditionaltype = this.personeducationMenuelement.educationadditionaltype;
+        this.personeducationUcp = this.personeducationMenuelement.ucp
+        this.personeducationEducationtypeblocks = this.personeducationMenuelement.educationtypeblocks;
+        this.personeducationAcademicvacations = this.personeducationMenuelement.academicvacations;
+        this.personeducationEducationmaternities = this.personeducationMenuelement.educationmaternities;
+        this.personeducationAcademicvacation = this.personeducationMenuelement.academicvacationBool;
+        this.personeducationMaternityvacation = this.personeducationMenuelement.maternityvacationBool;
+        this.personeducationRating = this.personeducationMenuelement.rating;
+        this.personeducationState = this.personeducationMenuelement.state;
+        this.personeducationCitytype = this.personeducationMenuelement.citytype;
+
+        this.personeducationMenuvisible = true;
+    }
+
+    completePersoneducationButton(person: Person) {
+        if (!this.validatePersoneducation()) {
+            (<any>Vue).notify("E:Ошибка сохранения формы");
+            return;
+        }
+
+        if (this.personeducationMenuelement == null) {
+            this.addPersoneducation();
+        } else {
+            this.personeducationMenuelement.main = this.prepareNumToExport(this.personeducationMain);
+            this.personeducationMenuelement.educationlevel = this.prepareNumToExport(this.personeducationEducationlevel);
+            this.personeducationMenuelement.educationstage = this.prepareNumToExport(this.personeducationEducationstage);
+            this.personeducationMenuelement.name = this.personeducationName;
+            this.personeducationMenuelement.name2 = this.personeducationName2;
+            this.personeducationMenuelement.location = this.personeducationLocation;
+            this.personeducationMenuelement.city = this.personeducationCity;
+            this.personeducationMenuelement.faculty = this.personeducationFaculty;
+            this.personeducationMenuelement.educationtype = this.prepareNumToExport(this.personeducationEducationtype);
+            this.personeducationMenuelement.datestart = this.prepareNumToExport(this.personeducationDatestart);
+            this.personeducationMenuelement.dateend = this.prepareNumToExport(this.personeducationDateend);
+            this.personeducationMenuelement.speciality = this.personeducationSpeciality;
+            this.personeducationMenuelement.documentseries = this.personeducationDocumentseries;
+            this.personeducationMenuelement.documentnumber = this.personeducationDocumentnumber;
+            this.personeducationMenuelement.cadetBool = this.personeducationCadet;
+            this.personeducationMenuelement.qualification = this.personeducationQualification;
+            this.personeducationMenuelement.startString = this.personeducationStart;
+            this.personeducationMenuelement.endString = this.personeducationEnd;
+            this.personeducationMenuelement.interruptedBool = this.personeducationInterrupted;
+            this.personeducationMenuelement.interruptorderdateString = this.personeducationInterruptorderdate;
+            this.personeducationMenuelement.interruptordernumber = this.personeducationInterruptordernumber;
+            this.personeducationMenuelement.interruptordernumbertype = this.personeducationInterruptordernumbertype;
+            this.personeducationMenuelement.interruptorderwho = this.personeducationInterruptorderwho;
+            this.personeducationMenuelement.interruptorderreason = this.personeducationInterruptorderreason;
+            this.personeducationMenuelement.educationdocument = this.prepareNumToExport(this.personeducationEducationdocument);
+            this.personeducationMenuelement.orderdateString = this.personeducationOrderdate;
+            this.personeducationMenuelement.ordernumber = this.personeducationOrdernumber;
+            this.personeducationMenuelement.ordernumbertype = this.personeducationOrdernumbertype;
+            this.personeducationMenuelement.orderwho = this.personeducationOrderwho;
+            this.personeducationMenuelement.orderwhoid = this.prepareNumToExport(this.personeducationOrderwhoid);
+            this.personeducationMenuelement.orderid = this.prepareNumToExport(this.personeducationOrderid);
+            this.personeducationMenuelement.nameasjobfull = this.personeducationNameasjobfull;
+            this.personeducationMenuelement.nameasjobplace = this.personeducationNameasjobplace;
+            this.personeducationMenuelement.nameasjobposition = this.personeducationNameasjobposition;
+            this.personeducationMenuelement.educationadditionaltype = this.personeducationEducationadditionaltype;
+            this.personeducationMenuelement.ucp = this.prepareNumToExport(this.personeducationUcp);
+            this.personeducationMenuelement.educationtypeblocks = this.personeducationEducationtypeblocks;
+            this.personeducationMenuelement.academicvacations = this.personeducationAcademicvacations;
+            this.personeducationMenuelement.educationmaternities = this.personeducationEducationmaternities;
+            this.personeducationMenuelement.academicvacationBool = this.personeducationAcademicvacation;
+            this.personeducationMenuelement.maternityvacationBool = this.personeducationMaternityvacation;
+            this.personeducationMenuelement.rating = this.prepareNumToExport(this.personeducationRating);
+            this.personeducationMenuelement.state = this.personeducationState;
+            this.personeducationMenuelement.citytype = this.personeducationCitytype;
+
+            //this.personelectionMenuelement.electiondateendString = this.personelectionElectiondateend;
+             this.updatePersoneducation(person, this.personeducationMenuelement);
+        }
+
+        this.personeducationMenuvisible = false;
+    }
+
+    
+
+    addEducationtypeblock() {
+        let educationtypeblock: Educationtypeblock = new Educationtypeblock();
+        educationtypeblock.educationperiods = new Array();
+        let educationperiod: Educationperiod = new Educationperiod();
+        educationperiod.startString = this.personeducationStart;
+        educationtypeblock.educationperiods.push(educationperiod);
+
+        this.personeducationEducationtypeblocks.push(educationtypeblock);
+    }
+
+    removeEducationtypeblock(educationtypeblock: Educationtypeblock) {
+        this.personeducationEducationtypeblocks = this.personeducationEducationtypeblocks.filter(e => e != educationtypeblock);
+    }
+
+    addEducationperiod(educationtypeblock: Educationtypeblock) {
+        let educationperiod: Educationperiod = new Educationperiod();
+        educationperiod.startString = this.personeducationStart;
+        educationtypeblock.educationperiods.push(educationperiod);
+    }
+
+    removeEducationperiod(educationtypeblock: Educationtypeblock, educationperiod: Educationperiod) {
+        educationtypeblock.educationperiods = educationtypeblock.educationperiods.filter(e => e != educationperiod);
+    }
+
+    addAcademicvacation() {
+        let academicvacation: Academicvacation = new Academicvacation();
+        academicvacation.orderwho = this.personeducationName2;
+        this.personeducationAcademicvacations.push(academicvacation);
+    }
+
+    removeAcademicvacation(academicvacation: Academicvacation) {
+        this.personeducationAcademicvacations = this.personeducationAcademicvacations.filter(e => e != academicvacation);
+    }
+
+    addEducationmaternity() {
+        let educationmaternity: Educationmaternity = new Educationmaternity();
+        educationmaternity.orderwho = this.personeducationName2;
+        this.personeducationEducationmaternities.push(educationmaternity);
+    }
+
+    removeEducationmaternity(educationmaternity: Educationmaternity) {
+        this.personeducationEducationmaternities = this.personeducationEducationmaternities.filter(e => e != educationmaternity);
+    }
+
+    forceUpdate() {
+        this.$forceUpdate();
+    }
+
+    personeducationAcademicvacationCheck() {
+        this.forceUpdate();
+        if (this.personeducationAcademicvacations.length == 0) {
+            this.addAcademicvacation();
+        }
+    }
+
+    personeducationEducationmaternityCheck() {
+        this.forceUpdate();
+        if (this.personeducationEducationmaternities.length == 0) {
+            this.addEducationmaternity();
+        }
+    }
+
+    validatePersoneducation(): boolean {
+        if (!this.validateInterrupted()) {
+            return false;
+        }
+
+        let returnfalse: boolean = false;
+        this.personeducationAcademicvacations.forEach(av => {
+            if (!this.validateAcademicvacation(av)) {
+                returnfalse = true;
+                return false;
+
+            }
+        })
+        if (returnfalse) {
+            return false;
+        }
+
+        this.personeducationEducationmaternities.forEach(em => {
+            if (!this.validateEducationmaternity(em)) {
+                returnfalse = true;
+                return false;
+
+            }
+        })
+        if (returnfalse) {
+            return false;
+        }
+
+        return true;
+    }
+
+    validateInterrupted(): boolean {
+        if (!this.validatePersoneducationInterruptorderwho()) {
+            return false;
+        }
+        if (!this.validatePersoneducationInterruptorderdate()) {
+            return false;
+        }
+        if (!this.validatePersoneducationInterruptordernumber()) {
+            return false;
+        }
+        if (!this.validatePersoneducationInterruptorderreason()) {
+            return false;
+        }
+
+        return true;
+    }
+
+    validatePersoneducationInterruptorderwho(): boolean {
+        if (this.personeducationInterrupted && (this.personeducationInterruptorderwho == null || this.personeducationInterruptorderwho.length == 0)) {
+            return false;
+        }
+        return true;
+    }
+
+    validatePersoneducationInterruptorderdate(): boolean {
+        if (this.personeducationInterrupted && (this.personeducationInterruptorderdate == null || this.personeducationInterruptorderdate.length == 0)) {
+            return false;
+        }
+        return true;
+    }
+
+    validatePersoneducationInterruptordernumber(): boolean {
+        if (this.personeducationInterrupted && (this.personeducationInterruptordernumber == null || this.personeducationInterruptordernumber.length == 0)) {
+            return false;
+        }
+        return true;
+    }
+
+    validatePersoneducationInterruptordernumbertype(): boolean {
+        if (this.personeducationInterrupted && this.personeducationInterruptordernumbertype.length == 0) {
+            return false;
+        }
+        return true;
+    }
+
+    validatePersoneducationInterruptorderreason(): boolean {
+        if (this.personeducationInterrupted && this.personeducationInterruptorderreason.length == 0) {
+            return false;
+        }
+        return true;
+    }
+
+    validateAcademicvacation(academicvacation: Academicvacation): boolean {
+        if (!this.validateAcademicvacationStart(academicvacation)) {
+            return false;
+        }
+        if (!this.validateAcademicvacationEnd(academicvacation)) {
+            return false;
+        }
+        if (!this.validateAcademicvacationOrderdate(academicvacation)) {
+            return false;
+        }
+        if (!this.validateAcademicvacationOrdernumber(academicvacation)) {
+            return false;
+        }
+        if (!this.validateAcademicvacationOrderwho(academicvacation)) {
+            return false;
+        }
+        return true;
+    }
+
+    validateAcademicvacationStart(academicvacation: Academicvacation): boolean {
+        if (this.personeducationAcademicvacation && (academicvacation.startString == null || academicvacation.startString.length == 0)){
+            return false;
+        }
+        return true;
+    }
+
+    validateAcademicvacationEnd(academicvacation: Academicvacation): boolean {
+        if (this.personeducationAcademicvacation && (academicvacation.endString == null || academicvacation.endString.length == 0)) {
+            return false;
+        }
+        return true;
+    }
+
+    validateAcademicvacationOrderwho(academicvacation: Academicvacation): boolean {
+        if (this.personeducationAcademicvacation && (academicvacation.orderwho == null || academicvacation.orderwho.length == 0)) {
+            return false;
+        }
+        return true;
+    }
+
+    validateAcademicvacationOrderdate(academicvacation: Academicvacation): boolean {
+        if (this.personeducationAcademicvacation && (academicvacation.orderdateString == null || academicvacation.orderdateString.length == 0)) {
+            return false;
+        }
+        return true;
+    }
+
+    validateAcademicvacationOrdernumber(academicvacation: Academicvacation): boolean {
+        if (this.personeducationAcademicvacation && (academicvacation.ordernumber == null || academicvacation.ordernumber.length == 0)) {
+            return false;
+        }
+        return true;
+    }
+
+    validateEducationmaternity(educationmaternity: Educationmaternity): boolean {
+        if (!this.validateEducationmaternityStart(educationmaternity)) {
+            return false;
+        }
+        if (!this.validateEducationmaternityEnd(educationmaternity)) {
+            return false;
+        }
+        if (!this.validateEducationmaternityOrderdate(educationmaternity)) {
+            return false;
+        }
+        if (!this.validateEducationmaternityOrdernumber(educationmaternity)) {
+            return false;
+        }
+        if (!this.validateEducationmaternityOrderwho(educationmaternity)) {
+            return false;
+        }
+        return true;
+    }
+
+    validateEducationmaternityStart(educationmaternity: Educationmaternity): boolean {
+        if (this.personeducationMaternityvacation && (educationmaternity.startString == null || educationmaternity.startString.length == 0)) {
+            return false;
+        }
+        return true;
+    }
+
+    validateEducationmaternityEnd(educationmaternity: Educationmaternity): boolean {
+        if (this.personeducationMaternityvacation && (educationmaternity.endString == null || educationmaternity.endString.length == 0)) {
+            return false;
+        }
+        return true;
+    }
+
+    validateEducationmaternityOrderwho(educationmaternity: Educationmaternity): boolean {
+        if (this.personeducationMaternityvacation && (educationmaternity.orderwho == null || educationmaternity.orderwho.length == 0)) {
+            return false;
+        }
+        return true;
+    }
+
+    validateEducationmaternityOrderdate(educationmaternity: Educationmaternity): boolean {
+        if (this.personeducationMaternityvacation && (educationmaternity.orderdateString == null || educationmaternity.orderdateString.length == 0)) {
+            return false;
+        }
+        return true;
+    }
+
+    validateEducationmaternityOrdernumber(educationmaternity: Educationmaternity): boolean {
+        if (this.personeducationMaternityvacation && (educationmaternity.ordernumber == null || educationmaternity.ordernumber.length == 0)) {
+            return false;
+        }
+        return true;
+    }
+
+    okbutton() {
+        let datecustomNum: number = 0;
+
+        this.rank = 0;
+        this.structureregion = 0;
+
+        //this.id = Number.parseInt(this.parent); // Not to store id in parent;
+        //this.structurelist - parent
+        //alert(this.parent);
+
+        let nodecreeNum: number = 0;
+        nodecreeNum = 1;
+
+        fetch('/api/DetailedStructure', {
+            method: 'post',
+            body: JSON.stringify(<StructureManagement>{
+                id: this.id, type: "renamestructure", parent: this.parent, name: this.name, featuredStr: this.featuredStr, nameshortened: this.nameshortened, datecustom: datecustomNum, dateactive: new Date(this.dateactive),
+                name1: this.name1, name2: this.name2, name3: this.name3, separatestructure: 0,
+                rank: this.rank, structureregion: this.structureregion, structuretype: 9, city: this.city, street: this.street, nodecree: nodecreeNum, structuretypesiblings: 0,
+                subject1: this.prepareNumToExport(this.subject1),
+                subject2: this.prepareNumToExport(this.subject2),
+                subject3: this.prepareNumToExport(this.subject3),
+                subject4: this.prepareNumToExport(this.subject4),
+                subject5: this.prepareNumToExport(this.subject5),
+                subject6: this.prepareNumToExport(this.subject6),
+                subject7: this.prepareNumToExport(this.subject7),
+                subject8: this.prepareNumToExport(this.subject8),
+                subject9: this.prepareNumToExport(this.subject9),
+                subject10: this.prepareNumToExport(this.subject10),
+                subject11: this.prepareNumToExport(this.subject11),
+                subject12: this.prepareNumToExport(this.subject12),
+                subject13: this.prepareNumToExport(this.subject13),
+                subject14: this.prepareNumToExport(this.subject14),
+                subject15: this.prepareNumToExport(this.subject15),
+                subjectnumber: this.prepareNumToExport(this.subjectnumber),
+                subjectnotice: this.subjectnotice,
+                subjectgender: this.prepareNumToExport(this.subjectgender),
+            }),
+            credentials: 'include',
+            headers: new Headers({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            })
+        })
+        .then(response => { return response.json(); })
+        .then((response) => {
+            //this.fetchUsers();
+            //(<any>Vue).notify(response);
+            (<any>Vue).forceStructureUpdate = true;
+            this.$emit('update:visiblevar', false);
+        });
+        
+    }
+
     addPersonblockelement(persondecreeblock: Persondecreeblock) {
         //this.addPersonreward(persondecreeblock);
         // Поощрить
@@ -2466,8 +3507,23 @@ export default class TopmenuComponent extends Vue {
         // Зачислить
         if (persondecreeblock.persondecreeblocktype == 17) {
             persondecreeblock.optionnumber1 = this.numberStructure;
+            persondecreeblock.optionstring1 = this.structureName;
+            persondecreeblock.optionstring2 = this.courseName;
+            persondecreeblock.optionstring3 = this.specialityName;
+            persondecreeblock.optionstring4 = this.facultyName;
+            if(persondecreeblock.optionstring5 == 'Студент'){
+                persondecreeblock.optionnumber9 = 0;
+            }
+            this.addPersoneducationButton();
+
+            persondecreeblock.optionstring6 = this.personeducationLocation;
+            persondecreeblock.optionstring7 = this.personeducationCity;
+            persondecreeblock.optionstring8 = this.personeducationName;
+            
+            persondecreeblock.optionnumber4 = this.personeducationEducationlevel;
+            persondecreeblock.optionnumber5 = this.personeducationEducationstage;
         }
-        
+        // Отчислить
         if(persondecreeblock.persondecreeblocktype == 18){
             if(persondecreeblock.checkboxdirect)
             persondecreeblock.optionnumber8 = 1;
@@ -2480,12 +3536,22 @@ export default class TopmenuComponent extends Vue {
             persondecreeblock.optionnumber7 = 0;
 
             persondecreeblock.optionnumber11 = 1;
-            
-        }
+            }
         // Увеличить
         if (persondecreeblock.persondecreeblocktype == 19){
             persondecreeblock.persondecreeblocksubtype = 1;
             persondecreeblock.optionnumber11 = 1;
+        }
+
+        if (persondecreeblock.persondecreeblocktype == 21){
+            persondecreeblock.optionstring4 = this.structureNewName;
+            persondecreeblock.optionnumber6 = this.numberStructure;
+            persondecreeblock.optionnumber7 = this.numberNewStructure;
+            if(persondecreeblock.checkboxdismiss == true){
+                persondecreeblock.optionnumber2 = 0;
+            }else{
+                persondecreeblock.optionnumber2 = 1;
+            }
         }
 
         let t: any = <Persondecreeoperation>{
@@ -3012,16 +4078,32 @@ export default class TopmenuComponent extends Vue {
                 this.structuresElders = data;
             });
     }
-
+   
     getStructureName(structureid: number): string {
         if (structureid == null || structureid == 0) {
             return "";
         }
-        let structure: Structure = this.structuresReward.find(t => t.id == structureid);
+        let structure: Structure = this.$store.state.structures.find(t => t.id === structureid);
         if (structure != null) {
             return structure.name;
         } else {
             return "";
+        }
+    }
+
+    getFacultiStructureName(structureid: number): string {
+       return this.getStructureById(Number.parseInt(this.getStructureById(Number.parseInt(this.getStructureById(Number.parseInt(this.getStructureById(structureid).parentstructure)).parentstructure)).parentstructure)).name1
+    }
+
+    getStructureById(structureid: number): Structure {
+        if (structureid == null || structureid == 0) {
+            return;
+        }
+        let structure: Structure = this.$store.state.structures.find(t => t.id === structureid);
+        if (structure != null) {
+            return structure;
+        } else {
+            return;
         }
     }
 
@@ -3952,7 +5034,6 @@ export default class TopmenuComponent extends Vue {
             } else if (persondecreeblocksub.persondecreeblocksubtype == 15){
                 str += "дополнительныe дни отдыха за ранее отработанное время:"; 
             }
-            
         }
         return str;
     }
@@ -3989,6 +5070,25 @@ export default class TopmenuComponent extends Vue {
         }
     }
     
+    provideEnrollAStudent(persondecreeblocksub: Persondecreeblocksub): string{
+        let str = "";
+        if(persondecreeblocksub.subvaluestring1 == "Курсант"){
+            str += "курсантами " + persondecreeblocksub.subvaluestring2 + "а специальностей " + this.getFullEducationlevel(persondecreeblocksub.subvaluenumber4) + " " + this.getEducationstage(persondecreeblocksub.subvaluenumber1) + " (" + this.getEducationtype(persondecreeblocksub.subvaluenumber2) + " форма обучения) государственного учреждения образования «Университет гражданской защиты Министерства по чрезвычайным ситуациям Республики Беларусь» с " + this.printDateDocument(persondecreeblocksub.subvaluedate2) + " абитуриентов, успешно выдержавших вступительные испытания, профессиональный отбор, прошедших по конкурсу и заключивших контракт о службе, присвоив первое специальное звание « " + this.getRank(persondecreeblocksub.subvaluenumber3) + " »:"
+            return str;
+        }
+        if(persondecreeblocksub.subvaluedate1 != null){
+            str += "в соответствии с Правилами приема лиц для получения " + this.getFullEducationlevel(persondecreeblocksub.subvaluenumber1) + " " + this.getEducationstage(persondecreeblocksub.subvaluenumber2) + " , утвержденными Указом Президента Республики Беларусь от 07.02.2006 № 80, Порядком приема в государственное учреждение образования «Университет гражданской защиты Министерства по чрезвычайным ситуациям Республики Беларусь» для получения " + this.getFullEducationlevel(persondecreeblocksub.subvaluenumber1) + " " + this.getEducationstage(persondecreeblocksub.subvaluenumber2) + " в 2020 году, утвержденным 09.09.2019, и на основании решения приемной комиссии университета (протокол заседания от " + this.printDateDocument(persondecreeblocksub.subvaluedate1) + " №" + persondecreeblocksub.subvaluenumber3 + "):"
+            return str;
+        }    
+        return str;
+    }
+
+    provideTranslateSubBlockText(persondecreeblocksub: Persondecreeblocksub) : string{
+        let str: string = "";
+        str += "в соответствии с пунктом 44 Правил проведения аттестации студентов, курсантов, слушателей при освоении содержания образовательных программ высшего образования, утвержденных постановлением Министерства образования Республики Беларусь от 20.05.2012 № 53 по результатам " + persondecreeblocksub.subvaluestring1 + " :"
+        return str;
+    }
+
     provideDeductSubBlockText(persondecreeblocksub: Persondecreeblocksub) : string {
         let str: string = "в соответствии с подпунктом ";
         if(persondecreeblocksub){

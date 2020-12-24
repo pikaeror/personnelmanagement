@@ -178,6 +178,8 @@ export default class decreeoperationtemplatecreator extends Vue {
 
     update: boolean;
 
+    active_decree_operation: Persondecreeblock;
+
     data() {
         return {
             input_decree: this.input_decree,
@@ -239,6 +241,8 @@ export default class decreeoperationtemplatecreator extends Vue {
             persondecreeCreatorObject: null,
 
             update: true,
+
+            active_decree_operation: null,
         }
     }
 
@@ -249,6 +253,10 @@ export default class decreeoperationtemplatecreator extends Vue {
         //this.input_decree.creatorObject.structureString
         this.persondecreeSelectUpdate(this.input_decree.id);
         //setInterval(this.persondecreeSelectUpdate, 10000);
+    }
+
+    get getList(): Persondecreeblock[] {
+        return [this.active_decree_operation];
     }
 
     get modeselectstructure(): boolean {
@@ -710,6 +718,18 @@ export default class decreeoperationtemplatecreator extends Vue {
             return structure.name;
         } else {
             return "";
+        }
+    }
+ 
+    getStructure(structureid: number): Structure {
+        if (structureid == null || structureid == 0) {
+            return;
+        }
+        let structure: Structure = this.structuresReward.find(t => t.id == structureid);
+        if (structure != null) {
+            return structure;
+        } else {
+            return;
         }
     }
 
@@ -1719,7 +1739,7 @@ export default class decreeoperationtemplatecreator extends Vue {
             (<any>Vue).notify("S:Проект приказа направлен на кадровика");
         })
         this.$store.commit("setdecreeoperationtemplatecreatorVisible", false);
-        this.visible = false;
+        //this.visible = false;
     }
 
     closeUserSearch() {
@@ -1801,6 +1821,7 @@ export default class decreeoperationtemplatecreator extends Vue {
                     this.selectPerson(this.person.id);
                 }
                 this.persondecreeSelectUpdate(this.input_decree.id);
+                this.active_decree_operation = this.persondecreeBlocks[this.persondecreeBlocks.length - 1];
                 //this.fetchPersondecreeBlocks();
                 /*this.updateMethod();*/
             });

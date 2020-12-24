@@ -452,7 +452,7 @@ namespace PersonnelManagement.Controllers
             if (IdentityService.IsLogined(sessionid, repository))
             {
                 user = IdentityService.GetUserBySessionID(sessionid, repository);
-                List<Person> persons = repository.GetPersonsForStructure(user, id, true);
+                List<Person> persons = repository.GetPersonsForStructure(id, true);
 
                 return persons;
             }
@@ -462,21 +462,18 @@ namespace PersonnelManagement.Controllers
         }
 
         [HttpGet("WithoutJobPlace/{devizor}")]
-        public IEnumerable<IEnumerable<Person>> PersonWithoutJobPlace([FromRoute] int devizor)
+        public IEnumerable<Person> PersonWithoutJobPlace([FromRoute] int devizor)
         {
             string sessionid = Request.Cookies[Keys.COOKIES_SESSION];
             User user = null;
             if (IdentityService.IsLogined(sessionid, repository))
             {
                 user = IdentityService.GetUserBySessionID(sessionid, repository);
-                /*user.
-                *//*List<Person> persons = repository.GetPersonsForStructure(user, id, true);*//*
-
-                return persons;*/
+                FinderWhitoutWorkPlace calculation = new FinderWhitoutWorkPlace(repository, user);
+                calculation.Worker(devizor);
+                return calculation.GetResualtList();
             }
-            List<List<Person>> empty = new List<List<Person>>();
-            //return empty;
-            return empty;
+            return new List<Person>();
         }
     }
 }

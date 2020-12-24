@@ -14,9 +14,12 @@ export default class Persondecreeblocksub {
     priority: number;
     subvaluenumber1: number;
     subvaluenumber2: number;
+    subvaluenumber3: number;
+    subvaluenumber4: number;
     subvaluestring1: string;
     subvaluestring2: string;
     subvaluestring3: string;
+    subvaluestring4: string;
     parentpersondecreeblocksub: number;
     
     subvaluedate1: Date;

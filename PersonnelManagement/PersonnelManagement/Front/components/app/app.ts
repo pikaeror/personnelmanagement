@@ -56,6 +56,7 @@ export default class AppComponent extends Vue {
         this.updateHolidays();
         this.updatePersondecreeblocktypes();
         this.updatePersondecreeblocksubtypes();
+        this.updateStructureresAll();
         this.updateRegions();
         this.updateAreas();
         this.updateFires();
@@ -517,6 +518,10 @@ export default class AppComponent extends Vue {
 
     updatePersondecreeblocksubtypes() {
         this.$store.commit("updatePersondecreeblocksubtypes");
+    }
+
+    updateStructureresAll(){
+        this.$store.commit("updateStructureresAll");
     }
 
     updateRegions() {

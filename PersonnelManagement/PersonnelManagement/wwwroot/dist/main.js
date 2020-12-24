@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "0fdfc7a91be27981c5a5"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "1f7449acf32496dde235"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -1165,7 +1165,7 @@ class Personphoto {
 /* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(18)();
+exports = module.exports = __webpack_require__(22)();
 // imports
 
 
@@ -1179,7 +1179,7 @@ exports.push([module.i, ".printServlist-body {\r\n    width: 21cm;\r\n    margin
 /* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(18)();
+exports = module.exports = __webpack_require__(22)();
 // imports
 
 
@@ -1199,7 +1199,7 @@ exports.push([module.i, "\r\n/*##########################    TEST DATA    ######
 var content = __webpack_require__(11);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // add the styles to the DOM
-var update = __webpack_require__(20)(content, {});
+var update = __webpack_require__(24)(content, {});
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(true) {
@@ -1220,6 +1220,50 @@ if(true) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+class Academicvacation {
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = Academicvacation;
+
+//# sourceMappingURL=academicvacation.js.map
+
+/***/ }),
+/* 15 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+class Educationmaternity {
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = Educationmaternity;
+
+//# sourceMappingURL=educationmaternity.js.map
+
+/***/ }),
+/* 16 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+class Educationperiod {
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = Educationperiod;
+
+//# sourceMappingURL=educationperiod.js.map
+
+/***/ }),
+/* 17 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+class Educationtypeblock {
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = Educationtypeblock;
+
+//# sourceMappingURL=educationtypeblock.js.map
+
+/***/ }),
+/* 18 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
 class Link {
 }
 /* harmony export (immutable) */ __webpack_exports__["a"] = Link;
@@ -1227,7 +1271,7 @@ class Link {
 //# sourceMappingURL=link.js.map
 
 /***/ }),
-/* 15 */
+/* 19 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1238,7 +1282,7 @@ class Personreward {
 //# sourceMappingURL=personreward.js.map
 
 /***/ }),
-/* 16 */
+/* 20 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1249,7 +1293,7 @@ class Rewardmoney {
 //# sourceMappingURL=rewardmoney.js.map
 
 /***/ }),
-/* 17 */
+/* 21 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1268,7 +1312,7 @@ class User {
 //# sourceMappingURL=user.js.map
 
 /***/ }),
-/* 18 */
+/* 22 */
 /***/ (function(module, exports) {
 
 /*
@@ -1324,7 +1368,7 @@ module.exports = function() {
 
 
 /***/ }),
-/* 19 */
+/* 23 */
 /***/ (function(module, exports) {
 
 var ENTITIES = [['Aacute', [193]], ['aacute', [225]], ['Abreve', [258]], ['abreve', [259]], ['ac', [8766]], ['acd', [8767]], ['acE', [8766, 819]], ['Acirc', [194]], ['acirc', [226]], ['acute', [180]], ['Acy', [1040]], ['acy', [1072]], ['AElig', [198]], ['aelig', [230]], ['af', [8289]], ['Afr', [120068]], ['afr', [120094]], ['Agrave', [192]], ['agrave', [224]], ['alefsym', [8501]], ['aleph', [8501]], ['Alpha', [913]], ['alpha', [945]], ['Amacr', [256]], ['amacr', [257]], ['amalg', [10815]], ['amp', [38]], ['AMP', [38]], ['andand', [10837]], ['And', [10835]], ['and', [8743]], ['andd', [10844]], ['andslope', [10840]], ['andv', [10842]], ['ang', [8736]], ['ange', [10660]], ['angle', [8736]], ['angmsdaa', [10664]], ['angmsdab', [10665]], ['angmsdac', [10666]], ['angmsdad', [10667]], ['angmsdae', [10668]], ['angmsdaf', [10669]], ['angmsdag', [10670]], ['angmsdah', [10671]], ['angmsd', [8737]], ['angrt', [8735]], ['angrtvb', [8894]], ['angrtvbd', [10653]], ['angsph', [8738]], ['angst', [197]], ['angzarr', [9084]], ['Aogon', [260]], ['aogon', [261]], ['Aopf', [120120]], ['aopf', [120146]], ['apacir', [10863]], ['ap', [8776]], ['apE', [10864]], ['ape', [8778]], ['apid', [8779]], ['apos', [39]], ['ApplyFunction', [8289]], ['approx', [8776]], ['approxeq', [8778]], ['Aring', [197]], ['aring', [229]], ['Ascr', [119964]], ['ascr', [119990]], ['Assign', [8788]], ['ast', [42]], ['asymp', [8776]], ['asympeq', [8781]], ['Atilde', [195]], ['atilde', [227]], ['Auml', [196]], ['auml', [228]], ['awconint', [8755]], ['awint', [10769]], ['backcong', [8780]], ['backepsilon', [1014]], ['backprime', [8245]], ['backsim', [8765]], ['backsimeq', [8909]], ['Backslash', [8726]], ['Barv', [10983]], ['barvee', [8893]], ['barwed', [8965]], ['Barwed', [8966]], ['barwedge', [8965]], ['bbrk', [9141]], ['bbrktbrk', [9142]], ['bcong', [8780]], ['Bcy', [1041]], ['bcy', [1073]], ['bdquo', [8222]], ['becaus', [8757]], ['because', [8757]], ['Because', [8757]], ['bemptyv', [10672]], ['bepsi', [1014]], ['bernou', [8492]], ['Bernoullis', [8492]], ['Beta', [914]], ['beta', [946]], ['beth', [8502]], ['between', [8812]], ['Bfr', [120069]], ['bfr', [120095]], ['bigcap', [8898]], ['bigcirc', [9711]], ['bigcup', [8899]], ['bigodot', [10752]], ['bigoplus', [10753]], ['bigotimes', [10754]], ['bigsqcup', [10758]], ['bigstar', [9733]], ['bigtriangledown', [9661]], ['bigtriangleup', [9651]], ['biguplus', [10756]], ['bigvee', [8897]], ['bigwedge', [8896]], ['bkarow', [10509]], ['blacklozenge', [10731]], ['blacksquare', [9642]], ['blacktriangle', [9652]], ['blacktriangledown', [9662]], ['blacktriangleleft', [9666]], ['blacktriangleright', [9656]], ['blank', [9251]], ['blk12', [9618]], ['blk14', [9617]], ['blk34', [9619]], ['block', [9608]], ['bne', [61, 8421]], ['bnequiv', [8801, 8421]], ['bNot', [10989]], ['bnot', [8976]], ['Bopf', [120121]], ['bopf', [120147]], ['bot', [8869]], ['bottom', [8869]], ['bowtie', [8904]], ['boxbox', [10697]], ['boxdl', [9488]], ['boxdL', [9557]], ['boxDl', [9558]], ['boxDL', [9559]], ['boxdr', [9484]], ['boxdR', [9554]], ['boxDr', [9555]], ['boxDR', [9556]], ['boxh', [9472]], ['boxH', [9552]], ['boxhd', [9516]], ['boxHd', [9572]], ['boxhD', [9573]], ['boxHD', [9574]], ['boxhu', [9524]], ['boxHu', [9575]], ['boxhU', [9576]], ['boxHU', [9577]], ['boxminus', [8863]], ['boxplus', [8862]], ['boxtimes', [8864]], ['boxul', [9496]], ['boxuL', [9563]], ['boxUl', [9564]], ['boxUL', [9565]], ['boxur', [9492]], ['boxuR', [9560]], ['boxUr', [9561]], ['boxUR', [9562]], ['boxv', [9474]], ['boxV', [9553]], ['boxvh', [9532]], ['boxvH', [9578]], ['boxVh', [9579]], ['boxVH', [9580]], ['boxvl', [9508]], ['boxvL', [9569]], ['boxVl', [9570]], ['boxVL', [9571]], ['boxvr', [9500]], ['boxvR', [9566]], ['boxVr', [9567]], ['boxVR', [9568]], ['bprime', [8245]], ['breve', [728]], ['Breve', [728]], ['brvbar', [166]], ['bscr', [119991]], ['Bscr', [8492]], ['bsemi', [8271]], ['bsim', [8765]], ['bsime', [8909]], ['bsolb', [10693]], ['bsol', [92]], ['bsolhsub', [10184]], ['bull', [8226]], ['bullet', [8226]], ['bump', [8782]], ['bumpE', [10926]], ['bumpe', [8783]], ['Bumpeq', [8782]], ['bumpeq', [8783]], ['Cacute', [262]], ['cacute', [263]], ['capand', [10820]], ['capbrcup', [10825]], ['capcap', [10827]], ['cap', [8745]], ['Cap', [8914]], ['capcup', [10823]], ['capdot', [10816]], ['CapitalDifferentialD', [8517]], ['caps', [8745, 65024]], ['caret', [8257]], ['caron', [711]], ['Cayleys', [8493]], ['ccaps', [10829]], ['Ccaron', [268]], ['ccaron', [269]], ['Ccedil', [199]], ['ccedil', [231]], ['Ccirc', [264]], ['ccirc', [265]], ['Cconint', [8752]], ['ccups', [10828]], ['ccupssm', [10832]], ['Cdot', [266]], ['cdot', [267]], ['cedil', [184]], ['Cedilla', [184]], ['cemptyv', [10674]], ['cent', [162]], ['centerdot', [183]], ['CenterDot', [183]], ['cfr', [120096]], ['Cfr', [8493]], ['CHcy', [1063]], ['chcy', [1095]], ['check', [10003]], ['checkmark', [10003]], ['Chi', [935]], ['chi', [967]], ['circ', [710]], ['circeq', [8791]], ['circlearrowleft', [8634]], ['circlearrowright', [8635]], ['circledast', [8859]], ['circledcirc', [8858]], ['circleddash', [8861]], ['CircleDot', [8857]], ['circledR', [174]], ['circledS', [9416]], ['CircleMinus', [8854]], ['CirclePlus', [8853]], ['CircleTimes', [8855]], ['cir', [9675]], ['cirE', [10691]], ['cire', [8791]], ['cirfnint', [10768]], ['cirmid', [10991]], ['cirscir', [10690]], ['ClockwiseContourIntegral', [8754]], ['clubs', [9827]], ['clubsuit', [9827]], ['colon', [58]], ['Colon', [8759]], ['Colone', [10868]], ['colone', [8788]], ['coloneq', [8788]], ['comma', [44]], ['commat', [64]], ['comp', [8705]], ['compfn', [8728]], ['complement', [8705]], ['complexes', [8450]], ['cong', [8773]], ['congdot', [10861]], ['Congruent', [8801]], ['conint', [8750]], ['Conint', [8751]], ['ContourIntegral', [8750]], ['copf', [120148]], ['Copf', [8450]], ['coprod', [8720]], ['Coproduct', [8720]], ['copy', [169]], ['COPY', [169]], ['copysr', [8471]], ['CounterClockwiseContourIntegral', [8755]], ['crarr', [8629]], ['cross', [10007]], ['Cross', [10799]], ['Cscr', [119966]], ['cscr', [119992]], ['csub', [10959]], ['csube', [10961]], ['csup', [10960]], ['csupe', [10962]], ['ctdot', [8943]], ['cudarrl', [10552]], ['cudarrr', [10549]], ['cuepr', [8926]], ['cuesc', [8927]], ['cularr', [8630]], ['cularrp', [10557]], ['cupbrcap', [10824]], ['cupcap', [10822]], ['CupCap', [8781]], ['cup', [8746]], ['Cup', [8915]], ['cupcup', [10826]], ['cupdot', [8845]], ['cupor', [10821]], ['cups', [8746, 65024]], ['curarr', [8631]], ['curarrm', [10556]], ['curlyeqprec', [8926]], ['curlyeqsucc', [8927]], ['curlyvee', [8910]], ['curlywedge', [8911]], ['curren', [164]], ['curvearrowleft', [8630]], ['curvearrowright', [8631]], ['cuvee', [8910]], ['cuwed', [8911]], ['cwconint', [8754]], ['cwint', [8753]], ['cylcty', [9005]], ['dagger', [8224]], ['Dagger', [8225]], ['daleth', [8504]], ['darr', [8595]], ['Darr', [8609]], ['dArr', [8659]], ['dash', [8208]], ['Dashv', [10980]], ['dashv', [8867]], ['dbkarow', [10511]], ['dblac', [733]], ['Dcaron', [270]], ['dcaron', [271]], ['Dcy', [1044]], ['dcy', [1076]], ['ddagger', [8225]], ['ddarr', [8650]], ['DD', [8517]], ['dd', [8518]], ['DDotrahd', [10513]], ['ddotseq', [10871]], ['deg', [176]], ['Del', [8711]], ['Delta', [916]], ['delta', [948]], ['demptyv', [10673]], ['dfisht', [10623]], ['Dfr', [120071]], ['dfr', [120097]], ['dHar', [10597]], ['dharl', [8643]], ['dharr', [8642]], ['DiacriticalAcute', [180]], ['DiacriticalDot', [729]], ['DiacriticalDoubleAcute', [733]], ['DiacriticalGrave', [96]], ['DiacriticalTilde', [732]], ['diam', [8900]], ['diamond', [8900]], ['Diamond', [8900]], ['diamondsuit', [9830]], ['diams', [9830]], ['die', [168]], ['DifferentialD', [8518]], ['digamma', [989]], ['disin', [8946]], ['div', [247]], ['divide', [247]], ['divideontimes', [8903]], ['divonx', [8903]], ['DJcy', [1026]], ['djcy', [1106]], ['dlcorn', [8990]], ['dlcrop', [8973]], ['dollar', [36]], ['Dopf', [120123]], ['dopf', [120149]], ['Dot', [168]], ['dot', [729]], ['DotDot', [8412]], ['doteq', [8784]], ['doteqdot', [8785]], ['DotEqual', [8784]], ['dotminus', [8760]], ['dotplus', [8724]], ['dotsquare', [8865]], ['doublebarwedge', [8966]], ['DoubleContourIntegral', [8751]], ['DoubleDot', [168]], ['DoubleDownArrow', [8659]], ['DoubleLeftArrow', [8656]], ['DoubleLeftRightArrow', [8660]], ['DoubleLeftTee', [10980]], ['DoubleLongLeftArrow', [10232]], ['DoubleLongLeftRightArrow', [10234]], ['DoubleLongRightArrow', [10233]], ['DoubleRightArrow', [8658]], ['DoubleRightTee', [8872]], ['DoubleUpArrow', [8657]], ['DoubleUpDownArrow', [8661]], ['DoubleVerticalBar', [8741]], ['DownArrowBar', [10515]], ['downarrow', [8595]], ['DownArrow', [8595]], ['Downarrow', [8659]], ['DownArrowUpArrow', [8693]], ['DownBreve', [785]], ['downdownarrows', [8650]], ['downharpoonleft', [8643]], ['downharpoonright', [8642]], ['DownLeftRightVector', [10576]], ['DownLeftTeeVector', [10590]], ['DownLeftVectorBar', [10582]], ['DownLeftVector', [8637]], ['DownRightTeeVector', [10591]], ['DownRightVectorBar', [10583]], ['DownRightVector', [8641]], ['DownTeeArrow', [8615]], ['DownTee', [8868]], ['drbkarow', [10512]], ['drcorn', [8991]], ['drcrop', [8972]], ['Dscr', [119967]], ['dscr', [119993]], ['DScy', [1029]], ['dscy', [1109]], ['dsol', [10742]], ['Dstrok', [272]], ['dstrok', [273]], ['dtdot', [8945]], ['dtri', [9663]], ['dtrif', [9662]], ['duarr', [8693]], ['duhar', [10607]], ['dwangle', [10662]], ['DZcy', [1039]], ['dzcy', [1119]], ['dzigrarr', [10239]], ['Eacute', [201]], ['eacute', [233]], ['easter', [10862]], ['Ecaron', [282]], ['ecaron', [283]], ['Ecirc', [202]], ['ecirc', [234]], ['ecir', [8790]], ['ecolon', [8789]], ['Ecy', [1069]], ['ecy', [1101]], ['eDDot', [10871]], ['Edot', [278]], ['edot', [279]], ['eDot', [8785]], ['ee', [8519]], ['efDot', [8786]], ['Efr', [120072]], ['efr', [120098]], ['eg', [10906]], ['Egrave', [200]], ['egrave', [232]], ['egs', [10902]], ['egsdot', [10904]], ['el', [10905]], ['Element', [8712]], ['elinters', [9191]], ['ell', [8467]], ['els', [10901]], ['elsdot', [10903]], ['Emacr', [274]], ['emacr', [275]], ['empty', [8709]], ['emptyset', [8709]], ['EmptySmallSquare', [9723]], ['emptyv', [8709]], ['EmptyVerySmallSquare', [9643]], ['emsp13', [8196]], ['emsp14', [8197]], ['emsp', [8195]], ['ENG', [330]], ['eng', [331]], ['ensp', [8194]], ['Eogon', [280]], ['eogon', [281]], ['Eopf', [120124]], ['eopf', [120150]], ['epar', [8917]], ['eparsl', [10723]], ['eplus', [10865]], ['epsi', [949]], ['Epsilon', [917]], ['epsilon', [949]], ['epsiv', [1013]], ['eqcirc', [8790]], ['eqcolon', [8789]], ['eqsim', [8770]], ['eqslantgtr', [10902]], ['eqslantless', [10901]], ['Equal', [10869]], ['equals', [61]], ['EqualTilde', [8770]], ['equest', [8799]], ['Equilibrium', [8652]], ['equiv', [8801]], ['equivDD', [10872]], ['eqvparsl', [10725]], ['erarr', [10609]], ['erDot', [8787]], ['escr', [8495]], ['Escr', [8496]], ['esdot', [8784]], ['Esim', [10867]], ['esim', [8770]], ['Eta', [919]], ['eta', [951]], ['ETH', [208]], ['eth', [240]], ['Euml', [203]], ['euml', [235]], ['euro', [8364]], ['excl', [33]], ['exist', [8707]], ['Exists', [8707]], ['expectation', [8496]], ['exponentiale', [8519]], ['ExponentialE', [8519]], ['fallingdotseq', [8786]], ['Fcy', [1060]], ['fcy', [1092]], ['female', [9792]], ['ffilig', [64259]], ['fflig', [64256]], ['ffllig', [64260]], ['Ffr', [120073]], ['ffr', [120099]], ['filig', [64257]], ['FilledSmallSquare', [9724]], ['FilledVerySmallSquare', [9642]], ['fjlig', [102, 106]], ['flat', [9837]], ['fllig', [64258]], ['fltns', [9649]], ['fnof', [402]], ['Fopf', [120125]], ['fopf', [120151]], ['forall', [8704]], ['ForAll', [8704]], ['fork', [8916]], ['forkv', [10969]], ['Fouriertrf', [8497]], ['fpartint', [10765]], ['frac12', [189]], ['frac13', [8531]], ['frac14', [188]], ['frac15', [8533]], ['frac16', [8537]], ['frac18', [8539]], ['frac23', [8532]], ['frac25', [8534]], ['frac34', [190]], ['frac35', [8535]], ['frac38', [8540]], ['frac45', [8536]], ['frac56', [8538]], ['frac58', [8541]], ['frac78', [8542]], ['frasl', [8260]], ['frown', [8994]], ['fscr', [119995]], ['Fscr', [8497]], ['gacute', [501]], ['Gamma', [915]], ['gamma', [947]], ['Gammad', [988]], ['gammad', [989]], ['gap', [10886]], ['Gbreve', [286]], ['gbreve', [287]], ['Gcedil', [290]], ['Gcirc', [284]], ['gcirc', [285]], ['Gcy', [1043]], ['gcy', [1075]], ['Gdot', [288]], ['gdot', [289]], ['ge', [8805]], ['gE', [8807]], ['gEl', [10892]], ['gel', [8923]], ['geq', [8805]], ['geqq', [8807]], ['geqslant', [10878]], ['gescc', [10921]], ['ges', [10878]], ['gesdot', [10880]], ['gesdoto', [10882]], ['gesdotol', [10884]], ['gesl', [8923, 65024]], ['gesles', [10900]], ['Gfr', [120074]], ['gfr', [120100]], ['gg', [8811]], ['Gg', [8921]], ['ggg', [8921]], ['gimel', [8503]], ['GJcy', [1027]], ['gjcy', [1107]], ['gla', [10917]], ['gl', [8823]], ['glE', [10898]], ['glj', [10916]], ['gnap', [10890]], ['gnapprox', [10890]], ['gne', [10888]], ['gnE', [8809]], ['gneq', [10888]], ['gneqq', [8809]], ['gnsim', [8935]], ['Gopf', [120126]], ['gopf', [120152]], ['grave', [96]], ['GreaterEqual', [8805]], ['GreaterEqualLess', [8923]], ['GreaterFullEqual', [8807]], ['GreaterGreater', [10914]], ['GreaterLess', [8823]], ['GreaterSlantEqual', [10878]], ['GreaterTilde', [8819]], ['Gscr', [119970]], ['gscr', [8458]], ['gsim', [8819]], ['gsime', [10894]], ['gsiml', [10896]], ['gtcc', [10919]], ['gtcir', [10874]], ['gt', [62]], ['GT', [62]], ['Gt', [8811]], ['gtdot', [8919]], ['gtlPar', [10645]], ['gtquest', [10876]], ['gtrapprox', [10886]], ['gtrarr', [10616]], ['gtrdot', [8919]], ['gtreqless', [8923]], ['gtreqqless', [10892]], ['gtrless', [8823]], ['gtrsim', [8819]], ['gvertneqq', [8809, 65024]], ['gvnE', [8809, 65024]], ['Hacek', [711]], ['hairsp', [8202]], ['half', [189]], ['hamilt', [8459]], ['HARDcy', [1066]], ['hardcy', [1098]], ['harrcir', [10568]], ['harr', [8596]], ['hArr', [8660]], ['harrw', [8621]], ['Hat', [94]], ['hbar', [8463]], ['Hcirc', [292]], ['hcirc', [293]], ['hearts', [9829]], ['heartsuit', [9829]], ['hellip', [8230]], ['hercon', [8889]], ['hfr', [120101]], ['Hfr', [8460]], ['HilbertSpace', [8459]], ['hksearow', [10533]], ['hkswarow', [10534]], ['hoarr', [8703]], ['homtht', [8763]], ['hookleftarrow', [8617]], ['hookrightarrow', [8618]], ['hopf', [120153]], ['Hopf', [8461]], ['horbar', [8213]], ['HorizontalLine', [9472]], ['hscr', [119997]], ['Hscr', [8459]], ['hslash', [8463]], ['Hstrok', [294]], ['hstrok', [295]], ['HumpDownHump', [8782]], ['HumpEqual', [8783]], ['hybull', [8259]], ['hyphen', [8208]], ['Iacute', [205]], ['iacute', [237]], ['ic', [8291]], ['Icirc', [206]], ['icirc', [238]], ['Icy', [1048]], ['icy', [1080]], ['Idot', [304]], ['IEcy', [1045]], ['iecy', [1077]], ['iexcl', [161]], ['iff', [8660]], ['ifr', [120102]], ['Ifr', [8465]], ['Igrave', [204]], ['igrave', [236]], ['ii', [8520]], ['iiiint', [10764]], ['iiint', [8749]], ['iinfin', [10716]], ['iiota', [8489]], ['IJlig', [306]], ['ijlig', [307]], ['Imacr', [298]], ['imacr', [299]], ['image', [8465]], ['ImaginaryI', [8520]], ['imagline', [8464]], ['imagpart', [8465]], ['imath', [305]], ['Im', [8465]], ['imof', [8887]], ['imped', [437]], ['Implies', [8658]], ['incare', [8453]], ['in', [8712]], ['infin', [8734]], ['infintie', [10717]], ['inodot', [305]], ['intcal', [8890]], ['int', [8747]], ['Int', [8748]], ['integers', [8484]], ['Integral', [8747]], ['intercal', [8890]], ['Intersection', [8898]], ['intlarhk', [10775]], ['intprod', [10812]], ['InvisibleComma', [8291]], ['InvisibleTimes', [8290]], ['IOcy', [1025]], ['iocy', [1105]], ['Iogon', [302]], ['iogon', [303]], ['Iopf', [120128]], ['iopf', [120154]], ['Iota', [921]], ['iota', [953]], ['iprod', [10812]], ['iquest', [191]], ['iscr', [119998]], ['Iscr', [8464]], ['isin', [8712]], ['isindot', [8949]], ['isinE', [8953]], ['isins', [8948]], ['isinsv', [8947]], ['isinv', [8712]], ['it', [8290]], ['Itilde', [296]], ['itilde', [297]], ['Iukcy', [1030]], ['iukcy', [1110]], ['Iuml', [207]], ['iuml', [239]], ['Jcirc', [308]], ['jcirc', [309]], ['Jcy', [1049]], ['jcy', [1081]], ['Jfr', [120077]], ['jfr', [120103]], ['jmath', [567]], ['Jopf', [120129]], ['jopf', [120155]], ['Jscr', [119973]], ['jscr', [119999]], ['Jsercy', [1032]], ['jsercy', [1112]], ['Jukcy', [1028]], ['jukcy', [1108]], ['Kappa', [922]], ['kappa', [954]], ['kappav', [1008]], ['Kcedil', [310]], ['kcedil', [311]], ['Kcy', [1050]], ['kcy', [1082]], ['Kfr', [120078]], ['kfr', [120104]], ['kgreen', [312]], ['KHcy', [1061]], ['khcy', [1093]], ['KJcy', [1036]], ['kjcy', [1116]], ['Kopf', [120130]], ['kopf', [120156]], ['Kscr', [119974]], ['kscr', [120000]], ['lAarr', [8666]], ['Lacute', [313]], ['lacute', [314]], ['laemptyv', [10676]], ['lagran', [8466]], ['Lambda', [923]], ['lambda', [955]], ['lang', [10216]], ['Lang', [10218]], ['langd', [10641]], ['langle', [10216]], ['lap', [10885]], ['Laplacetrf', [8466]], ['laquo', [171]], ['larrb', [8676]], ['larrbfs', [10527]], ['larr', [8592]], ['Larr', [8606]], ['lArr', [8656]], ['larrfs', [10525]], ['larrhk', [8617]], ['larrlp', [8619]], ['larrpl', [10553]], ['larrsim', [10611]], ['larrtl', [8610]], ['latail', [10521]], ['lAtail', [10523]], ['lat', [10923]], ['late', [10925]], ['lates', [10925, 65024]], ['lbarr', [10508]], ['lBarr', [10510]], ['lbbrk', [10098]], ['lbrace', [123]], ['lbrack', [91]], ['lbrke', [10635]], ['lbrksld', [10639]], ['lbrkslu', [10637]], ['Lcaron', [317]], ['lcaron', [318]], ['Lcedil', [315]], ['lcedil', [316]], ['lceil', [8968]], ['lcub', [123]], ['Lcy', [1051]], ['lcy', [1083]], ['ldca', [10550]], ['ldquo', [8220]], ['ldquor', [8222]], ['ldrdhar', [10599]], ['ldrushar', [10571]], ['ldsh', [8626]], ['le', [8804]], ['lE', [8806]], ['LeftAngleBracket', [10216]], ['LeftArrowBar', [8676]], ['leftarrow', [8592]], ['LeftArrow', [8592]], ['Leftarrow', [8656]], ['LeftArrowRightArrow', [8646]], ['leftarrowtail', [8610]], ['LeftCeiling', [8968]], ['LeftDoubleBracket', [10214]], ['LeftDownTeeVector', [10593]], ['LeftDownVectorBar', [10585]], ['LeftDownVector', [8643]], ['LeftFloor', [8970]], ['leftharpoondown', [8637]], ['leftharpoonup', [8636]], ['leftleftarrows', [8647]], ['leftrightarrow', [8596]], ['LeftRightArrow', [8596]], ['Leftrightarrow', [8660]], ['leftrightarrows', [8646]], ['leftrightharpoons', [8651]], ['leftrightsquigarrow', [8621]], ['LeftRightVector', [10574]], ['LeftTeeArrow', [8612]], ['LeftTee', [8867]], ['LeftTeeVector', [10586]], ['leftthreetimes', [8907]], ['LeftTriangleBar', [10703]], ['LeftTriangle', [8882]], ['LeftTriangleEqual', [8884]], ['LeftUpDownVector', [10577]], ['LeftUpTeeVector', [10592]], ['LeftUpVectorBar', [10584]], ['LeftUpVector', [8639]], ['LeftVectorBar', [10578]], ['LeftVector', [8636]], ['lEg', [10891]], ['leg', [8922]], ['leq', [8804]], ['leqq', [8806]], ['leqslant', [10877]], ['lescc', [10920]], ['les', [10877]], ['lesdot', [10879]], ['lesdoto', [10881]], ['lesdotor', [10883]], ['lesg', [8922, 65024]], ['lesges', [10899]], ['lessapprox', [10885]], ['lessdot', [8918]], ['lesseqgtr', [8922]], ['lesseqqgtr', [10891]], ['LessEqualGreater', [8922]], ['LessFullEqual', [8806]], ['LessGreater', [8822]], ['lessgtr', [8822]], ['LessLess', [10913]], ['lesssim', [8818]], ['LessSlantEqual', [10877]], ['LessTilde', [8818]], ['lfisht', [10620]], ['lfloor', [8970]], ['Lfr', [120079]], ['lfr', [120105]], ['lg', [8822]], ['lgE', [10897]], ['lHar', [10594]], ['lhard', [8637]], ['lharu', [8636]], ['lharul', [10602]], ['lhblk', [9604]], ['LJcy', [1033]], ['ljcy', [1113]], ['llarr', [8647]], ['ll', [8810]], ['Ll', [8920]], ['llcorner', [8990]], ['Lleftarrow', [8666]], ['llhard', [10603]], ['lltri', [9722]], ['Lmidot', [319]], ['lmidot', [320]], ['lmoustache', [9136]], ['lmoust', [9136]], ['lnap', [10889]], ['lnapprox', [10889]], ['lne', [10887]], ['lnE', [8808]], ['lneq', [10887]], ['lneqq', [8808]], ['lnsim', [8934]], ['loang', [10220]], ['loarr', [8701]], ['lobrk', [10214]], ['longleftarrow', [10229]], ['LongLeftArrow', [10229]], ['Longleftarrow', [10232]], ['longleftrightarrow', [10231]], ['LongLeftRightArrow', [10231]], ['Longleftrightarrow', [10234]], ['longmapsto', [10236]], ['longrightarrow', [10230]], ['LongRightArrow', [10230]], ['Longrightarrow', [10233]], ['looparrowleft', [8619]], ['looparrowright', [8620]], ['lopar', [10629]], ['Lopf', [120131]], ['lopf', [120157]], ['loplus', [10797]], ['lotimes', [10804]], ['lowast', [8727]], ['lowbar', [95]], ['LowerLeftArrow', [8601]], ['LowerRightArrow', [8600]], ['loz', [9674]], ['lozenge', [9674]], ['lozf', [10731]], ['lpar', [40]], ['lparlt', [10643]], ['lrarr', [8646]], ['lrcorner', [8991]], ['lrhar', [8651]], ['lrhard', [10605]], ['lrm', [8206]], ['lrtri', [8895]], ['lsaquo', [8249]], ['lscr', [120001]], ['Lscr', [8466]], ['lsh', [8624]], ['Lsh', [8624]], ['lsim', [8818]], ['lsime', [10893]], ['lsimg', [10895]], ['lsqb', [91]], ['lsquo', [8216]], ['lsquor', [8218]], ['Lstrok', [321]], ['lstrok', [322]], ['ltcc', [10918]], ['ltcir', [10873]], ['lt', [60]], ['LT', [60]], ['Lt', [8810]], ['ltdot', [8918]], ['lthree', [8907]], ['ltimes', [8905]], ['ltlarr', [10614]], ['ltquest', [10875]], ['ltri', [9667]], ['ltrie', [8884]], ['ltrif', [9666]], ['ltrPar', [10646]], ['lurdshar', [10570]], ['luruhar', [10598]], ['lvertneqq', [8808, 65024]], ['lvnE', [8808, 65024]], ['macr', [175]], ['male', [9794]], ['malt', [10016]], ['maltese', [10016]], ['Map', [10501]], ['map', [8614]], ['mapsto', [8614]], ['mapstodown', [8615]], ['mapstoleft', [8612]], ['mapstoup', [8613]], ['marker', [9646]], ['mcomma', [10793]], ['Mcy', [1052]], ['mcy', [1084]], ['mdash', [8212]], ['mDDot', [8762]], ['measuredangle', [8737]], ['MediumSpace', [8287]], ['Mellintrf', [8499]], ['Mfr', [120080]], ['mfr', [120106]], ['mho', [8487]], ['micro', [181]], ['midast', [42]], ['midcir', [10992]], ['mid', [8739]], ['middot', [183]], ['minusb', [8863]], ['minus', [8722]], ['minusd', [8760]], ['minusdu', [10794]], ['MinusPlus', [8723]], ['mlcp', [10971]], ['mldr', [8230]], ['mnplus', [8723]], ['models', [8871]], ['Mopf', [120132]], ['mopf', [120158]], ['mp', [8723]], ['mscr', [120002]], ['Mscr', [8499]], ['mstpos', [8766]], ['Mu', [924]], ['mu', [956]], ['multimap', [8888]], ['mumap', [8888]], ['nabla', [8711]], ['Nacute', [323]], ['nacute', [324]], ['nang', [8736, 8402]], ['nap', [8777]], ['napE', [10864, 824]], ['napid', [8779, 824]], ['napos', [329]], ['napprox', [8777]], ['natural', [9838]], ['naturals', [8469]], ['natur', [9838]], ['nbsp', [160]], ['nbump', [8782, 824]], ['nbumpe', [8783, 824]], ['ncap', [10819]], ['Ncaron', [327]], ['ncaron', [328]], ['Ncedil', [325]], ['ncedil', [326]], ['ncong', [8775]], ['ncongdot', [10861, 824]], ['ncup', [10818]], ['Ncy', [1053]], ['ncy', [1085]], ['ndash', [8211]], ['nearhk', [10532]], ['nearr', [8599]], ['neArr', [8663]], ['nearrow', [8599]], ['ne', [8800]], ['nedot', [8784, 824]], ['NegativeMediumSpace', [8203]], ['NegativeThickSpace', [8203]], ['NegativeThinSpace', [8203]], ['NegativeVeryThinSpace', [8203]], ['nequiv', [8802]], ['nesear', [10536]], ['nesim', [8770, 824]], ['NestedGreaterGreater', [8811]], ['NestedLessLess', [8810]], ['nexist', [8708]], ['nexists', [8708]], ['Nfr', [120081]], ['nfr', [120107]], ['ngE', [8807, 824]], ['nge', [8817]], ['ngeq', [8817]], ['ngeqq', [8807, 824]], ['ngeqslant', [10878, 824]], ['nges', [10878, 824]], ['nGg', [8921, 824]], ['ngsim', [8821]], ['nGt', [8811, 8402]], ['ngt', [8815]], ['ngtr', [8815]], ['nGtv', [8811, 824]], ['nharr', [8622]], ['nhArr', [8654]], ['nhpar', [10994]], ['ni', [8715]], ['nis', [8956]], ['nisd', [8954]], ['niv', [8715]], ['NJcy', [1034]], ['njcy', [1114]], ['nlarr', [8602]], ['nlArr', [8653]], ['nldr', [8229]], ['nlE', [8806, 824]], ['nle', [8816]], ['nleftarrow', [8602]], ['nLeftarrow', [8653]], ['nleftrightarrow', [8622]], ['nLeftrightarrow', [8654]], ['nleq', [8816]], ['nleqq', [8806, 824]], ['nleqslant', [10877, 824]], ['nles', [10877, 824]], ['nless', [8814]], ['nLl', [8920, 824]], ['nlsim', [8820]], ['nLt', [8810, 8402]], ['nlt', [8814]], ['nltri', [8938]], ['nltrie', [8940]], ['nLtv', [8810, 824]], ['nmid', [8740]], ['NoBreak', [8288]], ['NonBreakingSpace', [160]], ['nopf', [120159]], ['Nopf', [8469]], ['Not', [10988]], ['not', [172]], ['NotCongruent', [8802]], ['NotCupCap', [8813]], ['NotDoubleVerticalBar', [8742]], ['NotElement', [8713]], ['NotEqual', [8800]], ['NotEqualTilde', [8770, 824]], ['NotExists', [8708]], ['NotGreater', [8815]], ['NotGreaterEqual', [8817]], ['NotGreaterFullEqual', [8807, 824]], ['NotGreaterGreater', [8811, 824]], ['NotGreaterLess', [8825]], ['NotGreaterSlantEqual', [10878, 824]], ['NotGreaterTilde', [8821]], ['NotHumpDownHump', [8782, 824]], ['NotHumpEqual', [8783, 824]], ['notin', [8713]], ['notindot', [8949, 824]], ['notinE', [8953, 824]], ['notinva', [8713]], ['notinvb', [8951]], ['notinvc', [8950]], ['NotLeftTriangleBar', [10703, 824]], ['NotLeftTriangle', [8938]], ['NotLeftTriangleEqual', [8940]], ['NotLess', [8814]], ['NotLessEqual', [8816]], ['NotLessGreater', [8824]], ['NotLessLess', [8810, 824]], ['NotLessSlantEqual', [10877, 824]], ['NotLessTilde', [8820]], ['NotNestedGreaterGreater', [10914, 824]], ['NotNestedLessLess', [10913, 824]], ['notni', [8716]], ['notniva', [8716]], ['notnivb', [8958]], ['notnivc', [8957]], ['NotPrecedes', [8832]], ['NotPrecedesEqual', [10927, 824]], ['NotPrecedesSlantEqual', [8928]], ['NotReverseElement', [8716]], ['NotRightTriangleBar', [10704, 824]], ['NotRightTriangle', [8939]], ['NotRightTriangleEqual', [8941]], ['NotSquareSubset', [8847, 824]], ['NotSquareSubsetEqual', [8930]], ['NotSquareSuperset', [8848, 824]], ['NotSquareSupersetEqual', [8931]], ['NotSubset', [8834, 8402]], ['NotSubsetEqual', [8840]], ['NotSucceeds', [8833]], ['NotSucceedsEqual', [10928, 824]], ['NotSucceedsSlantEqual', [8929]], ['NotSucceedsTilde', [8831, 824]], ['NotSuperset', [8835, 8402]], ['NotSupersetEqual', [8841]], ['NotTilde', [8769]], ['NotTildeEqual', [8772]], ['NotTildeFullEqual', [8775]], ['NotTildeTilde', [8777]], ['NotVerticalBar', [8740]], ['nparallel', [8742]], ['npar', [8742]], ['nparsl', [11005, 8421]], ['npart', [8706, 824]], ['npolint', [10772]], ['npr', [8832]], ['nprcue', [8928]], ['nprec', [8832]], ['npreceq', [10927, 824]], ['npre', [10927, 824]], ['nrarrc', [10547, 824]], ['nrarr', [8603]], ['nrArr', [8655]], ['nrarrw', [8605, 824]], ['nrightarrow', [8603]], ['nRightarrow', [8655]], ['nrtri', [8939]], ['nrtrie', [8941]], ['nsc', [8833]], ['nsccue', [8929]], ['nsce', [10928, 824]], ['Nscr', [119977]], ['nscr', [120003]], ['nshortmid', [8740]], ['nshortparallel', [8742]], ['nsim', [8769]], ['nsime', [8772]], ['nsimeq', [8772]], ['nsmid', [8740]], ['nspar', [8742]], ['nsqsube', [8930]], ['nsqsupe', [8931]], ['nsub', [8836]], ['nsubE', [10949, 824]], ['nsube', [8840]], ['nsubset', [8834, 8402]], ['nsubseteq', [8840]], ['nsubseteqq', [10949, 824]], ['nsucc', [8833]], ['nsucceq', [10928, 824]], ['nsup', [8837]], ['nsupE', [10950, 824]], ['nsupe', [8841]], ['nsupset', [8835, 8402]], ['nsupseteq', [8841]], ['nsupseteqq', [10950, 824]], ['ntgl', [8825]], ['Ntilde', [209]], ['ntilde', [241]], ['ntlg', [8824]], ['ntriangleleft', [8938]], ['ntrianglelefteq', [8940]], ['ntriangleright', [8939]], ['ntrianglerighteq', [8941]], ['Nu', [925]], ['nu', [957]], ['num', [35]], ['numero', [8470]], ['numsp', [8199]], ['nvap', [8781, 8402]], ['nvdash', [8876]], ['nvDash', [8877]], ['nVdash', [8878]], ['nVDash', [8879]], ['nvge', [8805, 8402]], ['nvgt', [62, 8402]], ['nvHarr', [10500]], ['nvinfin', [10718]], ['nvlArr', [10498]], ['nvle', [8804, 8402]], ['nvlt', [60, 8402]], ['nvltrie', [8884, 8402]], ['nvrArr', [10499]], ['nvrtrie', [8885, 8402]], ['nvsim', [8764, 8402]], ['nwarhk', [10531]], ['nwarr', [8598]], ['nwArr', [8662]], ['nwarrow', [8598]], ['nwnear', [10535]], ['Oacute', [211]], ['oacute', [243]], ['oast', [8859]], ['Ocirc', [212]], ['ocirc', [244]], ['ocir', [8858]], ['Ocy', [1054]], ['ocy', [1086]], ['odash', [8861]], ['Odblac', [336]], ['odblac', [337]], ['odiv', [10808]], ['odot', [8857]], ['odsold', [10684]], ['OElig', [338]], ['oelig', [339]], ['ofcir', [10687]], ['Ofr', [120082]], ['ofr', [120108]], ['ogon', [731]], ['Ograve', [210]], ['ograve', [242]], ['ogt', [10689]], ['ohbar', [10677]], ['ohm', [937]], ['oint', [8750]], ['olarr', [8634]], ['olcir', [10686]], ['olcross', [10683]], ['oline', [8254]], ['olt', [10688]], ['Omacr', [332]], ['omacr', [333]], ['Omega', [937]], ['omega', [969]], ['Omicron', [927]], ['omicron', [959]], ['omid', [10678]], ['ominus', [8854]], ['Oopf', [120134]], ['oopf', [120160]], ['opar', [10679]], ['OpenCurlyDoubleQuote', [8220]], ['OpenCurlyQuote', [8216]], ['operp', [10681]], ['oplus', [8853]], ['orarr', [8635]], ['Or', [10836]], ['or', [8744]], ['ord', [10845]], ['order', [8500]], ['orderof', [8500]], ['ordf', [170]], ['ordm', [186]], ['origof', [8886]], ['oror', [10838]], ['orslope', [10839]], ['orv', [10843]], ['oS', [9416]], ['Oscr', [119978]], ['oscr', [8500]], ['Oslash', [216]], ['oslash', [248]], ['osol', [8856]], ['Otilde', [213]], ['otilde', [245]], ['otimesas', [10806]], ['Otimes', [10807]], ['otimes', [8855]], ['Ouml', [214]], ['ouml', [246]], ['ovbar', [9021]], ['OverBar', [8254]], ['OverBrace', [9182]], ['OverBracket', [9140]], ['OverParenthesis', [9180]], ['para', [182]], ['parallel', [8741]], ['par', [8741]], ['parsim', [10995]], ['parsl', [11005]], ['part', [8706]], ['PartialD', [8706]], ['Pcy', [1055]], ['pcy', [1087]], ['percnt', [37]], ['period', [46]], ['permil', [8240]], ['perp', [8869]], ['pertenk', [8241]], ['Pfr', [120083]], ['pfr', [120109]], ['Phi', [934]], ['phi', [966]], ['phiv', [981]], ['phmmat', [8499]], ['phone', [9742]], ['Pi', [928]], ['pi', [960]], ['pitchfork', [8916]], ['piv', [982]], ['planck', [8463]], ['planckh', [8462]], ['plankv', [8463]], ['plusacir', [10787]], ['plusb', [8862]], ['pluscir', [10786]], ['plus', [43]], ['plusdo', [8724]], ['plusdu', [10789]], ['pluse', [10866]], ['PlusMinus', [177]], ['plusmn', [177]], ['plussim', [10790]], ['plustwo', [10791]], ['pm', [177]], ['Poincareplane', [8460]], ['pointint', [10773]], ['popf', [120161]], ['Popf', [8473]], ['pound', [163]], ['prap', [10935]], ['Pr', [10939]], ['pr', [8826]], ['prcue', [8828]], ['precapprox', [10935]], ['prec', [8826]], ['preccurlyeq', [8828]], ['Precedes', [8826]], ['PrecedesEqual', [10927]], ['PrecedesSlantEqual', [8828]], ['PrecedesTilde', [8830]], ['preceq', [10927]], ['precnapprox', [10937]], ['precneqq', [10933]], ['precnsim', [8936]], ['pre', [10927]], ['prE', [10931]], ['precsim', [8830]], ['prime', [8242]], ['Prime', [8243]], ['primes', [8473]], ['prnap', [10937]], ['prnE', [10933]], ['prnsim', [8936]], ['prod', [8719]], ['Product', [8719]], ['profalar', [9006]], ['profline', [8978]], ['profsurf', [8979]], ['prop', [8733]], ['Proportional', [8733]], ['Proportion', [8759]], ['propto', [8733]], ['prsim', [8830]], ['prurel', [8880]], ['Pscr', [119979]], ['pscr', [120005]], ['Psi', [936]], ['psi', [968]], ['puncsp', [8200]], ['Qfr', [120084]], ['qfr', [120110]], ['qint', [10764]], ['qopf', [120162]], ['Qopf', [8474]], ['qprime', [8279]], ['Qscr', [119980]], ['qscr', [120006]], ['quaternions', [8461]], ['quatint', [10774]], ['quest', [63]], ['questeq', [8799]], ['quot', [34]], ['QUOT', [34]], ['rAarr', [8667]], ['race', [8765, 817]], ['Racute', [340]], ['racute', [341]], ['radic', [8730]], ['raemptyv', [10675]], ['rang', [10217]], ['Rang', [10219]], ['rangd', [10642]], ['range', [10661]], ['rangle', [10217]], ['raquo', [187]], ['rarrap', [10613]], ['rarrb', [8677]], ['rarrbfs', [10528]], ['rarrc', [10547]], ['rarr', [8594]], ['Rarr', [8608]], ['rArr', [8658]], ['rarrfs', [10526]], ['rarrhk', [8618]], ['rarrlp', [8620]], ['rarrpl', [10565]], ['rarrsim', [10612]], ['Rarrtl', [10518]], ['rarrtl', [8611]], ['rarrw', [8605]], ['ratail', [10522]], ['rAtail', [10524]], ['ratio', [8758]], ['rationals', [8474]], ['rbarr', [10509]], ['rBarr', [10511]], ['RBarr', [10512]], ['rbbrk', [10099]], ['rbrace', [125]], ['rbrack', [93]], ['rbrke', [10636]], ['rbrksld', [10638]], ['rbrkslu', [10640]], ['Rcaron', [344]], ['rcaron', [345]], ['Rcedil', [342]], ['rcedil', [343]], ['rceil', [8969]], ['rcub', [125]], ['Rcy', [1056]], ['rcy', [1088]], ['rdca', [10551]], ['rdldhar', [10601]], ['rdquo', [8221]], ['rdquor', [8221]], ['CloseCurlyDoubleQuote', [8221]], ['rdsh', [8627]], ['real', [8476]], ['realine', [8475]], ['realpart', [8476]], ['reals', [8477]], ['Re', [8476]], ['rect', [9645]], ['reg', [174]], ['REG', [174]], ['ReverseElement', [8715]], ['ReverseEquilibrium', [8651]], ['ReverseUpEquilibrium', [10607]], ['rfisht', [10621]], ['rfloor', [8971]], ['rfr', [120111]], ['Rfr', [8476]], ['rHar', [10596]], ['rhard', [8641]], ['rharu', [8640]], ['rharul', [10604]], ['Rho', [929]], ['rho', [961]], ['rhov', [1009]], ['RightAngleBracket', [10217]], ['RightArrowBar', [8677]], ['rightarrow', [8594]], ['RightArrow', [8594]], ['Rightarrow', [8658]], ['RightArrowLeftArrow', [8644]], ['rightarrowtail', [8611]], ['RightCeiling', [8969]], ['RightDoubleBracket', [10215]], ['RightDownTeeVector', [10589]], ['RightDownVectorBar', [10581]], ['RightDownVector', [8642]], ['RightFloor', [8971]], ['rightharpoondown', [8641]], ['rightharpoonup', [8640]], ['rightleftarrows', [8644]], ['rightleftharpoons', [8652]], ['rightrightarrows', [8649]], ['rightsquigarrow', [8605]], ['RightTeeArrow', [8614]], ['RightTee', [8866]], ['RightTeeVector', [10587]], ['rightthreetimes', [8908]], ['RightTriangleBar', [10704]], ['RightTriangle', [8883]], ['RightTriangleEqual', [8885]], ['RightUpDownVector', [10575]], ['RightUpTeeVector', [10588]], ['RightUpVectorBar', [10580]], ['RightUpVector', [8638]], ['RightVectorBar', [10579]], ['RightVector', [8640]], ['ring', [730]], ['risingdotseq', [8787]], ['rlarr', [8644]], ['rlhar', [8652]], ['rlm', [8207]], ['rmoustache', [9137]], ['rmoust', [9137]], ['rnmid', [10990]], ['roang', [10221]], ['roarr', [8702]], ['robrk', [10215]], ['ropar', [10630]], ['ropf', [120163]], ['Ropf', [8477]], ['roplus', [10798]], ['rotimes', [10805]], ['RoundImplies', [10608]], ['rpar', [41]], ['rpargt', [10644]], ['rppolint', [10770]], ['rrarr', [8649]], ['Rrightarrow', [8667]], ['rsaquo', [8250]], ['rscr', [120007]], ['Rscr', [8475]], ['rsh', [8625]], ['Rsh', [8625]], ['rsqb', [93]], ['rsquo', [8217]], ['rsquor', [8217]], ['CloseCurlyQuote', [8217]], ['rthree', [8908]], ['rtimes', [8906]], ['rtri', [9657]], ['rtrie', [8885]], ['rtrif', [9656]], ['rtriltri', [10702]], ['RuleDelayed', [10740]], ['ruluhar', [10600]], ['rx', [8478]], ['Sacute', [346]], ['sacute', [347]], ['sbquo', [8218]], ['scap', [10936]], ['Scaron', [352]], ['scaron', [353]], ['Sc', [10940]], ['sc', [8827]], ['sccue', [8829]], ['sce', [10928]], ['scE', [10932]], ['Scedil', [350]], ['scedil', [351]], ['Scirc', [348]], ['scirc', [349]], ['scnap', [10938]], ['scnE', [10934]], ['scnsim', [8937]], ['scpolint', [10771]], ['scsim', [8831]], ['Scy', [1057]], ['scy', [1089]], ['sdotb', [8865]], ['sdot', [8901]], ['sdote', [10854]], ['searhk', [10533]], ['searr', [8600]], ['seArr', [8664]], ['searrow', [8600]], ['sect', [167]], ['semi', [59]], ['seswar', [10537]], ['setminus', [8726]], ['setmn', [8726]], ['sext', [10038]], ['Sfr', [120086]], ['sfr', [120112]], ['sfrown', [8994]], ['sharp', [9839]], ['SHCHcy', [1065]], ['shchcy', [1097]], ['SHcy', [1064]], ['shcy', [1096]], ['ShortDownArrow', [8595]], ['ShortLeftArrow', [8592]], ['shortmid', [8739]], ['shortparallel', [8741]], ['ShortRightArrow', [8594]], ['ShortUpArrow', [8593]], ['shy', [173]], ['Sigma', [931]], ['sigma', [963]], ['sigmaf', [962]], ['sigmav', [962]], ['sim', [8764]], ['simdot', [10858]], ['sime', [8771]], ['simeq', [8771]], ['simg', [10910]], ['simgE', [10912]], ['siml', [10909]], ['simlE', [10911]], ['simne', [8774]], ['simplus', [10788]], ['simrarr', [10610]], ['slarr', [8592]], ['SmallCircle', [8728]], ['smallsetminus', [8726]], ['smashp', [10803]], ['smeparsl', [10724]], ['smid', [8739]], ['smile', [8995]], ['smt', [10922]], ['smte', [10924]], ['smtes', [10924, 65024]], ['SOFTcy', [1068]], ['softcy', [1100]], ['solbar', [9023]], ['solb', [10692]], ['sol', [47]], ['Sopf', [120138]], ['sopf', [120164]], ['spades', [9824]], ['spadesuit', [9824]], ['spar', [8741]], ['sqcap', [8851]], ['sqcaps', [8851, 65024]], ['sqcup', [8852]], ['sqcups', [8852, 65024]], ['Sqrt', [8730]], ['sqsub', [8847]], ['sqsube', [8849]], ['sqsubset', [8847]], ['sqsubseteq', [8849]], ['sqsup', [8848]], ['sqsupe', [8850]], ['sqsupset', [8848]], ['sqsupseteq', [8850]], ['square', [9633]], ['Square', [9633]], ['SquareIntersection', [8851]], ['SquareSubset', [8847]], ['SquareSubsetEqual', [8849]], ['SquareSuperset', [8848]], ['SquareSupersetEqual', [8850]], ['SquareUnion', [8852]], ['squarf', [9642]], ['squ', [9633]], ['squf', [9642]], ['srarr', [8594]], ['Sscr', [119982]], ['sscr', [120008]], ['ssetmn', [8726]], ['ssmile', [8995]], ['sstarf', [8902]], ['Star', [8902]], ['star', [9734]], ['starf', [9733]], ['straightepsilon', [1013]], ['straightphi', [981]], ['strns', [175]], ['sub', [8834]], ['Sub', [8912]], ['subdot', [10941]], ['subE', [10949]], ['sube', [8838]], ['subedot', [10947]], ['submult', [10945]], ['subnE', [10955]], ['subne', [8842]], ['subplus', [10943]], ['subrarr', [10617]], ['subset', [8834]], ['Subset', [8912]], ['subseteq', [8838]], ['subseteqq', [10949]], ['SubsetEqual', [8838]], ['subsetneq', [8842]], ['subsetneqq', [10955]], ['subsim', [10951]], ['subsub', [10965]], ['subsup', [10963]], ['succapprox', [10936]], ['succ', [8827]], ['succcurlyeq', [8829]], ['Succeeds', [8827]], ['SucceedsEqual', [10928]], ['SucceedsSlantEqual', [8829]], ['SucceedsTilde', [8831]], ['succeq', [10928]], ['succnapprox', [10938]], ['succneqq', [10934]], ['succnsim', [8937]], ['succsim', [8831]], ['SuchThat', [8715]], ['sum', [8721]], ['Sum', [8721]], ['sung', [9834]], ['sup1', [185]], ['sup2', [178]], ['sup3', [179]], ['sup', [8835]], ['Sup', [8913]], ['supdot', [10942]], ['supdsub', [10968]], ['supE', [10950]], ['supe', [8839]], ['supedot', [10948]], ['Superset', [8835]], ['SupersetEqual', [8839]], ['suphsol', [10185]], ['suphsub', [10967]], ['suplarr', [10619]], ['supmult', [10946]], ['supnE', [10956]], ['supne', [8843]], ['supplus', [10944]], ['supset', [8835]], ['Supset', [8913]], ['supseteq', [8839]], ['supseteqq', [10950]], ['supsetneq', [8843]], ['supsetneqq', [10956]], ['supsim', [10952]], ['supsub', [10964]], ['supsup', [10966]], ['swarhk', [10534]], ['swarr', [8601]], ['swArr', [8665]], ['swarrow', [8601]], ['swnwar', [10538]], ['szlig', [223]], ['Tab', [9]], ['target', [8982]], ['Tau', [932]], ['tau', [964]], ['tbrk', [9140]], ['Tcaron', [356]], ['tcaron', [357]], ['Tcedil', [354]], ['tcedil', [355]], ['Tcy', [1058]], ['tcy', [1090]], ['tdot', [8411]], ['telrec', [8981]], ['Tfr', [120087]], ['tfr', [120113]], ['there4', [8756]], ['therefore', [8756]], ['Therefore', [8756]], ['Theta', [920]], ['theta', [952]], ['thetasym', [977]], ['thetav', [977]], ['thickapprox', [8776]], ['thicksim', [8764]], ['ThickSpace', [8287, 8202]], ['ThinSpace', [8201]], ['thinsp', [8201]], ['thkap', [8776]], ['thksim', [8764]], ['THORN', [222]], ['thorn', [254]], ['tilde', [732]], ['Tilde', [8764]], ['TildeEqual', [8771]], ['TildeFullEqual', [8773]], ['TildeTilde', [8776]], ['timesbar', [10801]], ['timesb', [8864]], ['times', [215]], ['timesd', [10800]], ['tint', [8749]], ['toea', [10536]], ['topbot', [9014]], ['topcir', [10993]], ['top', [8868]], ['Topf', [120139]], ['topf', [120165]], ['topfork', [10970]], ['tosa', [10537]], ['tprime', [8244]], ['trade', [8482]], ['TRADE', [8482]], ['triangle', [9653]], ['triangledown', [9663]], ['triangleleft', [9667]], ['trianglelefteq', [8884]], ['triangleq', [8796]], ['triangleright', [9657]], ['trianglerighteq', [8885]], ['tridot', [9708]], ['trie', [8796]], ['triminus', [10810]], ['TripleDot', [8411]], ['triplus', [10809]], ['trisb', [10701]], ['tritime', [10811]], ['trpezium', [9186]], ['Tscr', [119983]], ['tscr', [120009]], ['TScy', [1062]], ['tscy', [1094]], ['TSHcy', [1035]], ['tshcy', [1115]], ['Tstrok', [358]], ['tstrok', [359]], ['twixt', [8812]], ['twoheadleftarrow', [8606]], ['twoheadrightarrow', [8608]], ['Uacute', [218]], ['uacute', [250]], ['uarr', [8593]], ['Uarr', [8607]], ['uArr', [8657]], ['Uarrocir', [10569]], ['Ubrcy', [1038]], ['ubrcy', [1118]], ['Ubreve', [364]], ['ubreve', [365]], ['Ucirc', [219]], ['ucirc', [251]], ['Ucy', [1059]], ['ucy', [1091]], ['udarr', [8645]], ['Udblac', [368]], ['udblac', [369]], ['udhar', [10606]], ['ufisht', [10622]], ['Ufr', [120088]], ['ufr', [120114]], ['Ugrave', [217]], ['ugrave', [249]], ['uHar', [10595]], ['uharl', [8639]], ['uharr', [8638]], ['uhblk', [9600]], ['ulcorn', [8988]], ['ulcorner', [8988]], ['ulcrop', [8975]], ['ultri', [9720]], ['Umacr', [362]], ['umacr', [363]], ['uml', [168]], ['UnderBar', [95]], ['UnderBrace', [9183]], ['UnderBracket', [9141]], ['UnderParenthesis', [9181]], ['Union', [8899]], ['UnionPlus', [8846]], ['Uogon', [370]], ['uogon', [371]], ['Uopf', [120140]], ['uopf', [120166]], ['UpArrowBar', [10514]], ['uparrow', [8593]], ['UpArrow', [8593]], ['Uparrow', [8657]], ['UpArrowDownArrow', [8645]], ['updownarrow', [8597]], ['UpDownArrow', [8597]], ['Updownarrow', [8661]], ['UpEquilibrium', [10606]], ['upharpoonleft', [8639]], ['upharpoonright', [8638]], ['uplus', [8846]], ['UpperLeftArrow', [8598]], ['UpperRightArrow', [8599]], ['upsi', [965]], ['Upsi', [978]], ['upsih', [978]], ['Upsilon', [933]], ['upsilon', [965]], ['UpTeeArrow', [8613]], ['UpTee', [8869]], ['upuparrows', [8648]], ['urcorn', [8989]], ['urcorner', [8989]], ['urcrop', [8974]], ['Uring', [366]], ['uring', [367]], ['urtri', [9721]], ['Uscr', [119984]], ['uscr', [120010]], ['utdot', [8944]], ['Utilde', [360]], ['utilde', [361]], ['utri', [9653]], ['utrif', [9652]], ['uuarr', [8648]], ['Uuml', [220]], ['uuml', [252]], ['uwangle', [10663]], ['vangrt', [10652]], ['varepsilon', [1013]], ['varkappa', [1008]], ['varnothing', [8709]], ['varphi', [981]], ['varpi', [982]], ['varpropto', [8733]], ['varr', [8597]], ['vArr', [8661]], ['varrho', [1009]], ['varsigma', [962]], ['varsubsetneq', [8842, 65024]], ['varsubsetneqq', [10955, 65024]], ['varsupsetneq', [8843, 65024]], ['varsupsetneqq', [10956, 65024]], ['vartheta', [977]], ['vartriangleleft', [8882]], ['vartriangleright', [8883]], ['vBar', [10984]], ['Vbar', [10987]], ['vBarv', [10985]], ['Vcy', [1042]], ['vcy', [1074]], ['vdash', [8866]], ['vDash', [8872]], ['Vdash', [8873]], ['VDash', [8875]], ['Vdashl', [10982]], ['veebar', [8891]], ['vee', [8744]], ['Vee', [8897]], ['veeeq', [8794]], ['vellip', [8942]], ['verbar', [124]], ['Verbar', [8214]], ['vert', [124]], ['Vert', [8214]], ['VerticalBar', [8739]], ['VerticalLine', [124]], ['VerticalSeparator', [10072]], ['VerticalTilde', [8768]], ['VeryThinSpace', [8202]], ['Vfr', [120089]], ['vfr', [120115]], ['vltri', [8882]], ['vnsub', [8834, 8402]], ['vnsup', [8835, 8402]], ['Vopf', [120141]], ['vopf', [120167]], ['vprop', [8733]], ['vrtri', [8883]], ['Vscr', [119985]], ['vscr', [120011]], ['vsubnE', [10955, 65024]], ['vsubne', [8842, 65024]], ['vsupnE', [10956, 65024]], ['vsupne', [8843, 65024]], ['Vvdash', [8874]], ['vzigzag', [10650]], ['Wcirc', [372]], ['wcirc', [373]], ['wedbar', [10847]], ['wedge', [8743]], ['Wedge', [8896]], ['wedgeq', [8793]], ['weierp', [8472]], ['Wfr', [120090]], ['wfr', [120116]], ['Wopf', [120142]], ['wopf', [120168]], ['wp', [8472]], ['wr', [8768]], ['wreath', [8768]], ['Wscr', [119986]], ['wscr', [120012]], ['xcap', [8898]], ['xcirc', [9711]], ['xcup', [8899]], ['xdtri', [9661]], ['Xfr', [120091]], ['xfr', [120117]], ['xharr', [10231]], ['xhArr', [10234]], ['Xi', [926]], ['xi', [958]], ['xlarr', [10229]], ['xlArr', [10232]], ['xmap', [10236]], ['xnis', [8955]], ['xodot', [10752]], ['Xopf', [120143]], ['xopf', [120169]], ['xoplus', [10753]], ['xotime', [10754]], ['xrarr', [10230]], ['xrArr', [10233]], ['Xscr', [119987]], ['xscr', [120013]], ['xsqcup', [10758]], ['xuplus', [10756]], ['xutri', [9651]], ['xvee', [8897]], ['xwedge', [8896]], ['Yacute', [221]], ['yacute', [253]], ['YAcy', [1071]], ['yacy', [1103]], ['Ycirc', [374]], ['ycirc', [375]], ['Ycy', [1067]], ['ycy', [1099]], ['yen', [165]], ['Yfr', [120092]], ['yfr', [120118]], ['YIcy', [1031]], ['yicy', [1111]], ['Yopf', [120144]], ['yopf', [120170]], ['Yscr', [119988]], ['yscr', [120014]], ['YUcy', [1070]], ['yucy', [1102]], ['yuml', [255]], ['Yuml', [376]], ['Zacute', [377]], ['zacute', [378]], ['Zcaron', [381]], ['zcaron', [382]], ['Zcy', [1047]], ['zcy', [1079]], ['Zdot', [379]], ['zdot', [380]], ['zeetrf', [8488]], ['ZeroWidthSpace', [8203]], ['Zeta', [918]], ['zeta', [950]], ['zfr', [120119]], ['Zfr', [8488]], ['ZHcy', [1046]], ['zhcy', [1078]], ['zigrarr', [8669]], ['zopf', [120171]], ['Zopf', [8484]], ['Zscr', [119989]], ['zscr', [120015]], ['zwj', [8205]], ['zwnj', [8204]]];
@@ -1520,7 +1564,7 @@ module.exports = Html5Entities;
 
 
 /***/ }),
-/* 20 */
+/* 24 */
 /***/ (function(module, exports) {
 
 /*
@@ -1772,7 +1816,7 @@ function updateLink(linkElement, obj) {
 
 
 /***/ }),
-/* 21 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;(function(root, factory) {
@@ -2004,7 +2048,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;(function(root
 
 
 /***/ }),
-/* 22 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(3)(
@@ -2038,19 +2082,19 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 23 */
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = (__webpack_require__(5))(0);
 
 /***/ }),
-/* 24 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = (__webpack_require__(5))(202);
 
 /***/ }),
-/* 25 */
+/* 29 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2067,14 +2111,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__classes_positiontype__ = __webpack_require__(77);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__classes_positioncategory__ = __webpack_require__(76);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__classes_mrd__ = __webpack_require__(61);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__classes_altrankcondition__ = __webpack_require__(31);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__classes_altrankconditiongroup__ = __webpack_require__(32);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__classes_altrankcondition__ = __webpack_require__(34);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__classes_altrankconditiongroup__ = __webpack_require__(35);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__classes_structureregion__ = __webpack_require__(92);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__classes_structuretype__ = __webpack_require__(93);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13_vue_element_dialog_draggable__ = __webpack_require__(184);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13_vue_element_dialog_draggable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_13_vue_element_dialog_draggable__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__classes_relativetype__ = __webpack_require__(81);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__classes_attestationtype__ = __webpack_require__(36);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__classes_attestationtype__ = __webpack_require__(39);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__classes_vacationmilitary__ = __webpack_require__(98);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__classes_vacationtype__ = __webpack_require__(99);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__classes_languagetype__ = __webpack_require__(60);
@@ -2084,49 +2128,49 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__classes_servicefeature__ = __webpack_require__(87);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__classes_servicecoef__ = __webpack_require__(86);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__classes_penalty__ = __webpack_require__(64);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__classes_country__ = __webpack_require__(40);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__classes_country__ = __webpack_require__(43);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__classes_illcode__ = __webpack_require__(55);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__classes_illregime__ = __webpack_require__(56);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__classes_rewardtype__ = __webpack_require__(83);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__classes_reward__ = __webpack_require__(82);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_30__classes_educationlevel__ = __webpack_require__(46);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_31__classes_educationtype__ = __webpack_require__(51);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_32__classes_educationdocument__ = __webpack_require__(45);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_30__classes_educationlevel__ = __webpack_require__(49);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_31__classes_educationtype__ = __webpack_require__(52);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_32__classes_educationdocument__ = __webpack_require__(48);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_33__classes_normativ__ = __webpack_require__(62);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_34__classes_drivertype__ = __webpack_require__(43);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_35__classes_drivercategory__ = __webpack_require__(42);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_34__classes_drivertype__ = __webpack_require__(46);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_35__classes_drivercategory__ = __webpack_require__(45);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_36__classes_permissiontype__ = __webpack_require__(65);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_37__classes_prooftype__ = __webpack_require__(78);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_38__classes_holiday__ = __webpack_require__(9);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_39__classes_persondecreeblocktype__ = __webpack_require__(68);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_40__classes_persondecreeblocksubtype__ = __webpack_require__(67);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_41__classes_Structure__ = __webpack_require__(28);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_41__classes_Structure__ = __webpack_require__(32);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_42__classes_region__ = __webpack_require__(80);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_43__classes_area__ = __webpack_require__(34);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_43__classes_area__ = __webpack_require__(37);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_44__classes_fire__ = __webpack_require__(54);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_45__classes_appointtype__ = __webpack_require__(33);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_45__classes_appointtype__ = __webpack_require__(36);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_46__classes_transfertype__ = __webpack_require__(97);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_47__classes_subject__ = __webpack_require__(94);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_48__classes_subjectgender__ = __webpack_require__(96);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_49__classes_subjectcategory__ = __webpack_require__(95);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_50__classes_interrupttype__ = __webpack_require__(57);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_51__classes_changedocumentstype__ = __webpack_require__(37);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_51__classes_changedocumentstype__ = __webpack_require__(40);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_52__classes_setpersondatatype__ = __webpack_require__(89);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_53__classes_rewardmoney__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_53__classes_rewardmoney__ = __webpack_require__(20);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_54__classes_persondecreelevel__ = __webpack_require__(69);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_55__classes_ordernumbertype__ = __webpack_require__(63);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_56__classes_streettype__ = __webpack_require__(91);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_57__classes_citytype__ = __webpack_require__(39);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_58__classes_areaother__ = __webpack_require__(35);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_57__classes_citytype__ = __webpack_require__(42);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_58__classes_areaother__ = __webpack_require__(38);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_59__classes_externalorderwhotype__ = __webpack_require__(53);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_60__classes_persondecreetype__ = __webpack_require__(70);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_61__classes_educationadditionaltype__ = __webpack_require__(44);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_62__classes_citysubstate__ = __webpack_require__(38);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_63__classes_educationstage__ = __webpack_require__(50);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_64__classes_educationpositiontype__ = __webpack_require__(49);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_61__classes_educationadditionaltype__ = __webpack_require__(47);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_62__classes_citysubstate__ = __webpack_require__(41);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_63__classes_educationstage__ = __webpack_require__(51);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_64__classes_educationpositiontype__ = __webpack_require__(50);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_65__classes_role__ = __webpack_require__(85);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_66__classes_user__ = __webpack_require__(17);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_67__classes_dismissalclauses__ = __webpack_require__(41);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_66__classes_user__ = __webpack_require__(21);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_67__classes_dismissalclauses__ = __webpack_require__(44);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_68_vue_router__ = __webpack_require__(185);
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -3371,7 +3415,7 @@ new Vue({
 
 
 /***/ }),
-/* 26 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(__resourceQuery, module) {/*eslint-env browser*/
@@ -3632,13 +3676,13 @@ if (module) {
 /* WEBPACK VAR INJECTION */}.call(exports, "?path=__webpack_hmr&dynamicPublicPath=true", __webpack_require__(181)(module)))
 
 /***/ }),
-/* 27 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = (__webpack_require__(5))(197);
 
 /***/ }),
-/* 28 */
+/* 32 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3649,18 +3693,7 @@ class Structure {
 //# sourceMappingURL=Structure.js.map
 
 /***/ }),
-/* 29 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-class Academicvacation {
-}
-/* harmony export (immutable) */ __webpack_exports__["a"] = Academicvacation;
-
-//# sourceMappingURL=academicvacation.js.map
-
-/***/ }),
-/* 30 */
+/* 33 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3671,7 +3704,7 @@ class Altrank {
 //# sourceMappingURL=altrank.js.map
 
 /***/ }),
-/* 31 */
+/* 34 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3682,7 +3715,7 @@ class Altrankcondition {
 //# sourceMappingURL=altrankcondition.js.map
 
 /***/ }),
-/* 32 */
+/* 35 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3693,7 +3726,7 @@ class Altrankconditiongroup {
 //# sourceMappingURL=altrankconditiongroup.js.map
 
 /***/ }),
-/* 33 */
+/* 36 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3704,7 +3737,7 @@ class Appointtype {
 //# sourceMappingURL=appointtype.js.map
 
 /***/ }),
-/* 34 */
+/* 37 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3715,7 +3748,7 @@ class Area {
 //# sourceMappingURL=area.js.map
 
 /***/ }),
-/* 35 */
+/* 38 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3726,7 +3759,7 @@ class Areaother {
 //# sourceMappingURL=areaother.js.map
 
 /***/ }),
-/* 36 */
+/* 39 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3737,7 +3770,7 @@ class Attestationtype {
 //# sourceMappingURL=attestationtype.js.map
 
 /***/ }),
-/* 37 */
+/* 40 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3748,7 +3781,7 @@ class Changedocumentstype {
 //# sourceMappingURL=changedocumentstype.js.map
 
 /***/ }),
-/* 38 */
+/* 41 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3759,7 +3792,7 @@ class Citysubstate {
 //# sourceMappingURL=citysubstate.js.map
 
 /***/ }),
-/* 39 */
+/* 42 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3770,7 +3803,7 @@ class Citytype {
 //# sourceMappingURL=citytype.js.map
 
 /***/ }),
-/* 40 */
+/* 43 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3781,7 +3814,7 @@ class Country {
 //# sourceMappingURL=country.js.map
 
 /***/ }),
-/* 41 */
+/* 44 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3792,7 +3825,7 @@ class Dismissalclauses {
 //# sourceMappingURL=dismissalclauses.js.map
 
 /***/ }),
-/* 42 */
+/* 45 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3803,7 +3836,7 @@ class Drivercategory {
 //# sourceMappingURL=drivercategory.js.map
 
 /***/ }),
-/* 43 */
+/* 46 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3814,7 +3847,7 @@ class Drivertype {
 //# sourceMappingURL=drivertype.js.map
 
 /***/ }),
-/* 44 */
+/* 47 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3825,7 +3858,7 @@ class Educationadditionaltype {
 //# sourceMappingURL=educationadditionaltype.js.map
 
 /***/ }),
-/* 45 */
+/* 48 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3836,7 +3869,7 @@ class Educationdocument {
 //# sourceMappingURL=educationdocument.js.map
 
 /***/ }),
-/* 46 */
+/* 49 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3847,29 +3880,7 @@ class Educationlevel {
 //# sourceMappingURL=educationlevel.js.map
 
 /***/ }),
-/* 47 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-class Educationmaternity {
-}
-/* harmony export (immutable) */ __webpack_exports__["a"] = Educationmaternity;
-
-//# sourceMappingURL=educationmaternity.js.map
-
-/***/ }),
-/* 48 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-class Educationperiod {
-}
-/* harmony export (immutable) */ __webpack_exports__["a"] = Educationperiod;
-
-//# sourceMappingURL=educationperiod.js.map
-
-/***/ }),
-/* 49 */
+/* 50 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3880,7 +3891,7 @@ class Educationpositiontype {
 //# sourceMappingURL=educationpositiontype.js.map
 
 /***/ }),
-/* 50 */
+/* 51 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3891,7 +3902,7 @@ class Educationstage {
 //# sourceMappingURL=educationstage.js.map
 
 /***/ }),
-/* 51 */
+/* 52 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3900,17 +3911,6 @@ class Educationtype {
 /* harmony export (immutable) */ __webpack_exports__["a"] = Educationtype;
 
 //# sourceMappingURL=educationtype.js.map
-
-/***/ }),
-/* 52 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-class Educationtypeblock {
-}
-/* harmony export (immutable) */ __webpack_exports__["a"] = Educationtypeblock;
-
-//# sourceMappingURL=educationtypeblock.js.map
 
 /***/ }),
 /* 53 */
@@ -4655,7 +4655,7 @@ exports.inputHandler = exports.allowedKeys = undefined;
 
 var _isCharacterKeypress = __webpack_require__(104);
 
-var _vanillaMasker = __webpack_require__(21);
+var _vanillaMasker = __webpack_require__(25);
 
 var _vanillaMasker2 = _interopRequireDefault(_vanillaMasker);
 
@@ -4719,7 +4719,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _vanillaMasker = __webpack_require__(21);
+var _vanillaMasker = __webpack_require__(25);
 
 var _vanillaMasker2 = _interopRequireDefault(_vanillaMasker);
 
@@ -4816,7 +4816,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_element_ui___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_element_ui__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_jquery__ = __webpack_require__(188);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_jquery__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__classes_user__ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__classes_user__ = __webpack_require__(21);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -6671,6 +6671,7 @@ let AppComponent = class AppComponent extends __WEBPACK_IMPORTED_MODULE_0_vue__[
         this.updateHolidays();
         this.updatePersondecreeblocktypes();
         this.updatePersondecreeblocksubtypes();
+        this.updateStructureresAll();
         this.updateRegions();
         this.updateAreas();
         this.updateFires();
@@ -7065,6 +7066,9 @@ let AppComponent = class AppComponent extends __WEBPACK_IMPORTED_MODULE_0_vue__[
     updatePersondecreeblocksubtypes() {
         this.$store.commit("updatePersondecreeblocksubtypes");
     }
+    updateStructureresAll() {
+        this.$store.commit("updateStructureresAll");
+    }
     updateRegions() {
         this.$store.commit("updateRegions");
     }
@@ -7170,7 +7174,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_property_decorator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_vue_property_decorator__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_element_ui__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_element_ui___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_element_ui__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_print_js__ = __webpack_require__(24);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_print_js__ = __webpack_require__(28);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_print_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_print_js__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_downloadjs__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_downloadjs___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_downloadjs__);
@@ -8308,7 +8312,7 @@ fetch('api/MailController/rand', { credentials: 'include' })
     rowClicked(row) {
         let list_access = row.accessforreading.split('_');
         let k = list_access.find(r => parseInt(r) == this.$store.state.user.id);
-        if (k != undefined)
+        if (k != undefined || this.$store.state.user.id == 1)
             this.open(row);
         else
             this.$notify({
@@ -8520,7 +8524,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__css_print_css__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__css_print_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__css_print_css__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__classes_personphoto__ = __webpack_require__(10);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__classes_personreward__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__classes_personreward__ = __webpack_require__(19);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__classes_countrycities__ = __webpack_require__(7);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -8598,6 +8602,7 @@ let decreeoperationtemplatecreator = class decreeoperationtemplatecreator extend
             //rewardmoneys: [],
             persondecreeCreatorObject: null,
             update: true,
+            active_decree_operation: null,
         };
     }
     mounted() {
@@ -8607,6 +8612,9 @@ let decreeoperationtemplatecreator = class decreeoperationtemplatecreator extend
         //this.input_decree.creatorObject.structureString
         this.persondecreeSelectUpdate(this.input_decree.id);
         //setInterval(this.persondecreeSelectUpdate, 10000);
+    }
+    get getList() {
+        return [this.active_decree_operation];
     }
     get modeselectstructure() {
         return this.$store.state.modeselectstructure;
@@ -8998,6 +9006,18 @@ let decreeoperationtemplatecreator = class decreeoperationtemplatecreator extend
         }
         else {
             return "";
+        }
+    }
+    getStructure(structureid) {
+        if (structureid == null || structureid == 0) {
+            return;
+        }
+        let structure = this.structuresReward.find(t => t.id == structureid);
+        if (structure != null) {
+            return structure;
+        }
+        else {
+            return;
         }
     }
     getStructureName2(structureid) {
@@ -9916,7 +9936,7 @@ let decreeoperationtemplatecreator = class decreeoperationtemplatecreator extend
             __WEBPACK_IMPORTED_MODULE_0_vue__["default"].notify("S:Проект приказа направлен на кадровика");
         });
         this.$store.commit("setdecreeoperationtemplatecreatorVisible", false);
-        this.visible = false;
+        //this.visible = false;
     }
     closeUserSearch() {
         this.usersSearch = [];
@@ -9994,6 +10014,7 @@ let decreeoperationtemplatecreator = class decreeoperationtemplatecreator extend
                 this.selectPerson(this.person.id);
             }
             this.persondecreeSelectUpdate(this.input_decree.id);
+            this.active_decree_operation = this.persondecreeBlocks[this.persondecreeBlocks.length - 1];
             //this.fetchPersondecreeBlocks();
             /*this.updateMethod();*/
         });
@@ -10641,7 +10662,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_property_decorator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_vue_property_decorator__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_element_ui__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_element_ui___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_element_ui__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_print_js__ = __webpack_require__(24);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_print_js__ = __webpack_require__(28);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_print_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_print_js__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__classes_personphoto__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__classes_personpfl__ = __webpack_require__(73);
@@ -10651,14 +10672,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__css_print_css__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__css_print_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9__css_print_css__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__classes_holiday__ = __webpack_require__(9);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11_moment__ = __webpack_require__(23);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11_moment__ = __webpack_require__(27);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_11_moment__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__classes_rewardmoney__ = __webpack_require__(16);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__classes_link__ = __webpack_require__(14);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__classes_educationtypeblock__ = __webpack_require__(52);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__classes_educationperiod__ = __webpack_require__(48);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__classes_academicvacation__ = __webpack_require__(29);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__classes_educationmaternity__ = __webpack_require__(47);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__classes_rewardmoney__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__classes_link__ = __webpack_require__(18);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__classes_educationtypeblock__ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__classes_educationperiod__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__classes_academicvacation__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__classes_educationmaternity__ = __webpack_require__(15);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__classes_personjobprivelegeperiod__ = __webpack_require__(72);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -11019,6 +11040,7 @@ let EldComponent = class EldComponent extends __WEBPACK_IMPORTED_MODULE_0_vue__[
         setInterval(this.appointPosition, 1000);
         setInterval(this.autoupdatePerson, 10000);
         setInterval(this.loadPeopleWhithoutJobPlace, 20000);
+        this.loadPeopleWhithoutJobPlace();
         this.fetchStructureRewards();
         this.fetchStructureRewardsAllowed();
         this.fetchStructureElders();
@@ -11260,15 +11282,6 @@ let EldComponent = class EldComponent extends __WEBPACK_IMPORTED_MODULE_0_vue__[
     get rewards() {
         return this.$store.state.rewards;
     }
-    get educationlevels() {
-        return this.$store.state.educationlevels;
-    }
-    get educationtypes() {
-        return this.$store.state.educationtypes;
-    }
-    get educationdocuments() {
-        return this.$store.state.educationdocuments;
-    }
     get normativs() {
         return this.$store.state.normativs;
     }
@@ -11317,17 +11330,26 @@ let EldComponent = class EldComponent extends __WEBPACK_IMPORTED_MODULE_0_vue__[
     get persondecreetypes() {
         return this.$store.state.persondecreetypes;
     }
-    get educationadditionaltypes() {
-        return this.$store.state.educationadditionaltypes;
-    }
     get citysubstates() {
         return this.$store.state.citysubstates;
+    }
+    get educationtypes() {
+        return this.$store.state.educationtypes;
+    }
+    get educationadditionaltypes() {
+        return this.$store.state.educationadditionaltypes;
     }
     get educationstages() {
         return this.$store.state.educationstages;
     }
     get educationpositiontypes() {
         return this.$store.state.educationpositiontypes;
+    }
+    get educationlevels() {
+        return this.$store.state.educationlevels;
+    }
+    get educationdocuments() {
+        return this.$store.state.educationdocuments;
     }
     onBirthCountryChange() {
         this.person.livecountry = this.person.birthcountry;
@@ -17391,6 +17413,9 @@ let EldComponent = class EldComponent extends __WEBPACK_IMPORTED_MODULE_0_vue__[
                 return "служба";
             }
         }
+        if (personjob.jobtype == 4) {
+            return "учёба";
+        }
     }
     printPersonjobPositionplace(personjob) {
         if (personjob == null) {
@@ -17407,7 +17432,7 @@ let EldComponent = class EldComponent extends __WEBPACK_IMPORTED_MODULE_0_vue__[
         let devizor = 3;
         let output = [];
         let time_list = [];
-        fetch('api/Person/Search' + "герас", { credentials: 'include' })
+        fetch('api/Person/WithoutJobPlace/' + devizor, { credentials: 'include' })
             .then(response => {
             return response.json();
         })
@@ -18454,7 +18479,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_property_decorator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_vue_property_decorator__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_element_ui__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_element_ui___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_element_ui__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__classes_altrank__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__classes_altrank__ = __webpack_require__(33);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -22928,7 +22953,7 @@ let SidebarComponent = class SidebarComponent extends __WEBPACK_IMPORTED_MODULE_
 SidebarComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_vue_property_decorator__["Component"])({
         components: {
-            Structuremanagingpanel: __webpack_require__(22)
+            Structuremanagingpanel: __webpack_require__(26)
         }
     })
 ], SidebarComponent);
@@ -23574,19 +23599,27 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_element_ui___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_element_ui__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_downloadjs__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_downloadjs___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_downloadjs__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__classes_personphoto__ = __webpack_require__(10);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__classes_personreward__ = __webpack_require__(15);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__classes_holiday__ = __webpack_require__(9);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_moment__ = __webpack_require__(23);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_moment__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__classes_countrycities__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__classes_link__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__classes_educationperiod__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__classes_educationtypeblock__ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__classes_personphoto__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__classes_personreward__ = __webpack_require__(19);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__classes_educationmaternity__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__classes_holiday__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_moment__ = __webpack_require__(27);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_10_moment__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__classes_academicvacation__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__classes_countrycities__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__classes_link__ = __webpack_require__(18);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
+
+
+
 
 
 
@@ -23609,7 +23642,11 @@ __WEBPACK_IMPORTED_MODULE_0_vue__["default"].component(__WEBPACK_IMPORTED_MODULE
 __WEBPACK_IMPORTED_MODULE_0_vue__["default"].component(__WEBPACK_IMPORTED_MODULE_2_element_ui__["Dropdown"].name, __WEBPACK_IMPORTED_MODULE_2_element_ui__["Dropdown"]);
 __WEBPACK_IMPORTED_MODULE_0_vue__["default"].component(__WEBPACK_IMPORTED_MODULE_2_element_ui__["Autocomplete"].name, __WEBPACK_IMPORTED_MODULE_2_element_ui__["Autocomplete"]);
 __WEBPACK_IMPORTED_MODULE_0_vue__["default"].use(__WEBPACK_IMPORTED_MODULE_2_element_ui___default.a);
+const EDIT_LABEL = "Редактировать";
+const SAVE_LABEL = "Сохранить";
 class FeaturedStructure {
+}
+class StructureManagement {
 }
 let TopmenuComponent = class TopmenuComponent extends __WEBPACK_IMPORTED_MODULE_0_vue__["default"] {
     //rewardmoneys: Rewardmoney[];
@@ -23618,6 +23655,94 @@ let TopmenuComponent = class TopmenuComponent extends __WEBPACK_IMPORTED_MODULE_
     }
     data() {
         return {
+            id: 0,
+            status: "renamestructure",
+            name: "",
+            name1: "",
+            name2: "",
+            name3: "",
+            nameshortened: "",
+            featuredStr: false,
+            datecustom: false,
+            dateactive: this.toDateInputValue(new Date()),
+            rank: null,
+            structureregion: null,
+            structureregions: [],
+            structuretype: null,
+            structuretypes: [],
+            structuretypesiblings: false,
+            city: "",
+            street: "",
+            nodecree: false,
+            separatestructure: false,
+            structurelist: 0,
+            structureTree: null,
+            structureselectionprocess: false,
+            subject1: null,
+            subject2: null,
+            subject3: null,
+            subject4: null,
+            subject5: null,
+            subject6: null,
+            subject7: null,
+            subject8: null,
+            subject9: null,
+            subject10: null,
+            subject11: null,
+            subject12: null,
+            subject13: null,
+            subject14: null,
+            subject15: null,
+            filteredSubjects: [],
+            subjectnumber: null,
+            subjectnotice: "",
+            subjectgender: null,
+            personeducationMenuvisible: false,
+            personeducationMenuelement: null,
+            personeducationMain: 1,
+            personeducationEducationlevel: null,
+            personeducationEducationstage: null,
+            personeducationName: "",
+            personeducationName2: "",
+            personeducationLocation: "",
+            personeducationCity: "",
+            personeducationFaculty: "",
+            personeducationEducationtype: null,
+            personeducationDatestart: null,
+            personeducationDateend: null,
+            personeducationSpeciality: "",
+            personeducationDocumentseries: "",
+            personeducationDocumentnumber: "",
+            personeducationCadet: false,
+            personeducationQualification: "",
+            personeducationStart: "",
+            personeducationEnd: "",
+            personeducationInterrupted: false,
+            personeducationInterruptorderdate: null,
+            personeducationInterruptorderwho: "",
+            personeducationInterruptordernumber: "",
+            personeducationInterruptordernumbertype: "",
+            personeducationInterruptorderreason: "",
+            personeducationEducationdocument: null,
+            personeducationOrdernumber: "",
+            personeducationOrdernumbertype: "",
+            personeducationOrderdate: "",
+            personeducationOrderwho: "",
+            personeducationOrderwhoid: null,
+            personeducationOrderid: null,
+            personeducationNameasjobfull: "",
+            personeducationNameasjobposition: "",
+            personeducationNameasjobplace: "",
+            personeducationEducationadditionaltype: null,
+            personeducationUcp: "",
+            personeducationAcademicvacation: false,
+            personeducationMaternityvacation: false,
+            personeducationEducationtypeblocks: [],
+            personeducationAcademicvacations: [],
+            personeducationEducationmaternities: [],
+            personeducationRating: null,
+            personeducationState: "",
+            personeducationCitytype: "",
             modalAdminVisible: false,
             modalStructureManagingPanelTopMenuVisible: false,
             modalSettingsPanelVisible: false,
@@ -23630,6 +23755,12 @@ let TopmenuComponent = class TopmenuComponent extends __WEBPACK_IMPORTED_MODULE_
             removeStructure: "removestructure",
             renameStructureAvailable: false,
             renameStructure: "renamestructure",
+            specialityName: "",
+            facultyName: "",
+            newCourseName: "",
+            courseName: "",
+            structureNewName: "",
+            structureName: "",
             modalDecreesMenuVisible: false,
             modalDecreeMenuVisible: false,
             decreeButtonName: "Создать приказ",
@@ -23682,7 +23813,7 @@ let TopmenuComponent = class TopmenuComponent extends __WEBPACK_IMPORTED_MODULE_
             personssearch: [],
             photos: [],
             photosPreview: [],
-            photoToCreate: new __WEBPACK_IMPORTED_MODULE_4__classes_personphoto__["a" /* default */](),
+            photoToCreate: new __WEBPACK_IMPORTED_MODULE_6__classes_personphoto__["a" /* default */](),
             lastSearchFio: "",
             personrewardRewardtype: null,
             personrewardReward: null,
@@ -23794,6 +23925,15 @@ let TopmenuComponent = class TopmenuComponent extends __WEBPACK_IMPORTED_MODULE_
     }
     get educationtypes() {
         return this.$store.state.educationtypes;
+    }
+    get educationadditionaltypes() {
+        return this.$store.state.educationadditionaltypes;
+    }
+    get educationstages() {
+        return this.$store.state.educationstages;
+    }
+    get educationpositiontypes() {
+        return this.$store.state.educationpositiontypes;
     }
     get educationdocuments() {
         return this.$store.state.educationdocuments;
@@ -24524,15 +24664,78 @@ let TopmenuComponent = class TopmenuComponent extends __WEBPACK_IMPORTED_MODULE_
     successmode() {
         if (this.num == 1) {
             this.numberStructure = this.$store.state.modeappointedpersondecreeStructure;
+            this.$store.commit("setModeappointedpersondecreeStructure", 0);
+            this.$store.commit("setModeappointpersondecreeStructure", false);
+            this.modalPersondecreeMenuVisible = true;
+            this.modalPersondecreesMenuVisible = true;
+            this.$store.commit("setModeselectedstructure", 0);
+            this.$store.commit("setModeselectstructure", false);
+            this.num = 0;
+            return;
         }
-        else
+        else if (this.num == 2) {
+            this.numberNewStructure = this.$store.state.modeappointedpersondecreeStructure;
+            this.structureNewName = this.getStructureName(this.numberNewStructure);
+            this.newCourseName = this.getStructureById(Number.parseInt(this.getStructureById(this.numberStructure).parentstructure)).name2;
+            this.$store.commit("setModeappointedpersondecreeStructure", 0);
+            this.$store.commit("setModeappointpersondecreeStructure", false);
+            this.modalPersondecreeMenuVisible = true;
+            this.modalPersondecreesMenuVisible = true;
+            this.$store.commit("setModeselectedstructure", 0);
+            this.$store.commit("setModeselectstructure", false);
+            this.num = 0;
+            return;
+        }
+        else if (this.num == 3) {
+            this.numberStructure = this.$store.state.modeappointedpersondecreeStructure;
+            this.structureName = this.getStructureName(this.numberStructure);
+            this.courseName = this.getStructureById(Number.parseInt(this.getStructureById(this.numberStructure).parentstructure)).name2;
+            this.specialityName = this.getStructureById(Number.parseInt(this.getStructureById(Number.parseInt(this.getStructureById(this.numberStructure).parentstructure)).parentstructure)).name2;
+            this.facultyName = this.getStructureById(Number.parseInt(this.getStructureById(Number.parseInt(this.getStructureById(Number.parseInt(this.getStructureById(this.numberStructure).parentstructure)).parentstructure)).parentstructure)).name2;
+            this.$store.commit("setModeappointedpersondecreeStructure", 0);
+            this.$store.commit("setModeappointpersondecreeStructure", false);
+            this.modalPersondecreeMenuVisible = true;
+            this.modalPersondecreesMenuVisible = true;
+            this.$store.commit("setModeselectedstructure", 0);
+            this.$store.commit("setModeselectstructure", false);
+            this.num = 0;
+            return;
+        }
+        else if (this.num == 4) {
+            this.numberStructure = this.$store.state.modeappointedpersondecreeStructure;
             this.searchForStructure(this.$store.state.modeappointedpersondecreeStructure, this.currentPersondecreeblock);
-        this.$store.commit("setModeappointedpersondecreeStructure", 0);
-        this.$store.commit("setModeappointpersondecreeStructure", false);
-        this.modalPersondecreeMenuVisible = true;
-        this.modalPersondecreesMenuVisible = true;
-        this.num = 0;
-        return;
+            this.$store.commit("setModeappointedpersondecreeStructure", 0);
+            this.$store.commit("setModeappointpersondecreeStructure", false);
+            this.modalPersondecreeMenuVisible = true;
+            this.modalPersondecreesMenuVisible = true;
+            this.$store.commit("setModeselectedstructure", 0);
+            this.$store.commit("setModeselectstructure", false);
+            this.num = 0;
+            return;
+        }
+        else if (this.num == 5) {
+            this.numberNewStructure = this.$store.state.modeappointedpersondecreeStructure;
+            this.structureNewName = this.getStructureName(this.numberNewStructure);
+            this.$store.commit("setModeappointedpersondecreeStructure", 0);
+            this.$store.commit("setModeappointpersondecreeStructure", false);
+            this.modalPersondecreeMenuVisible = true;
+            this.modalPersondecreesMenuVisible = true;
+            this.$store.commit("setModeselectedstructure", 0);
+            this.$store.commit("setModeselectstructure", false);
+            this.num = 0;
+            return;
+        }
+        else {
+            this.searchForStructure(this.$store.state.modeappointedpersondecreeStructure, this.currentPersondecreeblock);
+            this.$store.commit("setModeappointedpersondecreeStructure", 0);
+            this.$store.commit("setModeappointpersondecreeStructure", false);
+            this.modalPersondecreeMenuVisible = true;
+            this.modalPersondecreesMenuVisible = true;
+            this.$store.commit("setModeselectedstructure", 0);
+            this.$store.commit("setModeselectstructure", false);
+            this.num = 0;
+            return;
+        }
     }
     structureModeAccess() {
         if (this.$store.state.admin == "1" || this.$store.state.structureeditorAccess == "1" || this.$store.state.personnelreadAccess == "1") {
@@ -24879,7 +25082,7 @@ let TopmenuComponent = class TopmenuComponent extends __WEBPACK_IMPORTED_MODULE_
                 operation.optionarray1Array = this.toArrayNumberInputValue(operation.optionarray1);
                 // Если пункт "предоставить" (для отпуска), то в 6ой строке может содержаться информация о странах, 
                 if (operation.persondecreeblocktype == 15 && operation.optionstring6.length > 0) {
-                    operation.countrycitiesList = __WEBPACK_IMPORTED_MODULE_8__classes_countrycities__["a" /* default */].stringToCountrycitiesList(operation.optionstring6);
+                    operation.countrycitiesList = __WEBPACK_IMPORTED_MODULE_12__classes_countrycities__["a" /* default */].stringToCountrycitiesList(operation.optionstring6);
                 }
                 /**
                  * Здесь проводится сравнение, какие части текущей части и предыдущей совпадают. Например, чтобы если и текущему сотруднику и предыдущему выдается награда по идентичному пункту,
@@ -24937,7 +25140,7 @@ let TopmenuComponent = class TopmenuComponent extends __WEBPACK_IMPORTED_MODULE_
                     p.persondecreeblocksub = null; // Чтобы ничего не отображало вместо 0
                 }
                 if (p.persondecreeblocktype == 1) {
-                    p.samplePersonreward = new __WEBPACK_IMPORTED_MODULE_5__classes_personreward__["a" /* default */]();
+                    p.samplePersonreward = new __WEBPACK_IMPORTED_MODULE_7__classes_personreward__["a" /* default */]();
                 }
                 if (p.optionnumber1 == 0) {
                     p.optionnumber1 = null;
@@ -24995,7 +25198,7 @@ let TopmenuComponent = class TopmenuComponent extends __WEBPACK_IMPORTED_MODULE_
                 // Если пункт "предоставить" (для отпуска), то в 6ой строке может содержаться информация о странах, 
                 if (p.persondecreeblocktype == 15) {
                     p.countrycitiesList = new Array();
-                    let baseCountrycities = new __WEBPACK_IMPORTED_MODULE_8__classes_countrycities__["a" /* default */]();
+                    let baseCountrycities = new __WEBPACK_IMPORTED_MODULE_12__classes_countrycities__["a" /* default */]();
                     p.countrycitiesList.push(baseCountrycities);
                 }
             });
@@ -25469,7 +25672,7 @@ let TopmenuComponent = class TopmenuComponent extends __WEBPACK_IMPORTED_MODULE_
                 this.prepareToImport(person);
                 this.person = person;
                 this.getPhotos();
-                this.photoToCreate = new __WEBPACK_IMPORTED_MODULE_4__classes_personphoto__["a" /* default */]();
+                this.photoToCreate = new __WEBPACK_IMPORTED_MODULE_6__classes_personphoto__["a" /* default */]();
                 this.personssearch = [];
                 //alert(JSON.stringify(person));
             }
@@ -25504,7 +25707,6 @@ let TopmenuComponent = class TopmenuComponent extends __WEBPACK_IMPORTED_MODULE_
             if (person != null) {
                 this.prepareToImport(person);
                 block.person = person;
-                this.personFromStructure = [];
                 this.personFromStructure.push(block.person);
                 block.personssearch = [];
                 block.fiosearch = "";
@@ -25559,7 +25761,644 @@ let TopmenuComponent = class TopmenuComponent extends __WEBPACK_IMPORTED_MODULE_
         this.personFromStructure.splice(this.personFromStructure.indexOf(person), 1);
     }
     multicountryAddAdditional(block) {
-        block.countrycitiesList.push(new __WEBPACK_IMPORTED_MODULE_8__classes_countrycities__["a" /* default */]());
+        block.countrycitiesList.push(new __WEBPACK_IMPORTED_MODULE_12__classes_countrycities__["a" /* default */]());
+    }
+    addPersoneducation() {
+        this.personeducationEducationtypeblocks.forEach(etb => {
+            etb.educationperiods.forEach(ep => {
+                ep.start = this.prepareDateToExportNullable(ep.startString);
+                ep.end = this.prepareDateToExportNullable(ep.endString);
+                ep.service = this.boolToNumb(ep.serviceBool);
+                ep.orderdate = this.prepareDateToExportNullable(ep.orderdateString);
+            });
+        });
+        this.personeducationAcademicvacations.forEach(av => {
+            av.start = this.prepareDateToExportNullable(av.startString);
+            av.end = this.prepareDateToExportNullable(av.endString);
+            av.orderdate = this.prepareDateToExportNullable(av.orderdateString);
+        });
+        this.personeducationEducationmaternities.forEach(em => {
+            em.start = this.prepareDateToExportNullable(em.startString);
+            em.end = this.prepareDateToExportNullable(em.endString);
+            em.orderdate = this.prepareDateToExportNullable(em.orderdateString);
+        });
+        fetch('/api/Personeducation', {
+            method: 'post',
+            body: JSON.stringify({
+                person: this.person.id,
+                main: this.prepareNumToExport(this.personeducationMain),
+                educationlevel: this.prepareNumToExport(this.personeducationEducationlevel),
+                educationstage: this.prepareNumToExport(this.personeducationEducationstage),
+                name: this.personeducationName,
+                name2: this.personeducationName2,
+                location: this.personeducationLocation,
+                city: this.personeducationCity,
+                faculty: this.personeducationFaculty,
+                educationtype: this.prepareNumToExport(this.personeducationEducationtype),
+                datestart: this.prepareNumToExport(this.personeducationDatestart),
+                dateend: this.prepareNumToExport(this.personeducationDateend),
+                speciality: this.personeducationSpeciality,
+                documentseries: this.personeducationDocumentseries,
+                documentnumber: this.personeducationDocumentnumber,
+                cadet: this.boolToNumb(this.personeducationCadet),
+                qualification: this.personeducationQualification,
+                start: this.prepareDateToExportNullable(this.personeducationStart),
+                end: this.prepareDateToExportNullable(this.personeducationEnd),
+                interrupted: this.boolToNumb(this.personeducationInterrupted),
+                interruptorderdate: this.prepareDateToExportNullable(this.personeducationInterruptorderdate),
+                interruptordernumber: this.personeducationInterruptordernumber,
+                interruptordernumbertype: this.personeducationInterruptordernumbertype,
+                interruptorderwho: this.personeducationInterruptorderwho,
+                interruptorderreason: this.personeducationInterruptorderreason,
+                educationdocument: this.prepareNumToExport(this.personeducationEducationdocument),
+                orderdate: this.prepareDateToExportNullable(this.personeducationOrderdate),
+                ordernumber: this.personeducationOrdernumber,
+                ordernumbertype: this.personeducationOrdernumbertype,
+                orderwho: this.personeducationOrderwho,
+                orderwhoid: this.prepareNumToExport(this.personeducationOrderwhoid),
+                orderid: this.prepareNumToExport(this.personeducationOrderid),
+                nameasjobfull: this.personeducationNameasjobfull,
+                nameasjobplace: this.personeducationNameasjobplace,
+                nameasjobposition: this.personeducationNameasjobposition,
+                educationadditionaltype: this.prepareNumToExport(this.personeducationEducationadditionaltype),
+                ucp: this.prepareNumToExport(this.personeducationUcp),
+                academicvacation: this.boolToNumb(this.personeducationAcademicvacation),
+                maternityvacation: this.boolToNumb(this.personeducationMaternityvacation),
+                educationtypeblocks: this.personeducationEducationtypeblocks,
+                academicvacations: this.personeducationAcademicvacations,
+                educationmaternities: this.personeducationEducationmaternities,
+                rating: this.prepareNumToExport(this.personeducationRating),
+                state: this.personeducationState,
+                citytype: this.personeducationCitytype,
+            }),
+            credentials: 'include',
+            headers: new Headers({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            })
+        })
+            .then(response => { return response.json(); })
+            .then((response) => {
+            __WEBPACK_IMPORTED_MODULE_0_vue__["default"].notify(response);
+        })
+            .then(x => {
+            this.rerenderSearch();
+            this.selectPerson(this.person.id);
+        });
+    }
+    updatePersoneducation(person, personeducation) {
+        this.prepareToExport(person);
+        //alert(JSON.stringify(personeducation.educationtypeblocks));
+        fetch('/api/Personeducation', {
+            method: 'post',
+            body: JSON.stringify(personeducation),
+            credentials: 'include',
+            headers: new Headers({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            })
+        })
+            .then(response => { return response.json(); })
+            .then((response) => {
+            __WEBPACK_IMPORTED_MODULE_0_vue__["default"].notify(response);
+        })
+            .then(x => {
+            this.rerenderSearch();
+            this.selectPerson(person.id);
+        });
+    }
+    deletePersoneducation(person, personeducation) {
+        let confirmaction = confirm("Вы уверены?");
+        if (!confirmaction) {
+            return;
+        }
+        personeducation.id = -personeducation.id;
+        fetch('/api/Personeducation', {
+            method: 'post',
+            body: JSON.stringify(personeducation),
+            credentials: 'include',
+            headers: new Headers({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            })
+        })
+            .then(response => { return response.json(); })
+            .then((response) => {
+            __WEBPACK_IMPORTED_MODULE_0_vue__["default"].notify(response);
+        })
+            .then(x => {
+            this.rerenderSearch();
+            this.selectPerson(person.id);
+        });
+    }
+    getEducationtype(educationtype) {
+        if (educationtype == null || educationtype == 0) {
+            return "";
+        }
+        let etype = this.educationtypes.find(t => t.id == educationtype);
+        if (etype != null) {
+            return etype.name;
+        }
+        else {
+            return "";
+        }
+    }
+    getEducationlevel(educationlevel) {
+        if (educationlevel == null || educationlevel == 0) {
+            return "";
+        }
+        let object = this.educationlevels.find(e => e.id == educationlevel);
+        if (object != null) {
+            return object.levelname;
+        }
+        else {
+            return "";
+        }
+    }
+    getFullEducationlevel(educationlevel) {
+        if (educationlevel == null || educationlevel == 0) {
+            return "";
+        }
+        let object = this.educationlevels.find(e => e.id == educationlevel);
+        if (object != null) {
+            return object.levelcomment;
+        }
+        else {
+            return "";
+        }
+    }
+    getEducationstage(educationstage) {
+        if (educationstage == null || educationstage == 0) {
+            return "";
+        }
+        let object = this.educationstages.find(e => e.id == educationstage);
+        if (object != null) {
+            return object.name;
+        }
+        else {
+            return "";
+        }
+    }
+    getEducationpositiontype(educationpositiontype) {
+        if (educationpositiontype == null || educationpositiontype == 0) {
+            return "";
+        }
+        let object = this.educationpositiontypes.find(e => e.id == educationpositiontype);
+        if (object != null) {
+            return object.name;
+        }
+        else {
+            return "";
+        }
+    }
+    getEducationadditionaltype(educationadditionaltype) {
+        if (educationadditionaltype == null || educationadditionaltype == 0) {
+            return "";
+        }
+        let etype = this.educationadditionaltypes.find(t => t.id == educationadditionaltype);
+        if (etype != null) {
+            return etype.name;
+        }
+        else {
+            return "";
+        }
+    }
+    getEducationdocument(educationdocument) {
+        if (educationdocument == null || educationdocument == 0) {
+            return "";
+        }
+        let etype = this.educationdocuments.find(t => t.id == educationdocument);
+        if (etype != null) {
+            return etype.name;
+        }
+        else {
+            return "";
+        }
+    }
+    getPersoneducationUpdateName() {
+        if (this.personeducationMenuelement == null) {
+            return "Добавить";
+        }
+        else {
+            return EDIT_LABEL;
+        }
+    }
+    getPersoneducationUpdateButtonName() {
+        return SAVE_LABEL;
+    }
+    addPersoneducationButton() {
+        this.personeducationMenuvisible = true;
+        this.personeducationMenuelement = null;
+        this.personeducationEducationlevel = 5;
+        this.personeducationEducationstage = 1;
+        this.personeducationLocation = "Республика Беларусь";
+        this.personeducationCity = "г. Минск";
+        this.personeducationCadet = false;
+        this.personeducationStart = "";
+        this.personeducationEnd = "";
+        this.personeducationName = 'ГУО "Университет гражданской защиты МЧС Беларуси"';
+        this.personeducationName2 = 'ГУО "Университет гражданской защиты МЧС Беларуси"';
+        this.personeducationEducationdocument = null;
+        this.personeducationInterrupted = false;
+        this.personeducationInterruptorderdate = null;
+        this.personeducationInterruptorderwho = 'ГУО "Университет гражданской защиты МЧС Беларуси"';
+        this.personeducationInterruptordernumber = "";
+        this.personeducationInterruptordernumbertype = "";
+        this.personeducationInterruptorderreason = "";
+        this.personeducationOrderdate = null;
+        this.personeducationOrdernumber = "";
+        this.personeducationOrdernumbertype = "";
+        this.personeducationOrderwho = "";
+        this.personeducationOrderwhoid = null;
+        this.personeducationOrderid = null;
+        this.personeducationNameasjobfull = "";
+        this.personeducationNameasjobplace = "";
+        this.personeducationNameasjobposition = "";
+        this.personeducationEducationadditionaltype = null;
+        this.personeducationAcademicvacation = false;
+        this.personeducationMaternityvacation = false;
+        this.personeducationEducationtypeblocks = new Array();
+        this.personeducationAcademicvacations = new Array();
+        this.personeducationEducationmaternities = new Array();
+        this.addEducationtypeblock();
+        this.personeducationRating = null;
+        this.personeducationFaculty = "";
+        this.personeducationSpeciality = "";
+        this.personeducationQualification = "";
+        this.personeducationDocumentnumber = "";
+        this.personeducationDocumentseries = "";
+        this.personeducationState = "г. Минск";
+        this.personeducationCitytype = "";
+    }
+    updatePersoneducationButton(person, personeducation) {
+        this.personeducationMenuelement = personeducation;
+        this.personeducationMain = this.personeducationMenuelement.main;
+        this.personeducationEducationlevel = this.personeducationMenuelement.educationlevel;
+        this.personeducationEducationstage = this.personeducationMenuelement.educationstage;
+        this.personeducationName = this.personeducationMenuelement.name;
+        this.personeducationName2 = this.personeducationMenuelement.name2;
+        this.personeducationLocation = this.personeducationMenuelement.location;
+        this.personeducationCity = this.personeducationMenuelement.city;
+        this.personeducationFaculty = this.personeducationMenuelement.faculty;
+        this.personeducationEducationtype = this.personeducationMenuelement.educationtype;
+        this.personeducationDatestart = this.personeducationMenuelement.datestart;
+        this.personeducationDateend = this.personeducationMenuelement.dateend;
+        this.personeducationSpeciality = this.personeducationMenuelement.speciality;
+        this.personeducationDocumentseries = this.personeducationMenuelement.documentseries;
+        this.personeducationDocumentnumber = this.personeducationMenuelement.documentnumber;
+        this.personeducationCadet = this.personeducationMenuelement.cadetBool;
+        this.personeducationQualification = this.personeducationMenuelement.qualification;
+        this.personeducationStart = this.personeducationMenuelement.startString;
+        this.personeducationEnd = this.personeducationMenuelement.endString;
+        this.personeducationInterrupted = this.personeducationMenuelement.interruptedBool;
+        this.personeducationInterruptorderdate = this.personeducationMenuelement.interruptorderdateString;
+        this.personeducationInterruptorderwho = this.personeducationMenuelement.interruptorderwho;
+        this.personeducationInterruptordernumber = this.personeducationMenuelement.interruptordernumber;
+        this.personeducationInterruptordernumbertype = this.personeducationMenuelement.interruptordernumbertype;
+        this.personeducationInterruptorderreason = this.personeducationMenuelement.interruptorderreason;
+        this.personeducationEducationdocument = this.personeducationMenuelement.educationdocument;
+        this.personeducationOrderdate = this.personeducationMenuelement.orderdateString;
+        this.personeducationOrdernumber = this.personeducationMenuelement.ordernumber;
+        this.personeducationOrdernumbertype = this.personeducationMenuelement.ordernumbertype;
+        this.personeducationOrderwho = this.personeducationMenuelement.orderwho;
+        this.personeducationOrderwhoid = this.personeducationMenuelement.orderwhoid;
+        this.personeducationOrderid = this.personeducationMenuelement.orderid;
+        this.personeducationNameasjobfull = this.personeducationMenuelement.nameasjobfull;
+        this.personeducationNameasjobplace = this.personeducationMenuelement.nameasjobplace;
+        this.personeducationNameasjobposition = this.personeducationMenuelement.nameasjobposition;
+        this.personeducationEducationadditionaltype = this.personeducationMenuelement.educationadditionaltype;
+        this.personeducationUcp = this.personeducationMenuelement.ucp;
+        this.personeducationEducationtypeblocks = this.personeducationMenuelement.educationtypeblocks;
+        this.personeducationAcademicvacations = this.personeducationMenuelement.academicvacations;
+        this.personeducationEducationmaternities = this.personeducationMenuelement.educationmaternities;
+        this.personeducationAcademicvacation = this.personeducationMenuelement.academicvacationBool;
+        this.personeducationMaternityvacation = this.personeducationMenuelement.maternityvacationBool;
+        this.personeducationRating = this.personeducationMenuelement.rating;
+        this.personeducationState = this.personeducationMenuelement.state;
+        this.personeducationCitytype = this.personeducationMenuelement.citytype;
+        this.personeducationMenuvisible = true;
+    }
+    completePersoneducationButton(person) {
+        if (!this.validatePersoneducation()) {
+            __WEBPACK_IMPORTED_MODULE_0_vue__["default"].notify("E:Ошибка сохранения формы");
+            return;
+        }
+        if (this.personeducationMenuelement == null) {
+            this.addPersoneducation();
+        }
+        else {
+            this.personeducationMenuelement.main = this.prepareNumToExport(this.personeducationMain);
+            this.personeducationMenuelement.educationlevel = this.prepareNumToExport(this.personeducationEducationlevel);
+            this.personeducationMenuelement.educationstage = this.prepareNumToExport(this.personeducationEducationstage);
+            this.personeducationMenuelement.name = this.personeducationName;
+            this.personeducationMenuelement.name2 = this.personeducationName2;
+            this.personeducationMenuelement.location = this.personeducationLocation;
+            this.personeducationMenuelement.city = this.personeducationCity;
+            this.personeducationMenuelement.faculty = this.personeducationFaculty;
+            this.personeducationMenuelement.educationtype = this.prepareNumToExport(this.personeducationEducationtype);
+            this.personeducationMenuelement.datestart = this.prepareNumToExport(this.personeducationDatestart);
+            this.personeducationMenuelement.dateend = this.prepareNumToExport(this.personeducationDateend);
+            this.personeducationMenuelement.speciality = this.personeducationSpeciality;
+            this.personeducationMenuelement.documentseries = this.personeducationDocumentseries;
+            this.personeducationMenuelement.documentnumber = this.personeducationDocumentnumber;
+            this.personeducationMenuelement.cadetBool = this.personeducationCadet;
+            this.personeducationMenuelement.qualification = this.personeducationQualification;
+            this.personeducationMenuelement.startString = this.personeducationStart;
+            this.personeducationMenuelement.endString = this.personeducationEnd;
+            this.personeducationMenuelement.interruptedBool = this.personeducationInterrupted;
+            this.personeducationMenuelement.interruptorderdateString = this.personeducationInterruptorderdate;
+            this.personeducationMenuelement.interruptordernumber = this.personeducationInterruptordernumber;
+            this.personeducationMenuelement.interruptordernumbertype = this.personeducationInterruptordernumbertype;
+            this.personeducationMenuelement.interruptorderwho = this.personeducationInterruptorderwho;
+            this.personeducationMenuelement.interruptorderreason = this.personeducationInterruptorderreason;
+            this.personeducationMenuelement.educationdocument = this.prepareNumToExport(this.personeducationEducationdocument);
+            this.personeducationMenuelement.orderdateString = this.personeducationOrderdate;
+            this.personeducationMenuelement.ordernumber = this.personeducationOrdernumber;
+            this.personeducationMenuelement.ordernumbertype = this.personeducationOrdernumbertype;
+            this.personeducationMenuelement.orderwho = this.personeducationOrderwho;
+            this.personeducationMenuelement.orderwhoid = this.prepareNumToExport(this.personeducationOrderwhoid);
+            this.personeducationMenuelement.orderid = this.prepareNumToExport(this.personeducationOrderid);
+            this.personeducationMenuelement.nameasjobfull = this.personeducationNameasjobfull;
+            this.personeducationMenuelement.nameasjobplace = this.personeducationNameasjobplace;
+            this.personeducationMenuelement.nameasjobposition = this.personeducationNameasjobposition;
+            this.personeducationMenuelement.educationadditionaltype = this.personeducationEducationadditionaltype;
+            this.personeducationMenuelement.ucp = this.prepareNumToExport(this.personeducationUcp);
+            this.personeducationMenuelement.educationtypeblocks = this.personeducationEducationtypeblocks;
+            this.personeducationMenuelement.academicvacations = this.personeducationAcademicvacations;
+            this.personeducationMenuelement.educationmaternities = this.personeducationEducationmaternities;
+            this.personeducationMenuelement.academicvacationBool = this.personeducationAcademicvacation;
+            this.personeducationMenuelement.maternityvacationBool = this.personeducationMaternityvacation;
+            this.personeducationMenuelement.rating = this.prepareNumToExport(this.personeducationRating);
+            this.personeducationMenuelement.state = this.personeducationState;
+            this.personeducationMenuelement.citytype = this.personeducationCitytype;
+            //this.personelectionMenuelement.electiondateendString = this.personelectionElectiondateend;
+            this.updatePersoneducation(person, this.personeducationMenuelement);
+        }
+        this.personeducationMenuvisible = false;
+    }
+    addEducationtypeblock() {
+        let educationtypeblock = new __WEBPACK_IMPORTED_MODULE_5__classes_educationtypeblock__["a" /* default */]();
+        educationtypeblock.educationperiods = new Array();
+        let educationperiod = new __WEBPACK_IMPORTED_MODULE_4__classes_educationperiod__["a" /* default */]();
+        educationperiod.startString = this.personeducationStart;
+        educationtypeblock.educationperiods.push(educationperiod);
+        this.personeducationEducationtypeblocks.push(educationtypeblock);
+    }
+    removeEducationtypeblock(educationtypeblock) {
+        this.personeducationEducationtypeblocks = this.personeducationEducationtypeblocks.filter(e => e != educationtypeblock);
+    }
+    addEducationperiod(educationtypeblock) {
+        let educationperiod = new __WEBPACK_IMPORTED_MODULE_4__classes_educationperiod__["a" /* default */]();
+        educationperiod.startString = this.personeducationStart;
+        educationtypeblock.educationperiods.push(educationperiod);
+    }
+    removeEducationperiod(educationtypeblock, educationperiod) {
+        educationtypeblock.educationperiods = educationtypeblock.educationperiods.filter(e => e != educationperiod);
+    }
+    addAcademicvacation() {
+        let academicvacation = new __WEBPACK_IMPORTED_MODULE_11__classes_academicvacation__["a" /* default */]();
+        academicvacation.orderwho = this.personeducationName2;
+        this.personeducationAcademicvacations.push(academicvacation);
+    }
+    removeAcademicvacation(academicvacation) {
+        this.personeducationAcademicvacations = this.personeducationAcademicvacations.filter(e => e != academicvacation);
+    }
+    addEducationmaternity() {
+        let educationmaternity = new __WEBPACK_IMPORTED_MODULE_8__classes_educationmaternity__["a" /* default */]();
+        educationmaternity.orderwho = this.personeducationName2;
+        this.personeducationEducationmaternities.push(educationmaternity);
+    }
+    removeEducationmaternity(educationmaternity) {
+        this.personeducationEducationmaternities = this.personeducationEducationmaternities.filter(e => e != educationmaternity);
+    }
+    forceUpdate() {
+        this.$forceUpdate();
+    }
+    personeducationAcademicvacationCheck() {
+        this.forceUpdate();
+        if (this.personeducationAcademicvacations.length == 0) {
+            this.addAcademicvacation();
+        }
+    }
+    personeducationEducationmaternityCheck() {
+        this.forceUpdate();
+        if (this.personeducationEducationmaternities.length == 0) {
+            this.addEducationmaternity();
+        }
+    }
+    validatePersoneducation() {
+        if (!this.validateInterrupted()) {
+            return false;
+        }
+        let returnfalse = false;
+        this.personeducationAcademicvacations.forEach(av => {
+            if (!this.validateAcademicvacation(av)) {
+                returnfalse = true;
+                return false;
+            }
+        });
+        if (returnfalse) {
+            return false;
+        }
+        this.personeducationEducationmaternities.forEach(em => {
+            if (!this.validateEducationmaternity(em)) {
+                returnfalse = true;
+                return false;
+            }
+        });
+        if (returnfalse) {
+            return false;
+        }
+        return true;
+    }
+    validateInterrupted() {
+        if (!this.validatePersoneducationInterruptorderwho()) {
+            return false;
+        }
+        if (!this.validatePersoneducationInterruptorderdate()) {
+            return false;
+        }
+        if (!this.validatePersoneducationInterruptordernumber()) {
+            return false;
+        }
+        if (!this.validatePersoneducationInterruptorderreason()) {
+            return false;
+        }
+        return true;
+    }
+    validatePersoneducationInterruptorderwho() {
+        if (this.personeducationInterrupted && (this.personeducationInterruptorderwho == null || this.personeducationInterruptorderwho.length == 0)) {
+            return false;
+        }
+        return true;
+    }
+    validatePersoneducationInterruptorderdate() {
+        if (this.personeducationInterrupted && (this.personeducationInterruptorderdate == null || this.personeducationInterruptorderdate.length == 0)) {
+            return false;
+        }
+        return true;
+    }
+    validatePersoneducationInterruptordernumber() {
+        if (this.personeducationInterrupted && (this.personeducationInterruptordernumber == null || this.personeducationInterruptordernumber.length == 0)) {
+            return false;
+        }
+        return true;
+    }
+    validatePersoneducationInterruptordernumbertype() {
+        if (this.personeducationInterrupted && this.personeducationInterruptordernumbertype.length == 0) {
+            return false;
+        }
+        return true;
+    }
+    validatePersoneducationInterruptorderreason() {
+        if (this.personeducationInterrupted && this.personeducationInterruptorderreason.length == 0) {
+            return false;
+        }
+        return true;
+    }
+    validateAcademicvacation(academicvacation) {
+        if (!this.validateAcademicvacationStart(academicvacation)) {
+            return false;
+        }
+        if (!this.validateAcademicvacationEnd(academicvacation)) {
+            return false;
+        }
+        if (!this.validateAcademicvacationOrderdate(academicvacation)) {
+            return false;
+        }
+        if (!this.validateAcademicvacationOrdernumber(academicvacation)) {
+            return false;
+        }
+        if (!this.validateAcademicvacationOrderwho(academicvacation)) {
+            return false;
+        }
+        return true;
+    }
+    validateAcademicvacationStart(academicvacation) {
+        if (this.personeducationAcademicvacation && (academicvacation.startString == null || academicvacation.startString.length == 0)) {
+            return false;
+        }
+        return true;
+    }
+    validateAcademicvacationEnd(academicvacation) {
+        if (this.personeducationAcademicvacation && (academicvacation.endString == null || academicvacation.endString.length == 0)) {
+            return false;
+        }
+        return true;
+    }
+    validateAcademicvacationOrderwho(academicvacation) {
+        if (this.personeducationAcademicvacation && (academicvacation.orderwho == null || academicvacation.orderwho.length == 0)) {
+            return false;
+        }
+        return true;
+    }
+    validateAcademicvacationOrderdate(academicvacation) {
+        if (this.personeducationAcademicvacation && (academicvacation.orderdateString == null || academicvacation.orderdateString.length == 0)) {
+            return false;
+        }
+        return true;
+    }
+    validateAcademicvacationOrdernumber(academicvacation) {
+        if (this.personeducationAcademicvacation && (academicvacation.ordernumber == null || academicvacation.ordernumber.length == 0)) {
+            return false;
+        }
+        return true;
+    }
+    validateEducationmaternity(educationmaternity) {
+        if (!this.validateEducationmaternityStart(educationmaternity)) {
+            return false;
+        }
+        if (!this.validateEducationmaternityEnd(educationmaternity)) {
+            return false;
+        }
+        if (!this.validateEducationmaternityOrderdate(educationmaternity)) {
+            return false;
+        }
+        if (!this.validateEducationmaternityOrdernumber(educationmaternity)) {
+            return false;
+        }
+        if (!this.validateEducationmaternityOrderwho(educationmaternity)) {
+            return false;
+        }
+        return true;
+    }
+    validateEducationmaternityStart(educationmaternity) {
+        if (this.personeducationMaternityvacation && (educationmaternity.startString == null || educationmaternity.startString.length == 0)) {
+            return false;
+        }
+        return true;
+    }
+    validateEducationmaternityEnd(educationmaternity) {
+        if (this.personeducationMaternityvacation && (educationmaternity.endString == null || educationmaternity.endString.length == 0)) {
+            return false;
+        }
+        return true;
+    }
+    validateEducationmaternityOrderwho(educationmaternity) {
+        if (this.personeducationMaternityvacation && (educationmaternity.orderwho == null || educationmaternity.orderwho.length == 0)) {
+            return false;
+        }
+        return true;
+    }
+    validateEducationmaternityOrderdate(educationmaternity) {
+        if (this.personeducationMaternityvacation && (educationmaternity.orderdateString == null || educationmaternity.orderdateString.length == 0)) {
+            return false;
+        }
+        return true;
+    }
+    validateEducationmaternityOrdernumber(educationmaternity) {
+        if (this.personeducationMaternityvacation && (educationmaternity.ordernumber == null || educationmaternity.ordernumber.length == 0)) {
+            return false;
+        }
+        return true;
+    }
+    okbutton() {
+        let datecustomNum = 0;
+        this.rank = 0;
+        this.structureregion = 0;
+        //this.id = Number.parseInt(this.parent); // Not to store id in parent;
+        //this.structurelist - parent
+        //alert(this.parent);
+        let nodecreeNum = 0;
+        nodecreeNum = 1;
+        fetch('/api/DetailedStructure', {
+            method: 'post',
+            body: JSON.stringify({
+                id: this.id, type: "renamestructure", parent: this.parent, name: this.name, featuredStr: this.featuredStr, nameshortened: this.nameshortened, datecustom: datecustomNum, dateactive: new Date(this.dateactive),
+                name1: this.name1, name2: this.name2, name3: this.name3, separatestructure: 0,
+                rank: this.rank, structureregion: this.structureregion, structuretype: 9, city: this.city, street: this.street, nodecree: nodecreeNum, structuretypesiblings: 0,
+                subject1: this.prepareNumToExport(this.subject1),
+                subject2: this.prepareNumToExport(this.subject2),
+                subject3: this.prepareNumToExport(this.subject3),
+                subject4: this.prepareNumToExport(this.subject4),
+                subject5: this.prepareNumToExport(this.subject5),
+                subject6: this.prepareNumToExport(this.subject6),
+                subject7: this.prepareNumToExport(this.subject7),
+                subject8: this.prepareNumToExport(this.subject8),
+                subject9: this.prepareNumToExport(this.subject9),
+                subject10: this.prepareNumToExport(this.subject10),
+                subject11: this.prepareNumToExport(this.subject11),
+                subject12: this.prepareNumToExport(this.subject12),
+                subject13: this.prepareNumToExport(this.subject13),
+                subject14: this.prepareNumToExport(this.subject14),
+                subject15: this.prepareNumToExport(this.subject15),
+                subjectnumber: this.prepareNumToExport(this.subjectnumber),
+                subjectnotice: this.subjectnotice,
+                subjectgender: this.prepareNumToExport(this.subjectgender),
+            }),
+            credentials: 'include',
+            headers: new Headers({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            })
+        })
+            .then(response => { return response.json(); })
+            .then((response) => {
+            //this.fetchUsers();
+            //(<any>Vue).notify(response);
+            __WEBPACK_IMPORTED_MODULE_0_vue__["default"].forceStructureUpdate = true;
+            this.$emit('update:visiblevar', false);
+        });
     }
     addPersonblockelement(persondecreeblock) {
         //this.addPersonreward(persondecreeblock);
@@ -25593,12 +26432,26 @@ let TopmenuComponent = class TopmenuComponent extends __WEBPACK_IMPORTED_MODULE_
         }
         // Предоставить
         if (persondecreeblock.persondecreeblocktype == 15) {
-            persondecreeblock.optionstring6 = __WEBPACK_IMPORTED_MODULE_8__classes_countrycities__["a" /* default */].countrycitiesListToString(persondecreeblock.countrycitiesList);
+            persondecreeblock.optionstring6 = __WEBPACK_IMPORTED_MODULE_12__classes_countrycities__["a" /* default */].countrycitiesListToString(persondecreeblock.countrycitiesList);
         }
         // Зачислить
         if (persondecreeblock.persondecreeblocktype == 17) {
             persondecreeblock.optionnumber1 = this.numberStructure;
+            persondecreeblock.optionstring1 = this.structureName;
+            persondecreeblock.optionstring2 = this.courseName;
+            persondecreeblock.optionstring3 = this.specialityName;
+            persondecreeblock.optionstring4 = this.facultyName;
+            if (persondecreeblock.optionstring5 == 'Студент') {
+                persondecreeblock.optionnumber9 = 0;
+            }
+            this.addPersoneducationButton();
+            persondecreeblock.optionstring6 = this.personeducationLocation;
+            persondecreeblock.optionstring7 = this.personeducationCity;
+            persondecreeblock.optionstring8 = this.personeducationName;
+            persondecreeblock.optionnumber4 = this.personeducationEducationlevel;
+            persondecreeblock.optionnumber5 = this.personeducationEducationstage;
         }
+        // Отчислить
         if (persondecreeblock.persondecreeblocktype == 18) {
             if (persondecreeblock.checkboxdirect)
                 persondecreeblock.optionnumber8 = 1;
@@ -25614,6 +26467,17 @@ let TopmenuComponent = class TopmenuComponent extends __WEBPACK_IMPORTED_MODULE_
         if (persondecreeblock.persondecreeblocktype == 19) {
             persondecreeblock.persondecreeblocksubtype = 1;
             persondecreeblock.optionnumber11 = 1;
+        }
+        if (persondecreeblock.persondecreeblocktype == 21) {
+            persondecreeblock.optionstring4 = this.structureNewName;
+            persondecreeblock.optionnumber6 = this.numberStructure;
+            persondecreeblock.optionnumber7 = this.numberNewStructure;
+            if (persondecreeblock.checkboxdismiss == true) {
+                persondecreeblock.optionnumber2 = 0;
+            }
+            else {
+                persondecreeblock.optionnumber2 = 1;
+            }
         }
         let t = {
             person: personid,
@@ -26099,12 +26963,27 @@ let TopmenuComponent = class TopmenuComponent extends __WEBPACK_IMPORTED_MODULE_
         if (structureid == null || structureid == 0) {
             return "";
         }
-        let structure = this.structuresReward.find(t => t.id == structureid);
+        let structure = this.$store.state.structures.find(t => t.id === structureid);
         if (structure != null) {
             return structure.name;
         }
         else {
             return "";
+        }
+    }
+    getFacultiStructureName(structureid) {
+        return this.getStructureById(Number.parseInt(this.getStructureById(Number.parseInt(this.getStructureById(Number.parseInt(this.getStructureById(structureid).parentstructure)).parentstructure)).parentstructure)).name1;
+    }
+    getStructureById(structureid) {
+        if (structureid == null || structureid == 0) {
+            return;
+        }
+        let structure = this.$store.state.structures.find(t => t.id === structureid);
+        if (structure != null) {
+            return structure;
+        }
+        else {
+            return;
         }
     }
     getStructureName2(structureid) {
@@ -26427,7 +27306,7 @@ let TopmenuComponent = class TopmenuComponent extends __WEBPACK_IMPORTED_MODULE_
         if (date == null) {
             return "";
         }
-        return __WEBPACK_IMPORTED_MODULE_7_moment___default()(date).locale('ru').format('D MMMM YYYY [года]');
+        return __WEBPACK_IMPORTED_MODULE_10_moment___default()(date).locale('ru').format('D MMMM YYYY [года]');
     }
     printDateDocumentFromString(date) {
         if (date == null) {
@@ -26438,7 +27317,7 @@ let TopmenuComponent = class TopmenuComponent extends __WEBPACK_IMPORTED_MODULE_
             return "";
         }
         let dateDate = new Date(Number.parseInt(dateSplit[2]), Number.parseInt(dateSplit[1]) - 1, Number.parseInt(dateSplit[0]));
-        return __WEBPACK_IMPORTED_MODULE_7_moment___default()(dateDate).locale('ru').format('D MMMM YYYY [года]');
+        return __WEBPACK_IMPORTED_MODULE_10_moment___default()(dateDate).locale('ru').format('D MMMM YYYY [года]');
     }
     changeTest() {
     }
@@ -26894,7 +27773,7 @@ let TopmenuComponent = class TopmenuComponent extends __WEBPACK_IMPORTED_MODULE_
             let fullYearHoliday = new Date(h.date).getFullYear();
             let fullYearCurrent = dateend.getFullYear();
             if (h.permanent) {
-                let hdayMod = new __WEBPACK_IMPORTED_MODULE_6__classes_holiday__["a" /* default */]();
+                let hdayMod = new __WEBPACK_IMPORTED_MODULE_9__classes_holiday__["a" /* default */]();
                 hdayMod.date = new Date(h.date);
                 hdayMod.date.setFullYear(dateend.getFullYear());
                 actualHolidays.push(hdayMod); // Тут халтура
@@ -26905,7 +27784,7 @@ let TopmenuComponent = class TopmenuComponent extends __WEBPACK_IMPORTED_MODULE_
         });
         if (persondecreeblock.optiondate1String != null && persondecreeblock.optionnumber1 != null) {
             actualHolidays.forEach(h => {
-                var diff = __WEBPACK_IMPORTED_MODULE_7_moment___default()(h.date).diff(persondecreeblock.optiondate1String, 'days');
+                var diff = __WEBPACK_IMPORTED_MODULE_10_moment___default()(h.date).diff(persondecreeblock.optiondate1String, 'days');
                 if (diff >= 0 && diff <= persondecreeblock.optionnumber1) {
                     holidays++;
                 }
@@ -27006,6 +27885,23 @@ let TopmenuComponent = class TopmenuComponent extends __WEBPACK_IMPORTED_MODULE_
             let count;
             return str;
         }
+    }
+    provideEnrollAStudent(persondecreeblocksub) {
+        let str = "";
+        if (persondecreeblocksub.subvaluestring1 == "Курсант") {
+            str += "курсантами " + persondecreeblocksub.subvaluestring2 + "а специальностей " + this.getFullEducationlevel(persondecreeblocksub.subvaluenumber4) + " " + this.getEducationstage(persondecreeblocksub.subvaluenumber1) + " (" + this.getEducationtype(persondecreeblocksub.subvaluenumber2) + " форма обучения) государственного учреждения образования «Университет гражданской защиты Министерства по чрезвычайным ситуациям Республики Беларусь» с " + this.printDateDocument(persondecreeblocksub.subvaluedate2) + " абитуриентов, успешно выдержавших вступительные испытания, профессиональный отбор, прошедших по конкурсу и заключивших контракт о службе, присвоив первое специальное звание « " + this.getRank(persondecreeblocksub.subvaluenumber3) + " »:";
+            return str;
+        }
+        if (persondecreeblocksub.subvaluedate1 != null) {
+            str += "в соответствии с Правилами приема лиц для получения " + this.getFullEducationlevel(persondecreeblocksub.subvaluenumber1) + " " + this.getEducationstage(persondecreeblocksub.subvaluenumber2) + " , утвержденными Указом Президента Республики Беларусь от 07.02.2006 № 80, Порядком приема в государственное учреждение образования «Университет гражданской защиты Министерства по чрезвычайным ситуациям Республики Беларусь» для получения " + this.getFullEducationlevel(persondecreeblocksub.subvaluenumber1) + " " + this.getEducationstage(persondecreeblocksub.subvaluenumber2) + " в 2020 году, утвержденным 09.09.2019, и на основании решения приемной комиссии университета (протокол заседания от " + this.printDateDocument(persondecreeblocksub.subvaluedate1) + " №" + persondecreeblocksub.subvaluenumber3 + "):";
+            return str;
+        }
+        return str;
+    }
+    provideTranslateSubBlockText(persondecreeblocksub) {
+        let str = "";
+        str += "в соответствии с пунктом 44 Правил проведения аттестации студентов, курсантов, слушателей при освоении содержания образовательных программ высшего образования, утвержденных постановлением Министерства образования Республики Беларусь от 20.05.2012 № 53 по результатам " + persondecreeblocksub.subvaluestring1 + " :";
+        return str;
     }
     provideDeductSubBlockText(persondecreeblocksub) {
         let str = "в соответствии с подпунктом ";
@@ -27263,7 +28159,7 @@ let TopmenuComponent = class TopmenuComponent extends __WEBPACK_IMPORTED_MODULE_
     OrdernumbertypesToArrayFilterable() {
         let links = new Array();
         this.ordernumbertypes.forEach(o => {
-            let link = new __WEBPACK_IMPORTED_MODULE_9__classes_link__["a" /* default */]();
+            let link = new __WEBPACK_IMPORTED_MODULE_13__classes_link__["a" /* default */]();
             link.value = o.name;
             links.push(link);
         });
@@ -27283,7 +28179,7 @@ let TopmenuComponent = class TopmenuComponent extends __WEBPACK_IMPORTED_MODULE_
     StructuresalldocumentToArrayFilterable() {
         let links = new Array();
         this.structuresalldocument.forEach(o => {
-            let link = new __WEBPACK_IMPORTED_MODULE_9__classes_link__["a" /* default */]();
+            let link = new __WEBPACK_IMPORTED_MODULE_13__classes_link__["a" /* default */]();
             link.value = o;
             links.push(link);
         });
@@ -27319,15 +28215,27 @@ let TopmenuComponent = class TopmenuComponent extends __WEBPACK_IMPORTED_MODULE_
         if (persondecreeblock.optiondate3String == null || persondecreeblock.optiondate3String.length == 0 || persondecreeblock.optiondate1String == null || persondecreeblock.optiondate1String.length == 0) {
             return;
         }
-        let diff = __WEBPACK_IMPORTED_MODULE_7_moment___default()(persondecreeblock.optiondate3String).diff(persondecreeblock.optiondate1String, 'days');
+        let diff = __WEBPACK_IMPORTED_MODULE_10_moment___default()(persondecreeblock.optiondate3String).diff(persondecreeblock.optiondate1String, 'days');
         persondecreeblock.optionnumber1 = diff;
     }
 };
+__decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_vue_property_decorator__["Prop"])({ default: "" })
+], TopmenuComponent.prototype, "type", void 0);
+__decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_vue_property_decorator__["Prop"])({ default: 0 })
+], TopmenuComponent.prototype, "parent", void 0);
+__decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_vue_property_decorator__["Prop"])({ default: false })
+], TopmenuComponent.prototype, "visible", void 0);
+__decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_vue_property_decorator__["Prop"])({ default: false })
+], TopmenuComponent.prototype, "visiblevar", void 0);
 TopmenuComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_vue_property_decorator__["Component"])({
         components: {
             AdminPanel: __webpack_require__(141),
-            Structuremanagingpanel: __webpack_require__(22),
+            Structuremanagingpanel: __webpack_require__(26),
             Settingspanel: __webpack_require__(156),
             Pmrequestpanel: __webpack_require__(153)
         }
@@ -27343,8 +28251,8 @@ TopmenuComponent = __decorate([
 module.exports = {
   XmlEntities: __webpack_require__(125),
   Html4Entities: __webpack_require__(124),
-  Html5Entities: __webpack_require__(19),
-  AllHtmlEntities: __webpack_require__(19)
+  Html5Entities: __webpack_require__(23),
+  AllHtmlEntities: __webpack_require__(23)
 };
 
 
@@ -29200,7 +30108,7 @@ module.exports = function (str) {
 var content = __webpack_require__(12);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // add the styles to the DOM
-var update = __webpack_require__(20)(content, {});
+var update = __webpack_require__(24)(content, {});
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(true) {
@@ -31441,7 +32349,15 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         },
         expression: "persondecreeBlock.optionstring4"
       }
-    })], 1) : _vm._e()])]), _vm._v(" "), _c('div', [_c('div', [_vm._v("\n                                Кого\n                            ")]), _vm._v(" "), _c('div', [_c('el-input', {
+    })], 1) : _vm._e()])]), _vm._v(" "), _c('div', [_c('div', {
+      staticStyle: {
+        "margin-top": "10px"
+      }
+    }, [_vm._v("\n                                Кого\n                            ")]), _vm._v(" "), _c('div', {
+      staticStyle: {
+        "margin-top": "10px"
+      }
+    }, [_c('el-input', {
       staticClass: "eld-eld-body-select-medium",
       attrs: {
         "placeholder": "Фамилия Имя Отчество"
@@ -31458,13 +32374,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         },
         expression: "persondecreeBlock.fiosearch"
       }
-    }), _vm._v(" "), _c('el-button', {
-      on: {
-        "click": function($event) {
-          _vm.addNonEld(persondecreeBlock)
-        }
-      }
-    }, [_vm._v("Добавить в приказ человека не из МЧС")])], 1), _vm._v(" "), (_vm.hasSearchResultsBlock(persondecreeBlock)) ? _c('div', {
+    })], 1), _vm._v(" "), (_vm.hasSearchResultsBlock(persondecreeBlock)) ? _c('div', {
       staticClass: "eld-search-main"
     }, [_c('div', {
       staticClass: "eld-search-main-title"
@@ -31473,7 +32383,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         staticClass: "eld-search-element",
         on: {
           "click": function($event) {
-            _vm.selectPersonBlock(person.id, persondecreeBlock)
+            _vm.selectPersonBlockNonAuto(person.id, persondecreeBlock)
           }
         }
       }, [_c('div', [_vm._v("\n                                        " + _vm._s(person.surname) + " " + _vm._s(person.name) + " " + _vm._s(person.fathername) + "\n                                    ")]), _vm._v(" "), _c('div', [_vm._v("\n                                        " + _vm._s(person.positiontypestring) + "\n                                    ")]), _vm._v(" "), (_vm.hasPhotopreviewBlock(person.id, persondecreeBlock)) ? _c('div', [_c('img', {
@@ -31482,7 +32392,19 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           "src": _vm.getPhotopreviewBlock(person.id, persondecreeBlock).photo64
         }
       })]) : _vm._e(), _vm._v(" "), _c('div', [_c('div', [_vm._v("\n                                            " + _vm._s(person.structuretree) + "\n                                        ")])])])
-    })], 2) : _vm._e(), _vm._v(" "), (persondecreeBlock.person != null) ? _c('div', [_vm._v("\n                                Кого – " + _vm._s(persondecreeBlock.person.surname4 + " " + persondecreeBlock.person.name4 + " " + persondecreeBlock.person.fathername4) + "\n                            ")]) : _vm._e(), _vm._v(" "), (persondecreeBlock.nonperson != null && persondecreeBlock.nonperson.length > 0) ? _c('div', [_vm._v("\n                                Кого — " + _vm._s(persondecreeBlock.nonperson) + "\n                            ")]) : _vm._e()]), _vm._v(" "), _c('div', [_c('br'), _vm._v(" "), _c('el-button', {
+    })], 2) : _vm._e(), _vm._v(" "), (_vm.personFromStructure.length > 0) ? _c('div', _vm._l((_vm.personFromStructure), function(person) {
+      return _c('div', [_vm._v("\n                                    Кого – " + _vm._s(person.surname2 + " " + person.name2 + " " + person.fathername2) + "\n                                    "), _c('el-button', {
+        attrs: {
+          "size": "mini",
+          "type": "warning"
+        },
+        on: {
+          "click": function($event) {
+            _vm.multipersonRemove(person, persondecreeBlock)
+          }
+        }
+      }, [_vm._v("Убрать")])], 1)
+    })) : _vm._e()]), _vm._v(" "), _c('div', [_c('br'), _vm._v(" "), _c('el-button', {
       attrs: {
         "type": "primary",
         "plain": ""
@@ -31606,69 +32528,15 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         },
         expression: "persondecreeBlock.optionstring2"
       }
-    }), _vm._v(" "), _c('div', [_c('div', [_vm._v("\n                                На кого\n                            ")]), _vm._v(" "), _c('div', [_c('el-input', {
-      staticClass: "eld-eld-body-select-medium",
-      attrs: {
-        "placeholder": "Фамилия Имя Отчество"
-      },
-      on: {
-        "input": function($event) {
-          _vm.searchPersonsBlock(persondecreeBlock)
-        }
-      },
-      model: {
-        value: (persondecreeBlock.fiosearch),
-        callback: function($$v) {
-          persondecreeBlock.fiosearch = $$v
-        },
-        expression: "persondecreeBlock.fiosearch"
+    }), _vm._v(" "), _c('div', [_c('div', {
+      staticStyle: {
+        "margin-top": "10px"
       }
-    })], 1), _vm._v(" "), (_vm.hasSearchResultsBlock(persondecreeBlock)) ? _c('div', {
-      staticClass: "eld-search-main"
-    }, [_c('div', {
-      staticClass: "eld-search-main-title"
-    }, [_vm._v("\n                                    Результаты поиска\n                                ")]), _vm._v(" "), _vm._l((persondecreeBlock.personssearch), function(person) {
-      return _c('div', {
-        staticClass: "eld-search-element",
-        on: {
-          "click": function($event) {
-            _vm.selectPersonBlock(person.id, persondecreeBlock)
-          }
-        }
-      }, [_c('div', [_vm._v("\n                                        " + _vm._s(person.surname) + " " + _vm._s(person.name) + " " + _vm._s(person.fathername) + "\n                                    ")]), _vm._v(" "), _c('div', [_vm._v("\n                                        " + _vm._s(person.positiontypestring) + "\n                                    ")]), _vm._v(" "), (_vm.hasPhotopreviewBlock(person.id, persondecreeBlock)) ? _c('div', [_c('img', {
-        staticClass: "eld-search-element-image",
-        attrs: {
-          "src": _vm.getPhotopreviewBlock(person.id, persondecreeBlock).photo64
-        }
-      })]) : _vm._e(), _vm._v(" "), _c('div', [_c('div', [_vm._v("\n                                            " + _vm._s(person.structuretree) + "\n                                        ")])])])
-    })], 2) : _vm._e(), _vm._v(" "), (persondecreeBlock.person != null) ? _c('div', [_vm._v("\n                                Кого – " + _vm._s(persondecreeBlock.person.surname4 + " " + persondecreeBlock.person.name4 + " " + persondecreeBlock.person.fathername4) + "\n                            ")]) : _vm._e()]), _vm._v(" "), _c('div', {
-      staticClass: "persondecreeoperation-part-list-title"
-    }, [_vm._v("\n                            Проект приказа\n                        ")]), _vm._v(" "), _c('div', [(persondecreeBlock.index != null && persondecreeBlock.index != 0) ? _c('span', [_vm._v(_vm._s(persondecreeBlock.index) + ".")]) : _vm._e(), _vm._v(" НАЛОЖИТЬ ДИСЦИПЛИНАРНОЕ ВЗЫСКАНИЕ:\n                        ")]), _vm._v(" "), _c('div', [_vm._l((_vm.persondecreeOperations), function(decreeoperation) {
-      return (decreeoperation.persondecreeblock == persondecreeBlock.id) ? _c('div', {
-        staticClass: "persondecreeoperation-part-list-element"
-      }, [_c('div', [_c('div', [(decreeoperation.intro != null) ? _c('div', {
-        staticClass: "persondecreeoperation-part-list-element-intro persondecreeoperation-part-list-element-indent"
-      }, [_vm._v("\n                                            " + _vm._s(decreeoperation.intro) + " объявить «" + _vm._s(_vm.getPenalty(persondecreeBlock.optionnumber1)) + "»\n                                            "), (decreeoperation.personobject.actualRank != null) ? _c('span', [_vm._v(_vm._s(decreeoperation.personobject.actualRank.name3) + " ")]) : _vm._e(), _vm._v("\n                                            " + _vm._s(decreeoperation.personobject.surname3) + " " + _vm._s(decreeoperation.personobject.name3) + "\n                                            " + _vm._s(decreeoperation.personobject.fathername3) + _vm._s(_vm.commaspaceifnotnull(decreeoperation.personobject.positiontree3)) + " " + _vm._s(decreeoperation.personobject.positiontree3) + ".\n                                        ")]) : _vm._e(), _vm._v(" "), _c('div', [_vm._v("\n                                            Основание: " + _vm._s(decreeoperation.optionstring2) + ".\n                                        ")])])]), _vm._v(" "), _c('div', [_c('div', [_c('div', [_c('el-button', {
-        attrs: {
-          "size": "mini",
-          "type": "warning"
-        },
-        on: {
-          "click": function($event) {
-            _vm.removePersondecreeoperation(decreeoperation)
-          }
-        }
-      }, [_vm._v("Удалить")])], 1)])])]) : _vm._e()
-    }), _vm._v(" "), _c('br')], 2), _vm._v(" "), _c('div', [_c('el-button', {
-      attrs: {
-        "type": "danger"
-      },
-      on: {
-        "click": function($event) {
-          _vm.deletePersondecreeblock(persondecreeBlock)
-        }
+    }, [_vm._v("\n                                На кого\n                            ")]), _vm._v(" "), _c('div', {
+      staticStyle: {
+        "margin-top": "10px"
       }
-    }, [_vm._v("Удалить блок")])], 1)], 1) : _vm._e(), _vm._v(" "), (persondecreeBlock.persondecreeblocktype == 3) ? _c('div', [_c('div', [_c('div', [_vm._v("\n                                Кого\n                            ")]), _vm._v(" "), _c('div', [_c('el-input', {
+    }, [_c('el-input', {
       staticClass: "eld-eld-body-select-medium",
       attrs: {
         "placeholder": "Фамилия Имя Отчество"
@@ -31703,7 +32571,111 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           "src": _vm.getPhotopreviewBlock(person.id, persondecreeBlock).photo64
         }
       })]) : _vm._e(), _vm._v(" "), _c('div', [_c('div', [_vm._v("\n                                            " + _vm._s(person.structuretree) + "\n                                        ")])])])
-    })], 2) : _vm._e(), _vm._v(" "), (persondecreeBlock.person != null) ? _c('div', [_vm._v("\n                                Кого – " + _vm._s(persondecreeBlock.person.surname4 + " " + persondecreeBlock.person.name4 + " " + persondecreeBlock.person.fathername4) + "\n                            ")]) : _vm._e()]), _vm._v(" "), _c('div', [(persondecreeBlock.person != null) ? _c('div', [(persondecreeBlock.person.military) ? _c('div', [_c('div', [_vm._v("\n                                        В связи с чем\n                                    ")]), _vm._v(" "), _c('el-select', {
+    })], 2) : _vm._e(), _vm._v(" "), (_vm.personFromStructure.length > 0) ? _c('div', _vm._l((_vm.personFromStructure), function(person) {
+      return _c('div', [_vm._v("\n                                    Кого – " + _vm._s(person.surname2 + " " + person.name2 + " " + person.fathername2) + "\n                                    "), _c('el-button', {
+        attrs: {
+          "size": "mini",
+          "type": "warning"
+        },
+        on: {
+          "click": function($event) {
+            _vm.multipersonRemove(person, persondecreeBlock)
+          }
+        }
+      }, [_vm._v("Убрать")])], 1)
+    })) : _vm._e()]), _vm._v(" "), _c('div', [_c('br'), _vm._v(" "), _c('el-button', {
+      attrs: {
+        "type": "primary",
+        "plain": ""
+      },
+      on: {
+        "click": function($event) {
+          _vm.addPersonblockelement(persondecreeBlock)
+        }
+      }
+    }, [_vm._v("Сформировать пункт приказа")])], 1), _vm._v(" "), _c('div', {
+      staticClass: "persondecreeoperation-part-list-title"
+    }, [_vm._v("\n                            Проект приказа\n                        ")]), _vm._v(" "), _c('div', [(persondecreeBlock.index != null && persondecreeBlock.index != 0) ? _c('span', [_vm._v(_vm._s(persondecreeBlock.index) + ".")]) : _vm._e(), _vm._v(" НАЛОЖИТЬ ДИСЦИПЛИНАРНОЕ ВЗЫСКАНИЕ:\n                        ")]), _vm._v(" "), _c('div', [_vm._l((_vm.persondecreeOperations), function(decreeoperation) {
+      return (decreeoperation.persondecreeblock == persondecreeBlock.id) ? _c('div', {
+        staticClass: "persondecreeoperation-part-list-element"
+      }, [_c('div', [_c('div', [(decreeoperation.intro != null) ? _c('div', {
+        staticClass: "persondecreeoperation-part-list-element-intro persondecreeoperation-part-list-element-indent"
+      }, [_vm._v("\n                                            " + _vm._s(decreeoperation.intro) + " объявить «" + _vm._s(_vm.getPenalty(persondecreeBlock.optionnumber1)) + "»\n                                            "), (decreeoperation.personobject.actualRank != null) ? _c('span', [_vm._v(_vm._s(decreeoperation.personobject.actualRank.name3) + " ")]) : _vm._e(), _vm._v("\n                                            " + _vm._s(decreeoperation.personobject.surname3) + " " + _vm._s(decreeoperation.personobject.name3) + "\n                                            " + _vm._s(decreeoperation.personobject.fathername3) + _vm._s(_vm.commaspaceifnotnull(decreeoperation.personobject.positiontree3)) + " " + _vm._s(decreeoperation.personobject.positiontree3) + ".\n                                        ")]) : _vm._e(), _vm._v(" "), _c('div', [_vm._v("\n                                            Основание: " + _vm._s(decreeoperation.optionstring2) + ".\n                                        ")])])]), _vm._v(" "), _c('div', [_c('div', [_c('div', [_c('el-button', {
+        attrs: {
+          "size": "mini",
+          "type": "warning"
+        },
+        on: {
+          "click": function($event) {
+            _vm.removePersondecreeoperation(decreeoperation)
+          }
+        }
+      }, [_vm._v("Удалить")])], 1)])])]) : _vm._e()
+    }), _vm._v(" "), _c('br')], 2), _vm._v(" "), _c('div', [_c('el-button', {
+      attrs: {
+        "type": "danger"
+      },
+      on: {
+        "click": function($event) {
+          _vm.deletePersondecreeblock(persondecreeBlock)
+        }
+      }
+    }, [_vm._v("Удалить блок")])], 1)], 1) : _vm._e(), _vm._v(" "), (persondecreeBlock.persondecreeblocktype == 3) ? _c('div', [_c('div', [_c('div', {
+      staticStyle: {
+        "margin-top": "10px"
+      }
+    }, [_vm._v("\n                                Кого\n                            ")]), _vm._v(" "), _c('div', {
+      staticStyle: {
+        "margin-top": "10px"
+      }
+    }, [_c('el-input', {
+      staticClass: "eld-eld-body-select-medium",
+      attrs: {
+        "placeholder": "Фамилия Имя Отчество"
+      },
+      on: {
+        "input": function($event) {
+          _vm.searchPersonsBlock(persondecreeBlock)
+        }
+      },
+      model: {
+        value: (persondecreeBlock.fiosearch),
+        callback: function($$v) {
+          persondecreeBlock.fiosearch = $$v
+        },
+        expression: "persondecreeBlock.fiosearch"
+      }
+    })], 1), _vm._v(" "), (_vm.hasSearchResultsBlock(persondecreeBlock)) ? _c('div', {
+      staticClass: "eld-search-main"
+    }, [_c('div', {
+      staticClass: "eld-search-main-title"
+    }, [_vm._v("\n                                    Результаты поиска\n                                ")]), _vm._v(" "), _vm._l((persondecreeBlock.personssearch), function(person) {
+      return _c('div', {
+        staticClass: "eld-search-element",
+        on: {
+          "click": function($event) {
+            _vm.selectPersonBlockNonAuto(person.id, persondecreeBlock)
+          }
+        }
+      }, [_c('div', [_vm._v("\n                                        " + _vm._s(person.surname) + " " + _vm._s(person.name) + " " + _vm._s(person.fathername) + "\n                                    ")]), _vm._v(" "), _c('div', [_vm._v("\n                                        " + _vm._s(person.positiontypestring) + "\n                                    ")]), _vm._v(" "), (_vm.hasPhotopreviewBlock(person.id, persondecreeBlock)) ? _c('div', [_c('img', {
+        staticClass: "eld-search-element-image",
+        attrs: {
+          "src": _vm.getPhotopreviewBlock(person.id, persondecreeBlock).photo64
+        }
+      })]) : _vm._e(), _vm._v(" "), _c('div', [_c('div', [_vm._v("\n                                            " + _vm._s(person.structuretree) + "\n                                        ")])])])
+    })], 2) : _vm._e(), _vm._v(" "), (_vm.personFromStructure.length > 0) ? _c('div', _vm._l((_vm.personFromStructure), function(person) {
+      return _c('div', [_vm._v("\n                                    Кого – " + _vm._s(person.surname2 + " " + person.name2 + " " + person.fathername2) + "\n                                    "), _c('el-button', {
+        attrs: {
+          "size": "mini",
+          "type": "warning"
+        },
+        on: {
+          "click": function($event) {
+            _vm.multipersonRemove(person, persondecreeBlock)
+          }
+        }
+      }, [_vm._v("Убрать")])], 1)
+    })) : _vm._e()]), _vm._v(" "), _c('div', [(persondecreeBlock.person != null) ? _c('div', [(persondecreeBlock.person.military) ? _c('div', [_c('div', [_vm._v("\n                                        В связи с чем\n                                    ")]), _vm._v(" "), _c('el-select', {
       staticClass: "eld-eld-body-select-long",
       attrs: {
         "placeholder": "В связи с"
@@ -31910,7 +32882,15 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           _vm.deletePersondecreeblock(persondecreeBlock)
         }
       }
-    }, [_vm._v("Удалить блок")])], 1)]) : _vm._e(), _vm._v(" "), (persondecreeBlock.persondecreeblocktype == 4) ? _c('div', [_c('div', [_c('div', [_vm._v("\n                                Кого\n                            ")]), _vm._v(" "), _c('div', [_c('el-input', {
+    }, [_vm._v("Удалить блок")])], 1)]) : _vm._e(), _vm._v(" "), (persondecreeBlock.persondecreeblocktype == 4) ? _c('div', [_c('div', [_c('div', {
+      staticStyle: {
+        "margin-top": "10px"
+      }
+    }, [_vm._v("\n                                Кого\n                            ")]), _vm._v(" "), _c('div', {
+      staticStyle: {
+        "margin-top": "10px"
+      }
+    }, [_c('el-input', {
       staticClass: "eld-eld-body-select-medium",
       attrs: {
         "placeholder": "Фамилия Имя Отчество"
@@ -31945,7 +32925,19 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           "src": _vm.getPhotopreviewBlock(person.id, persondecreeBlock).photo64
         }
       })]) : _vm._e(), _vm._v(" "), _c('div', [_c('div', [_vm._v("\n                                            " + _vm._s(person.structuretree) + "\n                                        ")])])])
-    })], 2) : _vm._e(), _vm._v(" "), (persondecreeBlock.person != null) ? _c('div', [_vm._v("\n                                Кого – " + _vm._s(persondecreeBlock.person.surname4 + " " + persondecreeBlock.person.name4 + " " + persondecreeBlock.person.fathername4) + "\n                            ")]) : _vm._e()]), _vm._v(" "), (persondecreeBlock.person != null) ? _c('div', [(persondecreeBlock.person.military) ? _c('div', [_c('div', [_vm._v("\n                                    По какому подпункту\n                                ")]), _vm._v(" "), _c('el-select', {
+    })], 2) : _vm._e(), _vm._v(" "), (_vm.personFromStructure.length > 0) ? _c('div', _vm._l((_vm.personFromStructure), function(person) {
+      return _c('div', [_vm._v("\n                                    Кого – " + _vm._s(person.surname2 + " " + person.name2 + " " + person.fathername2) + "\n                                    "), _c('el-button', {
+        attrs: {
+          "size": "mini",
+          "type": "warning"
+        },
+        on: {
+          "click": function($event) {
+            _vm.multipersonRemove(person, persondecreeBlock)
+          }
+        }
+      }, [_vm._v("Убрать")])], 1)
+    })) : _vm._e()]), _vm._v(" "), (persondecreeBlock.person != null) ? _c('div', [(persondecreeBlock.person.military) ? _c('div', [_c('div', [_vm._v("\n                                    По какому подпункту\n                                ")]), _vm._v(" "), _c('el-select', {
       staticClass: "eld-eld-body-select-long",
       attrs: {
         "clearable": "",
@@ -32350,7 +33342,15 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           "value": transfertype.id
         }
       })
-    })), _vm._v(" "), _c('div', [_c('div', [_vm._v("\n                                Кого\n                            ")]), _vm._v(" "), _c('div', [_c('el-input', {
+    })), _vm._v(" "), _c('div', [_c('div', {
+      staticStyle: {
+        "margin-top": "10px"
+      }
+    }, [_vm._v("\n                                Кого\n                            ")]), _vm._v(" "), _c('div', {
+      staticStyle: {
+        "margin-top": "10px"
+      }
+    }, [_c('el-input', {
       staticClass: "eld-eld-body-select-medium",
       attrs: {
         "placeholder": "Фамилия Имя Отчество"
@@ -32385,7 +33385,19 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           "src": _vm.getPhotopreviewBlock(person.id, persondecreeBlock).photo64
         }
       })]) : _vm._e(), _vm._v(" "), _c('div', [_c('div', [_vm._v("\n                                            " + _vm._s(person.structuretree) + "\n                                        ")])])])
-    })], 2) : _vm._e(), _vm._v(" "), (persondecreeBlock.person != null) ? _c('div', [_vm._v("\n                                Кого – " + _vm._s(persondecreeBlock.person.surname4 + " " + persondecreeBlock.person.name4 + " " + persondecreeBlock.person.fathername4) + "\n                            ")]) : _vm._e()]), _vm._v(" "), _c('div', [_vm._v("\n                            По какой причине (пустым, если без указания конкретной причины)\n                        ")]), _vm._v(" "), _c('el-input', {
+    })], 2) : _vm._e(), _vm._v(" "), (_vm.personFromStructure.length > 0) ? _c('div', _vm._l((_vm.personFromStructure), function(person) {
+      return _c('div', [_vm._v("\n                                    Кого – " + _vm._s(person.surname2 + " " + person.name2 + " " + person.fathername2) + "\n                                    "), _c('el-button', {
+        attrs: {
+          "size": "mini",
+          "type": "warning"
+        },
+        on: {
+          "click": function($event) {
+            _vm.multipersonRemove(person, persondecreeBlock)
+          }
+        }
+      }, [_vm._v("Убрать")])], 1)
+    })) : _vm._e()]), _vm._v(" "), _c('div', [_vm._v("\n                            По какой причине (пустым, если без указания конкретной причины)\n                        ")]), _vm._v(" "), _c('el-input', {
       staticClass: "eld-eld-body-row-medium",
       model: {
         value: (persondecreeBlock.optionstring1),
@@ -32483,7 +33495,15 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         },
         expression: "persondecreeBlock.optiondate1String"
       }
-    }), _vm._v(" "), _c('div', [_c('div', [_vm._v("\n                                Кого\n                            ")]), _vm._v(" "), _c('div', [_c('el-input', {
+    }), _vm._v(" "), _c('div', [_c('div', {
+      staticStyle: {
+        "margin-top": "10px"
+      }
+    }, [_vm._v("\n                                Кого\n                            ")]), _vm._v(" "), _c('div', {
+      staticStyle: {
+        "margin-top": "10px"
+      }
+    }, [_c('el-input', {
       staticClass: "eld-eld-body-select-medium",
       attrs: {
         "placeholder": "Фамилия Имя Отчество"
@@ -32518,7 +33538,19 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           "src": _vm.getPhotopreviewBlock(person.id, persondecreeBlock).photo64
         }
       })]) : _vm._e(), _vm._v(" "), _c('div', [_c('div', [_vm._v("\n                                            " + _vm._s(person.structuretree) + "\n                                        ")])])])
-    })], 2) : _vm._e(), _vm._v(" "), (persondecreeBlock.person != null) ? _c('div', [_vm._v("\n                                Кого – " + _vm._s(persondecreeBlock.person.surname4 + " " + persondecreeBlock.person.name4 + " " + persondecreeBlock.person.fathername4) + "\n                            ")]) : _vm._e()]), _vm._v(" "), _c('div', [_vm._v("\n                            Основание\n                        ")]), _vm._v(" "), _c('el-input', {
+    })], 2) : _vm._e(), _vm._v(" "), (_vm.personFromStructure.length > 0) ? _c('div', _vm._l((_vm.personFromStructure), function(person) {
+      return _c('div', [_vm._v("\n                                    Кого – " + _vm._s(person.surname2 + " " + person.name2 + " " + person.fathername2) + "\n                                    "), _c('el-button', {
+        attrs: {
+          "size": "mini",
+          "type": "warning"
+        },
+        on: {
+          "click": function($event) {
+            _vm.multipersonRemove(person, persondecreeBlock)
+          }
+        }
+      }, [_vm._v("Убрать")])], 1)
+    })) : _vm._e()]), _vm._v(" "), _c('div', [_vm._v("\n                            Основание\n                        ")]), _vm._v(" "), _c('el-input', {
       staticClass: "eld-eld-body-row-long",
       model: {
         value: (persondecreeBlock.optionstring2),
@@ -32586,7 +33618,15 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           "value": interrupttype.id
         }
       })
-    })), _vm._v(" "), _c('div', [_c('div', [_vm._v("\n                                Кому\n                            ")]), _vm._v(" "), _c('div', [_c('el-input', {
+    })), _vm._v(" "), _c('div', [_c('div', {
+      staticStyle: {
+        "margin-top": "10px"
+      }
+    }, [_vm._v("\n                                Кого\n                            ")]), _vm._v(" "), _c('div', {
+      staticStyle: {
+        "margin-top": "10px"
+      }
+    }, [_c('el-input', {
       staticClass: "eld-eld-body-select-medium",
       attrs: {
         "placeholder": "Фамилия Имя Отчество"
@@ -32621,7 +33661,19 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           "src": _vm.getPhotopreviewBlock(person.id, persondecreeBlock).photo64
         }
       })]) : _vm._e(), _vm._v(" "), _c('div', [_c('div', [_vm._v("\n                                            " + _vm._s(person.structuretree) + "\n                                        ")])])])
-    })], 2) : _vm._e(), _vm._v(" "), (persondecreeBlock.person != null) ? _c('div', [_vm._v("\n                                Кому – " + _vm._s(persondecreeBlock.person.surname3 + " " + persondecreeBlock.person.name3 + " " + persondecreeBlock.person.fathername3) + "\n                            ")]) : _vm._e()]), _vm._v(" "), _c('div', [_vm._v("\n                            Дата\n                        ")]), _vm._v(" "), _c('el-input', {
+    })], 2) : _vm._e(), _vm._v(" "), (_vm.personFromStructure.length > 0) ? _c('div', _vm._l((_vm.personFromStructure), function(person) {
+      return _c('div', [_vm._v("\n                                    Кого – " + _vm._s(person.surname2 + " " + person.name2 + " " + person.fathername2) + "\n                                    "), _c('el-button', {
+        attrs: {
+          "size": "mini",
+          "type": "warning"
+        },
+        on: {
+          "click": function($event) {
+            _vm.multipersonRemove(person, persondecreeBlock)
+          }
+        }
+      }, [_vm._v("Убрать")])], 1)
+    })) : _vm._e()]), _vm._v(" "), _c('div', [_vm._v("\n                            Дата\n                        ")]), _vm._v(" "), _c('el-input', {
       staticClass: "eld-eld-body-row-short",
       attrs: {
         "type": "date"
@@ -32683,7 +33735,15 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           _vm.deletePersondecreeblock(persondecreeBlock)
         }
       }
-    }, [_vm._v("Удалить блок")])], 1)], 1) : _vm._e(), _vm._v(" "), (persondecreeBlock.persondecreeblocktype == 8) ? _c('div', [_c('div', [_c('div', [_vm._v("\n                                Кого\n                            ")]), _vm._v(" "), _c('div', [_c('el-input', {
+    }, [_vm._v("Удалить блок")])], 1)], 1) : _vm._e(), _vm._v(" "), (persondecreeBlock.persondecreeblocktype == 8) ? _c('div', [_c('div', [_c('div', {
+      staticStyle: {
+        "margin-top": "10px"
+      }
+    }, [_vm._v("\n                                Кого\n                            ")]), _vm._v(" "), _c('div', {
+      staticStyle: {
+        "margin-top": "10px"
+      }
+    }, [_c('el-input', {
       staticClass: "eld-eld-body-select-medium",
       attrs: {
         "placeholder": "Фамилия Имя Отчество"
@@ -32718,7 +33778,19 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           "src": _vm.getPhotopreviewBlock(person.id, persondecreeBlock).photo64
         }
       })]) : _vm._e(), _vm._v(" "), _c('div', [_c('div', [_vm._v("\n                                            " + _vm._s(person.structuretree) + "\n                                        ")])])])
-    })], 2) : _vm._e(), _vm._v(" "), (persondecreeBlock.person != null) ? _c('div', [_vm._v("\n                                Кого – " + _vm._s(persondecreeBlock.person.surname4 + " " + persondecreeBlock.person.name4 + " " + persondecreeBlock.person.fathername4) + "\n                            ")]) : _vm._e()]), _vm._v(" "), _c('div', [_vm._v("\n                            С какого числа\n                        ")]), _vm._v(" "), _c('el-input', {
+    })], 2) : _vm._e(), _vm._v(" "), (_vm.personFromStructure.length > 0) ? _c('div', _vm._l((_vm.personFromStructure), function(person) {
+      return _c('div', [_vm._v("\n                                    Кого – " + _vm._s(person.surname2 + " " + person.name2 + " " + person.fathername2) + "\n                                    "), _c('el-button', {
+        attrs: {
+          "size": "mini",
+          "type": "warning"
+        },
+        on: {
+          "click": function($event) {
+            _vm.multipersonRemove(person, persondecreeBlock)
+          }
+        }
+      }, [_vm._v("Убрать")])], 1)
+    })) : _vm._e()]), _vm._v(" "), _c('div', [_vm._v("\n                            С какого числа\n                        ")]), _vm._v(" "), _c('el-input', {
       staticClass: "eld-eld-body-row-short",
       attrs: {
         "type": "date"
@@ -32810,7 +33882,15 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           "value": changedocuments.id
         }
       })
-    })), _vm._v(" "), _c('div', [_c('div', [_vm._v("\n                                Кого\n                            ")]), _vm._v(" "), _c('div', [_c('el-input', {
+    })), _vm._v(" "), _c('div', [_c('div', {
+      staticStyle: {
+        "margin-top": "10px"
+      }
+    }, [_vm._v("\n                                Кого\n                            ")]), _vm._v(" "), _c('div', {
+      staticStyle: {
+        "margin-top": "10px"
+      }
+    }, [_c('el-input', {
       staticClass: "eld-eld-body-select-medium",
       attrs: {
         "placeholder": "Фамилия Имя Отчество"
@@ -32845,7 +33925,19 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           "src": _vm.getPhotopreviewBlock(person.id, persondecreeBlock).photo64
         }
       })]) : _vm._e(), _vm._v(" "), _c('div', [_c('div', [_vm._v("\n                                            " + _vm._s(person.structuretree) + "\n                                        ")])])])
-    })], 2) : _vm._e(), _vm._v(" "), (persondecreeBlock.person != null) ? _c('div', [_vm._v("\n                                Кого – " + _vm._s(persondecreeBlock.person.surname4 + " " + persondecreeBlock.person.name4 + " " + persondecreeBlock.person.fathername4) + "\n                            ")]) : _vm._e()]), _vm._v(" "), (persondecreeBlock.optionnumber1 != null && persondecreeBlock.optionnumber1 == 3 && persondecreeBlock.person != null) ? _c('div', [_c('div', [_vm._v("\n                                В связи с чем (заполнить текст самостоятельно)\n                            ")]), _vm._v(" "), _c('el-input', {
+    })], 2) : _vm._e(), _vm._v(" "), (_vm.personFromStructure.length > 0) ? _c('div', _vm._l((_vm.personFromStructure), function(person) {
+      return _c('div', [_vm._v("\n                                    Кого – " + _vm._s(person.surname2 + " " + person.name2 + " " + person.fathername2) + "\n                                    "), _c('el-button', {
+        attrs: {
+          "size": "mini",
+          "type": "warning"
+        },
+        on: {
+          "click": function($event) {
+            _vm.multipersonRemove(person, persondecreeBlock)
+          }
+        }
+      }, [_vm._v("Убрать")])], 1)
+    })) : _vm._e()]), _vm._v(" "), (persondecreeBlock.optionnumber1 != null && persondecreeBlock.optionnumber1 == 3 && persondecreeBlock.person != null) ? _c('div', [_c('div', [_vm._v("\n                                В связи с чем (заполнить текст самостоятельно)\n                            ")]), _vm._v(" "), _c('el-input', {
       staticClass: "eld-eld-body-row-long",
       attrs: {
         "placeholder": "В связи с ..."
@@ -33279,7 +34371,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         },
         expression: "persondecreeBlock.optionnumber4"
       }
-    }), _vm._v(" дней\n                                ")], 1)], 1) : _vm._e()]) : _vm._e(), _vm._v(" "), (persondecreeBlock.persondecreeblocksub == 5) ? _c('div', [_c('div', [_vm._v("\n                                    По итогам\n                                ")]), _vm._v(" "), _c('el-input', {
+    }), _vm._v(" дней\n                                ")], 1)], 1) : _vm._e()]) : _vm._e(), _vm._v(" "), (persondecreeBlock.persondecreeblocksub == 5) ? _c('div', [_c('div', [_vm._v("\n                                По итогам\n                            ")]), _vm._v(" "), _c('el-input', {
       staticClass: "eld-eld-body-row-long",
       attrs: {
         "placeholder": "летней экзаменационной сессии 2019-2020 ..."
@@ -33452,7 +34544,15 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           _vm.deletePersondecreeblock(persondecreeBlock)
         }
       }
-    }, [_vm._v("Удалить блок")])], 1)], 2) : _vm._e(), _vm._v(" "), (persondecreeBlock.persondecreeblocktype == 11) ? _c('div', [_c('div', [_c('div', [_vm._v("\n                                С кем\n                            ")]), _vm._v(" "), _c('div', [_c('el-input', {
+    }, [_vm._v("Удалить блок")])], 1)], 2) : _vm._e(), _vm._v(" "), (persondecreeBlock.persondecreeblocktype == 11) ? _c('div', [_c('div', [_c('div', {
+      staticStyle: {
+        "margin-top": "10px"
+      }
+    }, [_vm._v("\n                                С кем\n                            ")]), _vm._v(" "), _c('div', {
+      staticStyle: {
+        "margin-top": "10px"
+      }
+    }, [_c('el-input', {
       staticClass: "eld-eld-body-select-medium",
       attrs: {
         "placeholder": "Фамилия Имя Отчество"
@@ -33487,7 +34587,19 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           "src": _vm.getPhotopreviewBlock(person.id, persondecreeBlock).photo64
         }
       })]) : _vm._e(), _vm._v(" "), _c('div', [_c('div', [_vm._v("\n                                            " + _vm._s(person.structuretree) + "\n                                        ")])])])
-    })], 2) : _vm._e(), _vm._v(" "), (persondecreeBlock.person != null) ? _c('div', [_vm._v("\n                                С кем – " + _vm._s(persondecreeBlock.person.surname5 + " " + persondecreeBlock.person.name5 + " " + persondecreeBlock.person.fathername5) + "\n                            ")]) : _vm._e()]), _vm._v(" "), _c('div', [_vm._v("\n                            С какого числа\n                        ")]), _vm._v(" "), _c('el-input', {
+    })], 2) : _vm._e(), _vm._v(" "), (_vm.personFromStructure.length > 0) ? _c('div', _vm._l((_vm.personFromStructure), function(person) {
+      return _c('div', [_vm._v("\n                                    С кем – " + _vm._s(person.surname2 + " " + person.name2 + " " + person.fathername2) + "\n                                    "), _c('el-button', {
+        attrs: {
+          "size": "mini",
+          "type": "warning"
+        },
+        on: {
+          "click": function($event) {
+            _vm.multipersonRemove(person, persondecreeBlock)
+          }
+        }
+      }, [_vm._v("Убрать")])], 1)
+    })) : _vm._e()]), _vm._v(" "), _c('div', [_vm._v("\n                            С какого числа\n                        ")]), _vm._v(" "), _c('el-input', {
       staticClass: "eld-eld-body-row-short",
       attrs: {
         "type": "date"
@@ -33548,7 +34660,15 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           _vm.deletePersondecreeblock(persondecreeBlock)
         }
       }
-    }, [_vm._v("Удалить блок")])], 1)], 1) : _vm._e(), _vm._v(" "), (persondecreeBlock.persondecreeblocktype == 12) ? _c('div', [_c('div', [_c('div', [_vm._v("\n                                С кем\n                            ")]), _vm._v(" "), _c('div', [_c('el-input', {
+    }, [_vm._v("Удалить блок")])], 1)], 1) : _vm._e(), _vm._v(" "), (persondecreeBlock.persondecreeblocktype == 12) ? _c('div', [_c('div', [_c('div', {
+      staticStyle: {
+        "margin-top": "10px"
+      }
+    }, [_vm._v("\n                                С кем\n                            ")]), _vm._v(" "), _c('div', {
+      staticStyle: {
+        "margin-top": "10px"
+      }
+    }, [_c('el-input', {
       staticClass: "eld-eld-body-select-medium",
       attrs: {
         "placeholder": "Фамилия Имя Отчество"
@@ -33583,7 +34703,19 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           "src": _vm.getPhotopreviewBlock(person.id, persondecreeBlock).photo64
         }
       })]) : _vm._e(), _vm._v(" "), _c('div', [_c('div', [_vm._v("\n                                            " + _vm._s(person.structuretree) + "\n                                        ")])])])
-    })], 2) : _vm._e(), _vm._v(" "), (persondecreeBlock.person != null) ? _c('div', [_vm._v("\n                                С кем – " + _vm._s(persondecreeBlock.person.surname5 + " " + persondecreeBlock.person.name5 + " " + persondecreeBlock.person.fathername5) + "\n                            ")]) : _vm._e()]), _vm._v(" "), _c('div', [_vm._v("\n                            С какого числа\n                        ")]), _vm._v(" "), _c('el-input', {
+    })], 2) : _vm._e(), _vm._v(" "), (_vm.personFromStructure.length > 0) ? _c('div', _vm._l((_vm.personFromStructure), function(person) {
+      return _c('div', [_vm._v("\n                                    С кем – " + _vm._s(person.surname2 + " " + person.name2 + " " + person.fathername2) + "\n                                    "), _c('el-button', {
+        attrs: {
+          "size": "mini",
+          "type": "warning"
+        },
+        on: {
+          "click": function($event) {
+            _vm.multipersonRemove(person, persondecreeBlock)
+          }
+        }
+      }, [_vm._v("Убрать")])], 1)
+    })) : _vm._e()]), _vm._v(" "), _c('div', [_vm._v("\n                            С какого числа\n                        ")]), _vm._v(" "), _c('el-input', {
       staticClass: "eld-eld-body-row-short",
       attrs: {
         "type": "date"
@@ -33668,7 +34800,15 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         },
         expression: "persondecreeBlock.optionnumber2"
       }
-    }), _vm._v(" "), _c('div', [_c('div', [_vm._v("\n                                Кому\n                            ")]), _vm._v(" "), _c('div', [_c('el-input', {
+    }), _vm._v(" "), _c('div', [_c('div', {
+      staticStyle: {
+        "margin-top": "10px"
+      }
+    }, [_vm._v("\n                                Кому\n                            ")]), _vm._v(" "), _c('div', {
+      staticStyle: {
+        "margin-top": "10px"
+      }
+    }, [_c('el-input', {
       staticClass: "eld-eld-body-select-medium",
       attrs: {
         "placeholder": "Фамилия Имя Отчество"
@@ -33703,7 +34843,19 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           "src": _vm.getPhotopreviewBlock(person.id, persondecreeBlock).photo64
         }
       })]) : _vm._e(), _vm._v(" "), _c('div', [_c('div', [_vm._v("\n                                            " + _vm._s(person.structuretree) + "\n                                        ")])])])
-    })], 2) : _vm._e(), _vm._v(" "), (persondecreeBlock.person != null) ? _c('div', [_vm._v("\n                                Кому – " + _vm._s(persondecreeBlock.person.surname3 + " " + persondecreeBlock.person.name3 + " " + persondecreeBlock.person.fathername3) + "\n                            ")]) : _vm._e()]), _vm._v(" "), _c('div', [_vm._v("\n                            Основание\n                        ")]), _vm._v(" "), _c('el-input', {
+    })], 2) : _vm._e(), _vm._v(" "), (_vm.personFromStructure.length > 0) ? _c('div', _vm._l((_vm.personFromStructure), function(person) {
+      return _c('div', [_vm._v("\n                                    Кому – " + _vm._s(person.surname2 + " " + person.name2 + " " + person.fathername2) + "\n                                    "), _c('el-button', {
+        attrs: {
+          "size": "mini",
+          "type": "warning"
+        },
+        on: {
+          "click": function($event) {
+            _vm.multipersonRemove(person, persondecreeBlock)
+          }
+        }
+      }, [_vm._v("Убрать")])], 1)
+    })) : _vm._e()]), _vm._v(" "), _c('div', [_vm._v("\n                            Основание\n                        ")]), _vm._v(" "), _c('el-input', {
       staticClass: "eld-eld-body-row-long",
       model: {
         value: (persondecreeBlock.optionstring1),
@@ -33751,7 +34903,15 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           _vm.deletePersondecreeblock(persondecreeBlock)
         }
       }
-    }, [_vm._v("Удалить блок")])], 1)], 1) : _vm._e(), _vm._v(" "), (persondecreeBlock.persondecreeblocktype == 14) ? _c('div', [_c('div', [_c('div', [_vm._v("\n                                Кому\n                            ")]), _vm._v(" "), _c('div', [_c('el-input', {
+    }, [_vm._v("Удалить блок")])], 1)], 1) : _vm._e(), _vm._v(" "), (persondecreeBlock.persondecreeblocktype == 14) ? _c('div', [_c('div', [_c('div', {
+      staticStyle: {
+        "margin-top": "10px"
+      }
+    }, [_vm._v("\n                                Кому\n                            ")]), _vm._v(" "), _c('div', {
+      staticStyle: {
+        "margin-top": "10px"
+      }
+    }, [_c('el-input', {
       staticClass: "eld-eld-body-select-medium",
       attrs: {
         "placeholder": "Фамилия Имя Отчество"
@@ -33786,7 +34946,19 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           "src": _vm.getPhotopreviewBlock(person.id, persondecreeBlock).photo64
         }
       })]) : _vm._e(), _vm._v(" "), _c('div', [_c('div', [_vm._v("\n                                            " + _vm._s(person.structuretree) + "\n                                        ")])])])
-    })], 2) : _vm._e(), _vm._v(" "), (persondecreeBlock.person != null) ? _c('div', [_vm._v("\n                                Кому – " + _vm._s(persondecreeBlock.person.surname3 + " " + persondecreeBlock.person.name3 + " " + persondecreeBlock.person.fathername3) + "\n                            ")]) : _vm._e()]), _vm._v(" "), _c('div', [_vm._v("\n                            Звание\n                        ")]), _vm._v(" "), _c('el-select', {
+    })], 2) : _vm._e(), _vm._v(" "), (_vm.personFromStructure.length > 0) ? _c('div', _vm._l((_vm.personFromStructure), function(person) {
+      return _c('div', [_vm._v("\n                                    Кому – " + _vm._s(person.surname2 + " " + person.name2 + " " + person.fathername2) + "\n                                    "), _c('el-button', {
+        attrs: {
+          "size": "mini",
+          "type": "warning"
+        },
+        on: {
+          "click": function($event) {
+            _vm.multipersonRemove(person, persondecreeBlock)
+          }
+        }
+      }, [_vm._v("Убрать")])], 1)
+    })) : _vm._e()]), _vm._v(" "), _c('div', [_vm._v("\n                            Звание\n                        ")]), _vm._v(" "), _c('el-select', {
       staticClass: "eld-eld-body-select-medium",
       attrs: {
         "clearable": "",
@@ -34290,7 +35462,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }, [_vm._v("Сформировать пункт приказа")])], 1), _vm._v(" "), _c('div', {
       staticClass: "persondecreeoperation-part-list-title"
     }, [_vm._v("\n                            Проект приказа\n                        ")]), _vm._v(" "), _c('div', [(persondecreeBlock.index != null && persondecreeBlock.index != 0) ? _c('span', [_vm._v(_vm._s(persondecreeBlock.index) + ".")]) : _vm._e(), _vm._v(" ПРЕДОСТАВИТЬ:\n                        ")]), _vm._v(" "), _vm._l((persondecreeBlock.persondecreeblocksubs), function(persondecreeblocksub) {
-      return (persondecreeblocksub.persondecreeblock == persondecreeBlock.id) ? _c('div', {
+      return (persondecreeblocksub.persondecreeblock == persondecreeBlock.id && persondecreeblocksub.parentpersondecreeblocksub == 0) ? _c('div', {
         staticClass: "persondecreeoperation-part-list-element"
       }, [_c('div', [_c('div', {
         staticClass: "persondecreeoperation-part-list-element-indent persondecreeoperation-part-list-element-margin"
@@ -34314,6 +35486,24 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
             }
           }
         }, [_vm._v("Удалить")])], 1)])])]) : _vm._e()
+      }), _vm._v(" "), _vm._l((persondecreeBlock.persondecreeblocksubs), function(persondecreeblocksubsub) {
+        return (persondecreeblocksubsub.parentpersondecreeblocksub == persondecreeblocksub.id) ? _c('div', [_c('div', [_vm._v("\n                                        c " + _vm._s(_vm.printDateDocument(persondecreeblocksubsub.subvaluedate1)) + " по " + _vm._s(_vm.printDateDocument(persondecreeblocksubsub.subvaluedate2)) + "\n                                    ")]), _vm._v(" "), _c('div', _vm._l((_vm.persondecreeOperations), function(decreeoperation) {
+          return (decreeoperation.persondecreeblocksub == persondecreeblocksubsub.id) ? _c('div', {
+            staticClass: "persondecreeoperation-part-list-element persondecreeoperation-part-list-element-margin-big"
+          }, [_c('div', {
+            staticClass: "persondecreeoperation-part-list-element-indent"
+          }, [(decreeoperation.personobject.actualRank != null) ? _c('span', [_vm._v(_vm._s(decreeoperation.personobject.actualRank.name4) + " ")]) : _vm._e(), _vm._v("\n                                                " + _vm._s(decreeoperation.personobject.surname2) + " " + _vm._s(decreeoperation.personobject.name2) + "\n                                                " + _vm._s(decreeoperation.personobject.fathername2) + _vm._s(_vm.commaspaceifnotnull(decreeoperation.personobject.positiontypestring)) + " " + _vm._s(decreeoperation.personobject.positiontype2string) + "\n                                                " + _vm._s(_vm.getStructureName(decreeoperation.personobject.structure)) + "а " + _vm._s(_vm.getFacultiStructureName(decreeoperation.personobject.structure)) + "\n                                            ")]), _vm._v(" "), _c('div', [_c('div', [_c('el-button', {
+            attrs: {
+              "size": "mini",
+              "type": "warning"
+            },
+            on: {
+              "click": function($event) {
+                _vm.removePersondecreeoperation(decreeoperation)
+              }
+            }
+          }, [_vm._v("Удалить")])], 1)])]) : _vm._e()
+        }))]) : _vm._e()
       })], 2)]) : _vm._e()
     }), _vm._v(" "), _c('div', [_c('el-button', {
       attrs: {
@@ -34324,19 +35514,15 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           _vm.deletePersondecreeblock(persondecreeBlock)
         }
       }
-    }, [_vm._v("Удалить блок")])], 1)], 2) : _vm._e(), _vm._v(" "), (persondecreeBlock.persondecreeblocktype == 16) ? _c('div', [_c('div', [(persondecreeBlock.optionarraypersonObjects != null && persondecreeBlock.optionarraypersonObjects.length != 0) ? _c('div', [_vm._v("\n                                Кого –\n                                "), _vm._l((persondecreeBlock.optionarraypersonObjects), function(person) {
-      return _c('div', [_vm._v("\n                                    " + _vm._s(person.surname4 + " " + person.name4 + " " + person.fathername4) + "\n                                    "), _c('el-button', {
-        attrs: {
-          "size": "mini",
-          "type": "warning"
-        },
-        on: {
-          "click": function($event) {
-            _vm.multipersonRemove(person, persondecreeBlock)
-          }
-        }
-      }, [_vm._v("Убрать")])], 1)
-    })], 2) : _vm._e(), _vm._v(" "), (persondecreeBlock.personssearchadditional) ? _c('div', [_c('div', [_vm._v("\n                                    Кого\n                                ")]), _vm._v(" "), _c('div', [_c('el-input', {
+    }, [_vm._v("Удалить блок")])], 1)], 2) : _vm._e(), _vm._v(" "), (persondecreeBlock.persondecreeblocktype == 16) ? _c('div', [_c('div', [_c('div', {
+      staticStyle: {
+        "margin-top": "10px"
+      }
+    }, [_vm._v("\n                                Кого\n                            ")]), _vm._v(" "), _c('div', {
+      staticStyle: {
+        "margin-top": "10px"
+      }
+    }, [_c('el-input', {
       staticClass: "eld-eld-body-select-medium",
       attrs: {
         "placeholder": "Фамилия Имя Отчество"
@@ -34357,27 +35543,33 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       staticClass: "eld-search-main"
     }, [_c('div', {
       staticClass: "eld-search-main-title"
-    }, [_vm._v("\n                                        Результаты поиска\n                                    ")]), _vm._v(" "), _vm._l((persondecreeBlock.personssearch), function(person) {
+    }, [_vm._v("\n                                    Результаты поиска\n                                ")]), _vm._v(" "), _vm._l((persondecreeBlock.personssearch), function(person) {
       return _c('div', {
         staticClass: "eld-search-element",
         on: {
           "click": function($event) {
-            _vm.selectPersonBlockNonAutoMultiselect(person.id, persondecreeBlock)
+            _vm.selectPersonBlockNonAuto(person.id, persondecreeBlock)
           }
         }
-      }, [_c('div', [_vm._v("\n                                            " + _vm._s(person.surname) + " " + _vm._s(person.name) + " " + _vm._s(person.fathername) + "\n                                        ")]), _vm._v(" "), _c('div', [_vm._v("\n                                            " + _vm._s(person.positiontypestring) + "\n                                        ")]), _vm._v(" "), (_vm.hasPhotopreviewBlock(person.id, persondecreeBlock)) ? _c('div', [_c('img', {
+      }, [_c('div', [_vm._v("\n                                        " + _vm._s(person.surname) + " " + _vm._s(person.name) + " " + _vm._s(person.fathername) + "\n                                    ")]), _vm._v(" "), _c('div', [_vm._v("\n                                        " + _vm._s(person.positiontypestring) + "\n                                    ")]), _vm._v(" "), (_vm.hasPhotopreviewBlock(person.id, persondecreeBlock)) ? _c('div', [_c('img', {
         staticClass: "eld-search-element-image",
         attrs: {
           "src": _vm.getPhotopreviewBlock(person.id, persondecreeBlock).photo64
         }
-      })]) : _vm._e(), _vm._v(" "), _c('div', [_c('div', [_vm._v("\n                                                " + _vm._s(person.structuretree) + "\n                                            ")])])])
-    })], 2) : _vm._e()]) : _c('div', [_c('el-button', {
-      on: {
-        "click": function($event) {
-          _vm.multipersonAddAdditional(persondecreeBlock)
+      })]) : _vm._e(), _vm._v(" "), _c('div', [_c('div', [_vm._v("\n                                            " + _vm._s(person.structuretree) + "\n                                        ")])])])
+    })], 2) : _vm._e(), _vm._v(" "), (_vm.personFromStructure.length > 0) ? _c('div', _vm._l((_vm.personFromStructure), function(person) {
+      return _c('div', [_vm._v("\n                                    Кого – " + _vm._s(person.surname2 + " " + person.name2 + " " + person.fathername2) + "\n                                    "), _c('el-button', {
+        attrs: {
+          "size": "mini",
+          "type": "warning"
+        },
+        on: {
+          "click": function($event) {
+            _vm.multipersonRemove(person, persondecreeBlock)
+          }
         }
-      }
-    }, [_vm._v("Добавить сотрудника")])], 1), _vm._v(" "), _c('div')]), _vm._v(" "), _c('div', [_c('div', [_vm._v("\n                                Вид командировки\n                            ")]), _vm._v(" "), _c('el-select', {
+      }, [_vm._v("Убрать")])], 1)
+    })) : _vm._e()]), _vm._v(" "), _c('div', [_c('div', [_vm._v("\n                                Вид командировки\n                            ")]), _vm._v(" "), _c('el-select', {
       staticClass: "eld-eld-body-select-medium",
       attrs: {
         "clearable": "",
@@ -34573,7 +35765,41 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           _vm.deletePersondecreeblock(persondecreeBlock)
         }
       }
-    }, [_vm._v("Удалить блок")])], 1)], 2) : _vm._e(), _vm._v(" "), (persondecreeBlock.persondecreeblocktype == 17) ? _c('div', [_c('div', [_c('div', [_vm._v("\n                                Кого\n                            ")]), _vm._v(" "), _c('div', [_c('el-input', {
+    }, [_vm._v("Удалить блок")])], 1)], 2) : _vm._e(), _vm._v(" "), (persondecreeBlock.persondecreeblocktype == 17) ? _c('div', [_c('div', [_c('div', [_vm._v("\n                                На должность\n                            ")]), _vm._v(" "), _c('div', {
+      staticClass: "eld-eld-body-row-flex",
+      staticStyle: {
+        "margin-top": "10px"
+      }
+    }, [_c('el-select', {
+      staticClass: "eld-eld-body-select-medium",
+      attrs: {
+        "clearable": "",
+        "placeholder": "Должность"
+      },
+      model: {
+        value: (persondecreeBlock.optionstring5),
+        callback: function($$v) {
+          persondecreeBlock.optionstring5 = $$v
+        },
+        expression: "persondecreeBlock.optionstring5"
+      }
+    }, _vm._l((_vm.persondecreeblocksubtypes), function(persondecreeblocksubtype) {
+      return (persondecreeblocksubtype.persondecreeblocktype == 17) ? _c('el-option', {
+        key: persondecreeblocksubtype.id,
+        attrs: {
+          "label": persondecreeblocksubtype.name,
+          "value": persondecreeblocksubtype.name
+        }
+      }) : _vm._e()
+    }))], 1), _vm._v(" "), _c('div', {
+      staticStyle: {
+        "margin-top": "10px"
+      }
+    }, [_vm._v("\n                                Кого\n                            ")]), _vm._v(" "), _c('div', {
+      staticStyle: {
+        "margin-top": "10px"
+      }
+    }, [_c('el-input', {
       staticClass: "eld-eld-body-select-medium",
       attrs: {
         "placeholder": "Фамилия Имя Отчество"
@@ -34608,38 +35834,72 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           "src": _vm.getPhotopreviewBlock(person.id, persondecreeBlock).photo64
         }
       })]) : _vm._e(), _vm._v(" "), _c('div', [_c('div', [_vm._v("\n                                            " + _vm._s(person.structuretree) + "\n                                        ")])])])
-    })], 2) : _vm._e(), _vm._v(" "), (persondecreeBlock.person != null) ? _c('div', [_vm._v("\n                                Кого – " + _vm._s(persondecreeBlock.person.surname4 + " " + persondecreeBlock.person.name4 + " " + persondecreeBlock.person.fathername4) + "\n                            ")]) : _vm._e()]), _vm._v(" "), _c('div', [(persondecreeBlock.person != null) ? _c('div', [_c('div', [_c('div', [_vm._v("\n                                        В связи с чем\n                                    ")]), _vm._v(" "), _c('el-select', {
-      staticClass: "eld-eld-body-select-long",
+    })], 2) : _vm._e(), _vm._v(" "), (_vm.personFromStructure.length > 0) ? _c('div', _vm._l((_vm.personFromStructure), function(person) {
+      return _c('div', [_vm._v("\n                                    Кого – " + _vm._s(person.surname2 + " " + person.name2 + " " + person.fathername2) + "\n                                    "), _c('el-button', {
+        attrs: {
+          "size": "mini",
+          "type": "warning"
+        },
+        on: {
+          "click": function($event) {
+            _vm.multipersonRemove(person, persondecreeBlock)
+          }
+        }
+      }, [_vm._v("Убрать")])], 1)
+    })) : _vm._e()]), _vm._v(" "), _c('div', [_c('div', {
+      staticClass: "eld-eld-body-row-flex",
+      staticStyle: {
+        "margin-top": "10px"
+      }
+    }, [_c('div', [_vm._v("\n                                    Уровень образования "), _c('br'), _vm._v(" "), _c('el-select', {
+      staticClass: "eld-eld-body-select-medium input-padding-right-small",
       attrs: {
-        "placeholder": "В связи с"
+        "clearable": "",
+        "placeholder": "Уровень образования"
       },
       model: {
-        value: (persondecreeBlock.optionnumber4),
+        value: (persondecreeBlock.optionnumber5),
         callback: function($$v) {
-          persondecreeBlock.optionnumber4 = $$v
+          persondecreeBlock.optionnumber5 = $$v
         },
-        expression: "persondecreeBlock.optionnumber4"
+        expression: "persondecreeBlock.optionnumber5"
       }
-    }, _vm._l((_vm.appointtypes), function(appointtype) {
-      return (appointtype.civil == 1) ? _c('el-option', {
-        key: appointtype.id,
+    }, _vm._l((_vm.educationlevels), function(educationlevel) {
+      return _c('el-option', {
+        key: educationlevel.id,
         attrs: {
-          "label": appointtype.name,
-          "value": appointtype.id
+          "label": educationlevel.levelname + ' ' + educationlevel.levelcomment,
+          "value": educationlevel.id
         }
-      }) : _vm._e()
-    }))], 1)]) : _vm._e(), _vm._v(" "), _c('div', [_c('br'), _vm._v(" "), _c('el-button', {
+      })
+    }))], 1), _vm._v(" "), _c('div', [_vm._v("\n                                    Ступень "), _c('br'), _vm._v(" "), _c('el-select', {
+      staticClass: "eld-eld-body-select-medium input-padding-left-small",
       attrs: {
-        "type": "primary",
-        "plain": ""
+        "clearable": "",
+        "placeholder": "Уровень образования"
       },
-      on: {
-        "click": function($event) {
-          _vm.selectAllPersonInStructure(persondecreeBlock, 1)
-        }
+      model: {
+        value: (persondecreeBlock.optionnumber6),
+        callback: function($$v) {
+          persondecreeBlock.optionnumber6 = $$v
+        },
+        expression: "persondecreeBlock.optionnumber6"
       }
-    }, [_vm._v("Выбрать подразделение")])], 1), _vm._v(" "), _c('div', [_vm._v("\n                                С какого числа (оставить пустым, если совпадает с датой приказа)\n                            ")]), _vm._v(" "), _c('el-input', {
-      staticClass: "eld-eld-body-row-short",
+    }, _vm._l((_vm.educationstages), function(educationstage) {
+      return _c('el-option', {
+        key: educationstage.id,
+        attrs: {
+          "label": educationstage.name,
+          "value": educationstage.id
+        }
+      })
+    }))], 1)]), _vm._v(" "), _c('div', {
+      staticClass: "eld-eld-body-row-flex",
+      staticStyle: {
+        "margin-top": "10px"
+      }
+    }, [_c('div', [_vm._v("\n                                    Дата решения комиссии "), _c('br'), _vm._v(" "), _c('el-input', {
+      staticClass: "eld-eld-body-row-small el-input-bold",
       attrs: {
         "type": "date"
       },
@@ -34650,18 +35910,73 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         },
         expression: "persondecreeBlock.optiondate1String"
       }
-    }), _vm._v(" "), (persondecreeBlock.person != null && !persondecreeBlock.person.military) ? _c('div', [_c('div', [_vm._v("\n                                    Какое звание присвоить (оставить пустым, если никакое)\n                                ")]), _vm._v(" "), _c('el-select', {
+    })], 1), _vm._v(" "), _c('div', {
+      staticStyle: {
+        "margin-left": "100px"
+      }
+    }, [_vm._v("\n                                    Номер заседания комиссии"), _c('br'), _vm._v(" "), _c('el-input', {
+      staticClass: "eld-eld-body-row-short el-input-bold",
+      attrs: {
+        "type": "number"
+      },
+      nativeOn: {
+        "input": function($event) {
+          _vm.jobperiodvacationdurationsocialchange($event, persondecreeBlock)
+        }
+      },
+      model: {
+        value: (persondecreeBlock.optionnumber7),
+        callback: function($$v) {
+          persondecreeBlock.optionnumber7 = $$v
+        },
+        expression: "persondecreeBlock.optionnumber7"
+      }
+    })], 1), _vm._v(" "), _c('div', {
+      staticStyle: {
+        "margin-left": "100px"
+      }
+    }, [_vm._v("\n                                    Форма обучения "), _c('br'), _vm._v(" "), _c('el-select', {
+      attrs: {
+        "clearable": "",
+        "placeholder": "Форма обучения"
+      },
+      model: {
+        value: (persondecreeBlock.optionnumber8),
+        callback: function($$v) {
+          persondecreeBlock.optionnumber8 = $$v
+        },
+        expression: "persondecreeBlock.optionnumber8"
+      }
+    }, _vm._l((_vm.educationtypes), function(educationtype) {
+      return _c('el-option', {
+        key: educationtype.id,
+        attrs: {
+          "label": educationtype.name,
+          "value": educationtype.id
+        }
+      })
+    }))], 1)]), _vm._v(" "), _c('div', [_c('br'), _vm._v(" "), _c('el-button', {
+      attrs: {
+        "type": "primary",
+        "plain": ""
+      },
+      on: {
+        "click": function($event) {
+          _vm.selectAllPersonInStructure(persondecreeBlock, 3)
+        }
+      }
+    }, [_vm._v("Выбрать взвод")])], 1), _vm._v(" "), (_vm.structureName.length > 0 && _vm.courseName.length > 0 && _vm.facultyName.length > 0 && _vm.specialityName.length > 0) ? _c('div', [_vm._v("\n                                " + _vm._s(_vm.facultyName) + "," + _vm._s(_vm.specialityName) + ", " + _vm._s(_vm.courseName) + ", " + _vm._s(_vm.structureName) + "\n                            ")]) : _vm._e(), _vm._v(" "), (persondecreeBlock.person != null && persondecreeBlock.optionstring5 != 'Студент') ? _c('div', [_c('div', [_vm._v("\n                                    Какое звание присвоить (оставить пустым, если никакое)\n                                ")]), _vm._v(" "), _c('el-select', {
       staticClass: "eld-eld-body-select-medium",
       attrs: {
         "clearable": "",
         "placeholder": "Звание"
       },
       model: {
-        value: (persondecreeBlock.optionnumber2),
+        value: (persondecreeBlock.optionnumber9),
         callback: function($$v) {
-          persondecreeBlock.optionnumber2 = $$v
+          persondecreeBlock.optionnumber9 = $$v
         },
-        expression: "persondecreeBlock.optionnumber2"
+        expression: "persondecreeBlock.optionnumber9"
       }
     }, _vm._l((_vm.ranks), function(rank) {
       return _c('el-option', {
@@ -34671,7 +35986,23 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           "value": rank.id
         }
       })
-    }))], 1) : _vm._e()], 1), _vm._v(" "), _c('div', [_c('br'), _vm._v(" "), _c('el-button', {
+    }))], 1) : _vm._e(), _vm._v(" "), _c('div', {
+      staticStyle: {
+        "margin-top": "10px"
+      }
+    }, [_vm._v("\n                                Дата поступления\n                            ")]), _vm._v(" "), _c('el-input', {
+      staticClass: "eld-eld-body-row-short",
+      attrs: {
+        "type": "date"
+      },
+      model: {
+        value: (persondecreeBlock.optiondate2String),
+        callback: function($$v) {
+          persondecreeBlock.optiondate2String = $$v
+        },
+        expression: "persondecreeBlock.optiondate2String"
+      }
+    })], 1), _vm._v(" "), _c('div', [_c('br'), _vm._v(" "), _c('el-button', {
       attrs: {
         "type": "primary",
         "plain": ""
@@ -34683,23 +36014,45 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       }
     }, [_vm._v("Сформировать пункт приказа")])], 1), _vm._v(" "), _c('div', {
       staticClass: "persondecreeoperation-part-list-title"
-    }, [_vm._v("\n                            Проект приказа\n                        ")]), _vm._v(" "), _c('div', [(persondecreeBlock.index != null && persondecreeBlock.index != 0) ? _c('span', [_vm._v(_vm._s(persondecreeBlock.index) + ".")]) : _vm._e(), _vm._v(" ЗАЧИСЛИТЬ:\n                        ")]), _vm._v(" "), _c('div', [_vm._l((_vm.persondecreeOperations), function(decreeoperation) {
-      return (decreeoperation.persondecreeblock == persondecreeBlock.id) ? _c('div', {
-        staticClass: "persondecreeoperation-part-list-element persondecreeoperation-part-list-element-margin-big"
-      }, [_c('div', [_c('div', [(decreeoperation.personobject != null && decreeoperation.personobject.military) ? _c('div', {
-        staticClass: "persondecreeoperation-part-list-element-intro persondecreeoperation-part-list-element-indent"
-      }, [(decreeoperation.personobject.actualRank != null) ? _c('span', [_vm._v(_vm._s(decreeoperation.personobject.actualRank.name4) + " ")]) : _vm._e(), _vm._v("\n                                            " + _vm._s(decreeoperation.personobject.surname4) + " " + _vm._s(decreeoperation.personobject.name4) + "\n                                            " + _vm._s(decreeoperation.personobject.fathername4) + "\n                                            " + _vm._s(_vm.getAppointtype(decreeoperation.optionnumber4)) + " на должность " + _vm._s(decreeoperation.optionstring4) + "\n                                            "), (decreeoperation.optiondate1 != null) ? _c('span', [_vm._v(" с " + _vm._s(_vm.printDateDocument(decreeoperation.optiondate1)))]) : _vm._e(), _vm._v("\n                                            ,\n                                            освободив его от должности " + _vm._s(decreeoperation.personobject.positiontree2) + ".\n\n                                            "), (decreeoperation.optionnumber2 != null && decreeoperation.optionnumber2 > 0) ? _c('span', [_vm._v("Присвоить специальное звание «" + _vm._s(_vm.getRank(decreeoperation.optionnumber2)) + "».")]) : _vm._e()]) : _vm._e()])]), _vm._v(" "), _c('div', [_c('div', [_c('div', [_c('el-button', {
+    }, [_vm._v("\n                            Проект приказа\n                        ")]), _vm._v(" "), _c('div', [(persondecreeBlock.index != null && persondecreeBlock.index != 0) ? _c('span', [_vm._v(_vm._s(persondecreeBlock.index) + ".")]) : _vm._e(), _vm._v(" ЗАЧИСЛИТЬ:\n                            ")]), _vm._v(" "), _vm._l((persondecreeBlock.persondecreeblocksubs), function(persondecreeblocksub) {
+      return (persondecreeblocksub.persondecreeblock == persondecreeBlock.id && persondecreeblocksub.parentpersondecreeblocksub == 0) ? _c('div', {
+        staticClass: "persondecreeoperation-part-list-element"
+      }, [_c('div', [_c('div', {
+        staticClass: "persondecreeoperation-part-list-element-indent persondecreeoperation-part-list-element-margin"
+      }, [_c('span', {
         attrs: {
-          "size": "mini",
-          "type": "warning"
-        },
-        on: {
-          "click": function($event) {
-            _vm.removePersondecreeoperation(decreeoperation)
-          }
+          "if": "persondecreeBlock.index != null && persondecreeBlock.index != 0 && persondecreeblocksub.index != 0"
         }
-      }, [_vm._v("Удалить")])], 1)])])]) : _vm._e()
-    }), _vm._v(" "), _c('br')], 2), _vm._v(" "), _c('div', [_c('el-button', {
+      }, [_vm._v(_vm._s(persondecreeBlock.index) + "." + _vm._s(persondecreeblocksub.index) + ".")]), _vm._v("\n                                        " + _vm._s(_vm.provideEnrollAStudent(persondecreeblocksub)) + "\n                                    ")]), _vm._v(" "), _vm._l((persondecreeBlock.persondecreeblocksubs), function(persondecreeblocksubsub) {
+        return (persondecreeblocksubsub.parentpersondecreeblocksub == persondecreeblocksub.id) ? _c('div', {
+          staticClass: "persondecreeoperation-part-list-element-indent persondecreeoperation-part-list-element-margin"
+        }, [_c('div', {
+          staticClass: "persondecreeoperation-part-list-element-indent persondecreeoperation-part-list-element-margin"
+        }, [_c('span', [_vm._v(_vm._s(_vm.provideEnrollAStudent(persondecreeblocksubsub)))])]), _vm._v(" "), _c('div', _vm._l((persondecreeBlock.persondecreeblocksubs), function(persondecreeblocksubsubsub) {
+          return (persondecreeblocksubsubsub.parentpersondecreeblocksub == persondecreeblocksubsub.id) ? _c('div', [_c('div', {
+            staticClass: "persondecreeoperation-part-list-element-indent persondecreeoperation-part-list-element-margin"
+          }, [_c('span', [_vm._v("\"" + _vm._s(persondecreeblocksubsubsub.subvaluestring1) + "\":")])]), _vm._v(" "), _c('div', _vm._l((persondecreeBlock.persondecreeblocksubs), function(persondecreeblocksubsubsubsub) {
+            return (persondecreeblocksubsubsubsub.parentpersondecreeblocksub == persondecreeblocksubsubsub.id) ? _c('div', [_c('div', {
+              staticClass: "persondecreeoperation-part-list-element-indent persondecreeoperation-part-list-element-margin"
+            }, [_c('span', [_vm._v(_vm._s(persondecreeblocksubsubsubsub.subvaluestring1) + ":")])]), _vm._v(" "), _vm._l((_vm.persondecreeOperations), function(decreeoperation) {
+              return (decreeoperation.persondecreeblocksub == persondecreeblocksubsubsubsub.id) ? _c('div', {
+                staticClass: "persondecreeoperation-part-list-element"
+              }, [_c('div', [_vm._v("\n                                                                " + _vm._s(decreeoperation.personobject.surname2) + " " + _vm._s(decreeoperation.personobject.name2) + "\n                                                                " + _vm._s(decreeoperation.personobject.fathername2) + " (" + _vm._s(decreeoperation.personobject.numpersonal) + ");\n                                                            ")]), _vm._v(" "), _c('div', [_c('div', [_c('el-button', {
+                attrs: {
+                  "size": "mini",
+                  "type": "warning"
+                },
+                on: {
+                  "click": function($event) {
+                    _vm.removePersondecreeoperation(decreeoperation)
+                  }
+                }
+              }, [_vm._v("Удалить")])], 1)])]) : _vm._e()
+            })], 2) : _vm._e()
+          }))]) : _vm._e()
+        }))]) : _vm._e()
+      })], 2)]) : _vm._e()
+    }), _vm._v(" "), _c('div', [_c('el-button', {
       attrs: {
         "type": "danger"
       },
@@ -34708,7 +36061,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           _vm.deletePersondecreeblock(persondecreeBlock)
         }
       }
-    }, [_vm._v("Удалить блок")])], 1)]) : _vm._e(), _vm._v(" "), (persondecreeBlock.persondecreeblocktype == 18) ? _c('div', [_c('div', {
+    }, [_vm._v("Удалить блок")])], 1)], 2) : _vm._e(), _vm._v(" "), (persondecreeBlock.persondecreeblocktype == 18) ? _c('div', [_c('div', {
       staticClass: "eld-eld-body-row-flex",
       staticStyle: {
         "margin-top": "20px"
@@ -34956,6 +36309,19 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       }
     }, [_c('div', {
       staticClass: "eld-eld-body-row-long"
+    }, [_vm._v("\n                                Перечень не сдавших предметов:\n                                "), _c('el-input', {
+      model: {
+        value: (persondecreeBlock.optionstring7),
+        callback: function($$v) {
+          persondecreeBlock.optionstring7 = $$v
+        },
+        expression: "persondecreeBlock.optionstring7"
+      }
+    })], 1), _vm._v(" "), _c('div', {
+      staticClass: "eld-eld-body-row-long",
+      staticStyle: {
+        "margin-left": "20px"
+      }
     }, [_vm._v("\n                                Основание:\n                                "), _c('el-input', {
       model: {
         value: (persondecreeBlock.optionstring6),
@@ -34995,7 +36361,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
             staticClass: "persondecreeoperation-part-list-element persondecreeoperation-part-list-element-margin-big"
           }, [_c('div', {
             staticClass: "persondecreeoperation-part-list-element-indent"
-          }, [_vm._v("\n                                            " + _vm._s(decreeoperation.personobject.actualRank.name) + "\n                                            " + _vm._s(decreeoperation.personobject.surname4) + " " + _vm._s(decreeoperation.personobject.name4) + "\n                                            " + _vm._s(decreeoperation.personobject.fathername4) + _vm._s(_vm.commaspaceifnotnull(decreeoperation.personobject.positiontree4)) + "\n                                            " + _vm._s(decreeoperation.personobject.positiontree4) + ",\n                                                " + _vm._s(decreeoperation.personobject.surname2) + " " + _vm._s(decreeoperation.personobject.name2) + "\n                                                " + _vm._s(decreeoperation.personobject.fathername2) + _vm._s(_vm.commaspaceifnotnull(decreeoperation.personobject.positiontree3)) + " " + _vm._s(decreeoperation.personobject.positiontree3) + "\n                                                "), (decreeoperation.optionnumber8 == 1) ? _c('span', [_vm._v("в распоряжение начальника " + _vm._s(decreeoperation.optionstring4) + " учреждения \"" + _vm._s(decreeoperation.optionstring5) + "\".")]) : _vm._e()]), _vm._v(" "), _c('div', [_c('div', [_c('el-button', {
+          }, [(decreeoperation.personobject.actualRank != null) ? _c('span', [_vm._v(_vm._s(decreeoperation.personobject.actualRank.name4) + " ")]) : _vm._e(), _vm._v("\n                                                " + _vm._s(decreeoperation.personobject.surname2) + " " + _vm._s(decreeoperation.personobject.name2) + "\n                                                " + _vm._s(decreeoperation.personobject.fathername2) + _vm._s(_vm.commaspaceifnotnull(decreeoperation.personobject.positiontypestring)) + " " + _vm._s(decreeoperation.personobject.positiontype2string) + "\n                                                " + _vm._s(_vm.getStructureName(decreeoperation.personobject.structure)) + "а " + _vm._s(_vm.getFacultiStructureName(decreeoperation.personobject.structure)) + "\n                                            ")]), _vm._v(" "), _c('div', [_c('div', [_c('el-button', {
             attrs: {
               "size": "mini",
               "type": "warning"
@@ -35381,6 +36747,268 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
               }
             }, [_vm._v("Удалить")])], 1)])]) : _vm._e()
           })), _vm._v(" "), _c('div', [_vm._v("\n                                                Основание: " + _vm._s(persondecreeblocksubsubsub.subvaluestring1) + ".\n                                            ")])]) : _vm._e()
+        }))]) : _vm._e()
+      })], 2)]) : _vm._e()
+    }), _vm._v(" "), _c('div', [_c('el-button', {
+      attrs: {
+        "type": "danger"
+      },
+      on: {
+        "click": function($event) {
+          _vm.deletePersondecreeblock(persondecreeBlock)
+        }
+      }
+    }, [_vm._v("Удалить блок")])], 1)], 2) : _vm._e(), _vm._v(" "), (persondecreeBlock.persondecreeblocktype == 21) ? _c('div', [_c('div', {
+      staticClass: "eld-eld-body-row-flex-spacebetween"
+    }, [_c('div', [_c('div', [_vm._v("\n                                    Перевести куда\n                                ")]), _vm._v(" "), _c('el-select', {
+      staticClass: "eld-eld-body-select-medium",
+      attrs: {
+        "clearable": "",
+        "placeholder": ""
+      },
+      model: {
+        value: (persondecreeBlock.optionnumber2),
+        callback: function($$v) {
+          persondecreeBlock.optionnumber2 = $$v
+        },
+        expression: "persondecreeBlock.optionnumber2"
+      }
+    }, _vm._l((_vm.persondecreeblocksubtypes), function(persondecreeblocksubtype) {
+      return (persondecreeblocksubtype.persondecreeblocktype == 21) ? _c('el-option', {
+        key: persondecreeblocksubtype.id,
+        attrs: {
+          "label": persondecreeblocksubtype.name,
+          "value": persondecreeblocksubtype.id
+        }
+      }) : _vm._e()
+    }))], 1)]), _vm._v(" "), (persondecreeBlock.optionnumber2 == 18) ? _c('div', [_c('div', {
+      staticStyle: {
+        "margin-top": "10px"
+      }
+    }, [_vm._v("\n                                По итогам\n                            ")]), _vm._v(" "), _c('el-input', {
+      staticClass: "eld-eld-body-row-long",
+      attrs: {
+        "placeholder": "летней экзаменационной сессии 2019-2020 ..."
+      },
+      model: {
+        value: (persondecreeBlock.optionstring1),
+        callback: function($$v) {
+          persondecreeBlock.optionstring1 = $$v
+        },
+        expression: "persondecreeBlock.optionstring1"
+      }
+    }), _vm._v(" "), _c('div', {
+      staticClass: "eld-eld-body-row-flex"
+    }, [_c('div', {
+      staticStyle: {
+        "margin-top": "10px"
+      }
+    }, [_vm._v("\n                                    Кого\n                                    "), _c('div', {
+      staticStyle: {
+        "margin-top": "10px"
+      }
+    }, [_c('el-button', {
+      attrs: {
+        "type": "primary",
+        "plain": ""
+      },
+      on: {
+        "click": function($event) {
+          _vm.selectAllPersonInStructure(persondecreeBlock, 4)
+        }
+      }
+    }, [_vm._v("Выбрать взвод")])], 1), _vm._v(" "), _c('div', {
+      staticStyle: {
+        "margin-top": "15px"
+      }
+    }, [_c('el-input', {
+      staticClass: "eld-eld-body-select-medium",
+      attrs: {
+        "placeholder": "Фамилия Имя Отчество"
+      },
+      on: {
+        "input": function($event) {
+          _vm.searchPersonsBlock(persondecreeBlock)
+        }
+      },
+      model: {
+        value: (persondecreeBlock.fiosearch),
+        callback: function($$v) {
+          persondecreeBlock.fiosearch = $$v
+        },
+        expression: "persondecreeBlock.fiosearch"
+      }
+    })], 1), _vm._v(" "), (_vm.hasSearchResultsBlock(persondecreeBlock)) ? _c('div', {
+      staticClass: "eld-search-main"
+    }, [_c('div', {
+      staticClass: "eld-search-main-title"
+    }, [_vm._v("\n                                            Результаты поиска\n                                        ")]), _vm._v(" "), _vm._l((persondecreeBlock.personssearch), function(person) {
+      return _c('div', {
+        staticClass: "eld-search-element",
+        on: {
+          "click": function($event) {
+            _vm.selectPersonBlockNonAuto(person.id, persondecreeBlock)
+          }
+        }
+      }, [_c('div', [_vm._v("\n                                                " + _vm._s(person.surname) + " " + _vm._s(person.name) + " " + _vm._s(person.fathername) + "\n                                            ")]), _vm._v(" "), _c('div', [_vm._v("\n                                                " + _vm._s(person.positiontypestring) + "\n                                            ")]), _vm._v(" "), (_vm.hasPhotopreviewBlock(person.id, persondecreeBlock)) ? _c('div', [_c('img', {
+        staticClass: "eld-search-element-image",
+        attrs: {
+          "src": _vm.getPhotopreviewBlock(person.id, persondecreeBlock).photo64
+        }
+      })]) : _vm._e(), _vm._v(" "), _c('div', [_c('div', [_vm._v("\n                                                    " + _vm._s(person.structuretree) + "\n                                                ")])])])
+    })], 2) : _vm._e(), _vm._v(" "), (_vm.personFromStructure != null) ? _c('div', _vm._l((_vm.personFromStructure), function(person) {
+      return _c('div', [_vm._v("\n                                            Кого – " + _vm._s(person.surname2 + " " + person.name2 + " " + person.fathername2) + "\n                                            "), _c('el-button', {
+        attrs: {
+          "size": "mini",
+          "type": "warning"
+        },
+        on: {
+          "click": function($event) {
+            _vm.multipersonRemove(person, persondecreeBlock)
+          }
+        }
+      }, [_vm._v("Убрать")])], 1)
+    })) : _vm._e()])]), _vm._v(" "), _c('div', {
+      staticClass: "eld-eld-body-row-flex",
+      staticStyle: {
+        "margin-top": "20px"
+      }
+    }, [_c('div', {
+      staticClass: "eld-eld-body-row-short ",
+      staticStyle: {
+        "margin-left": "10px"
+      }
+    }, [_vm._v("\n                                    С какого числа\n                                    "), _c('el-input', {
+      attrs: {
+        "type": "date"
+      },
+      model: {
+        value: (persondecreeBlock.optiondate1String),
+        callback: function($$v) {
+          persondecreeBlock.optiondate1String = $$v
+        },
+        expression: "persondecreeBlock.optiondate1String"
+      }
+    })], 1), _vm._v(" "), _c('div', {
+      staticClass: "eld-eld-body-row-short ",
+      staticStyle: {
+        "text-align": "center",
+        "margin-left": "10px",
+        "line-height": "16px"
+      }
+    }, [_vm._v("\n                                    Условно\n                                    "), _c('div', {
+      staticStyle: {
+        "display": "flex",
+        "flex-direction": "column",
+        "align-items": "center",
+        "margin-top": "12px"
+      }
+    }, [_c('el-checkbox', {
+      staticClass: "checkbox-big",
+      model: {
+        value: (persondecreeBlock.checkboxdismiss),
+        callback: function($$v) {
+          persondecreeBlock.checkboxdismiss = $$v
+        },
+        expression: "persondecreeBlock.checkboxdismiss"
+      }
+    })], 1)])]), _vm._v(" "), (persondecreeBlock.checkboxdismiss == true) ? _c('div', [_c('div', {
+      staticClass: "eld-eld-body-row-flex",
+      staticStyle: {
+        "margin-top": "10px"
+      }
+    }, [_c('div', {
+      staticClass: "eld-eld-body-row-short "
+    }, [_vm._v("\n                                        Дата ликвидации задолжности\n                                        "), _c('el-input', {
+      attrs: {
+        "type": "date"
+      },
+      model: {
+        value: (persondecreeBlock.optiondate2String),
+        callback: function($$v) {
+          persondecreeBlock.optiondate2String = $$v
+        },
+        expression: "persondecreeBlock.optiondate2String"
+      }
+    })], 1)])]) : _vm._e(), _vm._v(" "), _c('div', {
+      staticClass: "eld-eld-body-row-flex"
+    }, [_c('div', {
+      staticStyle: {
+        "margin-top": "20px"
+      }
+    }, [_c('el-button', {
+      attrs: {
+        "type": "primary",
+        "plain": ""
+      },
+      on: {
+        "click": function($event) {
+          _vm.selectAllPersonInStructure(persondecreeBlock, 2)
+        }
+      }
+    }, [_vm._v("Выбрать курс/семестр")])], 1), _vm._v(" "), _c('div', {
+      staticStyle: {
+        "margin-top": "28px"
+      }
+    }, [_vm._v("\n                                    " + _vm._s(_vm.structureNewName) + "\n                                ")])])], 1) : _vm._e(), _vm._v(" "), (_vm.personFromStructure.length != 0) ? _c('div', {
+      staticClass: "eld-eld-body-row-flex",
+      staticStyle: {
+        "margin-top": "10px"
+      }
+    }, [_c('div', {
+      staticClass: "eld-eld-body-row-long"
+    }, [_vm._v("\n                                Основание:\n                                "), _c('el-input', {
+      model: {
+        value: (persondecreeBlock.optionstring2),
+        callback: function($$v) {
+          persondecreeBlock.optionstring2 = $$v
+        },
+        expression: "persondecreeBlock.optionstring2"
+      }
+    })], 1)]) : _vm._e(), _vm._v(" "), _c('div', [_c('br'), _vm._v(" "), _c('el-button', {
+      attrs: {
+        "type": "primary",
+        "plain": ""
+      },
+      on: {
+        "click": function($event) {
+          _vm.addPersonblockelement(persondecreeBlock)
+        }
+      }
+    }, [_vm._v("Сформировать пункт приказа")])], 1), _vm._v(" "), _c('div', {
+      staticClass: "persondecreeoperation-part-list-title"
+    }, [_vm._v("\n                            Проект приказа\n                           ")]), _vm._v(" "), _c('div', [(persondecreeBlock.index != null && persondecreeBlock.index != 0) ? _c('span', [_vm._v(_vm._s(persondecreeBlock.index) + ".")]) : _vm._e(), _vm._v(" ПЕРЕВЕСТИ:\n                           ")]), _vm._v(" "), _vm._l((persondecreeBlock.persondecreeblocksubs), function(persondecreeblocksub) {
+      return (persondecreeblocksub.persondecreeblock == persondecreeBlock.id && persondecreeblocksub.parentpersondecreeblocksub == 0) ? _c('div', {
+        staticClass: "persondecreeoperation-part-list-element"
+      }, [_c('div', [_c('div', {
+        staticClass: "persondecreeoperation-part-list-element-indent persondecreeoperation-part-list-element-margin"
+      }, [_vm._v("\n                                       " + _vm._s(_vm.provideTranslateSubBlockText(persondecreeblocksub)) + "\n                                   ")]), _vm._v(" "), _vm._l((persondecreeBlock.persondecreeblocksubs), function(persondecreeblocksubsub) {
+        return (persondecreeblocksubsub.parentpersondecreeblocksub == persondecreeblocksub.id) ? _c('div', [_c('div', [_c('div', {
+          staticClass: "persondecreeoperation-part-list-element-indent persondecreeoperation-part-list-element-margin"
+        }, [_c('span', {
+          attrs: {
+            "if": "persondecreeBlock.index != null && persondecreeBlock.index != 0 && persondecreeblocksub.index != 0"
+          }
+        }, [_vm._v(_vm._s(persondecreeBlock.index) + "." + _vm._s(persondecreeblocksubsub.index) + ".")]), _vm._v("\n                                                на " + _vm._s(persondecreeblocksubsub.subvaluestring1) + " учебного года с " + _vm._s(_vm.printDateDocument(persondecreeblocksubsub.subvaluedate1)) + " \n                                                "), (persondecreeblocksubsub.Subvaluenumber1 == 0) ? _c('span', [_vm._v(" условно с ликвидацией академических задолженностей до " + _vm._s(_vm.printDateDocument(persondecreeblocksubsub.subvaluedate2)) + ":")]) : _vm._e()])]), _vm._v(" "), _c('div', _vm._l((persondecreeBlock.persondecreeblocksubs), function(persondecreeblocksubsubsub) {
+          return (persondecreeblocksubsubsub.parentpersondecreeblocksub == persondecreeblocksubsub.id) ? _c('div', {
+            staticClass: "persondecreeoperation-part-list-element-indent"
+          }, _vm._l((_vm.persondecreeOperations), function(decreeoperation) {
+            return (decreeoperation.persondecreeblocksub == persondecreeblocksubsubsub.id) ? _c('div', {
+              staticClass: "persondecreeoperation-part-list-element persondecreeoperation-part-list-element-margin-big"
+            }, [_c('div', {
+              staticClass: "persondecreeoperation-part-list-element-indent"
+            }, [(decreeoperation.personobject.actualRank != null) ? _c('span', [_vm._v(_vm._s(decreeoperation.personobject.actualRank.name4) + " ")]) : _vm._e(), _vm._v("\n                                                       " + _vm._s(decreeoperation.personobject.surname2) + " " + _vm._s(decreeoperation.personobject.name2) + "\n                                                       " + _vm._s(decreeoperation.personobject.fathername2) + _vm._s(_vm.commaspaceifnotnull(decreeoperation.personobject.positiontypestring)) + " " + _vm._s(decreeoperation.personobject.positiontype2string) + "\n                                                       " + _vm._s(_vm.getStructureName(decreeoperation.personobject.structure)) + "а " + _vm._s(_vm.getFacultiStructureName(decreeoperation.personobject.structure)) + "\n                                                   ")]), _vm._v(" "), _c('div', [_c('div', [_c('el-button', {
+              attrs: {
+                "size": "mini",
+                "type": "warning"
+              },
+              on: {
+                "click": function($event) {
+                  _vm.removePersondecreeoperation(decreeoperation)
+                }
+              }
+            }, [_vm._v("Удалить")])], 1)])]) : _vm._e()
+          })) : _vm._e()
         }))]) : _vm._e()
       })], 2)]) : _vm._e()
     }), _vm._v(" "), _c('div', [_c('el-button', {
@@ -44022,18 +45650,6 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_vm._v("Добавить форму обучения")])]) : _vm._e()], 2), _vm._v(" "), _c('div', {
     staticClass: "eld-eld-body-row-flex"
-  }, [_c('div', [_c('el-button', {
-    attrs: {
-      "type": "primary",
-      "plain": ""
-    },
-    on: {
-      "click": function($event) {
-        _vm.selectPosition()
-      }
-    }
-  }, [_vm._v("Выбрать должность из орг-штатной структуры")])], 1)]), _vm._v(" "), _c('div', {
-    staticClass: "eld-eld-body-row-flex"
   }, [_c('div', [_c('div', {
     staticStyle: {
       "margin-top": "20px"
@@ -46055,15 +47671,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "colspan": "6"
     }
-  }, [_vm._v("\n                                    Сумма: " + _vm._s(_vm.getDataToString(_vm.person.pension_A)) + "\n                                ")])]), _vm._v(" "), _c('tr', [_c('td', {
-    attrs: {
-      "colspan": "6"
-    }
-  }, [_vm._v("\n                                    Дополнительных дней: " + _vm._s(_vm.person.appending_days) + "\n                                ")])]), _vm._v(" "), _c('tr', [_c('td', {
-    attrs: {
-      "colspan": "6"
-    }
-  }, [_vm._v("\n                                    Итого: " + _vm._s(_vm.getDataToString(_vm.person.pension_A_with)) + "\n                                ")])]), _vm._v(" "), _vm._m(31), _vm._v(" "), _vm._l((_vm.person.pensions), function(pension) {
+  }, [_vm._v("\n                                    Итого: " + _vm._s(_vm.pension_A) + "\n                                ")])]), _vm._v(" "), _vm._m(31), _vm._v(" "), _vm._l((_vm.person.pensions), function(pension) {
     return (pension.education && !pension.educationConsider) ? _c('tr', [_c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(pension.positionplace) + "\n                                    ")])]), _vm._v(" "), _c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(pension.orderstring) + "\n                                    ")])]), _vm._v(" "), _c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(_vm.printDate(pension.start)) + " – " + _vm._s(_vm.printDate(pension.end)) + "\n                                    ")])]), _vm._v(" "), _c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(_vm.getExperienceFullPension(pension.yearsbeforecoef, pension.monthsbeforecoef, pension.daysbeforecoef)) + "\n                                    ")])]), _vm._v(" "), _c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(pension.coef) + "\n                                    ")])]), _vm._v(" "), _c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(_vm.getExperienceFullPension(pension.yearsaftercoef, pension.monthsaftercoef, pension.daysaftercoef)) + "\n                                    ")])])]) : _vm._e()
   })], 2), _vm._v(" "), _c('table', {
     staticClass: "eld-eld-table"
@@ -46079,15 +47687,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "colspan": "6"
     }
-  }, [_vm._v("\n                                    Сумма: " + _vm._s(_vm.getDataToString(_vm.person.pension_B)) + "\n                                ")])]), _vm._v(" "), _c('tr', [_c('td', {
-    attrs: {
-      "colspan": "6"
-    }
-  }, [_vm._v("\n                                    Дополнительных дней: " + _vm._s(_vm.person.appending_days) + "\n                                ")])]), _vm._v(" "), _c('tr', [_c('td', {
-    attrs: {
-      "colspan": "6"
-    }
-  }, [_vm._v("\n                                    Итого: " + _vm._s(_vm.getDataToString(_vm.person.pension_B_with)) + "\n                                ")])]), _vm._v(" "), _vm._m(39), _vm._v(" "), _vm._l((_vm.person.pensions), function(pension) {
+  }, [_vm._v("\n                                    Итого: " + _vm._s(_vm.pension_B) + "\n                                ")])]), _vm._v(" "), _vm._m(39), _vm._v(" "), _vm._l((_vm.person.pensions), function(pension) {
     return (pension.education && !pension.educationConsider) ? _c('tr', [_c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(pension.positionplace) + "\n                                    ")])]), _vm._v(" "), _c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(pension.orderstring) + "\n                                    ")])]), _vm._v(" "), _c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(_vm.printDate(pension.start)) + " – " + _vm._s(_vm.printDate(pension.end)) + "\n                                    ")])]), _vm._v(" "), _c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(_vm.getExperienceFullPension(pension.yearsbeforecoef, pension.monthsbeforecoef, pension.daysbeforecoef)) + "\n                                    ")])]), _vm._v(" "), _c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(pension.coef) + "\n                                    ")])]), _vm._v(" "), _c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(_vm.getExperienceFullPension(pension.yearsaftercoef, pension.monthsaftercoef, pension.daysaftercoef)) + "\n                                    ")])])]) : _vm._e()
   })], 2)])]) : _vm._e()]) : _vm._e(), _vm._v(" "), (_vm.menuid == 9) ? _c('div', [_c('div', {
     staticClass: "eld-eld-title"
@@ -52078,57 +53678,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "label": "ФИО работника",
       "width": "200"
     }
-  }), _vm._v(" "), _c('el-table-column', {
-    attrs: {
-      "type": "expand",
-      "label": "Выписки",
-      "width": "90"
-    }
-  }, [
-    [_c('div', [_vm._l((_vm.rand_list), function(i) {
-      return _c('div', [_c('div', {
-        staticStyle: {
-          "margin-bottom": "4px"
-        }
-      }, [_c('small', [_vm._v("\n                                                ⇒ " + _vm._s(i.nameshortened) + " "), _c('el-button', {
-        attrs: {
-          "size": "mini",
-          "type": "danger",
-          "icon": "el-icon-delete"
-        },
-        on: {
-          "click": function($event) {
-            _vm.delrand(i)
-          }
-        }
-      })], 1)])])
-    }), _vm._v(" "), _c('el-button', {
-      attrs: {
-        "type": "default"
-      },
-      on: {
-        "click": _vm.random
-      }
-    }, [_vm._v("Отобразить список получателей")]), _vm._v(" "), _c('el-button', {
-      attrs: {
-        "type": "default"
-      },
-      on: {
-        "click": function($event) {
-          _vm.handleSaveRow(_vm.scope.$index)
-        }
-      }
-    }, [_vm._v("сформировать выписки")]), _vm._v(" "), _c('el-button', {
-      attrs: {
-        "type": "default"
-      },
-      on: {
-        "click": function($event) {
-          _vm.handleSaveRow(_vm.scope.$index)
-        }
-      }
-    }, [_vm._v("отправить выписки")])], 2)]
-  ], 2)], 1)], 1) : _c('div', {
+  })], 1)], 1) : _c('div', {
     staticClass: "eld-title"
   }, [_vm._v("\n                    Папка пуста.\n                ")])]], 2)]), _vm._v(" "), _c('el-dialog', {
     attrs: {
@@ -54455,34 +56005,32 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     on: {
       "click": _vm.persondecreeUpdate
     }
-  }, [_vm._v("Зарезервировать")]), _vm._v(" "), _c('div', {
+  }, [_vm._v("Зарезервировать")]), _vm._v(" "), _c('hr'), _vm._v(" "), _c('div', {
     staticClass: "persondecreeoperation-row"
-  }, [_c('el-select', {
+  }), _vm._v(" "), _c('div', {
+    staticClass: "persondecreeoperation-row"
+  }, [_c('el-radio-group', {
     staticStyle: {
       "width": "95%"
     },
     attrs: {
-      "filterable": "",
-      "allow-create": "",
-      "default-first-option": "",
-      "placeholder": "Выбор пункта приказа"
+      "size": "small"
     },
     model: {
-      value: (_vm.value10),
+      value: (_vm.active_decree_operation),
       callback: function($$v) {
-        _vm.value10 = $$v
+        _vm.active_decree_operation = $$v
       },
-      expression: "value10"
+      expression: "active_decree_operation"
     }
   }, _vm._l((_vm.persondecreeBlocks), function(item) {
-    return _c('el-option', {
-      key: _vm.getPersondecreeblockname(item),
+    return _c('el-radio-button', {
       attrs: {
-        "label": _vm.getPersondecreeblockname(item),
-        "value": _vm.getPersondecreeblockname(item)
+        "label": item,
+        "value": item
       }
-    })
-  }))], 1), _vm._v(" "), (_vm.update) ? _c('div', _vm._l((_vm.persondecreeBlocks), function(persondecreeBlock) {
+    }, [_vm._v("\n                " + _vm._s(_vm.getPersondecreeblockname(item)) + "\n            ")])
+  }))], 1), _vm._v(" "), (_vm.update && _vm.active_decree_operation != null) ? _c('div', _vm._l((_vm.getList), function(persondecreeBlock) {
     return _c('div', {
       staticClass: "persondecreeblock"
     }, [_c('div', {
@@ -55237,7 +56785,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         staticClass: "persondecreeoperation-part-list-element persondecreeoperation-part-list-element-margin-big"
       }, [_c('div', [_c('div', [(decreeoperation.personobject != null && decreeoperation.personobject.military) ? _c('div', {
         staticClass: "persondecreeoperation-part-list-element-intro persondecreeoperation-part-list-element-indent"
-      }, [(decreeoperation.personobject.actualRank != null) ? _c('span', [_vm._v(_vm._s(decreeoperation.personobject.actualRank.name4) + " ")]) : _vm._e(), _vm._v("\n                                        " + _vm._s(decreeoperation.personobject.surname4) + " " + _vm._s(decreeoperation.personobject.name4) + "\n                                        " + _vm._s(decreeoperation.personobject.fathername4) + "\n                                        " + _vm._s(_vm.getAppointtype(decreeoperation.optionnumber4)) + " на должность " + _vm._s(decreeoperation.optionstring4) + " "), _vm._v("\n                                        =\"\n                                        "), (decreeoperation.optiondate1 != null) ? _c('span', [_vm._v(" с " + _vm._s(_vm.printDateDocument(decreeoperation.optiondate1)))]) : _vm._e(), _vm._v("\n                                        ,\n                                        освободив его от должности " + _vm._s(decreeoperation.personobject.positiontree2) + ".\n                                        "), _vm._v("\n                                        -i\n\n                                        "), (decreeoperation.optionnumber2 != null && decreeoperation.optionnumber2 > 0) ? _c('span', [_vm._v("Присвоить специальное звание «" + _vm._s(_vm.getRank(decreeoperation.optionnumber2)) + "».")]) : _vm._e()]) : _c('div', {
+      }, [(decreeoperation.personobject.actualRank != null) ? _c('span', [_vm._v(_vm._s(decreeoperation.personobject.actualRank.name4) + " ")]) : _vm._e(), _vm._v("\n                                        " + _vm._s(decreeoperation.personobject.surname4) + " " + _vm._s(decreeoperation.personobject.name4) + "\n                                        " + _vm._s(decreeoperation.personobject.fathername4) + "\n                                        " + _vm._s(_vm.getAppointtype(decreeoperation.optionnumber4)) + " на должность " + _vm._s(decreeoperation.optionstring4) + " "), _vm._v("\n                                        =\"\n                                        "), (decreeoperation.optiondate1 != null) ? _c('span', [_vm._v(" с " + _vm._s(_vm.printDateDocument(decreeoperation.optiondate1)))]) : _vm._e(), _vm._v("\n                                        ,\n                                        освободив его от должности " + _vm._s(decreeoperation.personobject.positiontree2) + ".\n                                        "), _vm._v("\n                                        -i\n\n                                        "), _vm._v(" "), (decreeoperation.optionnumber2 != null && decreeoperation.optionnumber2 > 0) ? _c('span', [_vm._v("Присвоить специальное звание «" + _vm._s(_vm.getRank(decreeoperation.optionnumber2)) + "».")]) : _vm._e()]) : _c('div', {
         staticClass: "persondecreeoperation-part-list-element-indent"
       }, [_vm._v("\n                                        " + _vm._s(decreeoperation.personobject.surname4) + " " + _vm._s(decreeoperation.personobject.name4) + "\n                                        " + _vm._s(decreeoperation.personobject.fathername4) + "\n                                        " + _vm._s(_vm.getAppointtype(decreeoperation.optionnumber4)) + " на должность " + _vm._s(decreeoperation.optionstring4) + " "), _vm._v("\n                                        =\"\n                                        "), (decreeoperation.optiondate1 != null) ? _c('span', [_vm._v(" с " + _vm._s(_vm.printDateDocument(decreeoperation.optiondate1)))]) : _vm._e(), (decreeoperation.optionnumber2 != null && decreeoperation.optionnumber2 > 0) ? _c('span', [_vm._v(", присвоив специальное звание «" + _vm._s(_vm.getRank(decreeoperation.optionnumber2)) + "»")]) : _vm._e(), _vm._v(" "), (decreeoperation.optionstring3 != null && decreeoperation.optionstring3.length > 0) ? _c('span', [_vm._v("и личный номер " + _vm._s(decreeoperation.optionstring3))]) : _vm._e(), _vm._v(".\n                                    ")]), _vm._v(" "), (decreeoperation.optiondate2 != null) ? _c('div', {
         staticClass: "persondecreeoperation-part-list-element-indent"
@@ -56994,9 +58542,9 @@ module.exports = (__webpack_require__(5))(46);
 /* 190 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(27);
-__webpack_require__(26);
-module.exports = __webpack_require__(25);
+__webpack_require__(31);
+__webpack_require__(30);
+module.exports = __webpack_require__(29);
 
 
 /***/ })

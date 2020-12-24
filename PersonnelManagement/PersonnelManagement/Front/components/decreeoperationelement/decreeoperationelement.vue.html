@@ -59,9 +59,9 @@
                             </el-table-column>
                             <el-table-column property="getFIO" label="ФИО работника" width="200">
                             </el-table-column>
-                            <el-table-column type="expand" label="Выписки" width="90">
+                            <!--<el-table-column type="expand" label="Выписки" width="90">
                                 <template slot-scope="props">
-                                    <div> <!--v-if="props.row.signed == 1"-->
+                                    <div>
                                         <div v-for="i in rand_list">
                                             <div style="margin-bottom: 4px">
                                                 <small>
@@ -74,7 +74,7 @@
                                         <el-button type="default" @click="handleSaveRow(scope.$index)">отправить выписки</el-button>
                                     </div>
                                 </template>
-                            </el-table-column>
+                            </el-table-column>-->
                         </el-table>
                     </div>
                     <div v-else class="eld-title">

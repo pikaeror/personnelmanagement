@@ -821,6 +821,7 @@ export default class EldComponent extends Vue {
         setInterval(this.autoupdatePerson, 10000);
         setInterval(this.loadPeopleWhithoutJobPlace, 20000);
 
+        this.loadPeopleWhithoutJobPlace();
         this.fetchStructureRewards();
         this.fetchStructureRewardsAllowed();
         this.fetchStructureElders();
@@ -1101,17 +1102,6 @@ export default class EldComponent extends Vue {
         return this.$store.state.rewards;
     }
 
-    get educationlevels(): Educationlevel[] {
-        return this.$store.state.educationlevels;
-    }
-
-    get educationtypes(): Educationtype[] {
-        return this.$store.state.educationtypes;
-    }
-
-    get educationdocuments(): Educationdocument[] {
-        return this.$store.state.educationdocuments;
-    }
 
     get normativs(): Normativ[] {
         return this.$store.state.normativs;
@@ -1177,12 +1167,16 @@ export default class EldComponent extends Vue {
         return this.$store.state.persondecreetypes;
     }
 
-    get educationadditionaltypes(): Educationadditionaltype[] {
-        return this.$store.state.educationadditionaltypes;
-    }
-
     get citysubstates(): Citysubstate[] {
         return this.$store.state.citysubstates;
+    }
+
+    get educationtypes(): Educationtype[] {
+        return this.$store.state.educationtypes;
+    }
+
+    get educationadditionaltypes(): Educationadditionaltype[] {
+        return this.$store.state.educationadditionaltypes;
     }
 
     get educationstages(): Educationstage[] {
@@ -1191,6 +1185,14 @@ export default class EldComponent extends Vue {
 
     get educationpositiontypes(): Educationpositiontype[] {
         return this.$store.state.educationpositiontypes;
+    }
+    
+    get educationlevels(): Educationlevel[] {
+        return this.$store.state.educationlevels;
+    }
+
+    get educationdocuments(): Educationdocument[] {
+        return this.$store.state.educationdocuments;
     }
 
     onBirthCountryChange() {
@@ -3616,7 +3618,7 @@ export default class EldComponent extends Vue {
                 this.selectPerson(person.id);
             });
     }
-
+ 
     deletePersonjob(person: Person, personjob: Personjob) {
         let confirmaction: boolean = confirm("Вы уверены?");
         if (!confirmaction) {
@@ -5401,7 +5403,6 @@ export default class EldComponent extends Vue {
         if (!this.validatePersoneducationInterruptorderreason()) {
             return false;
         }
-
         return true;
     }
 
@@ -7957,6 +7958,9 @@ export default class EldComponent extends Vue {
                 return "служба";
             }
         }
+        if (personjob.jobtype == 4){
+            return "учёба";
+        }
     }
 
     printPersonjobPositionplace(personjob: Personjob): string {
@@ -7974,7 +7978,7 @@ export default class EldComponent extends Vue {
         let devizor: number = 3;
         let output: (Person[])[] = [];
         let time_list: Person[] = [];
-        fetch('api/Person/Search' + "герас", { credentials: 'include' })
+        fetch('api/Person/WithoutJobPlace/' + devizor, { credentials: 'include' })
             .then(response => {
                 return response.json() as Promise<Person[]>;
             })

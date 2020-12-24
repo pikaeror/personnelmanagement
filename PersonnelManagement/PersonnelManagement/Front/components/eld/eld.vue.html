@@ -1461,7 +1461,6 @@
                                     <div>
                                         <el-autocomplete v-model="personeducationLocation" :fetch-suggestions="countrySearch"></el-autocomplete>
                                     </div>
-
                                 </div>
                                 <div class="eld-eld-body-row-mediumshort">
                                     Область (г. Минск)
@@ -1471,7 +1470,6 @@
                                     Тип населенного пункта
                                     <el-autocomplete v-model="personeducationCitytype" :fetch-suggestions="citytypeSearch"></el-autocomplete>
                                 </div>
-
                                 <div class="eld-eld-body-row-mediumshort" v-if="!isBelarusCapital(personeducationState)">
                                     Наим. нас. пункта
                                     <el-input v-model="personeducationCity"></el-input>
@@ -1486,7 +1484,6 @@
                                     <div style="margin-top:10px;">
                                         <el-input v-model="personeducationStart" type="date"></el-input>
                                     </div>
-
                                 </div>
                                 <div class="eld-eld-body-row-medium eld-eld-body-select-medium input-padding-left-small">
                                     <div style="text-align: center; margin-top: 10px;">
@@ -1545,7 +1542,6 @@
                                     <el-input v-model="personeducationInterruptorderreason" placeholder="Основание отчисления" type="textarea" v-bind:class="{ 'validation-error': !validatePersoneducationInterruptorderreason()}"></el-input>
                                 </div>
                             </div>
-
                             <br />
                             <div>
                                 <div v-for="educationtypeblock in personeducationEducationtypeblocks" class="eld-eld-body-row-flex" style="margin-top:30px;">
@@ -1569,16 +1565,13 @@
                                                 <div class="eld-eld-body-row-inline-text-margin">
                                                     с
                                                 </div>
-
                                                 <div class="eld-eld-body-row-shortest">
-
                                                     <el-input v-model="educationperiod.startString" type="date" class="eld-eld-body-row-shortest-input"></el-input>
                                                 </div>
                                                 <div class="eld-eld-body-row-inline-text-margin">
                                                     по
                                                 </div>
                                                 <div class="eld-eld-body-row-shortest">
-
                                                     <el-input v-model="educationperiod.endString" type="date" class="eld-eld-body-row-shortest-input"></el-input>
                                                 </div>
                                                 <div style="margin-top: -25px;">
@@ -1590,7 +1583,6 @@
                                                     </el-select>
                                                 </div>
                                                 <div style="margin-top: -60px;">
-
                                                     <div style="text-align: center; line-height: 16px;">
                                                         <div>
                                                             Период учебы является службой
@@ -1626,12 +1618,9 @@
                                 <div v-if="personeducationEducationtypeblocks.length == 0" style="margin-top: -2px; text-align: center;">
                                     <span class="eld-eld-body-button-text" style="color:#409EFF; font-size: 11px;" @click="addEducationtypeblock">Добавить форму обучения</span>
                                 </div>
-
                             </div>
-
                             <div class="eld-eld-body-row-flex">
                                 <div>
-
                                     <div style="margin-top: 20px;">
                                         <div style="text-align: center; line-height: 16px;">
                                             <div>
@@ -1755,7 +1744,6 @@
                                     </div>
                                 </div>
                             </div>
-
                             <div class="eld-eld-body-row-flex">
                                 <div class="eld-eld-body-row-mediumshorter">
                                     Факультет (отделение)
@@ -1770,9 +1758,6 @@
                                     <el-input v-model="personeducationQualification" type="textarea" :rows="3"></el-input>
                                 </div>
                             </div>
-
-
-
                             <div class="eld-eld-body-row-flex" style="margin-top: 10px;">
                                 <div>
                                     <div>
@@ -1793,31 +1778,6 @@
                                     <el-input v-model="personeducationDocumentnumber" :disabled="personeducationInterrupted"></el-input>
                                 </div>
                             </div>
-                            <!--<div>
-                            <el-checkbox v-model="personeducationCadet">Курсант (Период учебы добавляется в стаж службы)</el-checkbox>
-                        </div>
-                        <div v-if="personeducationCadet">
-
-                            <div class="eld-eld-body-row-long">
-                                Чей приказ (в родительном падеже)
-                                <el-autocomplete v-model="personeducationOrderwho" :fetch-suggestions="structuresalldocumentSearch" class="eld-eld-body-row-long" type="textarea" :rows="4"></el-autocomplete>
-                            </div>
-                            <div class="eld-eld-body-row-flex">
-                                <div class="eld-eld-body-row-short">
-                                    Номер приказа
-                                    <el-input v-model="personeducationOrdernumber"></el-input>
-                                </div>
-                                <div class="eld-eld-body-row-mediumshort">
-                                    Индекс (литера) приказа
-                                    <el-autocomplete v-model="personeducationOrdernumbertype" :fetch-suggestions="ordernumbertypeSearch"></el-autocomplete>
-                                </div>
-                                <div class="eld-eld-body-row-short">
-                                    Дата приказа
-                                    <el-input v-model="personeducationOrderdate" type="date"></el-input>
-                                </div>
-                            </div>
-                        </div>-->
-
                             <div class="eld-eld-body-row-add">
                                 <el-button @click="completePersoneducationButton(person)" type="success">{{getPersoneducationUpdateButtonName()}}</el-button>
                             </div>
@@ -1870,7 +1830,6 @@
                                     <el-input v-model="personeducationEnd" type="date"></el-input>
                                 </div>
                             </div>
-
                             <div class="eld-eld-body-row-long">
                                 Специальность
                                 <el-input v-model="personeducationSpeciality"></el-input>
@@ -1900,7 +1859,6 @@
                                     <el-input v-model="personeducationDocumentnumber"></el-input>
                                 </div>
                             </div>
-
                             <div class="eld-eld-body-row-add">
                                 <el-button @click="completePersoneducationButton(person)" type="success">{{getPersoneducationUpdateButtonName()}}</el-button>
                             </div>
@@ -1929,7 +1887,6 @@
                                     </el-select>
                                 </div>
                             </div>
-
                             <div>
                                 <div style="text-align: center; margin-top: 5px;">
                                     Наименование учреждения образования
@@ -1945,9 +1902,6 @@
                                     </div>
                                 </div>
                             </div>
-
-
-
                             <div class="eld-eld-body-row-flex">
                                 <div class="eld-eld-body-row-mediumshort">
                                     Страна
@@ -1955,7 +1909,6 @@
                                     <div>
                                         <el-autocomplete v-model="personeducationLocation" :fetch-suggestions="countrySearch"></el-autocomplete>
                                     </div>
-
                                 </div>
                                 <div class="eld-eld-body-row-mediumshort">
                                     Область (г. Минск)
@@ -1965,13 +1918,11 @@
                                     Тип населенного пункта
                                     <el-autocomplete v-model="personeducationCitytype" :fetch-suggestions="citytypeSearch"></el-autocomplete>
                                 </div>
-
                                 <div class="eld-eld-body-row-mediumshort" v-if="!isBelarusCapital(personeducationState)">
                                     Наим. нас. пункта
                                     <el-input v-model="personeducationCity"></el-input>
                                 </div>
                             </div>
-
                             <div class="eld-eld-body-row-flex">
                                 <div class="eld-eld-body-row-medium input-padding-right-small ">
                                     <div style="margin-top:22px;">
@@ -1980,7 +1931,6 @@
                                     <div style="margin-top:10px;">
                                         <el-input v-model="personeducationStart" type="date"></el-input>
                                     </div>
-
                                 </div>
                                 <div class="eld-eld-body-row-medium input-padding-left-small">
                                     <div style="text-align: center; margin-top: 10px;">
@@ -2031,19 +1981,14 @@
                                             </div>
                                         </div>
                                     </div>
-
-
                                 </div>
                                 <div class="eld-eld-body-row-long">
                                     Основание отчисления
                                     <el-input v-model="personeducationInterruptorderreason" placeholder="Основание отчисления" type="textarea" v-bind:class="{ 'validation-error': !validatePersoneducationInterruptorderreason()}"></el-input>
                                 </div>
                             </div>
-
-
                             <br />
                             <div>
-
                                 <div v-for="educationtypeblock in personeducationEducationtypeblocks" class="eld-eld-body-row-flex" style="margin-top:30px;">
                                     <div>
                                         Форма обучения <br />
@@ -2065,7 +2010,6 @@
                                                 <div class="eld-eld-body-row-inline-text-margin">
                                                     с
                                                 </div>
-
                                                 <div class="eld-eld-body-row-shortest">
 
                                                     <el-input v-model="educationperiod.startString" type="date" class="eld-eld-body-row-shortest-input"></el-input>
@@ -2142,15 +2086,6 @@
                                     <span class="eld-eld-body-button-text" style="color:#409EFF; font-size: 11px;" @click="addEducationtypeblock">Добавить форму обучения</span>
                                 </div>
                             </div>
-
-                            <div class="eld-eld-body-row-flex">
-                                <div>
-                                    <el-button @click="selectPosition()" type="primary" plain>Выбрать должность из орг-штатной структуры</el-button>
-                                </div>
-                            </div>
-
-
-
                             <div class="eld-eld-body-row-flex">
                                 <div>
                                     <div style="margin-top: 20px;">
@@ -2299,8 +2234,6 @@
                                     <el-input v-model="personeducationQualification" type="textarea" :rows="3"></el-input>
                                 </div>
                             </div>
-
-
                             <div class="eld-eld-body-row-flex" style="margin-top: 10px;">
                                 <div>
                                     <div>
@@ -2321,7 +2254,6 @@
                                     <el-input v-model="personeducationDocumentnumber" :disabled="personeducationInterrupted"></el-input>
                                 </div>
                             </div>
-
                             <div class="eld-eld-body-row-add">
                                 <el-button @click="completePersoneducationButton(person)" type="success">{{getPersoneducationUpdateButtonName()}}</el-button>
                             </div>
@@ -2775,7 +2707,6 @@
                                 </div>
                                 <div v-if="personjobManual || personjobPosition > 0">
                                     <div class="eld-eld-body-row-flex">
-
                                         <div class="eld-eld-body-row-mediumshorter">
                                             Вид трудовой деятельности
                                             <el-select @change="onPersonjobJobtypeChange()" clearable placeholder="Вид трудовой деятельности" v-model="personjobJobtype" class="eld-eld-body-select-mediumshort">
@@ -2829,19 +2760,8 @@
                                                 <el-input v-model="personjobJobplace" type="textarea" :rows="3"
                                                           placeholder="Пример: финансового отдела департамента по надзору за безопасным ведением работ в промышленности"></el-input>
                                             </div>
-
                                         </div>
-                                        <!--<div v-else>
-                                        <el-input v-model="personjobJobplace" type="textarea" :rows="3"
-                                                    placeholder="Пример: главный специалист финансового отдела департамента по надзору за безопасным ведением работ в промышленности"></el-input>
-                                    </div>-->
-
                                     </div>
-
-                                    <!--<div class="eld-eld-body-row-medium">
-                                    Дней отпуска (Для МЧС)
-                                    <el-input v-model="personjobVacationdays"></el-input>
-                                </div>-->
                                 </div>
                                 <!--Если служба-->
                                 <div v-if="personjobJobtype != null && personjobJobtype == 2">
@@ -2860,26 +2780,13 @@
                                                 <el-input v-model="personjobJobplace" type="textarea" :rows="4"
                                                           placeholder="Пример: военизированной пожарной части №4 по охране Советского района г. Минска управления пожарной охраны управления внутренних дел Минского горисполкома"></el-input>
                                             </div>
-
                                         </div>
-                                        <!--<div v-else>
-
-                                        <el-input v-model="personjobServiceplace" type="textarea" :rows="4"
-                                                    placeholder="Пример: старший пожарный военизированной пожарной части №4 по охране Советского района г. Минска управления пожарной охраны управления внутренних дел Минского горисполкома"></el-input>
-                                    </div>-->
-
-
                                     </div>
-
-
-
                                 </div>
                                 <div>
                                     <div style="text-align:center">
                                         Приказ
                                     </div>
-
-                                    <!--GGGGGGGGGGG-->
                                     <div class="eld-eld-body-row-flex">
                                         <div class="eld-eld-body-row-medium small-text-centered">
                                             Чей (в родительном падеже)
@@ -3653,17 +3560,7 @@
                                 </tr>
                                 <tr>
                                     <td colspan="6">
-                                        Сумма: {{getDataToString(person.pension_A)}}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colspan="6">
-                                        Дополнительных дней: {{person.appending_days}}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colspan="6">
-                                        Итого: {{getDataToString(person.pension_A_with)}}
+                                        Итого: {{pension_A}}
                                     </td>
                                 </tr>
                                 <tr>
@@ -3909,17 +3806,7 @@
                                 </tr>
                                 <tr>
                                     <td colspan="6">
-                                        Сумма: {{getDataToString(person.pension_B)}}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colspan="6">
-                                        Дополнительных дней: {{person.appending_days}}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colspan="6">
-                                        Итого: {{getDataToString(person.pension_B_with)}}
+                                        Итого: {{pension_B}}
                                     </td>
                                 </tr>
                                 <tr>

@@ -16,8 +16,12 @@ namespace PersonnelManagement.Models
         public int Priority { get; set; }
         public int Subvaluenumber1 { get; set; }
         public int Subvaluenumber2 { get; set; }
+        public int Subvaluenumber3 { get; set; }
+        public int Subvaluenumber4 { get; set; }
         public string Subvaluestring1 { get; set; }
         public string Subvaluestring2 { get; set; }
+        public string Subvaluestring3 { get; set; }
+        public string Subvaluestring4 { get; set; }
         public int Parentpersondecreeblocksub { get; set; }
         public DateTime? Subvaluedate1 { get; set; }
         public DateTime? Subvaluedate2 { get; set; }

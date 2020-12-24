@@ -26,23 +26,35 @@
         <div class="persondecreeoperation-row"><div class="persondecreeoperation-row-text">Название приказа:</div> <el-input v-model="input_decree.name"></el-input></div>
         <div class="persondecreeoperation-row"><div class="persondecreeoperation-row-text">Рабочее название приказа:</div> <el-input v-model="input_decree.nickname"></el-input></div>
         <el-button @click="persondecreeUpdate" class="persondecrees-margintop">Зарезервировать</el-button>
+        <hr />
         <div class="persondecreeoperation-row">
-            <el-select v-model="value10"
-                   filterable
-                   allow-create
-                   default-first-option
-                   placeholder="Выбор пункта приказа"
-                   style="width: 95%">
+            <!--<el-select v-model="active_decree_operation"
+                       filterable
+                       allow-create
+                       default-first-option
+                       remote="true"
+                       placeholder="Выбор пункта приказа"
+                       style="width: 95%">
                 <el-option v-for="item in persondecreeBlocks"
-                       :key="getPersondecreeblockname(item)"
-                       :label="getPersondecreeblockname(item)"
-                       :value="getPersondecreeblockname(item)">
+                           :key="getPersondecreeblockname(item)"
+                           :label="getPersondecreeblockname(item)"
+                           :value="item">
                 </el-option>
-            </el-select>
+            </el-select>-->
+        </div>
+        <div class="persondecreeoperation-row">
+            <el-radio-group v-model="active_decree_operation"
+                       style="width: 95%" size="small">
+                <el-radio-button v-for="item in persondecreeBlocks"
+                          :label="item"
+                          :value="item">
+                    {{getPersondecreeblockname(item)}}
+                </el-radio-button>
+            </el-radio-group>
         </div>
 
-        <div v-if="update">
-            <div v-for="persondecreeBlock in persondecreeBlocks" class="persondecreeblock">
+        <div v-if="update && active_decree_operation != null">
+            <div v-for="persondecreeBlock in getList" class="persondecreeblock">
                 <div class="persondecreeblock-title">
                     {{getPersondecreeblockname(persondecreeBlock)}}
                 </div>
@@ -713,6 +725,8 @@
                                             <!--{{decreeoperation.personobject.positiontype2string}} {{decreeoperation.personobject.structuretree2}}.-->
                                             -i
 
+                                            <ti
+
                                             <span v-if="decreeoperation.optionnumber2 != null && decreeoperation.optionnumber2 > 0">Присвоить специальное звание «{{getRank(decreeoperation.optionnumber2)}}».</span>
                                         </div>
                                         <!--Назначить человека на должность, присвоив личный номер-->
@@ -1036,6 +1050,7 @@
                                                     <span v-if="decreeoperation.optionstring3 != null && decreeoperation.optionstring3.length > 0 && decreeoperation.optionnumber6 != 7"> {{decreeoperation.subvaluestring1}}</span>
                                                     <!--Общая часть-->
                                                     <span v-if="RewardNotOne(decreeoperation.optionstring3) || decreeoperation.optionnumber7 != 1">{{decreeoperation.optionstring3}} </span>
+
                                                     <!--Денежное награждение-->
                                                     <span v-if="decreeoperation.optionnumber6 == 7">
                                                         {{getRewardmoneytype(decreeoperation.optionnumber7, decreeoperation.optionstring3)}}

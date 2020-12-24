@@ -136,9 +136,7 @@ namespace PersonnelManagement.Models
         public virtual DbSet<User> User { get; set; }
         public virtual DbSet<Vacationmilitary> Vacationmilitary { get; set; }
         public virtual DbSet<Vacationtype> Vacationtype { get; set; }
-
         public pmContext(DbContextOptions<pmContext> options) : base(options) { }
-
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
@@ -153,10 +151,6 @@ namespace PersonnelManagement.Models
             modelBuilder.Entity<Academicvacation>(entity =>
             {
                 entity.ToTable("academicvacation");
-
-                entity.HasIndex(e => e.Id)
-                    .HasName("id_UNIQUE")
-                    .IsUnique();
 
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
@@ -206,10 +200,6 @@ namespace PersonnelManagement.Models
             {
                 entity.ToTable("altrank");
 
-                entity.HasIndex(e => e.Id)
-                    .HasName("id_UNIQUE")
-                    .IsUnique();
-
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
                     .HasColumnType("int(11)");
@@ -236,10 +226,6 @@ namespace PersonnelManagement.Models
             {
                 entity.ToTable("altrankcondition");
 
-                entity.HasIndex(e => e.Id)
-                    .HasName("id_UNIQUE")
-                    .IsUnique();
-
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
                     .HasColumnType("int(11)");
@@ -258,10 +244,6 @@ namespace PersonnelManagement.Models
             {
                 entity.ToTable("altrankconditiongroup");
 
-                entity.HasIndex(e => e.Id)
-                    .HasName("id_UNIQUE")
-                    .IsUnique();
-
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
                     .HasColumnType("int(11)");
@@ -274,10 +256,6 @@ namespace PersonnelManagement.Models
             modelBuilder.Entity<Appointtype>(entity =>
             {
                 entity.ToTable("appointtype");
-
-                entity.HasIndex(e => e.Id)
-                    .HasName("id_UNIQUE")
-                    .IsUnique();
 
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
@@ -298,10 +276,6 @@ namespace PersonnelManagement.Models
             modelBuilder.Entity<Area>(entity =>
             {
                 entity.ToTable("area");
-
-                entity.HasIndex(e => e.Id)
-                    .HasName("id_UNIQUE")
-                    .IsUnique();
 
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
@@ -328,10 +302,6 @@ namespace PersonnelManagement.Models
             {
                 entity.ToTable("areaother");
 
-                entity.HasIndex(e => e.Id)
-                    .HasName("id_UNIQUE")
-                    .IsUnique();
-
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
                     .HasColumnType("int(11)");
@@ -347,10 +317,6 @@ namespace PersonnelManagement.Models
             {
                 entity.ToTable("attestationtype");
 
-                entity.HasIndex(e => e.Id)
-                    .HasName("id_UNIQUE")
-                    .IsUnique();
-
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
                     .HasColumnType("int(11)");
@@ -365,10 +331,6 @@ namespace PersonnelManagement.Models
             modelBuilder.Entity<Autobiographydata>(entity =>
             {
                 entity.ToTable("autobiographydata");
-
-                entity.HasIndex(e => e.Id)
-                    .HasName("id_UNIQUE")
-                    .IsUnique();
 
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
@@ -460,10 +422,6 @@ namespace PersonnelManagement.Models
             {
                 entity.ToTable("cabinetdata");
 
-                entity.HasIndex(e => e.Id)
-                    .HasName("id_UNIQUE")
-                    .IsUnique();
-
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
                     .HasColumnType("int(11)");
@@ -539,10 +497,6 @@ namespace PersonnelManagement.Models
             {
                 entity.ToTable("changedocumentstype");
 
-                entity.HasIndex(e => e.Id)
-                    .HasName("id_UNIQUE")
-                    .IsUnique();
-
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
                     .HasColumnType("int(11)");
@@ -573,10 +527,6 @@ namespace PersonnelManagement.Models
             {
                 entity.ToTable("citysubstate");
 
-                entity.HasIndex(e => e.Id)
-                    .HasName("id_UNIQUE")
-                    .IsUnique();
-
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
                     .HasColumnType("int(11)");
@@ -592,10 +542,6 @@ namespace PersonnelManagement.Models
             {
                 entity.ToTable("citytype");
 
-                entity.HasIndex(e => e.Id)
-                    .HasName("id_UNIQUE")
-                    .IsUnique();
-
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
                     .HasColumnType("int(11)");
@@ -610,10 +556,6 @@ namespace PersonnelManagement.Models
             modelBuilder.Entity<Civildecree>(entity =>
             {
                 entity.ToTable("civildecree");
-
-                entity.HasIndex(e => e.Id)
-                    .HasName("id_UNIQUE")
-                    .IsUnique();
 
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
@@ -686,10 +628,6 @@ namespace PersonnelManagement.Models
             {
                 entity.ToTable("country");
 
-                entity.HasIndex(e => e.Id)
-                    .HasName("id_UNIQUE")
-                    .IsUnique();
-
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
                     .HasColumnType("int(11)");
@@ -710,10 +648,6 @@ namespace PersonnelManagement.Models
             modelBuilder.Entity<Declarationdata>(entity =>
             {
                 entity.ToTable("declarationdata");
-
-                entity.HasIndex(e => e.Id)
-                    .HasName("id_UNIQUE")
-                    .IsUnique();
 
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
@@ -884,10 +818,6 @@ namespace PersonnelManagement.Models
             {
                 entity.ToTable("declarationrelative");
 
-                entity.HasIndex(e => e.Id)
-                    .HasName("id_UNIQUE")
-                    .IsUnique();
-
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
                     .HasColumnType("int(11)");
@@ -1022,19 +952,6 @@ namespace PersonnelManagement.Models
             {
                 entity.ToTable("decree");
 
-                entity.HasIndex(e => e.Dateactive)
-                    .HasName("DATEACTIVE");
-
-                entity.HasIndex(e => e.Id)
-                    .HasName("id_UNIQUE")
-                    .IsUnique();
-
-                entity.HasIndex(e => e.Signed)
-                    .HasName("SIGNED");
-
-                entity.HasIndex(e => new { e.Signed, e.Dateactive })
-                    .HasName("SDA");
-
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
                     .HasColumnType("int(11)");
@@ -1083,19 +1000,6 @@ namespace PersonnelManagement.Models
             modelBuilder.Entity<Decreeoperation>(entity =>
             {
                 entity.ToTable("decreeoperation");
-
-                entity.HasIndex(e => e.Decree)
-                    .HasName("DECREE");
-
-                entity.HasIndex(e => e.Id)
-                    .HasName("id_UNIQUE")
-                    .IsUnique();
-
-                entity.HasIndex(e => e.Subject)
-                    .HasName("SUBJECT");
-
-                entity.HasIndex(e => new { e.Deleted, e.Subject })
-                    .HasName("DS");
 
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
@@ -1191,10 +1095,6 @@ namespace PersonnelManagement.Models
             {
                 entity.ToTable("departmentrename");
 
-                entity.HasIndex(e => e.Id)
-                    .HasName("id_UNIQUE")
-                    .IsUnique();
-
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
                     .HasColumnType("int(11)");
@@ -1253,10 +1153,6 @@ namespace PersonnelManagement.Models
             {
                 entity.ToTable("drivercategory");
 
-                entity.HasIndex(e => e.Id)
-                    .HasName("id_UNIQUE")
-                    .IsUnique();
-
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
                     .HasColumnType("int(11)");
@@ -1271,10 +1167,6 @@ namespace PersonnelManagement.Models
             modelBuilder.Entity<Drivertype>(entity =>
             {
                 entity.ToTable("drivertype");
-
-                entity.HasIndex(e => e.Id)
-                    .HasName("id_UNIQUE")
-                    .IsUnique();
 
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
@@ -1291,10 +1183,6 @@ namespace PersonnelManagement.Models
             {
                 entity.ToTable("educationadditionaltype");
 
-                entity.HasIndex(e => e.Id)
-                    .HasName("id_UNIQUE")
-                    .IsUnique();
-
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
                     .HasColumnType("int(11)");
@@ -1310,10 +1198,6 @@ namespace PersonnelManagement.Models
             {
                 entity.ToTable("educationdocument");
 
-                entity.HasIndex(e => e.Id)
-                    .HasName("id_UNIQUE")
-                    .IsUnique();
-
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
                     .HasColumnType("int(11)");
@@ -1328,10 +1212,6 @@ namespace PersonnelManagement.Models
             modelBuilder.Entity<Educationlevel>(entity =>
             {
                 entity.ToTable("educationlevel");
-
-                entity.HasIndex(e => e.Id)
-                    .HasName("id_UNIQUE")
-                    .IsUnique();
 
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
@@ -1353,10 +1233,6 @@ namespace PersonnelManagement.Models
             modelBuilder.Entity<Educationmaternity>(entity =>
             {
                 entity.ToTable("educationmaternity");
-
-                entity.HasIndex(e => e.Id)
-                    .HasName("id_UNIQUE")
-                    .IsUnique();
 
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
@@ -1405,10 +1281,6 @@ namespace PersonnelManagement.Models
             modelBuilder.Entity<Educationperiod>(entity =>
             {
                 entity.ToTable("educationperiod");
-
-                entity.HasIndex(e => e.Id)
-                    .HasName("id_UNIQUE")
-                    .IsUnique();
 
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
@@ -1484,10 +1356,6 @@ namespace PersonnelManagement.Models
             {
                 entity.ToTable("educationpositiontype");
 
-                entity.HasIndex(e => e.Id)
-                    .HasName("id_UNIQUE")
-                    .IsUnique();
-
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
                     .HasColumnType("int(11)");
@@ -1508,10 +1376,6 @@ namespace PersonnelManagement.Models
             {
                 entity.ToTable("educationstage");
 
-                entity.HasIndex(e => e.Id)
-                    .HasName("id_UNIQUE")
-                    .IsUnique();
-
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
                     .HasColumnType("int(11)");
@@ -1527,10 +1391,6 @@ namespace PersonnelManagement.Models
             {
                 entity.ToTable("educationtype");
 
-                entity.HasIndex(e => e.Id)
-                    .HasName("id_UNIQUE")
-                    .IsUnique();
-
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
                     .HasColumnType("int(11)");
@@ -1545,10 +1405,6 @@ namespace PersonnelManagement.Models
             modelBuilder.Entity<Educationtypeblock>(entity =>
             {
                 entity.ToTable("educationtypeblock");
-
-                entity.HasIndex(e => e.Id)
-                    .HasName("id_UNIQUE")
-                    .IsUnique();
 
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
@@ -1573,10 +1429,6 @@ namespace PersonnelManagement.Models
             {
                 entity.ToTable("externalorderwhotype");
 
-                entity.HasIndex(e => e.Id)
-                    .HasName("id_UNIQUE")
-                    .IsUnique();
-
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
                     .HasColumnType("int(11)");
@@ -1591,10 +1443,6 @@ namespace PersonnelManagement.Models
             modelBuilder.Entity<Fire>(entity =>
             {
                 entity.ToTable("fire");
-
-                entity.HasIndex(e => e.Id)
-                    .HasName("id_UNIQUE")
-                    .IsUnique();
 
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
@@ -1644,10 +1492,6 @@ namespace PersonnelManagement.Models
             {
                 entity.ToTable("holiday");
 
-                entity.HasIndex(e => e.Id)
-                    .HasName("id_UNIQUE")
-                    .IsUnique();
-
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
                     .HasColumnType("int(11)");
@@ -1667,10 +1511,6 @@ namespace PersonnelManagement.Models
             {
                 entity.ToTable("illcode");
 
-                entity.HasIndex(e => e.Id)
-                    .HasName("id_UNIQUE")
-                    .IsUnique();
-
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
                     .HasColumnType("int(11)");
@@ -1686,10 +1526,6 @@ namespace PersonnelManagement.Models
             {
                 entity.ToTable("illregime");
 
-                entity.HasIndex(e => e.Id)
-                    .HasName("id_UNIQUE")
-                    .IsUnique();
-
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
                     .HasColumnType("int(11)");
@@ -1704,10 +1540,6 @@ namespace PersonnelManagement.Models
             modelBuilder.Entity<Interrupttype>(entity =>
             {
                 entity.ToTable("interrupttype");
-
-                entity.HasIndex(e => e.Id)
-                    .HasName("id_UNIQUE")
-                    .IsUnique();
 
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
@@ -1746,10 +1578,6 @@ namespace PersonnelManagement.Models
             {
                 entity.ToTable("jobtype");
 
-                entity.HasIndex(e => e.Id)
-                    .HasName("id_UNIQUE")
-                    .IsUnique();
-
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
                     .HasColumnType("int(11)");
@@ -1765,10 +1593,6 @@ namespace PersonnelManagement.Models
             {
                 entity.ToTable("languageskill");
 
-                entity.HasIndex(e => e.Id)
-                    .HasName("id_UNIQUE")
-                    .IsUnique();
-
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
                     .HasColumnType("int(11)");
@@ -1783,10 +1607,6 @@ namespace PersonnelManagement.Models
             modelBuilder.Entity<Languagetype>(entity =>
             {
                 entity.ToTable("languagetype");
-
-                entity.HasIndex(e => e.Id)
-                    .HasName("id_UNIQUE")
-                    .IsUnique();
 
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
@@ -1848,10 +1668,6 @@ namespace PersonnelManagement.Models
             {
                 entity.ToTable("mrd");
 
-                entity.HasIndex(e => e.Id)
-                    .HasName("id_UNIQUE")
-                    .IsUnique();
-
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
                     .HasColumnType("int(11)");
@@ -1870,10 +1686,6 @@ namespace PersonnelManagement.Models
             {
                 entity.ToTable("normativ");
 
-                entity.HasIndex(e => e.Id)
-                    .HasName("id_UNIQUE")
-                    .IsUnique();
-
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
                     .HasColumnType("int(11)");
@@ -1888,10 +1700,6 @@ namespace PersonnelManagement.Models
             modelBuilder.Entity<Ordernumbertype>(entity =>
             {
                 entity.ToTable("ordernumbertype");
-
-                entity.HasIndex(e => e.Id)
-                    .HasName("id_UNIQUE")
-                    .IsUnique();
 
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
@@ -1908,10 +1716,6 @@ namespace PersonnelManagement.Models
             {
                 entity.ToTable("penalty");
 
-                entity.HasIndex(e => e.Id)
-                    .HasName("id_UNIQUE")
-                    .IsUnique();
-
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
                     .HasColumnType("int(11)");
@@ -1926,10 +1730,6 @@ namespace PersonnelManagement.Models
             modelBuilder.Entity<Permissiontype>(entity =>
             {
                 entity.ToTable("permissiontype");
-
-                entity.HasIndex(e => e.Id)
-                    .HasName("id_UNIQUE")
-                    .IsUnique();
 
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
@@ -2386,10 +2186,6 @@ namespace PersonnelManagement.Models
             {
                 entity.ToTable("personadditionalagreement");
 
-                entity.HasIndex(e => e.Id)
-                    .HasName("id_UNIQUE")
-                    .IsUnique();
-
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
                     .HasColumnType("int(11)");
@@ -2422,10 +2218,6 @@ namespace PersonnelManagement.Models
             modelBuilder.Entity<Personattestation>(entity =>
             {
                 entity.ToTable("personattestation");
-
-                entity.HasIndex(e => e.Id)
-                    .HasName("id_UNIQUE")
-                    .IsUnique();
 
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
@@ -2495,10 +2287,6 @@ namespace PersonnelManagement.Models
             {
                 entity.ToTable("personchangedocuments");
 
-                entity.HasIndex(e => e.Id)
-                    .HasName("id_UNIQUE")
-                    .IsUnique();
-
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
                     .HasColumnType("int(11)");
@@ -2561,10 +2349,6 @@ namespace PersonnelManagement.Models
             modelBuilder.Entity<Personcontract>(entity =>
             {
                 entity.ToTable("personcontract");
-
-                entity.HasIndex(e => e.Id)
-                    .HasName("id_UNIQUE")
-                    .IsUnique();
 
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
@@ -2657,10 +2441,6 @@ namespace PersonnelManagement.Models
             {
                 entity.ToTable("persondecree");
 
-                entity.HasIndex(e => e.Id)
-                    .HasName("id_UNIQUE")
-                    .IsUnique();
-
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
                     .HasColumnType("int(11)");
@@ -2732,10 +2512,6 @@ namespace PersonnelManagement.Models
             modelBuilder.Entity<Persondecreeblock>(entity =>
             {
                 entity.ToTable("persondecreeblock");
-
-                entity.HasIndex(e => e.Id)
-                    .HasName("id_UNIQUE")
-                    .IsUnique();
 
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
@@ -2947,10 +2723,6 @@ namespace PersonnelManagement.Models
             {
                 entity.ToTable("persondecreeblockintro");
 
-                entity.HasIndex(e => e.Id)
-                    .HasName("id_UNIQUE")
-                    .IsUnique();
-
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
                     .HasColumnType("int(11)");
@@ -2990,10 +2762,6 @@ namespace PersonnelManagement.Models
             modelBuilder.Entity<Persondecreeblocksub>(entity =>
             {
                 entity.ToTable("persondecreeblocksub");
-
-                entity.HasIndex(e => e.Id)
-                    .HasName("id_UNIQUE")
-                    .IsUnique();
 
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
@@ -3063,6 +2831,16 @@ namespace PersonnelManagement.Models
                     .HasColumnType("int(11)")
                     .HasDefaultValueSql("'0'");
 
+                entity.Property(e => e.Subvaluenumber3)
+                    .HasColumnName("subvaluenumber3")
+                    .HasColumnType("int(11)")
+                    .HasDefaultValueSql("'0'");
+
+                entity.Property(e => e.Subvaluenumber4)
+                    .HasColumnName("subvaluenumber4")
+                    .HasColumnType("int(11)")
+                    .HasDefaultValueSql("'0'");
+
                 entity.Property(e => e.Subvaluestring1)
                     .IsRequired()
                     .HasColumnName("subvaluestring1")
@@ -3074,15 +2852,23 @@ namespace PersonnelManagement.Models
                     .HasColumnName("subvaluestring2")
                     .HasMaxLength(900)
                     .HasDefaultValueSql("''");
+
+                entity.Property(e => e.Subvaluestring3)
+                    .IsRequired()
+                    .HasColumnName("subvaluestring3")
+                    .HasMaxLength(900)
+                    .HasDefaultValueSql("''");
+
+                entity.Property(e => e.Subvaluestring4)
+                    .IsRequired()
+                    .HasColumnName("subvaluestring4")
+                    .HasMaxLength(900)
+                    .HasDefaultValueSql("''");
             });
 
             modelBuilder.Entity<Persondecreeblocksubtype>(entity =>
             {
                 entity.ToTable("persondecreeblocksubtype");
-
-                entity.HasIndex(e => e.Id)
-                    .HasName("id_UNIQUE")
-                    .IsUnique();
 
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
@@ -3109,10 +2895,6 @@ namespace PersonnelManagement.Models
             {
                 entity.ToTable("persondecreeblocktype");
 
-                entity.HasIndex(e => e.Id)
-                    .HasName("id_UNIQUE")
-                    .IsUnique();
-
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
                     .HasColumnType("int(11)");
@@ -3133,10 +2915,6 @@ namespace PersonnelManagement.Models
             {
                 entity.ToTable("persondecreelevel");
 
-                entity.HasIndex(e => e.Id)
-                    .HasName("id_UNIQUE")
-                    .IsUnique();
-
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
                     .HasColumnType("int(11)");
@@ -3151,10 +2929,6 @@ namespace PersonnelManagement.Models
             modelBuilder.Entity<Persondecreeoperation>(entity =>
             {
                 entity.ToTable("persondecreeoperation");
-
-                entity.HasIndex(e => e.Id)
-                    .HasName("id_UNIQUE")
-                    .IsUnique();
 
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
@@ -3411,10 +3185,6 @@ namespace PersonnelManagement.Models
             {
                 entity.ToTable("persondecreetype");
 
-                entity.HasIndex(e => e.Id)
-                    .HasName("шв_UNIQUE")
-                    .IsUnique();
-
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
                     .HasColumnType("int(11)");
@@ -3429,10 +3199,6 @@ namespace PersonnelManagement.Models
             modelBuilder.Entity<Persondispanserization>(entity =>
             {
                 entity.ToTable("persondispanserization");
-
-                entity.HasIndex(e => e.Id)
-                    .HasName("id_UNIQUE")
-                    .IsUnique();
 
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
@@ -3463,10 +3229,6 @@ namespace PersonnelManagement.Models
             modelBuilder.Entity<Persondriver>(entity =>
             {
                 entity.ToTable("persondriver");
-
-                entity.HasIndex(e => e.Id)
-                    .HasName("id_UNIQUE")
-                    .IsUnique();
 
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
@@ -3513,10 +3275,6 @@ namespace PersonnelManagement.Models
             modelBuilder.Entity<Personeducation>(entity =>
             {
                 entity.ToTable("personeducation");
-
-                entity.HasIndex(e => e.Id)
-                    .HasName("id_UNIQUE")
-                    .IsUnique();
 
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
@@ -3754,10 +3512,6 @@ namespace PersonnelManagement.Models
             {
                 entity.ToTable("personelection");
 
-                entity.HasIndex(e => e.Id)
-                    .HasName("id_UNIQUE")
-                    .IsUnique();
-
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
                     .HasColumnType("int(11)");
@@ -3799,10 +3553,6 @@ namespace PersonnelManagement.Models
             modelBuilder.Entity<Personfire>(entity =>
             {
                 entity.ToTable("personfire");
-
-                entity.HasIndex(e => e.Id)
-                    .HasName("id_UNIQUE")
-                    .IsUnique();
 
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
@@ -3880,10 +3630,6 @@ namespace PersonnelManagement.Models
             {
                 entity.ToTable("personill");
 
-                entity.HasIndex(e => e.Id)
-                    .HasName("id_UNIQUE")
-                    .IsUnique();
-
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
                     .HasColumnType("int(11)");
@@ -3934,10 +3680,6 @@ namespace PersonnelManagement.Models
             {
                 entity.ToTable("personillcode");
 
-                entity.HasIndex(e => e.Id)
-                    .HasName("id_UNIQUE")
-                    .IsUnique();
-
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
                     .HasColumnType("int(11)");
@@ -3956,10 +3698,6 @@ namespace PersonnelManagement.Models
             modelBuilder.Entity<Personjob>(entity =>
             {
                 entity.ToTable("personjob");
-
-                entity.HasIndex(e => e.Id)
-                    .HasName("id_UNIQUE")
-                    .IsUnique();
 
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
@@ -4161,10 +3899,6 @@ namespace PersonnelManagement.Models
             {
                 entity.ToTable("personjobprivelege");
 
-                entity.HasIndex(e => e.Id)
-                    .HasName("id_UNIQUE")
-                    .IsUnique();
-
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
                     .HasColumnType("int(11)");
@@ -4260,10 +3994,6 @@ namespace PersonnelManagement.Models
             {
                 entity.ToTable("personjobprivelegeperiod");
 
-                entity.HasIndex(e => e.Id)
-                    .HasName("id_UNIQUE")
-                    .IsUnique();
-
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
                     .HasColumnType("int(11)");
@@ -4285,10 +4015,6 @@ namespace PersonnelManagement.Models
             modelBuilder.Entity<Personlanguage>(entity =>
             {
                 entity.ToTable("personlanguage");
-
-                entity.HasIndex(e => e.Id)
-                    .HasName("id_UNIQUE")
-                    .IsUnique();
 
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
@@ -4313,10 +4039,6 @@ namespace PersonnelManagement.Models
             modelBuilder.Entity<Personpenalty>(entity =>
             {
                 entity.ToTable("personpenalty");
-
-                entity.HasIndex(e => e.Id)
-                    .HasName("id_UNIQUE")
-                    .IsUnique();
 
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
@@ -4375,10 +4097,6 @@ namespace PersonnelManagement.Models
             {
                 entity.ToTable("personpermission");
 
-                entity.HasIndex(e => e.Id)
-                    .HasName("id_UNIQUE")
-                    .IsUnique();
-
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
                     .HasColumnType("int(11)");
@@ -4413,10 +4131,6 @@ namespace PersonnelManagement.Models
             modelBuilder.Entity<Personpfl>(entity =>
             {
                 entity.ToTable("personpfl");
-
-                entity.HasIndex(e => e.Id)
-                    .HasName("id_UNIQUE")
-                    .IsUnique();
 
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
@@ -4496,10 +4210,6 @@ namespace PersonnelManagement.Models
             {
                 entity.ToTable("personphysical");
 
-                entity.HasIndex(e => e.Id)
-                    .HasName("id_UNIQUE")
-                    .IsUnique();
-
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
                     .HasColumnType("int(11)");
@@ -4518,10 +4228,6 @@ namespace PersonnelManagement.Models
             modelBuilder.Entity<Personprivelege>(entity =>
             {
                 entity.ToTable("personprivelege");
-
-                entity.HasIndex(e => e.Id)
-                    .HasName("id_UNIQUE")
-                    .IsUnique();
 
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
@@ -4542,10 +4248,6 @@ namespace PersonnelManagement.Models
             modelBuilder.Entity<Personrank>(entity =>
             {
                 entity.ToTable("personrank");
-
-                entity.HasIndex(e => e.Id)
-                    .HasName("id_UNIQUE")
-                    .IsUnique();
 
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
@@ -4608,10 +4310,6 @@ namespace PersonnelManagement.Models
             modelBuilder.Entity<Personrelative>(entity =>
             {
                 entity.ToTable("personrelative");
-
-                entity.HasIndex(e => e.Id)
-                    .HasName("id_UNIQUE")
-                    .IsUnique();
 
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
@@ -4829,10 +4527,6 @@ namespace PersonnelManagement.Models
             {
                 entity.ToTable("personreward");
 
-                entity.HasIndex(e => e.Id)
-                    .HasName("id_UNIQUE")
-                    .IsUnique();
-
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
                     .HasColumnType("int(11)");
@@ -4939,10 +4633,6 @@ namespace PersonnelManagement.Models
             {
                 entity.ToTable("personscience");
 
-                entity.HasIndex(e => e.Id)
-                    .HasName("id_UNIQUE")
-                    .IsUnique();
-
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
                     .HasColumnType("int(11)");
@@ -4978,10 +4668,6 @@ namespace PersonnelManagement.Models
             modelBuilder.Entity<Persontransfer>(entity =>
             {
                 entity.ToTable("persontransfer");
-
-                entity.HasIndex(e => e.Id)
-                    .HasName("id_UNIQUE")
-                    .IsUnique();
 
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
@@ -5062,10 +4748,6 @@ namespace PersonnelManagement.Models
             modelBuilder.Entity<Personvacation>(entity =>
             {
                 entity.ToTable("personvacation");
-
-                entity.HasIndex(e => e.Id)
-                    .HasName("id_UNIQUE")
-                    .IsUnique();
 
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
@@ -5192,10 +4874,6 @@ namespace PersonnelManagement.Models
             {
                 entity.ToTable("personvvk");
 
-                entity.HasIndex(e => e.Id)
-                    .HasName("id_UNIQUE")
-                    .IsUnique();
-
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
                     .HasColumnType("int(11)");
@@ -5226,10 +4904,6 @@ namespace PersonnelManagement.Models
             modelBuilder.Entity<Personworktrip>(entity =>
             {
                 entity.ToTable("personworktrip");
-
-                entity.HasIndex(e => e.Id)
-                    .HasName("id_UNIQUE")
-                    .IsUnique();
 
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
@@ -5303,10 +4977,6 @@ namespace PersonnelManagement.Models
             {
                 entity.ToTable("physicalfield");
 
-                entity.HasIndex(e => e.Id)
-                    .HasName("id_UNIQUE")
-                    .IsUnique();
-
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
                     .HasColumnType("int(11)");
@@ -5331,12 +5001,6 @@ namespace PersonnelManagement.Models
             modelBuilder.Entity<Position>(entity =>
             {
                 entity.ToTable("position");
-
-                entity.HasIndex(e => e.Positiontype)
-                    .HasName("POSITIONTYPE");
-
-                entity.HasIndex(e => e.Structure)
-                    .HasName("STRUCTURE");
 
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
@@ -5675,14 +5339,6 @@ namespace PersonnelManagement.Models
             {
                 entity.ToTable("positioncategoryrank");
 
-                entity.HasIndex(e => e.Id)
-                    .HasName("id_UNIQUE")
-                    .IsUnique();
-
-                entity.HasIndex(e => e.Rank)
-                    .HasName("rank_UNIQUE")
-                    .IsUnique();
-
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
                     .HasColumnType("int(11)");
@@ -5698,10 +5354,6 @@ namespace PersonnelManagement.Models
             modelBuilder.Entity<Positionhistory>(entity =>
             {
                 entity.ToTable("positionhistory");
-
-                entity.HasIndex(e => e.Id)
-                    .HasName("id_UNIQUE")
-                    .IsUnique();
 
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
@@ -5742,10 +5394,6 @@ namespace PersonnelManagement.Models
             {
                 entity.ToTable("positionmrd");
 
-                entity.HasIndex(e => e.Id)
-                    .HasName("id_UNIQUE")
-                    .IsUnique();
-
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
                     .HasColumnType("int(11)");
@@ -5762,10 +5410,6 @@ namespace PersonnelManagement.Models
             modelBuilder.Entity<Positiontype>(entity =>
             {
                 entity.ToTable("positiontype");
-
-                entity.HasIndex(e => e.Id)
-                    .HasName("id_UNIQUE")
-                    .IsUnique();
 
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
@@ -5927,10 +5571,6 @@ namespace PersonnelManagement.Models
             modelBuilder.Entity<Profiledata>(entity =>
             {
                 entity.ToTable("profiledata");
-
-                entity.HasIndex(e => e.Id)
-                    .HasName("id_UNIQUE")
-                    .IsUnique();
 
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
@@ -6133,10 +5773,6 @@ namespace PersonnelManagement.Models
             {
                 entity.ToTable("profilerelatives");
 
-                entity.HasIndex(e => e.Id)
-                    .HasName("id_UNIQUE")
-                    .IsUnique();
-
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
                     .HasColumnType("int(11)");
@@ -6185,10 +5821,6 @@ namespace PersonnelManagement.Models
             {
                 entity.ToTable("prooftype");
 
-                entity.HasIndex(e => e.Id)
-                    .HasName("id_UNIQUE")
-                    .IsUnique();
-
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
                     .HasColumnType("int(11)");
@@ -6203,10 +5835,6 @@ namespace PersonnelManagement.Models
             modelBuilder.Entity<Pseducation>(entity =>
             {
                 entity.ToTable("pseducation");
-
-                entity.HasIndex(e => e.Id)
-                    .HasName("id_UNIQUE")
-                    .IsUnique();
 
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
@@ -6261,10 +5889,6 @@ namespace PersonnelManagement.Models
             modelBuilder.Entity<Pswork>(entity =>
             {
                 entity.ToTable("pswork");
-
-                entity.HasIndex(e => e.Id)
-                    .HasName("id_UNIQUE")
-                    .IsUnique();
 
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
@@ -6334,13 +5958,6 @@ namespace PersonnelManagement.Models
             modelBuilder.Entity<Rank>(entity =>
             {
                 entity.ToTable("rank");
-
-                entity.HasIndex(e => e.Id)
-                    .HasName("id_UNIQUE")
-                    .IsUnique();
-
-                entity.HasIndex(e => e.Order)
-                    .HasName("ORDER");
 
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
@@ -6423,10 +6040,6 @@ namespace PersonnelManagement.Models
             {
                 entity.ToTable("region");
 
-                entity.HasIndex(e => e.Id)
-                    .HasName("id_UNIQUE")
-                    .IsUnique();
-
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
                     .HasColumnType("int(11)");
@@ -6447,10 +6060,6 @@ namespace PersonnelManagement.Models
             {
                 entity.ToTable("relativetype");
 
-                entity.HasIndex(e => e.Id)
-                    .HasName("id_UNIQUE")
-                    .IsUnique();
-
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
                     .HasColumnType("int(11)");
@@ -6465,10 +6074,6 @@ namespace PersonnelManagement.Models
             modelBuilder.Entity<Reward>(entity =>
             {
                 entity.ToTable("reward");
-
-                entity.HasIndex(e => e.Id)
-                    .HasName("id_UNIQUE")
-                    .IsUnique();
 
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
@@ -6489,10 +6094,6 @@ namespace PersonnelManagement.Models
             modelBuilder.Entity<Rewardmoney>(entity =>
             {
                 entity.ToTable("rewardmoney");
-
-                entity.HasIndex(e => e.Id)
-                    .HasName("id_UNIQUE")
-                    .IsUnique();
 
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
@@ -6520,10 +6121,6 @@ namespace PersonnelManagement.Models
             modelBuilder.Entity<Rewardtype>(entity =>
             {
                 entity.ToTable("rewardtype");
-
-                entity.HasIndex(e => e.Id)
-                    .HasName("id_UNIQUE")
-                    .IsUnique();
 
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
@@ -6589,10 +6186,6 @@ namespace PersonnelManagement.Models
             modelBuilder.Entity<Rights>(entity =>
             {
                 entity.ToTable("rights");
-
-                entity.HasIndex(e => e.Id)
-                    .HasName("id_UNIQUE")
-                    .IsUnique();
 
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
@@ -6998,10 +6591,6 @@ namespace PersonnelManagement.Models
             {
                 entity.ToTable("rightsstructure");
 
-                entity.HasIndex(e => e.Id)
-                    .HasName("id_UNIQUE")
-                    .IsUnique();
-
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
                     .HasColumnType("int(11)");
@@ -7046,10 +6635,6 @@ namespace PersonnelManagement.Models
             {
                 entity.ToTable("role");
 
-                entity.HasIndex(e => e.Id)
-                    .HasName("id_UNIQUE")
-                    .IsUnique();
-
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
                     .HasColumnType("int(11)");
@@ -7070,10 +6655,6 @@ namespace PersonnelManagement.Models
             {
                 entity.ToTable("servicecoef");
 
-                entity.HasIndex(e => e.Id)
-                    .HasName("id_UNIQUE")
-                    .IsUnique();
-
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
                     .HasColumnType("int(11)");
@@ -7089,10 +6670,6 @@ namespace PersonnelManagement.Models
             {
                 entity.ToTable("servicefeature");
 
-                entity.HasIndex(e => e.Id)
-                    .HasName("id_UNIQUE")
-                    .IsUnique();
-
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
                     .HasColumnType("int(11)");
@@ -7107,10 +6684,6 @@ namespace PersonnelManagement.Models
             modelBuilder.Entity<Servicetype>(entity =>
             {
                 entity.ToTable("servicetype");
-
-                entity.HasIndex(e => e.Id)
-                    .HasName("id_UNIQUE")
-                    .IsUnique();
 
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
@@ -7144,10 +6717,6 @@ namespace PersonnelManagement.Models
             {
                 entity.ToTable("setpersondatatype");
 
-                entity.HasIndex(e => e.Id)
-                    .HasName("id_UNIQUE")
-                    .IsUnique();
-
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
                     .HasColumnType("int(11)");
@@ -7162,10 +6731,6 @@ namespace PersonnelManagement.Models
             modelBuilder.Entity<Sheetdata>(entity =>
             {
                 entity.ToTable("sheetdata");
-
-                entity.HasIndex(e => e.Id)
-                    .HasName("id_UNIQUE")
-                    .IsUnique();
 
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
@@ -7345,10 +6910,6 @@ namespace PersonnelManagement.Models
             {
                 entity.ToTable("sheetpolitics");
 
-                entity.HasIndex(e => e.Id)
-                    .HasName("id_UNIQUE")
-                    .IsUnique();
-
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
                     .HasColumnType("int(11)");
@@ -7390,10 +6951,6 @@ namespace PersonnelManagement.Models
             {
                 entity.ToTable("sourceoffinancing");
 
-                entity.HasIndex(e => e.Id)
-                    .HasName("id_UNIQUE")
-                    .IsUnique();
-
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
                     .HasColumnType("int(11)");
@@ -7413,10 +6970,6 @@ namespace PersonnelManagement.Models
             {
                 entity.ToTable("streettype");
 
-                entity.HasIndex(e => e.Id)
-                    .HasName("id_UNIQUE")
-                    .IsUnique();
-
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
                     .HasColumnType("int(11)");
@@ -7431,15 +6984,6 @@ namespace PersonnelManagement.Models
             modelBuilder.Entity<Structure>(entity =>
             {
                 entity.ToTable("structure");
-
-                entity.HasIndex(e => e.Changeorigin)
-                    .HasName("CHANGEORIGIN");
-
-                entity.HasIndex(e => e.Changestructurelast)
-                    .HasName("CHANGESTRUCTURELAST");
-
-                entity.HasIndex(e => e.Parentstructure)
-                    .HasName("PARENT");
 
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
@@ -7693,10 +7237,6 @@ namespace PersonnelManagement.Models
             {
                 entity.ToTable("structureregion");
 
-                entity.HasIndex(e => e.Id)
-                    .HasName("id_UNIQUE")
-                    .IsUnique();
-
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
                     .HasColumnType("int(11)");
@@ -7712,10 +7252,6 @@ namespace PersonnelManagement.Models
             {
                 entity.ToTable("structuretype");
 
-                entity.HasIndex(e => e.Id)
-                    .HasName("id_UNIQUE")
-                    .IsUnique();
-
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
                     .HasColumnType("int(11)");
@@ -7730,10 +7266,6 @@ namespace PersonnelManagement.Models
             modelBuilder.Entity<Subject>(entity =>
             {
                 entity.ToTable("subject");
-
-                entity.HasIndex(e => e.Id)
-                    .HasName("id_UNIQUE")
-                    .IsUnique();
 
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
@@ -7801,10 +7333,6 @@ namespace PersonnelManagement.Models
             {
                 entity.ToTable("subjectcategory");
 
-                entity.HasIndex(e => e.Id)
-                    .HasName("id_UNIQUE")
-                    .IsUnique();
-
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
                     .HasColumnType("int(11)");
@@ -7824,15 +7352,6 @@ namespace PersonnelManagement.Models
             modelBuilder.Entity<Subjectexport>(entity =>
             {
                 entity.ToTable("subjectexport");
-
-                entity.HasIndex(e => e.Category)
-                    .HasName("category_index");
-
-                entity.HasIndex(e => e.Dropword)
-                    .HasName("dropword_index");
-
-                entity.HasIndex(e => e.Gender)
-                    .HasName("gender_index");
 
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
@@ -7883,10 +7402,6 @@ namespace PersonnelManagement.Models
             {
                 entity.ToTable("subjectgender");
 
-                entity.HasIndex(e => e.Id)
-                    .HasName("id_UNIQUE")
-                    .IsUnique();
-
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
                     .HasColumnType("int(11)");
@@ -7901,10 +7416,6 @@ namespace PersonnelManagement.Models
             modelBuilder.Entity<Transfertype>(entity =>
             {
                 entity.ToTable("transfertype");
-
-                entity.HasIndex(e => e.Id)
-                    .HasName("id_UNIQUE")
-                    .IsUnique();
 
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
@@ -7942,10 +7453,6 @@ namespace PersonnelManagement.Models
             modelBuilder.Entity<User>(entity =>
             {
                 entity.ToTable("user");
-
-                entity.HasIndex(e => e.Id)
-                    .HasName("id_UNIQUE")
-                    .IsUnique();
 
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
@@ -8061,10 +7568,6 @@ namespace PersonnelManagement.Models
             {
                 entity.ToTable("vacationmilitary");
 
-                entity.HasIndex(e => e.Id)
-                    .HasName("id_UNIQUE")
-                    .IsUnique();
-
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
                     .HasColumnType("int(11)");
@@ -8079,10 +7582,6 @@ namespace PersonnelManagement.Models
             modelBuilder.Entity<Vacationtype>(entity =>
             {
                 entity.ToTable("vacationtype");
-
-                entity.HasIndex(e => e.Id)
-                    .HasName("id_UNIQUE")
-                    .IsUnique();
 
                 entity.Property(e => e.Id)
                     .HasColumnName("id")

@@ -84,5 +84,17 @@ namespace PersonnelManagement.Models
             Paragraph paragraph = new Paragraph(paragraphProperties, run);
             body.AppendChild(paragraph);
         }
+
+        private Persondecree loadDecree(int id_decree)
+        {
+            return m_repository.PersondecreesLocal().Values.FirstOrDefault(r => r.Id == id_decree);
+        }
+
+        private List<Persondecreeoperation> loadDecreeOperations(Persondecree decree)
+        {
+            List<Persondecreeoperation> output = m_repository.PersondecreeoperationsLocal().Values.Where(r => r.Persondecree == decree.Id).ToList();
+            output.Sort((x, y) => x.Index.CompareTo(y.Index));
+            return output;
+        }
     }
 }

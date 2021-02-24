@@ -25,7 +25,7 @@ namespace PersonnelManagement.Models
             m_user = user;
 
             m_stream = new MemoryStream();
-            CreateDocument(m_stream);
+            //CreateDocument(m_stream);
         }
 
         public MemoryStream GetMemoryStream()
@@ -61,6 +61,26 @@ namespace PersonnelManagement.Models
             }
         }
 
+        public void Worker(Persondecree decree)
+        {
+            List<Persondecreeblock> blocks = loadDecreeBlocks(decree.Id);
+            blocks.Sort((a, b) => a.Index.CompareTo(b.Index));
+
+            using (var document = WordprocessingDocument.Create(m_stream, WordprocessingDocumentType.Document))
+            {
+                document.AddMainDocumentPart();
+                document.MainDocumentPart.Document = new Document();
+                var body = new Body();
+                SetMargins(body);
+                foreach(Persondecreeblock k in blocks)
+                {
+                    generateencourage(body, k);
+                }
+                addFirstParagraffs(body);
+                document.MainDocumentPart.Document.AppendChild(body);
+            }
+        }
+
         private void addFirstParagraffs(Body body, string write = "test line output")
         {
             ParagraphProperties paragraphProperties = new ParagraphProperties(new Indentation() { Left = "0" },
@@ -90,11 +110,28 @@ namespace PersonnelManagement.Models
             return m_repository.PersondecreesLocal().Values.FirstOrDefault(r => r.Id == id_decree);
         }
 
+        private List<Persondecreeblock> loadDecreeBlocks(int id_decree)
+        {
+            return m_repository.Persondecreeblocks.Where(r => r.Persondecree == id_decree).ToList();
+        }
+
         private List<Persondecreeoperation> loadDecreeOperations(Persondecree decree)
         {
             List<Persondecreeoperation> output = m_repository.PersondecreeoperationsLocal().Values.Where(r => r.Persondecree == decree.Id).ToList();
             output.Sort((x, y) => x.Index.CompareTo(y.Index));
             return output;
+        }
+
+        private void generateencourage(Body body, Persondecreeblock input_list)
+        {
+            if (input_list.Persondecreeblocktype != 1)
+                return;
+            addFirstParagraffs(body, input_list.Index.ToString() +
+                ". " +
+                m_repository.Persondecreeblocktypes.First(r => r.Id == input_list.Persondecreeblocktype).Name.ToString().ToUpper() +
+                ":");
+
+
         }
     }
 }

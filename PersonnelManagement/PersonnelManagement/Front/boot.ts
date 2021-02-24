@@ -392,6 +392,9 @@ const store = new Vuex.Store({
         modeappointedpersonstructuredecree: 0,
         modecopystring: "", // String with copy data. "s=1" means copy structure with id 1 and all substructrures with the same or null type and all positions inclusive.
 
+        currentdecreemail: "",
+        decreemail: false,
+
     },
     mutations: {
         setchosenpersiondecreeblock(state, n) {
@@ -548,6 +551,15 @@ const store = new Vuex.Store({
         },
         setDateFromDB(state, n) {
             state.date = n;
+        },
+
+        setdecreemailM(state, n) {
+            state.currentdecreemail = n;
+            if (n == "") {
+                state.decreemail = false;
+            } else {
+                state.decreemail = true;
+            }
         },
 
         setDateByDate(state, n) {

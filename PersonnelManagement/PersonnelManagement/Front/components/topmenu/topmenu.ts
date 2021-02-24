@@ -339,6 +339,7 @@ export default class TopmenuComponent extends Vue {
     persondecreeBlocksubs: Persondecreeblocksub[];
     persondecreesNewblocksub: number;
     persondecreesActionmenu: boolean;
+    persondecreeSigned: number;
     
     numberNewStructure: number;
     numberStructure: number;
@@ -377,6 +378,7 @@ export default class TopmenuComponent extends Vue {
 
     personvacationHolidays: number;
     //rewardmoneys: Rewardmoney[];
+    customwidth: boolean;
 
     
     onDecreeDatesignedChange(value: string, oldValue: string) {
@@ -552,6 +554,7 @@ export default class TopmenuComponent extends Vue {
             persondecreeBlocksubs: [],
             persondecreesNewblocksub: null,
             persondecreesActionmenu: false,
+            persondecreeSigned: 0,
 
             fiosearch: "",
             person: null,
@@ -579,6 +582,8 @@ export default class TopmenuComponent extends Vue {
 
             personvacationHolidays: null,
             //rewardmoneys: [],
+
+            customwidth: false,
         }
     }
 
@@ -588,6 +593,7 @@ export default class TopmenuComponent extends Vue {
         setInterval(this.renewPersondecrees, 3000);
         setInterval(this.appointPosition, 1000);
         setInterval(this.appointStructure, 1000);
+        setInterval(this.persondecreeSelectt, 500);
         this.fetchFeaturedStructures();
         this.fetchStructureRewards();
         this.fetchStructureRewardsAllowed();
@@ -2147,7 +2153,23 @@ export default class TopmenuComponent extends Vue {
                 this.persondecreeId = id;
                 //alert(result.creatorObject);
                 this.persondecreeCreatorObject = result.creatorObject;
+                this.persondecreeSigned = result.signed;
             });
+    }
+
+    persondecreeSelectt() {
+        if (this.$store.state.decreemail) {
+            let id: number = this.$store.state.currentdecreemail;
+            this.customwidth = this.$store.state.decreemail;
+            this.modalPersondecreeMenuVisible = this.$store.state.decreemail;
+            this.persondecreeSelectUpdate(id);
+        }
+    }
+
+    logic_function_decree_mail_close(): boolean {
+        this.customwidth = false;
+        this.$store.commit("setdecreemailM", "");
+        return !this.modalPersondecreeMenuVisible;
     }
 
     persondecreeSelect(event: any, id: number) {
@@ -4258,20 +4280,41 @@ export default class TopmenuComponent extends Vue {
      * @param persondecreeblock
      */
     selectPosition(persondecreeblock: Persondecreeblock) {
+        if (this.$store.state.decreemail) {
+            this.$store.commit("setdecreeoperationelementVisible", 0);
+            this.$store.commit("setchosenpersiondecreeblock", persondecreeblock);
 
+            let appearance = {
+                positioncompact: this.$store.state.positioncompact,
+                sidebardisplay: 1,
+            }
 
-        let appearance = {
-            positioncompact: this.$store.state.positioncompact,
-            sidebardisplay: 1,
+            this.$store.commit("setdecreeoperationtemplatecreatorVisible", false);
+            this.$store.commit("setdecreeoperationelementVisible", 0);
+            this.$store.commit("setmailmodeprevios", true);
+
+            //this.visible = false;
+            this.modalPersondecreeMenuVisible = false;
+            this.modalPersondecreesMenuVisible = false;
+            this.$store.commit("setModeappointpersondecree", true);
+            this.currentPersondecreeblock = persondecreeblock;
+
+            this.$store.commit("updateUserAppearance", appearance);
+        } else {
+
+            let appearance = {
+                positioncompact: this.$store.state.positioncompact,
+                sidebardisplay: 1,
+            }
+
+            this.$store.commit("setEldVisible", 0);
+            this.modalPersondecreeMenuVisible = false;
+            this.modalPersondecreesMenuVisible = false;
+            this.$store.commit("setModeappointpersondecree", true);
+            this.currentPersondecreeblock = persondecreeblock;
+
+            this.$store.commit("updateUserAppearance", appearance);
         }
-
-        this.$store.commit("setEldVisible", 0);
-        this.modalPersondecreeMenuVisible = false;
-        this.modalPersondecreesMenuVisible = false;
-        this.$store.commit("setModeappointpersondecree", true);
-        this.currentPersondecreeblock = persondecreeblock;
-
-        this.$store.commit("updateUserAppearance", appearance);
     }
 
     /**

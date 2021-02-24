@@ -309,6 +309,24 @@ export default class derceeoperationelement extends Vue {
         //this.viewpersondecrees.length
     }
 
+    rowClicked(row, flag = true) {
+        let k;
+        if (flag) {
+            let list_access: string[] = row.accessforreading.split('_');
+            let k = list_access.find(r => parseInt(r) == this.$store.state.user.id);
+        } else
+            k = "true";
+        if (k != undefined || this.$store.state.user.id == 1)
+            //this.open(row);
+            this.$store.commit("setdecreemailM", row.id);
+        else
+            this.$notify({
+                title: 'Нет прав',
+                message: 'Отказано в доступе',
+                type: 'warning'
+            });
+    }
+
     createMenuToggle() {
         this.fullpersondecrees = null;
         //this.persondecreeCreate();
@@ -342,7 +360,8 @@ export default class derceeoperationelement extends Vue {
                     })
                     .then(result => {
                         this.fetchMailExplorer();
-                        this.open(result);
+                        //this.open(result);
+                        this.rowClicked(result, false);
                     });
             })
         })
@@ -351,6 +370,7 @@ export default class derceeoperationelement extends Vue {
     open(decree: Persondecree) {
         this.$store.commit("setpersondecree", decree);
         this.$store.commit("setdecreeoperationtemplatecreatorVisible", this.$store.state.decreeoperationtemplatecreatorVisible ? false : true);
+        this.rowClicked(decree);
     }
 
     getMaxID(array_culc): number {
@@ -485,19 +505,6 @@ export default class derceeoperationelement extends Vue {
             })
         }
         return time;
-    }
-
-    rowClicked(row) {
-        let list_access: string[] = row.accessforreading.split('_');
-        let k = list_access.find(r => parseInt(r) == this.$store.state.user.id);
-        if (k != undefined || this.$store.state.user.id == 1)
-            this.open(row);
-        else
-            this.$notify({
-                title: 'Нет прав',
-                message: 'Отказано в доступе',
-                type: 'warning'
-            });
     }
 
     canSelectRow(row) {

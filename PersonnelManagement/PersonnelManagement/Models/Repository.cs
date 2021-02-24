@@ -2581,6 +2581,28 @@ namespace PersonnelManagement.Models
         {
             User contextUser = Users.First(u => u.Id == user.Id);
             Decree decree = Decrees.First(d => d.Id == decreeManagement.Id);
+            UpdateStructuresLocal();
+            foreach (Decreeoperation p in DecreeoperationsLocal().Values.ToList().FindAll(r => r.Decree == decree.Id))
+            {
+                if(p.Changed == 1 && StructuresLocal().ContainsKey(p.Changedtype) && p.Subject < 0 && p.Dateactive.GetValueOrDefault().Date <= contextUser.Date)
+                {
+                    foreach (Decreeoperation d in DecreeoperationsLocal().Values.ToList().FindAll(r => r.Changedtype == p.Changedtype))
+                    {
+                        if(StructuresLocal().ContainsKey(d.Subject * -1) && StructuresLocal()[d.Subject * -1].Featured == 1 && d.Id != p.Id)
+                        {
+                            Structure structure = Structures.First(r => r.Id == d.Subject * -1);
+                            structure.Featured = 0;
+                            context.SaveChanges();
+                        }
+                    }
+                    if (StructuresLocal()[p.Changedtype].Featured == 1)
+                    {
+                        Structure structure = Structures.First(r => r.Id == p.Changedtype);
+                        structure.Featured = 0;
+                        context.SaveChanges();
+                    }
+                }
+            }
             contextUser.Decree = 0;
             decree.Name = decreeManagement.Name;
             decree.Number = decreeManagement.Number;
@@ -2591,6 +2613,7 @@ namespace PersonnelManagement.Models
 
             UpdateDateactives(decree.Id);
             UpdateUsersLocal();
+            UpdateStructuresLocal();
         }
 
         public void UpdateDecree(DecreeManagement decreeManagement, User user)

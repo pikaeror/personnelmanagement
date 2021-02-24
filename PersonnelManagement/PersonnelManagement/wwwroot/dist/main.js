@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "1f7449acf32496dde235"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "4211c05bd8dee97e15f5"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -2538,6 +2538,8 @@ const store = new __WEBPACK_IMPORTED_MODULE_3_vuex__["default"].Store({
         modeappointpersonstructuredecree: false,
         modeappointedpersonstructuredecree: 0,
         modecopystring: "",
+        currentdecreemail: "",
+        decreemail: false,
     },
     mutations: {
         setchosenpersiondecreeblock(state, n) {
@@ -2673,6 +2675,15 @@ const store = new __WEBPACK_IMPORTED_MODULE_3_vuex__["default"].Store({
         },
         setDateFromDB(state, n) {
             state.date = n;
+        },
+        setdecreemailM(state, n) {
+            state.currentdecreemail = n;
+            if (n == "") {
+                state.decreemail = false;
+            }
+            else {
+                state.decreemail = true;
+            }
         },
         setDateByDate(state, n) {
             //state.date = this.toDateInputValue(n);
@@ -8128,6 +8139,24 @@ fetch('api/MailController/rand', { credentials: 'include' })
         });
         //this.viewpersondecrees.length
     }
+    rowClicked(row, flag = true) {
+        let k;
+        if (flag) {
+            let list_access = row.accessforreading.split('_');
+            let k = list_access.find(r => parseInt(r) == this.$store.state.user.id);
+        }
+        else
+            k = "true";
+        if (k != undefined || this.$store.state.user.id == 1)
+            //this.open(row);
+            this.$store.commit("setdecreemailM", row.id);
+        else
+            this.$notify({
+                title: 'Нет прав',
+                message: 'Отказано в доступе',
+                type: 'warning'
+            });
+    }
     createMenuToggle() {
         this.fullpersondecrees = null;
         //this.persondecreeCreate();
@@ -8161,7 +8190,8 @@ fetch('api/MailController/rand', { credentials: 'include' })
                 })
                     .then(result => {
                     this.fetchMailExplorer();
-                    this.open(result);
+                    //this.open(result);
+                    this.rowClicked(result, false);
                 });
             });
         });
@@ -8169,6 +8199,7 @@ fetch('api/MailController/rand', { credentials: 'include' })
     open(decree) {
         this.$store.commit("setpersondecree", decree);
         this.$store.commit("setdecreeoperationtemplatecreatorVisible", this.$store.state.decreeoperationtemplatecreatorVisible ? false : true);
+        this.rowClicked(decree);
     }
     getMaxID(array_culc) {
         let index = -1;
@@ -8308,18 +8339,6 @@ fetch('api/MailController/rand', { credentials: 'include' })
             });
         }
         return time;
-    }
-    rowClicked(row) {
-        let list_access = row.accessforreading.split('_');
-        let k = list_access.find(r => parseInt(r) == this.$store.state.user.id);
-        if (k != undefined || this.$store.state.user.id == 1)
-            this.open(row);
-        else
-            this.$notify({
-                title: 'Нет прав',
-                message: 'Отказано в доступе',
-                type: 'warning'
-            });
     }
     canSelectRow(row) {
         this.viewpersondecrees.forEach(r => {
@@ -11040,7 +11059,7 @@ let EldComponent = class EldComponent extends __WEBPACK_IMPORTED_MODULE_0_vue__[
         setInterval(this.appointPosition, 1000);
         setInterval(this.autoupdatePerson, 10000);
         setInterval(this.loadPeopleWhithoutJobPlace, 20000);
-        this.loadPeopleWhithoutJobPlace();
+        //this.loadPeopleWhithoutJobPlace();
         this.fetchStructureRewards();
         this.fetchStructureRewardsAllowed();
         this.fetchStructureElders();
@@ -23649,7 +23668,6 @@ class FeaturedStructure {
 class StructureManagement {
 }
 let TopmenuComponent = class TopmenuComponent extends __WEBPACK_IMPORTED_MODULE_0_vue__["default"] {
-    //rewardmoneys: Rewardmoney[];
     onDecreeDatesignedChange(value, oldValue) {
         this.decreeDateactive = this.decreeDatesigned;
     }
@@ -23808,6 +23826,7 @@ let TopmenuComponent = class TopmenuComponent extends __WEBPACK_IMPORTED_MODULE_
             persondecreeBlocksubs: [],
             persondecreesNewblocksub: null,
             persondecreesActionmenu: false,
+            persondecreeSigned: 0,
             fiosearch: "",
             person: null,
             personssearch: [],
@@ -23828,6 +23847,8 @@ let TopmenuComponent = class TopmenuComponent extends __WEBPACK_IMPORTED_MODULE_
             structuresRewardAllowedToSelect: [],
             structuresElders: [],
             personvacationHolidays: null,
+            //rewardmoneys: [],
+            customwidth: false,
         };
     }
     mounted() {
@@ -23836,6 +23857,7 @@ let TopmenuComponent = class TopmenuComponent extends __WEBPACK_IMPORTED_MODULE_
         setInterval(this.renewPersondecrees, 3000);
         setInterval(this.appointPosition, 1000);
         setInterval(this.appointStructure, 1000);
+        setInterval(this.persondecreeSelectt, 500);
         this.fetchFeaturedStructures();
         this.fetchStructureRewards();
         this.fetchStructureRewardsAllowed();
@@ -25225,7 +25247,21 @@ let TopmenuComponent = class TopmenuComponent extends __WEBPACK_IMPORTED_MODULE_
             this.persondecreeId = id;
             //alert(result.creatorObject);
             this.persondecreeCreatorObject = result.creatorObject;
+            this.persondecreeSigned = result.signed;
         });
+    }
+    persondecreeSelectt() {
+        if (this.$store.state.decreemail) {
+            let id = this.$store.state.currentdecreemail;
+            this.customwidth = this.$store.state.decreemail;
+            this.modalPersondecreeMenuVisible = this.$store.state.decreemail;
+            this.persondecreeSelectUpdate(id);
+        }
+    }
+    logic_function_decree_mail_close() {
+        this.customwidth = false;
+        this.$store.commit("setdecreemailM", "");
+        return !this.modalPersondecreeMenuVisible;
     }
     persondecreeSelect(event, id) {
         this.modalPersondecreeMenuVisible = true;
@@ -27128,16 +27164,35 @@ let TopmenuComponent = class TopmenuComponent extends __WEBPACK_IMPORTED_MODULE_
      * @param persondecreeblock
      */
     selectPosition(persondecreeblock) {
-        let appearance = {
-            positioncompact: this.$store.state.positioncompact,
-            sidebardisplay: 1,
-        };
-        this.$store.commit("setEldVisible", 0);
-        this.modalPersondecreeMenuVisible = false;
-        this.modalPersondecreesMenuVisible = false;
-        this.$store.commit("setModeappointpersondecree", true);
-        this.currentPersondecreeblock = persondecreeblock;
-        this.$store.commit("updateUserAppearance", appearance);
+        if (this.$store.state.decreemail) {
+            this.$store.commit("setdecreeoperationelementVisible", 0);
+            this.$store.commit("setchosenpersiondecreeblock", persondecreeblock);
+            let appearance = {
+                positioncompact: this.$store.state.positioncompact,
+                sidebardisplay: 1,
+            };
+            this.$store.commit("setdecreeoperationtemplatecreatorVisible", false);
+            this.$store.commit("setdecreeoperationelementVisible", 0);
+            this.$store.commit("setmailmodeprevios", true);
+            //this.visible = false;
+            this.modalPersondecreeMenuVisible = false;
+            this.modalPersondecreesMenuVisible = false;
+            this.$store.commit("setModeappointpersondecree", true);
+            this.currentPersondecreeblock = persondecreeblock;
+            this.$store.commit("updateUserAppearance", appearance);
+        }
+        else {
+            let appearance = {
+                positioncompact: this.$store.state.positioncompact,
+                sidebardisplay: 1,
+            };
+            this.$store.commit("setEldVisible", 0);
+            this.modalPersondecreeMenuVisible = false;
+            this.modalPersondecreesMenuVisible = false;
+            this.$store.commit("setModeappointpersondecree", true);
+            this.currentPersondecreeblock = persondecreeblock;
+            this.$store.commit("updateUserAppearance", appearance);
+        }
     }
     /**
      * Подгрузка данных о должности
@@ -32001,8 +32056,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }],
     attrs: {
       "visible": _vm.modalPersondecreeMenuVisible,
-      "width": "900px",
-      "close-on-click-modal": false
+      "width": "70%",
+      "close-on-click-modal": _vm.logic_function_decree_mail_close()
     },
     on: {
       "update:visible": function($event) {
@@ -32030,7 +32085,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_vm._v("Дата приказа:")]), _vm._v(" "), _c('el-input', {
     attrs: {
       "suffix-icon": "el-icon-date",
-      "type": "date"
+      "type": "date",
+      "disabled": _vm.persondecreeSigned == 1
     },
     model: {
       value: (_vm.persondecreeDatesigned),
@@ -32045,7 +32101,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "persondecreeoperation-row-text"
   }, [_vm._v("Номер приказа:")]), _vm._v(" "), _c('el-input', {
     attrs: {
-      "type": "number"
+      "type": "number",
+      "disabled": _vm.persondecreeSigned == 1
     },
     model: {
       value: (_vm.persondecreeNumber),
@@ -32066,7 +32123,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "no-data-text": "Не найдено",
       "no-match-text": "Не найдено",
       "clearable": "",
-      "placeholder": ""
+      "placeholder": "",
+      "disabled": _vm.persondecreeSigned == 1
     },
     model: {
       value: (_vm.persondecreeNumbertype),
@@ -32088,6 +32146,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('div', {
     staticClass: "persondecreeoperation-row-text"
   }, [_vm._v("Название приказа:")]), _vm._v(" "), _c('el-input', {
+    attrs: {
+      "disabled": _vm.persondecreeSigned == 1
+    },
     model: {
       value: (_vm.persondecreeName),
       callback: function($$v) {
@@ -32100,6 +32161,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('div', {
     staticClass: "persondecreeoperation-row-text"
   }, [_vm._v("Рабочее название приказа:")]), _vm._v(" "), _c('el-input', {
+    attrs: {
+      "disabled": _vm.persondecreeSigned == 1
+    },
     model: {
       value: (_vm.persondecreeNickname),
       callback: function($$v) {
@@ -32107,17 +32171,17 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       },
       expression: "persondecreeNickname"
     }
-  })], 1), _vm._v(" "), _c('el-button', {
+  })], 1), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('el-button', {
     staticClass: "persondecrees-margintop",
     on: {
       "click": _vm.persondecreeUpdate
     }
-  }, [_vm._v("Зарезервировать")]), _vm._v(" "), _c('div', _vm._l((_vm.persondecreeBlocks), function(persondecreeBlock) {
+  }, [_vm._v("Зарезервировать")]) : _vm._e(), _vm._v(" "), _c('div', _vm._l((_vm.persondecreeBlocks), function(persondecreeBlock) {
     return _c('div', {
       staticClass: "persondecreeblock"
-    }, [_c('div', {
+    }, [(_vm.persondecreeSigned != 1) ? _c('div', {
       staticClass: "persondecreeblock-title"
-    }, [_vm._v("\n                        " + _vm._s(_vm.getPersondecreeblockname(persondecreeBlock)) + "\n                    ")]), _vm._v(" "), (persondecreeBlock.persondecreeblocktype == 1) ? _c('div', [_c('div', [_c('div', [_c('div', [_vm._v("\n                                    За какие заслуги\n                                ")]), _vm._v(" "), _c('el-input', {
+    }, [_vm._v("\n                        " + _vm._s(_vm.getPersondecreeblockname(persondecreeBlock)) + "\n                    ")]) : _vm._e(), _vm._v(" "), (persondecreeBlock.persondecreeblocktype == 1) ? _c('div', [(_vm.persondecreeSigned != 1) ? _c('div', [_c('div', [_c('div', [_vm._v("\n                                    За какие заслуги\n                                ")]), _vm._v(" "), _c('el-input', {
       staticClass: "eld-eld-body-row-medium",
       model: {
         value: (persondecreeBlock.intro),
@@ -32349,7 +32413,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         },
         expression: "persondecreeBlock.optionstring4"
       }
-    })], 1) : _vm._e()])]), _vm._v(" "), _c('div', [_c('div', {
+    })], 1) : _vm._e()])]) : _vm._e(), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_c('div', {
       staticStyle: {
         "margin-top": "10px"
       }
@@ -32404,7 +32468,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           }
         }
       }, [_vm._v("Убрать")])], 1)
-    })) : _vm._e()]), _vm._v(" "), _c('div', [_c('br'), _vm._v(" "), _c('el-button', {
+    })) : _vm._e()]) : _vm._e(), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_c('br'), _vm._v(" "), _c('el-button', {
       attrs: {
         "type": "primary",
         "plain": ""
@@ -32414,9 +32478,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           _vm.addPersonblockelement(persondecreeBlock)
         }
       }
-    }, [_vm._v("Сформировать пункт приказа")])], 1), _vm._v(" "), _c('div', {
+    }, [_vm._v("Сформировать пункт приказа")])], 1) : _vm._e(), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', {
       staticClass: "persondecreeoperation-part-list-title"
-    }, [_vm._v("\n                            Проект приказа\n                        ")]), _vm._v(" "), _c('div', [(persondecreeBlock.index != null && persondecreeBlock.index != 0) ? _c('span', [_vm._v(_vm._s(persondecreeBlock.index) + ".")]) : _vm._e(), _vm._v(" ПООЩРИТЬ:\n                        ")]), _vm._v(" "), _c('div', [_vm._l((persondecreeBlock.persondecreeblockintros), function(persondecreeintro) {
+    }, [_vm._v("\n                            Проект приказа\n                        ")]) : _vm._e(), _vm._v(" "), _c('div', [(persondecreeBlock.index != null && persondecreeBlock.index != 0) ? _c('span', [_vm._v(_vm._s(persondecreeBlock.index) + ".")]) : _vm._e(), _vm._v(" ПООЩРИТЬ:\n                        ")]), _vm._v(" "), _c('div', [_vm._l((persondecreeBlock.persondecreeblockintros), function(persondecreeintro) {
       return (persondecreeintro.persondecreeblock == persondecreeBlock.id) ? _c('div', {
         staticClass: "persondecreeoperation-part-list-element"
       }, [_c('div', [_c('div', {
@@ -32437,7 +32501,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
             staticClass: "persondecreeoperation-part-list-element-name "
           }, [_c('div', {
             staticClass: "persondecreeoperation-part-list-element-indent"
-          }, [(decreeoperation.persondecreeblocksubtype == 8 && decreeoperation.personpenalty != null) ? _c('span', [_vm._v("\n                                                            «" + _vm._s(_vm.getPenalty(decreeoperation.personpenalty.penalty)) + "», объявленное приказом " + _vm._s(decreeoperation.personpenalty.orderwho) + " от " + _vm._s(_vm.printDate(decreeoperation.personpenalty.orderdate)) + "\n                                                            " + _vm._s(decreeoperation.personpenalty.ordernumber) + " с\n                                                        ")]) : _vm._e(), _vm._v(" "), (decreeoperation.persondecreeblocksubtype == 8 || decreeoperation.persondecreeblocksubtype == 3 || decreeoperation.persondecreeblocksubtype == 4 || decreeoperation.persondecreeblocksubtype == 5 || decreeoperation.persondecreeblocksubtype == 6 || decreeoperation.persondecreeblocksubtype == 7 || decreeoperation.persondecreeblocksubtype == 10) ? _c('span', [(decreeoperation.personobject != null) ? _c('span', [(decreeoperation.personobject.actualRank != null) ? _c('span', [_vm._v(_vm._s(_vm.smallletter(decreeoperation.personobject.actualRank.name4)) + " ")]) : _vm._e(), _vm._v("\n                                                                " + _vm._s(decreeoperation.personobject.surname4) + " " + _vm._s(decreeoperation.personobject.name4) + "\n                                                                " + _vm._s(decreeoperation.personobject.fathername4) + _vm._s(_vm.commaspaceifnotnull(_vm.beautifyString(decreeoperation.personobject.positiontree4))) + _vm._s(_vm.beautifyString(decreeoperation.personobject.positiontree4)) + ";\n                                                            ")]) : _c('span', [_vm._v("\n                                                                " + _vm._s(decreeoperation.nonperson) + ";\n                                                            ")])]) : _vm._e(), _vm._v(" "), (decreeoperation.persondecreeblocksubtype == 1 || decreeoperation.persondecreeblocksubtype == 2 || decreeoperation.persondecreeblocksubtype == 9) ? _c('span', [(decreeoperation.personobject != null) ? _c('span', [(decreeoperation.personobject.actualRank != null) ? _c('span', [_vm._v(_vm._s(decreeoperation.personobject.actualRank.name3) + " ")]) : _vm._e(), _vm._v("\n                                                                " + _vm._s(decreeoperation.personobject.surname3) + " " + _vm._s(decreeoperation.personobject.name3) + "\n                                                                " + _vm._s(decreeoperation.personobject.fathername3)), (decreeoperation.persondecreeblocksubtype == 1 || decreeoperation.persondecreeblocksubtype == 2) ? _c('span', [_vm._v(" (" + _vm._s(decreeoperation.personobject.numpersonal) + ")")]) : _vm._e(), _vm._v(_vm._s(_vm.commaspaceifnotnull(_vm.beautifyString(decreeoperation.personobject.positiontree3))) + _vm._s(_vm.beautifyString(decreeoperation.personobject.positiontree3)) + ";\n                                                            ")]) : _c('span', [_vm._v("\n                                                                " + _vm._s(decreeoperation.nonperson) + ";\n                                                            ")])]) : _vm._e()]), _vm._v(" "), (decreeoperation.persondecreeblocksubtype == 8) ? _c('div', [_vm._v("\n                                                        Основание: " + _vm._s(decreeoperation.subvaluestring2) + "\n                                                    ")]) : _vm._e()])]), _vm._v(" "), _c('div', [_c('div', [_c('el-button', {
+          }, [(decreeoperation.persondecreeblocksubtype == 8 && decreeoperation.personpenalty != null) ? _c('span', [_vm._v("\n                                                            «" + _vm._s(_vm.getPenalty(decreeoperation.personpenalty.penalty)) + "», объявленное приказом " + _vm._s(decreeoperation.personpenalty.orderwho) + " от " + _vm._s(_vm.printDate(decreeoperation.personpenalty.orderdate)) + "\n                                                            " + _vm._s(decreeoperation.personpenalty.ordernumber) + " с\n                                                        ")]) : _vm._e(), _vm._v(" "), (decreeoperation.persondecreeblocksubtype == 8 || decreeoperation.persondecreeblocksubtype == 3 || decreeoperation.persondecreeblocksubtype == 4 || decreeoperation.persondecreeblocksubtype == 5 || decreeoperation.persondecreeblocksubtype == 6 || decreeoperation.persondecreeblocksubtype == 7 || decreeoperation.persondecreeblocksubtype == 10) ? _c('span', [(decreeoperation.personobject != null) ? _c('span', [(decreeoperation.personobject.actualRank != null) ? _c('span', [_vm._v(_vm._s(_vm.smallletter(decreeoperation.personobject.actualRank.name4)) + " ")]) : _vm._e(), _vm._v("\n                                                                " + _vm._s(decreeoperation.personobject.surname4) + " " + _vm._s(decreeoperation.personobject.name4) + "\n                                                                " + _vm._s(decreeoperation.personobject.fathername4) + _vm._s(_vm.commaspaceifnotnull(_vm.beautifyString(decreeoperation.personobject.positiontree4))) + _vm._s(_vm.beautifyString(decreeoperation.personobject.positiontree4)) + ";\n                                                            ")]) : _c('span', [_vm._v("\n                                                                " + _vm._s(decreeoperation.nonperson) + ";\n                                                            ")])]) : _vm._e(), _vm._v(" "), (decreeoperation.persondecreeblocksubtype == 1 || decreeoperation.persondecreeblocksubtype == 2 || decreeoperation.persondecreeblocksubtype == 9) ? _c('span', [(decreeoperation.personobject != null) ? _c('span', [(decreeoperation.personobject.actualRank != null) ? _c('span', [_vm._v(_vm._s(decreeoperation.personobject.actualRank.name3) + " ")]) : _vm._e(), _vm._v("\n                                                                " + _vm._s(decreeoperation.personobject.surname3) + " " + _vm._s(decreeoperation.personobject.name3) + "\n                                                                " + _vm._s(decreeoperation.personobject.fathername3)), (decreeoperation.persondecreeblocksubtype == 1 || decreeoperation.persondecreeblocksubtype == 2) ? _c('span', [_vm._v(" (" + _vm._s(decreeoperation.personobject.numpersonal) + ")")]) : _vm._e(), _vm._v(_vm._s(_vm.commaspaceifnotnull(_vm.beautifyString(decreeoperation.personobject.positiontree3))) + _vm._s(_vm.beautifyString(decreeoperation.personobject.positiontree3)) + ";\n                                                            ")]) : _c('span', [_vm._v("\n                                                                " + _vm._s(decreeoperation.nonperson) + ";\n                                                            ")])]) : _vm._e()]), _vm._v(" "), (decreeoperation.persondecreeblocksubtype == 8) ? _c('div', [_vm._v("\n                                                        Основание: " + _vm._s(decreeoperation.subvaluestring2) + "\n                                                    ")]) : _vm._e()])]), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_c('div', [_c('el-button', {
             attrs: {
               "size": "mini",
               "type": "warning"
@@ -32447,7 +32511,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
                 _vm.removePersondecreeoperation(decreeoperation)
               }
             }
-          }, [_vm._v("Удалить")])], 1)])]) : _vm._e()
+          }, [_vm._v("Удалить")])], 1)]) : _vm._e()]) : _vm._e()
         })], 2) : _vm._e()
       })], 2), _vm._v(" "), _c('div', [_c('div')])]) : _vm._e()
     }), _vm._v(" "), _vm._l((persondecreeBlock.persondecreeblocksubs), function(persondecreeblocksub) {
@@ -32468,7 +32532,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           staticClass: "persondecreeoperation-part-list-element-name "
         }, [_c('div', {
           staticClass: "persondecreeoperation-part-list-element-indent"
-        }, [(decreeoperation.persondecreeblocksubtype == 8 && decreeoperation.personpenalty != null) ? _c('span', [_vm._v("\n                                                        «" + _vm._s(_vm.getPenalty(decreeoperation.personpenalty.penalty)) + "», объявленное приказом " + _vm._s(decreeoperation.personpenalty.orderwho) + " от " + _vm._s(_vm.printDate(decreeoperation.personpenalty.orderdate)) + "\n                                                        " + _vm._s(decreeoperation.personpenalty.ordernumber) + " с\n                                                    ")]) : _vm._e(), _vm._v(" "), (decreeoperation.persondecreeblocksubtype == 8 || decreeoperation.persondecreeblocksubtype == 3 || decreeoperation.persondecreeblocksubtype == 4 || decreeoperation.persondecreeblocksubtype == 5 || decreeoperation.persondecreeblocksubtype == 6 || decreeoperation.persondecreeblocksubtype == 7 || decreeoperation.persondecreeblocksubtype == 10) ? _c('span', [(decreeoperation.personobject != null) ? _c('span', [(decreeoperation.personobject.actualRank != null) ? _c('span', [_vm._v(_vm._s(_vm.smallletter(decreeoperation.personobject.actualRank.name4)) + " ")]) : _vm._e(), _vm._v("\n                                                            " + _vm._s(decreeoperation.personobject.surname4) + " " + _vm._s(decreeoperation.personobject.name4) + "\n                                                            " + _vm._s(decreeoperation.personobject.fathername4) + _vm._s(_vm.commaspaceifnotnull(_vm.beautifyString(decreeoperation.personobject.positiontree4))) + _vm._s(_vm.beautifyString(decreeoperation.personobject.positiontree4)) + ";\n                                                        ")]) : _c('span', [_vm._v("\n                                                            " + _vm._s(decreeoperation.nonperson) + ";\n                                                        ")])]) : _vm._e(), _vm._v(" "), (decreeoperation.persondecreeblocksubtype == 1 || decreeoperation.persondecreeblocksubtype == 2 || decreeoperation.persondecreeblocksubtype == 9) ? _c('span', [_c('span'), _vm._v(" "), _c('span'), _vm._v(" "), (decreeoperation.personobject.actualRank != null) ? _c('span', [_vm._v(_vm._s(decreeoperation.personobject.actualRank.name3) + " ")]) : _vm._e(), _vm._v("\n                                                        " + _vm._s(decreeoperation.personobject.surname3) + " " + _vm._s(decreeoperation.personobject.name3) + "\n                                                        " + _vm._s(decreeoperation.personobject.fathername3)), (decreeoperation.persondecreeblocksubtype == 1 || decreeoperation.persondecreeblocksubtype == 2) ? _c('span', [_vm._v(" (" + _vm._s(decreeoperation.personobject.numpersonal) + ")")]) : _vm._e(), _vm._v(_vm._s(_vm.commaspaceifnotnull(_vm.beautifyString(decreeoperation.personobject.positiontree2))) + _vm._s(_vm.beautifyString(decreeoperation.personobject.positiontree2)) + "\n                                                    ")]) : _vm._e()]), _vm._v(" "), (decreeoperation.persondecreeblocksubtype == 8) ? _c('div', [_vm._v("\n                                                    Основание: " + _vm._s(decreeoperation.subvaluestring2) + "\n                                                ")]) : _vm._e()])]), _vm._v(" "), _c('div', [_c('el-button', {
+        }, [(decreeoperation.persondecreeblocksubtype == 8 && decreeoperation.personpenalty != null) ? _c('span', [_vm._v("\n                                                        «" + _vm._s(_vm.getPenalty(decreeoperation.personpenalty.penalty)) + "», объявленное приказом " + _vm._s(decreeoperation.personpenalty.orderwho) + " от " + _vm._s(_vm.printDate(decreeoperation.personpenalty.orderdate)) + "\n                                                        " + _vm._s(decreeoperation.personpenalty.ordernumber) + " с\n                                                    ")]) : _vm._e(), _vm._v(" "), (decreeoperation.persondecreeblocksubtype == 8 || decreeoperation.persondecreeblocksubtype == 3 || decreeoperation.persondecreeblocksubtype == 4 || decreeoperation.persondecreeblocksubtype == 5 || decreeoperation.persondecreeblocksubtype == 6 || decreeoperation.persondecreeblocksubtype == 7 || decreeoperation.persondecreeblocksubtype == 10) ? _c('span', [(decreeoperation.personobject != null) ? _c('span', [(decreeoperation.personobject.actualRank != null) ? _c('span', [_vm._v(_vm._s(_vm.smallletter(decreeoperation.personobject.actualRank.name4)) + " ")]) : _vm._e(), _vm._v("\n                                                            " + _vm._s(decreeoperation.personobject.surname4) + " " + _vm._s(decreeoperation.personobject.name4) + "\n                                                            " + _vm._s(decreeoperation.personobject.fathername4) + _vm._s(_vm.commaspaceifnotnull(_vm.beautifyString(decreeoperation.personobject.positiontree4))) + _vm._s(_vm.beautifyString(decreeoperation.personobject.positiontree4)) + ";\n                                                        ")]) : _c('span', [_vm._v("\n                                                            " + _vm._s(decreeoperation.nonperson) + ";\n                                                        ")])]) : _vm._e(), _vm._v(" "), (decreeoperation.persondecreeblocksubtype == 1 || decreeoperation.persondecreeblocksubtype == 2 || decreeoperation.persondecreeblocksubtype == 9) ? _c('span', [_c('span'), _vm._v(" "), _c('span'), _vm._v(" "), (decreeoperation.personobject.actualRank != null) ? _c('span', [_vm._v(_vm._s(decreeoperation.personobject.actualRank.name3) + " ")]) : _vm._e(), _vm._v("\n                                                        " + _vm._s(decreeoperation.personobject.surname3) + " " + _vm._s(decreeoperation.personobject.name3) + "\n                                                        " + _vm._s(decreeoperation.personobject.fathername3)), (decreeoperation.persondecreeblocksubtype == 1 || decreeoperation.persondecreeblocksubtype == 2) ? _c('span', [_vm._v(" (" + _vm._s(decreeoperation.personobject.numpersonal) + ")")]) : _vm._e(), _vm._v(_vm._s(_vm.commaspaceifnotnull(_vm.beautifyString(decreeoperation.personobject.positiontree2))) + _vm._s(_vm.beautifyString(decreeoperation.personobject.positiontree2)) + "\n                                                    ")]) : _vm._e()]), _vm._v(" "), (decreeoperation.persondecreeblocksubtype == 8) ? _c('div', [_vm._v("\n                                                    Основание: " + _vm._s(decreeoperation.subvaluestring2) + "\n                                                ")]) : _vm._e()])]), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_c('el-button', {
           attrs: {
             "size": "mini",
             "type": "warning"
@@ -32478,9 +32542,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
               _vm.removePersondecreeoperation(decreeoperation)
             }
           }
-        }, [_vm._v("Удалить")])], 1)]) : _vm._e()
+        }, [_vm._v("Удалить")])], 1) : _vm._e()]) : _vm._e()
       })], 2), _vm._v(" "), _c('div')]) : _vm._e()
-    }), _vm._v(" "), _c('br')], 2), _vm._v(" "), _c('div', [_c('el-button', {
+    }), _vm._v(" "), _c('br')], 2), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_c('el-button', {
       attrs: {
         "type": "danger"
       },
@@ -32489,7 +32553,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           _vm.deletePersondecreeblock(persondecreeBlock)
         }
       }
-    }, [_vm._v("Удалить блок")])], 1)]) : _vm._e(), _vm._v(" "), (persondecreeBlock.persondecreeblocktype == 2) ? _c('div', [_c('div', [_c('div', [_vm._v("\n                                За что\n                            ")]), _vm._v(" "), _c('el-input', {
+    }, [_vm._v("Удалить блок")])], 1) : _vm._e()]) : _vm._e(), _vm._v(" "), (persondecreeBlock.persondecreeblocktype == 2) ? _c('div', [(_vm.persondecreeSigned != 1) ? _c('div', [_c('div', [_vm._v("\n                                За что\n                            ")]), _vm._v(" "), _c('el-input', {
       staticClass: "eld-eld-body-row-medium",
       model: {
         value: (persondecreeBlock.intro),
@@ -32498,7 +32562,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         },
         expression: "persondecreeBlock.intro"
       }
-    })], 1), _vm._v(" "), _c('div', [_vm._v("\n                            Тип взыскания\n                        ")]), _vm._v(" "), _c('el-select', {
+    })], 1) : _vm._e(), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_vm._v("\n                            Тип взыскания\n                        ")]) : _vm._e(), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_c('el-select', {
       staticClass: "eld-eld-body-select-medium",
       attrs: {
         "clearable": "",
@@ -32519,7 +32583,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           "value": penalty.id
         }
       })
-    })), _vm._v(" "), _c('div', [_vm._v("\n                            Основание\n                        ")]), _vm._v(" "), _c('el-input', {
+    }))], 1) : _vm._e(), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_vm._v("\n                            Основание\n                        ")]) : _vm._e(), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_c('el-input', {
       staticClass: "eld-eld-body-row-medium",
       model: {
         value: (persondecreeBlock.optionstring2),
@@ -32528,7 +32592,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         },
         expression: "persondecreeBlock.optionstring2"
       }
-    }), _vm._v(" "), _c('div', [_c('div', {
+    })], 1) : _vm._e(), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_c('div', {
       staticStyle: {
         "margin-top": "10px"
       }
@@ -32583,7 +32647,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           }
         }
       }, [_vm._v("Убрать")])], 1)
-    })) : _vm._e()]), _vm._v(" "), _c('div', [_c('br'), _vm._v(" "), _c('el-button', {
+    })) : _vm._e()]) : _vm._e(), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_c('br'), _vm._v(" "), _c('el-button', {
       attrs: {
         "type": "primary",
         "plain": ""
@@ -32593,9 +32657,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           _vm.addPersonblockelement(persondecreeBlock)
         }
       }
-    }, [_vm._v("Сформировать пункт приказа")])], 1), _vm._v(" "), _c('div', {
+    }, [_vm._v("Сформировать пункт приказа")])], 1) : _vm._e(), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', {
       staticClass: "persondecreeoperation-part-list-title"
-    }, [_vm._v("\n                            Проект приказа\n                        ")]), _vm._v(" "), _c('div', [(persondecreeBlock.index != null && persondecreeBlock.index != 0) ? _c('span', [_vm._v(_vm._s(persondecreeBlock.index) + ".")]) : _vm._e(), _vm._v(" НАЛОЖИТЬ ДИСЦИПЛИНАРНОЕ ВЗЫСКАНИЕ:\n                        ")]), _vm._v(" "), _c('div', [_vm._l((_vm.persondecreeOperations), function(decreeoperation) {
+    }, [_vm._v("\n                            Проект приказа\n                        ")]) : _vm._e(), _vm._v(" "), _c('div', [(persondecreeBlock.index != null && persondecreeBlock.index != 0) ? _c('span', [_vm._v(_vm._s(persondecreeBlock.index) + ".")]) : _vm._e(), _vm._v(" НАЛОЖИТЬ ДИСЦИПЛИНАРНОЕ ВЗЫСКАНИЕ:\n                        ")]), _vm._v(" "), _c('div', [_vm._l((_vm.persondecreeOperations), function(decreeoperation) {
       return (decreeoperation.persondecreeblock == persondecreeBlock.id) ? _c('div', {
         staticClass: "persondecreeoperation-part-list-element"
       }, [_c('div', [_c('div', [(decreeoperation.intro != null) ? _c('div', {
@@ -32620,7 +32684,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           _vm.deletePersondecreeblock(persondecreeBlock)
         }
       }
-    }, [_vm._v("Удалить блок")])], 1)], 1) : _vm._e(), _vm._v(" "), (persondecreeBlock.persondecreeblocktype == 3) ? _c('div', [_c('div', [_c('div', {
+    }, [_vm._v("Удалить блок")])], 1)]) : _vm._e(), _vm._v(" "), (persondecreeBlock.persondecreeblocktype == 3) ? _c('div', [(_vm.persondecreeSigned != 1) ? _c('div', [_c('div', {
       staticStyle: {
         "margin-top": "10px"
       }
@@ -32675,7 +32739,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           }
         }
       }, [_vm._v("Убрать")])], 1)
-    })) : _vm._e()]), _vm._v(" "), _c('div', [(persondecreeBlock.person != null) ? _c('div', [(persondecreeBlock.person.military) ? _c('div', [_c('div', [_vm._v("\n                                        В связи с чем\n                                    ")]), _vm._v(" "), _c('el-select', {
+    })) : _vm._e()]) : _vm._e(), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [(persondecreeBlock.person != null) ? _c('div', [(persondecreeBlock.person.military) ? _c('div', [_c('div', [_vm._v("\n                                        В связи с чем\n                                    ")]), _vm._v(" "), _c('el-select', {
       staticClass: "eld-eld-body-select-long",
       attrs: {
         "placeholder": "В связи с"
@@ -32839,7 +32903,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         },
         expression: "persondecreeBlock.optiondate4String"
       }
-    })], 1) : _vm._e()], 1), _vm._v(" "), _c('div', [_c('br'), _vm._v(" "), _c('el-button', {
+    })], 1) : _vm._e()], 1) : _vm._e(), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_c('br'), _vm._v(" "), _c('el-button', {
       attrs: {
         "type": "primary",
         "plain": ""
@@ -32849,9 +32913,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           _vm.addPersonblockelement(persondecreeBlock)
         }
       }
-    }, [_vm._v("Сформировать пункт приказа")])], 1), _vm._v(" "), _c('div', {
+    }, [_vm._v("Сформировать пункт приказа")])], 1) : _vm._e(), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', {
       staticClass: "persondecreeoperation-part-list-title"
-    }, [_vm._v("\n                            Проект приказа\n                        ")]), _vm._v(" "), _c('div', [(persondecreeBlock.index != null && persondecreeBlock.index != 0) ? _c('span', [_vm._v(_vm._s(persondecreeBlock.index) + ".")]) : _vm._e(), _vm._v(" НАЗНАЧИТЬ:\n                        ")]), _vm._v(" "), _c('div', [_vm._l((_vm.persondecreeOperations), function(decreeoperation) {
+    }, [_vm._v("\n                            Проект приказа\n                        ")]) : _vm._e(), _vm._v(" "), _c('div', [(persondecreeBlock.index != null && persondecreeBlock.index != 0) ? _c('span', [_vm._v(_vm._s(persondecreeBlock.index) + ".")]) : _vm._e(), _vm._v(" НАЗНАЧИТЬ:\n                        ")]), _vm._v(" "), _c('div', [_vm._l((_vm.persondecreeOperations), function(decreeoperation) {
       return (decreeoperation.persondecreeblock == persondecreeBlock.id) ? _c('div', {
         staticClass: "persondecreeoperation-part-list-element persondecreeoperation-part-list-element-margin-big"
       }, [_c('div', [_c('div', [(decreeoperation.personobject != null && decreeoperation.personobject.military) ? _c('div', {
@@ -32862,7 +32926,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         staticClass: "persondecreeoperation-part-list-element-indent"
       }, [_vm._v("\n                                            Установить стаж для выплаты процентной надбавки за выслугу лет по состоянию на\n                                            " + _vm._s(_vm.printDateDocument(decreeoperation.optiondate2)) + "\n                                            — "), _vm._v("\n                                            " + _vm._s(decreeoperation.optionnumber5) + " " + _vm._s(_vm.getYearString(decreeoperation.optionnumber5)) + "\n                                            " + _vm._s(decreeoperation.optionnumber6) + " " + _vm._s(_vm.getMonthString(decreeoperation.optionnumber6)) + "\n                                            " + _vm._s(decreeoperation.optionnumber7) + " " + _vm._s(_vm.getDayString(decreeoperation.optionnumber7)) + ".\n                                            ")]) : _vm._e(), _vm._v(" "), (decreeoperation.optiondate3 != null) ? _c('div', {
         staticClass: "persondecreeoperation-part-list-element-indent"
-      }, [_vm._v("\n                                            Заключить контракт сроком на "), _vm._v("\n                                            " + _vm._s(decreeoperation.optionnumber8) + " " + _vm._s(_vm.getYearString(decreeoperation.optionnumber8)) + "\n                                            " + _vm._s(decreeoperation.optionnumber9) + " " + _vm._s(_vm.getMonthString(decreeoperation.optionnumber9)) + "\n                                            " + _vm._s(decreeoperation.optionnumber10) + " " + _vm._s(_vm.getDayString(decreeoperation.optionnumber10)) + "\n                                            с " + _vm._s(_vm.printDateDocument(decreeoperation.optiondate3)) + "\n                                            по " + _vm._s(_vm.printDateDocument(decreeoperation.optiondate4)) + ".\n                                            ")]) : _vm._e()])]), _vm._v(" "), _c('div', [_c('div', [_c('div', [_c('el-button', {
+      }, [_vm._v("\n                                            Заключить контракт сроком на "), _vm._v("\n                                            " + _vm._s(decreeoperation.optionnumber8) + " " + _vm._s(_vm.getYearString(decreeoperation.optionnumber8)) + "\n                                            " + _vm._s(decreeoperation.optionnumber9) + " " + _vm._s(_vm.getMonthString(decreeoperation.optionnumber9)) + "\n                                            " + _vm._s(decreeoperation.optionnumber10) + " " + _vm._s(_vm.getDayString(decreeoperation.optionnumber10)) + "\n                                            с " + _vm._s(_vm.printDateDocument(decreeoperation.optiondate3)) + "\n                                            по " + _vm._s(_vm.printDateDocument(decreeoperation.optiondate4)) + ".\n                                            ")]) : _vm._e()])]), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_c('div', [_c('div', [_c('el-button', {
         attrs: {
           "size": "mini",
           "type": "warning"
@@ -32872,8 +32936,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
             _vm.removePersondecreeoperation(decreeoperation)
           }
         }
-      }, [_vm._v("Удалить")])], 1)])])]) : _vm._e()
-    }), _vm._v(" "), _c('br')], 2), _vm._v(" "), _c('div', [_c('el-button', {
+      }, [_vm._v("Удалить")])], 1)])]) : _vm._e()]) : _vm._e()
+    }), _vm._v(" "), _c('br')], 2), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_c('el-button', {
       attrs: {
         "type": "danger"
       },
@@ -32882,7 +32946,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           _vm.deletePersondecreeblock(persondecreeBlock)
         }
       }
-    }, [_vm._v("Удалить блок")])], 1)]) : _vm._e(), _vm._v(" "), (persondecreeBlock.persondecreeblocktype == 4) ? _c('div', [_c('div', [_c('div', {
+    }, [_vm._v("Удалить блок")])], 1) : _vm._e()]) : _vm._e(), _vm._v(" "), (persondecreeBlock.persondecreeblocktype == 4) ? _c('div', [(_vm.persondecreeSigned != 1) ? _c('div', [_c('div', {
       staticStyle: {
         "margin-top": "10px"
       }
@@ -32937,7 +33001,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           }
         }
       }, [_vm._v("Убрать")])], 1)
-    })) : _vm._e()]), _vm._v(" "), (persondecreeBlock.person != null) ? _c('div', [(persondecreeBlock.person.military) ? _c('div', [_c('div', [_vm._v("\n                                    По какому подпункту\n                                ")]), _vm._v(" "), _c('el-select', {
+    })) : _vm._e()]) : _vm._e(), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [(persondecreeBlock.person != null) ? _c('div', [(persondecreeBlock.person.military) ? _c('div', [_c('div', [_vm._v("\n                                        По какому подпункту\n                                    ")]), _vm._v(" "), _c('el-select', {
       staticClass: "eld-eld-body-select-long",
       attrs: {
         "clearable": "",
@@ -32958,7 +33022,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           "value": fire.id
         }
       }) : _vm._e()
-    }))], 1) : _c('div', [_c('div', [_vm._v("\n                                    По какому подпункту\n                                ")]), _vm._v(" "), _c('el-select', {
+    }))], 1) : _c('div', [_c('div', [_vm._v("\n                                        По какому подпункту\n                                    ")]), _vm._v(" "), _c('el-select', {
       staticClass: "eld-eld-body-select-long",
       attrs: {
         "clearable": "",
@@ -32979,7 +33043,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           "value": fire.id
         }
       }) : _vm._e()
-    }))], 1)]) : _vm._e(), _vm._v(" "), _c('div', [_vm._v("\n                            Дата\n                        ")]), _vm._v(" "), _c('el-input', {
+    }))], 1)]) : _vm._e()]) : _vm._e(), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_vm._v("\n                            Дата\n                        ")]) : _vm._e(), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_c('el-input', {
       staticClass: "eld-eld-body-row-short",
       attrs: {
         "type": "date"
@@ -32991,7 +33055,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         },
         expression: "persondecreeBlock.optiondate1String"
       }
-    }), _vm._v(" "), _c('div', [_vm._v("\n                            Выплатить компенсацию за неиспользованные дни основного отпуска за этот год. (число дней. Оставить пустым или 0, если нет)\n                        ")]), _vm._v(" "), _c('el-input', {
+    })], 1) : _vm._e(), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_vm._v("\n                            Выплатить компенсацию за неиспользованные дни основного отпуска за этот год. (число дней. Оставить пустым или 0, если нет)\n                        ")]) : _vm._e(), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_c('el-input', {
       staticClass: "eld-eld-body-row-short",
       attrs: {
         "type": "number"
@@ -33003,7 +33067,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         },
         expression: "persondecreeBlock.optionnumber2"
       }
-    }), _vm._v(" "), _c('div', [_vm._v("\n                            Удержать денежное довольствие за дни использованного основного отпуска за этот год. (число дней. Оставить пустым или 0, если нет)\n                        ")]), _vm._v(" "), _c('el-input', {
+    })], 1) : _vm._e(), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_vm._v("\n                            Удержать денежное довольствие за дни использованного основного отпуска за этот год. (число дней. Оставить пустым или 0, если нет)\n                        ")]) : _vm._e(), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_c('el-input', {
       staticClass: "eld-eld-body-row-short",
       attrs: {
         "type": "number"
@@ -33015,7 +33079,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         },
         expression: "persondecreeBlock.optionnumber3"
       }
-    }), _vm._v(" "), _c('div', [_c('el-switch', {
+    })], 1) : _vm._e(), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_c('el-switch', {
       attrs: {
         "inactive-value": 0,
         "active-value": 1,
@@ -33028,7 +33092,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         },
         expression: "persondecreeBlock.optionnumber4"
       }
-    })], 1), _vm._v(" "), _c('div', [_c('el-switch', {
+    })], 1) : _vm._e(), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_c('el-switch', {
       attrs: {
         "inactive-value": 0,
         "active-value": 12,
@@ -33042,7 +33106,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         },
         expression: "persondecreeBlock.optionnumber5"
       }
-    })], 1), _vm._v(" "), _c('div', [_c('el-switch', {
+    })], 1) : _vm._e(), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_c('el-switch', {
       attrs: {
         "inactive-value": 0,
         "active-value": 11,
@@ -33055,7 +33119,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         },
         expression: "persondecreeBlock.optionnumber9"
       }
-    })], 1), _vm._v(" "), (persondecreeBlock.optionnumber9 != null && persondecreeBlock.optionnumber9 > 0) ? _c('div', [_c('div', [_vm._v("\n                                Вид поощрения\n                            ")]), _vm._v(" "), _c('el-select', {
+    })], 1) : _vm._e(), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [(persondecreeBlock.optionnumber9 != null && persondecreeBlock.optionnumber9 > 0) ? _c('div', [_c('div', [_vm._v("\n                                    Вид поощрения\n                                ")]), _vm._v(" "), _c('el-select', {
       staticClass: "eld-eld-body-select-medium",
       attrs: {
         "clearable": "",
@@ -33081,7 +33145,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           "value": persondecreeblocksubtype.id
         }
       }) : _vm._e()
-    })), _vm._v(" "), (persondecreeBlock.optionnumber6 == 4) ? _c('div', [_c('div', [_vm._v("\n                                    Список нагрудных знаков\n                                ")]), _vm._v(" "), _c('el-select', {
+    })), _vm._v(" "), (persondecreeBlock.optionnumber6 == 4) ? _c('div', [_c('div', [_vm._v("\n                                        Список нагрудных знаков\n                                    ")]), _vm._v(" "), _c('el-select', {
       staticClass: "eld-eld-body-select-medium",
       attrs: {
         "clearable": "",
@@ -33102,7 +33166,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           "value": reward.id
         }
       }) : _vm._e()
-    }))], 1) : _vm._e(), _vm._v(" "), (persondecreeBlock.optionnumber6 == 3) ? _c('div', [_c('div', [_vm._v("\n                                    Список медалей\n                                ")]), _vm._v(" "), _c('el-select', {
+    }))], 1) : _vm._e(), _vm._v(" "), (persondecreeBlock.optionnumber6 == 3) ? _c('div', [_c('div', [_vm._v("\n                                        Список медалей\n                                    ")]), _vm._v(" "), _c('el-select', {
       staticClass: "eld-eld-body-select-medium",
       attrs: {
         "clearable": "",
@@ -33123,7 +33187,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           "value": reward.id
         }
       }) : _vm._e()
-    }))], 1) : _vm._e(), _vm._v(" "), (persondecreeBlock.optionnumber6 == 1) ? _c('div', [_c('div', [_vm._v("\n                                    Звание\n                                ")]), _vm._v(" "), _c('el-select', {
+    }))], 1) : _vm._e(), _vm._v(" "), (persondecreeBlock.optionnumber6 == 1) ? _c('div', [_c('div', [_vm._v("\n                                        Звание\n                                    ")]), _vm._v(" "), _c('el-select', {
       staticClass: "eld-eld-body-select-medium",
       attrs: {
         "clearable": "",
@@ -33144,7 +33208,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           "value": rank.id
         }
       }) : _vm._e()
-    }))], 1) : _vm._e(), _vm._v(" "), (persondecreeBlock.optionnumber6 == 2) ? _c('div', [_c('div', [_vm._v("\n                                    Звание\n                                ")]), _vm._v(" "), _c('el-select', {
+    }))], 1) : _vm._e(), _vm._v(" "), (persondecreeBlock.optionnumber6 == 2) ? _c('div', [_c('div', [_vm._v("\n                                        Звание\n                                    ")]), _vm._v(" "), _c('el-select', {
       staticClass: "eld-eld-body-select-medium",
       attrs: {
         "clearable": "",
@@ -33165,7 +33229,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           "value": rank.id
         }
       }) : _vm._e()
-    }))], 1) : _vm._e(), _vm._v(" "), (persondecreeBlock.optionnumber6 == 5 || persondecreeBlock.optionnumber6 == 6) ? _c('div', [_c('div', [_vm._v("\n                                    Подразделение\n                                ")]), _vm._v(" "), _c('el-select', {
+    }))], 1) : _vm._e(), _vm._v(" "), (persondecreeBlock.optionnumber6 == 5 || persondecreeBlock.optionnumber6 == 6) ? _c('div', [_c('div', [_vm._v("\n                                        Подразделение\n                                    ")]), _vm._v(" "), _c('el-select', {
       staticClass: "eld-eld-body-select-medium",
       attrs: {
         "clearable": "",
@@ -33186,7 +33250,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           "value": structure.id
         }
       })
-    }))], 1) : _vm._e(), _vm._v(" "), (persondecreeBlock.optionnumber6 == 7) ? _c('div', [_c('div', [_c('div', [_vm._v("\n                                        Вид поощрения деньгами\n                                    ")]), _vm._v(" "), _c('el-select', {
+    }))], 1) : _vm._e(), _vm._v(" "), (persondecreeBlock.optionnumber6 == 7) ? _c('div', [_c('div', [_c('div', [_vm._v("\n                                            Вид поощрения деньгами\n                                        ")]), _vm._v(" "), _c('el-select', {
       staticClass: "eld-eld-body-select-medium",
       attrs: {
         "clearable": "",
@@ -33207,7 +33271,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           "value": rewardmoney.id
         }
       })
-    }))], 1), _vm._v(" "), _c('div', [_c('div', [_vm._v("\n                                        В размере\n                                    ")]), _vm._v(" "), _c('el-input', {
+    }))], 1), _vm._v(" "), _c('div', [_c('div', [_vm._v("\n                                            В размере\n                                        ")]), _vm._v(" "), _c('el-input', {
       staticClass: "eld-eld-body-row-mediumshort",
       model: {
         value: (persondecreeBlock.optionstring3),
@@ -33216,7 +33280,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         },
         expression: "persondecreeBlock.optionstring3"
       }
-    }), _vm._v(" "), _c('span', [_vm._v(_vm._s(_vm.getRewardmoneytype(persondecreeBlock.optionnumber7)))])], 1)]) : _vm._e(), _vm._v(" "), (persondecreeBlock.optionnumber6 == 8) ? _c('div', [_c('div', [_vm._v("\n                                    Тип взыскания\n                                ")]), _vm._v(" "), _c('el-select', {
+    }), _vm._v(" "), _c('span', [_vm._v(_vm._s(_vm.getRewardmoneytype(persondecreeBlock.optionnumber7)))])], 1)]) : _vm._e(), _vm._v(" "), (persondecreeBlock.optionnumber6 == 8) ? _c('div', [_c('div', [_vm._v("\n                                        Тип взыскания\n                                    ")]), _vm._v(" "), _c('el-select', {
       staticClass: "eld-eld-body-select-medium",
       attrs: {
         "clearable": "",
@@ -33237,7 +33301,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           "value": penalty.id
         }
       })
-    })), _vm._v(" "), _c('div', [_vm._v("\n                                    Основание\n                                ")]), _vm._v(" "), _c('el-input', {
+    })), _vm._v(" "), _c('div', [_vm._v("\n                                        Основание\n                                    ")]), _vm._v(" "), _c('el-input', {
       staticClass: "eld-eld-body-row-medium",
       model: {
         value: (persondecreeBlock.optionstring4),
@@ -33246,7 +33310,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         },
         expression: "persondecreeBlock.optionstring4"
       }
-    })], 1) : _vm._e()], 1) : _vm._e(), _vm._v(" "), _c('div', [_vm._v("\n                            Основание\n                        ")]), _vm._v(" "), _c('el-input', {
+    })], 1) : _vm._e()], 1) : _vm._e()]) : _vm._e(), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_vm._v("\n                            Основание\n                        ")]) : _vm._e(), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_c('el-input', {
       staticClass: "eld-eld-body-row-long",
       model: {
         value: (persondecreeBlock.optionstring1),
@@ -33255,7 +33319,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         },
         expression: "persondecreeBlock.optionstring1"
       }
-    }), _vm._v(" "), _c('div', [_c('br'), _vm._v(" "), _c('el-button', {
+    })], 1) : _vm._e(), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_c('br'), _vm._v(" "), _c('el-button', {
       attrs: {
         "type": "primary",
         "plain": ""
@@ -33265,9 +33329,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           _vm.addPersonblockelement(persondecreeBlock)
         }
       }
-    }, [_vm._v("Сформировать пункт приказа")])], 1), _vm._v(" "), _c('div', {
+    }, [_vm._v("Сформировать пункт приказа")])], 1) : _vm._e(), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', {
       staticClass: "persondecreeoperation-part-list-title"
-    }, [_vm._v("\n                            Проект приказа\n                        ")]), _vm._v(" "), _c('div', [(persondecreeBlock.index != null && persondecreeBlock.index != 0) ? _c('span', [_vm._v(_vm._s(persondecreeBlock.index) + ".")]) : _vm._e(), _vm._v(" УВОЛИТЬ:\n                        ")]), _vm._v(" "), _c('div', [_vm._l((persondecreeBlock.persondecreeblocksubs), function(persondecreeblocksub) {
+    }, [_vm._v("\n                            Проект приказа\n                        ")]) : _vm._e(), _vm._v(" "), _c('div', [(persondecreeBlock.index != null && persondecreeBlock.index != 0) ? _c('span', [_vm._v(_vm._s(persondecreeBlock.index) + ".")]) : _vm._e(), _vm._v(" УВОЛИТЬ:\n                        ")]), _vm._v(" "), _c('div', [_vm._l((persondecreeBlock.persondecreeblocksubs), function(persondecreeblocksub) {
       return (persondecreeblocksub.persondecreeblock == persondecreeBlock.id) ? _c('div', {
         staticClass: "persondecreeoperation-part-list-element"
       }, [_c('div', _vm._l((_vm.persondecreeOperations), function(decreeoperation) {
@@ -33301,7 +33365,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           staticClass: "persondecreeoperation-part-list-element-indent"
         }, [_vm._v("\n                                                        Выплатить компенсацию за " + _vm._s(decreeoperation.optionnumber2) + " " + _vm._s(_vm.getDayString(decreeoperation.optionnumber2)) + " неиспользованного основного отпуска за " + _vm._s(_vm.year(decreeoperation.optiondate1)) + " год.\n                                                    ")]) : _vm._e(), _vm._v(" "), (decreeoperation.optionnumber2 != null && decreeoperation.optionnumber3 != 0) ? _c('div', {
           staticClass: "persondecreeoperation-part-list-element-indent"
-        }, [_vm._v("\n                                                        Удержать денежное довольствие на " + _vm._s(decreeoperation.optionnumber3) + " " + _vm._s(_vm.getDayString(decreeoperation.optionnumber3)) + " использованного основного отпуска за " + _vm._s(_vm.year(decreeoperation.optiondate1)) + " год.\n                                                    ")]) : _vm._e(), _vm._v(" "), _c('div', [_vm._v("\n                                                        Основание: " + _vm._s(decreeoperation.optionstring1) + ".\n                                                    ")])])]) : _vm._e()]), _vm._v(" "), _c('div', [_c('div', [_c('div', [_c('el-button', {
+        }, [_vm._v("\n                                                        Удержать денежное довольствие на " + _vm._s(decreeoperation.optionnumber3) + " " + _vm._s(_vm.getDayString(decreeoperation.optionnumber3)) + " использованного основного отпуска за " + _vm._s(_vm.year(decreeoperation.optiondate1)) + " год.\n                                                    ")]) : _vm._e(), _vm._v(" "), _c('div', [_vm._v("\n                                                        Основание: " + _vm._s(decreeoperation.optionstring1) + ".\n                                                    ")])])]) : _vm._e()]), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_c('div', [_c('div', [_c('el-button', {
           attrs: {
             "size": "mini",
             "type": "warning"
@@ -33311,9 +33375,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
               _vm.removePersondecreeoperation(decreeoperation)
             }
           }
-        }, [_vm._v("Удалить")])], 1)])])]) : _vm._e()
+        }, [_vm._v("Удалить")])], 1)])]) : _vm._e()]) : _vm._e()
       })), _vm._v(" "), _c('div')]) : _vm._e()
-    }), _vm._v(" "), _c('br')], 2), _vm._v(" "), _c('div', [_c('el-button', {
+    }), _vm._v(" "), _c('br')], 2), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_c('el-button', {
       attrs: {
         "type": "danger"
       },
@@ -33322,7 +33386,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           _vm.deletePersondecreeblock(persondecreeBlock)
         }
       }
-    }, [_vm._v("Удалить блок")])], 1)], 1) : _vm._e(), _vm._v(" "), (persondecreeBlock.persondecreeblocktype == 5) ? _c('div', [_c('div', [_vm._v("\n                            В соответствии с каким пунктом\n                        ")]), _vm._v(" "), _c('el-select', {
+    }, [_vm._v("Удалить блок")])], 1) : _vm._e()]) : _vm._e(), _vm._v(" "), (persondecreeBlock.persondecreeblocktype == 5) ? _c('div', [(_vm.persondecreeSigned != 1) ? _c('div', [_vm._v("\n                            В соответствии с каким пунктом\n                        ")]) : _vm._e(), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_c('el-select', {
       staticClass: "eld-eld-body-select-long",
       attrs: {
         "placeholder": "В соответствии с каким пунктом"
@@ -33342,7 +33406,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           "value": transfertype.id
         }
       })
-    })), _vm._v(" "), _c('div', [_c('div', {
+    }))], 1) : _vm._e(), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_c('div', {
       staticStyle: {
         "margin-top": "10px"
       }
@@ -33397,7 +33461,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           }
         }
       }, [_vm._v("Убрать")])], 1)
-    })) : _vm._e()]), _vm._v(" "), _c('div', [_vm._v("\n                            По какой причине (пустым, если без указания конкретной причины)\n                        ")]), _vm._v(" "), _c('el-input', {
+    })) : _vm._e()]) : _vm._e(), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_vm._v("\n                            По какой причине (пустым, если без указания конкретной причины)\n                        ")]) : _vm._e(), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_c('el-input', {
       staticClass: "eld-eld-body-row-medium",
       model: {
         value: (persondecreeBlock.optionstring1),
@@ -33406,7 +33470,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         },
         expression: "persondecreeBlock.optionstring1"
       }
-    }), _vm._v(" "), _c('div', [_c('br'), _vm._v(" "), _c('el-button', {
+    })], 1) : _vm._e(), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_c('br'), _vm._v(" "), _c('el-button', {
       attrs: {
         "type": "primary",
         "plain": ""
@@ -33416,7 +33480,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           _vm.selectStructure(persondecreeBlock)
         }
       }
-    }, [_vm._v("Перевести в распоряжение начальника подразделения")])], 1), _vm._v(" "), _c('div', [_vm._v("\n                            " + _vm._s(persondecreeBlock.optionstring2) + "\n                        ")]), _vm._v(" "), _c('div', [_vm._v("\n                            Основание\n                        ")]), _vm._v(" "), _c('el-input', {
+    }, [_vm._v("Перевести в распоряжение начальника подразделения")])], 1) : _vm._e(), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_vm._v("\n                            " + _vm._s(persondecreeBlock.optionstring2) + "\n                        ")]) : _vm._e(), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_vm._v("\n                            Основание\n                        ")]) : _vm._e(), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_c('el-input', {
       staticClass: "eld-eld-body-row-long",
       model: {
         value: (persondecreeBlock.optionstring3),
@@ -33425,7 +33489,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         },
         expression: "persondecreeBlock.optionstring3"
       }
-    }), _vm._v(" "), _c('div', [_c('br'), _vm._v(" "), _c('el-button', {
+    })], 1) : _vm._e(), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_c('br'), _vm._v(" "), _c('el-button', {
       attrs: {
         "type": "primary",
         "plain": ""
@@ -33435,9 +33499,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           _vm.addPersonblockelement(persondecreeBlock)
         }
       }
-    }, [_vm._v("Сформировать пункт приказа")])], 1), _vm._v(" "), _c('div', {
+    }, [_vm._v("Сформировать пункт приказа")])], 1) : _vm._e(), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', {
       staticClass: "persondecreeoperation-part-list-title"
-    }, [_vm._v("\n                            Проект приказа\n                        ")]), _vm._v(" "), _c('div', [(persondecreeBlock.index != null && persondecreeBlock.index != 0) ? _c('span', [_vm._v(_vm._s(persondecreeBlock.index) + ".")]) : _vm._e(), _vm._v(" ОСВОБОДИТЬ:\n                        ")]), _vm._v(" "), _c('div', _vm._l((persondecreeBlock.persondecreeblocksubs), function(persondecreeblocksub) {
+    }, [_vm._v("\n                            Проект приказа\n                        ")]) : _vm._e(), _vm._v(" "), _c('div', [(persondecreeBlock.index != null && persondecreeBlock.index != 0) ? _c('span', [_vm._v(_vm._s(persondecreeBlock.index) + ".")]) : _vm._e(), _vm._v(" ОСВОБОДИТЬ:\n                        ")]), _vm._v(" "), _c('div', _vm._l((persondecreeBlock.persondecreeblocksubs), function(persondecreeblocksub) {
       return (persondecreeblocksub.persondecreeblock == persondecreeBlock.id) ? _c('div', {
         staticClass: "persondecreeoperation-part-list-element"
       }, [_c('div', _vm._l((_vm.persondecreeOperations), function(decreeoperation) {
@@ -33453,7 +33517,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           staticClass: "persondecreeoperation-part-list-element-margin-small persondecreeoperation-part-list-element-indent"
         }, [(decreeoperation.personobject.actualRank != null) ? _c('span', [_vm._v(_vm._s(decreeoperation.personobject.actualRank.name4) + " ")]) : _vm._e(), _vm._v("\n                                                    " + _vm._s(decreeoperation.personobject.surname4) + " " + _vm._s(decreeoperation.personobject.name4) + "\n                                                    " + _vm._s(decreeoperation.personobject.fathername4) + " " + _vm._s(decreeoperation.optionstring1) + "\n                                                    от должности " + _vm._s(decreeoperation.personobject.positiontree2) + " и зачислить его в распоряжение начальника\n                                                    " + _vm._s(decreeoperation.optionstring2) + ".\n                                                ")]), _vm._v(" "), _c('div', {
           staticClass: "persondecreeoperation-part-list-element-margin-big"
-        }, [_vm._v("\n                                                    Основание: " + _vm._s(decreeoperation.optionstring3) + ".\n                                                ")])])]), _vm._v(" "), _c('div', [_c('div', [_c('div', [_c('el-button', {
+        }, [_vm._v("\n                                                    Основание: " + _vm._s(decreeoperation.optionstring3) + ".\n                                                ")])])]), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_c('div', [_c('div', [_c('el-button', {
           attrs: {
             "size": "mini",
             "type": "warning"
@@ -33463,9 +33527,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
               _vm.removePersondecreeoperation(decreeoperation)
             }
           }
-        }, [_vm._v("Удалить")])], 1)])])]) : _vm._e()
+        }, [_vm._v("Удалить")])], 1)])]) : _vm._e()]) : _vm._e()
       }))]) : _vm._e()
-    })), _vm._v(" "), _c('div', [_c('el-button', {
+    })), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_c('el-button', {
       attrs: {
         "type": "danger"
       },
@@ -33474,7 +33538,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           _vm.deletePersondecreeblock(persondecreeBlock)
         }
       }
-    }, [_vm._v("Удалить блок")])], 1)], 1) : _vm._e(), _vm._v(" "), (persondecreeBlock.persondecreeblocktype == 6) ? _c('div', [_c('div', [_vm._v("\n                            В распоряжение\n                        ")]), _vm._v(" "), _c('el-input', {
+    }, [_vm._v("Удалить блок")])], 1) : _vm._e()]) : _vm._e(), _vm._v(" "), (persondecreeBlock.persondecreeblocktype == 6) ? _c('div', [(_vm.persondecreeSigned != 1) ? _c('div', [_c('div', [_vm._v("\n                                В распоряжение\n                            ")]), _vm._v(" "), _c('el-input', {
       staticClass: "eld-eld-body-row-long",
       model: {
         value: (persondecreeBlock.optionstring1),
@@ -33483,7 +33547,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         },
         expression: "persondecreeBlock.optionstring1"
       }
-    }), _vm._v(" "), _c('div', [_vm._v("\n                            Дата\n                        ")]), _vm._v(" "), _c('el-input', {
+    }), _vm._v(" "), _c('div', [_vm._v("\n                                Дата\n                            ")]), _vm._v(" "), _c('el-input', {
       staticClass: "eld-eld-body-row-short",
       attrs: {
         "type": "date"
@@ -33499,7 +33563,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       staticStyle: {
         "margin-top": "10px"
       }
-    }, [_vm._v("\n                                Кого\n                            ")]), _vm._v(" "), _c('div', {
+    }, [_vm._v("\n                                    Кого\n                                ")]), _vm._v(" "), _c('div', {
       staticStyle: {
         "margin-top": "10px"
       }
@@ -33524,7 +33588,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       staticClass: "eld-search-main"
     }, [_c('div', {
       staticClass: "eld-search-main-title"
-    }, [_vm._v("\n                                    Результаты поиска\n                                ")]), _vm._v(" "), _vm._l((persondecreeBlock.personssearch), function(person) {
+    }, [_vm._v("\n                                        Результаты поиска\n                                    ")]), _vm._v(" "), _vm._l((persondecreeBlock.personssearch), function(person) {
       return _c('div', {
         staticClass: "eld-search-element",
         on: {
@@ -33532,14 +33596,14 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
             _vm.selectPersonBlockNonAuto(person.id, persondecreeBlock)
           }
         }
-      }, [_c('div', [_vm._v("\n                                        " + _vm._s(person.surname) + " " + _vm._s(person.name) + " " + _vm._s(person.fathername) + "\n                                    ")]), _vm._v(" "), _c('div', [_vm._v("\n                                        " + _vm._s(person.positiontypestring) + "\n                                    ")]), _vm._v(" "), (_vm.hasPhotopreviewBlock(person.id, persondecreeBlock)) ? _c('div', [_c('img', {
+      }, [_c('div', [_vm._v("\n                                            " + _vm._s(person.surname) + " " + _vm._s(person.name) + " " + _vm._s(person.fathername) + "\n                                        ")]), _vm._v(" "), _c('div', [_vm._v("\n                                            " + _vm._s(person.positiontypestring) + "\n                                        ")]), _vm._v(" "), (_vm.hasPhotopreviewBlock(person.id, persondecreeBlock)) ? _c('div', [_c('img', {
         staticClass: "eld-search-element-image",
         attrs: {
           "src": _vm.getPhotopreviewBlock(person.id, persondecreeBlock).photo64
         }
-      })]) : _vm._e(), _vm._v(" "), _c('div', [_c('div', [_vm._v("\n                                            " + _vm._s(person.structuretree) + "\n                                        ")])])])
+      })]) : _vm._e(), _vm._v(" "), _c('div', [_c('div', [_vm._v("\n                                                " + _vm._s(person.structuretree) + "\n                                            ")])])])
     })], 2) : _vm._e(), _vm._v(" "), (_vm.personFromStructure.length > 0) ? _c('div', _vm._l((_vm.personFromStructure), function(person) {
-      return _c('div', [_vm._v("\n                                    Кого – " + _vm._s(person.surname2 + " " + person.name2 + " " + person.fathername2) + "\n                                    "), _c('el-button', {
+      return _c('div', [_vm._v("\n                                        Кого – " + _vm._s(person.surname2 + " " + person.name2 + " " + person.fathername2) + "\n                                        "), _c('el-button', {
         attrs: {
           "size": "mini",
           "type": "warning"
@@ -33550,7 +33614,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           }
         }
       }, [_vm._v("Убрать")])], 1)
-    })) : _vm._e()]), _vm._v(" "), _c('div', [_vm._v("\n                            Основание\n                        ")]), _vm._v(" "), _c('el-input', {
+    })) : _vm._e()]), _vm._v(" "), _c('div', [_vm._v("\n                                Основание\n                            ")]), _vm._v(" "), _c('el-input', {
       staticClass: "eld-eld-body-row-long",
       model: {
         value: (persondecreeBlock.optionstring2),
@@ -33569,16 +33633,16 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           _vm.addPersonblockelement(persondecreeBlock)
         }
       }
-    }, [_vm._v("Сформировать пункт приказа")])], 1), _vm._v(" "), _c('div', {
+    }, [_vm._v("Сформировать пункт приказа")])], 1)], 1) : _vm._e(), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', {
       staticClass: "persondecreeoperation-part-list-title"
-    }, [_vm._v("\n                            Проект приказа\n                        ")]), _vm._v(" "), _c('div', [(persondecreeBlock.index != null && persondecreeBlock.index != 0) ? _c('span', [_vm._v(_vm._s(persondecreeBlock.index) + ".")]) : _vm._e(), _vm._v(" ПЕРЕВЕСТИ:\n                        ")]), _vm._v(" "), _c('div', [_vm._l((_vm.persondecreeOperations), function(decreeoperation) {
+    }, [_vm._v("\n                            Проект приказа\n                        ")]) : _vm._e(), _vm._v(" "), _c('div', [(persondecreeBlock.index != null && persondecreeBlock.index != 0) ? _c('span', [_vm._v(_vm._s(persondecreeBlock.index) + ".")]) : _vm._e(), _vm._v(" ПЕРЕВЕСТИ:\n                        ")]), _vm._v(" "), _c('div', [_vm._l((_vm.persondecreeOperations), function(decreeoperation) {
       return (decreeoperation.persondecreeblock == persondecreeBlock.id) ? _c('div', {
         staticClass: "persondecreeoperation-part-list-element"
       }, [_c('div', [_c('div', {
         staticClass: "persondecreeoperation-part-list-element-margin-small persondecreeoperation-part-list-element-indent"
       }, [_vm._v("\n                                        в распоряжение " + _vm._s(decreeoperation.optionstring1) + "\n                                        "), (decreeoperation.optiondate1 != null) ? _c('span', [_vm._v(" с " + _vm._s(_vm.printDateDocument(decreeoperation.optiondate1)))]) : _vm._e(), _vm._v(" "), (decreeoperation.personobject.actualRank != null) ? _c('span', [_vm._v(_vm._s(decreeoperation.personobject.actualRank.name4) + " ")]) : _vm._e(), _vm._v("\n                                        " + _vm._s(decreeoperation.personobject.surname4) + " " + _vm._s(decreeoperation.personobject.name4) + "\n                                        " + _vm._s(decreeoperation.personobject.fathername4) + ", освободив его\n                                        от должности " + _vm._s(decreeoperation.personobject.positiontype2string) + " " + _vm._s(decreeoperation.personobject.structuretree2) + ".\n                                    ")]), _vm._v(" "), _c('div', {
         staticClass: "persondecreeoperation-part-list-element-margin-big"
-      }, [_vm._v("\n                                        Основание: " + _vm._s(decreeoperation.optionstring2) + ".\n                                    ")])]), _vm._v(" "), _c('div', [_c('div', [_c('div', [_c('el-button', {
+      }, [_vm._v("\n                                        Основание: " + _vm._s(decreeoperation.optionstring2) + ".\n                                    ")])]), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_c('div', [_c('div', [_c('el-button', {
         attrs: {
           "size": "mini",
           "type": "warning"
@@ -33588,8 +33652,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
             _vm.removePersondecreeoperation(decreeoperation)
           }
         }
-      }, [_vm._v("Удалить")])], 1)])])]) : _vm._e()
-    }), _vm._v(" "), _c('br')], 2), _vm._v(" "), _c('div', [_c('el-button', {
+      }, [_vm._v("Удалить")])], 1)])]) : _vm._e()]) : _vm._e()
+    }), _vm._v(" "), _c('br')], 2), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_c('el-button', {
       attrs: {
         "type": "danger"
       },
@@ -33598,7 +33662,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           _vm.deletePersondecreeblock(persondecreeBlock)
         }
       }
-    }, [_vm._v("Удалить блок")])], 1)], 1) : _vm._e(), _vm._v(" "), (persondecreeBlock.persondecreeblocktype == 7) ? _c('div', [_c('div', [_vm._v("\n                            В соответствии с каким пунктом\n                        ")]), _vm._v(" "), _c('el-select', {
+    }, [_vm._v("Удалить блок")])], 1) : _vm._e()]) : _vm._e(), _vm._v(" "), (persondecreeBlock.persondecreeblocktype == 7) ? _c('div', [(_vm.persondecreeSigned != 1) ? _c('div', [_c('div', [_vm._v("\n                                В соответствии с каким пунктом\n                            ")]), _vm._v(" "), _c('el-select', {
       staticClass: "eld-eld-body-select-long",
       attrs: {
         "placeholder": "В соответствии с каким пунктом"
@@ -33622,7 +33686,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       staticStyle: {
         "margin-top": "10px"
       }
-    }, [_vm._v("\n                                Кого\n                            ")]), _vm._v(" "), _c('div', {
+    }, [_vm._v("\n                                    Кого\n                                ")]), _vm._v(" "), _c('div', {
       staticStyle: {
         "margin-top": "10px"
       }
@@ -33647,7 +33711,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       staticClass: "eld-search-main"
     }, [_c('div', {
       staticClass: "eld-search-main-title"
-    }, [_vm._v("\n                                    Результаты поиска\n                                ")]), _vm._v(" "), _vm._l((persondecreeBlock.personssearch), function(person) {
+    }, [_vm._v("\n                                        Результаты поиска\n                                    ")]), _vm._v(" "), _vm._l((persondecreeBlock.personssearch), function(person) {
       return _c('div', {
         staticClass: "eld-search-element",
         on: {
@@ -33655,14 +33719,14 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
             _vm.selectPersonBlockNonAuto(person.id, persondecreeBlock)
           }
         }
-      }, [_c('div', [_vm._v("\n                                        " + _vm._s(person.surname) + " " + _vm._s(person.name) + " " + _vm._s(person.fathername) + "\n                                    ")]), _vm._v(" "), _c('div', [_vm._v("\n                                        " + _vm._s(person.positiontypestring) + "\n                                    ")]), _vm._v(" "), (_vm.hasPhotopreviewBlock(person.id, persondecreeBlock)) ? _c('div', [_c('img', {
+      }, [_c('div', [_vm._v("\n                                            " + _vm._s(person.surname) + " " + _vm._s(person.name) + " " + _vm._s(person.fathername) + "\n                                        ")]), _vm._v(" "), _c('div', [_vm._v("\n                                            " + _vm._s(person.positiontypestring) + "\n                                        ")]), _vm._v(" "), (_vm.hasPhotopreviewBlock(person.id, persondecreeBlock)) ? _c('div', [_c('img', {
         staticClass: "eld-search-element-image",
         attrs: {
           "src": _vm.getPhotopreviewBlock(person.id, persondecreeBlock).photo64
         }
-      })]) : _vm._e(), _vm._v(" "), _c('div', [_c('div', [_vm._v("\n                                            " + _vm._s(person.structuretree) + "\n                                        ")])])])
+      })]) : _vm._e(), _vm._v(" "), _c('div', [_c('div', [_vm._v("\n                                                " + _vm._s(person.structuretree) + "\n                                            ")])])])
     })], 2) : _vm._e(), _vm._v(" "), (_vm.personFromStructure.length > 0) ? _c('div', _vm._l((_vm.personFromStructure), function(person) {
-      return _c('div', [_vm._v("\n                                    Кого – " + _vm._s(person.surname2 + " " + person.name2 + " " + person.fathername2) + "\n                                    "), _c('el-button', {
+      return _c('div', [_vm._v("\n                                        Кого – " + _vm._s(person.surname2 + " " + person.name2 + " " + person.fathername2) + "\n                                        "), _c('el-button', {
         attrs: {
           "size": "mini",
           "type": "warning"
@@ -33673,7 +33737,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           }
         }
       }, [_vm._v("Убрать")])], 1)
-    })) : _vm._e()]), _vm._v(" "), _c('div', [_vm._v("\n                            Дата\n                        ")]), _vm._v(" "), _c('el-input', {
+    })) : _vm._e()]), _vm._v(" "), _c('div', [_vm._v("\n                                Дата\n                            ")]), _vm._v(" "), _c('el-input', {
       staticClass: "eld-eld-body-row-short",
       attrs: {
         "type": "date"
@@ -33685,7 +33749,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         },
         expression: "persondecreeBlock.optiondate1String"
       }
-    }), _vm._v(" "), _c('div', [_vm._v("\n                            Основание\n                        ")]), _vm._v(" "), _c('el-input', {
+    }), _vm._v(" "), _c('div', [_vm._v("\n                                Основание\n                            ")]), _vm._v(" "), _c('el-input', {
       staticClass: "eld-eld-body-row-long",
       model: {
         value: (persondecreeBlock.optionstring1),
@@ -33704,9 +33768,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           _vm.addPersonblockelement(persondecreeBlock)
         }
       }
-    }, [_vm._v("Сформировать пункт приказа")])], 1), _vm._v(" "), _c('div', {
+    }, [_vm._v("Сформировать пункт приказа")])], 1)], 1) : _vm._e(), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', {
       staticClass: "persondecreeoperation-part-list-title"
-    }, [_vm._v("\n                            Проект приказа\n                        ")]), _vm._v(" "), _c('div', [(persondecreeBlock.index != null && persondecreeBlock.index != 0) ? _c('span', [_vm._v(_vm._s(persondecreeBlock.index) + ".")]) : _vm._e(), _vm._v(" ПРЕКРАТИТЬ СЛУЖБУ:\n                        ")]), _vm._v(" "), _c('div', [_vm._l((_vm.persondecreeOperations), function(decreeoperation) {
+    }, [_vm._v("\n                            Проект приказа\n                        ")]) : _vm._e(), _vm._v(" "), _c('div', [(persondecreeBlock.index != null && persondecreeBlock.index != 0) ? _c('span', [_vm._v(_vm._s(persondecreeBlock.index) + ".")]) : _vm._e(), _vm._v(" ПРЕКРАТИТЬ СЛУЖБУ:\n                        ")]), _vm._v(" "), _c('div', [_vm._l((_vm.persondecreeOperations), function(decreeoperation) {
       return (decreeoperation.persondecreeblock == persondecreeBlock.id) ? _c('div', {
         staticClass: "persondecreeoperation-part-list-element"
       }, [_c('div', [_c('div', {
@@ -33715,7 +33779,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         staticClass: "persondecreeoperation-part-list-element-margin-small persondecreeoperation-part-list-element-indent"
       }, [(decreeoperation.personobject.actualRank != null) ? _c('span', [_vm._v(_vm._s(decreeoperation.personobject.actualRank.name3) + " ")]) : _vm._e(), _vm._v("\n                                        " + _vm._s(decreeoperation.personobject.surname3) + " " + _vm._s(decreeoperation.personobject.name3) + "\n                                        " + _vm._s(decreeoperation.personobject.fathername3) + _vm._s(_vm.commaspaceifnotnull(decreeoperation.personobject.positiontree3)) + " " + _vm._s(decreeoperation.personobject.positiontree3) + ".\n                                    ")]), _vm._v(" "), _c('div', {
         staticClass: "persondecreeoperation-part-list-element-margin-big"
-      }, [_vm._v("\n                                        Основание: " + _vm._s(decreeoperation.optionstring1) + ".\n                                    ")])]), _vm._v(" "), _c('div', [_c('div', [_c('div', [_c('el-button', {
+      }, [_vm._v("\n                                        Основание: " + _vm._s(decreeoperation.optionstring1) + ".\n                                    ")])]), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_c('div', [_c('div', [_c('el-button', {
         attrs: {
           "size": "mini",
           "type": "warning"
@@ -33725,8 +33789,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
             _vm.removePersondecreeoperation(decreeoperation)
           }
         }
-      }, [_vm._v("Удалить")])], 1)])])]) : _vm._e()
-    }), _vm._v(" "), _c('br')], 2), _vm._v(" "), _c('div', [_c('el-button', {
+      }, [_vm._v("Удалить")])], 1)])]) : _vm._e()]) : _vm._e()
+    }), _vm._v(" "), _c('br')], 2), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_c('el-button', {
       attrs: {
         "type": "danger"
       },
@@ -33735,11 +33799,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           _vm.deletePersondecreeblock(persondecreeBlock)
         }
       }
-    }, [_vm._v("Удалить блок")])], 1)], 1) : _vm._e(), _vm._v(" "), (persondecreeBlock.persondecreeblocktype == 8) ? _c('div', [_c('div', [_c('div', {
+    }, [_vm._v("Удалить блок")])], 1) : _vm._e()]) : _vm._e(), _vm._v(" "), (persondecreeBlock.persondecreeblocktype == 8) ? _c('div', [(_vm.persondecreeSigned != 1) ? _c('div', [_c('div', [_c('div', {
       staticStyle: {
         "margin-top": "10px"
       }
-    }, [_vm._v("\n                                Кого\n                            ")]), _vm._v(" "), _c('div', {
+    }, [_vm._v("\n                                    Кого\n                                ")]), _vm._v(" "), _c('div', {
       staticStyle: {
         "margin-top": "10px"
       }
@@ -33764,7 +33828,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       staticClass: "eld-search-main"
     }, [_c('div', {
       staticClass: "eld-search-main-title"
-    }, [_vm._v("\n                                    Результаты поиска\n                                ")]), _vm._v(" "), _vm._l((persondecreeBlock.personssearch), function(person) {
+    }, [_vm._v("\n                                        Результаты поиска\n                                    ")]), _vm._v(" "), _vm._l((persondecreeBlock.personssearch), function(person) {
       return _c('div', {
         staticClass: "eld-search-element",
         on: {
@@ -33772,14 +33836,14 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
             _vm.selectPersonBlockNonAuto(person.id, persondecreeBlock)
           }
         }
-      }, [_c('div', [_vm._v("\n                                        " + _vm._s(person.surname) + " " + _vm._s(person.name) + " " + _vm._s(person.fathername) + "\n                                    ")]), _vm._v(" "), _c('div', [_vm._v("\n                                        " + _vm._s(person.positiontypestring) + "\n                                    ")]), _vm._v(" "), (_vm.hasPhotopreviewBlock(person.id, persondecreeBlock)) ? _c('div', [_c('img', {
+      }, [_c('div', [_vm._v("\n                                            " + _vm._s(person.surname) + " " + _vm._s(person.name) + " " + _vm._s(person.fathername) + "\n                                        ")]), _vm._v(" "), _c('div', [_vm._v("\n                                            " + _vm._s(person.positiontypestring) + "\n                                        ")]), _vm._v(" "), (_vm.hasPhotopreviewBlock(person.id, persondecreeBlock)) ? _c('div', [_c('img', {
         staticClass: "eld-search-element-image",
         attrs: {
           "src": _vm.getPhotopreviewBlock(person.id, persondecreeBlock).photo64
         }
-      })]) : _vm._e(), _vm._v(" "), _c('div', [_c('div', [_vm._v("\n                                            " + _vm._s(person.structuretree) + "\n                                        ")])])])
+      })]) : _vm._e(), _vm._v(" "), _c('div', [_c('div', [_vm._v("\n                                                " + _vm._s(person.structuretree) + "\n                                            ")])])])
     })], 2) : _vm._e(), _vm._v(" "), (_vm.personFromStructure.length > 0) ? _c('div', _vm._l((_vm.personFromStructure), function(person) {
-      return _c('div', [_vm._v("\n                                    Кого – " + _vm._s(person.surname2 + " " + person.name2 + " " + person.fathername2) + "\n                                    "), _c('el-button', {
+      return _c('div', [_vm._v("\n                                        Кого – " + _vm._s(person.surname2 + " " + person.name2 + " " + person.fathername2) + "\n                                        "), _c('el-button', {
         attrs: {
           "size": "mini",
           "type": "warning"
@@ -33790,7 +33854,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           }
         }
       }, [_vm._v("Убрать")])], 1)
-    })) : _vm._e()]), _vm._v(" "), _c('div', [_vm._v("\n                            С какого числа\n                        ")]), _vm._v(" "), _c('el-input', {
+    })) : _vm._e()]), _vm._v(" "), _c('div', [_vm._v("\n                                С какого числа\n                            ")]), _vm._v(" "), _c('el-input', {
       staticClass: "eld-eld-body-row-short",
       attrs: {
         "type": "date"
@@ -33802,7 +33866,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         },
         expression: "persondecreeBlock.optiondate1String"
       }
-    }), _vm._v(" "), _c('div', [_vm._v("\n                            В связи с чем\n                        ")]), _vm._v(" "), _c('el-input', {
+    }), _vm._v(" "), _c('div', [_vm._v("\n                                В связи с чем\n                            ")]), _vm._v(" "), _c('el-input', {
       staticClass: "eld-eld-body-row-long",
       attrs: {
         "placeholder": "В связи с ..."
@@ -33814,7 +33878,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         },
         expression: "persondecreeBlock.optionstring1"
       }
-    }), _vm._v(" "), _c('div', [_vm._v("\n                            Основание\n                        ")]), _vm._v(" "), _c('el-input', {
+    }), _vm._v(" "), _c('div', [_vm._v("\n                                Основание\n                            ")]), _vm._v(" "), _c('el-input', {
       staticClass: "eld-eld-body-row-long",
       model: {
         value: (persondecreeBlock.optionstring2),
@@ -33833,16 +33897,16 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           _vm.addPersonblockelement(persondecreeBlock)
         }
       }
-    }, [_vm._v("Сформировать пункт приказа")])], 1), _vm._v(" "), _c('div', {
+    }, [_vm._v("Сформировать пункт приказа")])], 1)], 1) : _vm._e(), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', {
       staticClass: "persondecreeoperation-part-list-title"
-    }, [_vm._v("\n                            Проект приказа\n                        ")]), _vm._v(" "), _c('div', [(persondecreeBlock.index != null && persondecreeBlock.index != 0) ? _c('span', [_vm._v(_vm._s(persondecreeBlock.index) + ".")]) : _vm._e(), _vm._v(" ОТСТРАНИТЬ:\n                        ")]), _vm._v(" "), _c('div', [_vm._l((_vm.persondecreeOperations), function(decreeoperation) {
+    }, [_vm._v("\n                            Проект приказа\n                        ")]) : _vm._e(), _vm._v(" "), _c('div', [(persondecreeBlock.index != null && persondecreeBlock.index != 0) ? _c('span', [_vm._v(_vm._s(persondecreeBlock.index) + ".")]) : _vm._e(), _vm._v(" ОТСТРАНИТЬ:\n                        ")]), _vm._v(" "), _c('div', [_vm._l((_vm.persondecreeOperations), function(decreeoperation) {
       return (decreeoperation.persondecreeblock == persondecreeBlock.id) ? _c('div', {
         staticClass: "persondecreeoperation-part-list-element"
       }, [_c('div', [_c('div', {
         staticClass: "persondecreeoperation-part-list-element-margin-small persondecreeoperation-part-list-element-indent"
       }, [_vm._v("\n                                        в соответствии с п. 49 Положения о прохождении службы в органах и подразделениях по чрезвычайным ситуациям Республики Беларусь от\n                                        исполнения служебных обязанностей\n                                        "), (decreeoperation.personobject.actualRank != null) ? _c('span', [_vm._v(_vm._s(decreeoperation.personobject.actualRank.name4) + " ")]) : _vm._e(), _vm._v("\n                                        " + _vm._s(decreeoperation.personobject.surname4) + " " + _vm._s(decreeoperation.personobject.name4) + "\n                                        " + _vm._s(decreeoperation.personobject.fathername4) + _vm._s(_vm.commaspaceifnotnull(decreeoperation.personobject.positiontree4)) + " " + _vm._s(decreeoperation.personobject.positiontree4)), (decreeoperation.optiondate1 != null) ? _c('span', [_vm._v(", с " + _vm._s(_vm.printDateDocument(decreeoperation.optiondate1)))]) : _vm._e(), _vm._v("\n                                        " + _vm._s(decreeoperation.optionstring1) + ".\n                                    ")]), _vm._v(" "), _c('div', {
         staticClass: "persondecreeoperation-part-list-element-margin-big"
-      }, [_vm._v("\n                                        Основание: " + _vm._s(decreeoperation.optionstring2) + ".\n                                    ")])]), _vm._v(" "), _c('div', [_c('div', [_c('div', [_c('el-button', {
+      }, [_vm._v("\n                                        Основание: " + _vm._s(decreeoperation.optionstring2) + ".\n                                    ")])]), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_c('div', [_c('div', [_c('el-button', {
         attrs: {
           "size": "mini",
           "type": "warning"
@@ -33852,8 +33916,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
             _vm.removePersondecreeoperation(decreeoperation)
           }
         }
-      }, [_vm._v("Удалить")])], 1)])])]) : _vm._e()
-    }), _vm._v(" "), _c('br')], 2), _vm._v(" "), _c('div', [_c('el-button', {
+      }, [_vm._v("Удалить")])], 1)])]) : _vm._e()]) : _vm._e()
+    }), _vm._v(" "), _c('br')], 2), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_c('el-button', {
       attrs: {
         "type": "danger"
       },
@@ -33862,7 +33926,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           _vm.deletePersondecreeblock(persondecreeBlock)
         }
       }
-    }, [_vm._v("Удалить блок")])], 1)], 1) : _vm._e(), _vm._v(" "), (persondecreeBlock.persondecreeblocktype == 9) ? _c('div', [_c('div', [_vm._v("\n                            В связи с чем\n                        ")]), _vm._v(" "), _c('el-select', {
+    }, [_vm._v("Удалить блок")])], 1) : _vm._e()]) : _vm._e(), _vm._v(" "), (persondecreeBlock.persondecreeblocktype == 9) ? _c('div', [(_vm.persondecreeSigned != 1) ? _c('div', [_c('div', [_vm._v("\n                                В связи с чем\n                            ")]), _vm._v(" "), _c('el-select', {
       staticClass: "eld-eld-body-select-long",
       attrs: {
         "placeholder": "В связи с чем"
@@ -33886,7 +33950,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       staticStyle: {
         "margin-top": "10px"
       }
-    }, [_vm._v("\n                                Кого\n                            ")]), _vm._v(" "), _c('div', {
+    }, [_vm._v("\n                                    Кого\n                                ")]), _vm._v(" "), _c('div', {
       staticStyle: {
         "margin-top": "10px"
       }
@@ -33911,7 +33975,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       staticClass: "eld-search-main"
     }, [_c('div', {
       staticClass: "eld-search-main-title"
-    }, [_vm._v("\n                                    Результаты поиска\n                                ")]), _vm._v(" "), _vm._l((persondecreeBlock.personssearch), function(person) {
+    }, [_vm._v("\n                                        Результаты поиска\n                                    ")]), _vm._v(" "), _vm._l((persondecreeBlock.personssearch), function(person) {
       return _c('div', {
         staticClass: "eld-search-element",
         on: {
@@ -33919,14 +33983,14 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
             _vm.selectPersonBlockNonAuto(person.id, persondecreeBlock)
           }
         }
-      }, [_c('div', [_vm._v("\n                                        " + _vm._s(person.surname) + " " + _vm._s(person.name) + " " + _vm._s(person.fathername) + "\n                                    ")]), _vm._v(" "), _c('div', [_vm._v("\n                                        " + _vm._s(person.positiontypestring) + "\n                                    ")]), _vm._v(" "), (_vm.hasPhotopreviewBlock(person.id, persondecreeBlock)) ? _c('div', [_c('img', {
+      }, [_c('div', [_vm._v("\n                                            " + _vm._s(person.surname) + " " + _vm._s(person.name) + " " + _vm._s(person.fathername) + "\n                                        ")]), _vm._v(" "), _c('div', [_vm._v("\n                                            " + _vm._s(person.positiontypestring) + "\n                                        ")]), _vm._v(" "), (_vm.hasPhotopreviewBlock(person.id, persondecreeBlock)) ? _c('div', [_c('img', {
         staticClass: "eld-search-element-image",
         attrs: {
           "src": _vm.getPhotopreviewBlock(person.id, persondecreeBlock).photo64
         }
-      })]) : _vm._e(), _vm._v(" "), _c('div', [_c('div', [_vm._v("\n                                            " + _vm._s(person.structuretree) + "\n                                        ")])])])
+      })]) : _vm._e(), _vm._v(" "), _c('div', [_c('div', [_vm._v("\n                                                " + _vm._s(person.structuretree) + "\n                                            ")])])])
     })], 2) : _vm._e(), _vm._v(" "), (_vm.personFromStructure.length > 0) ? _c('div', _vm._l((_vm.personFromStructure), function(person) {
-      return _c('div', [_vm._v("\n                                    Кого – " + _vm._s(person.surname2 + " " + person.name2 + " " + person.fathername2) + "\n                                    "), _c('el-button', {
+      return _c('div', [_vm._v("\n                                        Кого – " + _vm._s(person.surname2 + " " + person.name2 + " " + person.fathername2) + "\n                                        "), _c('el-button', {
         attrs: {
           "size": "mini",
           "type": "warning"
@@ -33937,7 +34001,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           }
         }
       }, [_vm._v("Убрать")])], 1)
-    })) : _vm._e()]), _vm._v(" "), (persondecreeBlock.optionnumber1 != null && persondecreeBlock.optionnumber1 == 3 && persondecreeBlock.person != null) ? _c('div', [_c('div', [_vm._v("\n                                В связи с чем (заполнить текст самостоятельно)\n                            ")]), _vm._v(" "), _c('el-input', {
+    })) : _vm._e()]), _vm._v(" "), (persondecreeBlock.optionnumber1 != null && persondecreeBlock.optionnumber1 == 3 && persondecreeBlock.person != null) ? _c('div', [_c('div', [_vm._v("\n                                    В связи с чем (заполнить текст самостоятельно)\n                                ")]), _vm._v(" "), _c('el-input', {
       staticClass: "eld-eld-body-row-long",
       attrs: {
         "placeholder": "В связи с ..."
@@ -33949,7 +34013,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         },
         expression: "persondecreeBlock.optionstring1"
       }
-    }), _vm._v(" "), _c('div', [_vm._v("\n                                Какие изменения внести (\"числить по фамилии ИВАНОВА\")\n                            ")]), _vm._v(" "), _c('el-input', {
+    }), _vm._v(" "), _c('div', [_vm._v("\n                                    Какие изменения внести (\"числить по фамилии ИВАНОВА\")\n                                ")]), _vm._v(" "), _c('el-input', {
       staticClass: "eld-eld-body-row-long",
       attrs: {
         "placeholder": ""
@@ -33961,7 +34025,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         },
         expression: "persondecreeBlock.optionstring2"
       }
-    })], 1) : _vm._e(), _vm._v(" "), (persondecreeBlock.optionnumber1 != null && (persondecreeBlock.optionnumber1 == 1 || persondecreeBlock.optionnumber1 == 2) && persondecreeBlock.person != null) ? _c('div', [_c('div', [_vm._v("\n                                Числить по фамилии\n                            ")]), _vm._v(" "), _c('el-input', {
+    })], 1) : _vm._e(), _vm._v(" "), (persondecreeBlock.optionnumber1 != null && (persondecreeBlock.optionnumber1 == 1 || persondecreeBlock.optionnumber1 == 2) && persondecreeBlock.person != null) ? _c('div', [_c('div', [_vm._v("\n                                    Числить по фамилии\n                                ")]), _vm._v(" "), _c('el-input', {
       staticClass: "eld-eld-body-row-mediumshort",
       attrs: {
         "placeholder": "Фамилия"
@@ -33973,7 +34037,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         },
         expression: "persondecreeBlock.optionstring2"
       }
-    })], 1) : _vm._e(), _vm._v(" "), (persondecreeBlock.optionnumber1 != null && (persondecreeBlock.optionnumber1 == 4) && persondecreeBlock.person != null) ? _c('div', [_c('div', [_vm._v("\n                                Числить по имени\n                            ")]), _vm._v(" "), _c('div', [_c('el-select', {
+    })], 1) : _vm._e(), _vm._v(" "), (persondecreeBlock.optionnumber1 != null && (persondecreeBlock.optionnumber1 == 4) && persondecreeBlock.person != null) ? _c('div', [_c('div', [_vm._v("\n                                    Числить по имени\n                                ")]), _vm._v(" "), _c('div', [_c('el-select', {
       staticClass: "eld-eld-body-row-mediumshort",
       attrs: {
         "clearable": "",
@@ -33997,7 +34061,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           "value": subject.name
         }
       }) : _vm._e()
-    }))], 1)]) : _vm._e(), _vm._v(" "), (persondecreeBlock.optionnumber1 != null && (persondecreeBlock.optionnumber1 == 5) && persondecreeBlock.person != null) ? _c('div', [_c('div', [_vm._v("\n                                Числить по отчеству\n                            ")]), _vm._v(" "), _c('div', [_c('el-select', {
+    }))], 1)]) : _vm._e(), _vm._v(" "), (persondecreeBlock.optionnumber1 != null && (persondecreeBlock.optionnumber1 == 5) && persondecreeBlock.person != null) ? _c('div', [_c('div', [_vm._v("\n                                    Числить по отчеству\n                                ")]), _vm._v(" "), _c('div', [_c('el-select', {
       staticClass: "eld-eld-body-row-mediumshort",
       attrs: {
         "clearable": "",
@@ -34021,7 +34085,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           "value": subject.name
         }
       }) : _vm._e()
-    }))], 1)]) : _vm._e(), _vm._v(" "), _c('div', [_vm._v("\n                            Основание\n                        ")]), _vm._v(" "), _c('el-input', {
+    }))], 1)]) : _vm._e(), _vm._v(" "), _c('div', [_vm._v("\n                                Основание\n                            ")]), _vm._v(" "), _c('el-input', {
       staticClass: "eld-eld-body-row-long",
       model: {
         value: (persondecreeBlock.optionstring3),
@@ -34040,16 +34104,16 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           _vm.addPersonblockelement(persondecreeBlock)
         }
       }
-    }, [_vm._v("Сформировать пункт приказа")])], 1), _vm._v(" "), _c('div', {
+    }, [_vm._v("Сформировать пункт приказа")])], 1)], 1) : _vm._e(), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', {
       staticClass: "persondecreeoperation-part-list-title"
-    }, [_vm._v("\n                            Проект приказа\n                        ")]), _vm._v(" "), _c('div', [(persondecreeBlock.index != null && persondecreeBlock.index != 0) ? _c('span', [_vm._v(_vm._s(persondecreeBlock.index) + ".")]) : _vm._e(), _vm._v(" ВНЕСТИ ИЗМЕНЕНИЯ В УЧЕТНЫЕ ДОКУМЕНТЫ:\n                        ")]), _vm._v(" "), _c('div', [_vm._l((_vm.persondecreeOperations), function(decreeoperation) {
+    }, [_vm._v("\n                            Проект приказа\n                        ")]) : _vm._e(), _vm._v(" "), _c('div', [(persondecreeBlock.index != null && persondecreeBlock.index != 0) ? _c('span', [_vm._v(_vm._s(persondecreeBlock.index) + ".")]) : _vm._e(), _vm._v(" ВНЕСТИ ИЗМЕНЕНИЯ В УЧЕТНЫЕ ДОКУМЕНТЫ:\n                        ")]), _vm._v(" "), _c('div', [_vm._l((_vm.persondecreeOperations), function(decreeoperation) {
       return (decreeoperation.persondecreeblock == persondecreeBlock.id) ? _c('div', {
         staticClass: "persondecreeoperation-part-list-element"
       }, [_c('div', [_c('div', {
         staticClass: "persondecreeoperation-part-list-element-margin-small persondecreeoperation-part-list-element-indent"
       }, [(decreeoperation.optionnumber1 != null && decreeoperation.optionnumber1 == 1) ? _c('span', [_vm._v(_vm._s(_vm.getChangedocumentstypeObject(decreeoperation.optionnumber1).name))]) : _vm._e(), _vm._v(" "), (decreeoperation.optionnumber1 != null && decreeoperation.optionnumber1 == 2) ? _c('span', [_vm._v(_vm._s(_vm.getChangedocumentstypeObject(decreeoperation.optionnumber1).name))]) : _vm._e(), _vm._v(" "), (decreeoperation.optionnumber1 != null && decreeoperation.optionnumber1 == 3) ? _c('span', [_vm._v(_vm._s(decreeoperation.optionstring1))]) : _vm._e(), _vm._v(" "), (decreeoperation.optionnumber1 != null && decreeoperation.optionnumber1 == 4) ? _c('span', [_vm._v(_vm._s(_vm.getChangedocumentstypeObject(decreeoperation.optionnumber1).name))]) : _vm._e(), _vm._v(" "), (decreeoperation.optionnumber1 != null && decreeoperation.optionnumber1 == 5) ? _c('span', [_vm._v(_vm._s(_vm.getChangedocumentstypeObject(decreeoperation.optionnumber1).name))]) : _vm._e(), _vm._v(" "), (decreeoperation.personobject.actualRank != null) ? _c('span', [_vm._v(_vm._s(decreeoperation.personobject.actualRank.name2) + " ")]) : _vm._e(), _vm._v("\n\n                                        " + _vm._s(decreeoperation.personobject.surname4) + " " + _vm._s(decreeoperation.personobject.name4) + "\n                                        " + _vm._s(decreeoperation.personobject.fathername4) + ", " + _vm._s(_vm.commaspaceifnotnull(decreeoperation.personobject.positiontree4)) + " " + _vm._s(decreeoperation.personobject.positiontree4) + ",\n                                        "), (decreeoperation.optionnumber1 != null && decreeoperation.optionnumber1 == 1) ? _c('span', [_vm._v("числить по фамилии " + _vm._s(decreeoperation.optionstring2) + ".")]) : _vm._e(), _vm._v(" "), (decreeoperation.optionnumber1 != null && decreeoperation.optionnumber1 == 2) ? _c('span', [_vm._v("числить по фамилии " + _vm._s(decreeoperation.optionstring2) + ".")]) : _vm._e(), _vm._v(" "), (decreeoperation.optionnumber1 != null && decreeoperation.optionnumber1 == 3) ? _c('span', [_vm._v(_vm._s(decreeoperation.optionstring2) + ".")]) : _vm._e(), _vm._v(" "), (decreeoperation.optionnumber1 != null && decreeoperation.optionnumber1 == 4) ? _c('span', [_vm._v("числить по имени " + _vm._s(decreeoperation.optionstring2) + ".")]) : _vm._e(), _vm._v(" "), (decreeoperation.optionnumber1 != null && decreeoperation.optionnumber1 == 5) ? _c('span', [_vm._v("числить по отчеству " + _vm._s(decreeoperation.optionstring2) + ".")]) : _vm._e()]), _vm._v(" "), _c('div', {
         staticClass: "persondecreeoperation-part-list-element-margin-big"
-      }, [_vm._v("\n                                        Основание: " + _vm._s(decreeoperation.optionstring3) + ".\n                                    ")])]), _vm._v(" "), _c('div', [_c('div', [_c('div', [_c('el-button', {
+      }, [_vm._v("\n                                        Основание: " + _vm._s(decreeoperation.optionstring3) + ".\n                                    ")])]), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_c('div', [_c('div', [_c('el-button', {
         attrs: {
           "size": "mini",
           "type": "warning"
@@ -34059,8 +34123,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
             _vm.removePersondecreeoperation(decreeoperation)
           }
         }
-      }, [_vm._v("Удалить")])], 1)])])]) : _vm._e()
-    }), _vm._v(" "), _c('br')], 2), _vm._v(" "), _c('div', [_c('el-button', {
+      }, [_vm._v("Удалить")])], 1)])]) : _vm._e()]) : _vm._e()
+    }), _vm._v(" "), _c('br')], 2), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_c('el-button', {
       attrs: {
         "type": "danger"
       },
@@ -34069,7 +34133,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           _vm.deletePersondecreeblock(persondecreeBlock)
         }
       }
-    }, [_vm._v("Удалить блок")])], 1)], 1) : _vm._e(), _vm._v(" "), (persondecreeBlock.persondecreeblocktype == 10) ? _c('div', [_c('div', [_vm._v("\n                            Установить\n                        ")]), _vm._v(" "), _c('el-select', {
+    }, [_vm._v("Удалить блок")])], 1) : _vm._e()]) : _vm._e(), _vm._v(" "), (persondecreeBlock.persondecreeblocktype == 10) ? _c('div', [(_vm.persondecreeSigned != 1) ? _c('div', [_c('div', [_vm._v("\n                                Установить\n                            ")]), _vm._v(" "), _c('el-select', {
       staticClass: "eld-eld-body-select-long",
       attrs: {
         "clearable": "",
@@ -34090,7 +34154,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           "value": setpersondatatype.id
         }
       })
-    })), _vm._v(" "), _c('div', [_c('div', [_vm._v("\n                                Кому\n                            ")]), _vm._v(" "), _c('div', {
+    })), _vm._v(" "), _c('div', [_c('div', [_vm._v("\n                                    Кому\n                                ")]), _vm._v(" "), _c('div', {
       staticStyle: {
         "margin-top": "10px"
       }
@@ -34129,7 +34193,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       staticClass: "eld-search-main"
     }, [_c('div', {
       staticClass: "eld-search-main-title"
-    }, [_vm._v("\n                                    Результаты поиска\n                                ")]), _vm._v(" "), _vm._l((persondecreeBlock.personssearch), function(person) {
+    }, [_vm._v("\n                                        Результаты поиска\n                                    ")]), _vm._v(" "), _vm._l((persondecreeBlock.personssearch), function(person) {
       return _c('div', {
         staticClass: "eld-search-element",
         on: {
@@ -34137,14 +34201,14 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
             _vm.selectPersonBlockNonAuto(person.id, persondecreeBlock)
           }
         }
-      }, [_c('div', [_vm._v("\n                                        " + _vm._s(person.surname) + " " + _vm._s(person.name) + " " + _vm._s(person.fathername) + "\n                                    ")]), _vm._v(" "), _c('div', [_vm._v("\n                                        " + _vm._s(person.positiontypestring) + "\n                                    ")]), _vm._v(" "), (_vm.hasPhotopreviewBlock(person.id, persondecreeBlock)) ? _c('div', [_c('img', {
+      }, [_c('div', [_vm._v("\n                                            " + _vm._s(person.surname) + " " + _vm._s(person.name) + " " + _vm._s(person.fathername) + "\n                                        ")]), _vm._v(" "), _c('div', [_vm._v("\n                                            " + _vm._s(person.positiontypestring) + "\n                                        ")]), _vm._v(" "), (_vm.hasPhotopreviewBlock(person.id, persondecreeBlock)) ? _c('div', [_c('img', {
         staticClass: "eld-search-element-image",
         attrs: {
           "src": _vm.getPhotopreviewBlock(person.id, persondecreeBlock).photo64
         }
-      })]) : _vm._e(), _vm._v(" "), _c('div', [_c('div', [_vm._v("\n                                            " + _vm._s(person.structuretree) + "\n                                        ")])])])
+      })]) : _vm._e(), _vm._v(" "), _c('div', [_c('div', [_vm._v("\n                                                " + _vm._s(person.structuretree) + "\n                                            ")])])])
     })], 2) : _vm._e(), _vm._v(" "), (_vm.personFromStructure != null) ? _c('div', _vm._l((_vm.personFromStructure), function(person) {
-      return _c('div', [_vm._v("\n                                    Кого – " + _vm._s(person.surname3 + " " + person.name3 + " " + person.fathername3) + "\n                                    "), _c('el-button', {
+      return _c('div', [_vm._v("\n                                        Кого – " + _vm._s(person.surname3 + " " + person.name3 + " " + person.fathername3) + "\n                                        "), _c('el-button', {
         attrs: {
           "size": "mini",
           "type": "warning"
@@ -34155,7 +34219,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           }
         }
       }, [_vm._v("Убрать")])], 1)
-    })) : _vm._e()]), _vm._v(" "), (persondecreeBlock.persondecreeblocksub != null) ? _c('div', [(persondecreeBlock.persondecreeblocksub == 1) ? _c('div', [_c('div', [_vm._v("\n                                    По состоянию на\n                                ")]), _vm._v(" "), _c('el-input', {
+    })) : _vm._e()]), _vm._v(" "), (persondecreeBlock.persondecreeblocksub != null) ? _c('div', [(persondecreeBlock.persondecreeblocksub == 1) ? _c('div', [_c('div', [_vm._v("\n                                        По состоянию на\n                                    ")]), _vm._v(" "), _c('el-input', {
       staticClass: "eld-eld-body-row-short",
       attrs: {
         "type": "date"
@@ -34167,7 +34231,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         },
         expression: "persondecreeBlock.optiondate1String"
       }
-    }), _vm._v(" "), _c('div', [_vm._v("\n                                    Сколько\n                                ")]), _vm._v(" "), _c('div', [_c('el-input', {
+    }), _vm._v(" "), _c('div', [_vm._v("\n                                        Сколько\n                                    ")]), _vm._v(" "), _c('div', [_c('el-input', {
       staticClass: "eld-eld-body-row-short",
       attrs: {
         "type": "number"
@@ -34179,7 +34243,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         },
         expression: "persondecreeBlock.optionnumber2"
       }
-    }), _vm._v(" лет\n                                    "), _c('el-input', {
+    }), _vm._v(" лет\n                                        "), _c('el-input', {
       staticClass: "eld-eld-body-row-short",
       attrs: {
         "type": "number"
@@ -34191,7 +34255,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         },
         expression: "persondecreeBlock.optionnumber3"
       }
-    }), _vm._v(" месяцев\n                                    "), _c('el-input', {
+    }), _vm._v(" месяцев\n                                        "), _c('el-input', {
       staticClass: "eld-eld-body-row-short",
       attrs: {
         "type": "number"
@@ -34203,7 +34267,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         },
         expression: "persondecreeBlock.optionnumber4"
       }
-    }), _vm._v(" дней\n                                ")], 1)], 1) : _vm._e(), _vm._v(" "), (persondecreeBlock.persondecreeblocksub == 2) ? _c('div', [_c('div', [_vm._v("\n                                    С какого числа\n                                ")]), _vm._v(" "), _c('el-input', {
+    }), _vm._v(" дней\n                                    ")], 1)], 1) : _vm._e(), _vm._v(" "), (persondecreeBlock.persondecreeblocksub == 2) ? _c('div', [_c('div', [_vm._v("\n                                        С какого числа\n                                    ")]), _vm._v(" "), _c('el-input', {
       staticClass: "eld-eld-body-row-short",
       attrs: {
         "type": "date"
@@ -34215,7 +34279,223 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         },
         expression: "persondecreeBlock.optiondate1String"
       }
-    }), _vm._v(" "), _c('div', [_vm._v("\n                                    В размере оклада денежного содержания (в процентах)\n                                ")]), _vm._v(" "), _c('el-input', {
+    }), _vm._v(" "), _c('div', [_vm._v("\n                                        В размере оклада денежного содержания (в процентах)\n                                    ")]), _vm._v(" "), _c('el-input', {
+      staticClass: "eld-eld-body-row-short",
+      attrs: {
+        "type": "number"
+      },
+      model: {
+        value: (persondecreeBlock.optionnumber2),
+        callback: function($$v) {
+          persondecreeBlock.optionnumber2 = $$v
+        },
+        expression: "persondecreeBlock.optionnumber2"
+      }
+    }), _vm._v(" "), _c('div', [_vm._v("\n                                        Основание\n                                    ")]), _vm._v(" "), _c('el-input', {
+      staticClass: "eld-eld-body-row-long",
+      attrs: {
+        "placeholder": "рапорт ..."
+      },
+      model: {
+        value: (persondecreeBlock.optionstring2),
+        callback: function($$v) {
+          persondecreeBlock.optionstring2 = $$v
+        },
+        expression: "persondecreeBlock.optionstring2"
+      }
+    })], 1) : _vm._e(), _vm._v(" "), (persondecreeBlock.persondecreeblocksub == 3) ? _c('div', [_c('div', [_vm._v("\n                                        По состоянию на\n                                    ")]), _vm._v(" "), _c('el-input', {
+      staticClass: "eld-eld-body-row-short",
+      attrs: {
+        "type": "date"
+      },
+      model: {
+        value: (persondecreeBlock.optiondate1String),
+        callback: function($$v) {
+          persondecreeBlock.optiondate1String = $$v
+        },
+        expression: "persondecreeBlock.optiondate1String"
+      }
+    }), _vm._v(" "), _c('div', [_vm._v("\n                                        в отрасли —\n                                    ")]), _vm._v(" "), _c('div', [_c('el-input', {
+      staticClass: "eld-eld-body-row-short",
+      attrs: {
+        "type": "number"
+      },
+      model: {
+        value: (persondecreeBlock.optionnumber2),
+        callback: function($$v) {
+          persondecreeBlock.optionnumber2 = $$v
+        },
+        expression: "persondecreeBlock.optionnumber2"
+      }
+    }), _vm._v(" лет\n                                        "), _c('el-input', {
+      staticClass: "eld-eld-body-row-short",
+      attrs: {
+        "type": "number"
+      },
+      model: {
+        value: (persondecreeBlock.optionnumber3),
+        callback: function($$v) {
+          persondecreeBlock.optionnumber3 = $$v
+        },
+        expression: "persondecreeBlock.optionnumber3"
+      }
+    }), _vm._v(" месяцев\n                                        "), _c('el-input', {
+      staticClass: "eld-eld-body-row-short",
+      attrs: {
+        "type": "number"
+      },
+      model: {
+        value: (persondecreeBlock.optionnumber4),
+        callback: function($$v) {
+          persondecreeBlock.optionnumber4 = $$v
+        },
+        expression: "persondecreeBlock.optionnumber4"
+      }
+    }), _vm._v(" дней\n                                    ")], 1), _vm._v(" "), _c('div', [_vm._v("\n                                        для выплаты ежемесячной надбавки за выслугу лет —\n                                    ")]), _vm._v(" "), _c('div', [_c('el-input', {
+      staticClass: "eld-eld-body-row-short",
+      attrs: {
+        "type": "number"
+      },
+      model: {
+        value: (persondecreeBlock.optionnumber5),
+        callback: function($$v) {
+          persondecreeBlock.optionnumber5 = $$v
+        },
+        expression: "persondecreeBlock.optionnumber5"
+      }
+    }), _vm._v(" лет\n                                        "), _c('el-input', {
+      staticClass: "eld-eld-body-row-short",
+      attrs: {
+        "type": "number"
+      },
+      model: {
+        value: (persondecreeBlock.optionnumber6),
+        callback: function($$v) {
+          persondecreeBlock.optionnumber6 = $$v
+        },
+        expression: "persondecreeBlock.optionnumber6"
+      }
+    }), _vm._v(" месяцев\n                                        "), _c('el-input', {
+      staticClass: "eld-eld-body-row-short",
+      attrs: {
+        "type": "number"
+      },
+      model: {
+        value: (persondecreeBlock.optionnumber7),
+        callback: function($$v) {
+          persondecreeBlock.optionnumber7 = $$v
+        },
+        expression: "persondecreeBlock.optionnumber7"
+      }
+    }), _vm._v(" дней\n                                    ")], 1)], 1) : _vm._e(), _vm._v(" "), (persondecreeBlock.persondecreeblocksub == 4) ? _c('div', [_c('div', [_vm._v("\n                                        По состоянию на\n                                    ")]), _vm._v(" "), _c('el-input', {
+      staticClass: "eld-eld-body-row-short",
+      attrs: {
+        "type": "date"
+      },
+      model: {
+        value: (persondecreeBlock.optiondate1String),
+        callback: function($$v) {
+          persondecreeBlock.optiondate1String = $$v
+        },
+        expression: "persondecreeBlock.optiondate1String"
+      }
+    }), _vm._v(" "), _c('div', [_vm._v("\n                                        Сколько\n                                    ")]), _vm._v(" "), _c('div', [_c('el-input', {
+      staticClass: "eld-eld-body-row-short",
+      attrs: {
+        "type": "number"
+      },
+      model: {
+        value: (persondecreeBlock.optionnumber2),
+        callback: function($$v) {
+          persondecreeBlock.optionnumber2 = $$v
+        },
+        expression: "persondecreeBlock.optionnumber2"
+      }
+    }), _vm._v(" лет\n                                        "), _c('el-input', {
+      staticClass: "eld-eld-body-row-short",
+      attrs: {
+        "type": "number"
+      },
+      model: {
+        value: (persondecreeBlock.optionnumber3),
+        callback: function($$v) {
+          persondecreeBlock.optionnumber3 = $$v
+        },
+        expression: "persondecreeBlock.optionnumber3"
+      }
+    }), _vm._v(" месяцев\n                                        "), _c('el-input', {
+      staticClass: "eld-eld-body-row-short",
+      attrs: {
+        "type": "number"
+      },
+      model: {
+        value: (persondecreeBlock.optionnumber4),
+        callback: function($$v) {
+          persondecreeBlock.optionnumber4 = $$v
+        },
+        expression: "persondecreeBlock.optionnumber4"
+      }
+    }), _vm._v(" дней\n                                    ")], 1)], 1) : _vm._e()]) : _vm._e(), _vm._v(" "), (persondecreeBlock.persondecreeblocksub == 5) ? _c('div', [_c('div', [_vm._v("\n                                    По итогам\n                                ")]), _vm._v(" "), _c('el-input', {
+      staticClass: "eld-eld-body-row-long",
+      attrs: {
+        "placeholder": "летней экзаменационной сессии 2019-2020 ..."
+      },
+      model: {
+        value: (persondecreeBlock.optionstring3),
+        callback: function($$v) {
+          persondecreeBlock.optionstring3 = $$v
+        },
+        expression: "persondecreeBlock.optionstring3"
+      }
+    }), _vm._v(" "), _c('div', {
+      staticClass: "eld-eld-body-row-flex",
+      staticStyle: {
+        "margin-top": "10px"
+      }
+    }, [_c('div', {
+      staticClass: "eld-eld-body-row-mshort"
+    }, [_vm._v("\n                                        С какого числа\n                                        "), _c('el-input', {
+      staticClass: "eld-eld-body-row-short",
+      attrs: {
+        "type": "date"
+      },
+      model: {
+        value: (persondecreeBlock.optiondate1String),
+        callback: function($$v) {
+          persondecreeBlock.optiondate1String = $$v
+        },
+        expression: "persondecreeBlock.optiondate1String"
+      }
+    })], 1), _vm._v(" "), _c('div', {
+      staticClass: "eld-eld-body-row-mshort",
+      staticStyle: {
+        "margin-left": "10px"
+      }
+    }, [_vm._v("\n                                        По какое\n                                        "), _c('el-input', {
+      staticClass: "eld-eld-body-row-short",
+      attrs: {
+        "type": "date"
+      },
+      model: {
+        value: (persondecreeBlock.optiondate2String),
+        callback: function($$v) {
+          persondecreeBlock.optiondate2String = $$v
+        },
+        expression: "persondecreeBlock.optiondate2String"
+      }
+    })], 1)]), _vm._v(" "), _c('div', [_vm._v("\n                                    За какие результаты\n                                ")]), _vm._v(" "), _c('el-input', {
+      staticClass: "eld-eld-body-row-long",
+      attrs: {
+        "placeholder": "хорошие/отличные"
+      },
+      model: {
+        value: (persondecreeBlock.optionstring4),
+        callback: function($$v) {
+          persondecreeBlock.optionstring4 = $$v
+        },
+        expression: "persondecreeBlock.optionstring4"
+      }
+    }), _vm._v(" "), _c('div', [_vm._v("\n                                    Размер должностного оклада курсантам факультета (в процентах)\n                                ")]), _vm._v(" "), _c('el-input', {
       staticClass: "eld-eld-body-row-short",
       attrs: {
         "type": "number"
@@ -34239,222 +34519,6 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         },
         expression: "persondecreeBlock.optionstring2"
       }
-    })], 1) : _vm._e(), _vm._v(" "), (persondecreeBlock.persondecreeblocksub == 3) ? _c('div', [_c('div', [_vm._v("\n                                    По состоянию на\n                                ")]), _vm._v(" "), _c('el-input', {
-      staticClass: "eld-eld-body-row-short",
-      attrs: {
-        "type": "date"
-      },
-      model: {
-        value: (persondecreeBlock.optiondate1String),
-        callback: function($$v) {
-          persondecreeBlock.optiondate1String = $$v
-        },
-        expression: "persondecreeBlock.optiondate1String"
-      }
-    }), _vm._v(" "), _c('div', [_vm._v("\n                                    в отрасли —\n                                ")]), _vm._v(" "), _c('div', [_c('el-input', {
-      staticClass: "eld-eld-body-row-short",
-      attrs: {
-        "type": "number"
-      },
-      model: {
-        value: (persondecreeBlock.optionnumber2),
-        callback: function($$v) {
-          persondecreeBlock.optionnumber2 = $$v
-        },
-        expression: "persondecreeBlock.optionnumber2"
-      }
-    }), _vm._v(" лет\n                                    "), _c('el-input', {
-      staticClass: "eld-eld-body-row-short",
-      attrs: {
-        "type": "number"
-      },
-      model: {
-        value: (persondecreeBlock.optionnumber3),
-        callback: function($$v) {
-          persondecreeBlock.optionnumber3 = $$v
-        },
-        expression: "persondecreeBlock.optionnumber3"
-      }
-    }), _vm._v(" месяцев\n                                    "), _c('el-input', {
-      staticClass: "eld-eld-body-row-short",
-      attrs: {
-        "type": "number"
-      },
-      model: {
-        value: (persondecreeBlock.optionnumber4),
-        callback: function($$v) {
-          persondecreeBlock.optionnumber4 = $$v
-        },
-        expression: "persondecreeBlock.optionnumber4"
-      }
-    }), _vm._v(" дней\n                                ")], 1), _vm._v(" "), _c('div', [_vm._v("\n                                    для выплаты ежемесячной надбавки за выслугу лет —\n                                ")]), _vm._v(" "), _c('div', [_c('el-input', {
-      staticClass: "eld-eld-body-row-short",
-      attrs: {
-        "type": "number"
-      },
-      model: {
-        value: (persondecreeBlock.optionnumber5),
-        callback: function($$v) {
-          persondecreeBlock.optionnumber5 = $$v
-        },
-        expression: "persondecreeBlock.optionnumber5"
-      }
-    }), _vm._v(" лет\n                                    "), _c('el-input', {
-      staticClass: "eld-eld-body-row-short",
-      attrs: {
-        "type": "number"
-      },
-      model: {
-        value: (persondecreeBlock.optionnumber6),
-        callback: function($$v) {
-          persondecreeBlock.optionnumber6 = $$v
-        },
-        expression: "persondecreeBlock.optionnumber6"
-      }
-    }), _vm._v(" месяцев\n                                    "), _c('el-input', {
-      staticClass: "eld-eld-body-row-short",
-      attrs: {
-        "type": "number"
-      },
-      model: {
-        value: (persondecreeBlock.optionnumber7),
-        callback: function($$v) {
-          persondecreeBlock.optionnumber7 = $$v
-        },
-        expression: "persondecreeBlock.optionnumber7"
-      }
-    }), _vm._v(" дней\n                                ")], 1)], 1) : _vm._e(), _vm._v(" "), (persondecreeBlock.persondecreeblocksub == 4) ? _c('div', [_c('div', [_vm._v("\n                                    По состоянию на\n                                ")]), _vm._v(" "), _c('el-input', {
-      staticClass: "eld-eld-body-row-short",
-      attrs: {
-        "type": "date"
-      },
-      model: {
-        value: (persondecreeBlock.optiondate1String),
-        callback: function($$v) {
-          persondecreeBlock.optiondate1String = $$v
-        },
-        expression: "persondecreeBlock.optiondate1String"
-      }
-    }), _vm._v(" "), _c('div', [_vm._v("\n                                    Сколько\n                                ")]), _vm._v(" "), _c('div', [_c('el-input', {
-      staticClass: "eld-eld-body-row-short",
-      attrs: {
-        "type": "number"
-      },
-      model: {
-        value: (persondecreeBlock.optionnumber2),
-        callback: function($$v) {
-          persondecreeBlock.optionnumber2 = $$v
-        },
-        expression: "persondecreeBlock.optionnumber2"
-      }
-    }), _vm._v(" лет\n                                    "), _c('el-input', {
-      staticClass: "eld-eld-body-row-short",
-      attrs: {
-        "type": "number"
-      },
-      model: {
-        value: (persondecreeBlock.optionnumber3),
-        callback: function($$v) {
-          persondecreeBlock.optionnumber3 = $$v
-        },
-        expression: "persondecreeBlock.optionnumber3"
-      }
-    }), _vm._v(" месяцев\n                                    "), _c('el-input', {
-      staticClass: "eld-eld-body-row-short",
-      attrs: {
-        "type": "number"
-      },
-      model: {
-        value: (persondecreeBlock.optionnumber4),
-        callback: function($$v) {
-          persondecreeBlock.optionnumber4 = $$v
-        },
-        expression: "persondecreeBlock.optionnumber4"
-      }
-    }), _vm._v(" дней\n                                ")], 1)], 1) : _vm._e()]) : _vm._e(), _vm._v(" "), (persondecreeBlock.persondecreeblocksub == 5) ? _c('div', [_c('div', [_vm._v("\n                                По итогам\n                            ")]), _vm._v(" "), _c('el-input', {
-      staticClass: "eld-eld-body-row-long",
-      attrs: {
-        "placeholder": "летней экзаменационной сессии 2019-2020 ..."
-      },
-      model: {
-        value: (persondecreeBlock.optionstring3),
-        callback: function($$v) {
-          persondecreeBlock.optionstring3 = $$v
-        },
-        expression: "persondecreeBlock.optionstring3"
-      }
-    }), _vm._v(" "), _c('div', {
-      staticClass: "eld-eld-body-row-flex",
-      staticStyle: {
-        "margin-top": "10px"
-      }
-    }, [_c('div', {
-      staticClass: "eld-eld-body-row-mshort"
-    }, [_vm._v("\n                                    С какого числа\n                                "), _c('el-input', {
-      staticClass: "eld-eld-body-row-short",
-      attrs: {
-        "type": "date"
-      },
-      model: {
-        value: (persondecreeBlock.optiondate1String),
-        callback: function($$v) {
-          persondecreeBlock.optiondate1String = $$v
-        },
-        expression: "persondecreeBlock.optiondate1String"
-      }
-    })], 1), _vm._v(" "), _c('div', {
-      staticClass: "eld-eld-body-row-mshort",
-      staticStyle: {
-        "margin-left": "10px"
-      }
-    }, [_vm._v("\n                                    По какое \n                                "), _c('el-input', {
-      staticClass: "eld-eld-body-row-short",
-      attrs: {
-        "type": "date"
-      },
-      model: {
-        value: (persondecreeBlock.optiondate2String),
-        callback: function($$v) {
-          persondecreeBlock.optiondate2String = $$v
-        },
-        expression: "persondecreeBlock.optiondate2String"
-      }
-    })], 1)]), _vm._v(" "), _c('div', [_vm._v("\n                                За какие результаты\n                            ")]), _vm._v(" "), _c('el-input', {
-      staticClass: "eld-eld-body-row-long",
-      attrs: {
-        "placeholder": "хорошие/отличные"
-      },
-      model: {
-        value: (persondecreeBlock.optionstring4),
-        callback: function($$v) {
-          persondecreeBlock.optionstring4 = $$v
-        },
-        expression: "persondecreeBlock.optionstring4"
-      }
-    }), _vm._v(" "), _c('div', [_vm._v("\n                                Размер должностного оклада курсантам факультета (в процентах)\n                            ")]), _vm._v(" "), _c('el-input', {
-      staticClass: "eld-eld-body-row-short",
-      attrs: {
-        "type": "number"
-      },
-      model: {
-        value: (persondecreeBlock.optionnumber2),
-        callback: function($$v) {
-          persondecreeBlock.optionnumber2 = $$v
-        },
-        expression: "persondecreeBlock.optionnumber2"
-      }
-    }), _vm._v(" "), _c('div', [_vm._v("\n                                Основание\n                            ")]), _vm._v(" "), _c('el-input', {
-      staticClass: "eld-eld-body-row-long",
-      attrs: {
-        "placeholder": "рапорт ..."
-      },
-      model: {
-        value: (persondecreeBlock.optionstring2),
-        callback: function($$v) {
-          persondecreeBlock.optionstring2 = $$v
-        },
-        expression: "persondecreeBlock.optionstring2"
-      }
     })], 1) : _vm._e(), _vm._v(" "), _c('div', [_c('br'), _vm._v(" "), _c('el-button', {
       attrs: {
         "type": "primary",
@@ -34465,9 +34529,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           _vm.addPersonblockelement(persondecreeBlock)
         }
       }
-    }, [_vm._v("Сформировать пункт приказа")])], 1), _vm._v(" "), _c('div', {
+    }, [_vm._v("Сформировать пункт приказа")])], 1)], 1) : _vm._e(), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', {
       staticClass: "persondecreeoperation-part-list-title"
-    }, [_vm._v("\n                             Проект приказа\n                            ")]), _vm._v(" "), _c('div', [(persondecreeBlock.index != null && persondecreeBlock.index != 0) ? _c('span', [_vm._v(_vm._s(persondecreeBlock.index) + ".")]) : _vm._e(), _vm._v(" УСТАНОВИТЬ:\n                            ")]), _vm._v(" "), _vm._l((persondecreeBlock.persondecreeblocksubs), function(persondecreeblocksub) {
+    }, [_vm._v("\n                            Проект приказа\n                        ")]) : _vm._e(), _vm._v(" "), _c('div', [(persondecreeBlock.index != null && persondecreeBlock.index != 0) ? _c('span', [_vm._v(_vm._s(persondecreeBlock.index) + ".")]) : _vm._e(), _vm._v(" УСТАНОВИТЬ:\n                        ")]), _vm._v(" "), _vm._l((persondecreeBlock.persondecreeblocksubs), function(persondecreeblocksub) {
       return (persondecreeblocksub.persondecreeblock == persondecreeBlock.id && persondecreeblocksub.parentpersondecreeblocksub == 0) ? _c('div', {
         staticClass: "persondecreeoperation-part-list-element"
       }, [_c('div', [_c('div', {
@@ -34476,30 +34540,30 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         attrs: {
           "if": "persondecreeBlock.index != null && persondecreeBlock.index != 0 && persondecreeblocksub.index != 0"
         }
-      }, [_vm._v(_vm._s(persondecreeBlock.index) + "." + _vm._s(persondecreeblocksub.index) + ".")]), _vm._v("\n                                        " + _vm._s(_vm.provideSetSubBlockText(persondecreeblocksub, persondecreeBlock)) + "\n                                    ")]), _vm._v(" "), _vm._l((_vm.persondecreeOperations), function(decreeoperation) {
+      }, [_vm._v(_vm._s(persondecreeBlock.index) + "." + _vm._s(persondecreeblocksub.index) + ".")]), _vm._v("\n                                    " + _vm._s(_vm.provideSetSubBlockText(persondecreeblocksub, persondecreeBlock)) + "\n                                ")]), _vm._v(" "), _vm._l((_vm.persondecreeOperations), function(decreeoperation) {
         return (decreeoperation.persondecreeblocksub == persondecreeblocksub.id) ? _c('div', {
           staticClass: "persondecreeoperation-part-list-element persondecreeoperation-part-list-element-margin-big"
         }, [_c('div', [(decreeoperation.persondecreeblocksubtype != null && decreeoperation.persondecreeblocksubtype == 1) ? _c('div', {
           staticClass: "persondecreeoperation-part-list-element-margin-big"
         }, [_c('div', {
           staticClass: "persondecreeoperation-part-list-element-indent"
-        }, [(decreeoperation.personobject.actualRank != null) ? _c('span', [_vm._v(_vm._s(decreeoperation.personobject.actualRank.name3) + " ")]) : _vm._e(), _vm._v("\n                                                    " + _vm._s(decreeoperation.personobject.surname3) + " " + _vm._s(decreeoperation.personobject.name3) + "\n                                                    " + _vm._s(decreeoperation.personobject.fathername3) + _vm._s(_vm.commaspaceifnotnull(decreeoperation.personobject.positiontree3)) + " " + _vm._s(decreeoperation.personobject.positiontree3) + ",\n                                                    по состоянию на " + _vm._s(_vm.printDateDocument(decreeoperation.optiondate1)) + " —\n                                                    " + _vm._s(decreeoperation.optionnumber2) + " " + _vm._s(_vm.getYearString(decreeoperation.optionnumber2)) + "\n                                                    " + _vm._s(decreeoperation.optionnumber3) + " " + _vm._s(_vm.getMonthString(decreeoperation.optionnumber3)) + "\n                                                    " + _vm._s(decreeoperation.optionnumber4) + " " + _vm._s(_vm.getDayString(decreeoperation.optionnumber4)) + ".\n                                                ")])]) : _vm._e(), _vm._v(" "), (decreeoperation.persondecreeblocksubtype != null && decreeoperation.persondecreeblocksubtype == 2) ? _c('div', {
+        }, [(decreeoperation.personobject.actualRank != null) ? _c('span', [_vm._v(_vm._s(decreeoperation.personobject.actualRank.name3) + " ")]) : _vm._e(), _vm._v("\n                                                " + _vm._s(decreeoperation.personobject.surname3) + " " + _vm._s(decreeoperation.personobject.name3) + "\n                                                " + _vm._s(decreeoperation.personobject.fathername3) + _vm._s(_vm.commaspaceifnotnull(decreeoperation.personobject.positiontree3)) + " " + _vm._s(decreeoperation.personobject.positiontree3) + ",\n                                                по состоянию на " + _vm._s(_vm.printDateDocument(decreeoperation.optiondate1)) + " —\n                                                " + _vm._s(decreeoperation.optionnumber2) + " " + _vm._s(_vm.getYearString(decreeoperation.optionnumber2)) + "\n                                                " + _vm._s(decreeoperation.optionnumber3) + " " + _vm._s(_vm.getMonthString(decreeoperation.optionnumber3)) + "\n                                                " + _vm._s(decreeoperation.optionnumber4) + " " + _vm._s(_vm.getDayString(decreeoperation.optionnumber4)) + ".\n                                            ")])]) : _vm._e(), _vm._v(" "), (decreeoperation.persondecreeblocksubtype != null && decreeoperation.persondecreeblocksubtype == 2) ? _c('div', {
           staticClass: "persondecreeoperation-part-list-element-margin-big"
         }, [_c('div', {
           staticClass: "persondecreeoperation-part-list-element-indent persondecreeoperation-part-list-element-margin-small"
-        }, [(decreeoperation.personobject.actualRank != null) ? _c('span', [_vm._v(_vm._s(decreeoperation.personobject.actualRank.name3) + " ")]) : _vm._e(), _vm._v("\n                                                    " + _vm._s(decreeoperation.personobject.surname3) + " " + _vm._s(decreeoperation.personobject.name3) + "\n                                                    " + _vm._s(decreeoperation.personobject.fathername3) + _vm._s(_vm.commaspaceifnotnull(decreeoperation.personobject.positiontree3)) + " " + _vm._s(decreeoperation.personobject.positiontree3) + ".\n                                                ")]), _vm._v(" "), _c('div', [_vm._v("\n                                                    Основание: " + _vm._s(decreeoperation.optionstring2) + ".\n                                                ")])]) : _vm._e(), _vm._v(" "), (decreeoperation.persondecreeblocksubtype != null && decreeoperation.persondecreeblocksubtype == 3) ? _c('div', {
+        }, [(decreeoperation.personobject.actualRank != null) ? _c('span', [_vm._v(_vm._s(decreeoperation.personobject.actualRank.name3) + " ")]) : _vm._e(), _vm._v("\n                                                " + _vm._s(decreeoperation.personobject.surname3) + " " + _vm._s(decreeoperation.personobject.name3) + "\n                                                " + _vm._s(decreeoperation.personobject.fathername3) + _vm._s(_vm.commaspaceifnotnull(decreeoperation.personobject.positiontree3)) + " " + _vm._s(decreeoperation.personobject.positiontree3) + ".\n                                            ")]), _vm._v(" "), _c('div', [_vm._v("\n                                                Основание: " + _vm._s(decreeoperation.optionstring2) + ".\n                                            ")])]) : _vm._e(), _vm._v(" "), (decreeoperation.persondecreeblocksubtype != null && decreeoperation.persondecreeblocksubtype == 3) ? _c('div', {
           staticClass: "persondecreeoperation-part-list-element-margin-big"
         }, [_c('div', {
           staticClass: "persondecreeoperation-part-list-element-indent"
-        }, [(decreeoperation.personobject.actualRank != null) ? _c('span', [_vm._v(_vm._s(decreeoperation.personobject.actualRank.name3) + " ")]) : _vm._e(), _vm._v("\n                                                    " + _vm._s(decreeoperation.personobject.surname3) + " " + _vm._s(decreeoperation.personobject.name3) + "\n                                                    " + _vm._s(decreeoperation.personobject.fathername3) + _vm._s(_vm.commaspaceifnotnull(decreeoperation.personobject.positiontree3)) + " " + _vm._s(decreeoperation.personobject.positiontree3) + ",\n                                                    по состоянию на " + _vm._s(_vm.printDateDocument(decreeoperation.optiondate1)) + ":\n                                                ")]), _vm._v(" "), (decreeoperation.optionnumber2 != null || decreeoperation.optionnumber3 != null || decreeoperation.optionnumber4 != null) ? _c('div', {
+        }, [(decreeoperation.personobject.actualRank != null) ? _c('span', [_vm._v(_vm._s(decreeoperation.personobject.actualRank.name3) + " ")]) : _vm._e(), _vm._v("\n                                                " + _vm._s(decreeoperation.personobject.surname3) + " " + _vm._s(decreeoperation.personobject.name3) + "\n                                                " + _vm._s(decreeoperation.personobject.fathername3) + _vm._s(_vm.commaspaceifnotnull(decreeoperation.personobject.positiontree3)) + " " + _vm._s(decreeoperation.personobject.positiontree3) + ",\n                                                по состоянию на " + _vm._s(_vm.printDateDocument(decreeoperation.optiondate1)) + ":\n                                            ")]), _vm._v(" "), (decreeoperation.optionnumber2 != null || decreeoperation.optionnumber3 != null || decreeoperation.optionnumber4 != null) ? _c('div', {
           staticClass: "persondecreeoperation-part-list-element-indent"
-        }, [_vm._v("\n                                                    в отрасли —\n                                                    "), (decreeoperation.optionnumber2 != null) ? _c('span', [_vm._v(_vm._s(decreeoperation.optionnumber2) + " " + _vm._s(_vm.getYearString(decreeoperation.optionnumber2)))]) : _vm._e(), _vm._v(" "), (decreeoperation.optionnumber3 != null) ? _c('span', [_vm._v(_vm._s(decreeoperation.optionnumber3) + " " + _vm._s(_vm.getMonthString(decreeoperation.optionnumber3)))]) : _vm._e(), _vm._v(" "), (decreeoperation.optionnumber4 != null) ? _c('span', [_vm._v(_vm._s(decreeoperation.optionnumber4) + " " + _vm._s(_vm.getDayString(decreeoperation.optionnumber4)))]) : _vm._e()]) : _vm._e(), _vm._v(" "), (decreeoperation.optionnumber5 != null || decreeoperation.optionnumber6 != null || decreeoperation.optionnumber7 != null) ? _c('div', {
+        }, [_vm._v("\n                                                в отрасли —\n                                                "), (decreeoperation.optionnumber2 != null) ? _c('span', [_vm._v(_vm._s(decreeoperation.optionnumber2) + " " + _vm._s(_vm.getYearString(decreeoperation.optionnumber2)))]) : _vm._e(), _vm._v(" "), (decreeoperation.optionnumber3 != null) ? _c('span', [_vm._v(_vm._s(decreeoperation.optionnumber3) + " " + _vm._s(_vm.getMonthString(decreeoperation.optionnumber3)))]) : _vm._e(), _vm._v(" "), (decreeoperation.optionnumber4 != null) ? _c('span', [_vm._v(_vm._s(decreeoperation.optionnumber4) + " " + _vm._s(_vm.getDayString(decreeoperation.optionnumber4)))]) : _vm._e()]) : _vm._e(), _vm._v(" "), (decreeoperation.optionnumber5 != null || decreeoperation.optionnumber6 != null || decreeoperation.optionnumber7 != null) ? _c('div', {
           staticClass: "persondecreeoperation-part-list-element-indent"
-        }, [_vm._v("\n                                                    для выплаты ежемесячной надбавки за выслугу лет —\n                                                    "), (decreeoperation.optionnumber5 != null) ? _c('span', [_vm._v(_vm._s(decreeoperation.optionnumber5) + " " + _vm._s(_vm.getYearString(decreeoperation.optionnumber5)))]) : _vm._e(), _vm._v(" "), (decreeoperation.optionnumber6 != null) ? _c('span', [_vm._v(_vm._s(decreeoperation.optionnumber6) + " " + _vm._s(_vm.getMonthString(decreeoperation.optionnumber6)))]) : _vm._e(), _vm._v(" "), (decreeoperation.optionnumber7 != null) ? _c('span', [_vm._v(_vm._s(decreeoperation.optionnumber7) + " " + _vm._s(_vm.getDayString(decreeoperation.optionnumber7)))]) : _vm._e()]) : _vm._e()]) : _vm._e(), _vm._v(" "), (decreeoperation.persondecreeblocksubtype != null && decreeoperation.persondecreeblocksubtype == 4) ? _c('div', {
+        }, [_vm._v("\n                                                для выплаты ежемесячной надбавки за выслугу лет —\n                                                "), (decreeoperation.optionnumber5 != null) ? _c('span', [_vm._v(_vm._s(decreeoperation.optionnumber5) + " " + _vm._s(_vm.getYearString(decreeoperation.optionnumber5)))]) : _vm._e(), _vm._v(" "), (decreeoperation.optionnumber6 != null) ? _c('span', [_vm._v(_vm._s(decreeoperation.optionnumber6) + " " + _vm._s(_vm.getMonthString(decreeoperation.optionnumber6)))]) : _vm._e(), _vm._v(" "), (decreeoperation.optionnumber7 != null) ? _c('span', [_vm._v(_vm._s(decreeoperation.optionnumber7) + " " + _vm._s(_vm.getDayString(decreeoperation.optionnumber7)))]) : _vm._e()]) : _vm._e()]) : _vm._e(), _vm._v(" "), (decreeoperation.persondecreeblocksubtype != null && decreeoperation.persondecreeblocksubtype == 4) ? _c('div', {
           staticClass: "persondecreeoperation-part-list-element-margin-big"
         }, [_c('div', {
           staticClass: "persondecreeoperation-part-list-element-indent"
-        }, [(decreeoperation.personobject.actualRank != null) ? _c('span', [_vm._v(_vm._s(decreeoperation.personobject.actualRank.name3) + " ")]) : _vm._e(), _vm._v("\n                                                    " + _vm._s(decreeoperation.personobject.surname3) + " " + _vm._s(decreeoperation.personobject.name3) + "\n                                                    " + _vm._s(decreeoperation.personobject.fathername3) + _vm._s(_vm.commaspaceifnotnull(decreeoperation.personobject.positiontree3)) + " " + _vm._s(decreeoperation.personobject.positiontree3) + ",\n                                                    по состоянию на " + _vm._s(_vm.printDateDocument(decreeoperation.optiondate1)) + " —\n                                                    " + _vm._s(decreeoperation.optionnumber2) + " " + _vm._s(_vm.getYearString(decreeoperation.optionnumber2)) + "\n                                                    " + _vm._s(decreeoperation.optionnumber3) + " " + _vm._s(_vm.getMonthString(decreeoperation.optionnumber3)) + "\n                                                    " + _vm._s(decreeoperation.optionnumber4) + " " + _vm._s(_vm.getDayString(decreeoperation.optionnumber4)) + ".\n                                                ")])]) : _vm._e()]), _vm._v(" "), _c('div', [_c('div', [_c('div', [_c('el-button', {
+        }, [(decreeoperation.personobject.actualRank != null) ? _c('span', [_vm._v(_vm._s(decreeoperation.personobject.actualRank.name3) + " ")]) : _vm._e(), _vm._v("\n                                                " + _vm._s(decreeoperation.personobject.surname3) + " " + _vm._s(decreeoperation.personobject.name3) + "\n                                                " + _vm._s(decreeoperation.personobject.fathername3) + _vm._s(_vm.commaspaceifnotnull(decreeoperation.personobject.positiontree3)) + " " + _vm._s(decreeoperation.personobject.positiontree3) + ",\n                                                по состоянию на " + _vm._s(_vm.printDateDocument(decreeoperation.optiondate1)) + " —\n                                                " + _vm._s(decreeoperation.optionnumber2) + " " + _vm._s(_vm.getYearString(decreeoperation.optionnumber2)) + "\n                                                " + _vm._s(decreeoperation.optionnumber3) + " " + _vm._s(_vm.getMonthString(decreeoperation.optionnumber3)) + "\n                                                " + _vm._s(decreeoperation.optionnumber4) + " " + _vm._s(_vm.getDayString(decreeoperation.optionnumber4)) + ".\n                                            ")])]) : _vm._e()]), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_c('div', [_c('div', [_c('el-button', {
           attrs: {
             "size": "mini",
             "type": "warning"
@@ -34509,19 +34573,19 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
               _vm.removePersondecreeoperation(decreeoperation)
             }
           }
-        }, [_vm._v("Удалить")])], 1)])])]) : _vm._e()
+        }, [_vm._v("Удалить")])], 1)])]) : _vm._e()]) : _vm._e()
       }), _vm._v(" "), _vm._l((persondecreeBlock.persondecreeblocksubs), function(persondecreeblocksubsub) {
-        return (persondecreeblocksubsub.parentpersondecreeblocksub == persondecreeblocksub.id) ? _c('div', [_c('div', [_vm._v("\n                                            " + _vm._s(_vm.printDateDocument(persondecreeblocksubsub.subvaluedate1)) + " по " + _vm._s(_vm.printDateDocument(persondecreeblocksubsub.subvaluedate2)) + " :\n                                        ")]), _vm._v(" "), _c('div', _vm._l((persondecreeBlock.persondecreeblocksubs), function(persondecreeblocksubsubsub) {
+        return (persondecreeblocksubsub.parentpersondecreeblocksub == persondecreeblocksub.id) ? _c('div', [_c('div', [_vm._v("\n                                        " + _vm._s(_vm.printDateDocument(persondecreeblocksubsub.subvaluedate1)) + " по " + _vm._s(_vm.printDateDocument(persondecreeblocksubsub.subvaluedate2)) + " :\n                                    ")]), _vm._v(" "), _c('div', _vm._l((persondecreeBlock.persondecreeblocksubs), function(persondecreeblocksubsubsub) {
           return (persondecreeblocksubsubsub.parentpersondecreeblocksub == persondecreeblocksubsub.id) ? _c('div', {
             staticClass: "persondecreeoperation-part-list-element-indent"
           }, [_c('div', {
             staticClass: "persondecreeoperation-part-list-element-indent persondecreeoperation-part-list-element-margin"
-          }, [_c('span', [_vm._v("  за \"" + _vm._s(persondecreeblocksubsubsub.subvaluestring1) + "\" результаты в учёбе в размере " + _vm._s(persondecreeblocksubsubsub.subvaluenumber1) + " % должностного оклада \n                                                        курсантам факультетов предупреждения и ликвидации чрезвычайных ситуаций и техносферной безопасности: ")])]), _vm._v(" "), _vm._l((_vm.persondecreeOperations), function(decreeoperation) {
+          }, [_c('span', [_vm._v("\n                                                    за \"" + _vm._s(persondecreeblocksubsubsub.subvaluestring1) + "\" результаты в учёбе в размере " + _vm._s(persondecreeblocksubsubsub.subvaluenumber1) + " % должностного оклада\n                                                    курсантам факультетов предупреждения и ликвидации чрезвычайных ситуаций и техносферной безопасности:\n                                                ")])]), _vm._v(" "), _vm._l((_vm.persondecreeOperations), function(decreeoperation) {
             return (decreeoperation.persondecreeblocksub == persondecreeblocksubsubsub.id) ? _c('div', {
               staticClass: "persondecreeoperation-part-list-element persondecreeoperation-part-list-element-margin-big"
             }, [_c('div', {
               staticClass: "persondecreeoperation-part-list-element-indent"
-            }, [_vm._v("\n                                                        " + _vm._s(decreeoperation.personobject.surname3) + " " + _vm._s(decreeoperation.personobject.name3) + "\n                                                        " + _vm._s(decreeoperation.personobject.fathername3) + _vm._s(_vm.commaspaceifnotnull(decreeoperation.personobject.positiontree3)) + " " + _vm._s(decreeoperation.personobject.positiontree3) + "\n                                                    ")]), _vm._v(" "), _c('div', [_c('div', [_c('el-button', {
+            }, [_vm._v("\n                                                    " + _vm._s(decreeoperation.personobject.surname3) + " " + _vm._s(decreeoperation.personobject.name3) + "\n                                                    " + _vm._s(decreeoperation.personobject.fathername3) + _vm._s(_vm.commaspaceifnotnull(decreeoperation.personobject.positiontree3)) + " " + _vm._s(decreeoperation.personobject.positiontree3) + "\n                                                ")]), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_c('div', [_c('el-button', {
               attrs: {
                 "size": "mini",
                 "type": "warning"
@@ -34531,11 +34595,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
                   _vm.removePersondecreeoperation(decreeoperation)
                 }
               }
-            }, [_vm._v("Удалить")])], 1)])]) : _vm._e()
+            }, [_vm._v("Удалить")])], 1)]) : _vm._e()]) : _vm._e()
           })], 2) : _vm._e()
         }))]) : _vm._e()
       })], 2)]) : _vm._e()
-    }), _vm._v(" "), _c('div', [_c('el-button', {
+    }), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_c('el-button', {
       attrs: {
         "type": "danger"
       },
@@ -34544,11 +34608,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           _vm.deletePersondecreeblock(persondecreeBlock)
         }
       }
-    }, [_vm._v("Удалить блок")])], 1)], 2) : _vm._e(), _vm._v(" "), (persondecreeBlock.persondecreeblocktype == 11) ? _c('div', [_c('div', [_c('div', {
+    }, [_vm._v("Удалить блок")])], 1) : _vm._e()], 2) : _vm._e(), _vm._v(" "), (persondecreeBlock.persondecreeblocktype == 11) ? _c('div', [(_vm.persondecreeSigned != 1) ? _c('div', [_c('div', [_c('div', {
       staticStyle: {
         "margin-top": "10px"
       }
-    }, [_vm._v("\n                                С кем\n                            ")]), _vm._v(" "), _c('div', {
+    }, [_vm._v("\n                                    С кем\n                                ")]), _vm._v(" "), _c('div', {
       staticStyle: {
         "margin-top": "10px"
       }
@@ -34573,7 +34637,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       staticClass: "eld-search-main"
     }, [_c('div', {
       staticClass: "eld-search-main-title"
-    }, [_vm._v("\n                                    Результаты поиска\n                                ")]), _vm._v(" "), _vm._l((persondecreeBlock.personssearch), function(person) {
+    }, [_vm._v("\n                                        Результаты поиска\n                                    ")]), _vm._v(" "), _vm._l((persondecreeBlock.personssearch), function(person) {
       return _c('div', {
         staticClass: "eld-search-element",
         on: {
@@ -34581,14 +34645,14 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
             _vm.selectPersonBlockNonAuto(person.id, persondecreeBlock)
           }
         }
-      }, [_c('div', [_vm._v("\n                                        " + _vm._s(person.surname) + " " + _vm._s(person.name) + " " + _vm._s(person.fathername) + "\n                                    ")]), _vm._v(" "), _c('div', [_vm._v("\n                                        " + _vm._s(person.positiontypestring) + "\n                                    ")]), _vm._v(" "), (_vm.hasPhotopreviewBlock(person.id, persondecreeBlock)) ? _c('div', [_c('img', {
+      }, [_c('div', [_vm._v("\n                                            " + _vm._s(person.surname) + " " + _vm._s(person.name) + " " + _vm._s(person.fathername) + "\n                                        ")]), _vm._v(" "), _c('div', [_vm._v("\n                                            " + _vm._s(person.positiontypestring) + "\n                                        ")]), _vm._v(" "), (_vm.hasPhotopreviewBlock(person.id, persondecreeBlock)) ? _c('div', [_c('img', {
         staticClass: "eld-search-element-image",
         attrs: {
           "src": _vm.getPhotopreviewBlock(person.id, persondecreeBlock).photo64
         }
-      })]) : _vm._e(), _vm._v(" "), _c('div', [_c('div', [_vm._v("\n                                            " + _vm._s(person.structuretree) + "\n                                        ")])])])
+      })]) : _vm._e(), _vm._v(" "), _c('div', [_c('div', [_vm._v("\n                                                " + _vm._s(person.structuretree) + "\n                                            ")])])])
     })], 2) : _vm._e(), _vm._v(" "), (_vm.personFromStructure.length > 0) ? _c('div', _vm._l((_vm.personFromStructure), function(person) {
-      return _c('div', [_vm._v("\n                                    С кем – " + _vm._s(person.surname2 + " " + person.name2 + " " + person.fathername2) + "\n                                    "), _c('el-button', {
+      return _c('div', [_vm._v("\n                                        С кем – " + _vm._s(person.surname2 + " " + person.name2 + " " + person.fathername2) + "\n                                        "), _c('el-button', {
         attrs: {
           "size": "mini",
           "type": "warning"
@@ -34599,7 +34663,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           }
         }
       }, [_vm._v("Убрать")])], 1)
-    })) : _vm._e()]), _vm._v(" "), _c('div', [_vm._v("\n                            С какого числа\n                        ")]), _vm._v(" "), _c('el-input', {
+    })) : _vm._e()]), _vm._v(" "), _c('div', [_vm._v("\n                                С какого числа\n                            ")]), _vm._v(" "), _c('el-input', {
       staticClass: "eld-eld-body-row-short",
       attrs: {
         "type": "date"
@@ -34611,7 +34675,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         },
         expression: "persondecreeBlock.optiondate1String"
       }
-    }), _vm._v(" "), _c('div', [_vm._v("\n                            По какое число\n                        ")]), _vm._v(" "), _c('el-input', {
+    }), _vm._v(" "), _c('div', [_vm._v("\n                                По какое число\n                            ")]), _vm._v(" "), _c('el-input', {
       staticClass: "eld-eld-body-row-short",
       attrs: {
         "type": "date"
@@ -34633,14 +34697,14 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           _vm.addPersonblockelement(persondecreeBlock)
         }
       }
-    }, [_vm._v("Сформировать пункт приказа")])], 1), _vm._v(" "), _c('div', {
+    }, [_vm._v("Сформировать пункт приказа")])], 1)], 1) : _vm._e(), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', {
       staticClass: "persondecreeoperation-part-list-title"
-    }, [_vm._v("\n                            Проект приказа\n                        ")]), _vm._v(" "), _c('div', [(persondecreeBlock.index != null && persondecreeBlock.index != 0) ? _c('span', [_vm._v(_vm._s(persondecreeBlock.index) + ".")]) : _vm._e(), _vm._v(" ЗАКЛЮЧИТЬ КОНТРАКТ"), (_vm.countOperationsInBlock(persondecreeBlock.id) > 1) ? _c('span', [_vm._v("Ы")]) : _vm._e(), _vm._v(" С:\n                        ")]), _vm._v(" "), _c('div', [_vm._l((_vm.persondecreeOperations), function(decreeoperation) {
+    }, [_vm._v("\n                            Проект приказа\n                        ")]) : _vm._e(), _vm._v(" "), _c('div', [(persondecreeBlock.index != null && persondecreeBlock.index != 0) ? _c('span', [_vm._v(_vm._s(persondecreeBlock.index) + ".")]) : _vm._e(), _vm._v(" ЗАКЛЮЧИТЬ КОНТРАКТ"), (_vm.countOperationsInBlock(persondecreeBlock.id) > 1) ? _c('span', [_vm._v("Ы")]) : _vm._e(), _vm._v(" С:\n                        ")]), _vm._v(" "), _c('div', [_vm._l((_vm.persondecreeOperations), function(decreeoperation) {
       return (decreeoperation.persondecreeblock == persondecreeBlock.id) ? _c('div', {
         staticClass: "persondecreeoperation-part-list-element"
       }, [_c('div', [_c('div', {
         staticClass: "persondecreeoperation-part-list-element-indent persondecreeoperation-part-list-element-margin-big"
-      }, [(decreeoperation.personobject.actualRank != null) ? _c('span', [_vm._v(_vm._s(decreeoperation.personobject.actualRank.name5) + " ")]) : _vm._e(), _vm._v("\n                                        " + _vm._s(decreeoperation.personobject.surname5) + " " + _vm._s(decreeoperation.personobject.name5) + "\n                                        " + _vm._s(decreeoperation.personobject.fathername5) + _vm._s(_vm.commaspaceifnotnull(decreeoperation.personobject.positiontree5)) + " " + _vm._s(decreeoperation.personobject.positiontree5) + ",\n                                        сроком на "), (decreeoperation.optionnumber3 != null && decreeoperation.optionnumber3 != 0) ? _c('span', [_vm._v(_vm._s(decreeoperation.optionnumber3) + " " + _vm._s(_vm.getYearString(decreeoperation.optionnumber3)))]) : _vm._e(), _vm._v(" "), (decreeoperation.optionnumber4 != null && decreeoperation.optionnumber4 != 0) ? _c('span', [_vm._v(_vm._s(decreeoperation.optionnumber4) + " " + _vm._s(_vm.getMonthString(decreeoperation.optionnumber4)))]) : _vm._e(), _vm._v(" "), (decreeoperation.optionnumber5 != null && decreeoperation.optionnumber5 != 0) ? _c('span', [_vm._v(_vm._s(decreeoperation.optionnumber5) + " " + _vm._s(_vm.getDayString(decreeoperation.optionnumber5)))]) : _vm._e(), _vm._v(" "), (decreeoperation.optiondate1 != null) ? _c('span', [_vm._v(" с " + _vm._s(_vm.printDateDocument(decreeoperation.optiondate1)))]) : _vm._e(), _vm._v(" "), (decreeoperation.optiondate2 != null) ? _c('span', [_vm._v(" по " + _vm._s(_vm.printDateDocument(decreeoperation.optiondate2)) + ".")]) : _vm._e(), _vm._v(" "), (decreeoperation.optionnumber2 != null && decreeoperation.optionnumber2 > 0) ? _c('span', [_vm._v(" Выплатить единовременное денежное вознаграждение в размере " + _vm._s(decreeoperation.optionnumber2) + " базовых окладов;")]) : _vm._e()])]), _vm._v(" "), _c('div', [_c('div', [_c('div', [_c('el-button', {
+      }, [(decreeoperation.personobject.actualRank != null) ? _c('span', [_vm._v(_vm._s(decreeoperation.personobject.actualRank.name5) + " ")]) : _vm._e(), _vm._v("\n                                        " + _vm._s(decreeoperation.personobject.surname5) + " " + _vm._s(decreeoperation.personobject.name5) + "\n                                        " + _vm._s(decreeoperation.personobject.fathername5) + _vm._s(_vm.commaspaceifnotnull(decreeoperation.personobject.positiontree5)) + " " + _vm._s(decreeoperation.personobject.positiontree5) + ",\n                                        сроком на "), (decreeoperation.optionnumber3 != null && decreeoperation.optionnumber3 != 0) ? _c('span', [_vm._v(_vm._s(decreeoperation.optionnumber3) + " " + _vm._s(_vm.getYearString(decreeoperation.optionnumber3)))]) : _vm._e(), _vm._v(" "), (decreeoperation.optionnumber4 != null && decreeoperation.optionnumber4 != 0) ? _c('span', [_vm._v(_vm._s(decreeoperation.optionnumber4) + " " + _vm._s(_vm.getMonthString(decreeoperation.optionnumber4)))]) : _vm._e(), _vm._v(" "), (decreeoperation.optionnumber5 != null && decreeoperation.optionnumber5 != 0) ? _c('span', [_vm._v(_vm._s(decreeoperation.optionnumber5) + " " + _vm._s(_vm.getDayString(decreeoperation.optionnumber5)))]) : _vm._e(), _vm._v(" "), (decreeoperation.optiondate1 != null) ? _c('span', [_vm._v(" с " + _vm._s(_vm.printDateDocument(decreeoperation.optiondate1)))]) : _vm._e(), _vm._v(" "), (decreeoperation.optiondate2 != null) ? _c('span', [_vm._v(" по " + _vm._s(_vm.printDateDocument(decreeoperation.optiondate2)) + ".")]) : _vm._e(), _vm._v(" "), (decreeoperation.optionnumber2 != null && decreeoperation.optionnumber2 > 0) ? _c('span', [_vm._v(" Выплатить единовременное денежное вознаграждение в размере " + _vm._s(decreeoperation.optionnumber2) + " базовых окладов;")]) : _vm._e()])]), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_c('div', [_c('div', [_c('el-button', {
         attrs: {
           "size": "mini",
           "type": "warning"
@@ -34650,8 +34714,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
             _vm.removePersondecreeoperation(decreeoperation)
           }
         }
-      }, [_vm._v("Удалить")])], 1)])])]) : _vm._e()
-    }), _vm._v(" "), _c('br')], 2), _vm._v(" "), _c('div', [_c('el-button', {
+      }, [_vm._v("Удалить")])], 1)])]) : _vm._e()]) : _vm._e()
+    }), _vm._v(" "), _c('br')], 2), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_c('el-button', {
       attrs: {
         "type": "danger"
       },
@@ -34660,11 +34724,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           _vm.deletePersondecreeblock(persondecreeBlock)
         }
       }
-    }, [_vm._v("Удалить блок")])], 1)], 1) : _vm._e(), _vm._v(" "), (persondecreeBlock.persondecreeblocktype == 12) ? _c('div', [_c('div', [_c('div', {
+    }, [_vm._v("Удалить блок")])], 1) : _vm._e()]) : _vm._e(), _vm._v(" "), (persondecreeBlock.persondecreeblocktype == 12) ? _c('div', [(_vm.persondecreeSigned != 1) ? _c('div', [_c('div', [_c('div', {
       staticStyle: {
         "margin-top": "10px"
       }
-    }, [_vm._v("\n                                С кем\n                            ")]), _vm._v(" "), _c('div', {
+    }, [_vm._v("\n                                    С кем\n                                ")]), _vm._v(" "), _c('div', {
       staticStyle: {
         "margin-top": "10px"
       }
@@ -34689,7 +34753,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       staticClass: "eld-search-main"
     }, [_c('div', {
       staticClass: "eld-search-main-title"
-    }, [_vm._v("\n                                    Результаты поиска\n                                ")]), _vm._v(" "), _vm._l((persondecreeBlock.personssearch), function(person) {
+    }, [_vm._v("\n                                        Результаты поиска\n                                    ")]), _vm._v(" "), _vm._l((persondecreeBlock.personssearch), function(person) {
       return _c('div', {
         staticClass: "eld-search-element",
         on: {
@@ -34697,14 +34761,14 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
             _vm.selectPersonBlockNonAuto(person.id, persondecreeBlock)
           }
         }
-      }, [_c('div', [_vm._v("\n                                        " + _vm._s(person.surname) + " " + _vm._s(person.name) + " " + _vm._s(person.fathername) + "\n                                    ")]), _vm._v(" "), _c('div', [_vm._v("\n                                        " + _vm._s(person.positiontypestring) + "\n                                    ")]), _vm._v(" "), (_vm.hasPhotopreviewBlock(person.id, persondecreeBlock)) ? _c('div', [_c('img', {
+      }, [_c('div', [_vm._v("\n                                            " + _vm._s(person.surname) + " " + _vm._s(person.name) + " " + _vm._s(person.fathername) + "\n                                        ")]), _vm._v(" "), _c('div', [_vm._v("\n                                            " + _vm._s(person.positiontypestring) + "\n                                        ")]), _vm._v(" "), (_vm.hasPhotopreviewBlock(person.id, persondecreeBlock)) ? _c('div', [_c('img', {
         staticClass: "eld-search-element-image",
         attrs: {
           "src": _vm.getPhotopreviewBlock(person.id, persondecreeBlock).photo64
         }
-      })]) : _vm._e(), _vm._v(" "), _c('div', [_c('div', [_vm._v("\n                                            " + _vm._s(person.structuretree) + "\n                                        ")])])])
+      })]) : _vm._e(), _vm._v(" "), _c('div', [_c('div', [_vm._v("\n                                                " + _vm._s(person.structuretree) + "\n                                            ")])])])
     })], 2) : _vm._e(), _vm._v(" "), (_vm.personFromStructure.length > 0) ? _c('div', _vm._l((_vm.personFromStructure), function(person) {
-      return _c('div', [_vm._v("\n                                    С кем – " + _vm._s(person.surname2 + " " + person.name2 + " " + person.fathername2) + "\n                                    "), _c('el-button', {
+      return _c('div', [_vm._v("\n                                        С кем – " + _vm._s(person.surname2 + " " + person.name2 + " " + person.fathername2) + "\n                                        "), _c('el-button', {
         attrs: {
           "size": "mini",
           "type": "warning"
@@ -34715,7 +34779,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           }
         }
       }, [_vm._v("Убрать")])], 1)
-    })) : _vm._e()]), _vm._v(" "), _c('div', [_vm._v("\n                            С какого числа\n                        ")]), _vm._v(" "), _c('el-input', {
+    })) : _vm._e()]), _vm._v(" "), _c('div', [_vm._v("\n                                С какого числа\n                            ")]), _vm._v(" "), _c('el-input', {
       staticClass: "eld-eld-body-row-short",
       attrs: {
         "type": "date"
@@ -34727,7 +34791,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         },
         expression: "persondecreeBlock.optiondate1String"
       }
-    }), _vm._v(" "), _c('div', [_vm._v("\n                            По какое число\n                        ")]), _vm._v(" "), _c('el-input', {
+    }), _vm._v(" "), _c('div', [_vm._v("\n                                По какое число\n                            ")]), _vm._v(" "), _c('el-input', {
       staticClass: "eld-eld-body-row-short",
       attrs: {
         "type": "date"
@@ -34749,14 +34813,14 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           _vm.addPersonblockelement(persondecreeBlock)
         }
       }
-    }, [_vm._v("Сформировать пункт приказа")])], 1), _vm._v(" "), _c('div', {
+    }, [_vm._v("Сформировать пункт приказа")])], 1)], 1) : _vm._e(), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', {
       staticClass: "persondecreeoperation-part-list-title"
-    }, [_vm._v("\n                            Проект приказа\n                        ")]), _vm._v(" "), _c('div', [(persondecreeBlock.index != null && persondecreeBlock.index != 0) ? _c('span', [_vm._v(_vm._s(persondecreeBlock.index) + ".")]) : _vm._e(), _vm._v(" ПРОДЛИТЬ КОНТРАКТ"), (_vm.countOperationsInBlock(persondecreeBlock.id) > 1) ? _c('span', [_vm._v("Ы")]) : _vm._e(), _vm._v(" С:\n                        ")]), _vm._v(" "), _c('div', [_vm._l((_vm.persondecreeOperations), function(decreeoperation) {
+    }, [_vm._v("\n                            Проект приказа\n                        ")]) : _vm._e(), _vm._v(" "), _c('div', [(persondecreeBlock.index != null && persondecreeBlock.index != 0) ? _c('span', [_vm._v(_vm._s(persondecreeBlock.index) + ".")]) : _vm._e(), _vm._v(" ПРОДЛИТЬ КОНТРАКТ"), (_vm.countOperationsInBlock(persondecreeBlock.id) > 1) ? _c('span', [_vm._v("Ы")]) : _vm._e(), _vm._v(" С:\n                        ")]), _vm._v(" "), _c('div', [_vm._l((_vm.persondecreeOperations), function(decreeoperation) {
       return (decreeoperation.persondecreeblock == persondecreeBlock.id) ? _c('div', {
         staticClass: "persondecreeoperation-part-list-element"
       }, [_c('div', [_c('div', {
         staticClass: "persondecreeoperation-part-list-element-indent persondecreeoperation-part-list-element-margin-big"
-      }, [(decreeoperation.personobject.actualRank != null) ? _c('span', [_vm._v(_vm._s(decreeoperation.personobject.actualRank.name5) + " ")]) : _vm._e(), _vm._v("\n                                        " + _vm._s(decreeoperation.personobject.surname5) + " " + _vm._s(decreeoperation.personobject.name5) + "\n                                        " + _vm._s(decreeoperation.personobject.fathername5) + _vm._s(_vm.commaspaceifnotnull(decreeoperation.personobject.positiontree5)) + " " + _vm._s(decreeoperation.personobject.positiontree5) + ",\n                                        сроком на "), (decreeoperation.optionnumber3 != null && decreeoperation.optionnumber3 != 0) ? _c('span', [_vm._v(_vm._s(decreeoperation.optionnumber3) + " " + _vm._s(_vm.getYearString(decreeoperation.optionnumber3)))]) : _vm._e(), _vm._v(" "), (decreeoperation.optionnumber4 != null && decreeoperation.optionnumber4 != 0) ? _c('span', [_vm._v(_vm._s(decreeoperation.optionnumber4) + " " + _vm._s(_vm.getMonthString(decreeoperation.optionnumber4)))]) : _vm._e(), _vm._v(" "), (decreeoperation.optionnumber5 != null && decreeoperation.optionnumber5 != 0) ? _c('span', [_vm._v(_vm._s(decreeoperation.optionnumber5) + " " + _vm._s(_vm.getDayString(decreeoperation.optionnumber5)))]) : _vm._e(), _vm._v(" "), (decreeoperation.optiondate1 != null) ? _c('span', [_vm._v(" с " + _vm._s(_vm.printDateDocument(decreeoperation.optiondate1)))]) : _vm._e(), _vm._v(" "), (decreeoperation.optiondate2 != null) ? _c('span', [_vm._v(" по " + _vm._s(_vm.printDateDocument(decreeoperation.optiondate2)) + ".")]) : _vm._e(), _vm._v(" "), (decreeoperation.optionnumber2 != null && decreeoperation.optionnumber2 > 0) ? _c('span', [_vm._v(" Выплатить единовременное денежное вознаграждение в размере " + _vm._s(decreeoperation.optionnumber2) + " базовых окладов;")]) : _vm._e()])]), _vm._v(" "), _c('div', [_c('div', [_c('div', [_c('el-button', {
+      }, [(decreeoperation.personobject.actualRank != null) ? _c('span', [_vm._v(_vm._s(decreeoperation.personobject.actualRank.name5) + " ")]) : _vm._e(), _vm._v("\n                                        " + _vm._s(decreeoperation.personobject.surname5) + " " + _vm._s(decreeoperation.personobject.name5) + "\n                                        " + _vm._s(decreeoperation.personobject.fathername5) + _vm._s(_vm.commaspaceifnotnull(decreeoperation.personobject.positiontree5)) + " " + _vm._s(decreeoperation.personobject.positiontree5) + ",\n                                        сроком на "), (decreeoperation.optionnumber3 != null && decreeoperation.optionnumber3 != 0) ? _c('span', [_vm._v(_vm._s(decreeoperation.optionnumber3) + " " + _vm._s(_vm.getYearString(decreeoperation.optionnumber3)))]) : _vm._e(), _vm._v(" "), (decreeoperation.optionnumber4 != null && decreeoperation.optionnumber4 != 0) ? _c('span', [_vm._v(_vm._s(decreeoperation.optionnumber4) + " " + _vm._s(_vm.getMonthString(decreeoperation.optionnumber4)))]) : _vm._e(), _vm._v(" "), (decreeoperation.optionnumber5 != null && decreeoperation.optionnumber5 != 0) ? _c('span', [_vm._v(_vm._s(decreeoperation.optionnumber5) + " " + _vm._s(_vm.getDayString(decreeoperation.optionnumber5)))]) : _vm._e(), _vm._v(" "), (decreeoperation.optiondate1 != null) ? _c('span', [_vm._v(" с " + _vm._s(_vm.printDateDocument(decreeoperation.optiondate1)))]) : _vm._e(), _vm._v(" "), (decreeoperation.optiondate2 != null) ? _c('span', [_vm._v(" по " + _vm._s(_vm.printDateDocument(decreeoperation.optiondate2)) + ".")]) : _vm._e(), _vm._v(" "), (decreeoperation.optionnumber2 != null && decreeoperation.optionnumber2 > 0) ? _c('span', [_vm._v(" Выплатить единовременное денежное вознаграждение в размере " + _vm._s(decreeoperation.optionnumber2) + " базовых окладов;")]) : _vm._e()])]), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_c('div', [_c('div', [_c('el-button', {
         attrs: {
           "size": "mini",
           "type": "warning"
@@ -34766,8 +34830,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
             _vm.removePersondecreeoperation(decreeoperation)
           }
         }
-      }, [_vm._v("Удалить")])], 1)])])]) : _vm._e()
-    }), _vm._v(" "), _c('br')], 2), _vm._v(" "), _c('div', [_c('el-button', {
+      }, [_vm._v("Удалить")])], 1)])]) : _vm._e()]) : _vm._e()
+    }), _vm._v(" "), _c('br')], 2), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_c('el-button', {
       attrs: {
         "type": "danger"
       },
@@ -34776,7 +34840,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           _vm.deletePersondecreeblock(persondecreeBlock)
         }
       }
-    }, [_vm._v("Удалить блок")])], 1)], 1) : _vm._e(), _vm._v(" "), (persondecreeBlock.persondecreeblocktype == 13) ? _c('div', [_c('div', [_vm._v("\n                            За сколько суток неиспользованного отпуска\n                        ")]), _vm._v(" "), _c('el-input', {
+    }, [_vm._v("Удалить блок")])], 1) : _vm._e()]) : _vm._e(), _vm._v(" "), (persondecreeBlock.persondecreeblocktype == 13) ? _c('div', [(_vm.persondecreeSigned != 1) ? _c('div', [_c('div', [_vm._v("\n                                За сколько суток неиспользованного отпуска\n                            ")]), _vm._v(" "), _c('el-input', {
       staticClass: "eld-eld-body-row-short",
       attrs: {
         "type": "number"
@@ -34788,7 +34852,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         },
         expression: "persondecreeBlock.optionnumber1"
       }
-    }), _vm._v(" "), _c('div', [_vm._v("\n                            За какой год\n                        ")]), _vm._v(" "), _c('el-input', {
+    }), _vm._v(" "), _c('div', [_vm._v("\n                                За какой год\n                            ")]), _vm._v(" "), _c('el-input', {
       staticClass: "eld-eld-body-row-short",
       attrs: {
         "type": "number"
@@ -34804,7 +34868,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       staticStyle: {
         "margin-top": "10px"
       }
-    }, [_vm._v("\n                                Кому\n                            ")]), _vm._v(" "), _c('div', {
+    }, [_vm._v("\n                                    Кому\n                                ")]), _vm._v(" "), _c('div', {
       staticStyle: {
         "margin-top": "10px"
       }
@@ -34829,7 +34893,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       staticClass: "eld-search-main"
     }, [_c('div', {
       staticClass: "eld-search-main-title"
-    }, [_vm._v("\n                                    Результаты поиска\n                                ")]), _vm._v(" "), _vm._l((persondecreeBlock.personssearch), function(person) {
+    }, [_vm._v("\n                                        Результаты поиска\n                                    ")]), _vm._v(" "), _vm._l((persondecreeBlock.personssearch), function(person) {
       return _c('div', {
         staticClass: "eld-search-element",
         on: {
@@ -34837,14 +34901,14 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
             _vm.selectPersonBlockNonAuto(person.id, persondecreeBlock)
           }
         }
-      }, [_c('div', [_vm._v("\n                                        " + _vm._s(person.surname) + " " + _vm._s(person.name) + " " + _vm._s(person.fathername) + "\n                                    ")]), _vm._v(" "), _c('div', [_vm._v("\n                                        " + _vm._s(person.positiontypestring) + "\n                                    ")]), _vm._v(" "), (_vm.hasPhotopreviewBlock(person.id, persondecreeBlock)) ? _c('div', [_c('img', {
+      }, [_c('div', [_vm._v("\n                                            " + _vm._s(person.surname) + " " + _vm._s(person.name) + " " + _vm._s(person.fathername) + "\n                                        ")]), _vm._v(" "), _c('div', [_vm._v("\n                                            " + _vm._s(person.positiontypestring) + "\n                                        ")]), _vm._v(" "), (_vm.hasPhotopreviewBlock(person.id, persondecreeBlock)) ? _c('div', [_c('img', {
         staticClass: "eld-search-element-image",
         attrs: {
           "src": _vm.getPhotopreviewBlock(person.id, persondecreeBlock).photo64
         }
-      })]) : _vm._e(), _vm._v(" "), _c('div', [_c('div', [_vm._v("\n                                            " + _vm._s(person.structuretree) + "\n                                        ")])])])
+      })]) : _vm._e(), _vm._v(" "), _c('div', [_c('div', [_vm._v("\n                                                " + _vm._s(person.structuretree) + "\n                                            ")])])])
     })], 2) : _vm._e(), _vm._v(" "), (_vm.personFromStructure.length > 0) ? _c('div', _vm._l((_vm.personFromStructure), function(person) {
-      return _c('div', [_vm._v("\n                                    Кому – " + _vm._s(person.surname2 + " " + person.name2 + " " + person.fathername2) + "\n                                    "), _c('el-button', {
+      return _c('div', [_vm._v("\n                                        Кому – " + _vm._s(person.surname2 + " " + person.name2 + " " + person.fathername2) + "\n                                        "), _c('el-button', {
         attrs: {
           "size": "mini",
           "type": "warning"
@@ -34855,7 +34919,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           }
         }
       }, [_vm._v("Убрать")])], 1)
-    })) : _vm._e()]), _vm._v(" "), _c('div', [_vm._v("\n                            Основание\n                        ")]), _vm._v(" "), _c('el-input', {
+    })) : _vm._e()]), _vm._v(" "), _c('div', [_vm._v("\n                                Основание\n                            ")]), _vm._v(" "), _c('el-input', {
       staticClass: "eld-eld-body-row-long",
       model: {
         value: (persondecreeBlock.optionstring1),
@@ -34874,16 +34938,16 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           _vm.addPersonblockelement(persondecreeBlock)
         }
       }
-    }, [_vm._v("Сформировать пункт приказа")])], 1), _vm._v(" "), _c('div', {
+    }, [_vm._v("Сформировать пункт приказа")])], 1)], 1) : _vm._e(), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', {
       staticClass: "persondecreeoperation-part-list-title"
-    }, [_vm._v("\n                            Проект приказа\n                        ")]), _vm._v(" "), _c('div', [(persondecreeBlock.index != null && persondecreeBlock.index != 0) ? _c('span', [_vm._v(_vm._s(persondecreeBlock.index) + ".")]) : _vm._e(), _vm._v(" ВЫПЛАТИТЬ ДЕНЕЖНУЮ КОМПЕНСАЦИЮ:\n                        ")]), _vm._v(" "), _c('div', [_vm._l((_vm.persondecreeOperations), function(decreeoperation) {
+    }, [_vm._v("\n                            Проект приказа\n                        ")]) : _vm._e(), _vm._v(" "), _c('div', [(persondecreeBlock.index != null && persondecreeBlock.index != 0) ? _c('span', [_vm._v(_vm._s(persondecreeBlock.index) + ".")]) : _vm._e(), _vm._v(" ВЫПЛАТИТЬ ДЕНЕЖНУЮ КОМПЕНСАЦИЮ:\n                        ")]), _vm._v(" "), _c('div', [_vm._l((_vm.persondecreeOperations), function(decreeoperation) {
       return (decreeoperation.persondecreeblock == persondecreeBlock.id) ? _c('div', {
         staticClass: "persondecreeoperation-part-list-element"
       }, [_c('div', [_c('div', {
         staticClass: "persondecreeoperation-part-list-element-indent persondecreeoperation-part-list-element-margin-small"
       }, [_vm._v("\n                                        за " + _vm._s(decreeoperation.optionnumber1) + " " + _vm._s(_vm.getDayCalendarString(decreeoperation.optionnumber1)) + " неиспользованного в " + _vm._s(decreeoperation.optionnumber2) + " году основного отпуска\n                                        "), (decreeoperation.personobject.actualRank != null) ? _c('span', [_vm._v(_vm._s(decreeoperation.personobject.actualRank.name3) + " ")]) : _vm._e(), _vm._v("\n                                        " + _vm._s(decreeoperation.personobject.surname3) + " " + _vm._s(decreeoperation.personobject.name3) + "\n                                        " + _vm._s(decreeoperation.personobject.fathername3) + _vm._s(_vm.commaspaceifnotnull(decreeoperation.personobject.positiontree3)) + " " + _vm._s(decreeoperation.personobject.positiontree3) + ".\n                                    ")]), _vm._v(" "), _c('div', {
         staticClass: "persondecreeoperation-part-list-element-margin-big"
-      }, [_vm._v("\n                                        Основание: " + _vm._s(decreeoperation.optionstring1) + ".\n                                    ")])]), _vm._v(" "), _c('div', [_c('div', [_c('div', [_c('el-button', {
+      }, [_vm._v("\n                                        Основание: " + _vm._s(decreeoperation.optionstring1) + ".\n                                    ")])]), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_c('div', [_c('div', [_c('el-button', {
         attrs: {
           "size": "mini",
           "type": "warning"
@@ -34893,8 +34957,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
             _vm.removePersondecreeoperation(decreeoperation)
           }
         }
-      }, [_vm._v("Удалить")])], 1)])])]) : _vm._e()
-    }), _vm._v(" "), _c('br')], 2), _vm._v(" "), _c('div', [_c('el-button', {
+      }, [_vm._v("Удалить")])], 1)])]) : _vm._e()]) : _vm._e()
+    }), _vm._v(" "), _c('br')], 2), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_c('el-button', {
       attrs: {
         "type": "danger"
       },
@@ -34903,11 +34967,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           _vm.deletePersondecreeblock(persondecreeBlock)
         }
       }
-    }, [_vm._v("Удалить блок")])], 1)], 1) : _vm._e(), _vm._v(" "), (persondecreeBlock.persondecreeblocktype == 14) ? _c('div', [_c('div', [_c('div', {
+    }, [_vm._v("Удалить блок")])], 1) : _vm._e()]) : _vm._e(), _vm._v(" "), (persondecreeBlock.persondecreeblocktype == 14) ? _c('div', [(_vm.persondecreeSigned != 1) ? _c('div', [_c('div', [_c('div', {
       staticStyle: {
         "margin-top": "10px"
       }
-    }, [_vm._v("\n                                Кому\n                            ")]), _vm._v(" "), _c('div', {
+    }, [_vm._v("\n                                    Кому\n                                ")]), _vm._v(" "), _c('div', {
       staticStyle: {
         "margin-top": "10px"
       }
@@ -34932,7 +34996,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       staticClass: "eld-search-main"
     }, [_c('div', {
       staticClass: "eld-search-main-title"
-    }, [_vm._v("\n                                    Результаты поиска\n                                ")]), _vm._v(" "), _vm._l((persondecreeBlock.personssearch), function(person) {
+    }, [_vm._v("\n                                        Результаты поиска\n                                    ")]), _vm._v(" "), _vm._l((persondecreeBlock.personssearch), function(person) {
       return _c('div', {
         staticClass: "eld-search-element",
         on: {
@@ -34940,14 +35004,14 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
             _vm.selectPersonBlockNonAuto(person.id, persondecreeBlock)
           }
         }
-      }, [_c('div', [_vm._v("\n                                        " + _vm._s(person.surname) + " " + _vm._s(person.name) + " " + _vm._s(person.fathername) + "\n                                    ")]), _vm._v(" "), _c('div', [_vm._v("\n                                        " + _vm._s(person.positiontypestring) + "\n                                    ")]), _vm._v(" "), (_vm.hasPhotopreviewBlock(person.id, persondecreeBlock)) ? _c('div', [_c('img', {
+      }, [_c('div', [_vm._v("\n                                            " + _vm._s(person.surname) + " " + _vm._s(person.name) + " " + _vm._s(person.fathername) + "\n                                        ")]), _vm._v(" "), _c('div', [_vm._v("\n                                            " + _vm._s(person.positiontypestring) + "\n                                        ")]), _vm._v(" "), (_vm.hasPhotopreviewBlock(person.id, persondecreeBlock)) ? _c('div', [_c('img', {
         staticClass: "eld-search-element-image",
         attrs: {
           "src": _vm.getPhotopreviewBlock(person.id, persondecreeBlock).photo64
         }
-      })]) : _vm._e(), _vm._v(" "), _c('div', [_c('div', [_vm._v("\n                                            " + _vm._s(person.structuretree) + "\n                                        ")])])])
+      })]) : _vm._e(), _vm._v(" "), _c('div', [_c('div', [_vm._v("\n                                                " + _vm._s(person.structuretree) + "\n                                            ")])])])
     })], 2) : _vm._e(), _vm._v(" "), (_vm.personFromStructure.length > 0) ? _c('div', _vm._l((_vm.personFromStructure), function(person) {
-      return _c('div', [_vm._v("\n                                    Кому – " + _vm._s(person.surname2 + " " + person.name2 + " " + person.fathername2) + "\n                                    "), _c('el-button', {
+      return _c('div', [_vm._v("\n                                        Кому – " + _vm._s(person.surname2 + " " + person.name2 + " " + person.fathername2) + "\n                                        "), _c('el-button', {
         attrs: {
           "size": "mini",
           "type": "warning"
@@ -34958,7 +35022,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           }
         }
       }, [_vm._v("Убрать")])], 1)
-    })) : _vm._e()]), _vm._v(" "), _c('div', [_vm._v("\n                            Звание\n                        ")]), _vm._v(" "), _c('el-select', {
+    })) : _vm._e()]), _vm._v(" "), _c('div', [_vm._v("\n                                Звание\n                            ")]), _vm._v(" "), _c('el-select', {
       staticClass: "eld-eld-body-select-medium",
       attrs: {
         "clearable": "",
@@ -34980,7 +35044,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           "value": rank.id
         }
       }) : _vm._e()
-    })), _vm._v(" "), _c('div', [_vm._v("\n                            С какого числа\n                        ")]), _vm._v(" "), _c('el-input', {
+    })), _vm._v(" "), _c('div', [_vm._v("\n                                С какого числа\n                            ")]), _vm._v(" "), _c('el-input', {
       staticClass: "eld-eld-body-row-short",
       attrs: {
         "type": "date"
@@ -35002,9 +35066,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           _vm.addPersonblockelement(persondecreeBlock)
         }
       }
-    }, [_vm._v("Сформировать пункт приказа")])], 1), _vm._v(" "), _c('div', {
+    }, [_vm._v("Сформировать пункт приказа")])], 1)], 1) : _vm._e(), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', {
       staticClass: "persondecreeoperation-part-list-title"
-    }, [_vm._v("\n                            Проект приказа\n                        ")]), _vm._v(" "), _c('div', [(persondecreeBlock.index != null && persondecreeBlock.index != 0) ? _c('span', [_vm._v(_vm._s(persondecreeBlock.index) + ".")]) : _vm._e(), _vm._v(" ПРИСВОИТЬ:\n                        ")]), _vm._v(" "), _c('div', {
+    }, [_vm._v("\n                            Проект приказа\n                        ")]) : _vm._e(), _vm._v(" "), _c('div', [(persondecreeBlock.index != null && persondecreeBlock.index != 0) ? _c('span', [_vm._v(_vm._s(persondecreeBlock.index) + ".")]) : _vm._e(), _vm._v(" ПРИСВОИТЬ:\n                        ")]), _vm._v(" "), _c('div', {
       staticClass: "persondecreeoperation-part-list-element-indent persondecreeoperation-part-list-element-margin-big"
     }, [_vm._v("\n                            очередные специальные звания " + _vm._s(persondecreeBlock.intro) + " начальствующего состава:\n                        ")]), _vm._v(" "), _vm._l((persondecreeBlock.persondecreeblocksubs), function(persondecreeblocksub) {
       return (persondecreeblocksub.persondecreeblock == persondecreeBlock.id) ? _c('div', {
@@ -35016,7 +35080,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           staticClass: "persondecreeoperation-part-list-element persondecreeoperation-part-list-element-margin-big"
         }, [_c('div', [_c('div', {
           staticClass: "persondecreeoperation-part-list-element-indent persondecreeoperation-part-list-element-margin-big"
-        }, [(decreeoperation.personobject.actualRank != null) ? _c('span', [_vm._v(_vm._s(decreeoperation.personobject.actualRank.name3) + " ")]) : _vm._e(), _vm._v("\n                                            " + _vm._s(decreeoperation.personobject.surname3) + " " + _vm._s(decreeoperation.personobject.name3) + "\n                                            " + _vm._s(decreeoperation.personobject.fathername3) + "\n                                            (" + _vm._s(decreeoperation.personobject.numpersonal) + ")" + _vm._s(_vm.commaspaceifnotnull(decreeoperation.personobject.positiontree3)) + " " + _vm._s(decreeoperation.personobject.positiontree3) + "\n                                            "), (decreeoperation.optiondate1 != null) ? _c('span', [_vm._v(" с " + _vm._s(_vm.printDateDocument(decreeoperation.optiondate1)))]) : _vm._e(), _vm._v(";\n                                        ")])]), _vm._v(" "), _c('div', [_c('div', [_c('div', [_c('el-button', {
+        }, [(decreeoperation.personobject.actualRank != null) ? _c('span', [_vm._v(_vm._s(decreeoperation.personobject.actualRank.name3) + " ")]) : _vm._e(), _vm._v("\n                                            " + _vm._s(decreeoperation.personobject.surname3) + " " + _vm._s(decreeoperation.personobject.name3) + "\n                                            " + _vm._s(decreeoperation.personobject.fathername3) + "\n                                            (" + _vm._s(decreeoperation.personobject.numpersonal) + ")" + _vm._s(_vm.commaspaceifnotnull(decreeoperation.personobject.positiontree3)) + " " + _vm._s(decreeoperation.personobject.positiontree3) + "\n                                            "), (decreeoperation.optiondate1 != null) ? _c('span', [_vm._v(" с " + _vm._s(_vm.printDateDocument(decreeoperation.optiondate1)))]) : _vm._e(), _vm._v(";\n                                        ")])]), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_c('div', [_c('div', [_c('el-button', {
           attrs: {
             "size": "mini",
             "type": "warning"
@@ -35026,9 +35090,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
               _vm.removePersondecreeoperation(decreeoperation)
             }
           }
-        }, [_vm._v("Удалить")])], 1)])])]) : _vm._e()
+        }, [_vm._v("Удалить")])], 1)])]) : _vm._e()]) : _vm._e()
       })], 2)]) : _vm._e()
-    }), _vm._v(" "), _c('div', [_c('el-button', {
+    }), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_c('el-button', {
       attrs: {
         "type": "danger"
       },
@@ -35037,9 +35101,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           _vm.deletePersondecreeblock(persondecreeBlock)
         }
       }
-    }, [_vm._v("Удалить блок")])], 1)], 2) : _vm._e(), _vm._v(" "), (persondecreeBlock.persondecreeblocktype == 15) ? _c('div', [_c('div', {
+    }, [_vm._v("Удалить блок")])], 1) : _vm._e()], 2) : _vm._e(), _vm._v(" "), (persondecreeBlock.persondecreeblocktype == 15) ? _c('div', [(_vm.persondecreeSigned != 1) ? _c('div', [_c('div', {
       staticClass: "eld-eld-body-row-flex-spacebetween"
-    }, [_c('div', [_c('div', [_vm._v("\n                                    Предоставить что\n                                ")]), _vm._v(" "), _c('el-select', {
+    }, [_c('div', [_c('div', [_vm._v("\n                                        Предоставить что\n                                    ")]), _vm._v(" "), _c('el-select', {
       staticClass: "eld-eld-body-select-medium",
       attrs: {
         "clearable": "",
@@ -35060,7 +35124,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           "value": persondecreeblocksubtype.id
         }
       }) : _vm._e()
-    }))], 1), _vm._v(" "), (persondecreeBlock.persondecreeblocksub == 11) ? _c('div', [_c('div', [_vm._v("\n                                    Вид отпуска\n                                ")]), _vm._v(" "), _c('div', [_c('el-select', {
+    }))], 1), _vm._v(" "), (persondecreeBlock.persondecreeblocksub == 11) ? _c('div', [_c('div', [_vm._v("\n                                        Вид отпуска\n                                    ")]), _vm._v(" "), _c('div', [_c('el-select', {
       staticClass: "eld-eld-body-select-medium",
       attrs: {
         "clearable": "",
@@ -35081,7 +35145,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           "value": vacationtype.id
         }
       })
-    }))], 1), _vm._v(" "), _c('small', [_vm._v("Основной — для аттестованых, "), _c('br'), _vm._v(" Основной трудовой и дополнительный трудовой — для гражданского персонала ")])]) : _vm._e()]), _vm._v(" "), _c('div', [_c('div', [_vm._v("\n                                Кому\n                            ")]), _vm._v(" "), _c('div', {
+    }))], 1), _vm._v(" "), _c('small', [_vm._v("Основной — для аттестованых, "), _c('br'), _vm._v(" Основной трудовой и дополнительный трудовой — для гражданского персонала ")])]) : _vm._e()]), _vm._v(" "), _c('div', [_c('div', [_vm._v("\n                                    Кому\n                                ")]), _vm._v(" "), _c('div', {
       staticStyle: {
         "margin-top": "10px"
       }
@@ -35120,7 +35184,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       staticClass: "eld-search-main"
     }, [_c('div', {
       staticClass: "eld-search-main-title"
-    }, [_vm._v("\n                                    Результаты поиска\n                                ")]), _vm._v(" "), _vm._l((persondecreeBlock.personssearch), function(person) {
+    }, [_vm._v("\n                                        Результаты поиска\n                                    ")]), _vm._v(" "), _vm._l((persondecreeBlock.personssearch), function(person) {
       return _c('div', {
         staticClass: "eld-search-element",
         on: {
@@ -35128,14 +35192,14 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
             _vm.selectPersonBlockNonAuto(person.id, persondecreeBlock)
           }
         }
-      }, [_c('div', [_vm._v("\n                                        " + _vm._s(person.surname) + " " + _vm._s(person.name) + " " + _vm._s(person.fathername) + "\n                                    ")]), _vm._v(" "), _c('div', [_vm._v("\n                                        " + _vm._s(person.positiontypestring) + "\n                                    ")]), _vm._v(" "), (_vm.hasPhotopreviewBlock(person.id, persondecreeBlock)) ? _c('div', [_c('img', {
+      }, [_c('div', [_vm._v("\n                                            " + _vm._s(person.surname) + " " + _vm._s(person.name) + " " + _vm._s(person.fathername) + "\n                                        ")]), _vm._v(" "), _c('div', [_vm._v("\n                                            " + _vm._s(person.positiontypestring) + "\n                                        ")]), _vm._v(" "), (_vm.hasPhotopreviewBlock(person.id, persondecreeBlock)) ? _c('div', [_c('img', {
         staticClass: "eld-search-element-image",
         attrs: {
           "src": _vm.getPhotopreviewBlock(person.id, persondecreeBlock).photo64
         }
-      })]) : _vm._e(), _vm._v(" "), _c('div', [_c('div', [_vm._v("\n                                            " + _vm._s(person.structuretree) + "\n                                        ")])])])
+      })]) : _vm._e(), _vm._v(" "), _c('div', [_c('div', [_vm._v("\n                                                " + _vm._s(person.structuretree) + "\n                                            ")])])])
     })], 2) : _vm._e(), _vm._v(" "), (_vm.personFromStructure.length > 0) ? _c('div', _vm._l((_vm.personFromStructure), function(person) {
-      return _c('div', [_vm._v("\n                                    Кого – " + _vm._s(person.surname3 + " " + person.name3 + " " + person.fathername3) + "\n                                    "), _c('el-button', {
+      return _c('div', [_vm._v("\n                                        Кого – " + _vm._s(person.surname3 + " " + person.name3 + " " + person.fathername3) + "\n                                        "), _c('el-button', {
         attrs: {
           "size": "mini",
           "type": "warning"
@@ -35148,7 +35212,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       }, [_vm._v("Убрать")])], 1)
     })) : _vm._e()]), _vm._v(" "), (persondecreeBlock.persondecreeblocksub == 11 && persondecreeBlock.person != null) ? _c('div', [_c('div', [_c('div', {
       staticClass: "eld-eld-body-row-flex-spacebetween"
-    }, [_c('div', [_c('div', [_vm._v("\n                                            с "), _c('el-input', {
+    }, [_c('div', [_c('div', [_vm._v("\n                                                с "), _c('el-input', {
       staticClass: "eld-eld-body-row-short el-input-bold",
       attrs: {
         "type": "date"
@@ -35165,7 +35229,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         },
         expression: "persondecreeBlock.optiondate1String"
       }
-    })], 1), _vm._v(" "), (!_vm.isMaternity(persondecreeBlock.subvaluenumber1)) ? _c('div', [_vm._v("\n                                            по "), _c('b', [_vm._v(_vm._s(_vm.printDate(persondecreeBlock.optiondate3String)))])]) : _vm._e(), _vm._v(" "), (_vm.isMaternity(persondecreeBlock.subvaluenumber1)) ? _c('div', [_vm._v("\n                                            по\n                                            "), _c('el-input', {
+    })], 1), _vm._v(" "), (!_vm.isMaternity(persondecreeBlock.subvaluenumber1)) ? _c('div', [_vm._v("\n                                                по "), _c('b', [_vm._v(_vm._s(_vm.printDate(persondecreeBlock.optiondate3String)))])]) : _vm._e(), _vm._v(" "), (_vm.isMaternity(persondecreeBlock.subvaluenumber1)) ? _c('div', [_vm._v("\n                                                по\n                                                "), _c('el-input', {
       staticClass: "eld-eld-body-row-short el-input-bold",
       attrs: {
         "type": "date"
@@ -35182,7 +35246,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         },
         expression: "persondecreeBlock.optiondate3String"
       }
-    })], 1) : _vm._e()]), _vm._v(" "), (_vm.getVacationtype(persondecreeBlock.subvaluenumber1).main == 1) ? _c('div', [_c('div', [_vm._v("\n                                            Продолжительностью\n                                            "), _c('el-input', {
+    })], 1) : _vm._e()]), _vm._v(" "), (_vm.getVacationtype(persondecreeBlock.subvaluenumber1).main == 1) ? _c('div', [_c('div', [_vm._v("\n                                                Продолжительностью\n                                                "), _c('el-input', {
       staticClass: "eld-eld-body-row-short el-input-bold",
       attrs: {
         "type": "number"
@@ -35199,7 +35263,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         },
         expression: "persondecreeBlock.optionnumber1"
       }
-    }), _vm._v("\n                                            дней\n                                        ")], 1), _vm._v(" "), _c('div', [_vm._v("\n                                            включая\n                                        ")]), _vm._v(" "), _c('div', _vm._l((persondecreeBlock.person.jobperiods), function(jobperiod, index) {
+    }), _vm._v("\n                                                дней\n                                            ")], 1), _vm._v(" "), _c('div', [_vm._v("\n                                                включая\n                                            ")]), _vm._v(" "), _c('div', _vm._l((persondecreeBlock.person.jobperiods), function(jobperiod, index) {
       return (jobperiod.vacationdaystransferleft > 0) ? _c('div', [_c('div', {
         staticClass: "persondecreeoperation-vacationperiod-days"
       }, [(jobperiod.vacationselectedshow) ? _c('el-switch', {
@@ -35242,8 +35306,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           },
           expression: "jobperiod.vacationselecteddays"
         }
-      }), _vm._v("\n                                                    дней\n                                                    за период с " + _vm._s(_vm.printDate(jobperiod.start)) + " по\n                                                    " + _vm._s(_vm.printDate(jobperiod.end)) + "\n                                                ")], 1)]) : _vm._e()
-    }))]) : _vm._e(), _vm._v(" "), (_vm.getVacationtype(persondecreeBlock.subvaluenumber1).main == 0) ? _c('div', [(!_vm.isMaternity(persondecreeBlock.subvaluenumber1)) ? _c('div', [_vm._v("\n                                            Продолжительностью\n                                            "), _c('el-input', {
+      }), _vm._v("\n                                                        дней\n                                                        за период с " + _vm._s(_vm.printDate(jobperiod.start)) + " по\n                                                        " + _vm._s(_vm.printDate(jobperiod.end)) + "\n                                                    ")], 1)]) : _vm._e()
+    }))]) : _vm._e(), _vm._v(" "), (_vm.getVacationtype(persondecreeBlock.subvaluenumber1).main == 0) ? _c('div', [(!_vm.isMaternity(persondecreeBlock.subvaluenumber1)) ? _c('div', [_vm._v("\n                                                Продолжительностью\n                                                "), _c('el-input', {
       staticClass: "eld-eld-body-row-short el-input-bold",
       attrs: {
         "type": "number"
@@ -35260,10 +35324,10 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         },
         expression: "persondecreeBlock.optionnumber1"
       }
-    }), _vm._v("\n                                            дней\n                                        ")], 1) : _vm._e(), _vm._v(" "), (_vm.isMaternity(persondecreeBlock.subvaluenumber1)) ? _c('div', [_vm._v("\n                                            Продолжительностью\n                                            " + _vm._s(persondecreeBlock.optionnumber1) + "\n                                            дней\n                                        ")]) : _vm._e()]) : _vm._e()]), _vm._v(" "), _c('div', [(_vm.getVacationtype(persondecreeBlock.subvaluenumber1).main == 1) ? _c('div', [_vm._v("\n                                        С выездом в\n                                        "), _vm._l((persondecreeBlock.countrycitiesList), function(countrycities, index) {
+    }), _vm._v("\n                                                дней\n                                            ")], 1) : _vm._e(), _vm._v(" "), (_vm.isMaternity(persondecreeBlock.subvaluenumber1)) ? _c('div', [_vm._v("\n                                                Продолжительностью\n                                                " + _vm._s(persondecreeBlock.optionnumber1) + "\n                                                дней\n                                            ")]) : _vm._e()]) : _vm._e()]), _vm._v(" "), _c('div', [(_vm.getVacationtype(persondecreeBlock.subvaluenumber1).main == 1) ? _c('div', [_vm._v("\n                                            С выездом в\n                                            "), _vm._l((persondecreeBlock.countrycitiesList), function(countrycities, index) {
       return _c('div', {
         staticClass: "eld-eld-body-row-flex-spacebetween"
-      }, [_c('div', [_c('div', [_vm._v("\n                                                    Страна\n                                                ")]), _vm._v(" "), _c('el-select', {
+      }, [_c('div', [_c('div', [_vm._v("\n                                                        Страна\n                                                    ")]), _vm._v(" "), _c('el-select', {
         staticClass: "eld-eld-body-select-medium",
         attrs: {
           "clearable": "",
@@ -35301,8 +35365,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
             _vm.multicountryAddAdditional(persondecreeBlock)
           }
         }
-      }, [_vm._v("Добавить еще страну пребывания")]) : _vm._e()], 1), _vm._v(" "), _c('div', [_vm._v("\n                                                Города:\n                                                "), _vm._l((countrycities.cities), function(city) {
-        return _c('div', [_vm._v("\n                                                    " + _vm._s(city) + " "), _c('span', {
+      }, [_vm._v("Добавить еще страну пребывания")]) : _vm._e()], 1), _vm._v(" "), _c('div', [_vm._v("\n                                                    Города:\n                                                    "), _vm._l((countrycities.cities), function(city) {
+        return _c('div', [_vm._v("\n                                                        " + _vm._s(city) + " "), _c('span', {
           staticClass: "eld-eld-body-button-text",
           on: {
             "click": function($event) {
@@ -35330,7 +35394,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           }
         }
       }, [_vm._v("Добавить еще город")])], 1)], 2)])
-    })], 2) : _vm._e(), _vm._v(" "), (_vm.getVacationtype(persondecreeBlock.subvaluenumber1).main == 1) ? _c('div', [_c('div', [_vm._v("\n                                            Разрешить выезд в страну пребывания с\n                                        ")]), _vm._v("\n                                        с "), _c('el-input', {
+    })], 2) : _vm._e(), _vm._v(" "), (_vm.getVacationtype(persondecreeBlock.subvaluenumber1).main == 1) ? _c('div', [_c('div', [_vm._v("\n                                                Разрешить выезд в страну пребывания с\n                                            ")]), _vm._v("\n                                            с "), _c('el-input', {
       staticClass: "eld-eld-body-row-short el-input-bold",
       attrs: {
         "type": "date"
@@ -35342,7 +35406,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         },
         expression: "persondecreeBlock.optiondate2String"
       }
-    }), _vm._v("\n                                        по "), _c('el-input', {
+    }), _vm._v("\n                                            по "), _c('el-input', {
       staticClass: "eld-eld-body-row-short el-input-bold",
       attrs: {
         "type": "date"
@@ -35354,7 +35418,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         },
         expression: "persondecreeBlock.optiondate4String"
       }
-    }), _vm._v(" "), (persondecreeBlock.person.military && _vm.getVacationtype(persondecreeBlock.subvaluenumber1).main == 1) ? _c('div', [_c('div', [_vm._v("\n                                                Количество дней на проезд\n                                            ")]), _vm._v(" "), _c('el-input', {
+    }), _vm._v(" "), (persondecreeBlock.person.military && _vm.getVacationtype(persondecreeBlock.subvaluenumber1).main == 1) ? _c('div', [_c('div', [_vm._v("\n                                                    Количество дней на проезд\n                                                ")]), _vm._v(" "), _c('el-input', {
       staticClass: "eld-eld-body-row-short el-input-bold",
       attrs: {
         "type": "number",
@@ -35372,7 +35436,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         },
         expression: "persondecreeBlock.optionnumber2"
       }
-    })], 1) : _vm._e()], 1) : _vm._e(), _vm._v(" "), (!persondecreeBlock.person.military && _vm.getVacationtype(persondecreeBlock.subvaluenumber1).main == 1) ? _c('div', [_vm._v("\n                                        количество праздничных дней " + _vm._s(persondecreeBlock.optionnumber8) + "\n                                    ")]) : _vm._e()]), _vm._v(" "), _c('div', [_vm._v("\n                                    Основание\n                                ")]), _vm._v(" "), _c('el-input', {
+    })], 1) : _vm._e()], 1) : _vm._e(), _vm._v(" "), (!persondecreeBlock.person.military && _vm.getVacationtype(persondecreeBlock.subvaluenumber1).main == 1) ? _c('div', [_vm._v("\n                                            количество праздничных дней " + _vm._s(persondecreeBlock.optionnumber8) + "\n                                        ")]) : _vm._e()]), _vm._v(" "), _c('div', [_vm._v("\n                                        Основание\n                                    ")]), _vm._v(" "), _c('el-input', {
       staticClass: "eld-eld-body-row-long",
       model: {
         value: (persondecreeBlock.optionstring3),
@@ -35398,7 +35462,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         },
         expression: "persondecreeBlock.optiondate1String"
       }
-    })], 1)])]) : _vm._e(), _vm._v(" "), (persondecreeBlock.persondecreeblocksub == 15 && persondecreeBlock.person != null) ? _c('div', [_c('div', [_c('div', [_vm._v("\n                                    с "), _c('el-input', {
+    })], 1)])]) : _vm._e(), _vm._v(" "), (persondecreeBlock.persondecreeblocksub == 15 && persondecreeBlock.person != null) ? _c('div', [_c('div', [_c('div', [_vm._v("\n                                        с "), _c('el-input', {
       staticClass: "eld-eld-body-row-short el-input-bold",
       attrs: {
         "type": "date"
@@ -35415,7 +35479,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         },
         expression: "persondecreeBlock.optiondate1String"
       }
-    })], 1), _vm._v(" "), (!_vm.isMaternity(persondecreeBlock.subvaluenumber1)) ? _c('div', [_vm._v("\n                                    по "), _c('b', [_vm._v(_vm._s(_vm.printDate(persondecreeBlock.optiondate3String)))])]) : _vm._e(), _vm._v(" "), (_vm.isMaternity(persondecreeBlock.subvaluenumber1)) ? _c('div', [_vm._v("\n                                    по\n                                    "), _c('el-input', {
+    })], 1), _vm._v(" "), (!_vm.isMaternity(persondecreeBlock.subvaluenumber1)) ? _c('div', [_vm._v("\n                                        по "), _c('b', [_vm._v(_vm._s(_vm.printDate(persondecreeBlock.optiondate3String)))])]) : _vm._e(), _vm._v(" "), (_vm.isMaternity(persondecreeBlock.subvaluenumber1)) ? _c('div', [_vm._v("\n                                        по\n                                        "), _c('el-input', {
       staticClass: "eld-eld-body-row-short el-input-bold",
       attrs: {
         "type": "date"
@@ -35432,7 +35496,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         },
         expression: "persondecreeBlock.optiondate3String"
       }
-    })], 1) : _vm._e(), _vm._v(" "), _c('div', [_vm._v("\n                                    Продолжительностью\n                                    "), _c('el-input', {
+    })], 1) : _vm._e(), _vm._v(" "), _c('div', [_vm._v("\n                                        Продолжительностью\n                                        "), _c('el-input', {
       staticClass: "eld-eld-body-row-short el-input-bold",
       attrs: {
         "type": "number"
@@ -35449,7 +35513,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         },
         expression: "persondecreeBlock.optionnumber1"
       }
-    }), _vm._v("\n                                    дней\n                                ")], 1)])]) : _vm._e(), _vm._v(" "), _c('div', [_c('br'), _vm._v(" "), _c('el-button', {
+    }), _vm._v("\n                                        дней\n                                    ")], 1)])]) : _vm._e(), _vm._v(" "), _c('div', [_c('br'), _vm._v(" "), _c('el-button', {
       attrs: {
         "type": "primary",
         "plain": ""
@@ -35459,9 +35523,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           _vm.addPersonblockelement(persondecreeBlock)
         }
       }
-    }, [_vm._v("Сформировать пункт приказа")])], 1), _vm._v(" "), _c('div', {
+    }, [_vm._v("Сформировать пункт приказа")])], 1)]) : _vm._e(), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', {
       staticClass: "persondecreeoperation-part-list-title"
-    }, [_vm._v("\n                            Проект приказа\n                        ")]), _vm._v(" "), _c('div', [(persondecreeBlock.index != null && persondecreeBlock.index != 0) ? _c('span', [_vm._v(_vm._s(persondecreeBlock.index) + ".")]) : _vm._e(), _vm._v(" ПРЕДОСТАВИТЬ:\n                        ")]), _vm._v(" "), _vm._l((persondecreeBlock.persondecreeblocksubs), function(persondecreeblocksub) {
+    }, [_vm._v("\n                            Проект приказа\n                        ")]) : _vm._e(), _vm._v(" "), _c('div', [(persondecreeBlock.index != null && persondecreeBlock.index != 0) ? _c('span', [_vm._v(_vm._s(persondecreeBlock.index) + ".")]) : _vm._e(), _vm._v(" ПРЕДОСТАВИТЬ:\n                        ")]), _vm._v(" "), _vm._l((persondecreeBlock.persondecreeblocksubs), function(persondecreeblocksub) {
       return (persondecreeblocksub.persondecreeblock == persondecreeBlock.id && persondecreeblocksub.parentpersondecreeblocksub == 0) ? _c('div', {
         staticClass: "persondecreeoperation-part-list-element"
       }, [_c('div', [_c('div', {
@@ -35475,7 +35539,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           staticClass: "persondecreeoperation-part-list-element persondecreeoperation-part-list-element-margin-big"
         }, [_c('div', [_c('div', {
           staticClass: "persondecreeoperation-part-list-element-indent persondecreeoperation-part-list-element-margin-small"
-        }, [(decreeoperation.personobject.actualRank != null) ? _c('span', [_vm._v(_vm._s(decreeoperation.personobject.actualRank.name3) + " ")]) : _vm._e(), _vm._v("\n                                            " + _vm._s(decreeoperation.personobject.surname3) + " " + _vm._s(decreeoperation.personobject.name3) + "\n                                            " + _vm._s(decreeoperation.personobject.fathername3) + _vm._s(_vm.commaspaceifnotnull(decreeoperation.personobject.positiontree3)) + "\n                                            " + _vm._s(decreeoperation.personobject.positiontree3) + ",\n                                            "), _vm._v(" "), (!_vm.isSocialVacation(decreeoperation) && decreeoperation.persondecreeblocksubtype == 11 && decreeoperation.personobject.military) ? _c('span', [_vm._v("\n                                                продолжительностью  " + _vm._s(decreeoperation.optionnumber1) + " календарных дней "), (decreeoperation.optionnumber8 > 0 || decreeoperation.optionnumber2 > 0) ? _c('span', [_vm._v("в период")]) : _vm._e(), _vm._v(" "), (decreeoperation.optiondate1 != decreeoperation.optiondate3) ? _c('div', [(decreeoperation.optiondate1 != null) ? _c('span', [_vm._v(" с " + _vm._s(_vm.printDateDocument(decreeoperation.optiondate1)))]) : _vm._e(), _vm._v(" "), (decreeoperation.optiondate3 != null) ? _c('span', [_vm._v(" по " + _vm._s(_vm.printDateDocument(decreeoperation.optiondate3)))]) : _vm._e()]) : _vm._e(), _vm._v(" "), (decreeoperation.optiondate1 == decreeoperation.optiondate3) ? _c('div', [(decreeoperation.optiondate1 != null) ? _c('span', [_vm._v(" " + _vm._s(_vm.printDateDocument(decreeoperation.optiondate1)))]) : _vm._e()]) : _vm._e(), _vm._v("\n                                                " + _vm._s(_vm.vacationanyadditionalinfo(decreeoperation)) + _vm._s(_vm.vacationtraveltext(decreeoperation))), (decreeoperation.optiondate2 != null) ? _c('span', [_vm._v(" с " + _vm._s(_vm.printDateDocument(decreeoperation.optiondate2)))]) : _vm._e(), (decreeoperation.optiondate4 != null) ? _c('span', [_vm._v(" по " + _vm._s(_vm.printDateDocument(decreeoperation.optiondate4)))]) : _vm._e(), _vm._v(".\n                                            ")]) : _vm._e(), _vm._v(" "), (!_vm.isSocialVacation(decreeoperation) && decreeoperation.persondecreeblocksubtype == 11 && !decreeoperation.personobject.military) ? _c('span', [_vm._v("\n                                                продолжительностью  " + _vm._s(decreeoperation.optionnumber1) + " календарных дней "), (decreeoperation.optionnumber8 > 0 || decreeoperation.optionnumber2 > 0) ? _c('span', [_vm._v("в период")]) : _vm._e(), _vm._v(" "), (decreeoperation.optiondate1 != decreeoperation.optiondate3) ? _c('div', [(decreeoperation.optiondate1 != null) ? _c('span', [_vm._v(" с " + _vm._s(_vm.printDateDocument(decreeoperation.optiondate1)))]) : _vm._e(), _vm._v(" "), (decreeoperation.optiondate3 != null) ? _c('span', [_vm._v(" по " + _vm._s(_vm.printDateDocument(decreeoperation.optiondate3)))]) : _vm._e()]) : _vm._e(), _vm._v(" "), (decreeoperation.optiondate1 == decreeoperation.optiondate3) ? _c('div', [(decreeoperation.optiondate1 != null) ? _c('span', [_vm._v(" " + _vm._s(_vm.printDateDocument(decreeoperation.optiondate1)))]) : _vm._e()]) : _vm._e(), _vm._v("\n                                                " + _vm._s(_vm.vacationcivilholidaysadditionalinfo(decreeoperation)) + "\n                                                " + _vm._s(_vm.vacationcivilperiodsadditionalinfo(decreeoperation)) + _vm._s(_vm.vacationtraveltext(decreeoperation)) + ".\n                                            ")]) : _vm._e(), _vm._v(" "), (_vm.isSocialVacation(decreeoperation) && decreeoperation.persondecreeblocksubtype == 11) ? _c('span', [_vm._v("\n                                                продолжительностью  " + _vm._s(decreeoperation.optionnumber1) + " календарных дней\n                                                "), (decreeoperation.optiondate1 != decreeoperation.optiondate3) ? _c('div', [(decreeoperation.optiondate1 != null) ? _c('span', [_vm._v(" с " + _vm._s(_vm.printDateDocument(decreeoperation.optiondate1)))]) : _vm._e(), _vm._v(" "), (decreeoperation.optiondate3 != null) ? _c('span', [_vm._v(" по " + _vm._s(_vm.printDateDocument(decreeoperation.optiondate3)) + ".")]) : _vm._e()]) : _vm._e(), _vm._v(" "), (decreeoperation.optiondate1 == decreeoperation.optiondate3) ? _c('div', [(decreeoperation.optiondate1 != null) ? _c('span', [_vm._v(" " + _vm._s(_vm.printDateDocument(decreeoperation.optiondate1)) + ".")]) : _vm._e()]) : _vm._e()]) : _vm._e(), _vm._v(" "), (decreeoperation.persondecreeblocksubtype == 12) ? _c('span', [(decreeoperation.optiondate1 != null) ? _c('span', [_vm._v(" " + _vm._s(_vm.printDateDocument(decreeoperation.optiondate1)) + ".")]) : _vm._e()]) : _vm._e(), _vm._v(" "), (decreeoperation.persondecreeblocksubtype == 15) ? _c('span', [(decreeoperation.optiondate1 != decreeoperation.optiondate3) ? _c('div', [(decreeoperation.optiondate1 != null) ? _c('span', [_vm._v(" с " + _vm._s(_vm.printDateDocument(decreeoperation.optiondate1)))]) : _vm._e(), _vm._v(" "), (decreeoperation.optiondate3 != null) ? _c('span', [_vm._v(" по " + _vm._s(_vm.printDateDocument(decreeoperation.optiondate3)) + ".")]) : _vm._e()]) : _vm._e(), _vm._v(" "), (decreeoperation.optiondate1 == decreeoperation.optiondate3) ? _c('div', [(decreeoperation.optiondate1 != null) ? _c('span', [_vm._v(" " + _vm._s(_vm.printDateDocument(decreeoperation.optiondate1)) + ".")]) : _vm._e()]) : _vm._e()]) : _vm._e()]), _vm._v(" "), (decreeoperation.persondecreeblocksubtype == 11) ? _c('div', [_vm._v("\n                                            Основание: " + _vm._s(decreeoperation.optionstring3) + "\n                                        ")]) : _vm._e()]), _vm._v(" "), _c('div', [_c('div', [_c('div', [_c('el-button', {
+        }, [(decreeoperation.personobject.actualRank != null) ? _c('span', [_vm._v(_vm._s(decreeoperation.personobject.actualRank.name3) + " ")]) : _vm._e(), _vm._v("\n                                            " + _vm._s(decreeoperation.personobject.surname3) + " " + _vm._s(decreeoperation.personobject.name3) + "\n                                            " + _vm._s(decreeoperation.personobject.fathername3) + _vm._s(_vm.commaspaceifnotnull(decreeoperation.personobject.positiontree3)) + "\n                                            " + _vm._s(decreeoperation.personobject.positiontree3) + ",\n                                            "), _vm._v(" "), (!_vm.isSocialVacation(decreeoperation) && decreeoperation.persondecreeblocksubtype == 11 && decreeoperation.personobject.military) ? _c('span', [_vm._v("\n                                                продолжительностью  " + _vm._s(decreeoperation.optionnumber1) + " календарных дней "), (decreeoperation.optionnumber8 > 0 || decreeoperation.optionnumber2 > 0) ? _c('span', [_vm._v("в период")]) : _vm._e(), _vm._v(" "), (decreeoperation.optiondate1 != decreeoperation.optiondate3) ? _c('div', [(decreeoperation.optiondate1 != null) ? _c('span', [_vm._v(" с " + _vm._s(_vm.printDateDocument(decreeoperation.optiondate1)))]) : _vm._e(), _vm._v(" "), (decreeoperation.optiondate3 != null) ? _c('span', [_vm._v(" по " + _vm._s(_vm.printDateDocument(decreeoperation.optiondate3)))]) : _vm._e()]) : _vm._e(), _vm._v(" "), (decreeoperation.optiondate1 == decreeoperation.optiondate3) ? _c('div', [(decreeoperation.optiondate1 != null) ? _c('span', [_vm._v(" " + _vm._s(_vm.printDateDocument(decreeoperation.optiondate1)))]) : _vm._e()]) : _vm._e(), _vm._v("\n                                                " + _vm._s(_vm.vacationanyadditionalinfo(decreeoperation)) + _vm._s(_vm.vacationtraveltext(decreeoperation))), (decreeoperation.optiondate2 != null) ? _c('span', [_vm._v(" с " + _vm._s(_vm.printDateDocument(decreeoperation.optiondate2)))]) : _vm._e(), (decreeoperation.optiondate4 != null) ? _c('span', [_vm._v(" по " + _vm._s(_vm.printDateDocument(decreeoperation.optiondate4)))]) : _vm._e(), _vm._v(".\n                                            ")]) : _vm._e(), _vm._v(" "), (!_vm.isSocialVacation(decreeoperation) && decreeoperation.persondecreeblocksubtype == 11 && !decreeoperation.personobject.military) ? _c('span', [_vm._v("\n                                                продолжительностью  " + _vm._s(decreeoperation.optionnumber1) + " календарных дней "), (decreeoperation.optionnumber8 > 0 || decreeoperation.optionnumber2 > 0) ? _c('span', [_vm._v("в период")]) : _vm._e(), _vm._v(" "), (decreeoperation.optiondate1 != decreeoperation.optiondate3) ? _c('div', [(decreeoperation.optiondate1 != null) ? _c('span', [_vm._v(" с " + _vm._s(_vm.printDateDocument(decreeoperation.optiondate1)))]) : _vm._e(), _vm._v(" "), (decreeoperation.optiondate3 != null) ? _c('span', [_vm._v(" по " + _vm._s(_vm.printDateDocument(decreeoperation.optiondate3)))]) : _vm._e()]) : _vm._e(), _vm._v(" "), (decreeoperation.optiondate1 == decreeoperation.optiondate3) ? _c('div', [(decreeoperation.optiondate1 != null) ? _c('span', [_vm._v(" " + _vm._s(_vm.printDateDocument(decreeoperation.optiondate1)))]) : _vm._e()]) : _vm._e(), _vm._v("\n                                                " + _vm._s(_vm.vacationcivilholidaysadditionalinfo(decreeoperation)) + "\n                                                " + _vm._s(_vm.vacationcivilperiodsadditionalinfo(decreeoperation)) + _vm._s(_vm.vacationtraveltext(decreeoperation)) + ".\n                                            ")]) : _vm._e(), _vm._v(" "), (_vm.isSocialVacation(decreeoperation) && decreeoperation.persondecreeblocksubtype == 11) ? _c('span', [_vm._v("\n                                                продолжительностью  " + _vm._s(decreeoperation.optionnumber1) + " календарных дней\n                                                "), (decreeoperation.optiondate1 != decreeoperation.optiondate3) ? _c('div', [(decreeoperation.optiondate1 != null) ? _c('span', [_vm._v(" с " + _vm._s(_vm.printDateDocument(decreeoperation.optiondate1)))]) : _vm._e(), _vm._v(" "), (decreeoperation.optiondate3 != null) ? _c('span', [_vm._v(" по " + _vm._s(_vm.printDateDocument(decreeoperation.optiondate3)) + ".")]) : _vm._e()]) : _vm._e(), _vm._v(" "), (decreeoperation.optiondate1 == decreeoperation.optiondate3) ? _c('div', [(decreeoperation.optiondate1 != null) ? _c('span', [_vm._v(" " + _vm._s(_vm.printDateDocument(decreeoperation.optiondate1)) + ".")]) : _vm._e()]) : _vm._e()]) : _vm._e(), _vm._v(" "), (decreeoperation.persondecreeblocksubtype == 12) ? _c('span', [(decreeoperation.optiondate1 != null) ? _c('span', [_vm._v(" " + _vm._s(_vm.printDateDocument(decreeoperation.optiondate1)) + ".")]) : _vm._e()]) : _vm._e(), _vm._v(" "), (decreeoperation.persondecreeblocksubtype == 15) ? _c('span', [(decreeoperation.optiondate1 != decreeoperation.optiondate3) ? _c('div', [(decreeoperation.optiondate1 != null) ? _c('span', [_vm._v(" с " + _vm._s(_vm.printDateDocument(decreeoperation.optiondate1)))]) : _vm._e(), _vm._v(" "), (decreeoperation.optiondate3 != null) ? _c('span', [_vm._v(" по " + _vm._s(_vm.printDateDocument(decreeoperation.optiondate3)) + ".")]) : _vm._e()]) : _vm._e(), _vm._v(" "), (decreeoperation.optiondate1 == decreeoperation.optiondate3) ? _c('div', [(decreeoperation.optiondate1 != null) ? _c('span', [_vm._v(" " + _vm._s(_vm.printDateDocument(decreeoperation.optiondate1)) + ".")]) : _vm._e()]) : _vm._e()]) : _vm._e()]), _vm._v(" "), (decreeoperation.persondecreeblocksubtype == 11) ? _c('div', [_vm._v("\n                                            Основание: " + _vm._s(decreeoperation.optionstring3) + "\n                                        ")]) : _vm._e()]), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_c('div', [_c('div', [_c('el-button', {
           attrs: {
             "size": "mini",
             "type": "warning"
@@ -35485,14 +35549,14 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
               _vm.removePersondecreeoperation(decreeoperation)
             }
           }
-        }, [_vm._v("Удалить")])], 1)])])]) : _vm._e()
+        }, [_vm._v("Удалить")])], 1)])]) : _vm._e()]) : _vm._e()
       }), _vm._v(" "), _vm._l((persondecreeBlock.persondecreeblocksubs), function(persondecreeblocksubsub) {
         return (persondecreeblocksubsub.parentpersondecreeblocksub == persondecreeblocksub.id) ? _c('div', [_c('div', [_vm._v("\n                                        c " + _vm._s(_vm.printDateDocument(persondecreeblocksubsub.subvaluedate1)) + " по " + _vm._s(_vm.printDateDocument(persondecreeblocksubsub.subvaluedate2)) + "\n                                    ")]), _vm._v(" "), _c('div', _vm._l((_vm.persondecreeOperations), function(decreeoperation) {
           return (decreeoperation.persondecreeblocksub == persondecreeblocksubsub.id) ? _c('div', {
             staticClass: "persondecreeoperation-part-list-element persondecreeoperation-part-list-element-margin-big"
           }, [_c('div', {
             staticClass: "persondecreeoperation-part-list-element-indent"
-          }, [(decreeoperation.personobject.actualRank != null) ? _c('span', [_vm._v(_vm._s(decreeoperation.personobject.actualRank.name4) + " ")]) : _vm._e(), _vm._v("\n                                                " + _vm._s(decreeoperation.personobject.surname2) + " " + _vm._s(decreeoperation.personobject.name2) + "\n                                                " + _vm._s(decreeoperation.personobject.fathername2) + _vm._s(_vm.commaspaceifnotnull(decreeoperation.personobject.positiontypestring)) + " " + _vm._s(decreeoperation.personobject.positiontype2string) + "\n                                                " + _vm._s(_vm.getStructureName(decreeoperation.personobject.structure)) + "а " + _vm._s(_vm.getFacultiStructureName(decreeoperation.personobject.structure)) + "\n                                            ")]), _vm._v(" "), _c('div', [_c('div', [_c('el-button', {
+          }, [(decreeoperation.personobject.actualRank != null) ? _c('span', [_vm._v(_vm._s(decreeoperation.personobject.actualRank.name4) + " ")]) : _vm._e(), _vm._v("\n                                                " + _vm._s(decreeoperation.personobject.surname2) + " " + _vm._s(decreeoperation.personobject.name2) + "\n                                                " + _vm._s(decreeoperation.personobject.fathername2) + _vm._s(_vm.commaspaceifnotnull(decreeoperation.personobject.positiontypestring)) + " " + _vm._s(decreeoperation.personobject.positiontype2string) + "\n                                                " + _vm._s(_vm.getStructureName(decreeoperation.personobject.structure)) + "а " + _vm._s(_vm.getFacultiStructureName(decreeoperation.personobject.structure)) + "\n                                            ")]), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_c('div', [_c('el-button', {
             attrs: {
               "size": "mini",
               "type": "warning"
@@ -35502,10 +35566,10 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
                 _vm.removePersondecreeoperation(decreeoperation)
               }
             }
-          }, [_vm._v("Удалить")])], 1)])]) : _vm._e()
+          }, [_vm._v("Удалить")])], 1)]) : _vm._e()]) : _vm._e()
         }))]) : _vm._e()
       })], 2)]) : _vm._e()
-    }), _vm._v(" "), _c('div', [_c('el-button', {
+    }), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_c('el-button', {
       attrs: {
         "type": "danger"
       },
@@ -35514,11 +35578,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           _vm.deletePersondecreeblock(persondecreeBlock)
         }
       }
-    }, [_vm._v("Удалить блок")])], 1)], 2) : _vm._e(), _vm._v(" "), (persondecreeBlock.persondecreeblocktype == 16) ? _c('div', [_c('div', [_c('div', {
+    }, [_vm._v("Удалить блок")])], 1) : _vm._e()], 2) : _vm._e(), _vm._v(" "), (persondecreeBlock.persondecreeblocktype == 16) ? _c('div', [(_vm.persondecreeSigned != 1) ? _c('div', [_c('div', [_c('div', {
       staticStyle: {
         "margin-top": "10px"
       }
-    }, [_vm._v("\n                                Кого\n                            ")]), _vm._v(" "), _c('div', {
+    }, [_vm._v("\n                                    Кого\n                                ")]), _vm._v(" "), _c('div', {
       staticStyle: {
         "margin-top": "10px"
       }
@@ -35543,7 +35607,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       staticClass: "eld-search-main"
     }, [_c('div', {
       staticClass: "eld-search-main-title"
-    }, [_vm._v("\n                                    Результаты поиска\n                                ")]), _vm._v(" "), _vm._l((persondecreeBlock.personssearch), function(person) {
+    }, [_vm._v("\n                                        Результаты поиска\n                                    ")]), _vm._v(" "), _vm._l((persondecreeBlock.personssearch), function(person) {
       return _c('div', {
         staticClass: "eld-search-element",
         on: {
@@ -35551,14 +35615,14 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
             _vm.selectPersonBlockNonAuto(person.id, persondecreeBlock)
           }
         }
-      }, [_c('div', [_vm._v("\n                                        " + _vm._s(person.surname) + " " + _vm._s(person.name) + " " + _vm._s(person.fathername) + "\n                                    ")]), _vm._v(" "), _c('div', [_vm._v("\n                                        " + _vm._s(person.positiontypestring) + "\n                                    ")]), _vm._v(" "), (_vm.hasPhotopreviewBlock(person.id, persondecreeBlock)) ? _c('div', [_c('img', {
+      }, [_c('div', [_vm._v("\n                                            " + _vm._s(person.surname) + " " + _vm._s(person.name) + " " + _vm._s(person.fathername) + "\n                                        ")]), _vm._v(" "), _c('div', [_vm._v("\n                                            " + _vm._s(person.positiontypestring) + "\n                                        ")]), _vm._v(" "), (_vm.hasPhotopreviewBlock(person.id, persondecreeBlock)) ? _c('div', [_c('img', {
         staticClass: "eld-search-element-image",
         attrs: {
           "src": _vm.getPhotopreviewBlock(person.id, persondecreeBlock).photo64
         }
-      })]) : _vm._e(), _vm._v(" "), _c('div', [_c('div', [_vm._v("\n                                            " + _vm._s(person.structuretree) + "\n                                        ")])])])
+      })]) : _vm._e(), _vm._v(" "), _c('div', [_c('div', [_vm._v("\n                                                " + _vm._s(person.structuretree) + "\n                                            ")])])])
     })], 2) : _vm._e(), _vm._v(" "), (_vm.personFromStructure.length > 0) ? _c('div', _vm._l((_vm.personFromStructure), function(person) {
-      return _c('div', [_vm._v("\n                                    Кого – " + _vm._s(person.surname2 + " " + person.name2 + " " + person.fathername2) + "\n                                    "), _c('el-button', {
+      return _c('div', [_vm._v("\n                                        Кого – " + _vm._s(person.surname2 + " " + person.name2 + " " + person.fathername2) + "\n                                        "), _c('el-button', {
         attrs: {
           "size": "mini",
           "type": "warning"
@@ -35569,7 +35633,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           }
         }
       }, [_vm._v("Убрать")])], 1)
-    })) : _vm._e()]), _vm._v(" "), _c('div', [_c('div', [_vm._v("\n                                Вид командировки\n                            ")]), _vm._v(" "), _c('el-select', {
+    })) : _vm._e()]), _vm._v(" "), _c('div', [_c('div', [_vm._v("\n                                    Вид командировки\n                                ")]), _vm._v(" "), _c('el-select', {
       staticClass: "eld-eld-body-select-medium",
       attrs: {
         "clearable": "",
@@ -35590,7 +35654,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           "value": persondecreeblocksubtype.id
         }
       }) : _vm._e()
-    }))], 1), _vm._v(" "), (persondecreeBlock.persondecreeblocksub == 13) ? _c('div', [_c('div', [_vm._v("\n                                Страна пребывания\n                            ")]), _vm._v(" "), _c('el-select', {
+    }))], 1), _vm._v(" "), (persondecreeBlock.persondecreeblocksub == 13) ? _c('div', [_c('div', [_vm._v("\n                                    Страна пребывания\n                                ")]), _vm._v(" "), _c('el-select', {
       staticClass: "eld-eld-body-select-medium",
       attrs: {
         "clearable": "",
@@ -35614,7 +35678,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           "value": country.id
         }
       })
-    })), _vm._v(" "), _c('div', [_vm._v("\n                                Куда (например: г. Вену)\n                            ")]), _vm._v(" "), _c('el-input', {
+    })), _vm._v(" "), _c('div', [_vm._v("\n                                    Куда (например: г. Вену)\n                                ")]), _vm._v(" "), _c('el-input', {
       staticClass: "eld-eld-body-row-medium",
       model: {
         value: (persondecreeBlock.optionstring1),
@@ -35623,7 +35687,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         },
         expression: "persondecreeBlock.optionstring1"
       }
-    }), _vm._v(" "), _c('div', [_vm._v("\n                                Для чего (например: для участия в международной конференции)\n                            ")]), _vm._v(" "), _c('el-input', {
+    }), _vm._v(" "), _c('div', [_vm._v("\n                                    Для чего (например: для участия в международной конференции)\n                                ")]), _vm._v(" "), _c('el-input', {
       staticClass: "eld-eld-body-row-long",
       attrs: {
         "type": "textarea",
@@ -35636,7 +35700,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         },
         expression: "persondecreeBlock.optionstring2"
       }
-    }), _vm._v(" "), _c('div', [_vm._v("\n                                Финансирование расходов (например: за счет средств МАГАТЭ)\n                            ")]), _vm._v(" "), _c('el-input', {
+    }), _vm._v(" "), _c('div', [_vm._v("\n                                    Финансирование расходов (например: за счет средств МАГАТЭ)\n                                ")]), _vm._v(" "), _c('el-input', {
       staticClass: "eld-eld-body-row-long",
       model: {
         value: (persondecreeBlock.optionstring3),
@@ -35645,7 +35709,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         },
         expression: "persondecreeBlock.optionstring3"
       }
-    })], 1) : _vm._e(), _vm._v(" "), (persondecreeBlock.persondecreeblocksub == 14) ? _c('div', [_c('div', [_vm._v("\n                                Куда (например: в Минскую область)\n                            ")]), _vm._v(" "), _c('el-input', {
+    })], 1) : _vm._e(), _vm._v(" "), (persondecreeBlock.persondecreeblocksub == 14) ? _c('div', [_c('div', [_vm._v("\n                                    Куда (например: в Минскую область)\n                                ")]), _vm._v(" "), _c('el-input', {
       staticClass: "eld-eld-body-row-medium",
       model: {
         value: (persondecreeBlock.optionstring1),
@@ -35654,7 +35718,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         },
         expression: "persondecreeBlock.optionstring1"
       }
-    }), _vm._v(" "), _c('div', [_vm._v("\n                                Дополнительная информация (например: Проезд к месту командирования и обратно осуществляется на общественном (пассажирском) транспорте)\n                            ")]), _vm._v(" "), _c('el-input', {
+    }), _vm._v(" "), _c('div', [_vm._v("\n                                    Дополнительная информация (например: Проезд к месту командирования и обратно осуществляется на общественном (пассажирском) транспорте)\n                                ")]), _vm._v(" "), _c('el-input', {
       staticClass: "eld-eld-body-row-long",
       attrs: {
         "type": "textarea",
@@ -35667,7 +35731,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         },
         expression: "persondecreeBlock.optionstring5"
       }
-    })], 1) : _vm._e(), _vm._v(" "), _c('div', [_vm._v("\n                            С какого числа\n                        ")]), _vm._v(" "), _c('el-input', {
+    })], 1) : _vm._e(), _vm._v(" "), _c('div', [_vm._v("\n                                С какого числа\n                            ")]), _vm._v(" "), _c('el-input', {
       staticClass: "eld-eld-body-row-short",
       attrs: {
         "type": "date"
@@ -35684,7 +35748,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         },
         expression: "persondecreeBlock.optiondate1String"
       }
-    }), _vm._v(" "), _c('div', [_vm._v("\n                            Количество дней\n                        ")]), _vm._v(" "), _c('el-input', {
+    }), _vm._v(" "), _c('div', [_vm._v("\n                                Количество дней\n                            ")]), _vm._v(" "), _c('el-input', {
       staticClass: "eld-eld-body-row-short",
       attrs: {
         "type": "number"
@@ -35701,7 +35765,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         },
         expression: "persondecreeBlock.optionnumber2"
       }
-    }), _vm._v(" "), _c('div', [_vm._v("\n                            по " + _vm._s(_vm.printDate(persondecreeBlock.optiondate3String)) + "\n                        ")]), _vm._v(" "), _c('div', [_vm._v("\n                            Основание\n                        ")]), _vm._v(" "), _c('el-input', {
+    }), _vm._v(" "), _c('div', [_vm._v("\n                                по " + _vm._s(_vm.printDate(persondecreeBlock.optiondate3String)) + "\n                            ")]), _vm._v(" "), _c('div', [_vm._v("\n                                Основание\n                            ")]), _vm._v(" "), _c('el-input', {
       staticClass: "eld-eld-body-row-long",
       model: {
         value: (persondecreeBlock.optionstring4),
@@ -35720,9 +35784,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           _vm.addPersonblockelement(persondecreeBlock)
         }
       }
-    }, [_vm._v("Сформировать пункт приказа")])], 1), _vm._v(" "), _c('div', {
+    }, [_vm._v("Сформировать пункт приказа")])], 1)], 1) : _vm._e(), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', {
       staticClass: "persondecreeoperation-part-list-title"
-    }, [_vm._v("\n                            Проект приказа\n                        ")]), _vm._v(" "), _c('div', [(persondecreeBlock.index != null && persondecreeBlock.index != 0) ? _c('span', [_vm._v(_vm._s(persondecreeBlock.index) + ".")]) : _vm._e(), _vm._v(" КОМАНДИРОВАТЬ:\n                        ")]), _vm._v(" "), _vm._l((persondecreeBlock.persondecreeblocksubs), function(persondecreeblocksub) {
+    }, [_vm._v("\n                            Проект приказа\n                        ")]) : _vm._e(), _vm._v(" "), _c('div', [(persondecreeBlock.index != null && persondecreeBlock.index != 0) ? _c('span', [_vm._v(_vm._s(persondecreeBlock.index) + ".")]) : _vm._e(), _vm._v(" КОМАНДИРОВАТЬ:\n                        ")]), _vm._v(" "), _vm._l((persondecreeBlock.persondecreeblocksubs), function(persondecreeblocksub) {
       return (persondecreeblocksub.persondecreeblock == persondecreeBlock.id) ? _c('div', {
         staticClass: "persondecreeoperation-part-list-element"
       }, [_c('div', [_c('div', {
@@ -35744,7 +35808,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           staticClass: "persondecreeoperation-part-list-element-margin-small"
         }, [_vm._v("\n                                            Финансирование расходов по командированию осуществляется " + _vm._s(decreeoperation.optionstring3) + ".\n                                        ")]) : _vm._e(), _vm._v(" "), (decreeoperation.persondecreeblocksubtype == 14 && decreeoperation.optionstring5.length > 0) ? _c('div', {
           staticClass: "persondecreeoperation-part-list-element-margin-small persondecreeoperation-part-list-element-indent"
-        }, [_vm._v("\n                                            " + _vm._s(decreeoperation.optionstring5) + ".\n                                        ")]) : _vm._e(), _vm._v(" "), _c('div', [_vm._v("\n                                            Основание: " + _vm._s(decreeoperation.optionstring4) + ".\n                                        ")])]), _vm._v(" "), _c('div', [_c('div', [_c('div', [_c('el-button', {
+        }, [_vm._v("\n                                            " + _vm._s(decreeoperation.optionstring5) + ".\n                                        ")]) : _vm._e(), _vm._v(" "), _c('div', [_vm._v("\n                                            Основание: " + _vm._s(decreeoperation.optionstring4) + ".\n                                        ")])]), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_c('div', [_c('div', [_c('el-button', {
           attrs: {
             "size": "mini",
             "type": "warning"
@@ -35754,9 +35818,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
               _vm.removePersondecreeoperation(decreeoperation)
             }
           }
-        }, [_vm._v("Удалить")])], 1)])])]) : _vm._e()
+        }, [_vm._v("Удалить")])], 1)])]) : _vm._e()]) : _vm._e()
       })], 2)]) : _vm._e()
-    }), _vm._v(" "), _c('div', [_c('el-button', {
+    }), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_c('el-button', {
       attrs: {
         "type": "danger"
       },
@@ -35765,7 +35829,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           _vm.deletePersondecreeblock(persondecreeBlock)
         }
       }
-    }, [_vm._v("Удалить блок")])], 1)], 2) : _vm._e(), _vm._v(" "), (persondecreeBlock.persondecreeblocktype == 17) ? _c('div', [_c('div', [_c('div', [_vm._v("\n                                На должность\n                            ")]), _vm._v(" "), _c('div', {
+    }, [_vm._v("Удалить блок")])], 1) : _vm._e()], 2) : _vm._e(), _vm._v(" "), (persondecreeBlock.persondecreeblocktype == 17) ? _c('div', [(_vm.persondecreeSigned != 1) ? _c('div', [_c('div', [_c('div', [_vm._v("\n                                    На должность\n                                ")]), _vm._v(" "), _c('div', {
       staticClass: "eld-eld-body-row-flex",
       staticStyle: {
         "margin-top": "10px"
@@ -35795,7 +35859,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       staticStyle: {
         "margin-top": "10px"
       }
-    }, [_vm._v("\n                                Кого\n                            ")]), _vm._v(" "), _c('div', {
+    }, [_vm._v("\n                                    Кого\n                                ")]), _vm._v(" "), _c('div', {
       staticStyle: {
         "margin-top": "10px"
       }
@@ -35820,7 +35884,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       staticClass: "eld-search-main"
     }, [_c('div', {
       staticClass: "eld-search-main-title"
-    }, [_vm._v("\n                                    Результаты поиска\n                                ")]), _vm._v(" "), _vm._l((persondecreeBlock.personssearch), function(person) {
+    }, [_vm._v("\n                                        Результаты поиска\n                                    ")]), _vm._v(" "), _vm._l((persondecreeBlock.personssearch), function(person) {
       return _c('div', {
         staticClass: "eld-search-element",
         on: {
@@ -35828,14 +35892,14 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
             _vm.selectPersonBlockNonAuto(person.id, persondecreeBlock)
           }
         }
-      }, [_c('div', [_vm._v("\n                                        " + _vm._s(person.surname) + " " + _vm._s(person.name) + " " + _vm._s(person.fathername) + "\n                                    ")]), _vm._v(" "), _c('div', [_vm._v("\n                                        " + _vm._s(person.positiontypestring) + "\n                                    ")]), _vm._v(" "), (_vm.hasPhotopreviewBlock(person.id, persondecreeBlock)) ? _c('div', [_c('img', {
+      }, [_c('div', [_vm._v("\n                                            " + _vm._s(person.surname) + " " + _vm._s(person.name) + " " + _vm._s(person.fathername) + "\n                                        ")]), _vm._v(" "), _c('div', [_vm._v("\n                                            " + _vm._s(person.positiontypestring) + "\n                                        ")]), _vm._v(" "), (_vm.hasPhotopreviewBlock(person.id, persondecreeBlock)) ? _c('div', [_c('img', {
         staticClass: "eld-search-element-image",
         attrs: {
           "src": _vm.getPhotopreviewBlock(person.id, persondecreeBlock).photo64
         }
-      })]) : _vm._e(), _vm._v(" "), _c('div', [_c('div', [_vm._v("\n                                            " + _vm._s(person.structuretree) + "\n                                        ")])])])
+      })]) : _vm._e(), _vm._v(" "), _c('div', [_c('div', [_vm._v("\n                                                " + _vm._s(person.structuretree) + "\n                                            ")])])])
     })], 2) : _vm._e(), _vm._v(" "), (_vm.personFromStructure.length > 0) ? _c('div', _vm._l((_vm.personFromStructure), function(person) {
-      return _c('div', [_vm._v("\n                                    Кого – " + _vm._s(person.surname2 + " " + person.name2 + " " + person.fathername2) + "\n                                    "), _c('el-button', {
+      return _c('div', [_vm._v("\n                                        Кого – " + _vm._s(person.surname2 + " " + person.name2 + " " + person.fathername2) + "\n                                        "), _c('el-button', {
         attrs: {
           "size": "mini",
           "type": "warning"
@@ -35851,7 +35915,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       staticStyle: {
         "margin-top": "10px"
       }
-    }, [_c('div', [_vm._v("\n                                    Уровень образования "), _c('br'), _vm._v(" "), _c('el-select', {
+    }, [_c('div', [_vm._v("\n                                        Уровень образования "), _c('br'), _vm._v(" "), _c('el-select', {
       staticClass: "eld-eld-body-select-medium input-padding-right-small",
       attrs: {
         "clearable": "",
@@ -35872,7 +35936,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           "value": educationlevel.id
         }
       })
-    }))], 1), _vm._v(" "), _c('div', [_vm._v("\n                                    Ступень "), _c('br'), _vm._v(" "), _c('el-select', {
+    }))], 1), _vm._v(" "), _c('div', [_vm._v("\n                                        Ступень "), _c('br'), _vm._v(" "), _c('el-select', {
       staticClass: "eld-eld-body-select-medium input-padding-left-small",
       attrs: {
         "clearable": "",
@@ -35898,7 +35962,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       staticStyle: {
         "margin-top": "10px"
       }
-    }, [_c('div', [_vm._v("\n                                    Дата решения комиссии "), _c('br'), _vm._v(" "), _c('el-input', {
+    }, [_c('div', [_vm._v("\n                                        Дата решения комиссии "), _c('br'), _vm._v(" "), _c('el-input', {
       staticClass: "eld-eld-body-row-small el-input-bold",
       attrs: {
         "type": "date"
@@ -35914,7 +35978,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       staticStyle: {
         "margin-left": "100px"
       }
-    }, [_vm._v("\n                                    Номер заседания комиссии"), _c('br'), _vm._v(" "), _c('el-input', {
+    }, [_vm._v("\n                                        Номер заседания комиссии"), _c('br'), _vm._v(" "), _c('el-input', {
       staticClass: "eld-eld-body-row-short el-input-bold",
       attrs: {
         "type": "number"
@@ -35935,7 +35999,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       staticStyle: {
         "margin-left": "100px"
       }
-    }, [_vm._v("\n                                    Форма обучения "), _c('br'), _vm._v(" "), _c('el-select', {
+    }, [_vm._v("\n                                        Форма обучения "), _c('br'), _vm._v(" "), _c('el-select', {
       attrs: {
         "clearable": "",
         "placeholder": "Форма обучения"
@@ -35965,7 +36029,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           _vm.selectAllPersonInStructure(persondecreeBlock, 3)
         }
       }
-    }, [_vm._v("Выбрать взвод")])], 1), _vm._v(" "), (_vm.structureName.length > 0 && _vm.courseName.length > 0 && _vm.facultyName.length > 0 && _vm.specialityName.length > 0) ? _c('div', [_vm._v("\n                                " + _vm._s(_vm.facultyName) + "," + _vm._s(_vm.specialityName) + ", " + _vm._s(_vm.courseName) + ", " + _vm._s(_vm.structureName) + "\n                            ")]) : _vm._e(), _vm._v(" "), (persondecreeBlock.person != null && persondecreeBlock.optionstring5 != 'Студент') ? _c('div', [_c('div', [_vm._v("\n                                    Какое звание присвоить (оставить пустым, если никакое)\n                                ")]), _vm._v(" "), _c('el-select', {
+    }, [_vm._v("Выбрать взвод")])], 1), _vm._v(" "), (_vm.structureName.length > 0 && _vm.courseName.length > 0 && _vm.facultyName.length > 0 && _vm.specialityName.length > 0) ? _c('div', [_vm._v("\n                                    " + _vm._s(_vm.facultyName) + "," + _vm._s(_vm.specialityName) + ", " + _vm._s(_vm.courseName) + ", " + _vm._s(_vm.structureName) + "\n                                ")]) : _vm._e(), _vm._v(" "), (persondecreeBlock.person != null && persondecreeBlock.optionstring5 != 'Студент') ? _c('div', [_c('div', [_vm._v("\n                                        Какое звание присвоить (оставить пустым, если никакое)\n                                    ")]), _vm._v(" "), _c('el-select', {
       staticClass: "eld-eld-body-select-medium",
       attrs: {
         "clearable": "",
@@ -35990,7 +36054,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       staticStyle: {
         "margin-top": "10px"
       }
-    }, [_vm._v("\n                                Дата поступления\n                            ")]), _vm._v(" "), _c('el-input', {
+    }, [_vm._v("\n                                    Дата поступления\n                                ")]), _vm._v(" "), _c('el-input', {
       staticClass: "eld-eld-body-row-short",
       attrs: {
         "type": "date"
@@ -36012,9 +36076,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           _vm.addPersonblockelement(persondecreeBlock)
         }
       }
-    }, [_vm._v("Сформировать пункт приказа")])], 1), _vm._v(" "), _c('div', {
+    }, [_vm._v("Сформировать пункт приказа")])], 1)]) : _vm._e(), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', {
       staticClass: "persondecreeoperation-part-list-title"
-    }, [_vm._v("\n                            Проект приказа\n                        ")]), _vm._v(" "), _c('div', [(persondecreeBlock.index != null && persondecreeBlock.index != 0) ? _c('span', [_vm._v(_vm._s(persondecreeBlock.index) + ".")]) : _vm._e(), _vm._v(" ЗАЧИСЛИТЬ:\n                            ")]), _vm._v(" "), _vm._l((persondecreeBlock.persondecreeblocksubs), function(persondecreeblocksub) {
+    }, [_vm._v("\n                            Проект приказа\n                        ")]) : _vm._e(), _vm._v(" "), _c('div', [(persondecreeBlock.index != null && persondecreeBlock.index != 0) ? _c('span', [_vm._v(_vm._s(persondecreeBlock.index) + ".")]) : _vm._e(), _vm._v(" ЗАЧИСЛИТЬ:\n                        ")]), _vm._v(" "), _vm._l((persondecreeBlock.persondecreeblocksubs), function(persondecreeblocksub) {
       return (persondecreeblocksub.persondecreeblock == persondecreeBlock.id && persondecreeblocksub.parentpersondecreeblocksub == 0) ? _c('div', {
         staticClass: "persondecreeoperation-part-list-element"
       }, [_c('div', [_c('div', {
@@ -36023,7 +36087,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         attrs: {
           "if": "persondecreeBlock.index != null && persondecreeBlock.index != 0 && persondecreeblocksub.index != 0"
         }
-      }, [_vm._v(_vm._s(persondecreeBlock.index) + "." + _vm._s(persondecreeblocksub.index) + ".")]), _vm._v("\n                                        " + _vm._s(_vm.provideEnrollAStudent(persondecreeblocksub)) + "\n                                    ")]), _vm._v(" "), _vm._l((persondecreeBlock.persondecreeblocksubs), function(persondecreeblocksubsub) {
+      }, [_vm._v(_vm._s(persondecreeBlock.index) + "." + _vm._s(persondecreeblocksub.index) + ".")]), _vm._v("\n                                    " + _vm._s(_vm.provideEnrollAStudent(persondecreeblocksub)) + "\n                                ")]), _vm._v(" "), _vm._l((persondecreeBlock.persondecreeblocksubs), function(persondecreeblocksubsub) {
         return (persondecreeblocksubsub.parentpersondecreeblocksub == persondecreeblocksub.id) ? _c('div', {
           staticClass: "persondecreeoperation-part-list-element-indent persondecreeoperation-part-list-element-margin"
         }, [_c('div', {
@@ -36037,7 +36101,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
             }, [_c('span', [_vm._v(_vm._s(persondecreeblocksubsubsubsub.subvaluestring1) + ":")])]), _vm._v(" "), _vm._l((_vm.persondecreeOperations), function(decreeoperation) {
               return (decreeoperation.persondecreeblocksub == persondecreeblocksubsubsubsub.id) ? _c('div', {
                 staticClass: "persondecreeoperation-part-list-element"
-              }, [_c('div', [_vm._v("\n                                                                " + _vm._s(decreeoperation.personobject.surname2) + " " + _vm._s(decreeoperation.personobject.name2) + "\n                                                                " + _vm._s(decreeoperation.personobject.fathername2) + " (" + _vm._s(decreeoperation.personobject.numpersonal) + ");\n                                                            ")]), _vm._v(" "), _c('div', [_c('div', [_c('el-button', {
+              }, [_c('div', [_vm._v("\n                                                            " + _vm._s(decreeoperation.personobject.surname2) + " " + _vm._s(decreeoperation.personobject.name2) + "\n                                                            " + _vm._s(decreeoperation.personobject.fathername2) + " (" + _vm._s(decreeoperation.personobject.numpersonal) + ");\n                                                        ")]), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_c('div', [_c('el-button', {
                 attrs: {
                   "size": "mini",
                   "type": "warning"
@@ -36047,12 +36111,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
                     _vm.removePersondecreeoperation(decreeoperation)
                   }
                 }
-              }, [_vm._v("Удалить")])], 1)])]) : _vm._e()
+              }, [_vm._v("Удалить")])], 1)]) : _vm._e()]) : _vm._e()
             })], 2) : _vm._e()
           }))]) : _vm._e()
         }))]) : _vm._e()
       })], 2)]) : _vm._e()
-    }), _vm._v(" "), _c('div', [_c('el-button', {
+    }), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_c('el-button', {
       attrs: {
         "type": "danger"
       },
@@ -36061,7 +36125,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           _vm.deletePersondecreeblock(persondecreeBlock)
         }
       }
-    }, [_vm._v("Удалить блок")])], 1)], 2) : _vm._e(), _vm._v(" "), (persondecreeBlock.persondecreeblocktype == 18) ? _c('div', [_c('div', {
+    }, [_vm._v("Удалить блок")])], 1) : _vm._e()], 2) : _vm._e(), _vm._v(" "), (persondecreeBlock.persondecreeblocktype == 18) ? _c('div', [(_vm.persondecreeSigned != 1) ? _c('div', [_c('div', {
       staticClass: "eld-eld-body-row-flex",
       staticStyle: {
         "margin-top": "20px"
@@ -36093,716 +36157,6 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       staticStyle: {
         "margin-top": "10px"
       }
-    }, [_vm._v("\n                                Кого\n                                "), _c('div', {
-      staticStyle: {
-        "margin-top": "10px"
-      }
-    }, [_c('el-button', {
-      attrs: {
-        "type": "primary",
-        "plain": ""
-      },
-      on: {
-        "click": function($event) {
-          _vm.selectAllPersonInStructure(persondecreeBlock)
-        }
-      }
-    }, [_vm._v("Выбрать")])], 1), _vm._v(" "), _c('div', {
-      staticStyle: {
-        "margin-top": "15px"
-      }
-    }, [_c('el-input', {
-      staticClass: "eld-eld-body-select-medium",
-      attrs: {
-        "placeholder": "Фамилия Имя Отчество"
-      },
-      on: {
-        "input": function($event) {
-          _vm.searchPersonsBlock(persondecreeBlock)
-        }
-      },
-      model: {
-        value: (persondecreeBlock.fiosearch),
-        callback: function($$v) {
-          persondecreeBlock.fiosearch = $$v
-        },
-        expression: "persondecreeBlock.fiosearch"
-      }
-    })], 1), _vm._v(" "), (_vm.hasSearchResultsBlock(persondecreeBlock)) ? _c('div', {
-      staticClass: "eld-search-main"
-    }, [_c('div', {
-      staticClass: "eld-search-main-title"
-    }, [_vm._v("\n                                        Результаты поиска\n                                    ")]), _vm._v(" "), _vm._l((persondecreeBlock.personssearch), function(person) {
-      return _c('div', {
-        staticClass: "eld-search-element",
-        on: {
-          "click": function($event) {
-            _vm.selectPersonBlockNonAuto(person.id, persondecreeBlock)
-          }
-        }
-      }, [_c('div', [_vm._v("\n                                            " + _vm._s(person.surname) + " " + _vm._s(person.name) + " " + _vm._s(person.fathername) + "\n                                        ")]), _vm._v(" "), _c('div', [_vm._v("\n                                            " + _vm._s(person.positiontypestring) + "\n                                        ")]), _vm._v(" "), (_vm.hasPhotopreviewBlock(person.id, persondecreeBlock)) ? _c('div', [_c('img', {
-        staticClass: "eld-search-element-image",
-        attrs: {
-          "src": _vm.getPhotopreviewBlock(person.id, persondecreeBlock).photo64
-        }
-      })]) : _vm._e(), _vm._v(" "), _c('div', [_c('div', [_vm._v("\n                                                " + _vm._s(person.structuretree) + "\n                                            ")])])])
-    })], 2) : _vm._e(), _vm._v(" "), (_vm.personFromStructure != null) ? _c('div', _vm._l((_vm.personFromStructure), function(person) {
-      return _c('div', [_vm._v("\n                                        Кого – " + _vm._s(person.surname2 + " " + person.name2 + " " + person.fathername2) + "\n                                        "), _c('el-button', {
-        attrs: {
-          "size": "mini",
-          "type": "warning"
-        },
-        on: {
-          "click": function($event) {
-            _vm.multipersonRemove(person, persondecreeBlock)
-          }
-        }
-      }, [_vm._v("Убрать")])], 1)
-    })) : _vm._e()])]), _vm._v(" "), (_vm.personFromStructure.length != 0) ? _c('div', {
-      staticClass: "eld-eld-body-row-flex",
-      staticStyle: {
-        "margin-top": "10px"
-      }
-    }, [_c('div', [_vm._v("\n                                По какому подпункту\n                                "), _c('el-select', {
-      staticClass: "eld-eld-body-select-long",
-      staticStyle: {
-        "left": "0px"
-      },
-      attrs: {
-        "clearable": "",
-        "placeholder": "Подпункт положения"
-      },
-      model: {
-        value: (persondecreeBlock.persondecreeblocksub),
-        callback: function($$v) {
-          persondecreeBlock.persondecreeblocksub = $$v
-        },
-        expression: "persondecreeBlock.persondecreeblocksub"
-      }
-    }, _vm._l((_vm.dismissalclauses), function(persondecreeblocksubtype) {
-      return (persondecreeblocksubtype.persondecreeblocktype == 18) ? _c('el-option', {
-        key: persondecreeblocksubtype.id,
-        attrs: {
-          "label": persondecreeblocksubtype.paragraph + '.' + persondecreeblocksubtype.subparagraph + ' - ' + persondecreeblocksubtype.titleofarticles + '.',
-          "value": persondecreeblocksubtype.id
-        }
-      }) : _vm._e()
-    }))], 1)]) : _vm._e(), _vm._v(" "), (_vm.personFromStructure.length != 0) ? _c('div', {
-      staticClass: "eld-eld-body-row-flex",
-      staticStyle: {
-        "margin-top": "40px"
-      }
-    }, [_c('div', {
-      staticClass: "eld-eld-body-row-short ",
-      staticStyle: {
-        "margin-left": "10px"
-      }
-    }, [_vm._v("\n                                Дата\n                                "), _c('el-input', {
-      attrs: {
-        "type": "date"
-      },
-      model: {
-        value: (persondecreeBlock.optiondate1String),
-        callback: function($$v) {
-          persondecreeBlock.optiondate1String = $$v
-        },
-        expression: "persondecreeBlock.optiondate1String"
-      }
-    })], 1), _vm._v(" "), _c('div', {
-      staticClass: "eld-eld-body-row-short ",
-      staticStyle: {
-        "text-align": "center",
-        "margin-left": "10px",
-        "line-height": "16px"
-      }
-    }, [_vm._v("\n                                Уволить в запас\n                                "), _c('div', {
-      staticStyle: {
-        "display": "flex",
-        "flex-direction": "column",
-        "align-items": "center",
-        "margin-top": "12px"
-      }
-    }, [_c('el-checkbox', {
-      staticClass: "checkbox-big",
-      model: {
-        value: (persondecreeBlock.checkboxdismiss),
-        callback: function($$v) {
-          persondecreeBlock.checkboxdismiss = $$v
-        },
-        expression: "persondecreeBlock.checkboxdismiss"
-      }
-    })], 1)]), _vm._v(" "), _c('div', {
-      staticClass: "eld-eld-body-row-short ",
-      staticStyle: {
-        "text-align": "center",
-        "line-height": "16px"
-      }
-    }, [_vm._v("\n                                Направить\n                                "), _c('div', {
-      staticStyle: {
-        "display": "flex",
-        "flex-direction": "column",
-        "align-items": "center",
-        "margin-top": "12px"
-      }
-    }, [_c('el-checkbox', {
-      staticClass: "checkbox-big",
-      model: {
-        value: (persondecreeBlock.checkboxdirect),
-        callback: function($$v) {
-          persondecreeBlock.checkboxdirect = $$v
-        },
-        expression: "persondecreeBlock.checkboxdirect"
-      }
-    })], 1)])]) : _vm._e(), _vm._v(" "), (persondecreeBlock.checkboxdismiss == true) ? _c('div', [_c('div', [_vm._v("\n                                По какому подпункту\n                                "), _c('el-select', {
-      staticClass: "eld-eld-body-select-long",
-      attrs: {
-        "clearable": "",
-        "placeholder": "Подпункт положения"
-      },
-      model: {
-        value: (persondecreeBlock.optionnumber3),
-        callback: function($$v) {
-          persondecreeBlock.optionnumber3 = $$v
-        },
-        expression: "persondecreeBlock.optionnumber3"
-      }
-    }, _vm._l((_vm.dismissalclauses), function(dismissalclause) {
-      return _c('el-option', {
-        key: dismissalclause.id,
-        attrs: {
-          "label": dismissalclause.paragraph + '.' + dismissalclause.subparagraph + ' - ' + dismissalclause.titleofarticles + '.',
-          "value": dismissalclause.id
-        }
-      })
-    }))], 1)]) : _vm._e(), _vm._v(" "), (persondecreeBlock.checkboxdirect == true) ? _c('div', {
-      staticClass: "eld-eld-body-row-flex",
-      staticStyle: {
-        "margin-top": "10px"
-      }
-    }, [_c('div', {
-      staticClass: "eld-eld-body-row-mshort "
-    }, [_vm._v("\n                                РОЧС\n                                "), _c('el-input', {
-      model: {
-        value: (persondecreeBlock.optionstring4),
-        callback: function($$v) {
-          persondecreeBlock.optionstring4 = $$v
-        },
-        expression: "persondecreeBlock.optionstring4"
-      }
-    })], 1), _vm._v(" "), _c('div', {
-      staticClass: "eld-eld-body-row-mshort ",
-      staticStyle: {
-        "margin-left": "10px"
-      }
-    }, [_vm._v("\n                                Управление МЧС\n                                "), _c('el-input', {
-      model: {
-        value: (persondecreeBlock.optionstring5),
-        callback: function($$v) {
-          persondecreeBlock.optionstring5 = $$v
-        },
-        expression: "persondecreeBlock.optionstring5"
-      }
-    })], 1)]) : _vm._e(), _vm._v(" "), (_vm.personFromStructure.length != 0) ? _c('div', {
-      staticClass: "eld-eld-body-row-flex",
-      staticStyle: {
-        "margin-top": "10px"
-      }
-    }, [_c('div', {
-      staticClass: "eld-eld-body-row-long"
-    }, [_vm._v("\n                                Перечень не сдавших предметов:\n                                "), _c('el-input', {
-      model: {
-        value: (persondecreeBlock.optionstring7),
-        callback: function($$v) {
-          persondecreeBlock.optionstring7 = $$v
-        },
-        expression: "persondecreeBlock.optionstring7"
-      }
-    })], 1), _vm._v(" "), _c('div', {
-      staticClass: "eld-eld-body-row-long",
-      staticStyle: {
-        "margin-left": "20px"
-      }
-    }, [_vm._v("\n                                Основание:\n                                "), _c('el-input', {
-      model: {
-        value: (persondecreeBlock.optionstring6),
-        callback: function($$v) {
-          persondecreeBlock.optionstring6 = $$v
-        },
-        expression: "persondecreeBlock.optionstring6"
-      }
-    })], 1)]) : _vm._e(), _vm._v(" "), _c('div', {
-      staticStyle: {
-        "margin-top": "15px"
-      }
-    }, [_c('el-button', {
-      attrs: {
-        "type": "primary",
-        "plain": ""
-      },
-      on: {
-        "click": function($event) {
-          _vm.addPersonblockelement(persondecreeBlock)
-        }
-      }
-    }, [_vm._v("Сформировать пункт приказа")])], 1), _vm._v(" "), _c('div', {
-      staticClass: "persondecreeoperation-part-list-title"
-    }, [_vm._v("\n                            Проект приказа\n                            ")]), _vm._v(" "), _c('div', [(persondecreeBlock.index != null && persondecreeBlock.index != 0) ? _c('span', [_vm._v(_vm._s(persondecreeBlock.index) + ".")]) : _vm._e(), _vm._v(" ОТЧИСЛИТЬ:\n                        ")]), _vm._v(" "), _vm._l((persondecreeBlock.persondecreeblocksubs), function(persondecreeblocksub) {
-      return (persondecreeblocksub.persondecreeblock == persondecreeBlock.id && persondecreeblocksub.parentpersondecreeblocksub == persondecreeblocksub.persondecreeblock) ? _c('div', {
-        staticClass: "persondecreeoperation-part-list-element"
-      }, [_c('div', [_c('div', {
-        staticClass: "persondecreeoperation-part-list-element-indent persondecreeoperation-part-list-element-margin"
-      }, [_c('span', {
-        attrs: {
-          "if": "persondecreeBlock.index != null && persondecreeBlock.index != 0 && persondecreeblocksub.index != 0"
-        }
-      }, [_vm._v(_vm._s(persondecreeBlock.index) + "." + _vm._s(persondecreeblocksub.index) + ".")]), _vm._v("\n                                    " + _vm._s(_vm.provideDeductSubBlockText(persondecreeblocksub)) + "\n                                ")]), _vm._v(" "), _vm._l((persondecreeBlock.persondecreeblocksubs), function(persondecreeblocksubsub) {
-        return (persondecreeblocksubsub.parentpersondecreeblocksub == persondecreeblocksub.id) ? _c('div', [_c('div', [_vm._v("\n                                        " + _vm._s(_vm.printDateDocument(persondecreeblocksubsub.subvaluedate1)) + " с :\n                                    ")]), _vm._v(" "), _c('div', _vm._l((_vm.persondecreeOperations), function(decreeoperation) {
-          return (decreeoperation.persondecreeblocksub == persondecreeblocksubsub.id) ? _c('div', {
-            staticClass: "persondecreeoperation-part-list-element persondecreeoperation-part-list-element-margin-big"
-          }, [_c('div', {
-            staticClass: "persondecreeoperation-part-list-element-indent"
-          }, [(decreeoperation.personobject.actualRank != null) ? _c('span', [_vm._v(_vm._s(decreeoperation.personobject.actualRank.name4) + " ")]) : _vm._e(), _vm._v("\n                                                " + _vm._s(decreeoperation.personobject.surname2) + " " + _vm._s(decreeoperation.personobject.name2) + "\n                                                " + _vm._s(decreeoperation.personobject.fathername2) + _vm._s(_vm.commaspaceifnotnull(decreeoperation.personobject.positiontypestring)) + " " + _vm._s(decreeoperation.personobject.positiontype2string) + "\n                                                " + _vm._s(_vm.getStructureName(decreeoperation.personobject.structure)) + "а " + _vm._s(_vm.getFacultiStructureName(decreeoperation.personobject.structure)) + "\n                                            ")]), _vm._v(" "), _c('div', [_c('div', [_c('el-button', {
-            attrs: {
-              "size": "mini",
-              "type": "warning"
-            },
-            on: {
-              "click": function($event) {
-                _vm.removePersondecreeoperation(decreeoperation)
-              }
-            }
-          }, [_vm._v("Удалить")])], 1)])]) : _vm._e()
-        }))]) : _vm._e()
-      })], 2)]) : _vm._e()
-    }), _vm._v(" "), _c('div', [_c('el-button', {
-      attrs: {
-        "type": "danger"
-      },
-      on: {
-        "click": function($event) {
-          _vm.deletePersondecreeblock(persondecreeBlock)
-        }
-      }
-    }, [_vm._v("Удалить блок")])], 1)], 2) : _vm._e(), _vm._v(" "), (persondecreeBlock.persondecreeblocktype == 19) ? _c('div', [_c('div', {
-      staticClass: "eld-eld-body-row-flex"
-    }, [_c('div', {
-      staticStyle: {
-        "margin-top": "10px"
-      }
-    }, [_vm._v("\n                                Кому\n                                "), _c('div', {
-      staticStyle: {
-        "margin-top": "10px"
-      }
-    }, [_c('el-button', {
-      attrs: {
-        "type": "primary",
-        "plain": ""
-      },
-      on: {
-        "click": function($event) {
-          _vm.selectAllPersonInStructure(persondecreeBlock)
-        }
-      }
-    }, [_vm._v("Выбрать")])], 1), _vm._v(" "), _c('div', {
-      staticStyle: {
-        "margin-top": "15px"
-      }
-    }, [_c('el-input', {
-      staticClass: "eld-eld-body-select-medium",
-      attrs: {
-        "placeholder": "Фамилия Имя Отчество"
-      },
-      on: {
-        "input": function($event) {
-          _vm.searchPersonsBlock(persondecreeBlock)
-        }
-      },
-      model: {
-        value: (persondecreeBlock.fiosearch),
-        callback: function($$v) {
-          persondecreeBlock.fiosearch = $$v
-        },
-        expression: "persondecreeBlock.fiosearch"
-      }
-    })], 1), _vm._v(" "), (_vm.hasSearchResultsBlock(persondecreeBlock)) ? _c('div', {
-      staticClass: "eld-search-main"
-    }, [_c('div', {
-      staticClass: "eld-search-main-title"
-    }, [_vm._v("\n                                        Результаты поиска\n                                    ")]), _vm._v(" "), _vm._l((persondecreeBlock.personssearch), function(person) {
-      return _c('div', {
-        staticClass: "eld-search-element",
-        on: {
-          "click": function($event) {
-            _vm.selectPersonBlockNonAuto(person.id, persondecreeBlock)
-          }
-        }
-      }, [_c('div', [_vm._v("\n                                            " + _vm._s(person.surname) + " " + _vm._s(person.name) + " " + _vm._s(person.fathername) + "\n                                        ")]), _vm._v(" "), _c('div', [_vm._v("\n                                            " + _vm._s(person.positiontypestring) + "\n                                        ")]), _vm._v(" "), (_vm.hasPhotopreviewBlock(person.id, persondecreeBlock)) ? _c('div', [_c('img', {
-        staticClass: "eld-search-element-image",
-        attrs: {
-          "src": _vm.getPhotopreviewBlock(person.id, persondecreeBlock).photo64
-        }
-      })]) : _vm._e(), _vm._v(" "), _c('div', [_c('div', [_vm._v("\n                                                " + _vm._s(person.structuretree) + "\n                                            ")])])])
-    })], 2) : _vm._e(), _vm._v(" "), (_vm.personFromStructure != null) ? _c('div', _vm._l((_vm.personFromStructure), function(person) {
-      return _c('div', [_vm._v("\n                                        Кого – " + _vm._s(person.surname3 + " " + person.name3 + " " + person.fathername3) + "\n                                        "), _c('el-button', {
-        attrs: {
-          "size": "mini",
-          "type": "warning"
-        },
-        on: {
-          "click": function($event) {
-            _vm.multipersonRemove(person, persondecreeBlock)
-          }
-        }
-      }, [_vm._v("Убрать")])], 1)
-    })) : _vm._e()])]), _vm._v(" "), (_vm.personFromStructure.length != 0) ? _c('div', {
-      staticClass: "eld-eld-body-row-flex",
-      staticStyle: {
-        "margin-top": "40px"
-      }
-    }, [_c('div', {
-      staticClass: "eld-eld-body-row-short ",
-      staticStyle: {
-        "margin-left": "10px"
-      }
-    }, [_vm._v("\n                                Дата\n                                "), _c('el-input', {
-      attrs: {
-        "type": "date"
-      },
-      model: {
-        value: (persondecreeBlock.optiondate1String),
-        callback: function($$v) {
-          persondecreeBlock.optiondate1String = $$v
-        },
-        expression: "persondecreeBlock.optiondate1String"
-      }
-    })], 1), _vm._v(" "), _c('div', {
-      staticClass: "eld-eld-body-row-mshort ",
-      staticStyle: {
-        "margin-left": "10px"
-      }
-    }, [_vm._v("\n                                Пункт\n                                "), _c('el-input', {
-      model: {
-        value: (persondecreeBlock.optionstring1),
-        callback: function($$v) {
-          persondecreeBlock.optionstring1 = $$v
-        },
-        expression: "persondecreeBlock.optionstring1"
-      }
-    })], 1)]) : _vm._e(), _vm._v(" "), (_vm.personFromStructure.length != 0) ? _c('div', {
-      staticClass: "eld-eld-body-row-flex",
-      staticStyle: {
-        "margin-top": "10px"
-      }
-    }, [_c('div', {
-      staticClass: "eld-eld-body-row-long"
-    }, [_vm._v("\n                                Основание:\n                                "), _c('el-input', {
-      model: {
-        value: (persondecreeBlock.optionstring2),
-        callback: function($$v) {
-          persondecreeBlock.optionstring2 = $$v
-        },
-        expression: "persondecreeBlock.optionstring2"
-      }
-    })], 1)]) : _vm._e(), _vm._v(" "), _c('div', [_c('br'), _vm._v(" "), _c('el-button', {
-      attrs: {
-        "type": "primary",
-        "plain": ""
-      },
-      on: {
-        "click": function($event) {
-          _vm.addPersonblockelement(persondecreeBlock)
-        }
-      }
-    }, [_vm._v("Сформировать пункт приказа")])], 1), _vm._v(" "), _c('div', {
-      staticClass: "persondecreeoperation-part-list-title"
-    }, [_vm._v("\n                            Проект приказа\n                        ")]), _vm._v(" "), _c('div', [(persondecreeBlock.index != null && persondecreeBlock.index != 0) ? _c('span', [_vm._v(_vm._s(persondecreeBlock.index) + ".")]) : _vm._e(), _vm._v(" УВЕЛИЧИТЬ:\n                        ")]), _vm._v(" "), _vm._l((persondecreeBlock.persondecreeblocksubs), function(persondecreeblocksub) {
-      return (persondecreeblocksub.persondecreeblock == persondecreeBlock.id && persondecreeblocksub.parentpersondecreeblocksub == 0) ? _c('div', {
-        staticClass: "persondecreeoperation-part-list-element"
-      }, [_c('div', [_c('div', {
-        staticClass: "persondecreeoperation-part-list-element-indent persondecreeoperation-part-list-element-margin"
-      }, [_c('span', {
-        attrs: {
-          "if": "persondecreeBlock.index != null && persondecreeBlock.index != 0 && persondecreeblocksub.index != 0"
-        }
-      }, [_vm._v(_vm._s(persondecreeBlock.index) + "." + _vm._s(persondecreeblocksub.index) + ".")]), _vm._v("\n                                    " + _vm._s(_vm.provideUpSubBlockText(persondecreeblocksub)) + "\n                                ")]), _vm._v(" "), _vm._l((persondecreeBlock.persondecreeblocksubs), function(persondecreeblocksubsub) {
-        return (persondecreeblocksubsub.parentpersondecreeblocksub == persondecreeblocksub.id) ? _c('div', [_c('div', [_vm._v("\n                                        c " + _vm._s(_vm.printDateDocument(persondecreeblocksubsub.subvaluedate1)) + ":\n                                    ")]), _vm._v(" "), _c('div', _vm._l((_vm.persondecreeOperations), function(decreeoperation) {
-          return (decreeoperation.persondecreeblocksub == persondecreeblocksubsub.id) ? _c('div', {
-            staticClass: "persondecreeoperation-part-list-element persondecreeoperation-part-list-element-margin-big"
-          }, [_c('div', {
-            staticClass: "persondecreeoperation-part-list-element-indent"
-          }, [_vm._v("\n                                                " + _vm._s(decreeoperation.personobject.surname3) + " " + _vm._s(decreeoperation.personobject.name3) + "\n                                                " + _vm._s(decreeoperation.personobject.fathername3) + _vm._s(_vm.commaspaceifnotnull(decreeoperation.personobject.positiontree3)) + " " + _vm._s(decreeoperation.personobject.positiontree3) + "\n                                                "), (decreeoperation.optionnumber8 == 1) ? _c('span', [_vm._v("в распоряжение начальника " + _vm._s(decreeoperation.optionstring4) + " учреждение " + _vm._s(decreeoperation.optionstring5))]) : _vm._e()]), _vm._v(" "), _c('div', [_c('div', [_c('el-button', {
-            attrs: {
-              "size": "mini",
-              "type": "warning"
-            },
-            on: {
-              "click": function($event) {
-                _vm.removePersondecreeoperation(decreeoperation)
-              }
-            }
-          }, [_vm._v("Удалить")])], 1)])]) : _vm._e()
-        })), _vm._v(" "), _c('div', [_vm._v("\n                                        Основание: " + _vm._s(persondecreeblocksubsub.subvaluestring1) + ".\n                                    ")])]) : _vm._e()
-      })], 2)]) : _vm._e()
-    }), _vm._v(" "), _c('div', [_c('el-button', {
-      attrs: {
-        "type": "danger"
-      },
-      on: {
-        "click": function($event) {
-          _vm.deletePersondecreeblock(persondecreeBlock)
-        }
-      }
-    }, [_vm._v("Удалить блок")])], 1)], 2) : _vm._e(), _vm._v(" "), (persondecreeBlock.persondecreeblocktype == 20) ? _c('div', [_c('div', {
-      staticClass: "eld-eld-body-row-flex"
-    }, [_c('div', {
-      staticStyle: {
-        "margin-top": "10px"
-      }
-    }, [_vm._v("\n                                Кого\n                                "), _c('div', {
-      staticStyle: {
-        "margin-top": "10px"
-      }
-    }, [_c('el-button', {
-      attrs: {
-        "type": "primary",
-        "plain": ""
-      },
-      on: {
-        "click": function($event) {
-          _vm.selectAllPersonInStructure(persondecreeBlock)
-        }
-      }
-    }, [_vm._v("Выбрать")])], 1), _vm._v(" "), _c('div', {
-      staticStyle: {
-        "margin-top": "15px"
-      }
-    }, [_c('el-input', {
-      staticClass: "eld-eld-body-select-medium",
-      attrs: {
-        "placeholder": "Фамилия Имя Отчество"
-      },
-      on: {
-        "input": function($event) {
-          _vm.searchPersonsBlock(persondecreeBlock)
-        }
-      },
-      model: {
-        value: (persondecreeBlock.fiosearch),
-        callback: function($$v) {
-          persondecreeBlock.fiosearch = $$v
-        },
-        expression: "persondecreeBlock.fiosearch"
-      }
-    })], 1), _vm._v(" "), (_vm.hasSearchResultsBlock(persondecreeBlock)) ? _c('div', {
-      staticClass: "eld-search-main"
-    }, [_c('div', {
-      staticClass: "eld-search-main-title"
-    }, [_vm._v("\n                                        Результаты поиска\n                                    ")]), _vm._v(" "), _vm._l((persondecreeBlock.personssearch), function(person) {
-      return _c('div', {
-        staticClass: "eld-search-element",
-        on: {
-          "click": function($event) {
-            _vm.selectPersonBlockNonAuto(person.id, persondecreeBlock)
-          }
-        }
-      }, [_c('div', [_vm._v("\n                                            " + _vm._s(person.surname) + " " + _vm._s(person.name) + " " + _vm._s(person.fathername) + "\n                                        ")]), _vm._v(" "), _c('div', [_vm._v("\n                                            " + _vm._s(person.positiontypestring) + "\n                                        ")]), _vm._v(" "), (_vm.hasPhotopreviewBlock(person.id, persondecreeBlock)) ? _c('div', [_c('img', {
-        staticClass: "eld-search-element-image",
-        attrs: {
-          "src": _vm.getPhotopreviewBlock(person.id, persondecreeBlock).photo64
-        }
-      })]) : _vm._e(), _vm._v(" "), _c('div', [_c('div', [_vm._v("\n                                                " + _vm._s(person.structuretree) + "\n                                            ")])])])
-    })], 2) : _vm._e(), _vm._v(" "), (_vm.personFromStructure != null) ? _c('div', _vm._l((_vm.personFromStructure), function(person) {
-      return _c('div', [_vm._v("\n                                        Кого – " + _vm._s(person.surname3 + " " + person.name3 + " " + person.fathername3) + "\n                                        "), _c('el-button', {
-        attrs: {
-          "size": "mini",
-          "type": "warning"
-        },
-        on: {
-          "click": function($event) {
-            _vm.multipersonRemove(person, persondecreeBlock)
-          }
-        }
-      }, [_vm._v("Убрать")])], 1)
-    })) : _vm._e()])]), _vm._v(" "), (_vm.personFromStructure.length != 0) ? _c('div', {
-      staticClass: "eld-eld-body-row-flex",
-      staticStyle: {
-        "margin-top": "20px"
-      }
-    }, [_c('div', {
-      staticStyle: {
-        "margin-top": "10px"
-      }
-    }, [_c('el-button', {
-      attrs: {
-        "type": "primary",
-        "plain": ""
-      },
-      on: {
-        "click": function($event) {
-          _vm.selectAllPersonInStructure(persondecreeBlock)
-        }
-      }
-    }, [_vm._v("Выбрать")])], 1), _vm._v(" "), _c('div', {
-      staticClass: "eld-eld-body-row-small ",
-      staticStyle: {
-        "margin-left": "10px"
-      }
-    }, [_vm._v("\n                                Семестр\n                                "), _c('el-input', {
-      attrs: {
-        "type": "number"
-      },
-      model: {
-        value: (persondecreeBlock.optionnumber1),
-        callback: function($$v) {
-          persondecreeBlock.optionnumber1 = $$v
-        },
-        expression: "persondecreeBlock.optionnumber1"
-      }
-    })], 1), _vm._v(" "), _c('div', {
-      staticClass: "eld-eld-body-row-small ",
-      staticStyle: {
-        "margin-left": "10px"
-      }
-    }, [_vm._v("\n                                Курс\n                                "), _c('el-input', {
-      attrs: {
-        "type": "number"
-      },
-      model: {
-        value: (persondecreeBlock.optionnumber2),
-        callback: function($$v) {
-          persondecreeBlock.optionnumber2 = $$v
-        },
-        expression: "persondecreeBlock.optionnumber2"
-      }
-    })], 1)]) : _vm._e(), _vm._v(" "), (_vm.personFromStructure.length != 0) ? _c('div', {
-      staticClass: "eld-eld-body-row-flex",
-      staticStyle: {
-        "margin-top": "10px"
-      }
-    }, [_c('div', {
-      staticClass: "eld-eld-body-row-short "
-    }, [_vm._v("\n                                Дата ликвидации задолжности\n                                "), _c('el-input', {
-      attrs: {
-        "type": "date"
-      },
-      model: {
-        value: (persondecreeBlock.optiondate1String),
-        callback: function($$v) {
-          persondecreeBlock.optiondate1String = $$v
-        },
-        expression: "persondecreeBlock.optiondate1String"
-      }
-    })], 1)]) : _vm._e(), _vm._v(" "), (_vm.personFromStructure.length != 0) ? _c('div', {
-      staticClass: "eld-eld-body-row-flex",
-      staticStyle: {
-        "margin-top": "10px"
-      }
-    }, [_c('div', {
-      staticClass: "eld-eld-body-row-long"
-    }, [_vm._v("\n                                Основание:\n                                "), _c('el-input', {
-      model: {
-        value: (persondecreeBlock.optionstring2),
-        callback: function($$v) {
-          persondecreeBlock.optionstring2 = $$v
-        },
-        expression: "persondecreeBlock.optionstring2"
-      }
-    })], 1)]) : _vm._e(), _vm._v(" "), _c('div', [_c('br'), _vm._v(" "), _c('el-button', {
-      attrs: {
-        "type": "primary",
-        "plain": ""
-      },
-      on: {
-        "click": function($event) {
-          _vm.addPersonblockelement(persondecreeBlock)
-        }
-      }
-    }, [_vm._v("Сформировать пункт приказа")])], 1), _vm._v(" "), _c('div', {
-      staticClass: "persondecreeoperation-part-list-title"
-    }, [_vm._v("\n                            Проект приказа\n                        ")]), _vm._v(" "), _c('div', [(persondecreeBlock.index != null && persondecreeBlock.index != 0) ? _c('span', [_vm._v(_vm._s(persondecreeBlock.index) + ".")]) : _vm._e(), _vm._v(" ВОССТАНОВИТЬ:\n                        ")]), _vm._v(" "), _vm._l((persondecreeBlock.persondecreeblocksubs), function(persondecreeblocksub) {
-      return (persondecreeblocksub.persondecreeblock == persondecreeBlock.id && persondecreeblocksub.parentpersondecreeblocksub == 0) ? _c('div', {
-        staticClass: "persondecreeoperation-part-list-element"
-      }, [_c('div', [_c('div', {
-        staticClass: "persondecreeoperation-part-list-element-indent persondecreeoperation-part-list-element-margin"
-      }, [_c('span', {
-        attrs: {
-          "if": "persondecreeBlock.index != null && persondecreeBlock.index != 0 && persondecreeblocksub.index != 0"
-        }
-      }, [_vm._v(_vm._s(persondecreeBlock.index) + "." + _vm._s(persondecreeblocksub.index) + ".")]), _vm._v("\n                                    " + _vm._s(_vm.provideRestoreSubBlockText(persondecreeblocksub)) + "\n                                ")]), _vm._v(" "), _vm._l((persondecreeBlock.persondecreeblocksubs), function(persondecreeblocksubsub) {
-        return (persondecreeblocksubsub.parentpersondecreeblocksub == persondecreeblocksub.id) ? _c('div', [_c('div', [_vm._v("\n                                        на " + _vm._s(persondecreeblocksubsub.subvaluenumber1) + " семестр " + _vm._s(persondecreeblocksubsub.subvaluenumber2) + "  курса:\n                                    ")]), _vm._v(" "), _c('div', _vm._l((persondecreeBlock.persondecreeblocksubs), function(persondecreeblocksubsubsub) {
-          return (persondecreeblocksubsubsub.parentpersondecreeblocksub == persondecreeblocksubsub.id) ? _c('div', [_c('div', [_vm._v("\n                                                Академическую задолженность ликвидировать до " + _vm._s(_vm.printDateDocument(persondecreeblocksubsubsub.subvaluedate1)) + ".\n                                            ")]), _vm._v(" "), _c('div', _vm._l((_vm.persondecreeOperations), function(decreeoperation) {
-            return (decreeoperation.persondecreeblocksub == persondecreeblocksubsubsub.id) ? _c('div', {
-              staticClass: "persondecreeoperation-part-list-element persondecreeoperation-part-list-element-margin-big"
-            }, [_c('div', {
-              staticClass: "persondecreeoperation-part-list-element-indent"
-            }, [_vm._v("\n                                                        " + _vm._s(decreeoperation.personobject.surname2) + " " + _vm._s(decreeoperation.personobject.name2) + "\n                                                        " + _vm._s(decreeoperation.personobject.fathername2) + "\n                                                    ")]), _vm._v(" "), _c('div', [_c('div', [_c('el-button', {
-              attrs: {
-                "size": "mini",
-                "type": "warning"
-              },
-              on: {
-                "click": function($event) {
-                  _vm.removePersondecreeoperation(decreeoperation)
-                }
-              }
-            }, [_vm._v("Удалить")])], 1)])]) : _vm._e()
-          })), _vm._v(" "), _c('div', [_vm._v("\n                                                Основание: " + _vm._s(persondecreeblocksubsubsub.subvaluestring1) + ".\n                                            ")])]) : _vm._e()
-        }))]) : _vm._e()
-      })], 2)]) : _vm._e()
-    }), _vm._v(" "), _c('div', [_c('el-button', {
-      attrs: {
-        "type": "danger"
-      },
-      on: {
-        "click": function($event) {
-          _vm.deletePersondecreeblock(persondecreeBlock)
-        }
-      }
-    }, [_vm._v("Удалить блок")])], 1)], 2) : _vm._e(), _vm._v(" "), (persondecreeBlock.persondecreeblocktype == 21) ? _c('div', [_c('div', {
-      staticClass: "eld-eld-body-row-flex-spacebetween"
-    }, [_c('div', [_c('div', [_vm._v("\n                                    Перевести куда\n                                ")]), _vm._v(" "), _c('el-select', {
-      staticClass: "eld-eld-body-select-medium",
-      attrs: {
-        "clearable": "",
-        "placeholder": ""
-      },
-      model: {
-        value: (persondecreeBlock.optionnumber2),
-        callback: function($$v) {
-          persondecreeBlock.optionnumber2 = $$v
-        },
-        expression: "persondecreeBlock.optionnumber2"
-      }
-    }, _vm._l((_vm.persondecreeblocksubtypes), function(persondecreeblocksubtype) {
-      return (persondecreeblocksubtype.persondecreeblocktype == 21) ? _c('el-option', {
-        key: persondecreeblocksubtype.id,
-        attrs: {
-          "label": persondecreeblocksubtype.name,
-          "value": persondecreeblocksubtype.id
-        }
-      }) : _vm._e()
-    }))], 1)]), _vm._v(" "), (persondecreeBlock.optionnumber2 == 18) ? _c('div', [_c('div', {
-      staticStyle: {
-        "margin-top": "10px"
-      }
-    }, [_vm._v("\n                                По итогам\n                            ")]), _vm._v(" "), _c('el-input', {
-      staticClass: "eld-eld-body-row-long",
-      attrs: {
-        "placeholder": "летней экзаменационной сессии 2019-2020 ..."
-      },
-      model: {
-        value: (persondecreeBlock.optionstring1),
-        callback: function($$v) {
-          persondecreeBlock.optionstring1 = $$v
-        },
-        expression: "persondecreeBlock.optionstring1"
-      }
-    }), _vm._v(" "), _c('div', {
-      staticClass: "eld-eld-body-row-flex"
-    }, [_c('div', {
-      staticStyle: {
-        "margin-top": "10px"
-      }
     }, [_vm._v("\n                                    Кого\n                                    "), _c('div', {
       staticStyle: {
         "margin-top": "10px"
@@ -36814,10 +36168,10 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       },
       on: {
         "click": function($event) {
-          _vm.selectAllPersonInStructure(persondecreeBlock, 4)
+          _vm.selectAllPersonInStructure(persondecreeBlock)
         }
       }
-    }, [_vm._v("Выбрать взвод")])], 1), _vm._v(" "), _c('div', {
+    }, [_vm._v("Выбрать")])], 1), _vm._v(" "), _c('div', {
       staticStyle: {
         "margin-top": "15px"
       }
@@ -36868,17 +36222,46 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           }
         }
       }, [_vm._v("Убрать")])], 1)
-    })) : _vm._e()])]), _vm._v(" "), _c('div', {
+    })) : _vm._e()])]), _vm._v(" "), (_vm.personFromStructure.length != 0) ? _c('div', {
       staticClass: "eld-eld-body-row-flex",
       staticStyle: {
-        "margin-top": "20px"
+        "margin-top": "10px"
+      }
+    }, [_c('div', [_vm._v("\n                                    По какому подпункту\n                                    "), _c('el-select', {
+      staticClass: "eld-eld-body-select-long",
+      staticStyle: {
+        "left": "0px"
+      },
+      attrs: {
+        "clearable": "",
+        "placeholder": "Подпункт положения"
+      },
+      model: {
+        value: (persondecreeBlock.persondecreeblocksub),
+        callback: function($$v) {
+          persondecreeBlock.persondecreeblocksub = $$v
+        },
+        expression: "persondecreeBlock.persondecreeblocksub"
+      }
+    }, _vm._l((_vm.dismissalclauses), function(persondecreeblocksubtype) {
+      return (persondecreeblocksubtype.persondecreeblocktype == 18) ? _c('el-option', {
+        key: persondecreeblocksubtype.id,
+        attrs: {
+          "label": persondecreeblocksubtype.paragraph + '.' + persondecreeblocksubtype.subparagraph + ' - ' + persondecreeblocksubtype.titleofarticles + '.',
+          "value": persondecreeblocksubtype.id
+        }
+      }) : _vm._e()
+    }))], 1)]) : _vm._e(), _vm._v(" "), (_vm.personFromStructure.length != 0) ? _c('div', {
+      staticClass: "eld-eld-body-row-flex",
+      staticStyle: {
+        "margin-top": "40px"
       }
     }, [_c('div', {
       staticClass: "eld-eld-body-row-short ",
       staticStyle: {
         "margin-left": "10px"
       }
-    }, [_vm._v("\n                                    С какого числа\n                                    "), _c('el-input', {
+    }, [_vm._v("\n                                    Дата\n                                    "), _c('el-input', {
       attrs: {
         "type": "date"
       },
@@ -36896,7 +36279,688 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         "margin-left": "10px",
         "line-height": "16px"
       }
-    }, [_vm._v("\n                                    Условно\n                                    "), _c('div', {
+    }, [_vm._v("\n                                    Уволить в запас\n                                    "), _c('div', {
+      staticStyle: {
+        "display": "flex",
+        "flex-direction": "column",
+        "align-items": "center",
+        "margin-top": "12px"
+      }
+    }, [_c('el-checkbox', {
+      staticClass: "checkbox-big",
+      model: {
+        value: (persondecreeBlock.checkboxdismiss),
+        callback: function($$v) {
+          persondecreeBlock.checkboxdismiss = $$v
+        },
+        expression: "persondecreeBlock.checkboxdismiss"
+      }
+    })], 1)]), _vm._v(" "), _c('div', {
+      staticClass: "eld-eld-body-row-short ",
+      staticStyle: {
+        "text-align": "center",
+        "line-height": "16px"
+      }
+    }, [_vm._v("\n                                    Направить\n                                    "), _c('div', {
+      staticStyle: {
+        "display": "flex",
+        "flex-direction": "column",
+        "align-items": "center",
+        "margin-top": "12px"
+      }
+    }, [_c('el-checkbox', {
+      staticClass: "checkbox-big",
+      model: {
+        value: (persondecreeBlock.checkboxdirect),
+        callback: function($$v) {
+          persondecreeBlock.checkboxdirect = $$v
+        },
+        expression: "persondecreeBlock.checkboxdirect"
+      }
+    })], 1)])]) : _vm._e(), _vm._v(" "), (persondecreeBlock.checkboxdismiss == true) ? _c('div', [_c('div', [_vm._v("\n                                    По какому подпункту\n                                    "), _c('el-select', {
+      staticClass: "eld-eld-body-select-long",
+      attrs: {
+        "clearable": "",
+        "placeholder": "Подпункт положения"
+      },
+      model: {
+        value: (persondecreeBlock.optionnumber3),
+        callback: function($$v) {
+          persondecreeBlock.optionnumber3 = $$v
+        },
+        expression: "persondecreeBlock.optionnumber3"
+      }
+    }, _vm._l((_vm.dismissalclauses), function(dismissalclause) {
+      return _c('el-option', {
+        key: dismissalclause.id,
+        attrs: {
+          "label": dismissalclause.paragraph + '.' + dismissalclause.subparagraph + ' - ' + dismissalclause.titleofarticles + '.',
+          "value": dismissalclause.id
+        }
+      })
+    }))], 1)]) : _vm._e(), _vm._v(" "), (persondecreeBlock.checkboxdirect == true) ? _c('div', {
+      staticClass: "eld-eld-body-row-flex",
+      staticStyle: {
+        "margin-top": "10px"
+      }
+    }, [_c('div', {
+      staticClass: "eld-eld-body-row-mshort "
+    }, [_vm._v("\n                                    РОЧС\n                                    "), _c('el-input', {
+      model: {
+        value: (persondecreeBlock.optionstring4),
+        callback: function($$v) {
+          persondecreeBlock.optionstring4 = $$v
+        },
+        expression: "persondecreeBlock.optionstring4"
+      }
+    })], 1), _vm._v(" "), _c('div', {
+      staticClass: "eld-eld-body-row-mshort ",
+      staticStyle: {
+        "margin-left": "10px"
+      }
+    }, [_vm._v("\n                                    Управление МЧС\n                                    "), _c('el-input', {
+      model: {
+        value: (persondecreeBlock.optionstring5),
+        callback: function($$v) {
+          persondecreeBlock.optionstring5 = $$v
+        },
+        expression: "persondecreeBlock.optionstring5"
+      }
+    })], 1)]) : _vm._e(), _vm._v(" "), (_vm.personFromStructure.length != 0) ? _c('div', {
+      staticClass: "eld-eld-body-row-flex",
+      staticStyle: {
+        "margin-top": "10px"
+      }
+    }, [_c('div', {
+      staticClass: "eld-eld-body-row-long"
+    }, [_vm._v("\n                                    Перечень не сдавших предметов:\n                                    "), _c('el-input', {
+      model: {
+        value: (persondecreeBlock.optionstring7),
+        callback: function($$v) {
+          persondecreeBlock.optionstring7 = $$v
+        },
+        expression: "persondecreeBlock.optionstring7"
+      }
+    })], 1), _vm._v(" "), _c('div', {
+      staticClass: "eld-eld-body-row-long",
+      staticStyle: {
+        "margin-left": "20px"
+      }
+    }, [_vm._v("\n                                    Основание:\n                                    "), _c('el-input', {
+      model: {
+        value: (persondecreeBlock.optionstring6),
+        callback: function($$v) {
+          persondecreeBlock.optionstring6 = $$v
+        },
+        expression: "persondecreeBlock.optionstring6"
+      }
+    })], 1)]) : _vm._e(), _vm._v(" "), _c('div', {
+      staticStyle: {
+        "margin-top": "15px"
+      }
+    }, [_c('el-button', {
+      attrs: {
+        "type": "primary",
+        "plain": ""
+      },
+      on: {
+        "click": function($event) {
+          _vm.addPersonblockelement(persondecreeBlock)
+        }
+      }
+    }, [_vm._v("Сформировать пункт приказа")])], 1)]) : _vm._e(), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', {
+      staticClass: "persondecreeoperation-part-list-title"
+    }, [_vm._v("\n                            Проект приказа\n                            ")]) : _vm._e(), _vm._v(" "), _c('div', [(persondecreeBlock.index != null && persondecreeBlock.index != 0) ? _c('span', [_vm._v(_vm._s(persondecreeBlock.index) + ".")]) : _vm._e(), _vm._v(" ОТЧИСЛИТЬ:\n                        ")]), _vm._v(" "), _vm._l((persondecreeBlock.persondecreeblocksubs), function(persondecreeblocksub) {
+      return (persondecreeblocksub.persondecreeblock == persondecreeBlock.id && persondecreeblocksub.parentpersondecreeblocksub == persondecreeblocksub.persondecreeblock) ? _c('div', {
+        staticClass: "persondecreeoperation-part-list-element"
+      }, [_c('div', [_c('div', {
+        staticClass: "persondecreeoperation-part-list-element-indent persondecreeoperation-part-list-element-margin"
+      }, [_c('span', {
+        attrs: {
+          "if": "persondecreeBlock.index != null && persondecreeBlock.index != 0 && persondecreeblocksub.index != 0"
+        }
+      }, [_vm._v(_vm._s(persondecreeBlock.index) + "." + _vm._s(persondecreeblocksub.index) + ".")]), _vm._v("\n                                    " + _vm._s(_vm.provideDeductSubBlockText(persondecreeblocksub)) + "\n                                ")]), _vm._v(" "), _vm._l((persondecreeBlock.persondecreeblocksubs), function(persondecreeblocksubsub) {
+        return (persondecreeblocksubsub.parentpersondecreeblocksub == persondecreeblocksub.id) ? _c('div', [_c('div', [_vm._v("\n                                        " + _vm._s(_vm.printDateDocument(persondecreeblocksubsub.subvaluedate1)) + " с :\n                                    ")]), _vm._v(" "), _c('div', _vm._l((_vm.persondecreeOperations), function(decreeoperation) {
+          return (decreeoperation.persondecreeblocksub == persondecreeblocksubsub.id) ? _c('div', {
+            staticClass: "persondecreeoperation-part-list-element persondecreeoperation-part-list-element-margin-big"
+          }, [_c('div', {
+            staticClass: "persondecreeoperation-part-list-element-indent"
+          }, [(decreeoperation.personobject.actualRank != null) ? _c('span', [_vm._v(_vm._s(decreeoperation.personobject.actualRank.name4) + " ")]) : _vm._e(), _vm._v("\n                                                " + _vm._s(decreeoperation.personobject.surname2) + " " + _vm._s(decreeoperation.personobject.name2) + "\n                                                " + _vm._s(decreeoperation.personobject.fathername2) + _vm._s(_vm.commaspaceifnotnull(decreeoperation.personobject.positiontypestring)) + " " + _vm._s(decreeoperation.personobject.positiontype2string) + "\n                                                " + _vm._s(_vm.getStructureName(decreeoperation.personobject.structure)) + "а " + _vm._s(_vm.getFacultiStructureName(decreeoperation.personobject.structure)) + "\n                                            ")]), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_c('div', [_c('el-button', {
+            attrs: {
+              "size": "mini",
+              "type": "warning"
+            },
+            on: {
+              "click": function($event) {
+                _vm.removePersondecreeoperation(decreeoperation)
+              }
+            }
+          }, [_vm._v("Удалить")])], 1)]) : _vm._e()]) : _vm._e()
+        }))]) : _vm._e()
+      })], 2)]) : _vm._e()
+    }), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_c('el-button', {
+      attrs: {
+        "type": "danger"
+      },
+      on: {
+        "click": function($event) {
+          _vm.deletePersondecreeblock(persondecreeBlock)
+        }
+      }
+    }, [_vm._v("Удалить блок")])], 1) : _vm._e()], 2) : _vm._e(), _vm._v(" "), (persondecreeBlock.persondecreeblocktype == 19) ? _c('div', [(_vm.persondecreeSigned != 1) ? _c('div', [_c('div', {
+      staticClass: "eld-eld-body-row-flex"
+    }, [_c('div', {
+      staticStyle: {
+        "margin-top": "10px"
+      }
+    }, [_vm._v("\n                                    Кому\n                                    "), _c('div', {
+      staticStyle: {
+        "margin-top": "10px"
+      }
+    }, [_c('el-button', {
+      attrs: {
+        "type": "primary",
+        "plain": ""
+      },
+      on: {
+        "click": function($event) {
+          _vm.selectAllPersonInStructure(persondecreeBlock)
+        }
+      }
+    }, [_vm._v("Выбрать")])], 1), _vm._v(" "), _c('div', {
+      staticStyle: {
+        "margin-top": "15px"
+      }
+    }, [_c('el-input', {
+      staticClass: "eld-eld-body-select-medium",
+      attrs: {
+        "placeholder": "Фамилия Имя Отчество"
+      },
+      on: {
+        "input": function($event) {
+          _vm.searchPersonsBlock(persondecreeBlock)
+        }
+      },
+      model: {
+        value: (persondecreeBlock.fiosearch),
+        callback: function($$v) {
+          persondecreeBlock.fiosearch = $$v
+        },
+        expression: "persondecreeBlock.fiosearch"
+      }
+    })], 1), _vm._v(" "), (_vm.hasSearchResultsBlock(persondecreeBlock)) ? _c('div', {
+      staticClass: "eld-search-main"
+    }, [_c('div', {
+      staticClass: "eld-search-main-title"
+    }, [_vm._v("\n                                            Результаты поиска\n                                        ")]), _vm._v(" "), _vm._l((persondecreeBlock.personssearch), function(person) {
+      return _c('div', {
+        staticClass: "eld-search-element",
+        on: {
+          "click": function($event) {
+            _vm.selectPersonBlockNonAuto(person.id, persondecreeBlock)
+          }
+        }
+      }, [_c('div', [_vm._v("\n                                                " + _vm._s(person.surname) + " " + _vm._s(person.name) + " " + _vm._s(person.fathername) + "\n                                            ")]), _vm._v(" "), _c('div', [_vm._v("\n                                                " + _vm._s(person.positiontypestring) + "\n                                            ")]), _vm._v(" "), (_vm.hasPhotopreviewBlock(person.id, persondecreeBlock)) ? _c('div', [_c('img', {
+        staticClass: "eld-search-element-image",
+        attrs: {
+          "src": _vm.getPhotopreviewBlock(person.id, persondecreeBlock).photo64
+        }
+      })]) : _vm._e(), _vm._v(" "), _c('div', [_c('div', [_vm._v("\n                                                    " + _vm._s(person.structuretree) + "\n                                                ")])])])
+    })], 2) : _vm._e(), _vm._v(" "), (_vm.personFromStructure != null) ? _c('div', _vm._l((_vm.personFromStructure), function(person) {
+      return _c('div', [_vm._v("\n                                            Кого – " + _vm._s(person.surname3 + " " + person.name3 + " " + person.fathername3) + "\n                                            "), _c('el-button', {
+        attrs: {
+          "size": "mini",
+          "type": "warning"
+        },
+        on: {
+          "click": function($event) {
+            _vm.multipersonRemove(person, persondecreeBlock)
+          }
+        }
+      }, [_vm._v("Убрать")])], 1)
+    })) : _vm._e()])]), _vm._v(" "), (_vm.personFromStructure.length != 0) ? _c('div', {
+      staticClass: "eld-eld-body-row-flex",
+      staticStyle: {
+        "margin-top": "40px"
+      }
+    }, [_c('div', {
+      staticClass: "eld-eld-body-row-short ",
+      staticStyle: {
+        "margin-left": "10px"
+      }
+    }, [_vm._v("\n                                    Дата\n                                    "), _c('el-input', {
+      attrs: {
+        "type": "date"
+      },
+      model: {
+        value: (persondecreeBlock.optiondate1String),
+        callback: function($$v) {
+          persondecreeBlock.optiondate1String = $$v
+        },
+        expression: "persondecreeBlock.optiondate1String"
+      }
+    })], 1), _vm._v(" "), _c('div', {
+      staticClass: "eld-eld-body-row-mshort ",
+      staticStyle: {
+        "margin-left": "10px"
+      }
+    }, [_vm._v("\n                                    Пункт\n                                    "), _c('el-input', {
+      model: {
+        value: (persondecreeBlock.optionstring1),
+        callback: function($$v) {
+          persondecreeBlock.optionstring1 = $$v
+        },
+        expression: "persondecreeBlock.optionstring1"
+      }
+    })], 1)]) : _vm._e(), _vm._v(" "), (_vm.personFromStructure.length != 0) ? _c('div', {
+      staticClass: "eld-eld-body-row-flex",
+      staticStyle: {
+        "margin-top": "10px"
+      }
+    }, [_c('div', {
+      staticClass: "eld-eld-body-row-long"
+    }, [_vm._v("\n                                    Основание:\n                                    "), _c('el-input', {
+      model: {
+        value: (persondecreeBlock.optionstring2),
+        callback: function($$v) {
+          persondecreeBlock.optionstring2 = $$v
+        },
+        expression: "persondecreeBlock.optionstring2"
+      }
+    })], 1)]) : _vm._e(), _vm._v(" "), _c('div', [_c('br'), _vm._v(" "), _c('el-button', {
+      attrs: {
+        "type": "primary",
+        "plain": ""
+      },
+      on: {
+        "click": function($event) {
+          _vm.addPersonblockelement(persondecreeBlock)
+        }
+      }
+    }, [_vm._v("Сформировать пункт приказа")])], 1)]) : _vm._e(), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', {
+      staticClass: "persondecreeoperation-part-list-title"
+    }, [_vm._v("\n                            Проект приказа\n                        ")]) : _vm._e(), _vm._v(" "), _c('div', [(persondecreeBlock.index != null && persondecreeBlock.index != 0) ? _c('span', [_vm._v(_vm._s(persondecreeBlock.index) + ".")]) : _vm._e(), _vm._v(" УВЕЛИЧИТЬ:\n                        ")]), _vm._v(" "), _vm._l((persondecreeBlock.persondecreeblocksubs), function(persondecreeblocksub) {
+      return (persondecreeblocksub.persondecreeblock == persondecreeBlock.id && persondecreeblocksub.parentpersondecreeblocksub == 0) ? _c('div', {
+        staticClass: "persondecreeoperation-part-list-element"
+      }, [_c('div', [_c('div', {
+        staticClass: "persondecreeoperation-part-list-element-indent persondecreeoperation-part-list-element-margin"
+      }, [_c('span', {
+        attrs: {
+          "if": "persondecreeBlock.index != null && persondecreeBlock.index != 0 && persondecreeblocksub.index != 0"
+        }
+      }, [_vm._v(_vm._s(persondecreeBlock.index) + "." + _vm._s(persondecreeblocksub.index) + ".")]), _vm._v("\n                                    " + _vm._s(_vm.provideUpSubBlockText(persondecreeblocksub)) + "\n                                ")]), _vm._v(" "), _vm._l((persondecreeBlock.persondecreeblocksubs), function(persondecreeblocksubsub) {
+        return (persondecreeblocksubsub.parentpersondecreeblocksub == persondecreeblocksub.id) ? _c('div', [_c('div', [_vm._v("\n                                        c " + _vm._s(_vm.printDateDocument(persondecreeblocksubsub.subvaluedate1)) + ":\n                                    ")]), _vm._v(" "), _c('div', _vm._l((_vm.persondecreeOperations), function(decreeoperation) {
+          return (decreeoperation.persondecreeblocksub == persondecreeblocksubsub.id) ? _c('div', {
+            staticClass: "persondecreeoperation-part-list-element persondecreeoperation-part-list-element-margin-big"
+          }, [_c('div', {
+            staticClass: "persondecreeoperation-part-list-element-indent"
+          }, [_vm._v("\n                                                " + _vm._s(decreeoperation.personobject.surname3) + " " + _vm._s(decreeoperation.personobject.name3) + "\n                                                " + _vm._s(decreeoperation.personobject.fathername3) + _vm._s(_vm.commaspaceifnotnull(decreeoperation.personobject.positiontree3)) + " " + _vm._s(decreeoperation.personobject.positiontree3) + "\n                                                "), (decreeoperation.optionnumber8 == 1) ? _c('span', [_vm._v("в распоряжение начальника " + _vm._s(decreeoperation.optionstring4) + " учреждение " + _vm._s(decreeoperation.optionstring5))]) : _vm._e()]), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_c('div', [_c('el-button', {
+            attrs: {
+              "size": "mini",
+              "type": "warning"
+            },
+            on: {
+              "click": function($event) {
+                _vm.removePersondecreeoperation(decreeoperation)
+              }
+            }
+          }, [_vm._v("Удалить")])], 1)]) : _vm._e()]) : _vm._e()
+        })), _vm._v(" "), _c('div', [_vm._v("\n                                        Основание: " + _vm._s(persondecreeblocksubsub.subvaluestring1) + ".\n                                    ")])]) : _vm._e()
+      })], 2)]) : _vm._e()
+    }), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_c('el-button', {
+      attrs: {
+        "type": "danger"
+      },
+      on: {
+        "click": function($event) {
+          _vm.deletePersondecreeblock(persondecreeBlock)
+        }
+      }
+    }, [_vm._v("Удалить блок")])], 1) : _vm._e()], 2) : _vm._e(), _vm._v(" "), (persondecreeBlock.persondecreeblocktype == 20) ? _c('div', [(_vm.persondecreeSigned != 1) ? _c('div', [_c('div', {
+      staticClass: "eld-eld-body-row-flex"
+    }, [_c('div', {
+      staticStyle: {
+        "margin-top": "10px"
+      }
+    }, [_vm._v("\n                                    Кого\n                                    "), _c('div', {
+      staticStyle: {
+        "margin-top": "10px"
+      }
+    }, [_c('el-button', {
+      attrs: {
+        "type": "primary",
+        "plain": ""
+      },
+      on: {
+        "click": function($event) {
+          _vm.selectAllPersonInStructure(persondecreeBlock)
+        }
+      }
+    }, [_vm._v("Выбрать")])], 1), _vm._v(" "), _c('div', {
+      staticStyle: {
+        "margin-top": "15px"
+      }
+    }, [_c('el-input', {
+      staticClass: "eld-eld-body-select-medium",
+      attrs: {
+        "placeholder": "Фамилия Имя Отчество"
+      },
+      on: {
+        "input": function($event) {
+          _vm.searchPersonsBlock(persondecreeBlock)
+        }
+      },
+      model: {
+        value: (persondecreeBlock.fiosearch),
+        callback: function($$v) {
+          persondecreeBlock.fiosearch = $$v
+        },
+        expression: "persondecreeBlock.fiosearch"
+      }
+    })], 1), _vm._v(" "), (_vm.hasSearchResultsBlock(persondecreeBlock)) ? _c('div', {
+      staticClass: "eld-search-main"
+    }, [_c('div', {
+      staticClass: "eld-search-main-title"
+    }, [_vm._v("\n                                            Результаты поиска\n                                        ")]), _vm._v(" "), _vm._l((persondecreeBlock.personssearch), function(person) {
+      return _c('div', {
+        staticClass: "eld-search-element",
+        on: {
+          "click": function($event) {
+            _vm.selectPersonBlockNonAuto(person.id, persondecreeBlock)
+          }
+        }
+      }, [_c('div', [_vm._v("\n                                                " + _vm._s(person.surname) + " " + _vm._s(person.name) + " " + _vm._s(person.fathername) + "\n                                            ")]), _vm._v(" "), _c('div', [_vm._v("\n                                                " + _vm._s(person.positiontypestring) + "\n                                            ")]), _vm._v(" "), (_vm.hasPhotopreviewBlock(person.id, persondecreeBlock)) ? _c('div', [_c('img', {
+        staticClass: "eld-search-element-image",
+        attrs: {
+          "src": _vm.getPhotopreviewBlock(person.id, persondecreeBlock).photo64
+        }
+      })]) : _vm._e(), _vm._v(" "), _c('div', [_c('div', [_vm._v("\n                                                    " + _vm._s(person.structuretree) + "\n                                                ")])])])
+    })], 2) : _vm._e(), _vm._v(" "), (_vm.personFromStructure != null) ? _c('div', _vm._l((_vm.personFromStructure), function(person) {
+      return _c('div', [_vm._v("\n                                            Кого – " + _vm._s(person.surname3 + " " + person.name3 + " " + person.fathername3) + "\n                                            "), _c('el-button', {
+        attrs: {
+          "size": "mini",
+          "type": "warning"
+        },
+        on: {
+          "click": function($event) {
+            _vm.multipersonRemove(person, persondecreeBlock)
+          }
+        }
+      }, [_vm._v("Убрать")])], 1)
+    })) : _vm._e()])]), _vm._v(" "), (_vm.personFromStructure.length != 0) ? _c('div', {
+      staticClass: "eld-eld-body-row-flex",
+      staticStyle: {
+        "margin-top": "20px"
+      }
+    }, [_c('div', {
+      staticStyle: {
+        "margin-top": "10px"
+      }
+    }, [_c('el-button', {
+      attrs: {
+        "type": "primary",
+        "plain": ""
+      },
+      on: {
+        "click": function($event) {
+          _vm.selectAllPersonInStructure(persondecreeBlock)
+        }
+      }
+    }, [_vm._v("Выбрать")])], 1), _vm._v(" "), _c('div', {
+      staticClass: "eld-eld-body-row-small ",
+      staticStyle: {
+        "margin-left": "10px"
+      }
+    }, [_vm._v("\n                                    Семестр\n                                    "), _c('el-input', {
+      attrs: {
+        "type": "number"
+      },
+      model: {
+        value: (persondecreeBlock.optionnumber1),
+        callback: function($$v) {
+          persondecreeBlock.optionnumber1 = $$v
+        },
+        expression: "persondecreeBlock.optionnumber1"
+      }
+    })], 1), _vm._v(" "), _c('div', {
+      staticClass: "eld-eld-body-row-small ",
+      staticStyle: {
+        "margin-left": "10px"
+      }
+    }, [_vm._v("\n                                    Курс\n                                    "), _c('el-input', {
+      attrs: {
+        "type": "number"
+      },
+      model: {
+        value: (persondecreeBlock.optionnumber2),
+        callback: function($$v) {
+          persondecreeBlock.optionnumber2 = $$v
+        },
+        expression: "persondecreeBlock.optionnumber2"
+      }
+    })], 1)]) : _vm._e(), _vm._v(" "), (_vm.personFromStructure.length != 0) ? _c('div', {
+      staticClass: "eld-eld-body-row-flex",
+      staticStyle: {
+        "margin-top": "10px"
+      }
+    }, [_c('div', {
+      staticClass: "eld-eld-body-row-short "
+    }, [_vm._v("\n                                    Дата ликвидации задолжности\n                                    "), _c('el-input', {
+      attrs: {
+        "type": "date"
+      },
+      model: {
+        value: (persondecreeBlock.optiondate1String),
+        callback: function($$v) {
+          persondecreeBlock.optiondate1String = $$v
+        },
+        expression: "persondecreeBlock.optiondate1String"
+      }
+    })], 1)]) : _vm._e(), _vm._v(" "), (_vm.personFromStructure.length != 0) ? _c('div', {
+      staticClass: "eld-eld-body-row-flex",
+      staticStyle: {
+        "margin-top": "10px"
+      }
+    }, [_c('div', {
+      staticClass: "eld-eld-body-row-long"
+    }, [_vm._v("\n                                    Основание:\n                                    "), _c('el-input', {
+      model: {
+        value: (persondecreeBlock.optionstring2),
+        callback: function($$v) {
+          persondecreeBlock.optionstring2 = $$v
+        },
+        expression: "persondecreeBlock.optionstring2"
+      }
+    })], 1)]) : _vm._e(), _vm._v(" "), _c('div', [_c('br'), _vm._v(" "), _c('el-button', {
+      attrs: {
+        "type": "primary",
+        "plain": ""
+      },
+      on: {
+        "click": function($event) {
+          _vm.addPersonblockelement(persondecreeBlock)
+        }
+      }
+    }, [_vm._v("Сформировать пункт приказа")])], 1)]) : _vm._e(), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', {
+      staticClass: "persondecreeoperation-part-list-title"
+    }, [_vm._v("\n                            Проект приказа\n                        ")]) : _vm._e(), _vm._v(" "), _c('div', [(persondecreeBlock.index != null && persondecreeBlock.index != 0) ? _c('span', [_vm._v(_vm._s(persondecreeBlock.index) + ".")]) : _vm._e(), _vm._v(" ВОССТАНОВИТЬ:\n                        ")]), _vm._v(" "), _vm._l((persondecreeBlock.persondecreeblocksubs), function(persondecreeblocksub) {
+      return (persondecreeblocksub.persondecreeblock == persondecreeBlock.id && persondecreeblocksub.parentpersondecreeblocksub == 0) ? _c('div', {
+        staticClass: "persondecreeoperation-part-list-element"
+      }, [_c('div', [_c('div', {
+        staticClass: "persondecreeoperation-part-list-element-indent persondecreeoperation-part-list-element-margin"
+      }, [_c('span', {
+        attrs: {
+          "if": "persondecreeBlock.index != null && persondecreeBlock.index != 0 && persondecreeblocksub.index != 0"
+        }
+      }, [_vm._v(_vm._s(persondecreeBlock.index) + "." + _vm._s(persondecreeblocksub.index) + ".")]), _vm._v("\n                                    " + _vm._s(_vm.provideRestoreSubBlockText(persondecreeblocksub)) + "\n                                ")]), _vm._v(" "), _vm._l((persondecreeBlock.persondecreeblocksubs), function(persondecreeblocksubsub) {
+        return (persondecreeblocksubsub.parentpersondecreeblocksub == persondecreeblocksub.id) ? _c('div', [_c('div', [_vm._v("\n                                        на " + _vm._s(persondecreeblocksubsub.subvaluenumber1) + " семестр " + _vm._s(persondecreeblocksubsub.subvaluenumber2) + "  курса:\n                                    ")]), _vm._v(" "), _c('div', _vm._l((persondecreeBlock.persondecreeblocksubs), function(persondecreeblocksubsubsub) {
+          return (persondecreeblocksubsubsub.parentpersondecreeblocksub == persondecreeblocksubsub.id) ? _c('div', [_c('div', [_vm._v("\n                                                Академическую задолженность ликвидировать до " + _vm._s(_vm.printDateDocument(persondecreeblocksubsubsub.subvaluedate1)) + ".\n                                            ")]), _vm._v(" "), _c('div', _vm._l((_vm.persondecreeOperations), function(decreeoperation) {
+            return (decreeoperation.persondecreeblocksub == persondecreeblocksubsubsub.id) ? _c('div', {
+              staticClass: "persondecreeoperation-part-list-element persondecreeoperation-part-list-element-margin-big"
+            }, [_c('div', {
+              staticClass: "persondecreeoperation-part-list-element-indent"
+            }, [_vm._v("\n                                                        " + _vm._s(decreeoperation.personobject.surname2) + " " + _vm._s(decreeoperation.personobject.name2) + "\n                                                        " + _vm._s(decreeoperation.personobject.fathername2) + "\n                                                    ")]), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_c('div', [_c('el-button', {
+              attrs: {
+                "size": "mini",
+                "type": "warning"
+              },
+              on: {
+                "click": function($event) {
+                  _vm.removePersondecreeoperation(decreeoperation)
+                }
+              }
+            }, [_vm._v("Удалить")])], 1)]) : _vm._e()]) : _vm._e()
+          })), _vm._v(" "), _c('div', [_vm._v("\n                                                Основание: " + _vm._s(persondecreeblocksubsubsub.subvaluestring1) + ".\n                                            ")])]) : _vm._e()
+        }))]) : _vm._e()
+      })], 2)]) : _vm._e()
+    }), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_c('el-button', {
+      attrs: {
+        "type": "danger"
+      },
+      on: {
+        "click": function($event) {
+          _vm.deletePersondecreeblock(persondecreeBlock)
+        }
+      }
+    }, [_vm._v("Удалить блок")])], 1) : _vm._e()], 2) : _vm._e(), _vm._v(" "), (persondecreeBlock.persondecreeblocktype == 21) ? _c('div', [(_vm.persondecreeSigned != 1) ? _c('div', [_c('div', {
+      staticClass: "eld-eld-body-row-flex-spacebetween"
+    }, [_c('div', [_c('div', [_vm._v("\n                                        Перевести куда\n                                    ")]), _vm._v(" "), _c('el-select', {
+      staticClass: "eld-eld-body-select-medium",
+      attrs: {
+        "clearable": "",
+        "placeholder": ""
+      },
+      model: {
+        value: (persondecreeBlock.optionnumber2),
+        callback: function($$v) {
+          persondecreeBlock.optionnumber2 = $$v
+        },
+        expression: "persondecreeBlock.optionnumber2"
+      }
+    }, _vm._l((_vm.persondecreeblocksubtypes), function(persondecreeblocksubtype) {
+      return (persondecreeblocksubtype.persondecreeblocktype == 21) ? _c('el-option', {
+        key: persondecreeblocksubtype.id,
+        attrs: {
+          "label": persondecreeblocksubtype.name,
+          "value": persondecreeblocksubtype.id
+        }
+      }) : _vm._e()
+    }))], 1)]), _vm._v(" "), (persondecreeBlock.optionnumber2 == 18) ? _c('div', [_c('div', {
+      staticStyle: {
+        "margin-top": "10px"
+      }
+    }, [_vm._v("\n                                    По итогам\n                                ")]), _vm._v(" "), _c('el-input', {
+      staticClass: "eld-eld-body-row-long",
+      attrs: {
+        "placeholder": "летней экзаменационной сессии 2019-2020 ..."
+      },
+      model: {
+        value: (persondecreeBlock.optionstring1),
+        callback: function($$v) {
+          persondecreeBlock.optionstring1 = $$v
+        },
+        expression: "persondecreeBlock.optionstring1"
+      }
+    }), _vm._v(" "), _c('div', {
+      staticClass: "eld-eld-body-row-flex"
+    }, [_c('div', {
+      staticStyle: {
+        "margin-top": "10px"
+      }
+    }, [_vm._v("\n                                        Кого\n                                        "), _c('div', {
+      staticStyle: {
+        "margin-top": "10px"
+      }
+    }, [_c('el-button', {
+      attrs: {
+        "type": "primary",
+        "plain": ""
+      },
+      on: {
+        "click": function($event) {
+          _vm.selectAllPersonInStructure(persondecreeBlock, 4)
+        }
+      }
+    }, [_vm._v("Выбрать взвод")])], 1), _vm._v(" "), _c('div', {
+      staticStyle: {
+        "margin-top": "15px"
+      }
+    }, [_c('el-input', {
+      staticClass: "eld-eld-body-select-medium",
+      attrs: {
+        "placeholder": "Фамилия Имя Отчество"
+      },
+      on: {
+        "input": function($event) {
+          _vm.searchPersonsBlock(persondecreeBlock)
+        }
+      },
+      model: {
+        value: (persondecreeBlock.fiosearch),
+        callback: function($$v) {
+          persondecreeBlock.fiosearch = $$v
+        },
+        expression: "persondecreeBlock.fiosearch"
+      }
+    })], 1), _vm._v(" "), (_vm.hasSearchResultsBlock(persondecreeBlock)) ? _c('div', {
+      staticClass: "eld-search-main"
+    }, [_c('div', {
+      staticClass: "eld-search-main-title"
+    }, [_vm._v("\n                                                Результаты поиска\n                                            ")]), _vm._v(" "), _vm._l((persondecreeBlock.personssearch), function(person) {
+      return _c('div', {
+        staticClass: "eld-search-element",
+        on: {
+          "click": function($event) {
+            _vm.selectPersonBlockNonAuto(person.id, persondecreeBlock)
+          }
+        }
+      }, [_c('div', [_vm._v("\n                                                    " + _vm._s(person.surname) + " " + _vm._s(person.name) + " " + _vm._s(person.fathername) + "\n                                                ")]), _vm._v(" "), _c('div', [_vm._v("\n                                                    " + _vm._s(person.positiontypestring) + "\n                                                ")]), _vm._v(" "), (_vm.hasPhotopreviewBlock(person.id, persondecreeBlock)) ? _c('div', [_c('img', {
+        staticClass: "eld-search-element-image",
+        attrs: {
+          "src": _vm.getPhotopreviewBlock(person.id, persondecreeBlock).photo64
+        }
+      })]) : _vm._e(), _vm._v(" "), _c('div', [_c('div', [_vm._v("\n                                                        " + _vm._s(person.structuretree) + "\n                                                    ")])])])
+    })], 2) : _vm._e(), _vm._v(" "), (_vm.personFromStructure != null) ? _c('div', _vm._l((_vm.personFromStructure), function(person) {
+      return _c('div', [_vm._v("\n                                                Кого – " + _vm._s(person.surname2 + " " + person.name2 + " " + person.fathername2) + "\n                                                "), _c('el-button', {
+        attrs: {
+          "size": "mini",
+          "type": "warning"
+        },
+        on: {
+          "click": function($event) {
+            _vm.multipersonRemove(person, persondecreeBlock)
+          }
+        }
+      }, [_vm._v("Убрать")])], 1)
+    })) : _vm._e()])]), _vm._v(" "), _c('div', {
+      staticClass: "eld-eld-body-row-flex",
+      staticStyle: {
+        "margin-top": "20px"
+      }
+    }, [_c('div', {
+      staticClass: "eld-eld-body-row-short ",
+      staticStyle: {
+        "margin-left": "10px"
+      }
+    }, [_vm._v("\n                                        С какого числа\n                                        "), _c('el-input', {
+      attrs: {
+        "type": "date"
+      },
+      model: {
+        value: (persondecreeBlock.optiondate1String),
+        callback: function($$v) {
+          persondecreeBlock.optiondate1String = $$v
+        },
+        expression: "persondecreeBlock.optiondate1String"
+      }
+    })], 1), _vm._v(" "), _c('div', {
+      staticClass: "eld-eld-body-row-short ",
+      staticStyle: {
+        "text-align": "center",
+        "margin-left": "10px",
+        "line-height": "16px"
+      }
+    }, [_vm._v("\n                                        Условно\n                                        "), _c('div', {
       staticStyle: {
         "display": "flex",
         "flex-direction": "column",
@@ -36919,7 +36983,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       }
     }, [_c('div', {
       staticClass: "eld-eld-body-row-short "
-    }, [_vm._v("\n                                        Дата ликвидации задолжности\n                                        "), _c('el-input', {
+    }, [_vm._v("\n                                            Дата ликвидации задолжности\n                                            "), _c('el-input', {
       attrs: {
         "type": "date"
       },
@@ -36950,14 +37014,14 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       staticStyle: {
         "margin-top": "28px"
       }
-    }, [_vm._v("\n                                    " + _vm._s(_vm.structureNewName) + "\n                                ")])])], 1) : _vm._e(), _vm._v(" "), (_vm.personFromStructure.length != 0) ? _c('div', {
+    }, [_vm._v("\n                                        " + _vm._s(_vm.structureNewName) + "\n                                    ")])])], 1) : _vm._e(), _vm._v(" "), (_vm.personFromStructure.length != 0) ? _c('div', {
       staticClass: "eld-eld-body-row-flex",
       staticStyle: {
         "margin-top": "10px"
       }
     }, [_c('div', {
       staticClass: "eld-eld-body-row-long"
-    }, [_vm._v("\n                                Основание:\n                                "), _c('el-input', {
+    }, [_vm._v("\n                                    Основание:\n                                    "), _c('el-input', {
       model: {
         value: (persondecreeBlock.optionstring2),
         callback: function($$v) {
@@ -36975,21 +37039,21 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           _vm.addPersonblockelement(persondecreeBlock)
         }
       }
-    }, [_vm._v("Сформировать пункт приказа")])], 1), _vm._v(" "), _c('div', {
+    }, [_vm._v("Сформировать пункт приказа")])], 1)]) : _vm._e(), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', {
       staticClass: "persondecreeoperation-part-list-title"
-    }, [_vm._v("\n                            Проект приказа\n                           ")]), _vm._v(" "), _c('div', [(persondecreeBlock.index != null && persondecreeBlock.index != 0) ? _c('span', [_vm._v(_vm._s(persondecreeBlock.index) + ".")]) : _vm._e(), _vm._v(" ПЕРЕВЕСТИ:\n                           ")]), _vm._v(" "), _vm._l((persondecreeBlock.persondecreeblocksubs), function(persondecreeblocksub) {
+    }, [_vm._v("\n                            Проект приказа\n                        ")]) : _vm._e(), _vm._v(" "), _c('div', [(persondecreeBlock.index != null && persondecreeBlock.index != 0) ? _c('span', [_vm._v(_vm._s(persondecreeBlock.index) + ".")]) : _vm._e(), _vm._v(" ПЕРЕВЕСТИ:\n                        ")]), _vm._v(" "), _vm._l((persondecreeBlock.persondecreeblocksubs), function(persondecreeblocksub) {
       return (persondecreeblocksub.persondecreeblock == persondecreeBlock.id && persondecreeblocksub.parentpersondecreeblocksub == 0) ? _c('div', {
         staticClass: "persondecreeoperation-part-list-element"
       }, [_c('div', [_c('div', {
         staticClass: "persondecreeoperation-part-list-element-indent persondecreeoperation-part-list-element-margin"
-      }, [_vm._v("\n                                       " + _vm._s(_vm.provideTranslateSubBlockText(persondecreeblocksub)) + "\n                                   ")]), _vm._v(" "), _vm._l((persondecreeBlock.persondecreeblocksubs), function(persondecreeblocksubsub) {
+      }, [_vm._v("\n                                    " + _vm._s(_vm.provideTranslateSubBlockText(persondecreeblocksub)) + "\n                                ")]), _vm._v(" "), _vm._l((persondecreeBlock.persondecreeblocksubs), function(persondecreeblocksubsub) {
         return (persondecreeblocksubsub.parentpersondecreeblocksub == persondecreeblocksub.id) ? _c('div', [_c('div', [_c('div', {
           staticClass: "persondecreeoperation-part-list-element-indent persondecreeoperation-part-list-element-margin"
         }, [_c('span', {
           attrs: {
             "if": "persondecreeBlock.index != null && persondecreeBlock.index != 0 && persondecreeblocksub.index != 0"
           }
-        }, [_vm._v(_vm._s(persondecreeBlock.index) + "." + _vm._s(persondecreeblocksubsub.index) + ".")]), _vm._v("\n                                                на " + _vm._s(persondecreeblocksubsub.subvaluestring1) + " учебного года с " + _vm._s(_vm.printDateDocument(persondecreeblocksubsub.subvaluedate1)) + " \n                                                "), (persondecreeblocksubsub.Subvaluenumber1 == 0) ? _c('span', [_vm._v(" условно с ликвидацией академических задолженностей до " + _vm._s(_vm.printDateDocument(persondecreeblocksubsub.subvaluedate2)) + ":")]) : _vm._e()])]), _vm._v(" "), _c('div', _vm._l((persondecreeBlock.persondecreeblocksubs), function(persondecreeblocksubsubsub) {
+        }, [_vm._v(_vm._s(persondecreeBlock.index) + "." + _vm._s(persondecreeblocksubsub.index) + ".")]), _vm._v("\n                                            на " + _vm._s(persondecreeblocksubsub.subvaluestring1) + " учебного года с " + _vm._s(_vm.printDateDocument(persondecreeblocksubsub.subvaluedate1)) + "\n                                            "), (persondecreeblocksubsub.Subvaluenumber1 == 0) ? _c('span', [_vm._v(" условно с ликвидацией академических задолженностей до " + _vm._s(_vm.printDateDocument(persondecreeblocksubsub.subvaluedate2)) + ":")]) : _vm._e()])]), _vm._v(" "), _c('div', _vm._l((persondecreeBlock.persondecreeblocksubs), function(persondecreeblocksubsubsub) {
           return (persondecreeblocksubsubsub.parentpersondecreeblocksub == persondecreeblocksubsub.id) ? _c('div', {
             staticClass: "persondecreeoperation-part-list-element-indent"
           }, _vm._l((_vm.persondecreeOperations), function(decreeoperation) {
@@ -36997,7 +37061,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
               staticClass: "persondecreeoperation-part-list-element persondecreeoperation-part-list-element-margin-big"
             }, [_c('div', {
               staticClass: "persondecreeoperation-part-list-element-indent"
-            }, [(decreeoperation.personobject.actualRank != null) ? _c('span', [_vm._v(_vm._s(decreeoperation.personobject.actualRank.name4) + " ")]) : _vm._e(), _vm._v("\n                                                       " + _vm._s(decreeoperation.personobject.surname2) + " " + _vm._s(decreeoperation.personobject.name2) + "\n                                                       " + _vm._s(decreeoperation.personobject.fathername2) + _vm._s(_vm.commaspaceifnotnull(decreeoperation.personobject.positiontypestring)) + " " + _vm._s(decreeoperation.personobject.positiontype2string) + "\n                                                       " + _vm._s(_vm.getStructureName(decreeoperation.personobject.structure)) + "а " + _vm._s(_vm.getFacultiStructureName(decreeoperation.personobject.structure)) + "\n                                                   ")]), _vm._v(" "), _c('div', [_c('div', [_c('el-button', {
+            }, [(decreeoperation.personobject.actualRank != null) ? _c('span', [_vm._v(_vm._s(decreeoperation.personobject.actualRank.name4) + " ")]) : _vm._e(), _vm._v("\n                                                    " + _vm._s(decreeoperation.personobject.surname2) + " " + _vm._s(decreeoperation.personobject.name2) + "\n                                                    " + _vm._s(decreeoperation.personobject.fathername2) + _vm._s(_vm.commaspaceifnotnull(decreeoperation.personobject.positiontypestring)) + " " + _vm._s(decreeoperation.personobject.positiontype2string) + "\n                                                    " + _vm._s(_vm.getStructureName(decreeoperation.personobject.structure)) + "а " + _vm._s(_vm.getFacultiStructureName(decreeoperation.personobject.structure)) + "\n                                                ")]), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_c('div', [_c('el-button', {
               attrs: {
                 "size": "mini",
                 "type": "warning"
@@ -37007,11 +37071,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
                   _vm.removePersondecreeoperation(decreeoperation)
                 }
               }
-            }, [_vm._v("Удалить")])], 1)])]) : _vm._e()
+            }, [_vm._v("Удалить")])], 1)]) : _vm._e()]) : _vm._e()
           })) : _vm._e()
         }))]) : _vm._e()
       })], 2)]) : _vm._e()
-    }), _vm._v(" "), _c('div', [_c('el-button', {
+    }), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_c('el-button', {
       attrs: {
         "type": "danger"
       },
@@ -37020,8 +37084,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           _vm.deletePersondecreeblock(persondecreeBlock)
         }
       }
-    }, [_vm._v("Удалить блок")])], 1)], 2) : _vm._e()])
-  })), _vm._v(" "), _c('div', [_c('el-select', {
+    }, [_vm._v("Удалить блок")])], 1) : _vm._e()], 2) : _vm._e()])
+  })), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_c('el-select', {
     staticClass: "eld-eld-body-select-medium",
     attrs: {
       "clearable": "",
@@ -37052,7 +37116,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.addPersondecreeblock()
       }
     }
-  }, [_vm._v("\n                    Добавить управляющее слово\n                ")])], 1), _vm._v(" "), _c('hr'), _vm._v(" "), _c('div', [_c('el-button', {
+  }, [_vm._v("\n                    Добавить управляющее слово\n                ")])], 1) : _vm._e(), _vm._v(" "), _c('hr'), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_c('div', [_c('el-button', {
     attrs: {
       "type": "primary"
     },
@@ -37061,7 +37125,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.moveorder = !_vm.moveorder
       }
     }
-  }, [_vm._v("Направить приказ")])], 1), _vm._v(" "), (_vm.moveorder) ? _c('div', [_c('div', [_vm._v("\n                    Введите полностью или частично фамилию, логин или подразделение для поиска кадровика, которому будет направлен проект приказа\n                ")]), _vm._v(" "), _c('div', [_c('el-input', {
+  }, [_vm._v("Направить приказ")])], 1), _vm._v(" "), (_vm.moveorder) ? _c('div', [_c('div', [_vm._v("\n                        Введите полностью или частично фамилию, логин или подразделение для поиска кадровика, которому будет направлен проект приказа\n                    ")]), _vm._v(" "), _c('div', [_c('el-input', {
     staticClass: "eld-search-input",
     attrs: {
       "placeholder": "Поле поиска"
@@ -37083,7 +37147,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "eld-search-main"
   }, [_c('br'), _vm._v(" "), _c('div', {
     staticClass: "eld-search-main-title"
-  }, [_vm._v("\n                        Результаты поиска\n                    ")]), _vm._v(" "), _vm._l((_vm.usersSearch), function(user) {
+  }, [_vm._v("\n                            Результаты поиска\n                        ")]), _vm._v(" "), _vm._l((_vm.usersSearch), function(user) {
     return _c('div', {
       staticClass: "eld-search-element-user",
       on: {
@@ -37091,7 +37155,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           _vm.selectUser(user.id)
         }
       }
-    }, [_c('div', [_vm._v("\n                            " + _vm._s(user.surname) + " " + _vm._s(user.firstname) + " " + _vm._s(user.patronymic) + "\n                        ")]), _vm._v(" "), _c('div', [_vm._v("\n                            " + _vm._s(user.positionString) + "\n                        ")]), _vm._v(" "), _c('div', [_c('div', [_vm._v("\n                                " + _vm._s(user.structureString) + "\n                            ")])]), _vm._v(" "), _c('div', [_c('el-button', {
+    }, [_c('div', [_vm._v("\n                                " + _vm._s(user.surname) + " " + _vm._s(user.firstname) + " " + _vm._s(user.patronymic) + "\n                            ")]), _vm._v(" "), _c('div', [_vm._v("\n                                " + _vm._s(user.positionString) + "\n                            ")]), _vm._v(" "), _c('div', [_c('div', [_vm._v("\n\n                                " + _vm._s(user.structureString) + "\n                                ")])]), _vm._v(" "), _c('div', [_c('el-button', {
       attrs: {
         "size": "mini",
         "type": "success"
@@ -37114,7 +37178,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.closeUserSearch()
       }
     }
-  }, [_vm._v("Закрыть")])], 1)], 2) : _vm._e()]) : _vm._e(), _vm._v(" "), _c('hr'), _vm._v(" "), _c('div', [_c('el-button', {
+  }, [_vm._v("Закрыть")])], 1)], 2) : _vm._e()]) : _vm._e()]) : _vm._e(), _vm._v(" "), _c('hr'), _vm._v(" "), _c('div', [(_vm.persondecreeSigned != 1) ? _c('el-button', {
     attrs: {
       "type": "primary"
     },
@@ -37123,7 +37187,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.persondecreeAccept()
       }
     }
-  }, [_vm._v("Применить приказ")]), _vm._v(" "), _c('el-button', {
+  }, [_vm._v("Применить приказ")]) : _vm._e(), _vm._v(" "), _c('el-button', {
     attrs: {
       "type": "primary"
     },
@@ -37132,7 +37196,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.persondecreeWord()
       }
     }
-  }, [_vm._v("В Word")]), _vm._v(" "), _c('el-button', {
+  }, [_vm._v("В Word")]), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('el-button', {
     attrs: {
       "type": "primary"
     },
@@ -37141,7 +37205,14 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.persondecreeRemove()
       }
     }
-  }, [_vm._v("Отменить приказ")])], 1)], 1), _vm._v(" "), _c('el-dialog', {
+  }, [_vm._v("Отменить приказ")]) : _vm._e(), _vm._v(" "), (_vm.persondecreeSigned == 1) ? _c('el-button', {
+    attrs: {
+      "type": "primary"
+    },
+    on: {
+      "click": function($event) {}
+    }
+  }, [_vm._v("Сформировать выписки")]) : _vm._e()], 1)], 1), _vm._v(" "), _c('el-dialog', {
     directives: [{
       name: "draggable",
       rawName: "v-draggable"

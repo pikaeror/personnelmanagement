@@ -239,9 +239,10 @@ namespace PersonnelManagement.Controllers
              */
             else if (persondecreeManagement.PersondecreeManagementStatus == Keys.PERSONDECREE_MANAGEMENT_PRINTDECREE)
             {
-                //return File(GenerateDocument(decreeManagement), "application/vnd.openxmlformats-officedocument.wordprocessingml.document", "test.docx");
+                //return File(GenerateDocument(persondecreeManagement, user), "application/vnd.openxmlformats-officedocument.wordprocessingml.document", "test.docx");
                 //MemoryStream stream = GenerateDocument(persondecreeManagement, user);
                 DocPersonDecree time = new DocPersonDecree(repository, user);
+                time.Worker(persondecreeManagement);
                 return File(time.GetMemoryStream(), "application/vnd.openxmlformats-officedocument.wordprocessingml.document", "test.docx");
             }
             /**

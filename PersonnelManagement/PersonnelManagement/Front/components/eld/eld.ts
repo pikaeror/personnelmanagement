@@ -821,7 +821,7 @@ export default class EldComponent extends Vue {
         setInterval(this.autoupdatePerson, 10000);
         setInterval(this.loadPeopleWhithoutJobPlace, 20000);
 
-        this.loadPeopleWhithoutJobPlace();
+        //this.loadPeopleWhithoutJobPlace();
         this.fetchStructureRewards();
         this.fetchStructureRewardsAllowed();
         this.fetchStructureElders();

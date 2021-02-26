@@ -398,18 +398,18 @@ export default class derceeoperationelement extends Vue {
     }
 
     set_menu_id(id: number) {
-        this.setMenuid(1);
-        setTimeout(() => {
+        this.setMenuid(id);
+        /*setTimeout(() => {
             this.setMenuid(id);
-        }, 500);
+        }, 500);*/
     }
 
     setMenuid(id: number) {
-        this.rand_list = [];
+        //this.rand_list = [];
         this.menuid = id;
         this.multipleSelection = [];
-        this.viewpersondecrees = this.filterbyfolders(id);
-        this.getDateList();
+        /*this.viewpersondecrees = */this.filterbyfolders(id);
+        //this.getDateList();
     }
 
     switch_k() {
@@ -428,6 +428,7 @@ export default class derceeoperationelement extends Vue {
 
     filterbyfolders(folder: number) {
         var time = [];
+        //this.viewpersondecrees = time;
         if (folder == 2) {
             this.fullpersondecrees.forEach(r => {
                 if (r.creator == this.$store.state.user.id && folder - 1 == r.creatorfolder) {
@@ -504,6 +505,7 @@ export default class derceeoperationelement extends Vue {
                     time.push(r)
             })
         }
+        this.viewpersondecrees = time;
         return time;
     }
 

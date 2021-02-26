@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "4211c05bd8dee97e15f5"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "6782b831a7f58883de71"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -8223,17 +8223,17 @@ fetch('api/MailController/rand', { credentials: 'include' })
         /*this.getDateList();*/
     }
     set_menu_id(id) {
-        this.setMenuid(1);
-        setTimeout(() => {
+        this.setMenuid(id);
+        /*setTimeout(() => {
             this.setMenuid(id);
-        }, 500);
+        }, 500);*/
     }
     setMenuid(id) {
-        this.rand_list = [];
+        //this.rand_list = [];
         this.menuid = id;
         this.multipleSelection = [];
-        this.viewpersondecrees = this.filterbyfolders(id);
-        this.getDateList();
+        /*this.viewpersondecrees = */ this.filterbyfolders(id);
+        //this.getDateList();
     }
     switch_k() {
         this.unit_dialog = false;
@@ -8248,6 +8248,7 @@ fetch('api/MailController/rand', { credentials: 'include' })
     }
     filterbyfolders(folder) {
         var time = [];
+        //this.viewpersondecrees = time;
         if (folder == 2) {
             this.fullpersondecrees.forEach(r => {
                 if (r.creator == this.$store.state.user.id && folder - 1 == r.creatorfolder) {
@@ -8338,6 +8339,7 @@ fetch('api/MailController/rand', { credentials: 'include' })
                     time.push(r);
             });
         }
+        this.viewpersondecrees = time;
         return time;
     }
     canSelectRow(row) {
@@ -53694,7 +53696,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "visible": "update"
     }
-  }), _vm._v(" "), [(_vm.viewpersondecrees.length > 0) ? _c('div', [_c('el-table', {
+  }), _vm._v(" "), [(_vm.viewpersondecrees.length) ? _c('div', [_c('el-table', {
     ref: "multipleTable",
     staticStyle: {
       "width": "99%",
@@ -53721,8 +53723,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "property": "getDate",
       "label": "ДАТА",
       "sortable": "",
-      "width": "110",
-      "filter-method": _vm.filterHandler
+      "width": "110"
     }
   }), _vm._v(" "), _c('el-table-column', {
     attrs: {

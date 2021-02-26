@@ -45,12 +45,13 @@
                 <div visible="update"></div>
                 <!--property="marked"  @selection-change="handleSelectionChange"   :filters="datefiltervariants"  -->
                 <template>
-                    <div v-if="viewpersondecrees.length > 0">
+                    <div v-if="viewpersondecrees.length">
                         <el-table ref="multipleTable" :data="viewpersondecrees" style="width: 99%; height: 700px" height="100%" border :row-class-name="tableRowClassName" @selection-change="handleSelectionChange" @row-dblclick="rowClicked" @row-contextmenu="rowContextmenu">
                             <el-table-column type="selection" width="55">
                             </el-table-column>
-                            <el-table-column property="getDate" label="ДАТА" sortable width="110" :filter-method="filterHandler">
+                            <el-table-column property="getDate" label="ДАТА" sortable width="110">
                             </el-table-column>
+                            <!--:filter-method="filterHandler"-->
                             <el-table-column property="getNumber" label="№" sortable width="80">
                             </el-table-column>
                             <el-table-column property="getName" label="Название" width="450">
@@ -59,22 +60,6 @@
                             </el-table-column>
                             <el-table-column property="getFIO" label="ФИО работника" width="200">
                             </el-table-column>
-                            <!--<el-table-column type="expand" label="Выписки" width="90">
-                                <template slot-scope="props">
-                                    <div>
-                                        <div v-for="i in rand_list">
-                                            <div style="margin-bottom: 4px">
-                                                <small>
-                                                    &#8658 {{i.nameshortened}} <el-button size="mini" type="danger" icon="el-icon-delete" @click="delrand(i)"></el-button>
-                                                </small>
-                                            </div>
-                                        </div>
-                                        <el-button type="default" @click="random">Отобразить список получателей</el-button>
-                                        <el-button type="default" @click="handleSaveRow(scope.$index)">сформировать выписки</el-button>
-                                        <el-button type="default" @click="handleSaveRow(scope.$index)">отправить выписки</el-button>
-                                    </div>
-                                </template>
-                            </el-table-column>-->
                         </el-table>
                     </div>
                     <div v-else class="eld-title">

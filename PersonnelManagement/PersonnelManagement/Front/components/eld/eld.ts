@@ -491,6 +491,7 @@ export default class EldComponent extends Vue {
             photoName: "Фотография",
             photoDescription: "",
 
+            
             personrelativeMenuvisible: false,
             personrelativeMenuelement: null,
             personrelativeType: null,
@@ -1195,6 +1196,8 @@ export default class EldComponent extends Vue {
         return this.$store.state.educationdocuments;
     }
 
+    
+
     onBirthCountryChange() {
         this.person.livecountry = this.person.birthcountry;
         this.person.registercountry = this.person.birthcountry;
@@ -1370,6 +1373,19 @@ export default class EldComponent extends Vue {
             return true;
         }
         return false;
+    }
+   
+    getCourse(semestr: number): number{
+        if(semestr > 0 && semestr < 3){
+            return 1;
+        }else if(semestr < 5){
+            return 2;
+        }else if(semestr < 7){
+            return 3;
+        }else if(semestr < 9){
+            return 4;
+        }
+        return 0;
     }
 
     getPhotopreview(personid: number): Personphoto {
@@ -1910,8 +1926,6 @@ export default class EldComponent extends Vue {
                         jpp.endString = this.toDateInputValue(jpp.end);
                     })
                 });
-
-                
                 //alert(p.startString);
             })
         }
@@ -4852,7 +4866,6 @@ export default class EldComponent extends Vue {
         } else {
             return "";
         }
-
     }
 
     getPersonillUpdateName(): string {
@@ -4908,7 +4921,6 @@ export default class EldComponent extends Vue {
             this.updatePersonill(person, this.personillMenuelement);
             
         }
-
         this.personillMenuvisible = false;
     }
 
@@ -5001,7 +5013,6 @@ export default class EldComponent extends Vue {
                 rating: this.prepareNumToExport(this.personeducationRating),
                 state: this.personeducationState,
                 citytype: this.personeducationCitytype,
-
             }),
             credentials: 'include',
             headers: new Headers({
@@ -5143,7 +5154,6 @@ export default class EldComponent extends Vue {
     addPersoneducationButton(person: Person) {
         this.personeducationMenuvisible = true;
         this.personeducationMenuelement = null;
-
         this.personeducationEducationlevel = null;
         this.personeducationEducationstage = null;
         this.personeducationLocation = "Республика Беларусь";
@@ -5189,7 +5199,6 @@ export default class EldComponent extends Vue {
     updatePersoneducationButton(person: Person, personeducation: Personeducation) {
 
         this.personeducationMenuelement = personeducation;
-
         this.personeducationMain = this.personeducationMenuelement.main;
         this.personeducationEducationlevel = this.personeducationMenuelement.educationlevel;
         this.personeducationEducationstage = this.personeducationMenuelement.educationstage;
@@ -5234,7 +5243,6 @@ export default class EldComponent extends Vue {
         this.personeducationRating = this.personeducationMenuelement.rating;
         this.personeducationState = this.personeducationMenuelement.state;
         this.personeducationCitytype = this.personeducationMenuelement.citytype;
-
         this.personeducationMenuvisible = true;
     }
 
@@ -5243,7 +5251,6 @@ export default class EldComponent extends Vue {
             (<any>Vue).notify("E:Ошибка сохранения формы");
             return;
         }
-
         if (this.personeducationMenuelement == null) {
             this.addPersoneducation();
         } else {
@@ -5307,7 +5314,6 @@ export default class EldComponent extends Vue {
         let educationperiod: Educationperiod = new Educationperiod();
         educationperiod.startString = this.personeducationStart;
         educationtypeblock.educationperiods.push(educationperiod);
-
         this.personeducationEducationtypeblocks.push(educationtypeblock);
     }
 
@@ -5369,7 +5375,6 @@ export default class EldComponent extends Vue {
             if (!this.validateAcademicvacation(av)) {
                 returnfalse = true;
                 return false;
-
             }
         })
         if (returnfalse) {
@@ -5380,7 +5385,6 @@ export default class EldComponent extends Vue {
             if (!this.validateEducationmaternity(em)) {
                 returnfalse = true;
                 return false;
-
             }
         })
         if (returnfalse) {
@@ -6914,11 +6918,41 @@ export default class EldComponent extends Vue {
         return experienceString;
     }
 
+    calendar_diff(date_1: string, date_2: string): string {
+        if (date_1.valueOf() < date_2.valueOf())
+            return this.calendar_diff(date_2, date_1);
+        var days: number = parseInt(date_1.split('T')[0].split('-')[2]) - parseInt(date_2.split('T')[0].split('-')[2]);
+        let month: number = 0;
+        if (days < 0) {
+            days += 30;
+            month -= 1;
+        }
+        month += parseInt(date_1.split('T')[0].split('-')[1]) - parseInt(date_2.split('T')[0].split('-')[1]);
+        let year: number = 0;
+        if (month < 0) {
+            month += 12;
+            year -= 1;
+        }
+        year += parseInt(date_1.split('T')[0].split('-')[0]) - parseInt(date_2.split('T')[0].split('-')[0]);
+        return this.getExperienceFullPension(year, month, days);
+    }
+
     getDataToString(data_period: string): string {
         let time_list = data_period.split(' ');
         return (parseInt(time_list[0]) == 0 ? '' : (time_list[0] + ' ' + this.getYearString(parseInt(time_list[0])) + ' ')) +
             (parseInt(time_list[1]) == 0 ? '' : (time_list[1] + ' ' + this.getMonthString(parseInt(time_list[1])) + ' ')) +
             (parseInt(time_list[2]) == 0 ? '' : (time_list[2] + ' ' + this.getDayString(parseInt(time_list[2]))));
+    }
+
+    getSeniorityMARK(type_a: string, type_b: string): string {
+        let time_list = type_a.split(' ');
+        let value_a = 30 * (12 * parseInt(time_list[0]) + parseInt(time_list[1])) + parseInt(time_list[2]);
+        time_list = type_b.split(' ');
+        let value_b = 30 * (12 * parseInt(time_list[0]) + parseInt(time_list[1])) + parseInt(time_list[2]);
+        if (value_a > value_b) {
+            return this.getDataToString(type_a);
+        }
+        return this.getDataToString(type_b);
     }
 
     differenceBetweenTwoDays(date1: Date, date2: Date): number {
@@ -7653,8 +7687,6 @@ export default class EldComponent extends Vue {
         if (person.numpersonal.length > 0 && !this.isLetterCyrillic(person.numpersonal[0])) {
             person.numpersonal = person.numpersonal.substring(0, 0);
         }
-        
-
         if (person.numpersonal.length > 2 && !this.isNum(person.numpersonal[2])) {
             person.numpersonal = person.numpersonal.substring(0, 2);
         }

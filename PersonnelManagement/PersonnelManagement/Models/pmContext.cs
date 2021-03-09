@@ -5004,7 +5004,7 @@ namespace PersonnelManagement.Models
 
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
-                    .HasColumnType("int(11)");
+                    .HasColumnType("int(30)");
 
                 entity.Property(e => e.Altrank)
                     .HasColumnName("altrank")

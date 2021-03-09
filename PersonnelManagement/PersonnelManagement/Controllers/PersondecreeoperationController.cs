@@ -103,6 +103,11 @@ namespace PersonnelManagement.Controllers
                     persondecreeoperation.Person = element.Id;
                     repository.AddPersonDecreeoperation(user, persondecreeoperation);
                 });
+                persondecreeoperation.candidateSearch.ForEach(element =>
+                {
+                    persondecreeoperation.Person = -element.Id;
+                    repository.AddPersonDecreeoperation(user, persondecreeoperation);
+                });
                 return new ObjectResult(Keys.SUCCESS_SHORT + ":Добавлено!");
             }
             else if (persondecreeoperation.Status == 2)

@@ -100,6 +100,7 @@ import Countrycities from '../../classes/countrycities';
 import Ordernumbertype from '../../classes/ordernumbertype';
 import Link from '../../classes/link';
 import Dismissalclauses from '../../classes/dismissalclauses';
+import Cabinetdata from '../../classes/cabinetdata';
 
 Vue.component(Button.name, Button);
 Vue.component(Input.name, Input);
@@ -334,6 +335,8 @@ export default class TopmenuComponent extends Vue {
     persondecreeDatesigned: string;
     persondecreeCreatorObject: User;
     personFromStructure: Person[];
+    candidateFromStructure: Cabinetdata[];
+    candidateSearch: Cabinetdata[];
     persondecreeBlocks: Persondecreeblock[];
     persondecreesNewblock: number;
     persondecreeBlocksubs: Persondecreeblocksub[];
@@ -531,6 +534,7 @@ export default class TopmenuComponent extends Vue {
             decreeFilterDatesignedStart: "",
             decreeFilterDatesignedEnd: "",
             personFromStructure: [],
+            candidateSearch: [],
             decreesSignedList: [],
             decreeSignedOperations: [],
             modalDecreeMenuSignedVisible: false,
@@ -709,6 +713,9 @@ export default class TopmenuComponent extends Vue {
     get educationtypes(): Educationtype[] {
         return this.$store.state.educationtypes;
     }
+    get educationperiods(): Educationperiod[] {
+        return this.$store.state.educationperiods;
+    }
 
     get educationadditionaltypes(): Educationadditionaltype[] {
         return this.$store.state.educationadditionaltypes;
@@ -740,6 +747,10 @@ export default class TopmenuComponent extends Vue {
 
     get permissiontypes(): Permissiontype[] {
         return this.$store.state.permissiontypes;
+    }
+
+    get personeducation(): Personeducation[]{
+        return this.$store.state.personeducation;
     }
 
     get prooftypes(): Prooftype[] {
@@ -811,6 +822,18 @@ export default class TopmenuComponent extends Vue {
      */
     get pmrequestManagingPanelVisible(): boolean {
         return this.modalPmrequestPanelVisible && !this.modeselectstructure;
+    }
+
+    isNum(str: string) {
+        return str.length === 1 && str.match(/[0-9]/i);
+    }
+
+    isLetter(str: string) {
+        return str.length === 1 && str.match(/[a-zA-Z]/i);
+    }
+
+    isLetterCyrillic(str: string) {
+        return str.length === 1 && str.match(/[а-яА-Я]/i);
     }
 
     logout() {
@@ -1562,7 +1585,8 @@ export default class TopmenuComponent extends Vue {
         if(this.num == 2){
             this.numberNewStructure = this.$store.state.modeappointedpersondecreeStructure;
             this.structureNewName = this.getStructureName(this.numberNewStructure);
-            this.newCourseName = this.getStructureById(Number.parseInt(this.getStructureById(this.numberStructure).parentstructure)).name2;
+            this.newCourseName = this.getStructureById(Number.parseInt(this.getStructureById(this.numberNewStructure).parentstructure)).name2;
+            this.facultyName = this.getStructureById(Number.parseInt(this.getStructureById(Number.parseInt(this.getStructureById(this.numberNewStructure).parentstructure)).parentstructure)).name2;
             this.$store.commit("setModeappointedpersondecreeStructure", 0);
             this.$store.commit("setModeappointpersondecreeStructure", false);
             this.modalPersondecreeMenuVisible = true;
@@ -1604,6 +1628,7 @@ export default class TopmenuComponent extends Vue {
         else
         if(this.num == 5){
             this.numberNewStructure = this.$store.state.modeappointedpersondecreeStructure;
+
             this.structureNewName = this.getStructureName(this.numberNewStructure);
             this.$store.commit("setModeappointedpersondecreeStructure", 0);
             this.$store.commit("setModeappointpersondecreeStructure", false);
@@ -2243,9 +2268,25 @@ export default class TopmenuComponent extends Vue {
 
                             block.photosPreview = personphotos;
                             //this.lastSearchFio = fio;
-
                         }
                     })
+            })
+    }
+
+    searchCandidatsBlock(block: Persondecreeblock) {
+        block.searchiterationCandidate = block.searchiterationCandidate + 1;
+        let searchiterationCandidate: number = block.searchiterationCandidate;
+
+        let fio: string = block.fiocandidatesearch;
+        fetch('api/Cabinet/Search' + fio, { credentials: 'include' })
+            .then(response => {
+                return response.json() as Promise<Cabinetdata[]>;
+            })
+            .then(result => {
+                if (searchiterationCandidate < block.searchiterationCandidate) {
+                    return;
+                }
+                block.candidatessearch = result;
             })
     }
 
@@ -2399,8 +2440,6 @@ export default class TopmenuComponent extends Vue {
                 p.documentdateString = this.toDateInputValue(p.documentdate);
             })
         }
-
-        
     }
 
     prepareToExport(person: Person): void {
@@ -2658,6 +2697,14 @@ export default class TopmenuComponent extends Vue {
         }
     }
 
+    hasSearchCandidateResultsBlock(block: Persondecreeblock): boolean {
+        if (block.candidatessearch != null && block.candidatessearch.length > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     getPhotos() {
         fetch('api/Person/Media' + this.person.id, { credentials: 'include' })
             .then(response => {
@@ -2747,6 +2794,23 @@ export default class TopmenuComponent extends Vue {
             })
     }
 
+    selectCandidatBlockNonAuto(id: number, block: Persondecreeblock) {
+        fetch('api/Cabinet/Single' + id, { credentials: 'include' })
+            .then(response => {
+                return response.json() as Promise<Cabinetdata>;
+            })
+            .then(candidate => {
+                if (candidate != null) {
+                    block.candidate = candidate;
+                    this.candidateSearch.push(block.candidate);
+
+                    block.candidatessearch = [];
+                    block.fiosearch = "";
+                    block.nonperson = ""; // Если был чiеловек не из МЧС, убираем.
+                }
+            })
+    }
+
     /**
      * Добавляем сотрудника по айди в блок в режиме множественного добавления, когда несколько человек привязаны к одной операции.
      * @param id
@@ -2787,6 +2851,10 @@ export default class TopmenuComponent extends Vue {
 
     multipersonRemove(person: Person, block: Persondecreeblock) {
         this.personFromStructure.splice(this.personFromStructure.indexOf(person), 1);
+    }
+
+    multicandidateRemove(candidate: Cabinetdata) {
+        this.candidateSearch.splice(this.candidateSearch.indexOf(candidate), 1);
     }
 
     multicountryAddAdditional(block: Persondecreeblock) {
@@ -2938,6 +3006,18 @@ export default class TopmenuComponent extends Vue {
         }
     } 
 
+    getEducationperiod(educationperiod: number): Educationperiod {
+        if (educationperiod == null || educationperiod == 0) {
+            return null;
+        }
+        let eperiod: Educationperiod = this.educationperiods.find(t => t.id == educationperiod);
+        if (eperiod != null) {
+            return eperiod;
+        } else {
+            return null;
+        }
+    } 
+
     getEducationlevel(educationlevel: number): string {
         if (educationlevel == null || educationlevel == 0) {
             return "";
@@ -2973,7 +3053,7 @@ export default class TopmenuComponent extends Vue {
             return "";
         }
     }
-
+    
     getEducationpositiontype(educationpositiontype: number): string {
         if (educationpositiontype == null || educationpositiontype == 0) {
             return "";
@@ -3009,7 +3089,18 @@ export default class TopmenuComponent extends Vue {
         } else {
             return "";
         }
+    }
 
+    getPersoneducation(personId: number): Personeducation{
+        if (personId == null || personId == 0) {
+            return null;
+        }
+        let personeducation: Personeducation = this.personeducation.find(e => e.id == personId);
+        if (personeducation != null) {
+            return personeducation;
+        } else {
+            return null;
+        }
     }
 
     getPersoneducationUpdateName(): string {
@@ -3533,7 +3624,7 @@ export default class TopmenuComponent extends Vue {
             persondecreeblock.optionstring2 = this.courseName;
             persondecreeblock.optionstring3 = this.specialityName;
             persondecreeblock.optionstring4 = this.facultyName;
-            if(persondecreeblock.optionstring5 == 'Студент'){
+            if(persondecreeblock.optionstring5 == 'студент'){
                 persondecreeblock.optionnumber9 = 0;
             }
             this.addPersoneducationButton();
@@ -3541,39 +3632,79 @@ export default class TopmenuComponent extends Vue {
             persondecreeblock.optionstring6 = this.personeducationLocation;
             persondecreeblock.optionstring7 = this.personeducationCity;
             persondecreeblock.optionstring8 = this.personeducationName;
-            
-            persondecreeblock.optionnumber4 = this.personeducationEducationlevel;
-            persondecreeblock.optionnumber5 = this.personeducationEducationstage;
         }
         // Отчислить
         if(persondecreeblock.persondecreeblocktype == 18){
-            if(persondecreeblock.checkboxdirect)
-            persondecreeblock.optionnumber8 = 1;
-            else
-            persondecreeblock.optionnumber8 = 0;
-
-            if(persondecreeblock.checkboxdismiss)
-            persondecreeblock.optionnumber7 = 1;
-            else
-            persondecreeblock.optionnumber7 = 0;
-
-            persondecreeblock.optionnumber11 = 1;
+            if(persondecreeblock.persondecreeblocksub == 1){
+                if(persondecreeblock.checkbox1){
+                    persondecreeblock.optionnumber6 = 1;
+                }
+                if(persondecreeblock.checkbox2){
+                    persondecreeblock.optionnumber7 = 1;
+                }
+                if(persondecreeblock.checkbox3){
+                    persondecreeblock.optionnumber8 = 1;
+                }
+                if(persondecreeblock.checkbox4){
+                    persondecreeblock.optionnumber9 = 1;
+                }
+                persondecreeblock.optionnumber11 = 2;
+            }else if(persondecreeblock.persondecreeblocksub == 2){
+                if(persondecreeblock.checkboxdirect)
+                persondecreeblock.optionnumber8 = 1;
+                else
+                persondecreeblock.optionnumber8 = 0;
+                if(persondecreeblock.checkboxdismiss)
+                persondecreeblock.optionnumber7 = 1;
+                else
+                persondecreeblock.optionnumber7 = 0;
+                persondecreeblock.optionnumber11 = 1;
             }
+        }
         // Увеличить
         if (persondecreeblock.persondecreeblocktype == 19){
             persondecreeblock.persondecreeblocksubtype = 1;
             persondecreeblock.optionnumber11 = 1;
         }
 
-        if (persondecreeblock.persondecreeblocktype == 21){
-            persondecreeblock.optionstring4 = this.structureNewName;
-            persondecreeblock.optionnumber6 = this.numberStructure;
-            persondecreeblock.optionnumber7 = this.numberNewStructure;
-            if(persondecreeblock.checkboxdismiss == true){
-                persondecreeblock.optionnumber2 = 0;
-            }else{
-                persondecreeblock.optionnumber2 = 1;
+        // Восстановить
+        if (persondecreeblock.persondecreeblocktype == 20) {
+            persondecreeblock.optionnumber1 = this.numberStructure;
+            persondecreeblock.optionstring1 = this.structureName;
+            persondecreeblock.optionstring2 = this.courseName;
+            persondecreeblock.optionstring3 = this.specialityName;
+            persondecreeblock.optionstring4 = this.facultyName;
+            if(persondecreeblock.optionstring5 == 'студент'){
+                persondecreeblock.optionnumber9 = 0;
             }
+        }
+
+        if (persondecreeblock.persondecreeblocktype == 21){
+            if(persondecreeblock.optionnumber1 == 18){
+                persondecreeblock.optionstring4 = this.structureNewName;
+                persondecreeblock.optionnumber6 = this.numberStructure;
+                persondecreeblock.optionnumber7 = this.numberNewStructure;
+                persondecreeblock.optionstring5 = this.getStructureName(this.numberStructure);
+                persondecreeblock.optionstring6 = this.facultyName;
+                if(persondecreeblock.checkboxdismiss == true){
+                    persondecreeblock.optionnumber2 = 0;
+                }else{
+                    persondecreeblock.optionnumber2 = 1;
+                }
+            }else 
+            if(persondecreeblock.optionnumber1 == 27){
+                persondecreeblock.optionstring4 = this.structureNewName;
+                persondecreeblock.optionnumber6 = this.numberStructure;
+                persondecreeblock.optionnumber7 = this.numberNewStructure;
+                persondecreeblock.optionstring5 = this.getStructureName(this.numberStructure);
+                persondecreeblock.optionstring6 = this.facultyName;
+                if(persondecreeblock.checkboxdismiss == true){
+                    persondecreeblock.optionnumber2 = 0;
+                }else{
+                    persondecreeblock.optionnumber2 = 1;
+                }
+            }
+            
         }
 
         let t: any = <Persondecreeoperation>{
@@ -3623,6 +3754,7 @@ export default class TopmenuComponent extends Vue {
             persondecreeblocksubtype: this.prepareNumToExport(persondecreeblock.persondecreeblocksub), // тип поощрения. У нас будет только вид, потому что единовременно может быть только один вид поощрения
 
             personFromStructure: this.personFromStructure,
+            candidateSearch: this.candidateSearch,
         };
 
         fetch('/api/Persondecreeoperation', {
@@ -4114,7 +4246,8 @@ export default class TopmenuComponent extends Vue {
     }
 
     getFacultiStructureName(structureid: number): string {
-       return this.getStructureById(Number.parseInt(this.getStructureById(Number.parseInt(this.getStructureById(Number.parseInt(this.getStructureById(structureid).parentstructure)).parentstructure)).parentstructure)).name1
+       let str = this.getStructureById(Number.parseInt(this.getStructureById(Number.parseInt(this.getStructureById(Number.parseInt(this.getStructureById(structureid).parentstructure)).parentstructure)).parentstructure)).name1
+       return str 
     }
 
     getStructureById(structureid: number): Structure {
@@ -4289,9 +4422,11 @@ export default class TopmenuComponent extends Vue {
                 sidebardisplay: 1,
             }
 
+            //mergin from mark branch
             this.$store.commit("setdecreeoperationtemplatecreatorVisible", false);
             this.$store.commit("setdecreeoperationelementVisible", 0);
             this.$store.commit("setmailmodeprevios", true);
+            //--------------------------------------------
 
             //this.visible = false;
             this.modalPersondecreeMenuVisible = false;
@@ -4767,6 +4902,8 @@ export default class TopmenuComponent extends Vue {
         }
     }
 
+
+
     getCountry(country: number): Country {
         if (country == null || country == 0) {
             return null;
@@ -5176,7 +5313,7 @@ export default class TopmenuComponent extends Vue {
 
     provideRestoreSubBlockText(persondecreeblocksub: Persondecreeblocksub): string{
         let str = "";
-        str += "в соответствии с пунктом 2 статьи 80 Кодекса Республики Беларусь об образовании на факультет заочного обучения по специальности « "+ persondecreeblocksub.subvaluestring1 +" » (на условиях оплаты):"
+        str += "в соответствии с пунктом 2 статьи 80 Кодекса Республики Беларусь об образовании на "+ persondecreeblocksub.subvaluestring2 +" по специальности « "+ persondecreeblocksub.subvaluestring1 +" » (на условиях оплаты):"
         return str;
     }
     
@@ -5487,5 +5624,58 @@ export default class TopmenuComponent extends Vue {
         }
         let diff = moment(persondecreeblock.optiondate3String).diff(persondecreeblock.optiondate1String, 'days');
         persondecreeblock.optionnumber1 = diff;
+    }
+
+    numpersonalchange(event: Event, numpersonal: string) {
+        //alert(numpersonal);
+        let input = event.target as any;
+
+        if (numpersonal == null) {
+            return;
+        }
+        numpersonal = numpersonal.toUpperCase();
+        if (numpersonal.length == 1) {
+            numpersonal += "-";
+        }
+        if (numpersonal.length == 2) {
+            numpersonal = numpersonal.substring(0, 1) + "-";
+        }
+        if (numpersonal.length > 2) {
+            numpersonal = numpersonal.substring(0, 1) + "-" + numpersonal.substring(2);
+        }
+        if (numpersonal.length > 0 && !this.isLetterCyrillic(numpersonal[0])) {
+            numpersonal = numpersonal.substring(0, 0);
+        }
+        if (numpersonal.length > 2 && !this.isNum(numpersonal[2])) {
+            numpersonal = numpersonal.substring(0, 2);
+        }
+        if (numpersonal.length > 3 && !this.isNum(numpersonal[3])) {
+            numpersonal = numpersonal.substring(0, 3);
+        }
+        if (numpersonal.length > 4 && !this.isNum(numpersonal[4])) {
+            numpersonal = numpersonal.substring(0, 4);
+        }
+        if (numpersonal.length > 5 && !this.isNum(numpersonal[5])) {
+            numpersonal = numpersonal.substring(0, 5);
+        }
+        if (numpersonal.length > 6 && !this.isNum(numpersonal[6])) {
+            numpersonal = numpersonal.substring(0, 6);
+        }
+        input.value = numpersonal;
+        //alert(input.value);
+        //persondecreeblock.optionnumber1 = 5;
+    }
+       
+    getCourse(semestr: number): number{
+        if(semestr > 0 && semestr < 3){
+            return 1;
+        }else if(semestr < 5){
+            return 2;
+        }else if(semestr < 7){
+            return 3;
+        }else if(semestr < 9){
+            return 4;
+        }
+        return 0;
     }
 }

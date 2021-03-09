@@ -5272,12 +5272,13 @@ namespace PersonnelManagement.Models
                 // Выводить только обособленные (не структурные) подразделения. Пока определяем по городу
                 //if (structure.City != null && structure.City.Length > 0)
                 //{
-                    // Проверка на скорую руку. Потом улучшить
-                    // Пока не включаем ПАСПы, ПАСЧи, ПАСО и прочие
-                    if (structure.Structuretype != 15 && structure.Structuretype != 18 && structure.Structuretype != 45
-                        && structure.Structuretype != 13 && structure.Structuretype != 17 && structure.Structuretype != 14
-                        && structure.Structuretype != 22 && structure.Structuretype != 30)
-                    {
+                // Проверка на скорую руку. Потом улучшить
+                // Пока не включаем ПАСПы, ПАСЧи, ПАСО и прочие
+                /*if (structure.Structuretype != 15 && structure.Structuretype != 18 && structure.Structuretype != 45
+                    && structure.Structuretype != 13 && structure.Structuretype != 17 && structure.Structuretype != 14
+                    && structure.Structuretype != 22 && structure.Structuretype != 30)*/
+                if (structure.Featured == 1 || structure.Id == 1)
+                {
                         list.Add(FormTreeDocument(structure, user.Date.GetValueOrDefault(), null, 2, null));
                     }
                 //}
@@ -12154,9 +12155,9 @@ namespace PersonnelManagement.Models
                 ptr.Sort((a, b) => a.Start.Ticks.CompareTo(b.Start.Ticks));
                 personManager.Pensions = ptr.ToArray();
                 personManager.appending_days = appending_days;
-                A.add(new CustomDate(Day: appending_days));
+                A.add(new CustomDate(Day: -appending_days));
                 personManager.pension_A_with = A.Year.ToString() + " " + A.Month.ToString() + " " + A.Day.ToString() + " ";
-                B.add(new CustomDate(Day: appending_days));
+                B.add(new CustomDate(Day: -appending_days));
                 personManager.pension_B_with = B.Year.ToString() + " " + B.Month.ToString() + " " + B.Day.ToString() + " ";
             }
 
@@ -12473,77 +12474,77 @@ namespace PersonnelManagement.Models
                     }
 
                     // Идем по периодам в учебе и смотрим, какие из них являются военными.
-                    foreach (Personeducationpart personeducationpart in personeducation.Personeducationparts)
-                    {
-                        // Засчитывается только очное
-                        if (personeducationpart.Educationperiod != null && personeducationpart.Educationtypeblock != null && personeducationpart.Educationtypeblock.Educationtype == 1)
-                        {
-                            // Если не из УГЗ вкладки, то смотрим, что стоит галочка, что являлось службой.
-                            // Если из УГЗ вкладки, то смотрим, чтобы было прописано звание (больше 2ух символов не-пустых).
-                            if (personeducationpart.Educationperiod.Service > 0 || personeducationpart.Educationperiod.Rank.Trim().Length > 2)
-                            {
-                                Personjob cadetPersonjob = new Personjob();
-                                cadetPersonjob.Id = -1; // Помечаем таким образом, что запись ненастоящая и что ее нельзя редактировать.
-                                cadetPersonjob.Jobplace = personeducation.Name2;
-                                Educationpositiontype educationpositiontype = Educationpositiontypes.FirstOrDefault(e => e.Id == personeducationpart.Educationperiod.Educationpositiontype);
-                                if (educationpositiontype != null)
-                                {
-                                    cadetPersonjob.Jobposition = educationpositiontype.Name;
-                                } else
-                                {
-                                    cadetPersonjob.Jobposition = "";
-                                }
+                    //foreach (Personeducationpart personeducationpart in personeducation.Personeducationparts)
+                    //{
+                    //    // Засчитывается только очное
+                    //    if (personeducationpart.Educationperiod != null && personeducationpart.Educationtypeblock != null && personeducationpart.Educationtypeblock.Educationtype == 1)
+                    //    {
+                    //        // Если не из УГЗ вкладки, то смотрим, что стоит галочка, что являлось службой.
+                    //        // Если из УГЗ вкладки, то смотрим, чтобы было прописано звание (больше 2ух символов не-пустых).
+                    //        if (personeducationpart.Educationperiod.Service > 0 || personeducationpart.Educationperiod.Rank.Trim().Length > 2)
+                    //        {
+                    //            Personjob cadetPersonjob = new Personjob();
+                    //            cadetPersonjob.Id = -1; // Помечаем таким образом, что запись ненастоящая и что ее нельзя редактировать.
+                    //            cadetPersonjob.Jobplace = personeducation.Name2;
+                    //            Educationpositiontype educationpositiontype = Educationpositiontypes.FirstOrDefault(e => e.Id == personeducationpart.Educationperiod.Educationpositiontype);
+                    //            if (educationpositiontype != null)
+                    //            {
+                    //                cadetPersonjob.Jobposition = educationpositiontype.Name;
+                    //            } else
+                    //            {
+                    //                cadetPersonjob.Jobposition = "";
+                    //            }
                                 
-                                cadetPersonjob.Jobpositionplace = cadetPersonjob.Jobposition + " " + cadetPersonjob.Jobplace;
-                                cadetPersonjob.Start = personeducationpart.Educationperiod.Start;
-                                cadetPersonjob.End = personeducationpart.Educationperiod.End;
-                                cadetPersonjob.Servicetype = 2;
-                                cadetPersonjob.Jobtype = 2; // служба
-                                                            //cadetPersonjob.Serviceplace = "курсант " + personeducation.Name; // пока что так, но надо более адекватно
-                                //cadetPersonjob.Serviceplace = "курсант " + personeducation.Orderwho; // пока что так, но надо более адекватно
-                                cadetPersonjob.Ordernumber = personeducation.Ordernumber;
-                                cadetPersonjob.Ordernumbertype = personeducation.Ordernumbertype;
-                                cadetPersonjob.Orderdate = personeducation.Orderdate;
-                                cadetPersonjob.Orderwho = personeducation.Orderwho;
-                                cadetPersonjob.Orderwhoid = personeducation.Orderwhoid;
-                                cadetPersonjob.Orderid = personeducation.Orderid;
+                    //            cadetPersonjob.Jobpositionplace = cadetPersonjob.Jobposition + " " + cadetPersonjob.Jobplace;
+                    //            cadetPersonjob.Start = personeducationpart.Educationperiod.Start;
+                    //            cadetPersonjob.End = personeducationpart.Educationperiod.End;
+                    //            cadetPersonjob.Servicetype = 2;
+                    //            cadetPersonjob.Jobtype = 2; // служба
+                    //                                        //cadetPersonjob.Serviceplace = "курсант " + personeducation.Name; // пока что так, но надо более адекватно
+                    //            //cadetPersonjob.Serviceplace = "курсант " + personeducation.Orderwho; // пока что так, но надо более адекватно
+                    //            cadetPersonjob.Ordernumber = personeducation.Ordernumber;
+                    //            cadetPersonjob.Ordernumbertype = personeducation.Ordernumbertype;
+                    //            cadetPersonjob.Orderdate = personeducation.Orderdate;
+                    //            cadetPersonjob.Orderwho = personeducation.Orderwho;
+                    //            cadetPersonjob.Orderwhoid = personeducation.Orderwhoid;
+                    //            cadetPersonjob.Orderid = personeducation.Orderid;
 
-                                List<Personjob> newPersonjobs = new List<Personjob>(personManager.Personjobs);
-                                newPersonjobs.Add(cadetPersonjob);
-                                personManager.Personjobs = newPersonjobs.ToArray();
-                            }
-                        }
+                    //            List<Personjob> newPersonjobs = new List<Personjob>(personManager.Personjobs);
+                    //            newPersonjobs.Add(cadetPersonjob);
+                    //            personManager.Personjobs = newPersonjobs.ToArray();
+                    //        }
+                    //    }
 
-                        // Обучение до академ отпуска или декрета было очным
-                        if ((personeducationpart.Educationmaternity != null || personeducationpart.Academicvacation != null) && personeducationpart.PreviousEducationpartWithEducationperiod != null
-                            && personeducationpart.PreviousEducationpartWithEducationperiod.Educationtypeblock != null
-                            && personeducationpart.PreviousEducationpartWithEducationperiod.Educationtypeblock.Educationtype == 1)
-                        {
-                            Personvacation educationPersonvacation = new Personvacation();
-                            educationPersonvacation.Id = -1;
-                            educationPersonvacation.Date = personeducationpart.Start;
-                            educationPersonvacation.Duration = (personeducationpart.End.GetValueOrDefault() - personeducationpart.Start.GetValueOrDefault()).Days + 1;
-                            educationPersonvacation.Allowstart = personeducationpart.Start.GetValueOrDefault();
-                            educationPersonvacation.Allowend = personeducationpart.End.GetValueOrDefault();
-                            if (personeducationpart.Educationmaternity != null)
-                            {
-                                educationPersonvacation.Vacationtype = 6;
-                            }
-                            if (personeducationpart.Academicvacation != null)
-                            {
-                                educationPersonvacation.Vacationtype = 4;
-                            }
-                            //foreach (Jobperiod jobperiod in personManager.Jobperiods)
-                            //{
-                            //    Period period = new Period(jobperiod.Start.GetValueOrDefault(), jobperiod.End.GetValueOrDefault()); 
-                            //    if (period.Surround())
-                            //}
+                    //    // Обучение до академ отпуска или декрета было очным
+                    //    if ((personeducationpart.Educationmaternity != null || personeducationpart.Academicvacation != null) && personeducationpart.PreviousEducationpartWithEducationperiod != null
+                    //        && personeducationpart.PreviousEducationpartWithEducationperiod.Educationtypeblock != null
+                    //        && personeducationpart.PreviousEducationpartWithEducationperiod.Educationtypeblock.Educationtype == 1)
+                    //    {
+                    //        Personvacation educationPersonvacation = new Personvacation();
+                    //        educationPersonvacation.Id = -1;
+                    //        educationPersonvacation.Date = personeducationpart.Start;
+                    //        educationPersonvacation.Duration = (personeducationpart.End.GetValueOrDefault() - personeducationpart.Start.GetValueOrDefault()).Days + 1;
+                    //        educationPersonvacation.Allowstart = personeducationpart.Start.GetValueOrDefault();
+                    //        educationPersonvacation.Allowend = personeducationpart.End.GetValueOrDefault();
+                    //        if (personeducationpart.Educationmaternity != null)
+                    //        {
+                    //            educationPersonvacation.Vacationtype = 6;
+                    //        }
+                    //        if (personeducationpart.Academicvacation != null)
+                    //        {
+                    //            educationPersonvacation.Vacationtype = 4;
+                    //        }
+                    //        //foreach (Jobperiod jobperiod in personManager.Jobperiods)
+                    //        //{
+                    //        //    Period period = new Period(jobperiod.Start.GetValueOrDefault(), jobperiod.End.GetValueOrDefault()); 
+                    //        //    if (period.Surround())
+                    //        //}
 
-                            List<Personvacation> newPersonvacations = new List<Personvacation>(personManager.Personvacations);
-                            newPersonvacations.Add(educationPersonvacation);
-                            personManager.Personvacations = newPersonvacations.ToArray();
-                        }
-                    }
+                    //        List<Personvacation> newPersonvacations = new List<Personvacation>(personManager.Personvacations);
+                    //        newPersonvacations.Add(educationPersonvacation);
+                    //        personManager.Personvacations = newPersonvacations.ToArray();
+                    //    }
+                    //}
                 }
             } // Заканчиваем подсчет стажа
             
@@ -14174,30 +14175,33 @@ namespace PersonnelManagement.Models
             {
                 personjobContext.Statecivilstart = null;
                 personjobContext.Statecivilend = null;
+                SaveChanges();
+                UpdatePersonjobsLocal();
             }
-
-            SaveChanges();
-            UpdatePersonjobsLocal();
 
             if (personjobContext.Position > 0 && personjobContext.Actual > 0)
             {
                 AppointPerson(user, personjobContext.Person, personjobContext.Position);
+                SaveChanges();
             }
             else if (wasActual)
             {
                 TakeoffPerson(user, personjobContext.Person);
+                SaveChanges();
             }
-
-            SaveChanges();
 
             IEnumerable<Personjobprivelege> personjobpriveleges = context.Personjobprivelege.Where(e => e.Personjob == personjobContext.Id);
-            foreach (var personjobprivelege in personjobpriveleges)
+            if(personjobpriveleges.ToList().Count > 0)
             {
-                IEnumerable<Personjobprivelegeperiod> personjobprivelegeperiods = context.Personjobprivelegeperiod.Where(e => e.Personjobprivelege == personjobprivelege.Id);
-                context.Personjobprivelege.Remove(personjobprivelege);
-                context.Personjobprivelegeperiod.RemoveRange(personjobprivelegeperiods);
+                foreach (var personjobprivelege in personjobpriveleges)
+                {
+                    IEnumerable<Personjobprivelegeperiod> personjobprivelegeperiods = context.Personjobprivelegeperiod.Where(e => e.Personjobprivelege == personjobprivelege.Id);
+                    context.Personjobprivelege.Remove(personjobprivelege);
+                    context.Personjobprivelegeperiod.RemoveRange(personjobprivelegeperiods);
+                }
+                SaveChanges();
             }
-            SaveChanges();
+            
 
 
             personjobpriveleges = new List<Personjobprivelege>(personjob.Personjobpriveleges);
@@ -14336,7 +14340,7 @@ namespace PersonnelManagement.Models
             DateTime date = user.Date.GetValueOrDefault();
             Personjob outputPersonjob = personjob;
 
-            Position position = PositionsLocal().GetValue(outputPersonjob.Position);
+            Position position = PositionsLocal().GetValue(personjob.Positiontoselect);
             if (position == null)
             {
                 return null;
@@ -15654,7 +15658,6 @@ namespace PersonnelManagement.Models
 
         public IEnumerable<Position> GetAllFreePositionsFromStructure(int id, List<Person> persons, Persondecreeoperation persondecreeoperation)
         {
-            
             IEnumerable<int> positions = new List<int> { };
             persons.ForEach(el =>
             {
@@ -15664,8 +15667,6 @@ namespace PersonnelManagement.Models
             List<Position> output = GetPositions(id, DateTime.Now).ToList();
             output.ForEach(el => enumerableId = enumerableId.Append(el.Id));
             IEnumerable<int> output_list_id = enumerableId.Except(positions);
-
-            
 
             return output.Where(r => GetFreePositionsFromStructure(id, persondecreeoperation, positions, output_list_id, output, enumerableId, persondecreeoperation.Optionstring5).Contains(r.Id));
         }
@@ -15867,7 +15868,47 @@ namespace PersonnelManagement.Models
             //List<int> personjobsIds = new List<int>();
             //List<int> personjobsFireIds = new List<int>();
 
-            IEnumerable<Persondecreeoperation> decreeoperationsToAccept = PersondecreeoperationsLocal().Values.Where(d => d.Persondecree == decreeManagement.Id).ToList();
+            IEnumerable<Persondecreeoperation> decreeoperationsToAccept = PersondecreeoperationsLocal().Values.Where(d => d.Persondecree == decreeManagement.Id && d.Persondecreeblocktype != 21).ToList();
+            IEnumerable<Persondecreeoperation> decreeoperationsToAcceptMove = PersondecreeoperationsLocal().Values.Where(d => d.Persondecree == decreeManagement.Id && d.Persondecreeblocktype == 21).ToList();
+
+            if(decreeoperationsToAcceptMove.ToList().Count > 0)
+            {
+                int n = 0;
+                Dictionary<int, NewVzvod> new_vzvods = new Dictionary<int, NewVzvod>();
+                foreach (Persondecreeoperation decreeoperation in decreeoperationsToAcceptMove)
+                {
+                    if(decreeoperation.Optionnumber1 == 18)
+                    {
+                        bool isExist = true;
+                        if (new_vzvods.Count == 0)
+                        {
+                            new_vzvods.Add(n, new NewVzvod(decreeoperation.Optionnumber7, decreeoperation.Optionnumber6, decreeoperation.Optionstring5) { });
+                            n++;
+                        }
+
+                        foreach (KeyValuePair<int, NewVzvod> vzvod in new_vzvods)
+                        {
+                            if (vzvod.Value.newIdStructure == decreeoperation.Optionnumber7 && vzvod.Value.name == decreeoperation.Optionstring5)
+                            {
+                                isExist = false;
+                                break;
+                            }
+                            else
+                                continue;
+                        }
+                        if (isExist)
+                        {
+                            n++;
+                            new_vzvods.Add(n, new NewVzvod(decreeoperation.Optionnumber7, decreeoperation.Optionnumber6, decreeoperation.Optionstring5) { });
+                        }
+                    }
+                }
+
+                MovePersonBetweenCourses movePersonBetweenCourses = new MovePersonBetweenCourses(this, user, new_vzvods);
+                movePersonBetweenCourses.Worker(decreeoperationsToAcceptMove);
+            }
+
+
             foreach (Persondecreeoperation decreeoperation in decreeoperationsToAccept)
             {
                 // Поощрить (наградить)
@@ -15976,7 +16017,7 @@ namespace PersonnelManagement.Models
                     }
 
                     context.Personpenalty.Add(personpenalty);
-                }
+                }                
                 // Назначить
                 else if (decreeoperation.Persondecreeblocktype == 3)
                 {
@@ -16380,7 +16421,7 @@ namespace PersonnelManagement.Models
                     }
                 }
                 // Командировать
-                else if (decreeoperation.Persondecreeblocktype == 15)
+                else if (decreeoperation.Persondecreeblocktype == 16)
                 {
                     // Записываем если за границу
                     if (decreeoperation.Persondecreeblocksubtype == 13 && decreeoperation.Optionnumber1 > 0)
@@ -16390,10 +16431,6 @@ namespace PersonnelManagement.Models
                         //personworktrip.Tripdate =
                     }
                     
-                }
-                else if (decreeoperation.Persondecreeblocktype == 16)
-                {
-
                 }
                 // Зачислить
                 else if (decreeoperation.Persondecreeblocktype == 17)
@@ -16435,16 +16472,21 @@ namespace PersonnelManagement.Models
                         personjob.Orderwhoid = structureOwner.Id;
                     }
                     personjob.Actual = 1;
-                    List<Personjob> personjobs = PersonjobsLocal().Values.Where(p => p.Person == decreeoperation.Person).ToList();
-                    foreach (Personjob personjobExisted in personjobs)
+
+                    if(decreeoperation.Optionnumber8 != 2)
                     {
-                        if (personjobExisted.Actual == 1)
+                        List<Personjob> personjobs = PersonjobsLocal().Values.Where(p => p.Person == decreeoperation.Person).ToList();
+                        foreach (Personjob personjobExisted in personjobs)
                         {
-                            personjobExisted.Actual = 0;
-                            //personjobExisted.End = personjob.Start.GetValueOrDefault().AddDays(-1);
-                            personjobExisted.End = personjob.Start.GetValueOrDefault();
+                            if (personjobExisted.Actual == 1)
+                            {
+                                personjobExisted.Actual = 0;
+                                //personjobExisted.End = personjob.Start.GetValueOrDefault().AddDays(-1);
+                                personjobExisted.End = personjob.Start.GetValueOrDefault();
+                            }
                         }
                     }
+
                     AppointPersonJob(user, personjob);
                     AppointPerson(user, personjob.Person, personjob.Position); // Обновляем в ЭЛД актуальную должность
                     context.Personjob.Add(personjob);
@@ -16501,7 +16543,7 @@ namespace PersonnelManagement.Models
                     personeducation.Speciality = decreeoperation.Optionstring3;
                     personeducation.Start = decreeoperation.Optiondate1;
                     personeducation.Educationstage = decreeoperation.Optionnumber5;
-                    personeducation.Educationlevel = decreeoperation.Optionnumber4;
+                    personeducation.Educationlevel = decreeoperation.Optionnumber6;
                     personeducation.Orderdate = decree.Datesigned;
                     personeducation.Orderid = decree.Id;
                     personeducation.Ordernumber = decree.Number;
@@ -16528,7 +16570,7 @@ namespace PersonnelManagement.Models
 
                     Educationtypeblock newEducationtypeblock = new Educationtypeblock();
                     newEducationtypeblock.Personeducation = personeducation.Id;
-                    newEducationtypeblock.Educationtype = educationtypeblock.Educationtype;
+                    newEducationtypeblock.Educationtype = decreeoperation.Optionnumber8;
 
                     List<Educationperiod> educationperiods = new List<Educationperiod>(educationtypeblock.Educationperiods);
                     context.Educationtypeblock.Add(newEducationtypeblock);
@@ -16539,7 +16581,6 @@ namespace PersonnelManagement.Models
                     Rank rank = new Rank();
                     if (decreeoperation.Optionnumber9 == 0)
                     {
-                        
                         rank.Name = "";
                     }
                     else
@@ -16551,229 +16592,209 @@ namespace PersonnelManagement.Models
                     newEducationperiod.Educationtypeblock = newEducationtypeblock.Id;
                     newEducationperiod.Service = 0;
                     newEducationperiod.Start = decreeoperation.Optiondate1;
-                    newEducationperiod.Educationpositiontype = decreeoperation.Optionnumber5;
+                    newEducationperiod.Educationpositiontype = decreeoperation.Optionnumber2;
                     newEducationperiod.Rank = rank.Name;
                     newEducationperiod.Platoon = platoon;
                     newEducationperiod.Course = course;
                     context.Educationperiod.Add(newEducationperiod);
                     SaveChanges();
-
                 }
+                // Отчислить
                 else if (decreeoperation.Persondecreeblocktype == 18)
                 {
+                    Personjob lastPersonjob = context.Personjob.FirstOrDefault(p => p.Person == decreeoperation.Person && p.Actual > 0); // Актуальная работа должна быть одна. Или ищем первую.
+                    if (lastPersonjob != null)
+                    {
+                        lastPersonjob.Actual = 0;
+                        //lastPersonjob.Fireordernumber = decree.Name + " " + decree.Number;
+                        lastPersonjob.Fireordernumber = decree.Number;
+                        lastPersonjob.Fireordernumbertype = decree.Numbertype;
+                        lastPersonjob.Fireorderid = decree.Id;
+                        lastPersonjob.Fireorderwho = "";
+                        lastPersonjob.Fireorderwhoid = 0;
+                        lastPersonjob.Fireorderdate = decree.Datesigned.GetValueOrDefault();
+                        if (structureOwner != null)
+                        {
+                            lastPersonjob.Fireorderwho = GetStructureNameDocument(structureOwner, date, 1, null);
+                            lastPersonjob.Fireorderwhoid = structureOwner.Id;
+                        }
+                        if (decreeoperation.Optiondate1 == null)
+                        {
+                            lastPersonjob.End = decree.Datesigned.GetValueOrDefault();
+                        }
+                        else
+                        {
+                            lastPersonjob.End = decreeoperation.Optiondate1;
+                        }
+                    }
+                    TakeoffPerson(user, decreeoperation.Person);
 
+                    SaveChanges();
+
+                    Personeducation lastPersoneducation = context.Personeducation.FirstOrDefault(e => e.Person == decreeoperation.Person && e.End == null);
+
+                    if (decreeoperation.Optionnumber1 == 0)
+                    {
+                        if(lastPersoneducation != null)
+                        {
+                            lastPersoneducation.End = decreeoperation.Optiondate1;
+
+                            Educationtypeblock educationtypeblock = context.Educationtypeblock.FirstOrDefault(e => e.Personeducation == lastPersoneducation.Id);
+                            if (educationtypeblock != null)
+                            {
+                                educationtypeblock.IsEnded = 1;
+                                Educationperiod educationperiod = context.Educationperiod.FirstOrDefault(e => e.Educationtypeblock == educationtypeblock.Id && e.End == null);
+                                educationperiod.End = decree.Datesigned;
+                            }
+                            SaveChanges();
+                        }
+                    }
+                    else
+                    {
+                        if (lastPersoneducation != null)
+                        {
+                            lastPersoneducation.Interrupted = 1;
+                            lastPersoneducation.Interruptorderdate = decree.Datesigned;
+                            lastPersoneducation.Interruptordernumber = decree.Number;
+                            lastPersoneducation.Interruptordernumbertype = decree.Numbertype;
+                            lastPersoneducation.Interruptorderreason = decreeoperation.Optionstring7;
+                            lastPersoneducation.Interruptorderwho = decree.Nickname;
+
+                            Educationtypeblock educationtypeblock = context.Educationtypeblock.FirstOrDefault(e => e.Personeducation == lastPersoneducation.Id);
+                            if (educationtypeblock != null)
+                            {
+                                educationtypeblock.IsEnded = 1;
+                                Educationperiod educationperiod = context.Educationperiod.FirstOrDefault(e => e.Educationtypeblock == educationtypeblock.Id && e.End == null);
+                                educationperiod.End = decree.Datesigned;
+                            }
+                            SaveChanges();
+                        }
+                    }
                 }
+                // Увеличить
                 else if (decreeoperation.Persondecreeblocktype == 19)
                 {
 
                 }
+                // Восстановить
                 else if (decreeoperation.Persondecreeblocktype == 20)
                 {
-
-                }
-                else if (decreeoperation.Persondecreeblocktype == 21)
-                {
-                    bool isExist = false;
-
-                    Structure oldStructure = GetActualStructureInfo(decreeoperation.Optionnumber6, user.Date.GetValueOrDefault());
-
-                    Structure structure = new Structure();
-
-                    List<Structure> structures = new List<Structure>();
-
-                    StructuresLocal().Values.ToList().ForEach(s => { if (s.Parentstructure == decreeoperation.Optionnumber7) { structures.Add(s); } });
-
-                    if (structures.Count > 0)
-                    {
-                        structure = structures.FirstOrDefault(s => s.Changeorigin == 0);
-
-                        structure = GetActualStructureInfo(structure.Id, user.Date.GetValueOrDefault());
-
-                        isExist = true;
-                    }
-
-
-                    if (!isExist)
-                    {
-                        Structure newStructure = new Structure();
-
-                        newStructure.Name = oldStructure.Name;
-                        if (oldStructure.Name1 != null && oldStructure.Name1.Length > 0)
-                        {
-                            newStructure.Name1 = oldStructure.Name1;
-                        }
-                        else
-                        {
-                            newStructure.Name1 = oldStructure.Name;
-                        }
-                        if (oldStructure.Name2 != null && oldStructure.Name2.Length > 0)
-                        {
-                            newStructure.Name2 = oldStructure.Name2;
-                        }
-                        else
-                        {
-                            newStructure.Name2 = oldStructure.Name;
-                        }
-                        if (oldStructure.Name3 != null && oldStructure.Name3.Length > 0)
-                        {
-                            newStructure.Name3 = oldStructure.Name3;
-                        }
-                        else
-                        {
-                            newStructure.Name3 = oldStructure.Name;
-                        }
-                        newStructure.Nameshortened = oldStructure.Name;
-                        newStructure.Featured = oldStructure.Featured;
-                        newStructure.Structureregion = oldStructure.Structureregion;
-                        newStructure.Structuretype = oldStructure.Structuretype;
-                        newStructure.Street = oldStructure.Street;
-                        newStructure.City = oldStructure.City;
-                        newStructure.Rank = oldStructure.Rank;
-                        newStructure.Separatestructure = oldStructure.Separatestructure;
-                        if (decreeoperation.Optionnumber7 > 0)
-                        {
-                            newStructure.Parentstructure = decreeoperation.Optionnumber7;
-                            int lowPriority = 0;
-                            if (StructuresLocal().Values.Where(s => newStructure.Parentstructure == s.Parentstructure).Count() > 0)
-                            {
-                                lowPriority = StructuresLocal().Values.Where(s => newStructure.Parentstructure == s.Parentstructure).OrderBy(st => st.Priority).Last().Priority + 1;
-                            }
-                            newStructure.Priority = lowPriority;
-
-                            Structure parentActualStructure = GetActualStructureInfo(newStructure.Parentstructure, date);
-                            if (newStructure.Structuretype == 0 && parentActualStructure.Structuretype > 0)
-                            {
-                                newStructure.Structuretype = parentActualStructure.Structuretype;
-                            }
-                        }
-
-                        context.Structure.Add(newStructure);
-                        context.SaveChanges();
-                        UpdateStructuresLocal();
-
-                        structure = Structures.Last();
-
-                        DecreeManagement decreeManagement1 = new DecreeManagement();
-
-                        decreeManagement1.Nickname = " ";
-
-                        this.AddNewDecree(decreeManagement1, user);
-
-                        Decree decree1 = Decrees.Last();
-                        Decreeoperation operation = new Decreeoperation();
-                        operation.Decree = decree1.Id;
-                        operation.Created = 1;
-                        // У подразделений subject имеет знак минуса
-                        operation.Subject = -structure.Id;
-
-                        decreeManagement1.Id = decree1.Id;
-
-
-
-                        List<Position> positions = new List<Position>();
-
-                        PositionsLocal().Values.ToList().ForEach(e => {
-                            if (e.Structure == decreeoperation.Optionnumber6)
-                            {
-                                positions.Add(e);
-                            }
-                        });
-
-
-
-                        positions.ForEach(p => {
-                            p.Structure = structure.Id;
-                            p.Id = 0;
-                            //p.Id = 0;
-                            context.Position.Add(p);
-                            //context.SaveChanges();
-                            
-                        });
-                        context.SaveChanges();
-                        positions.ForEach(p => {
-                            decree1 = Decrees.Last();
-                            Decreeoperation positionOperation = new Decreeoperation();
-                            positionOperation.Decree = decree1.Id;
-                            positionOperation.Created = 1;
-                            // У подразделений subject имеет знак минуса
-                            positionOperation.Subject = -structure.Id;
-
-                            context.Decreeoperation.Add(positionOperation);
-                        });
-                        
-
-
-
-                        context.Decreeoperation.Add(operation);
-                        context.SaveChanges();
-                        UpdateDecreeoperationsLocal();
-
-                        this.AcceptDecree(decreeManagement1, user);
-                    }
+                    Personrank personrank = context.Personrank.FirstOrDefault(p => p.Person == decreeoperation.Person);
 
                     Personjob personjob = new Personjob();
+                    personjob.Person = decreeoperation.Person;
+                    personjob.Servicetype = 2;
+                    personjob.Servicecoef = 1;
+                    personjob.Servicefeature = 1;
+                    personjob.Position = decreeoperation.Optionnumber4;
+                    personjob.Serviceplace = decreeoperation.Optionstring2;
+                    personjob.Mchs = 1;
+                    if (personrank != null)
+                    {
+                        personjob.Jobtype = 2;
+                    }
+                    else
+                    {
+                        personjob.Jobtype = 4;
+                    }
+                    personjob.Orderdate = decree.Datesigned.GetValueOrDefault();
+                    if (decreeoperation.Optiondate1 == null)
+                    {
+                        personjob.Start = decree.Datesigned.GetValueOrDefault();
+                    }
+                    else
+                    {
+                        personjob.Start = decreeoperation.Optiondate1;
+                    }
+                    //personjob.Ordernumber = decree.Name + " " + decree.Number;
+                    personjob.Ordernumber = decree.Number;
+                    personjob.Ordernumbertype = decree.Numbertype;
+                    personjob.Orderwho = "";
+                    personjob.Orderwhoid = 0;
+                    personjob.Orderid = decree.Id;
+                    if (structureOwner != null)
+                    {
+                        personjob.Orderwho = GetStructureNameDocument(structureOwner, date, 1, null);
+                        personjob.Orderwhoid = structureOwner.Id;
+                    }
+                    personjob.Actual = 1;
+                    if(decreeoperation.Optionnumber8 != 2)
+                    {
+                        List<Personjob> personjobs = PersonjobsLocal().Values.Where(p => p.Person == decreeoperation.Person).ToList();
+                        foreach (Personjob personjobExisted in personjobs)
+                        {
+                            if (personjobExisted.Actual == 1)
+                            {
+                                personjobExisted.Actual = 0;
+                                //personjobExisted.End = personjob.Start.GetValueOrDefault().AddDays(-1);
+                                personjobExisted.End = personjob.Start.GetValueOrDefault();
+                            }
+                        }
+                    }
 
-                    personjob = PersonjobsLocal().Values.ToList().FirstOrDefault(p => p.End == null && p.Person == decreeoperation.Person);
+                    AppointPersonJob(user, personjob);
+                    AppointPerson(user, personjob.Person, personjob.Position); // Обновляем в ЭЛД актуальную должность
+                    context.Personjob.Add(personjob);
+                    SaveChanges();
+                    //personjobsIds.Add(personjob.Id);
 
-                    TextInfo textInfo = new CultureInfo("en-US", false).TextInfo;
+                    
+                    Personeducation personeducation = context.Personeducation.FirstOrDefault(p => p.Person == decreeoperation.Person && p.End == null);
 
-                    decreeoperation.Optionstring5 = textInfo.ToTitleCase(personjob.Jobposition);
-
-                    IEnumerable<Position> positions1 = GetAllFreePositionsFromStructure(structure.Id, GetPersonsForStructure(structure.Id), decreeoperation);
-                    decreeoperation.Optionnumber3 = positions1.ToList()[0].Id;
-
-                    personjob.Position = decreeoperation.Optionnumber3;
-
-                    ChangePersonJob(user, personjob);
-
-                    Personeducation personeducation = new Personeducation();
+                    if(personeducation != null)
+                    {
+                        personeducation.Interrupted = 0;
+                        personeducation.Interruptorderdate = null;
+                        personeducation.Interruptordernumber = "";
+                        personeducation.Interruptordernumbertype = "";
+                        personeducation.Interruptorderreason = "";
+                        personeducation.Interruptorderwho = "";
+                    }
 
                     Educationtypeblock educationtypeblock = new Educationtypeblock();
-
+                    educationtypeblock.Educationperiods = new List<Educationperiod>();
+                    educationtypeblock.Educationtype = 1;
                     Educationperiod educationperiod = new Educationperiod();
+                    educationperiod.Start = decreeoperation.Optiondate1;
 
-                    personeducation = Personeducations.ToList().FirstOrDefault(p => p.End == null && p.Person == decreeoperation.Person);
 
-                    educationtypeblock = Educationtypeblocks.ToList().FirstOrDefault(e => e.Personeducation == personeducation.Id);
+                    personeducation.Educationtypeblocks = new List<Educationtypeblock> { };
 
-                    educationperiod = Educationperiods.FirstOrDefault(e => e.Educationtypeblock == educationtypeblock.Id);
-                    educationperiod.End = decreeoperation.Optiondate1;
+                    personeducation.Educationtypeblocks.Add(educationtypeblock);
+
+                    List<Educationtypeblock> educationtypeblocks = new List<Educationtypeblock>(personeducation.Educationtypeblocks);
+                    List<Academicvacation> academicvacations = new List<Academicvacation>(personeducation.Academicvacation);
+                    List<Educationmaternity> educationmaternities = new List<Educationmaternity>(personeducation.Educationmaternities);
+                    
+
+
+                    SaveChanges();
 
                     Educationtypeblock newEducationtypeblock = new Educationtypeblock();
                     newEducationtypeblock.Personeducation = personeducation.Id;
-                    newEducationtypeblock.Educationtype = educationtypeblock.Educationtype;
+                    newEducationtypeblock.Educationtype = decreeoperation.Optionnumber8;
 
                     List<Educationperiod> educationperiods = new List<Educationperiod>(educationtypeblock.Educationperiods);
+
                     context.Educationtypeblock.Add(newEducationtypeblock);
+
                     SaveChanges();
 
+                    int platoon = int.Parse(decreeoperation.Optionstring1.Split(' ')[0]);
+                    int course = int.Parse(decreeoperation.Optionnumber2.ToString().Split(' ')[0]);
                     
-                    int course = int.Parse(decreeoperation.Optionstring4.Split(' ')[0]);
-                    Rank rank = RanksLocal().GetValue(decreeoperation.Optionnumber9);
-
                     Educationperiod newEducationperiod = new Educationperiod();
                     newEducationperiod.Educationtypeblock = newEducationtypeblock.Id;
                     newEducationperiod.Service = 0;
                     newEducationperiod.Start = decreeoperation.Optiondate1;
-                    newEducationperiod.Educationpositiontype = decreeoperation.Optionnumber5;
-                    newEducationperiod.Rank = educationperiod.Rank;
-                    newEducationperiod.Platoon = educationperiod.Platoon;
+                    newEducationperiod.Educationpositiontype = decreeoperation.Optionnumber3;
+                    newEducationperiod.Rank = context.Rank.FirstOrDefault(r => r.Id == personrank.Rank).Name;
+                    newEducationperiod.Platoon = platoon;
                     newEducationperiod.Course = course;
                     context.Educationperiod.Add(newEducationperiod);
                     SaveChanges();
                 }
             }
-            
-            context.SaveChanges();
-
-            //foreach (int personjobId in personjobsIds)
-            //{
-            //    Personjob contextPersonjob = context.Personjob.FirstOrDefault(p => p.Id == personjobId);
-            //    if (contextPersonjob != null)
-            //    {
-            //        contextPersonjob.Orderid = 
-            //    }
-            //}
 
             context.SaveChanges();
             UpdatePersondecreesLocal();
@@ -17051,10 +17072,70 @@ namespace PersonnelManagement.Models
 
             if (persondecreeoperation.Persondecreeblocktype == 17)
             {
+                persondecreeoperation.Optionstring5 = ToUpperFirstLetter(context.Educationpositiontype.FirstOrDefault(e => e.Id == persondecreeoperation.Optionnumber2).Name);
+                
                 IEnumerable<Position> positions1 = GetAllFreePositionsFromStructure(persondecreeoperation.Optionnumber1, GetPersonsForStructure(persondecreeoperation.Optionnumber1), persondecreeoperation);
                 persondecreeoperation.Optionnumber3 = positions1.ToList()[0].Id;
+
+                if(persondecreeoperation.Person < 0)
+                {
+                    string vowels = "аеёиоуыэюя";
+                    int numCandidate = -persondecreeoperation.Person;
+                    Cabinetdata cabinetdata = context.Cabinetdata.FirstOrDefault(c => c.Id == numCandidate);
+                    string fio = cabinetdata.Usersurname + ' ' + cabinetdata.Username + ' ' + cabinetdata.Userpatronymic;
+                    if (vowels.Contains(fio.GetLast(1)))
+                    {
+                        fio += " Женский";
+                    }
+                    else
+                    {
+                        fio += " Мужской";
+                    }
+                    decreeoperation.Person = CreatePerson(user, fio);
+                }
             }
 
+            if (persondecreeoperation.Persondecreeblocktype == 18)
+            {
+                if(persondecreeoperation.Persondecreeblocksubtype == 1)
+                {
+                    Person person = context.Person.FirstOrDefault(p => p.Id == persondecreeoperation.Person);
+                    Personjob personjob = context.Personjob.FirstOrDefault(p => p.Person == person.Id && p.End == null);
+                    Position position = context.Position.FirstOrDefault(p => p.Id == personjob.Position);
+                    Structure structure1 = context.Structure.FirstOrDefault(s => s.Id == position.Structure);
+                    Structure structure2 = context.Structure.FirstOrDefault(s => s.Id == structure1.Parentstructure);
+                    Structure structure3 = context.Structure.FirstOrDefault(s => s.Id == structure2.Parentstructure);
+                    Structure structure4 = context.Structure.FirstOrDefault(s => s.Id == structure3.Parentstructure);
+                    persondecreeoperation.Optionstring1 = structure3.Name;
+                    persondecreeoperation.Optionstring2 = structure4.Name;
+                }
+                if (persondecreeoperation.Persondecreeblocksub == 2)
+                {
+
+                }
+                Personeducation personeducation = Personeducations.ToList().FirstOrDefault(p => p.End == null && p.Person == decreeoperation.Person);
+                Educationtypeblock educationtypeblock = Educationtypeblocks.ToList().FirstOrDefault(e => e.Personeducation == personeducation.Id && e.IsEnded == 0);
+                Educationperiod educationperiod = Educationperiods.FirstOrDefault(e => e.Educationtypeblock == educationtypeblock.Id && e.End == null);
+
+                persondecreeoperation.Optionnumber3 = GetEducationperiod(educationperiod.Id).Course;
+            }
+
+            if (persondecreeoperation.Persondecreeblocktype == 20)
+            {
+                persondecreeoperation.Optionstring5 = ToUpperFirstLetter(context.Educationpositiontype.FirstOrDefault(e => e.Id == persondecreeoperation.Optionnumber3).Name);
+
+                IEnumerable<Position> positions1 = GetAllFreePositionsFromStructure(persondecreeoperation.Optionnumber1, GetPersonsForStructure(persondecreeoperation.Optionnumber1), persondecreeoperation);
+                persondecreeoperation.Optionnumber4 = positions1.ToList()[0].Id;
+            }
+
+            if (persondecreeoperation.Persondecreeblocktype == 21 && persondecreeoperation.Optionnumber1 == 27)
+            {
+                Personeducation personeducation = Personeducations.ToList().FirstOrDefault(p => p.End == null && p.Person == decreeoperation.Person);
+                Educationtypeblock educationtypeblock = Educationtypeblocks.ToList().FirstOrDefault(e => e.Personeducation == personeducation.Id && e.IsEnded == 0);
+                Educationperiod educationperiod = Educationperiods.FirstOrDefault(e => e.Educationtypeblock == educationtypeblock.Id && e.End == null);
+
+                persondecreeoperation.Optionnumber3 = GetEducationperiod(educationperiod.Id).Course;
+            }
             decreeoperation.Intro = persondecreeoperation.Intro;
             decreeoperation.Persondecreeblocksubtype = persondecreeoperation.Persondecreeblocksubtype; // Тип подблока, например 6 - "наградить грамотой"
             decreeoperation.Persondecreeblocktype = persondecreeoperation.Persondecreeblocktype;
@@ -17760,7 +17841,6 @@ namespace PersonnelManagement.Models
 
             }
 
-
             // Заключить контракты с
             if (persondecreeoperation.Persondecreeblocktype == 11)
             {
@@ -18122,7 +18202,6 @@ namespace PersonnelManagement.Models
                     // Были фабулы
                     else
                     {
-
                         if (persondecreeblocksubs.Count() == 0)
                         {
                             int maxPriority = persondecreeblockintros.Max(p => p.Priority) + 1;
@@ -18153,17 +18232,18 @@ namespace PersonnelManagement.Models
                 // Пытаемся найти, есть ли уже такой подпункт
                 //Persondecreeblocksub existingPersondecreeblocksub = persondecreeblocksubs.FirstOrDefault(p => p.Persondecreeblocksubtype == persondecreeoperation.Persondecreeblocksubtype);
                 Persondecreeblocksub existingPersondecreeblocksub = persondecreeblocksubs.FirstOrDefault(p => p.Subvaluedate1 == persondecreeoperation.Optiondate1 &&
-                    p.Subvaluenumber1 == persondecreeoperation.Optionnumber5 &&
-                    p.Subvaluenumber2 == persondecreeoperation.Optionnumber6 &&
+                    p.Subvaluenumber1 == persondecreeoperation.Optionnumber6 &&
+                    p.Subvaluenumber2 == persondecreeoperation.Optionnumber5 &&
                     p.Subvaluenumber3 == persondecreeoperation.Optionnumber7);
                 if (existingPersondecreeblocksub != null)
                 {
                     decreeoperation.Persondecreeblocksub = existingPersondecreeblocksub.Id;
 
+
                     existingPersondecreeblocksub = persondecreeblocksubs.FirstOrDefault(p => p.Subvaluestring1 == persondecreeoperation.Optionstring5 &&
                     p.Subvaluenumber1 == persondecreeoperation.Optionnumber6 &&
                     p.Subvaluedate2 == persondecreeoperation.Optiondate2 &&
-                    p.Subvaluenumber4 == persondecreeoperation.Optionnumber5 &&
+                    p.Subvaluenumber4 == persondecreeoperation.Optionnumber4 &&
                     p.Subvaluenumber2 == persondecreeoperation.Optionnumber8 &&
                     p.Subvaluenumber3 == persondecreeoperation.Optionnumber9 &&
                     p.Parentpersondecreeblocksub == decreeoperation.Persondecreeblocksub);
@@ -18224,7 +18304,7 @@ namespace PersonnelManagement.Models
                         persondecreeblocksubsub.Subvaluestring2 = persondecreeoperation.Optionstring2;
                         persondecreeblocksubsub.Subvaluedate2 = persondecreeoperation.Optiondate2;
                         persondecreeblocksubsub.Subvaluenumber1 = persondecreeoperation.Optionnumber6;
-                        persondecreeblocksubsub.Subvaluenumber4 = persondecreeoperation.Optionnumber5;
+                        persondecreeblocksubsub.Subvaluenumber4 = persondecreeoperation.Optionnumber4;
                         persondecreeblocksubsub.Subvaluenumber2 = persondecreeoperation.Optionnumber8;
                         persondecreeblocksubsub.Subvaluenumber3 = persondecreeoperation.Optionnumber9;
                         persondecreeblocksubsub.Parentpersondecreeblocksub = decreeoperation.Persondecreeblocksub;
@@ -18258,8 +18338,8 @@ namespace PersonnelManagement.Models
                     Persondecreeblocksub persondecreeblocksub = new Persondecreeblocksub();
                     persondecreeblocksub.Persondecreeblock = persondecreeoperation.Persondecreeblock;
                     persondecreeblocksub.Subvaluedate1 = persondecreeoperation.Optiondate1;
-                    persondecreeblocksub.Subvaluenumber1 = persondecreeoperation.Optionnumber5;
-                    persondecreeblocksub.Subvaluenumber2 = persondecreeoperation.Optionnumber6;
+                    persondecreeblocksub.Subvaluenumber1 = persondecreeoperation.Optionnumber6;
+                    persondecreeblocksub.Subvaluenumber2 = persondecreeoperation.Optionnumber5;
                     persondecreeblocksub.Subvaluenumber3 = persondecreeoperation.Optionnumber7;
 
                     context.Persondecreeblocksub.Add(persondecreeblocksub);
@@ -18272,7 +18352,7 @@ namespace PersonnelManagement.Models
                     persondecreeblocksubsub.Subvaluestring2 = persondecreeoperation.Optionstring2;
                     persondecreeblocksubsub.Subvaluedate2 = persondecreeoperation.Optiondate2;
                     persondecreeblocksubsub.Subvaluenumber1 = persondecreeoperation.Optionnumber6;
-                    persondecreeblocksubsub.Subvaluenumber4 = persondecreeoperation.Optionnumber5;
+                    persondecreeblocksubsub.Subvaluenumber4 = persondecreeoperation.Optionnumber4;
                     persondecreeblocksubsub.Subvaluenumber2 = persondecreeoperation.Optionnumber8;
                     persondecreeblocksubsub.Subvaluenumber3 = persondecreeoperation.Optionnumber9;
                     persondecreeblocksubsub.Parentpersondecreeblocksub = persondecreeblocksub.Id;
@@ -18326,7 +18406,6 @@ namespace PersonnelManagement.Models
                 switch(persondecreeoperation.Optionnumber11){
                     case 1:
                         {
-
                             // Пытаемся найти, есть ли уже такой подпункт
                             //Persondecreeblocksub existingPersondecreeblocksub = persondecreeblocksubs.FirstOrDefault(p => p.Persondecreeblocksubtype == persondecreeoperation.Persondecreeblocksubtype);
                             Persondecreeblocksub existingPersondecreeblocksub = persondecreeblocksubs.FirstOrDefault(p => p.Persondecreeblocksubtype == persondecreeoperation.Persondecreeblocksubtype &&
@@ -18337,7 +18416,7 @@ namespace PersonnelManagement.Models
                                 decreeoperation.Persondecreeblocksub = existingPersondecreeblocksub.Id;
 
                                 existingPersondecreeblocksub = persondecreeblocksubs.FirstOrDefault(p => p.Subvaluedate1 == persondecreeoperation.Optiondate1 &&
-                                p.Subvaluenumber1 == persondecreeoperation.Optionnumber8);
+                                p.Subvaluenumber3 == persondecreeoperation.Optionnumber3);
                                 if (existingPersondecreeblocksub != null)
                                 {
                                     decreeoperation.Persondecreeblocksub = existingPersondecreeblocksub.Id;
@@ -18346,12 +18425,14 @@ namespace PersonnelManagement.Models
                                 {
                                     Persondecreeblocksub persondecreeblocksubsub = new Persondecreeblocksub();
                                     persondecreeblocksubsub.Persondecreeblock = persondecreeoperation.Persondecreeblock;
-                                    persondecreeblocksubsub.Persondecreeblocksubtype = persondecreeoperation.Persondecreeblocksubtype;
+                                    persondecreeblocksubsub.Persondecreeblocksubtype = persondecreeoperation.Optionnumber1;
                                     persondecreeblocksubsub.Subvaluenumber1 = persondecreeoperation.Optionnumber8;
                                     persondecreeblocksubsub.Subvaluenumber2 = persondecreeoperation.Subvaluenumber2;
+                                    persondecreeblocksubsub.Subvaluenumber3 = persondecreeoperation.Optionnumber3;
                                     persondecreeblocksubsub.Subvaluedate1 = persondecreeoperation.Optiondate1;
                                     persondecreeblocksubsub.Parentpersondecreeblocksub = decreeoperation.Persondecreeblocksub;
                                     persondecreeblocksubsub.Subvaluestring1 = decreeoperation.Optionstring7;
+
                                     context.Persondecreeblocksub.Add(persondecreeblocksubsub);
                                     SaveChanges();
                                     decreeoperation.Persondecreeblocksub = persondecreeblocksubsub.Id;
@@ -18361,9 +18442,9 @@ namespace PersonnelManagement.Models
                             {
                                 Persondecreeblocksub persondecreeblocksub = new Persondecreeblocksub();
                                 persondecreeblocksub.Persondecreeblock = persondecreeoperation.Persondecreeblock;
-                                persondecreeblocksub.Persondecreeblocksubtype = persondecreeoperation.Persondecreeblocksubtype;
+                                persondecreeblocksub.Persondecreeblocksubtype = persondecreeoperation.Optionnumber1;
                                 persondecreeblocksub.Subvaluenumber1 = persondecreeoperation.Optionnumber7;
-                                persondecreeblocksub.Subvaluenumber2 = persondecreeoperation.Optionnumber3;
+                                persondecreeblocksub.Subvaluenumber2 = persondecreeoperation.Optionnumber2;
                                 persondecreeblocksub.Subvaluestring1 = persondecreeoperation.Subvaluestring1;
                                 persondecreeblocksub.Subvaluestring2 = persondecreeoperation.Subvaluestring2;
                                 persondecreeblocksub.Parentpersondecreeblocksub = persondecreeoperation.Persondecreeblock;
@@ -18378,8 +18459,9 @@ namespace PersonnelManagement.Models
                                 persondecreeblocksubsub.Persondecreeblocksubtype = persondecreeoperation.Persondecreeblocksubtype;
                                 persondecreeblocksubsub.Subvaluenumber1 = persondecreeoperation.Optionnumber8;
                                 persondecreeblocksubsub.Subvaluenumber2 = persondecreeoperation.Subvaluenumber2;
+                                persondecreeblocksubsub.Subvaluenumber3 = persondecreeoperation.Optionnumber3;
                                 persondecreeblocksubsub.Subvaluedate1 = persondecreeoperation.Optiondate1;
-
+                                persondecreeblocksubsub.Subvaluestring1 = decreeoperation.Optionstring7;
                                 persondecreeblocksubsub.Parentpersondecreeblocksub = persondecreeblocksub.Id;
 
 
@@ -18410,7 +18492,88 @@ namespace PersonnelManagement.Models
                         }
                     case 2:
                         {
+                            // Пытаемся найти, есть ли уже такой подпункт
+                            //Persondecreeblocksub existingPersondecreeblocksub = persondecreeblocksubs.FirstOrDefault(p => p.Persondecreeblocksubtype == persondecreeoperation.Persondecreeblocksubtype);
+                            Persondecreeblocksub existingPersondecreeblocksub = persondecreeblocksubs.FirstOrDefault(p => p.Subvaluedate1 == persondecreeoperation.Optiondate3);
+                            // Подпункт существует
+                            if (existingPersondecreeblocksub != null)
+                            {
+                                decreeoperation.Persondecreeblocksub = existingPersondecreeblocksub.Id;
 
+                                existingPersondecreeblocksub = persondecreeblocksubs.FirstOrDefault(p => p.Subvaluenumber1 == persondecreeoperation.Persondecreeblocksubtype &&
+                                p.Subvaluestring1 == persondecreeoperation.Optionstring1 &&
+                                p.Subvaluestring2 == persondecreeoperation.Optionstring2);
+                                if (existingPersondecreeblocksub != null)
+                                {
+                                    decreeoperation.Persondecreeblocksub = existingPersondecreeblocksub.Id;
+                                }
+                                else
+                                {
+                                    Persondecreeblocksub persondecreeblocksubsub = new Persondecreeblocksub();
+                                    persondecreeblocksubsub.Persondecreeblock = persondecreeoperation.Persondecreeblock;
+                                    persondecreeblocksubsub.Persondecreeblocksubtype = persondecreeoperation.Optionnumber1;
+                                    persondecreeblocksubsub.Subvaluenumber1 = persondecreeoperation.Optionnumber8;
+                                    persondecreeblocksubsub.Subvaluenumber2 = persondecreeoperation.Subvaluenumber2;
+                                    persondecreeblocksubsub.Subvaluenumber3 = persondecreeoperation.Optionnumber3;
+                                    persondecreeblocksubsub.Subvaluedate1 = persondecreeoperation.Optiondate1;
+                                    persondecreeblocksubsub.Parentpersondecreeblocksub = decreeoperation.Persondecreeblocksub;
+                                    persondecreeblocksubsub.Subvaluestring1 = decreeoperation.Optionstring7;
+
+                                    context.Persondecreeblocksub.Add(persondecreeblocksubsub);
+                                    SaveChanges();
+                                    decreeoperation.Persondecreeblocksub = persondecreeblocksubsub.Id;
+                                }
+                            }
+                            else
+                            {
+                                Persondecreeblocksub persondecreeblocksub = new Persondecreeblocksub();
+                                persondecreeblocksub.Persondecreeblock = persondecreeoperation.Persondecreeblock;
+                                persondecreeblocksub.Persondecreeblocksubtype = persondecreeoperation.Optionnumber1;
+                                persondecreeblocksub.Subvaluenumber1 = persondecreeoperation.Optionnumber7;
+                                persondecreeblocksub.Subvaluenumber2 = persondecreeoperation.Optionnumber2;
+                                persondecreeblocksub.Subvaluestring1 = persondecreeoperation.Subvaluestring1;
+                                persondecreeblocksub.Subvaluestring2 = persondecreeoperation.Subvaluestring2;
+                                persondecreeblocksub.Parentpersondecreeblocksub = persondecreeoperation.Persondecreeblock;
+
+
+                                context.Persondecreeblocksub.Add(persondecreeblocksub);
+                                SaveChanges();
+                                decreeoperation.Persondecreeblocksub = persondecreeblocksub.Id;
+
+                                Persondecreeblocksub persondecreeblocksubsub = new Persondecreeblocksub();
+                                persondecreeblocksubsub.Persondecreeblock = persondecreeoperation.Persondecreeblock;
+                                persondecreeblocksubsub.Persondecreeblocksubtype = persondecreeoperation.Persondecreeblocksubtype;
+                                persondecreeblocksubsub.Subvaluenumber1 = persondecreeoperation.Optionnumber8;
+                                persondecreeblocksubsub.Subvaluenumber2 = persondecreeoperation.Subvaluenumber2;
+                                persondecreeblocksubsub.Subvaluenumber3 = persondecreeoperation.Optionnumber3;
+                                persondecreeblocksubsub.Subvaluedate1 = persondecreeoperation.Optiondate1;
+                                persondecreeblocksubsub.Subvaluestring1 = decreeoperation.Optionstring7;
+                                persondecreeblocksubsub.Parentpersondecreeblocksub = persondecreeblocksub.Id;
+
+
+                                context.Persondecreeblocksub.Add(persondecreeblocksubsub);
+                                SaveChanges();
+                                decreeoperation.Persondecreeblocksub = persondecreeblocksubsub.Id;
+
+                                // Фабул не было
+                                if (persondecreeblockintros.Count == 0)
+                                {
+                                    // Подпунктов не было
+                                    if (persondecreeblocksubs.Count() == 0)
+                                    {
+                                        persondecreeblocksub.Priority = 1;
+                                        persondecreeblocksub.Index = 1;
+                                    }
+                                    else
+                                    {
+                                        int maxPriority = persondecreeblocksubs.Max(p => p.Priority) + 1;
+                                        int maxIndex = persondecreeblocksubs.Max(p => p.Index) + 1;
+
+                                        persondecreeblocksub.Priority = maxPriority;
+                                        persondecreeblocksub.Index = maxIndex;
+                                    }
+                                }
+                            }
                             break;
                         }
                     default: 
@@ -18419,6 +18582,7 @@ namespace PersonnelManagement.Models
 
             }
 
+            // Увеличить
             if (persondecreeoperation.Persondecreeblocktype == 19)
             {
                 // Пытаемся найти, есть ли уже такой подпункт
@@ -18490,17 +18654,19 @@ namespace PersonnelManagement.Models
                     }
                 }
             }
+
             //Восстановить
             if (persondecreeoperation.Persondecreeblocktype == 20)
             {
                 // Пытаемся найти, есть ли уже такой подпункт
                 //Persondecreeblocksub existingPersondecreeblocksub = persondecreeblocksubs.FirstOrDefault(p => p.Persondecreeblocksubtype == persondecreeoperation.Persondecreeblocksubtype);
-                Persondecreeblocksub existingPersondecreeblocksub = persondecreeblocksubs.FirstOrDefault(p => p.Subvaluestring1 == persondecreeoperation.Optionstring1);
+                Persondecreeblocksub existingPersondecreeblocksub = persondecreeblocksubs.FirstOrDefault(p => p.Subvaluestring1 == persondecreeoperation.Optionstring3 &&
+                p.Subvaluestring2 == persondecreeoperation.Optionstring4);
                 if (existingPersondecreeblocksub != null)
                 {
                     decreeoperation.Persondecreeblocksub = existingPersondecreeblocksub.Id;
 
-                    existingPersondecreeblocksub = persondecreeblocksubs.FirstOrDefault(p => p.Subvaluenumber1 == persondecreeoperation.Optionnumber1 && p.Subvaluenumber2 == persondecreeoperation.Optionnumber2);
+                    existingPersondecreeblocksub = persondecreeblocksubs.FirstOrDefault(p => p.Subvaluestring1 == persondecreeoperation.Optionstring2 && p.Subvaluestring2 == persondecreeoperation.Optionnumber2.ToString());
                     if (existingPersondecreeblocksub != null)
                     {
                         decreeoperation.Persondecreeblocksub = existingPersondecreeblocksub.Id;
@@ -18516,7 +18682,6 @@ namespace PersonnelManagement.Models
                             persondecreeblocksubsubsub.Persondecreeblock = persondecreeoperation.Persondecreeblock;
                             persondecreeblocksubsubsub.Persondecreeblocksubtype = persondecreeoperation.Persondecreeblocksubtype;
                             persondecreeblocksubsubsub.Subvaluedate1 = persondecreeoperation.Optiondate1;
-                            persondecreeblocksubsubsub.Subvaluestring1 = persondecreeoperation.Optionstring2;
                             persondecreeblocksubsubsub.Parentpersondecreeblocksub = decreeoperation.Persondecreeblocksub;
 
                             context.Persondecreeblocksub.Add(persondecreeblocksubsubsub);
@@ -18528,8 +18693,8 @@ namespace PersonnelManagement.Models
                     {
                         Persondecreeblocksub persondecreeblocksubsub = new Persondecreeblocksub();
                         persondecreeblocksubsub.Persondecreeblock = persondecreeoperation.Persondecreeblock;
-                        persondecreeblocksubsub.Subvaluenumber1 = persondecreeoperation.Optionnumber1;
-                        persondecreeblocksubsub.Subvaluenumber1 = persondecreeoperation.Optionnumber2;
+                        persondecreeblocksubsub.Subvaluestring1 = persondecreeoperation.Optionstring2;
+                        persondecreeblocksubsub.Subvaluestring2 = persondecreeoperation.Optionnumber2.ToString();
                         persondecreeblocksubsub.Parentpersondecreeblocksub = decreeoperation.Persondecreeblocksub;
 
                         context.Persondecreeblocksub.Add(persondecreeblocksubsub);
@@ -18540,7 +18705,6 @@ namespace PersonnelManagement.Models
                         persondecreeblocksubsubsub.Persondecreeblock = persondecreeoperation.Persondecreeblock;
                         persondecreeblocksubsubsub.Persondecreeblocksubtype = persondecreeoperation.Persondecreeblocksubtype;
                         persondecreeblocksubsubsub.Subvaluedate1 = persondecreeoperation.Optiondate1;
-                        persondecreeblocksubsubsub.Subvaluestring1 = persondecreeoperation.Optionstring2;
                         persondecreeblocksubsubsub.Parentpersondecreeblocksub = persondecreeblocksubsub.Id;
 
                         context.Persondecreeblocksub.Add(persondecreeblocksubsubsub);
@@ -18553,7 +18717,8 @@ namespace PersonnelManagement.Models
                     Persondecreeblocksub persondecreeblocksub = new Persondecreeblocksub();
                     persondecreeblocksub.Persondecreeblock = persondecreeoperation.Persondecreeblock;
                     persondecreeblocksub.Persondecreeblocksubtype = persondecreeoperation.Persondecreeblocksubtype;
-                    persondecreeblocksub.Subvaluestring1 = persondecreeoperation.Optionstring1;
+                    persondecreeblocksub.Subvaluestring1 = persondecreeoperation.Optionstring3;
+                    persondecreeblocksub.Subvaluestring2 = persondecreeoperation.Optionstring4;
 
                     context.Persondecreeblocksub.Add(persondecreeblocksub);
                     SaveChanges();
@@ -18562,8 +18727,8 @@ namespace PersonnelManagement.Models
                     Persondecreeblocksub persondecreeblocksubsub = new Persondecreeblocksub();
                     persondecreeblocksubsub.Persondecreeblock = persondecreeoperation.Persondecreeblock;
                     persondecreeblocksubsub.Persondecreeblocksubtype = persondecreeoperation.Persondecreeblocksubtype;
-                    persondecreeblocksubsub.Subvaluenumber1 = persondecreeoperation.Optionnumber1;
-                    persondecreeblocksubsub.Subvaluenumber2 = persondecreeoperation.Optionnumber2;
+                    persondecreeblocksubsub.Subvaluestring1 = persondecreeoperation.Optionstring2;
+                    persondecreeblocksubsub.Subvaluestring2 = persondecreeoperation.Optionnumber2.ToString();
                     persondecreeblocksubsub.Parentpersondecreeblocksub = persondecreeblocksub.Id;
 
                     context.Persondecreeblocksub.Add(persondecreeblocksubsub);
@@ -18574,7 +18739,6 @@ namespace PersonnelManagement.Models
                     persondecreeblocksubsubsub.Persondecreeblock = persondecreeoperation.Persondecreeblock;
                     persondecreeblocksubsubsub.Persondecreeblocksubtype = persondecreeoperation.Persondecreeblocksubtype;
                     persondecreeblocksubsubsub.Subvaluedate1 = persondecreeoperation.Optiondate1;
-                    persondecreeblocksubsubsub.Subvaluestring1 = persondecreeoperation.Optionstring2;
                     persondecreeblocksubsubsub.Parentpersondecreeblocksub = persondecreeblocksubsub.Id;
 
                     context.Persondecreeblocksub.Add(persondecreeblocksubsubsub);
@@ -18612,12 +18776,16 @@ namespace PersonnelManagement.Models
                 {
                     decreeoperation.Persondecreeblocksub = existingPersondecreeblocksub.Id;
 
-                    existingPersondecreeblocksub = persondecreeblocksubs.FirstOrDefault(p => p.Subvaluestring1 == persondecreeoperation.Optionstring4 && p.Subvaluedate1 == persondecreeoperation.Optiondate1 && p.Subvaluenumber1 == persondecreeoperation.Optionnumber2 && p.Subvaluedate2 == persondecreeoperation.Optiondate2);
+                    existingPersondecreeblocksub = persondecreeblocksubs.FirstOrDefault(p => p.Subvaluestring1 == persondecreeoperation.Optionstring6 );
                     if (existingPersondecreeblocksub != null)
                     {
                         decreeoperation.Persondecreeblocksub = existingPersondecreeblocksub.Id;
 
-                        existingPersondecreeblocksub = persondecreeblocksubs.FirstOrDefault(p => p.Subvaluestring1 == persondecreeoperation.Optionstring5);
+                        existingPersondecreeblocksub = persondecreeblocksubs.FirstOrDefault(p => 
+                           p.Subvaluestring1 == persondecreeoperation.Optionstring4
+                        && p.Subvaluedate1 == persondecreeoperation.Optiondate1 
+                        && p.Subvaluenumber1 == persondecreeoperation.Optionnumber2 
+                        && p.Subvaluedate2 == persondecreeoperation.Optiondate2);
                         if (existingPersondecreeblocksub != null)
                         {
                             decreeoperation.Persondecreeblocksub = existingPersondecreeblocksub.Id;
@@ -18626,12 +18794,29 @@ namespace PersonnelManagement.Models
                         {
                             Persondecreeblocksub persondecreeblocksubsubsub = new Persondecreeblocksub();
                             persondecreeblocksubsubsub.Persondecreeblock = persondecreeoperation.Persondecreeblock;
-                            persondecreeblocksubsubsub.Subvaluestring1 = persondecreeoperation.Optionstring5;
+                            persondecreeblocksubsubsub.Subvaluestring1 = persondecreeoperation.Optionstring4;
+                            persondecreeblocksubsubsub.Subvaluenumber1 = persondecreeoperation.Optionnumber2;
+                            persondecreeblocksubsubsub.Subvaluedate1 = persondecreeoperation.Optiondate1;
+                            persondecreeblocksubsubsub.Subvaluedate2 = persondecreeoperation.Optiondate2;
                             persondecreeblocksubsubsub.Parentpersondecreeblocksub = decreeoperation.Persondecreeblocksub;
 
                             context.Persondecreeblocksub.Add(persondecreeblocksubsubsub);
                             SaveChanges();
                             decreeoperation.Persondecreeblocksub = persondecreeblocksubsubsub.Id;
+
+                            if (persondecreeblocksubs.Count() == 0)
+                            {
+                                persondecreeblocksubsubsub.Priority = 1;
+                                persondecreeblocksubsubsub.Index = 1;
+                            }
+                            else
+                            {
+                                int maxPriority = persondecreeblocksubs.Max(p => p.Priority) + 1;
+                                int maxIndex = persondecreeblocksubs.Max(p => p.Index) + 1;
+
+                                persondecreeblocksubsubsub.Priority = maxPriority;
+                                persondecreeblocksubsubsub.Index = maxIndex;
+                            }
 
                         }
                     }
@@ -18639,10 +18824,7 @@ namespace PersonnelManagement.Models
                     {
                         Persondecreeblocksub persondecreeblocksubsub = new Persondecreeblocksub();
                         persondecreeblocksubsub.Persondecreeblock = persondecreeoperation.Persondecreeblock;
-                        persondecreeblocksubsub.Subvaluestring1 = persondecreeoperation.Optionstring4;
-                        persondecreeblocksubsub.Subvaluedate1 = persondecreeoperation.Optiondate1;
-                        persondecreeblocksubsub.Subvaluedate2 = persondecreeoperation.Optiondate2;
-                        persondecreeblocksubsub.Subvaluenumber1 = persondecreeoperation.Optionnumber2;
+                        persondecreeblocksubsub.Subvaluestring1 = persondecreeoperation.Optionstring6;
                         persondecreeblocksubsub.Parentpersondecreeblocksub = decreeoperation.Persondecreeblocksub;
 
                         context.Persondecreeblocksub.Add(persondecreeblocksubsub);
@@ -18651,7 +18833,10 @@ namespace PersonnelManagement.Models
 
                         Persondecreeblocksub persondecreeblocksubsubsub = new Persondecreeblocksub();
                         persondecreeblocksubsubsub.Persondecreeblock = persondecreeoperation.Persondecreeblock;
-                        persondecreeblocksubsubsub.Subvaluestring1 = persondecreeoperation.Optionstring5;
+                        persondecreeblocksubsubsub.Subvaluestring1 = persondecreeoperation.Optionstring4;
+                        persondecreeblocksubsubsub.Subvaluenumber1 = persondecreeoperation.Optionnumber2;
+                        persondecreeblocksubsubsub.Subvaluedate1 = persondecreeoperation.Optiondate1;
+                        persondecreeblocksubsubsub.Subvaluedate2 = persondecreeoperation.Optiondate2;
                         persondecreeblocksubsubsub.Parentpersondecreeblocksub = persondecreeblocksubsub.Id;
 
                         context.Persondecreeblocksub.Add(persondecreeblocksubsubsub);
@@ -18672,10 +18857,7 @@ namespace PersonnelManagement.Models
 
                     Persondecreeblocksub persondecreeblocksubsub = new Persondecreeblocksub();
                     persondecreeblocksubsub.Persondecreeblock = persondecreeoperation.Persondecreeblock;
-                    persondecreeblocksubsub.Subvaluestring1 = persondecreeoperation.Optionstring4;
-                    persondecreeblocksubsub.Subvaluedate1 = persondecreeoperation.Optiondate1;
-                    persondecreeblocksubsub.Subvaluedate2 = persondecreeoperation.Optiondate2;
-                    persondecreeblocksubsub.Subvaluenumber1 = persondecreeoperation.Optionnumber2;
+                    persondecreeblocksubsub.Subvaluestring1 = persondecreeoperation.Optionstring6;
                     persondecreeblocksubsub.Parentpersondecreeblocksub = persondecreeblocksub.Id;
 
                     context.Persondecreeblocksub.Add(persondecreeblocksubsub);
@@ -18684,30 +18866,29 @@ namespace PersonnelManagement.Models
 
                     Persondecreeblocksub persondecreeblocksubsubsub = new Persondecreeblocksub();
                     persondecreeblocksubsubsub.Persondecreeblock = persondecreeoperation.Persondecreeblock;
-                    persondecreeblocksubsubsub.Subvaluestring1 = persondecreeoperation.Optionstring5;
+                    persondecreeblocksubsubsub.Subvaluestring1 = persondecreeoperation.Optionstring4;
+                    persondecreeblocksubsubsub.Subvaluenumber1 = persondecreeoperation.Optionnumber2;
+                    persondecreeblocksubsubsub.Subvaluedate1 = persondecreeoperation.Optiondate1;
+                    persondecreeblocksubsubsub.Subvaluedate2 = persondecreeoperation.Optiondate2;
                     persondecreeblocksubsubsub.Parentpersondecreeblocksub = persondecreeblocksubsub.Id;
 
                     context.Persondecreeblocksub.Add(persondecreeblocksubsubsub);
                     SaveChanges();
                     decreeoperation.Persondecreeblocksub = persondecreeblocksubsubsub.Id;
 
-                    // Фабул не было
-                    if (persondecreeblockintros.Count == 0)
+                    // Подпунктов не было
+                    if (persondecreeblocksubs.Count() == 0)
                     {
-                        // Подпунктов не было
-                        if (persondecreeblocksubs.Count() == 0)
-                        {
-                            persondecreeblocksubsub.Priority = 1;
-                            persondecreeblocksubsub.Index = 1;
-                        }
-                        else
-                        {
-                            int maxPriority = persondecreeblocksubs.Max(p => p.Priority) + 1;
-                            int maxIndex = persondecreeblocksubs.Max(p => p.Index) + 1;
+                        persondecreeblocksubsubsub.Priority = 1;
+                        persondecreeblocksubsubsub.Index = 1;
+                    }
+                    else
+                    {
+                        int maxPriority = persondecreeblocksubs.Max(p => p.Priority) + 1;
+                        int maxIndex = persondecreeblocksubs.Max(p => p.Index) + 1;
 
-                            persondecreeblocksubsub.Priority = maxPriority;
-                            persondecreeblocksubsub.Index = maxIndex;
-                        }
+                        persondecreeblocksubsubsub.Priority = maxPriority;
+                        persondecreeblocksubsubsub.Index = maxIndex;
                     }
                 }
             }
@@ -19589,5 +19770,22 @@ namespace PersonnelManagement.Models
 
             return newPersondecreeoperation;
         }
+
+       public Educationperiod GetEducationperiod(int idEducationPeriod)
+        {
+            return context.Educationperiod.ToList().FirstOrDefault(e => e.Id == idEducationPeriod);
+        }
+        public string ToUpperFirstLetter(string source)
+        {
+            if (string.IsNullOrEmpty(source))
+                return string.Empty;
+            // convert to char array of the string
+            char[] letters = source.ToCharArray();
+            // upper case the first char
+            letters[0] = char.ToUpper(letters[0]);
+            // return the array made of the new char array
+            return new string(letters);
+        }
+
     }
 }

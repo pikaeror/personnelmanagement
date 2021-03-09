@@ -1514,7 +1514,6 @@ export default class PositionslistComponent extends Vue {
                 return false;
             }
         }
-        
     }
 
     isSignedAndWillBeCreated(posdep: PosDep): any {
@@ -1531,8 +1530,6 @@ export default class PositionslistComponent extends Vue {
                 return false;
             }
         }
-
-        
     }
 
     isNotSignedAndWillBeCreated(posdep: PosDep): any {
@@ -1549,8 +1546,6 @@ export default class PositionslistComponent extends Vue {
                 return false;
             }
         }
-
-        
     }
 
     isDeletedUnsigned(posdep: PosDep): any {

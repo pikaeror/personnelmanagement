@@ -35,7 +35,7 @@ namespace PersonnelManagement.Controllers
             {
                 fio = "";
             }
-            if (IdentityService.IsLogined(sessionid, repository))
+            if (IdentityService.IsLogined(sessionid, repository) && fio.Length > 1)
             {
                 user = IdentityService.GetUserBySessionID(sessionid, repository);
                 List<CabinetdataManager> cabinetdatasUnfiltered = repository.GetCabinetdatas(user, fio);

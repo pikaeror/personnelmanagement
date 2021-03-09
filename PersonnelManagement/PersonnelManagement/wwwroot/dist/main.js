@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "6782b831a7f58883de71"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "50abb1a20696f1d3cdc7"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -11509,6 +11509,21 @@ let EldComponent = class EldComponent extends __WEBPACK_IMPORTED_MODULE_0_vue__[
         }
         return false;
     }
+    getCourse(semestr) {
+        if (semestr > 0 && semestr < 3) {
+            return 1;
+        }
+        else if (semestr < 5) {
+            return 2;
+        }
+        else if (semestr < 7) {
+            return 3;
+        }
+        else if (semestr < 9) {
+            return 4;
+        }
+        return 0;
+    }
     getPhotopreview(personid) {
         return this.photosPreview.find(p => p.person == personid);
     }
@@ -16484,11 +16499,39 @@ let EldComponent = class EldComponent extends __WEBPACK_IMPORTED_MODULE_0_vue__[
             (parseInt(time_list[2]) == 0 ? '' : (time_list[2] + ' ' + this.getDayString(parseInt(time_list[2]))));
         return experienceString;
     }
+    calendar_diff(date_1, date_2) {
+        if (date_1.valueOf() < date_2.valueOf())
+            return this.calendar_diff(date_2, date_1);
+        var days = parseInt(date_1.split('T')[0].split('-')[2]) - parseInt(date_2.split('T')[0].split('-')[2]);
+        let month = 0;
+        if (days < 0) {
+            days += 30;
+            month -= 1;
+        }
+        month += parseInt(date_1.split('T')[0].split('-')[1]) - parseInt(date_2.split('T')[0].split('-')[1]);
+        let year = 0;
+        if (month < 0) {
+            month += 12;
+            year -= 1;
+        }
+        year += parseInt(date_1.split('T')[0].split('-')[0]) - parseInt(date_2.split('T')[0].split('-')[0]);
+        return this.getExperienceFullPension(year, month, days);
+    }
     getDataToString(data_period) {
         let time_list = data_period.split(' ');
         return (parseInt(time_list[0]) == 0 ? '' : (time_list[0] + ' ' + this.getYearString(parseInt(time_list[0])) + ' ')) +
             (parseInt(time_list[1]) == 0 ? '' : (time_list[1] + ' ' + this.getMonthString(parseInt(time_list[1])) + ' ')) +
             (parseInt(time_list[2]) == 0 ? '' : (time_list[2] + ' ' + this.getDayString(parseInt(time_list[2]))));
+    }
+    getSeniorityMARK(type_a, type_b) {
+        let time_list = type_a.split(' ');
+        let value_a = 30 * (12 * parseInt(time_list[0]) + parseInt(time_list[1])) + parseInt(time_list[2]);
+        time_list = type_b.split(' ');
+        let value_b = 30 * (12 * parseInt(time_list[0]) + parseInt(time_list[1])) + parseInt(time_list[2]);
+        if (value_a > value_b) {
+            return this.getDataToString(type_a);
+        }
+        return this.getDataToString(type_b);
     }
     differenceBetweenTwoDays(date1, date2) {
         if (date1 == null || date2 == null) {
@@ -23806,6 +23849,7 @@ let TopmenuComponent = class TopmenuComponent extends __WEBPACK_IMPORTED_MODULE_
             decreeFilterDatesignedStart: "",
             decreeFilterDatesignedEnd: "",
             personFromStructure: [],
+            candidateSearch: [],
             decreesSignedList: [],
             decreeSignedOperations: [],
             modalDecreeMenuSignedVisible: false,
@@ -23950,6 +23994,9 @@ let TopmenuComponent = class TopmenuComponent extends __WEBPACK_IMPORTED_MODULE_
     get educationtypes() {
         return this.$store.state.educationtypes;
     }
+    get educationperiods() {
+        return this.$store.state.educationperiods;
+    }
     get educationadditionaltypes() {
         return this.$store.state.educationadditionaltypes;
     }
@@ -23973,6 +24020,9 @@ let TopmenuComponent = class TopmenuComponent extends __WEBPACK_IMPORTED_MODULE_
     }
     get permissiontypes() {
         return this.$store.state.permissiontypes;
+    }
+    get personeducation() {
+        return this.$store.state.personeducation;
     }
     get prooftypes() {
         return this.$store.state.prooftypes;
@@ -24027,6 +24077,15 @@ let TopmenuComponent = class TopmenuComponent extends __WEBPACK_IMPORTED_MODULE_
      */
     get pmrequestManagingPanelVisible() {
         return this.modalPmrequestPanelVisible && !this.modeselectstructure;
+    }
+    isNum(str) {
+        return str.length === 1 && str.match(/[0-9]/i);
+    }
+    isLetter(str) {
+        return str.length === 1 && str.match(/[a-zA-Z]/i);
+    }
+    isLetterCyrillic(str) {
+        return str.length === 1 && str.match(/[а-яА-Я]/i);
     }
     logout() {
         __WEBPACK_IMPORTED_MODULE_0_vue__["default"].logout();
@@ -24700,7 +24759,8 @@ let TopmenuComponent = class TopmenuComponent extends __WEBPACK_IMPORTED_MODULE_
         else if (this.num == 2) {
             this.numberNewStructure = this.$store.state.modeappointedpersondecreeStructure;
             this.structureNewName = this.getStructureName(this.numberNewStructure);
-            this.newCourseName = this.getStructureById(Number.parseInt(this.getStructureById(this.numberStructure).parentstructure)).name2;
+            this.newCourseName = this.getStructureById(Number.parseInt(this.getStructureById(this.numberNewStructure).parentstructure)).name2;
+            this.facultyName = this.getStructureById(Number.parseInt(this.getStructureById(Number.parseInt(this.getStructureById(this.numberNewStructure).parentstructure)).parentstructure)).name2;
             this.$store.commit("setModeappointedpersondecreeStructure", 0);
             this.$store.commit("setModeappointpersondecreeStructure", false);
             this.modalPersondecreeMenuVisible = true;
@@ -25330,6 +25390,21 @@ let TopmenuComponent = class TopmenuComponent extends __WEBPACK_IMPORTED_MODULE_
             });
         });
     }
+    searchCandidatsBlock(block) {
+        block.searchiterationCandidate = block.searchiterationCandidate + 1;
+        let searchiterationCandidate = block.searchiterationCandidate;
+        let fio = block.fiocandidatesearch;
+        fetch('api/Cabinet/Search' + fio, { credentials: 'include' })
+            .then(response => {
+            return response.json();
+        })
+            .then(result => {
+            if (searchiterationCandidate < block.searchiterationCandidate) {
+                return;
+            }
+            block.candidatessearch = result;
+        });
+    }
     /**
      * После загрузки с базы данных нам нужно Даты превратить в string эквивалент
      */
@@ -25686,6 +25761,14 @@ let TopmenuComponent = class TopmenuComponent extends __WEBPACK_IMPORTED_MODULE_
             return false;
         }
     }
+    hasSearchCandidateResultsBlock(block) {
+        if (block.candidatessearch != null && block.candidatessearch.length > 0) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
     getPhotos() {
         fetch('api/Person/Media' + this.person.id, { credentials: 'include' })
             .then(response => {
@@ -25762,6 +25845,21 @@ let TopmenuComponent = class TopmenuComponent extends __WEBPACK_IMPORTED_MODULE_
             }
         });
     }
+    selectCandidatBlockNonAuto(id, block) {
+        fetch('api/Cabinet/Single' + id, { credentials: 'include' })
+            .then(response => {
+            return response.json();
+        })
+            .then(candidate => {
+            if (candidate != null) {
+                block.candidate = candidate;
+                this.candidateSearch.push(block.candidate);
+                block.candidatessearch = [];
+                block.fiosearch = "";
+                block.nonperson = ""; // Если был чiеловек не из МЧС, убираем.
+            }
+        });
+    }
     /**
      * Добавляем сотрудника по айди в блок в режиме множественного добавления, когда несколько человек привязаны к одной операции.
      * @param id
@@ -25797,6 +25895,9 @@ let TopmenuComponent = class TopmenuComponent extends __WEBPACK_IMPORTED_MODULE_
     }
     multipersonRemove(person, block) {
         this.personFromStructure.splice(this.personFromStructure.indexOf(person), 1);
+    }
+    multicandidateRemove(candidate) {
+        this.candidateSearch.splice(this.candidateSearch.indexOf(candidate), 1);
     }
     multicountryAddAdditional(block) {
         block.countrycitiesList.push(new __WEBPACK_IMPORTED_MODULE_12__classes_countrycities__["a" /* default */]());
@@ -25941,6 +26042,18 @@ let TopmenuComponent = class TopmenuComponent extends __WEBPACK_IMPORTED_MODULE_
             return "";
         }
     }
+    getEducationperiod(educationperiod) {
+        if (educationperiod == null || educationperiod == 0) {
+            return null;
+        }
+        let eperiod = this.educationperiods.find(t => t.id == educationperiod);
+        if (eperiod != null) {
+            return eperiod;
+        }
+        else {
+            return null;
+        }
+    }
     getEducationlevel(educationlevel) {
         if (educationlevel == null || educationlevel == 0) {
             return "";
@@ -26011,6 +26124,18 @@ let TopmenuComponent = class TopmenuComponent extends __WEBPACK_IMPORTED_MODULE_
         }
         else {
             return "";
+        }
+    }
+    getPersoneducation(personId) {
+        if (personId == null || personId == 0) {
+            return null;
+        }
+        let personeducation = this.personeducation.find(e => e.id == personId);
+        if (personeducation != null) {
+            return personeducation;
+        }
+        else {
+            return null;
         }
     }
     getPersoneducationUpdateName() {
@@ -26479,42 +26604,85 @@ let TopmenuComponent = class TopmenuComponent extends __WEBPACK_IMPORTED_MODULE_
             persondecreeblock.optionstring2 = this.courseName;
             persondecreeblock.optionstring3 = this.specialityName;
             persondecreeblock.optionstring4 = this.facultyName;
-            if (persondecreeblock.optionstring5 == 'Студент') {
+            if (persondecreeblock.optionstring5 == 'студент') {
                 persondecreeblock.optionnumber9 = 0;
             }
             this.addPersoneducationButton();
             persondecreeblock.optionstring6 = this.personeducationLocation;
             persondecreeblock.optionstring7 = this.personeducationCity;
             persondecreeblock.optionstring8 = this.personeducationName;
-            persondecreeblock.optionnumber4 = this.personeducationEducationlevel;
-            persondecreeblock.optionnumber5 = this.personeducationEducationstage;
         }
         // Отчислить
         if (persondecreeblock.persondecreeblocktype == 18) {
-            if (persondecreeblock.checkboxdirect)
-                persondecreeblock.optionnumber8 = 1;
-            else
-                persondecreeblock.optionnumber8 = 0;
-            if (persondecreeblock.checkboxdismiss)
-                persondecreeblock.optionnumber7 = 1;
-            else
-                persondecreeblock.optionnumber7 = 0;
-            persondecreeblock.optionnumber11 = 1;
+            if (persondecreeblock.persondecreeblocksub == 1) {
+                if (persondecreeblock.checkbox1) {
+                    persondecreeblock.optionnumber6 = 1;
+                }
+                if (persondecreeblock.checkbox2) {
+                    persondecreeblock.optionnumber7 = 1;
+                }
+                if (persondecreeblock.checkbox3) {
+                    persondecreeblock.optionnumber8 = 1;
+                }
+                if (persondecreeblock.checkbox4) {
+                    persondecreeblock.optionnumber9 = 1;
+                }
+                persondecreeblock.optionnumber11 = 2;
+            }
+            else if (persondecreeblock.persondecreeblocksub == 2) {
+                if (persondecreeblock.checkboxdirect)
+                    persondecreeblock.optionnumber8 = 1;
+                else
+                    persondecreeblock.optionnumber8 = 0;
+                if (persondecreeblock.checkboxdismiss)
+                    persondecreeblock.optionnumber7 = 1;
+                else
+                    persondecreeblock.optionnumber7 = 0;
+                persondecreeblock.optionnumber11 = 1;
+            }
         }
         // Увеличить
         if (persondecreeblock.persondecreeblocktype == 19) {
             persondecreeblock.persondecreeblocksubtype = 1;
             persondecreeblock.optionnumber11 = 1;
         }
-        if (persondecreeblock.persondecreeblocktype == 21) {
-            persondecreeblock.optionstring4 = this.structureNewName;
-            persondecreeblock.optionnumber6 = this.numberStructure;
-            persondecreeblock.optionnumber7 = this.numberNewStructure;
-            if (persondecreeblock.checkboxdismiss == true) {
-                persondecreeblock.optionnumber2 = 0;
+        // Восстановить
+        if (persondecreeblock.persondecreeblocktype == 20) {
+            persondecreeblock.optionnumber1 = this.numberStructure;
+            persondecreeblock.optionstring1 = this.structureName;
+            persondecreeblock.optionstring2 = this.courseName;
+            persondecreeblock.optionstring3 = this.specialityName;
+            persondecreeblock.optionstring4 = this.facultyName;
+            if (persondecreeblock.optionstring5 == 'студент') {
+                persondecreeblock.optionnumber9 = 0;
             }
-            else {
-                persondecreeblock.optionnumber2 = 1;
+        }
+        if (persondecreeblock.persondecreeblocktype == 21) {
+            if (persondecreeblock.optionnumber1 == 18) {
+                persondecreeblock.optionstring4 = this.structureNewName;
+                persondecreeblock.optionnumber6 = this.numberStructure;
+                persondecreeblock.optionnumber7 = this.numberNewStructure;
+                persondecreeblock.optionstring5 = this.getStructureName(this.numberStructure);
+                persondecreeblock.optionstring6 = this.facultyName;
+                if (persondecreeblock.checkboxdismiss == true) {
+                    persondecreeblock.optionnumber2 = 0;
+                }
+                else {
+                    persondecreeblock.optionnumber2 = 1;
+                }
+            }
+            else if (persondecreeblock.optionnumber1 == 27) {
+                persondecreeblock.optionstring4 = this.structureNewName;
+                persondecreeblock.optionnumber6 = this.numberStructure;
+                persondecreeblock.optionnumber7 = this.numberNewStructure;
+                persondecreeblock.optionstring5 = this.getStructureName(this.numberStructure);
+                persondecreeblock.optionstring6 = this.facultyName;
+                if (persondecreeblock.checkboxdismiss == true) {
+                    persondecreeblock.optionnumber2 = 0;
+                }
+                else {
+                    persondecreeblock.optionnumber2 = 1;
+                }
             }
         }
         let t = {
@@ -26562,6 +26730,7 @@ let TopmenuComponent = class TopmenuComponent extends __WEBPACK_IMPORTED_MODULE_
             persondecreeblocktype: this.prepareNumToExport(persondecreeblock.persondecreeblocktype),
             persondecreeblocksubtype: this.prepareNumToExport(persondecreeblock.persondecreeblocksub),
             personFromStructure: this.personFromStructure,
+            candidateSearch: this.candidateSearch,
         };
         fetch('/api/Persondecreeoperation', {
             method: 'post',
@@ -27010,7 +27179,8 @@ let TopmenuComponent = class TopmenuComponent extends __WEBPACK_IMPORTED_MODULE_
         }
     }
     getFacultiStructureName(structureid) {
-        return this.getStructureById(Number.parseInt(this.getStructureById(Number.parseInt(this.getStructureById(Number.parseInt(this.getStructureById(structureid).parentstructure)).parentstructure)).parentstructure)).name1;
+        let str = this.getStructureById(Number.parseInt(this.getStructureById(Number.parseInt(this.getStructureById(Number.parseInt(this.getStructureById(structureid).parentstructure)).parentstructure)).parentstructure)).name1;
+        return str;
     }
     getStructureById(structureid) {
         if (structureid == null || structureid == 0) {
@@ -27173,9 +27343,11 @@ let TopmenuComponent = class TopmenuComponent extends __WEBPACK_IMPORTED_MODULE_
                 positioncompact: this.$store.state.positioncompact,
                 sidebardisplay: 1,
             };
+            //mergin from mark branch
             this.$store.commit("setdecreeoperationtemplatecreatorVisible", false);
             this.$store.commit("setdecreeoperationelementVisible", 0);
             this.$store.commit("setmailmodeprevios", true);
+            //--------------------------------------------
             //this.visible = false;
             this.modalPersondecreeMenuVisible = false;
             this.modalPersondecreesMenuVisible = false;
@@ -28010,7 +28182,7 @@ let TopmenuComponent = class TopmenuComponent extends __WEBPACK_IMPORTED_MODULE_
     }
     provideRestoreSubBlockText(persondecreeblocksub) {
         let str = "";
-        str += "в соответствии с пунктом 2 статьи 80 Кодекса Республики Беларусь об образовании на факультет заочного обучения по специальности « " + persondecreeblocksub.subvaluestring1 + " » (на условиях оплаты):";
+        str += "в соответствии с пунктом 2 статьи 80 Кодекса Республики Беларусь об образовании на " + persondecreeblocksub.subvaluestring2 + " по специальности « " + persondecreeblocksub.subvaluestring1 + " » (на условиях оплаты):";
         return str;
     }
     isSocialVacation(persondecreeoperation) {
@@ -28274,6 +28446,59 @@ let TopmenuComponent = class TopmenuComponent extends __WEBPACK_IMPORTED_MODULE_
         }
         let diff = __WEBPACK_IMPORTED_MODULE_10_moment___default()(persondecreeblock.optiondate3String).diff(persondecreeblock.optiondate1String, 'days');
         persondecreeblock.optionnumber1 = diff;
+    }
+    numpersonalchange(event, numpersonal) {
+        //alert(numpersonal);
+        let input = event.target;
+        if (numpersonal == null) {
+            return;
+        }
+        numpersonal = numpersonal.toUpperCase();
+        if (numpersonal.length == 1) {
+            numpersonal += "-";
+        }
+        if (numpersonal.length == 2) {
+            numpersonal = numpersonal.substring(0, 1) + "-";
+        }
+        if (numpersonal.length > 2) {
+            numpersonal = numpersonal.substring(0, 1) + "-" + numpersonal.substring(2);
+        }
+        if (numpersonal.length > 0 && !this.isLetterCyrillic(numpersonal[0])) {
+            numpersonal = numpersonal.substring(0, 0);
+        }
+        if (numpersonal.length > 2 && !this.isNum(numpersonal[2])) {
+            numpersonal = numpersonal.substring(0, 2);
+        }
+        if (numpersonal.length > 3 && !this.isNum(numpersonal[3])) {
+            numpersonal = numpersonal.substring(0, 3);
+        }
+        if (numpersonal.length > 4 && !this.isNum(numpersonal[4])) {
+            numpersonal = numpersonal.substring(0, 4);
+        }
+        if (numpersonal.length > 5 && !this.isNum(numpersonal[5])) {
+            numpersonal = numpersonal.substring(0, 5);
+        }
+        if (numpersonal.length > 6 && !this.isNum(numpersonal[6])) {
+            numpersonal = numpersonal.substring(0, 6);
+        }
+        input.value = numpersonal;
+        //alert(input.value);
+        //persondecreeblock.optionnumber1 = 5;
+    }
+    getCourse(semestr) {
+        if (semestr > 0 && semestr < 3) {
+            return 1;
+        }
+        else if (semestr < 5) {
+            return 2;
+        }
+        else if (semestr < 7) {
+            return 3;
+        }
+        else if (semestr < 9) {
+            return 4;
+        }
+        return 0;
     }
 };
 __decorate([
@@ -32924,7 +33149,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         staticClass: "persondecreeoperation-part-list-element-intro persondecreeoperation-part-list-element-indent"
       }, [(decreeoperation.personobject.actualRank != null) ? _c('span', [_vm._v(_vm._s(decreeoperation.personobject.actualRank.name4) + " ")]) : _vm._e(), _vm._v("\n                                            " + _vm._s(decreeoperation.personobject.surname4) + " " + _vm._s(decreeoperation.personobject.name4) + "\n                                            " + _vm._s(decreeoperation.personobject.fathername4) + "\n                                            " + _vm._s(_vm.getAppointtype(decreeoperation.optionnumber4)) + " на должность " + _vm._s(decreeoperation.optionstring4) + " "), _vm._v(" "), (decreeoperation.optiondate1 != null) ? _c('span', [_vm._v(" с " + _vm._s(_vm.printDateDocument(decreeoperation.optiondate1)))]) : _vm._e(), _vm._v("\n                                            ,\n                                            освободив его от должности " + _vm._s(decreeoperation.personobject.positiontree2) + ".\n                                            "), _vm._v(" "), (decreeoperation.optionnumber2 != null && decreeoperation.optionnumber2 > 0) ? _c('span', [_vm._v("Присвоить специальное звание «" + _vm._s(_vm.getRank(decreeoperation.optionnumber2)) + "».")]) : _vm._e()]) : _c('div', {
         staticClass: "persondecreeoperation-part-list-element-indent"
-      }, [_vm._v("\n                                            " + _vm._s(decreeoperation.personobject.surname4) + " " + _vm._s(decreeoperation.personobject.name4) + "\n                                            " + _vm._s(decreeoperation.personobject.fathername4) + "\n                                            " + _vm._s(_vm.getAppointtype(decreeoperation.optionnumber4)) + " на должность " + _vm._s(decreeoperation.optionstring4) + " "), _vm._v(" "), (decreeoperation.optiondate1 != null) ? _c('span', [_vm._v(" с " + _vm._s(_vm.printDateDocument(decreeoperation.optiondate1)))]) : _vm._e(), (decreeoperation.optionnumber2 != null && decreeoperation.optionnumber2 > 0) ? _c('span', [_vm._v(", присвоив специальное звание «" + _vm._s(_vm.getRank(decreeoperation.optionnumber2)) + "»")]) : _vm._e(), _vm._v(" "), (decreeoperation.optionstring3 != null && decreeoperation.optionstring3.length > 0) ? _c('span', [_vm._v("и личный номер " + _vm._s(decreeoperation.optionstring3))]) : _vm._e(), _vm._v(".\n                                        ")]), _vm._v(" "), (decreeoperation.optiondate2 != null) ? _c('div', {
+      }, [_vm._v("\n                                            " + _vm._s(decreeoperation.personobject.surname4) + " " + _vm._s(decreeoperation.personobject.name4) + "\n                                            " + _vm._s(decreeoperation.personobject.fathername4) + "\n                                            " + _vm._s(_vm.getAppointtype(decreeoperation.optionnumber4)) + " на должность " + _vm._s(decreeoperation.optionstring4) + " "), _vm._v(" "), (decreeoperation.optiondate1 != null) ? _c('span', [_vm._v(" с " + _vm._s(_vm.printDateDocument(decreeoperation.optiondate1)))]) : _vm._e(), _vm._v(" "), (decreeoperation.optionnumber2 != null && decreeoperation.optionnumber2 > 0) ? _c('span', [_vm._v(", присвоив специальное звание «" + _vm._s(_vm.getRank(decreeoperation.optionnumber2)) + "»")]) : _vm._e(), _vm._v(" "), (decreeoperation.optionstring3 != null && decreeoperation.optionstring3.length > 0) ? _c('span', [_vm._v("и личный номер " + _vm._s(decreeoperation.optionstring3))]) : _vm._e(), _vm._v(".\n                                        ")]), _vm._v(" "), (decreeoperation.optiondate2 != null) ? _c('div', {
         staticClass: "persondecreeoperation-part-list-element-indent"
       }, [_vm._v("\n                                            Установить стаж для выплаты процентной надбавки за выслугу лет по состоянию на\n                                            " + _vm._s(_vm.printDateDocument(decreeoperation.optiondate2)) + "\n                                            — "), _vm._v("\n                                            " + _vm._s(decreeoperation.optionnumber5) + " " + _vm._s(_vm.getYearString(decreeoperation.optionnumber5)) + "\n                                            " + _vm._s(decreeoperation.optionnumber6) + " " + _vm._s(_vm.getMonthString(decreeoperation.optionnumber6)) + "\n                                            " + _vm._s(decreeoperation.optionnumber7) + " " + _vm._s(_vm.getDayString(decreeoperation.optionnumber7)) + ".\n                                            ")]) : _vm._e(), _vm._v(" "), (decreeoperation.optiondate3 != null) ? _c('div', {
         staticClass: "persondecreeoperation-part-list-element-indent"
@@ -35843,25 +36068,25 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         "placeholder": "Должность"
       },
       model: {
-        value: (persondecreeBlock.optionstring5),
+        value: (persondecreeBlock.optionnumber2),
         callback: function($$v) {
-          persondecreeBlock.optionstring5 = $$v
+          persondecreeBlock.optionnumber2 = $$v
         },
-        expression: "persondecreeBlock.optionstring5"
+        expression: "persondecreeBlock.optionnumber2"
       }
-    }, _vm._l((_vm.persondecreeblocksubtypes), function(persondecreeblocksubtype) {
-      return (persondecreeblocksubtype.persondecreeblocktype == 17) ? _c('el-option', {
-        key: persondecreeblocksubtype.id,
+    }, _vm._l((_vm.educationpositiontypes), function(educationpositiontype) {
+      return _c('el-option', {
+        key: educationpositiontype.id,
         attrs: {
-          "label": persondecreeblocksubtype.name,
-          "value": persondecreeblocksubtype.name
+          "label": educationpositiontype.name,
+          "value": educationpositiontype.id
         }
-      }) : _vm._e()
+      })
     }))], 1), _vm._v(" "), _c('div', {
       staticStyle: {
         "margin-top": "10px"
       }
-    }, [_vm._v("\n                                    Кого\n                                ")]), _vm._v(" "), _c('div', {
+    }, [_vm._v("\n                                    Поиск сотрудников\n                                ")]), _vm._v(" "), _c('div', {
       staticStyle: {
         "margin-top": "10px"
       }
@@ -35912,6 +36137,56 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           }
         }
       }, [_vm._v("Убрать")])], 1)
+    })) : _vm._e(), _vm._v(" "), _c('div', {
+      staticStyle: {
+        "margin-top": "10px"
+      }
+    }, [_vm._v("\n                                    Поиск кандидатов\n                                ")]), _vm._v(" "), _c('div', {
+      staticStyle: {
+        "margin-top": "10px"
+      }
+    }, [_c('el-input', {
+      staticClass: "eld-eld-body-select-medium",
+      attrs: {
+        "placeholder": "Фамилия Имя Отчество"
+      },
+      on: {
+        "input": function($event) {
+          _vm.searchCandidatsBlock(persondecreeBlock)
+        }
+      },
+      model: {
+        value: (persondecreeBlock.fiocandidatesearch),
+        callback: function($$v) {
+          persondecreeBlock.fiocandidatesearch = $$v
+        },
+        expression: "persondecreeBlock.fiocandidatesearch"
+      }
+    })], 1), _vm._v(" "), (_vm.hasSearchCandidateResultsBlock(persondecreeBlock)) ? _c('div', {
+      staticClass: "eld-search-main"
+    }, [_c('div', {
+      staticClass: "eld-search-main-title"
+    }, [_vm._v("\n                                        Результаты поиска\n                                    ")]), _vm._v(" "), _vm._l((persondecreeBlock.candidatessearch), function(candidate) {
+      return _c('div', {
+        staticClass: "eld-search-element",
+        on: {
+          "click": function($event) {
+            _vm.selectCandidatBlockNonAuto(candidate.id, persondecreeBlock)
+          }
+        }
+      }, [_c('div', [_vm._v("\n                                            " + _vm._s(candidate.usersurname) + " " + _vm._s(candidate.username) + " " + _vm._s(candidate.userpatronymic) + "\n                                        ")])])
+    })], 2) : _vm._e(), _vm._v(" "), (_vm.candidateSearch.length > 0) ? _c('div', _vm._l((_vm.candidateSearch), function(candidate) {
+      return _c('div', [_vm._v("\n                                        Кого – " + _vm._s(candidate.usersurname + " " + candidate.username + " " + candidate.userpatronymic) + "\n                                        "), _c('el-button', {
+        attrs: {
+          "size": "mini",
+          "type": "warning"
+        },
+        on: {
+          "click": function($event) {
+            _vm.multicandidateRemove(candidate)
+          }
+        }
+      }, [_vm._v("Убрать")])], 1)
     })) : _vm._e()]), _vm._v(" "), _c('div', [_c('div', {
       staticClass: "eld-eld-body-row-flex",
       staticStyle: {
@@ -35924,11 +36199,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         "placeholder": "Уровень образования"
       },
       model: {
-        value: (persondecreeBlock.optionnumber5),
+        value: (persondecreeBlock.optionnumber6),
         callback: function($$v) {
-          persondecreeBlock.optionnumber5 = $$v
+          persondecreeBlock.optionnumber6 = $$v
         },
-        expression: "persondecreeBlock.optionnumber5"
+        expression: "persondecreeBlock.optionnumber6"
       }
     }, _vm._l((_vm.educationlevels), function(educationlevel) {
       return _c('el-option', {
@@ -35945,11 +36220,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         "placeholder": "Уровень образования"
       },
       model: {
-        value: (persondecreeBlock.optionnumber6),
+        value: (persondecreeBlock.optionnumber5),
         callback: function($$v) {
-          persondecreeBlock.optionnumber6 = $$v
+          persondecreeBlock.optionnumber5 = $$v
         },
-        expression: "persondecreeBlock.optionnumber6"
+        expression: "persondecreeBlock.optionnumber5"
       }
     }, _vm._l((_vm.educationstages), function(educationstage) {
       return _c('el-option', {
@@ -36031,7 +36306,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           _vm.selectAllPersonInStructure(persondecreeBlock, 3)
         }
       }
-    }, [_vm._v("Выбрать взвод")])], 1), _vm._v(" "), (_vm.structureName.length > 0 && _vm.courseName.length > 0 && _vm.facultyName.length > 0 && _vm.specialityName.length > 0) ? _c('div', [_vm._v("\n                                    " + _vm._s(_vm.facultyName) + "," + _vm._s(_vm.specialityName) + ", " + _vm._s(_vm.courseName) + ", " + _vm._s(_vm.structureName) + "\n                                ")]) : _vm._e(), _vm._v(" "), (persondecreeBlock.person != null && persondecreeBlock.optionstring5 != 'Студент') ? _c('div', [_c('div', [_vm._v("\n                                        Какое звание присвоить (оставить пустым, если никакое)\n                                    ")]), _vm._v(" "), _c('el-select', {
+    }, [_vm._v("Выбрать взвод")])], 1), _vm._v(" "), (_vm.structureName.length > 0 && _vm.courseName.length > 0 && _vm.facultyName.length > 0 && _vm.specialityName.length > 0) ? _c('div', [_vm._v("\n                                    " + _vm._s(_vm.facultyName) + "," + _vm._s(_vm.specialityName) + ", " + _vm._s(_vm.courseName) + ", " + _vm._s(_vm.structureName) + "\n                                ")]) : _vm._e(), _vm._v(" "), ((persondecreeBlock.person != null || persondecreeBlock.candidatessearch) && persondecreeBlock.optionstring5 != 'студент') ? _c('div', [_c('div', [_vm._v("\n                                        Какое звание присвоить (оставить пустым, если никакое)\n                                    ")]), _vm._v(" "), _c('el-select', {
       staticClass: "eld-eld-body-select-medium",
       attrs: {
         "clearable": "",
@@ -36052,7 +36327,25 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           "value": rank.id
         }
       })
-    }))], 1) : _vm._e(), _vm._v(" "), _c('div', {
+    })), _vm._v(" "), _c('div', {
+      staticClass: "eld-eld-body-row-mediumshort"
+    }, [_vm._v("\n                                        Личный номер (Ж-12345)\n                                        "), _c('el-input', {
+      attrs: {
+        "maxlength": 7
+      },
+      nativeOn: {
+        "input": function($event) {
+          _vm.numpersonalchange($event, persondecreeBlock.optionstring9)
+        }
+      },
+      model: {
+        value: (persondecreeBlock.optionstring9),
+        callback: function($$v) {
+          persondecreeBlock.optionstring9 = $$v
+        },
+        expression: "persondecreeBlock.optionstring9"
+      }
+    })], 1)], 1) : _vm._e(), _vm._v(" "), _c('div', {
       staticStyle: {
         "margin-top": "10px"
       }
@@ -36127,12 +36420,32 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           _vm.deletePersondecreeblock(persondecreeBlock)
         }
       }
-    }, [_vm._v("Удалить блок")])], 1) : _vm._e()], 2) : _vm._e(), _vm._v(" "), (persondecreeBlock.persondecreeblocktype == 18) ? _c('div', [(_vm.persondecreeSigned != 1) ? _c('div', [_c('div', {
-      staticClass: "eld-eld-body-row-flex",
+    }, [_vm._v("Удалить блок")])], 1) : _vm._e()], 2) : _vm._e(), _vm._v(" "), (persondecreeBlock.persondecreeblocktype == 18) ? _c('div', [(_vm.persondecreeSigned != 1) ? _c('div', [_c('div', [_c('div', [_vm._v("\n                                    Отчислить за:\n                                ")]), _vm._v(" "), _c('el-select', {
+      staticClass: "eld-eld-body-select-medium",
+      attrs: {
+        "clearable": "",
+        "placeholder": "Вид предоставления"
+      },
+      model: {
+        value: (persondecreeBlock.optionnumber4),
+        callback: function($$v) {
+          persondecreeBlock.optionnumber4 = $$v
+        },
+        expression: "persondecreeBlock.optionnumber4"
+      }
+    }, _vm._l((_vm.persondecreeblocksubtypes), function(persondecreeblocksubtype) {
+      return (persondecreeblocksubtype.persondecreeblocktype == 18) ? _c('el-option', {
+        key: persondecreeblocksubtype.id,
+        attrs: {
+          "label": persondecreeblocksubtype.name,
+          "value": persondecreeblocksubtype.id
+        }
+      }) : _vm._e()
+    }))], 1), _vm._v(" "), _c('div', {
       staticStyle: {
         "margin-top": "20px"
       }
-    }, [_c('el-select', {
+    }, [_c('div', [_vm._v("\n                                    Должность:\n                                ")]), _vm._v(" "), _c('el-select', {
       staticClass: "eld-eld-body-select-medium",
       attrs: {
         "clearable": "",
@@ -36145,14 +36458,14 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         },
         expression: "persondecreeBlock.persondecreeblocksub"
       }
-    }, _vm._l((_vm.persondecreeblocksubtypes), function(persondecreeblocksubtype) {
-      return (persondecreeblocksubtype.persondecreeblocktype == 17) ? _c('el-option', {
-        key: persondecreeblocksubtype.id,
+    }, _vm._l((_vm.educationpositiontypes), function(educationpositiontype) {
+      return _c('el-option', {
+        key: educationpositiontype.id,
         attrs: {
-          "label": persondecreeblocksubtype.name,
-          "value": persondecreeblocksubtype.id
+          "label": educationpositiontype.name,
+          "value": educationpositiontype.id
         }
-      }) : _vm._e()
+      })
     }))], 1), _vm._v(" "), _c('div', {
       staticClass: "eld-eld-body-row-flex"
     }, [_c('div', {
@@ -36224,12 +36537,164 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           }
         }
       }, [_vm._v("Убрать")])], 1)
-    })) : _vm._e()])]), _vm._v(" "), (_vm.personFromStructure.length != 0) ? _c('div', {
+    })) : _vm._e()])]), _vm._v(" "), (persondecreeBlock.optionnumber4 == 30 && _vm.personFromStructure.length != 0) ? _c('div', [_c('div', {
+      staticClass: "eld-eld-body-row-flex",
+      staticStyle: {
+        "margin-top": "20px"
+      }
+    }, [_c('div', {
+      staticClass: "eld-eld-body-row-short "
+    }, [_vm._v("\n                                        Дата решения Государственной экзаменационной комиссии\n                                        "), _c('el-input', {
+      attrs: {
+        "type": "date"
+      },
+      model: {
+        value: (persondecreeBlock.optiondate2String),
+        callback: function($$v) {
+          persondecreeBlock.optiondate2String = $$v
+        },
+        expression: "persondecreeBlock.optiondate2String"
+      }
+    })], 1)]), _vm._v(" "), (persondecreeBlock.persondecreeblocksub == 1) ? _c('div', {
+      staticStyle: {
+        "margin-top": "20px"
+      }
+    }, [_c('div', {
+      staticClass: "eld-eld-body-row-flex"
+    }, [_c('div', {
+      staticClass: "eld-eld-body-row-short ",
+      staticStyle: {
+        "text-align": "center",
+        "margin-left": "10px",
+        "line-height": "16px"
+      }
+    }, [_vm._v("\n                                            с вручением золотой медали\n                                            "), _c('div', {
+      staticStyle: {
+        "display": "flex",
+        "flex-direction": "column",
+        "align-items": "center",
+        "margin-top": "12px"
+      }
+    }, [_c('el-checkbox', {
+      staticClass: "checkbox-big",
+      model: {
+        value: (persondecreeBlock.checkbox1),
+        callback: function($$v) {
+          persondecreeBlock.checkbox1 = $$v
+        },
+        expression: "persondecreeBlock.checkbox1"
+      }
+    })], 1)]), _vm._v(" "), _c('div', {
+      staticClass: "eld-eld-body-row-short ",
+      staticStyle: {
+        "text-align": "center",
+        "line-height": "16px"
+      }
+    }, [_vm._v("\n                                            с вручением диплома\n                                            "), _c('div', {
+      staticStyle: {
+        "display": "flex",
+        "flex-direction": "column",
+        "align-items": "center",
+        "margin-top": "12px"
+      }
+    }, [_c('el-checkbox', {
+      staticClass: "checkbox-big",
+      model: {
+        value: (persondecreeBlock.checkbox2),
+        callback: function($$v) {
+          persondecreeBlock.checkbox2 = $$v
+        },
+        expression: "persondecreeBlock.checkbox2"
+      }
+    })], 1)]), _vm._v(" "), _c('div', {
+      staticClass: "eld-eld-body-row-short ",
+      staticStyle: {
+        "text-align": "center",
+        "margin-left": "10px",
+        "line-height": "16px"
+      }
+    }, [_vm._v("\n                                            с вручемнем диплома с отличием\n                                            "), _c('div', {
+      staticStyle: {
+        "display": "flex",
+        "flex-direction": "column",
+        "align-items": "center",
+        "margin-top": "12px"
+      }
+    }, [_c('el-checkbox', {
+      staticClass: "checkbox-big",
+      model: {
+        value: (persondecreeBlock.checkbox3),
+        callback: function($$v) {
+          persondecreeBlock.checkbox3 = $$v
+        },
+        expression: "persondecreeBlock.checkbox3"
+      }
+    })], 1)]), _vm._v(" "), _c('div', {
+      staticClass: "eld-eld-body-row-short ",
+      staticStyle: {
+        "text-align": "center",
+        "margin-left": "10px",
+        "line-height": "16px"
+      }
+    }, [_vm._v("\n                                            с присвоением нагрудного знака\n                                            "), _c('div', {
+      staticStyle: {
+        "display": "flex",
+        "flex-direction": "column",
+        "align-items": "center",
+        "margin-top": "12px"
+      }
+    }, [_c('el-checkbox', {
+      staticClass: "checkbox-big",
+      model: {
+        value: (persondecreeBlock.checkbox4),
+        callback: function($$v) {
+          persondecreeBlock.checkbox4 = $$v
+        },
+        expression: "persondecreeBlock.checkbox4"
+      }
+    })], 1)])])]) : _vm._e(), _vm._v(" "), (persondecreeBlock.perosndecreeblocksub == 2) ? _c('div', {
+      staticClass: "eld-eld-body-row-flex",
+      staticStyle: {
+        "margin-top": "20"
+      }
+    }) : _vm._e(), _vm._v(" "), _c('div', [_c('div', {
+      staticClass: "eld-eld-body-row-short",
+      staticStyle: {
+        "margin-top": "20px"
+      }
+    }, [_vm._v("\n                                        номер протокола\n                                        "), _c('el-input', {
+      attrs: {
+        "type": "number"
+      },
+      model: {
+        value: (persondecreeBlock.optionnumber5),
+        callback: function($$v) {
+          persondecreeBlock.optionnumber5 = $$v
+        },
+        expression: "persondecreeBlock.optionnumber5"
+      }
+    })], 1), _vm._v(" "), _c('div', {
+      staticClass: "eld-eld-body-row-short",
+      staticStyle: {
+        "margin-top": "20px"
+      }
+    }, [_vm._v("\n                                        дата подписания протокола\n                                        "), _c('el-input', {
+      attrs: {
+        "type": "date"
+      },
+      model: {
+        value: (persondecreeBlock.optiondate3String),
+        callback: function($$v) {
+          persondecreeBlock.optiondate3String = $$v
+        },
+        expression: "persondecreeBlock.optiondate3String"
+      }
+    })], 1)])]) : _vm._e(), _vm._v(" "), (persondecreeBlock.optionnumber4 == 31 && _vm.personFromStructure.length != 0) ? _c('div', [_c('div', {
       staticClass: "eld-eld-body-row-flex",
       staticStyle: {
         "margin-top": "10px"
       }
-    }, [_c('div', [_vm._v("\n                                    По какому подпункту\n                                    "), _c('el-select', {
+    }, [_c('div', [_vm._v("\n                                        По какому подпункту\n                                        "), _c('el-select', {
       staticClass: "eld-eld-body-select-long",
       staticStyle: {
         "left": "0px"
@@ -36239,21 +36704,21 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         "placeholder": "Подпункт положения"
       },
       model: {
-        value: (persondecreeBlock.persondecreeblocksub),
+        value: (persondecreeBlock.optionnumber1),
         callback: function($$v) {
-          persondecreeBlock.persondecreeblocksub = $$v
+          persondecreeBlock.optionnumber1 = $$v
         },
-        expression: "persondecreeBlock.persondecreeblocksub"
+        expression: "persondecreeBlock.optionnumber1"
       }
     }, _vm._l((_vm.dismissalclauses), function(persondecreeblocksubtype) {
-      return (persondecreeblocksubtype.persondecreeblocktype == 18) ? _c('el-option', {
+      return (persondecreeblocksubtype.persondecreeblocktype == 18 && persondecreeblocksubtype.type == persondecreeBlock.persondecreeblocksub) ? _c('el-option', {
         key: persondecreeblocksubtype.id,
         attrs: {
           "label": persondecreeblocksubtype.paragraph + '.' + persondecreeblocksubtype.subparagraph + ' - ' + persondecreeblocksubtype.titleofarticles + '.',
           "value": persondecreeblocksubtype.id
         }
       }) : _vm._e()
-    }))], 1)]) : _vm._e(), _vm._v(" "), (_vm.personFromStructure.length != 0) ? _c('div', {
+    }))], 1)]), _vm._v(" "), _c('div', {
       staticClass: "eld-eld-body-row-flex",
       staticStyle: {
         "margin-top": "40px"
@@ -36263,7 +36728,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       staticStyle: {
         "margin-left": "10px"
       }
-    }, [_vm._v("\n                                    Дата\n                                    "), _c('el-input', {
+    }, [_vm._v("\n                                        Дата\n                                        "), _c('el-input', {
       attrs: {
         "type": "date"
       },
@@ -36281,7 +36746,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         "margin-left": "10px",
         "line-height": "16px"
       }
-    }, [_vm._v("\n                                    Уволить в запас\n                                    "), _c('div', {
+    }, [_vm._v("\n                                        Уволить в запас\n                                        "), _c('div', {
       staticStyle: {
         "display": "flex",
         "flex-direction": "column",
@@ -36303,7 +36768,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         "text-align": "center",
         "line-height": "16px"
       }
-    }, [_vm._v("\n                                    Направить\n                                    "), _c('div', {
+    }, [_vm._v("\n                                        Направить\n                                        "), _c('div', {
       staticStyle: {
         "display": "flex",
         "flex-direction": "column",
@@ -36319,27 +36784,30 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         },
         expression: "persondecreeBlock.checkboxdirect"
       }
-    })], 1)])]) : _vm._e(), _vm._v(" "), (persondecreeBlock.checkboxdismiss == true) ? _c('div', [_c('div', [_vm._v("\n                                    По какому подпункту\n                                    "), _c('el-select', {
+    })], 1)])]), _vm._v(" "), (persondecreeBlock.checkboxdismiss == true) ? _c('div', [_c('div', [_vm._v("\n                                        По какому подпункту\n                                        "), _c('el-select', {
       staticClass: "eld-eld-body-select-long",
+      staticStyle: {
+        "left": "0px"
+      },
       attrs: {
         "clearable": "",
         "placeholder": "Подпункт положения"
       },
       model: {
-        value: (persondecreeBlock.optionnumber3),
+        value: (persondecreeBlock.optionnumber2),
         callback: function($$v) {
-          persondecreeBlock.optionnumber3 = $$v
+          persondecreeBlock.optionnumber2 = $$v
         },
-        expression: "persondecreeBlock.optionnumber3"
+        expression: "persondecreeBlock.optionnumber2"
       }
-    }, _vm._l((_vm.dismissalclauses), function(dismissalclause) {
-      return _c('el-option', {
-        key: dismissalclause.id,
+    }, _vm._l((_vm.dismissalclauses), function(persondecreeblocksubtype) {
+      return (persondecreeblocksubtype.persondecreeblocktype == 18 && persondecreeblocksubtype.type == persondecreeBlock.persondecreeblocksub) ? _c('el-option', {
+        key: persondecreeblocksubtype.id,
         attrs: {
-          "label": dismissalclause.paragraph + '.' + dismissalclause.subparagraph + ' - ' + dismissalclause.titleofarticles + '.',
-          "value": dismissalclause.id
+          "label": persondecreeblocksubtype.paragraph + '.' + persondecreeblocksubtype.subparagraph + ' - ' + persondecreeblocksubtype.titleofarticles + '.',
+          "value": persondecreeblocksubtype.id
         }
-      })
+      }) : _vm._e()
     }))], 1)]) : _vm._e(), _vm._v(" "), (persondecreeBlock.checkboxdirect == true) ? _c('div', {
       staticClass: "eld-eld-body-row-flex",
       staticStyle: {
@@ -36347,7 +36815,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       }
     }, [_c('div', {
       staticClass: "eld-eld-body-row-mshort "
-    }, [_vm._v("\n                                    РОЧС\n                                    "), _c('el-input', {
+    }, [_vm._v("\n                                        РОЧС\n                                        "), _c('el-input', {
       model: {
         value: (persondecreeBlock.optionstring4),
         callback: function($$v) {
@@ -36360,7 +36828,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       staticStyle: {
         "margin-left": "10px"
       }
-    }, [_vm._v("\n                                    Управление МЧС\n                                    "), _c('el-input', {
+    }, [_vm._v("\n                                        Управление МЧС\n                                        "), _c('el-input', {
       model: {
         value: (persondecreeBlock.optionstring5),
         callback: function($$v) {
@@ -36375,7 +36843,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       }
     }, [_c('div', {
       staticClass: "eld-eld-body-row-long"
-    }, [_vm._v("\n                                    Перечень не сдавших предметов:\n                                    "), _c('el-input', {
+    }, [_vm._v("\n                                        Перечень не сдавших предметов:\n                                        "), _c('el-input', {
       model: {
         value: (persondecreeBlock.optionstring7),
         callback: function($$v) {
@@ -36388,7 +36856,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       staticStyle: {
         "margin-left": "20px"
       }
-    }, [_vm._v("\n                                    Основание:\n                                    "), _c('el-input', {
+    }, [_vm._v("\n                                        Основание:\n                                        "), _c('el-input', {
       model: {
         value: (persondecreeBlock.optionstring6),
         callback: function($$v) {
@@ -36396,7 +36864,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         },
         expression: "persondecreeBlock.optionstring6"
       }
-    })], 1)]) : _vm._e(), _vm._v(" "), _c('div', {
+    })], 1)]) : _vm._e()]) : _vm._e(), _vm._v(" "), _c('div', {
       staticStyle: {
         "margin-top": "15px"
       }
@@ -36422,12 +36890,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           "if": "persondecreeBlock.index != null && persondecreeBlock.index != 0 && persondecreeblocksub.index != 0"
         }
       }, [_vm._v(_vm._s(persondecreeBlock.index) + "." + _vm._s(persondecreeblocksub.index) + ".")]), _vm._v("\n                                    " + _vm._s(_vm.provideDeductSubBlockText(persondecreeblocksub)) + "\n                                ")]), _vm._v(" "), _vm._l((persondecreeBlock.persondecreeblocksubs), function(persondecreeblocksubsub) {
-        return (persondecreeblocksubsub.parentpersondecreeblocksub == persondecreeblocksub.id) ? _c('div', [_c('div', [_vm._v("\n                                        " + _vm._s(_vm.printDateDocument(persondecreeblocksubsub.subvaluedate1)) + " с :\n                                    ")]), _vm._v(" "), _c('div', _vm._l((_vm.persondecreeOperations), function(decreeoperation) {
+        return (persondecreeblocksubsub.parentpersondecreeblocksub == persondecreeblocksub.id) ? _c('div', [_c('div', [_vm._v("\n                                        " + _vm._s(_vm.printDateDocument(persondecreeblocksubsub.subvaluedate1)) + " с " + _vm._s(persondecreeblocksubsub.subvaluenumber3) + " семестра " + _vm._s(_vm.getCourse(persondecreeblocksubsub.subvaluenumber3)) + " курса:\n                                    ")]), _vm._v(" "), _c('div', _vm._l((_vm.persondecreeOperations), function(decreeoperation) {
           return (decreeoperation.persondecreeblocksub == persondecreeblocksubsub.id) ? _c('div', {
             staticClass: "persondecreeoperation-part-list-element persondecreeoperation-part-list-element-margin-big"
           }, [_c('div', {
             staticClass: "persondecreeoperation-part-list-element-indent"
-          }, [(decreeoperation.personobject.actualRank != null) ? _c('span', [_vm._v(_vm._s(decreeoperation.personobject.actualRank.name4) + " ")]) : _vm._e(), _vm._v("\n                                                " + _vm._s(decreeoperation.personobject.surname2) + " " + _vm._s(decreeoperation.personobject.name2) + "\n                                                " + _vm._s(decreeoperation.personobject.fathername2) + _vm._s(_vm.commaspaceifnotnull(decreeoperation.personobject.positiontypestring)) + " " + _vm._s(decreeoperation.personobject.positiontype2string) + "\n                                                " + _vm._s(_vm.getStructureName(decreeoperation.personobject.structure)) + "а " + _vm._s(_vm.getFacultiStructureName(decreeoperation.personobject.structure)) + "\n                                            ")]), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_c('div', [_c('el-button', {
+          }, [(decreeoperation.personobject.actualRank != null) ? _c('span', [_vm._v(_vm._s(decreeoperation.personobject.actualRank.name4) + " ")]) : _vm._e(), _vm._v("\n                                                " + _vm._s(decreeoperation.personobject.surname2) + " " + _vm._s(decreeoperation.personobject.name2) + "\n                                                " + _vm._s(decreeoperation.personobject.fathername2) + _vm._s(_vm.commaspaceifnotnull(decreeoperation.personobject.positiontypestring)) + " " + _vm._s(decreeoperation.personobject.positiontype2string) + "\n                                                " + _vm._s(_vm.getStructureName(decreeoperation.personobject.structure)) + "а " + _vm._s(_vm.getFacultiStructureName(decreeoperation.personobject.structure)) + "\n                                                "), (decreeoperation.optionnumber8 == 1) ? _c('span', [_vm._v(" и направить в распоряжение начальника " + _vm._s(decreeoperation.optionstring4) + " РОЧС учреждения \"" + _vm._s(decreeoperation.optionstring5) + "\", ")]) : _vm._e(), _vm._v(" "), (decreeoperation.optionstring7 != null) ? _c('span', [_vm._v(" перечень не ликвидированных задолжностей - " + _vm._s(decreeoperation.optionstring7))]) : _vm._e()]), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_c('div', [_c('el-button', {
             attrs: {
               "size": "mini",
               "type": "warning"
@@ -36624,21 +37092,33 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       staticStyle: {
         "margin-top": "10px"
       }
-    }, [_vm._v("\n                                    Кого\n                                    "), _c('div', {
+    }, [_c('div', [_vm._v("\n                                        На должность\n                                    ")]), _vm._v(" "), _c('div', {
+      staticClass: "eld-eld-body-row-flex",
       staticStyle: {
         "margin-top": "10px"
       }
-    }, [_c('el-button', {
+    }, [_c('el-select', {
+      staticClass: "eld-eld-body-select-medium",
       attrs: {
-        "type": "primary",
-        "plain": ""
+        "clearable": "",
+        "placeholder": "Должность"
       },
-      on: {
-        "click": function($event) {
-          _vm.selectAllPersonInStructure(persondecreeBlock)
-        }
+      model: {
+        value: (persondecreeBlock.optionnumber3),
+        callback: function($$v) {
+          persondecreeBlock.optionnumber3 = $$v
+        },
+        expression: "persondecreeBlock.optionnumber3"
       }
-    }, [_vm._v("Выбрать")])], 1), _vm._v(" "), _c('div', {
+    }, _vm._l((_vm.educationpositiontypes), function(educationpositiontype) {
+      return _c('el-option', {
+        key: educationpositiontype.id,
+        attrs: {
+          "label": educationpositiontype.name,
+          "value": educationpositiontype.id
+        }
+      })
+    }))], 1), _vm._v("\n                                    Кого\n                                    "), _c('div', {
       staticStyle: {
         "margin-top": "15px"
       }
@@ -36694,53 +37174,40 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       staticStyle: {
         "margin-top": "20px"
       }
-    }, [_c('div', {
-      staticStyle: {
-        "margin-top": "10px"
-      }
-    }, [_c('el-button', {
+    }, [_c('div', [(_vm.structureName.length > 0 && _vm.courseName.length > 0 && _vm.facultyName.length > 0 && _vm.specialityName.length > 0) ? _c('div', [_vm._v("\n                                        " + _vm._s(_vm.facultyName) + "," + _vm._s(_vm.specialityName) + ", " + _vm._s(_vm.courseName) + ", " + _vm._s(_vm.structureName) + "\n                                    ")]) : _vm._e(), _vm._v(" "), _c('br'), _vm._v(" "), _c('el-button', {
       attrs: {
         "type": "primary",
         "plain": ""
       },
       on: {
         "click": function($event) {
-          _vm.selectAllPersonInStructure(persondecreeBlock)
+          _vm.selectAllPersonInStructure(persondecreeBlock, 3)
         }
       }
-    }, [_vm._v("Выбрать")])], 1), _vm._v(" "), _c('div', {
-      staticClass: "eld-eld-body-row-small ",
-      staticStyle: {
-        "margin-left": "10px"
-      }
-    }, [_vm._v("\n                                    Семестр\n                                    "), _c('el-input', {
-      attrs: {
-        "type": "number"
-      },
-      model: {
-        value: (persondecreeBlock.optionnumber1),
-        callback: function($$v) {
-          persondecreeBlock.optionnumber1 = $$v
-        },
-        expression: "persondecreeBlock.optionnumber1"
-      }
-    })], 1), _vm._v(" "), _c('div', {
-      staticClass: "eld-eld-body-row-small ",
-      staticStyle: {
-        "margin-left": "10px"
-      }
-    }, [_vm._v("\n                                    Курс\n                                    "), _c('el-input', {
-      attrs: {
-        "type": "number"
-      },
-      model: {
+    }, [_vm._v("Выбрать взвод")]), _vm._v(" "), _c('div', [_c('br'), _vm._v(" "), _c('select', {
+      directives: [{
+        name: "model",
+        rawName: "v-model",
         value: (persondecreeBlock.optionnumber2),
-        callback: function($$v) {
-          persondecreeBlock.optionnumber2 = $$v
-        },
         expression: "persondecreeBlock.optionnumber2"
+      }],
+      on: {
+        "change": function($event) {
+          var $$selectedVal = Array.prototype.filter.call($event.target.options, function(o) {
+            return o.selected
+          }).map(function(o) {
+            var val = "_value" in o ? o._value : o.value;
+            return val
+          });
+          persondecreeBlock.optionnumber2 = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+        }
       }
-    })], 1)]) : _vm._e(), _vm._v(" "), (_vm.personFromStructure.length != 0) ? _c('div', {
+    }, [_c('option', {
+      attrs: {
+        "disabled": "",
+        "value": "Номер семестра"
+      }
+    }, [_vm._v("Номер семестра ")]), _vm._v(" "), _c('option', [_vm._v("1")]), _vm._v(" "), _c('option', [_vm._v("2")]), _vm._v(" "), _c('option', [_vm._v("3")]), _vm._v(" "), _c('option', [_vm._v("4")]), _vm._v(" "), _c('option', [_vm._v("5")]), _vm._v(" "), _c('option', [_vm._v("6")]), _vm._v(" "), _c('option', [_vm._v("7")]), _vm._v(" "), _c('option', [_vm._v("8")])]), _vm._v(" "), _c('span', [_vm._v("Выбран: " + _vm._s(persondecreeBlock.optionnumber2) + "й семестр")])])], 1)]) : _vm._e(), _vm._v(" "), (_vm.personFromStructure.length != 0) ? _c('div', {
       staticClass: "eld-eld-body-row-flex",
       staticStyle: {
         "margin-top": "10px"
@@ -36758,7 +37225,31 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         },
         expression: "persondecreeBlock.optiondate1String"
       }
-    })], 1)]) : _vm._e(), _vm._v(" "), (_vm.personFromStructure.length != 0) ? _c('div', {
+    })], 1), _vm._v(" "), _c('div', {
+      staticStyle: {
+        "margin-left": "100px"
+      }
+    }, [_vm._v("\n                                    Форма обучения "), _c('br'), _vm._v(" "), _c('el-select', {
+      attrs: {
+        "clearable": "",
+        "placeholder": "Форма обучения"
+      },
+      model: {
+        value: (persondecreeBlock.optionnumber8),
+        callback: function($$v) {
+          persondecreeBlock.optionnumber8 = $$v
+        },
+        expression: "persondecreeBlock.optionnumber8"
+      }
+    }, _vm._l((_vm.educationtypes), function(educationtype) {
+      return _c('el-option', {
+        key: educationtype.id,
+        attrs: {
+          "label": educationtype.name,
+          "value": educationtype.id
+        }
+      })
+    }))], 1)]) : _vm._e(), _vm._v(" "), (_vm.personFromStructure.length != 0) ? _c('div', {
       staticClass: "eld-eld-body-row-flex",
       staticStyle: {
         "margin-top": "10px"
@@ -36767,11 +37258,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       staticClass: "eld-eld-body-row-long"
     }, [_vm._v("\n                                    Основание:\n                                    "), _c('el-input', {
       model: {
-        value: (persondecreeBlock.optionstring2),
+        value: (persondecreeBlock.optionstring6),
         callback: function($$v) {
-          persondecreeBlock.optionstring2 = $$v
+          persondecreeBlock.optionstring6 = $$v
         },
-        expression: "persondecreeBlock.optionstring2"
+        expression: "persondecreeBlock.optionstring6"
       }
     })], 1)]) : _vm._e(), _vm._v(" "), _c('div', [_c('br'), _vm._v(" "), _c('el-button', {
       attrs: {
@@ -36795,13 +37286,13 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           "if": "persondecreeBlock.index != null && persondecreeBlock.index != 0 && persondecreeblocksub.index != 0"
         }
       }, [_vm._v(_vm._s(persondecreeBlock.index) + "." + _vm._s(persondecreeblocksub.index) + ".")]), _vm._v("\n                                    " + _vm._s(_vm.provideRestoreSubBlockText(persondecreeblocksub)) + "\n                                ")]), _vm._v(" "), _vm._l((persondecreeBlock.persondecreeblocksubs), function(persondecreeblocksubsub) {
-        return (persondecreeblocksubsub.parentpersondecreeblocksub == persondecreeblocksub.id) ? _c('div', [_c('div', [_vm._v("\n                                        на " + _vm._s(persondecreeblocksubsub.subvaluenumber1) + " семестр " + _vm._s(persondecreeblocksubsub.subvaluenumber2) + "  курса:\n                                    ")]), _vm._v(" "), _c('div', _vm._l((persondecreeBlock.persondecreeblocksubs), function(persondecreeblocksubsubsub) {
+        return (persondecreeblocksubsub.parentpersondecreeblocksub == persondecreeblocksub.id) ? _c('div', [_c('div', [_vm._v("\n                                        на " + _vm._s(persondecreeblocksubsub.subvaluestring2) + " семестр " + _vm._s(persondecreeblocksubsub.subvaluestring1) + "а :\n                                    ")]), _vm._v(" "), _c('div', _vm._l((persondecreeBlock.persondecreeblocksubs), function(persondecreeblocksubsubsub) {
           return (persondecreeblocksubsubsub.parentpersondecreeblocksub == persondecreeblocksubsub.id) ? _c('div', [_c('div', [_vm._v("\n                                                Академическую задолженность ликвидировать до " + _vm._s(_vm.printDateDocument(persondecreeblocksubsubsub.subvaluedate1)) + ".\n                                            ")]), _vm._v(" "), _c('div', _vm._l((_vm.persondecreeOperations), function(decreeoperation) {
             return (decreeoperation.persondecreeblocksub == persondecreeblocksubsubsub.id) ? _c('div', {
               staticClass: "persondecreeoperation-part-list-element persondecreeoperation-part-list-element-margin-big"
             }, [_c('div', {
               staticClass: "persondecreeoperation-part-list-element-indent"
-            }, [_vm._v("\n                                                        " + _vm._s(decreeoperation.personobject.surname2) + " " + _vm._s(decreeoperation.personobject.name2) + "\n                                                        " + _vm._s(decreeoperation.personobject.fathername2) + "\n                                                    ")]), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_c('div', [_c('el-button', {
+            }, [_vm._v("\n                                                        " + _vm._s(decreeoperation.personobject.surname2) + " " + _vm._s(decreeoperation.personobject.name2) + "\n                                                        " + _vm._s(decreeoperation.personobject.fathername2) + ".\n                                                    ")]), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_c('div', [_c('el-button', {
               attrs: {
                 "size": "mini",
                 "type": "warning"
@@ -36833,11 +37324,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         "placeholder": ""
       },
       model: {
-        value: (persondecreeBlock.optionnumber2),
+        value: (persondecreeBlock.optionnumber1),
         callback: function($$v) {
-          persondecreeBlock.optionnumber2 = $$v
+          persondecreeBlock.optionnumber1 = $$v
         },
-        expression: "persondecreeBlock.optionnumber2"
+        expression: "persondecreeBlock.optionnumber1"
       }
     }, _vm._l((_vm.persondecreeblocksubtypes), function(persondecreeblocksubtype) {
       return (persondecreeblocksubtype.persondecreeblocktype == 21) ? _c('el-option', {
@@ -36847,7 +37338,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           "value": persondecreeblocksubtype.id
         }
       }) : _vm._e()
-    }))], 1)]), _vm._v(" "), (persondecreeBlock.optionnumber2 == 18) ? _c('div', [_c('div', {
+    }))], 1)]), _vm._v(" "), (persondecreeBlock.optionnumber1 == 18) ? _c('div', [_c('div', {
       staticStyle: {
         "margin-top": "10px"
       }
@@ -37012,11 +37503,160 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           _vm.selectAllPersonInStructure(persondecreeBlock, 2)
         }
       }
-    }, [_vm._v("Выбрать курс/семестр")])], 1), _vm._v(" "), _c('div', {
+    }, [_vm._v("Выбрать курс")])], 1), _vm._v(" "), _c('div', {
       staticStyle: {
         "margin-top": "28px"
       }
-    }, [_vm._v("\n                                        " + _vm._s(_vm.structureNewName) + "\n                                    ")])])], 1) : _vm._e(), _vm._v(" "), (_vm.personFromStructure.length != 0) ? _c('div', {
+    }, [_vm._v("\n                                        " + _vm._s(_vm.structureNewName) + "\n                                    ")])])], 1) : _vm._e(), _vm._v(" "), (persondecreeBlock.optionnumber1 == 27) ? _c('div', [_c('div', {
+      staticStyle: {
+        "margin-top": "10px"
+      }
+    }, [_vm._v("\n                                    По итогам\n                                ")]), _vm._v(" "), _c('el-input', {
+      staticClass: "eld-eld-body-row-long",
+      attrs: {
+        "placeholder": "летней экзаменационной сессии 2019-2020 ..."
+      },
+      model: {
+        value: (persondecreeBlock.optionstring1),
+        callback: function($$v) {
+          persondecreeBlock.optionstring1 = $$v
+        },
+        expression: "persondecreeBlock.optionstring1"
+      }
+    }), _vm._v(" "), _c('div', {
+      staticClass: "eld-eld-body-row-flex"
+    }, [_c('div', {
+      staticStyle: {
+        "margin-top": "10px"
+      }
+    }, [_vm._v("\n                                        Кого\n                                        "), _c('div', {
+      staticStyle: {
+        "margin-top": "10px"
+      }
+    }, [_c('el-button', {
+      attrs: {
+        "type": "primary",
+        "plain": ""
+      },
+      on: {
+        "click": function($event) {
+          _vm.selectAllPersonInStructure(persondecreeBlock, 4)
+        }
+      }
+    }, [_vm._v("Выбрать взвод")])], 1), _vm._v(" "), _c('div', {
+      staticStyle: {
+        "margin-top": "15px"
+      }
+    }, [_c('el-input', {
+      staticClass: "eld-eld-body-select-medium",
+      attrs: {
+        "placeholder": "Фамилия Имя Отчество"
+      },
+      on: {
+        "input": function($event) {
+          _vm.searchPersonsBlock(persondecreeBlock)
+        }
+      },
+      model: {
+        value: (persondecreeBlock.fiosearch),
+        callback: function($$v) {
+          persondecreeBlock.fiosearch = $$v
+        },
+        expression: "persondecreeBlock.fiosearch"
+      }
+    })], 1), _vm._v(" "), (_vm.hasSearchResultsBlock(persondecreeBlock)) ? _c('div', {
+      staticClass: "eld-search-main"
+    }, [_c('div', {
+      staticClass: "eld-search-main-title"
+    }, [_vm._v("\n                                                Результаты поиска\n                                            ")]), _vm._v(" "), _vm._l((persondecreeBlock.personssearch), function(person) {
+      return _c('div', {
+        staticClass: "eld-search-element",
+        on: {
+          "click": function($event) {
+            _vm.selectPersonBlockNonAuto(person.id, persondecreeBlock)
+          }
+        }
+      }, [_c('div', [_vm._v("\n                                                    " + _vm._s(person.surname) + " " + _vm._s(person.name) + " " + _vm._s(person.fathername) + "\n                                                ")]), _vm._v(" "), _c('div', [_vm._v("\n                                                    " + _vm._s(person.positiontypestring) + "\n                                                ")]), _vm._v(" "), (_vm.hasPhotopreviewBlock(person.id, persondecreeBlock)) ? _c('div', [_c('img', {
+        staticClass: "eld-search-element-image",
+        attrs: {
+          "src": _vm.getPhotopreviewBlock(person.id, persondecreeBlock).photo64
+        }
+      })]) : _vm._e(), _vm._v(" "), _c('div', [_c('div', [_vm._v("\n                                                        " + _vm._s(person.structuretree) + "\n                                                    ")])])])
+    })], 2) : _vm._e(), _vm._v(" "), (_vm.personFromStructure != null) ? _c('div', _vm._l((_vm.personFromStructure), function(person) {
+      return _c('div', [_vm._v("\n                                                Кого – " + _vm._s(person.surname2 + " " + person.name2 + " " + person.fathername2) + "\n                                                "), _c('el-button', {
+        attrs: {
+          "size": "mini",
+          "type": "warning"
+        },
+        on: {
+          "click": function($event) {
+            _vm.multipersonRemove(person, persondecreeBlock)
+          }
+        }
+      }, [_vm._v("Убрать")])], 1)
+    })) : _vm._e()])]), _vm._v(" "), _c('div', {
+      staticClass: "eld-eld-body-row-flex",
+      staticStyle: {
+        "margin-top": "20px"
+      }
+    }, [_c('div', {
+      staticClass: "eld-eld-body-row-short ",
+      staticStyle: {
+        "margin-left": "10px"
+      }
+    }, [_vm._v("\n                                        С какого числа\n                                        "), _c('el-input', {
+      attrs: {
+        "type": "date"
+      },
+      model: {
+        value: (persondecreeBlock.optiondate1String),
+        callback: function($$v) {
+          persondecreeBlock.optiondate1String = $$v
+        },
+        expression: "persondecreeBlock.optiondate1String"
+      }
+    })], 1), _vm._v(" "), _c('div', {
+      staticClass: "eld-eld-body-row-short ",
+      staticStyle: {
+        "text-align": "center",
+        "margin-left": "10px",
+        "line-height": "16px"
+      }
+    }, [_vm._v("\n                                        Условно\n                                        "), _c('div', {
+      staticStyle: {
+        "display": "flex",
+        "flex-direction": "column",
+        "align-items": "center",
+        "margin-top": "12px"
+      }
+    }, [_c('el-checkbox', {
+      staticClass: "checkbox-big",
+      model: {
+        value: (persondecreeBlock.checkboxdismiss),
+        callback: function($$v) {
+          persondecreeBlock.checkboxdismiss = $$v
+        },
+        expression: "persondecreeBlock.checkboxdismiss"
+      }
+    })], 1)])]), _vm._v(" "), (persondecreeBlock.checkboxdismiss == true) ? _c('div', [_c('div', {
+      staticClass: "eld-eld-body-row-flex",
+      staticStyle: {
+        "margin-top": "10px"
+      }
+    }, [_c('div', {
+      staticClass: "eld-eld-body-row-short "
+    }, [_vm._v("\n                                            Дата ликвидации задолжности\n                                            "), _c('el-input', {
+      attrs: {
+        "type": "date"
+      },
+      model: {
+        value: (persondecreeBlock.optiondate2String),
+        callback: function($$v) {
+          persondecreeBlock.optiondate2String = $$v
+        },
+        expression: "persondecreeBlock.optiondate2String"
+      }
+    })], 1)])]) : _vm._e()], 1) : _vm._e(), _vm._v(" "), (_vm.personFromStructure.length != 0) ? _c('div', {
       staticClass: "eld-eld-body-row-flex",
       staticStyle: {
         "margin-top": "10px"
@@ -37043,27 +37683,27 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       }
     }, [_vm._v("Сформировать пункт приказа")])], 1)]) : _vm._e(), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', {
       staticClass: "persondecreeoperation-part-list-title"
-    }, [_vm._v("\n                            Проект приказа\n                        ")]) : _vm._e(), _vm._v(" "), _c('div', [(persondecreeBlock.index != null && persondecreeBlock.index != 0) ? _c('span', [_vm._v(_vm._s(persondecreeBlock.index) + ".")]) : _vm._e(), _vm._v(" ПЕРЕВЕСТИ:\n                        ")]), _vm._v(" "), _vm._l((persondecreeBlock.persondecreeblocksubs), function(persondecreeblocksub) {
+    }, [_vm._v("\n                            Проект приказа\n                        ")]) : _vm._e(), _vm._v(" "), _c('div', [(persondecreeBlock.index != null && persondecreeBlock.index != 0) ? _c('span', [_vm._v(_vm._s(persondecreeBlock.index) + ".")]) : _vm._e(), _vm._v("\n                            ПЕРЕВЕСТИ:\n                        ")]), _vm._v(" "), _vm._l((persondecreeBlock.persondecreeblocksubs), function(persondecreeblocksub) {
       return (persondecreeblocksub.persondecreeblock == persondecreeBlock.id && persondecreeblocksub.parentpersondecreeblocksub == 0) ? _c('div', {
         staticClass: "persondecreeoperation-part-list-element"
       }, [_c('div', [_c('div', {
         staticClass: "persondecreeoperation-part-list-element-indent persondecreeoperation-part-list-element-margin"
       }, [_vm._v("\n                                    " + _vm._s(_vm.provideTranslateSubBlockText(persondecreeblocksub)) + "\n                                ")]), _vm._v(" "), _vm._l((persondecreeBlock.persondecreeblocksubs), function(persondecreeblocksubsub) {
-        return (persondecreeblocksubsub.parentpersondecreeblocksub == persondecreeblocksub.id) ? _c('div', [_c('div', [_c('div', {
-          staticClass: "persondecreeoperation-part-list-element-indent persondecreeoperation-part-list-element-margin"
-        }, [_c('span', {
-          attrs: {
-            "if": "persondecreeBlock.index != null && persondecreeBlock.index != 0 && persondecreeblocksub.index != 0"
-          }
-        }, [_vm._v(_vm._s(persondecreeBlock.index) + "." + _vm._s(persondecreeblocksubsub.index) + ".")]), _vm._v("\n                                            на " + _vm._s(persondecreeblocksubsub.subvaluestring1) + " учебного года с " + _vm._s(_vm.printDateDocument(persondecreeblocksubsub.subvaluedate1)) + "\n                                            "), (persondecreeblocksubsub.Subvaluenumber1 == 0) ? _c('span', [_vm._v(" условно с ликвидацией академических задолженностей до " + _vm._s(_vm.printDateDocument(persondecreeblocksubsub.subvaluedate2)) + ":")]) : _vm._e()])]), _vm._v(" "), _c('div', _vm._l((persondecreeBlock.persondecreeblocksubs), function(persondecreeblocksubsubsub) {
+        return (persondecreeblocksubsub.parentpersondecreeblocksub == persondecreeblocksub.id) ? _c('div', [_c('div', [_c('span', [_vm._v("\n                                            " + _vm._s(persondecreeblocksubsub.subvaluestring1) + "\n                                        ")])]), _vm._v(" "), _c('div', _vm._l((persondecreeBlock.persondecreeblocksubs), function(persondecreeblocksubsubsub) {
           return (persondecreeblocksubsubsub.parentpersondecreeblocksub == persondecreeblocksubsub.id) ? _c('div', {
             staticClass: "persondecreeoperation-part-list-element-indent"
-          }, _vm._l((_vm.persondecreeOperations), function(decreeoperation) {
+          }, [_c('div', {
+            staticClass: "persondecreeoperation-part-list-element-indent persondecreeoperation-part-list-element-margin"
+          }, [_c('span', {
+            attrs: {
+              "if": "persondecreeBlock.index != null && persondecreeBlock.index != 0 && persondecreeblocksub.index != 0"
+            }
+          }, [_vm._v(_vm._s(persondecreeBlock.index) + "." + _vm._s(persondecreeblocksubsubsub.index) + ".")]), _vm._v("\n                                                на " + _vm._s(persondecreeblocksubsubsub.subvaluestring1) + " учебного года с\n                                                " + _vm._s(_vm.printDateDocument(persondecreeblocksubsubsub.subvaluedate1)) + "\n                                                "), (persondecreeblocksubsubsub.subvaluenumber1 == 0) ? _c('span', [_vm._v(" условно с ликвидацией\n                                                    академических задолженностей до\n                                                    " + _vm._s(_vm.printDateDocument(persondecreeblocksubsubsub.subvaluedate2)) + ":")]) : _vm._e()]), _vm._v(" "), _vm._l((_vm.persondecreeOperations), function(decreeoperation) {
             return (decreeoperation.persondecreeblocksub == persondecreeblocksubsubsub.id) ? _c('div', {
               staticClass: "persondecreeoperation-part-list-element persondecreeoperation-part-list-element-margin-big"
             }, [_c('div', {
               staticClass: "persondecreeoperation-part-list-element-indent"
-            }, [(decreeoperation.personobject.actualRank != null) ? _c('span', [_vm._v(_vm._s(decreeoperation.personobject.actualRank.name4) + " ")]) : _vm._e(), _vm._v("\n                                                    " + _vm._s(decreeoperation.personobject.surname2) + " " + _vm._s(decreeoperation.personobject.name2) + "\n                                                    " + _vm._s(decreeoperation.personobject.fathername2) + _vm._s(_vm.commaspaceifnotnull(decreeoperation.personobject.positiontypestring)) + " " + _vm._s(decreeoperation.personobject.positiontype2string) + "\n                                                    " + _vm._s(_vm.getStructureName(decreeoperation.personobject.structure)) + "а " + _vm._s(_vm.getFacultiStructureName(decreeoperation.personobject.structure)) + "\n                                                ")]), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_c('div', [_c('el-button', {
+            }, [(decreeoperation.personobject.actualRank != null) ? _c('span', [_vm._v(_vm._s(decreeoperation.personobject.actualRank.name4) + "\n                                                    ")]) : _vm._e(), _vm._v("\n                                                    " + _vm._s(decreeoperation.personobject.surname2) + " " + _vm._s(decreeoperation.personobject.name2) + "\n                                                    " + _vm._s(decreeoperation.personobject.fathername2) + _vm._s(_vm.commaspaceifnotnull(decreeoperation.personobject.positiontypestring)) + "\n                                                    " + _vm._s(decreeoperation.personobject.positiontype2string) + "\n                                                    " + _vm._s(_vm.getStructureName(decreeoperation.personobject.structure)) + "а\n                                                    " + _vm._s(_vm.getFacultiStructureName(decreeoperation.personobject.structure)) + "\n                                                ")]), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_c('div', [_c('el-button', {
               attrs: {
                 "size": "mini",
                 "type": "warning"
@@ -37074,7 +37714,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
                 }
               }
             }, [_vm._v("Удалить")])], 1)]) : _vm._e()]) : _vm._e()
-          })) : _vm._e()
+          })], 2) : _vm._e()
         }))]) : _vm._e()
       })], 2)]) : _vm._e()
     }), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_c('el-button', {
@@ -43159,7 +43799,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_vm._v("\n                    Родственники\n                ")]), _vm._v(" "), _c('table', {
     staticClass: "eld-eld-table"
   }, [_vm._m(8), _vm._v(" "), _vm._l((_vm.person.personrelatives), function(personrelative) {
-    return _c('tr', [_c('td', [_c('div', [_vm._v("\n                                " + _vm._s(_vm.getRelativetype(personrelative.relativetype)) + "\n                            ")])]), _vm._v(" "), _c('td', [_c('div', [_vm._v("\n                                " + _vm._s(personrelative.fio) + "\n                            ")]), _vm._v(" "), (personrelative.fioother.length > 1) ? _c('div', [_vm._v("\n                                Прочие фамилии " + _vm._s(personrelative.fioother) + "\n                            ")]) : _vm._e()]), _vm._v(" "), _c('td', [_c('div', [_c('div', [_vm._v("\n                                    " + _vm._s(_vm.printDate(personrelative.birthdayString)) + " " + _vm._s(personrelative.birthcountry) + "\n                                    " + _vm._s(personrelative.birthstate) + " " + _vm._s(personrelative.birthsubstate) + "\n                                    " + _vm._s(personrelative.birthcitytype) + " " + _vm._s(personrelative.birthcity) + "\n                                    " + _vm._s(personrelative.birthadditional) + "\n                                ")]), _vm._v(" "), (personrelative.death) ? _c('div', [_vm._v("\n                                    Умер"), (!personrelative.deathnodata && !personrelative.nodata && personrelative.deathcountry.length > 0) ? _c('span', [_vm._v("\n                                        .\n                                        Место погребения " + _vm._s(personrelative.deathcountry) + "\n                                        " + _vm._s(personrelative.deathstate) + " " + _vm._s(personrelative.deathsubstate) + "\n                                        " + _vm._s(personrelative.deathcitytype) + " " + _vm._s(personrelative.deathcity) + "\n                                        " + _vm._s(personrelative.deathadditional) + "\n                                    ")]) : _vm._e()]) : _vm._e()])]), _vm._v(" "), _c('td', [(!personrelative.nodata && !personrelative.death) ? _c('div', [_vm._v("\n                                " + _vm._s(personrelative.jobplace) + " " + _vm._s(personrelative.jobposition) + "\n                            ")]) : _vm._e()]), _vm._v(" "), _c('td', [(!personrelative.nodata && !personrelative.death) ? _c('div', [_vm._v("\n                                " + _vm._s(personrelative.livecountry) + " " + _vm._s(personrelative.livestate) + " " + _vm._s(personrelative.livesubstate) + " " + _vm._s(personrelative.livecitytype) + "\n                                " + _vm._s(personrelative.livecity) + " " + _vm._s(personrelative.livestreettype) + " " + _vm._s(personrelative.livestreet) + " " + _vm._s(personrelative.livehouse) + "\n                                "), (personrelative.livehouse != null && personrelative.livehouse.length > 0) ? _c('span', [_vm._v("д. " + _vm._s(personrelative.livehouse))]) : _vm._e(), _vm._v(" "), (personrelative.livehousing != null && personrelative.livehousing.length > 0) ? _c('span', [_vm._v("к. " + _vm._s(personrelative.livehousing))]) : _vm._e(), _vm._v(" "), (personrelative.liveflat != null && personrelative.liveflat.length > 0) ? _c('span', [_vm._v("кв. " + _vm._s(personrelative.liveflat))]) : _vm._e()]) : _vm._e()]), _vm._v(" "), _c('td', [_c('div', [_c('el-button', {
+    return _c('tr', [_c('td', [_c('div', [_vm._v("\n                                " + _vm._s(_vm.getRelativetype(personrelative.relativetype)) + "\n                            ")])]), _vm._v(" "), _c('td', [_c('div', [_vm._v("\n                                " + _vm._s(personrelative.fio) + "\n                            ")]), _vm._v(" "), (personrelative.fioother.length > 1) ? _c('div', [_vm._v("\n                                Прочие фамилии " + _vm._s(personrelative.fioother) + "\n                            ")]) : _vm._e()]), _vm._v(" "), _c('td', [_c('div', [_c('div', [_vm._v("\n                                    " + _vm._s(_vm.printDate(personrelative.birthdayString)) + " " + _vm._s(personrelative.birthcountry) + "\n                                    " + _vm._s(personrelative.birthstate) + " " + _vm._s(personrelative.birthsubstate) + "\n                                    " + _vm._s(personrelative.birthcitytype) + " " + _vm._s(personrelative.birthcity) + "\n                                    " + _vm._s(personrelative.birthadditional) + "\n                                ")]), _vm._v(" "), (personrelative.death) ? _c('div', [_vm._v("\n                                    Умер"), (!personrelative.deathnodata && !personrelative.nodata && personrelative.deathcountry.length > 0) ? _c('span', [_vm._v("\n                                        .\n                                        Место погребения " + _vm._s(personrelative.deathcountry) + "\n                                        " + _vm._s(personrelative.deathstate) + " " + _vm._s(personrelative.deathsubstate) + "\n                                        " + _vm._s(personrelative.deathcitytype) + " " + _vm._s(personrelative.deathcity) + "\n                                        " + _vm._s(personrelative.deathadditional) + "\n                                    ")]) : _vm._e()]) : _vm._e()])]), _vm._v(" "), _c('td', [(!personrelative.nodata && !personrelative.death) ? _c('div', [_vm._v("\n                                " + _vm._s(personrelative.jobplace) + " " + _vm._s(personrelative.jobposition) + "\n                            ")]) : _vm._e()]), _vm._v(" "), _c('td', [(!personrelative.nodata && !personrelative.death) ? _c('div', [_vm._v("\n                                " + _vm._s(personrelative.livecountry) + " " + _vm._s(personrelative.livestate) + " " + _vm._s(personrelative.livesubstate) + " " + _vm._s(personrelative.livecitytype) + "\n                                " + _vm._s(personrelative.livecity) + " " + _vm._s(personrelative.livestreettype) + " " + _vm._s(personrelative.livestreet) + " "), _vm._v(" "), (personrelative.livehouse != null && personrelative.livehouse.length > 0) ? _c('span', [_vm._v("д. " + _vm._s(personrelative.livehouse))]) : _vm._e(), _vm._v(" "), (personrelative.livehousing != null && personrelative.livehousing.length > 0) ? _c('span', [_vm._v("к. " + _vm._s(personrelative.livehousing))]) : _vm._e(), _vm._v(" "), (personrelative.liveflat != null && personrelative.liveflat.length > 0) ? _c('span', [_vm._v("кв. " + _vm._s(personrelative.liveflat))]) : _vm._e()]) : _vm._e()]), _vm._v(" "), _c('td', [_c('div', [_c('el-button', {
       attrs: {
         "size": "mini"
       },
@@ -43803,7 +44443,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         attrs: {
           "colspan": "7"
         }
-      }, [_c('div', [(personeducationpart.academicvacation != null) ? _c('div', [_vm._v("\n                                                Находился (-лась) в академическом отпуске\n                                            ")]) : _vm._e(), _vm._v(" "), (personeducationpart.educationmaternity != null) ? _c('div', [_vm._v("\n                                                Находился (-лась) в отпуске по уходу за детьми (по уходу за ребенком до достижения им возраста трех лет)\n                                            ")]) : _vm._e()])])] : [_c('td', [_c('div', [(personeducation.interrupted > 0) ? _c('span', [_vm._v("\n                                                обучался\n                                            ")]) : _c('span', [(_vm.printDate(personeducation.end).length > 0) ? _c('span', [_vm._v("\n                                                    " + _vm._s(_vm.getEducationlevel(personeducation.educationlevel)) + "\n                                                ")]) : _c('span', [_vm._v("\n                                                    обучается\n                                                ")])])])]), _vm._v(" "), _c('td', [_c('div', [_vm._v("\n                                            " + _vm._s(personeducation.faculty) + "\n                                        ")])]), _vm._v(" "), _c('td', [_c('div', [(personeducationpart.educationtypeblock != null) ? _c('span', [_vm._v("\n                                                " + _vm._s(_vm.getEducationtype(personeducationpart.educationtypeblock.educationtype)) + "\n                                            ")]) : _vm._e()])]), _vm._v(" "), _c('td', [_c('div', [(personeducationpart.educationperiod != null) ? _c('div', [_vm._v("\n                                                " + _vm._s(_vm.getEducationpositiontype(personeducationpart.educationperiod.educationpositiontype)) + "\n                                            ")]) : _vm._e()])]), _vm._v(" "), _c('td', [_c('div', [(personeducationpart.educationperiod != null) ? _c('div', [_vm._v("\n                                                " + _vm._s(personeducationpart.educationperiod.rank) + "\n                                            ")]) : _vm._e()])]), _vm._v(" "), _c('td', [_c('div', [(personeducationpart.educationperiod != null) ? _c('div', [_vm._v("\n                                                " + _vm._s(personeducationpart.educationperiod.course) + "\n                                            ")]) : _vm._e()])]), _vm._v(" "), _c('td', [_c('div', [(personeducationpart.educationperiod != null) ? _c('div', [_vm._v("\n                                                " + _vm._s(personeducationpart.educationperiod.platoon) + "\n                                            ")]) : _vm._e()])])], _vm._v(" "), _c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(_vm.printDate(personeducationpart.start)) + "\n                                    ")])]), _vm._v(" "), _c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(_vm.printDate(personeducationpart.end)) + "\n                                    ")])]), _vm._v(" "), _c('td', [_c('div', [(personeducationpart.educationperiod != null) ? _c('div', [_vm._v("\n                                            " + _vm._s(_vm.printDate(personeducationpart.educationperiod.orderdate)) + "\n                                        ")]) : _vm._e(), _vm._v(" "), (personeducationpart.academicvacation != null) ? _c('div', [_vm._v("\n                                            " + _vm._s(_vm.printDate(personeducationpart.academicvacation.orderdate)) + "\n                                        ")]) : _vm._e(), _vm._v(" "), (personeducationpart.educationmaternity != null) ? _c('div', [_vm._v("\n                                            " + _vm._s(_vm.printDate(personeducationpart.educationmaternity.orderdate)) + "\n                                        ")]) : _vm._e()])]), _vm._v(" "), _c('td', [_c('div', [(personeducationpart.educationperiod != null) ? _c('div', [_vm._v("\n                                            " + _vm._s(personeducationpart.educationperiod.ordernum) + "\n                                        ")]) : _vm._e(), _vm._v(" "), (personeducationpart.academicvacation != null) ? _c('div', [_vm._v("\n                                            " + _vm._s(personeducationpart.academicvacation.ordernumber) + "\n                                        ")]) : _vm._e(), _vm._v(" "), (personeducationpart.educationmaternity != null) ? _c('div', [_vm._v("\n                                            " + _vm._s(personeducationpart.educationmaternity.ordernumber) + "\n                                        ")]) : _vm._e()])]), _vm._v(" "), _c('td', [(personeducation.interrupted == 0 && personeducationpart.academicvacation == null && personeducationpart.educationmaternity == null &&
+      }, [_c('div', [(personeducationpart.academicvacation != null) ? _c('div', [_vm._v("\n                                                Находился (-лась) в академическом отпуске\n                                            ")]) : _vm._e(), _vm._v(" "), (personeducationpart.educationmaternity != null) ? _c('div', [_vm._v("\n                                                Находился (-лась) в отпуске по уходу за детьми (по уходу за ребенком до достижения им возраста трех лет)\n                                            ")]) : _vm._e()])])] : [_c('td', [_c('div', [(personeducation.interrupted > 0 || personeducationpart.end != null) ? _c('span', [_vm._v("\n                                                обучался \n                                            ")]) : _c('span', [(_vm.printDate(personeducation.end).length > 0) ? _c('span', [_vm._v("\n                                                    " + _vm._s(_vm.getEducationlevel(personeducation.educationlevel)) + "\n                                                ")]) : _c('span', [_vm._v("\n                                                    обучается\n                                                ")])])])]), _vm._v(" "), _c('td', [_c('div', [_vm._v("\n                                            " + _vm._s(personeducation.faculty) + "\n                                        ")])]), _vm._v(" "), _c('td', [_c('div', [(personeducationpart.educationtypeblock != null) ? _c('span', [_vm._v("\n                                                " + _vm._s(_vm.getEducationtype(personeducationpart.educationtypeblock.educationtype)) + "\n                                            ")]) : _vm._e()])]), _vm._v(" "), _c('td', [_c('div', [(personeducationpart.educationperiod != null) ? _c('div', [_vm._v("\n                                                " + _vm._s(_vm.getEducationpositiontype(personeducationpart.educationperiod.educationpositiontype)) + "\n                                            ")]) : _vm._e()])]), _vm._v(" "), _c('td', [_c('div', [(personeducationpart.educationperiod != null) ? _c('div', [_vm._v("\n                                                " + _vm._s(personeducationpart.educationperiod.rank) + "\n                                            ")]) : _vm._e()])]), _vm._v(" "), _c('td', [_c('div', [(personeducationpart.educationperiod != null) ? _c('div', [_vm._v("\n                                                " + _vm._s(_vm.getCourse(personeducationpart.educationperiod.course)) + "\n                                            ")]) : _vm._e()])]), _vm._v(" "), _c('td', [_c('div', [(personeducationpart.educationperiod != null) ? _c('div', [_vm._v("\n                                                " + _vm._s(personeducationpart.educationperiod.course) + "\n                                            ")]) : _vm._e()])]), _vm._v(" "), _c('td', [_c('div', [(personeducationpart.educationperiod != null) ? _c('div', [_vm._v("\n                                                " + _vm._s(personeducationpart.educationperiod.platoon) + "\n                                            ")]) : _vm._e()])])], _vm._v(" "), _c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(_vm.printDate(personeducationpart.start)) + "\n                                    ")])]), _vm._v(" "), _c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(_vm.printDate(personeducationpart.end)) + "\n                                    ")])]), _vm._v(" "), _c('td', [_c('div', [(personeducationpart.educationperiod != null) ? _c('div', [_vm._v("\n                                            " + _vm._s(_vm.printDate(personeducationpart.educationperiod.orderdate)) + "\n                                        ")]) : _vm._e(), _vm._v(" "), (personeducationpart.academicvacation != null) ? _c('div', [_vm._v("\n                                            " + _vm._s(_vm.printDate(personeducationpart.academicvacation.orderdate)) + "\n                                        ")]) : _vm._e(), _vm._v(" "), (personeducationpart.educationmaternity != null) ? _c('div', [_vm._v("\n                                            " + _vm._s(_vm.printDate(personeducationpart.educationmaternity.orderdate)) + "\n                                        ")]) : _vm._e()])]), _vm._v(" "), _c('td', [_c('div', [(personeducationpart.educationperiod != null) ? _c('div', [_vm._v("\n                                            " + _vm._s(personeducationpart.educationperiod.ordernum) + "\n                                        ")]) : _vm._e(), _vm._v(" "), (personeducationpart.academicvacation != null) ? _c('div', [_vm._v("\n                                            " + _vm._s(personeducationpart.academicvacation.ordernumber) + "\n                                        ")]) : _vm._e(), _vm._v(" "), (personeducationpart.educationmaternity != null) ? _c('div', [_vm._v("\n                                            " + _vm._s(personeducationpart.educationmaternity.ordernumber) + "\n                                        ")]) : _vm._e()])]), _vm._v(" "), _c('td', [(personeducation.interrupted == 0 && personeducationpart.academicvacation == null && personeducationpart.educationmaternity == null &&
         personeducation.personeducationparts.length == index + 1) ? _c('div', [_c('div', [_vm._v("\n                                            " + _vm._s(personeducation.speciality) + "\n                                        ")]), _vm._v(" "), _c('div', [_vm._v("\n                                            " + _vm._s(personeducation.qualification) + "\n                                        ")]), _vm._v(" "), _c('div', [_vm._v("\n                                            " + _vm._s(_vm.getEducationdocument(personeducation.educationdocument)) + "  " + _vm._s(personeducation.documentseries) + _vm._s(personeducation.documentnumber) + "\n                                        ")])]) : _vm._e()]), _vm._v(" "), _c('td', [_c('div', [_c('el-button', {
         attrs: {
           "size": "mini"
@@ -45603,6 +46243,16 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         staticClass: "eld-eld-body-row-tiny"
       }, [_c('br'), _vm._v("\n                                                Курс\n                                                "), _c('el-input', {
         attrs: {
+          "value": _vm.getCourse(educationperiod.course),
+          "type": "number"
+        },
+        on: {
+          "input": educationperiod.semestr
+        }
+      })], 1), _vm._v(" "), _c('div', {
+        staticClass: "eld-eld-body-row-tiny"
+      }, [_c('br'), _vm._v("\n                                                Семестр\n                                                "), _c('el-input', {
+        attrs: {
           "type": "number"
         },
         model: {
@@ -46756,7 +47406,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_vm._v("Периоды в выслугу лет")]), _vm._v(" "), _c('hr')], 1), _vm._v(" "), (_vm.personjobMenu == 1) ? _c('div', [_c('div', {
     staticClass: "eld-eld-body-subtitle"
-  }, [_vm._v("\n                        Трудовая деятельность\n                    ")]), _vm._v(" "), (_vm.person.military) ? _c('div', [_vm._v("\n                        Выслуга – " + _vm._s(_vm.getExperienceFull(_vm.person.experienceYears, _vm.person.experienceMonths, _vm.person.experienceDays)) + "\n                    ")]) : _vm._e(), _vm._v(" "), _c('table', {
+  }, [_vm._v("\n                        Трудовая деятельность\n                    ")]), _vm._v(" "), (_vm.person.military) ? _c('div', [_vm._v("\n                        Выслуга – " + _vm._s(_vm.getSeniorityMARK(_vm.person.pension_A_with, _vm.person.pension_B_with)) + "\n                    ")]) : _vm._e(), _vm._v(" "), _c('table', {
     staticClass: "eld-eld-table"
   }, [_vm._m(15), _vm._v(" "), _vm._m(16), _vm._v(" "), _vm._l((_vm.person.personjobs), function(personjob) {
     return _c('tr', [_c('td', [_c('div', [_vm._v("\n                                    " + _vm._s(_vm.printDate(personjob.startString)) + "\n                                ")])]), _vm._v(" "), _c('td', [(personjob.actual != null && personjob.actual) ? _c('div', [_vm._v("\n                                    По настоящее время\n                                ")]) : _c('div', [_vm._v("\n                                    " + _vm._s(_vm.printDate(personjob.endString)) + "\n                                ")])]), _vm._v(" "), _c('td', [_c('div', [_vm._v("\n                                    " + _vm._s(_vm.printPersonjobJobtype(personjob)) + "\n                                ")])]), _vm._v(" "), _c('td', [_c('div', [_c('div', [_vm._v("\n                                        " + _vm._s(_vm.printPersonjobPositionplace(personjob)) + "\n                                    ")])])]), _vm._v(" "), _c('td', [_c('div', [_c('div', [_c('div', [(personjob.orderwho != null && personjob.orderwho.length > 0) ? _c('span', [_vm._v(_vm._s(personjob.orderwho))]) : _vm._e(), _vm._v(" "), (personjob.ordernumber != null && personjob.ordernumber.length > 0) ? _c('span', [_vm._v("№ " + _vm._s(personjob.ordernumber) + " " + _vm._s(personjob.ordernumbertype))]) : _vm._e(), _vm._v(" "), (_vm.printDate(personjob.orderdate).length > 0) ? _c('span', [_vm._v(" от " + _vm._s(_vm.printDate(personjob.orderdate)))]) : _vm._e()]), _vm._v(" "), _c('br'), _vm._v(" "), (personjob.fireordernumber != null && personjob.fireordernumber.length > 0) ? _c('div', [_c('i', [_vm._v("Приказ об увольнении:")])]) : _vm._e(), _vm._v(" "), _c('div', [(personjob.fireorderwho != null && personjob.fireorderwho.length > 0) ? _c('span', [_vm._v(_vm._s(personjob.fireorderwho))]) : _vm._e(), _vm._v(" "), (personjob.fireordernumber != null && personjob.fireordernumber.length > 0) ? _c('span', [_vm._v("№ " + _vm._s(personjob.fireordernumber) + " " + _vm._s(personjob.fireordernumbertype))]) : _vm._e(), _vm._v(" "), (_vm.printDate(personjob.fireorderdate).length > 0) ? _c('span', [_vm._v(" от " + _vm._s(_vm.printDate(personjob.fireorderdate)))]) : _vm._e()])])])]), _vm._v(" "), _c('td', [(personjob.id != null && personjob.id > 0) ? _c('div', [_c('div', [_c('el-button', {
@@ -47735,33 +48385,49 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('table', {
     staticClass: "eld-eld-table"
   }, [_vm._m(24), _vm._v(" "), _vm._m(25), _vm._v(" "), _vm._m(26), _vm._v(" "), _vm._l((_vm.person.pensions), function(pension) {
-    return (pension.education && pension.educationMilitary && pension.educationConsider) ? _c('tr', [_c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(pension.positionplace) + "\n                                    ")])]), _vm._v(" "), _c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(pension.orderstring) + "\n                                    ")])]), _vm._v(" "), _c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(_vm.printDate(pension.start)) + " – " + _vm._s(_vm.printDate(pension.end)) + "\n                                    ")])]), _vm._v(" "), _c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(_vm.getExperienceFullPension(pension.yearsbeforecoef, pension.monthsbeforecoef, pension.daysbeforecoef)) + "\n                                    ")])]), _vm._v(" "), _c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(pension.coef) + "\n                                    ")])]), _vm._v(" "), _c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(_vm.getExperienceFullPension(pension.yearsaftercoef, pension.monthsaftercoef, pension.daysaftercoef)) + "\n                                    ")])])]) : _vm._e()
+    return (pension.education && pension.educationMilitary && pension.educationConsider) ? _c('tr', [_c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(pension.positionplace) + "\n                                    ")])]), _vm._v(" "), _c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(pension.orderstring) + "\n                                    ")])]), _vm._v(" "), _c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(_vm.printDate(pension.start)) + " – " + _vm._s(_vm.printDate(pension.end)) + "\n                                    ")])]), _vm._v(" "), _c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(_vm.calendar_diff(pension.start, pension.end)) + "\n                                    ")])]), _vm._v(" "), _c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(pension.coef) + "\n                                    ")])]), _vm._v(" "), _c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(_vm.getExperienceFullPension(pension.yearsaftercoef, pension.monthsaftercoef, pension.daysaftercoef)) + "\n                                    ")])])]) : _vm._e()
   }), _vm._v(" "), _vm._m(27), _vm._v(" "), _vm._m(28), _vm._v(" "), _vm._l((_vm.person.pensions), function(pension) {
-    return (pension.job && pension.jobMilitary) ? _c('tr', [_c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(pension.positionplace) + "\n                                    ")])]), _vm._v(" "), _c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(pension.orderstring) + "\n                                    ")])]), _vm._v(" "), _c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(_vm.printDate(pension.start)) + " – " + _vm._s(_vm.printDate(pension.end)) + "\n                                    ")])]), _vm._v(" "), _c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(_vm.getExperienceFullPension(pension.yearsbeforecoef, pension.monthsbeforecoef, pension.daysbeforecoef)) + "\n                                    ")])]), _vm._v(" "), _c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(pension.coef) + "\n                                    ")])]), _vm._v(" "), _c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(_vm.getExperienceFullPension(pension.yearsaftercoef, pension.monthsaftercoef, pension.daysaftercoef)) + "\n                                    ")])])]) : _vm._e()
+    return (pension.job && pension.jobMilitary) ? _c('tr', [_c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(pension.positionplace) + "\n                                    ")])]), _vm._v(" "), _c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(pension.orderstring) + "\n                                    ")])]), _vm._v(" "), _c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(_vm.printDate(pension.start)) + " – " + _vm._s(_vm.printDate(pension.end)) + "\n                                    ")])]), _vm._v(" "), _c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(_vm.calendar_diff(pension.start, pension.end)) + "\n                                    ")])]), _vm._v(" "), _c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(pension.coef) + "\n                                    ")])]), _vm._v(" "), _c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(_vm.getExperienceFullPension(pension.yearsaftercoef, pension.monthsaftercoef, pension.daysaftercoef)) + "\n                                    ")])])]) : _vm._e()
   }), _vm._v(" "), _vm._m(29), _vm._v(" "), _vm._m(30), _vm._v(" "), _vm._l((_vm.person.pensions), function(pension) {
-    return (pension.education && !pension.educationMilitary && pension.educationConsider) ? _c('tr', [_c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(pension.positionplace) + "\n                                    ")])]), _vm._v(" "), _c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(pension.orderstring) + "\n                                    ")])]), _vm._v(" "), _c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(_vm.printDate(pension.start)) + " – " + _vm._s(_vm.printDate(pension.end)) + "\n                                    ")])]), _vm._v(" "), _c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(_vm.getExperienceFullPension(pension.yearsbeforecoef, pension.monthsbeforecoef, pension.daysbeforecoef)) + "\n                                    ")])]), _vm._v(" "), _c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(pension.coef) + "\n                                    ")])]), _vm._v(" "), _c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(_vm.getExperienceFullPension(pension.yearsaftercoef, pension.monthsaftercoef, pension.daysaftercoef)) + "\n                                    ")])])]) : _vm._e()
+    return (pension.education && !pension.educationMilitary && pension.educationConsider) ? _c('tr', [_c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(pension.positionplace) + "\n                                    ")])]), _vm._v(" "), _c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(pension.orderstring) + "\n                                    ")])]), _vm._v(" "), _c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(_vm.printDate(pension.start)) + " – " + _vm._s(_vm.printDate(pension.end)) + "\n                                    ")])]), _vm._v(" "), _c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(_vm.calendar_diff(pension.start, pension.end)) + "\n                                    ")])]), _vm._v(" "), _c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(pension.coef) + "\n                                    ")])]), _vm._v(" "), _c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(_vm.getExperienceFullPension(pension.yearsaftercoef, pension.monthsaftercoef, pension.daysaftercoef)) + "\n                                    ")])])]) : _vm._e()
   }), _vm._v(" "), _c('tr', [_c('td', {
     attrs: {
       "colspan": "6"
     }
-  }, [_vm._v("\n                                    Итого: " + _vm._s(_vm.pension_A) + "\n                                ")])]), _vm._v(" "), _vm._m(31), _vm._v(" "), _vm._l((_vm.person.pensions), function(pension) {
-    return (pension.education && !pension.educationConsider) ? _c('tr', [_c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(pension.positionplace) + "\n                                    ")])]), _vm._v(" "), _c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(pension.orderstring) + "\n                                    ")])]), _vm._v(" "), _c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(_vm.printDate(pension.start)) + " – " + _vm._s(_vm.printDate(pension.end)) + "\n                                    ")])]), _vm._v(" "), _c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(_vm.getExperienceFullPension(pension.yearsbeforecoef, pension.monthsbeforecoef, pension.daysbeforecoef)) + "\n                                    ")])]), _vm._v(" "), _c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(pension.coef) + "\n                                    ")])]), _vm._v(" "), _c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(_vm.getExperienceFullPension(pension.yearsaftercoef, pension.monthsaftercoef, pension.daysaftercoef)) + "\n                                    ")])])]) : _vm._e()
+  }, [_vm._v("\n                                    Сумма: " + _vm._s(_vm.getDataToString(_vm.person.pension_A_with)) + "\n                                ")])]), _vm._v(" "), _c('tr', [_c('td', {
+    attrs: {
+      "colspan": "6"
+    }
+  }, [_vm._v("\n                                    Дополнительных дней: " + _vm._s(_vm.person.appending_days) + "\n                                ")])]), _vm._v(" "), _c('tr', [_c('td', {
+    attrs: {
+      "colspan": "6"
+    }
+  }, [_vm._v("\n                                    Итого: " + _vm._s(_vm.getDataToString(_vm.person.pension_A)) + "\n                                ")])]), _vm._v(" "), _vm._m(31), _vm._v(" "), _vm._l((_vm.person.pensions), function(pension) {
+    return (pension.education && !pension.educationConsider) ? _c('tr', [_c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(pension.positionplace) + "\n                                    ")])]), _vm._v(" "), _c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(pension.orderstring) + "\n                                    ")])]), _vm._v(" "), _c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(_vm.printDate(pension.start)) + " – " + _vm._s(_vm.printDate(pension.end)) + "\n                                    ")])]), _vm._v(" "), _c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(_vm.calendar_diff(pension.start, pension.end)) + "\n                                    ")])]), _vm._v(" "), _c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(pension.coef) + "\n                                    ")])]), _vm._v(" "), _c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(_vm.getExperienceFullPension(pension.yearsaftercoef, pension.monthsaftercoef, pension.daysaftercoef)) + "\n                                    ")])])]) : _vm._e()
   })], 2), _vm._v(" "), _c('table', {
     staticClass: "eld-eld-table"
   }, [_vm._m(32), _vm._v(" "), _vm._m(33), _vm._v(" "), _vm._m(34), _vm._v(" "), _vm._l((_vm.person.pensions), function(pension) {
-    return (pension.education && pension.educationMilitary && pension.educationConsider) ? _c('tr', [_c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(pension.positionplace) + "\n                                    ")])]), _vm._v(" "), _c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(pension.orderstring) + "\n                                    ")])]), _vm._v(" "), _c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(_vm.printDate(pension.start)) + " – " + _vm._s(_vm.printDate(pension.end)) + "\n                                    ")])]), _vm._v(" "), _c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(_vm.getExperienceFullPension(pension.yearsbeforecoef, pension.monthsbeforecoef, pension.daysbeforecoef)) + "\n                                    ")])]), _vm._v(" "), _c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(pension.coef) + "\n                                    ")])]), _vm._v(" "), _c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(_vm.getExperienceFullPension(pension.yearsaftercoef, pension.monthsaftercoef, pension.daysaftercoef)) + "\n                                    ")])])]) : _vm._e()
+    return (pension.education && pension.educationMilitary && pension.educationConsider) ? _c('tr', [_c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(pension.positionplace) + "\n                                    ")])]), _vm._v(" "), _c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(pension.orderstring) + "\n                                    ")])]), _vm._v(" "), _c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(_vm.printDate(pension.start)) + " – " + _vm._s(_vm.printDate(pension.end)) + "\n                                    ")])]), _vm._v(" "), _c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(_vm.calendar_diff(pension.start, pension.end)) + "\n                                    ")])]), _vm._v(" "), _c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(pension.coef) + "\n                                    ")])]), _vm._v(" "), _c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(_vm.getExperienceFullPension(pension.yearsaftercoef, pension.monthsaftercoef, pension.daysaftercoef)) + "\n                                    ")])])]) : _vm._e()
   }), _vm._v(" "), _vm._m(35), _vm._v(" "), _vm._l((_vm.person.pensions), function(pension) {
-    return (pension.education && !pension.educationMilitary && pension.educationConsider) ? _c('tr', [_c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(pension.positionplace) + "\n                                    ")])]), _vm._v(" "), _c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(pension.orderstring) + "\n                                    ")])]), _vm._v(" "), _c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(_vm.printDate(pension.start)) + " – " + _vm._s(_vm.printDate(pension.end)) + "\n                                    ")])]), _vm._v(" "), _c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(_vm.getExperienceFullPension(pension.yearsbeforecoef, pension.monthsbeforecoef, pension.daysbeforecoef)) + "\n                                    ")])]), _vm._v(" "), _c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(pension.coef) + "\n                                    ")])]), _vm._v(" "), _c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(_vm.getExperienceFullPension(pension.yearsaftercoef, pension.monthsaftercoef, pension.daysaftercoef)) + "\n                                    ")])])]) : _vm._e()
+    return (pension.education && !pension.educationMilitary && pension.educationConsider) ? _c('tr', [_c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(pension.positionplace) + "\n                                    ")])]), _vm._v(" "), _c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(pension.orderstring) + "\n                                    ")])]), _vm._v(" "), _c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(_vm.printDate(pension.start)) + " – " + _vm._s(_vm.printDate(pension.end)) + "\n                                    ")])]), _vm._v(" "), _c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(_vm.calendar_diff(pension.start, pension.end)) + "\n                                    ")])]), _vm._v(" "), _c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(pension.coef) + "\n                                    ")])]), _vm._v(" "), _c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(_vm.getExperienceFullPension(pension.yearsaftercoef, pension.monthsaftercoef, pension.daysaftercoef)) + "\n                                    ")])])]) : _vm._e()
   }), _vm._v(" "), _vm._m(36), _vm._v(" "), _vm._m(37), _vm._v(" "), _vm._l((_vm.person.pensions), function(pension) {
-    return (pension.job && pension.jobMilitary) ? _c('tr', [_c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(pension.positionplace) + "\n                                    ")])]), _vm._v(" "), _c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(pension.orderstring) + "\n                                    ")])]), _vm._v(" "), _c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(_vm.printDate(pension.start)) + " – " + _vm._s(_vm.printDate(pension.end)) + "\n                                    ")])]), _vm._v(" "), _c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(_vm.getExperienceFullPension(pension.yearsbeforecoef, pension.monthsbeforecoef, pension.daysbeforecoef)) + "\n                                    ")])]), _vm._v(" "), _c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(pension.coef) + "\n                                    ")])]), _vm._v(" "), _c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(_vm.getExperienceFullPension(pension.yearsaftercoef, pension.monthsaftercoef, pension.daysaftercoef)) + "\n                                    ")])])]) : _vm._e()
+    return (pension.job && pension.jobMilitary) ? _c('tr', [_c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(pension.positionplace) + "\n                                    ")])]), _vm._v(" "), _c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(pension.orderstring) + "\n                                    ")])]), _vm._v(" "), _c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(_vm.printDate(pension.start)) + " – " + _vm._s(_vm.printDate(pension.end)) + "\n                                    ")])]), _vm._v(" "), _c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(_vm.calendar_diff(pension.start, pension.end)) + "\n                                    ")])]), _vm._v(" "), _c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(pension.coef) + "\n                                    ")])]), _vm._v(" "), _c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(_vm.getExperienceFullPension(pension.yearsaftercoef, pension.monthsaftercoef, pension.daysaftercoef)) + "\n                                    ")])])]) : _vm._e()
   }), _vm._v(" "), _vm._m(38), _vm._v(" "), _vm._l((_vm.person.pensions), function(pension) {
-    return (pension.job && !pension.jobMilitary) ? _c('tr', [_c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(pension.positionplace) + "\n                                    ")])]), _vm._v(" "), _c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(pension.orderstring) + "\n                                    ")])]), _vm._v(" "), _c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(_vm.printDate(pension.start)) + " – " + _vm._s(_vm.printDate(pension.end)) + "\n                                    ")])]), _vm._v(" "), _c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(_vm.getExperienceFullPension(pension.yearsbeforecoef, pension.monthsbeforecoef, pension.daysbeforecoef)) + "\n                                    ")])]), _vm._v(" "), _c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(pension.coef) + "\n                                    ")])]), _vm._v(" "), _c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(_vm.getExperienceFullPension(pension.yearsaftercoef, pension.monthsaftercoef, pension.daysaftercoef)) + "\n                                    ")])])]) : _vm._e()
+    return (pension.job && !pension.jobMilitary) ? _c('tr', [_c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(pension.positionplace) + "\n                                    ")])]), _vm._v(" "), _c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(pension.orderstring) + "\n                                    ")])]), _vm._v(" "), _c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(_vm.printDate(pension.start)) + " – " + _vm._s(_vm.printDate(pension.end)) + "\n                                    ")])]), _vm._v(" "), _c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(_vm.calendar_diff(pension.start, pension.end)) + "\n                                    ")])]), _vm._v(" "), _c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(pension.coef) + "\n                                    ")])]), _vm._v(" "), _c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(_vm.getExperienceFullPension(pension.yearsaftercoef, pension.monthsaftercoef, pension.daysaftercoef)) + "\n                                    ")])])]) : _vm._e()
   }), _vm._v(" "), _c('tr', [_c('td', {
     attrs: {
       "colspan": "6"
     }
-  }, [_vm._v("\n                                    Итого: " + _vm._s(_vm.pension_B) + "\n                                ")])]), _vm._v(" "), _vm._m(39), _vm._v(" "), _vm._l((_vm.person.pensions), function(pension) {
-    return (pension.education && !pension.educationConsider) ? _c('tr', [_c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(pension.positionplace) + "\n                                    ")])]), _vm._v(" "), _c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(pension.orderstring) + "\n                                    ")])]), _vm._v(" "), _c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(_vm.printDate(pension.start)) + " – " + _vm._s(_vm.printDate(pension.end)) + "\n                                    ")])]), _vm._v(" "), _c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(_vm.getExperienceFullPension(pension.yearsbeforecoef, pension.monthsbeforecoef, pension.daysbeforecoef)) + "\n                                    ")])]), _vm._v(" "), _c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(pension.coef) + "\n                                    ")])]), _vm._v(" "), _c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(_vm.getExperienceFullPension(pension.yearsaftercoef, pension.monthsaftercoef, pension.daysaftercoef)) + "\n                                    ")])])]) : _vm._e()
+  }, [_vm._v("\n                                    Сумма: " + _vm._s(_vm.getDataToString(_vm.person.pension_B_with)) + "\n                                ")])]), _vm._v(" "), _c('tr', [_c('td', {
+    attrs: {
+      "colspan": "6"
+    }
+  }, [_vm._v("\n                                    Дополнительных дней: " + _vm._s(_vm.person.appending_days) + "\n                                ")])]), _vm._v(" "), _c('tr', [_c('td', {
+    attrs: {
+      "colspan": "6"
+    }
+  }, [_vm._v("\n                                    Итого: " + _vm._s(_vm.getDataToString(_vm.person.pension_B)) + "\n                                ")])]), _vm._v(" "), _vm._m(39), _vm._v(" "), _vm._l((_vm.person.pensions), function(pension) {
+    return (pension.education && !pension.educationConsider) ? _c('tr', [_c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(pension.positionplace) + "\n                                    ")])]), _vm._v(" "), _c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(pension.orderstring) + "\n                                    ")])]), _vm._v(" "), _c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(_vm.printDate(pension.start)) + " – " + _vm._s(_vm.printDate(pension.end)) + "\n                                    ")])]), _vm._v(" "), _c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(_vm.calendar_diff(pension.start, pension.end)) + "\n                                    ")])]), _vm._v(" "), _c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(pension.coef) + "\n                                    ")])]), _vm._v(" "), _c('td', [_c('div', [_vm._v("\n                                        " + _vm._s(_vm.getExperienceFullPension(pension.yearsaftercoef, pension.monthsaftercoef, pension.daysaftercoef)) + "\n                                    ")])])]) : _vm._e()
   })], 2)])]) : _vm._e()]) : _vm._e(), _vm._v(" "), (_vm.menuid == 9) ? _c('div', [_c('div', {
     staticClass: "eld-eld-title"
   }, [_vm._v("\n                    Контракты\n                ")]), _vm._v(" "), _c('div', [_c('el-button', {
@@ -50679,7 +51345,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('thead', [_c('tr', [_c('td', [_vm._v("Вид")]), _vm._v(" "), _c('td', [_vm._v("Наименование учебного заведения")]), _vm._v(" "), _c('td', [_vm._v("Местонахождение учебного заведения")]), _vm._v(" "), _c('td', [_vm._v("Факультет")]), _vm._v(" "), _c('td', [_vm._v("Форма обучения")]), _vm._v(" "), _c('td', [_vm._v("Дата поступления")]), _vm._v(" "), _c('td', [_vm._v("Дата окончания (отчисления)")]), _vm._v(" "), _c('td', [_vm._v("Специальность и номер диплома, аттестата, свидетельства или удостоверения")]), _vm._v(" "), _c('td', [_vm._v("Действия")])])])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('thead', [_c('tr', [_c('td', [_vm._v("Наименование учебного заведения")]), _vm._v(" "), _c('td', [_vm._v("Уровень образования")]), _vm._v(" "), _c('td', [_vm._v("Факультет")]), _vm._v(" "), _c('td', [_vm._v("Форма обучения")]), _vm._v(" "), _c('td', [_vm._v("Должность")]), _vm._v(" "), _c('td', [_vm._v("Специальное звание")]), _vm._v(" "), _c('td', [_vm._v("Курс")]), _vm._v(" "), _c('td', [_vm._v("Взвод")]), _vm._v(" "), _c('td', [_vm._v("Дата поступления")]), _vm._v(" "), _c('td', [_vm._v("Дата окончания (отчисления)")]), _vm._v(" "), _c('td', [_vm._v("Дата приказа")]), _vm._v(" "), _c('td', [_vm._v("Номер приказа")]), _vm._v(" "), _c('td', [_vm._v("Специальность, квалификация и номер диплома, аттестата или удостоверения")]), _vm._v(" "), _c('td', [_vm._v("Действия ")])])])
+  return _c('thead', [_c('tr', [_c('td', [_vm._v("Наименование учебного заведения")]), _vm._v(" "), _c('td', [_vm._v("Уровень образования")]), _vm._v(" "), _c('td', [_vm._v("Факультет")]), _vm._v(" "), _c('td', [_vm._v("Форма обучения")]), _vm._v(" "), _c('td', [_vm._v("Должность")]), _vm._v(" "), _c('td', [_vm._v("Специальное звание")]), _vm._v(" "), _c('td', [_vm._v("Курс")]), _vm._v(" "), _c('td', [_vm._v("Семестр")]), _vm._v(" "), _c('td', [_vm._v("Взвод")]), _vm._v(" "), _c('td', [_vm._v("Дата поступления")]), _vm._v(" "), _c('td', [_vm._v("Дата окончания (отчисления)")]), _vm._v(" "), _c('td', [_vm._v("Дата приказа")]), _vm._v(" "), _c('td', [_vm._v("Номер приказа")]), _vm._v(" "), _c('td', [_vm._v("Специальность, квалификация и номер диплома, аттестата или удостоверения")]), _vm._v(" "), _c('td', [_vm._v("Действия ")])])])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('thead', [_c('tr', [_c('td', [_vm._v("Причина")]), _vm._v(" "), _c('td', [_vm._v("Код заболевания")]), _vm._v(" "), _c('td', [_vm._v("Дата начала")]), _vm._v(" "), _c('td', [_vm._v("Дата окончания")]), _vm._v(" "), _c('td', [_vm._v("Режим лечения")]), _vm._v(" "), _c('td', [_vm._v("Действия")])])])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -50793,7 +51459,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "colspan": "6"
     }
-  }, [_vm._v("\n                                        по пункту А ст.14 Закона \"О пенсионном обеспечении военнослужащих (имеющие выслугу на службе 20 лет и более, в том числе в льготном исчислении)\n                                    ")])]), _vm._v(" "), _c('tr', [_c('td', {
+  }, [_vm._v("\n                                        по пункту А ст.14 Закона \"О пенсионном обеспечении военнослужащих (имеющие выслугу на службе 20 лет и более, в том числе в льготном исчислении)\n                                        ")])]), _vm._v(" "), _c('tr', [_c('td', {
     attrs: {
       "rowspan": "2"
     }

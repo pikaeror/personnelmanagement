@@ -7,6 +7,7 @@ import Positiontype from './positiontype';
 import Persondecreeblockintro from './persondecreeblockintro';
 import Persondecreeblocksub from './persondecreeblocksub';
 import Countrycities from './countrycities';
+import Cabinetdata from './cabinetdata';
 
 export default class Persondecreeblock {
     id: number;
@@ -67,6 +68,11 @@ export default class Persondecreeblock {
     optionarraypersonObjects: Person[]; // массив person, заключенных в optionarrayperson 
     checkboxdismiss: boolean = false;
     checkboxdirect: boolean = false;
+    
+    checkbox1: boolean;
+    checkbox2: boolean;
+    checkbox3: boolean;
+    checkbox4: boolean;
 
     index: number; // Номер блока.
     persondecreeblocksubtype: number;
@@ -78,10 +84,14 @@ export default class Persondecreeblock {
     samplePosition: Position;
     samplePositiontype: Positiontype;
     fiosearch: string = ""; // Для поиска
+    fiocandidatesearch: string = "";
     person: Person; // Для поиска
+    candidate: Cabinetdata;
     personssearch: Person[] = []; // Для поиска
+    candidatessearch: Cabinetdata[] = [];
     photosPreview: Personphoto[] = []; // Для поиска
     searchiteration: number = 0; // Для поиска
+    searchiterationCandidate: number = 0;
     personssearchadditional: boolean = true; // Для командирования. 
     countrycitiesList: Countrycities[] = new Array();
 

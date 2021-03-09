@@ -8,6 +8,7 @@ import Structure from './structure';
 import Fire from './fire';
 import Countrycities from './countrycities';
 import Personjob from './personjob';
+import Cabinetdata from './cabinetdata';
 
 export default class Persondecreeoperation {
     id: number;
@@ -80,6 +81,7 @@ export default class Persondecreeoperation {
     optionarraypersonArray: number[]; // массив айдишников person
     optionarraypersonObjects: Person[]; // массив person, заключенных в optionarrayperson 
     personFromStructure: Person[];
+    candidateSearch: Cabinetdata[];
     checkboxdismiss: boolean;
     checkboxdirect: boolean;
     

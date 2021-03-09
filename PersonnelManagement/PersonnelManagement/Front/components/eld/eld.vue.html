@@ -732,7 +732,7 @@
                             <td>
                                 <div v-if="!personrelative.nodata && !personrelative.death">
                                     {{personrelative.livecountry}} {{personrelative.livestate}} {{personrelative.livesubstate}} {{personrelative.livecitytype}}
-                                    {{personrelative.livecity}} {{personrelative.livestreettype}} {{personrelative.livestreet}} {{personrelative.livehouse}}
+                                    {{personrelative.livecity}} {{personrelative.livestreettype}} {{personrelative.livestreet}} <!--{{personrelative.livehouse}}-->
                                     <span v-if="personrelative.livehouse != null && personrelative.livehouse.length > 0">д. {{personrelative.livehouse}}</span>
                                     <span v-if="personrelative.livehousing != null && personrelative.livehousing.length > 0">к. {{personrelative.livehousing}}</span>
                                     <span v-if="personrelative.liveflat != null && personrelative.liveflat.length > 0">кв. {{personrelative.liveflat}}</span>
@@ -1254,6 +1254,7 @@
                                     <td>Должность</td>
                                     <td>Специальное звание</td>
                                     <td>Курс</td>
+                                    <td>Семестр</td>
                                     <td>Взвод</td>
                                     <td>Дата поступления</td>
                                     <td>Дата окончания (отчисления)</td>
@@ -1285,8 +1286,8 @@
                                     <template v-else>
                                         <td>
                                             <div>
-                                                <span v-if="personeducation.interrupted > 0">
-                                                    обучался
+                                                <span v-if="personeducation.interrupted > 0 || personeducationpart.end != null">
+                                                    обучался 
                                                 </span>
                                                 <span v-else>
                                                     <span v-if="printDate(personeducation.end).length > 0">
@@ -1322,6 +1323,13 @@
                                             <div>
                                                 <div v-if="personeducationpart.educationperiod != null">
                                                     {{personeducationpart.educationperiod.rank}}
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div>
+                                                <div v-if="personeducationpart.educationperiod != null">
+                                                    {{getCourse(personeducationpart.educationperiod.course)}}
                                                 </div>
                                             </div>
                                         </td>
@@ -2045,6 +2053,11 @@
                                                 <div class="eld-eld-body-row-tiny">
                                                     <br />
                                                     Курс
+                                                    <el-input :value="getCourse(educationperiod.course)" @input="educationperiod.semestr" type="number"></el-input>
+                                                </div>
+                                                <div class="eld-eld-body-row-tiny">
+                                                    <br />
+                                                    Семестр
                                                     <el-input v-model="educationperiod.course" type="number"></el-input>
                                                 </div>
                                                 <div>
@@ -2586,7 +2599,8 @@
                         </div>
                         <div v-if="person.military">
                             <!--Выслуга — {{person.experience.toFixed(2)}} лет-->
-                            Выслуга – {{getExperienceFull(person.experienceYears, person.experienceMonths, person.experienceDays)}}
+                            <!--Выслуга – {{getExperienceFull(person.experienceYears, person.experienceMonths, person.experienceDays)}}-->
+                            Выслуга – {{getSeniorityMARK(person.pension_A_with, person.pension_B_with)}}
                         </div>
                         <table class="eld-eld-table">
                             <colgroup>
@@ -2671,10 +2685,7 @@
                                             <el-button size="mini" @click="updatePersonjobButton(person, personjob)">Редактировать</el-button>
                                         </div>
                                         <div>
-
-
                                             <el-button size="mini" @click="deletePersonjob(person, personjob)">Удалить</el-button>
-
                                         </div>
                                     </div>
                                     <div v-else>
@@ -3393,6 +3404,7 @@
                                     <tr>
                                         <td colspan="6">
                                             по пункту А ст.14 Закона "О пенсионном обеспечении военнослужащих (имеющие выслугу на службе 20 лет и более, в том числе в льготном исчислении)
+                                            <el-button @click="calendar_diff(pension.start, pension.end)"
                                         </td>
                                     </tr>
                                     <tr>
@@ -3453,7 +3465,8 @@
                                     </td>
                                     <td>
                                         <div>
-                                            {{getExperienceFullPension(pension.yearsbeforecoef, pension.monthsbeforecoef, pension.daysbeforecoef)}}
+                                            <!--{{getExperienceFullPension(pension.yearsbeforecoef, pension.monthsbeforecoef, pension.daysbeforecoef)}}-->
+                                            {{calendar_diff(pension.start, pension.end)}}
                                         </div>
                                     </td>
                                     <td>
@@ -3498,7 +3511,8 @@
                                     </td>
                                     <td>
                                         <div>
-                                            {{getExperienceFullPension(pension.yearsbeforecoef, pension.monthsbeforecoef, pension.daysbeforecoef)}}
+                                            <!--{{getExperienceFullPension(pension.yearsbeforecoef, pension.monthsbeforecoef, pension.daysbeforecoef)}}-->
+                                            {{calendar_diff(pension.start, pension.end)}}
                                         </div>
                                     </td>
                                     <td>
@@ -3543,7 +3557,8 @@
                                     </td>
                                     <td>
                                         <div>
-                                            {{getExperienceFullPension(pension.yearsbeforecoef, pension.monthsbeforecoef, pension.daysbeforecoef)}}
+                                            <!--{{getExperienceFullPension(pension.yearsbeforecoef, pension.monthsbeforecoef, pension.daysbeforecoef)}}-->
+                                            {{calendar_diff(pension.start, pension.end)}}
                                         </div>
                                     </td>
                                     <td>
@@ -3560,7 +3575,18 @@
                                 </tr>
                                 <tr>
                                     <td colspan="6">
-                                        Итого: {{pension_A}}
+                                        <!--Итого: {{pension_A}}-->
+                                        Сумма: {{getDataToString(person.pension_A_with)}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="6">
+                                        Дополнительных дней: {{person.appending_days}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="6">
+                                        Итого: {{getDataToString(person.pension_A)}}
                                     </td>
                                 </tr>
                                 <tr>
@@ -3586,7 +3612,8 @@
                                     </td>
                                     <td>
                                         <div>
-                                            {{getExperienceFullPension(pension.yearsbeforecoef, pension.monthsbeforecoef, pension.daysbeforecoef)}}
+                                            <!--{{getExperienceFullPension(pension.yearsbeforecoef, pension.monthsbeforecoef, pension.daysbeforecoef)}}-->
+                                            {{calendar_diff(pension.start, pension.end)}}
                                         </div>
                                     </td>
                                     <td>
@@ -3667,7 +3694,8 @@
                                     </td>
                                     <td>
                                         <div>
-                                            {{getExperienceFullPension(pension.yearsbeforecoef, pension.monthsbeforecoef, pension.daysbeforecoef)}}
+                                            <!--{{getExperienceFullPension(pension.yearsbeforecoef, pension.monthsbeforecoef, pension.daysbeforecoef)}}-->
+                                            {{calendar_diff(pension.start, pension.end)}}
                                         </div>
                                     </td>
                                     <td>
@@ -3705,7 +3733,8 @@
                                     </td>
                                     <td>
                                         <div>
-                                            {{getExperienceFullPension(pension.yearsbeforecoef, pension.monthsbeforecoef, pension.daysbeforecoef)}}
+                                            <!--{{getExperienceFullPension(pension.yearsbeforecoef, pension.monthsbeforecoef, pension.daysbeforecoef)}}-->
+                                            {{calendar_diff(pension.start, pension.end)}}
                                         </div>
                                     </td>
                                     <td>
@@ -3751,7 +3780,8 @@
                                     </td>
                                     <td>
                                         <div>
-                                            {{getExperienceFullPension(pension.yearsbeforecoef, pension.monthsbeforecoef, pension.daysbeforecoef)}}
+                                            <!--{{getExperienceFullPension(pension.yearsbeforecoef, pension.monthsbeforecoef, pension.daysbeforecoef)}}-->
+                                            {{calendar_diff(pension.start, pension.end)}}
                                         </div>
                                     </td>
                                     <td>
@@ -3789,7 +3819,8 @@
                                     </td>
                                     <td>
                                         <div>
-                                            {{getExperienceFullPension(pension.yearsbeforecoef, pension.monthsbeforecoef, pension.daysbeforecoef)}}
+                                            <!--{{getExperienceFullPension(pension.yearsbeforecoef, pension.monthsbeforecoef, pension.daysbeforecoef)}}-->
+                                            {{calendar_diff(pension.start, pension.end)}}
                                         </div>
                                     </td>
                                     <td>
@@ -3806,7 +3837,18 @@
                                 </tr>
                                 <tr>
                                     <td colspan="6">
-                                        Итого: {{pension_B}}
+                                        <!--Итого: {{pension_B}}-->
+                                        Сумма: {{getDataToString(person.pension_B_with)}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="6">
+                                        Дополнительных дней: {{person.appending_days}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="6">
+                                        Итого: {{getDataToString(person.pension_B)}}
                                     </td>
                                 </tr>
                                 <tr>
@@ -3832,7 +3874,8 @@
                                     </td>
                                     <td>
                                         <div>
-                                            {{getExperienceFullPension(pension.yearsbeforecoef, pension.monthsbeforecoef, pension.daysbeforecoef)}}
+                                            <!--{{getExperienceFullPension(pension.yearsbeforecoef, pension.monthsbeforecoef, pension.daysbeforecoef)}}-->
+                                            {{calendar_diff(pension.start, pension.end)}}
                                         </div>
                                     </td>
                                     <td>

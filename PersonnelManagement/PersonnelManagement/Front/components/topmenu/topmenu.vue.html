@@ -855,7 +855,8 @@
                                                 {{decreeoperation.personobject.surname4}} {{decreeoperation.personobject.name4}}
                                                 {{decreeoperation.personobject.fathername4}}
                                                 {{getAppointtype(decreeoperation.optionnumber4)}} на должность {{decreeoperation.optionstring4}} <!--{{decreeoperation.optionstring1}} {{decreeoperation.optionstring2}}-->
-                                                <span v-if="decreeoperation.optiondate1 != null"> с {{printDateDocument(decreeoperation.optiondate1)}}</span><span v-if="decreeoperation.optionnumber2 != null && decreeoperation.optionnumber2 > 0">, присвоив специальное звание «{{getRank(decreeoperation.optionnumber2)}}»</span>
+                                                <span v-if="decreeoperation.optiondate1 != null"> с {{printDateDocument(decreeoperation.optiondate1)}}</span>
+                                                <span v-if="decreeoperation.optionnumber2 != null && decreeoperation.optionnumber2 > 0">, присвоив специальное звание «{{getRank(decreeoperation.optionnumber2)}}»</span>
                                                 <span v-if="decreeoperation.optionstring3 != null && decreeoperation.optionstring3.length > 0">и личный номер {{decreeoperation.optionstring3}}</span>.
                                             </div>
                                             <div v-if="decreeoperation.optiondate2 != null" class="persondecreeoperation-part-list-element-indent">
@@ -2989,14 +2990,14 @@
                                         На должность
                                     </div>
                                     <div class="eld-eld-body-row-flex" style="margin-top: 10px">
-                                        <el-select clearable placeholder="Должность" v-model="persondecreeBlock.optionstring5" class="eld-eld-body-select-medium">
-                                            <el-option v-for="persondecreeblocksubtype in persondecreeblocksubtypes" v-if="persondecreeblocksubtype.persondecreeblocktype == 17"
-                                                       :key="persondecreeblocksubtype.id" :label="persondecreeblocksubtype.name" :value="persondecreeblocksubtype.name">
+                                        <el-select clearable placeholder="Должность" v-model="persondecreeBlock.optionnumber2" class="eld-eld-body-select-medium">
+                                            <el-option v-for="educationpositiontype in educationpositiontypes"
+                                                       :key="educationpositiontype.id" :label="educationpositiontype.name" :value="educationpositiontype.id">
                                             </el-option>
-                                        </el-select>
+                                        </el-select>    
                                     </div>
                                     <div style="margin-top: 10px">
-                                        Кого
+                                        Поиск сотрудников
                                     </div>
                                     <div style="margin-top: 10px">
                                         <el-input placeholder="Фамилия Имя Отчество" class="eld-eld-body-select-medium" v-model="persondecreeBlock.fiosearch" @input="searchPersonsBlock(persondecreeBlock)"></el-input>
@@ -3029,12 +3030,35 @@
                                             <el-button size="mini" type="warning" @click="multipersonRemove(person, persondecreeBlock)">Убрать</el-button>
                                         </div>
                                     </div>
+                                    <div style="margin-top: 10px">
+                                        Поиск кандидатов
+                                    </div>
+                                    <div style="margin-top: 10px">
+                                        <el-input placeholder="Фамилия Имя Отчество" class="eld-eld-body-select-medium" v-model="persondecreeBlock.fiocandidatesearch" @input="searchCandidatsBlock(persondecreeBlock)"></el-input>
+                                        <!--<el-button @click="searchPersonsBlock(persondecreeBlock)">Поиск</el-button>-->
+                                    </div>
+                                    <div v-if="hasSearchCandidateResultsBlock(persondecreeBlock)" class="eld-search-main">
+                                        <div class="eld-search-main-title">
+                                            Результаты поиска
+                                        </div>
+                                        <div v-for="candidate in persondecreeBlock.candidatessearch" class="eld-search-element" @click="selectCandidatBlockNonAuto(candidate.id, persondecreeBlock)">
+                                            <div>
+                                                {{candidate.usersurname}} {{candidate.username}} {{candidate.userpatronymic}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div v-if="candidateSearch.length > 0">
+                                        <div v-for="candidate in candidateSearch">
+                                            Кого – {{candidate.usersurname + " " + candidate.username + " " + candidate.userpatronymic}}
+                                            <el-button size="mini" type="warning" @click="multicandidateRemove(candidate)">Убрать</el-button>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div>
                                     <div class="eld-eld-body-row-flex" style="margin-top: 10px">
                                         <div>
                                             Уровень образования <br />
-                                            <el-select clearable placeholder="Уровень образования" v-model="persondecreeBlock.optionnumber5" class="eld-eld-body-select-medium input-padding-right-small">
+                                            <el-select clearable placeholder="Уровень образования" v-model="persondecreeBlock.optionnumber6" class="eld-eld-body-select-medium input-padding-right-small">
                                                 <el-option v-for="educationlevel in educationlevels"
                                                            :key="educationlevel.id" :label="educationlevel.levelname + ' ' + educationlevel.levelcomment" :value="educationlevel.id">
                                                 </el-option>
@@ -3042,7 +3066,7 @@
                                         </div>
                                         <div>
                                             Ступень <br />
-                                            <el-select clearable placeholder="Уровень образования" v-model="persondecreeBlock.optionnumber6" class="eld-eld-body-select-medium input-padding-left-small">
+                                            <el-select clearable placeholder="Уровень образования" v-model="persondecreeBlock.optionnumber5" class="eld-eld-body-select-medium input-padding-left-small" >
                                                 <el-option v-for="educationstage in educationstages"
                                                            :key="educationstage.id" :label="educationstage.name" :value="educationstage.id">
                                                 </el-option>
@@ -3074,7 +3098,7 @@
                                     <div v-if="structureName.length > 0 && courseName.length > 0 && facultyName.length > 0 && specialityName.length > 0">
                                         {{facultyName}},{{specialityName}}, {{courseName}}, {{structureName}}
                                     </div>
-                                    <div v-if="persondecreeBlock.person != null && persondecreeBlock.optionstring5 != 'Студент' ">
+                                    <div v-if="(persondecreeBlock.person != null || persondecreeBlock.candidatessearch) && persondecreeBlock.optionstring5 != 'студент' ">
                                         <div>
                                             Какое звание присвоить (оставить пустым, если никакое)
                                         </div>
@@ -3083,6 +3107,10 @@
                                                        :key="rank.id" :label="rank.name" :value="rank.id">
                                             </el-option>
                                         </el-select>
+                                        <div class="eld-eld-body-row-mediumshort">
+                                            Личный номер (Ж-12345)
+                                            <el-input v-model="persondecreeBlock.optionstring9" @input.native="numpersonalchange($event, persondecreeBlock.optionstring9)" :maxlength="7"></el-input>
+                                        </div>
                                     </div>
                                     <div style="margin-top: 10px;">
                                         Дата поступления
@@ -3147,12 +3175,25 @@
                         <!--Отчислить-->
                         <div v-if="persondecreeBlock.persondecreeblocktype == 18">
                             <div v-if="persondecreeSigned != 1">
-                                <div class="eld-eld-body-row-flex" style="margin-top: 20px">
-                                    <el-select clearable placeholder="Должность" v-model="persondecreeBlock.persondecreeblocksub" class="eld-eld-body-select-medium">
-                                        <el-option v-for="persondecreeblocksubtype in persondecreeblocksubtypes" v-if="persondecreeblocksubtype.persondecreeblocktype == 17"
+                                <div >
+                                    <div>
+                                        Отчислить за:
+                                    </div>
+                                    <el-select clearable placeholder="Вид предоставления" v-model="persondecreeBlock.optionnumber4" class="eld-eld-body-select-medium">
+                                        <el-option v-for="persondecreeblocksubtype in persondecreeblocksubtypes" v-if="persondecreeblocksubtype.persondecreeblocktype == 18"
                                                    :key="persondecreeblocksubtype.id" :label="persondecreeblocksubtype.name" :value="persondecreeblocksubtype.id">
                                         </el-option>
                                     </el-select>
+                                </div>
+                                <div style="margin-top: 20px">
+                                    <div>
+                                        Должность:
+                                    </div>
+                                    <el-select clearable placeholder="Должность" v-model="persondecreeBlock.persondecreeblocksub" class="eld-eld-body-select-medium">
+                                        <el-option v-for="educationpositiontype in educationpositiontypes" 
+                                                   :key="educationpositiontype.id" :label="educationpositiontype.name" :value="educationpositiontype.id">
+                                        </el-option>
+                                    </el-select>    
                                 </div>
                                 <!--Система поиска людей-->
                                 <div class="eld-eld-body-row-flex">
@@ -3194,62 +3235,113 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div v-if="personFromStructure.length != 0" class="eld-eld-body-row-flex" style="margin-top: 10px">
-                                    <div>
-                                        По какому подпункту
-                                        <el-select clearable placeholder="Подпункт положения" v-model="persondecreeBlock.persondecreeblocksub" class="eld-eld-body-select-long" style="left:0px">
-                                            <el-option v-for="persondecreeblocksubtype in dismissalclauses" v-if="persondecreeblocksubtype.persondecreeblocktype == 18 "
-                                                       :key="persondecreeblocksubtype.id" :label="persondecreeblocksubtype.paragraph +'.'+ persondecreeblocksubtype.subparagraph +' - '+ persondecreeblocksubtype.titleofarticles + '.'" :value="persondecreeblocksubtype.id">
-                                            </el-option>
-                                        </el-select>
-                                    </div>
-                                </div>
-                                <div v-if="personFromStructure.length != 0" class="eld-eld-body-row-flex" style="margin-top: 40px">
-                                    <div class="eld-eld-body-row-short " style="margin-left:10px">
-                                        Дата
-                                        <el-input v-model="persondecreeBlock.optiondate1String" type="date"></el-input>
-                                    </div>
-                                    <div class="eld-eld-body-row-short " style="text-align: center; margin-left: 10px; line-height: 16px;">
-                                        Уволить в запас
-                                        <div style="display: flex; flex-direction: column; align-items: center; margin-top: 12px;">
-                                            <el-checkbox class="checkbox-big" v-model="persondecreeBlock.checkboxdismiss"></el-checkbox>
+                                <div v-if="persondecreeBlock.optionnumber4 == 30 && personFromStructure.length != 0">
+                                    <div class="eld-eld-body-row-flex" style="margin-top: 20px">
+                                        <div class="eld-eld-body-row-short ">
+                                            Дата решения Государственной экзаменационной комиссии
+                                            <el-input v-model="persondecreeBlock.optiondate2String" type="date"></el-input>
                                         </div>
                                     </div>
-                                    <div class="eld-eld-body-row-short " style="text-align: center; line-height: 16px;">
-                                        Направить
-                                        <div style="display: flex; flex-direction: column; align-items: center; margin-top: 12px;">
-                                            <el-checkbox class="checkbox-big" v-model="persondecreeBlock.checkboxdirect"></el-checkbox>
+                                    <div v-if="persondecreeBlock.persondecreeblocksub == 1"  style="margin-top: 20px">
+                                        <div class="eld-eld-body-row-flex">
+                                            <div class="eld-eld-body-row-short " style="text-align: center; margin-left: 10px; line-height: 16px;">
+                                                с вручением золотой медали
+                                                <div style="display: flex; flex-direction: column; align-items: center; margin-top: 12px;">
+                                                    <el-checkbox class="checkbox-big" v-model="persondecreeBlock.checkbox1"></el-checkbox>
+                                                </div>
+                                            </div>
+                                            <div class="eld-eld-body-row-short " style="text-align: center; line-height: 16px;">
+                                                с вручением диплома
+                                                <div style="display: flex; flex-direction: column; align-items: center; margin-top: 12px;">
+                                                    <el-checkbox class="checkbox-big" v-model="persondecreeBlock.checkbox2"></el-checkbox>
+                                                </div>
+                                            </div>
+                                            <div class="eld-eld-body-row-short " style="text-align: center; margin-left: 10px; line-height: 16px;">
+                                                с вручемнем диплома с отличием
+                                                <div style="display: flex; flex-direction: column; align-items: center; margin-top: 12px;">
+                                                    <el-checkbox class="checkbox-big" v-model="persondecreeBlock.checkbox3"></el-checkbox>
+                                                </div>
+                                            </div>
+                                            <div class="eld-eld-body-row-short " style="text-align: center; margin-left: 10px; line-height: 16px;">
+                                                с присвоением нагрудного знака
+                                                <div style="display: flex; flex-direction: column; align-items: center; margin-top: 12px;">
+                                                    <el-checkbox class="checkbox-big" v-model="persondecreeBlock.checkbox4"></el-checkbox>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div v-if="persondecreeBlock.perosndecreeblocksub == 2" class="eld-eld-body-row-flex" style="margin-top: 20">
+    
+                                    </div>
+                                    <div>
+                                        <div class="eld-eld-body-row-short" style="margin-top: 20px">
+                                            номер протокола
+                                            <el-input v-model="persondecreeBlock.optionnumber5" type="number"></el-input>
+                                        </div>
+                                        <div class="eld-eld-body-row-short" style="margin-top: 20px">
+                                            дата подписания протокола
+                                            <el-input v-model="persondecreeBlock.optiondate3String" type="date"></el-input>
                                         </div>
                                     </div>
                                 </div>
-                                <div v-if="persondecreeBlock.checkboxdismiss == true">
-                                    <div>
-                                        По какому подпункту
-                                        <el-select clearable placeholder="Подпункт положения" v-model="persondecreeBlock.optionnumber3" class="eld-eld-body-select-long">
-                                            <el-option v-for="dismissalclause in dismissalclauses"
-                                                       :key="dismissalclause.id" :label="dismissalclause.paragraph +'.'+ dismissalclause.subparagraph +' - '+ dismissalclause.titleofarticles + '.'" :value="dismissalclause.id">
-                                            </el-option>
-                                        </el-select>
+                                <div v-if="persondecreeBlock.optionnumber4 == 31 && personFromStructure.length != 0">
+                                    <div class="eld-eld-body-row-flex" style="margin-top: 10px">
+                                        <div>
+                                            По какому подпункту
+                                            <el-select clearable placeholder="Подпункт положения" v-model="persondecreeBlock.optionnumber1" class="eld-eld-body-select-long" style="left:0px;">
+                                                <el-option v-for="persondecreeblocksubtype in dismissalclauses" v-if="persondecreeblocksubtype.persondecreeblocktype == 18 && persondecreeblocksubtype.type == persondecreeBlock.persondecreeblocksub"
+                                                           :key="persondecreeblocksubtype.id" :label="persondecreeblocksubtype.paragraph +'.'+ persondecreeblocksubtype.subparagraph +' - '+ persondecreeblocksubtype.titleofarticles + '.'" :value="persondecreeblocksubtype.id">
+                                                </el-option>
+                                            </el-select>
+                                        </div>
                                     </div>
-                                </div>
-                                <div v-if="persondecreeBlock.checkboxdirect == true" class="eld-eld-body-row-flex" style="margin-top: 10px">
-                                    <div class="eld-eld-body-row-mshort ">
-                                        РОЧС
-                                        <el-input v-model="persondecreeBlock.optionstring4"></el-input>
+                                    <div class="eld-eld-body-row-flex" style="margin-top: 40px">
+                                        <div class="eld-eld-body-row-short " style="margin-left:10px">
+                                            Дата
+                                            <el-input v-model="persondecreeBlock.optiondate1String" type="date"></el-input>
+                                        </div>
+                                        <div class="eld-eld-body-row-short " style="text-align: center; margin-left: 10px; line-height: 16px;">
+                                            Уволить в запас
+                                            <div style="display: flex; flex-direction: column; align-items: center; margin-top: 12px;">
+                                                <el-checkbox class="checkbox-big" v-model="persondecreeBlock.checkboxdismiss"></el-checkbox>
+                                            </div>
+                                        </div>
+                                        <div class="eld-eld-body-row-short " style="text-align: center; line-height: 16px;">
+                                            Направить
+                                            <div style="display: flex; flex-direction: column; align-items: center; margin-top: 12px;">
+                                                <el-checkbox class="checkbox-big" v-model="persondecreeBlock.checkboxdirect"></el-checkbox>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="eld-eld-body-row-mshort " style="margin-left:10px">
-                                        Управление МЧС
-                                        <el-input v-model="persondecreeBlock.optionstring5"></el-input>
+                                    <div v-if="persondecreeBlock.checkboxdismiss == true">
+                                        <div>
+                                            По какому подпункту
+                                            <el-select clearable placeholder="Подпункт положения" v-model="persondecreeBlock.optionnumber2" class="eld-eld-body-select-long" style="left:0px;">
+                                                <el-option v-for="persondecreeblocksubtype in dismissalclauses" v-if="persondecreeblocksubtype.persondecreeblocktype == 18 && persondecreeblocksubtype.type == persondecreeBlock.persondecreeblocksub"
+                                                           :key="persondecreeblocksubtype.id" :label="persondecreeblocksubtype.paragraph +'.'+ persondecreeblocksubtype.subparagraph +' - '+ persondecreeblocksubtype.titleofarticles + '.'" :value="persondecreeblocksubtype.id">
+                                                </el-option>
+                                            </el-select>
+                                        </div>
                                     </div>
-                                </div>
-                                <div v-if="personFromStructure.length != 0" class="eld-eld-body-row-flex" style="margin-top: 10px">
-                                    <div class="eld-eld-body-row-long">
-                                        Перечень не сдавших предметов:
-                                        <el-input v-model="persondecreeBlock.optionstring7"></el-input>
+                                    <div v-if="persondecreeBlock.checkboxdirect == true" class="eld-eld-body-row-flex" style="margin-top: 10px">
+                                        <div class="eld-eld-body-row-mshort ">
+                                            РОЧС
+                                            <el-input v-model="persondecreeBlock.optionstring4"></el-input>
+                                        </div>
+                                        <div class="eld-eld-body-row-mshort " style="margin-left:10px">
+                                            Управление МЧС
+                                            <el-input v-model="persondecreeBlock.optionstring5"></el-input>
+                                        </div>
                                     </div>
-                                    <div class="eld-eld-body-row-long" style="margin-left: 20px">
-                                        Основание:
-                                        <el-input v-model="persondecreeBlock.optionstring6"></el-input>
+                                    <div v-if="personFromStructure.length != 0" class="eld-eld-body-row-flex" style="margin-top: 10px">
+                                        <div class="eld-eld-body-row-long">
+                                            Перечень не сдавших предметов:
+                                            <el-input v-model="persondecreeBlock.optionstring7"></el-input>
+                                        </div>
+                                        <div class="eld-eld-body-row-long" style="margin-left: 20px">
+                                            Основание:
+                                            <el-input v-model="persondecreeBlock.optionstring6"></el-input>
+                                        </div>
                                     </div>
                                 </div>
                                 <div style="margin-top: 15px">
@@ -3273,7 +3365,7 @@
                                     </div>
                                     <div v-for="persondecreeblocksubsub in persondecreeBlock.persondecreeblocksubs" v-if = "persondecreeblocksubsub.parentpersondecreeblocksub == persondecreeblocksub.id">
                                         <div>
-                                            {{printDateDocument(persondecreeblocksubsub.subvaluedate1)}} с :
+                                            {{printDateDocument(persondecreeblocksubsub.subvaluedate1)}} с {{persondecreeblocksubsub.subvaluenumber3}} семестра {{getCourse(persondecreeblocksubsub.subvaluenumber3)}} курса:
                                         </div>
                                         <div>
                                             <div v-for="decreeoperation in persondecreeOperations" v-if="decreeoperation.persondecreeblocksub == persondecreeblocksubsub.id" class="persondecreeoperation-part-list-element persondecreeoperation-part-list-element-margin-big">
@@ -3282,6 +3374,8 @@
                                                     {{decreeoperation.personobject.surname2}} {{decreeoperation.personobject.name2}}
                                                     {{decreeoperation.personobject.fathername2}}{{commaspaceifnotnull(decreeoperation.personobject.positiontypestring)}} {{decreeoperation.personobject.positiontype2string}}
                                                     {{getStructureName(decreeoperation.personobject.structure)}}а {{getFacultiStructureName(decreeoperation.personobject.structure)}}
+                                                    <span v-if="decreeoperation.optionnumber8 == 1"> и направить в распоряжение начальника {{decreeoperation.optionstring4}} РОЧС учреждения "{{decreeoperation.optionstring5}}", </span>
+                                                    <span v-if="decreeoperation.optionstring7 != null"> перечень не ликвидированных задолжностей - {{decreeoperation.optionstring7}}</span>
                                                 </div>
                                                 <div v-if="persondecreeSigned != 1">
                                                     <div>
@@ -3414,10 +3508,17 @@
                                 <!--Система поиска людей-->
                                 <div class="eld-eld-body-row-flex">
                                     <div style="margin-top: 10px">
-                                        Кого
-                                        <div style="margin-top: 10px">
-                                            <el-button @click="selectAllPersonInStructure(persondecreeBlock)" type="primary" plain>Выбрать</el-button>
+                                        <div>
+                                            На должность
                                         </div>
+                                        <div class="eld-eld-body-row-flex" style="margin-top: 10px">
+                                            <el-select clearable placeholder="Должность" v-model="persondecreeBlock.optionnumber3" class="eld-eld-body-select-medium">
+                                                <el-option v-for="educationpositiontype in educationpositiontypes"
+                                                           :key="educationpositiontype.id" :label="educationpositiontype.name" :value="educationpositiontype.id">
+                                                </el-option>
+                                            </el-select>    
+                                        </div>
+                                        Кого
                                         <div style="margin-top: 15px">
                                             <el-input placeholder="Фамилия Имя Отчество" class="eld-eld-body-select-medium" v-model="persondecreeBlock.fiosearch" @input="searchPersonsBlock(persondecreeBlock)"></el-input>
                                             <!--<el-button @click="searchPersonsBlock(persondecreeBlock)">Поиск</el-button>-->
@@ -3444,8 +3545,8 @@
                                             </div>
                                         </div>
                                         <!--<div v-if="persondecreeBlock.person != null">
-            Кому – {{persondecreeBlock.person.surname3 + " " + persondecreeBlock.person.name3 + " " + persondecreeBlock.person.fathername3}}
-            </div>-->
+                                        Кому – {{persondecreeBlock.person.surname3 + " " + persondecreeBlock.person.name3 + " " + persondecreeBlock.person.fathername3}}
+                                        </div>-->
                                         <div v-if="personFromStructure != null">
                                             <div v-for="person in personFromStructure">
                                                 Кого – {{person.surname3 + " " + person.name3 + " " + person.fathername3}}
@@ -3455,16 +3556,30 @@
                                     </div>
                                 </div>
                                 <div v-if="personFromStructure.length != 0" class="eld-eld-body-row-flex" style="margin-top: 20px">
-                                    <div style="margin-top: 10px">
-                                        <el-button @click="selectAllPersonInStructure(persondecreeBlock)" type="primary" plain>Выбрать</el-button>
-                                    </div>
-                                    <div class="eld-eld-body-row-small " style="margin-left:10px">
-                                        Семестр
-                                        <el-input v-model="persondecreeBlock.optionnumber1" type="number"></el-input>
-                                    </div>
-                                    <div class="eld-eld-body-row-small " style="margin-left:10px">
-                                        Курс
-                                        <el-input v-model="persondecreeBlock.optionnumber2" type="number"></el-input>
+                                    <div>
+                                        <!--<div>
+                                            отчислен с {{getCourse(getPersoneducation(personFromStructure[0].id))}} курса {{getPersoneducation(personFromStructure[0].id)}} семестра
+                                        </div>--> 
+                                        <div v-if="structureName.length > 0 && courseName.length > 0 && facultyName.length > 0 && specialityName.length > 0">
+                                            {{facultyName}},{{specialityName}}, {{courseName}}, {{structureName}}
+                                        </div>
+                                        <br />
+                                        <el-button @click="selectAllPersonInStructure(persondecreeBlock, 3)" type="primary" plain>Выбрать взвод</el-button>
+                                        <div>
+                                            <br />
+                                            <select v-model="persondecreeBlock.optionnumber2">
+                                                <option disabled value="Номер семестра">Номер семестра </option>
+                                                <option>1</option>
+                                                <option>2</option>
+                                                <option>3</option>
+                                                <option>4</option>
+                                                <option>5</option>
+                                                <option>6</option>
+                                                <option>7</option>
+                                                <option>8</option>
+                                              </select>
+                                              <span>Выбран: {{ persondecreeBlock.optionnumber2 }}й семестр</span>
+                                        </div>
                                     </div>
                                 </div>
                                 <div v-if="personFromStructure.length != 0" class="eld-eld-body-row-flex" style="margin-top: 10px">
@@ -3472,11 +3587,19 @@
                                         Дата ликвидации задолжности
                                         <el-input v-model="persondecreeBlock.optiondate1String" type="date"></el-input>
                                     </div>
+                                    <div style="margin-left: 100px">
+                                        Форма обучения <br />
+                                        <el-select clearable placeholder="Форма обучения" v-model="persondecreeBlock.optionnumber8">
+                                            <el-option v-for="educationtype in educationtypes"
+                                                       :key="educationtype.id" :label="educationtype.name" :value="educationtype.id">
+                                            </el-option>
+                                        </el-select>
+                                    </div>
                                 </div>
                                 <div v-if="personFromStructure.length != 0" class="eld-eld-body-row-flex" style="margin-top: 10px">
                                     <div class="eld-eld-body-row-long">
                                         Основание:
-                                        <el-input v-model="persondecreeBlock.optionstring2"></el-input>
+                                        <el-input v-model="persondecreeBlock.optionstring6"></el-input>
                                     </div>
                                 </div>
                                 <div>
@@ -3500,7 +3623,7 @@
                                     </div>
                                     <div v-for="persondecreeblocksubsub in persondecreeBlock.persondecreeblocksubs" v-if = "persondecreeblocksubsub.parentpersondecreeblocksub == persondecreeblocksub.id">
                                         <div>
-                                            на {{persondecreeblocksubsub.subvaluenumber1}} семестр {{persondecreeblocksubsub.subvaluenumber2}}  курса:
+                                            на {{persondecreeblocksubsub.subvaluestring2}} семестр {{persondecreeblocksubsub.subvaluestring1}}а :
                                         </div>
                                         <div>
                                             <div v-for="persondecreeblocksubsubsub in persondecreeBlock.persondecreeblocksubs" v-if = "persondecreeblocksubsubsub.parentpersondecreeblocksub == persondecreeblocksubsub.id">
@@ -3511,7 +3634,7 @@
                                                     <div v-for="decreeoperation in persondecreeOperations" v-if="decreeoperation.persondecreeblocksub == persondecreeblocksubsubsub.id" class="persondecreeoperation-part-list-element persondecreeoperation-part-list-element-margin-big">
                                                         <div class="persondecreeoperation-part-list-element-indent">
                                                             {{decreeoperation.personobject.surname2}} {{decreeoperation.personobject.name2}}
-                                                            {{decreeoperation.personobject.fathername2}}
+                                                            {{decreeoperation.personobject.fathername2}}.
                                                         </div>
                                                         <div v-if="persondecreeSigned != 1">
                                                             <div>
@@ -3540,14 +3663,14 @@
                                         <div>
                                             Перевести куда
                                         </div>
-                                        <el-select clearable placeholder="" v-model="persondecreeBlock.optionnumber2" class="eld-eld-body-select-medium">
+                                        <el-select clearable placeholder="" v-model="persondecreeBlock.optionnumber1" class="eld-eld-body-select-medium">
                                             <el-option v-for="persondecreeblocksubtype in persondecreeblocksubtypes" v-if="persondecreeblocksubtype.persondecreeblocktype == 21"
                                                        :key="persondecreeblocksubtype.id" :label="persondecreeblocksubtype.name" :value="persondecreeblocksubtype.id">
                                             </el-option>
                                         </el-select>
                                     </div>
                                 </div>
-                                <div v-if="persondecreeBlock.optionnumber2 == 18">
+                                <div v-if = "persondecreeBlock.optionnumber1 == 18">
                                     <div style="margin-top: 10px">
                                         По итогам
                                     </div>
@@ -3584,9 +3707,6 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <!--<div v-if="persondecreeBlock.person != null">
-                    Кому – {{persondecreeBlock.person.surname3 + " " + persondecreeBlock.person.name3 + " " + persondecreeBlock.person.fathername3}}
-                    </div>-->
                                             <div v-if="personFromStructure != null">
                                                 <div v-for="person in personFromStructure">
                                                     Кого – {{person.surname2 + " " + person.name2 + " " + person.fathername2}}
@@ -3607,7 +3727,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div v-if="persondecreeBlock.checkboxdismiss == true">
+                                    <div v-if="persondecreeBlock.checkboxdismiss == true" >
                                         <div class="eld-eld-body-row-flex" style="margin-top: 10px">
                                             <div class="eld-eld-body-row-short ">
                                                 Дата ликвидации задолжности
@@ -3617,10 +3737,76 @@
                                     </div>
                                     <div class="eld-eld-body-row-flex">
                                         <div style="margin-top: 20px">
-                                            <el-button @click="selectAllPersonInStructure(persondecreeBlock, 2)" type="primary" plain>Выбрать курс/семестр</el-button>
+                                            <el-button @click="selectAllPersonInStructure(persondecreeBlock, 2)" type="primary" plain>Выбрать курс</el-button>
                                         </div>
                                         <div style="margin-top: 28px">
                                             {{structureNewName}}
+                                        </div>    
+                                    </div>
+                                </div>
+                                <div v-if = "persondecreeBlock.optionnumber1 == 27">
+                                    <div style="margin-top: 10px">
+                                        По итогам
+                                    </div>
+                                    <el-input v-model="persondecreeBlock.optionstring1" class="eld-eld-body-row-long" placeholder="летней экзаменационной сессии 2019-2020 ..."></el-input>
+                                    <!--Система поиска людей-->
+                                    <div class="eld-eld-body-row-flex">
+                                        <div style="margin-top: 10px">
+                                            Кого
+                                            <div style="margin-top: 10px">
+                                                <el-button @click="selectAllPersonInStructure(persondecreeBlock, 4)" type="primary" plain>Выбрать взвод</el-button>
+                                            </div>
+                                            <div style="margin-top: 15px">
+                                                <el-input placeholder="Фамилия Имя Отчество" class="eld-eld-body-select-medium" v-model="persondecreeBlock.fiosearch" @input="searchPersonsBlock(persondecreeBlock)"></el-input>
+                                                <!--<el-button @click="searchPersonsBlock(persondecreeBlock)">Поиск</el-button>-->
+                                            </div>
+                                            <div v-if="hasSearchResultsBlock(persondecreeBlock)" class="eld-search-main">
+                                                <div class="eld-search-main-title">
+                                                    Результаты поиска
+                                                </div>
+                                                <div v-for="person in persondecreeBlock.personssearch" class="eld-search-element" @click="selectPersonBlockNonAuto(person.id, persondecreeBlock)">
+                                                    <div>
+                                                        {{person.surname}} {{person.name}} {{person.fathername}}
+                                                    </div>
+                                                    <div>
+                                                        {{person.positiontypestring}}
+                                                    </div>
+                                                    <div v-if="hasPhotopreviewBlock(person.id, persondecreeBlock)">
+                                                        <img :src="getPhotopreviewBlock(person.id, persondecreeBlock).photo64" class="eld-search-element-image" />
+                                                    </div>
+                                                    <div>
+                                                        <div>
+                                                            {{person.structuretree}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div v-if="personFromStructure != null">
+                                                <div v-for="person in personFromStructure">
+                                                    Кого – {{person.surname2 + " " + person.name2 + " " + person.fathername2}}
+                                                    <el-button size="mini" type="warning" @click="multipersonRemove(person, persondecreeBlock)">Убрать</el-button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="eld-eld-body-row-flex" style="margin-top: 20px">
+                                        <div class="eld-eld-body-row-short " style="margin-left:10px">
+                                            С какого числа
+                                            <el-input v-model="persondecreeBlock.optiondate1String" type="date"></el-input>
+                                        </div>
+                                        <div class="eld-eld-body-row-short " style="text-align: center; margin-left: 10px; line-height: 16px;">
+                                            Условно
+                                            <div style="display: flex; flex-direction: column; align-items: center; margin-top: 12px;">
+                                                <el-checkbox class="checkbox-big" v-model="persondecreeBlock.checkboxdismiss"></el-checkbox>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div v-if="persondecreeBlock.checkboxdismiss == true" >
+                                        <div class="eld-eld-body-row-flex" style="margin-top: 10px">
+                                            <div class="eld-eld-body-row-short ">
+                                                Дата ликвидации задолжности
+                                                <el-input v-model="persondecreeBlock.optiondate2String" type="date"></el-input>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -3640,36 +3826,55 @@
                                 Проект приказа
                             </div>
                             <div>
-                                <span v-if="persondecreeBlock.index != null && persondecreeBlock.index != 0">{{persondecreeBlock.index}}.</span> ПЕРЕВЕСТИ:
+                                <span v-if="persondecreeBlock.index != null && persondecreeBlock.index != 0">{{persondecreeBlock.index}}.</span>
+                                ПЕРЕВЕСТИ:
                             </div>
-                            <div v-for="persondecreeblocksub in persondecreeBlock.persondecreeblocksubs" v-if=" persondecreeblocksub.persondecreeblock == persondecreeBlock.id && persondecreeblocksub.parentpersondecreeblocksub == 0"
-                                 class="persondecreeoperation-part-list-element">
+                            <div v-for="persondecreeblocksub in persondecreeBlock.persondecreeblocksubs"
+                                v-if=" persondecreeblocksub.persondecreeblock == persondecreeBlock.id && persondecreeblocksub.parentpersondecreeblocksub == 0"
+                                class="persondecreeoperation-part-list-element">
                                 <div>
                                     <div class="persondecreeoperation-part-list-element-indent persondecreeoperation-part-list-element-margin">
                                         {{provideTranslateSubBlockText(persondecreeblocksub)}}
                                     </div>
-                                    <div v-for="persondecreeblocksubsub in persondecreeBlock.persondecreeblocksubs" v-if="persondecreeblocksubsub.parentpersondecreeblocksub == persondecreeblocksub.id">
+                                    <div v-for="persondecreeblocksubsub in persondecreeBlock.persondecreeblocksubs"
+                                        v-if="persondecreeblocksubsub.parentpersondecreeblocksub == persondecreeblocksub.id">
                                         <div>
-                                            <div class="persondecreeoperation-part-list-element-indent persondecreeoperation-part-list-element-margin">
-                                                <span if="persondecreeBlock.index != null && persondecreeBlock.index != 0 && persondecreeblocksub.index != 0">{{persondecreeBlock.index}}.{{persondecreeblocksubsub.index}}.</span>
-                                                на {{persondecreeblocksubsub.subvaluestring1}} учебного года с {{printDateDocument(persondecreeblocksubsub.subvaluedate1)}}
-                                                <span v-if="persondecreeblocksubsub.Subvaluenumber1 == 0"> условно с ликвидацией академических задолженностей до {{printDateDocument(persondecreeblocksubsub.subvaluedate2)}}:</span>
-                                            </div>
+                                            <span>
+                                                {{persondecreeblocksubsub.subvaluestring1}}
+                                            </span>
                                         </div>
                                         <div>
-                                            <div v-for="persondecreeblocksubsubsub in persondecreeBlock.persondecreeblocksubs" v-if="persondecreeblocksubsubsub.parentpersondecreeblocksub == persondecreeblocksubsub.id"
-                                                 class="persondecreeoperation-part-list-element-indent">
-                                                <div v-for="decreeoperation in persondecreeOperations" v-if="decreeoperation.persondecreeblocksub == persondecreeblocksubsubsub.id" class="persondecreeoperation-part-list-element persondecreeoperation-part-list-element-margin-big">
+                                            <div v-for="persondecreeblocksubsubsub in persondecreeBlock.persondecreeblocksubs"
+                                                v-if="persondecreeblocksubsubsub.parentpersondecreeblocksub == persondecreeblocksubsub.id"
+                                                class="persondecreeoperation-part-list-element-indent">
+                                                <div
+                                                    class="persondecreeoperation-part-list-element-indent persondecreeoperation-part-list-element-margin">
+                                                    <span
+                                                        if="persondecreeBlock.index != null && persondecreeBlock.index != 0 && persondecreeblocksub.index != 0">{{persondecreeBlock.index}}.{{persondecreeblocksubsubsub.index}}.</span>
+                                                    на {{persondecreeblocksubsubsub.subvaluestring1}} учебного года с
+                                                    {{printDateDocument(persondecreeblocksubsubsub.subvaluedate1)}}
+                                                    <span v-if="persondecreeblocksubsubsub.subvaluenumber1 == 0"> условно с ликвидацией
+                                                        академических задолженностей до
+                                                        {{printDateDocument(persondecreeblocksubsubsub.subvaluedate2)}}:</span>
+                                                </div>
+                                                <div v-for="decreeoperation in persondecreeOperations"
+                                                    v-if="decreeoperation.persondecreeblocksub == persondecreeblocksubsubsub.id"
+                                                    class="persondecreeoperation-part-list-element persondecreeoperation-part-list-element-margin-big">
                                                     <div class="persondecreeoperation-part-list-element-indent">
-                                                        <span v-if="decreeoperation.personobject.actualRank != null">{{decreeoperation.personobject.actualRank.name4}} </span>
+                                                        <span
+                                                            v-if="decreeoperation.personobject.actualRank != null">{{decreeoperation.personobject.actualRank.name4}}
+                                                        </span>
                                                         {{decreeoperation.personobject.surname2}} {{decreeoperation.personobject.name2}}
-                                                        {{decreeoperation.personobject.fathername2}}{{commaspaceifnotnull(decreeoperation.personobject.positiontypestring)}} {{decreeoperation.personobject.positiontype2string}}
-                                                        {{getStructureName(decreeoperation.personobject.structure)}}а {{getFacultiStructureName(decreeoperation.personobject.structure)}}
+                                                        {{decreeoperation.personobject.fathername2}}{{commaspaceifnotnull(decreeoperation.personobject.positiontypestring)}}
+                                                        {{decreeoperation.personobject.positiontype2string}}
+                                                        {{getStructureName(decreeoperation.personobject.structure)}}а
+                                                        {{getFacultiStructureName(decreeoperation.personobject.structure)}}
                                                     </div>
                                                     <div v-if="persondecreeSigned != 1">
                                                         <div>
                                                             <!--<el-button size="mini" type="warning" @click="updatePersonreward(persondecreeBlock, decreeoperation)">Редактировать</el-button>-->
-                                                            <el-button size="mini" type="warning" @click="removePersondecreeoperation(decreeoperation)">Удалить</el-button>
+                                                            <el-button size="mini" type="warning"
+                                                                @click="removePersondecreeoperation(decreeoperation)">Удалить</el-button>
                                                         </div>
                                                     </div>
                                                 </div>

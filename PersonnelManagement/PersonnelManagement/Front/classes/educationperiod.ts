@@ -12,6 +12,7 @@
     orderdate: Date;
     ordernum: string;
     ordernumbertype: string;
+    semestr: number;
 
     startString: string;
     endString: string;

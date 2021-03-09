@@ -9,5 +9,6 @@ namespace PersonnelManagement.Models
         public int Personeducation { get; set; }
         public int Educationtype { get; set; }
         public int PersoneducationId { get; set; }
+        public int IsEnded { get; set; }
     }
 }

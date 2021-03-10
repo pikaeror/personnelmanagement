@@ -3153,7 +3153,7 @@
                                                         <div v-for="decreeoperation in persondecreeOperations" v-if="decreeoperation.persondecreeblocksub == persondecreeblocksubsubsubsub.id" class="persondecreeoperation-part-list-element">
                                                             <div>
                                                                 {{decreeoperation.personobject.surname2}} {{decreeoperation.personobject.name2}}
-                                                                {{decreeoperation.personobject.fathername2}} ({{decreeoperation.personobject.numpersonal}});
+                                                                {{decreeoperation.personobject.fathername2}} ({{decreeoperation.optionstring9}});
                                                             </div>
                                                             <div v-if="persondecreeSigned != 1">
                                                                 <div>
@@ -3175,11 +3175,11 @@
                         <!--Отчислить-->
                         <div v-if="persondecreeBlock.persondecreeblocktype == 18">
                             <div v-if="persondecreeSigned != 1">
-                                <div >
+                                <div>
                                     <div>
                                         Отчислить за:
                                     </div>
-                                    <el-select clearable placeholder="Вид предоставления" v-model="persondecreeBlock.optionnumber4" class="eld-eld-body-select-medium">
+                                    <el-select clearable placeholder="" v-model="persondecreeBlock.optionnumber4" class="eld-eld-body-select-medium">
                                         <el-option v-for="persondecreeblocksubtype in persondecreeblocksubtypes" v-if="persondecreeblocksubtype.persondecreeblocktype == 18"
                                                    :key="persondecreeblocksubtype.id" :label="persondecreeblocksubtype.name" :value="persondecreeblocksubtype.id">
                                         </el-option>
@@ -3195,47 +3195,7 @@
                                         </el-option>
                                     </el-select>    
                                 </div>
-                                <!--Система поиска людей-->
-                                <div class="eld-eld-body-row-flex">
-                                    <div style="margin-top: 10px">
-                                        Кого
-                                        <div style="margin-top: 10px">
-                                            <el-button @click="selectAllPersonInStructure(persondecreeBlock)" type="primary" plain>Выбрать</el-button>
-                                        </div>
-                                        <div style="margin-top: 15px">
-                                            <el-input placeholder="Фамилия Имя Отчество" class="eld-eld-body-select-medium" v-model="persondecreeBlock.fiosearch" @input="searchPersonsBlock(persondecreeBlock)"></el-input>
-                                            <!--<el-button @click="searchPersonsBlock(persondecreeBlock)">Поиск</el-button>-->
-                                        </div>
-                                        <div v-if="hasSearchResultsBlock(persondecreeBlock)" class="eld-search-main">
-                                            <div class="eld-search-main-title">
-                                                Результаты поиска
-                                            </div>
-                                            <div v-for="person in persondecreeBlock.personssearch" class="eld-search-element" @click="selectPersonBlockNonAuto(person.id, persondecreeBlock)">
-                                                <div>
-                                                    {{person.surname}} {{person.name}} {{person.fathername}}
-                                                </div>
-                                                <div>
-                                                    {{person.positiontypestring}}
-                                                </div>
-                                                <div v-if="hasPhotopreviewBlock(person.id, persondecreeBlock)">
-                                                    <img :src="getPhotopreviewBlock(person.id, persondecreeBlock).photo64" class="eld-search-element-image" />
-                                                </div>
-                                                <div>
-                                                    <div>
-                                                        {{person.structuretree}}
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div v-if="personFromStructure != null">
-                                            <div v-for="person in personFromStructure">
-                                                Кого – {{person.surname2 + " " + person.name2 + " " + person.fathername2}}
-                                                <el-button size="mini" type="warning" @click="multipersonRemove(person, persondecreeBlock)">Убрать</el-button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div v-if="persondecreeBlock.optionnumber4 == 30 && personFromStructure.length != 0">
+                                <div v-if="persondecreeBlock.optionnumber4 == 30 && persondecreeBlock.persondecreeblocksub != null">
                                     <div class="eld-eld-body-row-flex" style="margin-top: 20px">
                                         <div class="eld-eld-body-row-short ">
                                             Дата решения Государственной экзаменационной комиссии
@@ -3271,7 +3231,7 @@
                                         </div>
                                     </div>
                                     <div v-if="persondecreeBlock.perosndecreeblocksub == 2" class="eld-eld-body-row-flex" style="margin-top: 20">
-    
+                                        
                                     </div>
                                     <div>
                                         <div class="eld-eld-body-row-short" style="margin-top: 20px">
@@ -3283,12 +3243,52 @@
                                             <el-input v-model="persondecreeBlock.optiondate3String" type="date"></el-input>
                                         </div>
                                     </div>
+                                    <!--Система поиска людей-->
+                                    <div class="eld-eld-body-row-flex">
+                                        <div style="margin-top: 10px">
+                                            Кого
+                                            <div style="margin-top: 10px">
+                                                <el-button @click="selectAllPersonInStructure(persondecreeBlock)" type="primary" plain>Выбрать</el-button>
+                                            </div>
+                                            <div style="margin-top: 15px">
+                                                <el-input placeholder="Фамилия Имя Отчество" class="eld-eld-body-select-medium" v-model="persondecreeBlock.fiosearch" @input="searchPersonsBlock(persondecreeBlock)"></el-input>
+                                                <!--<el-button @click="searchPersonsBlock(persondecreeBlock)">Поиск</el-button>-->
+                                            </div>
+                                            <div v-if="hasSearchResultsBlock(persondecreeBlock)" class="eld-search-main">
+                                                <div class="eld-search-main-title">
+                                                    Результаты поиска
+                                                </div>
+                                                <div v-for="person in persondecreeBlock.personssearch" class="eld-search-element" @click="selectPersonBlockNonAuto(person.id, persondecreeBlock)">
+                                                    <div>
+                                                        {{person.surname}} {{person.name}} {{person.fathername}}
+                                                    </div>
+                                                    <div>
+                                                        {{person.positiontypestring}}
+                                                    </div>
+                                                    <div v-if="hasPhotopreviewBlock(person.id, persondecreeBlock)">
+                                                        <img :src="getPhotopreviewBlock(person.id, persondecreeBlock).photo64" class="eld-search-element-image" />
+                                                    </div>
+                                                    <div>
+                                                        <div>
+                                                            {{person.structuretree}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div v-if="personFromStructure != null">
+                                                <div v-for="person in personFromStructure">
+                                                    Кого – {{person.surname2 + " " + person.name2 + " " + person.fathername2}}
+                                                    <el-button size="mini" type="warning" @click="multipersonRemove(person, persondecreeBlock)">Убрать</el-button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div v-if="persondecreeBlock.optionnumber4 == 31 && personFromStructure.length != 0">
-                                    <div class="eld-eld-body-row-flex" style="margin-top: 10px">
+                                <div v-if="persondecreeBlock.optionnumber4 == 31 && persondecreeBlock.persondecreeblocksub != null">
+                                    <div class="eld-eld-body-row-flex" style="margin-top: 20px">
                                         <div>
                                             По какому подпункту
-                                            <el-select clearable placeholder="Подпункт положения" v-model="persondecreeBlock.optionnumber1" class="eld-eld-body-select-long" style="left:0px;">
+                                            <el-select clearable placeholder="Подпункт положения" v-model="persondecreeBlock.optionnumber1" class="eld-eld-body-select-long" style="left:10px;">
                                                 <el-option v-for="persondecreeblocksubtype in dismissalclauses" v-if="persondecreeblocksubtype.persondecreeblocktype == 18 && persondecreeblocksubtype.type == persondecreeBlock.persondecreeblocksub"
                                                            :key="persondecreeblocksubtype.id" :label="persondecreeblocksubtype.paragraph +'.'+ persondecreeblocksubtype.subparagraph +' - '+ persondecreeblocksubtype.titleofarticles + '.'" :value="persondecreeblocksubtype.id">
                                                 </el-option>
@@ -3313,10 +3313,50 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div v-if="persondecreeBlock.checkboxdismiss == true">
+                                    <!--Система поиска людей-->
+                                    <div class="eld-eld-body-row-flex">
+                                        <div style="margin-top: 10px">
+                                            Кого
+                                            <div style="margin-top: 10px">
+                                                <el-button @click="selectAllPersonInStructure(persondecreeBlock)" type="primary" plain>Выбрать</el-button>
+                                            </div>
+                                            <div style="margin-top: 15px">
+                                                <el-input placeholder="Фамилия Имя Отчество" class="eld-eld-body-select-medium" v-model="persondecreeBlock.fiosearch" @input="searchPersonsBlock(persondecreeBlock)"></el-input>
+                                                <!--<el-button @click="searchPersonsBlock(persondecreeBlock)">Поиск</el-button>-->
+                                            </div>
+                                            <div v-if="hasSearchResultsBlock(persondecreeBlock)" class="eld-search-main">
+                                                <div class="eld-search-main-title">
+                                                    Результаты поиска
+                                                </div>
+                                                <div v-for="person in persondecreeBlock.personssearch" class="eld-search-element" @click="selectPersonBlockNonAuto(person.id, persondecreeBlock)">
+                                                    <div>
+                                                        {{person.surname}} {{person.name}} {{person.fathername}}
+                                                    </div>
+                                                    <div>
+                                                        {{person.positiontypestring}}
+                                                    </div>
+                                                    <div v-if="hasPhotopreviewBlock(person.id, persondecreeBlock)">
+                                                        <img :src="getPhotopreviewBlock(person.id, persondecreeBlock).photo64" class="eld-search-element-image" />
+                                                    </div>
+                                                    <div>
+                                                        <div>
+                                                            {{person.structuretree}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div v-if="personFromStructure != null">
+                                                <div v-for="person in personFromStructure">
+                                                    Кого – {{person.surname2 + " " + person.name2 + " " + person.fathername2}}
+                                                    <el-button size="mini" type="warning" @click="multipersonRemove(person, persondecreeBlock)">Убрать</el-button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div v-if="persondecreeBlock.checkboxdismiss == true" style="margin-top: 20px">
                                         <div>
                                             По какому подпункту
-                                            <el-select clearable placeholder="Подпункт положения" v-model="persondecreeBlock.optionnumber2" class="eld-eld-body-select-long" style="left:0px;">
+                                            <el-select clearable placeholder="Подпункт положения" v-model="persondecreeBlock.optionnumber2" class="eld-eld-body-select-long" style="left:10px;">
                                                 <el-option v-for="persondecreeblocksubtype in dismissalclauses" v-if="persondecreeblocksubtype.persondecreeblocktype == 18 && persondecreeblocksubtype.type == persondecreeBlock.persondecreeblocksub"
                                                            :key="persondecreeblocksubtype.id" :label="persondecreeblocksubtype.paragraph +'.'+ persondecreeblocksubtype.subparagraph +' - '+ persondecreeblocksubtype.titleofarticles + '.'" :value="persondecreeblocksubtype.id">
                                                 </el-option>

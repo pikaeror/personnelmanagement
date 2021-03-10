@@ -1415,6 +1415,10 @@ namespace PersonnelManagement.Models
                     .HasColumnType("int(11)")
                     .HasDefaultValueSql("'0'");
 
+                entity.Property(e => e.IsEnded)
+                    .HasColumnType("int(11)")
+                    .HasDefaultValueSql("'0'");
+
                 entity.Property(e => e.Personeducation)
                     .HasColumnName("personeducation")
                     .HasColumnType("int(11)")
@@ -1623,10 +1627,6 @@ namespace PersonnelManagement.Models
             {
                 entity.ToTable("mailexplorer");
 
-                entity.HasIndex(e => e.Id)
-                    .HasName("id_UNIQUE")
-                    .IsUnique();
-
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
                     .HasColumnType("int(11)");
@@ -1645,14 +1645,6 @@ namespace PersonnelManagement.Models
                 entity.HasKey(e => e.Idmailfolder);
 
                 entity.ToTable("mailfolder");
-
-                entity.HasIndex(e => e.Idmailfolder)
-                    .HasName("idmailfolder_UNIQUE")
-                    .IsUnique();
-
-                entity.HasIndex(e => e.Name)
-                    .HasName("name_UNIQUE")
-                    .IsUnique();
 
                 entity.Property(e => e.Idmailfolder)
                     .HasColumnName("idmailfolder")
@@ -3100,6 +3092,12 @@ namespace PersonnelManagement.Models
                 entity.Property(e => e.Optionstring8)
                     .IsRequired()
                     .HasColumnName("optionstring8")
+                    .HasMaxLength(900)
+                    .HasDefaultValueSql("''");
+
+                entity.Property(e => e.Optionstring9)
+                    .IsRequired()
+                    .HasColumnName("optionstring9")
                     .HasMaxLength(900)
                     .HasDefaultValueSql("''");
 
@@ -5004,7 +5002,7 @@ namespace PersonnelManagement.Models
 
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
-                    .HasColumnType("int(30)");
+                    .HasColumnType("int(11)");
 
                 entity.Property(e => e.Altrank)
                     .HasColumnName("altrank")

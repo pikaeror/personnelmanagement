@@ -198,13 +198,7 @@ namespace PersonnelManagement.Models
         public void UpdateStructuresLocal()
         {
             StructuresGetLastTime = stopWatch.ElapsedMilliseconds;
-            List<Structure> structuresList = Structures.ToList();
-            Dictionary<int, Structure> StructuresLocalObjectNew = new Dictionary<int, Structure>();
-            foreach (Structure structure in structuresList)
-            {
-                StructuresLocalObjectNew.Add(structure.Id, structure);
-            }
-            StructuresLocalObject = StructuresLocalObjectNew;
+            StructuresLocalObject = Structures.ToDictionary(structure => structure.Id);
         }
 
 
@@ -226,13 +220,7 @@ namespace PersonnelManagement.Models
         public void UpdateDecreesLocal()
         {
             DecreesGetLastTime = stopWatch.ElapsedMilliseconds;
-            List<Decree> decreesList = Decrees.ToList();
-            Dictionary<int, Decree> DecreesLocalObjectNew = new Dictionary<int, Decree>();
-            foreach (Decree decree in decreesList)
-            {
-                DecreesLocalObjectNew.Add(decree.Id, decree);
-            }
-            DecreesLocalObject = DecreesLocalObjectNew;
+            DecreesLocalObject = Decrees.ToDictionary(decree => decree.Id);
         }
 
         private static long RanksGetLastTime = -RANKS_GET_DELAY - 1;
@@ -253,13 +241,7 @@ namespace PersonnelManagement.Models
         public void UpdateRanksLocal()
         {
             RanksGetLastTime = stopWatch.ElapsedMilliseconds;
-            List<Rank> ranksList = Ranks.ToList();
-            Dictionary<int, Rank> RanksLocalObjectNew = new Dictionary<int, Rank>();
-            foreach (Rank rank in ranksList)
-            {
-                RanksLocalObjectNew.Add(rank.Id, rank);
-            }
-            RanksLocalObject = RanksLocalObjectNew;
+            RanksLocalObject = Ranks.ToDictionary(rank => rank.Id);
         }
 
         private static long AltranksGetLastTime = -ALTRANKS_GET_DELAY - 1;
@@ -280,13 +262,7 @@ namespace PersonnelManagement.Models
         public void UpdateAltranksLocal()
         {
             AltranksGetLastTime = stopWatch.ElapsedMilliseconds;
-            List<Altrank> altranksList = Altranks.ToList();
-            Dictionary<int, Altrank> AltranksLocalObjectNew = new Dictionary<int, Altrank>();
-            foreach (Altrank altrank in altranksList)
-            {
-                AltranksLocalObjectNew.Add(altrank.Id, altrank);
-            }
-            AltranksLocalObject = AltranksLocalObjectNew;
+            AltranksLocalObject = Altranks.ToDictionary(altrank => altrank.Id);
         }
 
 
@@ -308,13 +284,7 @@ namespace PersonnelManagement.Models
         public void UpdateAltrankconditionsLocal()
         {
             AltrankconditionsGetLastTime = stopWatch.ElapsedMilliseconds;
-            List<Altrankcondition> altrankconditionsList = Altrankconditions.ToList();
-            Dictionary<int, Altrankcondition> AltrankconditionsLocalObjectNew = new Dictionary<int, Altrankcondition>();
-            foreach (Altrankcondition altrankcondition in altrankconditionsList)
-            {
-                AltrankconditionsLocalObjectNew.Add(altrankcondition.Id, altrankcondition);
-            }
-            AltrankconditionsLocalObject = AltrankconditionsLocalObjectNew;
+            AltrankconditionsLocalObject = Altrankconditions.ToDictionary(altrankcondition => altrankcondition.Id);
         }
 
 
@@ -336,13 +306,7 @@ namespace PersonnelManagement.Models
         public void UpdateAltrankconditiongroupsLocal()
         {
             AltrankconditiongroupsGetLastTime = stopWatch.ElapsedMilliseconds;
-            List<Altrankconditiongroup> altrankconditiongroupsList = Altrankconditiongroups.ToList();
-            Dictionary<int, Altrankconditiongroup> AltrankconditiongroupsLocalObjectNew = new Dictionary<int, Altrankconditiongroup>();
-            foreach (Altrankconditiongroup altrankconditiongroup in altrankconditiongroupsList)
-            {
-                AltrankconditiongroupsLocalObjectNew.Add(altrankconditiongroup.Id, altrankconditiongroup);
-            }
-            AltrankconditiongroupsLocalObject = AltrankconditiongroupsLocalObjectNew;
+            AltrankconditiongroupsLocalObject = Altrankconditiongroups.ToDictionary(altrankconditiongroup => altrankconditiongroup.Id);
         }
 
 
@@ -364,13 +328,7 @@ namespace PersonnelManagement.Models
         public void UpdatePositionmrdsLocal()
         {
             PositionmrdsGetLastTime = stopWatch.ElapsedMilliseconds;
-            List<Positionmrd> positionmrdsList = Positionmrds.ToList();
-            Dictionary<int, Positionmrd> PositionmrdsLocalObjectNew = new Dictionary<int, Positionmrd>();
-            foreach (Positionmrd positionmrd in positionmrdsList)
-            {
-                PositionmrdsLocalObjectNew.Add(positionmrd.Id, positionmrd);
-            }
-            PositionmrdsLocalObject = PositionmrdsLocalObjectNew;
+            PositionmrdsLocalObject = Positionmrds.ToDictionary(positionmrd => positionmrd.Id);
         }
 
 
@@ -392,13 +350,7 @@ namespace PersonnelManagement.Models
         public void UpdateEducationtypeblocksLocal()
         {
             EducationtypeblocksGetLastTime = stopWatch.ElapsedMilliseconds;
-            List<Educationtypeblock> EducationtypeblocksList = Educationtypeblocks.ToList();
-            Dictionary<int, Educationtypeblock> EducationtypeblocksLocalObjectNew = new Dictionary<int, Educationtypeblock>();
-            foreach (Educationtypeblock Educationtypeblock in EducationtypeblocksList)
-            {
-                EducationtypeblocksLocalObjectNew.Add(Educationtypeblock.Id, Educationtypeblock);
-            }
-            EducationtypeblocksLocalObject = EducationtypeblocksLocalObjectNew;
+            EducationtypeblocksLocalObject = Educationtypeblocks.ToDictionary(Educationtypeblock => Educationtypeblock.Id);
         }
 
         private static long PositiontypesGetLastTime = -POSITIONTYPES_GET_DELAY - 1;
@@ -419,13 +371,7 @@ namespace PersonnelManagement.Models
         public void UpdatePositiontypesLocal()
         {
             PositiontypesGetLastTime = stopWatch.ElapsedMilliseconds;
-            List<Positiontype> positiontypesList = Positiontypes.ToList();
-            Dictionary<int, Positiontype> PositiontypesLocalObjectNew = new Dictionary<int, Positiontype>();
-            foreach (Positiontype positiontype in positiontypesList)
-            {
-                PositiontypesLocalObjectNew.Add(positiontype.Id, positiontype);
-            }
-            PositiontypesLocalObject = PositiontypesLocalObjectNew;
+            PositiontypesLocalObject = Positiontypes.ToDictionary(positiontype => positiontype.Id);
         }
 
         private static long SourceoffinancingsGetLastTime = -SOURCEOFFINANCINGS_GET_DELAY - 1;
@@ -446,13 +392,7 @@ namespace PersonnelManagement.Models
         public void UpdateSourceoffinancingsLocal()
         {
             SourceoffinancingsGetLastTime = stopWatch.ElapsedMilliseconds;
-            List<Sourceoffinancing> sourceoffinancingsList = Sourcesoffinancings.ToList();
-            Dictionary<int, Sourceoffinancing> SourceoffinancingsLocalObjectNew = new Dictionary<int, Sourceoffinancing>();
-            foreach (Sourceoffinancing sourceoffinancing in sourceoffinancingsList)
-            {
-                SourceoffinancingsLocalObjectNew.Add(sourceoffinancing.Id, sourceoffinancing);
-            }
-            SourceoffinancingsLocalObject = SourceoffinancingsLocalObjectNew;
+            SourceoffinancingsLocalObject = Sourcesoffinancings.ToDictionary(sourceoffinancing => sourceoffinancing.Id);
         }
 
         
@@ -474,13 +414,7 @@ namespace PersonnelManagement.Models
         public void UpdateMailexplorersLocal()
         {
             MailexplorerGetLastTime = stopWatch.ElapsedMilliseconds;
-            List<Mailexplorer> MailexplorersList = Mailexplorers.ToList();
-            Dictionary<int, Mailexplorer> MailexplorersLocalObjectNew = new Dictionary<int, Mailexplorer>();
-            foreach (Mailexplorer mrd in MailexplorersList)
-            {
-                MailexplorersLocalObjectNew.Add(mrd.Id, mrd);
-            }
-            MailexplorersLocalObject = MailexplorersLocalObjectNew;
+            MailexplorersLocalObject = Mailexplorers.ToDictionary(mrd => mrd.Id);
         }
 
 
@@ -502,13 +436,7 @@ namespace PersonnelManagement.Models
         public void UpdateMailfoldersLocal()
         {
             MailfolderGetLastTime = stopWatch.ElapsedMilliseconds;
-            List<Mailfolder> MailfoldersList = Mailfolders.ToList();
-            Dictionary<int, Mailfolder> MailfoldersLocalObjectNew = new Dictionary<int, Mailfolder>();
-            foreach (Mailfolder mrd in MailfoldersList)
-            {
-                MailfoldersLocalObjectNew.Add(mrd.Idmailfolder, mrd);
-            }
-            MailfoldersLocalObject = MailfoldersLocalObjectNew;
+            MailfoldersLocalObject = Mailfolders.ToDictionary(mrd => mrd.Idmailfolder);
         }
 
 
@@ -530,13 +458,7 @@ namespace PersonnelManagement.Models
         public void UpdateMrdsLocal()
         {
             MrdsGetLastTime = stopWatch.ElapsedMilliseconds;
-            List<Mrd> mrdsList = Mrds.ToList();
-            Dictionary<int, Mrd> MrdsLocalObjectNew = new Dictionary<int, Mrd>();
-            foreach (Mrd mrd in mrdsList)
-            {
-                MrdsLocalObjectNew.Add(mrd.Id, mrd);
-            }
-            MrdsLocalObject = MrdsLocalObjectNew;
+            MrdsLocalObject = Mrds.ToDictionary(mrd => mrd.Id);
         }
 
 
@@ -558,13 +480,7 @@ namespace PersonnelManagement.Models
         public void UpdateStructuretypesLocal()
         {
             StructuretypesGetLastTime = stopWatch.ElapsedMilliseconds;
-            List<Structuretype> structuretypesList = Structuretypes.ToList();
-            Dictionary<int, Structuretype> StructuretypesLocalObjectNew = new Dictionary<int, Structuretype>();
-            foreach (Structuretype structuretype in structuretypesList)
-            {
-                StructuretypesLocalObjectNew.Add(structuretype.Id, structuretype);
-            }
-            StructuretypesLocalObject = StructuretypesLocalObjectNew;
+            StructuretypesLocalObject = Structuretypes.ToDictionary(structuretype => structuretype.Id);
         }
 
         private static long DecreeoperationsGetLastTime = -DECREEOPERATIONS_GET_DELAY - 30000;
@@ -630,13 +546,7 @@ namespace PersonnelManagement.Models
         public void UpdatePositioncategoriesLocal()
         {
             PositioncategoriesGetLastTime = stopWatch.ElapsedMilliseconds;
-            List<Positioncategory> positioncategoriesList = Positioncategories.ToList();
-            Dictionary<int, Positioncategory> PositioncategoriesLocalObjectNew = new Dictionary<int, Positioncategory>();
-            foreach (Positioncategory positioncategory in positioncategoriesList)
-            {
-                PositioncategoriesLocalObjectNew.Add(positioncategory.Id, positioncategory);
-            }
-            PositioncategoriesLocalObject = PositioncategoriesLocalObjectNew;
+            PositioncategoriesLocalObject = Positioncategories.ToDictionary(positioncategory => positioncategory.Id);
         }
 
 
@@ -659,13 +569,7 @@ namespace PersonnelManagement.Models
         public void UpdatePositioncategoryRankLocal()
         {
             PositioncategoryRankGetLastTime = stopWatch.ElapsedMilliseconds;
-            List<Positioncategoryrank> positioncategoryRankList = Positioncategoryranks.ToList();
-            Dictionary<int, Positioncategoryrank> PositioncategoryRanksLocalObjectNew = new Dictionary<int, Positioncategoryrank>();
-            foreach (Positioncategoryrank positioncategoryrank in positioncategoryRankList)
-            {
-                PositioncategoryRanksLocalObjectNew.Add(positioncategoryrank.Id, positioncategoryrank);
-            }
-            PositioncategoryRanksLocalObject = PositioncategoryRanksLocalObjectNew;
+            PositioncategoryRanksLocalObject = Positioncategoryranks.ToDictionary(positioncategoryrank => positioncategoryrank.Id);
         }
 
 
@@ -702,13 +606,7 @@ namespace PersonnelManagement.Models
 
         public List<Position> PositionsList()
         {
-            List<Position> positions = new List<Position>();
-            foreach (Position position in Positions)
-            {
-                positions.Add(position);
-            }
-            return positions.ToList();
-            //return Positions.ToList();
+            return Positions.ToList();
         }
 
         [MethodImpl(MethodImplOptions.Synchronized)]
@@ -823,13 +721,7 @@ namespace PersonnelManagement.Models
         public void UpdatePersonranksLocal()
         {
             PersonranksGetLastTime = stopWatch.ElapsedMilliseconds;
-            List<Personrank> personranksList = Personranks.ToList();
-            Dictionary<int, Personrank> PersonranksLocalObjectNew = new Dictionary<int, Personrank>();
-            foreach (Personrank personrank in personranksList)
-            {
-                PersonranksLocalObjectNew.Add(personrank.Id, personrank);
-            }
-            PersonranksLocalObject = PersonranksLocalObjectNew;
+            PersonranksLocalObject = Personranks.ToDictionary(personrank => personrank.Id);
         }
 
 
@@ -853,13 +745,7 @@ namespace PersonnelManagement.Models
         public void UpdatePersoncontractsLocal()
         {
             PersoncontractsGetLastTime = stopWatch.ElapsedMilliseconds;
-            List<Personcontract> personcontractsList = Personcontracts.ToList();
-            Dictionary<int, Personcontract> PersoncontractsLocalObjectNew = new Dictionary<int, Personcontract>();
-            foreach (Personcontract personcontract in personcontractsList)
-            {
-                PersoncontractsLocalObjectNew.Add(personcontract.Id, personcontract);
-            }
-            PersoncontractsLocalObject = PersoncontractsLocalObjectNew;
+            PersoncontractsLocalObject = Personcontracts.ToDictionary(personcontract => personcontract.Id);
         }
 
 
@@ -881,13 +767,7 @@ namespace PersonnelManagement.Models
         public void UpdatePersonrelativesLocal()
         {
             PersonrelativesGetLastTime = stopWatch.ElapsedMilliseconds;
-            List<Personrelative> personrelativesList = Personrelatives.ToList();
-            Dictionary<int, Personrelative> PersonrelativesLocalObjectNew = new Dictionary<int, Personrelative>();
-            foreach (Personrelative personrelative in personrelativesList)
-            {
-                PersonrelativesLocalObjectNew.Add(personrelative.Id, personrelative);
-            }
-            PersonrelativesLocalObject = PersonrelativesLocalObjectNew;
+            PersonrelativesLocalObject = Personrelatives.ToDictionary(personrelative => personrelative.Id);
         }
 
 
@@ -911,13 +791,7 @@ namespace PersonnelManagement.Models
         public void UpdatePersonvacationsLocal()
         {
             PersonvacationsGetLastTime = stopWatch.ElapsedMilliseconds;
-            List<Personvacation> personvacationsList = Personvacations.ToList();
-            Dictionary<int, Personvacation> PersonvacationsLocalObjectNew = new Dictionary<int, Personvacation>();
-            foreach (Personvacation personvacation in personvacationsList)
-            {
-                PersonvacationsLocalObjectNew.Add(personvacation.Id, personvacation);
-            }
-            PersonvacationsLocalObject = PersonvacationsLocalObjectNew;
+            PersonvacationsLocalObject = Personvacations.ToDictionary(personvacation => personvacation.Id);
         }
 
         private static long PersonjobsGetLastTime = -PERSONJOBS_GET_DELAY - 1;
@@ -938,13 +812,7 @@ namespace PersonnelManagement.Models
         public void UpdatePersonjobsLocal()
         {
             PersonjobsGetLastTime = stopWatch.ElapsedMilliseconds;
-            List<Personjob> personjobsList = Personjobs.ToList();
-            Dictionary<int, Personjob> PersonjobsLocalObjectNew = new Dictionary<int, Personjob>();
-            foreach (Personjob personjob in personjobsList)
-            {
-                PersonjobsLocalObjectNew.Add(personjob.Id, personjob);
-            }
-            PersonjobsLocalObject = PersonjobsLocalObjectNew;
+            PersonjobsLocalObject = Personjobs.ToDictionary(personjob => personjob.Id);
         }
 
         private static long PersoneducationsGetLastTime = -PERSONEDUCATIONS_GET_DELAY - 1;
@@ -965,13 +833,7 @@ namespace PersonnelManagement.Models
         public void UpdatePersoneducationsLocal()
         {
             PersonrewardsGetLastTime = stopWatch.ElapsedMilliseconds;
-            List<Personeducation> personeducationsList = Personeducations.ToList();
-            Dictionary<int, Personeducation> PersonrewardsLocalObjectNew = new Dictionary<int, Personeducation>();
-            foreach (Personeducation personeducation in personeducationsList)
-            {
-                PersonrewardsLocalObjectNew.Add(personeducation.Id, personeducation);
-            }
-            PersoneducationsLocalObject = PersoneducationsLocalObjectNew;
+            PersoneducationsLocalObject = Personeducations.ToDictionary(personeducation => personeducation.Id);
         }
 
         private static long PersonrewardsGetLastTime = -PERSONREWARDS_GET_DELAY - 1;
@@ -992,13 +854,7 @@ namespace PersonnelManagement.Models
         public void UpdatePersonrewardsLocal()
         {
             PersonrewardsGetLastTime = stopWatch.ElapsedMilliseconds;
-            List<Personreward> personrewardsList = Personrewards.ToList();
-            Dictionary<int, Personreward> PersonrewardsLocalObjectNew = new Dictionary<int, Personreward>();
-            foreach (Personreward personreward in personrewardsList)
-            {
-                PersonrewardsLocalObjectNew.Add(personreward.Id, personreward);
-            }
-            PersonrewardsLocalObject = PersonrewardsLocalObjectNew;
+            PersonrewardsLocalObject = Personrewards.ToDictionary(personreward => personreward.Id);
         }
 
 
@@ -1021,13 +877,7 @@ namespace PersonnelManagement.Models
         public void UpdatePersondecreesLocal()
         {
             PersondecreesGetLastTime = stopWatch.ElapsedMilliseconds;
-            List<Persondecree> persondecreesList = Persondecrees.ToList();
-            Dictionary<int, Persondecree> PersondecreesLocalObjectNew = new Dictionary<int, Persondecree>();
-            foreach (Persondecree persondecree in persondecreesList)
-            {
-                PersondecreesLocalObjectNew.Add(persondecree.Id, persondecree);
-            }
-            PersondecreesLocalObject = PersondecreesLocalObjectNew;
+            PersondecreesLocalObject = Persondecrees.ToDictionary(persondecree => persondecree.Id);
         }
 
         private static long PersondecreeoperationsGetLastTime = -PERSONDECREEOPERATIONS_GET_DELAY - 1;
@@ -1048,13 +898,7 @@ namespace PersonnelManagement.Models
         public void UpdatePersondecreeoperationsLocal()
         {
             PersondecreeoperationsGetLastTime = stopWatch.ElapsedMilliseconds;
-            List<Persondecreeoperation> persondecreeoperationsList = Persondecreeoperations.ToList();
-            Dictionary<int, Persondecreeoperation> PersondecreeoperationsLocalObjectNew = new Dictionary<int, Persondecreeoperation>();
-            foreach (Persondecreeoperation persondecreeoperation in persondecreeoperationsList)
-            {
-                PersondecreeoperationsLocalObjectNew.Add(persondecreeoperation.Id, persondecreeoperation);
-            }
-            PersondecreeoperationsLocalObject = PersondecreeoperationsLocalObjectNew;
+            PersondecreeoperationsLocalObject = Persondecreeoperations.ToDictionary(persondecreeoperation => persondecreeoperation.Id);
         }
 
 
@@ -1076,13 +920,7 @@ namespace PersonnelManagement.Models
         public void UpdateSessionsLocal()
         {
             SessionsGetLastTime = stopWatch.ElapsedMilliseconds;
-            List<Session> sessionsList = Sessions.ToList();
-            Dictionary<string, Session> SessionsLocalObjectNew = new Dictionary<string, Session>();
-            foreach (Session session in sessionsList)
-            {
-                SessionsLocalObjectNew.Add(session.Id, session);
-            }
-            SessionsLocalObject = SessionsLocalObjectNew;
+            SessionsLocalObject = Sessions.ToDictionary(session => session.Id);
         }
 
 
@@ -1105,13 +943,7 @@ namespace PersonnelManagement.Models
         public void UpdateUsersLocal()
         {
             UsersGetLastTime = stopWatch.ElapsedMilliseconds;
-            List<User> usersList = Users.ToList();
-            Dictionary<int, User> UsersLocalObjectNew = new Dictionary<int, User>();
-            foreach (User user in usersList)
-            {
-                UsersLocalObjectNew.Add(user.Id, user);
-            }
-            UsersLocalObject = UsersLocalObjectNew;
+            UsersLocalObject = Users.ToDictionary(user => user.Id);
         }
 
         private static long RightsGetLastTime = -RIGHTS_GET_DELAY - 1; 
@@ -1132,13 +964,7 @@ namespace PersonnelManagement.Models
         public void UpdateRightsLocal()
         {
             RightsGetLastTime = stopWatch.ElapsedMilliseconds;
-            List<Rights> rightsList = Rights.ToList();
-            Dictionary<int, Rights> RightsLocalObjectNew = new Dictionary<int, Rights>();
-            foreach (Rights rights in rightsList)
-            {
-                RightsLocalObjectNew.Add(rights.Id, rights);
-            }
-            RightsLocalObject = RightsLocalObjectNew;
+            RightsLocalObject = Rights.ToDictionary(rights => rights.Id);
         }
 
         private static long RolesGetLastTime = -ROLES_GET_DELAY - 1;
@@ -1159,13 +985,7 @@ namespace PersonnelManagement.Models
         public void UpdateRolesLocal()
         {
             RolesGetLastTime = stopWatch.ElapsedMilliseconds;
-            List<Role> rolesList = Roles.ToList();
-            Dictionary<int, Role> RolesLocalObjectNew = new Dictionary<int, Role>();
-            foreach (Role role in rolesList)
-            {
-                RolesLocalObjectNew.Add(role.Id, role);
-            }
-            RolesLocalObject = RolesLocalObjectNew;
+            RolesLocalObject = Roles.ToDictionary(role => role.Id);
         }
 
 
@@ -1187,13 +1007,7 @@ namespace PersonnelManagement.Models
         public void UpdateSubjectsLocal()
         {
             SubjectsGetLastTime = stopWatch.ElapsedMilliseconds;
-            List<Subject> subjectsList = Subjects.ToList();
-            Dictionary<int, Subject> SubjectsLocalObjectNew = new Dictionary<int, Subject>();
-            foreach (Subject subject in subjectsList)
-            {
-                SubjectsLocalObjectNew.Add(subject.Id, subject);
-            }
-            SubjectsLocalObject = SubjectsLocalObjectNew;
+            SubjectsLocalObject = Subjects.ToDictionary(subject => subject.Id);
         }
 
 
@@ -1216,13 +1030,7 @@ namespace PersonnelManagement.Models
         public void UpdateCertificatesLocal()
         {
             CertificatesGetLastTime = stopWatch.ElapsedMilliseconds;
-            List<Certificate> certificatesList = Certificates.ToList();
-            Dictionary<int, Certificate> CertificatesLocalObjectNew = new Dictionary<int, Certificate>();
-            foreach (Certificate certificate in certificatesList)
-            {
-                CertificatesLocalObjectNew.Add(certificate.Id, certificate);
-            }
-            CertificatesLocalObject = CertificatesLocalObjectNew;
+            CertificatesLocalObject = Certificates.ToDictionary(certificate => certificate.Id);
         }
 
         /// <summary>
@@ -5082,14 +4890,15 @@ namespace PersonnelManagement.Models
         public IEnumerable<Structure> FilterDeletedStructures(IEnumerable<Structure> structures, DateTime date)
         {
             List<Structure> filtered = new List<Structure>();
-            foreach (Structure structure in structures)
+            return structures.Where(r => !IsSignedAndDeleted(r, date));
+            /*foreach (Structure structure in structures)
             {
                 if (!IsSignedAndDeleted(structure, date))
                 {
                     filtered.Add(structure);
                 }
             }
-            return filtered;
+            return filtered;*/
         }
 
 
@@ -17169,6 +16978,7 @@ namespace PersonnelManagement.Models
             decreeoperation.Optionstring6 = persondecreeoperation.Optionstring6;
             decreeoperation.Optionstring7 = persondecreeoperation.Optionstring7;
             decreeoperation.Optionstring8 = persondecreeoperation.Optionstring8;
+            decreeoperation.Optionstring9 = persondecreeoperation.Optionstring9;
             decreeoperation.Optiondate1 = persondecreeoperation.Optiondate1;
             decreeoperation.Optiondate2 = persondecreeoperation.Optiondate2;
             decreeoperation.Optiondate3 = persondecreeoperation.Optiondate3;
@@ -18412,19 +18222,21 @@ namespace PersonnelManagement.Models
                         {
                             // Пытаемся найти, есть ли уже такой подпункт
                             //Persondecreeblocksub existingPersondecreeblocksub = persondecreeblocksubs.FirstOrDefault(p => p.Persondecreeblocksubtype == persondecreeoperation.Persondecreeblocksubtype);
-                            Persondecreeblocksub existingPersondecreeblocksub = persondecreeblocksubs.FirstOrDefault(p => p.Persondecreeblocksubtype == persondecreeoperation.Persondecreeblocksubtype &&
-                            p.Subvaluenumber1 == persondecreeoperation.Optionnumber7);
+                            Persondecreeblocksub existingPersondecreeblocksub = persondecreeblocksubs.FirstOrDefault(p => 
+                            p.Persondecreeblocksubtype == persondecreeoperation.Persondecreeblocksubtype &&
+                            (p.Subvaluenumber1 == persondecreeoperation.Optionnumber7 || p.Subvaluedate1 == persondecreeoperation.Optiondate2));
                             // Подпункт существует
                             if (existingPersondecreeblocksub != null)
                             {
                                 decreeoperation.Persondecreeblocksub = existingPersondecreeblocksub.Id;
 
-                                existingPersondecreeblocksub = persondecreeblocksubs.FirstOrDefault(p => p.Subvaluedate1 == persondecreeoperation.Optiondate1 &&
+                                existingPersondecreeblocksub = persondecreeblocksubs.FirstOrDefault(p => 
+                                p.Subvaluedate1 == persondecreeoperation.Optiondate1 &&
                                 p.Subvaluenumber3 == persondecreeoperation.Optionnumber3);
                                 if (existingPersondecreeblocksub != null)
                                 {
                                     decreeoperation.Persondecreeblocksub = existingPersondecreeblocksub.Id;
-                                }
+                                } 
                                 else
                                 {
                                     Persondecreeblocksub persondecreeblocksubsub = new Persondecreeblocksub();
@@ -18449,10 +18261,10 @@ namespace PersonnelManagement.Models
                                 persondecreeblocksub.Persondecreeblocksubtype = persondecreeoperation.Optionnumber1;
                                 persondecreeblocksub.Subvaluenumber1 = persondecreeoperation.Optionnumber7;
                                 persondecreeblocksub.Subvaluenumber2 = persondecreeoperation.Optionnumber2;
+                                persondecreeblocksub.Subvaluenumber3 = persondecreeoperation.Optionnumber11;
                                 persondecreeblocksub.Subvaluestring1 = persondecreeoperation.Subvaluestring1;
                                 persondecreeblocksub.Subvaluestring2 = persondecreeoperation.Subvaluestring2;
                                 persondecreeblocksub.Parentpersondecreeblocksub = persondecreeoperation.Persondecreeblock;
-
 
                                 context.Persondecreeblocksub.Add(persondecreeblocksub);
                                 SaveChanges();
@@ -18467,7 +18279,6 @@ namespace PersonnelManagement.Models
                                 persondecreeblocksubsub.Subvaluedate1 = persondecreeoperation.Optiondate1;
                                 persondecreeblocksubsub.Subvaluestring1 = decreeoperation.Optionstring7;
                                 persondecreeblocksubsub.Parentpersondecreeblocksub = persondecreeblocksub.Id;
-
 
                                 context.Persondecreeblocksub.Add(persondecreeblocksubsub);
                                 SaveChanges();
@@ -18480,16 +18291,16 @@ namespace PersonnelManagement.Models
                                     if (persondecreeblocksubs.Count() == 0)
                                     {
                                         persondecreeblocksub.Priority = 1;
-                                        persondecreeblocksub.Index = 1;
-                                    }
+                                        persondecreeblocksub.Index = 1;   
+                                    } 
                                     else
                                     {
                                         int maxPriority = persondecreeblocksubs.Max(p => p.Priority) + 1;
-                                        int maxIndex = persondecreeblocksubs.Max(p => p.Index) + 1;
+                                        int maxIndex = persondecreeblocksubs.Max(p => p.Index) + 1;      
 
                                         persondecreeblocksub.Priority = maxPriority;
-                                        persondecreeblocksub.Index = maxIndex;
-                                    }
+                                        persondecreeblocksub.Index = maxIndex;      
+                                    } 
                                 }
                             }
                             break;
@@ -18498,47 +18309,80 @@ namespace PersonnelManagement.Models
                         {
                             // Пытаемся найти, есть ли уже такой подпункт
                             //Persondecreeblocksub existingPersondecreeblocksub = persondecreeblocksubs.FirstOrDefault(p => p.Persondecreeblocksubtype == persondecreeoperation.Persondecreeblocksubtype);
-                            Persondecreeblocksub existingPersondecreeblocksub = persondecreeblocksubs.FirstOrDefault(p => p.Subvaluedate1 == persondecreeoperation.Optiondate3);
+                            Persondecreeblocksub existingPersondecreeblocksub = persondecreeblocksubs.FirstOrDefault(p => 
+                            p.Subvaluedate1 == persondecreeoperation.Optiondate2);
                             // Подпункт существует
                             if (existingPersondecreeblocksub != null)
                             {
                                 decreeoperation.Persondecreeblocksub = existingPersondecreeblocksub.Id;
 
-                                existingPersondecreeblocksub = persondecreeblocksubs.FirstOrDefault(p => p.Subvaluenumber1 == persondecreeoperation.Persondecreeblocksubtype &&
+                                existingPersondecreeblocksub = persondecreeblocksubs.FirstOrDefault(p =>
                                 p.Subvaluestring1 == persondecreeoperation.Optionstring1 &&
-                                p.Subvaluestring2 == persondecreeoperation.Optionstring2);
+                                p.Subvaluestring2 == persondecreeoperation.Optionstring2 &&
+                                p.Subvaluedate1 == persondecreeoperation.Optiondate3 &&
+                                p.Subvaluenumber2 == persondecreeoperation.Optionnumber5);
                                 if (existingPersondecreeblocksub != null)
                                 {
                                     decreeoperation.Persondecreeblocksub = existingPersondecreeblocksub.Id;
+
+                                    existingPersondecreeblocksub = persondecreeblocksubs.FirstOrDefault(p => 
+                                    p.Subvaluenumber1 == persondecreeoperation.Optionnumber6 &&
+                                    p.Subvaluenumber2 == persondecreeoperation.Optionnumber7 &&
+                                    p.Subvaluenumber3 == persondecreeoperation.Optionnumber8 &&
+                                    p.Subvaluenumber4 == persondecreeoperation.Optionnumber9);
+                                    if (existingPersondecreeblocksub != null)
+                                    {
+                                        decreeoperation.Persondecreeblocksub = existingPersondecreeblocksub.Id;
+                                    }
+                                    else
+                                    {
+                                        Persondecreeblocksub persondecreeblocksubsubsub = new Persondecreeblocksub();
+                                        persondecreeblocksubsubsub.Persondecreeblock = persondecreeoperation.Persondecreeblock;
+                                        persondecreeblocksubsubsub.Subvaluenumber1 = persondecreeoperation.Optionnumber6;
+                                        persondecreeblocksubsubsub.Subvaluenumber2 = persondecreeoperation.Optionnumber7;
+                                        persondecreeblocksubsubsub.Subvaluenumber3 = persondecreeoperation.Optionnumber8;
+                                        persondecreeblocksubsubsub.Subvaluenumber4 = persondecreeoperation.Optionnumber9;
+                                        persondecreeblocksubsubsub.Parentpersondecreeblocksub = decreeoperation.Persondecreeblocksub;
+
+                                        context.Persondecreeblocksub.Add(persondecreeblocksubsubsub);
+                                        SaveChanges();
+                                        decreeoperation.Persondecreeblocksub = persondecreeblocksubsubsub.Id;
+                                    }
                                 }
                                 else
                                 {
                                     Persondecreeblocksub persondecreeblocksubsub = new Persondecreeblocksub();
                                     persondecreeblocksubsub.Persondecreeblock = persondecreeoperation.Persondecreeblock;
-                                    persondecreeblocksubsub.Persondecreeblocksubtype = persondecreeoperation.Optionnumber1;
-                                    persondecreeblocksubsub.Subvaluenumber1 = persondecreeoperation.Optionnumber8;
-                                    persondecreeblocksubsub.Subvaluenumber2 = persondecreeoperation.Subvaluenumber2;
-                                    persondecreeblocksubsub.Subvaluenumber3 = persondecreeoperation.Optionnumber3;
-                                    persondecreeblocksubsub.Subvaluedate1 = persondecreeoperation.Optiondate1;
+                                    persondecreeblocksubsub.Subvaluestring1 = persondecreeoperation.Optionstring1;
+                                    persondecreeblocksubsub.Subvaluestring2 = persondecreeoperation.Optionstring2;
+                                    persondecreeblocksubsub.Subvaluedate1 = persondecreeoperation.Optiondate3;
+                                    persondecreeblocksubsub.Subvaluenumber2 = decreeoperation.Optionnumber5;
                                     persondecreeblocksubsub.Parentpersondecreeblocksub = decreeoperation.Persondecreeblocksub;
-                                    persondecreeblocksubsub.Subvaluestring1 = decreeoperation.Optionstring7;
 
                                     context.Persondecreeblocksub.Add(persondecreeblocksubsub);
                                     SaveChanges();
                                     decreeoperation.Persondecreeblocksub = persondecreeblocksubsub.Id;
+
+                                    Persondecreeblocksub persondecreeblocksubsubsub = new Persondecreeblocksub();
+                                    persondecreeblocksubsubsub.Persondecreeblock = persondecreeoperation.Persondecreeblock;
+                                    persondecreeblocksubsubsub.Subvaluenumber1 = persondecreeoperation.Optionnumber6;
+                                    persondecreeblocksubsubsub.Subvaluenumber2 = persondecreeoperation.Optionnumber7;
+                                    persondecreeblocksubsubsub.Subvaluenumber3 = persondecreeoperation.Optionnumber8;
+                                    persondecreeblocksubsubsub.Subvaluenumber4 = persondecreeoperation.Optionnumber9;
+                                    persondecreeblocksubsubsub.Parentpersondecreeblocksub = decreeoperation.Persondecreeblocksub;
+
+                                    context.Persondecreeblocksub.Add(persondecreeblocksubsubsub);
+                                    SaveChanges();
+                                    decreeoperation.Persondecreeblocksub = persondecreeblocksubsubsub.Id;
                                 }
                             }
                             else
                             {
                                 Persondecreeblocksub persondecreeblocksub = new Persondecreeblocksub();
                                 persondecreeblocksub.Persondecreeblock = persondecreeoperation.Persondecreeblock;
-                                persondecreeblocksub.Persondecreeblocksubtype = persondecreeoperation.Optionnumber1;
-                                persondecreeblocksub.Subvaluenumber1 = persondecreeoperation.Optionnumber7;
-                                persondecreeblocksub.Subvaluenumber2 = persondecreeoperation.Optionnumber2;
-                                persondecreeblocksub.Subvaluestring1 = persondecreeoperation.Subvaluestring1;
-                                persondecreeblocksub.Subvaluestring2 = persondecreeoperation.Subvaluestring2;
-                                persondecreeblocksub.Parentpersondecreeblocksub = persondecreeoperation.Persondecreeblock;
-
+                                persondecreeblocksub.Subvaluedate1 = persondecreeoperation.Optiondate2;
+                                persondecreeblocksub.Subvaluenumber3 = persondecreeoperation.Optionnumber11;
+                                persondecreeblocksub.Parentpersondecreeblocksub = decreeoperation.Persondecreeblocksub;
 
                                 context.Persondecreeblocksub.Add(persondecreeblocksub);
                                 SaveChanges();
@@ -18546,18 +18390,27 @@ namespace PersonnelManagement.Models
 
                                 Persondecreeblocksub persondecreeblocksubsub = new Persondecreeblocksub();
                                 persondecreeblocksubsub.Persondecreeblock = persondecreeoperation.Persondecreeblock;
-                                persondecreeblocksubsub.Persondecreeblocksubtype = persondecreeoperation.Persondecreeblocksubtype;
-                                persondecreeblocksubsub.Subvaluenumber1 = persondecreeoperation.Optionnumber8;
-                                persondecreeblocksubsub.Subvaluenumber2 = persondecreeoperation.Subvaluenumber2;
-                                persondecreeblocksubsub.Subvaluenumber3 = persondecreeoperation.Optionnumber3;
-                                persondecreeblocksubsub.Subvaluedate1 = persondecreeoperation.Optiondate1;
-                                persondecreeblocksubsub.Subvaluestring1 = decreeoperation.Optionstring7;
-                                persondecreeblocksubsub.Parentpersondecreeblocksub = persondecreeblocksub.Id;
-
+                                persondecreeblocksubsub.Subvaluestring1 = persondecreeoperation.Optionstring1;
+                                persondecreeblocksubsub.Subvaluestring2 = persondecreeoperation.Optionstring2;
+                                persondecreeblocksubsub.Subvaluedate1 = persondecreeoperation.Optiondate3;
+                                persondecreeblocksubsub.Subvaluenumber2 = decreeoperation.Optionnumber5;
+                                persondecreeblocksubsub.Parentpersondecreeblocksub = decreeoperation.Persondecreeblocksub;
 
                                 context.Persondecreeblocksub.Add(persondecreeblocksubsub);
                                 SaveChanges();
                                 decreeoperation.Persondecreeblocksub = persondecreeblocksubsub.Id;
+
+                                Persondecreeblocksub persondecreeblocksubsubsub = new Persondecreeblocksub();
+                                persondecreeblocksubsubsub.Persondecreeblock = persondecreeoperation.Persondecreeblock;
+                                persondecreeblocksubsubsub.Subvaluenumber1 = persondecreeoperation.Optionnumber6;
+                                persondecreeblocksubsubsub.Subvaluenumber2 = persondecreeoperation.Optionnumber7;
+                                persondecreeblocksubsubsub.Subvaluenumber3 = persondecreeoperation.Optionnumber8;
+                                persondecreeblocksubsubsub.Subvaluenumber4 = persondecreeoperation.Optionnumber9;
+                                persondecreeblocksubsubsub.Parentpersondecreeblocksub = decreeoperation.Persondecreeblocksub;
+
+                                context.Persondecreeblocksub.Add(persondecreeblocksubsubsub);
+                                SaveChanges();
+                                decreeoperation.Persondecreeblocksub = persondecreeblocksubsubsub.Id;
 
                                 // Фабул не было
                                 if (persondecreeblockintros.Count == 0)
@@ -18846,10 +18699,24 @@ namespace PersonnelManagement.Models
                         context.Persondecreeblocksub.Add(persondecreeblocksubsubsub);
                         SaveChanges();
                         decreeoperation.Persondecreeblocksub = persondecreeblocksubsubsub.Id;
+
+                        if (persondecreeblocksubs.Count() == 0)
+                        {
+                            persondecreeblocksubsubsub.Priority = 1;
+                            persondecreeblocksubsubsub.Index = 1;
+                        }
+                        else
+                        {
+                            int maxPriority = persondecreeblocksubs.Max(p => p.Priority) + 1;
+                            int maxIndex = persondecreeblocksubs.Max(p => p.Index) + 1;
+
+                            persondecreeblocksubsubsub.Priority = maxPriority;
+                            persondecreeblocksubsubsub.Index = maxIndex;
+                        }
                     }
                 }
                 else
-                {
+                { 
                     Persondecreeblocksub persondecreeblocksub = new Persondecreeblocksub();
                     persondecreeblocksub.Persondecreeblock = persondecreeoperation.Persondecreeblock;
                     persondecreeblocksub.Persondecreeblocksubtype = persondecreeoperation.Persondecreeblocksubtype;
@@ -18890,7 +18757,6 @@ namespace PersonnelManagement.Models
                     {
                         int maxPriority = persondecreeblocksubs.Max(p => p.Priority) + 1;
                         int maxIndex = persondecreeblocksubs.Max(p => p.Index) + 1;
-
                         persondecreeblocksubsubsub.Priority = maxPriority;
                         persondecreeblocksubsubsub.Index = maxIndex;
                     }

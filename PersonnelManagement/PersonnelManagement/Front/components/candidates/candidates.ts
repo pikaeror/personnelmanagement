@@ -329,7 +329,6 @@ export default class CandidatesComponent extends Vue {
             .then(result => {
                 result.sort((a, b) => ('' + a.usersurname).localeCompare(b.usersurname));
                 this.cabinetes = result;
-                
             })
     }
 

@@ -37,6 +37,7 @@ export default class Persondecreeblock {
     optionstring6: string;
     optionstring7: string;
     optionstring8: string;
+    optionstring9: string;
     optiondate1: Date;
     optiondate2: Date;
     optiondate3: Date;

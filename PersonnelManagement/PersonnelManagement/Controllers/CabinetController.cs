@@ -35,7 +35,7 @@ namespace PersonnelManagement.Controllers
             {
                 fio = "";
             }
-            if (IdentityService.IsLogined(sessionid, repository) && fio.Length > 1)
+            if (IdentityService.IsLogined(sessionid, repository)/* && fio.Length > 1*/ /*Altksei searching condition*/)
             {
                 user = IdentityService.GetUserBySessionID(sessionid, repository);
                 List<CabinetdataManager> cabinetdatasUnfiltered = repository.GetCabinetdatas(user, fio);
@@ -100,8 +100,6 @@ namespace PersonnelManagement.Controllers
                     CabinetdataManager cabinetdataManager = repository.GetCabinetdataManagerByIdent(user, id);
                     return cabinetdataManager;
                 //}
-
-                return null;
             }
             //return empty;
             return null;
@@ -193,8 +191,6 @@ namespace PersonnelManagement.Controllers
 
                 return File(mem, "application/vnd.openxmlformats-officedocument.wordprocessingml.document", cabinetdataManager.Usersurname + "_candidate.docx");
                 //}
-
-                return null;
             }
             //return empty;
             return null;

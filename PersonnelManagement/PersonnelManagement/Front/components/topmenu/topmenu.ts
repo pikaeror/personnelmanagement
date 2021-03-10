@@ -1602,7 +1602,6 @@ export default class TopmenuComponent extends Vue {
             this.courseName = this.getStructureById(Number.parseInt(this.getStructureById(this.numberStructure).parentstructure)).name2;
             this.specialityName = this.getStructureById(Number.parseInt(this.getStructureById(Number.parseInt(this.getStructureById(this.numberStructure).parentstructure)).parentstructure)).name2;
             this.facultyName = this.getStructureById(Number.parseInt(this.getStructureById(Number.parseInt(this.getStructureById(Number.parseInt(this.getStructureById(this.numberStructure).parentstructure)).parentstructure)).parentstructure)).name2;
-            
             this.$store.commit("setModeappointedpersondecreeStructure", 0);
             this.$store.commit("setModeappointpersondecreeStructure", false);
             this.modalPersondecreeMenuVisible = true;
@@ -1628,7 +1627,6 @@ export default class TopmenuComponent extends Vue {
         else
         if(this.num == 5){
             this.numberNewStructure = this.$store.state.modeappointedpersondecreeStructure;
-
             this.structureNewName = this.getStructureName(this.numberNewStructure);
             this.$store.commit("setModeappointedpersondecreeStructure", 0);
             this.$store.commit("setModeappointpersondecreeStructure", false);
@@ -1641,16 +1639,16 @@ export default class TopmenuComponent extends Vue {
         }
         else{
             this.searchForStructure(this.$store.state.modeappointedpersondecreeStructure, this.currentPersondecreeblock);
-            this.$store.commit("setModeappointedpersondecreeStructure", 0);
+            this.$store.commit("setModeappointedpersondecreeStructure", 0);  
             this.$store.commit("setModeappointpersondecreeStructure", false);
-            this.modalPersondecreeMenuVisible = true;
+            this.modalPersondecreeMenuVisible = true; 
             this.modalPersondecreesMenuVisible = true;
-            this.$store.commit("setModeselectedstructure", 0);
+            this.$store.commit("setModeselectedstructure", 0);  
             this.$store.commit("setModeselectstructure", false);
             this.num = 0;
             return;
         }
-    }
+    }     
  
     structureModeAccess(): boolean {
         if (this.$store.state.admin == "1" || this.$store.state.structureeditorAccess == "1" || this.$store.state.personnelreadAccess == "1") {
@@ -3635,7 +3633,7 @@ export default class TopmenuComponent extends Vue {
         }
         // Отчислить
         if(persondecreeblock.persondecreeblocktype == 18){
-            if(persondecreeblock.persondecreeblocksub == 1){
+            if(persondecreeblock.optionnumber4 == 30){
                 if(persondecreeblock.checkbox1){
                     persondecreeblock.optionnumber6 = 1;
                 }
@@ -3649,7 +3647,7 @@ export default class TopmenuComponent extends Vue {
                     persondecreeblock.optionnumber9 = 1;
                 }
                 persondecreeblock.optionnumber11 = 2;
-            }else if(persondecreeblock.persondecreeblocksub == 2){
+            }else if(persondecreeblock.optionnumber4 == 31){
                 if(persondecreeblock.checkboxdirect)
                 persondecreeblock.optionnumber8 = 1;
                 else
@@ -3704,7 +3702,6 @@ export default class TopmenuComponent extends Vue {
                     persondecreeblock.optionnumber2 = 1;
                 }
             }
-            
         }
 
         let t: any = <Persondecreeoperation>{
@@ -3732,6 +3729,7 @@ export default class TopmenuComponent extends Vue {
             optionstring6: persondecreeblock.optionstring6,
             optionstring7: persondecreeblock.optionstring7,
             optionstring8: persondecreeblock.optionstring8,
+            optionstring9: persondecreeblock.optionstring9,
             optiondate1: this.prepareDateToExportNullable(persondecreeblock.optiondate1String),
             optiondate2: this.prepareDateToExportNullable(persondecreeblock.optiondate2String),
             optiondate3: this.prepareDateToExportNullable(persondecreeblock.optiondate3String),

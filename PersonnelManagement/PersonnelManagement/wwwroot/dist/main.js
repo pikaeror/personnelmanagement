@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "50abb1a20696f1d3cdc7"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "dbcf6eecfc90a7c49f47"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -26614,7 +26614,7 @@ let TopmenuComponent = class TopmenuComponent extends __WEBPACK_IMPORTED_MODULE_
         }
         // Отчислить
         if (persondecreeblock.persondecreeblocktype == 18) {
-            if (persondecreeblock.persondecreeblocksub == 1) {
+            if (persondecreeblock.optionnumber4 == 30) {
                 if (persondecreeblock.checkbox1) {
                     persondecreeblock.optionnumber6 = 1;
                 }
@@ -26629,7 +26629,7 @@ let TopmenuComponent = class TopmenuComponent extends __WEBPACK_IMPORTED_MODULE_
                 }
                 persondecreeblock.optionnumber11 = 2;
             }
-            else if (persondecreeblock.persondecreeblocksub == 2) {
+            else if (persondecreeblock.optionnumber4 == 31) {
                 if (persondecreeblock.checkboxdirect)
                     persondecreeblock.optionnumber8 = 1;
                 else
@@ -26710,6 +26710,7 @@ let TopmenuComponent = class TopmenuComponent extends __WEBPACK_IMPORTED_MODULE_
             optionstring6: persondecreeblock.optionstring6,
             optionstring7: persondecreeblock.optionstring7,
             optionstring8: persondecreeblock.optionstring8,
+            optionstring9: persondecreeblock.optionstring9,
             optiondate1: this.prepareDateToExportNullable(persondecreeblock.optiondate1String),
             optiondate2: this.prepareDateToExportNullable(persondecreeblock.optiondate2String),
             optiondate3: this.prepareDateToExportNullable(persondecreeblock.optiondate3String),
@@ -36396,7 +36397,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
             }, [_c('span', [_vm._v(_vm._s(persondecreeblocksubsubsubsub.subvaluestring1) + ":")])]), _vm._v(" "), _vm._l((_vm.persondecreeOperations), function(decreeoperation) {
               return (decreeoperation.persondecreeblocksub == persondecreeblocksubsubsubsub.id) ? _c('div', {
                 staticClass: "persondecreeoperation-part-list-element"
-              }, [_c('div', [_vm._v("\n                                                            " + _vm._s(decreeoperation.personobject.surname2) + " " + _vm._s(decreeoperation.personobject.name2) + "\n                                                            " + _vm._s(decreeoperation.personobject.fathername2) + " (" + _vm._s(decreeoperation.personobject.numpersonal) + ");\n                                                        ")]), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_c('div', [_c('el-button', {
+              }, [_c('div', [_vm._v("\n                                                            " + _vm._s(decreeoperation.personobject.surname2) + " " + _vm._s(decreeoperation.personobject.name2) + "\n                                                            " + _vm._s(decreeoperation.personobject.fathername2) + " (" + _vm._s(decreeoperation.optionstring9) + ");\n                                                        ")]), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_c('div', [_c('el-button', {
                 attrs: {
                   "size": "mini",
                   "type": "warning"
@@ -36424,7 +36425,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       staticClass: "eld-eld-body-select-medium",
       attrs: {
         "clearable": "",
-        "placeholder": "Вид предоставления"
+        "placeholder": ""
       },
       model: {
         value: (persondecreeBlock.optionnumber4),
@@ -36466,78 +36467,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           "value": educationpositiontype.id
         }
       })
-    }))], 1), _vm._v(" "), _c('div', {
-      staticClass: "eld-eld-body-row-flex"
-    }, [_c('div', {
-      staticStyle: {
-        "margin-top": "10px"
-      }
-    }, [_vm._v("\n                                    Кого\n                                    "), _c('div', {
-      staticStyle: {
-        "margin-top": "10px"
-      }
-    }, [_c('el-button', {
-      attrs: {
-        "type": "primary",
-        "plain": ""
-      },
-      on: {
-        "click": function($event) {
-          _vm.selectAllPersonInStructure(persondecreeBlock)
-        }
-      }
-    }, [_vm._v("Выбрать")])], 1), _vm._v(" "), _c('div', {
-      staticStyle: {
-        "margin-top": "15px"
-      }
-    }, [_c('el-input', {
-      staticClass: "eld-eld-body-select-medium",
-      attrs: {
-        "placeholder": "Фамилия Имя Отчество"
-      },
-      on: {
-        "input": function($event) {
-          _vm.searchPersonsBlock(persondecreeBlock)
-        }
-      },
-      model: {
-        value: (persondecreeBlock.fiosearch),
-        callback: function($$v) {
-          persondecreeBlock.fiosearch = $$v
-        },
-        expression: "persondecreeBlock.fiosearch"
-      }
-    })], 1), _vm._v(" "), (_vm.hasSearchResultsBlock(persondecreeBlock)) ? _c('div', {
-      staticClass: "eld-search-main"
-    }, [_c('div', {
-      staticClass: "eld-search-main-title"
-    }, [_vm._v("\n                                            Результаты поиска\n                                        ")]), _vm._v(" "), _vm._l((persondecreeBlock.personssearch), function(person) {
-      return _c('div', {
-        staticClass: "eld-search-element",
-        on: {
-          "click": function($event) {
-            _vm.selectPersonBlockNonAuto(person.id, persondecreeBlock)
-          }
-        }
-      }, [_c('div', [_vm._v("\n                                                " + _vm._s(person.surname) + " " + _vm._s(person.name) + " " + _vm._s(person.fathername) + "\n                                            ")]), _vm._v(" "), _c('div', [_vm._v("\n                                                " + _vm._s(person.positiontypestring) + "\n                                            ")]), _vm._v(" "), (_vm.hasPhotopreviewBlock(person.id, persondecreeBlock)) ? _c('div', [_c('img', {
-        staticClass: "eld-search-element-image",
-        attrs: {
-          "src": _vm.getPhotopreviewBlock(person.id, persondecreeBlock).photo64
-        }
-      })]) : _vm._e(), _vm._v(" "), _c('div', [_c('div', [_vm._v("\n                                                    " + _vm._s(person.structuretree) + "\n                                                ")])])])
-    })], 2) : _vm._e(), _vm._v(" "), (_vm.personFromStructure != null) ? _c('div', _vm._l((_vm.personFromStructure), function(person) {
-      return _c('div', [_vm._v("\n                                            Кого – " + _vm._s(person.surname2 + " " + person.name2 + " " + person.fathername2) + "\n                                            "), _c('el-button', {
-        attrs: {
-          "size": "mini",
-          "type": "warning"
-        },
-        on: {
-          "click": function($event) {
-            _vm.multipersonRemove(person, persondecreeBlock)
-          }
-        }
-      }, [_vm._v("Убрать")])], 1)
-    })) : _vm._e()])]), _vm._v(" "), (persondecreeBlock.optionnumber4 == 30 && _vm.personFromStructure.length != 0) ? _c('div', [_c('div', {
+    }))], 1), _vm._v(" "), (persondecreeBlock.optionnumber4 == 30 && persondecreeBlock.persondecreeblocksub != null) ? _c('div', [_c('div', {
       staticClass: "eld-eld-body-row-flex",
       staticStyle: {
         "margin-top": "20px"
@@ -36689,15 +36619,86 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         },
         expression: "persondecreeBlock.optiondate3String"
       }
-    })], 1)])]) : _vm._e(), _vm._v(" "), (persondecreeBlock.optionnumber4 == 31 && _vm.personFromStructure.length != 0) ? _c('div', [_c('div', {
-      staticClass: "eld-eld-body-row-flex",
+    })], 1)]), _vm._v(" "), _c('div', {
+      staticClass: "eld-eld-body-row-flex"
+    }, [_c('div', {
       staticStyle: {
         "margin-top": "10px"
+      }
+    }, [_vm._v("\n                                        Кого\n                                        "), _c('div', {
+      staticStyle: {
+        "margin-top": "10px"
+      }
+    }, [_c('el-button', {
+      attrs: {
+        "type": "primary",
+        "plain": ""
+      },
+      on: {
+        "click": function($event) {
+          _vm.selectAllPersonInStructure(persondecreeBlock)
+        }
+      }
+    }, [_vm._v("Выбрать")])], 1), _vm._v(" "), _c('div', {
+      staticStyle: {
+        "margin-top": "15px"
+      }
+    }, [_c('el-input', {
+      staticClass: "eld-eld-body-select-medium",
+      attrs: {
+        "placeholder": "Фамилия Имя Отчество"
+      },
+      on: {
+        "input": function($event) {
+          _vm.searchPersonsBlock(persondecreeBlock)
+        }
+      },
+      model: {
+        value: (persondecreeBlock.fiosearch),
+        callback: function($$v) {
+          persondecreeBlock.fiosearch = $$v
+        },
+        expression: "persondecreeBlock.fiosearch"
+      }
+    })], 1), _vm._v(" "), (_vm.hasSearchResultsBlock(persondecreeBlock)) ? _c('div', {
+      staticClass: "eld-search-main"
+    }, [_c('div', {
+      staticClass: "eld-search-main-title"
+    }, [_vm._v("\n                                                Результаты поиска\n                                            ")]), _vm._v(" "), _vm._l((persondecreeBlock.personssearch), function(person) {
+      return _c('div', {
+        staticClass: "eld-search-element",
+        on: {
+          "click": function($event) {
+            _vm.selectPersonBlockNonAuto(person.id, persondecreeBlock)
+          }
+        }
+      }, [_c('div', [_vm._v("\n                                                    " + _vm._s(person.surname) + " " + _vm._s(person.name) + " " + _vm._s(person.fathername) + "\n                                                ")]), _vm._v(" "), _c('div', [_vm._v("\n                                                    " + _vm._s(person.positiontypestring) + "\n                                                ")]), _vm._v(" "), (_vm.hasPhotopreviewBlock(person.id, persondecreeBlock)) ? _c('div', [_c('img', {
+        staticClass: "eld-search-element-image",
+        attrs: {
+          "src": _vm.getPhotopreviewBlock(person.id, persondecreeBlock).photo64
+        }
+      })]) : _vm._e(), _vm._v(" "), _c('div', [_c('div', [_vm._v("\n                                                        " + _vm._s(person.structuretree) + "\n                                                    ")])])])
+    })], 2) : _vm._e(), _vm._v(" "), (_vm.personFromStructure != null) ? _c('div', _vm._l((_vm.personFromStructure), function(person) {
+      return _c('div', [_vm._v("\n                                                Кого – " + _vm._s(person.surname2 + " " + person.name2 + " " + person.fathername2) + "\n                                                "), _c('el-button', {
+        attrs: {
+          "size": "mini",
+          "type": "warning"
+        },
+        on: {
+          "click": function($event) {
+            _vm.multipersonRemove(person, persondecreeBlock)
+          }
+        }
+      }, [_vm._v("Убрать")])], 1)
+    })) : _vm._e()])])]) : _vm._e(), _vm._v(" "), (persondecreeBlock.optionnumber4 == 31 && persondecreeBlock.persondecreeblocksub != null) ? _c('div', [_c('div', {
+      staticClass: "eld-eld-body-row-flex",
+      staticStyle: {
+        "margin-top": "20px"
       }
     }, [_c('div', [_vm._v("\n                                        По какому подпункту\n                                        "), _c('el-select', {
       staticClass: "eld-eld-body-select-long",
       staticStyle: {
-        "left": "0px"
+        "left": "10px"
       },
       attrs: {
         "clearable": "",
@@ -36784,10 +36785,85 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         },
         expression: "persondecreeBlock.checkboxdirect"
       }
-    })], 1)])]), _vm._v(" "), (persondecreeBlock.checkboxdismiss == true) ? _c('div', [_c('div', [_vm._v("\n                                        По какому подпункту\n                                        "), _c('el-select', {
+    })], 1)])]), _vm._v(" "), _c('div', {
+      staticClass: "eld-eld-body-row-flex"
+    }, [_c('div', {
+      staticStyle: {
+        "margin-top": "10px"
+      }
+    }, [_vm._v("\n                                        Кого\n                                        "), _c('div', {
+      staticStyle: {
+        "margin-top": "10px"
+      }
+    }, [_c('el-button', {
+      attrs: {
+        "type": "primary",
+        "plain": ""
+      },
+      on: {
+        "click": function($event) {
+          _vm.selectAllPersonInStructure(persondecreeBlock)
+        }
+      }
+    }, [_vm._v("Выбрать")])], 1), _vm._v(" "), _c('div', {
+      staticStyle: {
+        "margin-top": "15px"
+      }
+    }, [_c('el-input', {
+      staticClass: "eld-eld-body-select-medium",
+      attrs: {
+        "placeholder": "Фамилия Имя Отчество"
+      },
+      on: {
+        "input": function($event) {
+          _vm.searchPersonsBlock(persondecreeBlock)
+        }
+      },
+      model: {
+        value: (persondecreeBlock.fiosearch),
+        callback: function($$v) {
+          persondecreeBlock.fiosearch = $$v
+        },
+        expression: "persondecreeBlock.fiosearch"
+      }
+    })], 1), _vm._v(" "), (_vm.hasSearchResultsBlock(persondecreeBlock)) ? _c('div', {
+      staticClass: "eld-search-main"
+    }, [_c('div', {
+      staticClass: "eld-search-main-title"
+    }, [_vm._v("\n                                                Результаты поиска\n                                            ")]), _vm._v(" "), _vm._l((persondecreeBlock.personssearch), function(person) {
+      return _c('div', {
+        staticClass: "eld-search-element",
+        on: {
+          "click": function($event) {
+            _vm.selectPersonBlockNonAuto(person.id, persondecreeBlock)
+          }
+        }
+      }, [_c('div', [_vm._v("\n                                                    " + _vm._s(person.surname) + " " + _vm._s(person.name) + " " + _vm._s(person.fathername) + "\n                                                ")]), _vm._v(" "), _c('div', [_vm._v("\n                                                    " + _vm._s(person.positiontypestring) + "\n                                                ")]), _vm._v(" "), (_vm.hasPhotopreviewBlock(person.id, persondecreeBlock)) ? _c('div', [_c('img', {
+        staticClass: "eld-search-element-image",
+        attrs: {
+          "src": _vm.getPhotopreviewBlock(person.id, persondecreeBlock).photo64
+        }
+      })]) : _vm._e(), _vm._v(" "), _c('div', [_c('div', [_vm._v("\n                                                        " + _vm._s(person.structuretree) + "\n                                                    ")])])])
+    })], 2) : _vm._e(), _vm._v(" "), (_vm.personFromStructure != null) ? _c('div', _vm._l((_vm.personFromStructure), function(person) {
+      return _c('div', [_vm._v("\n                                                Кого – " + _vm._s(person.surname2 + " " + person.name2 + " " + person.fathername2) + "\n                                                "), _c('el-button', {
+        attrs: {
+          "size": "mini",
+          "type": "warning"
+        },
+        on: {
+          "click": function($event) {
+            _vm.multipersonRemove(person, persondecreeBlock)
+          }
+        }
+      }, [_vm._v("Убрать")])], 1)
+    })) : _vm._e()])]), _vm._v(" "), (persondecreeBlock.checkboxdismiss == true) ? _c('div', {
+      staticStyle: {
+        "margin-top": "20px"
+      }
+    }, [_c('div', [_vm._v("\n                                        По какому подпункту\n                                        "), _c('el-select', {
       staticClass: "eld-eld-body-select-long",
       staticStyle: {
-        "left": "0px"
+        "left": "10px"
       },
       attrs: {
         "clearable": "",

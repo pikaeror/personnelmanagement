@@ -38,6 +38,7 @@ namespace PersonnelManagement.Models
         public string Optionstring6 { get; set; }
         public string Optionstring7 { get; set; }
         public string Optionstring8 { get; set; }
+        public string Optionstring9 { get; set; }
         public DateTime? Optiondate1 { get; set; }
         public DateTime? Optiondate2 { get; set; }
         public DateTime? Optiondate3 { get; set; }

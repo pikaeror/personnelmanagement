@@ -29,9 +29,9 @@ namespace PersonnelManagement.Models
             time = GetAllPositions(m_user.Structure.GetValueOrDefault(), time);
 
             List<Position> delited_positions = FilterDelitedPositions(time);
-            List<Position> will_delited_positions = FilterWillDelitedPositions(time);
+            //List<Position> will_delited_positions = FilterWillDelitedPositions(time);
             debug_delited = FindPerson(delited_positions);
-            debug_will_delited = FindPerson(will_delited_positions);
+            //debug_will_delited = FindPerson(will_delited_positions);
             //OutputConfiguration(debug, devizor);
         }
 
@@ -63,12 +63,15 @@ namespace PersonnelManagement.Models
         {
             List<Position> output = new List<Position>();
             List<Decreeoperation> time = new List<Decreeoperation>();
+            DateTime actual_date = m_user.Date.GetValueOrDefault();
+            List<Decree> signeg_decrees = m_repository.DecreesLocal().Values.Where(r => r.Signed == 1).ToList();
+            List<Decreeoperation> actual_decreeoperations =
+                m_repository.DecreeoperationsLocal().Values.Where(r => r.Dateactive <= actual_date &&
+                                                                       r.Deleted == 1 &&
+                                                                       signeg_decrees.FirstOrDefault(t => t.Id == r.Decree) != null).ToList();
             foreach (Position i in positions)
             {
-                time = m_repository.DecreeoperationsLocal().Values.Where(r => r.Subject == i.Id &&
-                                                                              r.Dateactive <= m_user.Date.GetValueOrDefault() &&
-                                                                              r.Deleted == 1 &&
-                                                                              m_repository.DecreesLocal().Values.FirstOrDefault(t => t.Id == r.Decree).Signed == 1).ToList();
+                time = actual_decreeoperations.Where(r => r.Subject == i.Id).ToList();
                 if (time.Count > 0)
                     output.Add(i);
             }
@@ -109,19 +112,23 @@ namespace PersonnelManagement.Models
         private List<Person> FindPerson(List<Position> old_positions)
         {
             List<Person> output = new List<Person>();
-            foreach(Position position in old_positions)
+            List<Personjob> personjobs = m_repository.PersonjobsLocal().Values.ToList();
+            List<Person> people = m_repository.PersonsLocal().Values.ToList();
+            foreach (Position position in old_positions)
             {
-                Person time = FindPerson(position);
+                Person time = FindPerson(position,
+                    personjobs: personjobs,
+                    people: people);
                 if (time != null)
                     output.Add(time);
             }
             return output;
         }
 
-        private Person FindPerson(Position old_position)
+        private Person FindPerson(Position old_position, List<Personjob> personjobs = null, List<Person> people = null)
         {
-            Personjob job = m_repository.PersonjobsLocal().Values.FirstOrDefault(r => r.Position == old_position.Id && r.Actual == 1);
-            return job != null ? m_repository.PersonsLocal().Values.FirstOrDefault(r => r.Id == job.Person) : null;
+            Personjob job = personjobs.FirstOrDefault(r => r.Position == old_position.Id && r.Actual == 1);
+            return job != null ? people.FirstOrDefault(r => r.Id == job.Person) : null;
         }
 
         private void OutputConfiguration(List<Person> persons, int devizor)

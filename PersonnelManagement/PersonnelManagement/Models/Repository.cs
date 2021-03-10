@@ -1903,17 +1903,21 @@ namespace PersonnelManagement.Models
         /// <returns></returns>
         public Structure GetActualStructureInfo(int structureid, DateTime date, IEnumerable<Structure> structures = null)
         {
+            Dictionary<int, Structure> actual_structures = StructuresLocal();
+            IEnumerable<Structure> actual_structures_list = actual_structures.Values;
             if (structureid == 0)
             {
                 return null;
             }
             if (structures == null)
             {
-                if (StructuresLocal() == null)
+                if (actual_structures == null)
                 {
                     UpdateStructuresLocal();
+                    actual_structures = StructuresLocal();
+                    actual_structures_list = actual_structures.Values.ToList();
                 }
-                structures = StructuresLocal().Values.Where(s => s.Id == structureid || s.Changeorigin == structureid);
+                structures = actual_structures_list.Where(s => s.Id == structureid || s.Changeorigin == structureid);
                 structures = FilterDeletedStructures(structures, date);
             } // ????
             Structure originalStructure = GetOriginalStructure(structureid);
@@ -1921,7 +1925,7 @@ namespace PersonnelManagement.Models
             {
                 return null;
             }
-            structures = StructuresLocal().Values.Where(s => s.Id == originalStructure.Id || s.Changeorigin == originalStructure.Id);
+            structures = actual_structures_list.Where(s => s.Id == originalStructure.Id || s.Changeorigin == originalStructure.Id);
             //structures = structures.Where(s => s.Id == structureid || s.Changeorigin == originalStructure.Changeorigin);
 
             structures = FilterDeletedStructures(structures, date);
@@ -1967,7 +1971,7 @@ namespace PersonnelManagement.Models
                             return null;
                         }
                 }
-                if (firstStructure.Changeorigin > 0 && !StructuresLocal().ContainsKey(firstStructure.Changeorigin))
+                if (firstStructure.Changeorigin > 0 && !actual_structures.ContainsKey(firstStructure.Changeorigin))
                 {
                     return null; // Новая встроенная проверка
                 }
@@ -1979,7 +1983,7 @@ namespace PersonnelManagement.Models
             List<Structure> structuresFiltered = new List<Structure>();
             foreach (Structure structure in structures)
             {
-                if (structure.Changeorigin > 0 && !StructuresLocal().ContainsKey(structure.Changeorigin))
+                if (structure.Changeorigin > 0 && !actual_structures.ContainsKey(structure.Changeorigin))
                 {
                     
                 } else

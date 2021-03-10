@@ -650,7 +650,7 @@ namespace PersonnelManagement.Models
                 decree_operation.Index + " в соответствии с п. 49 Положения о прохождении службы в органах и подразделениях по чрезвычайным ситуациям Республики Беларусь от исполнения служебных обязанностей" +
                 getFullName(decree_operation.Person, 2, 2, with_position: false) + ", " +
                 getFullPositionName(person, 2, 2) +
-                (decree_operation.Optiondate1.GetValueOrDefault() != null ? (" , c " + decree_operation.Optiondate1.GetValueOrDefault().ToString("dd.MM.yyyy" + " ") : "" ) +
+                (decree_operation.Optiondate1.GetValueOrDefault() != null ? (" , c " + decree_operation.Optiondate1.GetValueOrDefault().ToString("dd.MM.yyyy" + " ")) : "" ) +
                 decree_operation.Optionstring1 + ".";
             addFirstParagraffs(body,
                 printing_string,
@@ -694,7 +694,7 @@ namespace PersonnelManagement.Models
                 printing_string += " " +
                     (decree_operation.Optionnumber1 != 3 ? (decree_operation.Optionstring1 + " ") : (changedocumentstype != null ? (changedocumentstype.Name + " ") : ""));
             printing_string += getFullName(decree_operation.Person, 2, 2, with_position: true) + ", " + 
-                (decree_operation.Optiondate1.GetValueOrDefault() != null ? (" , c " + decree_operation.Optiondate1.GetValueOrDefault().ToString("dd.MM.yyyy" + " ") : "") +
+                (decree_operation.Optiondate1.GetValueOrDefault() != null ? (" , c " + decree_operation.Optiondate1.GetValueOrDefault().ToString("dd.MM.yyyy" + " ")) : "") +
                 decree_operation.Optionstring1 + ".";
             addFirstParagraffs(body,
                 printing_string,

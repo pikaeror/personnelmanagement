@@ -177,8 +177,10 @@ namespace PersonnelManagement.Models
         private static Stopwatch stopWatch = Stopwatch.StartNew();
 
         private static long StructuresGetLastTime = -STRUCTURES_GET_DELAY - 90000;
+        private static long StructuresOriginGetLastTime = (3 * -STRUCTURES_GET_DELAY) - 90000;
         private const long STRUCTURES_GET_DELAY = 11000; // in ms
         private static Dictionary<int, Structure> StructuresLocalObject = null;
+        private static IEnumerable<Structure> ActualStructuresListWhithOrigin = null;
         /// <summary>
         /// Локальная версия таблицы из базы данных, которую мы или периодически обновляем или обновляем после внесения изменений. Необходима для улучшения быстродействия (уменьшения запросов в базу данных)
         /// </summary>
@@ -197,8 +199,17 @@ namespace PersonnelManagement.Models
         /// </summary>
         public void UpdateStructuresLocal()
         {
-            StructuresGetLastTime = stopWatch.ElapsedMilliseconds;
             StructuresLocalObject = Structures.ToDictionary(structure => structure.Id);
+            if (stopWatch.ElapsedMilliseconds > StructuresOriginGetLastTime + 3 * STRUCTURES_GET_DELAY)
+            {
+                UpdateStructuresOriginLocal();
+            }
+            StructuresGetLastTime = stopWatch.ElapsedMilliseconds;
+        }
+        public void UpdateStructuresOriginLocal()
+        {
+            StructuresOriginGetLastTime = stopWatch.ElapsedMilliseconds;
+            ActualStructuresListWhithOrigin = StructuresLocalObject.Values.Where(r => r.Changeorigin != 0);
         }
 
 
@@ -510,19 +521,16 @@ namespace PersonnelManagement.Models
         public void UpdateDecreeoperationsLocal()
         {
             DecreeoperationsGetLastTime = stopWatch.ElapsedMilliseconds;
-            List<Decreeoperation> decreeoperationsList = Decreeoperations.ToList();
-            Dictionary<int, Decreeoperation> DecreeoperationsLocalObjectNew = new Dictionary<int, Decreeoperation>();
+            DecreeoperationsLocalObject = Decreeoperations.ToDictionary(decreeoperation => decreeoperation.Id);
             Dictionary<int, List<Decreeoperation>> DecreeoperationsLocalSubjectAsKeyObjectNew = new Dictionary<int, List<Decreeoperation>>();
-            foreach (Decreeoperation decreeoperation in decreeoperationsList)
+            foreach (Decreeoperation decreeoperation in Decreeoperations.ToList())
             {
-                DecreeoperationsLocalObjectNew.Add(decreeoperation.Id, decreeoperation);
                 if (!DecreeoperationsLocalSubjectAsKeyObjectNew.ContainsKey(decreeoperation.Subject))
                 {
                     DecreeoperationsLocalSubjectAsKeyObjectNew.Add(decreeoperation.Subject, new List<Decreeoperation>());
                 }
                 DecreeoperationsLocalSubjectAsKeyObjectNew[decreeoperation.Subject].Add(decreeoperation);
             }
-            DecreeoperationsLocalObject = DecreeoperationsLocalObjectNew;
             DecreeoperationsLocalSubjectAsKeyObject = DecreeoperationsLocalSubjectAsKeyObjectNew;
         }
 
@@ -612,23 +620,17 @@ namespace PersonnelManagement.Models
         [MethodImpl(MethodImplOptions.Synchronized)]
         public void UpdatePositionsLocal()
         {
-            
-            List<Position> positionsList = new List<Position>();
-            positionsList = PositionsList();
-            
-            Dictionary<int, Position> PositionsLocalObjectNew = new Dictionary<int, Position>();
             Dictionary<int, List<Position>> PositionsLocalStructureAsKeyObjectNew = new Dictionary<int, List<Position>>();
-            foreach (Position position in positionsList)
+            foreach (Position position in PositionsList())
             {
-                PositionsLocalObjectNew.Add(position.Id, position);
                 if (!PositionsLocalStructureAsKeyObjectNew.ContainsKey(position.Structure))
                 {
                     PositionsLocalStructureAsKeyObjectNew.Add(position.Structure, new List<Position>());
                 }
                 PositionsLocalStructureAsKeyObjectNew[position.Structure].Add(position);
             }
-            PositionsLocalObject = PositionsLocalObjectNew;
             PositionsLocalStructureAsKeyObject = PositionsLocalStructureAsKeyObjectNew;
+            PositionsLocalObject = Positions.ToDictionary(position => position.Id);
             PositionsGetLastTime = stopWatch.ElapsedMilliseconds;
         }
 
@@ -1709,8 +1711,9 @@ namespace PersonnelManagement.Models
         /// <param name="date"></param>
         /// <param name="structures"></param>
         /// <returns></returns>
-        public Structure GetActualStructureInfo(int structureid, DateTime date, IEnumerable<Structure> structures = null)
+        public Structure GetActualStructureInfo(int structureid, DateTime date, IEnumerable<Structure> structures = null, IEnumerable<Structure> actual_structures_list_whith_origin = null)
         {
+            actual_structures_list_whith_origin = actual_structures_list_whith_origin == null ? ActualStructuresListWhithOrigin : actual_structures_list_whith_origin;
             Dictionary<int, Structure> actual_structures = StructuresLocal();
             IEnumerable<Structure> actual_structures_list = actual_structures.Values;
             if (structureid == 0)
@@ -1722,10 +1725,11 @@ namespace PersonnelManagement.Models
                 if (actual_structures == null)
                 {
                     UpdateStructuresLocal();
+                    actual_structures_list_whith_origin = actual_structures_list_whith_origin == null ? ActualStructuresListWhithOrigin : actual_structures_list_whith_origin;
                     actual_structures = StructuresLocal();
-                    actual_structures_list = actual_structures.Values.ToList();
+                    actual_structures_list = actual_structures.Values;
                 }
-                structures = actual_structures_list.Where(s => s.Id == structureid || s.Changeorigin == structureid);
+                structures = actual_structures_list_whith_origin.Where(s => s.Changeorigin == structureid).Append(actual_structures[structureid]);
                 structures = FilterDeletedStructures(structures, date);
             } // ????
             Structure originalStructure = GetOriginalStructure(structureid);
@@ -1733,19 +1737,19 @@ namespace PersonnelManagement.Models
             {
                 return null;
             }
-            structures = actual_structures_list.Where(s => s.Id == originalStructure.Id || s.Changeorigin == originalStructure.Id);
-            //structures = structures.Where(s => s.Id == structureid || s.Changeorigin == originalStructure.Changeorigin);
-
+            int originalStructure_id = originalStructure.Id;
+            structures = actual_structures_list_whith_origin.Where(s => s.Changeorigin == originalStructure_id).Append(originalStructure);
+            
             structures = FilterDeletedStructures(structures, date);
 
             // Удалять "гостей из будущего"
-
-            if (structures.Count() == 0)
+            int structures_count = structures.Count();
+            if (structures_count == 0)
             {
                 return null;
             }
 
-            if (structures.Count() == 1)
+            if (structures_count == 1)
             {
                 Structure firstStructure = structures.First();
                 int minusid = -firstStructure.Id;
@@ -4889,16 +4893,7 @@ namespace PersonnelManagement.Models
 
         public IEnumerable<Structure> FilterDeletedStructures(IEnumerable<Structure> structures, DateTime date)
         {
-            List<Structure> filtered = new List<Structure>();
             return structures.Where(r => !IsSignedAndDeleted(r, date));
-            /*foreach (Structure structure in structures)
-            {
-                if (!IsSignedAndDeleted(structure, date))
-                {
-                    filtered.Add(structure);
-                }
-            }
-            return filtered;*/
         }
 
 

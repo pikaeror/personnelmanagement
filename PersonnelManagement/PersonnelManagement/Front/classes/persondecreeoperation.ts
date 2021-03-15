@@ -10,6 +10,24 @@ import Countrycities from './countrycities';
 import Personjob from './personjob';
 import Cabinetdata from './cabinetdata';
 
+export class FeaturedStructure {
+    constructor(name: string = '', id: string = '') {
+        this.name = name;
+        this.id = id;
+    }
+    name: string;
+    id: string;
+}
+
+export class excerptStructures {
+    constructor(id: string = '', structures: FeaturedStructure[] = []) {
+        this.id = id;
+        this.structures = structures;
+    }
+    id: string;
+    structures: FeaturedStructure[];
+}
+
 export default class Persondecreeoperation {
     id: number;
     persondecree: number;
@@ -104,4 +122,6 @@ export default class Persondecreeoperation {
 
     // Только на фронтэнде
     countrycitiesList: Countrycities[] = new Array(new Countrycities());
+
+    excerptstructures: string;
 }

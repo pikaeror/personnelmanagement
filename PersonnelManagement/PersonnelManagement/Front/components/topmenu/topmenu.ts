@@ -6,6 +6,7 @@ import { Button, Select, Input, Dialog, Dropdown, DropdownItem, DropdownMenu, Ch
 import Decreemanagement from '../../classes/decreemanagement'
 import Decreeoperation from '../../classes/decreeoperation'
 import Persondecree from '../../classes/persondecree'
+import { FeaturedStructure, excerptStructures } from '../../classes/persondecreeoperation'
 import Persondecreeoperation from '../../classes/persondecreeoperation'
 import Persondecreeblock from '../../classes/persondecreeblock'
 import Persondecreeblocktype from '../../classes/persondecreeblocktype'
@@ -116,10 +117,15 @@ Vue.use(Element);
 const EDIT_LABEL = "Редактировать";
 const SAVE_LABEL = "Сохранить";
 
-class FeaturedStructure {
+/*class FeaturedStructure {
     name: string;
     id: string;
 }
+
+class excerptStructures {
+    id: number;
+    structures: FeaturedStructure[];
+}*/
 
 class StructureManagement {
     id: number;
@@ -230,6 +236,7 @@ export default class TopmenuComponent extends Vue {
     modalPmrequestPanelVisible: boolean;
     modalAboutPanelVisible: boolean;
     featured: FeaturedStructure[];
+    ttt: excerptStructures[];
     addStructureAvailable: boolean;
 
     num: number;
@@ -490,6 +497,7 @@ export default class TopmenuComponent extends Vue {
             modalAboutPanelVisible: false,
             sidebarDisplay: true,
             featured: [],
+            ttt: [],
             structureeditorAccess: "0",
 
             removeStructureAvailable: false,
@@ -1984,6 +1992,7 @@ export default class TopmenuComponent extends Vue {
                 let persondecreeblocksubtypePrev: number = 0;
                 let persondecreeblockoptionnumber1Prev: number = 0;
                 result.forEach(operation => {
+                    operation.excerptstructures = '';
                     // Если мы используем булевские типы вместо чисел
                     if (operation.optionnumber1 > 0) {
                         operation.optionnumber1Bool = true;

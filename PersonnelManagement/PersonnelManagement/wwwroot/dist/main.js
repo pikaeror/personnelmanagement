@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "dbcf6eecfc90a7c49f47"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "78db8e877554ab58a611"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -706,7 +706,7 @@
 /******/ 	__webpack_require__.h = function() { return hotCurrentHash; };
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return hotCreateRequire(190)(__webpack_require__.s = 190);
+/******/ 	return hotCreateRequire(191)(__webpack_require__.s = 191);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -938,9 +938,9 @@ module.exports = function normalizeComponent (
 Object.defineProperty(exports, "__esModule", { value: true });
 var vue_1 = __webpack_require__(0);
 exports.Vue = vue_1.default;
-var vue_class_component_1 = __webpack_require__(140);
+var vue_class_component_1 = __webpack_require__(141);
 exports.Component = vue_class_component_1.default;
-__webpack_require__(130);
+__webpack_require__(131);
 /**
  * decorator of an inject
  * @param key key
@@ -1034,12 +1034,6 @@ module.exports = vendor_3180170d1e78d9e27fe0;
 
 /***/ }),
 /* 6 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = (__webpack_require__(5))(206);
-
-/***/ }),
-/* 7 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1129,6 +1123,12 @@ class Countrycities {
 //# sourceMappingURL=countrycities.js.map
 
 /***/ }),
+/* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = (__webpack_require__(5))(206);
+
+/***/ }),
 /* 8 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -1184,7 +1184,7 @@ exports = module.exports = __webpack_require__(22)();
 
 
 // module
-exports.push([module.i, "\r\n/*##########################    TEST DATA    ######################################*/\r\n\r\n.row{\r\n    margin-bottom:10px;\r\n}\r\n\r\n\r\n/*##########################      MAIN      ######################################*/\r\n\r\n@font-face {\r\n    font-family: 'Merriweather';\r\n    src: url(" + __webpack_require__(133) + "); /* font-family: 'Merriweather', serif; */\r\n}\r\n\r\n@font-face {\r\n    font-family: 'Montserrat';\r\n    src: url(" + __webpack_require__(134) + "); /* font-family: 'Montserrat', sans-serif; */\r\n}\r\n\r\nbody {\r\n    font-family: 'Montserrat', sans-serif;\r\n    color: #333;\r\n}\r\n\r\n.el-dialog__body {\r\n    color: #333;\r\n}\r\n\r\n.el-button{\r\n    color: #333;\r\n}\r\n\r\n.el-button--success {\r\n    color: #FFF;\r\n}\r\n\r\n.el-button--primary {\r\n    color: #FFF;\r\n}\r\n\r\n.el-button--danger {\r\n    color: #FFF;\r\n}\r\n\r\n.el-button--warning {\r\n    color: #FFF;\r\n}\r\n\r\n.el-input__inner {\r\n    color: #333;\r\n}\r\n\r\n.el-input-bold{\r\n    font-weight: 600;\r\n}\r\n\r\n\r\n\r\n.el-dropdown-menu__item {\r\n    color: #333;\r\n}\r\n\r\n.el-checkbox{\r\n    color: #333;\r\n}\r\n\r\n.el-select-dropdown__item.hover {\r\n    background-color: #FFB4B4;\r\n    color: #FFF;\r\n}\r\n\r\n.checkbox-big{\r\n    \r\n}\r\n\r\n\r\n.checkbox-big .el-checkbox__inner {\r\n    width: 30px;\r\n    height: 30px;\r\n    border: 1px solid black !important;\r\n}\r\n\r\n.checkbox-big .el-checkbox__inner::after{\r\n    height: 15px;\r\n    font-weight: 600;\r\n    /*width: 10px;*/\r\n    top: 6px;\r\n    left: 12px;\r\n    \r\n}\r\n\r\n.container-grid {\r\n    display: grid;\r\n    grid-template-rows: minmax(100px, 9%) auto;\r\n    grid-template-columns: minmax(250px, 22%) auto;\r\n    grid-template-areas: \"header header\" \"sidebar main\";\r\n    height: 100vh;\r\n}\r\n\r\n.container-grid-nosidebar {\r\n    display: grid;\r\n    grid-template-rows: minmax(100px, 9%) auto;\r\n    grid-template-columns: 0 auto;\r\n    grid-template-areas: \"header header\" \"sidebar main\";\r\n    height: 100vh;\r\n}\r\n\r\n@media only screen and (max-width: 500px){\r\n    .container-grid {\r\n        display: grid;\r\n        grid-template-rows: minmax(100px, 9%) minmax(90px, 30%) auto;\r\n        grid-template-areas: \"header header\" \"sidebar sidebar\" \"main main\";\r\n        height: 100vh;\r\n    }\r\n\r\n    .container-grid-nosidebar {\r\n        display: grid;\r\n        grid-template-rows: minmax(100px, 9%) 0 auto;\r\n        grid-template-areas: \"header header\" \"sidebar sidebar\" \"main main\";\r\n        height: 100vh;\r\n    }\r\n} \r\n\r\n\r\n\r\n.top-menu {\r\n    background-color: #EEEEEE;\r\n    box-shadow: rgba(0,0,0,0.2) -0px -2px 2px inset;\r\n    border-bottom: 5px dashed #DDDDDD;\r\n   \r\n    /*min-height: 100px;*/\r\n    /*max-height: 150px;*/\r\n    grid-area: header;\r\n}\r\n\r\n.side-bar {\r\n    box-shadow: rgba(0,0,0,0.2) 0px 5px 10px inset;\r\n    background-color: #f4f4f4;\r\n    border-right: 5px dashed #DDDDDD;\r\n    grid-area: sidebar;\r\n    overflow-y: scroll;\r\n    padding-top: 5px;\r\n}\r\n\r\n.side-bar-no {\r\n    display: none;\r\n}\r\n\r\n.side-bar::-webkit-scrollbar {\r\n    display: none;\r\n}\r\n\r\n.main {\r\n    grid-area: main;\r\n    background-color: #f4f4f4;\r\n    box-shadow: rgba(0,0,0,0.2) 5px 5px 10px inset;\r\n    overflow-y: scroll;\r\n}\r\n\r\n.main::-webkit-scrollbar {\r\n    display: none;\r\n}\r\n\r\n\r\n\r\n/*################      PERSONNEL MANAGEMENT SPECIAL      ########################*/\r\n\r\n.pm-component{\r\n    margin:15px;\r\n}\r\n\r\n/*##########################    SIDE BAR    ######################################*/\r\n\r\n.sidebar{\r\n    \r\n}\r\n\r\n.sidebar-structure{\r\n    margin-top: 5px;\r\n    margin-left: 5px;\r\n    margin-right: 5px;\r\n    padding-left: 5px;\r\n    \r\n    min-height: 50px;\r\n    display: flex;\r\n    justify-content: space-between;\r\n    align-items: center;\r\n    box-shadow: rgba(0,0,0,0.4) 0px 0px 2px inset;\r\n    background-color: white;\r\n    border-radius: 0px 5px 5px 0px;\r\n    border-left: 3px groove #AAF;\r\n}\r\n\r\n.sidebar-structure-wc {\r\n    border-bottom: 2px solid #A4A4F4;\r\n}\r\n\r\n.sidebar-structure-title-childrenhas{\r\n    \r\n}\r\n\r\n.sidebar-structure-title-childrenno{\r\n\r\n}\r\n\r\n.sidebar-structure-title-childrenshowed {\r\n}\r\n\r\n/*.sidebar-structure-child {\r\n    margin-left: 75px;\r\n    border-left: 3px groove #22F;\r\n}*/\r\n\r\n.sidebar-structure-0 {\r\n    margin-left: 5px;\r\n    border-left: 3px groove #66F;\r\n}\r\n\r\n.sidebar-structure-0 > .sidebar-structuretext {\r\n    text-shadow: 0px 0px 1px #111;\r\n}\r\n\r\n.sidebar-structure-1 {\r\n    margin-left: 20px;\r\n    border-left: 3px groove #77F;\r\n    \r\n}\r\n\r\n.sidebar-structure-1 > .sidebar-structuretext {\r\n    text-shadow: 0px 0px 1px #333;\r\n}\r\n\r\n.sidebar-structure-2 {\r\n    margin-left: 35px;\r\n    border-left: 3px groove #8FF;\r\n}\r\n\r\n\r\n\r\n.sidebar-structure-3 {\r\n    margin-left: 50px;\r\n    border-left: 3px groove #FF9;\r\n}\r\n\r\n.sidebar-structure-3 > .sidebar-structuretext {\r\n    font-style: italic;\r\n}\r\n\r\n.sidebar-structure-4 {\r\n    margin-left: 60px;\r\n    border-left: 3px groove #FAF;\r\n}\r\n\r\n.sidebar-structure-5 {\r\n    margin-left: 70px;\r\n    border-left: 3px groove #BBB;\r\n}\r\n\r\n.sidebar-structure-6 {\r\n    margin-left: 75px;\r\n    border-left: 3px groove #FCC;\r\n}\r\n\r\n.sidebar-structure-7 {\r\n    margin-left: 80px;\r\n    border-left: 3px groove #DDF;\r\n}\r\n\r\n.sidebar-structure-user {\r\n    box-shadow: #99F 0px 0px 2px;\r\n    background-color: #f2f2ff;\r\n}\r\n\r\n.sidebar-selected {\r\n    border-bottom: 3px solid #f4a4a4;\r\n}\r\n\r\n.sidebar-structuretext{\r\n    cursor: pointer;\r\n    color: black;\r\n    text-align: center;\r\n    width: 100%;\r\n    margin-right: 5px;\r\n    \r\n    \r\n    /*text-shadow: 0px 0px 20px #333;*/\r\n}\r\n\r\n.sidebar-structurechecked{\r\n    margin-left: 5px;\r\n    color: red;\r\n    font-weight: 600;\r\n}\r\n\r\n.sidebar-structuredropdown {\r\n    min-width: 45px;\r\n    max-width: 45px;\r\n    align-self: stretch;\r\n    display: flex;\r\n    justify-content: center;\r\n    box-shadow: #DDDDDD -2px 0px 0px;\r\n    text-align: center;\r\n}\r\n\r\n.sidebar-structuredropdown:hover {\r\n    border-radius: 0px 5px 5px 0px;\r\n    color: red;\r\n    \r\n}\r\n\r\n.sidebar-action{\r\n    display: flex;\r\n    background-color: rgba(255,255,255,0.92);\r\n    font-size: 14px;\r\n}\r\n\r\n.sidebar-action-left{\r\n    border-right: 2px solid #EEE;\r\n    padding-right: 0px;\r\n}\r\n\r\n.sidebar-action-right {\r\n    margin-left: 2px;\r\n    margin-right: 8px;\r\n}\r\n\r\n.sidebar-icon {\r\n    word-wrap: break-word;\r\n    align-self: center;\r\n    font-size: 12px;\r\n    border-bottom: 1px solid #CCCCCC;\r\n    border-radius: 3px;\r\n}\r\n\r\n.sidebar-more {\r\n    font-size: 16px;\r\n    float: right;\r\n    margin-top: 15px;\r\n    margin-right: 5px;\r\n    padding-left: 5px;\r\n    padding-right: 5px;\r\n    border: 1px solid #DDDDDD;\r\n    box-shadow: #DDDDDD 0px 0px 3px;\r\n    border-radius: 8px;\r\n}\r\n\r\n.sidebar-more:hover{\r\n    box-shadow: #AAAAAA 0px 0px 5px;\r\n    color: red;\r\n}\r\n\r\n.sidebar-notsignedandcreated {\r\n    color: blue;\r\n    font-weight: 600;\r\n    font-size: 10px;\r\n}\r\n\r\n.sidebar-issignedandwillbecreated {\r\n    color: #6622FF;\r\n    font-weight: 600;\r\n    font-size: 10px;\r\n}\r\n\r\n.sidebar-isnotsignedandwillbecreated {\r\n    color: #0B9;\r\n    font-weight: 600;\r\n    font-size: 10px;\r\n}\r\n\r\n.sidebar-isdeletedunsigned {\r\n    color: darkorange;\r\n    font-weight: 600;\r\n    font-size: 10px;\r\n}\r\n\r\n.sidebar-iswillbedeletedsigned {\r\n    color: red;\r\n    font-weight: 600;\r\n    font-size: 10px;\r\n}\r\n\r\n.sidebar-iswillbedeletedunsigned {\r\n    color: orange;\r\n    font-weight: 600;\r\n    font-size: 10px;\r\n}\r\n\r\n.sidebar-buttongroup {\r\n    margin-top: 10px;\r\n    padding-right: 20px;\r\n}\r\n\r\n.sidebar-button{\r\n    margin-left: 10px;\r\n    margin-bottom: 3px;\r\n    width: 100%;\r\n}\r\n\r\n.sidebar-arrow-group{\r\n    display: flex;\r\n    flex-direction:column;\r\n}\r\n\r\n.sidebar-arrow {\r\n    margin: 3px;\r\n    border-radius: 3px;\r\n    border: 1px solid #E1E1E1;\r\n    font-size: 18px;\r\n    cursor: pointer;\r\n    \r\n}\r\n\r\n.sidebar-input{\r\n    width: 45px;\r\n    max-width: 45px;\r\n    margin: 0px; \r\n}\r\n\r\n.sidebar-input input{\r\n    \r\n    padding: 2px;\r\n    height: 30px;\r\n}\r\n\r\n.sidebar-button-priority {\r\n    width: 40px;\r\n    max-width: 40px;\r\n    padding: 0px;\r\n    height: 30px;\r\n    margin-left: 0px;\r\n    margin-right: 2px;\r\n}\r\n\r\n\r\n\r\n/*##########################     LOGIN      ######################################*/\r\n\r\n#login-container {\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\r\n    height: 100vh;\r\n}\r\n\r\n#login-warning {\r\n    font-size: 16px;\r\n    font-weight: bold;\r\n    text-align: center;\r\n    margin-bottom: 10px;\r\n}\r\n\r\n#login-logo-wrapper{\r\n    width: 100%;\r\n    height: 72px;\r\n    margin-top:10px;\r\n    margin-bottom: 10px;\r\n    display: flex;\r\n    justify-content: center;\r\n}\r\n\r\n#login-logo {\r\n    width: 72px;\r\n    filter: drop-shadow(2px 2px 2px #555);\r\n}\r\n\r\n#login-wrapper {\r\n    background-color: #EEEEEE;\r\n    margin-top: -10vh;\r\n    width: 360px;\r\n    /* height: 350px; */\r\n    border: 5px dashed #DDDDDD;\r\n    border-radius: 10px;\r\n    padding: 15px;\r\n    box-shadow: rgba(0,0,0,0.2) 0px 0px 20px inset;\r\n}\r\n\r\n#login-title {\r\n    font-family: 'Merriweather', serif;\r\n    font-size: 36px;\r\n    text-align: center;\r\n    text-shadow: 2px 2px 4px #AAA;\r\n}\r\n\r\n.login-input {\r\n    font-size: 16px;\r\n}\r\n\r\n.login-button {\r\n    width: 100%;\r\n    font-size: 16px;\r\n    align-self: center;\r\n}\r\n\r\n\r\n/*########################     TOP MENU      ####################################*/\r\n\r\n#topmenu {\r\n    margin: 0px;\r\n}\r\n\r\n#topmenu-container {\r\n    margin-left: 15px;\r\n    display: flex;\r\n    min-height: 90px;\r\n    height: 9vh;\r\n    /* height:100px; */\r\n    align-items: center;\r\n    justify-content: space-between;\r\n   \r\n}\r\n\r\n\r\n#topmenu-logo {\r\n    margin-bottom: 10px;\r\n    width: 40px;\r\n    height: 40px;\r\n    filter: drop-shadow(2px 2px 2px #555);\r\n    cursor: pointer;\r\n}\r\n\r\n#topmenu-rightblock {\r\n    min-width: 450px;\r\n    width: 600px;\r\n    margin-right: 5px;\r\n    display: flex;\r\n    align-items: center;\r\n    justify-content: flex-end;\r\n}\r\n\r\n#topmenu-logoblock {\r\n    \r\n    align-self: stretch;\r\n    margin-right: 0px;\r\n    padding-right: 5px;\r\n    display: flex;\r\n    align-items: center;\r\n    \r\n}\r\n\r\n#topmenu-appname {\r\n    margin-left: 10px;\r\n    cursor: pointer;\r\n    font-family: Merriweather;\r\n    font-size: 28px;\r\n    text-shadow: 2px 2px 4px #AAA;\r\n}\r\n\r\n#topmenu a {\r\n    color: black;\r\n    cursor: pointer;\r\n}\r\n\r\n.topmenu-mode{\r\n    \r\n    font-size: 12px;\r\n    margin-left: 0px;\r\n    max-width: 520px;\r\n}\r\n\r\n.topmenu-structurechecked {\r\n    margin-left: 5px;\r\n    color: red;\r\n    font-weight: 600;\r\n}\r\n\r\n#topmenu-featuredlist{\r\n    display: flex;\r\n    flex-wrap: wrap;\r\n    /*width: 1000px;*/\r\n   /*align-self: stretch;*/\r\n}\r\n\r\n.topmenu-featured {\r\n    display: flex;\r\n    font-size: 12px;\r\n    margin: 1px;\r\n    background-color: #FEFEFE;\r\n    border: 1px solid #DDD;\r\n    padding: 1px;\r\n    border-radius: 4px;\r\n    box-shadow: hsl(0,0%,90%) 0px 2px 2px;\r\n    cursor: pointer;\r\n}\r\n\r\n.topmenu-featured:hover{\r\n    \r\n    background-color: #EEF;\r\n    color: #88F;\r\n}\r\n\r\n.topmenu-structurename{\r\n    \r\n}\r\n\r\n.topmenu-structuredropdown {\r\n    min-width: 30px;\r\n    max-width: 30px;\r\n    align-self: stretch;\r\n    display: flex;\r\n    justify-content: center;\r\n    box-shadow: #DDDDDD -2px 0px 0px;\r\n    text-align: center;\r\n}\r\n\r\n.topmenu-rightblock-text {\r\n    \r\n    display: flex;\r\n    flex-direction: column;\r\n    align-content: center;\r\n    justify-content: center;\r\n    margin-right: 5px;\r\n    margin-left: 0px;\r\n    border-bottom: 1px solid #D4D4D4;\r\n    border-radius: 3px;\r\n}\r\n\r\n.topmenu-rightblock-date{\r\n    text-align: right;\r\n    cursor: pointer;\r\n}\r\n\r\n.topmenu-rightblock-date-date:hover{\r\n    color: #FFF;\r\n    text-shadow: 0px 0px 4px #A00;\r\n}\r\n\r\n.topmenu-rightblock-mode{\r\n    text-decoration:underline;\r\n    text-align: left;\r\n    cursor: pointer;\r\n}\r\n\r\n.topmenu-rightblock-decreename {\r\n    text-align: right;\r\n    color: #EE5555;\r\n    font-weight: 600;\r\n    cursor: pointer;\r\n}\r\n\r\n.topmenu-rightblock-login {\r\n    text-align: right;\r\n}\r\n\r\n.topmenu-rightblock-button {\r\n    padding-left: 12px;\r\n    padding-right: 12px;\r\n    padding-top: 10px;\r\n    padding-bottom: 10px;\r\n    box-shadow: rgba(0,0,0,0.2) 2px 2px 2px;\r\n}\r\n\r\n.topmenu-rightblock-button:hover {\r\n    box-shadow: rgba(122,0,255,0.4) 2px 2px 2px;\r\n}\r\n\r\n.decrees-create {\r\n    display: flex;\r\n}\r\n\r\n.decrees-element {\r\n    margin: 15px;\r\n    border-radius: 5px;\r\n    border: 2px solid #F2F2F2;\r\n    padding: 8px;\r\n}\r\n\r\n.decrees-margintop {\r\n    margin-top: 10px;\r\n}\r\n\r\n.decrees-selected {\r\n    background-color: #FCFCFF;\r\n    border: 2px solid #A2A2F2;\r\n}\r\n\r\n.decreeoperation-panel{\r\n    margin: 10px;\r\n    border-radius: 5px;\r\n    border: 2px solid #F2F2F2;\r\n}\r\n\r\n.decreeoperation-element {\r\n    border-top: 2px solid #F2F2F2;\r\n    border-bottom: 2px solid #F2F2F2;\r\n    margin: 10px;\r\n    font-size: 12px;\r\n    padding: 2px;\r\n    padding-left: 5px;\r\n}\r\n\r\n.decreeoperation-button {\r\n    margin-bottom: 5px;\r\n}\r\n\r\n\r\n.decreeoperation-nickname {\r\n    font-size: 18px;\r\n    font-weight: 600;\r\n    margin-bottom: 10px;\r\n}\r\n\r\n.decreeoperation-row{\r\n    display: flex;\r\n    align-items: center;\r\n}\r\n\r\n.decreeoperation-row-text{\r\n    flex-basis: 50%;\r\n}\r\n\r\n.decreeoperation-label-bold{\r\n    font-weight: 600;\r\n}\r\n\r\n.decreeoperation-ranklevel-0 {\r\n    margin-left: 10px;\r\n}\r\n\r\n.decreeoperation-ranklevel-1 {\r\n    margin-left: 25px;\r\n    border-left: 2px groove #77F;\r\n}\r\n\r\n.decreeoperation-ranklevel-2 {\r\n    margin-left: 40px;\r\n    border-left: 2px groove #88F;\r\n}\r\n\r\n.decreeoperation-ranklevel-3 {\r\n    margin-left: 55px;\r\n    border-left: 2px groove #99F;\r\n}\r\n\r\n.decreeoperation-ranklevel-4 {\r\n    margin-left: 70px;\r\n    border-left: 2px groove #AAF;\r\n}\r\n\r\n.decreeoperation-ranklevel-5 {\r\n    margin-left: 85px;\r\n    border-left: 2px groove #BBF;\r\n}\r\n\r\n.decreeoperation-ranklevel-6 {\r\n    margin-left: 100px;\r\n    border-left: 2px groove #CCF;\r\n}\r\n\r\n.decreeoperation-ranklevel-7 {\r\n    margin-left: 115px;\r\n    border-left: 2px groove #DDF;\r\n}\r\n\r\n.decreeoperation-ranklevel-8 {\r\n    margin-left: 130px;\r\n    border-left: 2px groove #EEF;\r\n}\r\n\r\n.decreeoperation-signed-decree-block{\r\n    padding-top: 2px;\r\n    margin-top: 4px;\r\n    border-top: 2px solid #D4D4E4;\r\n}\r\n\r\n.decreeoperation-signed-row-label {\r\n    min-width: 210px;\r\n}\r\n\r\n/*########################     ADMIN PANEL      #################################*/\r\n\r\n.adminpanel-title {\r\n    text-align:center;\r\n    font-family: Merriweather;\r\n    font-size:26px;\r\n    margin-bottom: 20px;\r\n}\r\n\r\n#adminpanel-users {\r\n    /*max-height: 200px;*/\r\n}\r\n\r\n#adminpanel-adduser {\r\n    /*padding: 10px;*/\r\n}\r\n\r\n.adminpanel-usercard {\r\n    border: 2px dashed hsl(0,0%,80%);\r\n    box-shadow: hsl(0,0%,80%) 0px 4px 10px;\r\n    padding: 5px;\r\n    margin: 5px;\r\n}\r\n\r\n.adminpanel-switch{\r\n    width: 400px;\r\n}\r\n\r\n.adminpanel-label {\r\n    \r\n}\r\n\r\n.adminpanel-row {\r\n    margin-top: 5px;\r\n    margin-bottom: 5px;\r\n}\r\n\r\n.adminpanel-row-label {\r\n    width: 400px;\r\n    display: inline-block;\r\n}\r\n\r\n.adminpanel-row-right{\r\n    font-weight: 600;\r\n    font-size: 24px;\r\n    color: #33A;\r\n}\r\n\r\n.adminpanel-submit {\r\n    margin-top: 10px;\r\n}\r\n\r\n.adminpanel-input {\r\n    margin-left: 0px;\r\n    width: 300px;\r\n    min-width: 100px;\r\n    \r\n    \r\n}\r\n\r\n#adminpanel-createuserwarning {\r\n    margin-left: 20px;\r\n    display: inline;\r\n}\r\n\r\n.adminpanel-rank{\r\n    display: flex;\r\n}\r\n\r\n.adminpanel-rank-input{\r\n   margin-right: 10px;\r\n}\r\n\r\n.adminpanel-rank-button{\r\n    \r\n}\r\n\r\n.adminpanel-sof {\r\n    display: flex;\r\n}\r\n\r\n.adminpanel-sof-input {\r\n    margin-right: 10px;\r\n}\r\n\r\n.adminpanel-sof-button {\r\n}\r\n\r\n.adminpanel-subject-category-container{\r\n    display: flex;\r\n}\r\n\r\n.adminpanel-subject-filter-container {\r\n    display: flex;\r\n}\r\n\r\n.adminpanel-subject-filter-div{\r\n    width: 300px;\r\n}\r\n\r\n.adminpanel-subject-filter-name{\r\n    width: 300px;\r\n}\r\n\r\n.adminpanel-subject-category {\r\n    border: 2px solid #99F;\r\n    margin: 4px;\r\n    border-radius: 8px;\r\n    padding: 2px;\r\n    cursor: pointer;\r\n    /*width: 200px;*/\r\n}\r\n\r\n.adminpanel-subject-category:hover{\r\n    background-color: #99F;\r\n    color: white;\r\n}\r\n\r\n.adminpanel-subject-category-active {\r\n    border: 2px solid #F99;\r\n    box-shadow: #F99 1px 1px 4px;\r\n}\r\n\r\n.adminpanel-subject-category-active:hover {\r\n    background-color: #F99;\r\n    color: white;\r\n}\r\n\r\n\r\n.adminpanel-subject:nth-child(2n + 1) {\r\n    background-color: #F2F2F2;\r\n}\r\n\r\n.adminpanel-subject {\r\n    display: flex;\r\n    margin-bottom: 10px;\r\n}\r\n\r\n.adminpanel-subject-input-row{\r\n    display: flex;\r\n}\r\n\r\n.adminpanel-subject-input {\r\n    \r\n    \r\n}\r\n\r\n.adminpanel-subject-input-text {\r\n    width: 400px;\r\n    margin-top: 5px;\r\n}\r\n\r\n.adminpanel-subject-text {\r\n    margin-right: 10px;\r\n    width: 15%;\r\n    font-size: 14px;\r\n}\r\n\r\n.adminpanel-subject-button {\r\n}\r\n\r\n.adminpanel-positiontype {\r\n    display: flex;\r\n}\r\n\r\n.adminpanel-positiontype-input {\r\n    margin-right: 10px;\r\n}\r\n\r\n.adminpanel-positiontype-input-smaller {\r\n    max-width: 300px;\r\n}\r\n\r\n.adminpanel-positiontype-label {\r\n    margin-right: 5px;\r\n    display: flex;\r\n    align-items: center;\r\n    font-size: 12px;\r\n}\r\n\r\n.adminpanel-positiontype-label-top {\r\n    display: flex;\r\n    justify-content: space-around;\r\n}\r\n\r\n.adminpanel-positiontype-number {\r\n    margin-right: 10px;\r\n    max-width: 150px;\r\n}\r\n\r\n.adminpanel-positiontype-number-small {\r\n    margin-right: 10px;\r\n    max-width: 80px;\r\n}\r\n\r\n.adminpanel-positiontype-button {\r\n}\r\n\r\n.adminpanel-positioncategory {\r\n    display: flex;\r\n}\r\n\r\n.adminpanel-positioncategory-input {\r\n    margin-right: 10px;\r\n}\r\n\r\n.adminpanel-positioncategory-button {\r\n}\r\n\r\n.adminpanel-mrd {\r\n    display: flex;\r\n}\r\n\r\n.adminpanel-mrd-input {\r\n    margin-right: 10px;\r\n}\r\n\r\n.adminpanel-mrd-button {\r\n}\r\n\r\n.adminpanel-altrankconditiongroup {\r\n    display: flex;\r\n}\r\n\r\n.adminpanel-altrankconditiongroup-input {\r\n    margin-right: 10px;\r\n}\r\n\r\n.adminpanel-altrankconditiongroup-button {\r\n}\r\n\r\n.adminpanel-altrankcondition {\r\n    display: flex;\r\n}\r\n\r\n.adminpanel-altrankcondition-input {\r\n    margin-right: 10px;\r\n}\r\n\r\n.adminpanel-altrankcondition-button {\r\n}\r\n\r\n.adminpanel-structureregion {\r\n    display: flex;\r\n}\r\n\r\n.adminpanel-structureregion-input {\r\n    margin-right: 10px;\r\n}\r\n\r\n.adminpanel-structureregion-button {\r\n}\r\n\r\n.adminpanel-structuretype {\r\n    display: flex;\r\n}\r\n\r\n.adminpanel-structuretype-input {\r\n    margin-right: 10px;\r\n}\r\n\r\n.adminpanel-structuretype-button {\r\n}\r\n\r\n.adminpanel-illcode {\r\n    display: flex;\r\n}\r\n\r\n.adminpanel-illcode-input {\r\n    margin-right: 10px;\r\n}\r\n\r\n.adminpanel-illcode-button {\r\n}\r\n\r\n\r\n/*####################     STRUCTURE MANAGEMENT PANEL      #########################*/\r\n\r\n#structuremanagementpanel{\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items:flex-start;\r\n    flex-direction: column;\r\n}\r\n\r\n.structuremanagementpanel-intro{\r\n    font-size:20px;\r\n}\r\n\r\n.structuremanagementpanel-input {\r\n    margin-top: 10px;\r\n}\r\n\r\n.structuremanagementpanel-checkbox{\r\n    margin-top: 15px;\r\n    align-self:flex-start;\r\n    \r\n}\r\n\r\n.structuremanagementpanel-document-select{\r\n    width: 150px;\r\n}\r\n\r\n.structuremanagementpanel-document-row{\r\n    display: flex;\r\n}\r\n\r\n.structuremanagementpanel-document-row-text {\r\n    padding-top: 15px;\r\n    width: 400px;\r\n}\r\n\r\n.structuremanagementpanel-freezed {\r\n    display: none;\r\n}\r\n\r\n#structuremanagementpanel-yesno{\r\n    margin-top: 10px;\r\n}\r\n\r\n#structuremanagementpanel-yes{\r\n    width: 100px;\r\n}\r\n\r\n#structuremanagementpanel-no {\r\n    width: 100px;\r\n}\r\n\r\n/*####################          CONTENT          #########################*/\r\n\r\n.widget {\r\n    box-shadow: #999 0px 2px 16px;\r\n    padding: 8px;\r\n    margin-bottom: 30px;\r\n    /*border-top: 2px solid #555;*/\r\n    width: 100%;\r\n    border-radius: 4px;\r\n    position: relative;\r\n    \r\n}\r\n\r\n.widget-title {\r\n    margin-bottom: 10px;\r\n    font-size: 22px;\r\n    font-family: 'Merriweather', serif;\r\n    text-align: center;\r\n}\r\n\r\n.widget-info{\r\n    font-weight: 600;\r\n}\r\n\r\n.widget-title-block{\r\n    display: flex;\r\n    justify-content: space-around;\r\n    margin-bottom: 5px;\r\n}\r\n\r\n.widget-title-block-left {\r\n    flex-basis: 20%;\r\n    padding-left: 5px;\r\n}\r\n\r\n.widget-title-block-middle {\r\n    flex-basis: 60%;\r\n}\r\n\r\n.widget-title-block-right{\r\n    flex-basis: 20%;\r\n    text-align: right;\r\n    padding-right: 20px;\r\n}\r\n\r\n.widget-title-block-addremove-openlist{\r\n    cursor: pointer;\r\n}\r\n\r\n.widget-title-block-addremove-excelbutton {\r\n    position: absolute;\r\n    right: 10px;\r\n    border: 2px solid #9C9;\r\n    border-radius: 5px;\r\n    padding: 1px;\r\n    padding-left: 5px;\r\n    padding-right: 5px;\r\n    color: white;\r\n    background-color: #7C7;\r\n    cursor: pointer;\r\n}\r\n\r\n.widget-title-block-addremove-excelbutton:hover {\r\n    background-color: #8D8;\r\n    border: 2px dashed #7A7;\r\n}\r\n\r\n.widget-title-block-addremove-list{\r\n    min-height: 100px;\r\n}\r\n\r\n.widget-title-block-addremove-div {\r\n    text-align: left;\r\n    margin-left: 120px;\r\n    display: flex;\r\n    justify-content: space-between;\r\n}\r\n\r\n.widget-title-block-add {\r\n    color: #99F;\r\n}\r\n\r\n.widget-title-block-remove {\r\n    color: #F55;\r\n}\r\n\r\n\r\n.widget-title-block-addremove-label {\r\n    text-align: right;\r\n}\r\n\r\n.widget-title-block-addremove {\r\n    width: 40px;\r\n    min-width: 40px;\r\n    font-weight: 300;\r\n}\r\n\r\n.widget-title-block-addremove-date {\r\n    font-weight: 300;\r\n}\r\n\r\n.widget-content {\r\n    \r\n}\r\n\r\n.widget-content-inline{\r\n    display: flex;\r\n    flex-wrap: wrap;\r\n    \r\n}\r\n\r\n.widget-close {\r\n    position: absolute;\r\n    top: 10px;\r\n    left: calc(100% - 30px);\r\n    cursor: pointer;\r\n    font-size: 18px;\r\n}\r\n\r\n.widget-close:hover{\r\n    color: red;\r\n    font-weight: 600;\r\n}\r\n\r\n\r\n/*####################     DEPARTMENTS LIST      #########################*/\r\n\r\n.department {\r\n    box-shadow: #AAA 0px 2px 4px;\r\n    padding: 5px;\r\n    margin-bottom: 20px;\r\n    margin-right: 20px;\r\n    width: 100%;\r\n    border-radius: 4px;\r\n    width: 250px;\r\n    height: 200px;\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\r\n    position: relative;\r\n}\r\n\r\n.department:hover {\r\n    box-shadow: #AAAAFF 0px 2px 16px;\r\n    transition: box-shadow 0.2s ease-in-out;\r\n}\r\n\r\n\r\n\r\n\r\n.department-name {\r\n    text-align: center;\r\n    cursor: pointer;\r\n    display: flex;\r\n    justify-content: center;\r\n    flex-direction: column;\r\n    height: 100%;\r\n    width: 100%;\r\n}\r\n\r\n.department-addnew {\r\n    color: transparent;\r\n    text-shadow: 0 0 2px rgba(0,0,0,0.5);\r\n    font-size: 40px;\r\n    width: 150px;\r\n    height: 150px;\r\n    display: flex;\r\n    justify-content: center;\r\n    flex-direction: column;\r\n}\r\n\r\n\r\n.department-addnew:hover {\r\n    color: black;\r\n    text-shadow: 0 0 0px;\r\n    transition: color 0.4s ease-in-out, text-shadow 0.4s ease-in-out;\r\n}\r\n\r\n.department-settings {\r\n    position: absolute;\r\n    top: 8px;\r\n    border: 1px solid #CCCCCC;\r\n    font-size: 10px;\r\n    padding: 2px;\r\n    border-radius: 5px;\r\n    left: calc(5px);\r\n    color: gray;\r\n    cursor: pointer;\r\n    z-index: 4;\r\n}\r\n\r\n.department-settings:hover{\r\n    color:black;\r\n\r\n}\r\n\r\n.department-notsignedandcreated {\r\n    color: blue;\r\n    font-weight: 600;\r\n    font-size: 10px;\r\n}\r\n\r\n.department-issignedandwillbecreated {\r\n    color: lightblue;\r\n    font-weight: 600;\r\n    font-size: 10px;\r\n}\r\n\r\n.department-isnotsignedandwillbecreated {\r\n    color: darkcyan;\r\n    font-weight: 600;\r\n    font-size: 10px;\r\n}\r\n\r\n.department-isdeletedunsigned {\r\n    color: darkorange;\r\n    font-weight: 600;\r\n    font-size: 10px;\r\n}\r\n\r\n.department-iswillbedeletedsigned {\r\n    color: red;\r\n    font-weight: 600;\r\n    font-size: 10px;\r\n}\r\n\r\n.department-iswillbedeletedunsigned {\r\n    color: orange;\r\n    font-weight: 600;\r\n    font-size: 10px;\r\n}\r\n\r\n\r\n/*####################     DEPARTMENT MANAGEMENT PANEL      #########################*/\r\n\r\n#departmentmanagementpanel {\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\r\n    flex-direction: column;\r\n}\r\n\r\n#departmentmanagementpanel-input {\r\n    margin-top: 10px;\r\n}\r\n\r\n.departmentmanagementpanel-freezed {\r\n    display: none;\r\n}\r\n\r\n#departmentmanagementpanel-yesno {\r\n    margin-top: 10px;\r\n}\r\n\r\n#departmentmanagementpanel-yes {\r\n    width: 100px;\r\n}\r\n\r\n#departmentmanagementpanel-no {\r\n    width: 100px;\r\n}\r\n\r\n\r\n/*####################     POSITIONS LIST      #########################*/\r\n\r\n.position {\r\n    box-shadow: #AAA 0px 2px 4px;\r\n    margin-bottom: 9px;\r\n    margin-right: 9px;\r\n    width: 100%;\r\n    border-radius: 4px;\r\n    width: 340px;\r\n    height: 280px;\r\n    max-width: 340px;\r\n    /* display: flex;\r\n    justify-content: center;\r\n    align-items: center;*/\r\n    padding: 7px;\r\n    position: relative;\r\n    background-color: #FFF;\r\n}\r\n\r\n.position:hover {\r\n    box-shadow: #AAAAFF 0px 2px 16px;\r\n    transition: box-shadow 0.2s ease-in-out;\r\n}\r\n\r\n\r\n.position-expiresoon {\r\n    box-shadow: #704214 0px 2px 8px;\r\n}\r\n\r\n.position-willbeadded {\r\n    background-color: #E5FFE5;\r\n}\r\n\r\n.position-willbedeleted {\r\n    background-color: #FFE5E5;\r\n}\r\n\r\n.position-expiresoon:hover {\r\n    box-shadow: #704214 0px 2px 16px;\r\n    transition: box-shadow 0.2s ease-in-out;\r\n}\r\n\r\n.position-name {\r\n    text-align: center;\r\n    cursor: pointer;\r\n    display: flex;\r\n    justify-content: flex-start;\r\n    flex-direction: column;\r\n    height: 100%;\r\n    width: 100%;\r\n    z-index: 3;\r\n    flex-basis: 50%;\r\n}\r\n\r\n.position-name-transfer {\r\n    text-align: center;\r\n    cursor: pointer;\r\n    display: flex;\r\n    justify-content: flex-start;\r\n    flex-direction: column;\r\n    height: 100%;\r\n    width: 100%;\r\n    z-index: 3;\r\n    flex-basis: 50%;\r\n}\r\n\r\n.position-grid {\r\n    display: flex;\r\n    justify-content: space-between;\r\n    flex-direction: column;\r\n    margin-top: 15px;\r\n    width: 330px;\r\n    height: 245px;\r\n}\r\n\r\n.position-grid-main {\r\n    display: flex;\r\n    justify-content: center;\r\n    flex-direction: row;\r\n}\r\n\r\n.position-leftblock {\r\n    display: flex;\r\n    justify-content: space-between;\r\n    flex-direction: column;\r\n    margin: 5px;\r\n    padding-right: 5px;\r\n    border-right: 2px solid #DDD;\r\n    min-height: 180px;\r\n    flex-basis: 25%;\r\n}\r\n\r\n.position-rightblock {\r\n    display: flex;\r\n    justify-content: flex-start;\r\n    flex-direction: column;\r\n    margin: 5px;\r\n    padding-left: 3px;\r\n    border-left: 2px solid #DDD;\r\n    flex-basis: 25%;\r\n}\r\n\r\n.position-sof {\r\n    display: flex;\r\n    justify-content: flex-start;\r\n    flex-direction: column;\r\n    margin: 0px;\r\n}\r\n\r\n.position-mrd {\r\n    margin-top: 5px;\r\n    font-size: 11.5px;\r\n    width: 100%;\r\n    word-wrap: break-word;\r\n    /*border-top: 2px solid #DDD;*/\r\n}\r\n\r\n.position-mrd-title{\r\n    font-weight: 600;\r\n}\r\n\r\n.position-nameblock {\r\n    min-height: 50px;\r\n    display: flex;\r\n    flex-direction: column;\r\n    justify-content: center;\r\n    /*background-color: rgba(244,244,244, 0.9);*/\r\n    border-radius: 0px 0px 5px 5px;\r\n    margin-bottom: -5px;\r\n    min-width: 150px;\r\n    /*text-shadow: 1px 1px 0px #FFF;*/\r\n}\r\n\r\n.position-nameblock:hover{\r\n\r\n}\r\n\r\n.position-nameblock-name {\r\n    margin-top: -15px;\r\n    font-size: 13px;\r\n    font-weight: 600;\r\n}\r\n\r\n.position-nameblock-name-alt{\r\n    font-size: 12px;\r\n}\r\n\r\n.position-nameblock-rank {\r\n    margin-top: 5px;\r\n    font-size: 12px;\r\n}\r\n\r\n.position-nameblock-category {\r\n    margin-top: 5px;\r\n    font-size: 12px;\r\n    border-bottom: 2px solid #DDD;\r\n}\r\n\r\n.position-nameblock-replaced {\r\n    margin-top: 5px;\r\n    font-size: 12px;\r\n}\r\n\r\n.position-nameblock-notice{\r\n    font-size: 11px;\r\n    margin-top:3px;\r\n}\r\n\r\n\r\n.position-dateactive-descr{\r\n    font-size: 11.5px;\r\n}\r\n\r\n.position-dateactive{\r\n    font-weight: 600;\r\n}\r\n\r\n.position-dateinactive-descr {\r\n    font-size: 11.5px;\r\n}\r\n\r\n.position-dateinactive-descr-red{\r\n    color: #F33;\r\n    text-shadow: 0px 0px 2px #F99;\r\n}\r\n\r\n.position-dateactive-descr-green {\r\n    color: #393;\r\n    text-shadow: 0px 0px 2px #9F9;\r\n}\r\n\r\n.position-dateinactive{\r\n    font-weight: 600;\r\n}\r\n\r\n\r\n.position-grid-compact {\r\n    display: flex;\r\n    justify-content: space-between;\r\n    flex-direction: column;\r\n    margin-top: 15px;\r\n    width: 330px;\r\n    height: 245px;\r\n}\r\n\r\n.position-grid-top-compact {\r\n    display: flex;\r\n    justify-content: center;\r\n    flex-direction: row;\r\n    \r\n}\r\n\r\n\r\n.position-sof-compact {\r\n    display: flex;\r\n    justify-content: flex-start;\r\n    flex-direction: column;\r\n    margin: 5px;\r\n    flex-basis: 20%;\r\n    padding-right: 5px;\r\n    border-right: 2px solid #DDD;\r\n}\r\n\r\n.position-quantity-compact {\r\n    display: flex;\r\n    justify-content: flex-start;\r\n    align-items: center;\r\n    flex-direction: column;\r\n    margin: 5px;\r\n    flex-basis: 20%;\r\n    padding-left: 5px;\r\n    border-left: 2px solid #DDD;\r\n}\r\n\r\n.position-name-compact {\r\n    text-align: center;\r\n    cursor: pointer;\r\n    display: flex;\r\n    justify-content: center;\r\n    flex-direction: column;\r\n    height: 100%;\r\n    width: 100%;\r\n    z-index: 3;\r\n    margin: 5px;\r\n}\r\n\r\n.position-nameblock-name-compact{\r\n    font-weight: 600;\r\n}\r\n\r\n.position-nameblock-name-alt-compact {\r\n    font-size: 12px;\r\n}\r\n\r\n.position-nameblock-rank-compact {\r\n    margin-top: 12px;\r\n    font-size: 12px;\r\n\r\n}\r\n\r\n.position-nameblock-replaced-compact{\r\n    margin-top: 16px;\r\n    font-size: 12px;\r\n}\r\n\r\n.position-nameblock-category-compact {\r\n    margin-top: 8px;\r\n    font-size: 12px;\r\n}\r\n\r\n.position-nameblock-compact {\r\n    min-height: 50px;\r\n    display: flex;\r\n    flex-direction: column;\r\n    justify-content: center;\r\n    background-color: rgba(244,244,244, 0.2);\r\n    border-radius: 0px 0px 5px 5px;\r\n    margin-bottom: -5px;\r\n    min-width: 150px;\r\n    margin-left: -5px;\r\n    /*text-shadow: 1px 1px 0px #FFF;*/\r\n}\r\n\r\n.position-nameblock-compact-bottom{\r\n    margin-top: 10px;\r\n}\r\n\r\n.position-nameblock-compact-quantity {\r\n    font-weight: 900;\r\n    font-size: 18px;\r\n    padding-left: 5px;\r\n    padding-right: 5px;\r\n    border-bottom: 2px solid #DDD;\r\n}\r\n\r\n.position-grid-bottom-compact {\r\n    display: flex;\r\n    justify-content: center;\r\n    flex-direction: row;\r\n    padding-top: 3px;\r\n    border-top: 2px solid #DDD;\r\n    font-size: 12px;\r\n}\r\n\r\n.position-dateactiveblock-compact{\r\n    padding: 5px;\r\n}\r\n\r\n.position-dateinactiveblock-compact{\r\n    padding: 5px;\r\n}\r\n\r\n\r\n.position-addnew {\r\n    color: transparent;\r\n    text-shadow: 0 0 2px rgba(0,0,0,0.5);\r\n    font-size: 40px;\r\n    width: 320px;\r\n    height: 260px;\r\n    display: flex;\r\n    justify-content: center;\r\n    flex-direction: column;\r\n}\r\n\r\n\r\n.position-addnew:hover {\r\n    color: black;\r\n    text-shadow: 0 0 0px;\r\n    transition: color 0.4s ease-in-out, text-shadow 0.4s ease-in-out;\r\n}\r\n\r\n.position-transfer {\r\n    font-size: 18px;\r\n    width: 450px;\r\n    height: 360px;\r\n    display: flex;\r\n    justify-content: center;\r\n    flex-direction: column;\r\n}\r\n\r\n.position-settings {\r\n    position: absolute;\r\n    top: 8px;\r\n    border: 1px solid #CCCCCC;\r\n    font-size: 10px;\r\n    padding: 2px;\r\n    border-radius: 5px;\r\n    left: calc(5px);\r\n    color: gray;\r\n    cursor: pointer;\r\n    z-index: 4;\r\n}\r\n\r\n.position-settings:hover {\r\n    color: black;\r\n}\r\n\r\n.position-info {\r\n    position: absolute;\r\n    top: 8px;\r\n    border: 1px solid #CCCCCC;\r\n    font-size: 10px;\r\n    padding: 2px;\r\n    padding-top: 4px;\r\n    padding-bottom: 4px;\r\n    border-radius: 5px;\r\n    left: calc(100% - 40px);\r\n    color: gray;\r\n    cursor: pointer;\r\n    z-index: 4;\r\n    background: none;\r\n}\r\n\r\n.position-additional {\r\n    position: absolute;\r\n    top: 8px;\r\n    border: 1px solid #CCCCCC;\r\n    font-size: 10px;\r\n    padding: 2px;\r\n    padding-top: 4px;\r\n    padding-bottom: 4px;\r\n    border-radius: 5px;\r\n    left: calc(100% - 70px);\r\n    color: gray;\r\n    cursor: pointer;\r\n    z-index: 4;\r\n    background: none;\r\n}\r\n\r\n.position-info:hover {\r\n    color: black;\r\n    background: none;\r\n}\r\n\r\n\r\n.position-plus{\r\n    height: 100%;\r\n    display: flex;\r\n    flex-direction: column;\r\n    justify-content: center;\r\n    width:100%;\r\n}\r\n\r\n.position-photo {\r\n    z-index: 0;\r\n    position: absolute;\r\n    display: block;\r\n    width: 100%;\r\n    height: 100%;\r\n    background-repeat: no-repeat;\r\n    background-size: 100%;\r\n    background-position: center;\r\n    border-radius: 5px;\r\n    \r\n}\r\n\r\n.position-nophoto {\r\n    /*filter: opacity(20%);*/\r\n}\r\n\r\n.department-div{\r\n    width: 100% !important;\r\n}\r\n\r\n.subdepartment {\r\n    box-shadow: #AAA 0px 2px 4px;\r\n    padding: 5px;\r\n    margin-bottom: 20px;\r\n    margin-top: 20px;\r\n    /*width: 100%;*/\r\n    /*width: 1480px;*/\r\n    border-radius: 4px;\r\n    height: 40px;\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\r\n    background-size: 2000px 2000px;\r\n    background-color: #F4F4F4;\r\n    background-image: repeating-linear-gradient(135deg, transparent, transparent 20px, #F8F8F8 20px, #F8F8F8 40px);\r\n    position: relative;\r\n}\r\n\r\n.subdepartment-name {\r\n    text-align: center;\r\n    cursor: pointer;\r\n    display: flex;\r\n    justify-content: center;\r\n    flex-direction: column;\r\n    height: 100%;\r\n    width: 100%;\r\n    z-index: 3;\r\n}\r\n\r\n.position-head{\r\n    border: 2px solid #FFAAAA;\r\n}\r\n\r\n.positionslist-inforow {\r\n    margin-top: 10px;\r\n    margin-bottom: 10px;\r\n}\r\n\r\n.position-history-title{\r\n    font-size: 16px;\r\n}\r\n\r\n.position-curation{\r\n    margin-top: 10px;\r\n}\r\n\r\n.position-curation-title{\r\n    font-size: 16px;\r\n}\r\n\r\n.position-curation-element{\r\n    padding-left: 2px;\r\n    margin-left: 3px;\r\n    margin-top: 3px;\r\n    font-size: 12px;\r\n    border-left: 2px solid #AAAAFF;\r\n}\r\n\r\n\r\n.position-curation-elementname {\r\n    font-weight: 600;\r\n}\r\n\r\n.position-heading {\r\n    margin-top: 10px;\r\n}\r\n\r\n.position-heading-title {\r\n    font-size: 16px;\r\n}\r\n\r\n.position-heading-element {\r\n    padding-left: 2px;\r\n    margin-left: 3px;\r\n    margin-top: 3px;\r\n    font-size: 12px;\r\n    border-left: 2px solid #AAAAFF;\r\n}\r\n\r\n.position-heading-elementname {\r\n    font-weight: 600;\r\n}\r\n\r\n.subdepartment-expiresoon {\r\n    box-shadow: #704214 0px 2px 8px;\r\n    background-size: 2000px 2000px;\r\n    background-image: repeating-linear-gradient(135deg, transparent, transparent 20px, #faf0e5 20px, #faf0e5 40px);\r\n}\r\n\r\n.subdepartment-info {\r\n    position: absolute;\r\n    top: 8px;\r\n    border: 1px solid #CCCCCC;\r\n    font-size: 10px;\r\n    padding: 2px;\r\n    padding-top: 4px;\r\n    padding-bottom: 4px;\r\n    border-radius: 5px;\r\n    left: calc(70px);\r\n    color: gray;\r\n    cursor: pointer;\r\n    z-index: 4;\r\n    background: none;\r\n}\r\n\r\n.subdepartment-info:hover {\r\n    color: black;\r\n    background: none;\r\n}\r\n\r\n.subdepartment-expiresoon:hover {\r\n    box-shadow: #704214 0px 2px 32px;\r\n    transition: box-shadow 0.2s ease-in-out;\r\n}\r\n\r\n.position-notsignedandcreated {\r\n    color: blue;\r\n    font-weight: 600;\r\n    font-size: 10px;\r\n}\r\n\r\n.position-issignedandwillbecreated {\r\n    color: lightblue;\r\n    font-weight: 600;\r\n    font-size: 10px;\r\n}\r\n\r\n.position-isnotsignedandwillbecreated {\r\n    color: darkcyan;\r\n    font-weight: 600;\r\n    font-size: 10px;\r\n}\r\n\r\n.position-isdeletedunsigned {\r\n    color: darkorange;\r\n    font-weight: 600;\r\n    font-size: 10px;\r\n}\r\n\r\n.position-iswillbedeletedsigned {\r\n    color: red;\r\n    font-weight: 600;\r\n    font-size: 10px;\r\n}\r\n\r\n.position-iswillbedeletedunsigned {\r\n    color: orange;\r\n    font-weight: 600;\r\n    font-size: 10px;\r\n}\r\n\r\n\r\n.position-structure {\r\n    box-shadow: #AAA 0px 2px 4px;\r\n    margin-bottom: 10px;\r\n    margin-right: 10px;\r\n    width: 100%;\r\n    border-radius: 4px;\r\n    width: 270px;\r\n    height: 270px;\r\n    /* display: flex;\r\n    justify-content: center;\r\n    align-items: center;*/\r\n    padding: 5px;\r\n    position: relative;\r\n    font-size: 14px;\r\n    cursor: pointer;\r\n    background-color: #FFF;\r\n}\r\n\r\n\r\n\r\n.position-structure:hover {\r\n    box-shadow: #AAAAFF 0px 2px 16px;\r\n    transition: box-shadow 0.2s ease-in-out;\r\n}\r\n\r\n.position-structure-title {\r\n    font-weight: 600;\r\n    font-size: 14px;\r\n    text-align: center;\r\n    border-bottom: 2px solid #D4D4D4;\r\n    margin-bottom: 5px;\r\n}\r\n\r\n.position-structure-back {\r\n    font-weight: 600;\r\n    font-size: 56px;\r\n    text-align: center;\r\n    line-height: 240px;\r\n    height: 100%;\r\n    vertical-align: middle;\r\n    margin-bottom: 5px;\r\n    \r\n}\r\n\r\n\r\n/*####################     POSITION PERSON MANAGEMENT PANEL      #########################*/\r\n\r\n.position-person {\r\n    box-shadow: #AAA 0px 2px 4px;\r\n    margin-bottom: 10px;\r\n    margin-right: 10px;\r\n    width: 100%;\r\n    border-radius: 4px;\r\n    width: 450px;\r\n    height: 360px;\r\n    /* display: flex;\r\n    justify-content: center;\r\n    align-items: center;*/\r\n    padding: 5px;\r\n    position: relative;\r\n    cursor: pointer;\r\n    background-color: #FFF;\r\n}\r\n\r\n.position-person:hover {\r\n    box-shadow: #AAAAFF 0px 2px 16px;\r\n    transition: box-shadow 0.2s ease-in-out;\r\n}\r\n\r\n\r\n.position-person-expiresoon {\r\n    box-shadow: #704214 0px 2px 8px;\r\n}\r\n\r\n.position-person-willbeadded {\r\n    background-color: #E5FFE5;\r\n}\r\n\r\n.position-person-willbedeleted {\r\n    background-color: #FFE5E5;\r\n}\r\n\r\n.position-person-expiresoon:hover {\r\n    box-shadow: #704214 0px 2px 16px;\r\n    transition: box-shadow 0.2s ease-in-out;\r\n}\r\n\r\n.position-person-name {\r\n    text-align: center;\r\n    cursor: pointer;\r\n    display: flex;\r\n    justify-content: flex-start;\r\n    flex-direction: column;\r\n    height: 100%;\r\n    width: 100%;\r\n    z-index: 3;\r\n    flex-basis: 50%;\r\n\r\n}\r\n\r\n.position-person-grid {\r\n    display: flex;\r\n    justify-content: space-between;\r\n    flex-direction: column;\r\n    margin-top: 15px;\r\n    width: 440px;\r\n    /*height: 280px;*/\r\n}\r\n\r\n.position-person-grid-main {\r\n    display: flex;\r\n    width: 100%;\r\n    /*background-color: red;*/\r\n    justify-content: space-around;\r\n    flex-direction: row;\r\n    max-height:120px;\r\n}\r\n\r\n.position-person-leftblock {\r\n    display: flex;\r\n    justify-content: space-between;\r\n    flex-direction: column;\r\n    margin: 5px;\r\n    padding-right: 5px;\r\n    border-right: 2px solid #DDD;\r\n    min-height: 120px;\r\n    flex-basis: 20%;\r\n}\r\n\r\n.position-person-rightblock {\r\n    display: flex;\r\n    justify-content: flex-start;\r\n    flex-direction: column;\r\n    margin: 5px;\r\n    padding-left: 3px;\r\n    border-left: 2px solid #DDD;\r\n    flex-basis: 20%;\r\n    \r\n}\r\n\r\n.position-person-button{\r\n    padding: 1px;\r\n    font-size: 10px;\r\n    margin: 0px;\r\n}\r\n\r\n.position-person-sof {\r\n    display: flex;\r\n    justify-content: flex-start;\r\n    flex-direction: column;\r\n    margin: 0px;\r\n}\r\n\r\n.position-person-noperson {\r\n    display: flex;\r\n    height: 100px;\r\n    justify-content: center;\r\n    flex-direction: row;\r\n    align-items: center;\r\n    font-size: 24px;\r\n    color: #444;\r\n    font-family: Merriweather;\r\n    margin: 0px;\r\n}\r\n\r\n.position-person-mrd {\r\n    margin-top: 5px;\r\n    font-size: 12px;\r\n    /*border-top: 2px solid #DDD;*/\r\n}\r\n\r\n.position-person-mrd-title {\r\n    font-weight: 600;\r\n}\r\n\r\n.position-person-nameblock {\r\n    min-height: 50px;\r\n    display: flex;\r\n    flex-direction: column;\r\n    justify-content: center;\r\n    /*background-color: rgba(244,244,244, 0.9);*/\r\n    border-radius: 0px 0px 5px 5px;\r\n    margin-bottom: -5px;\r\n    min-width: 150px;\r\n    /*text-shadow: 1px 1px 0px #FFF;*/\r\n}\r\n\r\n.position-nameblock:hover {\r\n}\r\n\r\n.position-person-nameblock-name {\r\n    margin-top: -15px;\r\n    text-align: center;\r\n    /*font-size: 13px;\r\n    font-weight: 600;*/\r\n}\r\n\r\n.position-person-nameblock-name-alt {\r\n    font-size: 12px;\r\n}\r\n\r\n.position-person-nameblock-rank {\r\n    margin-top: 5px;\r\n    font-size: 12px;\r\n}\r\n\r\n.position-person-grid-person {\r\n    display: flex;\r\n    width: 100%;\r\n    /*background-color: red;*/\r\n    justify-content: space-around;\r\n    flex-direction: column;\r\n\r\n}\r\n\r\n.position-person-grid-person-top{\r\n    text-align: center;\r\n}\r\n\r\n.position-person-grid-person-bottom {\r\n    display: flex;\r\n    width: 100%;\r\n    /*background-color: red;*/\r\n    justify-content: space-around;\r\n    flex-direction: row;\r\n}\r\n\r\n.position-person-grid-person-bottom-image{\r\n    height: 170px;\r\n    cursor: pointer;\r\n\r\n}\r\n\r\n.position-person-nameblock-category {\r\n    margin-top: 5px;\r\n    font-size: 12px;\r\n    border-bottom: 2px solid #DDD;\r\n}\r\n\r\n.position-person-nameblock-replaced {\r\n    margin-top: 5px;\r\n    font-size: 12px;\r\n}\r\n\r\n.position-person-nameblock-notice {\r\n    font-size: 11px;\r\n    margin-top: 3px;\r\n}\r\n\r\n.position-person-head {\r\n    border: 2px solid #FFAAAA;\r\n}\r\n\r\n.position-future-add {\r\n    color: #0A0;\r\n}\r\n\r\n.position-future-delete {\r\n    color: #A00;\r\n}\r\n\r\n/*####################     POSITION MANAGEMENT PANEL      #########################*/\r\n\r\n#positionmanagementpanel {\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: flex-start;\r\n    flex-direction: column;\r\n}\r\n\r\n.positionmanagementpanel-title{\r\n    text-align: center;\r\n    width: 100%;\r\n}\r\n\r\n.positionmanagementpanel-rankcap{\r\n    width: 100%;\r\n}\r\n\r\n#positionmanagementpanel-input {\r\n    margin-top: 10px;\r\n}\r\n\r\n.positionmanagementpanel-freezed {\r\n    display: none;\r\n}\r\n\r\n#positionmanagementpanel-yesno {\r\n    margin-top: 10px;\r\n}\r\n\r\n.positionmanagementpanel-margin {\r\n    margin-top: 10px;\r\n}\r\n\r\n.positionmanagementpanel-altrank-row{\r\n   \r\n}\r\n\r\n.positionmanagementpanel-left-margin{\r\n    margin-left: 8px;\r\n}\r\n\r\n.positionmanagementpanel-left {\r\n    white-space: nowrap;\r\n    display: flex;\r\n    justify-content: flex-start;\r\n    align-items: center;\r\n}\r\n\r\n.positionmanagementpanel-row {\r\n    \r\n    white-space: nowrap;\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\r\n}\r\n\r\n.positionmanagementpanel-fromit{\r\n    margin-top: 10px;\r\n}\r\n\r\n.positionmanagementpanel-label {\r\n    align-self: center;\r\n    margin-right: 10px;\r\n}\r\n\r\n.positionmanagementpanel-replacedbycivil{\r\n    width: 99%;\r\n    margin-bottom: 20px;\r\n    margin-left: 5px;\r\n    padding: 3px;\r\n    border-left: 2px solid #5599FF;\r\n    border-radius: 3px;\r\n}\r\n\r\n.positionmanagementpanel-rbcd{\r\n    margin-top: 10px;\r\n    margin-left: 5px;\r\n    padding-left: 3px;\r\n    border-left: 2px solid #ff88ff;\r\n}\r\n\r\n.positionmanagementpanel-flexrow {\r\n    display: flex;\r\n    justify-content: space-between;\r\n    flex-wrap: nowrap;\r\n    align-items: flex-end;\r\n    width: 100%;\r\n    /*background-color: rgba(122,122,122,0.4)*/\r\n}\r\n\r\n.positionmanagementpanel-flexrow-text {\r\n    height: 34px;\r\n    vertical-align: middle;\r\n    /*background-color: rgba(122,122,122,0.7);*/\r\n}\r\n\r\n.positionmanagementpanel-flexrow-text-first{\r\n    margin-left: 15px;\r\n}\r\n\r\n.positionmanagementpanel-flexrow-element-25{\r\n    flex-basis: 25%;\r\n}\r\n\r\n.positionmanagementpanel-flexrow-element-33{\r\n    flex-basis: 33%;\r\n}\r\n\r\n.positionmanagementpanel-flexrow-element-40 {\r\n    flex-basis: 40%;\r\n}\r\n\r\n.positionmanagementpanel-flexrow-element-50 {\r\n    flex-basis: 50%;\r\n}\r\n\r\n.positionmanagementpanel-flexrow-element-60 {\r\n    flex-basis: 60%;\r\n}\r\n\r\n.positionmanagementpanel-flexrow-element-66 {\r\n    flex-basis: 66%;\r\n}\r\n\r\n.positionmanagementpanel-flexrow-element-75 {\r\n    flex-basis: 75%;\r\n}\r\n\r\n.positionmanagementpanel-document-flexrow {\r\n    display: flex;\r\n    flex-wrap: wrap;\r\n    /*background-color: rgba(122,122,122,0.4)*/\r\n}\r\n\r\n.positionmanagementpanel-document-select {\r\n    width: 150px;\r\n}\r\n\r\n.positionmanagementpanel-document-structure{\r\n    margin: 5px;\r\n}\r\n\r\n#positionmanagementpanel-yes {\r\n    width: 100px;\r\n}\r\n\r\n#departmentmanagementpanel-no {\r\n    width: 100px;\r\n}\r\n\r\n.positionmanagementpanel-table {\r\n    border-top: 2px solid #AA77FF;\r\n    border-bottom: 2px solid #AA77FF;\r\n    text-align: center;\r\n    padding: 2px;\r\n}\r\n\r\n.positionmanagementpanel-table td{\r\n    padding-left: 3px;\r\n    padding-right: 3px;\r\n}\r\n\r\n.positionmanagementpanel-table input{\r\n    margin-left: 2px;\r\n}\r\n\r\n\r\n\r\n.positionmanagementpanel-thead {\r\n    border-bottom: 2px solid #AA77FF;\r\n}\r\n\r\n.positionmanagementpanel-thead td {\r\n    padding: 2px;\r\n    border-bottom: 2px solid #AA77FF;\r\n}\r\n\r\n.positionmanagementpanel-tbody tr {\r\n    background-color: white;\r\n}\r\n\r\n.positionmanagementpanel-tbody tr:nth-child(even) {\r\n    background-color: #D7D7D7;\r\n}\r\n\r\n\r\n\r\n.positionmanagementpanel-tr {\r\n}\r\n\r\n.positionmanagementpanel-td{\r\n\r\n}\r\n\r\n.positionmanagementpanel-curation{\r\n    padding-left: 3px;\r\n    margin-left: 5px;\r\n    border-left: 2px solid #00FFFF;\r\n}\r\n\r\n.positionmanagementpanel-curation-element {\r\n    margin-top: 5px;\r\n    padding-bottom: 3px;\r\n    margin-bottom: 5px;\r\n    border-bottom: 2px solid #E4E4E4;\r\n}\r\n\r\n.positionmanagementpanel-head {\r\n    padding-left: 3px;\r\n    margin-left: 5px;\r\n    border-left: 2px solid #FF55FF;\r\n}\r\n/*#######################     SETTINGS      ##########################*/\r\n.settingspanel-title {\r\n    text-align: center;\r\n    font-family: Merriweather;\r\n    font-size: 26px;\r\n    margin-bottom: 20px;\r\n}\r\n\r\n.settingspanel-datetitle{\r\n    margin-bottom: 10px;\r\n    text-align: center;\r\n}\r\n\r\n.settingspanel-dateinput{\r\n\r\n}\r\n\r\n.settingspanel-datebuttons{\r\n    margin-top: 10px;\r\n\r\n}\r\n\r\n\r\n/*####################     DECREE HISTORY      #########################*/\r\n\r\n.decreehistory-create {\r\n    display: flex;\r\n}\r\n\r\n.decreehistory-element {\r\n    margin: 15px;\r\n    border-radius: 5px;\r\n    border: 2px solid #F2F2F2;\r\n    padding: 8px;\r\n}\r\n\r\n.decreehistory-margintop {\r\n    margin-top: 10px;\r\n}\r\n\r\n.decreehistory-selected {\r\n    background-color: #FCFCFF;\r\n    border: 2px solid #A2A2F2;\r\n}\r\n\r\n.decreehistory-panel {\r\n    margin: 10px;\r\n    border-radius: 5px;\r\n    border: 2px solid #F2F2F2;\r\n}\r\n\r\n.decreehistory-element {\r\n    border-top: 2px solid #F2F2F2;\r\n    border-bottom: 2px solid #F2F2F2;\r\n    margin: 10px;\r\n}\r\n\r\n\r\n/*####################     PMREQUEST      #########################*/\r\n\r\n.pmrequest-title{\r\n    font-size: 20px;\r\n    padding-bottom: 10px;\r\n    font-weight: 500;\r\n}\r\n\r\n.pmrequest-row{\r\n    margin-top: 5px;\r\n    margin-bottom: 5px;\r\n    display: flex;\r\n    align-items: center;\r\n}\r\n\r\n.pmrequest-block {\r\n    padding-left: 5px;\r\n    border-left: 2px solid #AA99FF;\r\n    border-radius: 5px;\r\n}\r\n\r\n.pmrequest-label {\r\n    width: 200px;\r\n    margin-left: 15px;\r\n}\r\n\r\n.pmrequest-select{\r\n    width: 100%;\r\n}\r\n\r\n\r\n.pmrequest-marginleft{\r\n    margin-left: 20px;\r\n}\r\n\r\n.pmrequest-structure-element {\r\n    padding-left: 2px;\r\n    margin-left: 3px;\r\n    margin-top: 3px;\r\n    font-size: 12px;\r\n    border-left: 2px solid #AAAAFF;\r\n}\r\n\r\n.pmrequest-input-num{\r\n    width: 100px;\r\n}\r\n\r\n.pmrequest-spinner{\r\n    margin-left: 20px;\r\n}\r\n\r\n.pmrequest-singlerank{\r\n    margin-bottom: 15px;\r\n    padding: 2px;\r\n    border: solid 2px #EAEAEA;\r\n}\r\n\r\n.pmrequest-singlerank-title{\r\n    margin-bottom: 15px;\r\n}\r\n\r\n.pmrequest-singlerank-new{\r\n    margin-bottom: 30px;\r\n    font-size: 14px;\r\n}\r\n\r\n.pmrequest-table{\r\n    border: 3px solid #EAEAEA;\r\n    padding: 4px;\r\n}\r\n\r\n.pmrequest-table-tr {\r\n    border: 2px solid #EAEAEA;\r\n}\r\n\r\n.pmrequest-table-td {\r\n    padding: 2px;\r\n    border: 2px solid #EAEAEA;\r\n}\r\n\r\n.pmrequest-tablenew {\r\n    border: 2px solid #333;\r\n    padding: 4px;\r\n    width: 100%;\r\n}\r\n\r\n.pmrequest-tablenew > tr {\r\n    padding: 4px;\r\n    border: 2px solid #333;\r\n}\r\n\r\n.pmrequest-tablenew > tr> td {\r\n    padding-left: 4px;\r\n}\r\n\r\n\r\n.pmrequest-tablenew-td-border {\r\n    \r\n    border: 2px solid #333;\r\n}\r\n\r\n.pmrequest-tablenew-td-back-red{\r\n    background-color: #FFCACA;\r\n}\r\n\r\n.pmrequest-tablenew-td-back-green {\r\n    background-color: #CAFFCA;\r\n}\r\n\r\n.pmrequest-tablenew-back-brown {\r\n    background-color: #FFCC88;\r\n}\r\n\r\n.pmrequest-tablenew-back-green {\r\n    background-color: #CAFFCA;\r\n}\r\n\r\n.pmrequest-tablenew-back-silver {\r\n    background-color: #EAEAEA;\r\n}\r\n\r\n.pmrequest-tablenew-sub {\r\n    width: 100%;\r\n}\r\n\r\n.pmrequest-tablenew-td-subfield{\r\n    padding-right: 10px;\r\n}\r\n\r\n.pmrequest-tablenew-td-subnumber {\r\n    padding-left: 6px;\r\n    border-left: 2px solid #333;\r\n    width: 100px;\r\n}\r\n\r\n.pmrequest-tablenew-text-middle{\r\n    text-align:center;\r\n}\r\n\r\n.pmrequest-tablenew-td-autowidth {\r\n    padding-left: 6px;\r\n    border-left: 2px solid #333;\r\n}\r\n\r\n.pmrequest-tablenew-td-border-bottom {\r\n    border-bottom: 2px solid #333;\r\n}\r\n\r\n.pmrequest-tablenew-td-heightmax{\r\n    \r\n}\r\n\r\n.pmrequest-tablenew-td-border-left {\r\n    padding-left: 6px;\r\n    border-left: 2px solid #333;\r\n}\r\n\r\n.pmrequest-autowidth {\r\n    table-layout: fixed;\r\n    width: 100%;\r\n}\r\n\r\n.pmrequest-tablenew-td-table {\r\n    padding: 0px;\r\n    border: 2px solid #333;\r\n}\r\n\r\n\r\n/*##################    CANDIDATES     ######################*/\r\n\r\n.candidates-top-block {\r\n    padding-bottom: 4px;\r\n    border-bottom: 4px dashed #D9D9D9;\r\n    margin-bottom: 4px;\r\n    padding: 4px;\r\n}\r\n\r\n.candidates-title {\r\n    font-size: 24px;\r\n    text-align: center;\r\n    font-family: Merriweather;\r\n}\r\n\r\n.candidates-accordeon{\r\n    max-width: 99.9%;\r\n}\r\n\r\n.candidates-accordeon-title{\r\n    font-weight: 600;\r\n    font-size: 16px;\r\n}\r\n\r\n.candidates-cabinetes {\r\n    padding: 4px;\r\n    margin-top: 2px;\r\n    margin-bottom: 4px;\r\n    border-right: 2px solid #D4D4D4;\r\n    border-left: 2px solid #D4D4D4;\r\n    border-top: 2px solid #D4D4D4;\r\n    border-bottom: 2px solid #BAF;\r\n    border-radius: 0px 0px 6px 6px;\r\n}\r\n\r\n.candidates-cabinetes-element {\r\n    margin-top: 4px;\r\n    box-shadow: #DDD 2px 2px 2px;\r\n    padding: 4px;\r\n    min-height: 35px;\r\n}\r\n\r\n.candidates-cabinetes-element:hover {\r\n    box-shadow: #87D 0px 0px 6px;\r\n    /*border: 1px solid #BAF;*/\r\n    cursor: pointer;\r\n}\r\n\r\n.candidates-cabinetes-element-delete{\r\n    position: absolute;\r\n    right: 20px;\r\n}\r\n\r\n.candidates-hr{\r\n\r\n}\r\n\r\n.candidates-cabinete {\r\n    margin: 5px;\r\n    min-height: 400px;\r\n    box-shadow: #DDD 2px 2px 8px;\r\n    padding: 4px;\r\n}\r\n\r\n.candidates-cabinete-title {\r\n    text-align: center;\r\n    font-size: 24px;\r\n    font-family: Merriweather;\r\n}\r\n\r\n.candidates-cabinete-subtitle {\r\n    text-align: center;\r\n    font-size: 20px;\r\n}\r\n\r\n.candidates-cabinete-close{\r\n    position: absolute;\r\n    right: 20px;\r\n    margin-top: 0px;\r\n}\r\n\r\n.candidates-cabinete-close-button{\r\n    background-color: rgba(0,0,0,0);\r\n    font-weight: 600;\r\n    border: none;\r\n}\r\n\r\n.candidates-cabinete-close-button:hover{\r\n    background-color: rgba(0,0,0,0);\r\n    color: red;\r\n}\r\n\r\n.candidates-cabinete-actions{\r\n    padding-bottom: 4px;\r\n    border-bottom: 2px solid #DDD;\r\n}\r\n\r\n.candidates-cabinete-content {\r\n    display: flex;\r\n    flex-direction: column;\r\n\r\n    align-items: center;\r\n}\r\n\r\n.candidates-cabinete-document {\r\n    margin-top: 5px;\r\n    margin-right: 4px;\r\n    background-color: white;\r\n    padding: 4px;\r\n    border: 2px solid #E4E4E4;\r\n    border-radius: 2px;\r\n    box-shadow: #DDD 2px 2px 4px;\r\n    min-height: 80px;\r\n    max-width: 600px;\r\n    width: 600px;\r\n}\r\n\r\n.candidates-cabinete-document-title{\r\n    font-size: 14px;\r\n    text-align: center;\r\n    font-weight: 600;\r\n}\r\n\r\n.candidates-cabinete-document-actions{\r\n    margin-top: 8px;\r\n    margin-left: 4px;\r\n}\r\n\r\n.candidates-cabinete-document-button + .el-button {\r\n    margin-right: 0px;\r\n    margin-left: 0px;\r\n}\r\n\r\n.candidates-cabinete-remove {\r\n    margin-top: 5px;\r\n    display: flex;\r\n    max-width: 600px;\r\n    width: 600px;\r\n    justify-content: center;\r\n    box-shadow: #DDD 2px 2px 4px;\r\n}\r\n\r\n.candidates-cabinete-remove-button {\r\n    width: 100%;\r\n}\r\n\r\n.candidates-cabinete-info{\r\n    display: flex;\r\n    justify-content: center;\r\n    color: #777;\r\n    font-size: 13px;\r\n    margin: 3px;\r\n    margin-right: 10px;\r\n}\r\n\r\n.candidates-cabinete-info-element{\r\n    margin-right: 10px;\r\n    border: 1px solid #DDD;\r\n    border-radius: 3px;\r\n    padding: 2px;\r\n}\r\n\r\n/*####################     ELD      #########################*/\r\n.eld-top-block {\r\n    padding-bottom: 4px;\r\n    border-bottom: 4px dashed #D9D9D9;\r\n    margin-bottom: 4px;\r\n    padding: 4px;\r\n}\r\n\r\n.eld-search-and-create {\r\n    display: flex;\r\n    justify-content: space-between;\r\n}\r\n\r\n.eld-search-and-create:hover .eld-search-and-create-advice{\r\n    display: inline;\r\n}\r\n\r\n.eld-search-and-create-advice{\r\n    margin-right: 10px;\r\n    font-weight: 300;\r\n    font-size: 12px;\r\n    font-style: italic;\r\n    display: none;\r\n    color: #A4A4A4;\r\n}\r\n\r\n.eld-title{\r\n    font-size: 24px;\r\n    text-align: center;\r\n    font-family: Merriweather;\r\n\r\n}\r\n\r\n.eld-search{\r\n    display:flex;\r\n    flex-direction: column;\r\n    justify-content: flex-end;\r\n    \r\n}\r\n\r\n.eld-search-input{\r\n    width:300px;\r\n    margin-right: 5px;\r\n}\r\n\r\n.eld-search-main {\r\n    box-shadow: #CCC 0px 2px 2px;\r\n    padding-bottom: 4px;\r\n    \r\n}\r\n\r\n\r\n.eld-search-main-title {\r\n    text-align: center;\r\n    font-size: 21px;\r\n    font-family:Merriweather;\r\n}\r\n\r\n.eld-search-element{\r\n    cursor: pointer;\r\n    box-shadow: #CCC 0px 2px 2px;\r\n    margin: 4px;\r\n    padding: 4px;\r\n    border: 2px solid #CCC;\r\n    border-radius: 2px;\r\n    min-height: 100px;\r\n}\r\n\r\n.eld-search-element:hover{\r\n    background-color:#FFFFFA;\r\n    border: 2px solid #CFCFCC;\r\n    box-shadow: #CFCFCC 0px 2px 2px;\r\n}\r\n\r\n.eld-search-element-image {\r\n    margin: 4px;\r\n    min-width: 10%;\r\n    width: 10%;\r\n    max-width: 10%;\r\n}\r\n\r\n.eld-search-element-user {\r\n    box-shadow: #CCC 0px 2px 2px;\r\n    margin: 4px;\r\n    padding: 4px;\r\n    border: 2px solid #CCC;\r\n    border-radius: 2px;\r\n}\r\n\r\n.eld-eld {\r\n    border-top: 4px solid #DDD;\r\n    display: flex;\r\n    min-height: 500px;\r\n    box-shadow: #CCC 0px 0px 4px;\r\n    margin-top: 20px;\r\n}\r\n\r\n.eld-eld-title{\r\n    text-align: center;\r\n    font-size: 24px;\r\n    font-weight: 600;\r\n\r\n}\r\n\r\n.eld-eld-side {\r\n    /*flex-basis: 18%;*/\r\n    max-width: 250px;\r\n    \r\n    border-right: 4px solid #DDD;\r\n    box-shadow: #CCC 2px 0px 3px;\r\n}\r\n\r\n.eld-eld-side-mail {\r\n    /*flex-basis: 18%;*/\r\n    max-width: 17%;\r\n    min-width: 15%;\r\n    border-right: 4px solid #DDD;\r\n    box-shadow: #CCC 2px 0px 3px;\r\n}\r\n\r\n.eld-eld-main{\r\n    padding-left: 4px;\r\n    width: 100%;\r\n    min-height: 735px;\r\n}\r\n\r\n.eld-eld-label {\r\n    min-width: 120px;\r\n    font-weight: 600;\r\n}\r\n\r\n.eld-eld-side-element{\r\n    border: none;\r\n    border-bottom: 2px solid #D4D4D4;\r\n    border-radius: 0px;\r\n    margin: 4px;\r\n    padding: 2px;\r\n    font-size: 14px;\r\n    font-family: Merriweather;\r\n    text-align: center;\r\n    cursor: pointer;\r\n}\r\n\r\n.eld-eld-side-element:hover {\r\n    border-bottom: 2px solid #D4D4F4;\r\n    color: #449;\r\n}\r\n\r\n.eld-eld-side-element-selected {\r\n    border-bottom: 2px solid #A4A4F4;\r\n}\r\n\r\n.eld-eld-side-element-selected:hover{\r\n    border-bottom: 2px solid #A4A4F4;\r\n}\r\n\r\n.eld-search-element-button{\r\n    margin-left: 5px;\r\n}\r\n\r\n.eld-eld-main-head {\r\n    text-align: center;\r\n    width: 100%;\r\n    font-size: 21px;\r\n    border-bottom: 4px dotted #CCC;\r\n    font-family: Merriweather;\r\n    padding: 4px;\r\n    margin-bottom: 4px;\r\n}\r\n\r\n.eld-eld-main-head-position {\r\n    font-size: 18px;\r\n}\r\n\r\n.eld-eld-main-head-partbutton {\r\n    margin-right: 0px;\r\n    margin-left: 0px;\r\n    border-radius: 4px 0px 0px 4px;\r\n    background-color: rgba(255,255,255,0.4);\r\n}\r\n\r\n.eld-eld-main-head-partbutton + .el-button {\r\n    margin-right: 0px;\r\n    margin-left: 0px;\r\n    border-left: 0px;\r\n    border-radius: 0px 0px 0px 0px;\r\n}\r\n\r\n.eld-eld-main-head-image {\r\n    margin: 4px;\r\n    min-width: 10%;\r\n    max-width: 15%;\r\n}\r\n\r\n.eld-eld-body{\r\n\r\n}\r\n\r\n.eld-eld-body-row-flex {\r\n    display: flex;\r\n}\r\n\r\n.eld-eld-body-row-flex-center {\r\n    display: flex;\r\n    justify-content: center;\r\n}\r\n\r\n.eld-eld-body-row-flex-spacebetween {\r\n    display: flex;\r\n    justify-content: space-between;\r\n}\r\n\r\neld-eld-body-row-flex-vertical{\r\n    display: flex;\r\n    flex-direction: column;\r\n}\r\n\r\n.eld-eld-body-textcenter {\r\n    text-align: center;\r\n}\r\n\r\n.eld-eld-body-row-long{\r\n    max-width: 800px;\r\n    width: 800px;\r\n}\r\n\r\n.eld-eld-body-row-medium {\r\n    max-width: 400px;\r\n    width: 400px;\r\n}\r\n\r\n.eld-eld-body-row-right{\r\n    display: flex;\r\n    flex-direction: row-reverse;\r\n}\r\n\r\n.eld-eld-body-row-short {\r\n    max-width: 160px;\r\n    width: 160px;\r\n}\r\n\r\n.eld-eld-body-row-shortest {\r\n    max-width: 135px;\r\n    width: 135px;\r\n}\r\n\r\n.eld-eld-body-row-shortest-input input{\r\n    padding: 2px;\r\n}\r\n\r\n.eld-eld-body-row-tiny {\r\n    max-width: 80px;\r\n    width: 80px;\r\n}\r\n\r\n.eld-eld-body-row-mediumshort {\r\n    max-width: 200px;\r\n    width: 200px;\r\n}\r\n\r\n.eld-eld-body-row-mediumshorter {\r\n    max-width: 300px;\r\n    width: 300px;\r\n}\r\n\r\n.eld-eld-body-submenu-button{\r\n    background-color: rgba(0,0,0,0);\r\n    border: none;\r\n    border-radius: 0px;\r\n    border-bottom: 2px solid #AAF;\r\n}\r\n\r\n.eld-eld-body-submenu-button-selected {\r\n    background-color: rgba(0,0,200,0.08);\r\n    border-top-left-radius: 10px;\r\n    border-top-right-radius: 10px;\r\n    color: #002;\r\n    font-weight: 600;\r\n\r\n    border-bottom: 2px solid #AAF;\r\n}\r\n\r\n.eld-eld-body-submenu-button-selected:focus{\r\n    background-color: rgba(0,0,200,0.08);\r\n    border-top-left-radius: 10px;\r\n    border-top-right-radius: 10px;\r\n    color: #002;\r\n    font-weight: 600;\r\n\r\n    border-bottom: 2px solid #AAF;\r\n}\r\n\r\n.eld-eld-body-row-add {\r\n    margin: 10px;\r\n    margin-left: 2px;\r\n}\r\n\r\n.eld-eld-body-select-verylong {\r\n    max-width: 1000px;\r\n    width: 1000px;\r\n}\r\n\r\n.eld-eld-body-row-selectcontainer{\r\n    margin-bottom: 5px;\r\n}\r\n\r\n.eld-eld-body-row-case{\r\n    margin-top: 10px;\r\n    margin-right: 10px;\r\n    width: 230px;\r\n}\r\n\r\n.eld-eld-body-select-long {\r\n    max-width: 800px;\r\n    width: 800px;\r\n}\r\n\r\n\r\n.eld-eld-body-select-medium {\r\n    max-width: 400px;\r\n    width: 400px;\r\n}\r\n\r\n.eld-eld-body-select-mediumshort {\r\n    max-width: 300px;\r\n    width: 300px;\r\n}\r\n\r\n.eld-eld-body-subtitle {\r\n    font-size: 18px;\r\n    text-align: center;\r\n    margin-bottom: 10px;\r\n}\r\n\r\n.eld-eld-body-row-inline-text-margin{\r\n    margin-top: 8px;\r\n    margin-left: 8px;\r\n}\r\n\r\n.eld-eld-body-civilduration {\r\n    background-color: white;\r\n\r\n}\r\n\r\n.eld-eld-body-civilduration-margin {\r\n    height: 60px;\r\n    background-color: #F4F4F4;\r\n}\r\n\r\n.eld-eld-body-civilduration-padding-bottom{\r\n    padding-bottom: 6px;\r\n    padding-left: 6px;\r\n}\r\n\r\n.eld-eld-body-civilduration-padding-top {\r\n    padding-top: 6px;\r\n    padding-left: 6px;\r\n}\r\n\r\n.eld-eld-body-add-title {\r\n    font-size: 18px;\r\n    text-align: center;\r\n}\r\n\r\n.eld-eld-body-jobperiod-emptyspace{\r\n    margin-left: 44px;\r\n}\r\n\r\n.eld-eld-body-button-text {\r\n    cursor: pointer;\r\n    text-align: center;\r\n    text-decoration: underline;\r\n    font-size: 13px;\r\n}\r\n\r\n.eld-eld-media-element {\r\n    border-bottom: 3px solid #DDD;\r\n    padding-bottom: 4px;\r\n    margin-bottom: 4px;\r\n}\r\n\r\n.eld-eld-body-indinput {\r\n    border: solid 1px #449;\r\n    width: 400px;\r\n    background: repeating-linear-gradient(90deg, #ffffff 0px, #ffffff 25px, #000000 26px);\r\n    color: #777;\r\n    font-family: monospace;\r\n    letter-spacing: 1.57ch;\r\n    font-size: 18px;\r\n    padding-left: 0.85ch;\r\n    max-width: 367px;\r\n    width: 367px;\r\n    height: 40px;\r\n}\r\n\r\n.eld-eld-body-indinput:focus{\r\n    outline: none;\r\n    color: dodgerblue;\r\n}\r\n\r\n.eld-eld-body-passpinput {\r\n    max-width: 238px;\r\n    width: 238px;\r\n    margin-left: 5px;\r\n}\r\n\r\n.eld-eld-vacation-daysleft {\r\n    margin: 3px;\r\n    border: 1px solid #999;\r\n    \r\n}\r\n\r\n.eld-eld-vacation-daysleft-title {\r\n    border-bottom: 1px solid #999;\r\n    text-align: center;\r\n    padding: 3px;\r\n}\r\n\r\n.eld-eld-vacation-daysleft-number {\r\n    padding: 3px;\r\n    text-align: center;\r\n    font-size: 24px;\r\n}\r\n\r\n.eld-eld-vacation-daysfull {\r\n    margin: 3px;\r\n    border: 1px solid #999;\r\n}\r\n\r\n.eld-eld-vacation-daysfull-title {\r\n    border-bottom: 1px solid #999;\r\n    text-align: center;\r\n    padding: 3px;\r\n    border-right: 1px solid #999;\r\n}\r\n\r\n.eld-eld-vacation-daysfull-number {\r\n    padding: 3px;\r\n    text-align: center;\r\n    font-size: 24px;\r\n    border-right: 1px solid #999;\r\n}\r\n\r\n.eld-eld-vacation-daysfull-number-shift {\r\n    font-size: 13px;\r\n}\r\n\r\n.eld-eld-vacation-daysfull-detailed {\r\n    padding: 3px;\r\n    font-size: 13px;\r\n}\r\n\r\n.eld-eld-vacation-daysgiven {\r\n    margin: 3px;\r\n    border: 1px solid #999;\r\n}\r\n\r\n.eld-eld-vacation-daysgiven-title {\r\n    border-bottom: 1px solid #999;\r\n    text-align: center;\r\n    padding: 3px;\r\n}\r\n\r\n.eld-eld-vacation-daysgiven-number {\r\n    padding: 3px;\r\n    text-align: center;\r\n    font-size: 24px;\r\n}\r\n\r\n.eld-eld-media-label {\r\n    min-width: 100px;\r\n    font-weight: 600;\r\n}\r\n\r\n.eld-eld-media-image {\r\n    margin: 4px;\r\n    max-width: 30%;\r\n}\r\n\r\n.eld-eld-table{\r\n    margin: 3px;\r\n    box-shadow: rgba(0,0,0,0.2) 1px 1px 4px;\r\n    background-color: #FFF;\r\n}\r\n\r\n.eld-eld-table input{\r\n    border: none;\r\n    border-bottom: 2px solid;\r\n    border-color: #E4E4E4;\r\n    border-radius: 0px;\r\n    background-color: rgba(250,250,250,0);\r\n}\r\n\r\n.eld-eld-table textarea{\r\n    border: none;\r\n    border-bottom: 2px solid;\r\n    border-color: #E4E4E4;\r\n    border-radius: 0px;\r\n    background-color: rgba(250,250,250,0);\r\n}\r\n\r\n.eld-eld-table .el-checkbox{\r\n    margin-top: 10px;\r\n    margin-bottom: 10px;\r\n}\r\n\r\n.eld-eld-table label{\r\n    margin: 0px;\r\n}\r\n\r\n.eld-eld-table div{\r\n    text-align: center;\r\n}\r\n\r\n.eld-eld-table input:hover{\r\n    border-bottom: 2px solid #C2C2F2;\r\n\r\n}\r\n\r\n.eld-eld-table input:focus{\r\n    border-bottom: 2px solid #C2C2F2;\r\n\r\n}\r\n\r\n.eld-eld-table textarea:hover{\r\n    border-bottom: 2px solid #C2C2F2;\r\n\r\n}\r\n\r\n.eld-eld-table textarea:focus{\r\n    border-bottom: 2px solid #C2C2F2;\r\n\r\n}\r\n\r\n.eld-eld-table thead{\r\n    font-weight: 600;\r\n    text-align: center;\r\n}\r\n\r\n.eld-eld-table tr{\r\n    border: 2px solid #D6D6D6;\r\n    padding: 2px;\r\n   \r\n}\r\n\r\n.eld-eld-table button{\r\n    width: 125px;\r\n    background-color: rgba(255,255,255,0.5);\r\n}\r\n\r\n.eld-eld-table tr:hover{\r\n    box-shadow: rgba(0,0,0,0.4) 0px 0px 4px;\r\n}\r\n\r\n.eld-eld-table td{\r\n    border: 2px solid #D6D6D6;\r\n    padding: 2px;\r\n    vertical-align: top;\r\n}\r\n\r\n.el-upload__input{\r\n    display:none !important;\r\n}\r\n\r\n.printServlist-main{\r\n    display:flex;\r\n    margin-top: 10px;\r\n    justify-content: center;\r\n}\r\n\r\n/*###################     MODEPANEL      ########################*/\r\n\r\n.modepanel-element{\r\n    border: 2px solid #c8c8c8;\r\n    cursor: pointer;\r\n    height: 165px;\r\n    width: 165px;\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\r\n    text-align: center;\r\n    border-radius: 8px;\r\n    margin: 10px;\r\n    padding: 5px;\r\n    font-size: 16px;\r\n    text-shadow: 2px 2px 4px #333;\r\n}\r\n\r\n.modepanel-element:hover{\r\n    box-shadow: 0px 0px 6px #A77;\r\n}\r\n\r\n.modepanel-element-org{\r\n    border-color: #44A;\r\n    background-color: #66C;\r\n    color: white;\r\n}\r\n\r\n.modepanel-element-eld {\r\n    border-color: #097;\r\n    background-color: #2A9;\r\n    color: white;\r\n}\r\n\r\n.modepanel-element-candidates {\r\n    border-color: #8A0;\r\n    background-color: #AC2;\r\n    color: white;\r\n}\r\n\r\n.modepanel-element-people {\r\n    border-color: #07A;\r\n    background-color: #29C;\r\n    color: white;\r\n}\r\n\r\n.modepanel-container{\r\n    display: flex;\r\n    justify-content: center;\r\n}\r\n\r\n\r\n/*####################     PERSON DECREES      #########################*/\r\n\r\n.persondecrees-create {\r\n    display: flex;\r\n}\r\n\r\n.persondecrees-element {\r\n    margin: 15px;\r\n    border-radius: 5px;\r\n    border: 2px solid #F2F2F2;\r\n    padding: 8px;\r\n    display: flex;\r\n    \r\n    justify-content: space-between;\r\n}\r\n\r\n.persondecrees-actionmenu{\r\n    padding-top: 12px;\r\n}\r\n\r\n.persondecrees-element-author {\r\n    font-size: 12px;\r\n}\r\n\r\n.persondecrees-element-checkboxcontainer{\r\n    display: flex;\r\n    flex-direction: column;\r\n    align-content: center;\r\n    justify-content: center;\r\n    padding-right: 6px;\r\n}\r\n\r\n.persondecrees-margintop {\r\n    margin-top: 10px;\r\n}\r\n\r\n.persondecrees-selected {\r\n    background-color: #FCFCFF;\r\n    border: 2px solid #A2A2F2;\r\n}\r\n\r\n.persondecreeoperation-panel {\r\n    margin: 10px;\r\n    border-radius: 5px;\r\n    border: 2px solid #F2F2F2;\r\n}\r\n\r\n.persondecreeoperation-element {\r\n    border-top: 2px solid #F2F2F2;\r\n    border-bottom: 2px solid #F2F2F2;\r\n    margin: 10px;\r\n    font-size: 12px;\r\n    padding: 2px;\r\n    padding-left: 5px;\r\n}\r\n\r\n.persondecreeoperation-button {\r\n    margin-bottom: 5px;\r\n}\r\n\r\n.persondecreeoperation-vacationperiod-period {\r\n    display: inline-block;\r\n    width: 200px;\r\n}\r\n\r\n.persondecreeoperation-vacationperiod-days{\r\n    margin-top: 5px;\r\n}\r\n\r\n.persondecreeoperation-nickname {\r\n    font-size: 18px;\r\n    font-weight: 600;\r\n    margin-bottom: 10px;\r\n}\r\n\r\n.persondecreeoperation-row-warning{\r\n    color: red;\r\n    font-style: italic;\r\n}\r\n\r\n.persondecreeoperation-row {\r\n    display: flex;\r\n    align-items: center;\r\n}\r\n\r\n.persondecreeoperation-row-text {\r\n    flex-basis: 50%;\r\n}\r\n\r\n.persondecreeoperation-row-text-label{\r\n    font-weight: 600;\r\n    font-size: 16px;\r\n}\r\n\r\n.persondecreeoperation-label-bold {\r\n    font-weight: 600;\r\n}\r\n\r\n.persondecreeoperation-part{\r\n    border-bottom: 2px solid #EAEAEA;\r\n    margin: 3px;\r\n}\r\n\r\n.persondecreeoperation-part-title {\r\n    text-align: center;\r\n    font-size: 20px;\r\n}\r\n\r\n.persondecreeoperation-part-list{\r\n\r\n}\r\n\r\n.persondecreeoperation-part-list-element {\r\n    border-radius: 2px;\r\n    padding-left: 2px;\r\n    padding-right: 2px;\r\n    margin-left: 4px;\r\n    display: flex;\r\n    justify-content: space-between;\r\n    /*width: 850px;*/\r\n    width: 100%\r\n}\r\n\r\n.persondecreeoperation-part-list-element-indent{\r\n    text-indent: 10mm; \r\n}\r\n\r\n.persondecreeoperation-part-list-element-intro {\r\n    \r\n    margin-bottom: 7px;\r\n}\r\n\r\n.persondecreeoperation-part-list-element-margin-small {\r\n    margin-bottom: 0.2cm;\r\n}\r\n\r\n.persondecreeoperation-part-list-element-margin {\r\n    margin-bottom: 0.5cm;\r\n}\r\n\r\n.persondecreeoperation-part-list-element-margin-big {\r\n    margin-bottom: 0.75cm;\r\n}\r\n\r\n.persondecreeoperation-part-list-element-sub {\r\n    margin-bottom: 0.5cm;\r\n    text-align: center;\r\n    width: 700px;\r\n}\r\n\r\n.persondecreeoperation-part-list-element-sub-sub {\r\n    text-align: center;\r\n    width: 700px;\r\n}\r\n\r\n.persondecreeoperation-part-list-element-info{\r\n\r\n}\r\n\r\n.persondecreeoperation-part-list-element-actions {\r\n}\r\n\r\n.persondecreeoperation-part-list-element-name{\r\n    /*font-weight: 600;*/\r\n}\r\n\r\n.persondecreeoperation-part-list-element-other {\r\n}\r\n\r\n.persondecreeoperation-part-list-title {\r\n    text-align: center;\r\n    font-size: 18px;\r\n    margin-top: 20px;\r\n}\r\n\r\n.persondecreeoperation-part-add-title {\r\n    text-align: center;\r\n    font-size: 18px;\r\n    margin-top: 5px;\r\n}\r\n\r\n.persondecreeblock {\r\n    border-top: 3px solid #EEE;\r\n    border-bottom: 3px solid #EEE;\r\n    padding: 5px;\r\n    margin-top: 10px;\r\n    padding-left: 15px;\r\n}\r\n\r\n.persondecreeblock-element {\r\n    /*border-top: 3px solid #EEE;\r\n    border-bottom: 3px solid #EEE;*/\r\n    padding: 5px;\r\n    /*margin-top: 10px;\r\n    padding-left: 15px;*/\r\n}\r\n\r\n.persondecreeblock-title {\r\n    text-align: center;\r\n    font-size: 20px;\r\n    font-weight: 600;\r\n}\r\n\r\n.input-margin-left{\r\n    margin-left: 10px;\r\n}\r\n\r\n.input-padding-left-small {\r\n    padding-left: 5px;\r\n}\r\n\r\n.input-padding-right-small {\r\n    padding-right: 5px;\r\n}\r\n\r\n.validation-error{\r\n    border: 2px solid red;\r\n    border-radius: 7px;\r\n}\r\n\r\n.small-text-centered {\r\n    text-align: center;\r\n    font-size: 10px;\r\n}\r\n\r\n.bold-text-centered {\r\n    text-align: center;\r\n    font-weight: 600;\r\n}\r\n\r\n.text-centered {\r\n    text-align: center;\r\n}\r\n\r\n/*####################     POPOVER      #########################*/\r\n.popover-inforow {\r\n    margin-top: 4px;\r\n    margin-bottom: 4px;\r\n}\r\n\r\n.popover-dropdown {\r\n    margin-top: 0px;\r\n    margin-bottom: 0px;\r\n    padding-top: 0px;\r\n    padding-bottom: 0px;\r\n    padding-left: 4px;\r\n    padding-right: 2px;\r\n    font-size: 14px;\r\n}\r\n\r\n.popover-label {\r\n    width: 200px;\r\n    margin-top: 0px;\r\n    margin-bottom: 0px;\r\n}\r\n\r\n.popover-inforow-hr {\r\n    margin-top: 6px;\r\n    margin-bottom: 6px;\r\n}\r\n\r\n.popover-inforow-debug {\r\n    color: #BBB;\r\n}\r\n\r\n/*####################     LOADING      #########################*/\r\n\r\n.loading-spinner {\r\n    margin-left: 20px;\r\n}\r\n\r\n.loading-row {\r\n    margin-top: 5px;\r\n    margin-bottom: 5px;\r\n    display: flex;\r\n    align-items: center;\r\n}\r\n\r\n\r\n/*####################     TRANSITIONS      #########################*/\r\n/* Enter and leave animations can use different */\r\n/* durations and timing functions.              */\r\n.slide-fade-enter-active {\r\n    transition: all .3s ease;\r\n}\r\n\r\n.slide-fade-leave-active {\r\n    transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);\r\n}\r\n\r\n.slide-fade-enter, .slide-fade-leave-to\r\n/* .slide-fade-leave-active below version 2.1.8 */ {\r\n    transform: translateX(10px);\r\n    opacity: 0;\r\n}\r\n\r\n\r\n/*Костино*/\r\n\r\n.str1 {\r\n    position: relative;\r\n    font-size: 0.5cm;\r\n    float: left;\r\n    z-index: 1;\r\n    background-image: url(" + __webpack_require__(136) + ");\r\n    background-repeat: repeat-x;\r\n}\r\n\r\n.str2 {\r\n    position: relative;\r\n    font-size: 0.5cm;\r\n    text-indent: 15px;\r\n    background-image: url(" + __webpack_require__(138) + ");\r\n    background-repeat: repeat;\r\n}\r\n\r\n.page {\r\n    width: 100%;\r\n}\r\n\r\n#ab p {\r\n    /*line-height: 0.3cm;*/\r\n    text-indent: 1.25cm;\r\n}\r\n\r\n#ab > ol {\r\n    margin-left: 3cm;\r\n}\r\n\r\n.strP1 {\r\n    position: relative;\r\n    font-size: 0.5cm;\r\n    float: left;\r\n    z-index: 1;\r\n    background-image: url(" + __webpack_require__(137) + ");\r\n    background-repeat: repeat-x;\r\n    -webkit-print-color-adjust: exact;\r\n}\r\n\r\n.strP2 {\r\n    position: relative;\r\n    font-size: 0.5cm;\r\n    /*text-indent: 0px;*/\r\n    background-image: url(" + __webpack_require__(139) + ");\r\n    background-repeat: repeat;\r\n    -webkit-print-color-adjust: exact;\r\n}\r\n\r\n.page {\r\n    width: 100%;\r\n}\r\n\r\n.page p {\r\n    font-size: 0.5cm;\r\n}\r\n\r\n\r\n.el-table .warning-row {\r\n    background: oldlace;\r\n}\r\n\r\n.el-table .success-row {\r\n    background: #f0f9eb;\r\n}", ""]);
+exports.push([module.i, "\r\n/*##########################    TEST DATA    ######################################*/\r\n\r\n.row{\r\n    margin-bottom:10px;\r\n}\r\n\r\n\r\n/*##########################      MAIN      ######################################*/\r\n\r\n@font-face {\r\n    font-family: 'Merriweather';\r\n    src: url(" + __webpack_require__(134) + "); /* font-family: 'Merriweather', serif; */\r\n}\r\n\r\n@font-face {\r\n    font-family: 'Montserrat';\r\n    src: url(" + __webpack_require__(135) + "); /* font-family: 'Montserrat', sans-serif; */\r\n}\r\n\r\nbody {\r\n    font-family: 'Montserrat', sans-serif;\r\n    color: #333;\r\n}\r\n\r\n.el-dialog__body {\r\n    color: #333;\r\n}\r\n\r\n.el-button{\r\n    color: #333;\r\n}\r\n\r\n.el-button--success {\r\n    color: #FFF;\r\n}\r\n\r\n.el-button--primary {\r\n    color: #FFF;\r\n}\r\n\r\n.el-button--danger {\r\n    color: #FFF;\r\n}\r\n\r\n.el-button--warning {\r\n    color: #FFF;\r\n}\r\n\r\n.el-input__inner {\r\n    color: #333;\r\n}\r\n\r\n.el-input-bold{\r\n    font-weight: 600;\r\n}\r\n\r\n\r\n\r\n.el-dropdown-menu__item {\r\n    color: #333;\r\n}\r\n\r\n.el-checkbox{\r\n    color: #333;\r\n}\r\n\r\n.el-select-dropdown__item.hover {\r\n    background-color: #FFB4B4;\r\n    color: #FFF;\r\n}\r\n\r\n.checkbox-big{\r\n    \r\n}\r\n\r\n\r\n.checkbox-big .el-checkbox__inner {\r\n    width: 30px;\r\n    height: 30px;\r\n    border: 1px solid black !important;\r\n}\r\n\r\n.checkbox-big .el-checkbox__inner::after{\r\n    height: 15px;\r\n    font-weight: 600;\r\n    /*width: 10px;*/\r\n    top: 6px;\r\n    left: 12px;\r\n    \r\n}\r\n\r\n.container-grid {\r\n    display: grid;\r\n    grid-template-rows: minmax(100px, 9%) auto;\r\n    grid-template-columns: minmax(250px, 22%) auto;\r\n    grid-template-areas: \"header header\" \"sidebar main\";\r\n    height: 100vh;\r\n}\r\n\r\n.container-grid-nosidebar {\r\n    display: grid;\r\n    grid-template-rows: minmax(100px, 9%) auto;\r\n    grid-template-columns: 0 auto;\r\n    grid-template-areas: \"header header\" \"sidebar main\";\r\n    height: 100vh;\r\n}\r\n\r\n@media only screen and (max-width: 500px){\r\n    .container-grid {\r\n        display: grid;\r\n        grid-template-rows: minmax(100px, 9%) minmax(90px, 30%) auto;\r\n        grid-template-areas: \"header header\" \"sidebar sidebar\" \"main main\";\r\n        height: 100vh;\r\n    }\r\n\r\n    .container-grid-nosidebar {\r\n        display: grid;\r\n        grid-template-rows: minmax(100px, 9%) 0 auto;\r\n        grid-template-areas: \"header header\" \"sidebar sidebar\" \"main main\";\r\n        height: 100vh;\r\n    }\r\n} \r\n\r\n\r\n\r\n.top-menu {\r\n    background-color: #EEEEEE;\r\n    box-shadow: rgba(0,0,0,0.2) -0px -2px 2px inset;\r\n    border-bottom: 5px dashed #DDDDDD;\r\n   \r\n    /*min-height: 100px;*/\r\n    /*max-height: 150px;*/\r\n    grid-area: header;\r\n}\r\n\r\n.side-bar {\r\n    box-shadow: rgba(0,0,0,0.2) 0px 5px 10px inset;\r\n    background-color: #f4f4f4;\r\n    border-right: 5px dashed #DDDDDD;\r\n    grid-area: sidebar;\r\n    overflow-y: scroll;\r\n    padding-top: 5px;\r\n}\r\n\r\n.side-bar-no {\r\n    display: none;\r\n}\r\n\r\n.side-bar::-webkit-scrollbar {\r\n    display: none;\r\n}\r\n\r\n.main {\r\n    grid-area: main;\r\n    background-color: #f4f4f4;\r\n    box-shadow: rgba(0,0,0,0.2) 5px 5px 10px inset;\r\n    overflow-y: scroll;\r\n}\r\n\r\n.main::-webkit-scrollbar {\r\n    display: none;\r\n}\r\n\r\n\r\n\r\n/*################      PERSONNEL MANAGEMENT SPECIAL      ########################*/\r\n\r\n.pm-component{\r\n    margin:15px;\r\n}\r\n\r\n/*##########################    SIDE BAR    ######################################*/\r\n\r\n.sidebar{\r\n    \r\n}\r\n\r\n.sidebar-structure{\r\n    margin-top: 5px;\r\n    margin-left: 5px;\r\n    margin-right: 5px;\r\n    padding-left: 5px;\r\n    \r\n    min-height: 50px;\r\n    display: flex;\r\n    justify-content: space-between;\r\n    align-items: center;\r\n    box-shadow: rgba(0,0,0,0.4) 0px 0px 2px inset;\r\n    background-color: white;\r\n    border-radius: 0px 5px 5px 0px;\r\n    border-left: 3px groove #AAF;\r\n}\r\n\r\n.sidebar-structure-wc {\r\n    border-bottom: 2px solid #A4A4F4;\r\n}\r\n\r\n.sidebar-structure-title-childrenhas{\r\n    \r\n}\r\n\r\n.sidebar-structure-title-childrenno{\r\n\r\n}\r\n\r\n.sidebar-structure-title-childrenshowed {\r\n}\r\n\r\n/*.sidebar-structure-child {\r\n    margin-left: 75px;\r\n    border-left: 3px groove #22F;\r\n}*/\r\n\r\n.sidebar-structure-0 {\r\n    margin-left: 5px;\r\n    border-left: 3px groove #66F;\r\n}\r\n\r\n.sidebar-structure-0 > .sidebar-structuretext {\r\n    text-shadow: 0px 0px 1px #111;\r\n}\r\n\r\n.sidebar-structure-1 {\r\n    margin-left: 20px;\r\n    border-left: 3px groove #77F;\r\n    \r\n}\r\n\r\n.sidebar-structure-1 > .sidebar-structuretext {\r\n    text-shadow: 0px 0px 1px #333;\r\n}\r\n\r\n.sidebar-structure-2 {\r\n    margin-left: 35px;\r\n    border-left: 3px groove #8FF;\r\n}\r\n\r\n\r\n\r\n.sidebar-structure-3 {\r\n    margin-left: 50px;\r\n    border-left: 3px groove #FF9;\r\n}\r\n\r\n.sidebar-structure-3 > .sidebar-structuretext {\r\n    font-style: italic;\r\n}\r\n\r\n.sidebar-structure-4 {\r\n    margin-left: 60px;\r\n    border-left: 3px groove #FAF;\r\n}\r\n\r\n.sidebar-structure-5 {\r\n    margin-left: 70px;\r\n    border-left: 3px groove #BBB;\r\n}\r\n\r\n.sidebar-structure-6 {\r\n    margin-left: 75px;\r\n    border-left: 3px groove #FCC;\r\n}\r\n\r\n.sidebar-structure-7 {\r\n    margin-left: 80px;\r\n    border-left: 3px groove #DDF;\r\n}\r\n\r\n.sidebar-structure-user {\r\n    box-shadow: #99F 0px 0px 2px;\r\n    background-color: #f2f2ff;\r\n}\r\n\r\n.sidebar-selected {\r\n    border-bottom: 3px solid #f4a4a4;\r\n}\r\n\r\n.sidebar-structuretext{\r\n    cursor: pointer;\r\n    color: black;\r\n    text-align: center;\r\n    width: 100%;\r\n    margin-right: 5px;\r\n    \r\n    \r\n    /*text-shadow: 0px 0px 20px #333;*/\r\n}\r\n\r\n.sidebar-structurechecked{\r\n    margin-left: 5px;\r\n    color: red;\r\n    font-weight: 600;\r\n}\r\n\r\n.sidebar-structuredropdown {\r\n    min-width: 45px;\r\n    max-width: 45px;\r\n    align-self: stretch;\r\n    display: flex;\r\n    justify-content: center;\r\n    box-shadow: #DDDDDD -2px 0px 0px;\r\n    text-align: center;\r\n}\r\n\r\n.sidebar-structuredropdown:hover {\r\n    border-radius: 0px 5px 5px 0px;\r\n    color: red;\r\n    \r\n}\r\n\r\n.sidebar-action{\r\n    display: flex;\r\n    background-color: rgba(255,255,255,0.92);\r\n    font-size: 14px;\r\n}\r\n\r\n.sidebar-action-left{\r\n    border-right: 2px solid #EEE;\r\n    padding-right: 0px;\r\n}\r\n\r\n.sidebar-action-right {\r\n    margin-left: 2px;\r\n    margin-right: 8px;\r\n}\r\n\r\n.sidebar-icon {\r\n    word-wrap: break-word;\r\n    align-self: center;\r\n    font-size: 12px;\r\n    border-bottom: 1px solid #CCCCCC;\r\n    border-radius: 3px;\r\n}\r\n\r\n.sidebar-more {\r\n    font-size: 16px;\r\n    float: right;\r\n    margin-top: 15px;\r\n    margin-right: 5px;\r\n    padding-left: 5px;\r\n    padding-right: 5px;\r\n    border: 1px solid #DDDDDD;\r\n    box-shadow: #DDDDDD 0px 0px 3px;\r\n    border-radius: 8px;\r\n}\r\n\r\n.sidebar-more:hover{\r\n    box-shadow: #AAAAAA 0px 0px 5px;\r\n    color: red;\r\n}\r\n\r\n.sidebar-notsignedandcreated {\r\n    color: blue;\r\n    font-weight: 600;\r\n    font-size: 10px;\r\n}\r\n\r\n.sidebar-issignedandwillbecreated {\r\n    color: #6622FF;\r\n    font-weight: 600;\r\n    font-size: 10px;\r\n}\r\n\r\n.sidebar-isnotsignedandwillbecreated {\r\n    color: #0B9;\r\n    font-weight: 600;\r\n    font-size: 10px;\r\n}\r\n\r\n.sidebar-isdeletedunsigned {\r\n    color: darkorange;\r\n    font-weight: 600;\r\n    font-size: 10px;\r\n}\r\n\r\n.sidebar-iswillbedeletedsigned {\r\n    color: red;\r\n    font-weight: 600;\r\n    font-size: 10px;\r\n}\r\n\r\n.sidebar-iswillbedeletedunsigned {\r\n    color: orange;\r\n    font-weight: 600;\r\n    font-size: 10px;\r\n}\r\n\r\n.sidebar-buttongroup {\r\n    margin-top: 10px;\r\n    padding-right: 20px;\r\n}\r\n\r\n.sidebar-button{\r\n    margin-left: 10px;\r\n    margin-bottom: 3px;\r\n    width: 100%;\r\n}\r\n\r\n.sidebar-arrow-group{\r\n    display: flex;\r\n    flex-direction:column;\r\n}\r\n\r\n.sidebar-arrow {\r\n    margin: 3px;\r\n    border-radius: 3px;\r\n    border: 1px solid #E1E1E1;\r\n    font-size: 18px;\r\n    cursor: pointer;\r\n    \r\n}\r\n\r\n.sidebar-input{\r\n    width: 45px;\r\n    max-width: 45px;\r\n    margin: 0px; \r\n}\r\n\r\n.sidebar-input input{\r\n    \r\n    padding: 2px;\r\n    height: 30px;\r\n}\r\n\r\n.sidebar-button-priority {\r\n    width: 40px;\r\n    max-width: 40px;\r\n    padding: 0px;\r\n    height: 30px;\r\n    margin-left: 0px;\r\n    margin-right: 2px;\r\n}\r\n\r\n\r\n\r\n/*##########################     LOGIN      ######################################*/\r\n\r\n#login-container {\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\r\n    height: 100vh;\r\n}\r\n\r\n#login-warning {\r\n    font-size: 16px;\r\n    font-weight: bold;\r\n    text-align: center;\r\n    margin-bottom: 10px;\r\n}\r\n\r\n#login-logo-wrapper{\r\n    width: 100%;\r\n    height: 72px;\r\n    margin-top:10px;\r\n    margin-bottom: 10px;\r\n    display: flex;\r\n    justify-content: center;\r\n}\r\n\r\n#login-logo {\r\n    width: 72px;\r\n    filter: drop-shadow(2px 2px 2px #555);\r\n}\r\n\r\n#login-wrapper {\r\n    background-color: #EEEEEE;\r\n    margin-top: -10vh;\r\n    width: 360px;\r\n    /* height: 350px; */\r\n    border: 5px dashed #DDDDDD;\r\n    border-radius: 10px;\r\n    padding: 15px;\r\n    box-shadow: rgba(0,0,0,0.2) 0px 0px 20px inset;\r\n}\r\n\r\n#login-title {\r\n    font-family: 'Merriweather', serif;\r\n    font-size: 36px;\r\n    text-align: center;\r\n    text-shadow: 2px 2px 4px #AAA;\r\n}\r\n\r\n.login-input {\r\n    font-size: 16px;\r\n}\r\n\r\n.login-button {\r\n    width: 100%;\r\n    font-size: 16px;\r\n    align-self: center;\r\n}\r\n\r\n\r\n/*########################     TOP MENU      ####################################*/\r\n\r\n#topmenu {\r\n    margin: 0px;\r\n}\r\n\r\n#topmenu-container {\r\n    margin-left: 15px;\r\n    display: flex;\r\n    min-height: 90px;\r\n    height: 9vh;\r\n    /* height:100px; */\r\n    align-items: center;\r\n    justify-content: space-between;\r\n   \r\n}\r\n\r\n\r\n#topmenu-logo {\r\n    margin-bottom: 10px;\r\n    width: 40px;\r\n    height: 40px;\r\n    filter: drop-shadow(2px 2px 2px #555);\r\n    cursor: pointer;\r\n}\r\n\r\n#topmenu-rightblock {\r\n    min-width: 450px;\r\n    width: 600px;\r\n    margin-right: 5px;\r\n    display: flex;\r\n    align-items: center;\r\n    justify-content: flex-end;\r\n}\r\n\r\n#topmenu-logoblock {\r\n    \r\n    align-self: stretch;\r\n    margin-right: 0px;\r\n    padding-right: 5px;\r\n    display: flex;\r\n    align-items: center;\r\n    \r\n}\r\n\r\n#topmenu-appname {\r\n    margin-left: 10px;\r\n    cursor: pointer;\r\n    font-family: Merriweather;\r\n    font-size: 28px;\r\n    text-shadow: 2px 2px 4px #AAA;\r\n}\r\n\r\n#topmenu a {\r\n    color: black;\r\n    cursor: pointer;\r\n}\r\n\r\n.topmenu-mode{\r\n    \r\n    font-size: 12px;\r\n    margin-left: 0px;\r\n    max-width: 520px;\r\n}\r\n\r\n.topmenu-structurechecked {\r\n    margin-left: 5px;\r\n    color: red;\r\n    font-weight: 600;\r\n}\r\n\r\n#topmenu-featuredlist{\r\n    display: flex;\r\n    flex-wrap: wrap;\r\n    /*width: 1000px;*/\r\n   /*align-self: stretch;*/\r\n}\r\n\r\n.topmenu-featured {\r\n    display: flex;\r\n    font-size: 12px;\r\n    margin: 1px;\r\n    background-color: #FEFEFE;\r\n    border: 1px solid #DDD;\r\n    padding: 1px;\r\n    border-radius: 4px;\r\n    box-shadow: hsl(0,0%,90%) 0px 2px 2px;\r\n    cursor: pointer;\r\n}\r\n\r\n.topmenu-featured:hover{\r\n    \r\n    background-color: #EEF;\r\n    color: #88F;\r\n}\r\n\r\n.topmenu-structurename{\r\n    \r\n}\r\n\r\n.topmenu-structuredropdown {\r\n    min-width: 30px;\r\n    max-width: 30px;\r\n    align-self: stretch;\r\n    display: flex;\r\n    justify-content: center;\r\n    box-shadow: #DDDDDD -2px 0px 0px;\r\n    text-align: center;\r\n}\r\n\r\n.topmenu-rightblock-text {\r\n    \r\n    display: flex;\r\n    flex-direction: column;\r\n    align-content: center;\r\n    justify-content: center;\r\n    margin-right: 5px;\r\n    margin-left: 0px;\r\n    border-bottom: 1px solid #D4D4D4;\r\n    border-radius: 3px;\r\n}\r\n\r\n.topmenu-rightblock-date{\r\n    text-align: right;\r\n    cursor: pointer;\r\n}\r\n\r\n.topmenu-rightblock-date-date:hover{\r\n    color: #FFF;\r\n    text-shadow: 0px 0px 4px #A00;\r\n}\r\n\r\n.topmenu-rightblock-mode{\r\n    text-decoration:underline;\r\n    text-align: left;\r\n    cursor: pointer;\r\n}\r\n\r\n.topmenu-rightblock-decreename {\r\n    text-align: right;\r\n    color: #EE5555;\r\n    font-weight: 600;\r\n    cursor: pointer;\r\n}\r\n\r\n.topmenu-rightblock-login {\r\n    text-align: right;\r\n}\r\n\r\n.topmenu-rightblock-button {\r\n    padding-left: 12px;\r\n    padding-right: 12px;\r\n    padding-top: 10px;\r\n    padding-bottom: 10px;\r\n    box-shadow: rgba(0,0,0,0.2) 2px 2px 2px;\r\n}\r\n\r\n.topmenu-rightblock-button:hover {\r\n    box-shadow: rgba(122,0,255,0.4) 2px 2px 2px;\r\n}\r\n\r\n.decrees-create {\r\n    display: flex;\r\n}\r\n\r\n.decrees-element {\r\n    margin: 15px;\r\n    border-radius: 5px;\r\n    border: 2px solid #F2F2F2;\r\n    padding: 8px;\r\n}\r\n\r\n.decrees-margintop {\r\n    margin-top: 10px;\r\n}\r\n\r\n.decrees-selected {\r\n    background-color: #FCFCFF;\r\n    border: 2px solid #A2A2F2;\r\n}\r\n\r\n.decreeoperation-panel{\r\n    margin: 10px;\r\n    border-radius: 5px;\r\n    border: 2px solid #F2F2F2;\r\n}\r\n\r\n.decreeoperation-element {\r\n    border-top: 2px solid #F2F2F2;\r\n    border-bottom: 2px solid #F2F2F2;\r\n    margin: 10px;\r\n    font-size: 12px;\r\n    padding: 2px;\r\n    padding-left: 5px;\r\n}\r\n\r\n.decreeoperation-button {\r\n    margin-bottom: 5px;\r\n}\r\n\r\n\r\n.decreeoperation-nickname {\r\n    font-size: 18px;\r\n    font-weight: 600;\r\n    margin-bottom: 10px;\r\n}\r\n\r\n.decreeoperation-row{\r\n    display: flex;\r\n    align-items: center;\r\n}\r\n\r\n.decreeoperation-row-text{\r\n    flex-basis: 50%;\r\n}\r\n\r\n.decreeoperation-label-bold{\r\n    font-weight: 600;\r\n}\r\n\r\n.decreeoperation-ranklevel-0 {\r\n    margin-left: 10px;\r\n}\r\n\r\n.decreeoperation-ranklevel-1 {\r\n    margin-left: 25px;\r\n    border-left: 2px groove #77F;\r\n}\r\n\r\n.decreeoperation-ranklevel-2 {\r\n    margin-left: 40px;\r\n    border-left: 2px groove #88F;\r\n}\r\n\r\n.decreeoperation-ranklevel-3 {\r\n    margin-left: 55px;\r\n    border-left: 2px groove #99F;\r\n}\r\n\r\n.decreeoperation-ranklevel-4 {\r\n    margin-left: 70px;\r\n    border-left: 2px groove #AAF;\r\n}\r\n\r\n.decreeoperation-ranklevel-5 {\r\n    margin-left: 85px;\r\n    border-left: 2px groove #BBF;\r\n}\r\n\r\n.decreeoperation-ranklevel-6 {\r\n    margin-left: 100px;\r\n    border-left: 2px groove #CCF;\r\n}\r\n\r\n.decreeoperation-ranklevel-7 {\r\n    margin-left: 115px;\r\n    border-left: 2px groove #DDF;\r\n}\r\n\r\n.decreeoperation-ranklevel-8 {\r\n    margin-left: 130px;\r\n    border-left: 2px groove #EEF;\r\n}\r\n\r\n.decreeoperation-signed-decree-block{\r\n    padding-top: 2px;\r\n    margin-top: 4px;\r\n    border-top: 2px solid #D4D4E4;\r\n}\r\n\r\n.decreeoperation-signed-row-label {\r\n    min-width: 210px;\r\n}\r\n\r\n/*########################     ADMIN PANEL      #################################*/\r\n\r\n.adminpanel-title {\r\n    text-align:center;\r\n    font-family: Merriweather;\r\n    font-size:26px;\r\n    margin-bottom: 20px;\r\n}\r\n\r\n#adminpanel-users {\r\n    /*max-height: 200px;*/\r\n}\r\n\r\n#adminpanel-adduser {\r\n    /*padding: 10px;*/\r\n}\r\n\r\n.adminpanel-usercard {\r\n    border: 2px dashed hsl(0,0%,80%);\r\n    box-shadow: hsl(0,0%,80%) 0px 4px 10px;\r\n    padding: 5px;\r\n    margin: 5px;\r\n}\r\n\r\n.adminpanel-switch{\r\n    width: 400px;\r\n}\r\n\r\n.adminpanel-label {\r\n    \r\n}\r\n\r\n.adminpanel-row {\r\n    margin-top: 5px;\r\n    margin-bottom: 5px;\r\n}\r\n\r\n.adminpanel-row-label {\r\n    width: 400px;\r\n    display: inline-block;\r\n}\r\n\r\n.adminpanel-row-right{\r\n    font-weight: 600;\r\n    font-size: 24px;\r\n    color: #33A;\r\n}\r\n\r\n.adminpanel-submit {\r\n    margin-top: 10px;\r\n}\r\n\r\n.adminpanel-input {\r\n    margin-left: 0px;\r\n    width: 300px;\r\n    min-width: 100px;\r\n    \r\n    \r\n}\r\n\r\n#adminpanel-createuserwarning {\r\n    margin-left: 20px;\r\n    display: inline;\r\n}\r\n\r\n.adminpanel-rank{\r\n    display: flex;\r\n}\r\n\r\n.adminpanel-rank-input{\r\n   margin-right: 10px;\r\n}\r\n\r\n.adminpanel-rank-button{\r\n    \r\n}\r\n\r\n.adminpanel-sof {\r\n    display: flex;\r\n}\r\n\r\n.adminpanel-sof-input {\r\n    margin-right: 10px;\r\n}\r\n\r\n.adminpanel-sof-button {\r\n}\r\n\r\n.adminpanel-subject-category-container{\r\n    display: flex;\r\n}\r\n\r\n.adminpanel-subject-filter-container {\r\n    display: flex;\r\n}\r\n\r\n.adminpanel-subject-filter-div{\r\n    width: 300px;\r\n}\r\n\r\n.adminpanel-subject-filter-name{\r\n    width: 300px;\r\n}\r\n\r\n.adminpanel-subject-category {\r\n    border: 2px solid #99F;\r\n    margin: 4px;\r\n    border-radius: 8px;\r\n    padding: 2px;\r\n    cursor: pointer;\r\n    /*width: 200px;*/\r\n}\r\n\r\n.adminpanel-subject-category:hover{\r\n    background-color: #99F;\r\n    color: white;\r\n}\r\n\r\n.adminpanel-subject-category-active {\r\n    border: 2px solid #F99;\r\n    box-shadow: #F99 1px 1px 4px;\r\n}\r\n\r\n.adminpanel-subject-category-active:hover {\r\n    background-color: #F99;\r\n    color: white;\r\n}\r\n\r\n\r\n.adminpanel-subject:nth-child(2n + 1) {\r\n    background-color: #F2F2F2;\r\n}\r\n\r\n.adminpanel-subject {\r\n    display: flex;\r\n    margin-bottom: 10px;\r\n}\r\n\r\n.adminpanel-subject-input-row{\r\n    display: flex;\r\n}\r\n\r\n.adminpanel-subject-input {\r\n    \r\n    \r\n}\r\n\r\n.adminpanel-subject-input-text {\r\n    width: 400px;\r\n    margin-top: 5px;\r\n}\r\n\r\n.adminpanel-subject-text {\r\n    margin-right: 10px;\r\n    width: 15%;\r\n    font-size: 14px;\r\n}\r\n\r\n.adminpanel-subject-button {\r\n}\r\n\r\n.adminpanel-positiontype {\r\n    display: flex;\r\n}\r\n\r\n.adminpanel-positiontype-input {\r\n    margin-right: 10px;\r\n}\r\n\r\n.adminpanel-positiontype-input-smaller {\r\n    max-width: 300px;\r\n}\r\n\r\n.adminpanel-positiontype-label {\r\n    margin-right: 5px;\r\n    display: flex;\r\n    align-items: center;\r\n    font-size: 12px;\r\n}\r\n\r\n.adminpanel-positiontype-label-top {\r\n    display: flex;\r\n    justify-content: space-around;\r\n}\r\n\r\n.adminpanel-positiontype-number {\r\n    margin-right: 10px;\r\n    max-width: 150px;\r\n}\r\n\r\n.adminpanel-positiontype-number-small {\r\n    margin-right: 10px;\r\n    max-width: 80px;\r\n}\r\n\r\n.adminpanel-positiontype-button {\r\n}\r\n\r\n.adminpanel-positioncategory {\r\n    display: flex;\r\n}\r\n\r\n.adminpanel-positioncategory-input {\r\n    margin-right: 10px;\r\n}\r\n\r\n.adminpanel-positioncategory-button {\r\n}\r\n\r\n.adminpanel-mrd {\r\n    display: flex;\r\n}\r\n\r\n.adminpanel-mrd-input {\r\n    margin-right: 10px;\r\n}\r\n\r\n.adminpanel-mrd-button {\r\n}\r\n\r\n.adminpanel-altrankconditiongroup {\r\n    display: flex;\r\n}\r\n\r\n.adminpanel-altrankconditiongroup-input {\r\n    margin-right: 10px;\r\n}\r\n\r\n.adminpanel-altrankconditiongroup-button {\r\n}\r\n\r\n.adminpanel-altrankcondition {\r\n    display: flex;\r\n}\r\n\r\n.adminpanel-altrankcondition-input {\r\n    margin-right: 10px;\r\n}\r\n\r\n.adminpanel-altrankcondition-button {\r\n}\r\n\r\n.adminpanel-structureregion {\r\n    display: flex;\r\n}\r\n\r\n.adminpanel-structureregion-input {\r\n    margin-right: 10px;\r\n}\r\n\r\n.adminpanel-structureregion-button {\r\n}\r\n\r\n.adminpanel-structuretype {\r\n    display: flex;\r\n}\r\n\r\n.adminpanel-structuretype-input {\r\n    margin-right: 10px;\r\n}\r\n\r\n.adminpanel-structuretype-button {\r\n}\r\n\r\n.adminpanel-illcode {\r\n    display: flex;\r\n}\r\n\r\n.adminpanel-illcode-input {\r\n    margin-right: 10px;\r\n}\r\n\r\n.adminpanel-illcode-button {\r\n}\r\n\r\n\r\n/*####################     STRUCTURE MANAGEMENT PANEL      #########################*/\r\n\r\n#structuremanagementpanel{\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items:flex-start;\r\n    flex-direction: column;\r\n}\r\n\r\n.structuremanagementpanel-intro{\r\n    font-size:20px;\r\n}\r\n\r\n.structuremanagementpanel-input {\r\n    margin-top: 10px;\r\n}\r\n\r\n.structuremanagementpanel-checkbox{\r\n    margin-top: 15px;\r\n    align-self:flex-start;\r\n    \r\n}\r\n\r\n.structuremanagementpanel-document-select{\r\n    width: 150px;\r\n}\r\n\r\n.structuremanagementpanel-document-row{\r\n    display: flex;\r\n}\r\n\r\n.structuremanagementpanel-document-row-text {\r\n    padding-top: 15px;\r\n    width: 400px;\r\n}\r\n\r\n.structuremanagementpanel-freezed {\r\n    display: none;\r\n}\r\n\r\n#structuremanagementpanel-yesno{\r\n    margin-top: 10px;\r\n}\r\n\r\n#structuremanagementpanel-yes{\r\n    width: 100px;\r\n}\r\n\r\n#structuremanagementpanel-no {\r\n    width: 100px;\r\n}\r\n\r\n/*####################          CONTENT          #########################*/\r\n\r\n.widget {\r\n    box-shadow: #999 0px 2px 16px;\r\n    padding: 8px;\r\n    margin-bottom: 30px;\r\n    /*border-top: 2px solid #555;*/\r\n    width: 100%;\r\n    border-radius: 4px;\r\n    position: relative;\r\n    \r\n}\r\n\r\n.widget-title {\r\n    margin-bottom: 10px;\r\n    font-size: 22px;\r\n    font-family: 'Merriweather', serif;\r\n    text-align: center;\r\n}\r\n\r\n.widget-info{\r\n    font-weight: 600;\r\n}\r\n\r\n.widget-title-block{\r\n    display: flex;\r\n    justify-content: space-around;\r\n    margin-bottom: 5px;\r\n}\r\n\r\n.widget-title-block-left {\r\n    flex-basis: 20%;\r\n    padding-left: 5px;\r\n}\r\n\r\n.widget-title-block-middle {\r\n    flex-basis: 60%;\r\n}\r\n\r\n.widget-title-block-right{\r\n    flex-basis: 20%;\r\n    text-align: right;\r\n    padding-right: 20px;\r\n}\r\n\r\n.widget-title-block-addremove-openlist{\r\n    cursor: pointer;\r\n}\r\n\r\n.widget-title-block-addremove-excelbutton {\r\n    position: absolute;\r\n    right: 10px;\r\n    border: 2px solid #9C9;\r\n    border-radius: 5px;\r\n    padding: 1px;\r\n    padding-left: 5px;\r\n    padding-right: 5px;\r\n    color: white;\r\n    background-color: #7C7;\r\n    cursor: pointer;\r\n}\r\n\r\n.widget-title-block-addremove-excelbutton:hover {\r\n    background-color: #8D8;\r\n    border: 2px dashed #7A7;\r\n}\r\n\r\n.widget-title-block-addremove-list{\r\n    min-height: 100px;\r\n}\r\n\r\n.widget-title-block-addremove-div {\r\n    text-align: left;\r\n    margin-left: 120px;\r\n    display: flex;\r\n    justify-content: space-between;\r\n}\r\n\r\n.widget-title-block-add {\r\n    color: #99F;\r\n}\r\n\r\n.widget-title-block-remove {\r\n    color: #F55;\r\n}\r\n\r\n\r\n.widget-title-block-addremove-label {\r\n    text-align: right;\r\n}\r\n\r\n.widget-title-block-addremove {\r\n    width: 40px;\r\n    min-width: 40px;\r\n    font-weight: 300;\r\n}\r\n\r\n.widget-title-block-addremove-date {\r\n    font-weight: 300;\r\n}\r\n\r\n.widget-content {\r\n    \r\n}\r\n\r\n.widget-content-inline{\r\n    display: flex;\r\n    flex-wrap: wrap;\r\n    \r\n}\r\n\r\n.widget-close {\r\n    position: absolute;\r\n    top: 10px;\r\n    left: calc(100% - 30px);\r\n    cursor: pointer;\r\n    font-size: 18px;\r\n}\r\n\r\n.widget-close:hover{\r\n    color: red;\r\n    font-weight: 600;\r\n}\r\n\r\n\r\n/*####################     DEPARTMENTS LIST      #########################*/\r\n\r\n.department {\r\n    box-shadow: #AAA 0px 2px 4px;\r\n    padding: 5px;\r\n    margin-bottom: 20px;\r\n    margin-right: 20px;\r\n    width: 100%;\r\n    border-radius: 4px;\r\n    width: 250px;\r\n    height: 200px;\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\r\n    position: relative;\r\n}\r\n\r\n.department:hover {\r\n    box-shadow: #AAAAFF 0px 2px 16px;\r\n    transition: box-shadow 0.2s ease-in-out;\r\n}\r\n\r\n\r\n\r\n\r\n.department-name {\r\n    text-align: center;\r\n    cursor: pointer;\r\n    display: flex;\r\n    justify-content: center;\r\n    flex-direction: column;\r\n    height: 100%;\r\n    width: 100%;\r\n}\r\n\r\n.department-addnew {\r\n    color: transparent;\r\n    text-shadow: 0 0 2px rgba(0,0,0,0.5);\r\n    font-size: 40px;\r\n    width: 150px;\r\n    height: 150px;\r\n    display: flex;\r\n    justify-content: center;\r\n    flex-direction: column;\r\n}\r\n\r\n\r\n.department-addnew:hover {\r\n    color: black;\r\n    text-shadow: 0 0 0px;\r\n    transition: color 0.4s ease-in-out, text-shadow 0.4s ease-in-out;\r\n}\r\n\r\n.department-settings {\r\n    position: absolute;\r\n    top: 8px;\r\n    border: 1px solid #CCCCCC;\r\n    font-size: 10px;\r\n    padding: 2px;\r\n    border-radius: 5px;\r\n    left: calc(5px);\r\n    color: gray;\r\n    cursor: pointer;\r\n    z-index: 4;\r\n}\r\n\r\n.department-settings:hover{\r\n    color:black;\r\n\r\n}\r\n\r\n.department-notsignedandcreated {\r\n    color: blue;\r\n    font-weight: 600;\r\n    font-size: 10px;\r\n}\r\n\r\n.department-issignedandwillbecreated {\r\n    color: lightblue;\r\n    font-weight: 600;\r\n    font-size: 10px;\r\n}\r\n\r\n.department-isnotsignedandwillbecreated {\r\n    color: darkcyan;\r\n    font-weight: 600;\r\n    font-size: 10px;\r\n}\r\n\r\n.department-isdeletedunsigned {\r\n    color: darkorange;\r\n    font-weight: 600;\r\n    font-size: 10px;\r\n}\r\n\r\n.department-iswillbedeletedsigned {\r\n    color: red;\r\n    font-weight: 600;\r\n    font-size: 10px;\r\n}\r\n\r\n.department-iswillbedeletedunsigned {\r\n    color: orange;\r\n    font-weight: 600;\r\n    font-size: 10px;\r\n}\r\n\r\n\r\n/*####################     DEPARTMENT MANAGEMENT PANEL      #########################*/\r\n\r\n#departmentmanagementpanel {\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\r\n    flex-direction: column;\r\n}\r\n\r\n#departmentmanagementpanel-input {\r\n    margin-top: 10px;\r\n}\r\n\r\n.departmentmanagementpanel-freezed {\r\n    display: none;\r\n}\r\n\r\n#departmentmanagementpanel-yesno {\r\n    margin-top: 10px;\r\n}\r\n\r\n#departmentmanagementpanel-yes {\r\n    width: 100px;\r\n}\r\n\r\n#departmentmanagementpanel-no {\r\n    width: 100px;\r\n}\r\n\r\n\r\n/*####################     POSITIONS LIST      #########################*/\r\n\r\n.position {\r\n    box-shadow: #AAA 0px 2px 4px;\r\n    margin-bottom: 9px;\r\n    margin-right: 9px;\r\n    width: 100%;\r\n    border-radius: 4px;\r\n    width: 340px;\r\n    height: 280px;\r\n    max-width: 340px;\r\n    /* display: flex;\r\n    justify-content: center;\r\n    align-items: center;*/\r\n    padding: 7px;\r\n    position: relative;\r\n    background-color: #FFF;\r\n}\r\n\r\n.position:hover {\r\n    box-shadow: #AAAAFF 0px 2px 16px;\r\n    transition: box-shadow 0.2s ease-in-out;\r\n}\r\n\r\n\r\n.position-expiresoon {\r\n    box-shadow: #704214 0px 2px 8px;\r\n}\r\n\r\n.position-willbeadded {\r\n    background-color: #E5FFE5;\r\n}\r\n\r\n.position-willbedeleted {\r\n    background-color: #FFE5E5;\r\n}\r\n\r\n.position-expiresoon:hover {\r\n    box-shadow: #704214 0px 2px 16px;\r\n    transition: box-shadow 0.2s ease-in-out;\r\n}\r\n\r\n.position-name {\r\n    text-align: center;\r\n    cursor: pointer;\r\n    display: flex;\r\n    justify-content: flex-start;\r\n    flex-direction: column;\r\n    height: 100%;\r\n    width: 100%;\r\n    z-index: 3;\r\n    flex-basis: 50%;\r\n}\r\n\r\n.position-name-transfer {\r\n    text-align: center;\r\n    cursor: pointer;\r\n    display: flex;\r\n    justify-content: flex-start;\r\n    flex-direction: column;\r\n    height: 100%;\r\n    width: 100%;\r\n    z-index: 3;\r\n    flex-basis: 50%;\r\n}\r\n\r\n.position-grid {\r\n    display: flex;\r\n    justify-content: space-between;\r\n    flex-direction: column;\r\n    margin-top: 15px;\r\n    width: 330px;\r\n    height: 245px;\r\n}\r\n\r\n.position-grid-main {\r\n    display: flex;\r\n    justify-content: center;\r\n    flex-direction: row;\r\n}\r\n\r\n.position-leftblock {\r\n    display: flex;\r\n    justify-content: space-between;\r\n    flex-direction: column;\r\n    margin: 5px;\r\n    padding-right: 5px;\r\n    border-right: 2px solid #DDD;\r\n    min-height: 180px;\r\n    flex-basis: 25%;\r\n}\r\n\r\n.position-rightblock {\r\n    display: flex;\r\n    justify-content: flex-start;\r\n    flex-direction: column;\r\n    margin: 5px;\r\n    padding-left: 3px;\r\n    border-left: 2px solid #DDD;\r\n    flex-basis: 25%;\r\n}\r\n\r\n.position-sof {\r\n    display: flex;\r\n    justify-content: flex-start;\r\n    flex-direction: column;\r\n    margin: 0px;\r\n}\r\n\r\n.position-mrd {\r\n    margin-top: 5px;\r\n    font-size: 11.5px;\r\n    width: 100%;\r\n    word-wrap: break-word;\r\n    /*border-top: 2px solid #DDD;*/\r\n}\r\n\r\n.position-mrd-title{\r\n    font-weight: 600;\r\n}\r\n\r\n.position-nameblock {\r\n    min-height: 50px;\r\n    display: flex;\r\n    flex-direction: column;\r\n    justify-content: center;\r\n    /*background-color: rgba(244,244,244, 0.9);*/\r\n    border-radius: 0px 0px 5px 5px;\r\n    margin-bottom: -5px;\r\n    min-width: 150px;\r\n    /*text-shadow: 1px 1px 0px #FFF;*/\r\n}\r\n\r\n.position-nameblock:hover{\r\n\r\n}\r\n\r\n.position-nameblock-name {\r\n    margin-top: -15px;\r\n    font-size: 13px;\r\n    font-weight: 600;\r\n}\r\n\r\n.position-nameblock-name-alt{\r\n    font-size: 12px;\r\n}\r\n\r\n.position-nameblock-rank {\r\n    margin-top: 5px;\r\n    font-size: 12px;\r\n}\r\n\r\n.position-nameblock-category {\r\n    margin-top: 5px;\r\n    font-size: 12px;\r\n    border-bottom: 2px solid #DDD;\r\n}\r\n\r\n.position-nameblock-replaced {\r\n    margin-top: 5px;\r\n    font-size: 12px;\r\n}\r\n\r\n.position-nameblock-notice{\r\n    font-size: 11px;\r\n    margin-top:3px;\r\n}\r\n\r\n\r\n.position-dateactive-descr{\r\n    font-size: 11.5px;\r\n}\r\n\r\n.position-dateactive{\r\n    font-weight: 600;\r\n}\r\n\r\n.position-dateinactive-descr {\r\n    font-size: 11.5px;\r\n}\r\n\r\n.position-dateinactive-descr-red{\r\n    color: #F33;\r\n    text-shadow: 0px 0px 2px #F99;\r\n}\r\n\r\n.position-dateactive-descr-green {\r\n    color: #393;\r\n    text-shadow: 0px 0px 2px #9F9;\r\n}\r\n\r\n.position-dateinactive{\r\n    font-weight: 600;\r\n}\r\n\r\n\r\n.position-grid-compact {\r\n    display: flex;\r\n    justify-content: space-between;\r\n    flex-direction: column;\r\n    margin-top: 15px;\r\n    width: 330px;\r\n    height: 245px;\r\n}\r\n\r\n.position-grid-top-compact {\r\n    display: flex;\r\n    justify-content: center;\r\n    flex-direction: row;\r\n    \r\n}\r\n\r\n\r\n.position-sof-compact {\r\n    display: flex;\r\n    justify-content: flex-start;\r\n    flex-direction: column;\r\n    margin: 5px;\r\n    flex-basis: 20%;\r\n    padding-right: 5px;\r\n    border-right: 2px solid #DDD;\r\n}\r\n\r\n.position-quantity-compact {\r\n    display: flex;\r\n    justify-content: flex-start;\r\n    align-items: center;\r\n    flex-direction: column;\r\n    margin: 5px;\r\n    flex-basis: 20%;\r\n    padding-left: 5px;\r\n    border-left: 2px solid #DDD;\r\n}\r\n\r\n.position-name-compact {\r\n    text-align: center;\r\n    cursor: pointer;\r\n    display: flex;\r\n    justify-content: center;\r\n    flex-direction: column;\r\n    height: 100%;\r\n    width: 100%;\r\n    z-index: 3;\r\n    margin: 5px;\r\n}\r\n\r\n.position-nameblock-name-compact{\r\n    font-weight: 600;\r\n}\r\n\r\n.position-nameblock-name-alt-compact {\r\n    font-size: 12px;\r\n}\r\n\r\n.position-nameblock-rank-compact {\r\n    margin-top: 12px;\r\n    font-size: 12px;\r\n\r\n}\r\n\r\n.position-nameblock-replaced-compact{\r\n    margin-top: 16px;\r\n    font-size: 12px;\r\n}\r\n\r\n.position-nameblock-category-compact {\r\n    margin-top: 8px;\r\n    font-size: 12px;\r\n}\r\n\r\n.position-nameblock-compact {\r\n    min-height: 50px;\r\n    display: flex;\r\n    flex-direction: column;\r\n    justify-content: center;\r\n    background-color: rgba(244,244,244, 0.2);\r\n    border-radius: 0px 0px 5px 5px;\r\n    margin-bottom: -5px;\r\n    min-width: 150px;\r\n    margin-left: -5px;\r\n    /*text-shadow: 1px 1px 0px #FFF;*/\r\n}\r\n\r\n.position-nameblock-compact-bottom{\r\n    margin-top: 10px;\r\n}\r\n\r\n.position-nameblock-compact-quantity {\r\n    font-weight: 900;\r\n    font-size: 18px;\r\n    padding-left: 5px;\r\n    padding-right: 5px;\r\n    border-bottom: 2px solid #DDD;\r\n}\r\n\r\n.position-grid-bottom-compact {\r\n    display: flex;\r\n    justify-content: center;\r\n    flex-direction: row;\r\n    padding-top: 3px;\r\n    border-top: 2px solid #DDD;\r\n    font-size: 12px;\r\n}\r\n\r\n.position-dateactiveblock-compact{\r\n    padding: 5px;\r\n}\r\n\r\n.position-dateinactiveblock-compact{\r\n    padding: 5px;\r\n}\r\n\r\n\r\n.position-addnew {\r\n    color: transparent;\r\n    text-shadow: 0 0 2px rgba(0,0,0,0.5);\r\n    font-size: 40px;\r\n    width: 320px;\r\n    height: 260px;\r\n    display: flex;\r\n    justify-content: center;\r\n    flex-direction: column;\r\n}\r\n\r\n\r\n.position-addnew:hover {\r\n    color: black;\r\n    text-shadow: 0 0 0px;\r\n    transition: color 0.4s ease-in-out, text-shadow 0.4s ease-in-out;\r\n}\r\n\r\n.position-transfer {\r\n    font-size: 18px;\r\n    width: 450px;\r\n    height: 360px;\r\n    display: flex;\r\n    justify-content: center;\r\n    flex-direction: column;\r\n}\r\n\r\n.position-settings {\r\n    position: absolute;\r\n    top: 8px;\r\n    border: 1px solid #CCCCCC;\r\n    font-size: 10px;\r\n    padding: 2px;\r\n    border-radius: 5px;\r\n    left: calc(5px);\r\n    color: gray;\r\n    cursor: pointer;\r\n    z-index: 4;\r\n}\r\n\r\n.position-settings:hover {\r\n    color: black;\r\n}\r\n\r\n.position-info {\r\n    position: absolute;\r\n    top: 8px;\r\n    border: 1px solid #CCCCCC;\r\n    font-size: 10px;\r\n    padding: 2px;\r\n    padding-top: 4px;\r\n    padding-bottom: 4px;\r\n    border-radius: 5px;\r\n    left: calc(100% - 40px);\r\n    color: gray;\r\n    cursor: pointer;\r\n    z-index: 4;\r\n    background: none;\r\n}\r\n\r\n.position-additional {\r\n    position: absolute;\r\n    top: 8px;\r\n    border: 1px solid #CCCCCC;\r\n    font-size: 10px;\r\n    padding: 2px;\r\n    padding-top: 4px;\r\n    padding-bottom: 4px;\r\n    border-radius: 5px;\r\n    left: calc(100% - 70px);\r\n    color: gray;\r\n    cursor: pointer;\r\n    z-index: 4;\r\n    background: none;\r\n}\r\n\r\n.position-info:hover {\r\n    color: black;\r\n    background: none;\r\n}\r\n\r\n\r\n.position-plus{\r\n    height: 100%;\r\n    display: flex;\r\n    flex-direction: column;\r\n    justify-content: center;\r\n    width:100%;\r\n}\r\n\r\n.position-photo {\r\n    z-index: 0;\r\n    position: absolute;\r\n    display: block;\r\n    width: 100%;\r\n    height: 100%;\r\n    background-repeat: no-repeat;\r\n    background-size: 100%;\r\n    background-position: center;\r\n    border-radius: 5px;\r\n    \r\n}\r\n\r\n.position-nophoto {\r\n    /*filter: opacity(20%);*/\r\n}\r\n\r\n.department-div{\r\n    width: 100% !important;\r\n}\r\n\r\n.subdepartment {\r\n    box-shadow: #AAA 0px 2px 4px;\r\n    padding: 5px;\r\n    margin-bottom: 20px;\r\n    margin-top: 20px;\r\n    /*width: 100%;*/\r\n    /*width: 1480px;*/\r\n    border-radius: 4px;\r\n    height: 40px;\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\r\n    background-size: 2000px 2000px;\r\n    background-color: #F4F4F4;\r\n    background-image: repeating-linear-gradient(135deg, transparent, transparent 20px, #F8F8F8 20px, #F8F8F8 40px);\r\n    position: relative;\r\n}\r\n\r\n.subdepartment-name {\r\n    text-align: center;\r\n    cursor: pointer;\r\n    display: flex;\r\n    justify-content: center;\r\n    flex-direction: column;\r\n    height: 100%;\r\n    width: 100%;\r\n    z-index: 3;\r\n}\r\n\r\n.position-head{\r\n    border: 2px solid #FFAAAA;\r\n}\r\n\r\n.positionslist-inforow {\r\n    margin-top: 10px;\r\n    margin-bottom: 10px;\r\n}\r\n\r\n.position-history-title{\r\n    font-size: 16px;\r\n}\r\n\r\n.position-curation{\r\n    margin-top: 10px;\r\n}\r\n\r\n.position-curation-title{\r\n    font-size: 16px;\r\n}\r\n\r\n.position-curation-element{\r\n    padding-left: 2px;\r\n    margin-left: 3px;\r\n    margin-top: 3px;\r\n    font-size: 12px;\r\n    border-left: 2px solid #AAAAFF;\r\n}\r\n\r\n\r\n.position-curation-elementname {\r\n    font-weight: 600;\r\n}\r\n\r\n.position-heading {\r\n    margin-top: 10px;\r\n}\r\n\r\n.position-heading-title {\r\n    font-size: 16px;\r\n}\r\n\r\n.position-heading-element {\r\n    padding-left: 2px;\r\n    margin-left: 3px;\r\n    margin-top: 3px;\r\n    font-size: 12px;\r\n    border-left: 2px solid #AAAAFF;\r\n}\r\n\r\n.position-heading-elementname {\r\n    font-weight: 600;\r\n}\r\n\r\n.subdepartment-expiresoon {\r\n    box-shadow: #704214 0px 2px 8px;\r\n    background-size: 2000px 2000px;\r\n    background-image: repeating-linear-gradient(135deg, transparent, transparent 20px, #faf0e5 20px, #faf0e5 40px);\r\n}\r\n\r\n.subdepartment-info {\r\n    position: absolute;\r\n    top: 8px;\r\n    border: 1px solid #CCCCCC;\r\n    font-size: 10px;\r\n    padding: 2px;\r\n    padding-top: 4px;\r\n    padding-bottom: 4px;\r\n    border-radius: 5px;\r\n    left: calc(70px);\r\n    color: gray;\r\n    cursor: pointer;\r\n    z-index: 4;\r\n    background: none;\r\n}\r\n\r\n.subdepartment-info:hover {\r\n    color: black;\r\n    background: none;\r\n}\r\n\r\n.subdepartment-expiresoon:hover {\r\n    box-shadow: #704214 0px 2px 32px;\r\n    transition: box-shadow 0.2s ease-in-out;\r\n}\r\n\r\n.position-notsignedandcreated {\r\n    color: blue;\r\n    font-weight: 600;\r\n    font-size: 10px;\r\n}\r\n\r\n.position-issignedandwillbecreated {\r\n    color: lightblue;\r\n    font-weight: 600;\r\n    font-size: 10px;\r\n}\r\n\r\n.position-isnotsignedandwillbecreated {\r\n    color: darkcyan;\r\n    font-weight: 600;\r\n    font-size: 10px;\r\n}\r\n\r\n.position-isdeletedunsigned {\r\n    color: darkorange;\r\n    font-weight: 600;\r\n    font-size: 10px;\r\n}\r\n\r\n.position-iswillbedeletedsigned {\r\n    color: red;\r\n    font-weight: 600;\r\n    font-size: 10px;\r\n}\r\n\r\n.position-iswillbedeletedunsigned {\r\n    color: orange;\r\n    font-weight: 600;\r\n    font-size: 10px;\r\n}\r\n\r\n\r\n.position-structure {\r\n    box-shadow: #AAA 0px 2px 4px;\r\n    margin-bottom: 10px;\r\n    margin-right: 10px;\r\n    width: 100%;\r\n    border-radius: 4px;\r\n    width: 270px;\r\n    height: 270px;\r\n    /* display: flex;\r\n    justify-content: center;\r\n    align-items: center;*/\r\n    padding: 5px;\r\n    position: relative;\r\n    font-size: 14px;\r\n    cursor: pointer;\r\n    background-color: #FFF;\r\n}\r\n\r\n\r\n\r\n.position-structure:hover {\r\n    box-shadow: #AAAAFF 0px 2px 16px;\r\n    transition: box-shadow 0.2s ease-in-out;\r\n}\r\n\r\n.position-structure-title {\r\n    font-weight: 600;\r\n    font-size: 14px;\r\n    text-align: center;\r\n    border-bottom: 2px solid #D4D4D4;\r\n    margin-bottom: 5px;\r\n}\r\n\r\n.position-structure-back {\r\n    font-weight: 600;\r\n    font-size: 56px;\r\n    text-align: center;\r\n    line-height: 240px;\r\n    height: 100%;\r\n    vertical-align: middle;\r\n    margin-bottom: 5px;\r\n    \r\n}\r\n\r\n\r\n/*####################     POSITION PERSON MANAGEMENT PANEL      #########################*/\r\n\r\n.position-person {\r\n    box-shadow: #AAA 0px 2px 4px;\r\n    margin-bottom: 10px;\r\n    margin-right: 10px;\r\n    width: 100%;\r\n    border-radius: 4px;\r\n    width: 450px;\r\n    height: 360px;\r\n    /* display: flex;\r\n    justify-content: center;\r\n    align-items: center;*/\r\n    padding: 5px;\r\n    position: relative;\r\n    cursor: pointer;\r\n    background-color: #FFF;\r\n}\r\n\r\n.position-person:hover {\r\n    box-shadow: #AAAAFF 0px 2px 16px;\r\n    transition: box-shadow 0.2s ease-in-out;\r\n}\r\n\r\n\r\n.position-person-expiresoon {\r\n    box-shadow: #704214 0px 2px 8px;\r\n}\r\n\r\n.position-person-willbeadded {\r\n    background-color: #E5FFE5;\r\n}\r\n\r\n.position-person-willbedeleted {\r\n    background-color: #FFE5E5;\r\n}\r\n\r\n.position-person-expiresoon:hover {\r\n    box-shadow: #704214 0px 2px 16px;\r\n    transition: box-shadow 0.2s ease-in-out;\r\n}\r\n\r\n.position-person-name {\r\n    text-align: center;\r\n    cursor: pointer;\r\n    display: flex;\r\n    justify-content: flex-start;\r\n    flex-direction: column;\r\n    height: 100%;\r\n    width: 100%;\r\n    z-index: 3;\r\n    flex-basis: 50%;\r\n\r\n}\r\n\r\n.position-person-grid {\r\n    display: flex;\r\n    justify-content: space-between;\r\n    flex-direction: column;\r\n    margin-top: 15px;\r\n    width: 440px;\r\n    /*height: 280px;*/\r\n}\r\n\r\n.position-person-grid-main {\r\n    display: flex;\r\n    width: 100%;\r\n    /*background-color: red;*/\r\n    justify-content: space-around;\r\n    flex-direction: row;\r\n    max-height:120px;\r\n}\r\n\r\n.position-person-leftblock {\r\n    display: flex;\r\n    justify-content: space-between;\r\n    flex-direction: column;\r\n    margin: 5px;\r\n    padding-right: 5px;\r\n    border-right: 2px solid #DDD;\r\n    min-height: 120px;\r\n    flex-basis: 20%;\r\n}\r\n\r\n.position-person-rightblock {\r\n    display: flex;\r\n    justify-content: flex-start;\r\n    flex-direction: column;\r\n    margin: 5px;\r\n    padding-left: 3px;\r\n    border-left: 2px solid #DDD;\r\n    flex-basis: 20%;\r\n    \r\n}\r\n\r\n.position-person-button{\r\n    padding: 1px;\r\n    font-size: 10px;\r\n    margin: 0px;\r\n}\r\n\r\n.position-person-sof {\r\n    display: flex;\r\n    justify-content: flex-start;\r\n    flex-direction: column;\r\n    margin: 0px;\r\n}\r\n\r\n.position-person-noperson {\r\n    display: flex;\r\n    height: 100px;\r\n    justify-content: center;\r\n    flex-direction: row;\r\n    align-items: center;\r\n    font-size: 24px;\r\n    color: #444;\r\n    font-family: Merriweather;\r\n    margin: 0px;\r\n}\r\n\r\n.position-person-mrd {\r\n    margin-top: 5px;\r\n    font-size: 12px;\r\n    /*border-top: 2px solid #DDD;*/\r\n}\r\n\r\n.position-person-mrd-title {\r\n    font-weight: 600;\r\n}\r\n\r\n.position-person-nameblock {\r\n    min-height: 50px;\r\n    display: flex;\r\n    flex-direction: column;\r\n    justify-content: center;\r\n    /*background-color: rgba(244,244,244, 0.9);*/\r\n    border-radius: 0px 0px 5px 5px;\r\n    margin-bottom: -5px;\r\n    min-width: 150px;\r\n    /*text-shadow: 1px 1px 0px #FFF;*/\r\n}\r\n\r\n.position-nameblock:hover {\r\n}\r\n\r\n.position-person-nameblock-name {\r\n    margin-top: -15px;\r\n    text-align: center;\r\n    /*font-size: 13px;\r\n    font-weight: 600;*/\r\n}\r\n\r\n.position-person-nameblock-name-alt {\r\n    font-size: 12px;\r\n}\r\n\r\n.position-person-nameblock-rank {\r\n    margin-top: 5px;\r\n    font-size: 12px;\r\n}\r\n\r\n.position-person-grid-person {\r\n    display: flex;\r\n    width: 100%;\r\n    /*background-color: red;*/\r\n    justify-content: space-around;\r\n    flex-direction: column;\r\n\r\n}\r\n\r\n.position-person-grid-person-top{\r\n    text-align: center;\r\n}\r\n\r\n.position-person-grid-person-bottom {\r\n    display: flex;\r\n    width: 100%;\r\n    /*background-color: red;*/\r\n    justify-content: space-around;\r\n    flex-direction: row;\r\n}\r\n\r\n.position-person-grid-person-bottom-image{\r\n    height: 170px;\r\n    cursor: pointer;\r\n\r\n}\r\n\r\n.position-person-nameblock-category {\r\n    margin-top: 5px;\r\n    font-size: 12px;\r\n    border-bottom: 2px solid #DDD;\r\n}\r\n\r\n.position-person-nameblock-replaced {\r\n    margin-top: 5px;\r\n    font-size: 12px;\r\n}\r\n\r\n.position-person-nameblock-notice {\r\n    font-size: 11px;\r\n    margin-top: 3px;\r\n}\r\n\r\n.position-person-head {\r\n    border: 2px solid #FFAAAA;\r\n}\r\n\r\n.position-future-add {\r\n    color: #0A0;\r\n}\r\n\r\n.position-future-delete {\r\n    color: #A00;\r\n}\r\n\r\n/*####################     POSITION MANAGEMENT PANEL      #########################*/\r\n\r\n#positionmanagementpanel {\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: flex-start;\r\n    flex-direction: column;\r\n}\r\n\r\n.positionmanagementpanel-title{\r\n    text-align: center;\r\n    width: 100%;\r\n}\r\n\r\n.positionmanagementpanel-rankcap{\r\n    width: 100%;\r\n}\r\n\r\n#positionmanagementpanel-input {\r\n    margin-top: 10px;\r\n}\r\n\r\n.positionmanagementpanel-freezed {\r\n    display: none;\r\n}\r\n\r\n#positionmanagementpanel-yesno {\r\n    margin-top: 10px;\r\n}\r\n\r\n.positionmanagementpanel-margin {\r\n    margin-top: 10px;\r\n}\r\n\r\n.positionmanagementpanel-altrank-row{\r\n   \r\n}\r\n\r\n.positionmanagementpanel-left-margin{\r\n    margin-left: 8px;\r\n}\r\n\r\n.positionmanagementpanel-left {\r\n    white-space: nowrap;\r\n    display: flex;\r\n    justify-content: flex-start;\r\n    align-items: center;\r\n}\r\n\r\n.positionmanagementpanel-row {\r\n    \r\n    white-space: nowrap;\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\r\n}\r\n\r\n.positionmanagementpanel-fromit{\r\n    margin-top: 10px;\r\n}\r\n\r\n.positionmanagementpanel-label {\r\n    align-self: center;\r\n    margin-right: 10px;\r\n}\r\n\r\n.positionmanagementpanel-replacedbycivil{\r\n    width: 99%;\r\n    margin-bottom: 20px;\r\n    margin-left: 5px;\r\n    padding: 3px;\r\n    border-left: 2px solid #5599FF;\r\n    border-radius: 3px;\r\n}\r\n\r\n.positionmanagementpanel-rbcd{\r\n    margin-top: 10px;\r\n    margin-left: 5px;\r\n    padding-left: 3px;\r\n    border-left: 2px solid #ff88ff;\r\n}\r\n\r\n.positionmanagementpanel-flexrow {\r\n    display: flex;\r\n    justify-content: space-between;\r\n    flex-wrap: nowrap;\r\n    align-items: flex-end;\r\n    width: 100%;\r\n    /*background-color: rgba(122,122,122,0.4)*/\r\n}\r\n\r\n.positionmanagementpanel-flexrow-text {\r\n    height: 34px;\r\n    vertical-align: middle;\r\n    /*background-color: rgba(122,122,122,0.7);*/\r\n}\r\n\r\n.positionmanagementpanel-flexrow-text-first{\r\n    margin-left: 15px;\r\n}\r\n\r\n.positionmanagementpanel-flexrow-element-25{\r\n    flex-basis: 25%;\r\n}\r\n\r\n.positionmanagementpanel-flexrow-element-33{\r\n    flex-basis: 33%;\r\n}\r\n\r\n.positionmanagementpanel-flexrow-element-40 {\r\n    flex-basis: 40%;\r\n}\r\n\r\n.positionmanagementpanel-flexrow-element-50 {\r\n    flex-basis: 50%;\r\n}\r\n\r\n.positionmanagementpanel-flexrow-element-60 {\r\n    flex-basis: 60%;\r\n}\r\n\r\n.positionmanagementpanel-flexrow-element-66 {\r\n    flex-basis: 66%;\r\n}\r\n\r\n.positionmanagementpanel-flexrow-element-75 {\r\n    flex-basis: 75%;\r\n}\r\n\r\n.positionmanagementpanel-document-flexrow {\r\n    display: flex;\r\n    flex-wrap: wrap;\r\n    /*background-color: rgba(122,122,122,0.4)*/\r\n}\r\n\r\n.positionmanagementpanel-document-select {\r\n    width: 150px;\r\n}\r\n\r\n.positionmanagementpanel-document-structure{\r\n    margin: 5px;\r\n}\r\n\r\n#positionmanagementpanel-yes {\r\n    width: 100px;\r\n}\r\n\r\n#departmentmanagementpanel-no {\r\n    width: 100px;\r\n}\r\n\r\n.positionmanagementpanel-table {\r\n    border-top: 2px solid #AA77FF;\r\n    border-bottom: 2px solid #AA77FF;\r\n    text-align: center;\r\n    padding: 2px;\r\n}\r\n\r\n.positionmanagementpanel-table td{\r\n    padding-left: 3px;\r\n    padding-right: 3px;\r\n}\r\n\r\n.positionmanagementpanel-table input{\r\n    margin-left: 2px;\r\n}\r\n\r\n\r\n\r\n.positionmanagementpanel-thead {\r\n    border-bottom: 2px solid #AA77FF;\r\n}\r\n\r\n.positionmanagementpanel-thead td {\r\n    padding: 2px;\r\n    border-bottom: 2px solid #AA77FF;\r\n}\r\n\r\n.positionmanagementpanel-tbody tr {\r\n    background-color: white;\r\n}\r\n\r\n.positionmanagementpanel-tbody tr:nth-child(even) {\r\n    background-color: #D7D7D7;\r\n}\r\n\r\n\r\n\r\n.positionmanagementpanel-tr {\r\n}\r\n\r\n.positionmanagementpanel-td{\r\n\r\n}\r\n\r\n.positionmanagementpanel-curation{\r\n    padding-left: 3px;\r\n    margin-left: 5px;\r\n    border-left: 2px solid #00FFFF;\r\n}\r\n\r\n.positionmanagementpanel-curation-element {\r\n    margin-top: 5px;\r\n    padding-bottom: 3px;\r\n    margin-bottom: 5px;\r\n    border-bottom: 2px solid #E4E4E4;\r\n}\r\n\r\n.positionmanagementpanel-head {\r\n    padding-left: 3px;\r\n    margin-left: 5px;\r\n    border-left: 2px solid #FF55FF;\r\n}\r\n/*#######################     SETTINGS      ##########################*/\r\n.settingspanel-title {\r\n    text-align: center;\r\n    font-family: Merriweather;\r\n    font-size: 26px;\r\n    margin-bottom: 20px;\r\n}\r\n\r\n.settingspanel-datetitle{\r\n    margin-bottom: 10px;\r\n    text-align: center;\r\n}\r\n\r\n.settingspanel-dateinput{\r\n\r\n}\r\n\r\n.settingspanel-datebuttons{\r\n    margin-top: 10px;\r\n\r\n}\r\n\r\n\r\n/*####################     DECREE HISTORY      #########################*/\r\n\r\n.decreehistory-create {\r\n    display: flex;\r\n}\r\n\r\n.decreehistory-element {\r\n    margin: 15px;\r\n    border-radius: 5px;\r\n    border: 2px solid #F2F2F2;\r\n    padding: 8px;\r\n}\r\n\r\n.decreehistory-margintop {\r\n    margin-top: 10px;\r\n}\r\n\r\n.decreehistory-selected {\r\n    background-color: #FCFCFF;\r\n    border: 2px solid #A2A2F2;\r\n}\r\n\r\n.decreehistory-panel {\r\n    margin: 10px;\r\n    border-radius: 5px;\r\n    border: 2px solid #F2F2F2;\r\n}\r\n\r\n.decreehistory-element {\r\n    border-top: 2px solid #F2F2F2;\r\n    border-bottom: 2px solid #F2F2F2;\r\n    margin: 10px;\r\n}\r\n\r\n\r\n/*####################     PMREQUEST      #########################*/\r\n\r\n.pmrequest-title{\r\n    font-size: 20px;\r\n    padding-bottom: 10px;\r\n    font-weight: 500;\r\n}\r\n\r\n.pmrequest-row{\r\n    margin-top: 5px;\r\n    margin-bottom: 5px;\r\n    display: flex;\r\n    align-items: center;\r\n}\r\n\r\n.pmrequest-block {\r\n    padding-left: 5px;\r\n    border-left: 2px solid #AA99FF;\r\n    border-radius: 5px;\r\n}\r\n\r\n.pmrequest-label {\r\n    width: 200px;\r\n    margin-left: 15px;\r\n}\r\n\r\n.pmrequest-select{\r\n    width: 100%;\r\n}\r\n\r\n\r\n.pmrequest-marginleft{\r\n    margin-left: 20px;\r\n}\r\n\r\n.pmrequest-structure-element {\r\n    padding-left: 2px;\r\n    margin-left: 3px;\r\n    margin-top: 3px;\r\n    font-size: 12px;\r\n    border-left: 2px solid #AAAAFF;\r\n}\r\n\r\n.pmrequest-input-num{\r\n    width: 100px;\r\n}\r\n\r\n.pmrequest-spinner{\r\n    margin-left: 20px;\r\n}\r\n\r\n.pmrequest-singlerank{\r\n    margin-bottom: 15px;\r\n    padding: 2px;\r\n    border: solid 2px #EAEAEA;\r\n}\r\n\r\n.pmrequest-singlerank-title{\r\n    margin-bottom: 15px;\r\n}\r\n\r\n.pmrequest-singlerank-new{\r\n    margin-bottom: 30px;\r\n    font-size: 14px;\r\n}\r\n\r\n.pmrequest-table{\r\n    border: 3px solid #EAEAEA;\r\n    padding: 4px;\r\n}\r\n\r\n.pmrequest-table-tr {\r\n    border: 2px solid #EAEAEA;\r\n}\r\n\r\n.pmrequest-table-td {\r\n    padding: 2px;\r\n    border: 2px solid #EAEAEA;\r\n}\r\n\r\n.pmrequest-tablenew {\r\n    border: 2px solid #333;\r\n    padding: 4px;\r\n    width: 100%;\r\n}\r\n\r\n.pmrequest-tablenew > tr {\r\n    padding: 4px;\r\n    border: 2px solid #333;\r\n}\r\n\r\n.pmrequest-tablenew > tr> td {\r\n    padding-left: 4px;\r\n}\r\n\r\n\r\n.pmrequest-tablenew-td-border {\r\n    \r\n    border: 2px solid #333;\r\n}\r\n\r\n.pmrequest-tablenew-td-back-red{\r\n    background-color: #FFCACA;\r\n}\r\n\r\n.pmrequest-tablenew-td-back-green {\r\n    background-color: #CAFFCA;\r\n}\r\n\r\n.pmrequest-tablenew-back-brown {\r\n    background-color: #FFCC88;\r\n}\r\n\r\n.pmrequest-tablenew-back-green {\r\n    background-color: #CAFFCA;\r\n}\r\n\r\n.pmrequest-tablenew-back-silver {\r\n    background-color: #EAEAEA;\r\n}\r\n\r\n.pmrequest-tablenew-sub {\r\n    width: 100%;\r\n}\r\n\r\n.pmrequest-tablenew-td-subfield{\r\n    padding-right: 10px;\r\n}\r\n\r\n.pmrequest-tablenew-td-subnumber {\r\n    padding-left: 6px;\r\n    border-left: 2px solid #333;\r\n    width: 100px;\r\n}\r\n\r\n.pmrequest-tablenew-text-middle{\r\n    text-align:center;\r\n}\r\n\r\n.pmrequest-tablenew-td-autowidth {\r\n    padding-left: 6px;\r\n    border-left: 2px solid #333;\r\n}\r\n\r\n.pmrequest-tablenew-td-border-bottom {\r\n    border-bottom: 2px solid #333;\r\n}\r\n\r\n.pmrequest-tablenew-td-heightmax{\r\n    \r\n}\r\n\r\n.pmrequest-tablenew-td-border-left {\r\n    padding-left: 6px;\r\n    border-left: 2px solid #333;\r\n}\r\n\r\n.pmrequest-autowidth {\r\n    table-layout: fixed;\r\n    width: 100%;\r\n}\r\n\r\n.pmrequest-tablenew-td-table {\r\n    padding: 0px;\r\n    border: 2px solid #333;\r\n}\r\n\r\n\r\n/*##################    CANDIDATES     ######################*/\r\n\r\n.candidates-top-block {\r\n    padding-bottom: 4px;\r\n    border-bottom: 4px dashed #D9D9D9;\r\n    margin-bottom: 4px;\r\n    padding: 4px;\r\n}\r\n\r\n.candidates-title {\r\n    font-size: 24px;\r\n    text-align: center;\r\n    font-family: Merriweather;\r\n}\r\n\r\n.candidates-accordeon{\r\n    max-width: 99.9%;\r\n}\r\n\r\n.candidates-accordeon-title{\r\n    font-weight: 600;\r\n    font-size: 16px;\r\n}\r\n\r\n.candidates-cabinetes {\r\n    padding: 4px;\r\n    margin-top: 2px;\r\n    margin-bottom: 4px;\r\n    border-right: 2px solid #D4D4D4;\r\n    border-left: 2px solid #D4D4D4;\r\n    border-top: 2px solid #D4D4D4;\r\n    border-bottom: 2px solid #BAF;\r\n    border-radius: 0px 0px 6px 6px;\r\n}\r\n\r\n.candidates-cabinetes-element {\r\n    margin-top: 4px;\r\n    box-shadow: #DDD 2px 2px 2px;\r\n    padding: 4px;\r\n    min-height: 35px;\r\n}\r\n\r\n.candidates-cabinetes-element:hover {\r\n    box-shadow: #87D 0px 0px 6px;\r\n    /*border: 1px solid #BAF;*/\r\n    cursor: pointer;\r\n}\r\n\r\n.candidates-cabinetes-element-delete{\r\n    position: absolute;\r\n    right: 20px;\r\n}\r\n\r\n.candidates-hr{\r\n\r\n}\r\n\r\n.candidates-cabinete {\r\n    margin: 5px;\r\n    min-height: 400px;\r\n    box-shadow: #DDD 2px 2px 8px;\r\n    padding: 4px;\r\n}\r\n\r\n.candidates-cabinete-title {\r\n    text-align: center;\r\n    font-size: 24px;\r\n    font-family: Merriweather;\r\n}\r\n\r\n.candidates-cabinete-subtitle {\r\n    text-align: center;\r\n    font-size: 20px;\r\n}\r\n\r\n.candidates-cabinete-close{\r\n    position: absolute;\r\n    right: 20px;\r\n    margin-top: 0px;\r\n}\r\n\r\n.candidates-cabinete-close-button{\r\n    background-color: rgba(0,0,0,0);\r\n    font-weight: 600;\r\n    border: none;\r\n}\r\n\r\n.candidates-cabinete-close-button:hover{\r\n    background-color: rgba(0,0,0,0);\r\n    color: red;\r\n}\r\n\r\n.candidates-cabinete-actions{\r\n    padding-bottom: 4px;\r\n    border-bottom: 2px solid #DDD;\r\n}\r\n\r\n.candidates-cabinete-content {\r\n    display: flex;\r\n    flex-direction: column;\r\n\r\n    align-items: center;\r\n}\r\n\r\n.candidates-cabinete-document {\r\n    margin-top: 5px;\r\n    margin-right: 4px;\r\n    background-color: white;\r\n    padding: 4px;\r\n    border: 2px solid #E4E4E4;\r\n    border-radius: 2px;\r\n    box-shadow: #DDD 2px 2px 4px;\r\n    min-height: 80px;\r\n    max-width: 600px;\r\n    width: 600px;\r\n}\r\n\r\n.candidates-cabinete-document-title{\r\n    font-size: 14px;\r\n    text-align: center;\r\n    font-weight: 600;\r\n}\r\n\r\n.candidates-cabinete-document-actions{\r\n    margin-top: 8px;\r\n    margin-left: 4px;\r\n}\r\n\r\n.candidates-cabinete-document-button + .el-button {\r\n    margin-right: 0px;\r\n    margin-left: 0px;\r\n}\r\n\r\n.candidates-cabinete-remove {\r\n    margin-top: 5px;\r\n    display: flex;\r\n    max-width: 600px;\r\n    width: 600px;\r\n    justify-content: center;\r\n    box-shadow: #DDD 2px 2px 4px;\r\n}\r\n\r\n.candidates-cabinete-remove-button {\r\n    width: 100%;\r\n}\r\n\r\n.candidates-cabinete-info{\r\n    display: flex;\r\n    justify-content: center;\r\n    color: #777;\r\n    font-size: 13px;\r\n    margin: 3px;\r\n    margin-right: 10px;\r\n}\r\n\r\n.candidates-cabinete-info-element{\r\n    margin-right: 10px;\r\n    border: 1px solid #DDD;\r\n    border-radius: 3px;\r\n    padding: 2px;\r\n}\r\n\r\n/*####################     ELD      #########################*/\r\n.eld-top-block {\r\n    padding-bottom: 4px;\r\n    border-bottom: 4px dashed #D9D9D9;\r\n    margin-bottom: 4px;\r\n    padding: 4px;\r\n}\r\n\r\n.eld-search-and-create {\r\n    display: flex;\r\n    justify-content: space-between;\r\n}\r\n\r\n.eld-search-and-create:hover .eld-search-and-create-advice{\r\n    display: inline;\r\n}\r\n\r\n.eld-search-and-create-advice{\r\n    margin-right: 10px;\r\n    font-weight: 300;\r\n    font-size: 12px;\r\n    font-style: italic;\r\n    display: none;\r\n    color: #A4A4A4;\r\n}\r\n\r\n.eld-title{\r\n    font-size: 24px;\r\n    text-align: center;\r\n    font-family: Merriweather;\r\n\r\n}\r\n\r\n.eld-search{\r\n    display:flex;\r\n    flex-direction: column;\r\n    justify-content: flex-end;\r\n    \r\n}\r\n\r\n.eld-search-input{\r\n    width:300px;\r\n    margin-right: 5px;\r\n}\r\n\r\n.eld-search-main {\r\n    box-shadow: #CCC 0px 2px 2px;\r\n    padding-bottom: 4px;\r\n    \r\n}\r\n\r\n\r\n.eld-search-main-title {\r\n    text-align: center;\r\n    font-size: 21px;\r\n    font-family:Merriweather;\r\n}\r\n\r\n.eld-search-element{\r\n    cursor: pointer;\r\n    box-shadow: #CCC 0px 2px 2px;\r\n    margin: 4px;\r\n    padding: 4px;\r\n    border: 2px solid #CCC;\r\n    border-radius: 2px;\r\n    min-height: 100px;\r\n}\r\n\r\n.eld-search-element:hover{\r\n    background-color:#FFFFFA;\r\n    border: 2px solid #CFCFCC;\r\n    box-shadow: #CFCFCC 0px 2px 2px;\r\n}\r\n\r\n.eld-search-element-image {\r\n    margin: 4px;\r\n    min-width: 10%;\r\n    width: 10%;\r\n    max-width: 10%;\r\n}\r\n\r\n.eld-search-element-user {\r\n    box-shadow: #CCC 0px 2px 2px;\r\n    margin: 4px;\r\n    padding: 4px;\r\n    border: 2px solid #CCC;\r\n    border-radius: 2px;\r\n}\r\n\r\n.eld-eld {\r\n    border-top: 4px solid #DDD;\r\n    display: flex;\r\n    min-height: 500px;\r\n    box-shadow: #CCC 0px 0px 4px;\r\n    margin-top: 20px;\r\n}\r\n\r\n.eld-eld-title{\r\n    text-align: center;\r\n    font-size: 24px;\r\n    font-weight: 600;\r\n\r\n}\r\n\r\n.eld-eld-side {\r\n    /*flex-basis: 18%;*/\r\n    max-width: 250px;\r\n    \r\n    border-right: 4px solid #DDD;\r\n    box-shadow: #CCC 2px 0px 3px;\r\n}\r\n\r\n.eld-eld-side-mail {\r\n    /*flex-basis: 18%;*/\r\n    max-width: 17%;\r\n    min-width: 15%;\r\n    border-right: 4px solid #DDD;\r\n    box-shadow: #CCC 2px 0px 3px;\r\n}\r\n\r\n.eld-eld-main{\r\n    padding-left: 4px;\r\n    width: 100%;\r\n    min-height: 735px;\r\n}\r\n\r\n.eld-eld-label {\r\n    min-width: 120px;\r\n    font-weight: 600;\r\n}\r\n\r\n.eld-eld-side-element{\r\n    border: none;\r\n    border-bottom: 2px solid #D4D4D4;\r\n    border-radius: 0px;\r\n    margin: 4px;\r\n    padding: 2px;\r\n    font-size: 14px;\r\n    font-family: Merriweather;\r\n    text-align: center;\r\n    cursor: pointer;\r\n}\r\n\r\n.eld-eld-side-element:hover {\r\n    border-bottom: 2px solid #D4D4F4;\r\n    color: #449;\r\n}\r\n\r\n.eld-eld-side-element-selected {\r\n    border-bottom: 2px solid #A4A4F4;\r\n}\r\n\r\n.eld-eld-side-element-selected:hover{\r\n    border-bottom: 2px solid #A4A4F4;\r\n}\r\n\r\n.eld-search-element-button{\r\n    margin-left: 5px;\r\n}\r\n\r\n.eld-eld-main-head {\r\n    text-align: center;\r\n    width: 100%;\r\n    font-size: 21px;\r\n    border-bottom: 4px dotted #CCC;\r\n    font-family: Merriweather;\r\n    padding: 4px;\r\n    margin-bottom: 4px;\r\n}\r\n\r\n.eld-eld-main-head-position {\r\n    font-size: 18px;\r\n}\r\n\r\n.eld-eld-main-head-partbutton {\r\n    margin-right: 0px;\r\n    margin-left: 0px;\r\n    border-radius: 4px 0px 0px 4px;\r\n    background-color: rgba(255,255,255,0.4);\r\n}\r\n\r\n.eld-eld-main-head-partbutton + .el-button {\r\n    margin-right: 0px;\r\n    margin-left: 0px;\r\n    border-left: 0px;\r\n    border-radius: 0px 0px 0px 0px;\r\n}\r\n\r\n.eld-eld-main-head-image {\r\n    margin: 4px;\r\n    min-width: 10%;\r\n    max-width: 15%;\r\n}\r\n\r\n.eld-eld-body{\r\n\r\n}\r\n\r\n.eld-eld-body-row-flex {\r\n    display: flex;\r\n}\r\n\r\n.eld-eld-body-row-flex-center {\r\n    display: flex;\r\n    justify-content: center;\r\n}\r\n\r\n.eld-eld-body-row-flex-spacebetween {\r\n    display: flex;\r\n    justify-content: space-between;\r\n}\r\n\r\neld-eld-body-row-flex-vertical{\r\n    display: flex;\r\n    flex-direction: column;\r\n}\r\n\r\n.eld-eld-body-textcenter {\r\n    text-align: center;\r\n}\r\n\r\n.eld-eld-body-row-long{\r\n    max-width: 800px;\r\n    width: 800px;\r\n}\r\n\r\n.eld-eld-body-row-medium {\r\n    max-width: 400px;\r\n    width: 400px;\r\n}\r\n\r\n.eld-eld-body-row-right{\r\n    display: flex;\r\n    flex-direction: row-reverse;\r\n}\r\n\r\n.eld-eld-body-row-short {\r\n    max-width: 160px;\r\n    width: 160px;\r\n}\r\n\r\n.eld-eld-body-row-shortest {\r\n    max-width: 135px;\r\n    width: 135px;\r\n}\r\n\r\n.eld-eld-body-row-shortest-input input{\r\n    padding: 2px;\r\n}\r\n\r\n.eld-eld-body-row-tiny {\r\n    max-width: 80px;\r\n    width: 80px;\r\n}\r\n\r\n.eld-eld-body-row-mediumshort {\r\n    max-width: 200px;\r\n    width: 200px;\r\n}\r\n\r\n.eld-eld-body-row-mediumshorter {\r\n    max-width: 300px;\r\n    width: 300px;\r\n}\r\n\r\n.eld-eld-body-submenu-button{\r\n    background-color: rgba(0,0,0,0);\r\n    border: none;\r\n    border-radius: 0px;\r\n    border-bottom: 2px solid #AAF;\r\n}\r\n\r\n.eld-eld-body-submenu-button-selected {\r\n    background-color: rgba(0,0,200,0.08);\r\n    border-top-left-radius: 10px;\r\n    border-top-right-radius: 10px;\r\n    color: #002;\r\n    font-weight: 600;\r\n\r\n    border-bottom: 2px solid #AAF;\r\n}\r\n\r\n.eld-eld-body-submenu-button-selected:focus{\r\n    background-color: rgba(0,0,200,0.08);\r\n    border-top-left-radius: 10px;\r\n    border-top-right-radius: 10px;\r\n    color: #002;\r\n    font-weight: 600;\r\n\r\n    border-bottom: 2px solid #AAF;\r\n}\r\n\r\n.eld-eld-body-row-add {\r\n    margin: 10px;\r\n    margin-left: 2px;\r\n}\r\n\r\n.eld-eld-body-select-verylong {\r\n    max-width: 1000px;\r\n    width: 1000px;\r\n}\r\n\r\n.eld-eld-body-row-selectcontainer{\r\n    margin-bottom: 5px;\r\n}\r\n\r\n.eld-eld-body-row-case{\r\n    margin-top: 10px;\r\n    margin-right: 10px;\r\n    width: 230px;\r\n}\r\n\r\n.eld-eld-body-select-long {\r\n    max-width: 800px;\r\n    width: 800px;\r\n}\r\n\r\n\r\n.eld-eld-body-select-medium {\r\n    max-width: 400px;\r\n    width: 400px;\r\n}\r\n\r\n.eld-eld-body-select-mediumshort {\r\n    max-width: 300px;\r\n    width: 300px;\r\n}\r\n\r\n.eld-eld-body-subtitle {\r\n    font-size: 18px;\r\n    text-align: center;\r\n    margin-bottom: 10px;\r\n}\r\n\r\n.eld-eld-body-row-inline-text-margin{\r\n    margin-top: 8px;\r\n    margin-left: 8px;\r\n}\r\n\r\n.eld-eld-body-civilduration {\r\n    background-color: white;\r\n\r\n}\r\n\r\n.eld-eld-body-civilduration-margin {\r\n    height: 60px;\r\n    background-color: #F4F4F4;\r\n}\r\n\r\n.eld-eld-body-civilduration-padding-bottom{\r\n    padding-bottom: 6px;\r\n    padding-left: 6px;\r\n}\r\n\r\n.eld-eld-body-civilduration-padding-top {\r\n    padding-top: 6px;\r\n    padding-left: 6px;\r\n}\r\n\r\n.eld-eld-body-add-title {\r\n    font-size: 18px;\r\n    text-align: center;\r\n}\r\n\r\n.eld-eld-body-jobperiod-emptyspace{\r\n    margin-left: 44px;\r\n}\r\n\r\n.eld-eld-body-button-text {\r\n    cursor: pointer;\r\n    text-align: center;\r\n    text-decoration: underline;\r\n    font-size: 13px;\r\n}\r\n\r\n.eld-eld-media-element {\r\n    border-bottom: 3px solid #DDD;\r\n    padding-bottom: 4px;\r\n    margin-bottom: 4px;\r\n}\r\n\r\n.eld-eld-body-indinput {\r\n    border: solid 1px #449;\r\n    width: 400px;\r\n    background: repeating-linear-gradient(90deg, #ffffff 0px, #ffffff 25px, #000000 26px);\r\n    color: #777;\r\n    font-family: monospace;\r\n    letter-spacing: 1.57ch;\r\n    font-size: 18px;\r\n    padding-left: 0.85ch;\r\n    max-width: 367px;\r\n    width: 367px;\r\n    height: 40px;\r\n}\r\n\r\n.eld-eld-body-indinput:focus{\r\n    outline: none;\r\n    color: dodgerblue;\r\n}\r\n\r\n.eld-eld-body-passpinput {\r\n    max-width: 238px;\r\n    width: 238px;\r\n    margin-left: 5px;\r\n}\r\n\r\n.eld-eld-vacation-daysleft {\r\n    margin: 3px;\r\n    border: 1px solid #999;\r\n    \r\n}\r\n\r\n.eld-eld-vacation-daysleft-title {\r\n    border-bottom: 1px solid #999;\r\n    text-align: center;\r\n    padding: 3px;\r\n}\r\n\r\n.eld-eld-vacation-daysleft-number {\r\n    padding: 3px;\r\n    text-align: center;\r\n    font-size: 24px;\r\n}\r\n\r\n.eld-eld-vacation-daysfull {\r\n    margin: 3px;\r\n    border: 1px solid #999;\r\n}\r\n\r\n.eld-eld-vacation-daysfull-title {\r\n    border-bottom: 1px solid #999;\r\n    text-align: center;\r\n    padding: 3px;\r\n    border-right: 1px solid #999;\r\n}\r\n\r\n.eld-eld-vacation-daysfull-number {\r\n    padding: 3px;\r\n    text-align: center;\r\n    font-size: 24px;\r\n    border-right: 1px solid #999;\r\n}\r\n\r\n.eld-eld-vacation-daysfull-number-shift {\r\n    font-size: 13px;\r\n}\r\n\r\n.eld-eld-vacation-daysfull-detailed {\r\n    padding: 3px;\r\n    font-size: 13px;\r\n}\r\n\r\n.eld-eld-vacation-daysgiven {\r\n    margin: 3px;\r\n    border: 1px solid #999;\r\n}\r\n\r\n.eld-eld-vacation-daysgiven-title {\r\n    border-bottom: 1px solid #999;\r\n    text-align: center;\r\n    padding: 3px;\r\n}\r\n\r\n.eld-eld-vacation-daysgiven-number {\r\n    padding: 3px;\r\n    text-align: center;\r\n    font-size: 24px;\r\n}\r\n\r\n.eld-eld-media-label {\r\n    min-width: 100px;\r\n    font-weight: 600;\r\n}\r\n\r\n.eld-eld-media-image {\r\n    margin: 4px;\r\n    max-width: 30%;\r\n}\r\n\r\n.eld-eld-table{\r\n    margin: 3px;\r\n    box-shadow: rgba(0,0,0,0.2) 1px 1px 4px;\r\n    background-color: #FFF;\r\n}\r\n\r\n.eld-eld-table input{\r\n    border: none;\r\n    border-bottom: 2px solid;\r\n    border-color: #E4E4E4;\r\n    border-radius: 0px;\r\n    background-color: rgba(250,250,250,0);\r\n}\r\n\r\n.eld-eld-table textarea{\r\n    border: none;\r\n    border-bottom: 2px solid;\r\n    border-color: #E4E4E4;\r\n    border-radius: 0px;\r\n    background-color: rgba(250,250,250,0);\r\n}\r\n\r\n.eld-eld-table .el-checkbox{\r\n    margin-top: 10px;\r\n    margin-bottom: 10px;\r\n}\r\n\r\n.eld-eld-table label{\r\n    margin: 0px;\r\n}\r\n\r\n.eld-eld-table div{\r\n    text-align: center;\r\n}\r\n\r\n.eld-eld-table input:hover{\r\n    border-bottom: 2px solid #C2C2F2;\r\n\r\n}\r\n\r\n.eld-eld-table input:focus{\r\n    border-bottom: 2px solid #C2C2F2;\r\n\r\n}\r\n\r\n.eld-eld-table textarea:hover{\r\n    border-bottom: 2px solid #C2C2F2;\r\n\r\n}\r\n\r\n.eld-eld-table textarea:focus{\r\n    border-bottom: 2px solid #C2C2F2;\r\n\r\n}\r\n\r\n.eld-eld-table thead{\r\n    font-weight: 600;\r\n    text-align: center;\r\n}\r\n\r\n.eld-eld-table tr{\r\n    border: 2px solid #D6D6D6;\r\n    padding: 2px;\r\n   \r\n}\r\n\r\n.eld-eld-table button{\r\n    width: 125px;\r\n    background-color: rgba(255,255,255,0.5);\r\n}\r\n\r\n.eld-eld-table tr:hover{\r\n    box-shadow: rgba(0,0,0,0.4) 0px 0px 4px;\r\n}\r\n\r\n.eld-eld-table td{\r\n    border: 2px solid #D6D6D6;\r\n    padding: 2px;\r\n    vertical-align: top;\r\n}\r\n\r\n.el-upload__input{\r\n    display:none !important;\r\n}\r\n\r\n.printServlist-main{\r\n    display:flex;\r\n    margin-top: 10px;\r\n    justify-content: center;\r\n}\r\n\r\n/*###################     MODEPANEL      ########################*/\r\n\r\n.modepanel-element{\r\n    border: 2px solid #c8c8c8;\r\n    cursor: pointer;\r\n    height: 165px;\r\n    width: 165px;\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\r\n    text-align: center;\r\n    border-radius: 8px;\r\n    margin: 10px;\r\n    padding: 5px;\r\n    font-size: 16px;\r\n    text-shadow: 2px 2px 4px #333;\r\n}\r\n\r\n.modepanel-element:hover{\r\n    box-shadow: 0px 0px 6px #A77;\r\n}\r\n\r\n.modepanel-element-org{\r\n    border-color: #44A;\r\n    background-color: #66C;\r\n    color: white;\r\n}\r\n\r\n.modepanel-element-eld {\r\n    border-color: #097;\r\n    background-color: #2A9;\r\n    color: white;\r\n}\r\n\r\n.modepanel-element-candidates {\r\n    border-color: #8A0;\r\n    background-color: #AC2;\r\n    color: white;\r\n}\r\n\r\n.modepanel-element-people {\r\n    border-color: #07A;\r\n    background-color: #29C;\r\n    color: white;\r\n}\r\n\r\n.modepanel-container{\r\n    display: flex;\r\n    justify-content: center;\r\n}\r\n\r\n\r\n/*####################     PERSON DECREES      #########################*/\r\n\r\n.persondecrees-create {\r\n    display: flex;\r\n}\r\n\r\n.persondecrees-element {\r\n    margin: 15px;\r\n    border-radius: 5px;\r\n    border: 2px solid #F2F2F2;\r\n    padding: 8px;\r\n    display: flex;\r\n    \r\n    justify-content: space-between;\r\n}\r\n\r\n.persondecrees-actionmenu{\r\n    padding-top: 12px;\r\n}\r\n\r\n.persondecrees-element-author {\r\n    font-size: 12px;\r\n}\r\n\r\n.persondecrees-element-checkboxcontainer{\r\n    display: flex;\r\n    flex-direction: column;\r\n    align-content: center;\r\n    justify-content: center;\r\n    padding-right: 6px;\r\n}\r\n\r\n.persondecrees-margintop {\r\n    margin-top: 10px;\r\n}\r\n\r\n.persondecrees-selected {\r\n    background-color: #FCFCFF;\r\n    border: 2px solid #A2A2F2;\r\n}\r\n\r\n.persondecreeoperation-panel {\r\n    margin: 10px;\r\n    border-radius: 5px;\r\n    border: 2px solid #F2F2F2;\r\n}\r\n\r\n.persondecreeoperation-element {\r\n    border-top: 2px solid #F2F2F2;\r\n    border-bottom: 2px solid #F2F2F2;\r\n    margin: 10px;\r\n    font-size: 12px;\r\n    padding: 2px;\r\n    padding-left: 5px;\r\n}\r\n\r\n.persondecreeoperation-button {\r\n    margin-bottom: 5px;\r\n}\r\n\r\n.persondecreeoperation-vacationperiod-period {\r\n    display: inline-block;\r\n    width: 200px;\r\n}\r\n\r\n.persondecreeoperation-vacationperiod-days{\r\n    margin-top: 5px;\r\n}\r\n\r\n.persondecreeoperation-nickname {\r\n    font-size: 18px;\r\n    font-weight: 600;\r\n    margin-bottom: 10px;\r\n}\r\n\r\n.persondecreeoperation-row-warning{\r\n    color: red;\r\n    font-style: italic;\r\n}\r\n\r\n.persondecreeoperation-row {\r\n    display: flex;\r\n    align-items: center;\r\n}\r\n\r\n.persondecreeoperation-row-text {\r\n    flex-basis: 50%;\r\n}\r\n\r\n.persondecreeoperation-row-text-label{\r\n    font-weight: 600;\r\n    font-size: 16px;\r\n}\r\n\r\n.persondecreeoperation-label-bold {\r\n    font-weight: 600;\r\n}\r\n\r\n.persondecreeoperation-part{\r\n    border-bottom: 2px solid #EAEAEA;\r\n    margin: 3px;\r\n}\r\n\r\n.persondecreeoperation-part-title {\r\n    text-align: center;\r\n    font-size: 20px;\r\n}\r\n\r\n.persondecreeoperation-part-list{\r\n\r\n}\r\n\r\n.persondecreeoperation-part-list-element {\r\n    border-radius: 2px;\r\n    padding-left: 2px;\r\n    padding-right: 2px;\r\n    margin-left: 4px;\r\n    display: flex;\r\n    justify-content: space-between;\r\n    /*width: 850px;*/\r\n    width: 100%\r\n}\r\n\r\n.persondecreeoperation-part-list-element-indent{\r\n    text-indent: 10mm; \r\n}\r\n\r\n.persondecreeoperation-part-list-element-intro {\r\n    \r\n    margin-bottom: 7px;\r\n}\r\n\r\n.persondecreeoperation-part-list-element-margin-small {\r\n    margin-bottom: 0.2cm;\r\n}\r\n\r\n.persondecreeoperation-part-list-element-margin {\r\n    margin-bottom: 0.5cm;\r\n}\r\n\r\n.persondecreeoperation-part-list-element-margin-big {\r\n    margin-bottom: 0.75cm;\r\n}\r\n\r\n.persondecreeoperation-part-list-element-sub {\r\n    margin-bottom: 0.5cm;\r\n    text-align: center;\r\n    width: 700px;\r\n}\r\n\r\n.persondecreeoperation-part-list-element-sub-sub {\r\n    text-align: center;\r\n    width: 700px;\r\n}\r\n\r\n.persondecreeoperation-part-list-element-info{\r\n\r\n}\r\n\r\n.persondecreeoperation-part-list-element-actions {\r\n}\r\n\r\n.persondecreeoperation-part-list-element-name{\r\n    /*font-weight: 600;*/\r\n}\r\n\r\n.persondecreeoperation-part-list-element-other {\r\n}\r\n\r\n.persondecreeoperation-part-list-title {\r\n    text-align: center;\r\n    font-size: 18px;\r\n    margin-top: 20px;\r\n}\r\n\r\n.persondecreeoperation-part-add-title {\r\n    text-align: center;\r\n    font-size: 18px;\r\n    margin-top: 5px;\r\n}\r\n\r\n.persondecreeblock {\r\n    border-top: 3px solid #EEE;\r\n    border-bottom: 3px solid #EEE;\r\n    padding: 5px;\r\n    margin-top: 10px;\r\n    padding-left: 15px;\r\n}\r\n\r\n.persondecreeblock-element {\r\n    /*border-top: 3px solid #EEE;\r\n    border-bottom: 3px solid #EEE;*/\r\n    padding: 5px;\r\n    /*margin-top: 10px;\r\n    padding-left: 15px;*/\r\n}\r\n\r\n.persondecreeblock-title {\r\n    text-align: center;\r\n    font-size: 20px;\r\n    font-weight: 600;\r\n}\r\n\r\n.input-margin-left{\r\n    margin-left: 10px;\r\n}\r\n\r\n.input-padding-left-small {\r\n    padding-left: 5px;\r\n}\r\n\r\n.input-padding-right-small {\r\n    padding-right: 5px;\r\n}\r\n\r\n.validation-error{\r\n    border: 2px solid red;\r\n    border-radius: 7px;\r\n}\r\n\r\n.small-text-centered {\r\n    text-align: center;\r\n    font-size: 10px;\r\n}\r\n\r\n.bold-text-centered {\r\n    text-align: center;\r\n    font-weight: 600;\r\n}\r\n\r\n.text-centered {\r\n    text-align: center;\r\n}\r\n\r\n/*####################     POPOVER      #########################*/\r\n.popover-inforow {\r\n    margin-top: 4px;\r\n    margin-bottom: 4px;\r\n}\r\n\r\n.popover-dropdown {\r\n    margin-top: 0px;\r\n    margin-bottom: 0px;\r\n    padding-top: 0px;\r\n    padding-bottom: 0px;\r\n    padding-left: 4px;\r\n    padding-right: 2px;\r\n    font-size: 14px;\r\n}\r\n\r\n.popover-label {\r\n    width: 200px;\r\n    margin-top: 0px;\r\n    margin-bottom: 0px;\r\n}\r\n\r\n.popover-inforow-hr {\r\n    margin-top: 6px;\r\n    margin-bottom: 6px;\r\n}\r\n\r\n.popover-inforow-debug {\r\n    color: #BBB;\r\n}\r\n\r\n/*####################     LOADING      #########################*/\r\n\r\n.loading-spinner {\r\n    margin-left: 20px;\r\n}\r\n\r\n.loading-row {\r\n    margin-top: 5px;\r\n    margin-bottom: 5px;\r\n    display: flex;\r\n    align-items: center;\r\n}\r\n\r\n\r\n/*####################     TRANSITIONS      #########################*/\r\n/* Enter and leave animations can use different */\r\n/* durations and timing functions.              */\r\n.slide-fade-enter-active {\r\n    transition: all .3s ease;\r\n}\r\n\r\n.slide-fade-leave-active {\r\n    transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);\r\n}\r\n\r\n.slide-fade-enter, .slide-fade-leave-to\r\n/* .slide-fade-leave-active below version 2.1.8 */ {\r\n    transform: translateX(10px);\r\n    opacity: 0;\r\n}\r\n\r\n\r\n/*Костино*/\r\n\r\n.str1 {\r\n    position: relative;\r\n    font-size: 0.5cm;\r\n    float: left;\r\n    z-index: 1;\r\n    background-image: url(" + __webpack_require__(137) + ");\r\n    background-repeat: repeat-x;\r\n}\r\n\r\n.str2 {\r\n    position: relative;\r\n    font-size: 0.5cm;\r\n    text-indent: 15px;\r\n    background-image: url(" + __webpack_require__(139) + ");\r\n    background-repeat: repeat;\r\n}\r\n\r\n.page {\r\n    width: 100%;\r\n}\r\n\r\n#ab p {\r\n    /*line-height: 0.3cm;*/\r\n    text-indent: 1.25cm;\r\n}\r\n\r\n#ab > ol {\r\n    margin-left: 3cm;\r\n}\r\n\r\n.strP1 {\r\n    position: relative;\r\n    font-size: 0.5cm;\r\n    float: left;\r\n    z-index: 1;\r\n    background-image: url(" + __webpack_require__(138) + ");\r\n    background-repeat: repeat-x;\r\n    -webkit-print-color-adjust: exact;\r\n}\r\n\r\n.strP2 {\r\n    position: relative;\r\n    font-size: 0.5cm;\r\n    /*text-indent: 0px;*/\r\n    background-image: url(" + __webpack_require__(140) + ");\r\n    background-repeat: repeat;\r\n    -webkit-print-color-adjust: exact;\r\n}\r\n\r\n.page {\r\n    width: 100%;\r\n}\r\n\r\n.page p {\r\n    font-size: 0.5cm;\r\n}\r\n\r\n\r\n.el-table .warning-row {\r\n    background: oldlace;\r\n}\r\n\r\n.el-table .success-row {\r\n    background: #f0f9eb;\r\n}", ""]);
 
 // exports
 
@@ -1297,7 +1297,7 @@ class Rewardmoney {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__rights__ = __webpack_require__(84);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__rights__ = __webpack_require__(85);
 
 class User {
     constructor() {
@@ -2053,9 +2053,9 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;(function(root
 
 var Component = __webpack_require__(3)(
   /* script */
-  __webpack_require__(121),
+  __webpack_require__(122),
   /* template */
-  __webpack_require__(159),
+  __webpack_require__(160),
   /* scopeId */
   null,
   /* cssModules */
@@ -2099,40 +2099,40 @@ module.exports = (__webpack_require__(5))(202);
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__css_styles_css__ = __webpack_require__(132);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__css_styles_css__ = __webpack_require__(133);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__css_styles_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__css_styles_css__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_bootstrap__ = __webpack_require__(182);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_bootstrap__ = __webpack_require__(183);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_bootstrap___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_bootstrap__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_element_ui__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_element_ui___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_element_ui__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_vuex__ = __webpack_require__(186);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__classes_rank__ = __webpack_require__(79);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__classes_sourceoffinancing__ = __webpack_require__(90);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__classes_positiontype__ = __webpack_require__(77);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__classes_positioncategory__ = __webpack_require__(76);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_vuex__ = __webpack_require__(187);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__classes_rank__ = __webpack_require__(80);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__classes_sourceoffinancing__ = __webpack_require__(91);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__classes_positiontype__ = __webpack_require__(78);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__classes_positioncategory__ = __webpack_require__(77);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__classes_mrd__ = __webpack_require__(61);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__classes_altrankcondition__ = __webpack_require__(34);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__classes_altrankconditiongroup__ = __webpack_require__(35);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__classes_structureregion__ = __webpack_require__(92);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__classes_structuretype__ = __webpack_require__(93);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13_vue_element_dialog_draggable__ = __webpack_require__(184);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__classes_structureregion__ = __webpack_require__(93);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__classes_structuretype__ = __webpack_require__(94);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13_vue_element_dialog_draggable__ = __webpack_require__(185);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13_vue_element_dialog_draggable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_13_vue_element_dialog_draggable__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__classes_relativetype__ = __webpack_require__(81);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__classes_relativetype__ = __webpack_require__(82);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__classes_attestationtype__ = __webpack_require__(39);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__classes_vacationmilitary__ = __webpack_require__(98);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__classes_vacationtype__ = __webpack_require__(99);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__classes_vacationmilitary__ = __webpack_require__(99);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__classes_vacationtype__ = __webpack_require__(100);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__classes_languagetype__ = __webpack_require__(60);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__classes_languageskill__ = __webpack_require__(59);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__classes_jobtype__ = __webpack_require__(58);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__classes_servicetype__ = __webpack_require__(88);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__classes_servicefeature__ = __webpack_require__(87);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__classes_servicecoef__ = __webpack_require__(86);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__classes_servicetype__ = __webpack_require__(89);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__classes_servicefeature__ = __webpack_require__(88);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__classes_servicecoef__ = __webpack_require__(87);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__classes_penalty__ = __webpack_require__(64);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__classes_country__ = __webpack_require__(43);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__classes_illcode__ = __webpack_require__(55);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__classes_illregime__ = __webpack_require__(56);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__classes_rewardtype__ = __webpack_require__(83);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__classes_reward__ = __webpack_require__(82);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__classes_rewardtype__ = __webpack_require__(84);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__classes_reward__ = __webpack_require__(83);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_30__classes_educationlevel__ = __webpack_require__(49);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_31__classes_educationtype__ = __webpack_require__(52);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_32__classes_educationdocument__ = __webpack_require__(48);
@@ -2140,38 +2140,38 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_34__classes_drivertype__ = __webpack_require__(46);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_35__classes_drivercategory__ = __webpack_require__(45);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_36__classes_permissiontype__ = __webpack_require__(65);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_37__classes_prooftype__ = __webpack_require__(78);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_37__classes_prooftype__ = __webpack_require__(79);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_38__classes_holiday__ = __webpack_require__(9);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_39__classes_persondecreeblocktype__ = __webpack_require__(68);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_40__classes_persondecreeblocksubtype__ = __webpack_require__(67);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_41__classes_Structure__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_42__classes_region__ = __webpack_require__(80);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_42__classes_region__ = __webpack_require__(81);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_43__classes_area__ = __webpack_require__(37);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_44__classes_fire__ = __webpack_require__(54);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_45__classes_appointtype__ = __webpack_require__(36);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_46__classes_transfertype__ = __webpack_require__(97);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_47__classes_subject__ = __webpack_require__(94);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_48__classes_subjectgender__ = __webpack_require__(96);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_49__classes_subjectcategory__ = __webpack_require__(95);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_46__classes_transfertype__ = __webpack_require__(98);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_47__classes_subject__ = __webpack_require__(95);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_48__classes_subjectgender__ = __webpack_require__(97);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_49__classes_subjectcategory__ = __webpack_require__(96);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_50__classes_interrupttype__ = __webpack_require__(57);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_51__classes_changedocumentstype__ = __webpack_require__(40);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_52__classes_setpersondatatype__ = __webpack_require__(89);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_52__classes_setpersondatatype__ = __webpack_require__(90);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_53__classes_rewardmoney__ = __webpack_require__(20);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_54__classes_persondecreelevel__ = __webpack_require__(69);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_55__classes_ordernumbertype__ = __webpack_require__(63);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_56__classes_streettype__ = __webpack_require__(91);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_56__classes_streettype__ = __webpack_require__(92);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_57__classes_citytype__ = __webpack_require__(42);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_58__classes_areaother__ = __webpack_require__(38);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_59__classes_externalorderwhotype__ = __webpack_require__(53);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_60__classes_persondecreetype__ = __webpack_require__(70);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_60__classes_persondecreetype__ = __webpack_require__(71);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_61__classes_educationadditionaltype__ = __webpack_require__(47);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_62__classes_citysubstate__ = __webpack_require__(41);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_63__classes_educationstage__ = __webpack_require__(51);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_64__classes_educationpositiontype__ = __webpack_require__(50);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_65__classes_role__ = __webpack_require__(85);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_65__classes_role__ = __webpack_require__(86);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_66__classes_user__ = __webpack_require__(21);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_67__classes_dismissalclauses__ = __webpack_require__(44);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_68_vue_router__ = __webpack_require__(185);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_68_vue_router__ = __webpack_require__(186);
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
@@ -2400,8 +2400,8 @@ Vue.getKeyByValue = function (data, value) {
     return null;
 };
 const routes = [
-    { path: '/login', component: __webpack_require__(150) },
-    { path: '/', component: __webpack_require__(149) },
+    { path: '/login', component: __webpack_require__(151) },
+    { path: '/', component: __webpack_require__(150) },
 ];
 // this.$store.state.departmentsListId; - Getter
 // this.$store.state.parentStructures
@@ -3416,10 +3416,10 @@ new Vue({
         //alert(window.location.pathname);
         //this.currentRoute
         if (window.location.pathname != '/login') {
-            return h(__webpack_require__(142));
+            return h(__webpack_require__(143));
         }
         else {
-            return h(__webpack_require__(152));
+            return h(__webpack_require__(153));
         }
     }
 });
@@ -3442,7 +3442,7 @@ var options = {
   name: ''
 };
 if (true) {
-  var querystring = __webpack_require__(129);
+  var querystring = __webpack_require__(130);
   var overrides = querystring.parse(__resourceQuery.slice(1));
   if (overrides.path) options.path = overrides.path;
   if (overrides.timeout) options.timeout = overrides.timeout;
@@ -3562,11 +3562,11 @@ if (typeof window !== 'undefined') {
 }
 
 function createReporter() {
-  var strip = __webpack_require__(131);
+  var strip = __webpack_require__(132);
 
   var overlay;
   if (typeof document !== 'undefined' && options.overlay) {
-    overlay = __webpack_require__(179);
+    overlay = __webpack_require__(180);
   }
 
   var styles = {
@@ -3619,7 +3619,7 @@ function createReporter() {
   };
 }
 
-var processUpdate = __webpack_require__(180);
+var processUpdate = __webpack_require__(181);
 
 var customHandler;
 var subscribeAllHandler;
@@ -3684,7 +3684,7 @@ if (module) {
   };
 }
 
-/* WEBPACK VAR INJECTION */}.call(exports, "?path=__webpack_hmr&dynamicPublicPath=true", __webpack_require__(181)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, "?path=__webpack_hmr&dynamicPublicPath=true", __webpack_require__(182)(module)))
 
 /***/ }),
 /* 31 */
@@ -4115,6 +4115,42 @@ class Persondecreelevel {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__countrycities__ = __webpack_require__(6);
+
+class FeaturedStructure {
+    constructor(name = '', id = '') {
+        this.name = name;
+        this.id = id;
+    }
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = FeaturedStructure;
+
+class excerptStructures {
+    constructor(id = '', structures = []) {
+        this.id = id;
+        this.structures = structures;
+    }
+}
+/* unused harmony export excerptStructures */
+
+class Persondecreeoperation {
+    constructor() {
+        this.intronum = 0; // Записывается последовательно номер фабулы (1, 2 ...) для каждой первой операции в списке с одинаковой фабулой. 
+        this.persondecreeblocksubtypenum = 0; // Аналогично верхнему.
+        this.persondecreeoptionnumber1num = 0; // Аналогично верхнему
+        // Только на фронтэнде
+        this.countrycitiesList = new Array(new __WEBPACK_IMPORTED_MODULE_0__countrycities__["a" /* default */]());
+    }
+}
+/* unused harmony export default */
+
+//# sourceMappingURL=persondecreeoperation.js.map
+
+/***/ }),
+/* 71 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
 class Persondecreetype {
 }
 /* harmony export (immutable) */ __webpack_exports__["a"] = Persondecreetype;
@@ -4122,7 +4158,7 @@ class Persondecreetype {
 //# sourceMappingURL=persondecreetype.js.map
 
 /***/ }),
-/* 71 */
+/* 72 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4133,7 +4169,7 @@ class Personjobprivelege {
 //# sourceMappingURL=personjobprivelege.js.map
 
 /***/ }),
-/* 72 */
+/* 73 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4144,7 +4180,7 @@ class Personjobprivelegeperiod {
 //# sourceMappingURL=personjobprivelegeperiod.js.map
 
 /***/ }),
-/* 73 */
+/* 74 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4155,7 +4191,7 @@ class Personpfl {
 //# sourceMappingURL=personpfl.js.map
 
 /***/ }),
-/* 74 */
+/* 75 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4166,7 +4202,7 @@ class Personvacation {
 //# sourceMappingURL=personvacation.js.map
 
 /***/ }),
-/* 75 */
+/* 76 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4177,7 +4213,7 @@ class Physicalfield {
 //# sourceMappingURL=physicalfield.js.map
 
 /***/ }),
-/* 76 */
+/* 77 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4188,7 +4224,7 @@ class Positioncategory {
 //# sourceMappingURL=positioncategory.js.map
 
 /***/ }),
-/* 77 */
+/* 78 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4202,7 +4238,7 @@ class Positiontype {
 //# sourceMappingURL=positiontype.js.map
 
 /***/ }),
-/* 78 */
+/* 79 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4213,7 +4249,7 @@ class Prooftype {
 //# sourceMappingURL=prooftype.js.map
 
 /***/ }),
-/* 79 */
+/* 80 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4227,7 +4263,7 @@ class Rank {
 //# sourceMappingURL=rank.js.map
 
 /***/ }),
-/* 80 */
+/* 81 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4238,7 +4274,7 @@ class Region {
 //# sourceMappingURL=region.js.map
 
 /***/ }),
-/* 81 */
+/* 82 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4249,7 +4285,7 @@ class Relativetype {
 //# sourceMappingURL=relativetype.js.map
 
 /***/ }),
-/* 82 */
+/* 83 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4260,7 +4296,7 @@ class Reward {
 //# sourceMappingURL=reward.js.map
 
 /***/ }),
-/* 83 */
+/* 84 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4271,7 +4307,7 @@ class Rewardtype {
 //# sourceMappingURL=rewardtype.js.map
 
 /***/ }),
-/* 84 */
+/* 85 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4291,7 +4327,7 @@ class Rights {
 //# sourceMappingURL=rights.js.map
 
 /***/ }),
-/* 85 */
+/* 86 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4302,7 +4338,7 @@ class Role {
 //# sourceMappingURL=role.js.map
 
 /***/ }),
-/* 86 */
+/* 87 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4313,7 +4349,7 @@ class Servicecoef {
 //# sourceMappingURL=servicecoef.js.map
 
 /***/ }),
-/* 87 */
+/* 88 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4324,7 +4360,7 @@ class Servicefeature {
 //# sourceMappingURL=servicefeature.js.map
 
 /***/ }),
-/* 88 */
+/* 89 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4335,7 +4371,7 @@ class Servicetype {
 //# sourceMappingURL=servicetype.js.map
 
 /***/ }),
-/* 89 */
+/* 90 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4346,7 +4382,7 @@ class Setpersondatatype {
 //# sourceMappingURL=setpersondatatype.js.map
 
 /***/ }),
-/* 90 */
+/* 91 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4360,7 +4396,7 @@ class Sourceoffinancing {
 //# sourceMappingURL=sourceoffinancing.js.map
 
 /***/ }),
-/* 91 */
+/* 92 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4371,7 +4407,7 @@ class Streettype {
 //# sourceMappingURL=streettype.js.map
 
 /***/ }),
-/* 92 */
+/* 93 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4382,7 +4418,7 @@ class Structureregion {
 //# sourceMappingURL=structureregion.js.map
 
 /***/ }),
-/* 93 */
+/* 94 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4393,7 +4429,7 @@ class Structuretype {
 //# sourceMappingURL=structuretype.js.map
 
 /***/ }),
-/* 94 */
+/* 95 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4404,7 +4440,7 @@ class Subject {
 //# sourceMappingURL=subject.js.map
 
 /***/ }),
-/* 95 */
+/* 96 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4415,7 +4451,7 @@ class Subjectcategory {
 //# sourceMappingURL=subjectcategory.js.map
 
 /***/ }),
-/* 96 */
+/* 97 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4426,7 +4462,7 @@ class Subjectgender {
 //# sourceMappingURL=subjectgender.js.map
 
 /***/ }),
-/* 97 */
+/* 98 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4437,7 +4473,7 @@ class Transfertype {
 //# sourceMappingURL=transfertype.js.map
 
 /***/ }),
-/* 98 */
+/* 99 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4448,7 +4484,7 @@ class Vacationmilitary {
 //# sourceMappingURL=vacationmilitary.js.map
 
 /***/ }),
-/* 99 */
+/* 100 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4459,7 +4495,7 @@ class Vacationtype {
 //# sourceMappingURL=vacationtype.js.map
 
 /***/ }),
-/* 100 */
+/* 101 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4642,7 +4678,7 @@ ansiHTML.reset()
 
 
 /***/ }),
-/* 101 */
+/* 102 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4653,7 +4689,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 102 */
+/* 103 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4664,7 +4700,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.inputHandler = exports.allowedKeys = undefined;
 
-var _isCharacterKeypress = __webpack_require__(104);
+var _isCharacterKeypress = __webpack_require__(105);
 
 var _vanillaMasker = __webpack_require__(25);
 
@@ -4720,7 +4756,7 @@ var broadcast = function broadcast(ev) {
 };
 
 /***/ }),
-/* 103 */
+/* 104 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4738,7 +4774,7 @@ var _vue = __webpack_require__(0);
 
 var _vue2 = _interopRequireDefault(_vue);
 
-var _eventListener = __webpack_require__(102);
+var _eventListener = __webpack_require__(103);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -4796,7 +4832,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 104 */
+/* 105 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4815,7 +4851,7 @@ var isCharacterKeyPress = exports.isCharacterKeyPress = function isCharacterKeyP
 };
 
 /***/ }),
-/* 105 */
+/* 106 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4825,7 +4861,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_property_decorator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_vue_property_decorator__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_element_ui__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_element_ui___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_element_ui__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_jquery__ = __webpack_require__(188);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_jquery__ = __webpack_require__(189);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_jquery__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__classes_user__ = __webpack_require__(21);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -6621,7 +6657,7 @@ AdminpanelComponent = __decorate([
 
 
 /***/ }),
-/* 106 */
+/* 107 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -7166,8 +7202,8 @@ let AppComponent = class AppComponent extends __WEBPACK_IMPORTED_MODULE_0_vue__[
 AppComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_vue_property_decorator__["Component"])({
         components: {
-            SideBar: __webpack_require__(157),
-            TopMenu: __webpack_require__(158),
+            SideBar: __webpack_require__(158),
+            TopMenu: __webpack_require__(159),
         }
     })
 ], AppComponent);
@@ -7175,7 +7211,7 @@ AppComponent = __decorate([
 
 
 /***/ }),
-/* 107 */
+/* 108 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -7187,7 +7223,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_element_ui___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_element_ui__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_print_js__ = __webpack_require__(28);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_print_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_print_js__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_downloadjs__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_downloadjs__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_downloadjs___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_downloadjs__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -7891,7 +7927,7 @@ CandidatesComponent = __decorate([
 
 
 /***/ }),
-/* 108 */
+/* 109 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -8532,7 +8568,7 @@ derceeoperationelement = __decorate([
 
 
 /***/ }),
-/* 109 */
+/* 110 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -8546,7 +8582,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__css_print_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__css_print_css__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__classes_personphoto__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__classes_personreward__ = __webpack_require__(19);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__classes_countrycities__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__classes_countrycities__ = __webpack_require__(6);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -10223,7 +10259,7 @@ decreeoperationtemplatecreator = __decorate([
 
 
 /***/ }),
-/* 110 */
+/* 111 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -10355,7 +10391,7 @@ DepartmentmanagingpanelComponent = __decorate([
 
 
 /***/ }),
-/* 111 */
+/* 112 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -10396,7 +10432,7 @@ class Department {
 const subordinateStr = "subordinate";
 const fetchDepartmentDelay = 6000;
 const fetchDepartmentForceDelay = 250;
-__WEBPACK_IMPORTED_MODULE_0_vue__["default"].component('Departmentmanagingpanel', __webpack_require__(146));
+__WEBPACK_IMPORTED_MODULE_0_vue__["default"].component('Departmentmanagingpanel', __webpack_require__(147));
 let DepartmentslistComponent = class DepartmentslistComponent extends __WEBPACK_IMPORTED_MODULE_0_vue__["default"] {
     data() {
         return {
@@ -10673,7 +10709,7 @@ DepartmentslistComponent = __decorate([
 
 
 /***/ }),
-/* 112 */
+/* 113 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -10686,10 +10722,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_print_js__ = __webpack_require__(28);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_print_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_print_js__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__classes_personphoto__ = __webpack_require__(10);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__classes_personpfl__ = __webpack_require__(73);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__classes_personvacation__ = __webpack_require__(74);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__classes_physicalfield__ = __webpack_require__(75);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__classes_personjobprivelege__ = __webpack_require__(71);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__classes_personpfl__ = __webpack_require__(74);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__classes_personvacation__ = __webpack_require__(75);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__classes_physicalfield__ = __webpack_require__(76);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__classes_personjobprivelege__ = __webpack_require__(72);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__css_print_css__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__css_print_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9__css_print_css__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__classes_holiday__ = __webpack_require__(9);
@@ -10701,7 +10737,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__classes_educationperiod__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__classes_academicvacation__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__classes_educationmaternity__ = __webpack_require__(15);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__classes_personjobprivelegeperiod__ = __webpack_require__(72);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__classes_personjobprivelegeperiod__ = __webpack_require__(73);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -17531,7 +17567,7 @@ EldComponent = __decorate([
 
 
 /***/ }),
-/* 113 */
+/* 114 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -17539,9 +17575,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_property_decorator__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_property_decorator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_vue_property_decorator__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_awesome_mask__ = __webpack_require__(103);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_awesome_mask__ = __webpack_require__(104);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_awesome_mask___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_awesome_mask__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_vue_text_mask__ = __webpack_require__(178);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_vue_text_mask__ = __webpack_require__(179);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_vue_text_mask___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_vue_text_mask__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_element_ui__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_element_ui___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_element_ui__);
@@ -17634,13 +17670,13 @@ let HomeComponent = class HomeComponent extends __WEBPACK_IMPORTED_MODULE_0_vue_
 HomeComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_vue_property_decorator__["Component"])({
         components: {
-            Departmentslist: __webpack_require__(147),
-            Positionslist: __webpack_require__(155),
-            Eld: __webpack_require__(148),
-            Candidates: __webpack_require__(143),
-            Modepanel: __webpack_require__(151),
-            derceeoperationelement: __webpack_require__(144),
-            decreeoperationtemplatecreator: __webpack_require__(145),
+            Departmentslist: __webpack_require__(148),
+            Positionslist: __webpack_require__(156),
+            Eld: __webpack_require__(149),
+            Candidates: __webpack_require__(144),
+            Modepanel: __webpack_require__(152),
+            derceeoperationelement: __webpack_require__(145),
+            decreeoperationtemplatecreator: __webpack_require__(146),
         }
     })
 ], HomeComponent);
@@ -17648,7 +17684,7 @@ HomeComponent = __decorate([
 
 
 /***/ }),
-/* 114 */
+/* 115 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -17721,7 +17757,7 @@ LoginComponent = __decorate([
 
 
 /***/ }),
-/* 115 */
+/* 116 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -18012,7 +18048,7 @@ CandidatesComponent = __decorate([
 
 
 /***/ }),
-/* 116 */
+/* 117 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -18022,7 +18058,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_property_decorator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_vue_property_decorator__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_element_ui__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_element_ui___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_element_ui__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_downloadjs__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_downloadjs__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_downloadjs___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_downloadjs__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -18533,7 +18569,7 @@ PmrequestComponent = __decorate([
 
 
 /***/ }),
-/* 117 */
+/* 118 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -19986,7 +20022,7 @@ PositionmanagingpanelComponent = __decorate([
 
 
 /***/ }),
-/* 118 */
+/* 119 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -19996,12 +20032,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_property_decorator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_vue_property_decorator__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_element_ui__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_element_ui___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_element_ui__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_random_seed__ = __webpack_require__(187);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_random_seed__ = __webpack_require__(188);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_random_seed___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_random_seed__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_lodash__ = __webpack_require__(183);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_lodash__ = __webpack_require__(184);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_lodash__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__classes_decreeoperationsrequest__ = __webpack_require__(8);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_downloadjs__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_downloadjs__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_downloadjs___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_downloadjs__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -20046,7 +20082,7 @@ class PosDep {
 }
 const fetchPositionDelay = 4000;
 const fetchPositionForceDelay = 250;
-__WEBPACK_IMPORTED_MODULE_0_vue__["default"].component('Positionmanagingpanel', __webpack_require__(154));
+__WEBPACK_IMPORTED_MODULE_0_vue__["default"].component('Positionmanagingpanel', __webpack_require__(155));
 let PositionslistComponent = class PositionslistComponent extends __WEBPACK_IMPORTED_MODULE_0_vue__["default"] {
     data() {
         return {
@@ -21870,7 +21906,7 @@ PositionslistComponent = __decorate([
 
 
 /***/ }),
-/* 119 */
+/* 120 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -21958,7 +21994,7 @@ AdminpanelComponent = __decorate([
 
 
 /***/ }),
-/* 120 */
+/* 121 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -21969,7 +22005,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_element_ui__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_element_ui___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_element_ui__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__classes_decreeoperationsrequest__ = __webpack_require__(8);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_downloadjs__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_downloadjs__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_downloadjs___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_downloadjs__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -23025,7 +23061,7 @@ SidebarComponent = __decorate([
 
 
 /***/ }),
-/* 121 */
+/* 122 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -23651,7 +23687,7 @@ StructuremanagingpanelComponent = __decorate([
 
 
 /***/ }),
-/* 122 */
+/* 123 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -23661,25 +23697,27 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_property_decorator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_vue_property_decorator__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_element_ui__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_element_ui___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_element_ui__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_downloadjs__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_downloadjs___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_downloadjs__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__classes_educationperiod__ = __webpack_require__(16);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__classes_educationtypeblock__ = __webpack_require__(17);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__classes_personphoto__ = __webpack_require__(10);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__classes_personreward__ = __webpack_require__(19);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__classes_educationmaternity__ = __webpack_require__(15);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__classes_holiday__ = __webpack_require__(9);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_moment__ = __webpack_require__(27);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_10_moment__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__classes_academicvacation__ = __webpack_require__(14);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__classes_countrycities__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__classes_link__ = __webpack_require__(18);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__classes_persondecreeoperation__ = __webpack_require__(70);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_downloadjs__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_downloadjs___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_downloadjs__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__classes_educationperiod__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__classes_educationtypeblock__ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__classes_personphoto__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__classes_personreward__ = __webpack_require__(19);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__classes_educationmaternity__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__classes_holiday__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11_moment__ = __webpack_require__(27);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_11_moment__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__classes_academicvacation__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__classes_countrycities__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__classes_link__ = __webpack_require__(18);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -23708,8 +23746,15 @@ __WEBPACK_IMPORTED_MODULE_0_vue__["default"].component(__WEBPACK_IMPORTED_MODULE
 __WEBPACK_IMPORTED_MODULE_0_vue__["default"].use(__WEBPACK_IMPORTED_MODULE_2_element_ui___default.a);
 const EDIT_LABEL = "Редактировать";
 const SAVE_LABEL = "Сохранить";
-class FeaturedStructure {
+/*class FeaturedStructure {
+    name: string;
+    id: string;
 }
+
+class excerptStructures {
+    id: number;
+    structures: FeaturedStructure[];
+}*/
 class StructureManagement {
 }
 let TopmenuComponent = class TopmenuComponent extends __WEBPACK_IMPORTED_MODULE_0_vue__["default"] {
@@ -23813,6 +23858,7 @@ let TopmenuComponent = class TopmenuComponent extends __WEBPACK_IMPORTED_MODULE_
             modalAboutPanelVisible: false,
             sidebarDisplay: true,
             featured: [],
+            ttt: [],
             structureeditorAccess: "0",
             removeStructureAvailable: false,
             removeStructure: "removestructure",
@@ -23878,7 +23924,7 @@ let TopmenuComponent = class TopmenuComponent extends __WEBPACK_IMPORTED_MODULE_
             personssearch: [],
             photos: [],
             photosPreview: [],
-            photoToCreate: new __WEBPACK_IMPORTED_MODULE_6__classes_personphoto__["a" /* default */](),
+            photoToCreate: new __WEBPACK_IMPORTED_MODULE_7__classes_personphoto__["a" /* default */](),
             lastSearchFio: "",
             personrewardRewardtype: null,
             personrewardReward: null,
@@ -24246,7 +24292,7 @@ let TopmenuComponent = class TopmenuComponent extends __WEBPACK_IMPORTED_MODULE_
                 'Content-Type': 'application/json'
             })
         }).then(x => x.blob())
-            .then(x => __WEBPACK_IMPORTED_MODULE_3_downloadjs___default()(x, this.decreeName));
+            .then(x => __WEBPACK_IMPORTED_MODULE_4_downloadjs___default()(x, this.decreeName));
         /*        fetch('/api/Decrees', {
                     method: 'post',
                     body: JSON.stringify(<Decreemanagement>{
@@ -24271,7 +24317,7 @@ let TopmenuComponent = class TopmenuComponent extends __WEBPACK_IMPORTED_MODULE_
                 'Content-Type': 'application/json'
             })
         }).then(x => x.blob())
-            .then(x => __WEBPACK_IMPORTED_MODULE_3_downloadjs___default()(x, this.decreeName));
+            .then(x => __WEBPACK_IMPORTED_MODULE_4_downloadjs___default()(x, this.decreeName));
     }
     decreeAccept() {
         let csharpDateActive = new Date(this.decreeDateactive);
@@ -24373,7 +24419,7 @@ let TopmenuComponent = class TopmenuComponent extends __WEBPACK_IMPORTED_MODULE_
             featuredStructures = result;
             this.featured = new Array();
             featuredStructures.forEach(f => {
-                let featuredStructure = new FeaturedStructure();
+                let featuredStructure = new __WEBPACK_IMPORTED_MODULE_3__classes_persondecreeoperation__["a" /* FeaturedStructure */]();
                 featuredStructure.name = f.name;
                 featuredStructure.id = f.id;
                 this.featured.push(featuredStructure);
@@ -25074,7 +25120,7 @@ let TopmenuComponent = class TopmenuComponent extends __WEBPACK_IMPORTED_MODULE_
             })
         }).then(x => x.blob())
             .then(x => {
-            __WEBPACK_IMPORTED_MODULE_3_downloadjs___default()(x, this.persondecreeNickname + "_" + ddString + mmString + yyyy);
+            __WEBPACK_IMPORTED_MODULE_4_downloadjs___default()(x, this.persondecreeNickname + "_" + ddString + mmString + yyyy);
             //this.loadingStructureStaff = false;
         });
     }
@@ -25131,6 +25177,7 @@ let TopmenuComponent = class TopmenuComponent extends __WEBPACK_IMPORTED_MODULE_
             let persondecreeblocksubtypePrev = 0;
             let persondecreeblockoptionnumber1Prev = 0;
             result.forEach(operation => {
+                operation.excerptstructures = '';
                 // Если мы используем булевские типы вместо чисел
                 if (operation.optionnumber1 > 0) {
                     operation.optionnumber1Bool = true;
@@ -25166,7 +25213,7 @@ let TopmenuComponent = class TopmenuComponent extends __WEBPACK_IMPORTED_MODULE_
                 operation.optionarray1Array = this.toArrayNumberInputValue(operation.optionarray1);
                 // Если пункт "предоставить" (для отпуска), то в 6ой строке может содержаться информация о странах, 
                 if (operation.persondecreeblocktype == 15 && operation.optionstring6.length > 0) {
-                    operation.countrycitiesList = __WEBPACK_IMPORTED_MODULE_12__classes_countrycities__["a" /* default */].stringToCountrycitiesList(operation.optionstring6);
+                    operation.countrycitiesList = __WEBPACK_IMPORTED_MODULE_13__classes_countrycities__["a" /* default */].stringToCountrycitiesList(operation.optionstring6);
                 }
                 /**
                  * Здесь проводится сравнение, какие части текущей части и предыдущей совпадают. Например, чтобы если и текущему сотруднику и предыдущему выдается награда по идентичному пункту,
@@ -25224,7 +25271,7 @@ let TopmenuComponent = class TopmenuComponent extends __WEBPACK_IMPORTED_MODULE_
                     p.persondecreeblocksub = null; // Чтобы ничего не отображало вместо 0
                 }
                 if (p.persondecreeblocktype == 1) {
-                    p.samplePersonreward = new __WEBPACK_IMPORTED_MODULE_7__classes_personreward__["a" /* default */]();
+                    p.samplePersonreward = new __WEBPACK_IMPORTED_MODULE_8__classes_personreward__["a" /* default */]();
                 }
                 if (p.optionnumber1 == 0) {
                     p.optionnumber1 = null;
@@ -25282,7 +25329,7 @@ let TopmenuComponent = class TopmenuComponent extends __WEBPACK_IMPORTED_MODULE_
                 // Если пункт "предоставить" (для отпуска), то в 6ой строке может содержаться информация о странах, 
                 if (p.persondecreeblocktype == 15) {
                     p.countrycitiesList = new Array();
-                    let baseCountrycities = new __WEBPACK_IMPORTED_MODULE_12__classes_countrycities__["a" /* default */]();
+                    let baseCountrycities = new __WEBPACK_IMPORTED_MODULE_13__classes_countrycities__["a" /* default */]();
                     p.countrycitiesList.push(baseCountrycities);
                 }
             });
@@ -25793,7 +25840,7 @@ let TopmenuComponent = class TopmenuComponent extends __WEBPACK_IMPORTED_MODULE_
                 this.prepareToImport(person);
                 this.person = person;
                 this.getPhotos();
-                this.photoToCreate = new __WEBPACK_IMPORTED_MODULE_6__classes_personphoto__["a" /* default */]();
+                this.photoToCreate = new __WEBPACK_IMPORTED_MODULE_7__classes_personphoto__["a" /* default */]();
                 this.personssearch = [];
                 //alert(JSON.stringify(person));
             }
@@ -25900,7 +25947,7 @@ let TopmenuComponent = class TopmenuComponent extends __WEBPACK_IMPORTED_MODULE_
         this.candidateSearch.splice(this.candidateSearch.indexOf(candidate), 1);
     }
     multicountryAddAdditional(block) {
-        block.countrycitiesList.push(new __WEBPACK_IMPORTED_MODULE_12__classes_countrycities__["a" /* default */]());
+        block.countrycitiesList.push(new __WEBPACK_IMPORTED_MODULE_13__classes_countrycities__["a" /* default */]());
     }
     addPersoneducation() {
         this.personeducationEducationtypeblocks.forEach(etb => {
@@ -26300,9 +26347,9 @@ let TopmenuComponent = class TopmenuComponent extends __WEBPACK_IMPORTED_MODULE_
         this.personeducationMenuvisible = false;
     }
     addEducationtypeblock() {
-        let educationtypeblock = new __WEBPACK_IMPORTED_MODULE_5__classes_educationtypeblock__["a" /* default */]();
+        let educationtypeblock = new __WEBPACK_IMPORTED_MODULE_6__classes_educationtypeblock__["a" /* default */]();
         educationtypeblock.educationperiods = new Array();
-        let educationperiod = new __WEBPACK_IMPORTED_MODULE_4__classes_educationperiod__["a" /* default */]();
+        let educationperiod = new __WEBPACK_IMPORTED_MODULE_5__classes_educationperiod__["a" /* default */]();
         educationperiod.startString = this.personeducationStart;
         educationtypeblock.educationperiods.push(educationperiod);
         this.personeducationEducationtypeblocks.push(educationtypeblock);
@@ -26311,7 +26358,7 @@ let TopmenuComponent = class TopmenuComponent extends __WEBPACK_IMPORTED_MODULE_
         this.personeducationEducationtypeblocks = this.personeducationEducationtypeblocks.filter(e => e != educationtypeblock);
     }
     addEducationperiod(educationtypeblock) {
-        let educationperiod = new __WEBPACK_IMPORTED_MODULE_4__classes_educationperiod__["a" /* default */]();
+        let educationperiod = new __WEBPACK_IMPORTED_MODULE_5__classes_educationperiod__["a" /* default */]();
         educationperiod.startString = this.personeducationStart;
         educationtypeblock.educationperiods.push(educationperiod);
     }
@@ -26319,7 +26366,7 @@ let TopmenuComponent = class TopmenuComponent extends __WEBPACK_IMPORTED_MODULE_
         educationtypeblock.educationperiods = educationtypeblock.educationperiods.filter(e => e != educationperiod);
     }
     addAcademicvacation() {
-        let academicvacation = new __WEBPACK_IMPORTED_MODULE_11__classes_academicvacation__["a" /* default */]();
+        let academicvacation = new __WEBPACK_IMPORTED_MODULE_12__classes_academicvacation__["a" /* default */]();
         academicvacation.orderwho = this.personeducationName2;
         this.personeducationAcademicvacations.push(academicvacation);
     }
@@ -26327,7 +26374,7 @@ let TopmenuComponent = class TopmenuComponent extends __WEBPACK_IMPORTED_MODULE_
         this.personeducationAcademicvacations = this.personeducationAcademicvacations.filter(e => e != academicvacation);
     }
     addEducationmaternity() {
-        let educationmaternity = new __WEBPACK_IMPORTED_MODULE_8__classes_educationmaternity__["a" /* default */]();
+        let educationmaternity = new __WEBPACK_IMPORTED_MODULE_9__classes_educationmaternity__["a" /* default */]();
         educationmaternity.orderwho = this.personeducationName2;
         this.personeducationEducationmaternities.push(educationmaternity);
     }
@@ -26595,7 +26642,7 @@ let TopmenuComponent = class TopmenuComponent extends __WEBPACK_IMPORTED_MODULE_
         }
         // Предоставить
         if (persondecreeblock.persondecreeblocktype == 15) {
-            persondecreeblock.optionstring6 = __WEBPACK_IMPORTED_MODULE_12__classes_countrycities__["a" /* default */].countrycitiesListToString(persondecreeblock.countrycitiesList);
+            persondecreeblock.optionstring6 = __WEBPACK_IMPORTED_MODULE_13__classes_countrycities__["a" /* default */].countrycitiesListToString(persondecreeblock.countrycitiesList);
         }
         // Зачислить
         if (persondecreeblock.persondecreeblocktype == 17) {
@@ -27536,7 +27583,7 @@ let TopmenuComponent = class TopmenuComponent extends __WEBPACK_IMPORTED_MODULE_
         if (date == null) {
             return "";
         }
-        return __WEBPACK_IMPORTED_MODULE_10_moment___default()(date).locale('ru').format('D MMMM YYYY [года]');
+        return __WEBPACK_IMPORTED_MODULE_11_moment___default()(date).locale('ru').format('D MMMM YYYY [года]');
     }
     printDateDocumentFromString(date) {
         if (date == null) {
@@ -27547,7 +27594,7 @@ let TopmenuComponent = class TopmenuComponent extends __WEBPACK_IMPORTED_MODULE_
             return "";
         }
         let dateDate = new Date(Number.parseInt(dateSplit[2]), Number.parseInt(dateSplit[1]) - 1, Number.parseInt(dateSplit[0]));
-        return __WEBPACK_IMPORTED_MODULE_10_moment___default()(dateDate).locale('ru').format('D MMMM YYYY [года]');
+        return __WEBPACK_IMPORTED_MODULE_11_moment___default()(dateDate).locale('ru').format('D MMMM YYYY [года]');
     }
     changeTest() {
     }
@@ -28003,7 +28050,7 @@ let TopmenuComponent = class TopmenuComponent extends __WEBPACK_IMPORTED_MODULE_
             let fullYearHoliday = new Date(h.date).getFullYear();
             let fullYearCurrent = dateend.getFullYear();
             if (h.permanent) {
-                let hdayMod = new __WEBPACK_IMPORTED_MODULE_9__classes_holiday__["a" /* default */]();
+                let hdayMod = new __WEBPACK_IMPORTED_MODULE_10__classes_holiday__["a" /* default */]();
                 hdayMod.date = new Date(h.date);
                 hdayMod.date.setFullYear(dateend.getFullYear());
                 actualHolidays.push(hdayMod); // Тут халтура
@@ -28014,7 +28061,7 @@ let TopmenuComponent = class TopmenuComponent extends __WEBPACK_IMPORTED_MODULE_
         });
         if (persondecreeblock.optiondate1String != null && persondecreeblock.optionnumber1 != null) {
             actualHolidays.forEach(h => {
-                var diff = __WEBPACK_IMPORTED_MODULE_10_moment___default()(h.date).diff(persondecreeblock.optiondate1String, 'days');
+                var diff = __WEBPACK_IMPORTED_MODULE_11_moment___default()(h.date).diff(persondecreeblock.optiondate1String, 'days');
                 if (diff >= 0 && diff <= persondecreeblock.optionnumber1) {
                     holidays++;
                 }
@@ -28389,7 +28436,7 @@ let TopmenuComponent = class TopmenuComponent extends __WEBPACK_IMPORTED_MODULE_
     OrdernumbertypesToArrayFilterable() {
         let links = new Array();
         this.ordernumbertypes.forEach(o => {
-            let link = new __WEBPACK_IMPORTED_MODULE_13__classes_link__["a" /* default */]();
+            let link = new __WEBPACK_IMPORTED_MODULE_14__classes_link__["a" /* default */]();
             link.value = o.name;
             links.push(link);
         });
@@ -28409,7 +28456,7 @@ let TopmenuComponent = class TopmenuComponent extends __WEBPACK_IMPORTED_MODULE_
     StructuresalldocumentToArrayFilterable() {
         let links = new Array();
         this.structuresalldocument.forEach(o => {
-            let link = new __WEBPACK_IMPORTED_MODULE_13__classes_link__["a" /* default */]();
+            let link = new __WEBPACK_IMPORTED_MODULE_14__classes_link__["a" /* default */]();
             link.value = o;
             links.push(link);
         });
@@ -28445,7 +28492,7 @@ let TopmenuComponent = class TopmenuComponent extends __WEBPACK_IMPORTED_MODULE_
         if (persondecreeblock.optiondate3String == null || persondecreeblock.optiondate3String.length == 0 || persondecreeblock.optiondate1String == null || persondecreeblock.optiondate1String.length == 0) {
             return;
         }
-        let diff = __WEBPACK_IMPORTED_MODULE_10_moment___default()(persondecreeblock.optiondate3String).diff(persondecreeblock.optiondate1String, 'days');
+        let diff = __WEBPACK_IMPORTED_MODULE_11_moment___default()(persondecreeblock.optiondate3String).diff(persondecreeblock.optiondate1String, 'days');
         persondecreeblock.optionnumber1 = diff;
     }
     numpersonalchange(event, numpersonal) {
@@ -28517,10 +28564,10 @@ __decorate([
 TopmenuComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_vue_property_decorator__["Component"])({
         components: {
-            AdminPanel: __webpack_require__(141),
+            AdminPanel: __webpack_require__(142),
             Structuremanagingpanel: __webpack_require__(26),
-            Settingspanel: __webpack_require__(156),
-            Pmrequestpanel: __webpack_require__(153)
+            Settingspanel: __webpack_require__(157),
+            Pmrequestpanel: __webpack_require__(154)
         }
     })
 ], TopmenuComponent);
@@ -28528,19 +28575,19 @@ TopmenuComponent = __decorate([
 
 
 /***/ }),
-/* 123 */
+/* 124 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = {
-  XmlEntities: __webpack_require__(125),
-  Html4Entities: __webpack_require__(124),
+  XmlEntities: __webpack_require__(126),
+  Html4Entities: __webpack_require__(125),
   Html5Entities: __webpack_require__(23),
   AllHtmlEntities: __webpack_require__(23)
 };
 
 
 /***/ }),
-/* 124 */
+/* 125 */
 /***/ (function(module, exports) {
 
 var HTML_ALPHA = ['apos', 'nbsp', 'iexcl', 'cent', 'pound', 'curren', 'yen', 'brvbar', 'sect', 'uml', 'copy', 'ordf', 'laquo', 'not', 'shy', 'reg', 'macr', 'deg', 'plusmn', 'sup2', 'sup3', 'acute', 'micro', 'para', 'middot', 'cedil', 'sup1', 'ordm', 'raquo', 'frac14', 'frac12', 'frac34', 'iquest', 'Agrave', 'Aacute', 'Acirc', 'Atilde', 'Auml', 'Aring', 'Aelig', 'Ccedil', 'Egrave', 'Eacute', 'Ecirc', 'Euml', 'Igrave', 'Iacute', 'Icirc', 'Iuml', 'ETH', 'Ntilde', 'Ograve', 'Oacute', 'Ocirc', 'Otilde', 'Ouml', 'times', 'Oslash', 'Ugrave', 'Uacute', 'Ucirc', 'Uuml', 'Yacute', 'THORN', 'szlig', 'agrave', 'aacute', 'acirc', 'atilde', 'auml', 'aring', 'aelig', 'ccedil', 'egrave', 'eacute', 'ecirc', 'euml', 'igrave', 'iacute', 'icirc', 'iuml', 'eth', 'ntilde', 'ograve', 'oacute', 'ocirc', 'otilde', 'ouml', 'divide', 'oslash', 'ugrave', 'uacute', 'ucirc', 'uuml', 'yacute', 'thorn', 'yuml', 'quot', 'amp', 'lt', 'gt', 'OElig', 'oelig', 'Scaron', 'scaron', 'Yuml', 'circ', 'tilde', 'ensp', 'emsp', 'thinsp', 'zwnj', 'zwj', 'lrm', 'rlm', 'ndash', 'mdash', 'lsquo', 'rsquo', 'sbquo', 'ldquo', 'rdquo', 'bdquo', 'dagger', 'Dagger', 'permil', 'lsaquo', 'rsaquo', 'euro', 'fnof', 'Alpha', 'Beta', 'Gamma', 'Delta', 'Epsilon', 'Zeta', 'Eta', 'Theta', 'Iota', 'Kappa', 'Lambda', 'Mu', 'Nu', 'Xi', 'Omicron', 'Pi', 'Rho', 'Sigma', 'Tau', 'Upsilon', 'Phi', 'Chi', 'Psi', 'Omega', 'alpha', 'beta', 'gamma', 'delta', 'epsilon', 'zeta', 'eta', 'theta', 'iota', 'kappa', 'lambda', 'mu', 'nu', 'xi', 'omicron', 'pi', 'rho', 'sigmaf', 'sigma', 'tau', 'upsilon', 'phi', 'chi', 'psi', 'omega', 'thetasym', 'upsih', 'piv', 'bull', 'hellip', 'prime', 'Prime', 'oline', 'frasl', 'weierp', 'image', 'real', 'trade', 'alefsym', 'larr', 'uarr', 'rarr', 'darr', 'harr', 'crarr', 'lArr', 'uArr', 'rArr', 'dArr', 'hArr', 'forall', 'part', 'exist', 'empty', 'nabla', 'isin', 'notin', 'ni', 'prod', 'sum', 'minus', 'lowast', 'radic', 'prop', 'infin', 'ang', 'and', 'or', 'cap', 'cup', 'int', 'there4', 'sim', 'cong', 'asymp', 'ne', 'equiv', 'le', 'ge', 'sub', 'sup', 'nsub', 'sube', 'supe', 'oplus', 'otimes', 'perp', 'sdot', 'lceil', 'rceil', 'lfloor', 'rfloor', 'lang', 'rang', 'loz', 'spades', 'clubs', 'hearts', 'diams'];
@@ -28693,7 +28740,7 @@ module.exports = Html4Entities;
 
 
 /***/ }),
-/* 125 */
+/* 126 */
 /***/ (function(module, exports) {
 
 var ALPHA_INDEX = {
@@ -28854,7 +28901,7 @@ module.exports = XmlEntities;
 
 
 /***/ }),
-/* 126 */
+/* 127 */
 /***/ (function(module, exports) {
 
 // shim for using process in browser
@@ -29044,7 +29091,7 @@ process.umask = function() { return 0; };
 
 
 /***/ }),
-/* 127 */
+/* 128 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -29135,7 +29182,7 @@ var isArray = Array.isArray || function (xs) {
 
 
 /***/ }),
-/* 128 */
+/* 129 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -29227,18 +29274,18 @@ var objectKeys = Object.keys || function (obj) {
 
 
 /***/ }),
-/* 129 */
+/* 130 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-exports.decode = exports.parse = __webpack_require__(127);
-exports.encode = exports.stringify = __webpack_require__(128);
+exports.decode = exports.parse = __webpack_require__(128);
+exports.encode = exports.stringify = __webpack_require__(129);
 
 
 /***/ }),
-/* 130 */
+/* 131 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(process, global) {/*! *****************************************************************************
@@ -30366,15 +30413,15 @@ var Reflect;
             Function("return this;")());
 })(Reflect || (Reflect = {}));
 //# sourceMappingURL=Reflect.js.map
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(126), __webpack_require__(189)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(127), __webpack_require__(190)))
 
 /***/ }),
-/* 131 */
+/* 132 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-var ansiRegex = __webpack_require__(101)();
+var ansiRegex = __webpack_require__(102)();
 
 module.exports = function (str) {
 	return typeof str === 'string' ? str.replace(ansiRegex, '') : str;
@@ -30382,7 +30429,7 @@ module.exports = function (str) {
 
 
 /***/ }),
-/* 132 */
+/* 133 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
@@ -30408,49 +30455,49 @@ if(true) {
 }
 
 /***/ }),
-/* 133 */
+/* 134 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "f96a44b40f99ae4b63f275f1142f7c98.ttf";
 
 /***/ }),
-/* 134 */
+/* 135 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "9c46095118380d38f12e67c916b427f9.ttf";
 
 /***/ }),
-/* 135 */
+/* 136 */
 /***/ (function(module, exports) {
 
 module.exports = "data:image/png;base64,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"
 
 /***/ }),
-/* 136 */
+/* 137 */
 /***/ (function(module, exports) {
 
 module.exports = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAUCAIAAADDbMD2AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAAYSURBVHjaYvj//z8TAwMDtTAAAAD//wMA71YDJExDBIIAAAAASUVORK5CYII="
 
 /***/ }),
-/* 137 */
+/* 138 */
 /***/ (function(module, exports) {
 
 module.exports = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAeCAIAAABi9+OQAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAAaSURBVHjaYvj//z8TAwMD1fHv378Z8JgNGAAUhAkkiYPT2gAAAABJRU5ErkJggg=="
 
 /***/ }),
-/* 138 */
+/* 139 */
 /***/ (function(module, exports) {
 
 module.exports = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAUCAIAAADDbMD2AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAAXSURBVHjaYvj//z8TAwMDNTADAwMDYADvTgMizMESewAAAABJRU5ErkJggg=="
 
 /***/ }),
-/* 139 */
+/* 140 */
 /***/ (function(module, exports) {
 
 module.exports = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAeCAIAAABi9+OQAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAAeSURBVHjaYvj//z8TAwMDRfj3798MJJjDwMDAABgAiuwJIvhyWmkAAAAASUVORK5CYII="
 
 /***/ }),
-/* 140 */
+/* 141 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -30590,14 +30637,14 @@ exports.createDecorator = createDecorator;
 
 
 /***/ }),
-/* 141 */
+/* 142 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(3)(
   /* script */
-  __webpack_require__(105),
+  __webpack_require__(106),
   /* template */
-  __webpack_require__(162),
+  __webpack_require__(163),
   /* scopeId */
   null,
   /* cssModules */
@@ -30624,14 +30671,14 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 142 */
+/* 143 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(3)(
   /* script */
-  __webpack_require__(106),
+  __webpack_require__(107),
   /* template */
-  __webpack_require__(168),
+  __webpack_require__(169),
   /* scopeId */
   null,
   /* cssModules */
@@ -30658,14 +30705,14 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 143 */
+/* 144 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(3)(
   /* script */
-  __webpack_require__(107),
+  __webpack_require__(108),
   /* template */
-  __webpack_require__(166),
+  __webpack_require__(167),
   /* scopeId */
   null,
   /* cssModules */
@@ -30692,14 +30739,14 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 144 */
+/* 145 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(3)(
   /* script */
-  __webpack_require__(108),
+  __webpack_require__(109),
   /* template */
-  __webpack_require__(169),
+  __webpack_require__(170),
   /* scopeId */
   null,
   /* cssModules */
@@ -30726,14 +30773,14 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 145 */
+/* 146 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(3)(
   /* script */
-  __webpack_require__(109),
+  __webpack_require__(110),
   /* template */
-  __webpack_require__(176),
+  __webpack_require__(177),
   /* scopeId */
   null,
   /* cssModules */
@@ -30760,14 +30807,14 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 146 */
+/* 147 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(3)(
   /* script */
-  __webpack_require__(110),
+  __webpack_require__(111),
   /* template */
-  __webpack_require__(172),
+  __webpack_require__(173),
   /* scopeId */
   null,
   /* cssModules */
@@ -30794,14 +30841,14 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 147 */
+/* 148 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(3)(
   /* script */
-  __webpack_require__(111),
+  __webpack_require__(112),
   /* template */
-  __webpack_require__(173),
+  __webpack_require__(174),
   /* scopeId */
   null,
   /* cssModules */
@@ -30828,14 +30875,14 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 148 */
+/* 149 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(3)(
   /* script */
-  __webpack_require__(112),
+  __webpack_require__(113),
   /* template */
-  __webpack_require__(163),
+  __webpack_require__(164),
   /* scopeId */
   null,
   /* cssModules */
@@ -30862,14 +30909,14 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 149 */
+/* 150 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(3)(
   /* script */
-  __webpack_require__(113),
+  __webpack_require__(114),
   /* template */
-  __webpack_require__(165),
+  __webpack_require__(166),
   /* scopeId */
   null,
   /* cssModules */
@@ -30896,14 +30943,14 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 150 */
+/* 151 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(3)(
   /* script */
-  __webpack_require__(114),
+  __webpack_require__(115),
   /* template */
-  __webpack_require__(171),
+  __webpack_require__(172),
   /* scopeId */
   null,
   /* cssModules */
@@ -30930,14 +30977,14 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 151 */
+/* 152 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(3)(
   /* script */
-  __webpack_require__(115),
+  __webpack_require__(116),
   /* template */
-  __webpack_require__(174),
+  __webpack_require__(175),
   /* scopeId */
   null,
   /* cssModules */
@@ -30964,14 +31011,14 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 152 */
+/* 153 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(3)(
   /* script */
   null,
   /* template */
-  __webpack_require__(164),
+  __webpack_require__(165),
   /* scopeId */
   null,
   /* cssModules */
@@ -30998,14 +31045,14 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 153 */
+/* 154 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(3)(
   /* script */
-  __webpack_require__(116),
+  __webpack_require__(117),
   /* template */
-  __webpack_require__(175),
+  __webpack_require__(176),
   /* scopeId */
   null,
   /* cssModules */
@@ -31032,14 +31079,14 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 154 */
+/* 155 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(3)(
   /* script */
-  __webpack_require__(117),
+  __webpack_require__(118),
   /* template */
-  __webpack_require__(167),
+  __webpack_require__(168),
   /* scopeId */
   null,
   /* cssModules */
@@ -31066,14 +31113,14 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 155 */
+/* 156 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(3)(
   /* script */
-  __webpack_require__(118),
+  __webpack_require__(119),
   /* template */
-  __webpack_require__(170),
+  __webpack_require__(171),
   /* scopeId */
   null,
   /* cssModules */
@@ -31100,14 +31147,14 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 156 */
+/* 157 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(3)(
   /* script */
-  __webpack_require__(119),
+  __webpack_require__(120),
   /* template */
-  __webpack_require__(161),
+  __webpack_require__(162),
   /* scopeId */
   null,
   /* cssModules */
@@ -31134,14 +31181,14 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 157 */
+/* 158 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(3)(
   /* script */
-  __webpack_require__(120),
+  __webpack_require__(121),
   /* template */
-  __webpack_require__(177),
+  __webpack_require__(178),
   /* scopeId */
   null,
   /* cssModules */
@@ -31168,14 +31215,14 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 158 */
+/* 159 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(3)(
   /* script */
-  __webpack_require__(122),
+  __webpack_require__(123),
   /* template */
-  __webpack_require__(160),
+  __webpack_require__(161),
   /* scopeId */
   null,
   /* cssModules */
@@ -31202,7 +31249,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 159 */
+/* 160 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -31922,7 +31969,7 @@ if (true) {
 }
 
 /***/ }),
-/* 160 */
+/* 161 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -32729,7 +32776,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
             staticClass: "persondecreeoperation-part-list-element-name "
           }, [_c('div', {
             staticClass: "persondecreeoperation-part-list-element-indent"
-          }, [(decreeoperation.persondecreeblocksubtype == 8 && decreeoperation.personpenalty != null) ? _c('span', [_vm._v("\n                                                            «" + _vm._s(_vm.getPenalty(decreeoperation.personpenalty.penalty)) + "», объявленное приказом " + _vm._s(decreeoperation.personpenalty.orderwho) + " от " + _vm._s(_vm.printDate(decreeoperation.personpenalty.orderdate)) + "\n                                                            " + _vm._s(decreeoperation.personpenalty.ordernumber) + " с\n                                                        ")]) : _vm._e(), _vm._v(" "), (decreeoperation.persondecreeblocksubtype == 8 || decreeoperation.persondecreeblocksubtype == 3 || decreeoperation.persondecreeblocksubtype == 4 || decreeoperation.persondecreeblocksubtype == 5 || decreeoperation.persondecreeblocksubtype == 6 || decreeoperation.persondecreeblocksubtype == 7 || decreeoperation.persondecreeblocksubtype == 10) ? _c('span', [(decreeoperation.personobject != null) ? _c('span', [(decreeoperation.personobject.actualRank != null) ? _c('span', [_vm._v(_vm._s(_vm.smallletter(decreeoperation.personobject.actualRank.name4)) + " ")]) : _vm._e(), _vm._v("\n                                                                " + _vm._s(decreeoperation.personobject.surname4) + " " + _vm._s(decreeoperation.personobject.name4) + "\n                                                                " + _vm._s(decreeoperation.personobject.fathername4) + _vm._s(_vm.commaspaceifnotnull(_vm.beautifyString(decreeoperation.personobject.positiontree4))) + _vm._s(_vm.beautifyString(decreeoperation.personobject.positiontree4)) + ";\n                                                            ")]) : _c('span', [_vm._v("\n                                                                " + _vm._s(decreeoperation.nonperson) + ";\n                                                            ")])]) : _vm._e(), _vm._v(" "), (decreeoperation.persondecreeblocksubtype == 1 || decreeoperation.persondecreeblocksubtype == 2 || decreeoperation.persondecreeblocksubtype == 9) ? _c('span', [(decreeoperation.personobject != null) ? _c('span', [(decreeoperation.personobject.actualRank != null) ? _c('span', [_vm._v(_vm._s(decreeoperation.personobject.actualRank.name3) + " ")]) : _vm._e(), _vm._v("\n                                                                " + _vm._s(decreeoperation.personobject.surname3) + " " + _vm._s(decreeoperation.personobject.name3) + "\n                                                                " + _vm._s(decreeoperation.personobject.fathername3)), (decreeoperation.persondecreeblocksubtype == 1 || decreeoperation.persondecreeblocksubtype == 2) ? _c('span', [_vm._v(" (" + _vm._s(decreeoperation.personobject.numpersonal) + ")")]) : _vm._e(), _vm._v(_vm._s(_vm.commaspaceifnotnull(_vm.beautifyString(decreeoperation.personobject.positiontree3))) + _vm._s(_vm.beautifyString(decreeoperation.personobject.positiontree3)) + ";\n                                                            ")]) : _c('span', [_vm._v("\n                                                                " + _vm._s(decreeoperation.nonperson) + ";\n                                                            ")])]) : _vm._e()]), _vm._v(" "), (decreeoperation.persondecreeblocksubtype == 8) ? _c('div', [_vm._v("\n                                                        Основание: " + _vm._s(decreeoperation.subvaluestring2) + "\n                                                    ")]) : _vm._e()])]), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_c('div', [_c('el-button', {
+          }, [(decreeoperation.persondecreeblocksubtype == 8 && decreeoperation.personpenalty != null) ? _c('span', [_vm._v("\n                                                            «" + _vm._s(_vm.getPenalty(decreeoperation.personpenalty.penalty)) + "», объявленное приказом " + _vm._s(decreeoperation.personpenalty.orderwho) + " от " + _vm._s(_vm.printDate(decreeoperation.personpenalty.orderdate)) + "\n                                                            " + _vm._s(decreeoperation.personpenalty.ordernumber) + " с\n                                                        ")]) : _vm._e(), _vm._v(" "), (decreeoperation.persondecreeblocksubtype == 8 || decreeoperation.persondecreeblocksubtype == 3 || decreeoperation.persondecreeblocksubtype == 4 || decreeoperation.persondecreeblocksubtype == 5 || decreeoperation.persondecreeblocksubtype == 6 || decreeoperation.persondecreeblocksubtype == 7 || decreeoperation.persondecreeblocksubtype == 10) ? _c('span', [(decreeoperation.personobject != null) ? _c('span', [(decreeoperation.personobject.actualRank != null) ? _c('span', [_vm._v(_vm._s(_vm.smallletter(decreeoperation.personobject.actualRank.name4)) + " ")]) : _vm._e(), _vm._v("\n                                                                " + _vm._s(decreeoperation.personobject.surname4) + " " + _vm._s(decreeoperation.personobject.name4) + "\n                                                                " + _vm._s(decreeoperation.personobject.fathername4) + _vm._s(_vm.commaspaceifnotnull(_vm.beautifyString(decreeoperation.personobject.positiontree4))) + _vm._s(_vm.beautifyString(decreeoperation.personobject.positiontree4)) + ";\n                                                            ")]) : _c('span', [_vm._v("\n                                                                " + _vm._s(decreeoperation.nonperson) + ";\n                                                            ")])]) : _vm._e(), _vm._v(" "), (decreeoperation.persondecreeblocksubtype == 1 || decreeoperation.persondecreeblocksubtype == 2 || decreeoperation.persondecreeblocksubtype == 9) ? _c('span', [(decreeoperation.personobject != null) ? _c('span', [(decreeoperation.personobject.actualRank != null) ? _c('span', [_vm._v(_vm._s(decreeoperation.personobject.actualRank.name3) + " ")]) : _vm._e(), _vm._v("\n                                                                " + _vm._s(decreeoperation.personobject.surname3) + " " + _vm._s(decreeoperation.personobject.name3) + "\n                                                                " + _vm._s(decreeoperation.personobject.fathername3)), (decreeoperation.persondecreeblocksubtype == 1 || decreeoperation.persondecreeblocksubtype == 2) ? _c('span', [_vm._v(" (" + _vm._s(decreeoperation.personobject.numpersonal) + ")")]) : _vm._e(), _vm._v(_vm._s(_vm.commaspaceifnotnull(_vm.beautifyString(decreeoperation.personobject.positiontree3))) + _vm._s(_vm.beautifyString(decreeoperation.personobject.positiontree3)) + ";\n                                                            ")]) : _c('span', [_vm._v("\n                                                                " + _vm._s(decreeoperation.nonperson) + ";\n                                                            ")])]) : _vm._e()]), _vm._v(" "), (decreeoperation.persondecreeblocksubtype == 8) ? _c('div', [_vm._v("\n                                                        Основание: " + _vm._s(decreeoperation.subvaluestring2) + "\n                                                    ")]) : _vm._e()])]), _vm._v(" "), _c('div', [(_vm.persondecreeSigned != 1) ? _c('div', [_c('el-button', {
             attrs: {
               "size": "mini",
               "type": "warning"
@@ -32739,7 +32786,33 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
                 _vm.removePersondecreeoperation(decreeoperation)
               }
             }
-          }, [_vm._v("Удалить")])], 1)]) : _vm._e()]) : _vm._e()
+          }, [_vm._v("Удалить")])], 1) : _c('div', [_c('el-select', {
+            staticStyle: {
+              "width": "200px"
+            },
+            attrs: {
+              "multiple": "",
+              "filterable": "",
+              "allow-create": "",
+              "default-first-option": "",
+              "placeholder": "Редактировать список получателей данного пункта"
+            },
+            model: {
+              value: (decreeoperation.excerptstructures),
+              callback: function($$v) {
+                decreeoperation.excerptstructures = $$v
+              },
+              expression: "decreeoperation.excerptstructures"
+            }
+          }, _vm._l((_vm.featured), function(item) {
+            return _c('el-option', {
+              key: item.id,
+              attrs: {
+                "label": item.name,
+                "value": item.name
+              }
+            })
+          }))], 1)])]) : _vm._e()
         })], 2) : _vm._e()
       })], 2), _vm._v(" "), _c('div', [_c('div')])]) : _vm._e()
     }), _vm._v(" "), _vm._l((persondecreeBlock.persondecreeblocksubs), function(persondecreeblocksub) {
@@ -32760,7 +32833,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           staticClass: "persondecreeoperation-part-list-element-name "
         }, [_c('div', {
           staticClass: "persondecreeoperation-part-list-element-indent"
-        }, [(decreeoperation.persondecreeblocksubtype == 8 && decreeoperation.personpenalty != null) ? _c('span', [_vm._v("\n                                                        «" + _vm._s(_vm.getPenalty(decreeoperation.personpenalty.penalty)) + "», объявленное приказом " + _vm._s(decreeoperation.personpenalty.orderwho) + " от " + _vm._s(_vm.printDate(decreeoperation.personpenalty.orderdate)) + "\n                                                        " + _vm._s(decreeoperation.personpenalty.ordernumber) + " с\n                                                    ")]) : _vm._e(), _vm._v(" "), (decreeoperation.persondecreeblocksubtype == 8 || decreeoperation.persondecreeblocksubtype == 3 || decreeoperation.persondecreeblocksubtype == 4 || decreeoperation.persondecreeblocksubtype == 5 || decreeoperation.persondecreeblocksubtype == 6 || decreeoperation.persondecreeblocksubtype == 7 || decreeoperation.persondecreeblocksubtype == 10) ? _c('span', [(decreeoperation.personobject != null) ? _c('span', [(decreeoperation.personobject.actualRank != null) ? _c('span', [_vm._v(_vm._s(_vm.smallletter(decreeoperation.personobject.actualRank.name4)) + " ")]) : _vm._e(), _vm._v("\n                                                            " + _vm._s(decreeoperation.personobject.surname4) + " " + _vm._s(decreeoperation.personobject.name4) + "\n                                                            " + _vm._s(decreeoperation.personobject.fathername4) + _vm._s(_vm.commaspaceifnotnull(_vm.beautifyString(decreeoperation.personobject.positiontree4))) + _vm._s(_vm.beautifyString(decreeoperation.personobject.positiontree4)) + ";\n                                                        ")]) : _c('span', [_vm._v("\n                                                            " + _vm._s(decreeoperation.nonperson) + ";\n                                                        ")])]) : _vm._e(), _vm._v(" "), (decreeoperation.persondecreeblocksubtype == 1 || decreeoperation.persondecreeblocksubtype == 2 || decreeoperation.persondecreeblocksubtype == 9) ? _c('span', [_c('span'), _vm._v(" "), _c('span'), _vm._v(" "), (decreeoperation.personobject.actualRank != null) ? _c('span', [_vm._v(_vm._s(decreeoperation.personobject.actualRank.name3) + " ")]) : _vm._e(), _vm._v("\n                                                        " + _vm._s(decreeoperation.personobject.surname3) + " " + _vm._s(decreeoperation.personobject.name3) + "\n                                                        " + _vm._s(decreeoperation.personobject.fathername3)), (decreeoperation.persondecreeblocksubtype == 1 || decreeoperation.persondecreeblocksubtype == 2) ? _c('span', [_vm._v(" (" + _vm._s(decreeoperation.personobject.numpersonal) + ")")]) : _vm._e(), _vm._v(_vm._s(_vm.commaspaceifnotnull(_vm.beautifyString(decreeoperation.personobject.positiontree2))) + _vm._s(_vm.beautifyString(decreeoperation.personobject.positiontree2)) + "\n                                                    ")]) : _vm._e()]), _vm._v(" "), (decreeoperation.persondecreeblocksubtype == 8) ? _c('div', [_vm._v("\n                                                    Основание: " + _vm._s(decreeoperation.subvaluestring2) + "\n                                                ")]) : _vm._e()])]), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_c('el-button', {
+        }, [(decreeoperation.persondecreeblocksubtype == 8 && decreeoperation.personpenalty != null) ? _c('span', [_vm._v("\n                                                        «" + _vm._s(_vm.getPenalty(decreeoperation.personpenalty.penalty)) + "», объявленное приказом " + _vm._s(decreeoperation.personpenalty.orderwho) + " от " + _vm._s(_vm.printDate(decreeoperation.personpenalty.orderdate)) + "\n                                                        " + _vm._s(decreeoperation.personpenalty.ordernumber) + " с\n                                                    ")]) : _vm._e(), _vm._v(" "), (decreeoperation.persondecreeblocksubtype == 8 || decreeoperation.persondecreeblocksubtype == 3 || decreeoperation.persondecreeblocksubtype == 4 || decreeoperation.persondecreeblocksubtype == 5 || decreeoperation.persondecreeblocksubtype == 6 || decreeoperation.persondecreeblocksubtype == 7 || decreeoperation.persondecreeblocksubtype == 10) ? _c('span', [(decreeoperation.personobject != null) ? _c('span', [(decreeoperation.personobject.actualRank != null) ? _c('span', [_vm._v(_vm._s(_vm.smallletter(decreeoperation.personobject.actualRank.name4)) + " ")]) : _vm._e(), _vm._v("\n                                                            " + _vm._s(decreeoperation.personobject.surname4) + " " + _vm._s(decreeoperation.personobject.name4) + "\n                                                            " + _vm._s(decreeoperation.personobject.fathername4) + _vm._s(_vm.commaspaceifnotnull(_vm.beautifyString(decreeoperation.personobject.positiontree4))) + _vm._s(_vm.beautifyString(decreeoperation.personobject.positiontree4)) + ";\n                                                        ")]) : _c('span', [_vm._v("\n                                                            " + _vm._s(decreeoperation.nonperson) + ";\n                                                        ")])]) : _vm._e(), _vm._v(" "), (decreeoperation.persondecreeblocksubtype == 1 || decreeoperation.persondecreeblocksubtype == 2 || decreeoperation.persondecreeblocksubtype == 9) ? _c('span', [_c('span'), _vm._v(" "), _c('span'), _vm._v(" "), (decreeoperation.personobject.actualRank != null) ? _c('span', [_vm._v(_vm._s(decreeoperation.personobject.actualRank.name3) + " ")]) : _vm._e(), _vm._v("\n                                                        " + _vm._s(decreeoperation.personobject.surname3) + " " + _vm._s(decreeoperation.personobject.name3) + "\n                                                        " + _vm._s(decreeoperation.personobject.fathername3)), (decreeoperation.persondecreeblocksubtype == 1 || decreeoperation.persondecreeblocksubtype == 2) ? _c('span', [_vm._v(" (" + _vm._s(decreeoperation.personobject.numpersonal) + ")")]) : _vm._e(), _vm._v(_vm._s(_vm.commaspaceifnotnull(_vm.beautifyString(decreeoperation.personobject.positiontree2))) + _vm._s(_vm.beautifyString(decreeoperation.personobject.positiontree2)) + "\n                                                    ")]) : _vm._e()]), _vm._v(" "), (decreeoperation.persondecreeblocksubtype == 8) ? _c('div', [_vm._v("\n                                                    Основание: " + _vm._s(decreeoperation.subvaluestring2) + "\n                                                ")]) : _vm._e()])]), _vm._v(" "), _c('div', [(_vm.persondecreeSigned != 1) ? _c('div', [_c('el-button', {
           attrs: {
             "size": "mini",
             "type": "warning"
@@ -32770,7 +32843,33 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
               _vm.removePersondecreeoperation(decreeoperation)
             }
           }
-        }, [_vm._v("Удалить")])], 1) : _vm._e()]) : _vm._e()
+        }, [_vm._v("Удалить")])], 1) : _c('div', [_c('el-select', {
+          staticStyle: {
+            "width": "200px"
+          },
+          attrs: {
+            "multiple": "",
+            "filterable": "",
+            "allow-create": "",
+            "default-first-option": "",
+            "placeholder": "Редактировать список получателей данного пункта"
+          },
+          model: {
+            value: (decreeoperation.excerptstructures),
+            callback: function($$v) {
+              decreeoperation.excerptstructures = $$v
+            },
+            expression: "decreeoperation.excerptstructures"
+          }
+        }, _vm._l((_vm.featured), function(item) {
+          return _c('el-option', {
+            key: item.id,
+            attrs: {
+              "label": item.name,
+              "value": item.name
+            }
+          })
+        }))], 1)])]) : _vm._e()
       })], 2), _vm._v(" "), _c('div')]) : _vm._e()
     }), _vm._v(" "), _c('br')], 2), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_c('el-button', {
       attrs: {
@@ -32892,7 +32991,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         staticClass: "persondecreeoperation-part-list-element"
       }, [_c('div', [_c('div', [(decreeoperation.intro != null) ? _c('div', {
         staticClass: "persondecreeoperation-part-list-element-intro persondecreeoperation-part-list-element-indent"
-      }, [_vm._v("\n                                            " + _vm._s(decreeoperation.intro) + " объявить «" + _vm._s(_vm.getPenalty(persondecreeBlock.optionnumber1)) + "»\n                                            "), (decreeoperation.personobject.actualRank != null) ? _c('span', [_vm._v(_vm._s(decreeoperation.personobject.actualRank.name3) + " ")]) : _vm._e(), _vm._v("\n                                            " + _vm._s(decreeoperation.personobject.surname3) + " " + _vm._s(decreeoperation.personobject.name3) + "\n                                            " + _vm._s(decreeoperation.personobject.fathername3) + _vm._s(_vm.commaspaceifnotnull(decreeoperation.personobject.positiontree3)) + " " + _vm._s(decreeoperation.personobject.positiontree3) + ".\n                                        ")]) : _vm._e(), _vm._v(" "), _c('div', [_vm._v("\n                                            Основание: " + _vm._s(decreeoperation.optionstring2) + ".\n                                        ")])])]), _vm._v(" "), _c('div', [_c('div', [_c('div', [_c('el-button', {
+      }, [_vm._v("\n                                            " + _vm._s(decreeoperation.intro) + " объявить «" + _vm._s(_vm.getPenalty(persondecreeBlock.optionnumber1)) + "»\n                                            "), (decreeoperation.personobject.actualRank != null) ? _c('span', [_vm._v(_vm._s(decreeoperation.personobject.actualRank.name3) + " ")]) : _vm._e(), _vm._v("\n                                            " + _vm._s(decreeoperation.personobject.surname3) + " " + _vm._s(decreeoperation.personobject.name3) + "\n                                            " + _vm._s(decreeoperation.personobject.fathername3) + _vm._s(_vm.commaspaceifnotnull(decreeoperation.personobject.positiontree3)) + " " + _vm._s(decreeoperation.personobject.positiontree3) + ".\n                                        ")]) : _vm._e(), _vm._v(" "), _c('div', [_vm._v("\n                                            Основание: " + _vm._s(decreeoperation.optionstring2) + ".\n                                        ")])])]), _vm._v(" "), _c('div', [(_vm.persondecreeSigned != 1) ? _c('div', [_c('el-button', {
         attrs: {
           "size": "mini",
           "type": "warning"
@@ -32902,8 +33001,34 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
             _vm.removePersondecreeoperation(decreeoperation)
           }
         }
-      }, [_vm._v("Удалить")])], 1)])])]) : _vm._e()
-    }), _vm._v(" "), _c('br')], 2), _vm._v(" "), _c('div', [_c('el-button', {
+      }, [_vm._v("Удалить")])], 1) : _c('div', [_c('el-select', {
+        staticStyle: {
+          "width": "200px"
+        },
+        attrs: {
+          "multiple": "",
+          "filterable": "",
+          "allow-create": "",
+          "default-first-option": "",
+          "placeholder": "Редактировать список получателей данного пункта"
+        },
+        model: {
+          value: (decreeoperation.excerptstructures),
+          callback: function($$v) {
+            decreeoperation.excerptstructures = $$v
+          },
+          expression: "decreeoperation.excerptstructures"
+        }
+      }, _vm._l((_vm.featured), function(item) {
+        return _c('el-option', {
+          key: item.id,
+          attrs: {
+            "label": item.name,
+            "value": item.name
+          }
+        })
+      }))], 1)])]) : _vm._e()
+    }), _vm._v(" "), _c('br')], 2), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_c('el-button', {
       attrs: {
         "type": "danger"
       },
@@ -32912,7 +33037,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           _vm.deletePersondecreeblock(persondecreeBlock)
         }
       }
-    }, [_vm._v("Удалить блок")])], 1)]) : _vm._e(), _vm._v(" "), (persondecreeBlock.persondecreeblocktype == 3) ? _c('div', [(_vm.persondecreeSigned != 1) ? _c('div', [_c('div', {
+    }, [_vm._v("Удалить блок")])], 1) : _vm._e()]) : _vm._e(), _vm._v(" "), (persondecreeBlock.persondecreeblocktype == 3) ? _c('div', [(_vm.persondecreeSigned != 1) ? _c('div', [_c('div', {
       staticStyle: {
         "margin-top": "10px"
       }
@@ -33154,7 +33279,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         staticClass: "persondecreeoperation-part-list-element-indent"
       }, [_vm._v("\n                                            Установить стаж для выплаты процентной надбавки за выслугу лет по состоянию на\n                                            " + _vm._s(_vm.printDateDocument(decreeoperation.optiondate2)) + "\n                                            — "), _vm._v("\n                                            " + _vm._s(decreeoperation.optionnumber5) + " " + _vm._s(_vm.getYearString(decreeoperation.optionnumber5)) + "\n                                            " + _vm._s(decreeoperation.optionnumber6) + " " + _vm._s(_vm.getMonthString(decreeoperation.optionnumber6)) + "\n                                            " + _vm._s(decreeoperation.optionnumber7) + " " + _vm._s(_vm.getDayString(decreeoperation.optionnumber7)) + ".\n                                            ")]) : _vm._e(), _vm._v(" "), (decreeoperation.optiondate3 != null) ? _c('div', {
         staticClass: "persondecreeoperation-part-list-element-indent"
-      }, [_vm._v("\n                                            Заключить контракт сроком на "), _vm._v("\n                                            " + _vm._s(decreeoperation.optionnumber8) + " " + _vm._s(_vm.getYearString(decreeoperation.optionnumber8)) + "\n                                            " + _vm._s(decreeoperation.optionnumber9) + " " + _vm._s(_vm.getMonthString(decreeoperation.optionnumber9)) + "\n                                            " + _vm._s(decreeoperation.optionnumber10) + " " + _vm._s(_vm.getDayString(decreeoperation.optionnumber10)) + "\n                                            с " + _vm._s(_vm.printDateDocument(decreeoperation.optiondate3)) + "\n                                            по " + _vm._s(_vm.printDateDocument(decreeoperation.optiondate4)) + ".\n                                            ")]) : _vm._e()])]), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_c('div', [_c('div', [_c('el-button', {
+      }, [_vm._v("\n                                            Заключить контракт сроком на "), _vm._v("\n                                            " + _vm._s(decreeoperation.optionnumber8) + " " + _vm._s(_vm.getYearString(decreeoperation.optionnumber8)) + "\n                                            " + _vm._s(decreeoperation.optionnumber9) + " " + _vm._s(_vm.getMonthString(decreeoperation.optionnumber9)) + "\n                                            " + _vm._s(decreeoperation.optionnumber10) + " " + _vm._s(_vm.getDayString(decreeoperation.optionnumber10)) + "\n                                            с " + _vm._s(_vm.printDateDocument(decreeoperation.optiondate3)) + "\n                                            по " + _vm._s(_vm.printDateDocument(decreeoperation.optiondate4)) + ".\n                                            ")]) : _vm._e()])]), _vm._v(" "), _c('div', [(_vm.persondecreeSigned != 1) ? _c('div', [_c('el-button', {
         attrs: {
           "size": "mini",
           "type": "warning"
@@ -33164,7 +33289,33 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
             _vm.removePersondecreeoperation(decreeoperation)
           }
         }
-      }, [_vm._v("Удалить")])], 1)])]) : _vm._e()]) : _vm._e()
+      }, [_vm._v("Удалить")])], 1) : _c('div', [_c('el-select', {
+        staticStyle: {
+          "width": "200px"
+        },
+        attrs: {
+          "multiple": "",
+          "filterable": "",
+          "allow-create": "",
+          "default-first-option": "",
+          "placeholder": "Редактировать список получателей данного пункта"
+        },
+        model: {
+          value: (decreeoperation.excerptstructures),
+          callback: function($$v) {
+            decreeoperation.excerptstructures = $$v
+          },
+          expression: "decreeoperation.excerptstructures"
+        }
+      }, _vm._l((_vm.featured), function(item) {
+        return _c('el-option', {
+          key: item.id,
+          attrs: {
+            "label": item.name,
+            "value": item.name
+          }
+        })
+      }))], 1)])]) : _vm._e()
     }), _vm._v(" "), _c('br')], 2), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_c('el-button', {
       attrs: {
         "type": "danger"
@@ -33593,7 +33744,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           staticClass: "persondecreeoperation-part-list-element-indent"
         }, [_vm._v("\n                                                        Выплатить компенсацию за " + _vm._s(decreeoperation.optionnumber2) + " " + _vm._s(_vm.getDayString(decreeoperation.optionnumber2)) + " неиспользованного основного отпуска за " + _vm._s(_vm.year(decreeoperation.optiondate1)) + " год.\n                                                    ")]) : _vm._e(), _vm._v(" "), (decreeoperation.optionnumber2 != null && decreeoperation.optionnumber3 != 0) ? _c('div', {
           staticClass: "persondecreeoperation-part-list-element-indent"
-        }, [_vm._v("\n                                                        Удержать денежное довольствие на " + _vm._s(decreeoperation.optionnumber3) + " " + _vm._s(_vm.getDayString(decreeoperation.optionnumber3)) + " использованного основного отпуска за " + _vm._s(_vm.year(decreeoperation.optiondate1)) + " год.\n                                                    ")]) : _vm._e(), _vm._v(" "), _c('div', [_vm._v("\n                                                        Основание: " + _vm._s(decreeoperation.optionstring1) + ".\n                                                    ")])])]) : _vm._e()]), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_c('div', [_c('div', [_c('el-button', {
+        }, [_vm._v("\n                                                        Удержать денежное довольствие на " + _vm._s(decreeoperation.optionnumber3) + " " + _vm._s(_vm.getDayString(decreeoperation.optionnumber3)) + " использованного основного отпуска за " + _vm._s(_vm.year(decreeoperation.optiondate1)) + " год.\n                                                    ")]) : _vm._e(), _vm._v(" "), _c('div', [_vm._v("\n                                                        Основание: " + _vm._s(decreeoperation.optionstring1) + ".\n                                                    ")])])]) : _vm._e()]), _vm._v(" "), _c('div', [(_vm.persondecreeSigned != 1) ? _c('div', [_c('el-button', {
           attrs: {
             "size": "mini",
             "type": "warning"
@@ -33603,7 +33754,33 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
               _vm.removePersondecreeoperation(decreeoperation)
             }
           }
-        }, [_vm._v("Удалить")])], 1)])]) : _vm._e()]) : _vm._e()
+        }, [_vm._v("Удалить")])], 1) : _c('div', [_c('el-select', {
+          staticStyle: {
+            "width": "200px"
+          },
+          attrs: {
+            "multiple": "",
+            "filterable": "",
+            "allow-create": "",
+            "default-first-option": "",
+            "placeholder": "Редактировать список получателей данного пункта"
+          },
+          model: {
+            value: (decreeoperation.excerptstructures),
+            callback: function($$v) {
+              decreeoperation.excerptstructures = $$v
+            },
+            expression: "decreeoperation.excerptstructures"
+          }
+        }, _vm._l((_vm.featured), function(item) {
+          return _c('el-option', {
+            key: item.id,
+            attrs: {
+              "label": item.name,
+              "value": item.name
+            }
+          })
+        }))], 1)])]) : _vm._e()
       })), _vm._v(" "), _c('div')]) : _vm._e()
     }), _vm._v(" "), _c('br')], 2), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_c('el-button', {
       attrs: {
@@ -33745,7 +33922,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           staticClass: "persondecreeoperation-part-list-element-margin-small persondecreeoperation-part-list-element-indent"
         }, [(decreeoperation.personobject.actualRank != null) ? _c('span', [_vm._v(_vm._s(decreeoperation.personobject.actualRank.name4) + " ")]) : _vm._e(), _vm._v("\n                                                    " + _vm._s(decreeoperation.personobject.surname4) + " " + _vm._s(decreeoperation.personobject.name4) + "\n                                                    " + _vm._s(decreeoperation.personobject.fathername4) + " " + _vm._s(decreeoperation.optionstring1) + "\n                                                    от должности " + _vm._s(decreeoperation.personobject.positiontree2) + " и зачислить его в распоряжение начальника\n                                                    " + _vm._s(decreeoperation.optionstring2) + ".\n                                                ")]), _vm._v(" "), _c('div', {
           staticClass: "persondecreeoperation-part-list-element-margin-big"
-        }, [_vm._v("\n                                                    Основание: " + _vm._s(decreeoperation.optionstring3) + ".\n                                                ")])])]), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_c('div', [_c('div', [_c('el-button', {
+        }, [_vm._v("\n                                                    Основание: " + _vm._s(decreeoperation.optionstring3) + ".\n                                                ")])])]), _vm._v(" "), _c('div', [(_vm.persondecreeSigned != 1) ? _c('div', [_c('el-button', {
           attrs: {
             "size": "mini",
             "type": "warning"
@@ -33755,7 +33932,33 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
               _vm.removePersondecreeoperation(decreeoperation)
             }
           }
-        }, [_vm._v("Удалить")])], 1)])]) : _vm._e()]) : _vm._e()
+        }, [_vm._v("Удалить")])], 1) : _c('div', [_c('el-select', {
+          staticStyle: {
+            "width": "200px"
+          },
+          attrs: {
+            "multiple": "",
+            "filterable": "",
+            "allow-create": "",
+            "default-first-option": "",
+            "placeholder": "Редактировать список получателей данного пункта"
+          },
+          model: {
+            value: (decreeoperation.excerptstructures),
+            callback: function($$v) {
+              decreeoperation.excerptstructures = $$v
+            },
+            expression: "decreeoperation.excerptstructures"
+          }
+        }, _vm._l((_vm.featured), function(item) {
+          return _c('el-option', {
+            key: item.id,
+            attrs: {
+              "label": item.name,
+              "value": item.name
+            }
+          })
+        }))], 1)])]) : _vm._e()
       }))]) : _vm._e()
     })), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_c('el-button', {
       attrs: {
@@ -33870,7 +34073,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         staticClass: "persondecreeoperation-part-list-element-margin-small persondecreeoperation-part-list-element-indent"
       }, [_vm._v("\n                                        в распоряжение " + _vm._s(decreeoperation.optionstring1) + "\n                                        "), (decreeoperation.optiondate1 != null) ? _c('span', [_vm._v(" с " + _vm._s(_vm.printDateDocument(decreeoperation.optiondate1)))]) : _vm._e(), _vm._v(" "), (decreeoperation.personobject.actualRank != null) ? _c('span', [_vm._v(_vm._s(decreeoperation.personobject.actualRank.name4) + " ")]) : _vm._e(), _vm._v("\n                                        " + _vm._s(decreeoperation.personobject.surname4) + " " + _vm._s(decreeoperation.personobject.name4) + "\n                                        " + _vm._s(decreeoperation.personobject.fathername4) + ", освободив его\n                                        от должности " + _vm._s(decreeoperation.personobject.positiontype2string) + " " + _vm._s(decreeoperation.personobject.structuretree2) + ".\n                                    ")]), _vm._v(" "), _c('div', {
         staticClass: "persondecreeoperation-part-list-element-margin-big"
-      }, [_vm._v("\n                                        Основание: " + _vm._s(decreeoperation.optionstring2) + ".\n                                    ")])]), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_c('div', [_c('div', [_c('el-button', {
+      }, [_vm._v("\n                                        Основание: " + _vm._s(decreeoperation.optionstring2) + ".\n                                    ")])]), _vm._v(" "), _c('div', [(_vm.persondecreeSigned != 1) ? _c('div', [_c('el-button', {
         attrs: {
           "size": "mini",
           "type": "warning"
@@ -33880,7 +34083,33 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
             _vm.removePersondecreeoperation(decreeoperation)
           }
         }
-      }, [_vm._v("Удалить")])], 1)])]) : _vm._e()]) : _vm._e()
+      }, [_vm._v("Удалить")])], 1) : _c('div', [_c('el-select', {
+        staticStyle: {
+          "width": "200px"
+        },
+        attrs: {
+          "multiple": "",
+          "filterable": "",
+          "allow-create": "",
+          "default-first-option": "",
+          "placeholder": "Редактировать список получателей данного пункта"
+        },
+        model: {
+          value: (decreeoperation.excerptstructures),
+          callback: function($$v) {
+            decreeoperation.excerptstructures = $$v
+          },
+          expression: "decreeoperation.excerptstructures"
+        }
+      }, _vm._l((_vm.featured), function(item) {
+        return _c('el-option', {
+          key: item.id,
+          attrs: {
+            "label": item.name,
+            "value": item.name
+          }
+        })
+      }))], 1)])]) : _vm._e()
     }), _vm._v(" "), _c('br')], 2), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_c('el-button', {
       attrs: {
         "type": "danger"
@@ -34007,7 +34236,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         staticClass: "persondecreeoperation-part-list-element-margin-small persondecreeoperation-part-list-element-indent"
       }, [(decreeoperation.personobject.actualRank != null) ? _c('span', [_vm._v(_vm._s(decreeoperation.personobject.actualRank.name3) + " ")]) : _vm._e(), _vm._v("\n                                        " + _vm._s(decreeoperation.personobject.surname3) + " " + _vm._s(decreeoperation.personobject.name3) + "\n                                        " + _vm._s(decreeoperation.personobject.fathername3) + _vm._s(_vm.commaspaceifnotnull(decreeoperation.personobject.positiontree3)) + " " + _vm._s(decreeoperation.personobject.positiontree3) + ".\n                                    ")]), _vm._v(" "), _c('div', {
         staticClass: "persondecreeoperation-part-list-element-margin-big"
-      }, [_vm._v("\n                                        Основание: " + _vm._s(decreeoperation.optionstring1) + ".\n                                    ")])]), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_c('div', [_c('div', [_c('el-button', {
+      }, [_vm._v("\n                                        Основание: " + _vm._s(decreeoperation.optionstring1) + ".\n                                    ")])]), _vm._v(" "), _c('div', [(_vm.persondecreeSigned != 1) ? _c('div', [_c('el-button', {
         attrs: {
           "size": "mini",
           "type": "warning"
@@ -34017,7 +34246,33 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
             _vm.removePersondecreeoperation(decreeoperation)
           }
         }
-      }, [_vm._v("Удалить")])], 1)])]) : _vm._e()]) : _vm._e()
+      }, [_vm._v("Удалить")])], 1) : _c('div', [_c('el-select', {
+        staticStyle: {
+          "width": "200px"
+        },
+        attrs: {
+          "multiple": "",
+          "filterable": "",
+          "allow-create": "",
+          "default-first-option": "",
+          "placeholder": "Редактировать список получателей данного пункта"
+        },
+        model: {
+          value: (decreeoperation.excerptstructures),
+          callback: function($$v) {
+            decreeoperation.excerptstructures = $$v
+          },
+          expression: "decreeoperation.excerptstructures"
+        }
+      }, _vm._l((_vm.featured), function(item) {
+        return _c('el-option', {
+          key: item.id,
+          attrs: {
+            "label": item.name,
+            "value": item.name
+          }
+        })
+      }))], 1)])]) : _vm._e()
     }), _vm._v(" "), _c('br')], 2), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_c('el-button', {
       attrs: {
         "type": "danger"
@@ -34134,7 +34389,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         staticClass: "persondecreeoperation-part-list-element-margin-small persondecreeoperation-part-list-element-indent"
       }, [_vm._v("\n                                        в соответствии с п. 49 Положения о прохождении службы в органах и подразделениях по чрезвычайным ситуациям Республики Беларусь от\n                                        исполнения служебных обязанностей\n                                        "), (decreeoperation.personobject.actualRank != null) ? _c('span', [_vm._v(_vm._s(decreeoperation.personobject.actualRank.name4) + " ")]) : _vm._e(), _vm._v("\n                                        " + _vm._s(decreeoperation.personobject.surname4) + " " + _vm._s(decreeoperation.personobject.name4) + "\n                                        " + _vm._s(decreeoperation.personobject.fathername4) + _vm._s(_vm.commaspaceifnotnull(decreeoperation.personobject.positiontree4)) + " " + _vm._s(decreeoperation.personobject.positiontree4)), (decreeoperation.optiondate1 != null) ? _c('span', [_vm._v(", с " + _vm._s(_vm.printDateDocument(decreeoperation.optiondate1)))]) : _vm._e(), _vm._v("\n                                        " + _vm._s(decreeoperation.optionstring1) + ".\n                                    ")]), _vm._v(" "), _c('div', {
         staticClass: "persondecreeoperation-part-list-element-margin-big"
-      }, [_vm._v("\n                                        Основание: " + _vm._s(decreeoperation.optionstring2) + ".\n                                    ")])]), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_c('div', [_c('div', [_c('el-button', {
+      }, [_vm._v("\n                                        Основание: " + _vm._s(decreeoperation.optionstring2) + ".\n                                    ")])]), _vm._v(" "), _c('div', [(_vm.persondecreeSigned != 1) ? _c('div', [_c('el-button', {
         attrs: {
           "size": "mini",
           "type": "warning"
@@ -34144,7 +34399,33 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
             _vm.removePersondecreeoperation(decreeoperation)
           }
         }
-      }, [_vm._v("Удалить")])], 1)])]) : _vm._e()]) : _vm._e()
+      }, [_vm._v("Удалить")])], 1) : _c('div', [_c('el-select', {
+        staticStyle: {
+          "width": "200px"
+        },
+        attrs: {
+          "multiple": "",
+          "filterable": "",
+          "allow-create": "",
+          "default-first-option": "",
+          "placeholder": "Редактировать список получателей данного пункта"
+        },
+        model: {
+          value: (decreeoperation.excerptstructures),
+          callback: function($$v) {
+            decreeoperation.excerptstructures = $$v
+          },
+          expression: "decreeoperation.excerptstructures"
+        }
+      }, _vm._l((_vm.featured), function(item) {
+        return _c('el-option', {
+          key: item.id,
+          attrs: {
+            "label": item.name,
+            "value": item.name
+          }
+        })
+      }))], 1)])]) : _vm._e()
     }), _vm._v(" "), _c('br')], 2), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_c('el-button', {
       attrs: {
         "type": "danger"
@@ -34341,7 +34622,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         staticClass: "persondecreeoperation-part-list-element-margin-small persondecreeoperation-part-list-element-indent"
       }, [(decreeoperation.optionnumber1 != null && decreeoperation.optionnumber1 == 1) ? _c('span', [_vm._v(_vm._s(_vm.getChangedocumentstypeObject(decreeoperation.optionnumber1).name))]) : _vm._e(), _vm._v(" "), (decreeoperation.optionnumber1 != null && decreeoperation.optionnumber1 == 2) ? _c('span', [_vm._v(_vm._s(_vm.getChangedocumentstypeObject(decreeoperation.optionnumber1).name))]) : _vm._e(), _vm._v(" "), (decreeoperation.optionnumber1 != null && decreeoperation.optionnumber1 == 3) ? _c('span', [_vm._v(_vm._s(decreeoperation.optionstring1))]) : _vm._e(), _vm._v(" "), (decreeoperation.optionnumber1 != null && decreeoperation.optionnumber1 == 4) ? _c('span', [_vm._v(_vm._s(_vm.getChangedocumentstypeObject(decreeoperation.optionnumber1).name))]) : _vm._e(), _vm._v(" "), (decreeoperation.optionnumber1 != null && decreeoperation.optionnumber1 == 5) ? _c('span', [_vm._v(_vm._s(_vm.getChangedocumentstypeObject(decreeoperation.optionnumber1).name))]) : _vm._e(), _vm._v(" "), (decreeoperation.personobject.actualRank != null) ? _c('span', [_vm._v(_vm._s(decreeoperation.personobject.actualRank.name2) + " ")]) : _vm._e(), _vm._v("\n\n                                        " + _vm._s(decreeoperation.personobject.surname4) + " " + _vm._s(decreeoperation.personobject.name4) + "\n                                        " + _vm._s(decreeoperation.personobject.fathername4) + ", " + _vm._s(_vm.commaspaceifnotnull(decreeoperation.personobject.positiontree4)) + " " + _vm._s(decreeoperation.personobject.positiontree4) + ",\n                                        "), (decreeoperation.optionnumber1 != null && decreeoperation.optionnumber1 == 1) ? _c('span', [_vm._v("числить по фамилии " + _vm._s(decreeoperation.optionstring2) + ".")]) : _vm._e(), _vm._v(" "), (decreeoperation.optionnumber1 != null && decreeoperation.optionnumber1 == 2) ? _c('span', [_vm._v("числить по фамилии " + _vm._s(decreeoperation.optionstring2) + ".")]) : _vm._e(), _vm._v(" "), (decreeoperation.optionnumber1 != null && decreeoperation.optionnumber1 == 3) ? _c('span', [_vm._v(_vm._s(decreeoperation.optionstring2) + ".")]) : _vm._e(), _vm._v(" "), (decreeoperation.optionnumber1 != null && decreeoperation.optionnumber1 == 4) ? _c('span', [_vm._v("числить по имени " + _vm._s(decreeoperation.optionstring2) + ".")]) : _vm._e(), _vm._v(" "), (decreeoperation.optionnumber1 != null && decreeoperation.optionnumber1 == 5) ? _c('span', [_vm._v("числить по отчеству " + _vm._s(decreeoperation.optionstring2) + ".")]) : _vm._e()]), _vm._v(" "), _c('div', {
         staticClass: "persondecreeoperation-part-list-element-margin-big"
-      }, [_vm._v("\n                                        Основание: " + _vm._s(decreeoperation.optionstring3) + ".\n                                    ")])]), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_c('div', [_c('div', [_c('el-button', {
+      }, [_vm._v("\n                                        Основание: " + _vm._s(decreeoperation.optionstring3) + ".\n                                    ")])]), _vm._v(" "), _c('div', [(_vm.persondecreeSigned != 1) ? _c('div', [_c('el-button', {
         attrs: {
           "size": "mini",
           "type": "warning"
@@ -34351,7 +34632,33 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
             _vm.removePersondecreeoperation(decreeoperation)
           }
         }
-      }, [_vm._v("Удалить")])], 1)])]) : _vm._e()]) : _vm._e()
+      }, [_vm._v("Удалить")])], 1) : _c('div', [_c('el-select', {
+        staticStyle: {
+          "width": "200px"
+        },
+        attrs: {
+          "multiple": "",
+          "filterable": "",
+          "allow-create": "",
+          "default-first-option": "",
+          "placeholder": "Редактировать список получателей данного пункта"
+        },
+        model: {
+          value: (decreeoperation.excerptstructures),
+          callback: function($$v) {
+            decreeoperation.excerptstructures = $$v
+          },
+          expression: "decreeoperation.excerptstructures"
+        }
+      }, _vm._l((_vm.featured), function(item) {
+        return _c('el-option', {
+          key: item.id,
+          attrs: {
+            "label": item.name,
+            "value": item.name
+          }
+        })
+      }))], 1)])]) : _vm._e()
     }), _vm._v(" "), _c('br')], 2), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_c('el-button', {
       attrs: {
         "type": "danger"
@@ -34791,7 +35098,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           staticClass: "persondecreeoperation-part-list-element-margin-big"
         }, [_c('div', {
           staticClass: "persondecreeoperation-part-list-element-indent"
-        }, [(decreeoperation.personobject.actualRank != null) ? _c('span', [_vm._v(_vm._s(decreeoperation.personobject.actualRank.name3) + " ")]) : _vm._e(), _vm._v("\n                                                " + _vm._s(decreeoperation.personobject.surname3) + " " + _vm._s(decreeoperation.personobject.name3) + "\n                                                " + _vm._s(decreeoperation.personobject.fathername3) + _vm._s(_vm.commaspaceifnotnull(decreeoperation.personobject.positiontree3)) + " " + _vm._s(decreeoperation.personobject.positiontree3) + ",\n                                                по состоянию на " + _vm._s(_vm.printDateDocument(decreeoperation.optiondate1)) + " —\n                                                " + _vm._s(decreeoperation.optionnumber2) + " " + _vm._s(_vm.getYearString(decreeoperation.optionnumber2)) + "\n                                                " + _vm._s(decreeoperation.optionnumber3) + " " + _vm._s(_vm.getMonthString(decreeoperation.optionnumber3)) + "\n                                                " + _vm._s(decreeoperation.optionnumber4) + " " + _vm._s(_vm.getDayString(decreeoperation.optionnumber4)) + ".\n                                            ")])]) : _vm._e()]), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_c('div', [_c('div', [_c('el-button', {
+        }, [(decreeoperation.personobject.actualRank != null) ? _c('span', [_vm._v(_vm._s(decreeoperation.personobject.actualRank.name3) + " ")]) : _vm._e(), _vm._v("\n                                                " + _vm._s(decreeoperation.personobject.surname3) + " " + _vm._s(decreeoperation.personobject.name3) + "\n                                                " + _vm._s(decreeoperation.personobject.fathername3) + _vm._s(_vm.commaspaceifnotnull(decreeoperation.personobject.positiontree3)) + " " + _vm._s(decreeoperation.personobject.positiontree3) + ",\n                                                по состоянию на " + _vm._s(_vm.printDateDocument(decreeoperation.optiondate1)) + " —\n                                                " + _vm._s(decreeoperation.optionnumber2) + " " + _vm._s(_vm.getYearString(decreeoperation.optionnumber2)) + "\n                                                " + _vm._s(decreeoperation.optionnumber3) + " " + _vm._s(_vm.getMonthString(decreeoperation.optionnumber3)) + "\n                                                " + _vm._s(decreeoperation.optionnumber4) + " " + _vm._s(_vm.getDayString(decreeoperation.optionnumber4)) + ".\n                                            ")])]) : _vm._e()]), _vm._v(" "), _c('div', [(_vm.persondecreeSigned != 1) ? _c('div', [_c('el-button', {
           attrs: {
             "size": "mini",
             "type": "warning"
@@ -34801,7 +35108,33 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
               _vm.removePersondecreeoperation(decreeoperation)
             }
           }
-        }, [_vm._v("Удалить")])], 1)])]) : _vm._e()]) : _vm._e()
+        }, [_vm._v("Удалить")])], 1) : _c('div', [_c('el-select', {
+          staticStyle: {
+            "width": "200px"
+          },
+          attrs: {
+            "multiple": "",
+            "filterable": "",
+            "allow-create": "",
+            "default-first-option": "",
+            "placeholder": "Редактировать список получателей данного пункта"
+          },
+          model: {
+            value: (decreeoperation.excerptstructures),
+            callback: function($$v) {
+              decreeoperation.excerptstructures = $$v
+            },
+            expression: "decreeoperation.excerptstructures"
+          }
+        }, _vm._l((_vm.featured), function(item) {
+          return _c('el-option', {
+            key: item.id,
+            attrs: {
+              "label": item.name,
+              "value": item.name
+            }
+          })
+        }))], 1)])]) : _vm._e()
       }), _vm._v(" "), _vm._l((persondecreeBlock.persondecreeblocksubs), function(persondecreeblocksubsub) {
         return (persondecreeblocksubsub.parentpersondecreeblocksub == persondecreeblocksub.id) ? _c('div', [_c('div', [_vm._v("\n                                        " + _vm._s(_vm.printDateDocument(persondecreeblocksubsub.subvaluedate1)) + " по " + _vm._s(_vm.printDateDocument(persondecreeblocksubsub.subvaluedate2)) + " :\n                                    ")]), _vm._v(" "), _c('div', _vm._l((persondecreeBlock.persondecreeblocksubs), function(persondecreeblocksubsubsub) {
           return (persondecreeblocksubsubsub.parentpersondecreeblocksub == persondecreeblocksubsub.id) ? _c('div', {
@@ -34813,7 +35146,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
               staticClass: "persondecreeoperation-part-list-element persondecreeoperation-part-list-element-margin-big"
             }, [_c('div', {
               staticClass: "persondecreeoperation-part-list-element-indent"
-            }, [_vm._v("\n                                                    " + _vm._s(decreeoperation.personobject.surname3) + " " + _vm._s(decreeoperation.personobject.name3) + "\n                                                    " + _vm._s(decreeoperation.personobject.fathername3) + _vm._s(_vm.commaspaceifnotnull(decreeoperation.personobject.positiontree3)) + " " + _vm._s(decreeoperation.personobject.positiontree3) + "\n                                                ")]), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_c('div', [_c('el-button', {
+            }, [_vm._v("\n                                                    " + _vm._s(decreeoperation.personobject.surname3) + " " + _vm._s(decreeoperation.personobject.name3) + "\n                                                    " + _vm._s(decreeoperation.personobject.fathername3) + _vm._s(_vm.commaspaceifnotnull(decreeoperation.personobject.positiontree3)) + " " + _vm._s(decreeoperation.personobject.positiontree3) + "\n                                                ")]), _vm._v(" "), _c('div', [(_vm.persondecreeSigned != 1) ? _c('div', [_c('el-button', {
               attrs: {
                 "size": "mini",
                 "type": "warning"
@@ -34823,7 +35156,33 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
                   _vm.removePersondecreeoperation(decreeoperation)
                 }
               }
-            }, [_vm._v("Удалить")])], 1)]) : _vm._e()]) : _vm._e()
+            }, [_vm._v("Удалить")])], 1) : _c('div', [_c('el-select', {
+              staticStyle: {
+                "width": "200px"
+              },
+              attrs: {
+                "multiple": "",
+                "filterable": "",
+                "allow-create": "",
+                "default-first-option": "",
+                "placeholder": "Редактировать список получателей данного пункта"
+              },
+              model: {
+                value: (decreeoperation.excerptstructures),
+                callback: function($$v) {
+                  decreeoperation.excerptstructures = $$v
+                },
+                expression: "decreeoperation.excerptstructures"
+              }
+            }, _vm._l((_vm.featured), function(item) {
+              return _c('el-option', {
+                key: item.id,
+                attrs: {
+                  "label": item.name,
+                  "value": item.name
+                }
+              })
+            }))], 1)])]) : _vm._e()
           })], 2) : _vm._e()
         }))]) : _vm._e()
       })], 2)]) : _vm._e()
@@ -34932,7 +35291,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         staticClass: "persondecreeoperation-part-list-element"
       }, [_c('div', [_c('div', {
         staticClass: "persondecreeoperation-part-list-element-indent persondecreeoperation-part-list-element-margin-big"
-      }, [(decreeoperation.personobject.actualRank != null) ? _c('span', [_vm._v(_vm._s(decreeoperation.personobject.actualRank.name5) + " ")]) : _vm._e(), _vm._v("\n                                        " + _vm._s(decreeoperation.personobject.surname5) + " " + _vm._s(decreeoperation.personobject.name5) + "\n                                        " + _vm._s(decreeoperation.personobject.fathername5) + _vm._s(_vm.commaspaceifnotnull(decreeoperation.personobject.positiontree5)) + " " + _vm._s(decreeoperation.personobject.positiontree5) + ",\n                                        сроком на "), (decreeoperation.optionnumber3 != null && decreeoperation.optionnumber3 != 0) ? _c('span', [_vm._v(_vm._s(decreeoperation.optionnumber3) + " " + _vm._s(_vm.getYearString(decreeoperation.optionnumber3)))]) : _vm._e(), _vm._v(" "), (decreeoperation.optionnumber4 != null && decreeoperation.optionnumber4 != 0) ? _c('span', [_vm._v(_vm._s(decreeoperation.optionnumber4) + " " + _vm._s(_vm.getMonthString(decreeoperation.optionnumber4)))]) : _vm._e(), _vm._v(" "), (decreeoperation.optionnumber5 != null && decreeoperation.optionnumber5 != 0) ? _c('span', [_vm._v(_vm._s(decreeoperation.optionnumber5) + " " + _vm._s(_vm.getDayString(decreeoperation.optionnumber5)))]) : _vm._e(), _vm._v(" "), (decreeoperation.optiondate1 != null) ? _c('span', [_vm._v(" с " + _vm._s(_vm.printDateDocument(decreeoperation.optiondate1)))]) : _vm._e(), _vm._v(" "), (decreeoperation.optiondate2 != null) ? _c('span', [_vm._v(" по " + _vm._s(_vm.printDateDocument(decreeoperation.optiondate2)) + ".")]) : _vm._e(), _vm._v(" "), (decreeoperation.optionnumber2 != null && decreeoperation.optionnumber2 > 0) ? _c('span', [_vm._v(" Выплатить единовременное денежное вознаграждение в размере " + _vm._s(decreeoperation.optionnumber2) + " базовых окладов;")]) : _vm._e()])]), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_c('div', [_c('div', [_c('el-button', {
+      }, [(decreeoperation.personobject.actualRank != null) ? _c('span', [_vm._v(_vm._s(decreeoperation.personobject.actualRank.name5) + " ")]) : _vm._e(), _vm._v("\n                                        " + _vm._s(decreeoperation.personobject.surname5) + " " + _vm._s(decreeoperation.personobject.name5) + "\n                                        " + _vm._s(decreeoperation.personobject.fathername5) + _vm._s(_vm.commaspaceifnotnull(decreeoperation.personobject.positiontree5)) + " " + _vm._s(decreeoperation.personobject.positiontree5) + ",\n                                        сроком на "), (decreeoperation.optionnumber3 != null && decreeoperation.optionnumber3 != 0) ? _c('span', [_vm._v(_vm._s(decreeoperation.optionnumber3) + " " + _vm._s(_vm.getYearString(decreeoperation.optionnumber3)))]) : _vm._e(), _vm._v(" "), (decreeoperation.optionnumber4 != null && decreeoperation.optionnumber4 != 0) ? _c('span', [_vm._v(_vm._s(decreeoperation.optionnumber4) + " " + _vm._s(_vm.getMonthString(decreeoperation.optionnumber4)))]) : _vm._e(), _vm._v(" "), (decreeoperation.optionnumber5 != null && decreeoperation.optionnumber5 != 0) ? _c('span', [_vm._v(_vm._s(decreeoperation.optionnumber5) + " " + _vm._s(_vm.getDayString(decreeoperation.optionnumber5)))]) : _vm._e(), _vm._v(" "), (decreeoperation.optiondate1 != null) ? _c('span', [_vm._v(" с " + _vm._s(_vm.printDateDocument(decreeoperation.optiondate1)))]) : _vm._e(), _vm._v(" "), (decreeoperation.optiondate2 != null) ? _c('span', [_vm._v(" по " + _vm._s(_vm.printDateDocument(decreeoperation.optiondate2)) + ".")]) : _vm._e(), _vm._v(" "), (decreeoperation.optionnumber2 != null && decreeoperation.optionnumber2 > 0) ? _c('span', [_vm._v(" Выплатить единовременное денежное вознаграждение в размере " + _vm._s(decreeoperation.optionnumber2) + " базовых окладов;")]) : _vm._e()])]), _vm._v(" "), _c('div', [(_vm.persondecreeSigned != 1) ? _c('div', [_c('el-button', {
         attrs: {
           "size": "mini",
           "type": "warning"
@@ -34942,7 +35301,33 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
             _vm.removePersondecreeoperation(decreeoperation)
           }
         }
-      }, [_vm._v("Удалить")])], 1)])]) : _vm._e()]) : _vm._e()
+      }, [_vm._v("Удалить")])], 1) : _c('div', [_c('el-select', {
+        staticStyle: {
+          "width": "200px"
+        },
+        attrs: {
+          "multiple": "",
+          "filterable": "",
+          "allow-create": "",
+          "default-first-option": "",
+          "placeholder": "Редактировать список получателей данного пункта"
+        },
+        model: {
+          value: (decreeoperation.excerptstructures),
+          callback: function($$v) {
+            decreeoperation.excerptstructures = $$v
+          },
+          expression: "decreeoperation.excerptstructures"
+        }
+      }, _vm._l((_vm.featured), function(item) {
+        return _c('el-option', {
+          key: item.id,
+          attrs: {
+            "label": item.name,
+            "value": item.name
+          }
+        })
+      }))], 1)])]) : _vm._e()
     }), _vm._v(" "), _c('br')], 2), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_c('el-button', {
       attrs: {
         "type": "danger"
@@ -35048,7 +35433,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         staticClass: "persondecreeoperation-part-list-element"
       }, [_c('div', [_c('div', {
         staticClass: "persondecreeoperation-part-list-element-indent persondecreeoperation-part-list-element-margin-big"
-      }, [(decreeoperation.personobject.actualRank != null) ? _c('span', [_vm._v(_vm._s(decreeoperation.personobject.actualRank.name5) + " ")]) : _vm._e(), _vm._v("\n                                        " + _vm._s(decreeoperation.personobject.surname5) + " " + _vm._s(decreeoperation.personobject.name5) + "\n                                        " + _vm._s(decreeoperation.personobject.fathername5) + _vm._s(_vm.commaspaceifnotnull(decreeoperation.personobject.positiontree5)) + " " + _vm._s(decreeoperation.personobject.positiontree5) + ",\n                                        сроком на "), (decreeoperation.optionnumber3 != null && decreeoperation.optionnumber3 != 0) ? _c('span', [_vm._v(_vm._s(decreeoperation.optionnumber3) + " " + _vm._s(_vm.getYearString(decreeoperation.optionnumber3)))]) : _vm._e(), _vm._v(" "), (decreeoperation.optionnumber4 != null && decreeoperation.optionnumber4 != 0) ? _c('span', [_vm._v(_vm._s(decreeoperation.optionnumber4) + " " + _vm._s(_vm.getMonthString(decreeoperation.optionnumber4)))]) : _vm._e(), _vm._v(" "), (decreeoperation.optionnumber5 != null && decreeoperation.optionnumber5 != 0) ? _c('span', [_vm._v(_vm._s(decreeoperation.optionnumber5) + " " + _vm._s(_vm.getDayString(decreeoperation.optionnumber5)))]) : _vm._e(), _vm._v(" "), (decreeoperation.optiondate1 != null) ? _c('span', [_vm._v(" с " + _vm._s(_vm.printDateDocument(decreeoperation.optiondate1)))]) : _vm._e(), _vm._v(" "), (decreeoperation.optiondate2 != null) ? _c('span', [_vm._v(" по " + _vm._s(_vm.printDateDocument(decreeoperation.optiondate2)) + ".")]) : _vm._e(), _vm._v(" "), (decreeoperation.optionnumber2 != null && decreeoperation.optionnumber2 > 0) ? _c('span', [_vm._v(" Выплатить единовременное денежное вознаграждение в размере " + _vm._s(decreeoperation.optionnumber2) + " базовых окладов;")]) : _vm._e()])]), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_c('div', [_c('div', [_c('el-button', {
+      }, [(decreeoperation.personobject.actualRank != null) ? _c('span', [_vm._v(_vm._s(decreeoperation.personobject.actualRank.name5) + " ")]) : _vm._e(), _vm._v("\n                                        " + _vm._s(decreeoperation.personobject.surname5) + " " + _vm._s(decreeoperation.personobject.name5) + "\n                                        " + _vm._s(decreeoperation.personobject.fathername5) + _vm._s(_vm.commaspaceifnotnull(decreeoperation.personobject.positiontree5)) + " " + _vm._s(decreeoperation.personobject.positiontree5) + ",\n                                        сроком на "), (decreeoperation.optionnumber3 != null && decreeoperation.optionnumber3 != 0) ? _c('span', [_vm._v(_vm._s(decreeoperation.optionnumber3) + " " + _vm._s(_vm.getYearString(decreeoperation.optionnumber3)))]) : _vm._e(), _vm._v(" "), (decreeoperation.optionnumber4 != null && decreeoperation.optionnumber4 != 0) ? _c('span', [_vm._v(_vm._s(decreeoperation.optionnumber4) + " " + _vm._s(_vm.getMonthString(decreeoperation.optionnumber4)))]) : _vm._e(), _vm._v(" "), (decreeoperation.optionnumber5 != null && decreeoperation.optionnumber5 != 0) ? _c('span', [_vm._v(_vm._s(decreeoperation.optionnumber5) + " " + _vm._s(_vm.getDayString(decreeoperation.optionnumber5)))]) : _vm._e(), _vm._v(" "), (decreeoperation.optiondate1 != null) ? _c('span', [_vm._v(" с " + _vm._s(_vm.printDateDocument(decreeoperation.optiondate1)))]) : _vm._e(), _vm._v(" "), (decreeoperation.optiondate2 != null) ? _c('span', [_vm._v(" по " + _vm._s(_vm.printDateDocument(decreeoperation.optiondate2)) + ".")]) : _vm._e(), _vm._v(" "), (decreeoperation.optionnumber2 != null && decreeoperation.optionnumber2 > 0) ? _c('span', [_vm._v(" Выплатить единовременное денежное вознаграждение в размере " + _vm._s(decreeoperation.optionnumber2) + " базовых окладов;")]) : _vm._e()])]), _vm._v(" "), _c('div', [(_vm.persondecreeSigned != 1) ? _c('div', [_c('el-button', {
         attrs: {
           "size": "mini",
           "type": "warning"
@@ -35058,7 +35443,33 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
             _vm.removePersondecreeoperation(decreeoperation)
           }
         }
-      }, [_vm._v("Удалить")])], 1)])]) : _vm._e()]) : _vm._e()
+      }, [_vm._v("Удалить")])], 1) : _c('div', [_c('el-select', {
+        staticStyle: {
+          "width": "200px"
+        },
+        attrs: {
+          "multiple": "",
+          "filterable": "",
+          "allow-create": "",
+          "default-first-option": "",
+          "placeholder": "Редактировать список получателей данного пункта"
+        },
+        model: {
+          value: (decreeoperation.excerptstructures),
+          callback: function($$v) {
+            decreeoperation.excerptstructures = $$v
+          },
+          expression: "decreeoperation.excerptstructures"
+        }
+      }, _vm._l((_vm.featured), function(item) {
+        return _c('el-option', {
+          key: item.id,
+          attrs: {
+            "label": item.name,
+            "value": item.name
+          }
+        })
+      }))], 1)])]) : _vm._e()
     }), _vm._v(" "), _c('br')], 2), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_c('el-button', {
       attrs: {
         "type": "danger"
@@ -35175,7 +35586,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         staticClass: "persondecreeoperation-part-list-element-indent persondecreeoperation-part-list-element-margin-small"
       }, [_vm._v("\n                                        за " + _vm._s(decreeoperation.optionnumber1) + " " + _vm._s(_vm.getDayCalendarString(decreeoperation.optionnumber1)) + " неиспользованного в " + _vm._s(decreeoperation.optionnumber2) + " году основного отпуска\n                                        "), (decreeoperation.personobject.actualRank != null) ? _c('span', [_vm._v(_vm._s(decreeoperation.personobject.actualRank.name3) + " ")]) : _vm._e(), _vm._v("\n                                        " + _vm._s(decreeoperation.personobject.surname3) + " " + _vm._s(decreeoperation.personobject.name3) + "\n                                        " + _vm._s(decreeoperation.personobject.fathername3) + _vm._s(_vm.commaspaceifnotnull(decreeoperation.personobject.positiontree3)) + " " + _vm._s(decreeoperation.personobject.positiontree3) + ".\n                                    ")]), _vm._v(" "), _c('div', {
         staticClass: "persondecreeoperation-part-list-element-margin-big"
-      }, [_vm._v("\n                                        Основание: " + _vm._s(decreeoperation.optionstring1) + ".\n                                    ")])]), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_c('div', [_c('div', [_c('el-button', {
+      }, [_vm._v("\n                                        Основание: " + _vm._s(decreeoperation.optionstring1) + ".\n                                    ")])]), _vm._v(" "), _c('div', [(_vm.persondecreeSigned != 1) ? _c('div', [_c('el-button', {
         attrs: {
           "size": "mini",
           "type": "warning"
@@ -35185,7 +35596,33 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
             _vm.removePersondecreeoperation(decreeoperation)
           }
         }
-      }, [_vm._v("Удалить")])], 1)])]) : _vm._e()]) : _vm._e()
+      }, [_vm._v("Удалить")])], 1) : _c('div', [_c('el-select', {
+        staticStyle: {
+          "width": "200px"
+        },
+        attrs: {
+          "multiple": "",
+          "filterable": "",
+          "allow-create": "",
+          "default-first-option": "",
+          "placeholder": "Редактировать список получателей данного пункта"
+        },
+        model: {
+          value: (decreeoperation.excerptstructures),
+          callback: function($$v) {
+            decreeoperation.excerptstructures = $$v
+          },
+          expression: "decreeoperation.excerptstructures"
+        }
+      }, _vm._l((_vm.featured), function(item) {
+        return _c('el-option', {
+          key: item.id,
+          attrs: {
+            "label": item.name,
+            "value": item.name
+          }
+        })
+      }))], 1)])]) : _vm._e()
     }), _vm._v(" "), _c('br')], 2), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_c('el-button', {
       attrs: {
         "type": "danger"
@@ -35308,7 +35745,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           staticClass: "persondecreeoperation-part-list-element persondecreeoperation-part-list-element-margin-big"
         }, [_c('div', [_c('div', {
           staticClass: "persondecreeoperation-part-list-element-indent persondecreeoperation-part-list-element-margin-big"
-        }, [(decreeoperation.personobject.actualRank != null) ? _c('span', [_vm._v(_vm._s(decreeoperation.personobject.actualRank.name3) + " ")]) : _vm._e(), _vm._v("\n                                            " + _vm._s(decreeoperation.personobject.surname3) + " " + _vm._s(decreeoperation.personobject.name3) + "\n                                            " + _vm._s(decreeoperation.personobject.fathername3) + "\n                                            (" + _vm._s(decreeoperation.personobject.numpersonal) + ")" + _vm._s(_vm.commaspaceifnotnull(decreeoperation.personobject.positiontree3)) + " " + _vm._s(decreeoperation.personobject.positiontree3) + "\n                                            "), (decreeoperation.optiondate1 != null) ? _c('span', [_vm._v(" с " + _vm._s(_vm.printDateDocument(decreeoperation.optiondate1)))]) : _vm._e(), _vm._v(";\n                                        ")])]), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_c('div', [_c('div', [_c('el-button', {
+        }, [(decreeoperation.personobject.actualRank != null) ? _c('span', [_vm._v(_vm._s(decreeoperation.personobject.actualRank.name3) + " ")]) : _vm._e(), _vm._v("\n                                            " + _vm._s(decreeoperation.personobject.surname3) + " " + _vm._s(decreeoperation.personobject.name3) + "\n                                            " + _vm._s(decreeoperation.personobject.fathername3) + "\n                                            (" + _vm._s(decreeoperation.personobject.numpersonal) + ")" + _vm._s(_vm.commaspaceifnotnull(decreeoperation.personobject.positiontree3)) + " " + _vm._s(decreeoperation.personobject.positiontree3) + "\n                                            "), (decreeoperation.optiondate1 != null) ? _c('span', [_vm._v(" с " + _vm._s(_vm.printDateDocument(decreeoperation.optiondate1)))]) : _vm._e(), _vm._v(";\n                                        ")])]), _vm._v(" "), _c('div', [(_vm.persondecreeSigned != 1) ? _c('div', [_c('el-button', {
           attrs: {
             "size": "mini",
             "type": "warning"
@@ -35318,7 +35755,33 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
               _vm.removePersondecreeoperation(decreeoperation)
             }
           }
-        }, [_vm._v("Удалить")])], 1)])]) : _vm._e()]) : _vm._e()
+        }, [_vm._v("Удалить")])], 1) : _c('div', [_c('el-select', {
+          staticStyle: {
+            "width": "200px"
+          },
+          attrs: {
+            "multiple": "",
+            "filterable": "",
+            "allow-create": "",
+            "default-first-option": "",
+            "placeholder": "Редактировать список получателей данного пункта"
+          },
+          model: {
+            value: (decreeoperation.excerptstructures),
+            callback: function($$v) {
+              decreeoperation.excerptstructures = $$v
+            },
+            expression: "decreeoperation.excerptstructures"
+          }
+        }, _vm._l((_vm.featured), function(item) {
+          return _c('el-option', {
+            key: item.id,
+            attrs: {
+              "label": item.name,
+              "value": item.name
+            }
+          })
+        }))], 1)])]) : _vm._e()
       })], 2)]) : _vm._e()
     }), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_c('el-button', {
       attrs: {
@@ -35767,7 +36230,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           staticClass: "persondecreeoperation-part-list-element persondecreeoperation-part-list-element-margin-big"
         }, [_c('div', [_c('div', {
           staticClass: "persondecreeoperation-part-list-element-indent persondecreeoperation-part-list-element-margin-small"
-        }, [(decreeoperation.personobject.actualRank != null) ? _c('span', [_vm._v(_vm._s(decreeoperation.personobject.actualRank.name3) + " ")]) : _vm._e(), _vm._v("\n                                            " + _vm._s(decreeoperation.personobject.surname3) + " " + _vm._s(decreeoperation.personobject.name3) + "\n                                            " + _vm._s(decreeoperation.personobject.fathername3) + _vm._s(_vm.commaspaceifnotnull(decreeoperation.personobject.positiontree3)) + "\n                                            " + _vm._s(decreeoperation.personobject.positiontree3) + ",\n                                            "), _vm._v(" "), (!_vm.isSocialVacation(decreeoperation) && decreeoperation.persondecreeblocksubtype == 11 && decreeoperation.personobject.military) ? _c('span', [_vm._v("\n                                                продолжительностью  " + _vm._s(decreeoperation.optionnumber1) + " календарных дней "), (decreeoperation.optionnumber8 > 0 || decreeoperation.optionnumber2 > 0) ? _c('span', [_vm._v("в период")]) : _vm._e(), _vm._v(" "), (decreeoperation.optiondate1 != decreeoperation.optiondate3) ? _c('div', [(decreeoperation.optiondate1 != null) ? _c('span', [_vm._v(" с " + _vm._s(_vm.printDateDocument(decreeoperation.optiondate1)))]) : _vm._e(), _vm._v(" "), (decreeoperation.optiondate3 != null) ? _c('span', [_vm._v(" по " + _vm._s(_vm.printDateDocument(decreeoperation.optiondate3)))]) : _vm._e()]) : _vm._e(), _vm._v(" "), (decreeoperation.optiondate1 == decreeoperation.optiondate3) ? _c('div', [(decreeoperation.optiondate1 != null) ? _c('span', [_vm._v(" " + _vm._s(_vm.printDateDocument(decreeoperation.optiondate1)))]) : _vm._e()]) : _vm._e(), _vm._v("\n                                                " + _vm._s(_vm.vacationanyadditionalinfo(decreeoperation)) + _vm._s(_vm.vacationtraveltext(decreeoperation))), (decreeoperation.optiondate2 != null) ? _c('span', [_vm._v(" с " + _vm._s(_vm.printDateDocument(decreeoperation.optiondate2)))]) : _vm._e(), (decreeoperation.optiondate4 != null) ? _c('span', [_vm._v(" по " + _vm._s(_vm.printDateDocument(decreeoperation.optiondate4)))]) : _vm._e(), _vm._v(".\n                                            ")]) : _vm._e(), _vm._v(" "), (!_vm.isSocialVacation(decreeoperation) && decreeoperation.persondecreeblocksubtype == 11 && !decreeoperation.personobject.military) ? _c('span', [_vm._v("\n                                                продолжительностью  " + _vm._s(decreeoperation.optionnumber1) + " календарных дней "), (decreeoperation.optionnumber8 > 0 || decreeoperation.optionnumber2 > 0) ? _c('span', [_vm._v("в период")]) : _vm._e(), _vm._v(" "), (decreeoperation.optiondate1 != decreeoperation.optiondate3) ? _c('div', [(decreeoperation.optiondate1 != null) ? _c('span', [_vm._v(" с " + _vm._s(_vm.printDateDocument(decreeoperation.optiondate1)))]) : _vm._e(), _vm._v(" "), (decreeoperation.optiondate3 != null) ? _c('span', [_vm._v(" по " + _vm._s(_vm.printDateDocument(decreeoperation.optiondate3)))]) : _vm._e()]) : _vm._e(), _vm._v(" "), (decreeoperation.optiondate1 == decreeoperation.optiondate3) ? _c('div', [(decreeoperation.optiondate1 != null) ? _c('span', [_vm._v(" " + _vm._s(_vm.printDateDocument(decreeoperation.optiondate1)))]) : _vm._e()]) : _vm._e(), _vm._v("\n                                                " + _vm._s(_vm.vacationcivilholidaysadditionalinfo(decreeoperation)) + "\n                                                " + _vm._s(_vm.vacationcivilperiodsadditionalinfo(decreeoperation)) + _vm._s(_vm.vacationtraveltext(decreeoperation)) + ".\n                                            ")]) : _vm._e(), _vm._v(" "), (_vm.isSocialVacation(decreeoperation) && decreeoperation.persondecreeblocksubtype == 11) ? _c('span', [_vm._v("\n                                                продолжительностью  " + _vm._s(decreeoperation.optionnumber1) + " календарных дней\n                                                "), (decreeoperation.optiondate1 != decreeoperation.optiondate3) ? _c('div', [(decreeoperation.optiondate1 != null) ? _c('span', [_vm._v(" с " + _vm._s(_vm.printDateDocument(decreeoperation.optiondate1)))]) : _vm._e(), _vm._v(" "), (decreeoperation.optiondate3 != null) ? _c('span', [_vm._v(" по " + _vm._s(_vm.printDateDocument(decreeoperation.optiondate3)) + ".")]) : _vm._e()]) : _vm._e(), _vm._v(" "), (decreeoperation.optiondate1 == decreeoperation.optiondate3) ? _c('div', [(decreeoperation.optiondate1 != null) ? _c('span', [_vm._v(" " + _vm._s(_vm.printDateDocument(decreeoperation.optiondate1)) + ".")]) : _vm._e()]) : _vm._e()]) : _vm._e(), _vm._v(" "), (decreeoperation.persondecreeblocksubtype == 12) ? _c('span', [(decreeoperation.optiondate1 != null) ? _c('span', [_vm._v(" " + _vm._s(_vm.printDateDocument(decreeoperation.optiondate1)) + ".")]) : _vm._e()]) : _vm._e(), _vm._v(" "), (decreeoperation.persondecreeblocksubtype == 15) ? _c('span', [(decreeoperation.optiondate1 != decreeoperation.optiondate3) ? _c('div', [(decreeoperation.optiondate1 != null) ? _c('span', [_vm._v(" с " + _vm._s(_vm.printDateDocument(decreeoperation.optiondate1)))]) : _vm._e(), _vm._v(" "), (decreeoperation.optiondate3 != null) ? _c('span', [_vm._v(" по " + _vm._s(_vm.printDateDocument(decreeoperation.optiondate3)) + ".")]) : _vm._e()]) : _vm._e(), _vm._v(" "), (decreeoperation.optiondate1 == decreeoperation.optiondate3) ? _c('div', [(decreeoperation.optiondate1 != null) ? _c('span', [_vm._v(" " + _vm._s(_vm.printDateDocument(decreeoperation.optiondate1)) + ".")]) : _vm._e()]) : _vm._e()]) : _vm._e()]), _vm._v(" "), (decreeoperation.persondecreeblocksubtype == 11) ? _c('div', [_vm._v("\n                                            Основание: " + _vm._s(decreeoperation.optionstring3) + "\n                                        ")]) : _vm._e()]), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_c('div', [_c('div', [_c('el-button', {
+        }, [(decreeoperation.personobject.actualRank != null) ? _c('span', [_vm._v(_vm._s(decreeoperation.personobject.actualRank.name3) + " ")]) : _vm._e(), _vm._v("\n                                            " + _vm._s(decreeoperation.personobject.surname3) + " " + _vm._s(decreeoperation.personobject.name3) + "\n                                            " + _vm._s(decreeoperation.personobject.fathername3) + _vm._s(_vm.commaspaceifnotnull(decreeoperation.personobject.positiontree3)) + "\n                                            " + _vm._s(decreeoperation.personobject.positiontree3) + ",\n                                            "), _vm._v(" "), (!_vm.isSocialVacation(decreeoperation) && decreeoperation.persondecreeblocksubtype == 11 && decreeoperation.personobject.military) ? _c('span', [_vm._v("\n                                                продолжительностью  " + _vm._s(decreeoperation.optionnumber1) + " календарных дней "), (decreeoperation.optionnumber8 > 0 || decreeoperation.optionnumber2 > 0) ? _c('span', [_vm._v("в период")]) : _vm._e(), _vm._v(" "), (decreeoperation.optiondate1 != decreeoperation.optiondate3) ? _c('div', [(decreeoperation.optiondate1 != null) ? _c('span', [_vm._v(" с " + _vm._s(_vm.printDateDocument(decreeoperation.optiondate1)))]) : _vm._e(), _vm._v(" "), (decreeoperation.optiondate3 != null) ? _c('span', [_vm._v(" по " + _vm._s(_vm.printDateDocument(decreeoperation.optiondate3)))]) : _vm._e()]) : _vm._e(), _vm._v(" "), (decreeoperation.optiondate1 == decreeoperation.optiondate3) ? _c('div', [(decreeoperation.optiondate1 != null) ? _c('span', [_vm._v(" " + _vm._s(_vm.printDateDocument(decreeoperation.optiondate1)))]) : _vm._e()]) : _vm._e(), _vm._v("\n                                                " + _vm._s(_vm.vacationanyadditionalinfo(decreeoperation)) + _vm._s(_vm.vacationtraveltext(decreeoperation))), (decreeoperation.optiondate2 != null) ? _c('span', [_vm._v(" с " + _vm._s(_vm.printDateDocument(decreeoperation.optiondate2)))]) : _vm._e(), (decreeoperation.optiondate4 != null) ? _c('span', [_vm._v(" по " + _vm._s(_vm.printDateDocument(decreeoperation.optiondate4)))]) : _vm._e(), _vm._v(".\n                                            ")]) : _vm._e(), _vm._v(" "), (!_vm.isSocialVacation(decreeoperation) && decreeoperation.persondecreeblocksubtype == 11 && !decreeoperation.personobject.military) ? _c('span', [_vm._v("\n                                                продолжительностью  " + _vm._s(decreeoperation.optionnumber1) + " календарных дней "), (decreeoperation.optionnumber8 > 0 || decreeoperation.optionnumber2 > 0) ? _c('span', [_vm._v("в период")]) : _vm._e(), _vm._v(" "), (decreeoperation.optiondate1 != decreeoperation.optiondate3) ? _c('div', [(decreeoperation.optiondate1 != null) ? _c('span', [_vm._v(" с " + _vm._s(_vm.printDateDocument(decreeoperation.optiondate1)))]) : _vm._e(), _vm._v(" "), (decreeoperation.optiondate3 != null) ? _c('span', [_vm._v(" по " + _vm._s(_vm.printDateDocument(decreeoperation.optiondate3)))]) : _vm._e()]) : _vm._e(), _vm._v(" "), (decreeoperation.optiondate1 == decreeoperation.optiondate3) ? _c('div', [(decreeoperation.optiondate1 != null) ? _c('span', [_vm._v(" " + _vm._s(_vm.printDateDocument(decreeoperation.optiondate1)))]) : _vm._e()]) : _vm._e(), _vm._v("\n                                                " + _vm._s(_vm.vacationcivilholidaysadditionalinfo(decreeoperation)) + "\n                                                " + _vm._s(_vm.vacationcivilperiodsadditionalinfo(decreeoperation)) + _vm._s(_vm.vacationtraveltext(decreeoperation)) + ".\n                                            ")]) : _vm._e(), _vm._v(" "), (_vm.isSocialVacation(decreeoperation) && decreeoperation.persondecreeblocksubtype == 11) ? _c('span', [_vm._v("\n                                                продолжительностью  " + _vm._s(decreeoperation.optionnumber1) + " календарных дней\n                                                "), (decreeoperation.optiondate1 != decreeoperation.optiondate3) ? _c('div', [(decreeoperation.optiondate1 != null) ? _c('span', [_vm._v(" с " + _vm._s(_vm.printDateDocument(decreeoperation.optiondate1)))]) : _vm._e(), _vm._v(" "), (decreeoperation.optiondate3 != null) ? _c('span', [_vm._v(" по " + _vm._s(_vm.printDateDocument(decreeoperation.optiondate3)) + ".")]) : _vm._e()]) : _vm._e(), _vm._v(" "), (decreeoperation.optiondate1 == decreeoperation.optiondate3) ? _c('div', [(decreeoperation.optiondate1 != null) ? _c('span', [_vm._v(" " + _vm._s(_vm.printDateDocument(decreeoperation.optiondate1)) + ".")]) : _vm._e()]) : _vm._e()]) : _vm._e(), _vm._v(" "), (decreeoperation.persondecreeblocksubtype == 12) ? _c('span', [(decreeoperation.optiondate1 != null) ? _c('span', [_vm._v(" " + _vm._s(_vm.printDateDocument(decreeoperation.optiondate1)) + ".")]) : _vm._e()]) : _vm._e(), _vm._v(" "), (decreeoperation.persondecreeblocksubtype == 15) ? _c('span', [(decreeoperation.optiondate1 != decreeoperation.optiondate3) ? _c('div', [(decreeoperation.optiondate1 != null) ? _c('span', [_vm._v(" с " + _vm._s(_vm.printDateDocument(decreeoperation.optiondate1)))]) : _vm._e(), _vm._v(" "), (decreeoperation.optiondate3 != null) ? _c('span', [_vm._v(" по " + _vm._s(_vm.printDateDocument(decreeoperation.optiondate3)) + ".")]) : _vm._e()]) : _vm._e(), _vm._v(" "), (decreeoperation.optiondate1 == decreeoperation.optiondate3) ? _c('div', [(decreeoperation.optiondate1 != null) ? _c('span', [_vm._v(" " + _vm._s(_vm.printDateDocument(decreeoperation.optiondate1)) + ".")]) : _vm._e()]) : _vm._e()]) : _vm._e()]), _vm._v(" "), (decreeoperation.persondecreeblocksubtype == 11) ? _c('div', [_vm._v("\n                                            Основание: " + _vm._s(decreeoperation.optionstring3) + "\n                                        ")]) : _vm._e()]), _vm._v(" "), _c('div', [(_vm.persondecreeSigned != 1) ? _c('div', [_c('el-button', {
           attrs: {
             "size": "mini",
             "type": "warning"
@@ -35777,14 +36240,40 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
               _vm.removePersondecreeoperation(decreeoperation)
             }
           }
-        }, [_vm._v("Удалить")])], 1)])]) : _vm._e()]) : _vm._e()
+        }, [_vm._v("Удалить")])], 1) : _c('div', [_c('el-select', {
+          staticStyle: {
+            "width": "200px"
+          },
+          attrs: {
+            "multiple": "",
+            "filterable": "",
+            "allow-create": "",
+            "default-first-option": "",
+            "placeholder": "Редактировать список получателей данного пункта"
+          },
+          model: {
+            value: (decreeoperation.excerptstructures),
+            callback: function($$v) {
+              decreeoperation.excerptstructures = $$v
+            },
+            expression: "decreeoperation.excerptstructures"
+          }
+        }, _vm._l((_vm.featured), function(item) {
+          return _c('el-option', {
+            key: item.id,
+            attrs: {
+              "label": item.name,
+              "value": item.name
+            }
+          })
+        }))], 1)])]) : _vm._e()
       }), _vm._v(" "), _vm._l((persondecreeBlock.persondecreeblocksubs), function(persondecreeblocksubsub) {
         return (persondecreeblocksubsub.parentpersondecreeblocksub == persondecreeblocksub.id) ? _c('div', [_c('div', [_vm._v("\n                                        c " + _vm._s(_vm.printDateDocument(persondecreeblocksubsub.subvaluedate1)) + " по " + _vm._s(_vm.printDateDocument(persondecreeblocksubsub.subvaluedate2)) + "\n                                    ")]), _vm._v(" "), _c('div', _vm._l((_vm.persondecreeOperations), function(decreeoperation) {
           return (decreeoperation.persondecreeblocksub == persondecreeblocksubsub.id) ? _c('div', {
             staticClass: "persondecreeoperation-part-list-element persondecreeoperation-part-list-element-margin-big"
           }, [_c('div', {
             staticClass: "persondecreeoperation-part-list-element-indent"
-          }, [(decreeoperation.personobject.actualRank != null) ? _c('span', [_vm._v(_vm._s(decreeoperation.personobject.actualRank.name4) + " ")]) : _vm._e(), _vm._v("\n                                                " + _vm._s(decreeoperation.personobject.surname2) + " " + _vm._s(decreeoperation.personobject.name2) + "\n                                                " + _vm._s(decreeoperation.personobject.fathername2) + _vm._s(_vm.commaspaceifnotnull(decreeoperation.personobject.positiontypestring)) + " " + _vm._s(decreeoperation.personobject.positiontype2string) + "\n                                                " + _vm._s(_vm.getStructureName(decreeoperation.personobject.structure)) + "а " + _vm._s(_vm.getFacultiStructureName(decreeoperation.personobject.structure)) + "\n                                            ")]), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_c('div', [_c('el-button', {
+          }, [(decreeoperation.personobject.actualRank != null) ? _c('span', [_vm._v(_vm._s(decreeoperation.personobject.actualRank.name4) + " ")]) : _vm._e(), _vm._v("\n                                                " + _vm._s(decreeoperation.personobject.surname2) + " " + _vm._s(decreeoperation.personobject.name2) + "\n                                                " + _vm._s(decreeoperation.personobject.fathername2) + _vm._s(_vm.commaspaceifnotnull(decreeoperation.personobject.positiontypestring)) + " " + _vm._s(decreeoperation.personobject.positiontype2string) + "\n                                                " + _vm._s(_vm.getStructureName(decreeoperation.personobject.structure)) + "а " + _vm._s(_vm.getFacultiStructureName(decreeoperation.personobject.structure)) + "\n                                            ")]), _vm._v(" "), _c('div', [(_vm.persondecreeSigned != 1) ? _c('div', [_c('el-button', {
             attrs: {
               "size": "mini",
               "type": "warning"
@@ -35794,7 +36283,33 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
                 _vm.removePersondecreeoperation(decreeoperation)
               }
             }
-          }, [_vm._v("Удалить")])], 1)]) : _vm._e()]) : _vm._e()
+          }, [_vm._v("Удалить")])], 1) : _c('div', [_c('el-select', {
+            staticStyle: {
+              "width": "200px"
+            },
+            attrs: {
+              "multiple": "",
+              "filterable": "",
+              "allow-create": "",
+              "default-first-option": "",
+              "placeholder": "Редактировать список получателей данного пункта"
+            },
+            model: {
+              value: (decreeoperation.excerptstructures),
+              callback: function($$v) {
+                decreeoperation.excerptstructures = $$v
+              },
+              expression: "decreeoperation.excerptstructures"
+            }
+          }, _vm._l((_vm.featured), function(item) {
+            return _c('el-option', {
+              key: item.id,
+              attrs: {
+                "label": item.name,
+                "value": item.name
+              }
+            })
+          }))], 1)])]) : _vm._e()
         }))]) : _vm._e()
       })], 2)]) : _vm._e()
     }), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_c('el-button', {
@@ -36036,7 +36551,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           staticClass: "persondecreeoperation-part-list-element-margin-small"
         }, [_vm._v("\n                                            Финансирование расходов по командированию осуществляется " + _vm._s(decreeoperation.optionstring3) + ".\n                                        ")]) : _vm._e(), _vm._v(" "), (decreeoperation.persondecreeblocksubtype == 14 && decreeoperation.optionstring5.length > 0) ? _c('div', {
           staticClass: "persondecreeoperation-part-list-element-margin-small persondecreeoperation-part-list-element-indent"
-        }, [_vm._v("\n                                            " + _vm._s(decreeoperation.optionstring5) + ".\n                                        ")]) : _vm._e(), _vm._v(" "), _c('div', [_vm._v("\n                                            Основание: " + _vm._s(decreeoperation.optionstring4) + ".\n                                        ")])]), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_c('div', [_c('div', [_c('el-button', {
+        }, [_vm._v("\n                                            " + _vm._s(decreeoperation.optionstring5) + ".\n                                        ")]) : _vm._e(), _vm._v(" "), _c('div', [_vm._v("\n                                            Основание: " + _vm._s(decreeoperation.optionstring4) + ".\n                                        ")])]), _vm._v(" "), _c('div', [(_vm.persondecreeSigned != 1) ? _c('div', [_c('el-button', {
           attrs: {
             "size": "mini",
             "type": "warning"
@@ -36046,7 +36561,33 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
               _vm.removePersondecreeoperation(decreeoperation)
             }
           }
-        }, [_vm._v("Удалить")])], 1)])]) : _vm._e()]) : _vm._e()
+        }, [_vm._v("Удалить")])], 1) : _c('div', [_c('el-select', {
+          staticStyle: {
+            "width": "200px"
+          },
+          attrs: {
+            "multiple": "",
+            "filterable": "",
+            "allow-create": "",
+            "default-first-option": "",
+            "placeholder": "Редактировать список получателей данного пункта"
+          },
+          model: {
+            value: (decreeoperation.excerptstructures),
+            callback: function($$v) {
+              decreeoperation.excerptstructures = $$v
+            },
+            expression: "decreeoperation.excerptstructures"
+          }
+        }, _vm._l((_vm.featured), function(item) {
+          return _c('el-option', {
+            key: item.id,
+            attrs: {
+              "label": item.name,
+              "value": item.name
+            }
+          })
+        }))], 1)])]) : _vm._e()
       })], 2)]) : _vm._e()
     }), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_c('el-button', {
       attrs: {
@@ -37140,7 +37681,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
             staticClass: "persondecreeoperation-part-list-element persondecreeoperation-part-list-element-margin-big"
           }, [_c('div', {
             staticClass: "persondecreeoperation-part-list-element-indent"
-          }, [_vm._v("\n                                                " + _vm._s(decreeoperation.personobject.surname3) + " " + _vm._s(decreeoperation.personobject.name3) + "\n                                                " + _vm._s(decreeoperation.personobject.fathername3) + _vm._s(_vm.commaspaceifnotnull(decreeoperation.personobject.positiontree3)) + " " + _vm._s(decreeoperation.personobject.positiontree3) + "\n                                                "), (decreeoperation.optionnumber8 == 1) ? _c('span', [_vm._v("в распоряжение начальника " + _vm._s(decreeoperation.optionstring4) + " учреждение " + _vm._s(decreeoperation.optionstring5))]) : _vm._e()]), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_c('div', [_c('el-button', {
+          }, [_vm._v("\n                                                " + _vm._s(decreeoperation.personobject.surname3) + " " + _vm._s(decreeoperation.personobject.name3) + "\n                                                " + _vm._s(decreeoperation.personobject.fathername3) + _vm._s(_vm.commaspaceifnotnull(decreeoperation.personobject.positiontree3)) + " " + _vm._s(decreeoperation.personobject.positiontree3) + "\n                                                "), (decreeoperation.optionnumber8 == 1) ? _c('span', [_vm._v("в распоряжение начальника " + _vm._s(decreeoperation.optionstring4) + " учреждение " + _vm._s(decreeoperation.optionstring5))]) : _vm._e()]), _vm._v(" "), _c('div', [(_vm.persondecreeSigned != 1) ? _c('div', [_c('el-button', {
             attrs: {
               "size": "mini",
               "type": "warning"
@@ -37150,7 +37691,33 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
                 _vm.removePersondecreeoperation(decreeoperation)
               }
             }
-          }, [_vm._v("Удалить")])], 1)]) : _vm._e()]) : _vm._e()
+          }, [_vm._v("Удалить")])], 1) : _c('div', [_c('el-select', {
+            staticStyle: {
+              "width": "200px"
+            },
+            attrs: {
+              "multiple": "",
+              "filterable": "",
+              "allow-create": "",
+              "default-first-option": "",
+              "placeholder": "Редактировать список получателей данного пункта"
+            },
+            model: {
+              value: (decreeoperation.excerptstructures),
+              callback: function($$v) {
+                decreeoperation.excerptstructures = $$v
+              },
+              expression: "decreeoperation.excerptstructures"
+            }
+          }, _vm._l((_vm.featured), function(item) {
+            return _c('el-option', {
+              key: item.id,
+              attrs: {
+                "label": item.name,
+                "value": item.name
+              }
+            })
+          }))], 1)])]) : _vm._e()
         })), _vm._v(" "), _c('div', [_vm._v("\n                                        Основание: " + _vm._s(persondecreeblocksubsub.subvaluestring1) + ".\n                                    ")])]) : _vm._e()
       })], 2)]) : _vm._e()
     }), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_c('el-button', {
@@ -37368,7 +37935,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
               staticClass: "persondecreeoperation-part-list-element persondecreeoperation-part-list-element-margin-big"
             }, [_c('div', {
               staticClass: "persondecreeoperation-part-list-element-indent"
-            }, [_vm._v("\n                                                        " + _vm._s(decreeoperation.personobject.surname2) + " " + _vm._s(decreeoperation.personobject.name2) + "\n                                                        " + _vm._s(decreeoperation.personobject.fathername2) + ".\n                                                    ")]), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_c('div', [_c('el-button', {
+            }, [_vm._v("\n                                                        " + _vm._s(decreeoperation.personobject.surname2) + " " + _vm._s(decreeoperation.personobject.name2) + "\n                                                        " + _vm._s(decreeoperation.personobject.fathername2) + ".\n                                                    ")]), _vm._v(" "), _c('div', [(_vm.persondecreeSigned != 1) ? _c('div', [_c('el-button', {
               attrs: {
                 "size": "mini",
                 "type": "warning"
@@ -37378,7 +37945,33 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
                   _vm.removePersondecreeoperation(decreeoperation)
                 }
               }
-            }, [_vm._v("Удалить")])], 1)]) : _vm._e()]) : _vm._e()
+            }, [_vm._v("Удалить")])], 1) : _c('div', [_c('el-select', {
+              staticStyle: {
+                "width": "200px"
+              },
+              attrs: {
+                "multiple": "",
+                "filterable": "",
+                "allow-create": "",
+                "default-first-option": "",
+                "placeholder": "Редактировать список получателей данного пункта"
+              },
+              model: {
+                value: (decreeoperation.excerptstructures),
+                callback: function($$v) {
+                  decreeoperation.excerptstructures = $$v
+                },
+                expression: "decreeoperation.excerptstructures"
+              }
+            }, _vm._l((_vm.featured), function(item) {
+              return _c('el-option', {
+                key: item.id,
+                attrs: {
+                  "label": item.name,
+                  "value": item.name
+                }
+              })
+            }))], 1)])]) : _vm._e()
           })), _vm._v(" "), _c('div', [_vm._v("\n                                                Основание: " + _vm._s(persondecreeblocksubsubsub.subvaluestring1) + ".\n                                            ")])]) : _vm._e()
         }))]) : _vm._e()
       })], 2)]) : _vm._e()
@@ -38499,7 +39092,7 @@ if (true) {
 }
 
 /***/ }),
-/* 161 */
+/* 162 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -38572,7 +39165,7 @@ if (true) {
 }
 
 /***/ }),
-/* 162 */
+/* 163 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -42343,7 +42936,7 @@ if (true) {
 }
 
 /***/ }),
-/* 163 */
+/* 164 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -52314,7 +52907,7 @@ if (true) {
 }
 
 /***/ }),
-/* 164 */
+/* 165 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -52329,7 +52922,7 @@ if (true) {
 }
 
 /***/ }),
-/* 165 */
+/* 166 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -52389,7 +52982,7 @@ if (true) {
 }
 
 /***/ }),
-/* 166 */
+/* 167 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -52827,7 +53420,7 @@ if (true) {
 }
 
 /***/ }),
-/* 167 */
+/* 168 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -54203,7 +54796,7 @@ if (true) {
 }
 
 /***/ }),
-/* 168 */
+/* 169 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -54233,7 +54826,7 @@ if (true) {
 }
 
 /***/ }),
-/* 169 */
+/* 170 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -54782,7 +55375,7 @@ if (true) {
 }
 
 /***/ }),
-/* 170 */
+/* 171 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -55365,7 +55958,7 @@ if (true) {
 }
 
 /***/ }),
-/* 171 */
+/* 172 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -55436,7 +56029,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_c('img', {
     attrs: {
-      "src": __webpack_require__(135),
+      "src": __webpack_require__(136),
       "id": "login-logo"
     }
   })])
@@ -55450,7 +56043,7 @@ if (true) {
 }
 
 /***/ }),
-/* 172 */
+/* 173 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -55524,7 +56117,7 @@ if (true) {
 }
 
 /***/ }),
-/* 173 */
+/* 174 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -55632,7 +56225,7 @@ if (true) {
 }
 
 /***/ }),
-/* 174 */
+/* 175 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -55692,7 +56285,7 @@ if (true) {
 }
 
 /***/ }),
-/* 175 */
+/* 176 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -56712,7 +57305,7 @@ if (true) {
 }
 
 /***/ }),
-/* 176 */
+/* 177 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -58680,7 +59273,7 @@ if (true) {
 }
 
 /***/ }),
-/* 177 */
+/* 178 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -59070,13 +59663,13 @@ if (true) {
 }
 
 /***/ }),
-/* 178 */
+/* 179 */
 /***/ (function(module, exports, __webpack_require__) {
 
 !function(e,t){ true?module.exports=t():"function"==typeof define&&define.amd?define([],t):"object"==typeof exports?exports.vueTextMask=t():e.vueTextMask=t()}(this,function(){return function(e){function t(n){if(r[n])return r[n].exports;var i=r[n]={exports:{},id:n,loaded:!1};return e[n].call(i.exports,i,i.exports,t),i.loaded=!0,i.exports}var r={};return t.m=e,t.c=r,t.p="",t(0)}([function(e,t,r){"use strict";function n(e){return e&&e.__esModule?e:{default:e}}Object.defineProperty(t,"__esModule",{value:!0}),t.conformToMask=void 0;var i=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var r=arguments[t];for(var n in r)Object.prototype.hasOwnProperty.call(r,n)&&(e[n]=r[n])}return e},o=r(2);Object.defineProperty(t,"conformToMask",{enumerable:!0,get:function(){return n(o).default}});var a=r(5),u=n(a);t.default={render:function(e){var t=this;return e("input",{ref:"input",domProps:{value:this.value},on:{input:function(e){return t.updateValue(e.target.value)},focus:function(e){return t.emitEvent(e)},blur:function(e){return t.emitEvent(e)},keypress:function(e){return t.emitEvent(e)},click:function(e){return t.emitEvent(e)}}})},name:"masked-input",props:{value:{type:String,required:!1,default:""},mask:{type:[Array,Function,Boolean,Object],required:!0},guide:{type:Boolean,required:!1},placeholderChar:{type:String,required:!1},keepCharPositions:{type:Boolean,required:!1},pipe:{type:Function,required:!1},showMask:{type:Boolean,required:!1}},mounted:function(){this.initMask()},methods:{createTextMaskInputElement:u.default,setTextMaskInputElement:function(){this.textMaskInputElement=this.createTextMaskInputElement(i({inputElement:this.$refs.input},this.$options.propsData))},initMask:function(){this.setTextMaskInputElement(),this.textMaskInputElement.update(this.value)},bind:function(){this.setTextMaskInputElement(),this.updateValue(this.value)},updateValue:function(e){this.textMaskInputElement.update(e),this.$emit("input",this.$refs.input.value)},emitEvent:function(e){this.$emit(e.type,e)}},watch:{mask:function(e,t){this.mask!==t&&this.bind()},guide:function(){this.bind()},placeholderChar:function(){this.bind()},keepCharPositions:function(){this.bind()},pipe:function(){this.bind()},showMask:function(){this.bind()}}}},function(e,t){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.placeholderChar="_"},function(e,t,r){"use strict";function n(){var e=arguments.length>0&&void 0!==arguments[0]?arguments[0]:a,t=arguments.length>1&&void 0!==arguments[1]?arguments[1]:a,r=arguments.length>2&&void 0!==arguments[2]?arguments[2]:{},n=r.guide,u=void 0===n||n,s=r.previousConformedValue,l=void 0===s?a:s,f=r.placeholderChar,d=void 0===f?o.placeholderChar:f,c=r.placeholder,p=void 0===c?(0,i.convertMaskToPlaceholder)(t,d):c,h=r.currentCaretPosition,v=r.keepCharPositions,m=u===!1&&void 0!==l,g=e.length,y=l.length,b=p.length,k=t.length,C=g-y,x=C>0,P=h+(x?-C:0),M=P+Math.abs(C);if(v===!0&&!x){for(var O=a,T=P;T<M;T++)p[T]===d&&(O+=d);e=e.slice(0,P)+O+e.slice(P,g)}for(var w=e.split(a).map(function(e,t){return{char:e,isNew:t>=P&&t<M}}),E=g-1;E>=0;E--){var j=w[E].char;if(j!==d){var V=E>=P&&y===k;j===p[V?E-C:E]&&w.splice(E,1)}}var S=a,_=!1;e:for(var I=0;I<b;I++){var N=p[I];if(N===d){if(w.length>0)for(;w.length>0;){var q=w.shift(),A=q.char,$=q.isNew;if(A===d&&m!==!0){S+=d;continue e}if(t[I].test(A)){if(v===!0&&$!==!1&&l!==a&&u!==!1&&x){for(var B=w.length,F=null,R=0;R<B;R++){var J=w[R];if(J.char!==d&&J.isNew===!1)break;if(J.char===d){F=R;break}}null!==F?(S+=A,w.splice(F,1)):I--}else S+=A;continue e}_=!0}m===!1&&(S+=p.substr(I,b));break}S+=N}if(m&&x===!1){for(var L=null,W=0;W<S.length;W++)p[W]===d&&(L=W);S=null!==L?S.substr(0,L+1):a}return{conformedValue:S,meta:{someCharsRejected:_}}}Object.defineProperty(t,"__esModule",{value:!0}),t.default=n;var i=r(3),o=r(1),a=""},function(e,t,r){"use strict";function n(){var e=arguments.length>0&&void 0!==arguments[0]?arguments[0]:s,t=arguments.length>1&&void 0!==arguments[1]?arguments[1]:u.placeholderChar;if(e.indexOf(t)!==-1)throw new Error("Placeholder character must not be used as part of the mask. Please specify a character that is not present in your mask as your placeholder character.\n\n"+("The placeholder character that was received is: "+JSON.stringify(t)+"\n\n")+("The mask that was received is: "+JSON.stringify(e)));return e.map(function(e){return e instanceof RegExp?t:e}).join("")}function i(e){return"string"==typeof e||e instanceof String}function o(e){return"number"==typeof e&&void 0===e.length&&!isNaN(e)}function a(e){for(var t=[],r=void 0;r=e.indexOf(l),r!==-1;)t.push(r),e.splice(r,1);return{maskWithoutCaretTraps:e,indexes:t}}Object.defineProperty(t,"__esModule",{value:!0}),t.convertMaskToPlaceholder=n,t.isString=i,t.isNumber=o,t.processCaretTraps=a;var u=r(1),s=[],l="[]"},function(e,t){"use strict";function r(e){var t=e.previousConformedValue,r=void 0===t?i:t,o=e.previousPlaceholder,a=void 0===o?i:o,u=e.currentCaretPosition,s=void 0===u?0:u,l=e.conformedValue,f=e.rawValue,d=e.placeholderChar,c=e.placeholder,p=e.indexesOfPipedChars,h=void 0===p?n:p,v=e.caretTrapIndexes,m=void 0===v?n:v;if(0===s)return 0;var g=f.length,y=r.length,b=c.length,k=l.length,C=g-y,x=C>0,P=0===y,M=C>1&&!x&&!P;if(M)return s;var O=x&&(r===l||l===c),T=0,w=void 0,E=void 0;if(O)T=s-C;else{var j=l.toLowerCase(),V=f.toLowerCase(),S=V.substr(0,s).split(i),_=S.filter(function(e){return j.indexOf(e)!==-1});E=_[_.length-1];var I=a.substr(0,_.length).split(i).filter(function(e){return e!==d}).length,N=c.substr(0,_.length).split(i).filter(function(e){return e!==d}).length,q=N!==I,A=void 0!==a[_.length-1]&&void 0!==c[_.length-2]&&a[_.length-1]!==d&&a[_.length-1]!==c[_.length-1]&&a[_.length-1]===c[_.length-2];!x&&(q||A)&&I>0&&c.indexOf(E)>-1&&void 0!==f[s]&&(w=!0,E=f[s]);for(var $=h.map(function(e){return j[e]}),B=$.filter(function(e){return e===E}).length,F=_.filter(function(e){return e===E}).length,R=c.substr(0,c.indexOf(d)).split(i).filter(function(e,t){return e===E&&f[t]!==e}).length,J=R+F+B+(w?1:0),L=0,W=0;W<k;W++){var D=j[W];if(T=W+1,D===E&&L++,L>=J)break}}if(x){for(var z=T,G=T;G<=b;G++)if(c[G]===d&&(z=G),c[G]===d||m.indexOf(G)!==-1||G===b)return z}else if(w){for(var H=T-1;H>=0;H--)if(l[H]===E||m.indexOf(H)!==-1||0===H)return H}else for(var K=T;K>=0;K--)if(c[K-1]===d||m.indexOf(K)!==-1||0===K)return K}Object.defineProperty(t,"__esModule",{value:!0}),t.default=r;var n=[],i=""},function(e,t,r){"use strict";function n(e){return e&&e.__esModule?e:{default:e}}function i(e){var t={previousConformedValue:void 0,previousPlaceholder:void 0};return{state:t,update:function(r){var n=arguments.length>1&&void 0!==arguments[1]?arguments[1]:e,i=n.inputElement,l=n.mask,d=n.guide,g=n.pipe,b=n.placeholderChar,k=void 0===b?h.placeholderChar:b,C=n.keepCharPositions,x=void 0!==C&&C,P=n.showMask,M=void 0!==P&&P;if("undefined"==typeof r&&(r=i.value),r!==t.previousConformedValue){("undefined"==typeof l?"undefined":s(l))===y&&void 0!==l.pipe&&void 0!==l.mask&&(g=l.pipe,l=l.mask);var O=void 0,T=void 0;if(l instanceof Array&&(O=(0,p.convertMaskToPlaceholder)(l,k)),l!==!1){var w=a(r),E=i.selectionEnd,j=t.previousConformedValue,V=t.previousPlaceholder,S=void 0;if(("undefined"==typeof l?"undefined":s(l))===v){if(T=l(w,{currentCaretPosition:E,previousConformedValue:j,placeholderChar:k}),T===!1)return;var _=(0,p.processCaretTraps)(T),I=_.maskWithoutCaretTraps,N=_.indexes;T=I,S=N,O=(0,p.convertMaskToPlaceholder)(T,k)}else T=l;var q={previousConformedValue:j,guide:d,placeholderChar:k,pipe:g,placeholder:O,currentCaretPosition:E,keepCharPositions:x},A=(0,c.default)(w,T,q),$=A.conformedValue,B=("undefined"==typeof g?"undefined":s(g))===v,F={};B&&(F=g($,u({rawValue:w},q)),F===!1?F={value:j,rejected:!0}:(0,p.isString)(F)&&(F={value:F}));var R=B?F.value:$,J=(0,f.default)({previousConformedValue:j,previousPlaceholder:V,conformedValue:R,placeholder:O,rawValue:w,currentCaretPosition:E,placeholderChar:k,indexesOfPipedChars:F.indexesOfPipedChars,caretTrapIndexes:S}),L=R===O&&0===J,W=M?O:m,D=L?W:R;t.previousConformedValue=D,t.previousPlaceholder=O,i.value!==D&&(i.value=D,o(i,J))}}}}}function o(e,t){document.activeElement===e&&(b?k(function(){return e.setSelectionRange(t,t,g)},0):e.setSelectionRange(t,t,g))}function a(e){if((0,p.isString)(e))return e;if((0,p.isNumber)(e))return String(e);if(void 0===e||null===e)return m;throw new Error("The 'value' provided to Text Mask needs to be a string or a number. The value received was:\n\n "+JSON.stringify(e))}Object.defineProperty(t,"__esModule",{value:!0});var u=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var r=arguments[t];for(var n in r)Object.prototype.hasOwnProperty.call(r,n)&&(e[n]=r[n])}return e},s="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e};t.default=i;var l=r(4),f=n(l),d=r(2),c=n(d),p=r(3),h=r(1),v="function",m="",g="none",y="object",b="undefined"!=typeof navigator&&/Android/i.test(navigator.userAgent),k="undefined"!=typeof requestAnimationFrame?requestAnimationFrame:setTimeout}])});
 
 /***/ }),
-/* 179 */
+/* 180 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*eslint-env browser*/
@@ -59105,7 +59698,7 @@ for (var key in styles) {
   clientOverlay.style[key] = styles[key];
 }
 
-var ansiHTML = __webpack_require__(100);
+var ansiHTML = __webpack_require__(101);
 var colors = {
   reset: ['transparent', 'transparent'],
   black: '181818',
@@ -59120,7 +59713,7 @@ var colors = {
 };
 ansiHTML.setColors(colors);
 
-var Entities = __webpack_require__(123).AllHtmlEntities;
+var Entities = __webpack_require__(124).AllHtmlEntities;
 var entities = new Entities();
 
 exports.showProblems =
@@ -59161,7 +59754,7 @@ function problemType (type) {
 
 
 /***/ }),
-/* 180 */
+/* 181 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -59299,61 +59892,61 @@ module.exports = function(hash, moduleMap, options) {
 
 
 /***/ }),
-/* 181 */
+/* 182 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = (__webpack_require__(5))(194);
 
 /***/ }),
-/* 182 */
+/* 183 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = (__webpack_require__(5))(195);
 
 /***/ }),
-/* 183 */
+/* 184 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = (__webpack_require__(5))(201);
 
 /***/ }),
-/* 184 */
+/* 185 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = (__webpack_require__(5))(203);
 
 /***/ }),
-/* 185 */
+/* 186 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = (__webpack_require__(5))(204);
 
 /***/ }),
-/* 186 */
+/* 187 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = (__webpack_require__(5))(205);
 
 /***/ }),
-/* 187 */
+/* 188 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = (__webpack_require__(5))(207);
 
 /***/ }),
-/* 188 */
+/* 189 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = (__webpack_require__(5))(3);
 
 /***/ }),
-/* 189 */
+/* 190 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = (__webpack_require__(5))(46);
 
 /***/ }),
-/* 190 */
+/* 191 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(31);

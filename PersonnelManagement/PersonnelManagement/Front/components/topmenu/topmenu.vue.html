@@ -401,10 +401,25 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div v-if="persondecreeSigned != 1">
-                                                    <div>
+                                                <div>
+                                                    <div v-if="persondecreeSigned != 1">
                                                         <!--<el-button size="mini" type="warning" @click="updatePersonreward(persondecreeBlock, decreeoperation)">Редактировать</el-button>-->
                                                         <el-button size="mini" type="warning" @click="removePersondecreeoperation(decreeoperation)">Удалить</el-button>
+                                                    </div>
+                                                    <div v-else>
+                                                        <el-select v-model="decreeoperation.excerptstructures"
+                                                                   multiple
+                                                                   filterable
+                                                                   allow-create
+                                                                   default-first-option
+                                                                   placeholder="Редактировать список получателей данного пункта"
+                                                                   style="width: 200px">
+                                                            <el-option v-for="item in featured"
+                                                                       :key="item.id"
+                                                                       :label="item.name"
+                                                                       :value="item.name">
+                                                            </el-option>
+                                                        </el-select>
                                                     </div>
                                                 </div>
 
@@ -489,9 +504,26 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div v-if="persondecreeSigned != 1">
-                                                <!--<el-button size="mini" type="warning" @click="updatePersonreward(persondecreeBlock, decreeoperation)">Редактировать</el-button>-->
-                                                <el-button size="mini" type="warning" @click="removePersondecreeoperation(decreeoperation)">Удалить</el-button>
+                                            <div>
+                                                <div v-if="persondecreeSigned != 1">
+                                                    <!--<el-button size="mini" type="warning" @click="updatePersonreward(persondecreeBlock, decreeoperation)">Редактировать</el-button>-->
+                                                    <el-button size="mini" type="warning" @click="removePersondecreeoperation(decreeoperation)">Удалить</el-button>
+                                                </div>
+                                                <div v-else>
+                                                    <el-select v-model="decreeoperation.excerptstructures"
+                                                               multiple
+                                                               filterable
+                                                               allow-create
+                                                               default-first-option
+                                                               placeholder="Редактировать список получателей данного пункта"
+                                                               style="width: 200px">
+                                                        <el-option v-for="item in featured"
+                                                                   :key="item.id"
+                                                                   :label="item.name"
+                                                                   :value="item.name">
+                                                        </el-option>
+                                                    </el-select>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -669,17 +701,30 @@
                                         </div>
                                     </div>
                                     <div>
-                                        <div>
-                                            <div>
-                                                <!--<el-button size="mini" type="warning" @click="updatePersonreward(persondecreeBlock, decreeoperation)">Редактировать</el-button>-->
-                                                <el-button size="mini" type="warning" @click="removePersondecreeoperation(decreeoperation)">Удалить</el-button>
-                                            </div>
+                                        <div v-if="persondecreeSigned != 1">
+                                            <!--<el-button size="mini" type="warning" @click="updatePersonreward(persondecreeBlock, decreeoperation)">Редактировать</el-button>-->
+                                            <el-button size="mini" type="warning" @click="removePersondecreeoperation(decreeoperation)">Удалить</el-button>
+                                        </div>
+                                        <div v-else>
+                                            <el-select v-model="decreeoperation.excerptstructures"
+                                                       multiple
+                                                       filterable
+                                                       allow-create
+                                                       default-first-option
+                                                       placeholder="Редактировать список получателей данного пункта"
+                                                       style="width: 200px">
+                                                <el-option v-for="item in featured"
+                                                           :key="item.id"
+                                                           :label="item.name"
+                                                           :value="item.name">
+                                                </el-option>
+                                            </el-select>
                                         </div>
                                     </div>
                                 </div>
                                 <br />
                             </div>
-                            <div>
+                            <div v-if="persondecreeSigned != 1">
                                 <el-button @click="deletePersondecreeblock(persondecreeBlock)" type="danger">Удалить блок</el-button>
                             </div>
                         </div>
@@ -880,12 +925,25 @@
 
                                         </div>
                                     </div>
-                                    <div v-if="persondecreeSigned != 1">
-                                        <div>
-                                            <div>
-                                                <!--<el-button size="mini" type="warning" @click="updatePersonreward(persondecreeBlock, decreeoperation)">Редактировать</el-button>-->
-                                                <el-button size="mini" type="warning" @click="removePersondecreeoperation(decreeoperation)">Удалить</el-button>
-                                            </div>
+                                    <div>
+                                        <div v-if="persondecreeSigned != 1">
+                                            <!--<el-button size="mini" type="warning" @click="updatePersonreward(persondecreeBlock, decreeoperation)">Редактировать</el-button>-->
+                                            <el-button size="mini" type="warning" @click="removePersondecreeoperation(decreeoperation)">Удалить</el-button>
+                                        </div>
+                                        <div v-else>
+                                            <el-select v-model="decreeoperation.excerptstructures"
+                                                       multiple
+                                                       filterable
+                                                       allow-create
+                                                       default-first-option
+                                                       placeholder="Редактировать список получателей данного пункта"
+                                                       style="width: 200px">
+                                                <el-option v-for="item in featured"
+                                                           :key="item.id"
+                                                           :label="item.name"
+                                                           :value="item.name">
+                                                </el-option>
+                                            </el-select>
                                         </div>
                                     </div>
                                 </div>
@@ -1202,12 +1260,25 @@
 
                                             </div>
 
-                                            <div v-if="persondecreeSigned != 1">
-                                                <div>
-                                                    <div>
-                                                        <!--<el-button size="mini" type="warning" @click="updatePersonreward(persondecreeBlock, decreeoperation)">Редактировать</el-button>-->
-                                                        <el-button size="mini" type="warning" @click="removePersondecreeoperation(decreeoperation)">Удалить</el-button>
-                                                    </div>
+                                            <div>
+                                                <div v-if="persondecreeSigned != 1">
+                                                    <!--<el-button size="mini" type="warning" @click="updatePersonreward(persondecreeBlock, decreeoperation)">Редактировать</el-button>-->
+                                                    <el-button size="mini" type="warning" @click="removePersondecreeoperation(decreeoperation)">Удалить</el-button>
+                                                </div>
+                                                <div v-else>
+                                                    <el-select v-model="decreeoperation.excerptstructures"
+                                                               multiple
+                                                               filterable
+                                                               allow-create
+                                                               default-first-option
+                                                               placeholder="Редактировать список получателей данного пункта"
+                                                               style="width: 200px">
+                                                        <el-option v-for="item in featured"
+                                                                   :key="item.id"
+                                                                   :label="item.name"
+                                                                   :value="item.name">
+                                                        </el-option>
+                                                    </el-select>
                                                 </div>
                                             </div>
                                         </div>
@@ -1326,12 +1397,25 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div v-if="persondecreeSigned != 1">
-                                                <div>
-                                                    <div>
-                                                        <!--<el-button size="mini" type="warning" @click="updatePersonreward(persondecreeBlock, decreeoperation)">Редактировать</el-button>-->
-                                                        <el-button size="mini" type="warning" @click="removePersondecreeoperation(decreeoperation)">Удалить</el-button>
-                                                    </div>
+                                            <div>
+                                                <div v-if="persondecreeSigned != 1">
+                                                    <!--<el-button size="mini" type="warning" @click="updatePersonreward(persondecreeBlock, decreeoperation)">Редактировать</el-button>-->
+                                                    <el-button size="mini" type="warning" @click="removePersondecreeoperation(decreeoperation)">Удалить</el-button>
+                                                </div>
+                                                <div v-else>
+                                                    <el-select v-model="decreeoperation.excerptstructures"
+                                                               multiple
+                                                               filterable
+                                                               allow-create
+                                                               default-first-option
+                                                               placeholder="Редактировать список получателей данного пункта"
+                                                               style="width: 200px">
+                                                        <el-option v-for="item in featured"
+                                                                   :key="item.id"
+                                                                   :label="item.name"
+                                                                   :value="item.name">
+                                                        </el-option>
+                                                    </el-select>
                                                 </div>
                                             </div>
                                         </div>
@@ -1422,12 +1506,25 @@
                                             Основание: {{decreeoperation.optionstring2}}.
                                         </div>
                                     </div>
-                                    <div v-if="persondecreeSigned != 1">
-                                        <div>
-                                            <div>
-                                                <!--<el-button size="mini" type="warning" @click="updatePersonreward(persondecreeBlock, decreeoperation)">Редактировать</el-button>-->
-                                                <el-button size="mini" type="warning" @click="removePersondecreeoperation(decreeoperation)">Удалить</el-button>
-                                            </div>
+                                    <div>
+                                        <div v-if="persondecreeSigned != 1">
+                                            <!--<el-button size="mini" type="warning" @click="updatePersonreward(persondecreeBlock, decreeoperation)">Редактировать</el-button>-->
+                                            <el-button size="mini" type="warning" @click="removePersondecreeoperation(decreeoperation)">Удалить</el-button>
+                                        </div>
+                                        <div v-else>
+                                            <el-select v-model="decreeoperation.excerptstructures"
+                                                       multiple
+                                                       filterable
+                                                       allow-create
+                                                       default-first-option
+                                                       placeholder="Редактировать список получателей данного пункта"
+                                                       style="width: 200px">
+                                                <el-option v-for="item in featured"
+                                                           :key="item.id"
+                                                           :label="item.name"
+                                                           :value="item.name">
+                                                </el-option>
+                                            </el-select>
                                         </div>
                                     </div>
 
@@ -1524,12 +1621,25 @@
                                             Основание: {{decreeoperation.optionstring1}}.
                                         </div>
                                     </div>
-                                    <div v-if="persondecreeSigned != 1">
-                                        <div>
-                                            <div>
-                                                <!--<el-button size="mini" type="warning" @click="updatePersonreward(persondecreeBlock, decreeoperation)">Редактировать</el-button>-->
-                                                <el-button size="mini" type="warning" @click="removePersondecreeoperation(decreeoperation)">Удалить</el-button>
-                                            </div>
+                                    <div>
+                                        <div v-if="persondecreeSigned != 1">
+                                            <!--<el-button size="mini" type="warning" @click="updatePersonreward(persondecreeBlock, decreeoperation)">Редактировать</el-button>-->
+                                            <el-button size="mini" type="warning" @click="removePersondecreeoperation(decreeoperation)">Удалить</el-button>
+                                        </div>
+                                        <div v-else>
+                                            <el-select v-model="decreeoperation.excerptstructures"
+                                                       multiple
+                                                       filterable
+                                                       allow-create
+                                                       default-first-option
+                                                       placeholder="Редактировать список получателей данного пункта"
+                                                       style="width: 200px">
+                                                <el-option v-for="item in featured"
+                                                           :key="item.id"
+                                                           :label="item.name"
+                                                           :value="item.name">
+                                                </el-option>
+                                            </el-select>
                                         </div>
                                     </div>
 
@@ -1619,12 +1729,25 @@
                                             Основание: {{decreeoperation.optionstring2}}.
                                         </div>
                                     </div>
-                                    <div v-if="persondecreeSigned != 1">
-                                        <div>
-                                            <div>
-                                                <!--<el-button size="mini" type="warning" @click="updatePersonreward(persondecreeBlock, decreeoperation)">Редактировать</el-button>-->
-                                                <el-button size="mini" type="warning" @click="removePersondecreeoperation(decreeoperation)">Удалить</el-button>
-                                            </div>
+                                    <div>
+                                        <div v-if="persondecreeSigned != 1">
+                                            <!--<el-button size="mini" type="warning" @click="updatePersonreward(persondecreeBlock, decreeoperation)">Редактировать</el-button>-->
+                                            <el-button size="mini" type="warning" @click="removePersondecreeoperation(decreeoperation)">Удалить</el-button>
+                                        </div>
+                                        <div v-else>
+                                            <el-select v-model="decreeoperation.excerptstructures"
+                                                       multiple
+                                                       filterable
+                                                       allow-create
+                                                       default-first-option
+                                                       placeholder="Редактировать список получателей данного пункта"
+                                                       style="width: 200px">
+                                                <el-option v-for="item in featured"
+                                                           :key="item.id"
+                                                           :label="item.name"
+                                                           :value="item.name">
+                                                </el-option>
+                                            </el-select>
                                         </div>
                                     </div>
 
@@ -1766,12 +1889,25 @@
                                             Основание: {{decreeoperation.optionstring3}}.
                                         </div>
                                     </div>
-                                    <div v-if="persondecreeSigned != 1">
-                                        <div>
-                                            <div>
-                                                <!--<el-button size="mini" type="warning" @click="updatePersonreward(persondecreeBlock, decreeoperation)">Редактировать</el-button>-->
-                                                <el-button size="mini" type="warning" @click="removePersondecreeoperation(decreeoperation)">Удалить</el-button>
-                                            </div>
+                                    <div>
+                                        <div v-if="persondecreeSigned != 1">
+                                            <!--<el-button size="mini" type="warning" @click="updatePersonreward(persondecreeBlock, decreeoperation)">Редактировать</el-button>-->
+                                            <el-button size="mini" type="warning" @click="removePersondecreeoperation(decreeoperation)">Удалить</el-button>
+                                        </div>
+                                        <div v-else>
+                                            <el-select v-model="decreeoperation.excerptstructures"
+                                                       multiple
+                                                       filterable
+                                                       allow-create
+                                                       default-first-option
+                                                       placeholder="Редактировать список получателей данного пункта"
+                                                       style="width: 200px">
+                                                <el-option v-for="item in featured"
+                                                           :key="item.id"
+                                                           :label="item.name"
+                                                           :value="item.name">
+                                                </el-option>
+                                            </el-select>
                                         </div>
                                     </div>
 
@@ -2026,12 +2162,25 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div v-if="persondecreeSigned != 1">
-                                            <div>
-                                                <div>
-                                                    <!--<el-button size="mini" type="warning" @click="updatePersonreward(persondecreeBlock, decreeoperation)">Редактировать</el-button>-->
-                                                    <el-button size="mini" type="warning" @click="removePersondecreeoperation(decreeoperation)">Удалить</el-button>
-                                                </div>
+                                        <div>
+                                            <div v-if="persondecreeSigned != 1">
+                                                <!--<el-button size="mini" type="warning" @click="updatePersonreward(persondecreeBlock, decreeoperation)">Редактировать</el-button>-->
+                                                <el-button size="mini" type="warning" @click="removePersondecreeoperation(decreeoperation)">Удалить</el-button>
+                                            </div>
+                                            <div v-else>
+                                                <el-select v-model="decreeoperation.excerptstructures"
+                                                           multiple
+                                                           filterable
+                                                           allow-create
+                                                           default-first-option
+                                                           placeholder="Редактировать список получателей данного пункта"
+                                                           style="width: 200px">
+                                                    <el-option v-for="item in featured"
+                                                               :key="item.id"
+                                                               :label="item.name"
+                                                               :value="item.name">
+                                                    </el-option>
+                                                </el-select>
                                             </div>
                                         </div>
                                     </div>
@@ -2053,10 +2202,25 @@
                                                         {{decreeoperation.personobject.surname3}} {{decreeoperation.personobject.name3}}
                                                         {{decreeoperation.personobject.fathername3}}{{commaspaceifnotnull(decreeoperation.personobject.positiontree3)}} {{decreeoperation.personobject.positiontree3}}
                                                     </div>
-                                                    <div v-if="persondecreeSigned != 1">
-                                                        <div>
+                                                    <div>
+                                                        <div v-if="persondecreeSigned != 1">
                                                             <!--<el-button size="mini" type="warning" @click="updatePersonreward(persondecreeBlock, decreeoperation)">Редактировать</el-button>-->
                                                             <el-button size="mini" type="warning" @click="removePersondecreeoperation(decreeoperation)">Удалить</el-button>
+                                                        </div>
+                                                        <div v-else>
+                                                            <el-select v-model="decreeoperation.excerptstructures"
+                                                                       multiple
+                                                                       filterable
+                                                                       allow-create
+                                                                       default-first-option
+                                                                       placeholder="Редактировать список получателей данного пункта"
+                                                                       style="width: 200px">
+                                                                <el-option v-for="item in featured"
+                                                                           :key="item.id"
+                                                                           :label="item.name"
+                                                                           :value="item.name">
+                                                                </el-option>
+                                                            </el-select>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -2153,12 +2317,25 @@
                                         </div>
 
                                     </div>
-                                    <div v-if="persondecreeSigned != 1">
-                                        <div>
-                                            <div>
-                                                <!--<el-button size="mini" type="warning" @click="updatePersonreward(persondecreeBlock, decreeoperation)">Редактировать</el-button>-->
-                                                <el-button size="mini" type="warning" @click="removePersondecreeoperation(decreeoperation)">Удалить</el-button>
-                                            </div>
+                                    <div>
+                                        <div v-if="persondecreeSigned != 1">
+                                            <!--<el-button size="mini" type="warning" @click="updatePersonreward(persondecreeBlock, decreeoperation)">Редактировать</el-button>-->
+                                            <el-button size="mini" type="warning" @click="removePersondecreeoperation(decreeoperation)">Удалить</el-button>
+                                        </div>
+                                        <div v-else>
+                                            <el-select v-model="decreeoperation.excerptstructures"
+                                                       multiple
+                                                       filterable
+                                                       allow-create
+                                                       default-first-option
+                                                       placeholder="Редактировать список получателей данного пункта"
+                                                       style="width: 200px">
+                                                <el-option v-for="item in featured"
+                                                           :key="item.id"
+                                                           :label="item.name"
+                                                           :value="item.name">
+                                                </el-option>
+                                            </el-select>
                                         </div>
                                     </div>
 
@@ -2253,12 +2430,25 @@
                                         </div>
 
                                     </div>
-                                    <div v-if="persondecreeSigned != 1">
-                                        <div>
-                                            <div>
-                                                <!--<el-button size="mini" type="warning" @click="updatePersonreward(persondecreeBlock, decreeoperation)">Редактировать</el-button>-->
-                                                <el-button size="mini" type="warning" @click="removePersondecreeoperation(decreeoperation)">Удалить</el-button>
-                                            </div>
+                                    <div>
+                                        <div v-if="persondecreeSigned != 1">
+                                            <!--<el-button size="mini" type="warning" @click="updatePersonreward(persondecreeBlock, decreeoperation)">Редактировать</el-button>-->
+                                            <el-button size="mini" type="warning" @click="removePersondecreeoperation(decreeoperation)">Удалить</el-button>
+                                        </div>
+                                        <div v-else>
+                                            <el-select v-model="decreeoperation.excerptstructures"
+                                                       multiple
+                                                       filterable
+                                                       allow-create
+                                                       default-first-option
+                                                       placeholder="Редактировать список получателей данного пункта"
+                                                       style="width: 200px">
+                                                <el-option v-for="item in featured"
+                                                           :key="item.id"
+                                                           :label="item.name"
+                                                           :value="item.name">
+                                                </el-option>
+                                            </el-select>
                                         </div>
                                     </div>
 
@@ -2346,12 +2536,25 @@
                                             Основание: {{decreeoperation.optionstring1}}.
                                         </div>
                                     </div>
-                                    <div v-if="persondecreeSigned != 1">
-                                        <div>
-                                            <div>
-                                                <!--<el-button size="mini" type="warning" @click="updatePersonreward(persondecreeBlock, decreeoperation)">Редактировать</el-button>-->
-                                                <el-button size="mini" type="warning" @click="removePersondecreeoperation(decreeoperation)">Удалить</el-button>
-                                            </div>
+                                    <div>
+                                        <div v-if="persondecreeSigned != 1">
+                                            <!--<el-button size="mini" type="warning" @click="updatePersonreward(persondecreeBlock, decreeoperation)">Редактировать</el-button>-->
+                                            <el-button size="mini" type="warning" @click="removePersondecreeoperation(decreeoperation)">Удалить</el-button>
+                                        </div>
+                                        <div v-else>
+                                            <el-select v-model="decreeoperation.excerptstructures"
+                                                       multiple
+                                                       filterable
+                                                       allow-create
+                                                       default-first-option
+                                                       placeholder="Редактировать список получателей данного пункта"
+                                                       style="width: 200px">
+                                                <el-option v-for="item in featured"
+                                                           :key="item.id"
+                                                           :label="item.name"
+                                                           :value="item.name">
+                                                </el-option>
+                                            </el-select>
                                         </div>
                                     </div>
 
@@ -2445,12 +2648,25 @@
                                                 <span v-if="decreeoperation.optiondate1 != null"> с {{printDateDocument(decreeoperation.optiondate1)}}</span>;
                                             </div>
                                         </div>
-                                        <div v-if="persondecreeSigned != 1">
-                                            <div>
-                                                <div>
-                                                    <!--<el-button size="mini" type="warning" @click="updatePersonreward(persondecreeBlock, decreeoperation)">Редактировать</el-button>-->
-                                                    <el-button size="mini" type="warning" @click="removePersondecreeoperation(decreeoperation)">Удалить</el-button>
-                                                </div>
+                                        <div>
+                                            <div v-if="persondecreeSigned != 1">
+                                                <!--<el-button size="mini" type="warning" @click="updatePersonreward(persondecreeBlock, decreeoperation)">Редактировать</el-button>-->
+                                                <el-button size="mini" type="warning" @click="removePersondecreeoperation(decreeoperation)">Удалить</el-button>
+                                            </div>
+                                            <div v-else>
+                                                <el-select v-model="decreeoperation.excerptstructures"
+                                                           multiple
+                                                           filterable
+                                                           allow-create
+                                                           default-first-option
+                                                           placeholder="Редактировать список получателей данного пункта"
+                                                           style="width: 200px">
+                                                    <el-option v-for="item in featured"
+                                                               :key="item.id"
+                                                               :label="item.name"
+                                                               :value="item.name">
+                                                    </el-option>
+                                                </el-select>
                                             </div>
                                         </div>
                                     </div>
@@ -2751,12 +2967,25 @@
                                                 Основание: {{decreeoperation.optionstring3}}
                                             </div>
                                         </div>
-                                        <div v-if="persondecreeSigned != 1">
-                                            <div>
-                                                <div>
-                                                    <!--<el-button size="mini" type="warning" @click="updatePersonreward(persondecreeBlock, decreeoperation)">Редактировать</el-button>-->
-                                                    <el-button size="mini" type="warning" @click="removePersondecreeoperation(decreeoperation)">Удалить</el-button>
-                                                </div>
+                                        <div>
+                                            <div v-if="persondecreeSigned != 1">
+                                                <!--<el-button size="mini" type="warning" @click="updatePersonreward(persondecreeBlock, decreeoperation)">Редактировать</el-button>-->
+                                                <el-button size="mini" type="warning" @click="removePersondecreeoperation(decreeoperation)">Удалить</el-button>
+                                            </div>
+                                            <div v-else>
+                                                <el-select v-model="decreeoperation.excerptstructures"
+                                                           multiple
+                                                           filterable
+                                                           allow-create
+                                                           default-first-option
+                                                           placeholder="Редактировать список получателей данного пункта"
+                                                           style="width: 200px">
+                                                    <el-option v-for="item in featured"
+                                                               :key="item.id"
+                                                               :label="item.name"
+                                                               :value="item.name">
+                                                    </el-option>
+                                                </el-select>
                                             </div>
                                         </div>
                                     </div>
@@ -2772,10 +3001,25 @@
                                                     {{decreeoperation.personobject.fathername2}}{{commaspaceifnotnull(decreeoperation.personobject.positiontypestring)}} {{decreeoperation.personobject.positiontype2string}}
                                                     {{getStructureName(decreeoperation.personobject.structure)}}а {{getFacultiStructureName(decreeoperation.personobject.structure)}}
                                                 </div>
-                                                <div v-if="persondecreeSigned != 1">
-                                                    <div>
+                                                <div>
+                                                    <div v-if="persondecreeSigned != 1">
                                                         <!--<el-button size="mini" type="warning" @click="updatePersonreward(persondecreeBlock, decreeoperation)">Редактировать</el-button>-->
                                                         <el-button size="mini" type="warning" @click="removePersondecreeoperation(decreeoperation)">Удалить</el-button>
+                                                    </div>
+                                                    <div v-else>
+                                                        <el-select v-model="decreeoperation.excerptstructures"
+                                                                   multiple
+                                                                   filterable
+                                                                   allow-create
+                                                                   default-first-option
+                                                                   placeholder="Редактировать список получателей данного пункта"
+                                                                   style="width: 200px">
+                                                            <el-option v-for="item in featured"
+                                                                       :key="item.id"
+                                                                       :label="item.name"
+                                                                       :value="item.name">
+                                                            </el-option>
+                                                        </el-select>
                                                     </div>
                                                 </div>
                                             </div>
@@ -2966,12 +3210,25 @@
                                                 Основание: {{decreeoperation.optionstring4}}.
                                             </div>
                                         </div>
-                                        <div v-if="persondecreeSigned != 1">
-                                            <div>
-                                                <div>
-                                                    <!--<el-button size="mini" type="warning" @click="updatePersonreward(persondecreeBlock, decreeoperation)">Редактировать</el-button>-->
-                                                    <el-button size="mini" type="warning" @click="removePersondecreeoperation(decreeoperation)">Удалить</el-button>
-                                                </div>
+                                        <div>
+                                            <div v-if="persondecreeSigned != 1">
+                                                <!--<el-button size="mini" type="warning" @click="updatePersonreward(persondecreeBlock, decreeoperation)">Редактировать</el-button>-->
+                                                <el-button size="mini" type="warning" @click="removePersondecreeoperation(decreeoperation)">Удалить</el-button>
+                                            </div>
+                                            <div v-else>
+                                                <el-select v-model="decreeoperation.excerptstructures"
+                                                           multiple
+                                                           filterable
+                                                           allow-create
+                                                           default-first-option
+                                                           placeholder="Редактировать список получателей данного пункта"
+                                                           style="width: 200px">
+                                                    <el-option v-for="item in featured"
+                                                               :key="item.id"
+                                                               :label="item.name"
+                                                               :value="item.name">
+                                                    </el-option>
+                                                </el-select>
                                             </div>
                                         </div>
                                     </div>
@@ -3524,10 +3781,25 @@
                                                     {{decreeoperation.personobject.fathername3}}{{commaspaceifnotnull(decreeoperation.personobject.positiontree3)}} {{decreeoperation.personobject.positiontree3}}
                                                     <span v-if = "decreeoperation.optionnumber8 == 1 ">в распоряжение начальника {{decreeoperation.optionstring4}} учреждение {{decreeoperation.optionstring5}}</span>
                                                 </div>
-                                                <div v-if="persondecreeSigned != 1">
-                                                    <div>
+                                                <div>
+                                                    <div v-if="persondecreeSigned != 1">
                                                         <!--<el-button size="mini" type="warning" @click="updatePersonreward(persondecreeBlock, decreeoperation)">Редактировать</el-button>-->
                                                         <el-button size="mini" type="warning" @click="removePersondecreeoperation(decreeoperation)">Удалить</el-button>
+                                                    </div>
+                                                    <div v-else>
+                                                        <el-select v-model="decreeoperation.excerptstructures"
+                                                                   multiple
+                                                                   filterable
+                                                                   allow-create
+                                                                   default-first-option
+                                                                   placeholder="Редактировать список получателей данного пункта"
+                                                                   style="width: 200px">
+                                                            <el-option v-for="item in featured"
+                                                                       :key="item.id"
+                                                                       :label="item.name"
+                                                                       :value="item.name">
+                                                            </el-option>
+                                                        </el-select>
                                                     </div>
                                                 </div>
                                             </div>
@@ -3676,9 +3948,25 @@
                                                             {{decreeoperation.personobject.surname2}} {{decreeoperation.personobject.name2}}
                                                             {{decreeoperation.personobject.fathername2}}.
                                                         </div>
-                                                        <div v-if="persondecreeSigned != 1">
-                                                            <div>
+                                                        <div>
+                                                            <div v-if="persondecreeSigned != 1">
+                                                                <!--<el-button size="mini" type="warning" @click="updatePersonreward(persondecreeBlock, decreeoperation)">Редактировать</el-button>-->
                                                                 <el-button size="mini" type="warning" @click="removePersondecreeoperation(decreeoperation)">Удалить</el-button>
+                                                            </div>
+                                                            <div v-else>
+                                                                <el-select v-model="decreeoperation.excerptstructures"
+                                                                           multiple
+                                                                           filterable
+                                                                           allow-create
+                                                                           default-first-option
+                                                                           placeholder="Редактировать список получателей данного пункта"
+                                                                           style="width: 200px">
+                                                                    <el-option v-for="item in featured"
+                                                                               :key="item.id"
+                                                                               :label="item.name"
+                                                                               :value="item.name">
+                                                                    </el-option>
+                                                                </el-select>
                                                             </div>
                                                         </div>
                                                     </div>

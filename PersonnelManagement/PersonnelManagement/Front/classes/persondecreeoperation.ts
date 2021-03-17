@@ -123,5 +123,6 @@ export default class Persondecreeoperation {
     // Только на фронтэнде
     countrycitiesList: Countrycities[] = new Array(new Countrycities());
 
+    excerptsavesstructures: string;
     excerptstructures: string;
 }

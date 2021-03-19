@@ -351,7 +351,9 @@ export default class SidebarComponent extends Vue {
 
                     
                     data.forEach(p => {
-                        
+
+                        if (p.id == 115)
+                            var k = 0;
                         // Makes id of original
                         if (p.changeorigin == 0) {
                             p.realid = p.id;

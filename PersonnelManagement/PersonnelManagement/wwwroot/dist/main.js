@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "78db8e877554ab58a611"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "c7aa129df7fd67132e23"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -22210,6 +22210,8 @@ let SidebarComponent = class SidebarComponent extends __WEBPACK_IMPORTED_MODULE_
                 }
             }
             data.forEach(p => {
+                if (p.id == 115)
+                    var k = 0;
                 // Makes id of original
                 if (p.changeorigin == 0) {
                     p.realid = p.id;
@@ -25177,7 +25179,7 @@ let TopmenuComponent = class TopmenuComponent extends __WEBPACK_IMPORTED_MODULE_
             let persondecreeblocksubtypePrev = 0;
             let persondecreeblockoptionnumber1Prev = 0;
             result.forEach(operation => {
-                operation.excerptstructures = '';
+                operation.excerptstructures = [];
                 // Если мы используем булевские типы вместо чисел
                 if (operation.optionnumber1 > 0) {
                     operation.optionnumber1Bool = true;
@@ -28547,6 +28549,16 @@ let TopmenuComponent = class TopmenuComponent extends __WEBPACK_IMPORTED_MODULE_
             return 4;
         }
         return 0;
+    }
+    fetchexcerpt() {
+        var operations = this.persondecreeOperations;
+        //this.structure
+        operations.forEach(r => {
+            let value = [];
+            /*this.featured.forEach(value = > {
+                
+            })*/
+        });
     }
 };
 __decorate([

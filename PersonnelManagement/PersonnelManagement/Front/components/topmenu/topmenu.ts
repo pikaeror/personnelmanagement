@@ -1992,7 +1992,7 @@ export default class TopmenuComponent extends Vue {
                 let persondecreeblocksubtypePrev: number = 0;
                 let persondecreeblockoptionnumber1Prev: number = 0;
                 result.forEach(operation => {
-                    operation.excerptstructures = '';
+                    operation.excerptstructures = [];
                     // Если мы используем булевские типы вместо чисел
                     if (operation.optionnumber1 > 0) {
                         operation.optionnumber1Bool = true;
@@ -5684,5 +5684,16 @@ export default class TopmenuComponent extends Vue {
             return 4;
         }
         return 0;
+    }
+
+    fetchexcerpt() {
+        var operations = this.persondecreeOperations;
+        //this.structure
+        operations.forEach(r => {
+            let value: number[] = [];
+            /*this.featured.forEach(value = > {
+                
+            })*/
+        })
     }
 }

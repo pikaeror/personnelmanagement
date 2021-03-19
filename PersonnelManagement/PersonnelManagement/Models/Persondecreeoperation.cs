@@ -55,5 +55,6 @@ namespace PersonnelManagement.Models
         public string Nonperson { get; set; }
         public string Optionarray1 { get; set; }
         public string Optionarrayperson { get; set; }
+        public string Decreeexcerpt { get; set; }
     }
 }

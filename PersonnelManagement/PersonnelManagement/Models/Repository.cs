@@ -4680,8 +4680,8 @@ namespace PersonnelManagement.Models
                 {
                     strExp.ChildrenNumber = 1;
                 }
-
-                strExp.Grandparent = GetGrandParentName(strExp.Id);
+                strExp.Grandparent = GetGrandParentName(GetActualStructureInfo(strExp.Id, user.Date.GetValueOrDefault()).Id, user.Date);
+                /*strExp.Grandparent = GetGrandParentName(strExp.Id);*/
             }
 
             return outputList;
@@ -5972,15 +5972,15 @@ namespace PersonnelManagement.Models
             return false;
         }
 
-        public string GetGrandParentName(int structureID)
+        public string GetGrandParentName(int structureID, DateTime? dateTime = null)
         {
             bool anyparent = false;
             bool parentsavailable = true;
             string name = "";
             while (parentsavailable)
             {
-                Structure structure = null;
-                if (StructuresLocal().ContainsKey(structureID)){
+                Structure structure = dateTime == null ? null : GetActualStructureInfo(structureID, dateTime.GetValueOrDefault());
+                if (StructuresLocal().ContainsKey(structureID) && dateTime == null){
                     structure = StructuresLocal()[structureID];
                 }
                 if (structure == null)
@@ -16663,6 +16663,8 @@ namespace PersonnelManagement.Models
             List<Persondecreeoperation> persondecreeoperationsBase = PersondecreeoperationsLocal().Values.Where(p => p.Persondecree == decreeid).ToList();
             List<PersondecreeoperationManagement> persondecreeoperations = new List<PersondecreeoperationManagement>();
 
+            Dictionary<int, Structure> all_structures = StructuresLocal();
+            IEnumerable<Persondecreeexcerpt> persondecreeexcerpts = context.Persondecreeexcerpt;
             foreach (Persondecreeoperation decreeoperationBase in persondecreeoperationsBase)
             {
                 PersondecreeoperationManagement decreeoperation = new PersondecreeoperationManagement(decreeoperationBase);
@@ -16836,12 +16838,39 @@ namespace PersonnelManagement.Models
                 //        decreeoperation.Personreward = personreward;
                 //    }
                 //}
-
+                decreeoperation.Excerptstructures = generateexcerptstructurename(decreeoperation.Decreeexcerpt,
+                    all_structures,
+                    persondecreeexcerpts);
                 persondecreeoperations.Add(decreeoperation);
             }
 
 
             return persondecreeoperations;
+        }
+
+        private List<string> generateexcerptstructurename(string id_list,
+            Dictionary<int, Structure> structures,
+            IEnumerable<Persondecreeexcerpt> persondecreeexcerpts,
+            string devizer = "_")
+        {
+            List<string> output = new List<string>() { "" };
+            if (id_list.Length == 0)
+                return output;
+
+            List<string> working_ides_structures = id_list.Split(devizer).ToList();
+            Structure time_structure = null;
+            Persondecreeexcerpt time_persondecreeexcerpt = null;
+            int parse_value;
+            foreach(string id in working_ides_structures)
+            {
+                parse_value = Int32.Parse(id);
+                time_persondecreeexcerpt = persondecreeexcerpts.FirstOrDefault(r => r.Id == parse_value);
+                if (time_persondecreeexcerpt == null)
+                    continue;
+                time_structure = structures[time_persondecreeexcerpt.Structure];
+                output.Add(time_structure.Nameshortened);
+            }
+            return output;
         }
 
         // public void AddPersonDecreeoperation(User user, PersondecreeoperationManagement persondecreeoperation)

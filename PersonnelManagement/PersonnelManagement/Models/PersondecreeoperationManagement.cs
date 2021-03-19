@@ -23,6 +23,8 @@ namespace PersonnelManagement.Models
         public List<Cabinetdata> candidateSearch { get; set; }
         public List<PersonManager> OptionarraypersonObjects { get; set; } = new List<PersonManager>(); // ЭЛД, сгрупированные в дополнении к этой операции. 
                                                                         // Единственная группировка на данный момент - командировка нескольких людей в одно место назначения
+        
+        public List<string> Excerptstructures { get; set; }
 
         public PersondecreeoperationManagement(Persondecreeoperation persondecreeoperation)
         {
@@ -85,6 +87,9 @@ namespace PersonnelManagement.Models
             personFromStructure = new List<Person>();
             candidateSearch = new List<Cabinetdata>();
             OptionarraypersonObjects = new List<PersonManager>();
+            Decreeexcerpt = persondecreeoperation.Decreeexcerpt;
+            Excerptstructures = new List<string>();
+
         }
 
         public PersondecreeoperationManagement()

@@ -130,5 +130,24 @@ namespace PersonnelManagement.Controllers
             //}
             return new ObjectResult(Keys.ERROR_SHORT + ":Произошла какая-то оказия");
         }
+
+        // POST: api/Persondecreeoperation
+        [HttpPost("/updatelist")]
+        public IActionResult UpdateOperations([FromBody] IEnumerable<PersondecreeoperationManagement> persondecreeoperations)
+        {
+            string sessionid = Request.Cookies[Keys.COOKIES_SESSION];
+            User user = null;
+            if (IdentityService.IsLogined(sessionid, repository))
+            {
+                user = IdentityService.GetUserBySessionID(sessionid, repository);
+                bool hasAccess = IdentityService.CanEditPerson(user, repository);
+                if (!hasAccess)
+                {
+                    return new ObjectResult(Keys.ERROR_SHORT + ":Отказано в доступе");
+                }
+            }
+            /*repository.UpdatePersonDecreeoperation(user, persondecreeoperation);*/
+            return new ObjectResult(Keys.SUCCESS_SHORT + ":Обновлено!");
+        }
     }
 }

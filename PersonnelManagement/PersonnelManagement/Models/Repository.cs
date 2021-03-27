@@ -19137,6 +19137,22 @@ namespace PersonnelManagement.Models
 
         }
 
+        public void UpdatePersonDecreeoperation(IEnumerable<PersondecreeoperationManagement> persondecreeoperations)
+        {
+            Dictionary<int, Persondecreeexcerpt> persondecreeexcerpts = context.Persondecreeexcerpt.ToDictionary(r => r.Id);
+            foreach(PersondecreeoperationManagement persondecreeoperation in persondecreeoperations)
+            {
+                List<string> time_excerpt = persondecreeoperation.Decreeexcerpt.Split("_").ToList();
+                foreach(string id in time_excerpt)
+                {
+                    if (persondecreeexcerpts.ContainsKey(Int32.Parse(id)))
+                    {
+
+                    }
+                }
+            }
+        }
+
         /// <summary>
         /// Берет все блоки проекта приказа прохождения службы
         /// </summary>

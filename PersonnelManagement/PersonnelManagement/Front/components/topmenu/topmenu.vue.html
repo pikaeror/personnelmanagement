@@ -4278,7 +4278,7 @@
                     <el-button type="primary" @click="persondecreeAccept()" v-if="persondecreeSigned != 1">Применить приказ</el-button>
                     <el-button type="primary" @click="persondecreeWord()">В Word</el-button>
                     <el-button type="primary" @click="persondecreeRemove()" v-if="persondecreeSigned != 1">Отменить приказ</el-button>
-                    <el-button type="primary" @click="" v-if="persondecreeSigned == 1">Сформировать выписки</el-button>
+                    <el-button type="primary" @click="fetchexcerpt" v-if="persondecreeSigned == 1">Сформировать выписки</el-button>
                 </div>
                 <!--
 

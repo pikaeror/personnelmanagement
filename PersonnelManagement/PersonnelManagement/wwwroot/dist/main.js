@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "c7aa129df7fd67132e23"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "f3c7f23a2e14047230f4"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -28554,10 +28554,18 @@ let TopmenuComponent = class TopmenuComponent extends __WEBPACK_IMPORTED_MODULE_
         var operations = this.persondecreeOperations;
         //this.structure
         operations.forEach(r => {
-            let value = [];
-            /*this.featured.forEach(value = > {
-                
-            })*/
+            let output = [];
+            for (let value of this.featured) {
+                if (r.excerptstructures.indexOf(value.name) > -1)
+                    output.push(Number.parseInt(value.id));
+            }
+            let listexc = r.decreeexcerpt.length > 0 ? r.decreeexcerpt.split('_') : [];
+            output.forEach(d => {
+                if (listexc.indexOf(d.toString()) == -1) {
+                    listexc.push(d.toString());
+                }
+            });
+            r.decreeexcerpt = listexc.join('_');
         });
     }
 };
@@ -38533,7 +38541,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "type": "primary"
     },
     on: {
-      "click": function($event) {}
+      "click": _vm.fetchexcerpt
     }
   }, [_vm._v("Сформировать выписки")]) : _vm._e()], 1)], 1), _vm._v(" "), _c('el-dialog', {
     directives: [{

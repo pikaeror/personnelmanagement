@@ -5690,10 +5690,19 @@ export default class TopmenuComponent extends Vue {
         var operations = this.persondecreeOperations;
         //this.structure
         operations.forEach(r => {
-            let value: number[] = [];
-            /*this.featured.forEach(value = > {
-                
-            })*/
+            let output: number[] = [];
+            for (let value of this.featured) {
+                if (r.excerptstructures.indexOf(value.name) > -1)
+                    output.push(Number.parseInt(value.id));
+            }
+            let listexc: string[] = r.decreeexcerpt.length > 0 ? r.decreeexcerpt.split('_') : [];
+            output.forEach(d => {
+                if (listexc.indexOf(d.toString()) == -1) {
+                    listexc.push(d.toString());
+                }
+            })
+            r.decreeexcerpt = listexc.join('_');
         })
+
     }
 }

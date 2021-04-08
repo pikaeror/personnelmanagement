@@ -1887,6 +1887,7 @@ export default class TopmenuComponent extends Vue {
             this.modalPersondecreeMenuVisible = false;
             this.persondecreeId = 0;
             this.fetchPersondecreesActive();
+            this.fetchexcerpt();
             (<any>Vue).notify("S:Проект приказа принят");
         })
     }
@@ -1992,7 +1993,7 @@ export default class TopmenuComponent extends Vue {
                 let persondecreeblocksubtypePrev: number = 0;
                 let persondecreeblockoptionnumber1Prev: number = 0;
                 result.forEach(operation => {
-                    operation.excerptstructures = [];
+                    //operation.excerptstructures = [];
                     // Если мы используем булевские типы вместо чисел
                     if (operation.optionnumber1 > 0) {
                         operation.optionnumber1Bool = true;
@@ -5687,7 +5688,53 @@ export default class TopmenuComponent extends Vue {
     }
 
     fetchexcerpt() {
-        var operations = this.persondecreeOperations;
+        let t: Persondecreeoperation[] = [];
+        for (var iter of this.splitexcert()) {
+            t.push( < Persondecreeoperation > {
+                id: iter.id,
+                persondecree: iter.persondecree,
+                person: iter.person,
+                subjectid: iter.subjectid,
+                subjecttype: iter.subjecttype, // Тип операции. 1 - Награды.
+                creator: iter.creator,
+                persondecreeblock: iter.persondecreeblock,
+                persondecreeblocktype: iter.persondecreeblocktype,
+                persondecreeblocksub: iter.persondecreeblocksub,
+                persondecreeblocksubtype: iter.persondecreeblocksubtype,
+                intro: iter.intro,
+
+                personreward: iter.personreward,
+
+                // Только на фронтэнде
+                countrycitiesList: iter.countrycitiesList,
+
+                decreeexcerpt: iter.decreeexcerpt,
+                excerptstructures: iter.excerptstructures,
+                excerptstructures_front: iter.excerptstructures_front,
+            })
+        }
+        
+        fetch('api/Persondecreeoperationexcert', {
+            method: 'post',
+            body: JSON.stringify(t),
+            credentials: 'include',
+            headers: new Headers({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            })
+        })
+            .then(response => {
+                this.persondecreeOperations = [];
+                this.fetchPersondecreeOperations(this.persondecreeId);
+            })
+        /*
+            .then(response => {
+                return response.json() as Promise<Persondecreeoperation[]>;
+            })*/
+    }
+
+    splitexcert(): Persondecreeoperation[] {
+        var operations: Persondecreeoperation[] = this.persondecreeOperations;
         //this.structure
         operations.forEach(r => {
             let output: number[] = [];
@@ -5701,8 +5748,8 @@ export default class TopmenuComponent extends Vue {
                     listexc.push(d.toString());
                 }
             })
-            r.decreeexcerpt = listexc.join('_');
+            r.excerptstructures_front = listexc.join('_');
         })
-
+        return operations;
     }
 }

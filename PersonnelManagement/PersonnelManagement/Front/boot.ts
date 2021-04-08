@@ -395,6 +395,7 @@ const store = new Vuex.Store({
         currentdecreemail: "",
         decreemail: false,
 
+        excertmenu: false,
     },
     mutations: {
         setchosenpersiondecreeblock(state, n) {
@@ -551,6 +552,9 @@ const store = new Vuex.Store({
         },
         setDateFromDB(state, n) {
             state.date = n;
+        },
+        setExcertMenu(state, n) {
+            state.excertmenu = n;
         },
 
         setdecreemailM(state, n) {

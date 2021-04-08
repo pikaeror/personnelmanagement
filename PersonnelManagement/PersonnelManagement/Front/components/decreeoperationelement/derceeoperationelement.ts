@@ -86,6 +86,10 @@ export default class derceeoperationelement extends Vue {
     rand_list: Structure[];
     previos: Persondecree;
 
+    excertmenu: boolean;
+    excertsdecree: Persondecree;
+    excertsdecreestructure: Structure[];
+
     data() {
         return {
             menuid: 2,
@@ -138,6 +142,11 @@ export default class derceeoperationelement extends Vue {
             title_text_f: 'Направить:',
             title_text_s: 'Переместить:',
             title_text_t: 'Объединить:',
+            title_text_excert: 'Выписки по приказу:',
+
+            excertmenu: this.$store.state.excertmenu,
+            excertsdecree: null,
+            excertsdecreestructure: [],
         }
     }
 
@@ -311,6 +320,11 @@ export default class derceeoperationelement extends Vue {
 
     rowClicked(row, flag = true) {
         let k;
+        if (this.menuid == 10) {
+            this.getexcerts(row);
+            //this.$store.commit("setdecreemailM", row.id);
+            return;
+        }
         if (flag) {
             let list_access: string[] = row.accessforreading.split('_');
             let k = list_access.find(r => parseInt(r) == this.$store.state.user.id);
@@ -428,6 +442,7 @@ export default class derceeoperationelement extends Vue {
 
     filterbyfolders(folder: number) {
         var time = [];
+        var excert = false;
         //this.viewpersondecrees = time;
         if (folder == 2) {
             this.fullpersondecrees.forEach(r => {
@@ -504,8 +519,17 @@ export default class derceeoperationelement extends Vue {
                 if (r.signed == 1)
                     time.push(r)
             })
+        } else if (folder == 10) {
+            /*this.fullpersondecrees.forEach(r => {
+                if (r.signed == 1)
+                    time.push(r)
+            })*/
+            time = this.loadexcertsdecree();
+            //excert = true;
         }
         this.viewpersondecrees = time;
+        this.$store.commit("setExcertMenu", excert);
+        this.excertmenu = excert;
         return time;
     }
 
@@ -695,5 +719,89 @@ export default class derceeoperationelement extends Vue {
                 'Content-Type': 'application/json'
             })
         });
+    }
+
+    excertClose() {
+        this.$store.commit("setExcertMenu", false);
+        this.excertmenu = false;
+    }
+
+    loadexcertsdecree() {
+        var output: Persondecree[] = [];
+        fetch('api/Persondecreeoperationexcert/excertdecree', {
+            method: 'get',
+            credentials: 'include',
+            headers: new Headers({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            })
+        }).then(response => {
+            return response.json() as Promise<Persondecree[]>;
+        }).then(resualt => {
+            resualt.forEach(r => {
+                output.push(this.decreeParser(r));
+            })
+            this.viewpersondecrees = output;
+            //this.reload();
+        });
+        return output;
+    }
+
+    decreeParser(r) {
+        var exp: Mailexplorer = this.full_explorers.find(q => q.id == r.mailexplorerid);
+        r.creatorfolder = exp.folderCreator;
+        r.ownerfolder = exp.folderOwner;
+        r.accessforreading = exp.accessForReading;
+        if (this.fullpersondecrees != null) {
+            let preloadedPersondecree: Persondecree = this.fullpersondecrees.find(p => p.id == r.id);
+            if (preloadedPersondecree != null) {
+                r.marked = preloadedPersondecree.marked;
+            } else {
+                r.marked = false;
+            }
+            //r.marked = p
+        } else {
+            r.marked = false;
+        }
+        if (r.creatorObject != null) {
+            r.getFIO = ((r.creatorObject.surname == "" || r.creatorObject.surname == null) ? '' : (r.creatorObject.surname + ' ')) +
+                ((r.creatorObject.name == "" || r.creatorObject.name == null) ? '' : (r.creatorObject.name[0].toUpperCase() + '.')) +
+                ((r.creatorObject.firstname == "" || r.creatorObject.firstname == null) ? '' : (r.creatorObject.firstname[0].toUpperCase() + '.'));
+            r.getPlace = r.creatorObject.structureString;
+        }
+        r.getDate = (r.datesigned == null ? (r.datecreated == null ? '' : r.datecreated.toString().split('T')[0].split('-').reverse().join('-')) :
+            r.datesigned.toString().split('T')[0].split('-').reverse().join('-'))
+        r.getName = r.name +
+            (((r.name == null || r.name == "") || (r.nickname == null || r.nickname == "")) ? '' : ' / ') +
+            r.nickname;
+        r.getNumber = r.number.toString() + (r.numbertype == "" ? '' : (' ' + r.numbertype.toUpperCase()));
+
+        return r;
+    }
+
+    getexcerts(row) {
+        this.$store.commit("setExcertMenu", true);
+        this.excertmenu = true;
+        this.excertsdecree = row;
+        this.excertsdecreestructure = [];
+        fetch('api/Persondecreeoperationexcert/listexcertsstructure/' + row.id, {
+            method: 'get',
+            credentials: 'include',
+            headers: new Headers({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            })
+        }).then(r => {
+            return r.json() as Promise<Structure[]>;
+        })
+            .then(resualt => {
+                resualt.forEach(r => {
+                    this.excertsdecreestructure.push(r);
+                })
+            })
+    }
+
+    openexcert() {
+        this.$store.commit("setdecreemailM", this.excertsdecree.id);
     }
 }

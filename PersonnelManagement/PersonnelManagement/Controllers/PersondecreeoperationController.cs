@@ -131,7 +131,7 @@ namespace PersonnelManagement.Controllers
             return new ObjectResult(Keys.ERROR_SHORT + ":Произошла какая-то оказия");
         }
 
-        // POST: api/Persondecreeoperation
+        /*// POST: api/Persondecreeoperation
         [HttpPost("/updatelist")]
         public IActionResult UpdateOperations([FromBody] IEnumerable<PersondecreeoperationManagement> persondecreeoperations)
         {
@@ -146,8 +146,8 @@ namespace PersonnelManagement.Controllers
                     return new ObjectResult(Keys.ERROR_SHORT + ":Отказано в доступе");
                 }
             }
-            /*repository.UpdatePersonDecreeoperation(user, persondecreeoperation);*/
+            *//*repository.UpdatePersonDecreeoperation(user, persondecreeoperation);*//*
             return new ObjectResult(Keys.SUCCESS_SHORT + ":Обновлено!");
-        }
+        }*/
     }
 }

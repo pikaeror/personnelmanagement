@@ -159,8 +159,8 @@
             <div>
                 <div v-if="unit_dialog">
                     <!--<div style="margin-top: 10px">
-                        <el-button size="mini" @click="switch_k">Отобразить папки с приказами</el-button>
-                    </div>-->
+                    <el-button size="mini" @click="switch_k">Отобразить папки с приказами</el-button>
+                </div>-->
                 </div>
                 <div v-else>
                     <div style="display: flex; margin-bottom: 10px">
@@ -184,6 +184,34 @@
                     </div>
                     <div style="margin-top: 10px" v-if="multipleSelection.length > 1">
                         <el-button @click="persondecreesUnite" icon="el-icon-document" type="primary" round>Объединить</el-button>
+                    </div>
+                </div>
+            </div>
+        </el-dialog>
+
+        <el-dialog width="900px" :visible.sync="excertmenu" :title="title_text_excert" :before-close="excertClose">
+            <div style="margin-bottom: 10px">
+                <div v-if="excertsdecree != null">
+                    {{excertsdecree.number}}
+                </div>
+                <div v-else>
+                    Выписки по приказу отсутствуют
+                </div>
+                Выписки по приказам
+                <!--<div style="display: flex; margin-bottom: 4px">
+        <div v-for="folder in explorerFolder">
+            <div style="margin-right: 10px; margin-left: 10px">
+                <el-button size="mini" type="success" @click="FolderSelected(folder)">
+                    {{folder}}
+                </el-button>
+            </div>
+        </div>
+    </div>-->
+                <div v-for="struct in excertsdecreestructure">
+                    <div style="margin-bottom: 4px; box-shadow: 5px 5px 3px rgba(0,0,0,0.6); padding: 10px; border-radius: 10px; background: #eeece0;">
+                        <small @click="openexcert">
+                            &#8658 {{struct.nameshortened}}<el-button size="mini" type="danger" icon="el-icon-delete" @click="deleteDecreeFromList(decree)"></el-button>
+                        </small>
                     </div>
                 </div>
             </div>

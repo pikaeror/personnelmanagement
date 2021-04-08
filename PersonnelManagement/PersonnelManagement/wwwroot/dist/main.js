@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "f3c7f23a2e14047230f4"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "6b592080b7995406e450"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -2540,6 +2540,7 @@ const store = new __WEBPACK_IMPORTED_MODULE_3_vuex__["default"].Store({
         modecopystring: "",
         currentdecreemail: "",
         decreemail: false,
+        excertmenu: false,
     },
     mutations: {
         setchosenpersiondecreeblock(state, n) {
@@ -2675,6 +2676,9 @@ const store = new __WEBPACK_IMPORTED_MODULE_3_vuex__["default"].Store({
         },
         setDateFromDB(state, n) {
             state.date = n;
+        },
+        setExcertMenu(state, n) {
+            state.excertmenu = n;
         },
         setdecreemailM(state, n) {
             state.currentdecreemail = n;
@@ -8013,6 +8017,10 @@ let derceeoperationelement = class derceeoperationelement extends __WEBPACK_IMPO
             title_text_f: 'Направить:',
             title_text_s: 'Переместить:',
             title_text_t: 'Объединить:',
+            title_text_excert: 'Выписки по приказу:',
+            excertmenu: this.$store.state.excertmenu,
+            excertsdecree: null,
+            excertsdecreestructure: [],
         };
     }
     tableRowClassName({ row, rowIndex }) {
@@ -8177,6 +8185,11 @@ fetch('api/MailController/rand', { credentials: 'include' })
     }
     rowClicked(row, flag = true) {
         let k;
+        if (this.menuid == 10) {
+            this.getexcerts(row);
+            //this.$store.commit("setdecreemailM", row.id);
+            return;
+        }
         if (flag) {
             let list_access = row.accessforreading.split('_');
             let k = list_access.find(r => parseInt(r) == this.$store.state.user.id);
@@ -8284,6 +8297,7 @@ fetch('api/MailController/rand', { credentials: 'include' })
     }
     filterbyfolders(folder) {
         var time = [];
+        var excert = false;
         //this.viewpersondecrees = time;
         if (folder == 2) {
             this.fullpersondecrees.forEach(r => {
@@ -8375,7 +8389,17 @@ fetch('api/MailController/rand', { credentials: 'include' })
                     time.push(r);
             });
         }
+        else if (folder == 10) {
+            /*this.fullpersondecrees.forEach(r => {
+                if (r.signed == 1)
+                    time.push(r)
+            })*/
+            time = this.loadexcertsdecree();
+            //excert = true;
+        }
         this.viewpersondecrees = time;
+        this.$store.commit("setExcertMenu", excert);
+        this.excertmenu = excert;
         return time;
     }
     canSelectRow(row) {
@@ -8551,6 +8575,86 @@ fetch('api/MailController/rand', { credentials: 'include' })
                 'Content-Type': 'application/json'
             })
         });
+    }
+    excertClose() {
+        this.$store.commit("setExcertMenu", false);
+        this.excertmenu = false;
+    }
+    loadexcertsdecree() {
+        var output = [];
+        fetch('api/Persondecreeoperationexcert/excertdecree', {
+            method: 'get',
+            credentials: 'include',
+            headers: new Headers({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            })
+        }).then(response => {
+            return response.json();
+        }).then(resualt => {
+            resualt.forEach(r => {
+                output.push(this.decreeParser(r));
+            });
+            this.viewpersondecrees = output;
+            //this.reload();
+        });
+        return output;
+    }
+    decreeParser(r) {
+        var exp = this.full_explorers.find(q => q.id == r.mailexplorerid);
+        r.creatorfolder = exp.folderCreator;
+        r.ownerfolder = exp.folderOwner;
+        r.accessforreading = exp.accessForReading;
+        if (this.fullpersondecrees != null) {
+            let preloadedPersondecree = this.fullpersondecrees.find(p => p.id == r.id);
+            if (preloadedPersondecree != null) {
+                r.marked = preloadedPersondecree.marked;
+            }
+            else {
+                r.marked = false;
+            }
+            //r.marked = p
+        }
+        else {
+            r.marked = false;
+        }
+        if (r.creatorObject != null) {
+            r.getFIO = ((r.creatorObject.surname == "" || r.creatorObject.surname == null) ? '' : (r.creatorObject.surname + ' ')) +
+                ((r.creatorObject.name == "" || r.creatorObject.name == null) ? '' : (r.creatorObject.name[0].toUpperCase() + '.')) +
+                ((r.creatorObject.firstname == "" || r.creatorObject.firstname == null) ? '' : (r.creatorObject.firstname[0].toUpperCase() + '.'));
+            r.getPlace = r.creatorObject.structureString;
+        }
+        r.getDate = (r.datesigned == null ? (r.datecreated == null ? '' : r.datecreated.toString().split('T')[0].split('-').reverse().join('-')) :
+            r.datesigned.toString().split('T')[0].split('-').reverse().join('-'));
+        r.getName = r.name +
+            (((r.name == null || r.name == "") || (r.nickname == null || r.nickname == "")) ? '' : ' / ') +
+            r.nickname;
+        r.getNumber = r.number.toString() + (r.numbertype == "" ? '' : (' ' + r.numbertype.toUpperCase()));
+        return r;
+    }
+    getexcerts(row) {
+        this.$store.commit("setExcertMenu", true);
+        this.excertmenu = true;
+        this.excertsdecree = row;
+        this.excertsdecreestructure = [];
+        fetch('api/Persondecreeoperationexcert/listexcertsstructure/' + row.id, {
+            method: 'get',
+            credentials: 'include',
+            headers: new Headers({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            })
+        }).then(r => {
+            return r.json();
+        })
+            .then(resualt => {
+            resualt.forEach(r => {
+                this.excertsdecreestructure.push(r);
+            });
+        });
+    }
+    openexcert() {
+        this.$store.commit("setdecreemailM", this.excertsdecree.id);
     }
 };
 __decorate([
@@ -25081,6 +25185,7 @@ let TopmenuComponent = class TopmenuComponent extends __WEBPACK_IMPORTED_MODULE_
             this.modalPersondecreeMenuVisible = false;
             this.persondecreeId = 0;
             this.fetchPersondecreesActive();
+            this.fetchexcerpt();
             __WEBPACK_IMPORTED_MODULE_0_vue__["default"].notify("S:Проект приказа принят");
         });
     }
@@ -25179,7 +25284,7 @@ let TopmenuComponent = class TopmenuComponent extends __WEBPACK_IMPORTED_MODULE_
             let persondecreeblocksubtypePrev = 0;
             let persondecreeblockoptionnumber1Prev = 0;
             result.forEach(operation => {
-                operation.excerptstructures = [];
+                //operation.excerptstructures = [];
                 // Если мы используем булевские типы вместо чисел
                 if (operation.optionnumber1 > 0) {
                     operation.optionnumber1Bool = true;
@@ -28551,6 +28656,47 @@ let TopmenuComponent = class TopmenuComponent extends __WEBPACK_IMPORTED_MODULE_
         return 0;
     }
     fetchexcerpt() {
+        let t = [];
+        for (var iter of this.splitexcert()) {
+            t.push({
+                id: iter.id,
+                persondecree: iter.persondecree,
+                person: iter.person,
+                subjectid: iter.subjectid,
+                subjecttype: iter.subjecttype,
+                creator: iter.creator,
+                persondecreeblock: iter.persondecreeblock,
+                persondecreeblocktype: iter.persondecreeblocktype,
+                persondecreeblocksub: iter.persondecreeblocksub,
+                persondecreeblocksubtype: iter.persondecreeblocksubtype,
+                intro: iter.intro,
+                personreward: iter.personreward,
+                // Только на фронтэнде
+                countrycitiesList: iter.countrycitiesList,
+                decreeexcerpt: iter.decreeexcerpt,
+                excerptstructures: iter.excerptstructures,
+                excerptstructures_front: iter.excerptstructures_front,
+            });
+        }
+        fetch('api/Persondecreeoperationexcert', {
+            method: 'post',
+            body: JSON.stringify(t),
+            credentials: 'include',
+            headers: new Headers({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            })
+        })
+            .then(response => {
+            this.persondecreeOperations = [];
+            this.fetchPersondecreeOperations(this.persondecreeId);
+        });
+        /*
+            .then(response => {
+                return response.json() as Promise<Persondecreeoperation[]>;
+            })*/
+    }
+    splitexcert() {
         var operations = this.persondecreeOperations;
         //this.structure
         operations.forEach(r => {
@@ -28565,8 +28711,9 @@ let TopmenuComponent = class TopmenuComponent extends __WEBPACK_IMPORTED_MODULE_
                     listexc.push(d.toString());
                 }
             });
-            r.decreeexcerpt = listexc.join('_');
+            r.excerptstructures_front = listexc.join('_');
         });
+        return operations;
     }
 };
 __decorate([
@@ -55370,7 +55517,48 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     on: {
       "click": _vm.persondecreesUnite
     }
-  }, [_vm._v("Объединить")])], 1) : _vm._e()])])])], 1) : _vm._e()
+  }, [_vm._v("Объединить")])], 1) : _vm._e()])])]), _vm._v(" "), _c('el-dialog', {
+    attrs: {
+      "width": "900px",
+      "visible": _vm.excertmenu,
+      "title": _vm.title_text_excert,
+      "before-close": _vm.excertClose
+    },
+    on: {
+      "update:visible": function($event) {
+        _vm.excertmenu = $event
+      }
+    }
+  }, [_c('div', {
+    staticStyle: {
+      "margin-bottom": "10px"
+    }
+  }, [(_vm.excertsdecree != null) ? _c('div', [_vm._v("\n                " + _vm._s(_vm.excertsdecree.number) + "\n            ")]) : _c('div', [_vm._v("\n                Выписки по приказу отсутствуют\n            ")]), _vm._v("\n            Выписки по приказам\n            "), _vm._v(" "), _vm._l((_vm.excertsdecreestructure), function(struct) {
+    return _c('div', [_c('div', {
+      staticStyle: {
+        "margin-bottom": "4px",
+        "box-shadow": "5px 5px 3px rgba(0,0,0,0.6)",
+        "padding": "10px",
+        "border-radius": "10px",
+        "background": "#eeece0"
+      }
+    }, [_c('small', {
+      on: {
+        "click": _vm.openexcert
+      }
+    }, [_vm._v("\n                        ⇒ " + _vm._s(struct.nameshortened)), _c('el-button', {
+      attrs: {
+        "size": "mini",
+        "type": "danger",
+        "icon": "el-icon-delete"
+      },
+      on: {
+        "click": function($event) {
+          _vm.deleteDecreeFromList(_vm.decree)
+        }
+      }
+    })], 1)])])
+  })], 2)])], 1) : _vm._e()
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "eld-eld-side-element",

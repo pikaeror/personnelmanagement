@@ -15664,6 +15664,11 @@ namespace PersonnelManagement.Models
             //    persondecreeManagement.CreatorObject = userObject; // Добавляем в приказ информацию о создателе.
             //}
 
+            Mailexplorer time = MailexplorersLocal()[decree.Mailexplorerid];
+            time.FolderCreator = 7;
+            time.FolderOwner = 8;
+            context.Mailexplorer.Update(time);
+
             decree.Name = decreeManagement.Name;
             decree.Number = decreeManagement.Number;
             decree.Datecreated = decreeManagement.Datecreated;
@@ -16853,7 +16858,7 @@ namespace PersonnelManagement.Models
             IEnumerable<Persondecreeexcerpt> persondecreeexcerpts,
             string devizer = "_")
         {
-            List<string> output = new List<string>() { "" };
+            List<string> output = new List<string>();
             if (id_list.Length == 0)
                 return output;
 
@@ -16863,6 +16868,8 @@ namespace PersonnelManagement.Models
             int parse_value;
             foreach(string id in working_ides_structures)
             {
+                if (id == "")
+                    continue;
                 parse_value = Int32.Parse(id);
                 time_persondecreeexcerpt = persondecreeexcerpts.FirstOrDefault(r => r.Id == parse_value);
                 if (time_persondecreeexcerpt == null)
@@ -19137,20 +19144,148 @@ namespace PersonnelManagement.Models
 
         }
 
-        public void UpdatePersonDecreeoperation(IEnumerable<PersondecreeoperationManagement> persondecreeoperations)
+        public void UpdatePersonDecreeoperation(IEnumerable<PersondecreeoperationManagement> persondecreeoperations,
+            User user = null)
         {
-            Dictionary<int, Persondecreeexcerpt> persondecreeexcerpts = context.Persondecreeexcerpt.ToDictionary(r => r.Id);
-            foreach(PersondecreeoperationManagement persondecreeoperation in persondecreeoperations)
+            int decree = persondecreeoperations.Count() > 0 ? persondecreeoperations.Last().Persondecree : 0;
+            if (decree == 0)
+                return;
+            List<Persondecreeexcerpt> you = context.Persondecreeexcerpt.Where(r => r.Decree == decree).ToList();
+            Dictionary<int, Persondecreeexcerpt> persondecreeexcerpts = you.ToDictionary(r => r.Id);
+            Dictionary<int, Persondecreeexcerpt> persondecreeexcerpts_structure = you.ToDictionary(r => r.Structure);
+            foreach (PersondecreeoperationManagement persondecreeoperation in persondecreeoperations)
             {
-                List<string> time_excerpt = persondecreeoperation.Decreeexcerpt.Split("_").ToList();
+                if(persondecreeoperation.Excerptstructures_front == "")
+                {
+                    //Function_auto;
+                    try
+                    {
+                        persondecreeexcerpts_structure = AutoExcertGenerator(persondecreeoperation,
+                            persondecreeexcerpts_structure,
+                        user);
+                    }
+                    catch
+                    {
+                        continue;
+                    }
+                    continue;
+                }
+                Persondecreeoperation time_operation = context.Persondecreeoperation.First(r => r.Id == persondecreeoperation.Id);
+                List<string> time_excerpt = persondecreeoperation.Excerptstructures_front.Split("_").ToList();
                 foreach(string id in time_excerpt)
                 {
-                    if (persondecreeexcerpts.ContainsKey(Int32.Parse(id)))
+                    if (id == "")
+                        continue;
+                    if (persondecreeexcerpts_structure.ContainsKey(Int32.Parse(id)))
                     {
-
+                        Persondecreeexcerpt time = persondecreeexcerpts_structure[Int32.Parse(id)];
+                        time.Persondecreeoperations += time.Persondecreeoperations.Split("_").FirstOrDefault(r => r == persondecreeoperation.Id.ToString()) == null ? ("_" + persondecreeoperation.Id) : "";
+                        persondecreeexcerpts_structure[Int32.Parse(id)] = time;
+                        time_operation.Decreeexcerpt += time_operation.Decreeexcerpt.Split("_").FirstOrDefault(r => r == persondecreeoperation.Id.ToString()) == null ? ("_" + time.Id.ToString()) : "";
+                        context.Persondecreeexcerpt.Update(time);
+                    }
+                    else
+                    {
+                        Persondecreeexcerpt time = new Persondecreeexcerpt()
+                        {
+                            Decree = decree,
+                            Structure = Int32.Parse(id),
+                            Persondecreeoperations = persondecreeoperation.Id.ToString()
+                        };
+                        //context.Persondecreeexcerpt.Add(time);
+                        context.Persondecreeexcerpt.Add(time);
+                        context.SaveChanges();
+                        persondecreeexcerpts_structure[time.Structure] = time;
+                        //time.Persondecreeoperations += time.Persondecreeoperations.Split("_").FirstOrDefault(r => r == persondecreeoperation.Id.ToString()) != null ? ("_" + persondecreeoperation.Id) : "";
+                        time_operation.Decreeexcerpt += time_operation.Decreeexcerpt.Split("_").FirstOrDefault(r => r == persondecreeoperation.Id.ToString()) == null ? ("_" + time.Id.ToString()) : "";
                     }
                 }
+                context.Persondecreeoperation.Update(time_operation);
             }
+            UpdatePersondecreeoperationsLocal();
+        }
+
+        private Dictionary<int, Persondecreeexcerpt> AutoExcertGenerator(PersondecreeoperationManagement persondecreeoperation,
+            Dictionary<int, Persondecreeexcerpt> persondecreeexcerpts_structure,
+            User user = null)
+        {
+            Persondecreeoperation time_operation = context.Persondecreeoperation.First(r => r.Id == persondecreeoperation.Id);
+            Person person = PersonsLocal()[persondecreeoperation.Person];
+            Dictionary<int, Structure> str = StructuresLocal();
+            Structure struct_person = str[person.Structure];
+            Structure struct_user = str[user.Structure.GetValueOrDefault()];
+            struct_user = struct_user.Parentstructure == 0 ? struct_user : str[struct_user.Parentstructure];
+            
+            for(int i = struct_person.Id; i != 0;)
+            {
+                Structure parent_str = str[i];
+                if(parent_str.Parentstructure == struct_user.Id || parent_str.Parentstructure == struct_user.Parentstructure)
+                {
+                    if (persondecreeexcerpts_structure.ContainsKey(i))
+                    {
+                        Persondecreeexcerpt time = persondecreeexcerpts_structure[i];
+                        time.Persondecreeoperations += time.Persondecreeoperations.Split("_").FirstOrDefault(r => r == persondecreeoperation.Id.ToString()) == null ? ("_" + persondecreeoperation.Id) : "";
+                        persondecreeexcerpts_structure[i] = time;
+                        time_operation.Decreeexcerpt += time_operation.Decreeexcerpt.Split("_").FirstOrDefault(r => r == persondecreeoperation.Id.ToString()) == null ? ("_" + time.Id.ToString()) : "";
+                        context.Persondecreeexcerpt.Update(time);
+                    }
+                    else
+                    {
+                        Persondecreeexcerpt time = new Persondecreeexcerpt()
+                        {
+                            Decree = persondecreeoperation.Persondecree,
+                            Structure = i,
+                            Persondecreeoperations = persondecreeoperation.Id.ToString()
+                        };
+                        //context.Persondecreeexcerpt.Add(time);
+                        context.Persondecreeexcerpt.Add(time);
+                        context.SaveChanges();
+                        persondecreeexcerpts_structure[i] = time;
+                        //time.Persondecreeoperations += time.Persondecreeoperations.Split("_").FirstOrDefault(r => r == persondecreeoperation.Id.ToString()) != null ? ("_" + persondecreeoperation.Id) : "";
+                        time_operation.Decreeexcerpt += time_operation.Decreeexcerpt.Split("_").FirstOrDefault(r => r == persondecreeoperation.Id.ToString()) == null ? ("_" + time.Id.ToString()) : "";
+                        context.Persondecreeoperation.Update(time_operation);
+                    }
+                    context.SaveChanges();
+                    break;
+                }
+                i = parent_str.Parentstructure;
+            }
+            return persondecreeexcerpts_structure;
+        }
+
+        public IEnumerable<Persondecree> getExcertDecree(User user)
+        {
+            IEnumerable<Persondecree> output = new List<Persondecree>();
+            Dictionary<int, Structure> str = StructuresLocal();
+            Structure struct_user = str[user.Structure.GetValueOrDefault()];
+            struct_user = struct_user.Parentstructure == 0 ? struct_user : str[struct_user.Parentstructure];
+            Dictionary<int, Persondecree> decrees = PersondecreesLocal();
+
+            List<Persondecreeexcerpt> excerts = context.Persondecreeexcerpt.Where(r => str[r.Structure].Parentstructure == struct_user.Id).ToList();
+            excerts.ForEach(r =>
+            {
+                if (decrees.ContainsKey(r.Decree))
+                    output = output.Append(decrees[r.Decree]);
+            });
+            return output != null ? output : new List<Persondecree>();
+        }
+
+        public IEnumerable<Structure> getExcertStructures(int persondecree, User user)
+        {
+            IEnumerable<Structure> output = new List<Structure>();
+            Dictionary<int, Structure> str = StructuresLocal();
+            Structure struct_user = str[user.Structure.GetValueOrDefault()];
+            struct_user = struct_user.Parentstructure == 0 ? struct_user : str[struct_user.Parentstructure];
+            //Dictionary<int, Persondecree> decrees = PersondecreesLocal();
+
+            List<Persondecreeexcerpt> excerts = context.Persondecreeexcerpt.Where(r => r.Decree == persondecree &&
+            str[r.Structure].Parentstructure == struct_user.Id).ToList();
+            excerts.ForEach(r =>
+            {
+                if (str.ContainsKey(r.Structure))
+                    output = output.Append(str[r.Structure]);
+            });
+            return output != null ? output : new List<Structure>();
         }
 
         /// <summary>

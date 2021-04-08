@@ -125,4 +125,7 @@ export default class Persondecreeoperation {
 
     decreeexcerpt: string;
     excerptstructures: string[];
+    excerptstructures_front: string;
+
+
 }

@@ -25,6 +25,7 @@ namespace PersonnelManagement.Models
                                                                         // Единственная группировка на данный момент - командировка нескольких людей в одно место назначения
         
         public List<string> Excerptstructures { get; set; }
+        public string Excerptstructures_front { get; set; }
 
         public PersondecreeoperationManagement(Persondecreeoperation persondecreeoperation)
         {
@@ -89,6 +90,7 @@ namespace PersonnelManagement.Models
             OptionarraypersonObjects = new List<PersonManager>();
             Decreeexcerpt = persondecreeoperation.Decreeexcerpt;
             Excerptstructures = new List<string>();
+            Excerptstructures_front = "";
 
         }
 

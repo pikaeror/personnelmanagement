@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "6b592080b7995406e450"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "f8e5813fd199c4a065f5"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -55541,23 +55541,17 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         "padding": "10px",
         "border-radius": "10px",
         "background": "#eeece0"
-      }
-    }, [_c('small', {
-      on: {
-        "click": _vm.openexcert
-      }
-    }, [_vm._v("\n                        ⇒ " + _vm._s(struct.nameshortened)), _c('el-button', {
-      attrs: {
-        "size": "mini",
-        "type": "danger",
-        "icon": "el-icon-delete"
       },
       on: {
-        "click": function($event) {
-          _vm.deleteDecreeFromList(_vm.decree)
-        }
+        "dblclick": _vm.openexcert
       }
-    })], 1)])])
+    }, [_c('small', [_c('el-button', {
+      attrs: {
+        "type": "primary",
+        "icon": "el-icon-search",
+        "size": "mini"
+      }
+    }), _vm._v("\n                        ⇒ " + _vm._s(struct.nameshortened))], 1)])])
   })], 2)])], 1) : _vm._e()
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {

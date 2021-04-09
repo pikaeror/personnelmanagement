@@ -208,9 +208,10 @@
         </div>
     </div>-->
                 <div v-for="struct in excertsdecreestructure">
-                    <div style="margin-bottom: 4px; box-shadow: 5px 5px 3px rgba(0,0,0,0.6); padding: 10px; border-radius: 10px; background: #eeece0;">
-                        <small @click="openexcert">
-                            &#8658 {{struct.nameshortened}}<el-button size="mini" type="danger" icon="el-icon-delete" @click="deleteDecreeFromList(decree)"></el-button>
+                    <div style="margin-bottom: 4px; box-shadow: 5px 5px 3px rgba(0,0,0,0.6); padding: 10px; border-radius: 10px; background: #eeece0;" @dblclick="openexcert">
+                        <small>
+                            <el-button type="primary" icon="el-icon-search" size="mini"></el-button>
+                            &#8658 {{struct.nameshortened}}<!--<el-button size="mini" type="danger" icon="el-icon-delete" @click=""></el-button>-->
                         </small>
                     </div>
                 </div>

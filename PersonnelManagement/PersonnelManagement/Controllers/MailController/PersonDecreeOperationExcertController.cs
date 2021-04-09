@@ -54,6 +54,20 @@ namespace PersonnelManagement.Controllers
             return output;
         }
 
+        [HttpGet("excert")]
+        public ExcertComposition getExcertFullDecree()
+        {
+            ExcertComposition output = new ExcertComposition();
+            string sessionid = Request.Cookies[Keys.COOKIES_SESSION];
+            User user = null;
+            if (IdentityService.IsLogined(sessionid, repository))
+            {
+                user = IdentityService.GetUserBySessionID(sessionid, repository);
+                //return repository.getExcertStructures(id, user).ToList();
+            }
+            return output;
+        }
+
         // POST: api/Persondecreeoperation
         [HttpPost]
         public IActionResult UpdateOperations([FromBody] IEnumerable<PersondecreeoperationManagement> persondecreeoperations)

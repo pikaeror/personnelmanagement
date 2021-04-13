@@ -102,6 +102,7 @@ import Ordernumbertype from '../../classes/ordernumbertype';
 import Link from '../../classes/link';
 import Dismissalclauses from '../../classes/dismissalclauses';
 import Cabinetdata from '../../classes/cabinetdata';
+import ExcertComposition from '../../classes/Excerts/excertComposition';
 
 Vue.component(Button.name, Button);
 Vue.component(Input.name, Input);
@@ -389,6 +390,7 @@ export default class TopmenuComponent extends Vue {
     personvacationHolidays: number;
     //rewardmoneys: Rewardmoney[];
     customwidth: boolean;
+    excertmode: boolean;
 
     
     onDecreeDatesignedChange(value: string, oldValue: string) {
@@ -596,6 +598,7 @@ export default class TopmenuComponent extends Vue {
             //rewardmoneys: [],
 
             customwidth: false,
+            excertmode: false,
         }
     }
 
@@ -1976,106 +1979,7 @@ export default class TopmenuComponent extends Vue {
                 return response.json() as Promise<Persondecreeoperation[]>;
             })
             .then(result => {
-
-                /**
-                 * Проводим сортировку всех частей по блоку, вводной фабуле, подблоку
-                 */
-                //alert(JSON.stringify(result));
-                // list.sort((a, b) => (a.color > b.color) ? 1 : -1)
-                // list.sort((a, b) => (a.color > b.color) ? 1 : (a.color === b.color) ? ((a.size > b.size) ? 1 : -1) : -1 )
-                //result.sort((a, b) => (a.persondecreeblock > b.persondecreeblock) ? 1 : (a.persondecreeblock === b.persondecreeblock) ? ((a.intro < b.intro) ? 1 : -1) : -1);
-                // : (a.persondecreeblock === b.persondecreeblock) ? ((a.intro > b.intro) ? 1 : -1) - вставляется перед первым : -1
-                //result.sort((a, b) => (a.persondecreeblock > b.persondecreeblock) ? 1 : (a.persondecreeblock === b.persondecreeblock) ? ((a.intro < b.intro) ? 1 : (a.intro === b.intro) ? ((a.persondecreeblocksubtype > b.persondecreeblocksubtype) ? 1 : -1) : -1) : -1);
-                result.sort((a, b) => (a.persondecreeblock > b.persondecreeblock) ? 1 : (a.persondecreeblock === b.persondecreeblock) ? ((a.intro < b.intro) ? 1 : (a.intro === b.intro) ? ((a.persondecreeblocksubtype > b.persondecreeblocksubtype) ? 1 : (a.persondecreeblocksubtype === b.persondecreeblocksubtype) ? ((a.optionnumber1 > b.optionnumber1) ? 1 : -1) : -1) : -1) : -1);
-
-                let operationPrev: Persondecreeoperation = null;
-                let intronumPrev: number = 0;
-                let persondecreeblocksubtypePrev: number = 0;
-                let persondecreeblockoptionnumber1Prev: number = 0;
-                result.forEach(operation => {
-                    //operation.excerptstructures = [];
-                    // Если мы используем булевские типы вместо чисел
-                    if (operation.optionnumber1 > 0) {
-                        operation.optionnumber1Bool = true;
-                    } else {
-                        operation.optionnumber1Bool = false;
-                    }
-                    if (operation.optionnumber2 > 0) {
-                        operation.optionnumber2Bool = true;
-                    } else {
-                        operation.optionnumber2Bool = false;
-                    }
-                    if (operation.optionnumber3 > 0) {
-                        operation.optionnumber3Bool = true;
-                    } else {
-                        operation.optionnumber3Bool = false;
-                    }
-                    if (operation.optionnumber4 > 0) {
-                        operation.optionnumber4Bool = true;
-                    } else {
-                        operation.optionnumber4Bool = false;
-                    }
-                    if (operation.optionnumber5 > 0) {
-                        operation.optionnumber5Bool = true;
-                    } else {
-                        operation.optionnumber5Bool = false;
-                    }
-
-                    operation.optionarraypersonArray = this.toArrayNumberInputValue(operation.optionarrayperson);
-                    operation.optionarray1Array = this.toArrayNumberInputValue(operation.optionarray1);
-
-                    // Если пункт "предоставить" (для отпуска), то в 6ой строке может содержаться информация о странах, 
-                    if (operation.persondecreeblocktype == 15 && operation.optionstring6.length > 0) {
-                        operation.countrycitiesList = Countrycities.stringToCountrycitiesList(operation.optionstring6);
-                    }
-
-                    /**
-                     * Здесь проводится сравнение, какие части текущей части и предыдущей совпадают. Например, чтобы если и текущему сотруднику и предыдущему выдается награда по идентичному пункту, 
-                     * оно писало "присвоить очередное специальное звание на одну ступень выше" лишь один раз.
-                     */
-                    if (operationPrev != null) {
-                        let newIntro: boolean = false;
-                        let newSubtype: boolean = false;
-
-                        // Вводные фабулы не совпадают или вводная фабула отсутствует
-                        if (operation.intro.length == 0 || !(operationPrev.intro === operation.intro)) {
-                        //if (!(operationPrev.intro === operation.intro)) {
-                            intronumPrev += 1;
-                            operation.intronum = intronumPrev;
-
-
-                            if (operation.intro.length != 0 || operationPrev.intro.length != 0) {
-                                persondecreeblocksubtypePrev = 1;
-                                persondecreeblockoptionnumber1Prev = 1;
-                                newIntro = true;
-                            }
-                            
-                        }
-                        if (operation.persondecreeblocksubtype != operationPrev.persondecreeblocksubtype || newIntro) {
-                            persondecreeblocksubtypePrev += 1;
-                            operation.persondecreeblocksubtypenum = persondecreeblocksubtypePrev;
-                            
-                        }
-                        //if (operation.persondecreeoptionnumber1num != operationPrev.persondecreeoptionnumber1) {
-                        if (operation.optionnumber1 != operationPrev.optionnumber1 || newIntro) {
-                            persondecreeblockoptionnumber1Prev += 1;
-                            operation.persondecreeoptionnumber1num = persondecreeblockoptionnumber1Prev;
-                        } else {
-
-                        }
-                    } else {
-                        intronumPrev = 1;
-                        persondecreeblocksubtypePrev = 1;
-                        persondecreeblockoptionnumber1Prev = 1;
-                        operation.intronum = intronumPrev;
-                        operation.persondecreeblocksubtypenum = persondecreeblocksubtypePrev;
-                        operation.persondecreeoptionnumber1num = persondecreeblockoptionnumber1Prev;
-                    }
-                    //alert(operation.persondecreeoptionnumber1num + " "+ persondecreeblockoptionnumber1Prev);
-                    operationPrev = operation;
-                })
-
-                this.persondecreeOperations = result;
+                this.parsepersondecreeoperation(result);
             });
     }
 
@@ -2085,84 +1989,7 @@ export default class TopmenuComponent extends Vue {
                 return response.json() as Promise<Persondecreeblock[]>;
             })
             .then(result => {
-                //alert(JSON.stringify(result));
-                result.forEach(p => {
-                    if (p.persondecreeblocksub == 0) {
-                        p.persondecreeblocksub = null; // Чтобы ничего не отображало вместо 0
-                    }
-                    if (p.persondecreeblocktype == 1) { // Наградить
-                        p.samplePersonreward = new Personreward();
-                    }
-                    if (p.optionnumber1 == 0) {
-                        p.optionnumber1 = null;
-                    }
-                    if (p.optionnumber2 == 0) {
-                        p.optionnumber2 = null;
-                    }
-                    if (p.optionnumber3 == 0) {
-                        p.optionnumber3 = null;
-                    }
-                    if (p.optionnumber4 == 0) {
-                        p.optionnumber4 = null;
-                    }
-                    if (p.optionnumber5 == 0) {
-                        p.optionnumber5 = null;
-                    }
-                    if (p.optionnumber6 == 0) {
-                        p.optionnumber6 = null;
-                    }
-                    if (p.optionnumber7 == 0) {
-                        p.optionnumber7 = null;
-                    }
-                    if (p.optionnumber8 == 0) {
-                        p.optionnumber8 = null;
-                    }
-                    if (p.optionnumber9 == 0) {
-                        p.optionnumber9 = null;
-                    }
-                    if (p.optionnumber10 == 0) {
-                        p.optionnumber10 = null;
-                    }
-                    if (p.optionnumber11 == 0) {
-                        p.optionnumber11 = null;
-                    }
-
-                    if (p.subvaluenumber1 == 0) {
-                        p.subvaluenumber1 = null;
-                    }
-
-                    if (p.subvaluenumber2 == 0) {
-                        p.subvaluenumber2 = null;
-                    }
-
-                    p.optiondate1String = this.toDateInputValue(p.optiondate1);
-                    p.optiondate2String = this.toDateInputValue(p.optiondate2);
-                    p.optiondate3String = this.toDateInputValue(p.optiondate3);
-                    p.optiondate4String = this.toDateInputValue(p.optiondate4);
-                    p.optiondate5String = this.toDateInputValue(p.optiondate5);
-                    p.optiondate6String = this.toDateInputValue(p.optiondate6);
-                    p.optiondate7String = this.toDateInputValue(p.optiondate7);
-                    p.optiondate8String = this.toDateInputValue(p.optiondate8);
-
-                    p.optionarraypersonArray = this.toArrayNumberInputValue(p.optionarrayperson);
-                    p.optionarray1Array = this.toArrayNumberInputValue(p.optionarray1);
-
-                    p.personssearchadditional = true;
-                    if (p.optionarraypersonArray.length > 0) {
-                        p.personssearchadditional = false;
-                    }
-
-                    // Если пункт "предоставить" (для отпуска), то в 6ой строке может содержаться информация о странах, 
-                    if (p.persondecreeblocktype == 15) {
-                        p.countrycitiesList = new Array();
-
-                        let baseCountrycities: Countrycities = new Countycities();
-                        p.countrycitiesList.push(baseCountrycities);
-                        
-                    }
-                })
-
-                this.persondecreeBlocks = result;
+                this.parsepersondecreeblock(result);
             });
     }
 
@@ -2172,37 +1999,42 @@ export default class TopmenuComponent extends Vue {
                 return response.json() as Promise<Persondecree>;
             })
             .then(result => {
-                this.persondecreeDatecreated = this.toDateInputValue(result.datecreated);
-                if (result.datesigned != null) {
-                    this.persondecreeDatesigned = this.toDateInputValue(result.datesigned);
-                } else {
-                    this.persondecreeDatesigned = this.getdate();
-                }
-                
-                this.persondecreeName = result.name;
-                this.persondecreeNickname = result.nickname;
-                this.persondecreeNumber = result.number;
-                this.persondecreeNumbertype = result.numbertype;
-                this.persondecreeId = id;
-                //alert(result.creatorObject);
-                this.persondecreeCreatorObject = result.creatorObject;
-                this.persondecreeSigned = result.signed;
+                this.parsepersondecree(result);
             });
     }
 
     persondecreeSelectt() {
+        if (!this.logicFunctionExcert())
+            return;
+        /*if (this.$store.state.excertdecreeid != null)
+            this.excertmode = true;*/
         if (this.$store.state.decreemail) {
             let id: number = this.$store.state.currentdecreemail;
             this.customwidth = this.$store.state.decreemail;
-            this.modalPersondecreeMenuVisible = this.$store.state.decreemail;
+            //this.modalPersondecreeMenuVisible = this.$store.state.decreemail;
             this.persondecreeSelectUpdate(id);
+            this.modalPersondecreeMenuVisible = this.$store.state.decreemail;
         }
     }
 
     logic_function_decree_mail_close(): boolean {
         this.customwidth = false;
         this.$store.commit("setdecreemailM", "");
+        //this.$store.commit("setExcertDecreeId", null);
+        //this.excertmode = false;
+        //this.modalPersondecreeMenuVisible = !this.modalPersondecreeMenuVisible;
+        //this.persondecreeBlocks = [];
+        //this.persondecreeBlocksubs = [];
+        //this.persondecreeOperations = [];
         return !this.modalPersondecreeMenuVisible;
+    }
+    afterclosedecree() {
+        this.$store.commit("setExcertDecreeId", null);
+        this.excertmode = false;
+        this.modalPersondecreeMenuVisible = !this.modalPersondecreeMenuVisible;
+        this.persondecreeBlocks = [];
+        this.persondecreeBlocksubs = [];
+        this.persondecreeOperations = [];
     }
 
     persondecreeSelect(event: any, id: number) {
@@ -2211,6 +2043,8 @@ export default class TopmenuComponent extends Vue {
     }
 
     persondecreeSelectUpdate(id: number) {
+        if (this.excertmode)
+            return;
         this.fetchPersondecreeOperations(id);
         this.fetchPersondecreeBlocks(id);
         this.fetchPersondecree(id);
@@ -5751,5 +5585,228 @@ export default class TopmenuComponent extends Vue {
             r.excerptstructures_front = listexc.join('_');
         })
         return operations;
+    }
+
+    logicFunctionExcert(): boolean {
+        if (this.excertmode)
+            return true;
+        if (this.$store.state.excertmenu && this.$store.state.excertdecreeid != null && !this.modalPersondecreeMenuVisible) {
+            this.excertmode = true;
+            let str = this.$store.state.excertdecreeid;
+            fetch('api/Persondecreeoperationexcert/excert/' + str, {
+                method: 'get',
+                credentials: 'include',
+                headers: new Headers({
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                })
+            }).then(response => {
+                return response.json() as Promise<ExcertComposition>;
+            }).then(result => {
+                this.excertmode = true;
+                this.parsepersondecreeoperation(result.decreeoperations);
+                this.parsepersondecreeblock(result.decreeblocks);
+                this.parsepersondecree(result.decree);
+                this.persondecreeBlocksubs = result.decreeblocksubs;
+                //this.modalPersondecreeMenuVisible = false;
+                this.excertmode = true;
+                this.$store.commit("setLodingExcert", false);
+                this.modalPersondecreeMenuVisible = true;
+                this.$store.commit("setExcertDecreeId", str);
+                });
+            return false;
+        }
+        return true;
+    }
+
+    parsepersondecree(result) {
+        this.persondecreeDatecreated = this.toDateInputValue(result.datecreated);
+        if (result.datesigned != null) {
+            this.persondecreeDatesigned = this.toDateInputValue(result.datesigned);
+        } else {
+            this.persondecreeDatesigned = this.getdate();
+        }
+
+        this.persondecreeName = result.name;
+        this.persondecreeNickname = result.nickname;
+        this.persondecreeNumber = result.number;
+        this.persondecreeNumbertype = result.numbertype;
+        this.persondecreeId = result.id;
+        //alert(result.creatorObject);
+        this.persondecreeCreatorObject = result.creatorObject;
+        this.persondecreeSigned = result.signed;
+    }
+
+    parsepersondecreeblock(result) {
+        result.forEach(p => {
+            if (p.persondecreeblocksub == 0) {
+                p.persondecreeblocksub = null; // Чтобы ничего не отображало вместо 0
+            }
+            if (p.persondecreeblocktype == 1) { // Наградить
+                p.samplePersonreward = new Personreward();
+            }
+            if (p.optionnumber1 == 0) {
+                p.optionnumber1 = null;
+            }
+            if (p.optionnumber2 == 0) {
+                p.optionnumber2 = null;
+            }
+            if (p.optionnumber3 == 0) {
+                p.optionnumber3 = null;
+            }
+            if (p.optionnumber4 == 0) {
+                p.optionnumber4 = null;
+            }
+            if (p.optionnumber5 == 0) {
+                p.optionnumber5 = null;
+            }
+            if (p.optionnumber6 == 0) {
+                p.optionnumber6 = null;
+            }
+            if (p.optionnumber7 == 0) {
+                p.optionnumber7 = null;
+            }
+            if (p.optionnumber8 == 0) {
+                p.optionnumber8 = null;
+            }
+            if (p.optionnumber9 == 0) {
+                p.optionnumber9 = null;
+            }
+            if (p.optionnumber10 == 0) {
+                p.optionnumber10 = null;
+            }
+            if (p.optionnumber11 == 0) {
+                p.optionnumber11 = null;
+            }
+
+            if (p.subvaluenumber1 == 0) {
+                p.subvaluenumber1 = null;
+            }
+
+            if (p.subvaluenumber2 == 0) {
+                p.subvaluenumber2 = null;
+            }
+
+            p.optiondate1String = this.toDateInputValue(p.optiondate1);
+            p.optiondate2String = this.toDateInputValue(p.optiondate2);
+            p.optiondate3String = this.toDateInputValue(p.optiondate3);
+            p.optiondate4String = this.toDateInputValue(p.optiondate4);
+            p.optiondate5String = this.toDateInputValue(p.optiondate5);
+            p.optiondate6String = this.toDateInputValue(p.optiondate6);
+            p.optiondate7String = this.toDateInputValue(p.optiondate7);
+            p.optiondate8String = this.toDateInputValue(p.optiondate8);
+
+            p.optionarraypersonArray = this.toArrayNumberInputValue(p.optionarrayperson);
+            p.optionarray1Array = this.toArrayNumberInputValue(p.optionarray1);
+
+            p.personssearchadditional = true;
+            if (p.optionarraypersonArray.length > 0) {
+                p.personssearchadditional = false;
+            }
+
+            // Если пункт "предоставить" (для отпуска), то в 6ой строке может содержаться информация о странах, 
+            if (p.persondecreeblocktype == 15) {
+                p.countrycitiesList = new Array();
+
+                let baseCountrycities: Countrycities = new Countycities();
+                p.countrycitiesList.push(baseCountrycities);
+
+            }
+        })
+
+        this.persondecreeBlocks = result;
+    }
+
+    parsepersondecreeoperation(result) {
+        result.sort((a, b) => (a.persondecreeblock > b.persondecreeblock) ? 1 : (a.persondecreeblock === b.persondecreeblock) ? ((a.intro < b.intro) ? 1 : (a.intro === b.intro) ? ((a.persondecreeblocksubtype > b.persondecreeblocksubtype) ? 1 : (a.persondecreeblocksubtype === b.persondecreeblocksubtype) ? ((a.optionnumber1 > b.optionnumber1) ? 1 : -1) : -1) : -1) : -1);
+
+        let operationPrev: Persondecreeoperation = null;
+        let intronumPrev: number = 0;
+        let persondecreeblocksubtypePrev: number = 0;
+        let persondecreeblockoptionnumber1Prev: number = 0;
+        result.forEach(operation => {
+            //operation.excerptstructures = [];
+            // Если мы используем булевские типы вместо чисел
+            if (operation.optionnumber1 > 0) {
+                operation.optionnumber1Bool = true;
+            } else {
+                operation.optionnumber1Bool = false;
+            }
+            if (operation.optionnumber2 > 0) {
+                operation.optionnumber2Bool = true;
+            } else {
+                operation.optionnumber2Bool = false;
+            }
+            if (operation.optionnumber3 > 0) {
+                operation.optionnumber3Bool = true;
+            } else {
+                operation.optionnumber3Bool = false;
+            }
+            if (operation.optionnumber4 > 0) {
+                operation.optionnumber4Bool = true;
+            } else {
+                operation.optionnumber4Bool = false;
+            }
+            if (operation.optionnumber5 > 0) {
+                operation.optionnumber5Bool = true;
+            } else {
+                operation.optionnumber5Bool = false;
+            }
+
+            operation.optionarraypersonArray = this.toArrayNumberInputValue(operation.optionarrayperson);
+            operation.optionarray1Array = this.toArrayNumberInputValue(operation.optionarray1);
+
+            // Если пункт "предоставить" (для отпуска), то в 6ой строке может содержаться информация о странах, 
+            if (operation.persondecreeblocktype == 15 && operation.optionstring6.length > 0) {
+                operation.countrycitiesList = Countrycities.stringToCountrycitiesList(operation.optionstring6);
+            }
+
+            /**
+             * Здесь проводится сравнение, какие части текущей части и предыдущей совпадают. Например, чтобы если и текущему сотруднику и предыдущему выдается награда по идентичному пункту, 
+             * оно писало "присвоить очередное специальное звание на одну ступень выше" лишь один раз.
+             */
+            if (operationPrev != null) {
+                let newIntro: boolean = false;
+                let newSubtype: boolean = false;
+
+                // Вводные фабулы не совпадают или вводная фабула отсутствует
+                if (operation.intro.length == 0 || !(operationPrev.intro === operation.intro)) {
+                    //if (!(operationPrev.intro === operation.intro)) {
+                    intronumPrev += 1;
+                    operation.intronum = intronumPrev;
+
+
+                    if (operation.intro.length != 0 || operationPrev.intro.length != 0) {
+                        persondecreeblocksubtypePrev = 1;
+                        persondecreeblockoptionnumber1Prev = 1;
+                        newIntro = true;
+                    }
+
+                }
+                if (operation.persondecreeblocksubtype != operationPrev.persondecreeblocksubtype || newIntro) {
+                    persondecreeblocksubtypePrev += 1;
+                    operation.persondecreeblocksubtypenum = persondecreeblocksubtypePrev;
+
+                }
+                //if (operation.persondecreeoptionnumber1num != operationPrev.persondecreeoptionnumber1) {
+                if (operation.optionnumber1 != operationPrev.optionnumber1 || newIntro) {
+                    persondecreeblockoptionnumber1Prev += 1;
+                    operation.persondecreeoptionnumber1num = persondecreeblockoptionnumber1Prev;
+                } else {
+
+                }
+            } else {
+                intronumPrev = 1;
+                persondecreeblocksubtypePrev = 1;
+                persondecreeblockoptionnumber1Prev = 1;
+                operation.intronum = intronumPrev;
+                operation.persondecreeblocksubtypenum = persondecreeblocksubtypePrev;
+                operation.persondecreeoptionnumber1num = persondecreeblockoptionnumber1Prev;
+            }
+            //alert(operation.persondecreeoptionnumber1num + " "+ persondecreeblockoptionnumber1Prev);
+            operationPrev = operation;
+        })
+
+        this.persondecreeOperations = result;
     }
 }

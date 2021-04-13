@@ -13,5 +13,15 @@ namespace PersonnelManagement.Models
         public List<Persondecreeblocksub> decreeblocksubs { get; set; }
         public List<Persondecreeblocksubtype> decreeblocksubtypes { get; set; }
         public List<PersondecreeoperationManagement> decreeoperations { get; set; }
+
+        public ExcertComposition()
+        {
+            decree = new PersondecreeManagement();
+            decreeblocks = new List<PersondecreeblockManagement>();
+            decreeblocktypes = new List<Persondecreeblocktype>();
+            decreeblocksubs = new List<Persondecreeblocksub>();
+            decreeblocksubtypes = new List<Persondecreeblocksubtype>();
+            decreeoperations = new List<PersondecreeoperationManagement>();
+        }
     }
 }

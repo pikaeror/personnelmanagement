@@ -396,6 +396,8 @@ const store = new Vuex.Store({
         decreemail: false,
 
         excertmenu: false,
+        excertdecreeid: null,
+        lodingexcert: false,
     },
     mutations: {
         setchosenpersiondecreeblock(state, n) {
@@ -555,6 +557,12 @@ const store = new Vuex.Store({
         },
         setExcertMenu(state, n) {
             state.excertmenu = n;
+        },
+        setExcertDecreeId(state, n) {
+            state.excertdecreeid = n;
+        },
+        setLodingExcert(state, n) {
+            state.lodingexcert = n;
         },
 
         setdecreemailM(state, n) {

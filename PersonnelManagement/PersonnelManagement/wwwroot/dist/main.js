@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "f8e5813fd199c4a065f5"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "36de524efae69e1b4ae3"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -2541,6 +2541,8 @@ const store = new __WEBPACK_IMPORTED_MODULE_3_vuex__["default"].Store({
         currentdecreemail: "",
         decreemail: false,
         excertmenu: false,
+        excertdecreeid: null,
+        lodingexcert: false,
     },
     mutations: {
         setchosenpersiondecreeblock(state, n) {
@@ -2679,6 +2681,12 @@ const store = new __WEBPACK_IMPORTED_MODULE_3_vuex__["default"].Store({
         },
         setExcertMenu(state, n) {
             state.excertmenu = n;
+        },
+        setExcertDecreeId(state, n) {
+            state.excertdecreeid = n;
+        },
+        setLodingExcert(state, n) {
+            state.lodingexcert = n;
         },
         setdecreemailM(state, n) {
             state.currentdecreemail = n;
@@ -8017,10 +8025,12 @@ let derceeoperationelement = class derceeoperationelement extends __WEBPACK_IMPO
             title_text_f: 'Направить:',
             title_text_s: 'Переместить:',
             title_text_t: 'Объединить:',
-            title_text_excert: 'Выписки по приказу:',
+            title_text_excert: '',
+            title_text_excert_template: 'Выписки из приказа:',
             excertmenu: this.$store.state.excertmenu,
             excertsdecree: null,
             excertsdecreestructure: [],
+            upload: 0,
         };
     }
     tableRowClassName({ row, rowIndex }) {
@@ -8399,6 +8409,7 @@ fetch('api/MailController/rand', { credentials: 'include' })
         }
         this.viewpersondecrees = time;
         this.$store.commit("setExcertMenu", excert);
+        this.$store.commit("setExcertDecreeId", null);
         this.excertmenu = excert;
         return time;
     }
@@ -8577,7 +8588,9 @@ fetch('api/MailController/rand', { credentials: 'include' })
         });
     }
     excertClose() {
+        this.title_text_excert = this.title_text_excert_template;
         this.$store.commit("setExcertMenu", false);
+        this.$store.commit("setLodingExcert", false);
         this.excertmenu = false;
     }
     loadexcertsdecree() {
@@ -8636,6 +8649,7 @@ fetch('api/MailController/rand', { credentials: 'include' })
         this.$store.commit("setExcertMenu", true);
         this.excertmenu = true;
         this.excertsdecree = row;
+        this.title_text_excert = this.title_text_excert_template + ' № ' + this.excertsdecree.getNumber + ' от ' + this.excertsdecree.getDate;
         this.excertsdecreestructure = [];
         fetch('api/Persondecreeoperationexcert/listexcertsstructure/' + row.id, {
             method: 'get',
@@ -8653,8 +8667,12 @@ fetch('api/MailController/rand', { credentials: 'include' })
             });
         });
     }
-    openexcert() {
-        this.$store.commit("setdecreemailM", this.excertsdecree.id);
+    openexcert(struct) {
+        this.$store.commit("setLodingExcert", true);
+        this.$store.commit("setExcertDecreeId", this.excertsdecree.id.toString() + "_" + struct.id.toString());
+    }
+    get loading2() {
+        return this.$store.state.lodingexcert;
     }
 };
 __decorate([
@@ -24047,6 +24065,7 @@ let TopmenuComponent = class TopmenuComponent extends __WEBPACK_IMPORTED_MODULE_
             personvacationHolidays: null,
             //rewardmoneys: [],
             customwidth: false,
+            excertmode: false,
         };
     }
     mounted() {
@@ -25269,101 +25288,7 @@ let TopmenuComponent = class TopmenuComponent extends __WEBPACK_IMPORTED_MODULE_
             return response.json();
         })
             .then(result => {
-            /**
-             * Проводим сортировку всех частей по блоку, вводной фабуле, подблоку
-             */
-            //alert(JSON.stringify(result));
-            // list.sort((a, b) => (a.color > b.color) ? 1 : -1)
-            // list.sort((a, b) => (a.color > b.color) ? 1 : (a.color === b.color) ? ((a.size > b.size) ? 1 : -1) : -1 )
-            //result.sort((a, b) => (a.persondecreeblock > b.persondecreeblock) ? 1 : (a.persondecreeblock === b.persondecreeblock) ? ((a.intro < b.intro) ? 1 : -1) : -1);
-            // : (a.persondecreeblock === b.persondecreeblock) ? ((a.intro > b.intro) ? 1 : -1) - вставляется перед первым : -1
-            //result.sort((a, b) => (a.persondecreeblock > b.persondecreeblock) ? 1 : (a.persondecreeblock === b.persondecreeblock) ? ((a.intro < b.intro) ? 1 : (a.intro === b.intro) ? ((a.persondecreeblocksubtype > b.persondecreeblocksubtype) ? 1 : -1) : -1) : -1);
-            result.sort((a, b) => (a.persondecreeblock > b.persondecreeblock) ? 1 : (a.persondecreeblock === b.persondecreeblock) ? ((a.intro < b.intro) ? 1 : (a.intro === b.intro) ? ((a.persondecreeblocksubtype > b.persondecreeblocksubtype) ? 1 : (a.persondecreeblocksubtype === b.persondecreeblocksubtype) ? ((a.optionnumber1 > b.optionnumber1) ? 1 : -1) : -1) : -1) : -1);
-            let operationPrev = null;
-            let intronumPrev = 0;
-            let persondecreeblocksubtypePrev = 0;
-            let persondecreeblockoptionnumber1Prev = 0;
-            result.forEach(operation => {
-                //operation.excerptstructures = [];
-                // Если мы используем булевские типы вместо чисел
-                if (operation.optionnumber1 > 0) {
-                    operation.optionnumber1Bool = true;
-                }
-                else {
-                    operation.optionnumber1Bool = false;
-                }
-                if (operation.optionnumber2 > 0) {
-                    operation.optionnumber2Bool = true;
-                }
-                else {
-                    operation.optionnumber2Bool = false;
-                }
-                if (operation.optionnumber3 > 0) {
-                    operation.optionnumber3Bool = true;
-                }
-                else {
-                    operation.optionnumber3Bool = false;
-                }
-                if (operation.optionnumber4 > 0) {
-                    operation.optionnumber4Bool = true;
-                }
-                else {
-                    operation.optionnumber4Bool = false;
-                }
-                if (operation.optionnumber5 > 0) {
-                    operation.optionnumber5Bool = true;
-                }
-                else {
-                    operation.optionnumber5Bool = false;
-                }
-                operation.optionarraypersonArray = this.toArrayNumberInputValue(operation.optionarrayperson);
-                operation.optionarray1Array = this.toArrayNumberInputValue(operation.optionarray1);
-                // Если пункт "предоставить" (для отпуска), то в 6ой строке может содержаться информация о странах, 
-                if (operation.persondecreeblocktype == 15 && operation.optionstring6.length > 0) {
-                    operation.countrycitiesList = __WEBPACK_IMPORTED_MODULE_13__classes_countrycities__["a" /* default */].stringToCountrycitiesList(operation.optionstring6);
-                }
-                /**
-                 * Здесь проводится сравнение, какие части текущей части и предыдущей совпадают. Например, чтобы если и текущему сотруднику и предыдущему выдается награда по идентичному пункту,
-                 * оно писало "присвоить очередное специальное звание на одну ступень выше" лишь один раз.
-                 */
-                if (operationPrev != null) {
-                    let newIntro = false;
-                    let newSubtype = false;
-                    // Вводные фабулы не совпадают или вводная фабула отсутствует
-                    if (operation.intro.length == 0 || !(operationPrev.intro === operation.intro)) {
-                        //if (!(operationPrev.intro === operation.intro)) {
-                        intronumPrev += 1;
-                        operation.intronum = intronumPrev;
-                        if (operation.intro.length != 0 || operationPrev.intro.length != 0) {
-                            persondecreeblocksubtypePrev = 1;
-                            persondecreeblockoptionnumber1Prev = 1;
-                            newIntro = true;
-                        }
-                    }
-                    if (operation.persondecreeblocksubtype != operationPrev.persondecreeblocksubtype || newIntro) {
-                        persondecreeblocksubtypePrev += 1;
-                        operation.persondecreeblocksubtypenum = persondecreeblocksubtypePrev;
-                    }
-                    //if (operation.persondecreeoptionnumber1num != operationPrev.persondecreeoptionnumber1) {
-                    if (operation.optionnumber1 != operationPrev.optionnumber1 || newIntro) {
-                        persondecreeblockoptionnumber1Prev += 1;
-                        operation.persondecreeoptionnumber1num = persondecreeblockoptionnumber1Prev;
-                    }
-                    else {
-                    }
-                }
-                else {
-                    intronumPrev = 1;
-                    persondecreeblocksubtypePrev = 1;
-                    persondecreeblockoptionnumber1Prev = 1;
-                    operation.intronum = intronumPrev;
-                    operation.persondecreeblocksubtypenum = persondecreeblocksubtypePrev;
-                    operation.persondecreeoptionnumber1num = persondecreeblockoptionnumber1Prev;
-                }
-                //alert(operation.persondecreeoptionnumber1num + " "+ persondecreeblockoptionnumber1Prev);
-                operationPrev = operation;
-            });
-            this.persondecreeOperations = result;
+            this.parsepersondecreeoperation(result);
         });
     }
     fetchPersondecreeBlocks(decree) {
@@ -25372,75 +25297,7 @@ let TopmenuComponent = class TopmenuComponent extends __WEBPACK_IMPORTED_MODULE_
             return response.json();
         })
             .then(result => {
-            //alert(JSON.stringify(result));
-            result.forEach(p => {
-                if (p.persondecreeblocksub == 0) {
-                    p.persondecreeblocksub = null; // Чтобы ничего не отображало вместо 0
-                }
-                if (p.persondecreeblocktype == 1) {
-                    p.samplePersonreward = new __WEBPACK_IMPORTED_MODULE_8__classes_personreward__["a" /* default */]();
-                }
-                if (p.optionnumber1 == 0) {
-                    p.optionnumber1 = null;
-                }
-                if (p.optionnumber2 == 0) {
-                    p.optionnumber2 = null;
-                }
-                if (p.optionnumber3 == 0) {
-                    p.optionnumber3 = null;
-                }
-                if (p.optionnumber4 == 0) {
-                    p.optionnumber4 = null;
-                }
-                if (p.optionnumber5 == 0) {
-                    p.optionnumber5 = null;
-                }
-                if (p.optionnumber6 == 0) {
-                    p.optionnumber6 = null;
-                }
-                if (p.optionnumber7 == 0) {
-                    p.optionnumber7 = null;
-                }
-                if (p.optionnumber8 == 0) {
-                    p.optionnumber8 = null;
-                }
-                if (p.optionnumber9 == 0) {
-                    p.optionnumber9 = null;
-                }
-                if (p.optionnumber10 == 0) {
-                    p.optionnumber10 = null;
-                }
-                if (p.optionnumber11 == 0) {
-                    p.optionnumber11 = null;
-                }
-                if (p.subvaluenumber1 == 0) {
-                    p.subvaluenumber1 = null;
-                }
-                if (p.subvaluenumber2 == 0) {
-                    p.subvaluenumber2 = null;
-                }
-                p.optiondate1String = this.toDateInputValue(p.optiondate1);
-                p.optiondate2String = this.toDateInputValue(p.optiondate2);
-                p.optiondate3String = this.toDateInputValue(p.optiondate3);
-                p.optiondate4String = this.toDateInputValue(p.optiondate4);
-                p.optiondate5String = this.toDateInputValue(p.optiondate5);
-                p.optiondate6String = this.toDateInputValue(p.optiondate6);
-                p.optiondate7String = this.toDateInputValue(p.optiondate7);
-                p.optiondate8String = this.toDateInputValue(p.optiondate8);
-                p.optionarraypersonArray = this.toArrayNumberInputValue(p.optionarrayperson);
-                p.optionarray1Array = this.toArrayNumberInputValue(p.optionarray1);
-                p.personssearchadditional = true;
-                if (p.optionarraypersonArray.length > 0) {
-                    p.personssearchadditional = false;
-                }
-                // Если пункт "предоставить" (для отпуска), то в 6ой строке может содержаться информация о странах, 
-                if (p.persondecreeblocktype == 15) {
-                    p.countrycitiesList = new Array();
-                    let baseCountrycities = new __WEBPACK_IMPORTED_MODULE_13__classes_countrycities__["a" /* default */]();
-                    p.countrycitiesList.push(baseCountrycities);
-                }
-            });
-            this.persondecreeBlocks = result;
+            this.parsepersondecreeblock(result);
         });
     }
     fetchPersondecree(id) {
@@ -25449,41 +25306,48 @@ let TopmenuComponent = class TopmenuComponent extends __WEBPACK_IMPORTED_MODULE_
             return response.json();
         })
             .then(result => {
-            this.persondecreeDatecreated = this.toDateInputValue(result.datecreated);
-            if (result.datesigned != null) {
-                this.persondecreeDatesigned = this.toDateInputValue(result.datesigned);
-            }
-            else {
-                this.persondecreeDatesigned = this.getdate();
-            }
-            this.persondecreeName = result.name;
-            this.persondecreeNickname = result.nickname;
-            this.persondecreeNumber = result.number;
-            this.persondecreeNumbertype = result.numbertype;
-            this.persondecreeId = id;
-            //alert(result.creatorObject);
-            this.persondecreeCreatorObject = result.creatorObject;
-            this.persondecreeSigned = result.signed;
+            this.parsepersondecree(result);
         });
     }
     persondecreeSelectt() {
+        if (!this.logicFunctionExcert())
+            return;
+        /*if (this.$store.state.excertdecreeid != null)
+            this.excertmode = true;*/
         if (this.$store.state.decreemail) {
             let id = this.$store.state.currentdecreemail;
             this.customwidth = this.$store.state.decreemail;
-            this.modalPersondecreeMenuVisible = this.$store.state.decreemail;
+            //this.modalPersondecreeMenuVisible = this.$store.state.decreemail;
             this.persondecreeSelectUpdate(id);
+            this.modalPersondecreeMenuVisible = this.$store.state.decreemail;
         }
     }
     logic_function_decree_mail_close() {
         this.customwidth = false;
         this.$store.commit("setdecreemailM", "");
+        //this.$store.commit("setExcertDecreeId", null);
+        //this.excertmode = false;
+        //this.modalPersondecreeMenuVisible = !this.modalPersondecreeMenuVisible;
+        //this.persondecreeBlocks = [];
+        //this.persondecreeBlocksubs = [];
+        //this.persondecreeOperations = [];
         return !this.modalPersondecreeMenuVisible;
+    }
+    afterclosedecree() {
+        this.$store.commit("setExcertDecreeId", null);
+        this.excertmode = false;
+        this.modalPersondecreeMenuVisible = !this.modalPersondecreeMenuVisible;
+        this.persondecreeBlocks = [];
+        this.persondecreeBlocksubs = [];
+        this.persondecreeOperations = [];
     }
     persondecreeSelect(event, id) {
         this.modalPersondecreeMenuVisible = true;
         this.persondecreeSelectUpdate(id);
     }
     persondecreeSelectUpdate(id) {
+        if (this.excertmode)
+            return;
         this.fetchPersondecreeOperations(id);
         this.fetchPersondecreeBlocks(id);
         this.fetchPersondecree(id);
@@ -28714,6 +28578,212 @@ let TopmenuComponent = class TopmenuComponent extends __WEBPACK_IMPORTED_MODULE_
             r.excerptstructures_front = listexc.join('_');
         });
         return operations;
+    }
+    logicFunctionExcert() {
+        if (this.excertmode)
+            return true;
+        if (this.$store.state.excertmenu && this.$store.state.excertdecreeid != null && !this.modalPersondecreeMenuVisible) {
+            this.excertmode = true;
+            let str = this.$store.state.excertdecreeid;
+            fetch('api/Persondecreeoperationexcert/excert/' + str, {
+                method: 'get',
+                credentials: 'include',
+                headers: new Headers({
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                })
+            }).then(response => {
+                return response.json();
+            }).then(result => {
+                this.excertmode = true;
+                this.parsepersondecreeoperation(result.decreeoperations);
+                this.parsepersondecreeblock(result.decreeblocks);
+                this.parsepersondecree(result.decree);
+                this.persondecreeBlocksubs = result.decreeblocksubs;
+                //this.modalPersondecreeMenuVisible = false;
+                this.excertmode = true;
+                this.$store.commit("setLodingExcert", false);
+                this.modalPersondecreeMenuVisible = true;
+                this.$store.commit("setExcertDecreeId", str);
+            });
+            return false;
+        }
+        return true;
+    }
+    parsepersondecree(result) {
+        this.persondecreeDatecreated = this.toDateInputValue(result.datecreated);
+        if (result.datesigned != null) {
+            this.persondecreeDatesigned = this.toDateInputValue(result.datesigned);
+        }
+        else {
+            this.persondecreeDatesigned = this.getdate();
+        }
+        this.persondecreeName = result.name;
+        this.persondecreeNickname = result.nickname;
+        this.persondecreeNumber = result.number;
+        this.persondecreeNumbertype = result.numbertype;
+        this.persondecreeId = result.id;
+        //alert(result.creatorObject);
+        this.persondecreeCreatorObject = result.creatorObject;
+        this.persondecreeSigned = result.signed;
+    }
+    parsepersondecreeblock(result) {
+        result.forEach(p => {
+            if (p.persondecreeblocksub == 0) {
+                p.persondecreeblocksub = null; // Чтобы ничего не отображало вместо 0
+            }
+            if (p.persondecreeblocktype == 1) {
+                p.samplePersonreward = new __WEBPACK_IMPORTED_MODULE_8__classes_personreward__["a" /* default */]();
+            }
+            if (p.optionnumber1 == 0) {
+                p.optionnumber1 = null;
+            }
+            if (p.optionnumber2 == 0) {
+                p.optionnumber2 = null;
+            }
+            if (p.optionnumber3 == 0) {
+                p.optionnumber3 = null;
+            }
+            if (p.optionnumber4 == 0) {
+                p.optionnumber4 = null;
+            }
+            if (p.optionnumber5 == 0) {
+                p.optionnumber5 = null;
+            }
+            if (p.optionnumber6 == 0) {
+                p.optionnumber6 = null;
+            }
+            if (p.optionnumber7 == 0) {
+                p.optionnumber7 = null;
+            }
+            if (p.optionnumber8 == 0) {
+                p.optionnumber8 = null;
+            }
+            if (p.optionnumber9 == 0) {
+                p.optionnumber9 = null;
+            }
+            if (p.optionnumber10 == 0) {
+                p.optionnumber10 = null;
+            }
+            if (p.optionnumber11 == 0) {
+                p.optionnumber11 = null;
+            }
+            if (p.subvaluenumber1 == 0) {
+                p.subvaluenumber1 = null;
+            }
+            if (p.subvaluenumber2 == 0) {
+                p.subvaluenumber2 = null;
+            }
+            p.optiondate1String = this.toDateInputValue(p.optiondate1);
+            p.optiondate2String = this.toDateInputValue(p.optiondate2);
+            p.optiondate3String = this.toDateInputValue(p.optiondate3);
+            p.optiondate4String = this.toDateInputValue(p.optiondate4);
+            p.optiondate5String = this.toDateInputValue(p.optiondate5);
+            p.optiondate6String = this.toDateInputValue(p.optiondate6);
+            p.optiondate7String = this.toDateInputValue(p.optiondate7);
+            p.optiondate8String = this.toDateInputValue(p.optiondate8);
+            p.optionarraypersonArray = this.toArrayNumberInputValue(p.optionarrayperson);
+            p.optionarray1Array = this.toArrayNumberInputValue(p.optionarray1);
+            p.personssearchadditional = true;
+            if (p.optionarraypersonArray.length > 0) {
+                p.personssearchadditional = false;
+            }
+            // Если пункт "предоставить" (для отпуска), то в 6ой строке может содержаться информация о странах, 
+            if (p.persondecreeblocktype == 15) {
+                p.countrycitiesList = new Array();
+                let baseCountrycities = new __WEBPACK_IMPORTED_MODULE_13__classes_countrycities__["a" /* default */]();
+                p.countrycitiesList.push(baseCountrycities);
+            }
+        });
+        this.persondecreeBlocks = result;
+    }
+    parsepersondecreeoperation(result) {
+        result.sort((a, b) => (a.persondecreeblock > b.persondecreeblock) ? 1 : (a.persondecreeblock === b.persondecreeblock) ? ((a.intro < b.intro) ? 1 : (a.intro === b.intro) ? ((a.persondecreeblocksubtype > b.persondecreeblocksubtype) ? 1 : (a.persondecreeblocksubtype === b.persondecreeblocksubtype) ? ((a.optionnumber1 > b.optionnumber1) ? 1 : -1) : -1) : -1) : -1);
+        let operationPrev = null;
+        let intronumPrev = 0;
+        let persondecreeblocksubtypePrev = 0;
+        let persondecreeblockoptionnumber1Prev = 0;
+        result.forEach(operation => {
+            //operation.excerptstructures = [];
+            // Если мы используем булевские типы вместо чисел
+            if (operation.optionnumber1 > 0) {
+                operation.optionnumber1Bool = true;
+            }
+            else {
+                operation.optionnumber1Bool = false;
+            }
+            if (operation.optionnumber2 > 0) {
+                operation.optionnumber2Bool = true;
+            }
+            else {
+                operation.optionnumber2Bool = false;
+            }
+            if (operation.optionnumber3 > 0) {
+                operation.optionnumber3Bool = true;
+            }
+            else {
+                operation.optionnumber3Bool = false;
+            }
+            if (operation.optionnumber4 > 0) {
+                operation.optionnumber4Bool = true;
+            }
+            else {
+                operation.optionnumber4Bool = false;
+            }
+            if (operation.optionnumber5 > 0) {
+                operation.optionnumber5Bool = true;
+            }
+            else {
+                operation.optionnumber5Bool = false;
+            }
+            operation.optionarraypersonArray = this.toArrayNumberInputValue(operation.optionarrayperson);
+            operation.optionarray1Array = this.toArrayNumberInputValue(operation.optionarray1);
+            // Если пункт "предоставить" (для отпуска), то в 6ой строке может содержаться информация о странах, 
+            if (operation.persondecreeblocktype == 15 && operation.optionstring6.length > 0) {
+                operation.countrycitiesList = __WEBPACK_IMPORTED_MODULE_13__classes_countrycities__["a" /* default */].stringToCountrycitiesList(operation.optionstring6);
+            }
+            /**
+             * Здесь проводится сравнение, какие части текущей части и предыдущей совпадают. Например, чтобы если и текущему сотруднику и предыдущему выдается награда по идентичному пункту,
+             * оно писало "присвоить очередное специальное звание на одну ступень выше" лишь один раз.
+             */
+            if (operationPrev != null) {
+                let newIntro = false;
+                let newSubtype = false;
+                // Вводные фабулы не совпадают или вводная фабула отсутствует
+                if (operation.intro.length == 0 || !(operationPrev.intro === operation.intro)) {
+                    //if (!(operationPrev.intro === operation.intro)) {
+                    intronumPrev += 1;
+                    operation.intronum = intronumPrev;
+                    if (operation.intro.length != 0 || operationPrev.intro.length != 0) {
+                        persondecreeblocksubtypePrev = 1;
+                        persondecreeblockoptionnumber1Prev = 1;
+                        newIntro = true;
+                    }
+                }
+                if (operation.persondecreeblocksubtype != operationPrev.persondecreeblocksubtype || newIntro) {
+                    persondecreeblocksubtypePrev += 1;
+                    operation.persondecreeblocksubtypenum = persondecreeblocksubtypePrev;
+                }
+                //if (operation.persondecreeoptionnumber1num != operationPrev.persondecreeoptionnumber1) {
+                if (operation.optionnumber1 != operationPrev.optionnumber1 || newIntro) {
+                    persondecreeblockoptionnumber1Prev += 1;
+                    operation.persondecreeoptionnumber1num = persondecreeblockoptionnumber1Prev;
+                }
+                else {
+                }
+            }
+            else {
+                intronumPrev = 1;
+                persondecreeblocksubtypePrev = 1;
+                persondecreeblockoptionnumber1Prev = 1;
+                operation.intronum = intronumPrev;
+                operation.persondecreeblocksubtypenum = persondecreeblocksubtypePrev;
+                operation.persondecreeoptionnumber1num = persondecreeblockoptionnumber1Prev;
+            }
+            //alert(operation.persondecreeoptionnumber1num + " "+ persondecreeblockoptionnumber1Prev);
+            operationPrev = operation;
+        });
+        this.persondecreeOperations = result;
     }
 };
 __decorate([
@@ -32499,20 +32569,23 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "visible": _vm.modalPersondecreeMenuVisible,
       "width": "70%",
-      "close-on-click-modal": _vm.logic_function_decree_mail_close()
+      "close-on-click-modal": _vm.logic_function_decree_mail_close(),
+      "before-close": _vm.afterclosedecree
     },
     on: {
       "update:visible": function($event) {
         _vm.modalPersondecreeMenuVisible = $event
       }
     }
-  }, [_c('div', {
+  }, [(_vm.excertmode) ? _c('div', {
+    staticClass: "persondecreeoperation-nickname"
+  }, [_vm._v("Выписка из приказа № " + _vm._s(_vm.persondecreeNumber) + " от " + _vm._s(_vm.persondecreeDatesigned))]) : _vm._e(), _vm._v(" "), (!_vm.excertmode) ? _c('div', [_c('div', {
     staticClass: "persondecreeoperation-nickname"
   }, [_vm._v(_vm._s(_vm.persondecreeNickname))]), _vm._v(" "), (_vm.persondecreeCreatorObject != null) ? _c('div', [_c('div', {
     staticClass: "persondecreeoperation-row"
   }, [_c('div', {
     staticClass: "persondecreeoperation-row-text "
-  }, [_vm._v("Создатель проекта приказа:")]), _vm._v("\n                    " + _vm._s(_vm.persondecreeCreatorObject.surname) + " " + _vm._s(_vm.persondecreeCreatorObject.firstname) + " " + _vm._s(_vm.persondecreeCreatorObject.patronymic) + "."), _c('br'), _vm._v(" " + _vm._s(_vm.persondecreeCreatorObject.structureString) + ".\n                ")])]) : _vm._e(), _vm._v(" "), _c('div', {
+  }, [_vm._v("Создатель проекта приказа:")]), _vm._v("\n                        " + _vm._s(_vm.persondecreeCreatorObject.surname) + " " + _vm._s(_vm.persondecreeCreatorObject.firstname) + " " + _vm._s(_vm.persondecreeCreatorObject.patronymic) + "."), _c('br'), _vm._v(" " + _vm._s(_vm.persondecreeCreatorObject.structureString) + ".\n                    ")])]) : _vm._e(), _vm._v(" "), _c('div', {
     staticClass: "persondecreeoperation-row"
   }, [_c('div', {
     staticClass: "persondecreeoperation-row-text "
@@ -32520,7 +32593,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "persondecreeoperation-row-text-label"
   }, [_vm._v(_vm._s(_vm.beautifyDate(_vm.persondecreeDatecreated)))])]), _vm._v(" "), _c('hr'), _vm._v(" "), _c('div', {
     staticClass: "persondecreeoperation-row-warning"
-  }, [_vm._v("\n                Предварительные данные. Окончательная дата приказа и номер приказа вводятся только после подписания приказа.\n            ")]), _vm._v(" "), _c('div', {
+  }, [_vm._v("\n                    Предварительные данные. Окончательная дата приказа и номер приказа вводятся только после подписания приказа.\n                ")]), _vm._v(" "), _c('div', {
     staticClass: "persondecreeoperation-row"
   }, [_c('div', {
     staticClass: "persondecreeoperation-row-text"
@@ -32618,7 +32691,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     on: {
       "click": _vm.persondecreeUpdate
     }
-  }, [_vm._v("Зарезервировать")]) : _vm._e(), _vm._v(" "), _c('div', _vm._l((_vm.persondecreeBlocks), function(persondecreeBlock) {
+  }, [_vm._v("Зарезервировать")]) : _vm._e()], 1) : _vm._e(), _vm._v(" "), _c('div', _vm._l((_vm.persondecreeBlocks), function(persondecreeBlock) {
     return _c('div', {
       staticClass: "persondecreeblock"
     }, [(_vm.persondecreeSigned != 1) ? _c('div', {
@@ -32953,7 +33026,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
                 _vm.removePersondecreeoperation(decreeoperation)
               }
             }
-          }, [_vm._v("Удалить")])], 1) : _c('div', [_c('el-select', {
+          }, [_vm._v("Удалить")])], 1) : _c('div', [(!_vm.excertmode) ? _c('div', [_c('el-select', {
             staticStyle: {
               "width": "200px"
             },
@@ -32979,7 +33052,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
                 "value": item.name
               }
             })
-          }))], 1)])]) : _vm._e()
+          }))], 1) : _vm._e()])])]) : _vm._e()
         })], 2) : _vm._e()
       })], 2), _vm._v(" "), _c('div', [_c('div')])]) : _vm._e()
     }), _vm._v(" "), _vm._l((persondecreeBlock.persondecreeblocksubs), function(persondecreeblocksub) {
@@ -33010,7 +33083,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
               _vm.removePersondecreeoperation(decreeoperation)
             }
           }
-        }, [_vm._v("Удалить")])], 1) : _c('div', [_c('el-select', {
+        }, [_vm._v("Удалить")])], 1) : _c('div', [(!_vm.excertmode) ? _c('div', [_c('el-select', {
           staticStyle: {
             "width": "200px"
           },
@@ -33036,7 +33109,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
               "value": item.name
             }
           })
-        }))], 1)])]) : _vm._e()
+        }))], 1) : _vm._e()])])]) : _vm._e()
       })], 2), _vm._v(" "), _c('div')]) : _vm._e()
     }), _vm._v(" "), _c('br')], 2), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_c('el-button', {
       attrs: {
@@ -33168,7 +33241,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
             _vm.removePersondecreeoperation(decreeoperation)
           }
         }
-      }, [_vm._v("Удалить")])], 1) : _c('div', [_c('el-select', {
+      }, [_vm._v("Удалить")])], 1) : _c('div', [(!_vm.excertmode) ? _c('div', [_c('el-select', {
         staticStyle: {
           "width": "200px"
         },
@@ -33194,7 +33267,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
             "value": item.name
           }
         })
-      }))], 1)])]) : _vm._e()
+      }))], 1) : _vm._e()])])]) : _vm._e()
     }), _vm._v(" "), _c('br')], 2), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_c('el-button', {
       attrs: {
         "type": "danger"
@@ -33456,7 +33529,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
             _vm.removePersondecreeoperation(decreeoperation)
           }
         }
-      }, [_vm._v("Удалить")])], 1) : _c('div', [_c('el-select', {
+      }, [_vm._v("Удалить")])], 1) : _c('div', [(!_vm.excertmode) ? _c('div', [_c('el-select', {
         staticStyle: {
           "width": "200px"
         },
@@ -33482,7 +33555,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
             "value": item.name
           }
         })
-      }))], 1)])]) : _vm._e()
+      }))], 1) : _vm._e()])])]) : _vm._e()
     }), _vm._v(" "), _c('br')], 2), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_c('el-button', {
       attrs: {
         "type": "danger"
@@ -33921,7 +33994,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
               _vm.removePersondecreeoperation(decreeoperation)
             }
           }
-        }, [_vm._v("Удалить")])], 1) : _c('div', [_c('el-select', {
+        }, [_vm._v("Удалить")])], 1) : _c('div', [(!_vm.excertmode) ? _c('div', [_c('el-select', {
           staticStyle: {
             "width": "200px"
           },
@@ -33947,7 +34020,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
               "value": item.name
             }
           })
-        }))], 1)])]) : _vm._e()
+        }))], 1) : _vm._e()])])]) : _vm._e()
       })), _vm._v(" "), _c('div')]) : _vm._e()
     }), _vm._v(" "), _c('br')], 2), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_c('el-button', {
       attrs: {
@@ -34099,7 +34172,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
               _vm.removePersondecreeoperation(decreeoperation)
             }
           }
-        }, [_vm._v("Удалить")])], 1) : _c('div', [_c('el-select', {
+        }, [_vm._v("Удалить")])], 1) : _c('div', [(!_vm.excertmode) ? _c('div', [_c('el-select', {
           staticStyle: {
             "width": "200px"
           },
@@ -34125,7 +34198,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
               "value": item.name
             }
           })
-        }))], 1)])]) : _vm._e()
+        }))], 1) : _vm._e()])])]) : _vm._e()
       }))]) : _vm._e()
     })), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_c('el-button', {
       attrs: {
@@ -34250,7 +34323,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
             _vm.removePersondecreeoperation(decreeoperation)
           }
         }
-      }, [_vm._v("Удалить")])], 1) : _c('div', [_c('el-select', {
+      }, [_vm._v("Удалить")])], 1) : _c('div', [(!_vm.excertmode) ? _c('div', [_c('el-select', {
         staticStyle: {
           "width": "200px"
         },
@@ -34276,7 +34349,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
             "value": item.name
           }
         })
-      }))], 1)])]) : _vm._e()
+      }))], 1) : _vm._e()])])]) : _vm._e()
     }), _vm._v(" "), _c('br')], 2), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_c('el-button', {
       attrs: {
         "type": "danger"
@@ -34413,7 +34486,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
             _vm.removePersondecreeoperation(decreeoperation)
           }
         }
-      }, [_vm._v("Удалить")])], 1) : _c('div', [_c('el-select', {
+      }, [_vm._v("Удалить")])], 1) : _c('div', [(!_vm.excertmode) ? _c('div', [_c('el-select', {
         staticStyle: {
           "width": "200px"
         },
@@ -34439,7 +34512,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
             "value": item.name
           }
         })
-      }))], 1)])]) : _vm._e()
+      }))], 1) : _vm._e()])])]) : _vm._e()
     }), _vm._v(" "), _c('br')], 2), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_c('el-button', {
       attrs: {
         "type": "danger"
@@ -34566,7 +34639,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
             _vm.removePersondecreeoperation(decreeoperation)
           }
         }
-      }, [_vm._v("Удалить")])], 1) : _c('div', [_c('el-select', {
+      }, [_vm._v("Удалить")])], 1) : _c('div', [(!_vm.excertmode) ? _c('div', [_c('el-select', {
         staticStyle: {
           "width": "200px"
         },
@@ -34592,7 +34665,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
             "value": item.name
           }
         })
-      }))], 1)])]) : _vm._e()
+      }))], 1) : _vm._e()])])]) : _vm._e()
     }), _vm._v(" "), _c('br')], 2), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_c('el-button', {
       attrs: {
         "type": "danger"
@@ -34799,7 +34872,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
             _vm.removePersondecreeoperation(decreeoperation)
           }
         }
-      }, [_vm._v("Удалить")])], 1) : _c('div', [_c('el-select', {
+      }, [_vm._v("Удалить")])], 1) : _c('div', [(!_vm.excertmode) ? _c('div', [_c('el-select', {
         staticStyle: {
           "width": "200px"
         },
@@ -34825,7 +34898,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
             "value": item.name
           }
         })
-      }))], 1)])]) : _vm._e()
+      }))], 1) : _vm._e()])])]) : _vm._e()
     }), _vm._v(" "), _c('br')], 2), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_c('el-button', {
       attrs: {
         "type": "danger"
@@ -35275,7 +35348,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
               _vm.removePersondecreeoperation(decreeoperation)
             }
           }
-        }, [_vm._v("Удалить")])], 1) : _c('div', [_c('el-select', {
+        }, [_vm._v("Удалить")])], 1) : _c('div', [(!_vm.excertmode) ? _c('div', [_c('el-select', {
           staticStyle: {
             "width": "200px"
           },
@@ -35301,7 +35374,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
               "value": item.name
             }
           })
-        }))], 1)])]) : _vm._e()
+        }))], 1) : _vm._e()])])]) : _vm._e()
       }), _vm._v(" "), _vm._l((persondecreeBlock.persondecreeblocksubs), function(persondecreeblocksubsub) {
         return (persondecreeblocksubsub.parentpersondecreeblocksub == persondecreeblocksub.id) ? _c('div', [_c('div', [_vm._v("\n                                        " + _vm._s(_vm.printDateDocument(persondecreeblocksubsub.subvaluedate1)) + " по " + _vm._s(_vm.printDateDocument(persondecreeblocksubsub.subvaluedate2)) + " :\n                                    ")]), _vm._v(" "), _c('div', _vm._l((persondecreeBlock.persondecreeblocksubs), function(persondecreeblocksubsubsub) {
           return (persondecreeblocksubsubsub.parentpersondecreeblocksub == persondecreeblocksubsub.id) ? _c('div', {
@@ -35323,7 +35396,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
                   _vm.removePersondecreeoperation(decreeoperation)
                 }
               }
-            }, [_vm._v("Удалить")])], 1) : _c('div', [_c('el-select', {
+            }, [_vm._v("Удалить")])], 1) : _c('div', [(!_vm.excertmode) ? _c('div', [_c('el-select', {
               staticStyle: {
                 "width": "200px"
               },
@@ -35349,7 +35422,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
                   "value": item.name
                 }
               })
-            }))], 1)])]) : _vm._e()
+            }))], 1) : _vm._e()])])]) : _vm._e()
           })], 2) : _vm._e()
         }))]) : _vm._e()
       })], 2)]) : _vm._e()
@@ -35468,7 +35541,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
             _vm.removePersondecreeoperation(decreeoperation)
           }
         }
-      }, [_vm._v("Удалить")])], 1) : _c('div', [_c('el-select', {
+      }, [_vm._v("Удалить")])], 1) : _c('div', [(!_vm.excertmode) ? _c('div', [_c('el-select', {
         staticStyle: {
           "width": "200px"
         },
@@ -35494,7 +35567,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
             "value": item.name
           }
         })
-      }))], 1)])]) : _vm._e()
+      }))], 1) : _vm._e()])])]) : _vm._e()
     }), _vm._v(" "), _c('br')], 2), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_c('el-button', {
       attrs: {
         "type": "danger"
@@ -35610,7 +35683,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
             _vm.removePersondecreeoperation(decreeoperation)
           }
         }
-      }, [_vm._v("Удалить")])], 1) : _c('div', [_c('el-select', {
+      }, [_vm._v("Удалить")])], 1) : _c('div', [(!_vm.excertmode) ? _c('div', [_c('el-select', {
         staticStyle: {
           "width": "200px"
         },
@@ -35636,7 +35709,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
             "value": item.name
           }
         })
-      }))], 1)])]) : _vm._e()
+      }))], 1) : _vm._e()])])]) : _vm._e()
     }), _vm._v(" "), _c('br')], 2), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_c('el-button', {
       attrs: {
         "type": "danger"
@@ -35763,7 +35836,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
             _vm.removePersondecreeoperation(decreeoperation)
           }
         }
-      }, [_vm._v("Удалить")])], 1) : _c('div', [_c('el-select', {
+      }, [_vm._v("Удалить")])], 1) : _c('div', [(!_vm.excertmode) ? _c('div', [_c('el-select', {
         staticStyle: {
           "width": "200px"
         },
@@ -35789,7 +35862,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
             "value": item.name
           }
         })
-      }))], 1)])]) : _vm._e()
+      }))], 1) : _vm._e()])])]) : _vm._e()
     }), _vm._v(" "), _c('br')], 2), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_c('el-button', {
       attrs: {
         "type": "danger"
@@ -35922,7 +35995,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
               _vm.removePersondecreeoperation(decreeoperation)
             }
           }
-        }, [_vm._v("Удалить")])], 1) : _c('div', [_c('el-select', {
+        }, [_vm._v("Удалить")])], 1) : _c('div', [(!_vm.excertmode) ? _c('div', [_c('el-select', {
           staticStyle: {
             "width": "200px"
           },
@@ -35948,7 +36021,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
               "value": item.name
             }
           })
-        }))], 1)])]) : _vm._e()
+        }))], 1) : _vm._e()])])]) : _vm._e()
       })], 2)]) : _vm._e()
     }), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_c('el-button', {
       attrs: {
@@ -36407,7 +36480,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
               _vm.removePersondecreeoperation(decreeoperation)
             }
           }
-        }, [_vm._v("Удалить")])], 1) : _c('div', [_c('el-select', {
+        }, [_vm._v("Удалить")])], 1) : _c('div', [(!_vm.excertmode) ? _c('div', [_c('el-select', {
           staticStyle: {
             "width": "200px"
           },
@@ -36433,7 +36506,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
               "value": item.name
             }
           })
-        }))], 1)])]) : _vm._e()
+        }))], 1) : _vm._e()])])]) : _vm._e()
       }), _vm._v(" "), _vm._l((persondecreeBlock.persondecreeblocksubs), function(persondecreeblocksubsub) {
         return (persondecreeblocksubsub.parentpersondecreeblocksub == persondecreeblocksub.id) ? _c('div', [_c('div', [_vm._v("\n                                        c " + _vm._s(_vm.printDateDocument(persondecreeblocksubsub.subvaluedate1)) + " по " + _vm._s(_vm.printDateDocument(persondecreeblocksubsub.subvaluedate2)) + "\n                                    ")]), _vm._v(" "), _c('div', _vm._l((_vm.persondecreeOperations), function(decreeoperation) {
           return (decreeoperation.persondecreeblocksub == persondecreeblocksubsub.id) ? _c('div', {
@@ -36450,7 +36523,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
                 _vm.removePersondecreeoperation(decreeoperation)
               }
             }
-          }, [_vm._v("Удалить")])], 1) : _c('div', [_c('el-select', {
+          }, [_vm._v("Удалить")])], 1) : _c('div', [(!_vm.excertmode) ? _c('div', [_c('el-select', {
             staticStyle: {
               "width": "200px"
             },
@@ -36476,7 +36549,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
                 "value": item.name
               }
             })
-          }))], 1)])]) : _vm._e()
+          }))], 1) : _vm._e()])])]) : _vm._e()
         }))]) : _vm._e()
       })], 2)]) : _vm._e()
     }), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_c('el-button', {
@@ -36728,7 +36801,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
               _vm.removePersondecreeoperation(decreeoperation)
             }
           }
-        }, [_vm._v("Удалить")])], 1) : _c('div', [_c('el-select', {
+        }, [_vm._v("Удалить")])], 1) : _c('div', [(!_vm.excertmode) ? _c('div', [_c('el-select', {
           staticStyle: {
             "width": "200px"
           },
@@ -36754,7 +36827,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
               "value": item.name
             }
           })
-        }))], 1)])]) : _vm._e()
+        }))], 1) : _vm._e()])])]) : _vm._e()
       })], 2)]) : _vm._e()
     }), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_c('el-button', {
       attrs: {
@@ -37858,7 +37931,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
                 _vm.removePersondecreeoperation(decreeoperation)
               }
             }
-          }, [_vm._v("Удалить")])], 1) : _c('div', [_c('el-select', {
+          }, [_vm._v("Удалить")])], 1) : _c('div', [(!_vm.excertmode) ? _c('div', [_c('el-select', {
             staticStyle: {
               "width": "200px"
             },
@@ -37884,7 +37957,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
                 "value": item.name
               }
             })
-          }))], 1)])]) : _vm._e()
+          }))], 1) : _vm._e()])])]) : _vm._e()
         })), _vm._v(" "), _c('div', [_vm._v("\n                                        Основание: " + _vm._s(persondecreeblocksubsub.subvaluestring1) + ".\n                                    ")])]) : _vm._e()
       })], 2)]) : _vm._e()
     }), _vm._v(" "), (_vm.persondecreeSigned != 1) ? _c('div', [_c('el-button', {
@@ -38112,7 +38185,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
                   _vm.removePersondecreeoperation(decreeoperation)
                 }
               }
-            }, [_vm._v("Удалить")])], 1) : _c('div', [_c('el-select', {
+            }, [_vm._v("Удалить")])], 1) : _c('div', [(!_vm.excertmode) ? _c('div', [_c('el-select', {
               staticStyle: {
                 "width": "200px"
               },
@@ -38138,7 +38211,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
                   "value": item.name
                 }
               })
-            }))], 1)])]) : _vm._e()
+            }))], 1) : _vm._e()])])]) : _vm._e()
           })), _vm._v(" "), _c('div', [_vm._v("\n                                                Основание: " + _vm._s(persondecreeblocksubsubsub.subvaluestring1) + ".\n                                            ")])]) : _vm._e()
         }))]) : _vm._e()
       })], 2)]) : _vm._e()
@@ -38690,7 +38763,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     on: {
       "click": _vm.fetchexcerpt
     }
-  }, [_vm._v("Сформировать выписки")]) : _vm._e()], 1)], 1), _vm._v(" "), _c('el-dialog', {
+  }, [_vm._v("Сформировать выписки")]) : _vm._e()], 1)]), _vm._v(" "), _c('el-dialog', {
     directives: [{
       name: "draggable",
       rawName: "v-draggable"
@@ -55518,11 +55591,20 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "click": _vm.persondecreesUnite
     }
   }, [_vm._v("Объединить")])], 1) : _vm._e()])])]), _vm._v(" "), _c('el-dialog', {
+    directives: [{
+      name: "loading",
+      rawName: "v-loading",
+      value: (_vm.loading2),
+      expression: "loading2"
+    }],
     attrs: {
       "width": "900px",
       "visible": _vm.excertmenu,
       "title": _vm.title_text_excert,
-      "before-close": _vm.excertClose
+      "before-close": _vm.excertClose,
+      "element-loading-text": "Загрузка...",
+      "element-loading-spinner": "el-icon-loading",
+      "element-loading-background": "rgba(0, 0, 0, 0.8)"
     },
     on: {
       "update:visible": function($event) {
@@ -55533,7 +55615,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticStyle: {
       "margin-bottom": "10px"
     }
-  }, [(_vm.excertsdecree != null) ? _c('div', [_vm._v("\n                " + _vm._s(_vm.excertsdecree.number) + "\n            ")]) : _c('div', [_vm._v("\n                Выписки по приказу отсутствуют\n            ")]), _vm._v("\n            Выписки по приказам\n            "), _vm._v(" "), _vm._l((_vm.excertsdecreestructure), function(struct) {
+  }, [(_vm.excertsdecree != null) ? _c('div', [_vm._v("\n                " + _vm._s(_vm.excertsdecree.getNumber) + "\n                " + _vm._s(_vm.excertsdecree.number) + "\n            ")]) : _c('div', [_vm._v("\n                Выписки из приказа отсутствуют\n            ")]), _vm._v(" "), _vm._l((_vm.excertsdecreestructure), function(struct) {
     return _c('div', [_c('div', {
       staticStyle: {
         "margin-bottom": "4px",
@@ -55541,15 +55623,18 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         "padding": "10px",
         "border-radius": "10px",
         "background": "#eeece0"
-      },
-      on: {
-        "dblclick": _vm.openexcert
       }
     }, [_c('small', [_c('el-button', {
       attrs: {
         "type": "primary",
-        "icon": "el-icon-search",
-        "size": "mini"
+        "icon": "el-icon-view",
+        "size": "mini",
+        "loading": _vm.loading2
+      },
+      on: {
+        "click": function($event) {
+          _vm.openexcert(struct)
+        }
       }
     }), _vm._v("\n                        ⇒ " + _vm._s(struct.nameshortened))], 1)])])
   })], 2)])], 1) : _vm._e()

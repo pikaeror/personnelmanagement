@@ -112,33 +112,36 @@
 
             </el-dialog>
 
-            <el-dialog :visible.sync="modalPersondecreeMenuVisible" width="70%" :close-on-click-modal="logic_function_decree_mail_close()" v-draggable>
-                <div class="persondecreeoperation-nickname">{{persondecreeNickname}}</div>
-                <div v-if="persondecreeCreatorObject != null">
-                    <div class="persondecreeoperation-row">
-                        <div class="persondecreeoperation-row-text ">Создатель проекта приказа:</div>
-                        {{persondecreeCreatorObject.surname}} {{persondecreeCreatorObject.firstname}} {{persondecreeCreatorObject.patronymic}}.<br /> {{persondecreeCreatorObject.structureString}}.
+            <el-dialog :visible.sync="modalPersondecreeMenuVisible" width="70%" :close-on-click-modal="logic_function_decree_mail_close()" :before-close="afterclosedecree" v-draggable>
+                <div v-if="excertmode" class="persondecreeoperation-nickname">Выписка из приказа № {{persondecreeNumber}} от {{persondecreeDatesigned}}</div>
+                <div v-if="!excertmode">
+                    <div class="persondecreeoperation-nickname">{{persondecreeNickname}}</div>
+                    <div v-if="persondecreeCreatorObject != null">
+                        <div class="persondecreeoperation-row">
+                            <div class="persondecreeoperation-row-text ">Создатель проекта приказа:</div>
+                            {{persondecreeCreatorObject.surname}} {{persondecreeCreatorObject.firstname}} {{persondecreeCreatorObject.patronymic}}.<br /> {{persondecreeCreatorObject.structureString}}.
+                        </div>
                     </div>
+                    <div class="persondecreeoperation-row"><div class="persondecreeoperation-row-text ">Дата создания проекта:</div> <span class="persondecreeoperation-row-text-label">{{beautifyDate(persondecreeDatecreated)}}</span> <!--<el-input suffix-icon="el-icon-date" v-model="persondecreeDatecreated" @change="onPersondecreeDatesignedChange" type="date"></el-input>--></div>
+                    <hr />
+                    <div class="persondecreeoperation-row-warning">
+                        Предварительные данные. Окончательная дата приказа и номер приказа вводятся только после подписания приказа.
+                    </div>
+                    <div class="persondecreeoperation-row"><div class="persondecreeoperation-row-text">Дата приказа:</div> <el-input suffix-icon="el-icon-date" v-model="persondecreeDatesigned" type="date" :disabled="persondecreeSigned == 1"></el-input></div>
+                    <div class="persondecreeoperation-row"><div class="persondecreeoperation-row-text">Номер приказа:</div> <el-input v-model="persondecreeNumber" type="number" :disabled="persondecreeSigned == 1"></el-input></div>
+                    <div class="persondecreeoperation-row">
+                        <div class="persondecreeoperation-row-text">Индекс (литера) приказа:</div>
+                        <el-select v-model="persondecreeNumbertype" style="width:100%;" no-data-text="Не найдено" no-match-text="Не найдено" clearable placeholder="" :disabled="persondecreeSigned == 1">
+                            <el-option v-for="ordernumbertype in ordernumbertypes"
+                                       :key="ordernumbertype.name" :label="ordernumbertype.name" :value="ordernumbertype.name">
+                            </el-option>
+                        </el-select>
+                    </div>
+
+                    <div class="persondecreeoperation-row"><div class="persondecreeoperation-row-text">Название приказа:</div> <el-input v-model="persondecreeName" :disabled="persondecreeSigned == 1"></el-input></div>
+                    <div class="persondecreeoperation-row"><div class="persondecreeoperation-row-text">Рабочее название приказа:</div> <el-input v-model="persondecreeNickname" :disabled="persondecreeSigned == 1"></el-input></div>
+                    <el-button @click="persondecreeUpdate" class="persondecrees-margintop" v-if="persondecreeSigned != 1">Зарезервировать</el-button>
                 </div>
-                <div class="persondecreeoperation-row"><div class="persondecreeoperation-row-text ">Дата создания проекта:</div> <span class="persondecreeoperation-row-text-label">{{beautifyDate(persondecreeDatecreated)}}</span> <!--<el-input suffix-icon="el-icon-date" v-model="persondecreeDatecreated" @change="onPersondecreeDatesignedChange" type="date"></el-input>--></div>
-                <hr />
-                <div class="persondecreeoperation-row-warning">
-                    Предварительные данные. Окончательная дата приказа и номер приказа вводятся только после подписания приказа.
-                </div>
-                <div class="persondecreeoperation-row"><div class="persondecreeoperation-row-text">Дата приказа:</div> <el-input suffix-icon="el-icon-date" v-model="persondecreeDatesigned" type="date" :disabled="persondecreeSigned == 1"></el-input></div>
-                <div class="persondecreeoperation-row"><div class="persondecreeoperation-row-text">Номер приказа:</div> <el-input v-model="persondecreeNumber" type="number" :disabled="persondecreeSigned == 1"></el-input></div>
-                <div class="persondecreeoperation-row">
-                    <div class="persondecreeoperation-row-text">Индекс (литера) приказа:</div>
-                    <el-select v-model="persondecreeNumbertype" style="width:100%;" no-data-text="Не найдено" no-match-text="Не найдено" clearable placeholder="" :disabled="persondecreeSigned == 1">
-                        <el-option v-for="ordernumbertype in ordernumbertypes"
-                                   :key="ordernumbertype.name" :label="ordernumbertype.name" :value="ordernumbertype.name">
-                        </el-option>
-                    </el-select>
-                </div>
-                
-                <div class="persondecreeoperation-row"><div class="persondecreeoperation-row-text">Название приказа:</div> <el-input v-model="persondecreeName" :disabled="persondecreeSigned == 1"></el-input></div>
-                <div class="persondecreeoperation-row"><div class="persondecreeoperation-row-text">Рабочее название приказа:</div> <el-input v-model="persondecreeNickname" :disabled="persondecreeSigned == 1"></el-input></div>
-                <el-button @click="persondecreeUpdate" class="persondecrees-margintop" v-if="persondecreeSigned != 1">Зарезервировать</el-button>
                 <div>
                     <div v-for="persondecreeBlock in persondecreeBlocks" class="persondecreeblock">
                         <div class="persondecreeblock-title" v-if="persondecreeSigned != 1">
@@ -407,19 +410,21 @@
                                                         <el-button size="mini" type="warning" @click="removePersondecreeoperation(decreeoperation)">Удалить</el-button>
                                                     </div>
                                                     <div v-else>
-                                                        <el-select v-model="decreeoperation.excerptstructures"
-                                                                   multiple
-                                                                   filterable
-                                                                   allow-create
-                                                                   default-first-option
-                                                                   placeholder="Редактировать список получателей данного пункта"
-                                                                   style="width: 200px">
-                                                            <el-option v-for="item in featured"
-                                                                       :key="item.id"
-                                                                       :label="item.name"
-                                                                       :value="item.name">
-                                                            </el-option>
-                                                        </el-select>
+                                                        <div v-if="!excertmode">
+                                                            <el-select v-model="decreeoperation.excerptstructures"
+                                                                       multiple
+                                                                       filterable
+                                                                       allow-create
+                                                                       default-first-option
+                                                                       placeholder="Редактировать список получателей данного пункта"
+                                                                       style="width: 200px">
+                                                                <el-option v-for="item in featured"
+                                                                           :key="item.id"
+                                                                           :label="item.name"
+                                                                           :value="item.name">
+                                                                </el-option>
+                                                            </el-select>
+                                                        </div>
                                                     </div>
                                                 </div>
 
@@ -510,19 +515,21 @@
                                                     <el-button size="mini" type="warning" @click="removePersondecreeoperation(decreeoperation)">Удалить</el-button>
                                                 </div>
                                                 <div v-else>
-                                                    <el-select v-model="decreeoperation.excerptstructures"
-                                                               multiple
-                                                               filterable
-                                                               allow-create
-                                                               default-first-option
-                                                               placeholder="Редактировать список получателей данного пункта"
-                                                               style="width: 200px">
-                                                        <el-option v-for="item in featured"
-                                                                   :key="item.id"
-                                                                   :label="item.name"
-                                                                   :value="item.name">
-                                                        </el-option>
-                                                    </el-select>
+                                                    <div v-if="!excertmode">
+                                                        <el-select v-model="decreeoperation.excerptstructures"
+                                                                   multiple
+                                                                   filterable
+                                                                   allow-create
+                                                                   default-first-option
+                                                                   placeholder="Редактировать список получателей данного пункта"
+                                                                   style="width: 200px">
+                                                            <el-option v-for="item in featured"
+                                                                       :key="item.id"
+                                                                       :label="item.name"
+                                                                       :value="item.name">
+                                                            </el-option>
+                                                        </el-select>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -706,19 +713,21 @@
                                             <el-button size="mini" type="warning" @click="removePersondecreeoperation(decreeoperation)">Удалить</el-button>
                                         </div>
                                         <div v-else>
-                                            <el-select v-model="decreeoperation.excerptstructures"
-                                                       multiple
-                                                       filterable
-                                                       allow-create
-                                                       default-first-option
-                                                       placeholder="Редактировать список получателей данного пункта"
-                                                       style="width: 200px">
-                                                <el-option v-for="item in featured"
-                                                           :key="item.id"
-                                                           :label="item.name"
-                                                           :value="item.name">
-                                                </el-option>
-                                            </el-select>
+                                            <div v-if="!excertmode">
+                                                <el-select v-model="decreeoperation.excerptstructures"
+                                                           multiple
+                                                           filterable
+                                                           allow-create
+                                                           default-first-option
+                                                           placeholder="Редактировать список получателей данного пункта"
+                                                           style="width: 200px">
+                                                    <el-option v-for="item in featured"
+                                                               :key="item.id"
+                                                               :label="item.name"
+                                                               :value="item.name">
+                                                    </el-option>
+                                                </el-select>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -931,19 +940,21 @@
                                             <el-button size="mini" type="warning" @click="removePersondecreeoperation(decreeoperation)">Удалить</el-button>
                                         </div>
                                         <div v-else>
-                                            <el-select v-model="decreeoperation.excerptstructures"
-                                                       multiple
-                                                       filterable
-                                                       allow-create
-                                                       default-first-option
-                                                       placeholder="Редактировать список получателей данного пункта"
-                                                       style="width: 200px">
-                                                <el-option v-for="item in featured"
-                                                           :key="item.id"
-                                                           :label="item.name"
-                                                           :value="item.name">
-                                                </el-option>
-                                            </el-select>
+                                            <div v-if="!excertmode">
+                                                <el-select v-model="decreeoperation.excerptstructures"
+                                                           multiple
+                                                           filterable
+                                                           allow-create
+                                                           default-first-option
+                                                           placeholder="Редактировать список получателей данного пункта"
+                                                           style="width: 200px">
+                                                    <el-option v-for="item in featured"
+                                                               :key="item.id"
+                                                               :label="item.name"
+                                                               :value="item.name">
+                                                    </el-option>
+                                                </el-select>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -1266,19 +1277,21 @@
                                                     <el-button size="mini" type="warning" @click="removePersondecreeoperation(decreeoperation)">Удалить</el-button>
                                                 </div>
                                                 <div v-else>
-                                                    <el-select v-model="decreeoperation.excerptstructures"
-                                                               multiple
-                                                               filterable
-                                                               allow-create
-                                                               default-first-option
-                                                               placeholder="Редактировать список получателей данного пункта"
-                                                               style="width: 200px">
-                                                        <el-option v-for="item in featured"
-                                                                   :key="item.id"
-                                                                   :label="item.name"
-                                                                   :value="item.name">
-                                                        </el-option>
-                                                    </el-select>
+                                                    <div v-if="!excertmode">
+                                                        <el-select v-model="decreeoperation.excerptstructures"
+                                                                   multiple
+                                                                   filterable
+                                                                   allow-create
+                                                                   default-first-option
+                                                                   placeholder="Редактировать список получателей данного пункта"
+                                                                   style="width: 200px">
+                                                            <el-option v-for="item in featured"
+                                                                       :key="item.id"
+                                                                       :label="item.name"
+                                                                       :value="item.name">
+                                                            </el-option>
+                                                        </el-select>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -1403,19 +1416,21 @@
                                                     <el-button size="mini" type="warning" @click="removePersondecreeoperation(decreeoperation)">Удалить</el-button>
                                                 </div>
                                                 <div v-else>
-                                                    <el-select v-model="decreeoperation.excerptstructures"
-                                                               multiple
-                                                               filterable
-                                                               allow-create
-                                                               default-first-option
-                                                               placeholder="Редактировать список получателей данного пункта"
-                                                               style="width: 200px">
-                                                        <el-option v-for="item in featured"
-                                                                   :key="item.id"
-                                                                   :label="item.name"
-                                                                   :value="item.name">
-                                                        </el-option>
-                                                    </el-select>
+                                                    <div v-if="!excertmode">
+                                                        <el-select v-model="decreeoperation.excerptstructures"
+                                                                   multiple
+                                                                   filterable
+                                                                   allow-create
+                                                                   default-first-option
+                                                                   placeholder="Редактировать список получателей данного пункта"
+                                                                   style="width: 200px">
+                                                            <el-option v-for="item in featured"
+                                                                       :key="item.id"
+                                                                       :label="item.name"
+                                                                       :value="item.name">
+                                                            </el-option>
+                                                        </el-select>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -1512,19 +1527,21 @@
                                             <el-button size="mini" type="warning" @click="removePersondecreeoperation(decreeoperation)">Удалить</el-button>
                                         </div>
                                         <div v-else>
-                                            <el-select v-model="decreeoperation.excerptstructures"
-                                                       multiple
-                                                       filterable
-                                                       allow-create
-                                                       default-first-option
-                                                       placeholder="Редактировать список получателей данного пункта"
-                                                       style="width: 200px">
-                                                <el-option v-for="item in featured"
-                                                           :key="item.id"
-                                                           :label="item.name"
-                                                           :value="item.name">
-                                                </el-option>
-                                            </el-select>
+                                            <div v-if="!excertmode">
+                                                <el-select v-model="decreeoperation.excerptstructures"
+                                                           multiple
+                                                           filterable
+                                                           allow-create
+                                                           default-first-option
+                                                           placeholder="Редактировать список получателей данного пункта"
+                                                           style="width: 200px">
+                                                    <el-option v-for="item in featured"
+                                                               :key="item.id"
+                                                               :label="item.name"
+                                                               :value="item.name">
+                                                    </el-option>
+                                                </el-select>
+                                            </div>
                                         </div>
                                     </div>
 
@@ -1627,19 +1644,21 @@
                                             <el-button size="mini" type="warning" @click="removePersondecreeoperation(decreeoperation)">Удалить</el-button>
                                         </div>
                                         <div v-else>
-                                            <el-select v-model="decreeoperation.excerptstructures"
-                                                       multiple
-                                                       filterable
-                                                       allow-create
-                                                       default-first-option
-                                                       placeholder="Редактировать список получателей данного пункта"
-                                                       style="width: 200px">
-                                                <el-option v-for="item in featured"
-                                                           :key="item.id"
-                                                           :label="item.name"
-                                                           :value="item.name">
-                                                </el-option>
-                                            </el-select>
+                                            <div v-if="!excertmode">
+                                                <el-select v-model="decreeoperation.excerptstructures"
+                                                           multiple
+                                                           filterable
+                                                           allow-create
+                                                           default-first-option
+                                                           placeholder="Редактировать список получателей данного пункта"
+                                                           style="width: 200px">
+                                                    <el-option v-for="item in featured"
+                                                               :key="item.id"
+                                                               :label="item.name"
+                                                               :value="item.name">
+                                                    </el-option>
+                                                </el-select>
+                                            </div>
                                         </div>
                                     </div>
 
@@ -1735,19 +1754,21 @@
                                             <el-button size="mini" type="warning" @click="removePersondecreeoperation(decreeoperation)">Удалить</el-button>
                                         </div>
                                         <div v-else>
-                                            <el-select v-model="decreeoperation.excerptstructures"
-                                                       multiple
-                                                       filterable
-                                                       allow-create
-                                                       default-first-option
-                                                       placeholder="Редактировать список получателей данного пункта"
-                                                       style="width: 200px">
-                                                <el-option v-for="item in featured"
-                                                           :key="item.id"
-                                                           :label="item.name"
-                                                           :value="item.name">
-                                                </el-option>
-                                            </el-select>
+                                            <div v-if="!excertmode">
+                                                <el-select v-model="decreeoperation.excerptstructures"
+                                                           multiple
+                                                           filterable
+                                                           allow-create
+                                                           default-first-option
+                                                           placeholder="Редактировать список получателей данного пункта"
+                                                           style="width: 200px">
+                                                    <el-option v-for="item in featured"
+                                                               :key="item.id"
+                                                               :label="item.name"
+                                                               :value="item.name">
+                                                    </el-option>
+                                                </el-select>
+                                            </div>
                                         </div>
                                     </div>
 
@@ -1895,19 +1916,21 @@
                                             <el-button size="mini" type="warning" @click="removePersondecreeoperation(decreeoperation)">Удалить</el-button>
                                         </div>
                                         <div v-else>
-                                            <el-select v-model="decreeoperation.excerptstructures"
-                                                       multiple
-                                                       filterable
-                                                       allow-create
-                                                       default-first-option
-                                                       placeholder="Редактировать список получателей данного пункта"
-                                                       style="width: 200px">
-                                                <el-option v-for="item in featured"
-                                                           :key="item.id"
-                                                           :label="item.name"
-                                                           :value="item.name">
-                                                </el-option>
-                                            </el-select>
+                                            <div v-if="!excertmode">
+                                                <el-select v-model="decreeoperation.excerptstructures"
+                                                           multiple
+                                                           filterable
+                                                           allow-create
+                                                           default-first-option
+                                                           placeholder="Редактировать список получателей данного пункта"
+                                                           style="width: 200px">
+                                                    <el-option v-for="item in featured"
+                                                               :key="item.id"
+                                                               :label="item.name"
+                                                               :value="item.name">
+                                                    </el-option>
+                                                </el-select>
+                                            </div>
                                         </div>
                                     </div>
 
@@ -2168,19 +2191,21 @@
                                                 <el-button size="mini" type="warning" @click="removePersondecreeoperation(decreeoperation)">Удалить</el-button>
                                             </div>
                                             <div v-else>
-                                                <el-select v-model="decreeoperation.excerptstructures"
-                                                           multiple
-                                                           filterable
-                                                           allow-create
-                                                           default-first-option
-                                                           placeholder="Редактировать список получателей данного пункта"
-                                                           style="width: 200px">
-                                                    <el-option v-for="item in featured"
-                                                               :key="item.id"
-                                                               :label="item.name"
-                                                               :value="item.name">
-                                                    </el-option>
-                                                </el-select>
+                                                <div v-if="!excertmode">
+                                                    <el-select v-model="decreeoperation.excerptstructures"
+                                                               multiple
+                                                               filterable
+                                                               allow-create
+                                                               default-first-option
+                                                               placeholder="Редактировать список получателей данного пункта"
+                                                               style="width: 200px">
+                                                        <el-option v-for="item in featured"
+                                                                   :key="item.id"
+                                                                   :label="item.name"
+                                                                   :value="item.name">
+                                                        </el-option>
+                                                    </el-select>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -2208,19 +2233,21 @@
                                                             <el-button size="mini" type="warning" @click="removePersondecreeoperation(decreeoperation)">Удалить</el-button>
                                                         </div>
                                                         <div v-else>
-                                                            <el-select v-model="decreeoperation.excerptstructures"
-                                                                       multiple
-                                                                       filterable
-                                                                       allow-create
-                                                                       default-first-option
-                                                                       placeholder="Редактировать список получателей данного пункта"
-                                                                       style="width: 200px">
-                                                                <el-option v-for="item in featured"
-                                                                           :key="item.id"
-                                                                           :label="item.name"
-                                                                           :value="item.name">
-                                                                </el-option>
-                                                            </el-select>
+                                                            <div v-if="!excertmode">
+                                                                <el-select v-model="decreeoperation.excerptstructures"
+                                                                           multiple
+                                                                           filterable
+                                                                           allow-create
+                                                                           default-first-option
+                                                                           placeholder="Редактировать список получателей данного пункта"
+                                                                           style="width: 200px">
+                                                                    <el-option v-for="item in featured"
+                                                                               :key="item.id"
+                                                                               :label="item.name"
+                                                                               :value="item.name">
+                                                                    </el-option>
+                                                                </el-select>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -2323,19 +2350,21 @@
                                             <el-button size="mini" type="warning" @click="removePersondecreeoperation(decreeoperation)">Удалить</el-button>
                                         </div>
                                         <div v-else>
-                                            <el-select v-model="decreeoperation.excerptstructures"
-                                                       multiple
-                                                       filterable
-                                                       allow-create
-                                                       default-first-option
-                                                       placeholder="Редактировать список получателей данного пункта"
-                                                       style="width: 200px">
-                                                <el-option v-for="item in featured"
-                                                           :key="item.id"
-                                                           :label="item.name"
-                                                           :value="item.name">
-                                                </el-option>
-                                            </el-select>
+                                            <div v-if="!excertmode">
+                                                <el-select v-model="decreeoperation.excerptstructures"
+                                                           multiple
+                                                           filterable
+                                                           allow-create
+                                                           default-first-option
+                                                           placeholder="Редактировать список получателей данного пункта"
+                                                           style="width: 200px">
+                                                    <el-option v-for="item in featured"
+                                                               :key="item.id"
+                                                               :label="item.name"
+                                                               :value="item.name">
+                                                    </el-option>
+                                                </el-select>
+                                            </div>
                                         </div>
                                     </div>
 
@@ -2436,19 +2465,21 @@
                                             <el-button size="mini" type="warning" @click="removePersondecreeoperation(decreeoperation)">Удалить</el-button>
                                         </div>
                                         <div v-else>
-                                            <el-select v-model="decreeoperation.excerptstructures"
-                                                       multiple
-                                                       filterable
-                                                       allow-create
-                                                       default-first-option
-                                                       placeholder="Редактировать список получателей данного пункта"
-                                                       style="width: 200px">
-                                                <el-option v-for="item in featured"
-                                                           :key="item.id"
-                                                           :label="item.name"
-                                                           :value="item.name">
-                                                </el-option>
-                                            </el-select>
+                                            <div v-if="!excertmode">
+                                                <el-select v-model="decreeoperation.excerptstructures"
+                                                           multiple
+                                                           filterable
+                                                           allow-create
+                                                           default-first-option
+                                                           placeholder="Редактировать список получателей данного пункта"
+                                                           style="width: 200px">
+                                                    <el-option v-for="item in featured"
+                                                               :key="item.id"
+                                                               :label="item.name"
+                                                               :value="item.name">
+                                                    </el-option>
+                                                </el-select>
+                                            </div>
                                         </div>
                                     </div>
 
@@ -2542,19 +2573,21 @@
                                             <el-button size="mini" type="warning" @click="removePersondecreeoperation(decreeoperation)">Удалить</el-button>
                                         </div>
                                         <div v-else>
-                                            <el-select v-model="decreeoperation.excerptstructures"
-                                                       multiple
-                                                       filterable
-                                                       allow-create
-                                                       default-first-option
-                                                       placeholder="Редактировать список получателей данного пункта"
-                                                       style="width: 200px">
-                                                <el-option v-for="item in featured"
-                                                           :key="item.id"
-                                                           :label="item.name"
-                                                           :value="item.name">
-                                                </el-option>
-                                            </el-select>
+                                            <div v-if="!excertmode">
+                                                <el-select v-model="decreeoperation.excerptstructures"
+                                                           multiple
+                                                           filterable
+                                                           allow-create
+                                                           default-first-option
+                                                           placeholder="Редактировать список получателей данного пункта"
+                                                           style="width: 200px">
+                                                    <el-option v-for="item in featured"
+                                                               :key="item.id"
+                                                               :label="item.name"
+                                                               :value="item.name">
+                                                    </el-option>
+                                                </el-select>
+                                            </div>
                                         </div>
                                     </div>
 
@@ -2654,19 +2687,21 @@
                                                 <el-button size="mini" type="warning" @click="removePersondecreeoperation(decreeoperation)">Удалить</el-button>
                                             </div>
                                             <div v-else>
-                                                <el-select v-model="decreeoperation.excerptstructures"
-                                                           multiple
-                                                           filterable
-                                                           allow-create
-                                                           default-first-option
-                                                           placeholder="Редактировать список получателей данного пункта"
-                                                           style="width: 200px">
-                                                    <el-option v-for="item in featured"
-                                                               :key="item.id"
-                                                               :label="item.name"
-                                                               :value="item.name">
-                                                    </el-option>
-                                                </el-select>
+                                                <div v-if="!excertmode">
+                                                    <el-select v-model="decreeoperation.excerptstructures"
+                                                               multiple
+                                                               filterable
+                                                               allow-create
+                                                               default-first-option
+                                                               placeholder="Редактировать список получателей данного пункта"
+                                                               style="width: 200px">
+                                                        <el-option v-for="item in featured"
+                                                                   :key="item.id"
+                                                                   :label="item.name"
+                                                                   :value="item.name">
+                                                        </el-option>
+                                                    </el-select>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -2973,19 +3008,21 @@
                                                 <el-button size="mini" type="warning" @click="removePersondecreeoperation(decreeoperation)">Удалить</el-button>
                                             </div>
                                             <div v-else>
-                                                <el-select v-model="decreeoperation.excerptstructures"
-                                                           multiple
-                                                           filterable
-                                                           allow-create
-                                                           default-first-option
-                                                           placeholder="Редактировать список получателей данного пункта"
-                                                           style="width: 200px">
-                                                    <el-option v-for="item in featured"
-                                                               :key="item.id"
-                                                               :label="item.name"
-                                                               :value="item.name">
-                                                    </el-option>
-                                                </el-select>
+                                                <div v-if="!excertmode">
+                                                    <el-select v-model="decreeoperation.excerptstructures"
+                                                               multiple
+                                                               filterable
+                                                               allow-create
+                                                               default-first-option
+                                                               placeholder="Редактировать список получателей данного пункта"
+                                                               style="width: 200px">
+                                                        <el-option v-for="item in featured"
+                                                                   :key="item.id"
+                                                                   :label="item.name"
+                                                                   :value="item.name">
+                                                        </el-option>
+                                                    </el-select>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -3007,19 +3044,21 @@
                                                         <el-button size="mini" type="warning" @click="removePersondecreeoperation(decreeoperation)">Удалить</el-button>
                                                     </div>
                                                     <div v-else>
-                                                        <el-select v-model="decreeoperation.excerptstructures"
-                                                                   multiple
-                                                                   filterable
-                                                                   allow-create
-                                                                   default-first-option
-                                                                   placeholder="Редактировать список получателей данного пункта"
-                                                                   style="width: 200px">
-                                                            <el-option v-for="item in featured"
-                                                                       :key="item.id"
-                                                                       :label="item.name"
-                                                                       :value="item.name">
-                                                            </el-option>
-                                                        </el-select>
+                                                        <div v-if="!excertmode">
+                                                            <el-select v-model="decreeoperation.excerptstructures"
+                                                                       multiple
+                                                                       filterable
+                                                                       allow-create
+                                                                       default-first-option
+                                                                       placeholder="Редактировать список получателей данного пункта"
+                                                                       style="width: 200px">
+                                                                <el-option v-for="item in featured"
+                                                                           :key="item.id"
+                                                                           :label="item.name"
+                                                                           :value="item.name">
+                                                                </el-option>
+                                                            </el-select>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -3216,19 +3255,21 @@
                                                 <el-button size="mini" type="warning" @click="removePersondecreeoperation(decreeoperation)">Удалить</el-button>
                                             </div>
                                             <div v-else>
-                                                <el-select v-model="decreeoperation.excerptstructures"
-                                                           multiple
-                                                           filterable
-                                                           allow-create
-                                                           default-first-option
-                                                           placeholder="Редактировать список получателей данного пункта"
-                                                           style="width: 200px">
-                                                    <el-option v-for="item in featured"
-                                                               :key="item.id"
-                                                               :label="item.name"
-                                                               :value="item.name">
-                                                    </el-option>
-                                                </el-select>
+                                                <div v-if="!excertmode">
+                                                    <el-select v-model="decreeoperation.excerptstructures"
+                                                               multiple
+                                                               filterable
+                                                               allow-create
+                                                               default-first-option
+                                                               placeholder="Редактировать список получателей данного пункта"
+                                                               style="width: 200px">
+                                                        <el-option v-for="item in featured"
+                                                                   :key="item.id"
+                                                                   :label="item.name"
+                                                                   :value="item.name">
+                                                        </el-option>
+                                                    </el-select>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -3787,19 +3828,21 @@
                                                         <el-button size="mini" type="warning" @click="removePersondecreeoperation(decreeoperation)">Удалить</el-button>
                                                     </div>
                                                     <div v-else>
-                                                        <el-select v-model="decreeoperation.excerptstructures"
-                                                                   multiple
-                                                                   filterable
-                                                                   allow-create
-                                                                   default-first-option
-                                                                   placeholder="Редактировать список получателей данного пункта"
-                                                                   style="width: 200px">
-                                                            <el-option v-for="item in featured"
-                                                                       :key="item.id"
-                                                                       :label="item.name"
-                                                                       :value="item.name">
-                                                            </el-option>
-                                                        </el-select>
+                                                        <div v-if="!excertmode">
+                                                            <el-select v-model="decreeoperation.excerptstructures"
+                                                                       multiple
+                                                                       filterable
+                                                                       allow-create
+                                                                       default-first-option
+                                                                       placeholder="Редактировать список получателей данного пункта"
+                                                                       style="width: 200px">
+                                                                <el-option v-for="item in featured"
+                                                                           :key="item.id"
+                                                                           :label="item.name"
+                                                                           :value="item.name">
+                                                                </el-option>
+                                                            </el-select>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -3954,19 +3997,21 @@
                                                                 <el-button size="mini" type="warning" @click="removePersondecreeoperation(decreeoperation)">Удалить</el-button>
                                                             </div>
                                                             <div v-else>
-                                                                <el-select v-model="decreeoperation.excerptstructures"
-                                                                           multiple
-                                                                           filterable
-                                                                           allow-create
-                                                                           default-first-option
-                                                                           placeholder="Редактировать список получателей данного пункта"
-                                                                           style="width: 200px">
-                                                                    <el-option v-for="item in featured"
-                                                                               :key="item.id"
-                                                                               :label="item.name"
-                                                                               :value="item.name">
-                                                                    </el-option>
-                                                                </el-select>
+                                                                <div v-if="!excertmode">
+                                                                    <el-select v-model="decreeoperation.excerptstructures"
+                                                                               multiple
+                                                                               filterable
+                                                                               allow-create
+                                                                               default-first-option
+                                                                               placeholder="Редактировать список получателей данного пункта"
+                                                                               style="width: 200px">
+                                                                        <el-option v-for="item in featured"
+                                                                                   :key="item.id"
+                                                                                   :label="item.name"
+                                                                                   :value="item.name">
+                                                                        </el-option>
+                                                                    </el-select>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>

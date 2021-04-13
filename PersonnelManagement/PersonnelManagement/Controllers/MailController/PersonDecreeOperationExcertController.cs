@@ -27,9 +27,9 @@ namespace PersonnelManagement.Controllers
         }*/
 
         [HttpGet("excertdecree")]
-        public List<Persondecree> getDecreeList()
+        public List<PersondecreeManagement> getDecreeList()
         {
-            List<Persondecree> output = new List<Persondecree>();
+            List<PersondecreeManagement> output = new List<PersondecreeManagement>();
             string sessionid = Request.Cookies[Keys.COOKIES_SESSION];
             User user = null;
             if (IdentityService.IsLogined(sessionid, repository))
@@ -54,8 +54,8 @@ namespace PersonnelManagement.Controllers
             return output;
         }
 
-        [HttpGet("excert")]
-        public ExcertComposition getExcertFullDecree()
+        [HttpGet("excert/{ides}")]
+        public ExcertComposition getExcertFullDecree([FromRoute] string ides)
         {
             ExcertComposition output = new ExcertComposition();
             string sessionid = Request.Cookies[Keys.COOKIES_SESSION];
@@ -63,7 +63,7 @@ namespace PersonnelManagement.Controllers
             if (IdentityService.IsLogined(sessionid, repository))
             {
                 user = IdentityService.GetUserBySessionID(sessionid, repository);
-                //return repository.getExcertStructures(id, user).ToList();
+                return repository.getEcxertFullDecree(ides, user);
             }
             return output;
         }

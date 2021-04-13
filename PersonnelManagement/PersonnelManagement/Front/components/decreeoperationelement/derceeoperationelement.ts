@@ -89,6 +89,10 @@ export default class derceeoperationelement extends Vue {
     excertmenu: boolean;
     excertsdecree: Persondecree;
     excertsdecreestructure: Structure[];
+    title_text_excert: string;
+    title_text_excert_template: string;
+
+    upload: number;
 
     data() {
         return {
@@ -142,11 +146,14 @@ export default class derceeoperationelement extends Vue {
             title_text_f: 'Направить:',
             title_text_s: 'Переместить:',
             title_text_t: 'Объединить:',
-            title_text_excert: 'Выписки по приказу:',
+            title_text_excert: '',
+            title_text_excert_template: 'Выписки из приказа:',
 
             excertmenu: this.$store.state.excertmenu,
             excertsdecree: null,
             excertsdecreestructure: [],
+
+            upload: 0,
         }
     }
 
@@ -529,6 +536,7 @@ export default class derceeoperationelement extends Vue {
         }
         this.viewpersondecrees = time;
         this.$store.commit("setExcertMenu", excert);
+        this.$store.commit("setExcertDecreeId", null);
         this.excertmenu = excert;
         return time;
     }
@@ -722,7 +730,9 @@ export default class derceeoperationelement extends Vue {
     }
 
     excertClose() {
+        this.title_text_excert = this.title_text_excert_template;
         this.$store.commit("setExcertMenu", false);
+        this.$store.commit("setLodingExcert", false);
         this.excertmenu = false;
     }
 
@@ -783,6 +793,7 @@ export default class derceeoperationelement extends Vue {
         this.$store.commit("setExcertMenu", true);
         this.excertmenu = true;
         this.excertsdecree = row;
+        this.title_text_excert = this.title_text_excert_template + ' № ' + this.excertsdecree.getNumber + ' от ' + this.excertsdecree.getDate;
         this.excertsdecreestructure = [];
         fetch('api/Persondecreeoperationexcert/listexcertsstructure/' + row.id, {
             method: 'get',
@@ -801,7 +812,12 @@ export default class derceeoperationelement extends Vue {
             })
     }
 
-    openexcert() {
-        this.$store.commit("setdecreemailM", this.excertsdecree.id);
+    openexcert(struct) {
+        this.$store.commit("setLodingExcert", true);
+        this.$store.commit("setExcertDecreeId", this.excertsdecree.id.toString() + "_" + struct.id.toString());
+    }
+
+    get loading2(): boolean {
+        return this.$store.state.lodingexcert;
     }
 }

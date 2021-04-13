@@ -11534,9 +11534,9 @@ namespace PersonnelManagement.Models
             //}
         }
 
-        public PersonManager GetPersonManager(User user, int personid)
+        public PersonManager GetPersonManager(User user, int personid, IEnumerable<Structure> structures = null)
         {
-            return GetPersonManager(user, PersonsLocal().GetValue(personid));
+            return GetPersonManager(user, PersonsLocal().GetValue(personid), structures: structures);
         }
 
         /// <summary>
@@ -11546,7 +11546,7 @@ namespace PersonnelManagement.Models
         /// <param name="person"></param>
         /// <param name="fastSearch"></param>
         /// <returns></returns>
-        public PersonManager GetPersonManager(User user, Person person, bool fastSearch = false)
+        public PersonManager GetPersonManager(User user, Person person, bool fastSearch = false, IEnumerable<Structure> structures = null)
         {
             if (person == null)
             {
@@ -11560,7 +11560,7 @@ namespace PersonnelManagement.Models
             // Если сотрудник привязан к подразделению, записать информацию о сокращенном и полном наименовании
             if (person.Structure > 0)
             {
-                actualStructure = GetActualStructureInfo(person.Structure, user.Date.GetValueOrDefault());
+                actualStructure = GetActualStructureInfo(person.Structure, user.Date.GetValueOrDefault(), structures);
                 personManager.Structurename = GetStructureNameDocument(actualStructure, date, 1, null);
                 personManager.Structurename1 = personManager.Structurename;
                 // Для оптимизации в быстром поиске не будем вычислять все падежи
@@ -15583,6 +15583,21 @@ namespace PersonnelManagement.Models
             return persondecreeManagement;
         }
 
+        public PersondecreeManagement GetPersondecreeManagement(Persondecree persondecree, User user)
+        {
+            PersondecreeManagement persondecreeManagement = new PersondecreeManagement(persondecree);
+
+            User creator = Users.FirstOrDefault(u => u.Id == persondecreeManagement.Creator);
+            if (creator != null)
+            {
+                UserManager userObject = GetUserManager(user, creator);
+                persondecreeManagement.CreatorObject = userObject; // Добавляем в приказ информацию о создателе.
+            }
+
+
+            return persondecreeManagement;
+        }
+
         public void AddNewPersondecree(User user, PersondecreeManagement decreeManagement)
         {
             User contextUser = Users.First(u => u.Id == user.Id);
@@ -16653,7 +16668,7 @@ namespace PersonnelManagement.Models
         /// <param name="decreeid"></param>
         /// <param name="disabletracking"></param>
         /// <returns></returns>
-        public IEnumerable<PersondecreeoperationManagement> GetPersondecreeoperation(User user, int decreeid, bool disabletracking = false)
+        public IEnumerable<PersondecreeoperationManagement> GetPersondecreeoperation(User user, int decreeid, bool disabletracking = false, IEnumerable<Structure> structures = null)
         {
             DateTime date = user.Date.GetValueOrDefault();
             if (disabletracking)
@@ -16668,7 +16683,7 @@ namespace PersonnelManagement.Models
             List<Persondecreeoperation> persondecreeoperationsBase = PersondecreeoperationsLocal().Values.Where(p => p.Persondecree == decreeid).ToList();
             List<PersondecreeoperationManagement> persondecreeoperations = new List<PersondecreeoperationManagement>();
 
-            Dictionary<int, Structure> all_structures = StructuresLocal();
+            Dictionary<int, Structure> all_structures = structures == null ? StructuresLocal() : structures.ToDictionary(r => r.Id);
             IEnumerable<Persondecreeexcerpt> persondecreeexcerpts = context.Persondecreeexcerpt;
             foreach (Persondecreeoperation decreeoperationBase in persondecreeoperationsBase)
             {
@@ -16746,7 +16761,7 @@ namespace PersonnelManagement.Models
                                 decreeoperation.Optionstring1 = positiontype.Name2; // По умолчанию дательный падеж
                             }
 
-                            Structure actualStructure = GetActualStructureInfo(position.Structure, date); 
+                            Structure actualStructure = GetActualStructureInfo(position.Structure, date, structures); 
                             if (actualStructure != null)
                             {
                                 decreeoperation.Structureobject = actualStructure;
@@ -16786,7 +16801,7 @@ namespace PersonnelManagement.Models
                     // optionstring2 - Полное наименование подразделение, в распоряжение начальника которого отправляют сотрудника
                     // optionstring3 - Основание
 
-                    Structure actualStructure = GetActualStructureInfo(decreeoperation.Optionnumber2, date);
+                    Structure actualStructure = GetActualStructureInfo(decreeoperation.Optionnumber2, date, structures);
                     if (actualStructure != null)
                     {
                         decreeoperation.Structureobject = actualStructure;
@@ -16851,6 +16866,187 @@ namespace PersonnelManagement.Models
 
 
             return persondecreeoperations;
+        }
+
+        public PersondecreeoperationManagement GetPersondecreeoperation(Persondecreeoperation operation, User user, bool disabletracking = false, IEnumerable<Structure> structures = null)
+        {
+            DateTime date = user.Date.GetValueOrDefault();
+            PersondecreeoperationManagement decreeoperation = new PersondecreeoperationManagement(operation);
+            //Person person = PersonsLocal().GetValue(decreeoperationBase.Person);
+            //if (person != null)
+            //{
+            //    decreeoperation.Personobject = person;
+            //}
+
+            PersonManager person = GetPersonManager(user, operation.Person, structures: structures);
+            if (person != null)
+            {
+                decreeoperation.Personobject = person;
+            }
+
+            List<PersonManager> personManagers = new List<PersonManager>();
+            if (decreeoperation.Optionarrayperson != null && decreeoperation.Optionarrayperson.Length > 0)
+            {
+                string[] personidsStrings = decreeoperation.Optionarrayperson.Split(',');
+                foreach (string personidsString in personidsStrings)
+                {
+                    int personid = Int32.Parse(personidsString);
+                    PersonManager personInList = GetPersonManager(user, personid, structures: structures);
+                    if (personInList != null)
+                    {
+                        personManagers.Add(personInList);
+                    }
+                }
+            }
+            decreeoperation.OptionarraypersonObjects = personManagers;
+
+            // Поощрить
+            if (decreeoperation.Persondecreeblocktype == 1)
+            {
+                //снять ранее наложенное взыскание
+                if (decreeoperation.Persondecreeblocksubtype == 8)
+                {
+                    // Загружаем сюда 
+                    if (decreeoperation.Subvaluenumber2 > 0) // В Optionnumber2 мы храним информацию об id personpenalty
+                    {
+                        Personpenalty personpenalty = Personpenalties.FirstOrDefault(p => p.Id == decreeoperation.Subvaluenumber2);
+                        if (personpenalty != null)
+                        {
+                            decreeoperation.Personpenalty = personpenalty;
+                        }
+                    }
+                }
+
+            }
+            // Наложить дисциплинарное взыскание
+            if (decreeoperation.Persondecreeblocktype == 2)
+            {
+
+            }
+            // Назначить
+            if (decreeoperation.Persondecreeblocktype == 3)
+            {
+                if (decreeoperation.Optionnumber1 > 0) // Здеси хранится ID должности
+                {
+                    Position position = PositionsLocal().GetValue(decreeoperation.Optionnumber1);
+                    if (position != null)
+                    {
+                        decreeoperation.Positionobject = position;
+
+                        //if (position == null)
+                        //{
+                        //    return null;
+                        //}
+                        Positiontype positiontype = PositiontypesLocal().GetValue(position.Positiontype);
+                        decreeoperation.Positiontypeobject = positiontype;
+                        if (positiontype != null)
+                        {
+                            // Наименование должности
+                            decreeoperation.Optionstring1 = positiontype.Name2; // По умолчанию дательный падеж
+                        }
+
+                        Structure actualStructure = GetActualStructureInfo(position.Structure, date, structures);
+                        if (actualStructure != null)
+                        {
+                            decreeoperation.Structureobject = actualStructure;
+                            string structureTree = FormTreeDocument(actualStructure, date, null, 2, null); // Временное решение
+                            //string structureTree = FormTreeDocument2(actualStructure, true, date); // Временное решение
+                            //optionstring2
+                            decreeoperation.Optionstring2 = structureTree;
+                        }
+
+                        if (actualStructure != null)
+                        {
+                            // Полное наименование должности и подразделения в родительном падеже.
+                            decreeoperation.Optionstring4 = FormTreeDocument(actualStructure, date, position, 2, null);
+                        }
+
+                    }
+                }
+            }
+            // Уволить
+            if (decreeoperation.Persondecreeblocktype == 4)
+            {
+                if (decreeoperation.Persondecreeblocksubtype > 0) // Здесь хранится по какой причине увольняем человека
+                {
+                    Fire fire = Fires.FirstOrDefault(f => f.Id == decreeoperation.Persondecreeblocksubtype);
+                    if (fire != null)
+                    {
+                        decreeoperation.Fireobject = fire;
+                    }
+                }
+            }
+            // Освободить
+            if (decreeoperation.Persondecreeblocktype == 5)
+            {
+                // optionnumber1 - в соответствии с каким пунктом
+                // optionnumber2 - здесь хранится id подразделения
+                // optionstring1 - по какой причине
+                // optionstring2 - Полное наименование подразделение, в распоряжение начальника которого отправляют сотрудника
+                // optionstring3 - Основание
+
+                Structure actualStructure = GetActualStructureInfo(decreeoperation.Optionnumber2, date, structures);
+                if (actualStructure != null)
+                {
+                    decreeoperation.Structureobject = actualStructure;
+                    string structureTree = FormTreeDocument(actualStructure, date, null, 2, null); // Временное решение
+                    decreeoperation.Optionstring2 = structureTree;
+                }
+            }
+            // Перевести
+            if (decreeoperation.Persondecreeblocktype == 6)
+            {
+
+            }
+            // Прекратить службу
+            if (decreeoperation.Persondecreeblocktype == 7)
+            {
+
+            }
+            // Отстранить
+            if (decreeoperation.Persondecreeblocktype == 8)
+            {
+
+            }
+            // Внести изменения в учетные документы
+            if (decreeoperation.Persondecreeblocktype == 9)
+            {
+
+            }
+            // Установить
+            if (decreeoperation.Persondecreeblocktype == 10)
+            {
+
+            }
+            // Заключить контракты с
+            if (decreeoperation.Persondecreeblocktype == 11)
+            {
+
+            }
+            // Продлить контракт с
+            if (decreeoperation.Persondecreeblocktype == 12)
+            {
+
+            }
+            // Выплатить денежную компенсацию
+            if (decreeoperation.Persondecreeblocktype == 13)
+            {
+
+            }
+
+            //if (decreeoperation.Subjecttype == 1 && decreeoperation.Subjectid > 0) // Награда
+            //{
+            //    Personreward personreward = PersonrewardsLocal().GetValue(decreeoperation.Subjectid);
+            //    if (personreward != null)
+            //    {
+            //        decreeoperation.Personreward = personreward;
+            //    }
+            //}
+            /*decreeoperation.Excerptstructures = generateexcerptstructurename(decreeoperation.Decreeexcerpt,
+                all_structures,
+                persondecreeexcerpts);
+            persondecreeoperations.Add(decreeoperation);*/
+            return decreeoperation;
         }
 
         private List<string> generateexcerptstructurename(string id_list,
@@ -19253,9 +19449,9 @@ namespace PersonnelManagement.Models
             return persondecreeexcerpts_structure;
         }
 
-        public IEnumerable<Persondecree> getExcertDecree(User user)
+        public IEnumerable<PersondecreeManagement> getExcertDecree(User user)
         {
-            IEnumerable<Persondecree> output = new List<Persondecree>();
+            IEnumerable<PersondecreeManagement> output = new List<PersondecreeManagement>();
             Dictionary<int, Structure> str = StructuresLocal();
             Structure struct_user = str[user.Structure.GetValueOrDefault()];
             struct_user = struct_user.Parentstructure == 0 ? struct_user : str[struct_user.Parentstructure];
@@ -19265,9 +19461,9 @@ namespace PersonnelManagement.Models
             excerts.ForEach(r =>
             {
                 if (decrees.ContainsKey(r.Decree))
-                    output = output.Append(decrees[r.Decree]);
+                    output = output.Append(GetPersondecreeManagement(decrees[r.Decree], user));
             });
-            return output != null ? output : new List<Persondecree>();
+            return output != null ? output : new List<PersondecreeManagement>();
         }
 
         public IEnumerable<Structure> getExcertStructures(int persondecree, User user)
@@ -19278,14 +19474,85 @@ namespace PersonnelManagement.Models
             struct_user = struct_user.Parentstructure == 0 ? struct_user : str[struct_user.Parentstructure];
             //Dictionary<int, Persondecree> decrees = PersondecreesLocal();
 
-            List<Persondecreeexcerpt> excerts = context.Persondecreeexcerpt.Where(r => r.Decree == persondecree &&
-            str[r.Structure].Parentstructure == struct_user.Id).ToList();
+            List<Persondecreeexcerpt> excerts;
+            if (user.Id == 1)
+            {
+                excerts = context.Persondecreeexcerpt.Where(r => r.Decree == persondecree).ToList();
+            }
+            else
+            {
+                excerts = context.Persondecreeexcerpt.Where(r => r.Decree == persondecree &&
+                str[r.Structure].Parentstructure == struct_user.Id).ToList();
+            }
             excerts.ForEach(r =>
             {
                 if (str.ContainsKey(r.Structure))
                     output = output.Append(str[r.Structure]);
             });
             return output != null ? output : new List<Structure>();
+        }
+
+        public ExcertComposition getEcxertFullDecree(string ides, User user, char devizer = '_')
+        {
+            List<string> id = ides.Split(devizer).ToList();
+            int decree = Int32.Parse(id[0]);
+            int structure = Int32.Parse(id[1]);
+            Persondecreeexcerpt excert = context.Persondecreeexcerpt.First(r => r.Decree == decree && r.Structure == structure);
+            return getEcxertFullDecree(excert, user);
+        }
+
+        public ExcertComposition getEcxertFullDecree(int excert_id, User user)
+        {
+            Persondecreeexcerpt excert = context.Persondecreeexcerpt.First(r => r.Id == excert_id);
+            return getEcxertFullDecree(excert, user);
+        }
+
+        public ExcertComposition getEcxertFullDecree(Persondecreeexcerpt excert, User user)
+        {
+            IEnumerable<Structure> structures = StructuresLocal().Values;
+            ExcertComposition output = new ExcertComposition();
+            Dictionary<int, Persondecreeoperation> decreeoperations = PersondecreeoperationsLocal();
+            Dictionary<int, Persondecreeblocksub> decreeblocksubs = context.Persondecreeblocksub.ToDictionary(r => r.Id),
+                output_decreeblocksubs = new Dictionary<int, Persondecreeblocksub>();
+            Dictionary<int, Persondecreeblock> decreeblocks = context.Persondecreeblock.ToDictionary(r => r.Id);
+            Dictionary<int, PersondecreeblockManagement> output_decreeblocks = new Dictionary<int, PersondecreeblockManagement>();
+            Dictionary<int, Persondecree> decrees = PersondecreesLocal() /*context.Persondecree.ToDictionary(r => r.Id)*/;
+            Dictionary<int, PersondecreeManagement> output_decrees = new Dictionary<int, PersondecreeManagement>();
+            List<string> operations = excert.Persondecreeoperations.Split("_").ToList();
+            foreach(string iteration in operations)
+            {
+                int oper = Int32.Parse(iteration);
+                if(decreeoperations.ContainsKey(oper))
+                {
+                    PersondecreeoperationManagement time = GetPersondecreeoperation(decreeoperations[oper], user, true, structures);
+                    output.decreeoperations.Add(time);
+                    if(time.Persondecreeblocksub != 0 &&
+                        !output_decreeblocksubs.ContainsKey(time.Persondecreeblocksub) &&
+                        decreeblocksubs.ContainsKey(time.Persondecreeblocksub))
+                    {
+                        output_decreeblocksubs[time.Persondecreeblocksub] =
+                            decreeblocksubs[time.Persondecreeblocksub];
+                    }
+
+                    if (time.Persondecreeblock != 0 &&
+                        !output_decreeblocks.ContainsKey(time.Persondecreeblock) &&
+                        decreeblocks.ContainsKey(time.Persondecreeblock))
+                    {
+                        output_decreeblocks[time.Persondecreeblock] =
+                            GetPersondecreeblock(decreeblocks[time.Persondecreeblock], user, true, structures);
+                    }
+                    if (time.Persondecree != 0 &&
+                        !output_decrees.ContainsKey(time.Persondecree) &&
+                        decrees.ContainsKey(time.Persondecree))
+                    {
+                        output_decrees[time.Persondecree] = GetPersondecreeManagement(decrees[time.Persondecree], user);
+                    }
+                }
+            }
+            output.decree = output_decrees.Values.First();
+            output.decreeblocks = output_decreeblocks.Values.ToList();
+            output.decreeblocksubs = output_decreeblocksubs.Values.ToList();
+            return output;
         }
 
         /// <summary>
@@ -19355,6 +19622,54 @@ namespace PersonnelManagement.Models
 
 
             return persondecreeblocks;
+        }
+
+        public PersondecreeblockManagement GetPersondecreeblock(Persondecreeblock decreeblockBase, User user, bool disabletracking = false, IEnumerable<Structure> structures = null)
+        {
+            DateTime date = user.Date.GetValueOrDefault();
+            
+            PersondecreeblockManagement decreeblock = new PersondecreeblockManagement(decreeblockBase);
+            List<Persondecreeblockintro> persondecreeblockintros = Persondecreeblockintros.Where(p => p.Persondecreeblock == decreeblock.Id).ToList();
+            decreeblock.Persondecreeblockintros = persondecreeblockintros;
+
+            List<Persondecreeblocksub> persondecreeblocksubs = Persondecreeblocksubs.Where(p => p.Persondecreeblock == decreeblock.Id).ToList();
+            decreeblock.Persondecreeblocksubs = persondecreeblocksubs;
+
+            // Назначить
+            if (decreeblock.Persondecreeblocktype == 3)
+            {
+                if (decreeblock.Optionnumber1 > 0) // Здесь хранится ID должности
+                {
+                    Position position = PositionsLocal().GetValue(decreeblock.Optionnumber1);
+                    if (position != null)
+                    {
+                        decreeblock.SamplePosition = position;
+
+
+                        //if (position == null)
+                        //{
+                        //    return null;
+                        //}
+                        Positiontype positiontype = PositiontypesLocal().GetValue(position.Positiontype);
+                        decreeblock.SamplePositiontype = positiontype;
+                        //if (positiontype != null)
+                        //{
+                        //    decreeoperation.Optionstring1 = positiontype.Name2; // По умолчанию дательный падеж
+                        //}
+
+                        Structure actualStructure = GetActualStructureInfo(position.Structure, date, structures);
+                        if (actualStructure != null)
+                        {
+                            decreeblock.SampleStructure = actualStructure;
+                            //string structureTree = FormTreeDocument2(actualStructure, true, date); // Временное решение
+                            string structureTree = FormTreeDocument(actualStructure, date, null, 1, null); // Временное решение
+                            //optionstring2
+                            decreeblock.Optionstring2 = structureTree;
+                        }
+                    }
+                }
+            }
+            return decreeblock;
         }
 
         /// <summary>

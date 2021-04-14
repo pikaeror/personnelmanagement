@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "36de524efae69e1b4ae3"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "0468532b2c0ae54f776b"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -8202,11 +8202,11 @@ fetch('api/MailController/rand', { credentials: 'include' })
         }
         if (flag) {
             let list_access = row.accessforreading.split('_');
-            let k = list_access.find(r => parseInt(r) == this.$store.state.user.id);
+            k = list_access.find(r => parseInt(r) == this.$store.state.user.id);
         }
         else
             k = "true";
-        if (k != undefined || this.$store.state.user.id == 1)
+        if (k != undefined || this.$store.state.user.id == 1 || this.$store.state.user.id == 24)
             //this.open(row);
             this.$store.commit("setdecreemailM", row.id);
         else
@@ -24066,6 +24066,7 @@ let TopmenuComponent = class TopmenuComponent extends __WEBPACK_IMPORTED_MODULE_
             //rewardmoneys: [],
             customwidth: false,
             excertmode: false,
+            excertstructlist: [],
         };
     }
     mounted() {
@@ -24548,6 +24549,20 @@ let TopmenuComponent = class TopmenuComponent extends __WEBPACK_IMPORTED_MODULE_
                 featuredStructure.name = f.name;
                 featuredStructure.id = f.id;
                 this.featured.push(featuredStructure);
+            });
+        });
+        fetch('api/Persondecreeoperationexcert/structureslist', { credentials: 'include' })
+            .then(response => {
+            return response.json();
+        })
+            .then(result => {
+            let Structures = result;
+            this.excertstructlist = new Array();
+            Structures.forEach(f => {
+                let featuredStructure = new __WEBPACK_IMPORTED_MODULE_3__classes_persondecreeoperation__["a" /* FeaturedStructure */]();
+                featuredStructure.name = f.name;
+                featuredStructure.id = f.id;
+                this.excertstructlist.push(featuredStructure);
             });
         });
     }
@@ -33044,7 +33059,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
               },
               expression: "decreeoperation.excerptstructures"
             }
-          }, _vm._l((_vm.featured), function(item) {
+          }, _vm._l((_vm.excertstructlist), function(item) {
             return _c('el-option', {
               key: item.id,
               attrs: {
@@ -33101,7 +33116,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
             },
             expression: "decreeoperation.excerptstructures"
           }
-        }, _vm._l((_vm.featured), function(item) {
+        }, _vm._l((_vm.excertstructlist), function(item) {
           return _c('el-option', {
             key: item.id,
             attrs: {
@@ -33259,7 +33274,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           },
           expression: "decreeoperation.excerptstructures"
         }
-      }, _vm._l((_vm.featured), function(item) {
+      }, _vm._l((_vm.excertstructlist), function(item) {
         return _c('el-option', {
           key: item.id,
           attrs: {
@@ -33547,7 +33562,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           },
           expression: "decreeoperation.excerptstructures"
         }
-      }, _vm._l((_vm.featured), function(item) {
+      }, _vm._l((_vm.excertstructlist), function(item) {
         return _c('el-option', {
           key: item.id,
           attrs: {
@@ -34012,7 +34027,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
             },
             expression: "decreeoperation.excerptstructures"
           }
-        }, _vm._l((_vm.featured), function(item) {
+        }, _vm._l((_vm.excertstructlist), function(item) {
           return _c('el-option', {
             key: item.id,
             attrs: {
@@ -38729,7 +38744,21 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.closeUserSearch()
       }
     }
-  }, [_vm._v("Закрыть")])], 1)], 2) : _vm._e()]) : _vm._e()]) : _vm._e(), _vm._v(" "), _c('hr'), _vm._v(" "), _c('div', [(_vm.persondecreeSigned != 1) ? _c('el-button', {
+  }, [_vm._v("Закрыть")])], 1)], 2) : _vm._e()]) : _vm._e()]) : _vm._e(), _vm._v(" "), _c('hr'), _vm._v(" "), _c('div', [(_vm.excertmode) ? _c('div', [_c('el-button', {
+    attrs: {
+      "type": "primary"
+    },
+    on: {
+      "click": function($event) {}
+    }
+  }, [_vm._v("В Word")]), _vm._v(" "), _c('el-button', {
+    attrs: {
+      "type": "primary"
+    },
+    on: {
+      "click": _vm.fetchexcerptfromexcert
+    }
+  }, [_vm._v("Сформировать выписки")])], 1) : _c('div', [(_vm.persondecreeSigned != 1) ? _c('el-button', {
     attrs: {
       "type": "primary"
     },
@@ -38763,7 +38792,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     on: {
       "click": _vm.fetchexcerpt
     }
-  }, [_vm._v("Сформировать выписки")]) : _vm._e()], 1)]), _vm._v(" "), _c('el-dialog', {
+  }, [_vm._v("Сформировать выписки")]) : _vm._e()], 1)])]), _vm._v(" "), _c('el-dialog', {
     directives: [{
       name: "draggable",
       rawName: "v-draggable"

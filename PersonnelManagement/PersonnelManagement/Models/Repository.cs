@@ -19452,18 +19452,67 @@ namespace PersonnelManagement.Models
         public IEnumerable<PersondecreeManagement> getExcertDecree(User user)
         {
             IEnumerable<PersondecreeManagement> output = new List<PersondecreeManagement>();
+            Dictionary<int, PersondecreeManagement> output_dic = new Dictionary<int, PersondecreeManagement>();
             Dictionary<int, Structure> str = StructuresLocal();
             Structure struct_user = str[user.Structure.GetValueOrDefault()];
             struct_user = struct_user.Parentstructure == 0 ? struct_user : str[struct_user.Parentstructure];
             Dictionary<int, Persondecree> decrees = PersondecreesLocal();
 
-            List<Persondecreeexcerpt> excerts = context.Persondecreeexcerpt.Where(r => str[r.Structure].Parentstructure == struct_user.Id).ToList();
+            List<Persondecreeexcerpt> excerts = context.Persondecreeexcerpt.Where(r => str[r.Structure].Parentstructure == struct_user.Id ||
+            decrees[r.Decree].Creator == user.Id ||
+            decrees[r.Decree].Owner == user.Id).ToList();
             excerts.ForEach(r =>
             {
                 if (decrees.ContainsKey(r.Decree))
-                    output = output.Append(GetPersondecreeManagement(decrees[r.Decree], user));
+                {
+                    if (!output_dic.ContainsKey(r.Decree))
+                        output_dic[r.Decree] = GetPersondecreeManagement(decrees[r.Decree], user);
+                    output = output.Append(output_dic[r.Decree]);
+                }
             });
+            output = output_dic.Values.ToList();
             return output != null ? output : new List<PersondecreeManagement>();
+        }
+
+        public Structure getParentForUserExcert(User user, Dictionary<int, Structure> str = null)
+        {
+            str = str != null ? str : StructuresLocal();
+            return getStructuresForUserExcert(user: user, str: str, parentstructureonly: true).Last();
+        }
+
+        public IEnumerable<Structure> getStructuresForUserExcert(User user, Dictionary<int, Structure> str = null, bool parentstructureonly = false)
+        {
+            str = str != null ? str : StructuresLocal();
+            Dictionary<int, Structure> structures_output_dic = new Dictionary<int, Structure>();
+            Structure struct_user = str[user.Structure.GetValueOrDefault()], time_struct;
+            struct_user = struct_user.Parentstructure == 0 ? struct_user : str[struct_user.Parentstructure];
+            DateTime actualdate = user.Date.GetValueOrDefault();
+            struct_user = GetActualStructureInfo(struct_user.Id, actualdate, str.Values);
+            IEnumerable<Structure> iteration_list = struct_user.Nameshortened == "ЦА МЧС" ? str.Values.Where(r => r.Featured == 1) : str.Values.Where(r => r.Parentstructure == struct_user.Id);
+            foreach (Structure time in iteration_list)
+            {
+                time_struct = GetActualStructureInfo(time.Id, actualdate, str.Values);
+                if (time_struct != null && !structures_output_dic.ContainsKey(time_struct.Id))
+                {
+                    structures_output_dic.Add(time_struct.Id, time_struct);
+                    if(parentstructureonly)
+                    {
+                        return new List<Structure>() { GetActualStructureInfo(structures_output_dic.Values.Last().Id, actualdate, str.Values) };
+                    }
+                }
+            }
+            return (structures_output_dic != null ? structures_output_dic.Values.ToList() : new List<Structure>());
+        }
+
+        public IEnumerable<FeaturedStructure> getStructuresForUserExcert(User user)
+        {
+            IEnumerable<FeaturedStructure> output = new List<FeaturedStructure>();
+            Dictionary<int, Structure> str = StructuresLocal();
+            foreach (Structure time in getStructuresForUserExcert(user: user, str: str))
+            {
+                output = output.Append(new FeaturedStructure() { Id = time.Id.ToString(), Name = time.Nameshortened });
+            }
+            return output != null ? output : new List<FeaturedStructure>();
         }
 
         public IEnumerable<Structure> getExcertStructures(int persondecree, User user)

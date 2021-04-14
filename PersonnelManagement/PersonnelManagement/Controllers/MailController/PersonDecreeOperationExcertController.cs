@@ -25,6 +25,20 @@ namespace PersonnelManagement.Controllers
         {
             return "haha";
         }*/
+        [HttpGet("structureslist")]
+        public List<FeaturedStructure> getStructuresForUser()
+        {
+            List<FeaturedStructure> output = new List<FeaturedStructure>();
+            string sessionid = Request.Cookies[Keys.COOKIES_SESSION];
+            User user = null;
+            if (IdentityService.IsLogined(sessionid, repository))
+            {
+                user = IdentityService.GetUserBySessionID(sessionid, repository);
+                return repository.getStructuresForUserExcert(user).ToList();
+            }
+            return output;
+        }
+
 
         [HttpGet("excertdecree")]
         public List<PersondecreeManagement> getDecreeList()

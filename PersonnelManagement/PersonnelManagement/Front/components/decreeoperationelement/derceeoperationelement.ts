@@ -334,10 +334,10 @@ export default class derceeoperationelement extends Vue {
         }
         if (flag) {
             let list_access: string[] = row.accessforreading.split('_');
-            let k = list_access.find(r => parseInt(r) == this.$store.state.user.id);
+            k = list_access.find(r => parseInt(r) == this.$store.state.user.id);
         } else
             k = "true";
-        if (k != undefined || this.$store.state.user.id == 1)
+        if (k != undefined || this.$store.state.user.id == 1 || this.$store.state.user.id == 24)
             //this.open(row);
             this.$store.commit("setdecreemailM", row.id);
         else

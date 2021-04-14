@@ -391,6 +391,7 @@ export default class TopmenuComponent extends Vue {
     //rewardmoneys: Rewardmoney[];
     customwidth: boolean;
     excertmode: boolean;
+    excertstructlist: FeaturedStructure[];
 
     
     onDecreeDatesignedChange(value: string, oldValue: string) {
@@ -599,6 +600,7 @@ export default class TopmenuComponent extends Vue {
 
             customwidth: false,
             excertmode: false,
+            excertstructlist: [],
         }
     }
 
@@ -1172,6 +1174,21 @@ export default class TopmenuComponent extends Vue {
                     featuredStructure.name = f.name;
                     featuredStructure.id = f.id;
                     this.featured.push(featuredStructure);
+                })
+            });
+        fetch('api/Persondecreeoperationexcert/structureslist', { credentials: 'include' })
+            .then(response => {
+                return response.json() as Promise<Array<FeaturedStructure>>;
+            })
+            .then(result => {
+                let Structures = result;
+                this.excertstructlist = new Array();
+
+                Structures.forEach(f => {
+                    let featuredStructure: FeaturedStructure = new FeaturedStructure();
+                    featuredStructure.name = f.name;
+                    featuredStructure.id = f.id;
+                    this.excertstructlist.push(featuredStructure);
                 })
             });
     }

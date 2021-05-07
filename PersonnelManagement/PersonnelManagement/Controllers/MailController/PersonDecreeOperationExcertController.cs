@@ -68,6 +68,20 @@ namespace PersonnelManagement.Controllers
             return output;
         }
 
+        [HttpGet("listexcertsstructuretype/{id}")]
+        public List<ExcertStructure> getExcertExcertStructures([FromRoute] int id)
+        {
+            List<ExcertStructure> output = new List<ExcertStructure>();
+            string sessionid = Request.Cookies[Keys.COOKIES_SESSION];
+            User user = null;
+            if (IdentityService.IsLogined(sessionid, repository))
+            {
+                user = IdentityService.GetUserBySessionID(sessionid, repository);
+                return repository.getExcertExcertStructures(id, user).ToList();
+            }
+            return output;
+        }
+
         [HttpGet("excert/{ides}")]
         public ExcertComposition getExcertFullDecree([FromRoute] string ides)
         {
@@ -98,6 +112,24 @@ namespace PersonnelManagement.Controllers
                 }
             }
             repository.UpdatePersonDecreeoperation(persondecreeoperations, user);
+            return new ObjectResult(Keys.SUCCESS_SHORT + ":Обновлено!");
+        }
+
+        [HttpPost("updateexcert")]
+        public IActionResult UpdateExcertOpens([FromBody] ExcertStructure structure)
+        {
+            string sessionid = Request.Cookies[Keys.COOKIES_SESSION];
+            User user = null;
+            if (IdentityService.IsLogined(sessionid, repository))
+            {
+                user = IdentityService.GetUserBySessionID(sessionid, repository);
+                bool hasAccess = IdentityService.CanEditPerson(user, repository);
+                if (!hasAccess)
+                {
+                    return new ObjectResult(Keys.ERROR_SHORT + ":Отказано в доступе");
+                }
+            }
+            repository.UpdateExcert(structure, user);
             return new ObjectResult(Keys.SUCCESS_SHORT + ":Обновлено!");
         }
     }

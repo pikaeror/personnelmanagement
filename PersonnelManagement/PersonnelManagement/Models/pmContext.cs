@@ -3168,8 +3168,33 @@ namespace PersonnelManagement.Models
                     .HasColumnName("id")
                     .HasColumnType("int(11)");
 
+                entity.Property(e => e.CreatorId)
+                    .HasColumnName("creator_id")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Datacreated)
+                    .HasColumnName("datacreated")
+                    .HasColumnType("datetime");
+
+                entity.Property(e => e.Dataopens)
+                    .HasColumnName("dataopens")
+                    .HasColumnType("datetime");
+
+                entity.Property(e => e.Datasend)
+                    .HasColumnName("datasend")
+                    .HasColumnType("datetime");
+
                 entity.Property(e => e.Decree)
                     .HasColumnName("decree")
+                    .HasColumnType("int(11)")
+                    .HasDefaultValueSql("'0'");
+
+                entity.Property(e => e.FirstOpensId)
+                    .HasColumnName("first_opens_id")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Openflags)
+                    .HasColumnName("openflags")
                     .HasColumnType("int(11)")
                     .HasDefaultValueSql("'0'");
 

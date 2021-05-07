@@ -19337,7 +19337,6 @@ namespace PersonnelManagement.Models
                 SaveChanges();
                 UpdatePersondecreeoperationsLocal();
             }
-
         }
 
         public void UpdatePersonDecreeoperation(IEnumerable<PersondecreeoperationManagement> persondecreeoperations,
@@ -19386,7 +19385,9 @@ namespace PersonnelManagement.Models
                         {
                             Decree = decree,
                             Structure = Int32.Parse(id),
-                            Persondecreeoperations = persondecreeoperation.Id.ToString()
+                            Persondecreeoperations = persondecreeoperation.Id.ToString(),
+                            Datacreated = user.Date.GetValueOrDefault(),
+                            CreatorId = user.Id
                         };
                         //context.Persondecreeexcerpt.Add(time);
                         context.Persondecreeexcerpt.Add(time);
@@ -19399,6 +19400,18 @@ namespace PersonnelManagement.Models
                 context.Persondecreeoperation.Update(time_operation);
             }
             UpdatePersondecreeoperationsLocal();
+        }
+        
+        public void UpdateExcert(ExcertStructure structure, User user)
+        {
+            Persondecreeexcerpt excert = context.Persondecreeexcerpt.FirstOrDefault(r => r.Id == structure.excert_id);
+            if (excert.CreatorId == user.Id)
+                return;
+            if (excert.FirstOpensId == 0 || excert.FirstOpensId == null)
+                excert.FirstOpensId = user.Id;
+            excert.Dataopens = user.Date.GetValueOrDefault();
+            context.Persondecreeexcerpt.Update(excert);
+            context.SaveChanges();
         }
 
         private Dictionary<int, Persondecreeexcerpt> AutoExcertGenerator(PersondecreeoperationManagement persondecreeoperation,
@@ -19431,7 +19444,9 @@ namespace PersonnelManagement.Models
                         {
                             Decree = persondecreeoperation.Persondecree,
                             Structure = i,
-                            Persondecreeoperations = persondecreeoperation.Id.ToString()
+                            Persondecreeoperations = persondecreeoperation.Id.ToString(),
+                            Datacreated = user.Date.GetValueOrDefault(),
+                            CreatorId = user.Id
                         };
                         //context.Persondecreeexcerpt.Add(time);
                         context.Persondecreeexcerpt.Add(time);
@@ -19541,6 +19556,35 @@ namespace PersonnelManagement.Models
             return output != null ? output : new List<Structure>();
         }
 
+        public IEnumerable<ExcertStructure> getExcertExcertStructures(int persondecree, User user)
+        {
+            IEnumerable<ExcertStructure> output = new List<ExcertStructure>();
+            Dictionary<int, Structure> str = StructuresLocal();
+            Structure struct_user = str[user.Structure.GetValueOrDefault()];
+            struct_user = struct_user.Parentstructure == 0 ? struct_user : str[struct_user.Parentstructure];
+            //Dictionary<int, Persondecree> decrees = PersondecreesLocal();
+
+            List<Persondecreeexcerpt> excerts;
+            if (user.Id == 1)
+            {
+                excerts = context.Persondecreeexcerpt.Where(r => r.Decree == persondecree).ToList();
+            }
+            else
+            {
+                excerts = context.Persondecreeexcerpt.Where(r => r.Decree == persondecree &&
+                str[r.Structure].Parentstructure == struct_user.Id).ToList();
+            }
+            excerts.ForEach(r =>
+            {
+                if (str.ContainsKey(r.Structure))
+                    output = output.Append(new ExcertStructure() { structure = str[r.Structure],
+                        data_create = r.Datacreated == null ? "-" : r.Datacreated.GetValueOrDefault().ToString("dd-MM-yyyy"),
+                        data_opened = r.Dataopens == null ? "-" : r.Dataopens.GetValueOrDefault().ToString("dd-MM-yyyy"),
+                        excert_id = r.Id }) ;
+            });
+            return output != null ? output : new List<ExcertStructure>();
+        }
+
         public ExcertComposition getEcxertFullDecree(string ides, User user, char devizer = '_')
         {
             List<string> id = ides.Split(devizer).ToList();
@@ -19567,6 +19611,7 @@ namespace PersonnelManagement.Models
             Dictionary<int, PersondecreeblockManagement> output_decreeblocks = new Dictionary<int, PersondecreeblockManagement>();
             Dictionary<int, Persondecree> decrees = PersondecreesLocal() /*context.Persondecree.ToDictionary(r => r.Id)*/;
             Dictionary<int, PersondecreeManagement> output_decrees = new Dictionary<int, PersondecreeManagement>();
+            Dictionary<int, int> decree_intros = new Dictionary<int, int>();
             List<string> operations = excert.Persondecreeoperations.Split("_").ToList();
             foreach(string iteration in operations)
             {
@@ -19596,10 +19641,35 @@ namespace PersonnelManagement.Models
                     {
                         output_decrees[time.Persondecree] = GetPersondecreeManagement(decrees[time.Persondecree], user);
                     }
+                    if (!decree_intros.ContainsKey(time.Persondecreeblockintro))
+                    {
+                        decree_intros[time.Persondecreeblockintro] = time.Persondecreeblockintro;
+                    }
                 }
             }
             output.decree = output_decrees.Values.First();
             output.decreeblocks = output_decreeblocks.Values.ToList();
+            foreach (PersondecreeblockManagement iter in output.decreeblocks)
+            {
+                IEnumerable<Persondecreeblocksub> time = new List<Persondecreeblocksub>();
+                foreach(Persondecreeblocksub i in iter.Persondecreeblocksubs)
+                {
+                    if (output_decreeblocksubs.ContainsKey(i.Id))
+                    {
+                        time = time.Append(i);
+                    }
+                }
+                iter.Persondecreeblocksubs = time.ToList();
+                /*IEnumerable<Persondecreeblockintro> time_i = new List<Persondecreeblockintro>();
+                foreach (Persondecreeblockintro i in iter.Persondecreeblockintros)
+                {
+                    if (decree_intros.ContainsKey(i.Id))
+                    {
+                        time_i = time_i.Append(i);
+                    }
+                }
+                iter.Persondecreeblockintros = time_i.ToList();*/
+            }
             output.decreeblocksubs = output_decreeblocksubs.Values.ToList();
             return output;
         }

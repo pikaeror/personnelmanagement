@@ -2927,6 +2927,19 @@ body {
     font-weight: 600;
 }
 
+.eld-eld-side-element-folder-union {
+    border: none;
+    border-bottom: 2px solid #D4D4D4;
+    border-radius: 0px;
+    background-color: rgba(31 199 165 / 80%);
+    margin: 4px;
+    padding: 2px;
+    font-size: 14px;
+    font-family: Merriweather;
+    text-align: center;
+    cursor: pointer;
+}
+
 .eld-eld-side-element{
     border: none;
     border-bottom: 2px solid #D4D4D4;

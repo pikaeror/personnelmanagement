@@ -137,6 +137,26 @@ namespace PersonnelManagement.Controllers
                     if (decree.Creator == user.Id)
                         time.FolderCreator = 3;
                     time.FolderOwner = 2;
+                    if (time.AccessForReading.Split("_").ToList().IndexOf(id.ToString()) == -1)
+                        time.AccessForReading += "_" + id.ToString();
+                    List<string> users = time.LastCountOwner != null ? time.LastCountOwner.Split("|").ToList() : new List<string>() { "" };
+                    int index = users.IndexOf(id.ToString());
+                    if (index != -1)
+                    {
+                        users = time.LastDateOpen.Split("|").ToList();
+                        users[index] = " ";
+                        time.LastDateOpen = String.Join("|", users);
+                        users = time.DetaSend.Split("|").ToList();
+                        users[index] = user.Date.GetValueOrDefault().ToString("dd:MM:yyyy");
+                        time.DetaSend = String.Join("|", users);
+
+                    }
+                    else
+                    {
+                        time.LastCountOwner += id.ToString() + "|";
+                        time.LastDateOpen += " |";
+                        time.DetaSend += user.Date.GetValueOrDefault().ToString("dd:MM:yyyy") + "|";
+                    }
                     decree.Owner = id;
                     repository.GetContext().SaveChanges();
                 });
@@ -188,6 +208,34 @@ namespace PersonnelManagement.Controllers
                 //repository.GetContext().Persondecree.Find(i).Mailexplorerid = mailexplorers;
 
                 //repository.GetContext().Persondecree.
+            }
+        }
+
+        [HttpGet("unopen")]
+        public IEnumerable<PersondecreeManagement> get_unopen_counts()
+        {
+            string sessionid = Request.Cookies[Keys.COOKIES_SESSION];
+            User user = null;
+            if (IdentityService.IsLogined(sessionid, repository))
+            {
+                // return repository.GetDecree 
+                user = IdentityService.GetUserBySessionID(sessionid, repository);
+                MailWorker worker = new MailWorker(user, repository);
+                return worker.getUnopenDecree();
+            }
+            return null;
+        }
+
+        [HttpPost("opendecree/{id}")]
+        public void set_open_decree([FromRoute] int id)
+        {
+            string sessionid = Request.Cookies[Keys.COOKIES_SESSION];
+            User user = null;
+            if (IdentityService.IsLogined(sessionid, repository))
+            {
+                user = IdentityService.GetUserBySessionID(sessionid, repository);
+                MailWorker worker = new MailWorker(user, repository);
+                worker.open_unreed_decree(id);
             }
         }
     }

@@ -103,6 +103,7 @@ import Link from '../../classes/link';
 import Dismissalclauses from '../../classes/dismissalclauses';
 import Cabinetdata from '../../classes/cabinetdata';
 import ExcertComposition from '../../classes/Excerts/excertComposition';
+import Mailexplorer from '../../classes/Mail/mailexplorer';
 
 Vue.component(Button.name, Button);
 Vue.component(Input.name, Input);
@@ -1793,21 +1794,33 @@ export default class TopmenuComponent extends Vue {
 
     persondecreeCreate() {
         //this.disableDecrees();
-        fetch('/api/Persondecree', {
-            method: 'post',
-            body: JSON.stringify(<Persondecree>{
-                persondecreeManagementStatus: 1, // Добавить
-                nickname: this.persondecreeCreateName,
-            }),
+        fetch('api/MailController/AddNew', {
+            method: 'get',
             credentials: 'include',
             headers: new Headers({
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             })
-        }).then(x => {
-            this.persondecreeCreateName = "";
-            this.fetchPersondecreesActive();
-            (<any>Vue).notify("S:Проект приказа создан");
+        }).then(response => {
+            return response.json() as Promise<Mailexplorer>;
+        }).then(resualt => {
+            fetch('/api/Persondecree', {
+                method: 'post',
+                body: JSON.stringify(<Persondecree>{
+                    persondecreeManagementStatus: 1, // Добавить
+                    nickname: this.persondecreeCreateName,
+                    mailexplorerid: resualt.id,
+                }),
+                credentials: 'include',
+                headers: new Headers({
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                })
+            }).then(x => {
+                this.persondecreeCreateName = "";
+                this.fetchPersondecreesActive();
+                (<any>Vue).notify("S:Проект приказа создан");
+            })
         })
     }
 

@@ -66,6 +66,7 @@ export default class derceeoperationelement extends Vue {
     viewpersondecrees: Persondecree[];
 
     multipleSelection: Persondecree[];
+    decreeunopen: Persondecree[];
 
     decreecreator: boolean;
 
@@ -125,6 +126,7 @@ export default class derceeoperationelement extends Vue {
             viewpersondecrees: [],
 
             multipleSelection: [],
+            decreeunopen: [],
 
             decreecreator: false,
 
@@ -168,7 +170,10 @@ export default class derceeoperationelement extends Vue {
         if (row.signed == 1) {
             return 'success-row';
         }
-        return '';
+        if (this.decreeunopen.find(r => r.id == row.id) != undefined) {
+            return 'unopen-row';
+        }
+        return 'all';
     }
     handleSelectionChange(val) {
         this.multipleSelection = val;
@@ -310,6 +315,44 @@ export default class derceeoperationelement extends Vue {
                 this.reload();
                 this.multipleSelection = time_value;
             });
+        fetch('api/MailController/unopen', { credentials: 'include' })
+            .then(response => {
+                return response.json() as Promise<Persondecree[]>;
+            })
+            .then(result => {
+                //alert('mark');
+                result.forEach(r => {
+                    var exp: Mailexplorer = time_explorer.find(q => q.id == r.mailexplorerid);
+                    r.creatorfolder = exp.folderCreator;
+                    r.ownerfolder = exp.folderOwner;
+                    r.accessforreading = exp.accessForReading;
+                    if (this.fullpersondecrees != null) {
+                        let preloadedPersondecree: Persondecree = this.fullpersondecrees.find(p => p.id == r.id);
+                        if (preloadedPersondecree != null) {
+                            r.marked = preloadedPersondecree.marked;
+                        } else {
+                            r.marked = false;
+                        }
+                        //r.marked = p
+                    } else {
+                        r.marked = false;
+                    }
+                    if (r.creatorObject != null) {
+                        r.getFIO = ((r.creatorObject.surname == "" || r.creatorObject.surname == null) ? '' : (r.creatorObject.surname + ' ')) +
+                            ((r.creatorObject.name == "" || r.creatorObject.name == null) ? '' : (r.creatorObject.name[0].toUpperCase() + '.')) +
+                            ((r.creatorObject.firstname == "" || r.creatorObject.firstname == null) ? '' : (r.creatorObject.firstname[0].toUpperCase() + '.'));
+                        r.getPlace = r.creatorObject.structureString;
+                    }
+                    r.getDate = (r.datesigned == null ? (r.datecreated == null ? '' : r.datecreated.toString().split('T')[0].split('-').reverse().join('-')) :
+                        r.datesigned.toString().split('T')[0].split('-').reverse().join('-'))
+                    r.getName = r.name +
+                        (((r.name == null || r.name == "") || (r.nickname == null || r.nickname == "")) ? '' : ' / ') +
+                        r.nickname;
+                    r.getNumber = r.number.toString() + (r.numbertype == "" ? '' : (' ' + r.numbertype.toUpperCase()));
+
+                });
+                this.decreeunopen = result;
+            });
         return this.fullpersondecrees;
     }
 
@@ -344,9 +387,20 @@ export default class derceeoperationelement extends Vue {
             k = list_access.find(r => parseInt(r) == this.$store.state.user.id);
         } else
             k = "true";
-        if (k != undefined || this.$store.state.user.id == 1 || this.$store.state.user.id == 24)
+        if (k != undefined || this.$store.state.user.id == 1 || this.$store.state.user.id == 24) {
             //this.open(row);
             this.$store.commit("setdecreemailM", row.id);
+            fetch('api/MailController/opendecree/' + row.id, {
+                method: 'post',
+                credentials: 'include',
+                headers: new Headers({
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                })
+            }).then(response => {
+                this.fetchPersondecreesActive();
+            })
+        }
         else
             this.$notify({
                 title: 'Нет прав',
@@ -426,6 +480,11 @@ export default class derceeoperationelement extends Vue {
     }
 
     set_menu_id(id: number) {
+        if (this.menuid >= 98 && id < 50) {
+            this.new_excert_list = false;
+            this.update = false;
+            this.excertsdecreestructureT = [];
+        }
         this.setMenuid(id);
         /*setTimeout(() => {
             this.setMenuid(id);
@@ -434,6 +493,9 @@ export default class derceeoperationelement extends Vue {
 
     setMenuid(id: number) {
         //this.rand_list = [];
+/*        this.$store.commit("setExcertMenu", false);
+        this.$store.commit("setExcertDecreeId", null);
+        this.excertsdecreestructureT = [];*/
         this.menuid = id;
         this.multipleSelection = [];
         /*this.viewpersondecrees = */this.filterbyfolders(id);
@@ -547,12 +609,20 @@ export default class derceeoperationelement extends Vue {
             this.getexcerts(this.excertsdecree, false);
             new_excert_list = true;
 
+        } else if (folder == 98) {
+            this.decreeunopen.forEach(r => {
+                this.fullpersondecrees.forEach(d => {
+                    if (d.id == r.id)
+                        time.push(d);
+                })
+            })
         }
         this.viewpersondecrees = time;
         this.$store.commit("setExcertMenu", excert);
         this.$store.commit("setExcertDecreeId", null);
         this.excertmenu = excert;
         this.new_excert_list = new_excert_list;
+        this.update = true;
         return time;
     }
 
@@ -875,10 +945,17 @@ export default class derceeoperationelement extends Vue {
     qwerty(row, column, cell, event) {
         this.title_text_excert = this.title_text_excert_template;
         this.excertsdecreestructureT = [];
-        if ((this.menuid == 8 || this.menuid == 9) && cell.cellIndex == 4) {
-            this.new_excert_list = true;
-            this.getexcerts(row, false);
-            this.menuid = 99;
+        if ((this.menuid == 8 || this.menuid == 9)) {
+            if (cell.cellIndex == 4) {
+                this.new_excert_list = true;
+                this.getexcerts(row, false);
+                this.set_menu_id(99);
+                /*this.menuid = 99;*/
+            } else if (cell.cellIndex == 5) {
+                /*this.arvhive = true;
+                this.getarchivedecree(row, false);*/
+                this.set_menu_id(97);
+            }
         }
     }
 
@@ -896,5 +973,10 @@ export default class derceeoperationelement extends Vue {
                 this.usersSearch = result;
                 this.userSelected = null;
             })
+    }
+
+    viewUnopeneddecree() {
+        if (this.menuid <= 6)
+            this.set_menu_id(98);
     }
 }

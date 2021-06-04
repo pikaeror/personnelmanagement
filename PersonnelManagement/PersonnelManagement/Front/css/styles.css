@@ -2922,6 +2922,14 @@ body {
     min-height: 735px;
 }
 
+.eld-eld-main-mail {
+    max-width: 83%;
+    min-width: 85%;
+    padding-left: 4px;
+    /*width: 100%;*/
+    min-height: 735px;
+}
+
 .eld-eld-label {
     min-width: 120px;
     font-weight: 600;
@@ -3787,11 +3795,27 @@ eld-eld-body-row-flex-vertical{
     font-size: 0.5cm;
 }
 
-
-.el-table .warning-row {
-    background: oldlace;
+.el-table .all {
+    background: #ef65653d;
 }
 
 .el-table .success-row {
     background: #f0f9eb;
+}
+
+.el-table .unopen-row {
+    background: #4251ff4d;
+    font-weight: bold;
+    border: groove;
+}
+
+
+.el-mail-number-decrees {
+    text-align-last: right;
+    align-items: center;
+    font-family: Arial;
+    font-weight: bold;
+    font-style: oblique;
+    font-size: 10px;
+    margin: auto;
 }

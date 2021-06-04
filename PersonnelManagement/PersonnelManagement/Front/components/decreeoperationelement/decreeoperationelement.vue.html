@@ -31,21 +31,90 @@
             <!--Здесь боковая панель-->
             <div class="eld-eld-side-mail">
                 <div class="eld-eld-side-element"></div>
-                <div class="eld-eld-side-element-folder-union"><strong>Предложения</strong></div>
-                <div v-bind:class="{'eld-eld-side-element-selected': menuid == 2}" class="eld-eld-side-element" style="background-color: lightgray; border-radius: 20px;" @click="set_menu_id(2)">Мои документы</div>
-                <div v-bind:class="{'eld-eld-side-element-selected': menuid == 3}" class="eld-eld-side-element" style="background-color: lightgray; border-radius: 20px;" @click="set_menu_id(3)">
-                    Входящие
-                    <el-badge :value="1" :max="10" class="item" />
+                <div class="eld-eld-side-element-folder-union">
+                    <div style="display: inline-flex; ">
+                        <div style="text-align-last: center;">
+                            <strong>Предложения</strong>
+                            <el-badge :value="decreeunopen.length" :max="10" class="item" />
+                        </div>
+                        <!--<div v-if="menuid == 3 & viewpersondecrees.length > 0" class="el-mail-number-decrees">({{viewpersondecrees.length}})</div>-->
+                    </div>
                 </div>
-                <div v-bind:class="{'eld-eld-side-element-selected': menuid == 4}" class="eld-eld-side-element" style="background-color: lightgray; border-radius: 20px;" @click="set_menu_id(4)">Исходящие</div>
-                <div v-bind:class="{'eld-eld-side-element-selected': menuid == 5}" class="eld-eld-side-element" style="background-color: lightgray; border-radius: 20px;" @click="set_menu_id(5)">Отработанные</div>
-                <div v-bind:class="{'eld-eld-side-element-selected': menuid == 6}" class="eld-eld-side-element" style="background-color: lightgray; border-radius: 20px;" @click="set_menu_id(6)">Архив</div>
+                <div v-bind:class="{'eld-eld-side-element-selected': menuid == 2}" class="eld-eld-side-element" style="background-color: lightgray; border-radius: 20px;" @click="set_menu_id(2)">
+                    <div style="display: inline-flex; ">
+                        <div style="text-align-last: center;">
+                            Мои документы
+                            <el-badge :value="0" :max="10" class="item" />
+                        </div>
+                        <div v-if="menuid == 2 & viewpersondecrees.length > 0" class="el-mail-number-decrees">({{viewpersondecrees.length}})</div>
+                    </div>
+                </div>
+                <div v-bind:class="{'eld-eld-side-element-selected': menuid == 3}" class="eld-eld-side-element" style="background-color: lightgray; border-radius: 20px;" @click="set_menu_id(3)">
+                    <div style="display: inline-flex; ">
+                        <div style="text-align-last: center;">
+                            Входящие
+                            <el-badge :value="0" :max="10" class="item" />
+                        </div>
+                        <div v-if="menuid == 3 & viewpersondecrees.length > 0" class="el-mail-number-decrees">({{viewpersondecrees.length}})</div>
+                    </div>
+                </div>
+                <div v-bind:class="{'eld-eld-side-element-selected': menuid == 4}" class="eld-eld-side-element" style="background-color: lightgray; border-radius: 20px;" @click="set_menu_id(4)">
+                    <div style="display: inline-flex; ">
+                        <div style="text-align-last: center;">
+                            Исходящие
+                            <el-badge :value="0" :max="10" class="item" />
+                        </div>
+                        <div v-if="menuid == 4 & viewpersondecrees.length > 0" class="el-mail-number-decrees">({{viewpersondecrees.length}})</div>
+                    </div>
+                </div>
+                <div v-bind:class="{'eld-eld-side-element-selected': menuid == 5}" class="eld-eld-side-element" style="background-color: lightgray; border-radius: 20px;" @click="set_menu_id(5)">
+                    <div style="display: inline-flex; ">
+                        <div style="text-align-last: center;">
+                            Отработанные
+                            <el-badge :value="0" :max="10" class="item" />
+                        </div>
+                        <div v-if="menuid == 5 & viewpersondecrees.length > 0" class="el-mail-number-decrees">({{viewpersondecrees.length}})</div>
+                    </div>
+                </div>
+                <div v-bind:class="{'eld-eld-side-element-selected': menuid == 6}" class="eld-eld-side-element" style="background-color: lightgray; border-radius: 20px;" @click="set_menu_id(6)">
+                    <div style="display: inline-flex; ">
+                        <div style="text-align-last: center;">
+                            Архив
+                            <el-badge :value="0" :max="10" class="item" />
+                        </div>
+                        <div v-if="menuid == 6 & viewpersondecrees.length > 0" class="el-mail-number-decrees">({{viewpersondecrees.length}})</div>
+                    </div>
+                </div>
                 <div class="eld-eld-side-element"></div>
                 <div class="eld-eld-side-element"></div>
                 <div class="eld-eld-side-element-folder-union"><strong>Приказы</strong></div>
-                <div v-bind:class="{'eld-eld-side-element-selected': menuid == 7}" class="eld-eld-side-element" style="background-color: darkgray; border-radius: 20px;" @click="set_menu_id(7)">В работе</div>
-                <div v-bind:class="{'eld-eld-side-element-selected': menuid == 8}" class="eld-eld-side-element" style="background-color: darkgray; border-radius: 20px;" @click="set_menu_id(8)">Мои подписанные приказы</div>
-                <div v-bind:class="{'eld-eld-side-element-selected': menuid == 9}" class="eld-eld-side-element" style="background-color: darkgray; border-radius: 20px;" @click="set_menu_id(9)">Все подписанные приказы</div>
+                <div v-bind:class="{'eld-eld-side-element-selected': menuid == 7}" class="eld-eld-side-element" style="background-color: darkgray; border-radius: 20px;" @click="set_menu_id(7)">
+                    <div style="display: inline-flex; ">
+                        <div style="text-align-last: center;">
+                            В работе
+                            <el-badge :value="0" :max="10" class="item" />
+                        </div>
+                        <div v-if="menuid == 7 & viewpersondecrees.length > 0" class="el-mail-number-decrees">({{viewpersondecrees.length}})</div>
+                    </div>
+                </div>
+                <div v-bind:class="{'eld-eld-side-element-selected': menuid == 8}" class="eld-eld-side-element" style="background-color: darkgray; border-radius: 20px;" @click="set_menu_id(8)">
+                    <div style="display: inline-flex; ">
+                        <div style="text-align-last: center;">
+                            Мои подписанные приказы
+                            <el-badge :value="0" :max="10" class="item" />
+                        </div>
+                        <div v-if="menuid == 8 & viewpersondecrees.length > 0" class="el-mail-number-decrees">({{viewpersondecrees.length}})</div>
+                    </div>
+                </div>
+                <div v-bind:class="{'eld-eld-side-element-selected': menuid == 9}" class="eld-eld-side-element" style="background-color: darkgray; border-radius: 20px;" @click="set_menu_id(9)">
+                    <div style="display: inline-flex; ">
+                        <div style="text-align-last: center;">
+                            Все подписанные приказы
+                            <el-badge :value="0" :max="10" class="item" />
+                        </div>
+                        <div v-if="menuid == 9 & viewpersondecrees.length > 0" class="el-mail-number-decrees">({{viewpersondecrees.length}})</div>
+                    </div>
+                </div>
                 <div class="eld-eld-side-element"></div>
                 <div class="eld-eld-side-element"></div>
                 <div class="eld-eld-side-element-folder-union"><strong>Выписки</strong></div>
@@ -58,9 +127,9 @@
                     <el-badge :value="5" :max="10" class="item" />
                 </div>
             </div>
-            <div class="eld-eld-main">
+            <div class="eld-eld-main-mail">
                 <div v-if="!new_excert_list">
-                    <!--Шапка главного меню-->
+                    <!--Шапка главного меню style="display: inline-block;"-->
                     <div class="eld-eld-main-head">
                         <div style="display: flex; ">
                             <el-button class="eld-eld-main-head-partbutton" size="mini" @click="send" :disabled="menuid == 9 || menuid == 8">Направить</el-button>
@@ -70,16 +139,19 @@
                             <el-button class="eld-eld-main-head-partbutton" size="mini" @click="unit" :disabled="menuid == 9 || menuid == 8 || menuid == 8 || multipleSelection.length < 1">Объединить</el-button>
                             <el-button class="eld-eld-main-head-partbutton" size="mini" @click="sbdWorker">test</el-button>
                         </div>
-                        <div style="text-align-last: right;">
-
+                        <div style="text-align-last: right; margin-right: 11px;">
+                            <!--<el-button style="background: #f0f9eb" size="mini">Подписан</el-button>-->
+                            <el-badge :value="decreeunopen.length" :max="10" class="item">
+                                <el-button style="background: #4251ff4d" size="mini" @click="viewUnopeneddecree">Не просмотрен</el-button>
+                            </el-badge>
                         </div>
                     </div>
                     <div visible="update"></div>
-                    <!--property="marked"  @selection-change="handleSelectionChange"   :filters="datefiltervariants"  -->
+                    <!--property="marked"  @selection-change="handleSelectionChange"   :filters="datefiltervariants" -->
                     <template>
                         <div v-if="viewpersondecrees.length">
                             <el-table ref="multipleTable" :data="viewpersondecrees" style="width: 99%; height: 700px" height="100%" border :row-class-name="tableRowClassName" @cell-click="qwerty" @selection-change="handleSelectionChange" @row-dblclick="rowClicked" @row-contextmenu="rowContextmenu">
-                                <el-table-column type="selection" width="55">
+                                <el-table-column type="selection" style="max-width: 55">
                                 </el-table-column>
                                 <el-table-column property="getDate" label="ДАТА" sortable width="110">
                                 </el-table-column>
@@ -95,6 +167,13 @@
                                         </div>
                                     </template>
                                 </el-table-column>
+                                <el-table-column label="Архив" width="70" v-if="menuid == 9 || menuid == 8">
+                                    <template scope="item">
+                                        <div style="text-align-last: center; font-size: x-large;">
+                                            <i class="el-icon-info" size="mini"></i>
+                                        </div>
+                                    </template>
+                                </el-table-column>
                                 <el-table-column property="getPlace" label="Подразделение" width="550">
                                 </el-table-column>
                                 <el-table-column property="getFIO" label="ФИО работника" width="200">
@@ -107,72 +186,88 @@
                     </template>
                 </div>
                 <div v-else>
-                    <div v-if="excertsdecreestructureT.length">
-                        <el-table ref="multipleTable" :data="excertsdecreestructureT" style="width: 99%; height: 700px" height="100%" border :row-class-name="tableRowClassName" @row-dblclick="openexcert">
-                            <el-table-column type="selection" width="55">
-                            </el-table-column>
-                            <el-table-column property="structure.nameshortened" label="Получатель" width="400">
-                            </el-table-column>
-                            <!--:filter-method="filterHandler"-->
-                            <el-table-column property="data_create" label="Дата создания" width="110">
-                            </el-table-column>
-                            <el-table-column property="data_opened" label="Дата первого просмотра" width="110">
-                            </el-table-column>
-                            <el-table-column label="Выписки" width="90">
-                                <template scope="item">
-                                    <div>
-                                        <div style="text-align-last: center; font-size: x-large;">
-                                            <!--<i class="el-icon-view" size="mini" v-popover:popover4></i>-->
-                                            <el-popover ref="popover4"
-                                                        placement="right"
-                                                        width="400"
-                                                        trigger="click">
-                                                <el-button-group>
-                                                    <el-button type="success">направить выписку</el-button>
-                                                    <el-button type="warning">открыть доступ</el-button>
-                                                </el-button-group>
-                                                
-                                                <div style="text-align-last: center;">
-                                                    <el-select v-model="getusers"
-                                                               multiple
-                                                               filterable
-                                                               remote
-                                                               reserve-keyword
-                                                               placeholder="Please enter a keyword"
-                                                               :remote-method="remoteMethod"
-                                                               :loading="loading">
-                                                        <el-option v-for="item in usersSearch"
-                                                                   :key="item.surname"
-                                                                   :label="item.surname"
-                                                                   :value="item.surname">
-                                                        </el-option>
-                                                    </el-select>
-                                                </div>
-                                            </el-popover>
-                                            <el-button class="el-icon-message" size="mini" v-popover:popover4></el-button>
-                                        </div>
-                                    </div>
-                                </template>
-                            </el-table-column>
-                        </el-table>
-                    </div>
-                    <div v-else class="eld-title">
-                        Папка пуста.
-                    </div>
-                    <div v-for="struct in excertsdecreestructureT">
-                        <div style="margin-bottom: 4px; box-shadow: 5px 5px 3px rgba(0,0,0,0.6); padding: 10px; border-radius: 10px; background: #eeece0;" @click="openexcert(struct)">
-                            <small>
-                                <el-button type="primary" icon="el-icon-view" size="mini" @click="openexcert(struct)" :loading="loading2"></el-button>
-                                {{struct.structure.nameshortened}}<!--<el-button size="mini" type="danger" icon="el-icon-delete" @click=""></el-button>-->
-                            </small>
-                            <div style="text-align-last: right;">
-                                <el-button-group>
-                                    <el-button type="info" size="mini">Дата создания: {{struct.data_create}}</el-button>
-                                    <el-button type="info" size="mini">Дата просмотра: {{struct.data_opened}}</el-button>
-                                </el-button-group>
-                            </div>
+                    <div class="eld-eld-main-head" style="display: inline-block;">
+                        <div style="display: flex; ">
+                            <el-button class="eld-eld-main-head-partbutton" size="mini" @click="send" :disabled="menuid == 9 || menuid == 8">Направить</el-button>
+                            <el-button class="eld-eld-main-head-partbutton" size="mini" @click="deleted" :disabled="menuid == 9 || menuid == 8">Удалить</el-button>
+                            <el-button class="eld-eld-main-head-partbutton" size="mini" @click="unit" :disabled="menuid == 9 || menuid == 8 || menuid == 8 || multipleSelection.length < 1">Объединить</el-button>
+                            <!--<el-button class="eld-eld-main-head-partbutton" size="mini" @click="sbdWorker">test</el-button>-->
+                        </div>
+                        <div style="text-align-last: right;">
+                            <!--<el-button style="background: #f0f9eb" size="mini">Подписан</el-button>-->
+                            <!--<el-button style="background: #4251ff4d" size="mini" @click="viewUnopeneddecree">Не просмотрен</el-button> height="100%"-->
                         </div>
                     </div>
+                    <div visible="update"></div>
+                    <template>
+                        <div v-if="excertsdecreestructureT.length && menuid > 50">
+                            <el-table :data="excertsdecreestructureT" style="width: 99%; height: 700px" border :row-class-name="tableRowClassName" @row-dblclick="openexcert">
+                                <el-table-column type="selection" style="max-width: 55">
+                                </el-table-column>
+                                <el-table-column property="structure.nameshortened" label="Получатель" width="250">
+                                </el-table-column>
+                                <!--:filter-method="filterHandler"-->
+                                <el-table-column property="data_create" label="Дата создания" width="130">
+                                </el-table-column>
+                                <el-table-column property="data_opened" label="Дата первого просмотра" width="130">
+                                </el-table-column>
+                                <!--<el-table-column label="Выписки" width="90">
+                                    <template scope="item">
+                                        <div>
+                                            <div style="text-align-last: center; font-size: x-large;">-->
+                                                <!--<i class="el-icon-view" size="mini" v-popover:popover4></i>-->
+                                                <!--<el-popover ref="popover4"
+                                                            placement="right"
+                                                            width="400"
+                                                            trigger="click">
+                                                    <el-button-group>
+                                                        <el-button type="success">направить выписку</el-button>
+                                                        <el-button type="warning">открыть доступ</el-button>
+                                                    </el-button-group>
+
+                                                    <div style="text-align-last: center;">
+                                                        <el-select v-model="getusers"
+                                                                   multiple
+                                                                   filterable
+                                                                   remote
+                                                                   reserve-keyword
+                                                                   placeholder="Please enter a keyword"
+                                                                   :remote-method="remoteMethod"
+                                                                   :loading="loading">
+                                                            <el-option v-for="item in usersSearch"
+                                                                       :key="item.surname"
+                                                                       :label="item.surname"
+                                                                       :value="item.surname">
+                                                            </el-option>
+                                                        </el-select>
+                                                    </div>
+                                                </el-popover>
+                                                <el-button class="el-icon-message" size="mini" v-popover:popover4></el-button>
+                                            </div>
+                                        </div>
+                                    </template>
+                                </el-table-column>-->
+                            </el-table>
+                        </div>
+                        <div v-else class="eld-title">
+                            Папка пуста.
+                        </div>
+                    </template>
+                        <!--<div v-for="struct in excertsdecreestructureT">
+            <div style="margin-bottom: 4px; box-shadow: 5px 5px 3px rgba(0,0,0,0.6); padding: 10px; border-radius: 10px; background: #eeece0;" @click="openexcert(struct)">
+                <small>
+                    <el-button type="primary" icon="el-icon-view" size="mini" @click="openexcert(struct)" :loading="loading2"></el-button>
+                    {{struct.structure.nameshortened}}-->
+                        <!--<el-button size="mini" type="danger" icon="el-icon-delete" @click=""></el-button>-->
+                        <!--</small>
+                <div style="text-align-last: right;">
+                    <el-button-group>
+                        <el-button type="info" size="mini">Дата создания: {{struct.data_create}}</el-button>
+                        <el-button type="info" size="mini">Дата просмотра: {{struct.data_opened}}</el-button>
+                    </el-button-group>
+                </div>
+            </div>
+        </div>-->
                 </div>
             </div>
         </div>

@@ -71,6 +71,7 @@ namespace PersonnelManagement.Models
         public virtual DbSet<Persondecreelevel> Persondecreelevel { get; set; }
         public virtual DbSet<Persondecreeoperation> Persondecreeoperation { get; set; }
         public virtual DbSet<Persondecreetype> Persondecreetype { get; set; }
+        public virtual DbSet<Persondecreeunit> Persondecreeunit { get; set; }
         public virtual DbSet<Persondispanserization> Persondispanserization { get; set; }
         public virtual DbSet<Persondriver> Persondriver { get; set; }
         public virtual DbSet<Personeducation> Personeducation { get; set; }
@@ -1820,9 +1821,21 @@ namespace PersonnelManagement.Models
                     .HasColumnName("access_for_reading")
                     .HasMaxLength(450);
 
+                entity.Property(e => e.DetaSend)
+                    .HasColumnName("deta_send")
+                    .HasMaxLength(450);
+
                 entity.Property(e => e.FolderCreator).HasColumnName("folder_creator");
 
                 entity.Property(e => e.FolderOwner).HasColumnName("folder_owner");
+
+                entity.Property(e => e.LastCountOwner)
+                    .HasColumnName("last_count_owner")
+                    .HasMaxLength(450);
+
+                entity.Property(e => e.LastDateOpen)
+                    .HasColumnName("last_date_open")
+                    .HasMaxLength(450);
             });
 
             modelBuilder.Entity<Mailfolder>(entity =>
@@ -3517,6 +3530,28 @@ namespace PersonnelManagement.Models
                     .HasColumnName("name")
                     .HasMaxLength(90)
                     .HasDefaultValueSql("''");
+            });
+
+            modelBuilder.Entity<Persondecreeunit>(entity =>
+            {
+                entity.ToTable("persondecreeunit");
+
+                entity.HasIndex(e => e.Id)
+                    .HasName("id_UNIQUE")
+                    .IsUnique();
+
+                entity.Property(e => e.Id)
+                    .HasColumnName("id")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Decrees)
+                    .HasColumnName("decrees")
+                    .HasMaxLength(900)
+                    .HasDefaultValueSql("''");
+
+                entity.Property(e => e.Unitdecree)
+                    .HasColumnName("unitdecree")
+                    .HasColumnType("int(11)");
             });
 
             modelBuilder.Entity<Persondispanserization>(entity =>

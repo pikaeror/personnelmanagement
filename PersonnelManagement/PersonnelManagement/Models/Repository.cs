@@ -9144,6 +9144,8 @@ namespace PersonnelManagement.Models
             context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
             DateTime date = user.Date.GetValueOrDefault();
 
+            Dictionary<int, Structure> struct_local = context.Structure.ToDictionary(r => r.Id);
+
             Dictionary<int, Positiontype> positiontypesLocal = PositiontypesLocal();
             Dictionary<int, Sourceoffinancing> sofsLocal = SourceoffinancingsLocal();
             Dictionary<int, Mrd> mrdsLocal = MrdsLocal();
@@ -9195,7 +9197,7 @@ namespace PersonnelManagement.Models
             } else
             {
                 List<int> structuresArray = new List<int>();
-                foreach(Structure structure in FilterDeletedStructures(StructuresLocal().Values.Where(s => s.Parentstructure == 0), user.Date.GetValueOrDefault()))
+                foreach(Structure structure in FilterDeletedStructures(struct_local.Values.Where(s => s.Parentstructure == 0), user.Date.GetValueOrDefault()))
                 {
                     structuresArray.Add(StructureBaseId(structure));
                 }
@@ -9219,8 +9221,11 @@ namespace PersonnelManagement.Models
                 //positions = FilterDeletedPositionsQueryable(Positions, user.Date.GetValueOrDefault());
             }
 
+            /*Dictionary<int, Structure> struct_local = context.Structure.ToDictionary(r => r.Id);*/
+
             if (structuretypes != null)
             {
+                List<Position> input = positions.ToList();
                 positions = positions.Where(p => {
                 //positions = positions.AsParallel().Where(p => {
                     if (p.Structure == 0)
@@ -9229,16 +9234,26 @@ namespace PersonnelManagement.Models
                     }
                     //Structure structure = Structures.FirstOrDefault(s => s.Id == p.Structure);
                     Structure structure = null;
-                    if (StructuresLocal().ContainsKey(p.Structure))
+                    if (struct_local.ContainsKey(p.Structure))
                     {
-                        structure = StructuresLocal()[p.Structure];
+                        structure = struct_local[p.Structure];
                     } else
                     {
                         return false;
                     }
 
-                    return structuretypes.Contains(GetStructureType(structure)); });
-                    
+                    return structuretypes.Contains(GetStructureType(structure));
+                });
+
+                List<Position> output = new List<Position>();
+                foreach(Position time in input)
+                {
+                    Structure str = struct_local.GetValue(time.Structure),
+                    curent = GetActualStructureInfo(str, user.Date.GetValueOrDefault());
+                    if (structuretypes.Contains(curent.Structuretype))
+                        output.Add(time);
+                }
+                positions = output;
             }
 
 
@@ -9403,7 +9418,7 @@ namespace PersonnelManagement.Models
                 pmrequestPosition.Sof = sofsLocal[position.Sourceoffinancing].Name;
                 pmrequestPosition.Mrds = GetMrdsNamesLocal(position.Id, mrdsLocal, positionmrdsLocal);
 
-                Structure structureForStructuretype = StructuresLocal().GetValue(position.Structure);
+                Structure structureForStructuretype = struct_local.GetValue(position.Structure);
                 pmrequestPosition.Structuremrd = "";
                 if (structureForStructuretype != null)
                 {
@@ -9509,7 +9524,7 @@ namespace PersonnelManagement.Models
                 if (position.Head > 0)
                 {
                     
-                    Structure headingStructure = StructuresLocal().GetValue(position.Headid);
+                    Structure headingStructure = struct_local.GetValue(position.Headid);
                     //Structure headingStructure = Structures.FirstOrDefault(s => s.Id == position.Headid);
                     if (headingStructure != null)
                     {
@@ -9524,7 +9539,7 @@ namespace PersonnelManagement.Models
                     int[] curationids = position.Curatorlist.Split(',').Select(int.Parse).ToArray();
                     foreach (int id in curationids)
                     {
-                        Structure structure = StructuresLocal().GetValue(id);
+                        Structure structure = struct_local.GetValue(id);
                         //Structure structure = Structures.FirstOrDefault(s => s.Id == id);
                         if (structure != null)
                         {

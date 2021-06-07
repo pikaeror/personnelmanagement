@@ -979,4 +979,11 @@ export default class derceeoperationelement extends Vue {
         if (this.menuid <= 6)
             this.set_menu_id(98);
     }
+
+    /*isopeneddecree(row: Persondecree) {
+        var flag = this.decreeunopen.findIndex(r => { r.id == row.id });
+        if (flag == undefined || flag == -1)
+            return false;
+        return true;
+    }*/
 }

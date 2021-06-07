@@ -35,7 +35,7 @@
                     <div style="display: inline-flex; ">
                         <div style="text-align-last: center;">
                             <strong>Предложения</strong>
-                            <el-badge :value="decreeunopen.length" :max="10" class="item" />
+                            <!--<el-badge :value="decreeunopen.length" :max="10" class="item" />-->
                         </div>
                         <!--<div v-if="menuid == 3 & viewpersondecrees.length > 0" class="el-mail-number-decrees">({{viewpersondecrees.length}})</div>-->
                     </div>
@@ -177,6 +177,13 @@
                                 <el-table-column property="getPlace" label="Подразделение" width="550">
                                 </el-table-column>
                                 <el-table-column property="getFIO" label="ФИО работника" width="200">
+                                </el-table-column>
+                                <el-table-column width="50">
+                                    <template scope="item">
+                                        <div style="text-align-last: center; font-size: x-large;">
+                                            <i class="el-icon-view" size="mini"></i>
+                                        </div>
+                                    </template>
                                 </el-table-column>
                             </el-table>
                         </div>

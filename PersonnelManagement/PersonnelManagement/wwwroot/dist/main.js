@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "ff25edf70758ac7375b8"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "6a60e010ef3e5549cb40"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -7982,6 +7982,12 @@ let derceeoperationelement = class derceeoperationelement extends __WEBPACK_IMPO
     constructor() {
         super(...arguments);
         this.unit_decree = new __WEBPACK_IMPORTED_MODULE_4__classes_persondecree__["a" /* default */]();
+        /*isopeneddecree(row: Persondecree) {
+            var flag = this.decreeunopen.findIndex(r => { r.id == row.id });
+            if (flag == undefined || flag == -1)
+                return false;
+            return true;
+        }*/
     }
     data() {
         return {
@@ -55331,23 +55337,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "eld-eld-side-mail"
   }, [_c('div', {
     staticClass: "eld-eld-side-element"
-  }), _vm._v(" "), _c('div', {
-    staticClass: "eld-eld-side-element-folder-union"
-  }, [_c('div', {
-    staticStyle: {
-      "display": "inline-flex"
-    }
-  }, [_c('div', {
-    staticStyle: {
-      "text-align-last": "center"
-    }
-  }, [_c('strong', [_vm._v("Предложения")]), _vm._v(" "), _c('el-badge', {
-    staticClass: "item",
-    attrs: {
-      "value": _vm.decreeunopen.length,
-      "max": 10
-    }
-  })], 1)])]), _vm._v(" "), _c('div', {
+  }), _vm._v(" "), _vm._m(0), _vm._v(" "), _c('div', {
     staticClass: "eld-eld-side-element",
     class: {
       'eld-eld-side-element-selected': _vm.menuid == 2
@@ -55501,7 +55491,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "eld-eld-side-element"
   }), _vm._v(" "), _c('div', {
     staticClass: "eld-eld-side-element"
-  }), _vm._v(" "), _vm._m(0), _vm._v(" "), _c('div', {
+  }), _vm._v(" "), _vm._m(1), _vm._v(" "), _c('div', {
     staticClass: "eld-eld-side-element",
     class: {
       'eld-eld-side-element-selected': _vm.menuid == 7
@@ -55595,7 +55585,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "eld-eld-side-element"
   }), _vm._v(" "), _c('div', {
     staticClass: "eld-eld-side-element"
-  }), _vm._v(" "), _vm._m(1), _vm._v(" "), _c('div', {
+  }), _vm._v(" "), _vm._m(2), _vm._v(" "), _c('div', {
     staticClass: "eld-eld-side-element",
     class: {
       'eld-eld-side-element-selected': _vm.menuid == 10
@@ -55811,6 +55801,26 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "label": "ФИО работника",
       "width": "200"
     }
+  }), _vm._v(" "), _c('el-table-column', {
+    attrs: {
+      "width": "50"
+    },
+    scopedSlots: _vm._u([{
+      key: "default",
+      fn: function(item) {
+        return [_c('div', {
+          staticStyle: {
+            "text-align-last": "center",
+            "font-size": "x-large"
+          }
+        }, [_c('i', {
+          staticClass: "el-icon-view",
+          attrs: {
+            "size": "mini"
+          }
+        })])]
+      }
+    }])
   })], 1)], 1) : _c('div', {
     staticClass: "eld-title"
   }, [_vm._v("\n                        Папка пуста.\n                    ")])]], 2) : _c('div', [_c('div', {
@@ -56223,6 +56233,18 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }, [_vm._v("Дата просмотра: " + _vm._s(struct.data_opened))])], 1)], 1)])])
   })], 2)])], 1) : _vm._e()
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "eld-eld-side-element-folder-union"
+  }, [_c('div', {
+    staticStyle: {
+      "display": "inline-flex"
+    }
+  }, [_c('div', {
+    staticStyle: {
+      "text-align-last": "center"
+    }
+  }, [_c('strong', [_vm._v("Предложения")])])])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "eld-eld-side-element-folder-union"
   }, [_c('strong', [_vm._v("Приказы")])])

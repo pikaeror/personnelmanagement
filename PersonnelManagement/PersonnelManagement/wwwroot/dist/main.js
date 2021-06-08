@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "6a60e010ef3e5549cb40"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "097c239b24a1891a96b8"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -7982,12 +7982,6 @@ let derceeoperationelement = class derceeoperationelement extends __WEBPACK_IMPO
     constructor() {
         super(...arguments);
         this.unit_decree = new __WEBPACK_IMPORTED_MODULE_4__classes_persondecree__["a" /* default */]();
-        /*isopeneddecree(row: Persondecree) {
-            var flag = this.decreeunopen.findIndex(r => { r.id == row.id });
-            if (flag == undefined || flag == -1)
-                return false;
-            return true;
-        }*/
     }
     data() {
         return {
@@ -8375,95 +8369,35 @@ fetch('api/MailController/rand', { credentials: 'include' })
         if (this.multipleSelection.find(r => r.id == decree.id) == undefined)
             this.multipleSelection.push(decree);
     }
+    filter_my_documents(folder = 2) {
+        var time = [];
+        this.fullpersondecrees.forEach(r => {
+            if (r.creator == this.$store.state.user.id && folder - 1 == r.creatorfolder) {
+                time.push(r);
+            }
+            else if (r.owner == this.$store.state.user.id && folder - 1 == r.ownerfolder) {
+                time.push(r);
+            }
+        });
+        return time;
+    }
+    count_of_unopened(folder = 2) {
+        var time = this.filter_my_documents(folder);
+        var output = [];
+        time.forEach(r => {
+            this.decreeunopen.forEach(t => {
+                if (r.id == t.id)
+                    output.push(r);
+            });
+        });
+        return output.length;
+    }
     filterbyfolders(folder) {
         var time = [];
         var excert = false;
         var new_excert_list = false;
-        //this.viewpersondecrees = time;
-        if (folder == 2) {
-            this.fullpersondecrees.forEach(r => {
-                if (r.creator == this.$store.state.user.id && folder - 1 == r.creatorfolder) {
-                    time.push(r);
-                }
-                else if (r.owner == this.$store.state.user.id && folder - 1 == r.ownerfolder) {
-                    time.push(r);
-                }
-                /*if (r.creatorfolder == folder - 1 && r.creator == r.owner && r.creator == this.$store.state.user.id)
-                    this.viewpersondecrees.push(r)*/
-            });
-        }
-        else if (folder == 3) {
-            this.fullpersondecrees.forEach(r => {
-                if (r.creator == this.$store.state.user.id && folder - 1 == r.creatorfolder) {
-                    time.push(r);
-                }
-                else if (r.owner == this.$store.state.user.id && folder - 1 == r.ownerfolder) {
-                    time.push(r);
-                }
-            });
-            /*this.fullpersondecrees.forEach(r => {
-                if (r.signed == 0 && r.creator != r.owner && r.owner == this.$store.state.user.id)
-                    this.viewpersondecrees.push(r)
-            })*/
-        }
-        else if (folder == 4) {
-            this.fullpersondecrees.forEach(r => {
-                if (r.creator == this.$store.state.user.id && folder - 1 == r.creatorfolder) {
-                    time.push(r);
-                }
-                else if (r.owner == this.$store.state.user.id && folder - 1 == r.ownerfolder) {
-                    time.push(r);
-                }
-            });
-            /*this.fullpersondecrees.forEach(r => {
-                if (r.signed == 0 && r.creator != r.owner && r.creator == this.$store.state.user.id)
-                    this.viewpersondecrees.push(r)
-            })*/
-        }
-        else if (folder == 5) {
-            this.fullpersondecrees.forEach(r => {
-                if (r.creator == this.$store.state.user.id && folder - 1 == r.creatorfolder) {
-                    time.push(r);
-                }
-                else if (r.owner == this.$store.state.user.id && folder - 1 == r.ownerfolder) {
-                    time.push(r);
-                }
-            });
-        }
-        else if (folder == 6) {
-            this.fullpersondecrees.forEach(r => {
-                if (r.creator == this.$store.state.user.id && folder - 1 == r.creatorfolder) {
-                    time.push(r);
-                }
-                else if (r.owner == this.$store.state.user.id && folder - 1 == r.ownerfolder) {
-                    time.push(r);
-                }
-            });
-        }
-        else if (folder == 7) {
-            this.fullpersondecrees.forEach(r => {
-                if (r.creator == this.$store.state.user.id && folder - 1 == r.creatorfolder) {
-                    time.push(r);
-                }
-                else if (r.owner == this.$store.state.user.id && folder - 1 == r.ownerfolder) {
-                    time.push(r);
-                }
-            });
-        }
-        else if (folder == 8) {
-            // new_excert_list = this.new_excert_list ? true : false;
-            this.fullpersondecrees.forEach(r => {
-                if (r.creator == this.$store.state.user.id && folder - 1 == r.creatorfolder) {
-                    time.push(r);
-                }
-                else if (r.owner == this.$store.state.user.id && folder - 1 == r.ownerfolder) {
-                    time.push(r);
-                }
-            });
-            /*this.fullpersondecrees.forEach(r => {
-                if (r.signed == 1 && r.creator == this.$store.state.user.id)
-                    this.viewpersondecrees.push(r)
-            })*/
+        if (folder >= 2 && folder < 9) {
+            time = this.filter_my_documents(folder);
         }
         else if (folder == 9) {
             // new_excert_list = this.new_excert_list ? true : false;
@@ -8492,6 +8426,12 @@ fetch('api/MailController/rand', { credentials: 'include' })
                 });
             });
         }
+        //(this.$refs.multipleTable as ElTable).$el).onresize();
+        /*if (this.$refs) {
+            this.$refs.multipleTable.doLayout();
+        }*/
+        //this.reload();
+        //this.$emit('input', { plate: plateElement.value });
         this.viewpersondecrees = time;
         this.$store.commit("setExcertMenu", excert);
         this.$store.commit("setExcertDecreeId", null);
@@ -8833,6 +8773,16 @@ fetch('api/MailController/rand', { credentials: 'include' })
     viewUnopeneddecree() {
         if (this.menuid <= 6)
             this.set_menu_id(98);
+    }
+    isopeneddecree(row) {
+        var flag = false;
+        this.decreeunopen.forEach(r => {
+            if (r.id == row.row.id) {
+                flag = true;
+                return;
+            }
+        });
+        return flag;
     }
 };
 __decorate([
@@ -55362,7 +55312,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_vm._v("\n                        Мои документы\n                        "), _c('el-badge', {
     staticClass: "item",
     attrs: {
-      "value": 0,
+      "value": _vm.count_of_unopened(2),
       "max": 10
     }
   })], 1), _vm._v(" "), (_vm.menuid == 2 & _vm.viewpersondecrees.length > 0) ? _c('div', {
@@ -55392,7 +55342,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_vm._v("\n                        Входящие\n                        "), _c('el-badge', {
     staticClass: "item",
     attrs: {
-      "value": 0,
+      "value": _vm.count_of_unopened(3),
       "max": 10
     }
   })], 1), _vm._v(" "), (_vm.menuid == 3 & _vm.viewpersondecrees.length > 0) ? _c('div', {
@@ -55422,7 +55372,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_vm._v("\n                        Исходящие\n                        "), _c('el-badge', {
     staticClass: "item",
     attrs: {
-      "value": 0,
+      "value": _vm.count_of_unopened(4),
       "max": 10
     }
   })], 1), _vm._v(" "), (_vm.menuid == 4 & _vm.viewpersondecrees.length > 0) ? _c('div', {
@@ -55452,7 +55402,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_vm._v("\n                        Отработанные\n                        "), _c('el-badge', {
     staticClass: "item",
     attrs: {
-      "value": 0,
+      "value": _vm.count_of_unopened(5),
       "max": 10
     }
   })], 1), _vm._v(" "), (_vm.menuid == 5 & _vm.viewpersondecrees.length > 0) ? _c('div', {
@@ -55482,7 +55432,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_vm._v("\n                        Архив\n                        "), _c('el-badge', {
     staticClass: "item",
     attrs: {
-      "value": 0,
+      "value": _vm.count_of_unopened(6),
       "max": 10
     }
   })], 1), _vm._v(" "), (_vm.menuid == 6 & _vm.viewpersondecrees.length > 0) ? _c('div', {
@@ -55677,32 +55627,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     on: {
       "click": _vm.sbdWorker
     }
-  }, [_vm._v("test")])], 1), _vm._v(" "), _c('div', {
-    staticStyle: {
-      "text-align-last": "right",
-      "margin-right": "11px"
-    }
-  }, [_c('el-badge', {
-    staticClass: "item",
-    attrs: {
-      "value": _vm.decreeunopen.length,
-      "max": 10
-    }
-  }, [_c('el-button', {
-    staticStyle: {
-      "background": "#4251ff4d"
-    },
-    attrs: {
-      "size": "mini"
-    },
-    on: {
-      "click": _vm.viewUnopeneddecree
-    }
-  }, [_vm._v("Не просмотрен")])], 1)], 1)]), _vm._v(" "), _c('div', {
+  }, [_vm._v("test")])], 1)]), _vm._v(" "), _c('div', {
     attrs: {
       "visible": "update"
     }
-  }), _vm._v(" "), [(_vm.viewpersondecrees.length) ? _c('div', [_c('el-table', {
+  }), _vm._v(" "), _c('div', [(_vm.viewpersondecrees.length) ? _c('div', [_c('el-table', {
     ref: "multipleTable",
     staticStyle: {
       "width": "99%",
@@ -55801,14 +55730,14 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "label": "ФИО работника",
       "width": "200"
     }
-  }), _vm._v(" "), _c('el-table-column', {
+  }), _vm._v(" "), (_vm.menuid < 7) ? _c('el-table-column', {
     attrs: {
       "width": "50"
     },
     scopedSlots: _vm._u([{
       key: "default",
       fn: function(item) {
-        return [_c('div', {
+        return [(!_vm.isopeneddecree(item)) ? _c('div', {
           staticStyle: {
             "text-align-last": "center",
             "font-size": "x-large"
@@ -55818,12 +55747,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           attrs: {
             "size": "mini"
           }
-        })])]
+        })]) : _vm._e()]
       }
     }])
-  })], 1)], 1) : _c('div', {
+  }) : _vm._e()], 1)], 1) : _c('div', {
     staticClass: "eld-title"
-  }, [_vm._v("\n                        Папка пуста.\n                    ")])]], 2) : _c('div', [_c('div', {
+  }, [_vm._v("\n                        Папка пуста.\n                    ")])])]) : _c('div', [_c('div', {
     staticClass: "eld-eld-main-head",
     staticStyle: {
       "display": "inline-block"
@@ -55867,7 +55796,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "visible": "update"
     }
-  }), _vm._v(" "), [(_vm.excertsdecreestructureT.length && _vm.menuid > 50) ? _c('div', [_c('el-table', {
+  }), _vm._v(" "), _c('div', [(_vm.excertsdecreestructureT.length && _vm.menuid > 50) ? _c('div', [_c('el-table', {
     staticStyle: {
       "width": "99%",
       "height": "700px"
@@ -55907,7 +55836,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   })], 1)], 1) : _c('div', {
     staticClass: "eld-title"
-  }, [_vm._v("\n                        Папка пуста.\n                    ")])]], 2)])]), _vm._v(" "), _c('el-dialog', {
+  }, [_vm._v("\n                        Папка пуста.\n                    ")])])])])]), _vm._v(" "), _c('el-dialog', {
     attrs: {
       "width": "900px",
       "visible": _vm.dialogVisibleSend,

@@ -44,7 +44,7 @@
                     <div style="display: inline-flex; ">
                         <div style="text-align-last: center;">
                             Мои документы
-                            <el-badge :value="0" :max="10" class="item" />
+                            <el-badge :value="count_of_unopened(2)" :max="10" class="item" />
                         </div>
                         <div v-if="menuid == 2 & viewpersondecrees.length > 0" class="el-mail-number-decrees">({{viewpersondecrees.length}})</div>
                     </div>
@@ -53,7 +53,7 @@
                     <div style="display: inline-flex; ">
                         <div style="text-align-last: center;">
                             Входящие
-                            <el-badge :value="0" :max="10" class="item" />
+                            <el-badge :value="count_of_unopened(3)" :max="10" class="item" />
                         </div>
                         <div v-if="menuid == 3 & viewpersondecrees.length > 0" class="el-mail-number-decrees">({{viewpersondecrees.length}})</div>
                     </div>
@@ -62,7 +62,7 @@
                     <div style="display: inline-flex; ">
                         <div style="text-align-last: center;">
                             Исходящие
-                            <el-badge :value="0" :max="10" class="item" />
+                            <el-badge :value="count_of_unopened(4)" :max="10" class="item" />
                         </div>
                         <div v-if="menuid == 4 & viewpersondecrees.length > 0" class="el-mail-number-decrees">({{viewpersondecrees.length}})</div>
                     </div>
@@ -71,7 +71,7 @@
                     <div style="display: inline-flex; ">
                         <div style="text-align-last: center;">
                             Отработанные
-                            <el-badge :value="0" :max="10" class="item" />
+                            <el-badge :value="count_of_unopened(5)" :max="10" class="item" />
                         </div>
                         <div v-if="menuid == 5 & viewpersondecrees.length > 0" class="el-mail-number-decrees">({{viewpersondecrees.length}})</div>
                     </div>
@@ -80,7 +80,7 @@
                     <div style="display: inline-flex; ">
                         <div style="text-align-last: center;">
                             Архив
-                            <el-badge :value="0" :max="10" class="item" />
+                            <el-badge :value="count_of_unopened(6)" :max="10" class="item" />
                         </div>
                         <div v-if="menuid == 6 & viewpersondecrees.length > 0" class="el-mail-number-decrees">({{viewpersondecrees.length}})</div>
                     </div>
@@ -139,16 +139,16 @@
                             <el-button class="eld-eld-main-head-partbutton" size="mini" @click="unit" :disabled="menuid == 9 || menuid == 8 || menuid == 8 || multipleSelection.length < 1">Объединить</el-button>
                             <el-button class="eld-eld-main-head-partbutton" size="mini" @click="sbdWorker">test</el-button>
                         </div>
-                        <div style="text-align-last: right; margin-right: 11px;">
+                        <!--<div style="text-align-last: right; margin-right: 11px;">-->
                             <!--<el-button style="background: #f0f9eb" size="mini">Подписан</el-button>-->
-                            <el-badge :value="decreeunopen.length" :max="10" class="item">
+                            <!--<el-badge :value="decreeunopen.length" :max="10" class="item">
                                 <el-button style="background: #4251ff4d" size="mini" @click="viewUnopeneddecree">Не просмотрен</el-button>
                             </el-badge>
-                        </div>
+                        </div>-->
                     </div>
                     <div visible="update"></div>
                     <!--property="marked"  @selection-change="handleSelectionChange"   :filters="datefiltervariants" -->
-                    <template>
+                    <div>
                         <div v-if="viewpersondecrees.length">
                             <el-table ref="multipleTable" :data="viewpersondecrees" style="width: 99%; height: 700px" height="100%" border :row-class-name="tableRowClassName" @cell-click="qwerty" @selection-change="handleSelectionChange" @row-dblclick="rowClicked" @row-contextmenu="rowContextmenu">
                                 <el-table-column type="selection" style="max-width: 55">
@@ -178,9 +178,9 @@
                                 </el-table-column>
                                 <el-table-column property="getFIO" label="ФИО работника" width="200">
                                 </el-table-column>
-                                <el-table-column width="50">
+                                <el-table-column width="50" v-if="menuid < 7">
                                     <template scope="item">
-                                        <div style="text-align-last: center; font-size: x-large;">
+                                        <div v-if="!isopeneddecree(item)" style="text-align-last: center; font-size: x-large;">
                                             <i class="el-icon-view" size="mini"></i>
                                         </div>
                                     </template>
@@ -190,7 +190,7 @@
                         <div v-else class="eld-title">
                             Папка пуста.
                         </div>
-                    </template>
+                    </div>
                 </div>
                 <div v-else>
                     <div class="eld-eld-main-head" style="display: inline-block;">
@@ -206,7 +206,7 @@
                         </div>
                     </div>
                     <div visible="update"></div>
-                    <template>
+                    <div>
                         <div v-if="excertsdecreestructureT.length && menuid > 50">
                             <el-table :data="excertsdecreestructureT" style="width: 99%; height: 700px" border :row-class-name="tableRowClassName" @row-dblclick="openexcert">
                                 <el-table-column type="selection" style="max-width: 55">
@@ -259,7 +259,7 @@
                         <div v-else class="eld-title">
                             Папка пуста.
                         </div>
-                    </template>
+                    </div>
                         <!--<div v-for="struct in excertsdecreestructureT">
             <div style="margin-bottom: 4px; box-shadow: 5px 5px 3px rgba(0,0,0,0.6); padding: 10px; border-radius: 10px; background: #eeece0;" @click="openexcert(struct)">
                 <small>

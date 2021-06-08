@@ -15,6 +15,7 @@ import Persondecree from '../../classes/persondecree';
 import Mailexplorer from '../../classes/Mail/mailexplorer';
 import Structure from '../../classes/Structure';
 import ExcertStructures from '../../classes/Excerts/excertStructures';
+import { ElTable } from 'element-ui/types/table';
 
 Vue.component(Button.name, Button);
 Vue.component(Input.name, Input);
@@ -516,82 +517,36 @@ export default class derceeoperationelement extends Vue {
             this.multipleSelection.push(decree);
     }
 
+    filter_my_documents(folder: number = 2) {
+        var time = [];
+        this.fullpersondecrees.forEach(r => {
+            if (r.creator == this.$store.state.user.id && folder - 1 == r.creatorfolder) {
+                time.push(r);
+            } else if (r.owner == this.$store.state.user.id && folder - 1 == r.ownerfolder) {
+                time.push(r);
+            }
+        })
+        return time;
+    }
+
+    count_of_unopened(folder: number = 2) {
+        var time = this.filter_my_documents(folder);
+        var output = [];
+        time.forEach(r => {
+            this.decreeunopen.forEach(t => {
+                if (r.id == t.id)
+                    output.push(r);
+            });
+        })
+        return output.length;
+    }
+
     filterbyfolders(folder: number) {
         var time = [];
         var excert = false;
         var new_excert_list = false;
-        //this.viewpersondecrees = time;
-        if (folder == 2) {
-            this.fullpersondecrees.forEach(r => {
-                if (r.creator == this.$store.state.user.id && folder - 1 == r.creatorfolder) {
-                    time.push(r);
-                } else if (r.owner == this.$store.state.user.id && folder - 1 == r.ownerfolder) {
-                    time.push(r);
-                }
-                /*if (r.creatorfolder == folder - 1 && r.creator == r.owner && r.creator == this.$store.state.user.id)
-                    this.viewpersondecrees.push(r)*/
-            })
-        } else if (folder == 3) {
-            this.fullpersondecrees.forEach(r => {
-                if (r.creator == this.$store.state.user.id && folder - 1 == r.creatorfolder) {
-                    time.push(r);
-                } else if (r.owner == this.$store.state.user.id && folder - 1 == r.ownerfolder) {
-                    time.push(r);
-                }
-            })
-            /*this.fullpersondecrees.forEach(r => {
-                if (r.signed == 0 && r.creator != r.owner && r.owner == this.$store.state.user.id)
-                    this.viewpersondecrees.push(r)
-            })*/
-        } else if (folder == 4) {
-            this.fullpersondecrees.forEach(r => {
-                if (r.creator == this.$store.state.user.id && folder - 1 == r.creatorfolder) {
-                    time.push(r);
-                } else if (r.owner == this.$store.state.user.id && folder - 1 == r.ownerfolder) {
-                    time.push(r);
-                }
-            })
-            /*this.fullpersondecrees.forEach(r => {
-                if (r.signed == 0 && r.creator != r.owner && r.creator == this.$store.state.user.id)
-                    this.viewpersondecrees.push(r)
-            })*/
-        } else if (folder == 5) {
-            this.fullpersondecrees.forEach(r => {
-                if (r.creator == this.$store.state.user.id && folder - 1 == r.creatorfolder) {
-                    time.push(r);
-                } else if (r.owner == this.$store.state.user.id && folder - 1 == r.ownerfolder) {
-                    time.push(r);
-                }
-            })
-        } else if (folder == 6) {
-            this.fullpersondecrees.forEach(r => {
-                if (r.creator == this.$store.state.user.id && folder - 1 == r.creatorfolder) {
-                    time.push(r);
-                } else if (r.owner == this.$store.state.user.id && folder - 1 == r.ownerfolder) {
-                    time.push(r);
-                }
-            })
-        } else if (folder == 7) {
-            this.fullpersondecrees.forEach(r => {
-                if (r.creator == this.$store.state.user.id && folder - 1 == r.creatorfolder) {
-                    time.push(r);
-                } else if (r.owner == this.$store.state.user.id && folder - 1 == r.ownerfolder) {
-                    time.push(r);
-                }
-            })
-        } else if (folder == 8) {
-            // new_excert_list = this.new_excert_list ? true : false;
-            this.fullpersondecrees.forEach(r => {
-                if (r.creator == this.$store.state.user.id && folder - 1 == r.creatorfolder) {
-                    time.push(r);
-                } else if (r.owner == this.$store.state.user.id && folder - 1 == r.ownerfolder) {
-                    time.push(r);
-                }
-            })
-            /*this.fullpersondecrees.forEach(r => {
-                if (r.signed == 1 && r.creator == this.$store.state.user.id)
-                    this.viewpersondecrees.push(r)
-            })*/
+        if (folder >= 2 && folder < 9) {
+            time = this.filter_my_documents(folder);
         } else if (folder == 9) {
             // new_excert_list = this.new_excert_list ? true : false;
             this.fullpersondecrees.forEach(r => {
@@ -617,6 +572,12 @@ export default class derceeoperationelement extends Vue {
                 })
             })
         }
+        //(this.$refs.multipleTable as ElTable).$el).onresize();
+        /*if (this.$refs) {
+            this.$refs.multipleTable.doLayout();
+        }*/
+        //this.reload();
+        //this.$emit('input', { plate: plateElement.value });
         this.viewpersondecrees = time;
         this.$store.commit("setExcertMenu", excert);
         this.$store.commit("setExcertDecreeId", null);
@@ -980,10 +941,14 @@ export default class derceeoperationelement extends Vue {
             this.set_menu_id(98);
     }
 
-    /*isopeneddecree(row: Persondecree) {
-        var flag = this.decreeunopen.findIndex(r => { r.id == row.id });
-        if (flag == undefined || flag == -1)
-            return false;
-        return true;
-    }*/
+    isopeneddecree(row) {
+        var flag = false
+        this.decreeunopen.forEach(r => {
+            if (r.id == row.row.id) {
+                flag = true;
+                return;
+            }
+        });
+        return flag;
+    }
 }

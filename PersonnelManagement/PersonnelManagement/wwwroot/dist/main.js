@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "097c239b24a1891a96b8"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "c0fd18056f959168484e"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -8005,6 +8005,7 @@ let derceeoperationelement = class derceeoperationelement extends __WEBPACK_IMPO
             full_explorers: [],
             fullpersondecrees: [],
             viewpersondecrees: [],
+            persondecreearchive: [],
             multipleSelection: [],
             decreeunopen: [],
             decreecreator: false,
@@ -8036,6 +8037,9 @@ let derceeoperationelement = class derceeoperationelement extends __WEBPACK_IMPO
             upload: 0,
         };
     }
+    /*tables_reload() {
+        this.$refs.alltables.refresh();
+    }*/
     tableRowClassName({ row, rowIndex }) {
         if (row.signed == 1) {
             return 'success-row';
@@ -8338,10 +8342,9 @@ fetch('api/MailController/rand', { credentials: 'include' })
         /*this.getDateList();*/
     }
     set_menu_id(id) {
-        if (this.menuid >= 98 && id < 50) {
-            this.new_excert_list = false;
-            this.update = false;
-            this.excertsdecreestructureT = [];
+        var flag = false;
+        if (this.menuid != id) {
+            flag = true;
         }
         this.setMenuid(id);
         /*setTimeout(() => {
@@ -8426,9 +8429,12 @@ fetch('api/MailController/rand', { credentials: 'include' })
                 });
             });
         }
+        else if (folder == 97) {
+            time = this.persondecreearchive;
+        }
         //(this.$refs.multipleTable as ElTable).$el).onresize();
         /*if (this.$refs) {
-            this.$refs.multipleTable.doLayout();
+            
         }*/
         //this.reload();
         //this.$emit('input', { plate: plateElement.value });
@@ -8439,6 +8445,9 @@ fetch('api/MailController/rand', { credentials: 'include' })
         this.new_excert_list = new_excert_list;
         this.update = true;
         return time;
+    }
+    getarchive(decree) {
+        return [];
     }
     canSelectRow(row) {
         this.viewpersondecrees.forEach(r => {
@@ -8713,7 +8722,8 @@ fetch('api/MailController/rand', { credentials: 'include' })
         })
             .then(resualt => {
             if (resualt.length == 0) {
-                this.title_text_excert += " отсутствуют";
+                this.title_text_excert = this.title_text_excert.indexOf("отсутствуют") == -1 ? this.title_text_excert + " отсутствуют" : this.title_text_excert;
+                //this.title_text_excert += " отсутствуют";
             }
             resualt.forEach(r => {
                 this.excertsdecreestructureT.push(r);
@@ -55631,7 +55641,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "visible": "update"
     }
-  }), _vm._v(" "), _c('div', [(_vm.viewpersondecrees.length) ? _c('div', [_c('el-table', {
+  }), _vm._v(" "), (_vm.menuid < 7) ? _c('div', [_c('div', [_c('el-table', {
     ref: "multipleTable",
     staticStyle: {
       "width": "99%",
@@ -55641,7 +55651,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "data": _vm.viewpersondecrees,
       "height": "100%",
       "border": "",
-      "row-class-name": _vm.tableRowClassName
+      "row-class-name": _vm.tableRowClassName,
+      "empty-text": "Папка пуста",
+      "tooltip-effect": "dark"
     },
     on: {
       "cell-click": _vm.qwerty,
@@ -55651,7 +55663,88 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_c('el-table-column', {
     staticStyle: {
-      "max-width": "55"
+      "max-width": "55px"
+    },
+    attrs: {
+      "type": "selection"
+    }
+  }), _vm._v(" "), _c('el-table-column', {
+    attrs: {
+      "property": "getDate",
+      "label": "ДАТА",
+      "sortable": "",
+      "width": "110"
+    }
+  }), _vm._v(" "), _c('el-table-column', {
+    attrs: {
+      "property": "getNumber",
+      "label": "№",
+      "sortable": "",
+      "width": "80"
+    }
+  }), _vm._v(" "), _c('el-table-column', {
+    attrs: {
+      "property": "getName",
+      "label": "Название",
+      "width": "450"
+    }
+  }), _vm._v(" "), _c('el-table-column', {
+    attrs: {
+      "property": "getPlace",
+      "label": "Подразделение",
+      "width": "550"
+    }
+  }), _vm._v(" "), _c('el-table-column', {
+    attrs: {
+      "property": "getFIO",
+      "label": "ФИО работника",
+      "width": "200"
+    }
+  }), _vm._v(" "), (_vm.menuid < 7) ? _c('el-table-column', {
+    attrs: {
+      "width": "50"
+    },
+    scopedSlots: _vm._u([{
+      key: "default",
+      fn: function(item) {
+        return [(!_vm.isopeneddecree(item)) ? _c('div', {
+          staticStyle: {
+            "text-align-last": "center",
+            "font-size": "x-large"
+          }
+        }, [_c('i', {
+          staticClass: "el-icon-view",
+          attrs: {
+            "size": "mini"
+          }
+        })]) : _vm._e()]
+      }
+    }])
+  }) : _vm._e()], 1)], 1)]) : _c('div', [_c('div', {
+    attrs: {
+      "visible": "menuid >= 7"
+    }
+  }, [_c('el-table', {
+    staticStyle: {
+      "width": "99%",
+      "height": "700px"
+    },
+    attrs: {
+      "data": _vm.viewpersondecrees,
+      "height": "100%",
+      "border": "",
+      "row-class-name": _vm.tableRowClassName,
+      "empty-text": "Папка пуста"
+    },
+    on: {
+      "cell-click": _vm.qwerty,
+      "selection-change": _vm.handleSelectionChange,
+      "row-dblclick": _vm.rowClicked,
+      "row-contextmenu": _vm.rowContextmenu
+    }
+  }, [_c('el-table-column', {
+    staticStyle: {
+      "max-width": "55px"
     },
     attrs: {
       "type": "selection"
@@ -55730,29 +55823,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "label": "ФИО работника",
       "width": "200"
     }
-  }), _vm._v(" "), (_vm.menuid < 7) ? _c('el-table-column', {
-    attrs: {
-      "width": "50"
-    },
-    scopedSlots: _vm._u([{
-      key: "default",
-      fn: function(item) {
-        return [(!_vm.isopeneddecree(item)) ? _c('div', {
-          staticStyle: {
-            "text-align-last": "center",
-            "font-size": "x-large"
-          }
-        }, [_c('i', {
-          staticClass: "el-icon-view",
-          attrs: {
-            "size": "mini"
-          }
-        })]) : _vm._e()]
-      }
-    }])
-  }) : _vm._e()], 1)], 1) : _c('div', {
-    staticClass: "eld-title"
-  }, [_vm._v("\n                        Папка пуста.\n                    ")])])]) : _c('div', [_c('div', {
+  })], 1)], 1)])]) : _c('div', [_c('div', {
     staticClass: "eld-eld-main-head",
     staticStyle: {
       "display": "inline-block"
@@ -55796,7 +55867,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "visible": "update"
     }
-  }), _vm._v(" "), _c('div', [(_vm.excertsdecreestructureT.length && _vm.menuid > 50) ? _c('div', [_c('el-table', {
+  }), _vm._v(" "), [(_vm.menuid > 50) ? _c('div', [_c('el-table', {
     staticStyle: {
       "width": "99%",
       "height": "700px"
@@ -55804,14 +55875,15 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "data": _vm.excertsdecreestructureT,
       "border": "",
-      "row-class-name": _vm.tableRowClassName
+      "row-class-name": _vm.tableRowClassName,
+      "empty-text": "Папка пуста"
     },
     on: {
       "row-dblclick": _vm.openexcert
     }
   }, [_c('el-table-column', {
     staticStyle: {
-      "max-width": "55"
+      "max-width": "55px"
     },
     attrs: {
       "type": "selection"
@@ -55834,9 +55906,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "label": "Дата первого просмотра",
       "width": "130"
     }
-  })], 1)], 1) : _c('div', {
-    staticClass: "eld-title"
-  }, [_vm._v("\n                        Папка пуста.\n                    ")])])])])]), _vm._v(" "), _c('el-dialog', {
+  })], 1)], 1) : _vm._e()]], 2)])]), _vm._v(" "), _c('el-dialog', {
     attrs: {
       "width": "900px",
       "visible": _vm.dialogVisibleSend,

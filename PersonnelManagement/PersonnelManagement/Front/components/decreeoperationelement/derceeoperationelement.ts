@@ -65,6 +65,7 @@ export default class derceeoperationelement extends Vue {
     full_explorers: Mailexplorer[];
     fullpersondecrees: Persondecree[];
     viewpersondecrees: Persondecree[];
+    persondecreearchive: Persondecree[];
 
     multipleSelection: Persondecree[];
     decreeunopen: Persondecree[];
@@ -125,6 +126,7 @@ export default class derceeoperationelement extends Vue {
             full_explorers: [],
             fullpersondecrees: [],
             viewpersondecrees: [],
+            persondecreearchive: [],
 
             multipleSelection: [],
             decreeunopen: [],
@@ -166,6 +168,10 @@ export default class derceeoperationelement extends Vue {
             upload: 0,
         }
     }
+
+    /*tables_reload() {
+        this.$refs.alltables.refresh();
+    }*/
 
     tableRowClassName({ row, rowIndex }) {
         if (row.signed == 1) {
@@ -481,10 +487,9 @@ export default class derceeoperationelement extends Vue {
     }
 
     set_menu_id(id: number) {
-        if (this.menuid >= 98 && id < 50) {
-            this.new_excert_list = false;
-            this.update = false;
-            this.excertsdecreestructureT = [];
+        var flag = false;
+        if (this.menuid != id) {
+            flag = true;
         }
         this.setMenuid(id);
         /*setTimeout(() => {
@@ -571,10 +576,12 @@ export default class derceeoperationelement extends Vue {
                         time.push(d);
                 })
             })
+        } else if (folder == 97) {
+            time = this.persondecreearchive;
         }
         //(this.$refs.multipleTable as ElTable).$el).onresize();
         /*if (this.$refs) {
-            this.$refs.multipleTable.doLayout();
+            
         }*/
         //this.reload();
         //this.$emit('input', { plate: plateElement.value });
@@ -585,6 +592,11 @@ export default class derceeoperationelement extends Vue {
         this.new_excert_list = new_excert_list;
         this.update = true;
         return time;
+    }
+
+    getarchive(decree) {
+
+        return [];
     }
 
     canSelectRow(row) {
@@ -875,7 +887,8 @@ export default class derceeoperationelement extends Vue {
         })
             .then(resualt => {
                 if (resualt.length == 0) {
-                    this.title_text_excert += " отсутствуют";
+                    this.title_text_excert = this.title_text_excert.indexOf("отсутствуют") == -1 ? this.title_text_excert + " отсутствуют" : this.title_text_excert;
+                    //this.title_text_excert += " отсутствуют";
                 }
                 resualt.forEach(r => {
                     this.excertsdecreestructureT.push(r);

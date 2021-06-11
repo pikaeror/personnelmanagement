@@ -238,5 +238,20 @@ namespace PersonnelManagement.Controllers
                 worker.open_unreed_decree(id);
             }
         }
+
+        [HttpGet("archive/{id}")]
+        public IEnumerable<PersondecreeManagement> get_archive_by_decree([FromRoute] int id)
+        {
+            string sessionid = Request.Cookies[Keys.COOKIES_SESSION];
+            List<PersondecreeManagement> output = new List<PersondecreeManagement>();
+            User user = null;
+            if (IdentityService.IsLogined(sessionid, repository))
+            {
+                user = IdentityService.GetUserBySessionID(sessionid, repository);
+                MailWorker worker = new MailWorker(user, repository);
+                return worker.get_archive_by_decree(id);
+            }
+            return output;
+        }
     }
 }

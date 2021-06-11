@@ -76,5 +76,26 @@ namespace PersonnelManagement.Models
                 return false;
             return true;
         }
+
+        public List<PersondecreeManagement> get_archive_by_decree(int id)
+        {
+            Persondecree actualdecree = this.decrees.GetValue(id);
+            List<Persondecreeunit> persondecreeunits = m_context.Persondecreeunit.Where(r => r.Unitdecree == actualdecree.Id).ToList();
+            List<PersondecreeManagement> output = new List<PersondecreeManagement>();
+            // parse
+            foreach(Persondecreeunit persondecreeunit in persondecreeunits)
+            {
+                if (persondecreeunit.Decrees == "")
+                    continue;
+                List<string> decrees = persondecreeunit.Decrees.Split('|').ToList();
+                foreach(string value in decrees)
+                {
+                    if (value == "")
+                        continue;
+                    output.Add(m_repository.GetPersondecreeManagement(this.decrees.GetValue(Int32.Parse(value)), m_user));
+                }
+            }
+            return output;
+        }
     }
 }

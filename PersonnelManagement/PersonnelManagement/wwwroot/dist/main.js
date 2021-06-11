@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "c0fd18056f959168484e"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "87c37154ae1e59d3e647"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -8034,6 +8034,7 @@ let derceeoperationelement = class derceeoperationelement extends __WEBPACK_IMPO
             excertsdecreestructure: [],
             excertsdecreestructureT: [],
             new_excert_list: false,
+            arvhive: false,
             upload: 0,
         };
     }
@@ -8399,6 +8400,7 @@ fetch('api/MailController/rand', { credentials: 'include' })
         var time = [];
         var excert = false;
         var new_excert_list = false;
+        var archive = false;
         if (folder >= 2 && folder < 9) {
             time = this.filter_my_documents(folder);
         }
@@ -8431,6 +8433,7 @@ fetch('api/MailController/rand', { credentials: 'include' })
         }
         else if (folder == 97) {
             time = this.persondecreearchive;
+            archive = true;
         }
         //(this.$refs.multipleTable as ElTable).$el).onresize();
         /*if (this.$refs) {
@@ -8438,6 +8441,7 @@ fetch('api/MailController/rand', { credentials: 'include' })
         }*/
         //this.reload();
         //this.$emit('input', { plate: plateElement.value });
+        this.arvhive = archive;
         this.viewpersondecrees = time;
         this.$store.commit("setExcertMenu", excert);
         this.$store.commit("setExcertDecreeId", null);
@@ -8447,7 +8451,44 @@ fetch('api/MailController/rand', { credentials: 'include' })
         return time;
     }
     getarchive(decree) {
-        return [];
+        this.persondecreearchive = [];
+        fetch('api/MailController/archive/' + decree, { credentials: 'include' })
+            .then(response => {
+            return response.json();
+        })
+            .then(result => {
+            //alert('mark');
+            result.forEach(r => {
+                if (this.fullpersondecrees != null) {
+                    let preloadedPersondecree = this.fullpersondecrees.find(p => p.id == r.id);
+                    if (preloadedPersondecree != null) {
+                        r.marked = preloadedPersondecree.marked;
+                    }
+                    else {
+                        r.marked = false;
+                    }
+                    //r.marked = p
+                }
+                else {
+                    r.marked = false;
+                }
+                if (r.creatorObject != null) {
+                    r.getFIO = ((r.creatorObject.surname == "" || r.creatorObject.surname == null) ? '' : (r.creatorObject.surname + ' ')) +
+                        ((r.creatorObject.name == "" || r.creatorObject.name == null) ? '' : (r.creatorObject.name[0].toUpperCase() + '.')) +
+                        ((r.creatorObject.firstname == "" || r.creatorObject.firstname == null) ? '' : (r.creatorObject.firstname[0].toUpperCase() + '.'));
+                    r.getPlace = r.creatorObject.structureString;
+                }
+                r.getDate = (r.datesigned == null ? (r.datecreated == null ? '' : r.datecreated.toString().split('T')[0].split('-').reverse().join('-')) :
+                    r.datesigned.toString().split('T')[0].split('-').reverse().join('-'));
+                r.getName = r.name +
+                    (((r.name == null || r.name == "") || (r.nickname == null || r.nickname == "")) ? '' : ' / ') +
+                    r.nickname;
+                r.getNumber = r.number.toString() + (r.numbertype == "" ? '' : (' ' + r.numbertype.toUpperCase()));
+            });
+            this.persondecreearchive = result;
+            this.reload();
+        });
+        return this.persondecreearchive;
     }
     canSelectRow(row) {
         this.viewpersondecrees.forEach(r => {
@@ -8759,8 +8800,8 @@ fetch('api/MailController/rand', { credentials: 'include' })
                 /*this.menuid = 99;*/
             }
             else if (cell.cellIndex == 5) {
-                /*this.arvhive = true;
-                this.getarchivedecree(row, false);*/
+                this.arvhive = true;
+                this.getarchive(row.id);
                 this.set_menu_id(97);
             }
         }
@@ -55867,7 +55908,85 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "visible": "update"
     }
-  }), _vm._v(" "), [(_vm.menuid > 50) ? _c('div', [_c('el-table', {
+  }), _vm._v(" "), _c('div', [(_vm.arvhive) ? _c('div', [(_vm.menuid == 97) ? _c('div', [_c('el-table', {
+    staticStyle: {
+      "width": "99%",
+      "height": "700px"
+    },
+    attrs: {
+      "data": _vm.persondecreearchive,
+      "height": "100%",
+      "border": "",
+      "row-class-name": _vm.tableRowClassName,
+      "empty-text": "Папка пуста"
+    },
+    on: {
+      "cell-click": _vm.qwerty,
+      "selection-change": _vm.handleSelectionChange,
+      "row-dblclick": _vm.rowClicked,
+      "row-contextmenu": _vm.rowContextmenu
+    }
+  }, [_c('el-table-column', {
+    staticStyle: {
+      "max-width": "55px"
+    },
+    attrs: {
+      "type": "selection"
+    }
+  }), _vm._v(" "), _c('el-table-column', {
+    attrs: {
+      "property": "getDate",
+      "label": "ДАТА",
+      "sortable": "",
+      "width": "110"
+    }
+  }), _vm._v(" "), _c('el-table-column', {
+    attrs: {
+      "property": "getNumber",
+      "label": "№",
+      "sortable": "",
+      "width": "80"
+    }
+  }), _vm._v(" "), _c('el-table-column', {
+    attrs: {
+      "property": "getName",
+      "label": "Название",
+      "width": "450"
+    }
+  }), _vm._v(" "), _c('el-table-column', {
+    attrs: {
+      "label": "Архив",
+      "width": "70"
+    },
+    scopedSlots: _vm._u([{
+      key: "default",
+      fn: function(item) {
+        return [_c('div', {
+          staticStyle: {
+            "text-align-last": "center",
+            "font-size": "x-large"
+          }
+        }, [_c('i', {
+          staticClass: "el-icon-info",
+          attrs: {
+            "size": "mini"
+          }
+        })])]
+      }
+    }])
+  }), _vm._v(" "), _c('el-table-column', {
+    attrs: {
+      "property": "getPlace",
+      "label": "Подразделение",
+      "width": "550"
+    }
+  }), _vm._v(" "), _c('el-table-column', {
+    attrs: {
+      "property": "getFIO",
+      "label": "ФИО работника",
+      "width": "200"
+    }
+  })], 1)], 1) : _vm._e()]) : _vm._e(), _vm._v(" "), (_vm.menuid > 50) ? _c('div', [(_vm.menuid == 99) ? _c('div', [_c('el-table', {
     staticStyle: {
       "width": "99%",
       "height": "700px"
@@ -55906,7 +56025,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "label": "Дата первого просмотра",
       "width": "130"
     }
-  })], 1)], 1) : _vm._e()]], 2)])]), _vm._v(" "), _c('el-dialog', {
+  })], 1)], 1) : _vm._e()]) : _vm._e()])])])]), _vm._v(" "), _c('el-dialog', {
     attrs: {
       "width": "900px",
       "visible": _vm.dialogVisibleSend,

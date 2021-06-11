@@ -220,56 +220,83 @@
                         </div>
                     </div>
                     <div visible="update"></div>
-                    <template>
-                        <div v-if="menuid > 50">
-                            <el-table :data="excertsdecreestructureT" style="width: 99%; height: 700px" border :row-class-name="tableRowClassName" @row-dblclick="openexcert" empty-text="Папка пуста">
-                                <el-table-column type="selection" style="max-width: 55px">
-                                </el-table-column>
-                                <el-table-column property="structure.nameshortened" label="Получатель" width="250">
-                                </el-table-column>
-                                <el-table-column property="data_create" label="Дата создания" width="130">
-                                </el-table-column>
-                                <el-table-column property="data_opened" label="Дата первого просмотра" width="130">
-                                </el-table-column>
-                                <!--<el-table-column label="Выписки" width="90">
-                                    <template scope="item">
-                                        <div>
-                                            <div style="text-align-last: center; font-size: x-large;">-->
-                                                <!--<i class="el-icon-view" size="mini" v-popover:popover4></i>-->
-                                                <!--<el-popover ref="popover4"
-                                                            placement="right"
-                                                            width="400"
-                                                            trigger="click">
-                                                    <el-button-group>
-                                                        <el-button type="success">направить выписку</el-button>
-                                                        <el-button type="warning">открыть доступ</el-button>
-                                                    </el-button-group>
-
-                                                    <div style="text-align-last: center;">
-                                                        <el-select v-model="getusers"
-                                                                   multiple
-                                                                   filterable
-                                                                   remote
-                                                                   reserve-keyword
-                                                                   placeholder="Please enter a keyword"
-                                                                   :remote-method="remoteMethod"
-                                                                   :loading="loading">
-                                                            <el-option v-for="item in usersSearch"
-                                                                       :key="item.surname"
-                                                                       :label="item.surname"
-                                                                       :value="item.surname">
-                                                            </el-option>
-                                                        </el-select>
-                                                    </div>
-                                                </el-popover>
-                                                <el-button class="el-icon-message" size="mini" v-popover:popover4></el-button>
+                    <div>
+                        <div v-if="arvhive">
+                            <div v-if="menuid == 97">
+                                <el-table :data="persondecreearchive" style="width: 99%; height: 700px" height="100%" border :row-class-name="tableRowClassName" @cell-click="qwerty" @selection-change="handleSelectionChange" @row-dblclick="rowClicked" @row-contextmenu="rowContextmenu" empty-text="Папка пуста">
+                                    <el-table-column type="selection" style="max-width: 55px">
+                                    </el-table-column>
+                                    <el-table-column property="getDate" label="ДАТА" sortable width="110">
+                                    </el-table-column>
+                                    <el-table-column property="getNumber" label="№" sortable width="80">
+                                    </el-table-column>
+                                    <el-table-column property="getName" label="Название" width="450">
+                                    </el-table-column>
+                                    <el-table-column label="Архив" width="70">
+                                        <template scope="item">
+                                            <div style="text-align-last: center; font-size: x-large;">
+                                                <i class="el-icon-info" size="mini"></i>
                                             </div>
-                                        </div>
-                                    </template>
-                                </el-table-column>-->
-                            </el-table>
+                                        </template>
+                                    </el-table-column>
+                                    <el-table-column property="getPlace" label="Подразделение" width="550">
+                                    </el-table-column>
+                                    <el-table-column property="getFIO" label="ФИО работника" width="200">
+                                    </el-table-column>
+                                </el-table>
+                            </div>
                         </div>
-                    </template>
+                        <div v-if="menuid > 50">
+                            <div v-if="menuid == 99">
+                                <el-table :data="excertsdecreestructureT" style="width: 99%; height: 700px" border :row-class-name="tableRowClassName" @row-dblclick="openexcert" empty-text="Папка пуста">
+                                    <el-table-column type="selection" style="max-width: 55px">
+                                    </el-table-column>
+                                    <el-table-column property="structure.nameshortened" label="Получатель" width="250">
+                                    </el-table-column>
+                                    <el-table-column property="data_create" label="Дата создания" width="130">
+                                    </el-table-column>
+                                    <el-table-column property="data_opened" label="Дата первого просмотра" width="130">
+                                    </el-table-column>
+                                    <!--<el-table-column label="Выписки" width="90">
+            <template scope="item">
+                <div>
+                    <div style="text-align-last: center; font-size: x-large;">-->
+                                    <!--<i class="el-icon-view" size="mini" v-popover:popover4></i>-->
+                                    <!--<el-popover ref="popover4"
+                                    placement="right"
+                                    width="400"
+                                    trigger="click">
+                            <el-button-group>
+                                <el-button type="success">направить выписку</el-button>
+                                <el-button type="warning">открыть доступ</el-button>
+                            </el-button-group>
+
+                            <div style="text-align-last: center;">
+                                <el-select v-model="getusers"
+                                           multiple
+                                           filterable
+                                           remote
+                                           reserve-keyword
+                                           placeholder="Please enter a keyword"
+                                           :remote-method="remoteMethod"
+                                           :loading="loading">
+                                    <el-option v-for="item in usersSearch"
+                                               :key="item.surname"
+                                               :label="item.surname"
+                                               :value="item.surname">
+                                    </el-option>
+                                </el-select>
+                            </div>
+                        </el-popover>
+                        <el-button class="el-icon-message" size="mini" v-popover:popover4></el-button>
+                    </div>
+                </div>
+            </template>
+        </el-table-column>-->
+                                </el-table>
+                            </div>
+                        </div>
+                    </div>
                         <!--<div v-for="struct in excertsdecreestructureT">
             <div style="margin-bottom: 4px; box-shadow: 5px 5px 3px rgba(0,0,0,0.6); padding: 10px; border-radius: 10px; background: #eeece0;" @click="openexcert(struct)">
                 <small>

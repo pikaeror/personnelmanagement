@@ -98,6 +98,7 @@ export default class derceeoperationelement extends Vue {
     title_text_excert_template: string;
 
     new_excert_list: boolean;
+    arvhive: boolean;
 
     upload: number;
 
@@ -164,6 +165,7 @@ export default class derceeoperationelement extends Vue {
             excertsdecreestructureT: [],
 
             new_excert_list: false,
+            arvhive: false,
 
             upload: 0,
         }
@@ -550,6 +552,7 @@ export default class derceeoperationelement extends Vue {
         var time = [];
         var excert = false;
         var new_excert_list = false;
+        var archive = false;
         if (folder >= 2 && folder < 9) {
             time = this.filter_my_documents(folder);
         } else if (folder == 9) {
@@ -578,6 +581,7 @@ export default class derceeoperationelement extends Vue {
             })
         } else if (folder == 97) {
             time = this.persondecreearchive;
+            archive = true;
         }
         //(this.$refs.multipleTable as ElTable).$el).onresize();
         /*if (this.$refs) {
@@ -585,6 +589,7 @@ export default class derceeoperationelement extends Vue {
         }*/
         //this.reload();
         //this.$emit('input', { plate: plateElement.value });
+        this.arvhive = archive;
         this.viewpersondecrees = time;
         this.$store.commit("setExcertMenu", excert);
         this.$store.commit("setExcertDecreeId", null);
@@ -595,8 +600,43 @@ export default class derceeoperationelement extends Vue {
     }
 
     getarchive(decree) {
+        this.persondecreearchive = [];
+        fetch('api/MailController/archive/' + decree, { credentials: 'include' })
+            .then(response => {
+                return response.json() as Promise<Persondecree[]>;
+            })
+            .then(result => {
+                //alert('mark');
+                result.forEach(r => {
+                    if (this.fullpersondecrees != null) {
+                        let preloadedPersondecree: Persondecree = this.fullpersondecrees.find(p => p.id == r.id);
+                        if (preloadedPersondecree != null) {
+                            r.marked = preloadedPersondecree.marked;
+                        } else {
+                            r.marked = false;
+                        }
+                        //r.marked = p
+                    } else {
+                        r.marked = false;
+                    }
+                    if (r.creatorObject != null) {
+                        r.getFIO = ((r.creatorObject.surname == "" || r.creatorObject.surname == null) ? '' : (r.creatorObject.surname + ' ')) +
+                            ((r.creatorObject.name == "" || r.creatorObject.name == null) ? '' : (r.creatorObject.name[0].toUpperCase() + '.')) +
+                            ((r.creatorObject.firstname == "" || r.creatorObject.firstname == null) ? '' : (r.creatorObject.firstname[0].toUpperCase() + '.'));
+                        r.getPlace = r.creatorObject.structureString;
+                    }
+                    r.getDate = (r.datesigned == null ? (r.datecreated == null ? '' : r.datecreated.toString().split('T')[0].split('-').reverse().join('-')) :
+                        r.datesigned.toString().split('T')[0].split('-').reverse().join('-'))
+                    r.getName = r.name +
+                        (((r.name == null || r.name == "") || (r.nickname == null || r.nickname == "")) ? '' : ' / ') +
+                        r.nickname;
+                    r.getNumber = r.number.toString() + (r.numbertype == "" ? '' : (' ' + r.numbertype.toUpperCase()));
 
-        return [];
+                });
+                this.persondecreearchive = result;
+                this.reload();
+            });
+        return this.persondecreearchive;
     }
 
     canSelectRow(row) {
@@ -926,8 +966,8 @@ export default class derceeoperationelement extends Vue {
                 this.set_menu_id(99);
                 /*this.menuid = 99;*/
             } else if (cell.cellIndex == 5) {
-                /*this.arvhive = true;
-                this.getarchivedecree(row, false);*/
+                this.arvhive = true;
+                this.getarchive(row.id);
                 this.set_menu_id(97);
             }
         }

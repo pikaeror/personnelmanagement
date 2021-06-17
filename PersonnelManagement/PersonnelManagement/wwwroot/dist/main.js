@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "87c37154ae1e59d3e647"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "39824f93d258e3abdf87"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -7964,6 +7964,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
+/*import { registerLocale } from "../../../../node_modules/react-datepicker";
+import ru from "../../../../node_modules/date-fns/locale/ru";
+registerLocale("ru", ru);*/
 __WEBPACK_IMPORTED_MODULE_0_vue__["default"].component(__WEBPACK_IMPORTED_MODULE_2_element_ui__["Button"].name, __WEBPACK_IMPORTED_MODULE_2_element_ui__["Button"]);
 __WEBPACK_IMPORTED_MODULE_0_vue__["default"].component(__WEBPACK_IMPORTED_MODULE_2_element_ui__["Input"].name, __WEBPACK_IMPORTED_MODULE_2_element_ui__["Input"]);
 __WEBPACK_IMPORTED_MODULE_0_vue__["default"].component(__WEBPACK_IMPORTED_MODULE_2_element_ui__["Dropdown"].name, __WEBPACK_IMPORTED_MODULE_2_element_ui__["Dropdown"]);
@@ -7978,6 +7981,7 @@ __WEBPACK_IMPORTED_MODULE_0_vue__["default"].component(__WEBPACK_IMPORTED_MODULE
 __WEBPACK_IMPORTED_MODULE_0_vue__["default"].use(__WEBPACK_IMPORTED_MODULE_2_element_ui___default.a);
 __WEBPACK_IMPORTED_MODULE_0_vue__["default"].use(__WEBPACK_IMPORTED_MODULE_2_element_ui__["Table"]);
 __WEBPACK_IMPORTED_MODULE_0_vue__["default"].use(__WEBPACK_IMPORTED_MODULE_2_element_ui__["TableColumn"]);
+__WEBPACK_IMPORTED_MODULE_0_vue__["default"].use(__WEBPACK_IMPORTED_MODULE_2_element_ui__["DatePicker"]);
 let derceeoperationelement = class derceeoperationelement extends __WEBPACK_IMPORTED_MODULE_0_vue__["default"] {
     constructor() {
         super(...arguments);
@@ -7985,6 +7989,12 @@ let derceeoperationelement = class derceeoperationelement extends __WEBPACK_IMPO
     }
     data() {
         return {
+            /*ru: {
+                language: 'Russian',
+                    months: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
+                    monthsAbbr: ['Янв', 'Февр', 'Март', 'Апр', 'Май', 'Июнь', 'Июль', 'Авг', 'Сент', 'Окт', 'Нояб', 'Дек'],
+                        days: ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'], rtl: false, ymd: false, yearSuffix: ''
+            },*/
             menuid: 2,
             update: true,
             persondecreeOperations: [],
@@ -8036,6 +8046,9 @@ let derceeoperationelement = class derceeoperationelement extends __WEBPACK_IMPO
             new_excert_list: false,
             arvhive: false,
             upload: 0,
+            date_range: [],
+            date_range_start: "",
+            date_range_end: "",
         };
     }
     /*tables_reload() {
@@ -8180,7 +8193,7 @@ fetch('api/MailController/rand', { credentials: 'include' })
                     r.nickname;
                 r.getNumber = r.number.toString() + (r.numbertype == "" ? '' : (' ' + r.numbertype.toUpperCase()));
             });
-            this.fullpersondecrees = result;
+            this.fullpersondecrees = this.filter_decrees_by_data(result, this.date_range);
             this.reload();
             this.multipleSelection = time_value;
         });
@@ -8367,7 +8380,7 @@ fetch('api/MailController/rand', { credentials: 'include' })
     }
     FolderSelectedByUnit(id) {
         this.menuunitid = (this.explorerFolder.indexOf(id) + 2);
-        this.viewpersondecreesunit = this.filterbyfolders(this.menuunitid);
+        this.viewpersondecreesunit = this.filter_my_documents(this.menuunitid);
     }
     addToUnitList(decree) {
         if (this.multipleSelection.find(r => r.id == decree.id) == undefined)
@@ -8396,7 +8409,46 @@ fetch('api/MailController/rand', { credentials: 'include' })
         });
         return output.length;
     }
+    date_range_pick() {
+        if (this.date_range != null)
+            this.date_range = [new Date(this.date_range_start), new Date(this.date_range_end)];
+        this.fetchPersondecreesActive();
+    }
+    data_range_default() {
+        this.date_range = null;
+        this.date_range_pick();
+    }
+    filter_decrees_by_data(data, date) {
+        if (date == null || date.length < 2) {
+            var min = Number.MAX_VALUE, max = Number.MIN_VALUE;
+            for (var k of data) {
+                var datedecree = k.getDate.split('-');
+                var f = new Date(datedecree.reverse().join('-')).valueOf();
+                if (f <= min)
+                    min = f;
+                if (f >= max)
+                    max = f;
+            }
+            this.date_range = [new Date(min), new Date(max)];
+            this.date_range_start = new Date(min).toISOString().split('T')[0];
+            this.date_range_end = new Date(max).toISOString().split('T')[0];
+            return data;
+        }
+        var output = [];
+        var fil = [date[0].valueOf(), date[1].valueOf()];
+        for (var k of data) {
+            var datedecree = k.getDate.split('-');
+            var f = new Date(datedecree.reverse().join('-')).valueOf();
+            if (f >= fil[0] && f <= fil[1])
+                output.push(k);
+        }
+        /*var t = data.filter(r => {
+            Date.parse(r.getDate).valueOf() >= date[0].valueOf() && Date.parse(r.getDate).valueOf() <= date[1].valueOf()
+        });*/
+        return output;
+    }
     filterbyfolders(folder) {
+        //this.filter_decrees_by_data(this.fullpersondecrees, this.date_range);
         var time = [];
         var excert = false;
         var new_excert_list = false;
@@ -8834,6 +8886,9 @@ fetch('api/MailController/rand', { credentials: 'include' })
             }
         });
         return flag;
+    }
+    open_history(item) {
+        return;
     }
 };
 __decorate([
@@ -55306,33 +55361,83 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "eld-top-block"
   }, [_c('div', {
     staticClass: "eld-title"
-  }, [(!_vm.new_excert_list) ? _c('div', [_vm._v("\n                Почта\n            ")]) : _c('div', [_c('div', [_vm._v("\n                    " + _vm._s(_vm.title_text_excert) + "\n                ")]), _vm._v(" "), _c('div', {
+  }, [(!_vm.new_excert_list) ? _c('div', [_vm._v("\n                Почта\n            ")]) : _c('div', [_c('div', [_vm._v("\n                    " + _vm._s(_vm.title_text_excert) + "\n                ")])])]), _vm._v(" "), _c('div', {
     staticStyle: {
-      "text-align-last": "right"
+      "flex-wrap": "nowrap",
+      "display": "flex",
+      "justify-content": "space-around"
+    }
+  }, [_c('div', {
+    staticStyle: {
+      "display": "inline-block"
     }
   }, [_c('el-button', {
     attrs: {
-      "type": "warning",
-      "plain": ""
-    },
-    on: {
-      "click": function($event) {
-        _vm.rowClicked(_vm.excertsdecree)
-      }
-    }
-  }, [_vm._v("Перейти к приказу")])], 1)])]), _vm._v(" "), (!_vm.new_excert_list) ? _c('div', {
-    staticClass: "eld-search-and-create"
-  }, [_c('div', [_c('el-button', {
-    attrs: {
       "type": "success",
-      "plain": ""
+      "plain": "",
+      "disabled": _vm.new_excert_list
     },
     on: {
       "click": function($event) {
         _vm.createMenuToggle()
       }
     }
-  }, [_vm._v("Создать предложение")])], 1)]) : _vm._e()]), _vm._v(" "), _c('div', {
+  }, [_vm._v("Создать предложение")])], 1), _vm._v(" "), _c('div', {
+    staticStyle: {
+      "display": "flex"
+    }
+  }, [_c('el-input', {
+    attrs: {
+      "type": "date"
+    },
+    on: {
+      "change": _vm.date_range_pick
+    },
+    model: {
+      value: (_vm.date_range_start),
+      callback: function($$v) {
+        _vm.date_range_start = $$v
+      },
+      expression: "date_range_start"
+    }
+  }), _vm._v(" "), _c('el-input', {
+    attrs: {
+      "type": "date"
+    },
+    on: {
+      "change": _vm.date_range_pick
+    },
+    model: {
+      value: (_vm.date_range_end),
+      callback: function($$v) {
+        _vm.date_range_end = $$v
+      },
+      expression: "date_range_end"
+    }
+  }), _vm._v(" "), _c('el-button', {
+    attrs: {
+      "icon": "el-icon-error",
+      "size": "mini"
+    },
+    on: {
+      "click": _vm.data_range_default
+    }
+  })], 1), _vm._v(" "), _c('div', {
+    staticStyle: {
+      "display": "inline-block"
+    }
+  }, [_c('el-button', {
+    attrs: {
+      "type": "warning",
+      "plain": "",
+      "disabled": !_vm.new_excert_list
+    },
+    on: {
+      "click": function($event) {
+        _vm.rowClicked(_vm.excertsdecree)
+      }
+    }
+  }, [_vm._v("Перейти к приказу")])], 1)])]), _vm._v(" "), _c('div', {
     staticClass: "eld-eld"
   }, [_c('div', {
     staticClass: "eld-eld-side-mail"
@@ -55757,6 +55862,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           staticClass: "el-icon-view",
           attrs: {
             "size": "mini"
+          },
+          on: {
+            "click": function($event) {
+              _vm.open_history(item)
+            }
           }
         })]) : _vm._e()]
       }
@@ -56049,7 +56159,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         "border-radius": "10px",
         "background": "#eeece0"
       }
-    }, [_c('small', [_vm._v("\n                        ⇒ " + _vm._s(decree.number) + " " + _vm._s(decree.getName) + " от " + _vm._s(decree.getDate) + "; "), _c('el-button', {
+    }, [_c('small', [_vm._v("\n                        " + _vm._s(decree.number) + " " + _vm._s(decree.getName) + " от " + _vm._s(decree.getDate) + "; "), _c('el-button', {
       attrs: {
         "size": "mini",
         "type": "danger",
@@ -56202,16 +56312,18 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticStyle: {
       "margin-bottom": "10px"
     }
-  }, [_c('h5', [_vm._v("Выбранные для объединения проекты приказов:")]), _vm._v(" "), _vm._l((_vm.multipleSelection), function(decree) {
+  }, [_c('h5', [_vm._v("Выбранные для объединения проекты приказов (будут перемещены в папку \"Отработанные\"):")]), _vm._v(" "), _vm._l((_vm.multipleSelection), function(decree) {
     return _c('div', [_c('div', {
       staticStyle: {
         "margin-bottom": "4px",
         "box-shadow": "5px 5px 3px rgba(0,0,0,0.6)",
         "padding": "10px",
         "border-radius": "10px",
-        "background": "#eeece0"
+        "background": "#eeece0",
+        "display": "flex",
+        "justify-content": "space-between"
       }
-    }, [_c('small', [_vm._v("\n                        ⇒ " + _vm._s(decree.number) + " " + _vm._s(decree.getName) + " от " + _vm._s(decree.getDate) + "; "), _c('el-button', {
+    }, [_c('small', [_vm._v("\n                        " + _vm._s(decree.number) + " " + _vm._s(decree.getName) + " от " + _vm._s(decree.getDate) + ";\n                    ")]), _vm._v(" "), _c('el-button', {
       attrs: {
         "size": "mini",
         "type": "danger",
@@ -56222,10 +56334,13 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           _vm.deleteDecreeFromList(decree)
         }
       }
-    })], 1)])])
+    })], 1)])
   }), _vm._v(" "), (_vm.multipleSelection.length > 1) ? _c('div', {
     staticStyle: {
-      "margin-top": "10px"
+      "margin-top": "10px",
+      "display": "flex",
+      "justify-content": "space-evenly",
+      "align-items": "center"
     }
   }, [_c('el-button', {
     attrs: {
@@ -56236,7 +56351,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     on: {
       "click": _vm.persondecreesUnite
     }
-  }, [_vm._v("Объединить")])], 1) : _vm._e()], 2), _vm._v(" "), _c('div', [(_vm.unit_dialog) ? _c('div') : _c('div', [_c('div', {
+  }, [_vm._v("Объединить")]), _vm._v(" "), _c('div', [_vm._v("\n                    Объединенный приказ будет помещён в папку: \"В работе\"\n                ")])], 1) : _vm._e()], 2), _vm._v(" "), _c('div', [_c('div', [_c('div', {
     staticStyle: {
       "display": "flex",
       "margin-bottom": "10px"
@@ -56245,7 +56360,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     return _c('div', [_c('div', {
       staticStyle: {
         "margin-right": "10px",
-        "margin-left": "10px"
+        "margin-left": "10px",
+        "box-shadow": "5px 5px 3px rgba(0,0,0,0.6)",
+        "background": "#3de8a1"
       }
     }, [_c('el-button', {
       attrs: {
@@ -56259,11 +56376,21 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       }
     }, [_vm._v("\n                                " + _vm._s(folder) + "\n                            ")])], 1)])
   })), _vm._v(" "), (_vm.viewpersondecreesunit.length > 0) ? _c('div', _vm._l((_vm.viewpersondecreesunit), function(decree) {
-    return _c('div', [_c('small', {
+    return _c('div', [_c('div', {
+      staticStyle: {
+        "margin-bottom": "4px",
+        "display": "flex",
+        "justify-content": "space-between",
+        "margin-right": "10px",
+        "margin-left": "10px",
+        "box-shadow": "5px 5px 3px rgba(0,0,0,0.6)",
+        "background": "#3de8a1"
+      }
+    }, [_c('small', {
       staticStyle: {
         "margin-bottom": "5px"
       }
-    }, [_vm._v("\n                            " + _vm._s(decree.number) + " " + _vm._s(decree.getName) + " от " + _vm._s(decree.getDate) + "; "), _c('el-button', {
+    }, [_vm._v("\n                                " + _vm._s(decree.number) + " " + _vm._s(decree.getName) + " от " + _vm._s(decree.getDate) + ";\n                            ")]), _vm._v(" "), _c('el-button', {
       attrs: {
         "size": "mini"
       },
@@ -56277,7 +56404,10 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "eld-title"
   }, [_vm._v("\n                    Папка пуста.\n                ")]), _vm._v(" "), (_vm.multipleSelection.length > 1) ? _c('div', {
     staticStyle: {
-      "margin-top": "10px"
+      "margin-top": "10px",
+      "display": "flex",
+      "justify-content": "space-evenly",
+      "align-items": "center"
     }
   }, [_c('el-button', {
     attrs: {
@@ -56288,7 +56418,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     on: {
       "click": _vm.persondecreesUnite
     }
-  }, [_vm._v("Объединить")])], 1) : _vm._e()])])]), _vm._v(" "), _c('el-dialog', {
+  }, [_vm._v("Объединить")]), _vm._v(" "), _c('div', [_vm._v("\n                        Объединенный приказ будет помещён в папку: \"В работе\"\n                    ")])], 1) : _vm._e()])])]), _vm._v(" "), _c('el-dialog', {
     directives: [{
       name: "loading",
       rawName: "v-loading",
@@ -56334,7 +56464,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           _vm.openexcert(struct)
         }
       }
-    }), _vm._v("\n                        ⇒ " + _vm._s(struct.structure.nameshortened))], 1), _vm._v(" "), _c('div', {
+    }), _vm._v("\n                        " + _vm._s(struct.structure.nameshortened))], 1), _vm._v(" "), _c('div', {
       staticStyle: {
         "text-align-last": "right"
       }

@@ -15693,8 +15693,32 @@ namespace PersonnelManagement.Models
             //    UserManager userObject = GetUserManager(user, creator);
             //    persondecreeManagement.CreatorObject = userObject; // Добавляем в приказ информацию о создателе.
             //}
+            Dictionary<int, Persondecreeunit> decree_unit = context.Persondecreeunit.ToDictionary(r => r.Unitdecree.GetValueOrDefault() );
+            Dictionary<int, Mailexplorer> mail_dic = context.Mailexplorer.ToDictionary(r => r.Id );
+            Dictionary<int, Persondecree> decrees = context.Persondecree.ToDictionary(r => r.Id );
+            Persondecreeunit time_value = decree_unit.ContainsKey(decree.Id) ? decree_unit[decree.Id] : new Persondecreeunit(), clf_val;
+            Mailexplorer time_mail;
+            while(true)
+            {
+                if (time_value.Decrees == "")
+                    break;
+                string nextiteration = "";
+                foreach(string value in time_value.Decrees.Split('|'))
+                {
+                    if (value == "")
+                        continue;
+                    int index = int.Parse(value);
+                    clf_val = decree_unit.ContainsKey(index) ? decree_unit[index] : new Persondecreeunit();
+                    nextiteration += "|" + clf_val.Decrees;
+                    time_mail = mail_dic[decrees[index].Mailexplorerid];
+                    time_mail.FolderCreator = 5;
+                    time_mail.FolderOwner = 5;
+                    context.Mailexplorer.Update(time_mail);
+                }
+                time_value.Decrees = nextiteration;
+            }
 
-            Mailexplorer time = MailexplorersLocal()[decree.Mailexplorerid];
+            Mailexplorer time = mail_dic[decree.Mailexplorerid];
             time.FolderCreator = 7;
             time.FolderOwner = 8;
             context.Mailexplorer.Update(time);
@@ -20115,7 +20139,7 @@ namespace PersonnelManagement.Models
         /// </summary>
         /// <param name="user"></param>
         /// <param name="persondecreeIds"></param>
-        public void PersondecreesUnite(User user, IEnumerable<int> persondecreeIds, Persondecree folder = null)
+        public Persondecree PersondecreesUnite(User user, IEnumerable<int> persondecreeIds, Persondecree folder = null)
         {
             Mailexplorer for_new_decree = new Mailexplorer() { FolderCreator = 6, AccessForReading = user.Id.ToString(), FolderOwner = 0 };
             context.Mailexplorer.Add(for_new_decree);
@@ -20186,6 +20210,7 @@ namespace PersonnelManagement.Models
                     AddPersonDecreeoperation(user, newPersondecreeoperation);
                 }
             }
+            return unitedPersondecree;
         }
 
         /// <summary>

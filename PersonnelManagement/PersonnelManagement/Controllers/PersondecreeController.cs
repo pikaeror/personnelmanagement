@@ -137,7 +137,9 @@ namespace PersonnelManagement.Controllers
                 switch (operation)
                 {
                     case 1:
-                        repository.PersondecreesUnite(user, ids, folder);
+                        Persondecree decree =  repository.PersondecreesUnite(user, ids, folder);
+                        MailWorker worker = new MailWorker(user, repository);
+                        worker.unit_persondecree(decree, ids);
                         break;
                     default:
                         break;

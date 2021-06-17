@@ -97,5 +97,14 @@ namespace PersonnelManagement.Models
             }
             return output;
         }
+
+        public void unit_persondecree(Persondecree unit_decree, List<int> unit_list)
+        {
+            Persondecreeunit new_unit = new Persondecreeunit();
+            new_unit.Unitdecree = unit_decree.Id;
+            new_unit.Decrees = String.Join("|", unit_list);
+            m_context.Persondecreeunit.Add(new_unit);
+            m_context.SaveChanges();
+        }
     }
 }

@@ -1,7 +1,7 @@
 ﻿import Vue from 'vue';
 import { Component, Prop, Watch } from 'vue-property-decorator';
 import Element from 'element-ui';
-import { Input, Button, Dropdown, Dialog, DropdownItem, DropdownMenu, Popover, Checkbox, Tooltip, Upload, Autocomplete, Table, TableColumn } from 'element-ui';
+import ElementUI, { Input, Button, Dropdown, Dialog, DropdownItem, DropdownMenu, Popover, Checkbox, Tooltip, Upload, Autocomplete, Table, TableColumn, DatePicker } from 'element-ui';
 import _ from 'lodash';
 import '../../css/print.css';
 import Rewardmoney from '../../classes/rewardmoney'
@@ -16,6 +16,11 @@ import Mailexplorer from '../../classes/Mail/mailexplorer';
 import Structure from '../../classes/Structure';
 import ExcertStructures from '../../classes/Excerts/excertStructures';
 import { ElTable } from 'element-ui/types/table';
+import Datepicker from 'element-ui/types/date-picker';
+import elementLocale from 'element-ui/lib/locale/lang/en';
+/*import { registerLocale } from "../../../../node_modules/react-datepicker";
+import ru from "../../../../node_modules/date-fns/locale/ru";
+registerLocale("ru", ru);*/
 
 Vue.component(Button.name, Button);
 Vue.component(Input.name, Input);
@@ -31,6 +36,7 @@ Vue.component(Autocomplete.name, Autocomplete);
 Vue.use(Element);
 Vue.use(Table)
 Vue.use(TableColumn)
+Vue.use(DatePicker)
 
 @Component({
     components: {
@@ -102,8 +108,19 @@ export default class derceeoperationelement extends Vue {
 
     upload: number;
 
+    date_range: Date[];
+    date_range_start: string;
+    date_range_end: string;
+
     data() {
         return {
+            /*ru: {
+                language: 'Russian',
+                    months: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
+                    monthsAbbr: ['Янв', 'Февр', 'Март', 'Апр', 'Май', 'Июнь', 'Июль', 'Авг', 'Сент', 'Окт', 'Нояб', 'Дек'],
+                        days: ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'], rtl: false, ymd: false, yearSuffix: ''
+            },*/
+
             menuid: 2,
             update: true,
 
@@ -168,6 +185,10 @@ export default class derceeoperationelement extends Vue {
             arvhive: false,
 
             upload: 0,
+
+            date_range: [],
+            date_range_start: "",
+            date_range_end: "",
         }
     }
 
@@ -320,7 +341,7 @@ export default class derceeoperationelement extends Vue {
                     r.getNumber = r.number.toString() + (r.numbertype == "" ? '' : (' ' + r.numbertype.toUpperCase()));
                     
                 });
-                this.fullpersondecrees = result;
+                this.fullpersondecrees = this.filter_decrees_by_data(result, this.date_range);
                 this.reload();
                 this.multipleSelection = time_value;
             });
@@ -516,7 +537,7 @@ export default class derceeoperationelement extends Vue {
 
     FolderSelectedByUnit(id) {
         this.menuunitid = (this.explorerFolder.indexOf(id) + 2);
-        this.viewpersondecreesunit = this.filterbyfolders(this.menuunitid);
+        this.viewpersondecreesunit = this.filter_my_documents(this.menuunitid);
     }
 
     addToUnitList(decree: Persondecree) {
@@ -548,7 +569,48 @@ export default class derceeoperationelement extends Vue {
         return output.length;
     }
 
+    date_range_pick() {
+        if (this.date_range != null)
+            this.date_range = [new Date(this.date_range_start), new Date(this.date_range_end)]
+        this.fetchPersondecreesActive();
+    }
+    data_range_default() {
+        this.date_range = null;
+        this.date_range_pick();
+    }
+
+    filter_decrees_by_data(data: Persondecree[], date: Date[]): Persondecree[] {
+        if (date == null || date.length < 2) {
+            var min = Number.MAX_VALUE, max = Number.MIN_VALUE;
+            for (var k of data) {
+                var datedecree: string[] = k.getDate.split('-');
+                var f = new Date(datedecree.reverse().join('-')).valueOf();
+                if (f <= min)
+                    min = f;
+                if (f >= max)
+                    max = f;
+            }
+            this.date_range = [new Date(min), new Date(max)];
+            this.date_range_start = new Date(min).toISOString().split('T')[0];
+            this.date_range_end = new Date(max).toISOString().split('T')[0];
+            return data;
+        }
+        var output: Persondecree[] = [];
+        var fil = [date[0].valueOf(), date[1].valueOf()];
+        for (var k of data) {
+            var datedecree: string[] = k.getDate.split('-');
+            var f = new Date(datedecree.reverse().join('-')).valueOf();
+            if (f >= fil[0] && f <= fil[1])
+                output.push(k);
+        }
+        /*var t = data.filter(r => {
+            Date.parse(r.getDate).valueOf() >= date[0].valueOf() && Date.parse(r.getDate).valueOf() <= date[1].valueOf()
+        });*/
+        return output;
+    }
+
     filterbyfolders(folder: number) {
+        //this.filter_decrees_by_data(this.fullpersondecrees, this.date_range);
         var time = [];
         var excert = false;
         var new_excert_list = false;
@@ -1003,5 +1065,9 @@ export default class derceeoperationelement extends Vue {
             }
         });
         return flag;
+    }
+
+    open_history(item) {
+        return;
     }
 }

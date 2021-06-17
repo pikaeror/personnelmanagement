@@ -82,7 +82,6 @@ Vue.use(VueRouter);
 Vue.use(Vuex);
 Vue.use(DlgDraggable);
 
-
 /**
  * Keys
  */
@@ -114,8 +113,6 @@ Vue.forceStructureUpdate = false;
 
 
 Vue.sidebar = true;
-
-
 
 /**
  * Global methods

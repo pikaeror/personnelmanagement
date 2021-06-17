@@ -6,23 +6,29 @@
                     Почта
                 </div>
                 <div v-else>
-                    <!--<div v-if="excertsdecreestructureT == null || excertsdecreestructureT.length == 0">
-                        Выписки из приказа отсутствуют
-                    </div>-->
                     <div>
                         {{title_text_excert}}
                     </div>
-                    <div style="text-align-last: right;">
-                        <el-button @click="rowClicked(excertsdecree)" type="warning" plain>Перейти к приказу</el-button>
-                    </div>
                 </div>
             </div>
-            <div class="eld-search-and-create" v-if="!new_excert_list">
-                <div>
-                    <el-button @click="createMenuToggle()" type="success" plain>Создать предложение</el-button>
-                    <!--<el-dialog :visible.sync="decreecreator" width="50%" @close="close()" v-draggable>
-                    <decreeoperationtemplatecreator :visible="decreecreator"></decreeoperationtemplatecreator>
-                </el-dialog>-->
+            <div style="flex-wrap: nowrap; display: flex; justify-content: space-around;">
+                <div style="display: inline-block;">
+                    <el-button @click="createMenuToggle()" type="success" plain :disabled="new_excert_list">Создать предложение</el-button>
+                </div>
+                <div style="display: inline-block; display: flex">
+                    <!--<el-date-picker v-model="date_range"
+                                    type="daterange"
+                                    size="mini"
+                                    @change="date_range_pick"
+                                    unlink-panels
+                                    :clearable="false"
+                                    :local="ru" />-->
+                    <el-input v-model="date_range_start" type="date" @change="date_range_pick" />
+                    <el-input v-model="date_range_end" type="date" @change="date_range_pick" />
+                    <el-button icon="el-icon-error" @click="data_range_default" size="mini"></el-button>
+                </div>
+                <div style="display: inline-block;">
+                    <el-button @click="rowClicked(excertsdecree)" type="warning" plain :disabled="!new_excert_list">Перейти к приказу</el-button>
                 </div>
             </div>
         </div>
@@ -142,9 +148,9 @@
                         <!--<div style="text-align-last: right; margin-right: 11px;">-->
                         <!--<el-button style="background: #f0f9eb" size="mini">Подписан</el-button>-->
                         <!--<el-badge :value="decreeunopen.length" :max="10" class="item">
-                <el-button style="background: #4251ff4d" size="mini" @click="viewUnopeneddecree">Не просмотрен</el-button>
-            </el-badge>
-        </div>-->
+                                <el-button style="background: #4251ff4d" size="mini" @click="viewUnopeneddecree">Не просмотрен</el-button>
+                            </el-badge>
+                        </div>-->
                     </div>
                     <div visible="update"></div>
                     <!--property="marked"  @selection-change="handleSelectionChange"   :filters="datefiltervariants" -->
@@ -166,7 +172,7 @@
                                 <el-table-column width="50" v-if="menuid < 7">
                                     <template scope="item">
                                         <div v-if="!isopeneddecree(item)" style="text-align-last: center; font-size: x-large;">
-                                            <i class="el-icon-view" size="mini"></i>
+                                            <i class="el-icon-view" size="mini" @click="open_history(item)"></i>
                                         </div>
                                     </template>
                                 </el-table-column>
@@ -258,60 +264,60 @@
                                     <el-table-column property="data_opened" label="Дата первого просмотра" width="130">
                                     </el-table-column>
                                     <!--<el-table-column label="Выписки" width="90">
-            <template scope="item">
-                <div>
-                    <div style="text-align-last: center; font-size: x-large;">-->
+                                    <template scope="item">
+                                        <div>
+                                            <div style="text-align-last: center; font-size: x-large;">-->
                                     <!--<i class="el-icon-view" size="mini" v-popover:popover4></i>-->
                                     <!--<el-popover ref="popover4"
-                                    placement="right"
-                                    width="400"
-                                    trigger="click">
-                            <el-button-group>
-                                <el-button type="success">направить выписку</el-button>
-                                <el-button type="warning">открыть доступ</el-button>
-                            </el-button-group>
+                                                                placement="right"
+                                                                width="400"
+                                                                trigger="click">
+                                                        <el-button-group>
+                                                            <el-button type="success">направить выписку</el-button>
+                                                            <el-button type="warning">открыть доступ</el-button>
+                                                        </el-button-group>
 
-                            <div style="text-align-last: center;">
-                                <el-select v-model="getusers"
-                                           multiple
-                                           filterable
-                                           remote
-                                           reserve-keyword
-                                           placeholder="Please enter a keyword"
-                                           :remote-method="remoteMethod"
-                                           :loading="loading">
-                                    <el-option v-for="item in usersSearch"
-                                               :key="item.surname"
-                                               :label="item.surname"
-                                               :value="item.surname">
-                                    </el-option>
-                                </el-select>
-                            </div>
-                        </el-popover>
-                        <el-button class="el-icon-message" size="mini" v-popover:popover4></el-button>
-                    </div>
-                </div>
-            </template>
-        </el-table-column>-->
+                                                        <div style="text-align-last: center;">
+                                                            <el-select v-model="getusers"
+                                                                       multiple
+                                                                       filterable
+                                                                       remote
+                                                                       reserve-keyword
+                                                                       placeholder="Please enter a keyword"
+                                                                       :remote-method="remoteMethod"
+                                                                       :loading="loading">
+                                                                <el-option v-for="item in usersSearch"
+                                                                           :key="item.surname"
+                                                                           :label="item.surname"
+                                                                           :value="item.surname">
+                                                                </el-option>
+                                                            </el-select>
+                                                        </div>
+                                                    </el-popover>
+                                                    <el-button class="el-icon-message" size="mini" v-popover:popover4></el-button>
+                                                </div>
+                                            </div>
+                                        </template>
+                                    </el-table-column>-->
                                 </el-table>
                             </div>
                         </div>
                     </div>
-                        <!--<div v-for="struct in excertsdecreestructureT">
-            <div style="margin-bottom: 4px; box-shadow: 5px 5px 3px rgba(0,0,0,0.6); padding: 10px; border-radius: 10px; background: #eeece0;" @click="openexcert(struct)">
-                <small>
-                    <el-button type="primary" icon="el-icon-view" size="mini" @click="openexcert(struct)" :loading="loading2"></el-button>
-                    {{struct.structure.nameshortened}}-->
-                        <!--<el-button size="mini" type="danger" icon="el-icon-delete" @click=""></el-button>-->
-                        <!--</small>
-                <div style="text-align-last: right;">
-                    <el-button-group>
-                        <el-button type="info" size="mini">Дата создания: {{struct.data_create}}</el-button>
-                        <el-button type="info" size="mini">Дата просмотра: {{struct.data_opened}}</el-button>
-                    </el-button-group>
-                </div>
-            </div>
-        </div>-->
+                    <!--<div v-for="struct in excertsdecreestructureT">
+                    <div style="margin-bottom: 4px; box-shadow: 5px 5px 3px rgba(0,0,0,0.6); padding: 10px; border-radius: 10px; background: #eeece0;" @click="openexcert(struct)">
+                        <small>
+                            <el-button type="primary" icon="el-icon-view" size="mini" @click="openexcert(struct)" :loading="loading2"></el-button>
+                            {{struct.structure.nameshortened}}-->
+                    <!--<el-button size="mini" type="danger" icon="el-icon-delete" @click=""></el-button>-->
+                    <!--</small>
+                            <div style="text-align-last: right;">
+                                <el-button-group>
+                                    <el-button type="info" size="mini">Дата создания: {{struct.data_create}}</el-button>
+                                    <el-button type="info" size="mini">Дата просмотра: {{struct.data_opened}}</el-button>
+                                </el-button-group>
+                            </div>
+                        </div>
+                    </div>-->
                 </div>
             </div>
         </div>
@@ -323,7 +329,7 @@
                 <div v-for="decree in multipleSelection">
                     <div style="margin-bottom: 4px; box-shadow: 5px 5px 3px rgba(0,0,0,0.6); padding: 10px; border-radius: 10px; background: #eeece0;">
                         <small>
-                            &#8658 {{decree.number}} {{decree.getName}} от {{decree.getDate}}; <el-button size="mini" type="danger" icon="el-icon-delete" @click="deleteDecreeFromList(decree)"></el-button>
+                            {{decree.number}} {{decree.getName}} от {{decree.getDate}}; <el-button size="mini" type="danger" icon="el-icon-delete" @click="deleteDecreeFromList(decree)"></el-button>
                         </small>
                     </div>
                 </div>
@@ -390,28 +396,32 @@
                 <div class="persondecreeoperation-row"><div class="persondecreeoperation-row-text" style="margin-top: 10px">Введите рабочее название объединённого приказа:</div> <el-input v-model="unit_decree.nickname"></el-input></div>
             </div>
             <div style="margin-bottom: 10px">
-                <h5>Выбранные для объединения проекты приказов:</h5>
+                <h5>Выбранные для объединения проекты приказов (будут перемещены в папку "Отработанные"):</h5>
                 <div v-for="decree in multipleSelection">
-                    <div style="margin-bottom: 4px; box-shadow: 5px 5px 3px rgba(0,0,0,0.6); padding: 10px; border-radius: 10px; background: #eeece0;">
+                    <div style="margin-bottom: 4px; box-shadow: 5px 5px 3px rgba(0,0,0,0.6); padding: 10px; border-radius: 10px; background: #eeece0; display: flex; justify-content: space-between;">
                         <small>
-                            &#8658 {{decree.number}} {{decree.getName}} от {{decree.getDate}}; <el-button size="mini" type="danger" icon="el-icon-delete" @click="deleteDecreeFromList(decree)"></el-button>
+                            {{decree.number}} {{decree.getName}} от {{decree.getDate}};
                         </small>
+                        <el-button size="mini" type="danger" icon="el-icon-delete" @click="deleteDecreeFromList(decree)"></el-button>
                     </div>
                 </div>
-                <div style="margin-top: 10px" v-if="multipleSelection.length > 1">
+                <div style="margin-top: 10px; display: flex; justify-content: space-evenly; align-items: center;" v-if="multipleSelection.length > 1">
                     <el-button @click="persondecreesUnite" icon="el-icon-document" type="primary" round>Объединить</el-button>
+                    <div>
+                        Объединенный приказ будет помещён в папку: "В работе"
+                    </div>
                 </div>
             </div>
             <div>
-                <div v-if="unit_dialog">
-                    <!--<div style="margin-top: 10px">
-                    <el-button size="mini" @click="switch_k">Отобразить папки с приказами</el-button>
+                <!--<div v-if="unit_dialog">
+                    <div style="margin-top: 10px">
+                        <el-button size="mini" @click="switch_k">Отобразить папки с приказами</el-button>
+                    </div>
                 </div>-->
-                </div>
-                <div v-else>
+                <div>
                     <div style="display: flex; margin-bottom: 10px">
                         <div v-for="folder in explorerFolder">
-                            <div style="margin-right: 10px; margin-left: 10px">
+                            <div style="margin-right: 10px; margin-left: 10px; box-shadow: 5px 5px 3px rgba(0,0,0,0.6); background: #3de8a1;">
                                 <el-button size="mini" type="success" @click="FolderSelectedByUnit(folder)">
                                     {{folder}}
                                 </el-button>
@@ -420,16 +430,22 @@
                     </div>
                     <div v-if="viewpersondecreesunit.length > 0">
                         <div v-for="decree in viewpersondecreesunit">
-                            <small style="margin-bottom: 5px">
-                                {{decree.number}} {{decree.getName}} от {{decree.getDate}}; <el-button size="mini" @click="addToUnitList(decree)">Добавить к объединению</el-button>
-                            </small>
+                            <div style="margin-bottom: 4px; display: flex; justify-content: space-between; margin-right: 10px; margin-left: 10px; box-shadow: 5px 5px 3px rgba(0,0,0,0.6); background: #3de8a1;">
+                                <small style="margin-bottom: 5px">
+                                    {{decree.number}} {{decree.getName}} от {{decree.getDate}};
+                                </small>
+                                <el-button size="mini" @click="addToUnitList(decree)">Добавить к объединению</el-button>
+                            </div>
                         </div>
                     </div>
                     <div v-else class="eld-title">
                         Папка пуста.
                     </div>
-                    <div style="margin-top: 10px" v-if="multipleSelection.length > 1">
+                    <div style="margin-top: 10px; display: flex; justify-content: space-evenly; align-items: center;" v-if="multipleSelection.length > 1">
                         <el-button @click="persondecreesUnite" icon="el-icon-document" type="primary" round>Объединить</el-button>
+                        <div>
+                            Объединенный приказ будет помещён в папку: "В работе"
+                        </div>
                     </div>
                 </div>
             </div>
@@ -437,9 +453,9 @@
 
         <el-dialog width="900px" :visible.sync="excertmenu" :title="title_text_excert" :before-close="excertClose"
                    v-loading="loading2"
-                    element-loading-text="Загрузка..."
-                    element-loading-spinner="el-icon-loading"
-                    element-loading-background="rgba(0, 0, 0, 0.8)">
+                   element-loading-text="Загрузка..."
+                   element-loading-spinner="el-icon-loading"
+                   element-loading-background="rgba(0, 0, 0, 0.8)">
             <div style="margin-bottom: 10px">
                 <div v-if="excertsdecree != null">
                     {{excertsdecree.getNumber}}
@@ -453,7 +469,7 @@
                     <div style="margin-bottom: 4px; box-shadow: 5px 5px 3px rgba(0,0,0,0.6); padding: 10px; border-radius: 10px; background: #eeece0;">
                         <small>
                             <el-button type="primary" icon="el-icon-view" size="mini" @click="openexcert(struct)" :loading="loading2"></el-button>
-                            &#8658 {{struct.structure.nameshortened}}<!--<el-button size="mini" type="danger" icon="el-icon-delete" @click=""></el-button>-->
+                            {{struct.structure.nameshortened}}<!--<el-button size="mini" type="danger" icon="el-icon-delete" @click=""></el-button>-->
                         </small>
                         <div style="text-align-last: right;">
                             <el-button-group>

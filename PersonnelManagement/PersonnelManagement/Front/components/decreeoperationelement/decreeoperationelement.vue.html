@@ -132,6 +132,10 @@
                     УМЧС и другие
                     <el-badge :value="5" :max="10" class="item" />
                 </div>
+                <div v-bind:class="{'eld-eld-side-element-selected': menuid == 12}" class="eld-eld-side-element" style="background-color: lightgray; border-radius: 20px;" @click="set_menu_id(12)">
+                    Архив
+                    <!--<el-badge :value="5" :max="10" class="item" />-->
+                </div>
             </div>
             <div class="eld-eld-main-mail">
                 <div v-if="!new_excert_list">
@@ -321,7 +325,7 @@
                 </div>
             </div>
         </div>
-        <el-dialog width="900px" :visible.sync="dialogVisibleSend" :title="title_text_f">
+        <el-dialog width="900px" :visible.sync="dialogVisibleSend" :title="title_text_f" :before-close="update_full_decrees">
             <div style="margin-bottom: 10px">
                 <h4>
                     Введите полностью или частично фамилию, логин или подразделение для поиска кадровика, которому будут направлены проекты приказов:
@@ -368,7 +372,7 @@
             </div>
         </el-dialog>
 
-        <el-dialog width="900px" :visible.sync="dialogVisibleExplorer" :title="title_text_s">
+        <el-dialog width="900px" :visible.sync="dialogVisibleExplorer" :title="title_text_s" :before-close="update_full_decrees">
             <div style="margin-bottom: 10px">
                 Выберите папку для переноса следующих приказов:
                 <div style="display: flex; margin-bottom: 4px">
@@ -383,14 +387,14 @@
                 <div v-for="decree in multipleSelection">
                     <div style="margin-bottom: 4px; box-shadow: 5px 5px 3px rgba(0,0,0,0.6); padding: 10px; border-radius: 10px; background: #eeece0;">
                         <small>
-                            &#8658 {{decree.number}} {{decree.getName}} от {{decree.getDate}}; <el-button size="mini" type="danger" icon="el-icon-delete" @click="deleteDecreeFromList(decree)"></el-button>
+                            {{decree.number}} {{decree.getName}} от {{decree.getDate}}; <el-button size="mini" type="danger" icon="el-icon-delete" @click="deleteDecreeFromList(decree)"></el-button>
                         </small>
                     </div>
                 </div>
             </div>
         </el-dialog>
 
-        <el-dialog width="900px" :visible.sync="dialogVisibleUnit" :title="title_text_t">
+        <el-dialog width="900px" :visible.sync="dialogVisibleUnit" :title="title_text_t" :before-close="update_full_decrees">
             <div v-if="unit_decree != null">
                 <!--<div class="persondecreeoperation-row"><div class="persondecreeoperation-row-text">Название приказа:</div> <el-input v-model="unit_decree.name"></el-input></div>-->
                 <div class="persondecreeoperation-row"><div class="persondecreeoperation-row-text" style="margin-top: 10px">Введите рабочее название объединённого приказа:</div> <el-input v-model="unit_decree.nickname"></el-input></div>

@@ -1070,4 +1070,9 @@ export default class derceeoperationelement extends Vue {
     open_history(item) {
         return;
     }
+
+    update_full_decrees() {
+        this.fetchPersondecreesActive();
+        this.set_menu_id(this.menuid);
+    }
 }

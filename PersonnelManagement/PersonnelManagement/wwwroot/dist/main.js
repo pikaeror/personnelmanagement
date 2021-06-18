@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "39824f93d258e3abdf87"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "14ec7008139f7f508520"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -8889,6 +8889,10 @@ fetch('api/MailController/rand', { credentials: 'include' })
     }
     open_history(item) {
         return;
+    }
+    update_full_decrees() {
+        this.fetchPersondecreesActive();
+        this.set_menu_id(this.menuid);
     }
 };
 __decorate([
@@ -55731,7 +55735,21 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "value": 5,
       "max": 10
     }
-  })], 1)]), _vm._v(" "), _c('div', {
+  })], 1), _vm._v(" "), _c('div', {
+    staticClass: "eld-eld-side-element",
+    class: {
+      'eld-eld-side-element-selected': _vm.menuid == 12
+    },
+    staticStyle: {
+      "background-color": "lightgray",
+      "border-radius": "20px"
+    },
+    on: {
+      "click": function($event) {
+        _vm.set_menu_id(12)
+      }
+    }
+  }, [_vm._v("\n                Архив\n                ")])]), _vm._v(" "), _c('div', {
     staticClass: "eld-eld-main-mail"
   }, [(!_vm.new_excert_list) ? _c('div', [_c('div', {
     staticClass: "eld-eld-main-head"
@@ -56139,7 +56157,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "width": "900px",
       "visible": _vm.dialogVisibleSend,
-      "title": _vm.title_text_f
+      "title": _vm.title_text_f,
+      "before-close": _vm.update_full_decrees
     },
     on: {
       "update:visible": function($event) {
@@ -56228,7 +56247,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "width": "900px",
       "visible": _vm.dialogVisibleExplorer,
-      "title": _vm.title_text_s
+      "title": _vm.title_text_s,
+      "before-close": _vm.update_full_decrees
     },
     on: {
       "update:visible": function($event) {
@@ -56270,7 +56290,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         "border-radius": "10px",
         "background": "#eeece0"
       }
-    }, [_c('small', [_vm._v("\n                        ⇒ " + _vm._s(decree.number) + " " + _vm._s(decree.getName) + " от " + _vm._s(decree.getDate) + "; "), _c('el-button', {
+    }, [_c('small', [_vm._v("\n                        " + _vm._s(decree.number) + " " + _vm._s(decree.getName) + " от " + _vm._s(decree.getDate) + "; "), _c('el-button', {
       attrs: {
         "size": "mini",
         "type": "danger",
@@ -56286,7 +56306,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "width": "900px",
       "visible": _vm.dialogVisibleUnit,
-      "title": _vm.title_text_t
+      "title": _vm.title_text_t,
+      "before-close": _vm.update_full_decrees
     },
     on: {
       "update:visible": function($event) {

@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "14ec7008139f7f508520"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "36f33364b73d4294376e"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -8049,6 +8049,8 @@ let derceeoperationelement = class derceeoperationelement extends __WEBPACK_IMPO
             date_range: [],
             date_range_start: "",
             date_range_end: "",
+            history: [],
+            popover_first: false,
         };
     }
     /*tables_reload() {
@@ -8888,7 +8890,20 @@ fetch('api/MailController/rand', { credentials: 'include' })
         return flag;
     }
     open_history(item) {
-        return;
+        if (this.popover_first) {
+            this.history = [];
+            this.popover_first = false;
+            return;
+        }
+        var time = [];
+        fetch('api/MailController/history/' + item.row.id, { credentials: 'include' })
+            .then(response => {
+            return response.json();
+        })
+            .then(result => {
+            this.history = result;
+            this.popover_first = true;
+        });
     }
     update_full_decrees() {
         this.fetchPersondecreesActive();
@@ -55871,12 +55886,53 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     scopedSlots: _vm._u([{
       key: "default",
       fn: function(item) {
-        return [(!_vm.isopeneddecree(item)) ? _c('div', {
+        return [_c('el-popover', {
+          ref: "popover4",
+          attrs: {
+            "placement": "right",
+            "width": "630",
+            "trigger": "click",
+            "open-delay": 5000
+          }
+        }, [_c('el-table', {
+          staticStyle: {
+            "width": "100%",
+            "height": "300px"
+          },
+          attrs: {
+            "data": _vm.history,
+            "height": "100%",
+            "empty-text": "История отсутствует"
+          }
+        }, [_c('el-table-column', {
+          attrs: {
+            "width": "180",
+            "property": "date",
+            "label": "date"
+          }
+        }), _vm._v(" "), _c('el-table-column', {
+          attrs: {
+            "width": "300",
+            "property": "name",
+            "label": "name"
+          }
+        }), _vm._v(" "), _c('el-table-column', {
+          attrs: {
+            "width": "100",
+            "property": "action",
+            "label": "action"
+          }
+        })], 1)], 1), _vm._v(" "), (!_vm.isopeneddecree(item)) ? _c('div', {
           staticStyle: {
             "text-align-last": "center",
             "font-size": "x-large"
           }
         }, [_c('i', {
+          directives: [{
+            name: "popover",
+            rawName: "v-popover:popover4",
+            arg: "popover4"
+          }],
           staticClass: "el-icon-view",
           attrs: {
             "size": "mini"

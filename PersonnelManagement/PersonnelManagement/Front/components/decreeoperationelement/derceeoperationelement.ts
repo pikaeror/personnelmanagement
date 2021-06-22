@@ -18,6 +18,7 @@ import ExcertStructures from '../../classes/Excerts/excertStructures';
 import { ElTable } from 'element-ui/types/table';
 import Datepicker from 'element-ui/types/date-picker';
 import elementLocale from 'element-ui/lib/locale/lang/en';
+import PersonDecreeHistory from '../../classes/Mail/PersonDecreeHistory';
 /*import { registerLocale } from "../../../../node_modules/react-datepicker";
 import ru from "../../../../node_modules/date-fns/locale/ru";
 registerLocale("ru", ru);*/
@@ -112,6 +113,9 @@ export default class derceeoperationelement extends Vue {
     date_range_start: string;
     date_range_end: string;
 
+    history: PersonDecreeHistory[];
+    popover_first: boolean;
+
     data() {
         return {
             /*ru: {
@@ -189,6 +193,9 @@ export default class derceeoperationelement extends Vue {
             date_range: [],
             date_range_start: "",
             date_range_end: "",
+
+            history: [],
+            popover_first: false,
         }
     }
 
@@ -1068,7 +1075,20 @@ export default class derceeoperationelement extends Vue {
     }
 
     open_history(item) {
-        return;
+        if (this.popover_first) {
+            this.history = [];
+            this.popover_first = false;
+            return;
+        }
+        var time: PersonDecreeHistory[] = [];
+        fetch('api/MailController/history/' + item.row.id, { credentials: 'include' })
+            .then(response => {
+                return response.json() as Promise<PersonDecreeHistory[]>;
+            })
+            .then(result => {
+                this.history = result;
+                this.popover_first = true;
+            })
     }
 
     update_full_decrees() {

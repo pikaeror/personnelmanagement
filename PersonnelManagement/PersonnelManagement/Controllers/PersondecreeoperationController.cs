@@ -15,10 +15,12 @@ namespace PersonnelManagement.Controllers
     {
 
         private Repository repository;
+        private DecreeHistory history;
 
         public PersondecreeoperationController(Repository repository)
         {
             this.repository = repository;
+            this.history = new DecreeHistory(repo: repository, user: new User());
         }
 
         // Is allowed to edit structures.
@@ -95,7 +97,8 @@ namespace PersonnelManagement.Controllers
             {
                 return new ObjectResult(Keys.ERROR_SHORT + ":Отказано в доступе");
             }
-
+            this.history.m_user = user;
+            this.history.setAction(persondecreeoperation.Persondecree == 0 ? repository.GetContext().Persondecreeoperation.First(r => r.Id == persondecreeoperation.Id).Persondecree : persondecreeoperation.Persondecree, persondecreeoperation.Status + 30);
             if (persondecreeoperation.Status == 1)
             {
                 persondecreeoperation.personFromStructure.ForEach(element =>

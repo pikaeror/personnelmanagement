@@ -38,9 +38,12 @@ namespace PersonnelManagement.Controllers
         private const string beforeSpace = "120";
         private Repository repository;
 
+        private DecreeHistory history;
+
         public PersondecreeController(Repository repository)
         {
             this.repository = repository;
+            this.history = new DecreeHistory(repo: repository, user: new User());
         }
 
         // Is allowed to edit structures.
@@ -97,6 +100,8 @@ namespace PersonnelManagement.Controllers
             {
                 user = IdentityService.GetUserBySessionID(sessionid, repository);
                 PersondecreeManagement persondecree = repository.GetPersondecreeManagement(user, id);
+                this.history.m_user = user;
+                this.history.setAction(persondecree, Keys.PERSONDECREE_MANAGEMENT_CHANGEOWNER + 10);
                 //return repository.Persondecrees.FirstOrDefault(d => d.Id == id);
                 return persondecree;
             }
@@ -138,6 +143,8 @@ namespace PersonnelManagement.Controllers
                 {
                     case 1:
                         Persondecree decree =  repository.PersondecreesUnite(user, ids, folder);
+                        this.history.m_user = user;
+                        this.history.setAction(decree, Keys.PERSONDECREE_MANAGEMENT_CHANGEOWNER + 11);
                         MailWorker worker = new MailWorker(user, repository);
                         worker.unit_persondecree(decree, ids);
                         break;
@@ -202,8 +209,8 @@ namespace PersonnelManagement.Controllers
                 return new ObjectResult(Keys.ERROR_SHORT + ":Отказано в доступе");
             }
 
-
-
+            this.history.m_user = user;
+            this.history.setAction(persondecreeManagement, persondecreeManagement.PersondecreeManagementStatus);
             /**
              * Means, we add new decree.
              */

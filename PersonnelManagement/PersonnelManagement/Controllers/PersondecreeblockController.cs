@@ -16,12 +16,12 @@ namespace PersonnelManagement.Controllers
     {
 
         private Repository repository;
-
+        private DecreeHistory history;
 
         public PersondecreeblockController(Repository repository)
         {
             this.repository = repository;
-
+            this.history = new DecreeHistory(repo: repository, user: new User());
         }
 
         // Можно ли редактировать блоки
@@ -96,6 +96,8 @@ namespace PersonnelManagement.Controllers
             {
                 return new ObjectResult(Keys.ERROR_SHORT + ":Найдены ошибки в форме");
             }
+            this.history.m_user = user;
+            this.history.setAction(persondecreeblock.Persondecree == 0 ? repository.GetContext().Persondecreeblock.First(r => r.Id == persondecreeblock.Id).Persondecree : persondecreeblock.Persondecree, persondecreeblock.Status + 20);
             // Добавляем новый элемент в проект приказа
             if (persondecreeblock.Status == 1)
             {

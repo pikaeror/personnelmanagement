@@ -72,6 +72,7 @@ namespace PersonnelManagement.Models
         public virtual DbSet<Persondecreeoperation> Persondecreeoperation { get; set; }
         public virtual DbSet<Persondecreetype> Persondecreetype { get; set; }
         public virtual DbSet<Persondecreeunit> Persondecreeunit { get; set; }
+        public virtual DbSet<Persondecreeuserhistory> Persondecreeuserhistory { get; set; }
         public virtual DbSet<Persondispanserization> Persondispanserization { get; set; }
         public virtual DbSet<Persondriver> Persondriver { get; set; }
         public virtual DbSet<Personeducation> Personeducation { get; set; }
@@ -3551,6 +3552,35 @@ namespace PersonnelManagement.Models
 
                 entity.Property(e => e.Unitdecree)
                     .HasColumnName("unitdecree")
+                    .HasColumnType("int(11)");
+            });
+
+            modelBuilder.Entity<Persondecreeuserhistory>(entity =>
+            {
+                entity.ToTable("persondecreeuserhistory");
+
+                entity.HasIndex(e => e.Id)
+                    .HasName("id_UNIQUE")
+                    .IsUnique();
+
+                entity.Property(e => e.Id)
+                    .HasColumnName("id")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Date)
+                    .HasColumnName("date")
+                    .HasColumnType("datetime");
+
+                entity.Property(e => e.Decree)
+                    .HasColumnName("decree")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Status)
+                    .HasColumnName("status")
+                    .HasMaxLength(45);
+
+                entity.Property(e => e.User)
+                    .HasColumnName("user")
                     .HasColumnType("int(11)");
             });
 

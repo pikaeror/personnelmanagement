@@ -253,5 +253,20 @@ namespace PersonnelManagement.Controllers
             }
             return output;
         }
+
+        [HttpGet("history/{id}")]
+        public IEnumerable<PersonDecreeHistory> get_history([FromRoute] int id)
+        {
+            string sessionid = Request.Cookies[Keys.COOKIES_SESSION];
+            List<PersonDecreeHistory> output = new List<PersonDecreeHistory>();
+            User user = null;
+            if (IdentityService.IsLogined(sessionid, repository))
+            {
+                user = IdentityService.GetUserBySessionID(sessionid, repository);
+                DecreeHistory worker = new DecreeHistory(repository, user);
+                return worker.getHistory(id);
+            }
+            return output;
+        }
     }
 }

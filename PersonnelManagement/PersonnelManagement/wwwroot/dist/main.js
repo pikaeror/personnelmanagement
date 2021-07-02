@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "36f33364b73d4294376e"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "ae3b6915045b34af4783"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -8903,6 +8903,13 @@ fetch('api/MailController/rand', { credentials: 'include' })
             .then(result => {
             this.history = result;
             this.popover_first = true;
+        });
+        fetch('api/MailController/fullhistory', { credentials: 'include' })
+            .then(response => {
+            return response.json();
+        })
+            .then(result => {
+            var l = 123;
         });
     }
     update_full_decrees() {

@@ -84,5 +84,19 @@ namespace PersonnelManagement.Models
         {
             return this.getHistory(m_repository.PersondecreesLocal()[decree]);
         }
+
+        public Dictionary<int, List<PersonDecreeHistory>> getFullHistory()
+        {
+            Dictionary<int, List<PersonDecreeHistory>> output = new Dictionary<int, List<PersonDecreeHistory>>();
+            pmContext context = m_repository.GetContext();
+            foreach(Persondecreeuserhistory iterator in context.Persondecreeuserhistory)
+            {
+                if (!output.ContainsKey(iterator.Decree) && iterator.Decree != 0)
+                {
+                    output[iterator.Decree] = getHistory(iterator.Decree);
+                }
+            }
+            return output;
+        }
     }
 }

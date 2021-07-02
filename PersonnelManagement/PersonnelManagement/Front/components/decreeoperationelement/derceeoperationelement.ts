@@ -1089,6 +1089,13 @@ export default class derceeoperationelement extends Vue {
                 this.history = result;
                 this.popover_first = true;
             })
+        fetch('api/MailController/fullhistory', { credentials: 'include' })
+            .then(response => {
+                return response.json() as Promise<Map<number, PersonDecreeHistory[]>>;
+            })
+            .then(result => {
+                var l = 123;
+            })
     }
 
     update_full_decrees() {

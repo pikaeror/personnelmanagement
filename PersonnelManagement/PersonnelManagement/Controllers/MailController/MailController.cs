@@ -268,5 +268,20 @@ namespace PersonnelManagement.Controllers
             }
             return output;
         }
+
+        [HttpGet("fullhistory")]
+        public Dictionary<int, List<PersonDecreeHistory>> get_full_history()
+        {
+            Dictionary<int, List<PersonDecreeHistory>> out_put = new Dictionary<int, List<PersonDecreeHistory>>();
+            string sessionid = Request.Cookies[Keys.COOKIES_SESSION];
+            User user = null;
+            if (IdentityService.IsLogined(sessionid, repository))
+            {
+                user = IdentityService.GetUserBySessionID(sessionid, repository);
+                DecreeHistory worker = new DecreeHistory(repository, user);
+                return worker.getFullHistory();
+            }
+            return out_put;
+        }
     }
 }

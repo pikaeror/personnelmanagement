@@ -21,8 +21,12 @@ import educations_parameters from '../../classes/Requests_classes/educations_par
 import Structure from '../../classes/Structure';
 
 import Education_Request from '../../classes/Requests_classes/education_request';
+import Education_respons from '../../classes/Requests_classes/education_respons';
 import Rank_Request from '../../classes/Requests_classes/rank_request';
+import Rank_respons from '../../classes/Requests_classes/Rank_respons';
 import Contract_Request from '../../classes/Requests_classes/contract_request';
+import Contract_respons from '../../classes/Requests_classes/contract_respons';
+import Person from '../../classes/person';
 Vue.component(Button.name, Button);
 Vue.component(Input.name, Input);
 Vue.component(Checkbox.name, Checkbox);
@@ -134,10 +138,13 @@ export default class PmrequestComponent extends Vue {
 
     education_datas: educations_parameters;
     education_request: Education_Request;
+    education_resualt: Education_respons[];
 
     rank_request: Rank_Request;
+    rank_resualt: Rank_respons[];
 
     contract_request: Contract_Request;
+    contruct_resualt: Contract_respons[];
 
 
     @Prop({ default: false })
@@ -230,10 +237,13 @@ export default class PmrequestComponent extends Vue {
 
             education_datas: new educations_parameters(),
             education_request: new Education_Request(),
+            education_resualt: [],
 
             rank_request: new Rank_Request(),
+            rank_resualt: [],
 
             contract_request: new Contract_Request(),
+            contruct_resualt: [],
         }
     }
 
@@ -753,19 +763,50 @@ export default class PmrequestComponent extends Vue {
             list = [];
     }
 
+    fullname(person: Person): string {
+        return person.surname + ' ' + person.name + ' ' + person.fathername;
+    }
+
     education_request_button() {
         this.education_request.current_structure = this.structureTrees;
         console.log("education request");
+        fetch('api/request/PersonEducationRequest', {
+            method: 'post',
+            body: JSON.stringify(<Education_Request>(this.education_request)),
+            credentials: 'include'
+        })
+            .then(response => response.json() as Promise<Education_respons[]>)
+            .then(data => {
+                this.education_resualt = data;
+            });
     }
 
     rank_request_button() {
         this.rank_request.current_structure = this.structureTrees;
         console.log("rank request");
+        fetch('api/request/PersonRankRequest', {
+            method: 'post',
+            body: JSON.stringify(<Rank_Request>(this.rank_request)),
+            credentials: 'include'
+        })
+            .then(response => response.json() as Promise<Rank_respons[]>)
+            .then(data => {
+                this.rank_resualt = data;
+            });
     }
 
     contract_request_button() {
         this.contract_request.current_structure = this.structureTrees;
         console.log("contract request");
+        fetch('api/request/PersonContructRequest', {
+            method: 'post',
+            body: JSON.stringify(<Contract_Request>(this.contract_request)),
+            credentials: 'include'
+        })
+            .then(response => response.json() as Promise<Contract_respons[]>)
+            .then(data => {
+                this.contruct_resualt = data;
+            });
     }
 
     loder_old_eld_datas() {
@@ -789,5 +830,56 @@ export default class PmrequestComponent extends Vue {
                     return;
                 this.structureTrees.push(data);
             });
+    }
+
+    educationDownload() {
+        this.education_resualt.length
+        fetch('/api/Pmrequest', {
+            method: 'post',
+            body: JSON.stringify(<Education_respons[]>(this.education_resualt)),
+            credentials: 'include',
+            headers: new Headers({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            })
+        })
+            .then(x => x.blob())
+            .then(x => {
+                download(x, "Запрос_Образование_ЭЛД");
+            })
+    }
+
+    contructDownload() {
+        this.education_resualt.length
+        fetch('/api/Pmrequest', {
+            method: 'post',
+            body: JSON.stringify(<Contract_respons[]>(this.contruct_resualt)),
+            credentials: 'include',
+            headers: new Headers({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            })
+        })
+            .then(x => x.blob())
+            .then(x => {
+                download(x, "Запрос_Контракт_ЭЛД");
+            })
+    }
+
+    rankDownload() {
+        this.education_resualt.length
+        fetch('/api/Pmrequest', {
+            method: 'post',
+            body: JSON.stringify(<Rank_respons[]>(this.rank_resualt)),
+            credentials: 'include',
+            headers: new Headers({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            })
+        })
+            .then(x => x.blob())
+            .then(x => {
+                download(x, "Запрос_Звание_ЭЛД");
+            })
     }
 }

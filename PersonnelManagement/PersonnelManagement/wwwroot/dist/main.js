@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "c0b40471f095e0bdcba6"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "d230d2914e9d8b0f56ff"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -2061,7 +2061,7 @@ var Component = __webpack_require__(3)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\GIT\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\structuremanagingpanel\\structuremanagingpanel.vue.html"
+Component.options.__file = "D:\\Projects\\MCHS\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\structuremanagingpanel\\structuremanagingpanel.vue.html"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] structuremanagingpanel.vue.html: functional components are not supported with templates, they should use render functions.")}
 
@@ -3833,6 +3833,7 @@ class Rank_Request {
     constructor() {
         this.current_structure = [];
         this.last_rank_date = new Date();
+        this.corelate_rank = false;
     }
 }
 /* harmony export (immutable) */ __webpack_exports__["a"] = Rank_Request;
@@ -18686,8 +18687,11 @@ let PmrequestComponent = class PmrequestComponent extends __WEBPACK_IMPORTED_MOD
             structureselfcount: false,
             education_datas: new __WEBPACK_IMPORTED_MODULE_4__classes_Requests_classes_educations_parameters__["a" /* default */](),
             education_request: new __WEBPACK_IMPORTED_MODULE_5__classes_Requests_classes_education_request__["a" /* default */](),
+            education_resualt: [],
             rank_request: new __WEBPACK_IMPORTED_MODULE_6__classes_Requests_classes_rank_request__["a" /* default */](),
+            rank_resualt: [],
             contract_request: new __WEBPACK_IMPORTED_MODULE_7__classes_Requests_classes_contract_request__["a" /* default */](),
+            contruct_resualt: [],
         };
     }
     mounted() {
@@ -19134,17 +19138,47 @@ let PmrequestComponent = class PmrequestComponent extends __WEBPACK_IMPORTED_MOD
         else
             list = [];
     }
+    fullname(person) {
+        return person.surname + ' ' + person.name + ' ' + person.fathername;
+    }
     education_request_button() {
         this.education_request.current_structure = this.structureTrees;
         console.log("education request");
+        fetch('api/request/PersonEducationRequest', {
+            method: 'post',
+            body: JSON.stringify((this.education_request)),
+            credentials: 'include'
+        })
+            .then(response => response.json())
+            .then(data => {
+            this.education_resualt = data;
+        });
     }
     rank_request_button() {
         this.rank_request.current_structure = this.structureTrees;
         console.log("rank request");
+        fetch('api/request/PersonRankRequest', {
+            method: 'post',
+            body: JSON.stringify((this.rank_request)),
+            credentials: 'include'
+        })
+            .then(response => response.json())
+            .then(data => {
+            this.rank_resualt = data;
+        });
     }
     contract_request_button() {
         this.contract_request.current_structure = this.structureTrees;
         console.log("contract request");
+        fetch('api/request/PersonContructRequest', {
+            method: 'post',
+            body: JSON.stringify((this.contract_request)),
+            credentials: 'include'
+        })
+            .then(response => response.json())
+            .then(data => {
+            this.contruct_resualt = data;
+        });
     }
     loder_old_eld_datas() {
         this.load_user_structure();
@@ -19168,6 +19202,54 @@ let PmrequestComponent = class PmrequestComponent extends __WEBPACK_IMPORTED_MOD
                     return;
                 this.structureTrees.push(data);
             });
+        });
+    }
+    educationDownload() {
+        this.education_resualt.length;
+        fetch('/api/Pmrequest', {
+            method: 'post',
+            body: JSON.stringify((this.education_resualt)),
+            credentials: 'include',
+            headers: new Headers({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            })
+        })
+            .then(x => x.blob())
+            .then(x => {
+            __WEBPACK_IMPORTED_MODULE_3_downloadjs___default()(x, "Запрос_Образование_ЭЛД");
+        });
+    }
+    contructDownload() {
+        this.education_resualt.length;
+        fetch('/api/Pmrequest', {
+            method: 'post',
+            body: JSON.stringify((this.contruct_resualt)),
+            credentials: 'include',
+            headers: new Headers({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            })
+        })
+            .then(x => x.blob())
+            .then(x => {
+            __WEBPACK_IMPORTED_MODULE_3_downloadjs___default()(x, "Запрос_Контракт_ЭЛД");
+        });
+    }
+    rankDownload() {
+        this.education_resualt.length;
+        fetch('/api/Pmrequest', {
+            method: 'post',
+            body: JSON.stringify((this.rank_resualt)),
+            credentials: 'include',
+            headers: new Headers({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            })
+        })
+            .then(x => x.blob())
+            .then(x => {
+            __WEBPACK_IMPORTED_MODULE_3_downloadjs___default()(x, "Запрос_Звание_ЭЛД");
         });
     }
 };
@@ -31466,7 +31548,7 @@ var Component = __webpack_require__(3)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\GIT\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\adminpanel\\adminpanel.vue.html"
+Component.options.__file = "D:\\Projects\\MCHS\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\adminpanel\\adminpanel.vue.html"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] adminpanel.vue.html: functional components are not supported with templates, they should use render functions.")}
 
@@ -31500,7 +31582,7 @@ var Component = __webpack_require__(3)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\GIT\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\app\\app.vue.html"
+Component.options.__file = "D:\\Projects\\MCHS\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\app\\app.vue.html"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] app.vue.html: functional components are not supported with templates, they should use render functions.")}
 
@@ -31534,7 +31616,7 @@ var Component = __webpack_require__(3)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\GIT\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\candidates\\candidates.vue.html"
+Component.options.__file = "D:\\Projects\\MCHS\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\candidates\\candidates.vue.html"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] candidates.vue.html: functional components are not supported with templates, they should use render functions.")}
 
@@ -31568,7 +31650,7 @@ var Component = __webpack_require__(3)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\GIT\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\decreeoperationelement\\decreeoperationelement.vue.html"
+Component.options.__file = "D:\\Projects\\MCHS\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\decreeoperationelement\\decreeoperationelement.vue.html"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] decreeoperationelement.vue.html: functional components are not supported with templates, they should use render functions.")}
 
@@ -31602,7 +31684,7 @@ var Component = __webpack_require__(3)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\GIT\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\decreeoperationtemplatecreator\\decreeoperationtemplatecreator.vue.html"
+Component.options.__file = "D:\\Projects\\MCHS\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\decreeoperationtemplatecreator\\decreeoperationtemplatecreator.vue.html"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] decreeoperationtemplatecreator.vue.html: functional components are not supported with templates, they should use render functions.")}
 
@@ -31636,7 +31718,7 @@ var Component = __webpack_require__(3)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\GIT\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\departmentmanagingpanel\\departmentmanagingpanel.vue.html"
+Component.options.__file = "D:\\Projects\\MCHS\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\departmentmanagingpanel\\departmentmanagingpanel.vue.html"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] departmentmanagingpanel.vue.html: functional components are not supported with templates, they should use render functions.")}
 
@@ -31670,7 +31752,7 @@ var Component = __webpack_require__(3)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\GIT\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\departmentslist\\departmentslist.vue.html"
+Component.options.__file = "D:\\Projects\\MCHS\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\departmentslist\\departmentslist.vue.html"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] departmentslist.vue.html: functional components are not supported with templates, they should use render functions.")}
 
@@ -31704,7 +31786,7 @@ var Component = __webpack_require__(3)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\GIT\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\eld\\eld.vue.html"
+Component.options.__file = "D:\\Projects\\MCHS\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\eld\\eld.vue.html"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] eld.vue.html: functional components are not supported with templates, they should use render functions.")}
 
@@ -31738,7 +31820,7 @@ var Component = __webpack_require__(3)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\GIT\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\home\\home.vue.html"
+Component.options.__file = "D:\\Projects\\MCHS\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\home\\home.vue.html"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] home.vue.html: functional components are not supported with templates, they should use render functions.")}
 
@@ -31772,7 +31854,7 @@ var Component = __webpack_require__(3)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\GIT\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\login\\login.vue.html"
+Component.options.__file = "D:\\Projects\\MCHS\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\login\\login.vue.html"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] login.vue.html: functional components are not supported with templates, they should use render functions.")}
 
@@ -31806,7 +31888,7 @@ var Component = __webpack_require__(3)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\GIT\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\modepanel\\modepanel.vue.html"
+Component.options.__file = "D:\\Projects\\MCHS\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\modepanel\\modepanel.vue.html"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] modepanel.vue.html: functional components are not supported with templates, they should use render functions.")}
 
@@ -31840,7 +31922,7 @@ var Component = __webpack_require__(3)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\GIT\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\notemplate\\notemplate.vue.html"
+Component.options.__file = "D:\\Projects\\MCHS\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\notemplate\\notemplate.vue.html"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] notemplate.vue.html: functional components are not supported with templates, they should use render functions.")}
 
@@ -31874,7 +31956,7 @@ var Component = __webpack_require__(3)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\GIT\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\pmrequestpanel\\pmrequestpanel.vue.html"
+Component.options.__file = "D:\\Projects\\MCHS\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\pmrequestpanel\\pmrequestpanel.vue.html"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] pmrequestpanel.vue.html: functional components are not supported with templates, they should use render functions.")}
 
@@ -31908,7 +31990,7 @@ var Component = __webpack_require__(3)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\GIT\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\positionmanagingpanel\\positionmanagingpanel.vue.html"
+Component.options.__file = "D:\\Projects\\MCHS\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\positionmanagingpanel\\positionmanagingpanel.vue.html"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] positionmanagingpanel.vue.html: functional components are not supported with templates, they should use render functions.")}
 
@@ -31942,7 +32024,7 @@ var Component = __webpack_require__(3)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\GIT\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\positionslist\\positionslist.vue.html"
+Component.options.__file = "D:\\Projects\\MCHS\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\positionslist\\positionslist.vue.html"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] positionslist.vue.html: functional components are not supported with templates, they should use render functions.")}
 
@@ -31976,7 +32058,7 @@ var Component = __webpack_require__(3)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\GIT\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\settingspanel\\settingspanel.vue.html"
+Component.options.__file = "D:\\Projects\\MCHS\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\settingspanel\\settingspanel.vue.html"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] settingspanel.vue.html: functional components are not supported with templates, they should use render functions.")}
 
@@ -32010,7 +32092,7 @@ var Component = __webpack_require__(3)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\GIT\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\sidebar\\sidebar.vue.html"
+Component.options.__file = "D:\\Projects\\MCHS\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\sidebar\\sidebar.vue.html"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] sidebar.vue.html: functional components are not supported with templates, they should use render functions.")}
 
@@ -32044,7 +32126,7 @@ var Component = __webpack_require__(3)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\GIT\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\topmenu\\topmenu.vue.html"
+Component.options.__file = "D:\\Projects\\MCHS\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\topmenu\\topmenu.vue.html"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] topmenu.vue.html: functional components are not supported with templates, they should use render functions.")}
 
@@ -58695,6 +58777,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       }
     }, [_vm._v("Удалить")])], 1)
   }), _vm._v(" "), (_vm.structureTrees.length > 0) ? _c('div', [_c('el-collapse', {
+    staticClass: "eld-eld-side-element",
     attrs: {
       "accordion": ""
     },
@@ -58706,11 +58789,20 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       expression: "activeName"
     }
   }, [_c('el-collapse-item', {
+    staticClass: "eld-eld-side-element-folder",
     attrs: {
       "title": "Образование",
       "name": "1"
     }
-  }, [_c('div', [_vm._v("\n                        Образование:\n                        "), (_vm.education_datas.all_specializations.length > 0) ? _c('el-select', {
+  }, [_c('div', {
+    staticStyle: {
+      "margin-bottom": "4px",
+      "box-shadow": "5px 5px 3px rgba(0,0,0,0.6)",
+      "padding": "10px",
+      "border-radius": "10px",
+      "background": "#eeece0"
+    }
+  }, [(_vm.education_datas.all_specializations.length > 0) ? _c('el-select', {
     staticClass: "eld-eld-body-select-long-request",
     attrs: {
       "multiple": "",
@@ -58756,7 +58848,17 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         "value": item
       }
     })
-  })) : _vm._e()], 1), _vm._v(" "), _c('div', [_vm._v("\n                        Уровень образования:\n                        "), (_vm.education_datas.all_levels.length > 0) ? _c('el-select', {
+  })) : _vm._e()], 1), _vm._v(" "), _c('div', {
+    staticStyle: {
+      "margin-bottom": "4px",
+      "box-shadow": "5px 5px 3px rgba(0,0,0,0.6)",
+      "padding": "10px",
+      "border-radius": "10px",
+      "background": "#f6b0b0",
+      "display": "flex",
+      "justify-content": "space-between"
+    }
+  }, [_vm._v("\n                        Уровень образования:\n                        "), (_vm.education_datas.all_levels.length > 0) ? _c('el-select', {
     attrs: {
       "multiple": "",
       "filterable": "",
@@ -58779,15 +58881,71 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       }
     })
   })) : _vm._e()], 1), _vm._v(" "), _c('el-button', {
+    attrs: {
+      "type": "success",
+      "plain": ""
+    },
     on: {
       "click": _vm.education_request_button
     }
-  }, [_vm._v("Отправить запрос")]), _vm._v(" "), _c('div', [_vm._v("Implementation resualt.")])], 1), _vm._v(" "), _c('el-collapse-item', {
+  }, [_vm._v("Отправить запрос")]), _vm._v(" "), _c('el-table', {
+    attrs: {
+      "data": _vm.education_resualt,
+      "empty-text": "Сотрудников не найдено"
+    }
+  }, [_c('el-table-column', {
+    attrs: {
+      "prop": "person.numpersonal",
+      "label": "Номер"
+    }
+  }), _vm._v(" "), _c('el-table-column', {
+    attrs: {
+      "prop": "fullname(person)",
+      "label": "ФИО",
+      "sortable": ""
+    }
+  }), _vm._v(" "), _c('el-table-column', {
+    attrs: {
+      "prop": "education.speciality",
+      "label": "Специальность",
+      "sortable": ""
+    }
+  }), _vm._v(" "), _c('el-table-column', {
+    attrs: {
+      "prop": "education.qualification",
+      "label": "Квалификация",
+      "sortable": ""
+    }
+  }), _vm._v(" "), _c('el-table-column', {
+    attrs: {
+      "prop": "education.endString",
+      "label": "Дата окончания",
+      "sortable": ""
+    }
+  })], 1), _vm._v(" "), (_vm.education_resualt.length > 0) ? _c('div', {
+    staticClass: "pmrequest-row"
+  }, [_c('el-button', {
+    attrs: {
+      "disabled": _vm.loading
+    },
+    on: {
+      "click": _vm.educationDownload
+    }
+  }, [_vm._v("Скачать")])], 1) : _vm._e()], 1), _vm._v(" "), _c('el-collapse-item', {
+    staticClass: "eld-eld-side-element-folder",
     attrs: {
       "title": "Звание",
       "name": "2"
     }
-  }, [_c('div', [_c('span', {
+  }, [_c('div', {
+    staticStyle: {
+      "margin-bottom": "4px",
+      "box-shadow": "5px 5px 3px rgba(0,0,0,0.6)",
+      "padding": "10px",
+      "border-radius": "10px",
+      "background": "#f6b0b0"
+    }
+  }, [_c('span', {
     staticClass: "demo-input-label"
   }, [_vm._v("Срок истечения выслуги в звании, до:")]), _vm._v(" "), _c('el-input', {
     attrs: {
@@ -58801,16 +58959,78 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       },
       expression: "rank_request.last_rank_date"
     }
+  }), _vm._v(" "), _c('el-switch', {
+    attrs: {
+      "active-text": "Не соответсвие должности",
+      "inactive-text": ""
+    },
+    model: {
+      value: (_vm.rank_request.corelate_rank),
+      callback: function($$v) {
+        _vm.rank_request.corelate_rank = $$v
+      },
+      expression: "rank_request.corelate_rank"
+    }
   })], 1), _vm._v(" "), _c('el-button', {
+    attrs: {
+      "type": "success",
+      "plain": ""
+    },
     on: {
       "click": _vm.rank_request_button
     }
-  }, [_vm._v("Отправить запрос")]), _vm._v(" "), _c('div', [_vm._v("Implementation resualt.")])], 1), _vm._v(" "), _c('el-collapse-item', {
+  }, [_vm._v("Отправить запрос")]), _vm._v(" "), _c('el-table', {
+    attrs: {
+      "data": _vm.rank_resualt,
+      "empty-text": "Сотрудников не найдено"
+    }
+  }, [_c('el-table-column', {
+    attrs: {
+      "prop": "person.numpersonal",
+      "label": "Номер"
+    }
+  }), _vm._v(" "), _c('el-table-column', {
+    attrs: {
+      "prop": "fullname(person)",
+      "label": "ФИО",
+      "sortable": ""
+    }
+  }), _vm._v(" "), _c('el-table-column', {
+    attrs: {
+      "prop": "rank.name",
+      "label": "Звание",
+      "sortable": ""
+    }
+  }), _vm._v(" "), _c('el-table-column', {
+    attrs: {
+      "prop": "rank.date_end",
+      "label": "Дата окончания",
+      "sortable": ""
+    }
+  })], 1), _vm._v(" "), (_vm.rank_resualt.length > 0) ? _c('div', {
+    staticClass: "pmrequest-row"
+  }, [_c('el-button', {
+    attrs: {
+      "disabled": _vm.loading
+    },
+    on: {
+      "click": _vm.rankDownload
+    }
+  }, [_vm._v("Скачать")])], 1) : _vm._e()], 1), _vm._v(" "), _c('el-collapse-item', {
+    staticClass: "eld-eld-side-element-folder",
     attrs: {
       "title": "Контракт",
       "name": "3"
     }
-  }, [_c('div', [_c('span', {
+  }, [_c('div', {
+    staticStyle: {
+      "margin-bottom": "4px",
+      "box-shadow": "5px 5px 3px rgba(0,0,0,0.6)",
+      "padding": "10px",
+      "border-radius": "10px",
+      "background": "#f6b0b0"
+    }
+  }, [_c('span', {
     staticClass: "demo-input-label"
   }, [_vm._v("Срок истечения контракта, до:")]), _vm._v(" "), _c('el-input', {
     attrs: {
@@ -58825,55 +59045,106 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       expression: "contract_request.last_contract_date"
     }
   })], 1), _vm._v(" "), _c('el-button', {
+    attrs: {
+      "type": "success",
+      "plain": ""
+    },
     on: {
       "click": _vm.contract_request_button
     }
-  }, [_vm._v("Отправить запрос")]), _vm._v(" "), _c('div', [_vm._v("Implementation resualt.")])], 1), _vm._v(" "), _c('el-collapse-item', {
+  }, [_vm._v("Отправить запрос")]), _vm._v(" "), _c('el-table', {
+    attrs: {
+      "data": _vm.contruct_resualt,
+      "empty-text": "Сотрудников не найдено"
+    }
+  }, [_c('el-table-column', {
+    attrs: {
+      "prop": "person.numpersonal",
+      "label": "Номер"
+    }
+  }), _vm._v(" "), _c('el-table-column', {
+    attrs: {
+      "prop": "fullname(person)",
+      "label": "ФИО",
+      "sortable": ""
+    }
+  }), _vm._v(" "), _c('el-table-column', {
+    attrs: {
+      "prop": "contract.orderid",
+      "label": "Номер приказа",
+      "sortable": ""
+    }
+  }), _vm._v(" "), _c('el-table-column', {
+    attrs: {
+      "prop": "contract.dateendString",
+      "label": "Дата окончания",
+      "sortable": ""
+    }
+  })], 1), _vm._v(" "), (_vm.contruct_resualt.length > 0) ? _c('div', {
+    staticClass: "pmrequest-row"
+  }, [_c('el-button', {
+    attrs: {
+      "disabled": _vm.loading
+    },
+    on: {
+      "click": _vm.contructDownload
+    }
+  }, [_vm._v("Скачать")])], 1) : _vm._e(), _vm._v(" "), _c('div', [_vm._v("Implementation resualt.")])], 1), _vm._v(" "), _c('el-collapse-item', {
+    staticClass: "eld-eld-side-element-folder",
     attrs: {
       "title": "Отпуск",
       "name": "4"
     }
   }, [_c('div', [_vm._v("Decision making: giving advices about operations is acceptable, but do not make decisions for the users;")]), _vm._v(" "), _c('div', [_vm._v("Controlled consequences: users should be granted the freedom to operate, including canceling, aborting or terminating current operation.")])]), _vm._v(" "), _c('el-collapse-item', {
+    staticClass: "eld-eld-side-element-folder",
     attrs: {
       "title": "Награды",
       "name": "5"
     }
   }, [_c('div', [_vm._v("Decision making: giving advices about operations is acceptable, but do not make decisions for the users;")]), _vm._v(" "), _c('div', [_vm._v("Controlled consequences: users should be granted the freedom to operate, including canceling, aborting or terminating current operation.")])]), _vm._v(" "), _c('el-collapse-item', {
+    staticClass: "eld-eld-side-element-folder",
     attrs: {
       "title": "Удостоверение",
       "name": "6"
     }
   }, [_c('div', [_vm._v("Decision making: giving advices about operations is acceptable, but do not make decisions for the users;")]), _vm._v(" "), _c('div', [_vm._v("Controlled consequences: users should be granted the freedom to operate, including canceling, aborting or terminating current operation.")])]), _vm._v(" "), _c('el-collapse-item', {
+    staticClass: "eld-eld-side-element-folder",
     attrs: {
       "title": "Аттестация",
       "name": "7"
     }
   }, [_c('div', [_vm._v("Decision making: giving advices about operations is acceptable, but do not make decisions for the users;")]), _vm._v(" "), _c('div', [_vm._v("Controlled consequences: users should be granted the freedom to operate, including canceling, aborting or terminating current operation.")])]), _vm._v(" "), _c('el-collapse-item', {
+    staticClass: "eld-eld-side-element-folder",
     attrs: {
       "title": "Иностранные языки",
       "name": "8"
     }
   }, [_c('div', [_vm._v("Decision making: giving advices about operations is acceptable, but do not make decisions for the users;")]), _vm._v(" "), _c('div', [_vm._v("Controlled consequences: users should be granted the freedom to operate, including canceling, aborting or terminating current operation.")])]), _vm._v(" "), _c('el-collapse-item', {
+    staticClass: "eld-eld-side-element-folder",
     attrs: {
       "title": "Учёные степени",
       "name": "9"
     }
   }, [_c('div', [_vm._v("Decision making: giving advices about operations is acceptable, but do not make decisions for the users;")]), _vm._v(" "), _c('div', [_vm._v("Controlled consequences: users should be granted the freedom to operate, including canceling, aborting or terminating current operation.")])]), _vm._v(" "), _c('el-collapse-item', {
+    staticClass: "eld-eld-side-element-folder",
     attrs: {
       "title": "Выборные органы",
       "name": "10"
     }
   }, [_c('div', [_vm._v("Decision making: giving advices about operations is acceptable, but do not make decisions for the users;")]), _vm._v(" "), _c('div', [_vm._v("Controlled consequences: users should be granted the freedom to operate, including canceling, aborting or terminating current operation.")])]), _vm._v(" "), _c('el-collapse-item', {
+    staticClass: "eld-eld-side-element-folder",
     attrs: {
       "title": "Служебные командировки",
       "name": "11"
     }
   }, [_c('div', [_vm._v("Decision making: giving advices about operations is acceptable, but do not make decisions for the users;")]), _vm._v(" "), _c('div', [_vm._v("Controlled consequences: users should be granted the freedom to operate, including canceling, aborting or terminating current operation.")])]), _vm._v(" "), _c('el-collapse-item', {
+    staticClass: "eld-eld-side-element-folder",
     attrs: {
       "title": "Взыскания",
       "name": "12"
     }
   }, [_c('div', [_vm._v("Decision making: giving advices about operations is acceptable, but do not make decisions for the users;")]), _vm._v(" "), _c('div', [_vm._v("Controlled consequences: users should be granted the freedom to operate, including canceling, aborting or terminating current operation.")])]), _vm._v(" "), _c('el-collapse-item', {
+    staticClass: "eld-eld-side-element-folder",
     attrs: {
       "title": "Водительское удостоверение",
       "name": "13"

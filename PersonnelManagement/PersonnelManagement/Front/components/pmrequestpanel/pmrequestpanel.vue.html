@@ -417,10 +417,9 @@
             </div>
 
             <div v-if="structureTrees.length > 0">
-                <el-collapse v-model="activeName" accordion>
-                    <el-collapse-item title="Образование" name="1">
-                        <div>
-                            Образование:
+                <el-collapse v-model="activeName" accordion class="eld-eld-side-element">
+                    <el-collapse-item title="Образование" name="1" class="eld-eld-side-element-folder" >
+                        <div style="margin-bottom: 4px; box-shadow: 5px 5px 3px rgba(0,0,0,0.6); padding: 10px; border-radius: 10px; background: #eeece0;">
                             <el-select v-if="education_datas.all_specializations.length > 0" v-model="education_request.specializationList"
                                        multiple
                                        filterable
@@ -446,7 +445,7 @@
                                 </el-option>
                             </el-select>
                         </div>
-                        <div>
+                        <div style="margin-bottom: 4px; box-shadow: 5px 5px 3px rgba(0,0,0,0.6); padding: 10px; border-radius: 10px; background: #f6b0b0; display: flex; justify-content: space-between;">
                             Уровень образования:
                             <el-select v-if="education_datas.all_levels.length > 0" v-model="education_request.educationLevel"
                                        multiple
@@ -460,68 +459,100 @@
                                 </el-option>
                             </el-select>
                         </div>
-                        <el-button @click="education_request_button">Отправить запрос</el-button>
-                        <div>Implementation resualt.</div>
+                        <el-button @click="education_request_button" type="success" plain>Отправить запрос</el-button>
+                        <el-table :data="education_resualt" empty-text="Сотрудников не найдено">
+                            <el-table-column prop="person.numpersonal" label="Номер"></el-table-column>
+                            <el-table-column prop="fullname(person)" label="ФИО" sortable></el-table-column>
+                            <el-table-column prop="education.speciality" label="Специальность" sortable></el-table-column>
+                            <el-table-column prop="education.qualification" label="Квалификация" sortable></el-table-column>
+                            <el-table-column prop="education.endString" label="Дата окончания" sortable></el-table-column>
+                        </el-table>
+                        <div class="pmrequest-row" v-if="education_resualt.length > 0">
+                            <el-button @click="educationDownload" :disabled="loading">Скачать</el-button>
+                        </div>
+                        <!--<div>Implementation resualt.</div>-->
                     </el-collapse-item>
-                    <el-collapse-item title="Звание" name="2">
-                        <div>
+                    <el-collapse-item title="Звание" name="2" class="eld-eld-side-element-folder">
+                        <div style="margin-bottom: 4px; box-shadow: 5px 5px 3px rgba(0,0,0,0.6); padding: 10px; border-radius: 10px; background: #f6b0b0;">
                             <span class="demo-input-label">Срок истечения выслуги в звании, до:</span>
                             <el-input placeholder="Выберите дату"
                                       v-model="rank_request.last_rank_date"
                                       type="date">
                             </el-input>
+                            <el-switch v-model="rank_request.corelate_rank"
+                                       active-text="Не соответсвие должности"
+                                       inactive-text="">
+                            </el-switch>
                         </div>
-                        <el-button @click="rank_request_button">Отправить запрос</el-button>
-                        <div>Implementation resualt.</div>
+                        <el-button @click="rank_request_button" type="success" plain>Отправить запрос</el-button>
+                        <el-table :data="rank_resualt" empty-text="Сотрудников не найдено">
+                            <el-table-column prop="person.numpersonal" label="Номер"></el-table-column>
+                            <el-table-column prop="fullname(person)" label="ФИО" sortable></el-table-column>
+                            <el-table-column prop="rank.name" label="Звание" sortable></el-table-column>
+                            <el-table-column prop="rank.date_end" label="Дата окончания" sortable></el-table-column>
+                        </el-table>
+                        <div class="pmrequest-row" v-if="rank_resualt.length > 0">
+                            <el-button @click="rankDownload" :disabled="loading">Скачать</el-button>
+                        </div>
+                        <!--<div>Implementation resualt.</div>-->
                     </el-collapse-item>
-                    <el-collapse-item title="Контракт" name="3">
-                        <div>
+                    <el-collapse-item title="Контракт" name="3" class="eld-eld-side-element-folder">
+                        <div style="margin-bottom: 4px; box-shadow: 5px 5px 3px rgba(0,0,0,0.6); padding: 10px; border-radius: 10px; background: #f6b0b0;">
                             <span class="demo-input-label">Срок истечения контракта, до:</span>
                             <el-input placeholder="Выберите дату"
                                       v-model="contract_request.last_contract_date"
                                       type="date">
                             </el-input>
                         </div>
-                        <el-button @click="contract_request_button">Отправить запрос</el-button>
+                        <el-button @click="contract_request_button" type="success" plain>Отправить запрос</el-button>
+                        <el-table :data="contruct_resualt" empty-text="Сотрудников не найдено">
+                            <el-table-column prop="person.numpersonal" label="Номер"></el-table-column>
+                            <el-table-column prop="fullname(person)" label="ФИО" sortable></el-table-column>
+                            <el-table-column prop="contract.orderid" label="Номер приказа" sortable></el-table-column>
+                            <el-table-column prop="contract.dateendString" label="Дата окончания" sortable></el-table-column>
+                        </el-table>
+                        <div class="pmrequest-row" v-if="contruct_resualt.length > 0">
+                            <el-button @click="contructDownload" :disabled="loading">Скачать</el-button>
+                        </div>
                         <div>Implementation resualt.</div>
                     </el-collapse-item>
-                    <el-collapse-item title="Отпуск" name="4">
+                    <el-collapse-item title="Отпуск" name="4" class="eld-eld-side-element-folder">
                         <div>Decision making: giving advices about operations is acceptable, but do not make decisions for the users;</div>
                         <div>Controlled consequences: users should be granted the freedom to operate, including canceling, aborting or terminating current operation.</div>
                     </el-collapse-item>
-                    <el-collapse-item title="Награды" name="5">
+                    <el-collapse-item title="Награды" name="5" class="eld-eld-side-element-folder">
                         <div>Decision making: giving advices about operations is acceptable, but do not make decisions for the users;</div>
                         <div>Controlled consequences: users should be granted the freedom to operate, including canceling, aborting or terminating current operation.</div>
                     </el-collapse-item>
-                    <el-collapse-item title="Удостоверение" name="6">
+                    <el-collapse-item title="Удостоверение" name="6" class="eld-eld-side-element-folder">
                         <div>Decision making: giving advices about operations is acceptable, but do not make decisions for the users;</div>
                         <div>Controlled consequences: users should be granted the freedom to operate, including canceling, aborting or terminating current operation.</div>
                     </el-collapse-item>
-                    <el-collapse-item title="Аттестация" name="7">
+                    <el-collapse-item title="Аттестация" name="7" class="eld-eld-side-element-folder">
                         <div>Decision making: giving advices about operations is acceptable, but do not make decisions for the users;</div>
                         <div>Controlled consequences: users should be granted the freedom to operate, including canceling, aborting or terminating current operation.</div>
                     </el-collapse-item>
-                    <el-collapse-item title="Иностранные языки" name="8">
+                    <el-collapse-item title="Иностранные языки" name="8" class="eld-eld-side-element-folder">
                         <div>Decision making: giving advices about operations is acceptable, but do not make decisions for the users;</div>
                         <div>Controlled consequences: users should be granted the freedom to operate, including canceling, aborting or terminating current operation.</div>
                     </el-collapse-item>
-                    <el-collapse-item title="Учёные степени" name="9">
+                    <el-collapse-item title="Учёные степени" name="9" class="eld-eld-side-element-folder">
                         <div>Decision making: giving advices about operations is acceptable, but do not make decisions for the users;</div>
                         <div>Controlled consequences: users should be granted the freedom to operate, including canceling, aborting or terminating current operation.</div>
                     </el-collapse-item>
-                    <el-collapse-item title="Выборные органы" name="10">
+                    <el-collapse-item title="Выборные органы" name="10" class="eld-eld-side-element-folder">
                         <div>Decision making: giving advices about operations is acceptable, but do not make decisions for the users;</div>
                         <div>Controlled consequences: users should be granted the freedom to operate, including canceling, aborting or terminating current operation.</div>
                     </el-collapse-item>
-                    <el-collapse-item title="Служебные командировки" name="11">
+                    <el-collapse-item title="Служебные командировки" name="11" class="eld-eld-side-element-folder">
                         <div>Decision making: giving advices about operations is acceptable, but do not make decisions for the users;</div>
                         <div>Controlled consequences: users should be granted the freedom to operate, including canceling, aborting or terminating current operation.</div>
                     </el-collapse-item>
-                    <el-collapse-item title="Взыскания" name="12">
+                    <el-collapse-item title="Взыскания" name="12" class="eld-eld-side-element-folder">
                         <div>Decision making: giving advices about operations is acceptable, but do not make decisions for the users;</div>
                         <div>Controlled consequences: users should be granted the freedom to operate, including canceling, aborting or terminating current operation.</div>
                     </el-collapse-item>
-                    <el-collapse-item title="Водительское удостоверение" name="13">
+                    <el-collapse-item title="Водительское удостоверение" name="13" class="eld-eld-side-element-folder">
                         <div>Decision making: giving advices about operations is acceptable, but do not make decisions for the users;</div>
                         <div>Controlled consequences: users should be granted the freedom to operate, including canceling, aborting or terminating current operation.</div>
                     </el-collapse-item>

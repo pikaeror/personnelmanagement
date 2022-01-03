@@ -3587,7 +3587,7 @@ export default class EldComponent extends Vue {
                 manual: this.boolToNumb(this.personjobManual),
                 mchs: this.boolToNumb(this.personjobMchs),
                 vacationdays: this.prepareNumToExport(this.personjobVacationdays),
-                position: this.prepareNumToExport(this.personjobPosition),
+                position: this.prepareNumToExport(this.personjobPosition) == 0 ? this.$store.state.positionsListId : this.prepareNumToExport(this.personjobPosition),
                 statecivil: this.boolToNumb(this.personjobStatecivil),
                 statecivilstart: this.prepareDateToExportNullable(this.personjobStatecivilstart),
                 statecivilend: this.prepareDateToExportNullable(this.personjobStatecivilend),
@@ -3812,7 +3812,7 @@ export default class EldComponent extends Vue {
             this.personjobMenuelement.manualBool = this.personjobManual;
             this.personjobMenuelement.mchsBool = this.personjobMchs;
             this.personjobMenuelement.vacationdays = this.personjobVacationdays;
-            this.personjobMenuelement.position = this.prepareNumToExport(this.personjobPosition);
+            this.personjobMenuelement.position = this.prepareNumToExport(this.personjobPosition) == 0 ? this.$store.state.positionsListId : this.prepareNumToExport(this.personjobPosition);
             this.personjobMenuelement.startcustomString = this.personjobStartcustom
             this.personjobMenuelement.privelegeBool = this.personjobPrivelegebool;
             this.personjobMenuelement.personjobpriveleges = this.personjobPersonjobpriveleges;
@@ -3822,7 +3822,7 @@ export default class EldComponent extends Vue {
 
             this.updatePersonjob(person, this.personjobMenuelement);
         }
-
+        this.$store.commit("setPositionsListId", 0);
         this.personjobMenuvisible = false;
     }
 

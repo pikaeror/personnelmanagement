@@ -411,6 +411,7 @@
                             <div class="adminpanel-rank" v-for="rank in ranks">
 
                                 <el-input class="adminpanel-rank-input" @input="startRankUpdate" v-model="rank.name"></el-input>
+                                <el-input-number class="adminpanel-rank-input" v-model="rank.maxPeriod" controls-position="right" :min="1" :max="20"></el-input-number>
                                 <el-select class="adminpanel-rank-input" @change="startRankUpdate" v-model="rank.positioncategory">
                                     <el-option v-for="positioncategory in positioncategoriesnocivil" :key="positioncategory.id" :label="positioncategory.name" :value="positioncategory.id">
 
@@ -425,6 +426,7 @@
                     </el-tab-pane>
                     <el-tab-pane label="Добавить звание" name="rsecond">
                         <el-input v-model="newRankName" placeholder="Название звания"></el-input>
+                        <el-input-number class="adminpanel-rank-input" v-model="new_rank_maximum_period" controls-position="right" :min="1" :max="20"></el-input-number>
                         <el-select class="adminpanel-rank-input" v-model="newRankPositioncategory">
                             <el-option v-for="positioncategory in positioncategoriesnocivil" :key="positioncategory.id" :label="positioncategory.name" :value="positioncategory.id">
 

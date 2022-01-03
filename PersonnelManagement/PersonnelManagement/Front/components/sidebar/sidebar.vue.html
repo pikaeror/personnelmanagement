@@ -3,7 +3,7 @@
 
         <!--<transition-group name="slide-fade" tag="div">-->
         <div class="sidebar-structure" v-bind:class="{ [structure.levelchild]: displayIt, 'sidebar-structure-user': isUserStructure(structure), 'sidebar-selected' : isSelected(structure.id), 'sidebar-structure-wc': structure.hasChildren }" v-for="structure in structures" v-bind:key="structure" v-if="!isDeletedSigned(structure)">
-            <a class="sidebar-structuretext" @click="openStructure($event, structure)">
+            <a class="sidebar-structuretext" @click="openStructure($event, structure)" @contextmenu="openStructureDB($event, structure)">
 
                 <div v-bind:class="{'sidebar-structure-title-childrenhas': structure.hasChildren}" class="sidebar-levelstyle" :title="structure.name">
                     {{structure.nameshortened}}

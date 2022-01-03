@@ -3134,6 +3134,12 @@ eld-eld-body-row-flex-vertical{
     width: 800px;
 }
 
+.eld-eld-body-select-long-request {
+    max-width: 100%;
+    min-width: 60%;
+    width: 100%;
+}
+
 
 .eld-eld-body-select-medium {
     max-width: 400px;

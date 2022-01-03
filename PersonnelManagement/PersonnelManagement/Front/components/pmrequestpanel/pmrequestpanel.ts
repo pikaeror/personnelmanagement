@@ -17,6 +17,12 @@ import Pmrequest from '../../classes/pmrequest';
 import Pmresult from '../../classes/pmresult';
 import { Input, Button, Checkbox, Select, Option, Dialog } from 'element-ui';
 import Structureregion from '../../classes/structureregion';
+import educations_parameters from '../../classes/Requests_classes/educations_parameters';
+import Structure from '../../classes/Structure';
+
+import Education_Request from '../../classes/Requests_classes/education_request';
+import Rank_Request from '../../classes/Requests_classes/rank_request';
+import Contract_Request from '../../classes/Requests_classes/contract_request';
 Vue.component(Button.name, Button);
 Vue.component(Input.name, Input);
 Vue.component(Checkbox.name, Checkbox);
@@ -126,6 +132,14 @@ export default class PmrequestComponent extends Vue {
     structuresublevel: number; // Уровень вложенности для пункта выше
     structureselfcount: boolean; // Учитывать исключительно собственную численность подразделений, не включая численночть подчиненных
 
+    education_datas: educations_parameters;
+    education_request: Education_Request;
+
+    rank_request: Rank_Request;
+
+    contract_request: Contract_Request;
+
+
     @Prop({ default: false })
     visible: boolean;
 
@@ -145,6 +159,10 @@ export default class PmrequestComponent extends Vue {
             {
                 value: '3',
                 label: 'Запрос Таблицы',
+            },
+            {
+                value: '4',
+                label: 'Запрос ЭЛД',
             }],
             type: null,
             rank: [],
@@ -209,10 +227,18 @@ export default class PmrequestComponent extends Vue {
             structuresub: false, // Включать подчиненные подразделения тех, кто прошел фильтрацию
             structuresublevel: 0, // Уровень вложенности для пункта выше
             structureselfcount: false, // Учитывать исключительно собственную численность
+
+            education_datas: new educations_parameters(),
+            education_request: new Education_Request(),
+
+            rank_request: new Rank_Request(),
+
+            contract_request: new Contract_Request(),
         }
     }
 
     mounted() {
+        // setInterval(this.load_educations_parameters, 10000);
     }
 
     get positiontypes(): Positiontype[] {
@@ -647,6 +673,11 @@ export default class PmrequestComponent extends Vue {
     }
 
     onTypeChange() {
+        this.structureTrees = [];
+        if (this.type == 4) {
+            console.log("chose variand ELD");
+            this.loder_old_eld_datas();
+        }
     }
 
     arrayToString(array: any[]): string {
@@ -699,5 +730,64 @@ export default class PmrequestComponent extends Vue {
         return "width:" + prop + "%;";
     }
 
-    
+    clear(list) {
+        if (list == this.structuretype)
+            this.structuretype = [];
+        else if (list == this.positiontype)
+            this.positiontype = [];
+        else if (list == this.structureTrees)
+            this.structureTrees = [];
+        else if (list == this.rank)
+            this.rank = [];
+/*        else if (list == this.positioncategory)
+            this.positioncategory = null;*/
+        else if (list == this.sof)
+            this.sof = [];
+        else if (list == this.mrd)
+            this.mrd = [];
+        else if (list == this.structurerank)
+            this.structurerank = [];
+        else if (list == this.structureregion)
+            this.structureregion = [];
+        else
+            list = [];
+    }
+
+    education_request_button() {
+        this.education_request.current_structure = this.structureTrees;
+        console.log("education request");
+    }
+
+    rank_request_button() {
+        this.rank_request.current_structure = this.structureTrees;
+        console.log("rank request");
+    }
+
+    contract_request_button() {
+        this.contract_request.current_structure = this.structureTrees;
+        console.log("contract request");
+    }
+
+    loder_old_eld_datas() {
+        this.load_user_structure();
+        this.load_educations_parameters();
+    }
+
+    async load_educations_parameters() {
+        fetch('api/request/educationdata', { credentials: 'include' })
+            .then(response => response.json() as Promise<educations_parameters>)
+            .then(data => {
+                this.education_datas = data;
+            });
+    }
+
+    async load_user_structure() {
+        fetch('api/request/structureTree', { credentials: 'include' })
+            .then(response => response.json() as Promise<StructureTree>)
+            .then(data => {
+                if (data.id == null)
+                    return;
+                this.structureTrees.push(data);
+            });
+    }
 }

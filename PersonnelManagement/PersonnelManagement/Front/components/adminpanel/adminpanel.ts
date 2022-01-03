@@ -101,6 +101,7 @@ export default class AdminpanelComponent extends Vue {
 
     newRankName: string;
     newRankPositioncategory: number;
+    new_rank_maximum_period: number;
     ranks: Rank[];
     rankStopUpdateTimer: number;
 
@@ -249,6 +250,7 @@ export default class AdminpanelComponent extends Vue {
 
             newRankName: "",
             newRankPositioncategory: 1,
+            new_rank_maximum_period: 1,
             rankStopUpdateTimer: 0,
             ranks: [],
 
@@ -925,7 +927,8 @@ export default class AdminpanelComponent extends Vue {
         fetch('/api/Ranks', {
             method: 'post',
             body: JSON.stringify(<Rank>{
-                name: this.newRankName, 
+                name: this.newRankName,
+                maxPeriod: this.new_rank_maximum_period,
             }),
             credentials: 'include',
             headers: new Headers({
@@ -1535,6 +1538,7 @@ export default class AdminpanelComponent extends Vue {
                 name: rank.name,
                 order: 0,
                 positioncategory: rank.positioncategory,
+                maxPeriod: rank.maxPeriod,
             }),
             credentials: 'include',
             headers: new Headers({
@@ -1557,6 +1561,7 @@ export default class AdminpanelComponent extends Vue {
                 name: rank.name,
                 order: rank.order - 1,
                 positioncategory: rank.positioncategory,
+                maxPeriod: rank.maxPeriod,
             }),
             credentials: 'include',
             headers: new Headers({
@@ -1579,6 +1584,7 @@ export default class AdminpanelComponent extends Vue {
                 name: rank.name,
                 order: rank.order + 1,
                 positioncategory: rank.positioncategory,
+                maxPeriod: rank.maxPeriod,
             }),
             credentials: 'include',
             headers: new Headers({

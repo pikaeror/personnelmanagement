@@ -116,6 +116,8 @@ export default class derceeoperationelement extends Vue {
     history: PersonDecreeHistory[];
     popover_first: boolean;
 
+    decree_history: Map<number, PersonDecreeHistory[]>;
+
     data() {
         return {
             /*ru: {
@@ -196,6 +198,8 @@ export default class derceeoperationelement extends Vue {
 
             history: [],
             popover_first: false,
+
+            decree_history: {},
         }
     }
 
@@ -390,6 +394,13 @@ export default class derceeoperationelement extends Vue {
                 });
                 this.decreeunopen = result;
             });
+        fetch('api/MailController/fullhistory', { credentials: 'include' })
+            .then(response => {
+                return response.json() as Promise<Map<number, PersonDecreeHistory[]>>;
+            })
+            .then(result => {
+                this.decree_history = result;
+            })
         return this.fullpersondecrees;
     }
 
@@ -1074,12 +1085,14 @@ export default class derceeoperationelement extends Vue {
         return flag;
     }
 
-    open_history(item) {
+    /*open_history(item) {
         if (this.popover_first) {
             this.history = [];
             this.popover_first = false;
             return;
         }
+        this.history = this.decree_history[item.row.id];
+        this.popover_first = true;
         var time: PersonDecreeHistory[] = [];
         fetch('api/MailController/history/' + item.row.id, { credentials: 'include' })
             .then(response => {
@@ -1089,14 +1102,7 @@ export default class derceeoperationelement extends Vue {
                 this.history = result;
                 this.popover_first = true;
             })
-        fetch('api/MailController/fullhistory', { credentials: 'include' })
-            .then(response => {
-                return response.json() as Promise<Map<number, PersonDecreeHistory[]>>;
-            })
-            .then(result => {
-                var l = 123;
-            })
-    }
+    }*/
 
     update_full_decrees() {
         this.fetchPersondecreesActive();

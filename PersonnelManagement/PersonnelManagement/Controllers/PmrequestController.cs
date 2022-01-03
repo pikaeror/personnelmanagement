@@ -61,7 +61,7 @@ namespace PersonnelManagement.Controllers
                 //int[] structuresArray = pmrequest.Structures.Split(',').Select(int.Parse).ToArray();
                 //structuresArray = FilterStructuresByReadability(user, structuresArray.ToList()).ToArray();
 
-                bool hasAccess = IdentityService.canEditStructures(sessionid, repository);
+                bool hasAccess = IdentityService.CanReadStructure(sessionid, repository, user.Structure.GetValueOrDefault());
                 if (!hasAccess)
                 {
                     return new ObjectResult(Keys.ERROR_SHORT + ":Отказано в доступе");

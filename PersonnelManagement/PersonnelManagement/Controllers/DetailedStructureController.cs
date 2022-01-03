@@ -72,6 +72,85 @@ namespace PersonnelManagement.Controllers
             return new List<int>();
         }
 
+        [HttpPost("newList")]
+        public IEnumerable<StructureExpanded> GetData_new([FromBody] string get)
+        {
+            if (get.Contains("NaN"))
+            {
+                get = "0f0";
+            }
+            // Если перед id стоит -, то не показывает подчиненные подразделения. Если id положителен, то показывает
+            string[] splittedGet = get.Split('f');
+
+            int getFeatured = Int32.Parse(splittedGet[1]);
+            if (getFeatured != 0 && !splittedGet[0].Contains(getFeatured.ToString()))
+            {
+                if (splittedGet[0].Length == 0)
+                {
+                    splittedGet[0] = getFeatured.ToString();
+                }
+                else
+                {
+                    splittedGet[0] = splittedGet[0] + "_" + getFeatured.ToString();
+                }
+
+            }
+            if (splittedGet[0].Length == 0)
+            {
+                //if (getFeatured != 0)
+                //{
+                //    splittedGet[0] = getFeatured.ToString();
+                //}
+                //else
+                //{
+                //    return new List<StructureExpanded>();
+                //}
+                return new List<StructureExpanded>();
+            }////ffffff
+
+            List<int> idsList = splittedGet[0].Split('_').Select(n => Convert.ToInt32(n)).ToList();
+            List<int> filteredIds = new List<int>();
+            foreach (int id in idsList)
+            {
+                //int abs = Math.Abs(id);
+                if (idsList.Contains(id) && idsList.Contains(-id) && !filteredIds.Contains(Math.Abs(id)))
+                {
+                    filteredIds.Add(Math.Abs(id));
+                }
+                else
+                {
+                    filteredIds.Add(id);
+                }
+            }
+            int[] ids = filteredIds.Distinct().ToArray();
+
+            // filters
+            List<int> new_ids = new List<int>(),
+                to_user = new List<int>();
+            Dictionary<int, Structure> structures = repository.GetContext().Structure.ToDictionary(r => r.Id);
+            foreach (int i in ids)
+            {
+                if (structures.ContainsKey(Math.Abs(i)))
+                {
+                    new_ids.Add(i);
+                }
+            }
+            ids = new_ids.ToArray();
+            //--------------
+            string sessionid = Request.Cookies[Keys.COOKIES_SESSION];
+            if (IdentityService.IsLogined(sessionid, repository))
+            {
+                User user = IdentityService.GetUserBySessionID(sessionid, repository);
+                repository.RememberUserStructureTree(get, user);
+                var allowedStructuresToRead = repository.GetAllowedStructuresToRead(user, ids, getFeatured, true);
+
+                //var length = allowedStructuresToRead.Count(); // Debug info
+                return allowedStructuresToRead;
+            }
+            List<StructureExpanded> empty = new List<StructureExpanded>();
+            return empty;
+        }
+
         [HttpGet("{get}")]
         public IEnumerable<StructureExpanded> GetData([FromRoute] string get)
         {
@@ -83,6 +162,7 @@ namespace PersonnelManagement.Controllers
             string[] splittedGet = get.Split('f');
 
             int getFeatured = Int32.Parse(splittedGet[1]);
+
             if (getFeatured != 0 && !splittedGet[0].Contains(getFeatured.ToString()))
             {
                 if (splittedGet[0].Length == 0)
@@ -121,6 +201,20 @@ namespace PersonnelManagement.Controllers
                 }
             }
             int[] ids = filteredIds.Distinct().ToArray();
+
+            // filters
+            List<int> new_ids = new List<int>(),
+                to_user = new List<int>();
+            Dictionary<int, Structure> structures = repository.GetContext().Structure.ToDictionary(r => r.Id);
+            foreach(int i in ids)
+            {
+                if (structures.ContainsKey(Math.Abs(i)))
+                {
+                    new_ids.Add(i);
+                }
+            }
+            ids = new_ids.ToArray();
+            //--------------
             string sessionid = Request.Cookies[Keys.COOKIES_SESSION];
             if (IdentityService.IsLogined(sessionid, repository))
             {
@@ -134,6 +228,7 @@ namespace PersonnelManagement.Controllers
             List<StructureExpanded> empty = new List<StructureExpanded>();
             return empty;
         }
+
 
         // GET: api/DetailedStructure/Solo5
         [HttpGet("Solo{id}")]
@@ -399,6 +494,10 @@ namespace PersonnelManagement.Controllers
                 user = IdentityService.GetUserBySessionID(sessionid, repository);
                 string[] substring = str.Split('&');
                 repository.Paste(Int32.Parse(substring[0].Split('=')[1]), Int32.Parse(substring[1]), user);
+
+                /*StructureCustomEditor custom = new StructureCustomEditor(repository, user);
+                custom.PasteStructure(Int32.Parse(substring[0].Split('=')[1]), Int32.Parse(substring[1]));*/
+
                 return "";
             }
             return "";

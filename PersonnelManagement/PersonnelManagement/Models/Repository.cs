@@ -172,6 +172,7 @@ namespace PersonnelManagement.Models
         public IQueryable<Rightsstructure> Rightsstructures => context.Rightsstructure;
 
         public Dictionary<int, Personeducation> PersoneducationsLocalObjectNew { get; private set; }
+        public Dictionary<int, Educationlevel> EducationlevelsLocalObject { get; private set; }
 
         // Таймер. Используется для подсчета времени необходимого для следующего обновления локальных версий таблиц (StructuresLocal и иные). 
         private static Stopwatch stopWatch = Stopwatch.StartNew();
@@ -232,6 +233,26 @@ namespace PersonnelManagement.Models
         {
             DecreesGetLastTime = stopWatch.ElapsedMilliseconds;
             DecreesLocalObject = Decrees.ToDictionary(decree => decree.Id);
+        }
+
+        private static long EducationlevelsGetLastTime = -EDUCATIONLEVELS_GET_DELAY - 1;
+        private const long EDUCATIONLEVELS_GET_DELAY = 9000; // in ms
+        /// <summary>
+        /// Локальная версия таблицы из базы данных, которую мы или периодически обновляем или обновляем после внесения изменений. Необходима для улучшения быстродействия (уменьшения запросов в базу данных)
+        /// </summary>
+        /// <returns></returns>
+        public Dictionary<int, Educationlevel> EducationlevelsLocal() // 
+        {
+            if (stopWatch.ElapsedMilliseconds > EducationlevelsGetLastTime + EDUCATIONLEVELS_GET_DELAY)
+            {
+                UpdateEducationlevelsLocal();
+            }
+            return EducationlevelsLocalObject;
+        }
+        public void UpdateEducationlevelsLocal()
+        {
+            EducationlevelsGetLastTime = stopWatch.ElapsedMilliseconds;
+            EducationlevelsLocalObject = Educationlevels.ToDictionary(educationlevel => educationlevel.Id);
         }
 
         private static long RanksGetLastTime = -RANKS_GET_DELAY - 1;
@@ -1414,6 +1435,7 @@ namespace PersonnelManagement.Models
         public Structure CloneStructure(Structure structureToClone, User user)
         {
             Structure structure = new Structure();
+            structureToClone = GetActualStructureInfo(structureToClone, user.Date.GetValueOrDefault());
             structure.Name = structureToClone.Name;
             structure.Name1 = structureToClone.Name1;
             structure.Name2 = structureToClone.Name2;
@@ -1454,7 +1476,7 @@ namespace PersonnelManagement.Models
 
             context.Structure.Add(structure);
             context.SaveChanges();
-            UpdateStructuresLocal();
+            //UpdateStructuresLocal();
 
             Decree decree = GetDecreeByUser(user);
             Decreeoperation operation = new Decreeoperation();
@@ -1464,7 +1486,7 @@ namespace PersonnelManagement.Models
 
             context.Decreeoperation.Add(operation);
             context.SaveChanges();
-            UpdateDecreeoperationsLocal();
+            //UpdateDecreeoperationsLocal();
             return structure;
         }
 
@@ -1614,7 +1636,8 @@ namespace PersonnelManagement.Models
             /**
              * Creating new structure.
              */
-            Structure newStructure = new Structure();
+            Structure newStructure = new Structure(structure);
+            newStructure.Id = 0;
             newStructure.Name = structureManagement.Name;
             newStructure.Name1 = structureManagement.Name1;
             newStructure.Name2 = structureManagement.Name2;
@@ -1629,6 +1652,25 @@ namespace PersonnelManagement.Models
             newStructure.Parentstructure = structureManagement.Parent;
             newStructure.Priority = structure.Priority; // Ставим прежний приоритет
             newStructure.Separatestructure = structure.Separatestructure;
+
+            newStructure.Subject1 = structureManagement.Subject1;
+            newStructure.Subject2 = structureManagement.Subject2;
+            newStructure.Subject3 = structureManagement.Subject3;
+            newStructure.Subject4 = structureManagement.Subject4;
+            newStructure.Subject5 = structureManagement.Subject5;
+            newStructure.Subject6 = structureManagement.Subject6;
+            newStructure.Subject7 = structureManagement.Subject7;
+            newStructure.Subject8 = structureManagement.Subject8;
+            newStructure.Subject9 = structureManagement.Subject9;
+            newStructure.Subject10 = structureManagement.Subject10;
+            newStructure.Subject11 = structureManagement.Subject11;
+            newStructure.Subject12 = structureManagement.Subject12;
+            newStructure.Subject13 = structureManagement.Subject13;
+            newStructure.Subject14 = structureManagement.Subject14;
+            newStructure.Subject15 = structureManagement.Subject15;
+            newStructure.Subjectgender = structureManagement.Subjectgender;
+            newStructure.Subjectnumber = structureManagement.Subjectnumber;
+            newStructure.Subjectnotice = structureManagement.Subjectnotice;
 
             if (!structureManagement.Name.Equals(origin.Name))
             {
@@ -1649,7 +1691,7 @@ namespace PersonnelManagement.Models
              * Для прохождения службы
              */
 
-            structure.Subject1 = structureManagement.Subject1;
+/*            structure.Subject1 = structureManagement.Subject1;
             structure.Subject2 = structureManagement.Subject2;
             structure.Subject3 = structureManagement.Subject3;
             structure.Subject4 = structureManagement.Subject4;
@@ -1666,12 +1708,11 @@ namespace PersonnelManagement.Models
             structure.Subject15 = structureManagement.Subject15;
             structure.Subjectgender = structureManagement.Subjectgender;
             structure.Subjectnumber = structureManagement.Subjectnumber;
-            structure.Subjectnotice = structureManagement.Subjectnotice;
+            structure.Subjectnotice = structureManagement.Subjectnotice;*/
 
             newStructure.Changeorigin = origin.Id;
             context.Structure.Add(newStructure);
             context.SaveChanges();
-            UpdateStructuresLocal();
 
             Decree decree = GetDecreeByUser(user);
             Decreeoperation operation = new Decreeoperation();
@@ -1688,6 +1729,8 @@ namespace PersonnelManagement.Models
             origin.Changestructurelast = newStructure.Id;
             context.Decreeoperation.Add(operation);
             context.SaveChanges();
+
+            UpdateStructuresLocal();
             UpdateDecreeoperationsLocal();
         }
 
@@ -2086,6 +2129,25 @@ namespace PersonnelManagement.Models
             structure.City = structureManagement.City;
             structure.Rank = structureManagement.Rank;
             structure.Separatestructure = structureManagement.Separatestructure;
+
+            structure.Subject1 = structureManagement.Subject1;
+            structure.Subject2 = structureManagement.Subject2;
+            structure.Subject3 = structureManagement.Subject3;
+            structure.Subject4 = structureManagement.Subject4;
+            structure.Subject5 = structureManagement.Subject5;
+            structure.Subject6 = structureManagement.Subject6;
+            structure.Subject7 = structureManagement.Subject7;
+            structure.Subject8 = structureManagement.Subject8;
+            structure.Subject9 = structureManagement.Subject9;
+            structure.Subject10 = structureManagement.Subject10;
+            structure.Subject11 = structureManagement.Subject11;
+            structure.Subject12 = structureManagement.Subject12;
+            structure.Subject13 = structureManagement.Subject13;
+            structure.Subject14 = structureManagement.Subject14;
+            structure.Subject15 = structureManagement.Subject15;
+            structure.Subjectgender = structureManagement.Subjectgender;
+            structure.Subjectnumber = structureManagement.Subjectnumber;
+            structure.Subjectnotice = structureManagement.Subjectnotice;
 
             int minusstructureid = -structure.Id;
             Decreeoperation contextOperation = Decreeoperations.FirstOrDefault(d => d.Subject == minusstructureid);
@@ -2873,9 +2935,9 @@ namespace PersonnelManagement.Models
 
         public Position ClonePosition(Position positionToClone, User user)
         {
-            Position position = new Position();
+            Position position = new Position(positionToClone);
             position.Id = 0;
-            position.Cap = positionToClone.Cap;
+/*            position.Cap = positionToClone.Cap;
             position.Dateactive = positionToClone.Dateactive;
             position.Dateinactive = positionToClone.Dateinactive;
             position.Sourceoffinancing = positionToClone.Sourceoffinancing;
@@ -2886,20 +2948,20 @@ namespace PersonnelManagement.Models
             position.Replacedbycivilpositioncategory = positionToClone.Replacedbycivilpositioncategory;
             position.Replacedbycivilpositiontype = positionToClone.Replacedbycivilpositiontype;
             position.Opchs = positionToClone.Opchs;
-            position.Altrank = positionToClone.Altrank;
+            position.Altrank = positionToClone.Altrank;*/
             //position.Altrank = positionToClone.Altrank;
             position.Origin = 0;
-            position.Decertificate = positionToClone.Decertificate;
+/*            position.Decertificate = positionToClone.Decertificate;
             position.Decertificatedate = positionToClone.Decertificatedate;
             position.Civilranklow = positionToClone.Civilranklow;
             position.Civilrankhigh = positionToClone.Civilrankhigh;
             position.Replacedbycivildatelimit = positionToClone.Replacedbycivildatelimit;
-            position.Replacedbycivildate = positionToClone.Replacedbycivildate;
+            position.Replacedbycivildate = positionToClone.Replacedbycivildate;*/
             position.Structure = 0; // Put parent later
-            position.Positiontype = positionToClone.Positiontype;
+/*            position.Positiontype = positionToClone.Positiontype;
             position.Civildecree = positionToClone.Civildecree;
             position.Civildecreenumber = positionToClone.Civildecreenumber;
-            position.Civildecreedate = positionToClone.Civildecreedate;
+            position.Civildecreedate = positionToClone.Civildecreedate;*/
             position.Curator = 0;
             position.Head = 0;
             position.Curatorlist = "";
@@ -2908,7 +2970,7 @@ namespace PersonnelManagement.Models
             /**
              * Для прохождения службы
              */
-            position.Subject1 = positionToClone.Subject1;
+/*            position.Subject1 = positionToClone.Subject1;
             position.Subject2 = positionToClone.Subject2;
             position.Subject3 = positionToClone.Subject3;
             position.Subject4 = positionToClone.Subject4;
@@ -2927,12 +2989,12 @@ namespace PersonnelManagement.Models
             position.Subject17 = positionToClone.Subject17;
             position.Subject18 = positionToClone.Subject18;
             position.Subject19 = positionToClone.Subject19;
-            position.Subject20 = positionToClone.Subject20;
+            position.Subject20 = positionToClone.Subject20;*/
 
             context.Position.Add(position);
             context.SaveChanges();
             position.Origin = position.Id;
-            context.SaveChanges();
+            //context.SaveChanges();
 
             List<Positionmrd> positionmrdsToClone = Positionmrds.Where(pm => pm.Position == positionToClone.Id).ToList();
             foreach(Positionmrd positionmrdToClone in positionmrdsToClone)
@@ -2942,7 +3004,7 @@ namespace PersonnelManagement.Models
                 positionmrd.Position = position.Id;
                 context.Positionmrd.Add(positionmrd);
             }
-            context.SaveChanges();
+            //context.SaveChanges();
 
 
 
@@ -2959,7 +3021,7 @@ namespace PersonnelManagement.Models
                     context.Altrank.Add(altrank);
                 }
             }
-            context.SaveChanges();
+            /**/context.SaveChanges();
 
             
 
@@ -2974,9 +3036,9 @@ namespace PersonnelManagement.Models
 
             context.Decreeoperation.Add(operation);
             context.SaveChanges();
-            UpdateDecreeoperationsLocal();
+            /*UpdateDecreeoperationsLocal();
             UpdatePositionsLocal();
-            UpdatePositionmrdsLocal();
+            UpdatePositionmrdsLocal();*/
             return position;
         }
 
@@ -4198,13 +4260,16 @@ namespace PersonnelManagement.Models
 
         public void UpdateRank(Rank rank)
         {
-            Rank contextRank = Ranks.FirstOrDefault(r => r.Id == rank.Id);
+            //context.Rank.FirstOrDefault(r => r.Id == rank.Id);
+            Rank contextRank = context.Rank.FirstOrDefault(r => r.Id == rank.Id);
             if (contextRank == null)
             {
                 return;
             }
             contextRank.Name = rank.Name;
             contextRank.Positioncategory = rank.Positioncategory;
+            contextRank.MaxPeriod = rank.MaxPeriod;
+            context.Rank.Update(contextRank);
             context.SaveChanges();
             UpdateRanksLocal();
         }
@@ -4225,6 +4290,8 @@ namespace PersonnelManagement.Models
             rankSwap.Order = contextRank.Order;
             contextRank.Order = orderSwap;
 
+
+            context.Rank.Update(contextRank);
             context.SaveChanges();
             UpdateRanksLocal();
         }
@@ -4683,9 +4750,7 @@ namespace PersonnelManagement.Models
                 strExp.Grandparent = GetGrandParentName(GetActualStructureInfo(strExp.Id, user.Date.GetValueOrDefault()).Id, user.Date);
                 /*strExp.Grandparent = GetGrandParentName(strExp.Id);*/
             }
-
             return outputList;
-
             //return outputList;
         }
 
@@ -4988,6 +5053,19 @@ namespace PersonnelManagement.Models
                 
             }
             return structureTrees;
+        }
+
+        public StructureTree GetStructureTree(int id, DateTime date)
+        {
+            StructureTree structureTree = new StructureTree();
+            Structure structure = StructuresLocal().GetValue(id);
+            //Structure structure = Structures.FirstOrDefault(s => s.Id == id);
+            if (structure != null)
+            {
+                structureTree.Tree = FormTree(structure, true, date);
+                structureTree.Id = id;
+            }
+            return structureTree;
         }
 
         /**
@@ -7097,7 +7175,7 @@ namespace PersonnelManagement.Models
             List<KeyValue<int, int>> IdsAndParentIds = new List<KeyValue<int, int>>();
             Dictionary<int, int> oldIdsAndNewIds = new Dictionary<int, int>();
             //List<int> structuresInts = GetStructuresSiblingsWithSameOrNullType(structureid);
-            List<int> structuresInts = GetStructuresSiblings(structureid);
+            List<int> structuresInts = GetStructuresSiblings(structureid, date: user.Date);
             foreach (int i in structuresInts)
             {
                 Structure findedStructure = Structures.First(s => s.Id == i);
@@ -7111,6 +7189,8 @@ namespace PersonnelManagement.Models
                 //context.Structure.Add(clonedStructure);
             }
             context.SaveChanges();
+            UpdateStructuresLocal();
+            UpdateDecreeoperationsLocal();
 
             int index = 0;
             foreach (Structure cloned in newStructures)
@@ -7141,8 +7221,12 @@ namespace PersonnelManagement.Models
                     Position clonedPosition = ClonePosition(position, user);
                     clonedPosition.Structure = oldIdsAndNewIds[position.Structure];
                }
-            } 
+            }
             context.SaveChanges();
+            UpdateDecreeoperationsLocal();
+            UpdatePositionsLocal();
+            UpdatePositionmrdsLocal();
+            //context.SaveChanges();
             
         }
 
@@ -7631,8 +7715,9 @@ namespace PersonnelManagement.Models
             if (withHead)
             {
                 Position head = GetHead(structureID, date);
-                if (head != null && !positions.Contains(head))
+                if (head != null && !positions.ToDictionary(r => r.Id).ContainsKey(head.Id))
                 {
+                    //!positions.ToDictionary(r => r.Id).ContainsKey(head.Id) ? positions.Add(head) : null;
                     positions.Add(head);
                 }
             }
@@ -11062,6 +11147,26 @@ namespace PersonnelManagement.Models
             return persons;
         }
 
+        public List<PersonManager> GetAllPersons(User user, bool excludeRemoved = true, bool fastSearch = false)
+        {
+
+            List<PersonManager> persons = new List<PersonManager>();
+            if (PersonsLocal() == null)
+            {
+                UpdatePersonsLocal();
+            }
+            // Меняем на StartsWith, чтобы в первую очередь искало по фамилиям, потом имени, а уже потом отчеству.
+            persons.AddRange(PersonManager.PersonsToPersonManagers(this, user, PersonsLocal().Values.ToList().FindAll(el => el.Structure != 0), fastSearch));
+            //persons.AddRange(PersonManager.PersonsToPersonManagers(this, user, PersonsLocal().Values.Where(p => (p.Surname + " " + p.Name + " " + p.Fathername).ToLower().Contains(fioPrepared)), fastSearch));
+
+            if (excludeRemoved)
+            {
+                persons = persons.Where(p => p.Removed == 0).ToList();
+            }
+
+            return persons;
+        }
+
         /// <summary>
         /// Создаем новое ЭЛД. По умолчанию в конце к ФИО добавляется пол
         /// </summary>
@@ -14066,7 +14171,9 @@ namespace PersonnelManagement.Models
                     SaveChanges();
                 }
             }
-            
+            context.Personjob.Update(personjobContext);
+            SaveChanges();
+            UpdatePersonjobsLocal();
         }
 
         public void DeletePersonJob(User user, Personjob personjob)
@@ -15770,7 +15877,6 @@ namespace PersonnelManagement.Models
                         }
                     }
                 }
-
                 MovePersonBetweenCourses movePersonBetweenCourses = new MovePersonBetweenCourses(this, user, new_vzvods);
                 movePersonBetweenCourses.Worker(decreeoperationsToAcceptMove);
             }
@@ -20290,7 +20396,7 @@ namespace PersonnelManagement.Models
             return newPersondecreeoperation;
         }
 
-       public Educationperiod GetEducationperiod(int idEducationPeriod)
+        public Educationperiod GetEducationperiod(int idEducationPeriod)
         {
             return context.Educationperiod.ToList().FirstOrDefault(e => e.Id == idEducationPeriod);
         }
@@ -20306,5 +20412,69 @@ namespace PersonnelManagement.Models
             return new string(letters);
         }
 
+        public List<string> Get_all_cvalifications(User user)
+        {
+            List<string> all_cvalifications = new List<string>();
+            List<PersonManager> personsUnfiltered = GetAllPersons(user, true, true);
+            List<PersonManager> persons = new List<PersonManager>();
+            foreach (PersonManager person in personsUnfiltered)
+            {
+                bool is_AllowedToReadPerson = isAllowedToReadPerson(user, person.Id);
+                if (is_AllowedToReadPerson)
+                {
+                    persons.Add(person);
+                }
+            }
+            List<Personeducation> personeducations = Personeducations.ToList();
+
+            foreach (Personeducation personeducation in personeducations)
+            {
+                foreach (PersonManager person in persons)
+                {
+                    if (personeducation.Person == person.Id && personeducation.Qualification != "")
+                        all_cvalifications.Add(personeducation.Qualification.ToLower());
+                }
+            }
+            return all_cvalifications.Distinct().ToList();
+        }
+
+        public List<string> Get_all_specializations(User user)
+        {
+            List<string> all_specializations = new List<string>();
+            List<PersonManager> personsUnfiltered = GetAllPersons(user, true, true);
+            List<PersonManager> persons = new List<PersonManager>();
+            foreach (PersonManager person in personsUnfiltered)
+            {
+                bool is_AllowedToReadPerson = isAllowedToReadPerson(user, person.Id);
+                if (is_AllowedToReadPerson)
+                {
+                    persons.Add(person);
+                }
+            }
+
+            List<Personeducation> personeducations = Personeducations.ToList();
+
+            foreach (Personeducation personeducation in personeducations)
+            {
+                foreach (PersonManager person in persons)
+                {
+                    if (personeducation.Person == person.Id && personeducation.Speciality != "")
+                        all_specializations.Add(personeducation.Speciality.ToLower());
+                }
+            }
+            return all_specializations.Distinct().ToList();
+        }
+
+        public List<string> Get_all_levels()
+        {
+            UpdateEducationlevelsLocal();
+            List<string> all_levels = new List<string>();
+            List<Educationlevel> educationlevels = EducationlevelsLocal().Values.ToList();
+            foreach(Educationlevel educationlevel in educationlevels)
+            {
+                all_levels.Add(educationlevel.Levelname);
+            }
+            return all_levels;
+        }
     }
 }

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Globalization;
 
 namespace PersonnelManagement.Models
@@ -94,7 +93,6 @@ namespace PersonnelManagement.Models
 
                     List<Educationperiod> educationperiods = new List<Educationperiod>(educationtypeblock.Educationperiods);
                     p_repository.SaveChanges();
-
 
                     Rank rank = p_repository.RanksLocal().GetValue(decreeoperation.Optionnumber9);
 
@@ -219,8 +217,6 @@ namespace PersonnelManagement.Models
             operation.Created = 1;
             // У подразделений subject имеет знак минуса
             operation.Subject = -structure.Id;
-
-
             decreeManagement1.Id = decree.Id;
             List<Position> positions = new List<Position>();
 

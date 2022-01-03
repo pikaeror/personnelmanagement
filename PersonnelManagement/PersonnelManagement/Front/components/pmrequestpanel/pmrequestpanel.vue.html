@@ -21,6 +21,7 @@
                     Подразделению
                 </div>
                 <el-button @click="addStructure" size="mini">Добавить подразделение</el-button>
+                <el-button v-if="structureTrees.length > 0" @click="clear(structureTrees)" icon="el-icon-circle-close-outline" size="mini"></el-button>
             </div>
 
             <div class="pmrequest-structure-element" v-for="(sub, key, index) in structureTrees">
@@ -37,6 +38,7 @@
                                :key="stype.id" :label="stype.name" :value="stype.id">
                     </el-option>
                 </el-select>
+                <el-button v-if="structuretype.length > 0" @click="clear(structuretype)" icon="el-icon-circle-close-outline" size="mini"></el-button>
             </div>
             <div class="pmrequest-row">
                 <div class="pmrequest-label">
@@ -47,6 +49,7 @@
                                :key="ptype.id" :label="shortifyTitle(ptype.name)" :value="ptype.id">
                     </el-option>
                 </el-select>
+                <el-button v-if="positiontype.length > 0" @click="clear(positiontype)" icon="el-icon-circle-close-outline" size="mini"></el-button>
             </div>
             <div class="pmrequest-row">
                 <div class="pmrequest-label">
@@ -57,6 +60,7 @@
                                :key="r.id" :label="r.name" :value="r.id">
                     </el-option>
                 </el-select>
+                <el-button v-if="rank.length > 0" @click="clear(rank)" icon="el-icon-circle-close-outline" size="mini"></el-button>
                 <el-checkbox class="pmrequest-marginleft" v-model="ranksexpanded">
 
                 </el-checkbox>
@@ -76,6 +80,7 @@
                                :key="pcategory.id" :label="pcategory.name" :value="pcategory.id">
                     </el-option>
                 </el-select>
+                <!--                <el-button v-if="positioncategory != null" @click="clear(positioncategory)" icon="el-icon-circle-close-outline" size="mini"></el-button>-->
             </div>
             <div class="pmrequest-row pmrequest-label">
                 <el-checkbox v-model="notopchs">Не относятся к ОПЧС</el-checkbox>
@@ -103,6 +108,7 @@
                                :key="s.id" :label="s.name" :value="s.id">
                     </el-option>
                 </el-select>
+                <el-button v-if="sof.length > 0" @click="clear(sof)" icon="el-icon-circle-close-outline" size="mini"></el-button>
             </div>
             <div class="pmrequest-row">
                 <div class="pmrequest-label">
@@ -113,6 +119,7 @@
                                :key="m.id" :label="m.name" :value="m.id">
                     </el-option>
                 </el-select>
+                <el-button v-if="mrd.length > 0" @click="clear(mrd)" icon="el-icon-circle-close-outline" size="mini"></el-button>
             </div>
             <div class="pmrequest-block">
                 <div class="pmrequest-row">
@@ -237,6 +244,7 @@
                                :key="stype.id" :label="stype.name" :value="stype.id">
                     </el-option>
                 </el-select>
+                <el-button v-if="structuretype.length > 0" @click="clear(structuretype)" icon="el-icon-circle-close-outline" size="mini"></el-button>
             </div>
             <div class="pmrequest-row">
                 <div class="pmrequest-label">
@@ -248,6 +256,7 @@
                                :key="i-1" :label="i-1" :value="i-1">
                     </el-option>
                 </el-select>
+                <el-button v-if="structurerank.length > 0" @click="clear(structurerank)" icon="el-icon-circle-close-outline" size="mini"></el-button>
             </div>
             <div class="pmrequest-row">
                 <div class="pmrequest-label">
@@ -258,6 +267,7 @@
                                :key="sregion.id" :label="sregion.name" :value="sregion.id">
                     </el-option>
                 </el-select>
+                <el-button v-if="structureregion.length > 0" @click="clear(structureregion)" icon="el-icon-circle-close-outline" size="mini"></el-button>
             </div>
             <div class="pmrequest-row">
                 <div class="pmrequest-label">
@@ -328,6 +338,7 @@
                                :key="stype.id" :label="stype.name" :value="stype.id">
                     </el-option>
                 </el-select>
+                <el-button v-if="structuretype.length > 0" @click="clear(structuretype)" icon="el-icon-circle-close-outline" size="mini"></el-button>
             </div>
             <!--<div class="pmrequest-row">
             <div class="pmrequest-label">
@@ -372,23 +383,151 @@
         </div>-->
 
 
-        <div class="pmrequest-row">
-            <el-button @click="request" :disabled="loading">Запрос</el-button>
-            <div v-if="loading" class="pmrequest-spinner fingerprint-spinner">
-                <div class="spinner-ring"></div>
-                <div class="spinner-ring"></div>
-                <div class="spinner-ring"></div>
-                <div class="spinner-ring"></div>
-                <div class="spinner-ring"></div>
-                <div class="spinner-ring"></div>
-                <div class="spinner-ring"></div>
-                <div class="spinner-ring"></div>
-                <div class="spinner-ring"></div>
 
+            <div class="pmrequest-row">
+                <el-button @click="request" :disabled="loading">Запрос</el-button>
+                <div v-if="loading" class="pmrequest-spinner fingerprint-spinner">
+                    <div class="spinner-ring"></div>
+                    <div class="spinner-ring"></div>
+                    <div class="spinner-ring"></div>
+                    <div class="spinner-ring"></div>
+                    <div class="spinner-ring"></div>
+                    <div class="spinner-ring"></div>
+                    <div class="spinner-ring"></div>
+                    <div class="spinner-ring"></div>
+                    <div class="spinner-ring"></div>
+
+                </div>
             </div>
+
         </div>
 
-    </div>
+
+        <div v-if="type == 4">
+            <div class="pmrequest-row">
+                <div class="pmrequest-label">
+                    Подразделение
+                </div>
+                <el-button @click="addStructure" size="mini">Добавить подразделение</el-button>
+                <el-button v-if="structureTrees.length > 0" @click="clear(structureTrees)" icon="el-icon-circle-close-outline" size="mini"></el-button>
+            </div>
+            <div class="pmrequest-structure-element" v-for="(sub, key, index) in structureTrees">
+                {{key + 1}} - {{sub.tree}}
+                <el-button size="mini" @click="removeStructure(sub.id)">Удалить</el-button>
+            </div>
+
+            <div v-if="structureTrees.length > 0">
+                <el-collapse v-model="activeName" accordion>
+                    <el-collapse-item title="Образование" name="1">
+                        <div>
+                            Образование:
+                            <el-select v-if="education_datas.all_specializations.length > 0" v-model="education_request.specializationList"
+                                       multiple
+                                       filterable
+                                       placeholder="Выберите специализацию"
+                                       class="eld-eld-body-select-long-request"
+                                       no-match-text="Не найдено">
+                                <el-option v-for="item in education_datas.all_specializations"
+                                           :key="item"
+                                           :label="item"
+                                           :value="item">
+                                </el-option>
+                            </el-select>
+                            <el-select v-if="education_datas.all_cvalifications.length > 0" v-model="education_request.cvalificationList"
+                                       multiple
+                                       filterable
+                                       placeholder="Выберите квалификацию"
+                                       class="eld-eld-body-select-long-request"
+                                       no-match-text="Не найдено">
+                                <el-option v-for="item in education_datas.all_cvalifications"
+                                           :key="item"
+                                           :label="item"
+                                           :value="item">
+                                </el-option>
+                            </el-select>
+                        </div>
+                        <div>
+                            Уровень образования:
+                            <el-select v-if="education_datas.all_levels.length > 0" v-model="education_request.educationLevel"
+                                       multiple
+                                       filterable
+                                       placeholder="Выберите специализацию"
+                                       no-match-text="Не найдено">
+                                <el-option v-for="item in education_datas.all_levels"
+                                           :key="item"
+                                           :label="item"
+                                           :value="item">
+                                </el-option>
+                            </el-select>
+                        </div>
+                        <el-button @click="education_request_button">Отправить запрос</el-button>
+                        <div>Implementation resualt.</div>
+                    </el-collapse-item>
+                    <el-collapse-item title="Звание" name="2">
+                        <div>
+                            <span class="demo-input-label">Срок истечения выслуги в звании, до:</span>
+                            <el-input placeholder="Выберите дату"
+                                      v-model="rank_request.last_rank_date"
+                                      type="date">
+                            </el-input>
+                        </div>
+                        <el-button @click="rank_request_button">Отправить запрос</el-button>
+                        <div>Implementation resualt.</div>
+                    </el-collapse-item>
+                    <el-collapse-item title="Контракт" name="3">
+                        <div>
+                            <span class="demo-input-label">Срок истечения контракта, до:</span>
+                            <el-input placeholder="Выберите дату"
+                                      v-model="contract_request.last_contract_date"
+                                      type="date">
+                            </el-input>
+                        </div>
+                        <el-button @click="contract_request_button">Отправить запрос</el-button>
+                        <div>Implementation resualt.</div>
+                    </el-collapse-item>
+                    <el-collapse-item title="Отпуск" name="4">
+                        <div>Decision making: giving advices about operations is acceptable, but do not make decisions for the users;</div>
+                        <div>Controlled consequences: users should be granted the freedom to operate, including canceling, aborting or terminating current operation.</div>
+                    </el-collapse-item>
+                    <el-collapse-item title="Награды" name="5">
+                        <div>Decision making: giving advices about operations is acceptable, but do not make decisions for the users;</div>
+                        <div>Controlled consequences: users should be granted the freedom to operate, including canceling, aborting or terminating current operation.</div>
+                    </el-collapse-item>
+                    <el-collapse-item title="Удостоверение" name="6">
+                        <div>Decision making: giving advices about operations is acceptable, but do not make decisions for the users;</div>
+                        <div>Controlled consequences: users should be granted the freedom to operate, including canceling, aborting or terminating current operation.</div>
+                    </el-collapse-item>
+                    <el-collapse-item title="Аттестация" name="7">
+                        <div>Decision making: giving advices about operations is acceptable, but do not make decisions for the users;</div>
+                        <div>Controlled consequences: users should be granted the freedom to operate, including canceling, aborting or terminating current operation.</div>
+                    </el-collapse-item>
+                    <el-collapse-item title="Иностранные языки" name="8">
+                        <div>Decision making: giving advices about operations is acceptable, but do not make decisions for the users;</div>
+                        <div>Controlled consequences: users should be granted the freedom to operate, including canceling, aborting or terminating current operation.</div>
+                    </el-collapse-item>
+                    <el-collapse-item title="Учёные степени" name="9">
+                        <div>Decision making: giving advices about operations is acceptable, but do not make decisions for the users;</div>
+                        <div>Controlled consequences: users should be granted the freedom to operate, including canceling, aborting or terminating current operation.</div>
+                    </el-collapse-item>
+                    <el-collapse-item title="Выборные органы" name="10">
+                        <div>Decision making: giving advices about operations is acceptable, but do not make decisions for the users;</div>
+                        <div>Controlled consequences: users should be granted the freedom to operate, including canceling, aborting or terminating current operation.</div>
+                    </el-collapse-item>
+                    <el-collapse-item title="Служебные командировки" name="11">
+                        <div>Decision making: giving advices about operations is acceptable, but do not make decisions for the users;</div>
+                        <div>Controlled consequences: users should be granted the freedom to operate, including canceling, aborting or terminating current operation.</div>
+                    </el-collapse-item>
+                    <el-collapse-item title="Взыскания" name="12">
+                        <div>Decision making: giving advices about operations is acceptable, but do not make decisions for the users;</div>
+                        <div>Controlled consequences: users should be granted the freedom to operate, including canceling, aborting or terminating current operation.</div>
+                    </el-collapse-item>
+                    <el-collapse-item title="Водительское удостоверение" name="13">
+                        <div>Decision making: giving advices about operations is acceptable, but do not make decisions for the users;</div>
+                        <div>Controlled consequences: users should be granted the freedom to operate, including canceling, aborting or terminating current operation.</div>
+                    </el-collapse-item>
+                </el-collapse>
+            </div>
+        </div>
 
 
         <el-dialog :visible.sync="exceldialogvisible" width="60%" append-to-body>

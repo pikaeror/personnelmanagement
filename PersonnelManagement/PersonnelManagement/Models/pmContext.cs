@@ -142,6 +142,7 @@ namespace PersonnelManagement.Models
 
         public pmContext(DbContextOptions<pmContext> options) : base(options) { }
 
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
@@ -6522,6 +6523,8 @@ namespace PersonnelManagement.Models
                     .HasColumnName("decreeupone")
                     .HasColumnType("tinyint(1)")
                     .HasDefaultValueSql("'0'");
+
+                entity.Property(e => e.MaxPeriod).HasColumnName("max_period");
 
                 entity.Property(e => e.Name)
                     .HasColumnName("name")

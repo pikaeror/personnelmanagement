@@ -389,6 +389,15 @@ const store = new Vuex.Store({
         modeappointedpersonstructuredecree: 0,
         modecopystring: "", // String with copy data. "s=1" means copy structure with id 1 and all substructrures with the same or null type and all positions inclusive.
 
+        oldcurrentmode: {"fullmode": "0",
+                "sidebarDisplay" : "0",
+                "modepanelVisible": 0,
+                "candidatesVisible" : 0,
+                "eldVisible" : 0,
+                "positionsListId" : 0,
+                "decreeoperationelementVisible" : 0,
+                "decreeoperationtemplatecreatorVisible" : false },
+
         currentdecreemail: "",
         decreemail: false,
 
@@ -1283,6 +1292,74 @@ const store = new Vuex.Store({
             state.modeselectedheading = n;
         },
         setModeselectstructure(state, n) {
+            if (n) {
+                state.oldcurrentmode.fullmode = state.fullmode;
+                state.oldcurrentmode.sidebarDisplay = state.sidebarDisplay;
+                state.oldcurrentmode.modepanelVisible = state.modepanelVisible;
+                state.oldcurrentmode.candidatesVisible = state.candidatesVisible;
+                state.oldcurrentmode.eldVisible = state.eldVisible;
+                state.oldcurrentmode.positionsListId = state.positionsListId;
+                state.oldcurrentmode.decreeoperationelementVisible = state.decreeoperationelementVisible;
+                state.oldcurrentmode.decreeoperationtemplatecreatorVisible = state.decreeoperationtemplatecreatorVisible;
+
+                state.fullmode = "1";
+                state.sidebarDisplay = "1",
+                state.modepanelVisible = 0;
+                state.candidatesVisible = 0;
+                state.eldVisible = 0;
+                state.positionsListId = 1;
+                state.decreeoperationelementVisible = 0;
+                state.decreeoperationtemplatecreatorVisible = false;
+                fetch('/api/Identity', {
+                    method: 'post',
+                    body: JSON.stringify(<Usersettings>{
+                        positioncompactValue: Number(state.positioncompact),
+                        updatePositioncompact: 1,
+                        sidebarDisplayValue: 1,
+                        updateSidebarDisplay: 1,
+                    }),
+                    credentials: 'include',
+                    headers: new Headers({
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    })
+                }).then(x => {
+                    state.sidebarDisplay = n.sidebardisplay;
+                    state.positioncompact = n.positioncompact;
+                });
+                fetch('api/Identity/Fullmode1', { credentials: 'include' })
+                //fetch('api/Identity/Org', { credentials: 'include' })
+                //state.user.prototype.fullmode = 1;
+            } else {
+                state.fullmode = state.oldcurrentmode.fullmode;
+                state.sidebarDisplay = state.oldcurrentmode.sidebarDisplay;
+                state.modepanelVisible = state.oldcurrentmode.modepanelVisible;
+                state.candidatesVisible = state.oldcurrentmode.candidatesVisible;
+                state.eldVisible = state.oldcurrentmode.eldVisible;
+                state.positionsListId = state.oldcurrentmode.positionsListId;
+                state.decreeoperationelementVisible = state.oldcurrentmode.decreeoperationelementVisible;
+                state.decreeoperationtemplatecreatorVisible = state.oldcurrentmode.decreeoperationtemplatecreatorVisible;
+                fetch('/api/Identity', {
+                    method: 'post',
+                    body: JSON.stringify(<Usersettings>{
+                        positioncompactValue: Number(state.positioncompact),
+                        updatePositioncompact: 1,
+                        sidebarDisplayValue: Number(state.oldcurrentmode.sidebarDisplay),
+                        updateSidebarDisplay: 1,
+                    }),
+                    credentials: 'include',
+                    headers: new Headers({
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    })
+                }).then(x => {
+                    state.sidebarDisplay = n.sidebardisplay;
+                    state.positioncompact = n.positioncompact;
+                });
+                //this.updateUserAppearance(state, appearance);
+                fetch('api/Identity/Fullmode' + state.oldcurrentmode.fullmode, { credentials: 'include' })
+                //state.user.prototype.fullmode = Number(state.oldcurrentmode.fullmode);
+            }
             state.modeselectstructure = n;
         },
         setModeselectedstructure(state, n) {
@@ -1322,7 +1399,17 @@ const store = new Vuex.Store({
         setModecopystring(state, n) {
             state.modecopystring = n; // String with copy data. "s=1" means copy structure with id 1 and all substructrures with the same or null type and all positions inclusive.
         },
-    }
+    },
+    /*CopyCurrentState() {
+        var actual: { [name: string]: any } = {};
+        actual.modepanelVisible = this.store.state.modepanelVisible;
+        actual.candidatesVisible = this.store.state.candidatesVisible;
+        actual.eldVisible = this.store.state.eldVisible;
+        actual.positionsListId = this.store.state.positionsListId;
+        actual.decreeoperationelementVisible = this.store.state.decreeoperationelementVisible;
+        actual.decreeoperationtemplatecreatorVisible = this.store.state.decreeoperationtemplatecreatorVisible;
+        return actual;
+    }*/
 })
 
 new Vue({

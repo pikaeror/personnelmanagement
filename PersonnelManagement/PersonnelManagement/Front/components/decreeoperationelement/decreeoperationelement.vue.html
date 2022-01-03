@@ -178,16 +178,15 @@
                                         <el-popover ref="popover4"
                                                     placement="right"
                                                     width="630"
-                                                    trigger="click"
-                                                    :open-delay="5000">
-                                                <el-table :data="history" style="width: 100%; height: 300px" height="100%" empty-text="История отсутствует">
+                                                    trigger="click">
+                                                <el-table :data="decree_history[item.row.id]" style="width: 100%; height: 300px" height="100%" empty-text="История отсутствует">
                                                     <el-table-column width="180" property="date" label="date"></el-table-column>
                                                     <el-table-column width="300" property="name" label="name"></el-table-column>
                                                     <el-table-column width="100" property="action" label="action"></el-table-column>
                                                 </el-table>
                                         </el-popover>
                                         <div v-if="!isopeneddecree(item)" style="text-align-last: center; font-size: x-large;">
-                                            <i class="el-icon-view" size="mini" @click="open_history(item)" v-popover:popover4></i>
+                                            <i class="el-icon-view" size="mini" v-popover:popover4></i>
                                         </div>
                                     </template>
                                 </el-table-column>

@@ -20,5 +20,6 @@ namespace PersonnelManagement.Models
         public string Name4 { get; set; }
         public string Name5 { get; set; }
         public string Name6 { get; set; }
+        public uint MaxPeriod { get; set; }
     }
 }

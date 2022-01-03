@@ -24,6 +24,23 @@ namespace PersonnelManagement.Models
         }
     }
 
+    public partial class Decreeoperation
+    {
+        public Decreeoperation() { }
+        public Decreeoperation(Decreeoperation decreeoperation)
+        {
+            Id = decreeoperation.Id;
+            Decree = decreeoperation.Decree;
+            Subject = decreeoperation.Subject;
+            Created = decreeoperation.Created;
+            Deleted = decreeoperation.Deleted;
+            Changed = decreeoperation.Changed;
+            Changedtype = decreeoperation.Changedtype;
+            Dateactive = decreeoperation.Dateactive;
+            Datecustom = decreeoperation.Datecustom;
+        }
+    }
+
     public partial class Structure
     {
         public Structure() { }

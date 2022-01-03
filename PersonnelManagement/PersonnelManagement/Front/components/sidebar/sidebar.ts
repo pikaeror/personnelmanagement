@@ -311,19 +311,37 @@ export default class SidebarComponent extends Vue {
         //        return;
         //    }
         //}
-        this.fetchInProcess = true; 
+        /*var recursive = function () {
+            var f = fetchtops;
+            var s = force;
+            this.fetchStructures(f, s);
+        }*/
+        if (this.fetchInProcess) {
+            setTimeout(this.fetchStructures, fetchStructureDelay / 3, fetchtops, force)
+        }
+        else {
+            this.fetchInProcess = true;
+            var k = this.parentsArrayToGet().length;
         //alert(this.parentsArrayToGet());
-        this.getStructure().then(x =>
-            fetch('api/DetailedStructure/' + this.parentsArrayToGet(), { credentials: 'include' })
+            this.getStructure().then(x =>
+            fetch('api/DetailedStructure/newList', {
+                method: 'post',
+                body: JSON.stringify(this.parentsArrayToGet()), 
+                credentials: 'include',
+                headers: new Headers({
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                })
+            })
+            /*fetch('api/DetailedStructure/' + this.parentsArrayToGet(), {credentials: 'include'
+            })*/
                 .then(response => response.json() as Promise<Structure[]>)
                 .then(data => {
-                    
                     if (this.masterpersonneleditorAccess == "1" || this.structureeditorAccess == "1") {
                         this.allStructuresShowAvailable = true;
                     } else {
                         this.allStructuresShowAvailable = false;
                     }
-
                     if (this.structureeditorAccess == "1" && this.$store.state.decree != null && this.$store.state.decree != 0) {
                         this.addNewStructureAvailable = true;
                         this.removeStructureAvailable = true;
@@ -348,10 +366,7 @@ export default class SidebarComponent extends Vue {
                             this.renameStructurenodecreeAvailable = true; // без изменения приказа только
                         }
                     }
-
-                    
                     data.forEach(p => {
-
                         if (p.id == 115)
                             var k = 0;
                         // Makes id of original
@@ -361,8 +376,6 @@ export default class SidebarComponent extends Vue {
                             p.realid = p.id;
                             p.id = p.changeorigin; // В основном айдишнике мы храним изначальное айди структуры. Чтобы все завязывалось на изначальном айди.
                         }
-
-
                         p.levelchild = "sidebar-structure-" + p.level;
                         if (p.childrenNumber > 0) {
                             p.hasChildren = true;
@@ -374,7 +387,6 @@ export default class SidebarComponent extends Vue {
                             } else {
                                 p.structureregionString = "";
                             }
-
                         } else {
                             p.structureregionString = "";
                         }
@@ -410,7 +422,6 @@ export default class SidebarComponent extends Vue {
                         } else {
                             decreeoperationsrequest.subjectidstructureupdate = 0;
                         }
-
                         decreeoperationsrequest.subjectId = -s.id; // У подразделений subject имеет знак минуса
                         decreeoperationsrequest.requestedDate = currentDateStart;
                         decreeoperationsrequest.detailed = 0;
@@ -437,7 +448,8 @@ export default class SidebarComponent extends Vue {
                 })
 
             
-        )
+            )
+        }
         
     }
 
@@ -454,6 +466,11 @@ export default class SidebarComponent extends Vue {
         if (parents == "0") {
             parents = "";
         }
+/*        if (parents.length > 180) {
+            var time = this.$store.state.parentStructures;
+            var totime = time.slice(4, time.length);
+            parents = totime.join('_').toString();
+        }*/
         parents += "f";
         parents += this.$store.state.featured;
 
@@ -1137,6 +1154,40 @@ export default class SidebarComponent extends Vue {
             this.$store.commit("setPositionsListId", -structure.changeorigin);
         }
         
+        this.$store.commit("setPositionsListTitle", structure.name);
+        this.$store.commit("setGrandparent", structure.grandparent);
+
+        if (showSubs && structure.hasChildren) {
+            this.showSubordinates(structure.id);
+        } else {
+        }
+        //alert('Послушай, скажи мне друг. Ты всюду был, ты знаешь всё на свете. Не то что я, гуляка человек.' );
+    }
+
+    openStructureDB(event: any, structure: Structure) {
+        if (event) event.preventDefault();
+
+        let showSubs: boolean = false;
+        if (structure.changeorigin == 0) {
+            if (this.$store.state.positionsListId == -structure.id) {
+                showSubs = true;
+            }
+        } else {
+            if (this.$store.state.positionsListId == -structure.changeorigin) {
+                showSubs = true;
+            }
+        }
+        //alert(id);
+        //this.$store.commit("setDepartmentsListId", id);
+        //this.$store.commit("setDepartmentsListTitle", name);
+        //this.$store.commit("setForceDepartmentUpdate", true);
+        this.$store.commit("setForcePositionUpdate", true);
+        if (structure.changeorigin == 0) {
+            this.$store.commit("setPositionsListId", -structure.id);
+        } else {
+            this.$store.commit("setPositionsListId", -structure.changeorigin);
+        }
+
         this.$store.commit("setPositionsListTitle", structure.name);
         this.$store.commit("setGrandparent", structure.grandparent);
 

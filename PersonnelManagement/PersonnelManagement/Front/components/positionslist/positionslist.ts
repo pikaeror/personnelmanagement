@@ -2,7 +2,7 @@
 import { Component, Prop } from 'vue-property-decorator';
 import Element from 'element-ui';
 import { Input, Button, Dropdown, Dialog, DropdownItem, DropdownMenu, Popover, Checkbox, Tooltip } from 'element-ui';
-import rand from 'random-seed';
+// import rand from 'random-seed';
 import _ from 'lodash';
 import Rank from '../../classes/rank';
 import Sourceoffinancing from '../../classes/sourceoffinancing';
@@ -22,7 +22,7 @@ import Pmrequest from '../../classes/pmrequest';
 import download from 'downloadjs';
 import Order from '../../classes/OrderHistrory/FullHistory';
 
-rand.create();
+// rand.create();
 Vue.component(Button.name, Button);
 Vue.component(Input.name, Input);
 Vue.component(Dropdown.name, Dropdown);
@@ -1365,13 +1365,13 @@ export default class PositionslistComponent extends Vue {
 
     getRandomColor(departmentid: number): string {
 
-        var random = new rand(departmentid); 
-        var letters = '0123456789ABCDEF';
+        /*var random = new rand(departmentid); 
+        var letters = '0123456789ABCDEF';*/
         var color = '#';
-        for (var i = 0; i < 6; i++) {
+        /*for (var i = 0; i < 6; i++) {
             color += letters[Math.floor(random.random() * 16)];
         }
-        //alert(color);
+        //alert(color);*/
         return color;
        
     }
@@ -2188,7 +2188,7 @@ export default class PositionslistComponent extends Vue {
             }
 
             this.$store.commit("setEldVisible", 1);
-            this.$store.commit("setPositionsListId", 0);
+            this.$store.commit("setPositionsListId", position.id);
 
             this.$store.commit("updateUserAppearance", appearance);
         } else

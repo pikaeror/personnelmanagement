@@ -39,9 +39,6 @@ namespace PersonnelManagement.Controllers
             List<Educationlevel> empty = new List<Educationlevel>();
             return empty;
         }
-
-
-
         [HttpPost()]
         public IActionResult UpdateEducationlevel([FromBody]Educationlevel newEducationlevel)
         {

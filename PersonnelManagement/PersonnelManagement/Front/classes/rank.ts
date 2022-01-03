@@ -12,6 +12,8 @@
     name5: string;
     name6: string;
 
+    maxPeriod: number;
+
     toString() {
         return name;
     }

@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "d230d2914e9d8b0f56ff"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "10492ceb63711436347b"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -18692,6 +18692,8 @@ let PmrequestComponent = class PmrequestComponent extends __WEBPACK_IMPORTED_MOD
             rank_resualt: [],
             contract_request: new __WEBPACK_IMPORTED_MODULE_7__classes_Requests_classes_contract_request__["a" /* default */](),
             contruct_resualt: [],
+            vacation_request: [],
+            vacation_resualt: [],
         };
     }
     mounted() {
@@ -59089,67 +59091,847 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     on: {
       "click": _vm.contructDownload
     }
-  }, [_vm._v("Скачать")])], 1) : _vm._e(), _vm._v(" "), _c('div', [_vm._v("Implementation resualt.")])], 1), _vm._v(" "), _c('el-collapse-item', {
+  }, [_vm._v("Скачать")])], 1) : _vm._e()], 1), _vm._v(" "), _c('el-collapse-item', {
     staticClass: "eld-eld-side-element-folder",
     attrs: {
       "title": "Отпуск",
       "name": "4"
     }
-  }, [_c('div', [_vm._v("Decision making: giving advices about operations is acceptable, but do not make decisions for the users;")]), _vm._v(" "), _c('div', [_vm._v("Controlled consequences: users should be granted the freedom to operate, including canceling, aborting or terminating current operation.")])]), _vm._v(" "), _c('el-collapse-item', {
+  }, [_c('div', {
+    staticStyle: {
+      "margin-bottom": "4px",
+      "box-shadow": "5px 5px 3px rgba(0,0,0,0.6)",
+      "padding": "10px",
+      "border-radius": "10px",
+      "background": "#f6b0b0"
+    }
+  }, [_c('span', {
+    staticClass: "demo-input-label"
+  }, [_vm._v("Количество оставшихся дней:")]), _vm._v(" "), _c('el-input-number', {
+    attrs: {
+      "placeholder": "Выберите минимальное количество дней отпуска"
+    },
+    model: {
+      value: (_vm.vacation_request),
+      callback: function($$v) {
+        _vm.vacation_request = $$v
+      },
+      expression: "vacation_request"
+    }
+  }), _vm._v(" "), _c('el-switch', {
+    attrs: {
+      "active-text": "есть дни отпуска с прошлого периода",
+      "inactive-text": ""
+    },
+    model: {
+      value: (_vm.vacation_request),
+      callback: function($$v) {
+        _vm.vacation_request = $$v
+      },
+      expression: "vacation_request"
+    }
+  })], 1), _vm._v(" "), _c('el-button', {
+    attrs: {
+      "type": "success",
+      "plain": ""
+    },
+    on: {
+      "click": _vm.vacation_request_button
+    }
+  }, [_vm._v("Отправить запрос")]), _vm._v(" "), _c('el-table', {
+    attrs: {
+      "data": _vm.vacation_resualt,
+      "empty-text": "Сотрудников не найдено"
+    }
+  }, [_c('el-table-column', {
+    attrs: {
+      "prop": "person.numpersonal",
+      "label": "Номер"
+    }
+  }), _vm._v(" "), _c('el-table-column', {
+    attrs: {
+      "prop": "fullname(person)",
+      "label": "ФИО",
+      "sortable": ""
+    }
+  }), _vm._v(" "), _c('el-table-column', {
+    attrs: {
+      "prop": "vacation.cancel",
+      "label": "оставшихся дней",
+      "sortable": ""
+    }
+  }), _vm._v(" "), _c('el-table-column', {
+    attrs: {
+      "prop": "vacation.date_end",
+      "label": "Дата окончания",
+      "sortable": ""
+    }
+  })], 1), _vm._v(" "), (_vm.vacation_resualt.length > 0) ? _c('div', {
+    staticClass: "pmrequest-row"
+  }, [_c('el-button', {
+    attrs: {
+      "disabled": _vm.loading
+    },
+    on: {
+      "click": _vm.vacationDownload
+    }
+  }, [_vm._v("Скачать")])], 1) : _vm._e()], 1), _vm._v(" "), _c('el-collapse-item', {
     staticClass: "eld-eld-side-element-folder",
     attrs: {
       "title": "Награды",
       "name": "5"
     }
-  }, [_c('div', [_vm._v("Decision making: giving advices about operations is acceptable, but do not make decisions for the users;")]), _vm._v(" "), _c('div', [_vm._v("Controlled consequences: users should be granted the freedom to operate, including canceling, aborting or terminating current operation.")])]), _vm._v(" "), _c('el-collapse-item', {
+  }, [_c('div', {
+    staticStyle: {
+      "margin-bottom": "4px",
+      "box-shadow": "5px 5px 3px rgba(0,0,0,0.6)",
+      "padding": "10px",
+      "border-radius": "10px",
+      "background": "#f6b0b0"
+    }
+  }, [_c('span', {
+    staticClass: "demo-input-label"
+  }, [_vm._v("Количество оставшихся дней:")]), _vm._v(" "), _c('el-input-number', {
+    attrs: {
+      "placeholder": "Выберите минимальное количество дней отпуска"
+    },
+    model: {
+      value: (_vm.vacation_request),
+      callback: function($$v) {
+        _vm.vacation_request = $$v
+      },
+      expression: "vacation_request"
+    }
+  }), _vm._v(" "), _c('el-switch', {
+    attrs: {
+      "active-text": "есть дни отпуска с прошлого периода",
+      "inactive-text": ""
+    },
+    model: {
+      value: (_vm.vacation_request),
+      callback: function($$v) {
+        _vm.vacation_request = $$v
+      },
+      expression: "vacation_request"
+    }
+  })], 1), _vm._v(" "), _c('el-button', {
+    attrs: {
+      "type": "success",
+      "plain": ""
+    },
+    on: {
+      "click": _vm.vacation_request_button
+    }
+  }, [_vm._v("Отправить запрос")]), _vm._v(" "), _c('el-table', {
+    attrs: {
+      "data": _vm.vacation_resualt,
+      "empty-text": "Сотрудников не найдено"
+    }
+  }, [_c('el-table-column', {
+    attrs: {
+      "prop": "person.numpersonal",
+      "label": "Номер"
+    }
+  }), _vm._v(" "), _c('el-table-column', {
+    attrs: {
+      "prop": "fullname(person)",
+      "label": "ФИО",
+      "sortable": ""
+    }
+  }), _vm._v(" "), _c('el-table-column', {
+    attrs: {
+      "prop": "vacation.cancel",
+      "label": "оставшихся дней",
+      "sortable": ""
+    }
+  }), _vm._v(" "), _c('el-table-column', {
+    attrs: {
+      "prop": "vacation.date_end",
+      "label": "Дата окончания",
+      "sortable": ""
+    }
+  })], 1), _vm._v(" "), (_vm.vacation_resualt.length > 0) ? _c('div', {
+    staticClass: "pmrequest-row"
+  }, [_c('el-button', {
+    attrs: {
+      "disabled": _vm.loading
+    },
+    on: {
+      "click": _vm.vacationDownload
+    }
+  }, [_vm._v("Скачать")])], 1) : _vm._e()], 1), _vm._v(" "), _c('el-collapse-item', {
     staticClass: "eld-eld-side-element-folder",
     attrs: {
       "title": "Удостоверение",
       "name": "6"
     }
-  }, [_c('div', [_vm._v("Decision making: giving advices about operations is acceptable, but do not make decisions for the users;")]), _vm._v(" "), _c('div', [_vm._v("Controlled consequences: users should be granted the freedom to operate, including canceling, aborting or terminating current operation.")])]), _vm._v(" "), _c('el-collapse-item', {
+  }, [_c('div', {
+    staticStyle: {
+      "margin-bottom": "4px",
+      "box-shadow": "5px 5px 3px rgba(0,0,0,0.6)",
+      "padding": "10px",
+      "border-radius": "10px",
+      "background": "#f6b0b0"
+    }
+  }, [_c('span', {
+    staticClass: "demo-input-label"
+  }, [_vm._v("Количество оставшихся дней:")]), _vm._v(" "), _c('el-input-number', {
+    attrs: {
+      "placeholder": "Выберите минимальное количество дней отпуска"
+    },
+    model: {
+      value: (_vm.vacation_request),
+      callback: function($$v) {
+        _vm.vacation_request = $$v
+      },
+      expression: "vacation_request"
+    }
+  }), _vm._v(" "), _c('el-switch', {
+    attrs: {
+      "active-text": "есть дни отпуска с прошлого периода",
+      "inactive-text": ""
+    },
+    model: {
+      value: (_vm.vacation_request),
+      callback: function($$v) {
+        _vm.vacation_request = $$v
+      },
+      expression: "vacation_request"
+    }
+  })], 1), _vm._v(" "), _c('el-button', {
+    attrs: {
+      "type": "success",
+      "plain": ""
+    },
+    on: {
+      "click": _vm.vacation_request_button
+    }
+  }, [_vm._v("Отправить запрос")]), _vm._v(" "), _c('el-table', {
+    attrs: {
+      "data": _vm.vacation_resualt,
+      "empty-text": "Сотрудников не найдено"
+    }
+  }, [_c('el-table-column', {
+    attrs: {
+      "prop": "person.numpersonal",
+      "label": "Номер"
+    }
+  }), _vm._v(" "), _c('el-table-column', {
+    attrs: {
+      "prop": "fullname(person)",
+      "label": "ФИО",
+      "sortable": ""
+    }
+  }), _vm._v(" "), _c('el-table-column', {
+    attrs: {
+      "prop": "vacation.cancel",
+      "label": "оставшихся дней",
+      "sortable": ""
+    }
+  }), _vm._v(" "), _c('el-table-column', {
+    attrs: {
+      "prop": "vacation.date_end",
+      "label": "Дата окончания",
+      "sortable": ""
+    }
+  })], 1), _vm._v(" "), (_vm.vacation_resualt.length > 0) ? _c('div', {
+    staticClass: "pmrequest-row"
+  }, [_c('el-button', {
+    attrs: {
+      "disabled": _vm.loading
+    },
+    on: {
+      "click": _vm.vacationDownload
+    }
+  }, [_vm._v("Скачать")])], 1) : _vm._e()], 1), _vm._v(" "), _c('el-collapse-item', {
     staticClass: "eld-eld-side-element-folder",
     attrs: {
       "title": "Аттестация",
       "name": "7"
     }
-  }, [_c('div', [_vm._v("Decision making: giving advices about operations is acceptable, but do not make decisions for the users;")]), _vm._v(" "), _c('div', [_vm._v("Controlled consequences: users should be granted the freedom to operate, including canceling, aborting or terminating current operation.")])]), _vm._v(" "), _c('el-collapse-item', {
+  }, [_c('div', {
+    staticStyle: {
+      "margin-bottom": "4px",
+      "box-shadow": "5px 5px 3px rgba(0,0,0,0.6)",
+      "padding": "10px",
+      "border-radius": "10px",
+      "background": "#f6b0b0"
+    }
+  }, [_c('span', {
+    staticClass: "demo-input-label"
+  }, [_vm._v("Количество оставшихся дней:")]), _vm._v(" "), _c('el-input-number', {
+    attrs: {
+      "placeholder": "Выберите минимальное количество дней отпуска"
+    },
+    model: {
+      value: (_vm.vacation_request),
+      callback: function($$v) {
+        _vm.vacation_request = $$v
+      },
+      expression: "vacation_request"
+    }
+  }), _vm._v(" "), _c('el-switch', {
+    attrs: {
+      "active-text": "есть дни отпуска с прошлого периода",
+      "inactive-text": ""
+    },
+    model: {
+      value: (_vm.vacation_request),
+      callback: function($$v) {
+        _vm.vacation_request = $$v
+      },
+      expression: "vacation_request"
+    }
+  })], 1), _vm._v(" "), _c('el-button', {
+    attrs: {
+      "type": "success",
+      "plain": ""
+    },
+    on: {
+      "click": _vm.vacation_request_button
+    }
+  }, [_vm._v("Отправить запрос")]), _vm._v(" "), _c('el-table', {
+    attrs: {
+      "data": _vm.vacation_resualt,
+      "empty-text": "Сотрудников не найдено"
+    }
+  }, [_c('el-table-column', {
+    attrs: {
+      "prop": "person.numpersonal",
+      "label": "Номер"
+    }
+  }), _vm._v(" "), _c('el-table-column', {
+    attrs: {
+      "prop": "fullname(person)",
+      "label": "ФИО",
+      "sortable": ""
+    }
+  }), _vm._v(" "), _c('el-table-column', {
+    attrs: {
+      "prop": "vacation.cancel",
+      "label": "оставшихся дней",
+      "sortable": ""
+    }
+  }), _vm._v(" "), _c('el-table-column', {
+    attrs: {
+      "prop": "vacation.date_end",
+      "label": "Дата окончания",
+      "sortable": ""
+    }
+  })], 1), _vm._v(" "), (_vm.vacation_resualt.length > 0) ? _c('div', {
+    staticClass: "pmrequest-row"
+  }, [_c('el-button', {
+    attrs: {
+      "disabled": _vm.loading
+    },
+    on: {
+      "click": _vm.vacationDownload
+    }
+  }, [_vm._v("Скачать")])], 1) : _vm._e()], 1), _vm._v(" "), _c('el-collapse-item', {
     staticClass: "eld-eld-side-element-folder",
     attrs: {
       "title": "Иностранные языки",
       "name": "8"
     }
-  }, [_c('div', [_vm._v("Decision making: giving advices about operations is acceptable, but do not make decisions for the users;")]), _vm._v(" "), _c('div', [_vm._v("Controlled consequences: users should be granted the freedom to operate, including canceling, aborting or terminating current operation.")])]), _vm._v(" "), _c('el-collapse-item', {
+  }, [_c('div', {
+    staticStyle: {
+      "margin-bottom": "4px",
+      "box-shadow": "5px 5px 3px rgba(0,0,0,0.6)",
+      "padding": "10px",
+      "border-radius": "10px",
+      "background": "#f6b0b0"
+    }
+  }, [_c('span', {
+    staticClass: "demo-input-label"
+  }, [_vm._v("Количество оставшихся дней:")]), _vm._v(" "), _c('el-input-number', {
+    attrs: {
+      "placeholder": "Выберите минимальное количество дней отпуска"
+    },
+    model: {
+      value: (_vm.vacation_request),
+      callback: function($$v) {
+        _vm.vacation_request = $$v
+      },
+      expression: "vacation_request"
+    }
+  }), _vm._v(" "), _c('el-switch', {
+    attrs: {
+      "active-text": "есть дни отпуска с прошлого периода",
+      "inactive-text": ""
+    },
+    model: {
+      value: (_vm.vacation_request),
+      callback: function($$v) {
+        _vm.vacation_request = $$v
+      },
+      expression: "vacation_request"
+    }
+  })], 1), _vm._v(" "), _c('el-button', {
+    attrs: {
+      "type": "success",
+      "plain": ""
+    },
+    on: {
+      "click": _vm.vacation_request_button
+    }
+  }, [_vm._v("Отправить запрос")]), _vm._v(" "), _c('el-table', {
+    attrs: {
+      "data": _vm.vacation_resualt,
+      "empty-text": "Сотрудников не найдено"
+    }
+  }, [_c('el-table-column', {
+    attrs: {
+      "prop": "person.numpersonal",
+      "label": "Номер"
+    }
+  }), _vm._v(" "), _c('el-table-column', {
+    attrs: {
+      "prop": "fullname(person)",
+      "label": "ФИО",
+      "sortable": ""
+    }
+  }), _vm._v(" "), _c('el-table-column', {
+    attrs: {
+      "prop": "vacation.cancel",
+      "label": "оставшихся дней",
+      "sortable": ""
+    }
+  }), _vm._v(" "), _c('el-table-column', {
+    attrs: {
+      "prop": "vacation.date_end",
+      "label": "Дата окончания",
+      "sortable": ""
+    }
+  })], 1), _vm._v(" "), (_vm.vacation_resualt.length > 0) ? _c('div', {
+    staticClass: "pmrequest-row"
+  }, [_c('el-button', {
+    attrs: {
+      "disabled": _vm.loading
+    },
+    on: {
+      "click": _vm.vacationDownload
+    }
+  }, [_vm._v("Скачать")])], 1) : _vm._e()], 1), _vm._v(" "), _c('el-collapse-item', {
     staticClass: "eld-eld-side-element-folder",
     attrs: {
       "title": "Учёные степени",
       "name": "9"
     }
-  }, [_c('div', [_vm._v("Decision making: giving advices about operations is acceptable, but do not make decisions for the users;")]), _vm._v(" "), _c('div', [_vm._v("Controlled consequences: users should be granted the freedom to operate, including canceling, aborting or terminating current operation.")])]), _vm._v(" "), _c('el-collapse-item', {
+  }, [_c('div', {
+    staticStyle: {
+      "margin-bottom": "4px",
+      "box-shadow": "5px 5px 3px rgba(0,0,0,0.6)",
+      "padding": "10px",
+      "border-radius": "10px",
+      "background": "#f6b0b0"
+    }
+  }, [_c('span', {
+    staticClass: "demo-input-label"
+  }, [_vm._v("Количество оставшихся дней:")]), _vm._v(" "), _c('el-input-number', {
+    attrs: {
+      "placeholder": "Выберите минимальное количество дней отпуска"
+    },
+    model: {
+      value: (_vm.vacation_request),
+      callback: function($$v) {
+        _vm.vacation_request = $$v
+      },
+      expression: "vacation_request"
+    }
+  }), _vm._v(" "), _c('el-switch', {
+    attrs: {
+      "active-text": "есть дни отпуска с прошлого периода",
+      "inactive-text": ""
+    },
+    model: {
+      value: (_vm.vacation_request),
+      callback: function($$v) {
+        _vm.vacation_request = $$v
+      },
+      expression: "vacation_request"
+    }
+  })], 1), _vm._v(" "), _c('el-button', {
+    attrs: {
+      "type": "success",
+      "plain": ""
+    },
+    on: {
+      "click": _vm.vacation_request_button
+    }
+  }, [_vm._v("Отправить запрос")]), _vm._v(" "), _c('el-table', {
+    attrs: {
+      "data": _vm.vacation_resualt,
+      "empty-text": "Сотрудников не найдено"
+    }
+  }, [_c('el-table-column', {
+    attrs: {
+      "prop": "person.numpersonal",
+      "label": "Номер"
+    }
+  }), _vm._v(" "), _c('el-table-column', {
+    attrs: {
+      "prop": "fullname(person)",
+      "label": "ФИО",
+      "sortable": ""
+    }
+  }), _vm._v(" "), _c('el-table-column', {
+    attrs: {
+      "prop": "vacation.cancel",
+      "label": "оставшихся дней",
+      "sortable": ""
+    }
+  }), _vm._v(" "), _c('el-table-column', {
+    attrs: {
+      "prop": "vacation.date_end",
+      "label": "Дата окончания",
+      "sortable": ""
+    }
+  })], 1), _vm._v(" "), (_vm.vacation_resualt.length > 0) ? _c('div', {
+    staticClass: "pmrequest-row"
+  }, [_c('el-button', {
+    attrs: {
+      "disabled": _vm.loading
+    },
+    on: {
+      "click": _vm.vacationDownload
+    }
+  }, [_vm._v("Скачать")])], 1) : _vm._e()], 1), _vm._v(" "), _c('el-collapse-item', {
     staticClass: "eld-eld-side-element-folder",
     attrs: {
       "title": "Выборные органы",
       "name": "10"
     }
-  }, [_c('div', [_vm._v("Decision making: giving advices about operations is acceptable, but do not make decisions for the users;")]), _vm._v(" "), _c('div', [_vm._v("Controlled consequences: users should be granted the freedom to operate, including canceling, aborting or terminating current operation.")])]), _vm._v(" "), _c('el-collapse-item', {
+  }, [_c('div', {
+    staticStyle: {
+      "margin-bottom": "4px",
+      "box-shadow": "5px 5px 3px rgba(0,0,0,0.6)",
+      "padding": "10px",
+      "border-radius": "10px",
+      "background": "#f6b0b0"
+    }
+  }, [_c('span', {
+    staticClass: "demo-input-label"
+  }, [_vm._v("Количество оставшихся дней:")]), _vm._v(" "), _c('el-input-number', {
+    attrs: {
+      "placeholder": "Выберите минимальное количество дней отпуска"
+    },
+    model: {
+      value: (_vm.vacation_request),
+      callback: function($$v) {
+        _vm.vacation_request = $$v
+      },
+      expression: "vacation_request"
+    }
+  }), _vm._v(" "), _c('el-switch', {
+    attrs: {
+      "active-text": "есть дни отпуска с прошлого периода",
+      "inactive-text": ""
+    },
+    model: {
+      value: (_vm.vacation_request),
+      callback: function($$v) {
+        _vm.vacation_request = $$v
+      },
+      expression: "vacation_request"
+    }
+  })], 1), _vm._v(" "), _c('el-button', {
+    attrs: {
+      "type": "success",
+      "plain": ""
+    },
+    on: {
+      "click": _vm.vacation_request_button
+    }
+  }, [_vm._v("Отправить запрос")]), _vm._v(" "), _c('el-table', {
+    attrs: {
+      "data": _vm.vacation_resualt,
+      "empty-text": "Сотрудников не найдено"
+    }
+  }, [_c('el-table-column', {
+    attrs: {
+      "prop": "person.numpersonal",
+      "label": "Номер"
+    }
+  }), _vm._v(" "), _c('el-table-column', {
+    attrs: {
+      "prop": "fullname(person)",
+      "label": "ФИО",
+      "sortable": ""
+    }
+  }), _vm._v(" "), _c('el-table-column', {
+    attrs: {
+      "prop": "vacation.cancel",
+      "label": "оставшихся дней",
+      "sortable": ""
+    }
+  }), _vm._v(" "), _c('el-table-column', {
+    attrs: {
+      "prop": "vacation.date_end",
+      "label": "Дата окончания",
+      "sortable": ""
+    }
+  })], 1), _vm._v(" "), (_vm.vacation_resualt.length > 0) ? _c('div', {
+    staticClass: "pmrequest-row"
+  }, [_c('el-button', {
+    attrs: {
+      "disabled": _vm.loading
+    },
+    on: {
+      "click": _vm.vacationDownload
+    }
+  }, [_vm._v("Скачать")])], 1) : _vm._e()], 1), _vm._v(" "), _c('el-collapse-item', {
     staticClass: "eld-eld-side-element-folder",
     attrs: {
       "title": "Служебные командировки",
       "name": "11"
     }
-  }, [_c('div', [_vm._v("Decision making: giving advices about operations is acceptable, but do not make decisions for the users;")]), _vm._v(" "), _c('div', [_vm._v("Controlled consequences: users should be granted the freedom to operate, including canceling, aborting or terminating current operation.")])]), _vm._v(" "), _c('el-collapse-item', {
+  }, [_c('div', {
+    staticStyle: {
+      "margin-bottom": "4px",
+      "box-shadow": "5px 5px 3px rgba(0,0,0,0.6)",
+      "padding": "10px",
+      "border-radius": "10px",
+      "background": "#f6b0b0"
+    }
+  }, [_c('span', {
+    staticClass: "demo-input-label"
+  }, [_vm._v("Количество оставшихся дней:")]), _vm._v(" "), _c('el-input-number', {
+    attrs: {
+      "placeholder": "Выберите минимальное количество дней отпуска"
+    },
+    model: {
+      value: (_vm.vacation_request),
+      callback: function($$v) {
+        _vm.vacation_request = $$v
+      },
+      expression: "vacation_request"
+    }
+  }), _vm._v(" "), _c('el-switch', {
+    attrs: {
+      "active-text": "есть дни отпуска с прошлого периода",
+      "inactive-text": ""
+    },
+    model: {
+      value: (_vm.vacation_request),
+      callback: function($$v) {
+        _vm.vacation_request = $$v
+      },
+      expression: "vacation_request"
+    }
+  })], 1), _vm._v(" "), _c('el-button', {
+    attrs: {
+      "type": "success",
+      "plain": ""
+    },
+    on: {
+      "click": _vm.vacation_request_button
+    }
+  }, [_vm._v("Отправить запрос")]), _vm._v(" "), _c('el-table', {
+    attrs: {
+      "data": _vm.vacation_resualt,
+      "empty-text": "Сотрудников не найдено"
+    }
+  }, [_c('el-table-column', {
+    attrs: {
+      "prop": "person.numpersonal",
+      "label": "Номер"
+    }
+  }), _vm._v(" "), _c('el-table-column', {
+    attrs: {
+      "prop": "fullname(person)",
+      "label": "ФИО",
+      "sortable": ""
+    }
+  }), _vm._v(" "), _c('el-table-column', {
+    attrs: {
+      "prop": "vacation.cancel",
+      "label": "оставшихся дней",
+      "sortable": ""
+    }
+  }), _vm._v(" "), _c('el-table-column', {
+    attrs: {
+      "prop": "vacation.date_end",
+      "label": "Дата окончания",
+      "sortable": ""
+    }
+  })], 1), _vm._v(" "), (_vm.vacation_resualt.length > 0) ? _c('div', {
+    staticClass: "pmrequest-row"
+  }, [_c('el-button', {
+    attrs: {
+      "disabled": _vm.loading
+    },
+    on: {
+      "click": _vm.vacationDownload
+    }
+  }, [_vm._v("Скачать")])], 1) : _vm._e()], 1), _vm._v(" "), _c('el-collapse-item', {
     staticClass: "eld-eld-side-element-folder",
     attrs: {
       "title": "Взыскания",
       "name": "12"
     }
-  }, [_c('div', [_vm._v("Decision making: giving advices about operations is acceptable, but do not make decisions for the users;")]), _vm._v(" "), _c('div', [_vm._v("Controlled consequences: users should be granted the freedom to operate, including canceling, aborting or terminating current operation.")])]), _vm._v(" "), _c('el-collapse-item', {
+  }, [_c('div', {
+    staticStyle: {
+      "margin-bottom": "4px",
+      "box-shadow": "5px 5px 3px rgba(0,0,0,0.6)",
+      "padding": "10px",
+      "border-radius": "10px",
+      "background": "#f6b0b0"
+    }
+  }, [_c('span', {
+    staticClass: "demo-input-label"
+  }, [_vm._v("Количество оставшихся дней:")]), _vm._v(" "), _c('el-input-number', {
+    attrs: {
+      "placeholder": "Выберите минимальное количество дней отпуска"
+    },
+    model: {
+      value: (_vm.vacation_request),
+      callback: function($$v) {
+        _vm.vacation_request = $$v
+      },
+      expression: "vacation_request"
+    }
+  }), _vm._v(" "), _c('el-switch', {
+    attrs: {
+      "active-text": "есть дни отпуска с прошлого периода",
+      "inactive-text": ""
+    },
+    model: {
+      value: (_vm.vacation_request),
+      callback: function($$v) {
+        _vm.vacation_request = $$v
+      },
+      expression: "vacation_request"
+    }
+  })], 1), _vm._v(" "), _c('el-button', {
+    attrs: {
+      "type": "success",
+      "plain": ""
+    },
+    on: {
+      "click": _vm.vacation_request_button
+    }
+  }, [_vm._v("Отправить запрос")]), _vm._v(" "), _c('el-table', {
+    attrs: {
+      "data": _vm.vacation_resualt,
+      "empty-text": "Сотрудников не найдено"
+    }
+  }, [_c('el-table-column', {
+    attrs: {
+      "prop": "person.numpersonal",
+      "label": "Номер"
+    }
+  }), _vm._v(" "), _c('el-table-column', {
+    attrs: {
+      "prop": "fullname(person)",
+      "label": "ФИО",
+      "sortable": ""
+    }
+  }), _vm._v(" "), _c('el-table-column', {
+    attrs: {
+      "prop": "vacation.cancel",
+      "label": "оставшихся дней",
+      "sortable": ""
+    }
+  }), _vm._v(" "), _c('el-table-column', {
+    attrs: {
+      "prop": "vacation.date_end",
+      "label": "Дата окончания",
+      "sortable": ""
+    }
+  })], 1), _vm._v(" "), (_vm.vacation_resualt.length > 0) ? _c('div', {
+    staticClass: "pmrequest-row"
+  }, [_c('el-button', {
+    attrs: {
+      "disabled": _vm.loading
+    },
+    on: {
+      "click": _vm.vacationDownload
+    }
+  }, [_vm._v("Скачать")])], 1) : _vm._e()], 1), _vm._v(" "), _c('el-collapse-item', {
     staticClass: "eld-eld-side-element-folder",
     attrs: {
       "title": "Водительское удостоверение",
       "name": "13"
     }
-  }, [_c('div', [_vm._v("Decision making: giving advices about operations is acceptable, but do not make decisions for the users;")]), _vm._v(" "), _c('div', [_vm._v("Controlled consequences: users should be granted the freedom to operate, including canceling, aborting or terminating current operation.")])])], 1)], 1) : _vm._e()], 2) : _vm._e(), _vm._v(" "), _c('el-dialog', {
+  }, [_c('div', {
+    staticStyle: {
+      "margin-bottom": "4px",
+      "box-shadow": "5px 5px 3px rgba(0,0,0,0.6)",
+      "padding": "10px",
+      "border-radius": "10px",
+      "background": "#f6b0b0"
+    }
+  }, [_c('span', {
+    staticClass: "demo-input-label"
+  }, [_vm._v("Количество оставшихся дней:")]), _vm._v(" "), _c('el-input-number', {
+    attrs: {
+      "placeholder": "Выберите минимальное количество дней отпуска"
+    },
+    model: {
+      value: (_vm.vacation_request),
+      callback: function($$v) {
+        _vm.vacation_request = $$v
+      },
+      expression: "vacation_request"
+    }
+  }), _vm._v(" "), _c('el-switch', {
+    attrs: {
+      "active-text": "есть дни отпуска с прошлого периода",
+      "inactive-text": ""
+    },
+    model: {
+      value: (_vm.vacation_request),
+      callback: function($$v) {
+        _vm.vacation_request = $$v
+      },
+      expression: "vacation_request"
+    }
+  })], 1), _vm._v(" "), _c('el-button', {
+    attrs: {
+      "type": "success",
+      "plain": ""
+    },
+    on: {
+      "click": _vm.vacation_request_button
+    }
+  }, [_vm._v("Отправить запрос")]), _vm._v(" "), _c('el-table', {
+    attrs: {
+      "data": _vm.vacation_resualt,
+      "empty-text": "Сотрудников не найдено"
+    }
+  }, [_c('el-table-column', {
+    attrs: {
+      "prop": "person.numpersonal",
+      "label": "Номер"
+    }
+  }), _vm._v(" "), _c('el-table-column', {
+    attrs: {
+      "prop": "fullname(person)",
+      "label": "ФИО",
+      "sortable": ""
+    }
+  }), _vm._v(" "), _c('el-table-column', {
+    attrs: {
+      "prop": "vacation.cancel",
+      "label": "оставшихся дней",
+      "sortable": ""
+    }
+  }), _vm._v(" "), _c('el-table-column', {
+    attrs: {
+      "prop": "vacation.date_end",
+      "label": "Дата окончания",
+      "sortable": ""
+    }
+  })], 1), _vm._v(" "), (_vm.vacation_resualt.length > 0) ? _c('div', {
+    staticClass: "pmrequest-row"
+  }, [_c('el-button', {
+    attrs: {
+      "disabled": _vm.loading
+    },
+    on: {
+      "click": _vm.vacationDownload
+    }
+  }, [_vm._v("Скачать")])], 1) : _vm._e()], 1)], 1)], 1) : _vm._e()], 2) : _vm._e(), _vm._v(" "), _c('el-dialog', {
     attrs: {
       "visible": _vm.exceldialogvisible,
       "width": "60%",

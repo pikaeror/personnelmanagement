@@ -146,6 +146,9 @@ export default class PmrequestComponent extends Vue {
     contract_request: Contract_Request;
     contruct_resualt: Contract_respons[];
 
+    vacation_request: any;
+    vacation_resualt: any[];
+
 
     @Prop({ default: false })
     visible: boolean;
@@ -244,6 +247,9 @@ export default class PmrequestComponent extends Vue {
 
             contract_request: new Contract_Request(),
             contruct_resualt: [],
+
+            vacation_request: [],
+            vacation_resualt: [],
         }
     }
 

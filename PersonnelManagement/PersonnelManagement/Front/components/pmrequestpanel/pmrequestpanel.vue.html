@@ -514,47 +514,237 @@
                         <div class="pmrequest-row" v-if="contruct_resualt.length > 0">
                             <el-button @click="contructDownload" :disabled="loading">Скачать</el-button>
                         </div>
-                        <div>Implementation resualt.</div>
+                        <!--<div>Implementation resualt.</div>-->
                     </el-collapse-item>
                     <el-collapse-item title="Отпуск" name="4" class="eld-eld-side-element-folder">
-                        <div>Decision making: giving advices about operations is acceptable, but do not make decisions for the users;</div>
-                        <div>Controlled consequences: users should be granted the freedom to operate, including canceling, aborting or terminating current operation.</div>
+                        <div style="margin-bottom: 4px; box-shadow: 5px 5px 3px rgba(0,0,0,0.6); padding: 10px; border-radius: 10px; background: #f6b0b0;">
+                            <span class="demo-input-label">Количество оставшихся дней:</span>
+                            <el-input-number placeholder="Выберите минимальное количество дней отпуска"
+                                             v-model="vacation_request">
+                            </el-input-number>
+                            <el-switch v-model="vacation_request"
+                                       active-text="есть дни отпуска с прошлого периода"
+                                       inactive-text="">
+                            </el-switch>
+                        </div>
+                        <el-button @click="vacation_request_button" type="success" plain>Отправить запрос</el-button>
+                        <el-table :data="vacation_resualt" empty-text="Сотрудников не найдено">
+                            <el-table-column prop="person.numpersonal" label="Номер"></el-table-column>
+                            <el-table-column prop="fullname(person)" label="ФИО" sortable></el-table-column>
+                            <el-table-column prop="vacation.cancel" label="оставшихся дней" sortable></el-table-column>
+                            <el-table-column prop="vacation.date_end" label="Дата окончания" sortable></el-table-column>
+                        </el-table>
+                        <div class="pmrequest-row" v-if="vacation_resualt.length > 0">
+                            <el-button @click="vacationDownload" :disabled="loading">Скачать</el-button>
+                        </div>
+                        <!--<div>Implementation resualt.</div>-->
                     </el-collapse-item>
                     <el-collapse-item title="Награды" name="5" class="eld-eld-side-element-folder">
-                        <div>Decision making: giving advices about operations is acceptable, but do not make decisions for the users;</div>
-                        <div>Controlled consequences: users should be granted the freedom to operate, including canceling, aborting or terminating current operation.</div>
+                        <div style="margin-bottom: 4px; box-shadow: 5px 5px 3px rgba(0,0,0,0.6); padding: 10px; border-radius: 10px; background: #f6b0b0;">
+                            <span class="demo-input-label">Количество оставшихся дней:</span>
+                            <el-input-number placeholder="Выберите минимальное количество дней отпуска"
+                                             v-model="vacation_request">
+                            </el-input-number>
+                            <el-switch v-model="vacation_request"
+                                       active-text="есть дни отпуска с прошлого периода"
+                                       inactive-text="">
+                            </el-switch>
+                        </div>
+                        <el-button @click="vacation_request_button" type="success" plain>Отправить запрос</el-button>
+                        <el-table :data="vacation_resualt" empty-text="Сотрудников не найдено">
+                            <el-table-column prop="person.numpersonal" label="Номер"></el-table-column>
+                            <el-table-column prop="fullname(person)" label="ФИО" sortable></el-table-column>
+                            <el-table-column prop="vacation.cancel" label="оставшихся дней" sortable></el-table-column>
+                            <el-table-column prop="vacation.date_end" label="Дата окончания" sortable></el-table-column>
+                        </el-table>
+                        <div class="pmrequest-row" v-if="vacation_resualt.length > 0">
+                            <el-button @click="vacationDownload" :disabled="loading">Скачать</el-button>
+                        </div>
+                        <!--<div>Implementation resualt.</div>-->
                     </el-collapse-item>
                     <el-collapse-item title="Удостоверение" name="6" class="eld-eld-side-element-folder">
-                        <div>Decision making: giving advices about operations is acceptable, but do not make decisions for the users;</div>
-                        <div>Controlled consequences: users should be granted the freedom to operate, including canceling, aborting or terminating current operation.</div>
+                        <div style="margin-bottom: 4px; box-shadow: 5px 5px 3px rgba(0,0,0,0.6); padding: 10px; border-radius: 10px; background: #f6b0b0;">
+                            <span class="demo-input-label">Количество оставшихся дней:</span>
+                            <el-input-number placeholder="Выберите минимальное количество дней отпуска"
+                                             v-model="vacation_request">
+                            </el-input-number>
+                            <el-switch v-model="vacation_request"
+                                       active-text="есть дни отпуска с прошлого периода"
+                                       inactive-text="">
+                            </el-switch>
+                        </div>
+                        <el-button @click="vacation_request_button" type="success" plain>Отправить запрос</el-button>
+                        <el-table :data="vacation_resualt" empty-text="Сотрудников не найдено">
+                            <el-table-column prop="person.numpersonal" label="Номер"></el-table-column>
+                            <el-table-column prop="fullname(person)" label="ФИО" sortable></el-table-column>
+                            <el-table-column prop="vacation.cancel" label="оставшихся дней" sortable></el-table-column>
+                            <el-table-column prop="vacation.date_end" label="Дата окончания" sortable></el-table-column>
+                        </el-table>
+                        <div class="pmrequest-row" v-if="vacation_resualt.length > 0">
+                            <el-button @click="vacationDownload" :disabled="loading">Скачать</el-button>
+                        </div>
+                        <!--<div>Implementation resualt.</div>-->
                     </el-collapse-item>
                     <el-collapse-item title="Аттестация" name="7" class="eld-eld-side-element-folder">
-                        <div>Decision making: giving advices about operations is acceptable, but do not make decisions for the users;</div>
-                        <div>Controlled consequences: users should be granted the freedom to operate, including canceling, aborting or terminating current operation.</div>
+                        <div style="margin-bottom: 4px; box-shadow: 5px 5px 3px rgba(0,0,0,0.6); padding: 10px; border-radius: 10px; background: #f6b0b0;">
+                            <span class="demo-input-label">Количество оставшихся дней:</span>
+                            <el-input-number placeholder="Выберите минимальное количество дней отпуска"
+                                             v-model="vacation_request">
+                            </el-input-number>
+                            <el-switch v-model="vacation_request"
+                                       active-text="есть дни отпуска с прошлого периода"
+                                       inactive-text="">
+                            </el-switch>
+                        </div>
+                        <el-button @click="vacation_request_button" type="success" plain>Отправить запрос</el-button>
+                        <el-table :data="vacation_resualt" empty-text="Сотрудников не найдено">
+                            <el-table-column prop="person.numpersonal" label="Номер"></el-table-column>
+                            <el-table-column prop="fullname(person)" label="ФИО" sortable></el-table-column>
+                            <el-table-column prop="vacation.cancel" label="оставшихся дней" sortable></el-table-column>
+                            <el-table-column prop="vacation.date_end" label="Дата окончания" sortable></el-table-column>
+                        </el-table>
+                        <div class="pmrequest-row" v-if="vacation_resualt.length > 0">
+                            <el-button @click="vacationDownload" :disabled="loading">Скачать</el-button>
+                        </div>
+                        <!--<div>Implementation resualt.</div>-->
                     </el-collapse-item>
                     <el-collapse-item title="Иностранные языки" name="8" class="eld-eld-side-element-folder">
-                        <div>Decision making: giving advices about operations is acceptable, but do not make decisions for the users;</div>
-                        <div>Controlled consequences: users should be granted the freedom to operate, including canceling, aborting or terminating current operation.</div>
+                        <div style="margin-bottom: 4px; box-shadow: 5px 5px 3px rgba(0,0,0,0.6); padding: 10px; border-radius: 10px; background: #f6b0b0;">
+                            <span class="demo-input-label">Количество оставшихся дней:</span>
+                            <el-input-number placeholder="Выберите минимальное количество дней отпуска"
+                                             v-model="vacation_request">
+                            </el-input-number>
+                            <el-switch v-model="vacation_request"
+                                       active-text="есть дни отпуска с прошлого периода"
+                                       inactive-text="">
+                            </el-switch>
+                        </div>
+                        <el-button @click="vacation_request_button" type="success" plain>Отправить запрос</el-button>
+                        <el-table :data="vacation_resualt" empty-text="Сотрудников не найдено">
+                            <el-table-column prop="person.numpersonal" label="Номер"></el-table-column>
+                            <el-table-column prop="fullname(person)" label="ФИО" sortable></el-table-column>
+                            <el-table-column prop="vacation.cancel" label="оставшихся дней" sortable></el-table-column>
+                            <el-table-column prop="vacation.date_end" label="Дата окончания" sortable></el-table-column>
+                        </el-table>
+                        <div class="pmrequest-row" v-if="vacation_resualt.length > 0">
+                            <el-button @click="vacationDownload" :disabled="loading">Скачать</el-button>
+                        </div>
+                        <!--<div>Implementation resualt.</div>-->
                     </el-collapse-item>
                     <el-collapse-item title="Учёные степени" name="9" class="eld-eld-side-element-folder">
-                        <div>Decision making: giving advices about operations is acceptable, but do not make decisions for the users;</div>
-                        <div>Controlled consequences: users should be granted the freedom to operate, including canceling, aborting or terminating current operation.</div>
+                        <div style="margin-bottom: 4px; box-shadow: 5px 5px 3px rgba(0,0,0,0.6); padding: 10px; border-radius: 10px; background: #f6b0b0;">
+                            <span class="demo-input-label">Количество оставшихся дней:</span>
+                            <el-input-number placeholder="Выберите минимальное количество дней отпуска"
+                                             v-model="vacation_request">
+                            </el-input-number>
+                            <el-switch v-model="vacation_request"
+                                       active-text="есть дни отпуска с прошлого периода"
+                                       inactive-text="">
+                            </el-switch>
+                        </div>
+                        <el-button @click="vacation_request_button" type="success" plain>Отправить запрос</el-button>
+                        <el-table :data="vacation_resualt" empty-text="Сотрудников не найдено">
+                            <el-table-column prop="person.numpersonal" label="Номер"></el-table-column>
+                            <el-table-column prop="fullname(person)" label="ФИО" sortable></el-table-column>
+                            <el-table-column prop="vacation.cancel" label="оставшихся дней" sortable></el-table-column>
+                            <el-table-column prop="vacation.date_end" label="Дата окончания" sortable></el-table-column>
+                        </el-table>
+                        <div class="pmrequest-row" v-if="vacation_resualt.length > 0">
+                            <el-button @click="vacationDownload" :disabled="loading">Скачать</el-button>
+                        </div>
+                        <!--<div>Implementation resualt.</div>-->
                     </el-collapse-item>
                     <el-collapse-item title="Выборные органы" name="10" class="eld-eld-side-element-folder">
-                        <div>Decision making: giving advices about operations is acceptable, but do not make decisions for the users;</div>
-                        <div>Controlled consequences: users should be granted the freedom to operate, including canceling, aborting or terminating current operation.</div>
+                        <div style="margin-bottom: 4px; box-shadow: 5px 5px 3px rgba(0,0,0,0.6); padding: 10px; border-radius: 10px; background: #f6b0b0;">
+                            <span class="demo-input-label">Количество оставшихся дней:</span>
+                            <el-input-number placeholder="Выберите минимальное количество дней отпуска"
+                                             v-model="vacation_request">
+                            </el-input-number>
+                            <el-switch v-model="vacation_request"
+                                       active-text="есть дни отпуска с прошлого периода"
+                                       inactive-text="">
+                            </el-switch>
+                        </div>
+                        <el-button @click="vacation_request_button" type="success" plain>Отправить запрос</el-button>
+                        <el-table :data="vacation_resualt" empty-text="Сотрудников не найдено">
+                            <el-table-column prop="person.numpersonal" label="Номер"></el-table-column>
+                            <el-table-column prop="fullname(person)" label="ФИО" sortable></el-table-column>
+                            <el-table-column prop="vacation.cancel" label="оставшихся дней" sortable></el-table-column>
+                            <el-table-column prop="vacation.date_end" label="Дата окончания" sortable></el-table-column>
+                        </el-table>
+                        <div class="pmrequest-row" v-if="vacation_resualt.length > 0">
+                            <el-button @click="vacationDownload" :disabled="loading">Скачать</el-button>
+                        </div>
+                        <!--<div>Implementation resualt.</div>-->
                     </el-collapse-item>
                     <el-collapse-item title="Служебные командировки" name="11" class="eld-eld-side-element-folder">
-                        <div>Decision making: giving advices about operations is acceptable, but do not make decisions for the users;</div>
-                        <div>Controlled consequences: users should be granted the freedom to operate, including canceling, aborting or terminating current operation.</div>
+                        <div style="margin-bottom: 4px; box-shadow: 5px 5px 3px rgba(0,0,0,0.6); padding: 10px; border-radius: 10px; background: #f6b0b0;">
+                            <span class="demo-input-label">Количество оставшихся дней:</span>
+                            <el-input-number placeholder="Выберите минимальное количество дней отпуска"
+                                             v-model="vacation_request">
+                            </el-input-number>
+                            <el-switch v-model="vacation_request"
+                                       active-text="есть дни отпуска с прошлого периода"
+                                       inactive-text="">
+                            </el-switch>
+                        </div>
+                        <el-button @click="vacation_request_button" type="success" plain>Отправить запрос</el-button>
+                        <el-table :data="vacation_resualt" empty-text="Сотрудников не найдено">
+                            <el-table-column prop="person.numpersonal" label="Номер"></el-table-column>
+                            <el-table-column prop="fullname(person)" label="ФИО" sortable></el-table-column>
+                            <el-table-column prop="vacation.cancel" label="оставшихся дней" sortable></el-table-column>
+                            <el-table-column prop="vacation.date_end" label="Дата окончания" sortable></el-table-column>
+                        </el-table>
+                        <div class="pmrequest-row" v-if="vacation_resualt.length > 0">
+                            <el-button @click="vacationDownload" :disabled="loading">Скачать</el-button>
+                        </div>
+                        <!--<div>Implementation resualt.</div>-->
                     </el-collapse-item>
                     <el-collapse-item title="Взыскания" name="12" class="eld-eld-side-element-folder">
-                        <div>Decision making: giving advices about operations is acceptable, but do not make decisions for the users;</div>
-                        <div>Controlled consequences: users should be granted the freedom to operate, including canceling, aborting or terminating current operation.</div>
+                        <div style="margin-bottom: 4px; box-shadow: 5px 5px 3px rgba(0,0,0,0.6); padding: 10px; border-radius: 10px; background: #f6b0b0;">
+                            <span class="demo-input-label">Количество оставшихся дней:</span>
+                            <el-input-number placeholder="Выберите минимальное количество дней отпуска"
+                                             v-model="vacation_request">
+                            </el-input-number>
+                            <el-switch v-model="vacation_request"
+                                       active-text="есть дни отпуска с прошлого периода"
+                                       inactive-text="">
+                            </el-switch>
+                        </div>
+                        <el-button @click="vacation_request_button" type="success" plain>Отправить запрос</el-button>
+                        <el-table :data="vacation_resualt" empty-text="Сотрудников не найдено">
+                            <el-table-column prop="person.numpersonal" label="Номер"></el-table-column>
+                            <el-table-column prop="fullname(person)" label="ФИО" sortable></el-table-column>
+                            <el-table-column prop="vacation.cancel" label="оставшихся дней" sortable></el-table-column>
+                            <el-table-column prop="vacation.date_end" label="Дата окончания" sortable></el-table-column>
+                        </el-table>
+                        <div class="pmrequest-row" v-if="vacation_resualt.length > 0">
+                            <el-button @click="vacationDownload" :disabled="loading">Скачать</el-button>
+                        </div>
+                        <!--<div>Implementation resualt.</div>-->
                     </el-collapse-item>
                     <el-collapse-item title="Водительское удостоверение" name="13" class="eld-eld-side-element-folder">
-                        <div>Decision making: giving advices about operations is acceptable, but do not make decisions for the users;</div>
-                        <div>Controlled consequences: users should be granted the freedom to operate, including canceling, aborting or terminating current operation.</div>
+                        <div style="margin-bottom: 4px; box-shadow: 5px 5px 3px rgba(0,0,0,0.6); padding: 10px; border-radius: 10px; background: #f6b0b0;">
+                            <span class="demo-input-label">Количество оставшихся дней:</span>
+                            <el-input-number placeholder="Выберите минимальное количество дней отпуска"
+                                             v-model="vacation_request">
+                            </el-input-number>
+                            <el-switch v-model="vacation_request"
+                                       active-text="есть дни отпуска с прошлого периода"
+                                       inactive-text="">
+                            </el-switch>
+                        </div>
+                        <el-button @click="vacation_request_button" type="success" plain>Отправить запрос</el-button>
+                        <el-table :data="vacation_resualt" empty-text="Сотрудников не найдено">
+                            <el-table-column prop="person.numpersonal" label="Номер"></el-table-column>
+                            <el-table-column prop="fullname(person)" label="ФИО" sortable></el-table-column>
+                            <el-table-column prop="vacation.cancel" label="оставшихся дней" sortable></el-table-column>
+                            <el-table-column prop="vacation.date_end" label="Дата окончания" sortable></el-table-column>
+                        </el-table>
+                        <div class="pmrequest-row" v-if="vacation_resualt.length > 0">
+                            <el-button @click="vacationDownload" :disabled="loading">Скачать</el-button>
+                        </div>
+                        <!--<div>Implementation resualt.</div>-->
                     </el-collapse-item>
                 </el-collapse>
             </div>

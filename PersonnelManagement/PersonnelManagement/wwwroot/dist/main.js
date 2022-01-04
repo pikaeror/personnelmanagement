@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "10492ceb63711436347b"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "2cffaf2ae59bc29b7eb6"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -2061,7 +2061,7 @@ var Component = __webpack_require__(3)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\Projects\\MCHS\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\structuremanagingpanel\\structuremanagingpanel.vue.html"
+Component.options.__file = "D:\\GIT\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\structuremanagingpanel\\structuremanagingpanel.vue.html"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] structuremanagingpanel.vue.html: functional components are not supported with templates, they should use render functions.")}
 
@@ -19787,6 +19787,10 @@ let PositionmanagingpanelComponent = class PositionmanagingpanelComponent extend
         if (this.head && this.headid > 0) {
             headNum = 1;
         }
+        if (this.headid == -this.$store.state.positionsListId) {
+            headNum = 0;
+            this.headid = 0;
+        }
         let opchsNum = 0;
         if (this.opchs) {
             opchsNum = 1;
@@ -31550,7 +31554,7 @@ var Component = __webpack_require__(3)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\Projects\\MCHS\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\adminpanel\\adminpanel.vue.html"
+Component.options.__file = "D:\\GIT\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\adminpanel\\adminpanel.vue.html"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] adminpanel.vue.html: functional components are not supported with templates, they should use render functions.")}
 
@@ -31584,7 +31588,7 @@ var Component = __webpack_require__(3)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\Projects\\MCHS\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\app\\app.vue.html"
+Component.options.__file = "D:\\GIT\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\app\\app.vue.html"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] app.vue.html: functional components are not supported with templates, they should use render functions.")}
 
@@ -31618,7 +31622,7 @@ var Component = __webpack_require__(3)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\Projects\\MCHS\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\candidates\\candidates.vue.html"
+Component.options.__file = "D:\\GIT\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\candidates\\candidates.vue.html"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] candidates.vue.html: functional components are not supported with templates, they should use render functions.")}
 
@@ -31652,7 +31656,7 @@ var Component = __webpack_require__(3)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\Projects\\MCHS\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\decreeoperationelement\\decreeoperationelement.vue.html"
+Component.options.__file = "D:\\GIT\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\decreeoperationelement\\decreeoperationelement.vue.html"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] decreeoperationelement.vue.html: functional components are not supported with templates, they should use render functions.")}
 
@@ -31686,7 +31690,7 @@ var Component = __webpack_require__(3)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\Projects\\MCHS\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\decreeoperationtemplatecreator\\decreeoperationtemplatecreator.vue.html"
+Component.options.__file = "D:\\GIT\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\decreeoperationtemplatecreator\\decreeoperationtemplatecreator.vue.html"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] decreeoperationtemplatecreator.vue.html: functional components are not supported with templates, they should use render functions.")}
 
@@ -31720,7 +31724,7 @@ var Component = __webpack_require__(3)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\Projects\\MCHS\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\departmentmanagingpanel\\departmentmanagingpanel.vue.html"
+Component.options.__file = "D:\\GIT\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\departmentmanagingpanel\\departmentmanagingpanel.vue.html"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] departmentmanagingpanel.vue.html: functional components are not supported with templates, they should use render functions.")}
 
@@ -31754,7 +31758,7 @@ var Component = __webpack_require__(3)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\Projects\\MCHS\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\departmentslist\\departmentslist.vue.html"
+Component.options.__file = "D:\\GIT\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\departmentslist\\departmentslist.vue.html"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] departmentslist.vue.html: functional components are not supported with templates, they should use render functions.")}
 
@@ -31788,7 +31792,7 @@ var Component = __webpack_require__(3)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\Projects\\MCHS\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\eld\\eld.vue.html"
+Component.options.__file = "D:\\GIT\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\eld\\eld.vue.html"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] eld.vue.html: functional components are not supported with templates, they should use render functions.")}
 
@@ -31822,7 +31826,7 @@ var Component = __webpack_require__(3)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\Projects\\MCHS\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\home\\home.vue.html"
+Component.options.__file = "D:\\GIT\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\home\\home.vue.html"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] home.vue.html: functional components are not supported with templates, they should use render functions.")}
 
@@ -31856,7 +31860,7 @@ var Component = __webpack_require__(3)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\Projects\\MCHS\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\login\\login.vue.html"
+Component.options.__file = "D:\\GIT\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\login\\login.vue.html"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] login.vue.html: functional components are not supported with templates, they should use render functions.")}
 
@@ -31890,7 +31894,7 @@ var Component = __webpack_require__(3)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\Projects\\MCHS\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\modepanel\\modepanel.vue.html"
+Component.options.__file = "D:\\GIT\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\modepanel\\modepanel.vue.html"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] modepanel.vue.html: functional components are not supported with templates, they should use render functions.")}
 
@@ -31924,7 +31928,7 @@ var Component = __webpack_require__(3)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\Projects\\MCHS\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\notemplate\\notemplate.vue.html"
+Component.options.__file = "D:\\GIT\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\notemplate\\notemplate.vue.html"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] notemplate.vue.html: functional components are not supported with templates, they should use render functions.")}
 
@@ -31958,7 +31962,7 @@ var Component = __webpack_require__(3)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\Projects\\MCHS\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\pmrequestpanel\\pmrequestpanel.vue.html"
+Component.options.__file = "D:\\GIT\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\pmrequestpanel\\pmrequestpanel.vue.html"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] pmrequestpanel.vue.html: functional components are not supported with templates, they should use render functions.")}
 
@@ -31992,7 +31996,7 @@ var Component = __webpack_require__(3)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\Projects\\MCHS\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\positionmanagingpanel\\positionmanagingpanel.vue.html"
+Component.options.__file = "D:\\GIT\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\positionmanagingpanel\\positionmanagingpanel.vue.html"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] positionmanagingpanel.vue.html: functional components are not supported with templates, they should use render functions.")}
 
@@ -32026,7 +32030,7 @@ var Component = __webpack_require__(3)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\Projects\\MCHS\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\positionslist\\positionslist.vue.html"
+Component.options.__file = "D:\\GIT\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\positionslist\\positionslist.vue.html"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] positionslist.vue.html: functional components are not supported with templates, they should use render functions.")}
 
@@ -32060,7 +32064,7 @@ var Component = __webpack_require__(3)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\Projects\\MCHS\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\settingspanel\\settingspanel.vue.html"
+Component.options.__file = "D:\\GIT\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\settingspanel\\settingspanel.vue.html"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] settingspanel.vue.html: functional components are not supported with templates, they should use render functions.")}
 
@@ -32094,7 +32098,7 @@ var Component = __webpack_require__(3)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\Projects\\MCHS\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\sidebar\\sidebar.vue.html"
+Component.options.__file = "D:\\GIT\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\sidebar\\sidebar.vue.html"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] sidebar.vue.html: functional components are not supported with templates, they should use render functions.")}
 
@@ -32128,7 +32132,7 @@ var Component = __webpack_require__(3)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\Projects\\MCHS\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\topmenu\\topmenu.vue.html"
+Component.options.__file = "D:\\GIT\\personnelmanagement\\PersonnelManagement\\PersonnelManagement\\Front\\components\\topmenu\\topmenu.vue.html"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] topmenu.vue.html: functional components are not supported with templates, they should use render functions.")}
 
@@ -57296,7 +57300,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         staticClass: "position-dateinactive-descr"
       }, [_vm._v("Может замещаться гражданским персоналом по ")]), _c('div', {
         staticClass: "position-dateinactive"
-      }, [_vm._v(_vm._s(_vm.beautifyDate(_vm.getElementReplacedbycivilDate(posdep))))])]) : _vm._e()])])]), _vm._v(" "), (!posdep.headingthisstructure) ? _c('el-dropdown', {
+      }, [_vm._v(_vm._s(_vm.beautifyDate(_vm.getElementReplacedbycivilDate(posdep))))])]) : _vm._e()])])]), _vm._v(" "), (!posdep.headingthisstructure || _vm.$store.state.user.admin == 1) ? _c('el-dropdown', {
         staticClass: "position-settings",
         attrs: {
           "placement": "top"
@@ -57304,7 +57308,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         on: {
           "command": _vm.handleCommand
         }
-      }, [_c('div', [_vm._v("Действия")]), _vm._v(" "), _c('el-dropdown-menu', {
+      }, [_c('div', [_vm._v("Действия"), (posdep.headingthisstructure) ? _c('div', [_vm._v("Начальник")]) : _vm._e()]), _vm._v(" "), _c('el-dropdown-menu', {
         slot: "dropdown"
       }, [(_vm.hasAccessToEdit && _vm.isUnsignedCreate(posdep)) ? _c('el-dropdown-item', {
         attrs: {
@@ -58890,7 +58894,16 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     on: {
       "click": _vm.education_request_button
     }
-  }, [_vm._v("Отправить запрос")]), _vm._v(" "), _c('el-table', {
+  }, [_vm._v("Отправить запрос")]), _vm._v(" "), (_vm.education_resualt.length > 0) ? _c('div', {
+    staticClass: "pmrequest-row"
+  }, [_c('el-button', {
+    attrs: {
+      "disabled": _vm.loading
+    },
+    on: {
+      "click": _vm.educationDownload
+    }
+  }, [_vm._v("Скачать")])], 1) : _vm._e(), _vm._v(" "), _c('el-table', {
     attrs: {
       "data": _vm.education_resualt,
       "empty-text": "Сотрудников не найдено"
@@ -58981,7 +58994,16 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     on: {
       "click": _vm.rank_request_button
     }
-  }, [_vm._v("Отправить запрос")]), _vm._v(" "), _c('el-table', {
+  }, [_vm._v("Отправить запрос")]), _vm._v(" "), (_vm.rank_resualt.length > 0) ? _c('div', {
+    staticClass: "pmrequest-row"
+  }, [_c('el-button', {
+    attrs: {
+      "disabled": _vm.loading
+    },
+    on: {
+      "click": _vm.rankDownload
+    }
+  }, [_vm._v("Скачать")])], 1) : _vm._e(), _vm._v(" "), _c('el-table', {
     attrs: {
       "data": _vm.rank_resualt,
       "empty-text": "Сотрудников не найдено"
@@ -59054,7 +59076,16 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     on: {
       "click": _vm.contract_request_button
     }
-  }, [_vm._v("Отправить запрос")]), _vm._v(" "), _c('el-table', {
+  }, [_vm._v("Отправить запрос")]), _vm._v(" "), (_vm.contruct_resualt.length > 0) ? _c('div', {
+    staticClass: "pmrequest-row"
+  }, [_c('el-button', {
+    attrs: {
+      "disabled": _vm.loading
+    },
+    on: {
+      "click": _vm.contructDownload
+    }
+  }, [_vm._v("Скачать")])], 1) : _vm._e(), _vm._v(" "), _c('el-table', {
     attrs: {
       "data": _vm.contruct_resualt,
       "empty-text": "Сотрудников не найдено"
@@ -59107,7 +59138,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_c('span', {
     staticClass: "demo-input-label"
-  }, [_vm._v("Количество оставшихся дней:")]), _vm._v(" "), _c('el-input-number', {
+  }, [_vm._v("Количество не использованных дней:")]), _vm._v(" "), _c('el-input-number', {
     attrs: {
       "placeholder": "Выберите минимальное количество дней отпуска"
     },
@@ -59138,7 +59169,16 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     on: {
       "click": _vm.vacation_request_button
     }
-  }, [_vm._v("Отправить запрос")]), _vm._v(" "), _c('el-table', {
+  }, [_vm._v("Отправить запрос")]), _vm._v(" "), (_vm.vacation_resualt.length > 0) ? _c('div', {
+    staticClass: "pmrequest-row"
+  }, [_c('el-button', {
+    attrs: {
+      "disabled": _vm.loading
+    },
+    on: {
+      "click": _vm.vacationDownload
+    }
+  }, [_vm._v("Скачать")])], 1) : _vm._e(), _vm._v(" "), _c('el-table', {
     attrs: {
       "data": _vm.vacation_resualt,
       "empty-text": "Сотрудников не найдено"
@@ -59187,13 +59227,79 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "box-shadow": "5px 5px 3px rgba(0,0,0,0.6)",
       "padding": "10px",
       "border-radius": "10px",
+      "background": "#eeece0"
+    }
+  }, [(_vm.education_datas.all_specializations.length > 0) ? _c('el-select', {
+    staticClass: "eld-eld-body-select-long-request",
+    attrs: {
+      "multiple": "",
+      "filterable": "",
+      "placeholder": "Выберите тип награды",
+      "no-match-text": "Не найдено"
+    },
+    model: {
+      value: (_vm.education_request.specializationList),
+      callback: function($$v) {
+        _vm.education_request.specializationList = $$v
+      },
+      expression: "education_request.specializationList"
+    }
+  }, _vm._l((_vm.education_datas.all_specializations), function(item) {
+    return _c('el-option', {
+      key: item,
+      attrs: {
+        "label": item,
+        "value": item
+      }
+    })
+  })) : _vm._e(), _vm._v(" "), (_vm.education_datas.all_cvalifications.length > 0) ? _c('el-select', {
+    staticClass: "eld-eld-body-select-long-request",
+    attrs: {
+      "multiple": "",
+      "filterable": "",
+      "placeholder": "Выберите название награды",
+      "no-match-text": "Не найдено"
+    },
+    model: {
+      value: (_vm.education_request.cvalificationList),
+      callback: function($$v) {
+        _vm.education_request.cvalificationList = $$v
+      },
+      expression: "education_request.cvalificationList"
+    }
+  }, _vm._l((_vm.education_datas.all_cvalifications), function(item) {
+    return _c('el-option', {
+      key: item,
+      attrs: {
+        "label": item,
+        "value": item
+      }
+    })
+  })) : _vm._e(), _vm._v(" "), _c('el-switch', {
+    attrs: {
+      "active-text": "сотрудник имеет награды данных категорий",
+      "inactive-text": "сотрудник не имеет награды данных категорий"
+    },
+    model: {
+      value: (_vm.vacation_request),
+      callback: function($$v) {
+        _vm.vacation_request = $$v
+      },
+      expression: "vacation_request"
+    }
+  })], 1), _vm._v(" "), _c('div', {
+    staticStyle: {
+      "margin-bottom": "4px",
+      "box-shadow": "5px 5px 3px rgba(0,0,0,0.6)",
+      "padding": "10px",
+      "border-radius": "10px",
       "background": "#f6b0b0"
     }
   }, [_c('span', {
     staticClass: "demo-input-label"
-  }, [_vm._v("Количество оставшихся дней:")]), _vm._v(" "), _c('el-input-number', {
+  }, [_vm._v("Минимальное количество наград:")]), _vm._v(" "), _c('el-input-number', {
     attrs: {
-      "placeholder": "Выберите минимальное количество дней отпуска"
+      "placeholder": "Выберите минимальное количество наград"
     },
     model: {
       value: (_vm.vacation_request),
@@ -59204,7 +59310,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }), _vm._v(" "), _c('el-switch', {
     attrs: {
-      "active-text": "есть дни отпуска с прошлого периода",
+      "active-text": "награды других органов",
       "inactive-text": ""
     },
     model: {
@@ -59222,7 +59328,16 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     on: {
       "click": _vm.vacation_request_button
     }
-  }, [_vm._v("Отправить запрос")]), _vm._v(" "), _c('el-table', {
+  }, [_vm._v("Отправить запрос")]), _vm._v(" "), (_vm.vacation_resualt.length > 0) ? _c('div', {
+    staticClass: "pmrequest-row"
+  }, [_c('el-button', {
+    attrs: {
+      "disabled": _vm.loading
+    },
+    on: {
+      "click": _vm.vacationDownload
+    }
+  }, [_vm._v("Скачать")])], 1) : _vm._e(), _vm._v(" "), _c('el-table', {
     attrs: {
       "data": _vm.vacation_resualt,
       "empty-text": "Сотрудников не найдено"
@@ -59240,14 +59355,26 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }), _vm._v(" "), _c('el-table-column', {
     attrs: {
-      "prop": "vacation.cancel",
-      "label": "оставшихся дней",
+      "prop": "",
+      "label": "Тип награды",
       "sortable": ""
     }
   }), _vm._v(" "), _c('el-table-column', {
     attrs: {
-      "prop": "vacation.date_end",
-      "label": "Дата окончания",
+      "prop": "",
+      "label": "название награды",
+      "sortable": ""
+    }
+  }), _vm._v(" "), _c('el-table-column', {
+    attrs: {
+      "prop": "",
+      "label": "Орган",
+      "sortable": ""
+    }
+  }), _vm._v(" "), _c('el-table-column', {
+    attrs: {
+      "prop": "",
+      "label": "Дата присваения",
       "sortable": ""
     }
   })], 1), _vm._v(" "), (_vm.vacation_resualt.length > 0) ? _c('div', {
@@ -59275,20 +59402,21 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_c('span', {
     staticClass: "demo-input-label"
-  }, [_vm._v("Количество оставшихся дней:")]), _vm._v(" "), _c('el-input-number', {
+  }, [_vm._v("Дата окончания удостоверения:")]), _vm._v(" "), _c('el-input', {
     attrs: {
-      "placeholder": "Выберите минимальное количество дней отпуска"
+      "placeholder": "Выберите дату",
+      "type": "date"
     },
     model: {
-      value: (_vm.vacation_request),
+      value: (_vm.contract_request.last_contract_date),
       callback: function($$v) {
-        _vm.vacation_request = $$v
+        _vm.contract_request.last_contract_date = $$v
       },
-      expression: "vacation_request"
+      expression: "contract_request.last_contract_date"
     }
   }), _vm._v(" "), _c('el-switch', {
     attrs: {
-      "active-text": "есть дни отпуска с прошлого периода",
+      "active-text": "Удостоверение не соответствует должности",
       "inactive-text": ""
     },
     model: {
@@ -59306,7 +59434,16 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     on: {
       "click": _vm.vacation_request_button
     }
-  }, [_vm._v("Отправить запрос")]), _vm._v(" "), _c('el-table', {
+  }, [_vm._v("Отправить запрос")]), _vm._v(" "), (_vm.vacation_resualt.length > 0) ? _c('div', {
+    staticClass: "pmrequest-row"
+  }, [_c('el-button', {
+    attrs: {
+      "disabled": _vm.loading
+    },
+    on: {
+      "click": _vm.vacationDownload
+    }
+  }, [_vm._v("Скачать")])], 1) : _vm._e(), _vm._v(" "), _c('el-table', {
     attrs: {
       "data": _vm.vacation_resualt,
       "empty-text": "Сотрудников не найдено"
@@ -59325,7 +59462,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }), _vm._v(" "), _c('el-table-column', {
     attrs: {
       "prop": "vacation.cancel",
-      "label": "оставшихся дней",
+      "label": "номер удостоверения",
       "sortable": ""
     }
   }), _vm._v(" "), _c('el-table-column', {
@@ -59359,20 +59496,21 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_c('span', {
     staticClass: "demo-input-label"
-  }, [_vm._v("Количество оставшихся дней:")]), _vm._v(" "), _c('el-input-number', {
+  }, [_vm._v("Дата последеней аттестации:")]), _vm._v(" "), _c('el-input', {
     attrs: {
-      "placeholder": "Выберите минимальное количество дней отпуска"
+      "placeholder": "Выберите дату",
+      "type": "date"
     },
     model: {
-      value: (_vm.vacation_request),
+      value: (_vm.contract_request.last_contract_date),
       callback: function($$v) {
-        _vm.vacation_request = $$v
+        _vm.contract_request.last_contract_date = $$v
       },
-      expression: "vacation_request"
+      expression: "contract_request.last_contract_date"
     }
   }), _vm._v(" "), _c('el-switch', {
     attrs: {
-      "active-text": "есть дни отпуска с прошлого периода",
+      "active-text": "Аттестация просрочена",
       "inactive-text": ""
     },
     model: {
@@ -59390,7 +59528,16 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     on: {
       "click": _vm.vacation_request_button
     }
-  }, [_vm._v("Отправить запрос")]), _vm._v(" "), _c('el-table', {
+  }, [_vm._v("Отправить запрос")]), _vm._v(" "), (_vm.vacation_resualt.length > 0) ? _c('div', {
+    staticClass: "pmrequest-row"
+  }, [_c('el-button', {
+    attrs: {
+      "disabled": _vm.loading
+    },
+    on: {
+      "click": _vm.vacationDownload
+    }
+  }, [_vm._v("Скачать")])], 1) : _vm._e(), _vm._v(" "), _c('el-table', {
     attrs: {
       "data": _vm.vacation_resualt,
       "empty-text": "Сотрудников не найдено"
@@ -59409,7 +59556,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }), _vm._v(" "), _c('el-table-column', {
     attrs: {
       "prop": "vacation.cancel",
-      "label": "оставшихся дней",
+      "label": "Действительна",
       "sortable": ""
     }
   }), _vm._v(" "), _c('el-table-column', {
@@ -59474,7 +59621,16 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     on: {
       "click": _vm.vacation_request_button
     }
-  }, [_vm._v("Отправить запрос")]), _vm._v(" "), _c('el-table', {
+  }, [_vm._v("Отправить запрос")]), _vm._v(" "), (_vm.vacation_resualt.length > 0) ? _c('div', {
+    staticClass: "pmrequest-row"
+  }, [_c('el-button', {
+    attrs: {
+      "disabled": _vm.loading
+    },
+    on: {
+      "click": _vm.vacationDownload
+    }
+  }, [_vm._v("Скачать")])], 1) : _vm._e(), _vm._v(" "), _c('el-table', {
     attrs: {
       "data": _vm.vacation_resualt,
       "empty-text": "Сотрудников не найдено"
@@ -59558,7 +59714,16 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     on: {
       "click": _vm.vacation_request_button
     }
-  }, [_vm._v("Отправить запрос")]), _vm._v(" "), _c('el-table', {
+  }, [_vm._v("Отправить запрос")]), _vm._v(" "), (_vm.vacation_resualt.length > 0) ? _c('div', {
+    staticClass: "pmrequest-row"
+  }, [_c('el-button', {
+    attrs: {
+      "disabled": _vm.loading
+    },
+    on: {
+      "click": _vm.vacationDownload
+    }
+  }, [_vm._v("Скачать")])], 1) : _vm._e(), _vm._v(" "), _c('el-table', {
     attrs: {
       "data": _vm.vacation_resualt,
       "empty-text": "Сотрудников не найдено"
@@ -59642,7 +59807,16 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     on: {
       "click": _vm.vacation_request_button
     }
-  }, [_vm._v("Отправить запрос")]), _vm._v(" "), _c('el-table', {
+  }, [_vm._v("Отправить запрос")]), _vm._v(" "), (_vm.vacation_resualt.length > 0) ? _c('div', {
+    staticClass: "pmrequest-row"
+  }, [_c('el-button', {
+    attrs: {
+      "disabled": _vm.loading
+    },
+    on: {
+      "click": _vm.vacationDownload
+    }
+  }, [_vm._v("Скачать")])], 1) : _vm._e(), _vm._v(" "), _c('el-table', {
     attrs: {
       "data": _vm.vacation_resualt,
       "empty-text": "Сотрудников не найдено"
@@ -59726,7 +59900,16 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     on: {
       "click": _vm.vacation_request_button
     }
-  }, [_vm._v("Отправить запрос")]), _vm._v(" "), _c('el-table', {
+  }, [_vm._v("Отправить запрос")]), _vm._v(" "), (_vm.vacation_resualt.length > 0) ? _c('div', {
+    staticClass: "pmrequest-row"
+  }, [_c('el-button', {
+    attrs: {
+      "disabled": _vm.loading
+    },
+    on: {
+      "click": _vm.vacationDownload
+    }
+  }, [_vm._v("Скачать")])], 1) : _vm._e(), _vm._v(" "), _c('el-table', {
     attrs: {
       "data": _vm.vacation_resualt,
       "empty-text": "Сотрудников не найдено"
@@ -59810,7 +59993,16 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     on: {
       "click": _vm.vacation_request_button
     }
-  }, [_vm._v("Отправить запрос")]), _vm._v(" "), _c('el-table', {
+  }, [_vm._v("Отправить запрос")]), _vm._v(" "), (_vm.vacation_resualt.length > 0) ? _c('div', {
+    staticClass: "pmrequest-row"
+  }, [_c('el-button', {
+    attrs: {
+      "disabled": _vm.loading
+    },
+    on: {
+      "click": _vm.vacationDownload
+    }
+  }, [_vm._v("Скачать")])], 1) : _vm._e(), _vm._v(" "), _c('el-table', {
     attrs: {
       "data": _vm.vacation_resualt,
       "empty-text": "Сотрудников не найдено"
@@ -59894,7 +60086,16 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     on: {
       "click": _vm.vacation_request_button
     }
-  }, [_vm._v("Отправить запрос")]), _vm._v(" "), _c('el-table', {
+  }, [_vm._v("Отправить запрос")]), _vm._v(" "), (_vm.vacation_resualt.length > 0) ? _c('div', {
+    staticClass: "pmrequest-row"
+  }, [_c('el-button', {
+    attrs: {
+      "disabled": _vm.loading
+    },
+    on: {
+      "click": _vm.vacationDownload
+    }
+  }, [_vm._v("Скачать")])], 1) : _vm._e(), _vm._v(" "), _c('el-table', {
     attrs: {
       "data": _vm.vacation_resualt,
       "empty-text": "Сотрудников не найдено"

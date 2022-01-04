@@ -418,7 +418,7 @@
 
             <div v-if="structureTrees.length > 0">
                 <el-collapse v-model="activeName" accordion class="eld-eld-side-element">
-                    <el-collapse-item title="Образование" name="1" class="eld-eld-side-element-folder" >
+                    <el-collapse-item title="Образование" name="1" class="eld-eld-side-element-folder">
                         <div style="margin-bottom: 4px; box-shadow: 5px 5px 3px rgba(0,0,0,0.6); padding: 10px; border-radius: 10px; background: #eeece0;">
                             <el-select v-if="education_datas.all_specializations.length > 0" v-model="education_request.specializationList"
                                        multiple
@@ -460,6 +460,9 @@
                             </el-select>
                         </div>
                         <el-button @click="education_request_button" type="success" plain>Отправить запрос</el-button>
+                        <div class="pmrequest-row" v-if="education_resualt.length > 0">
+                            <el-button @click="educationDownload" :disabled="loading">Скачать</el-button>
+                        </div>
                         <el-table :data="education_resualt" empty-text="Сотрудников не найдено">
                             <el-table-column prop="person.numpersonal" label="Номер"></el-table-column>
                             <el-table-column prop="fullname(person)" label="ФИО" sortable></el-table-column>
@@ -485,6 +488,9 @@
                             </el-switch>
                         </div>
                         <el-button @click="rank_request_button" type="success" plain>Отправить запрос</el-button>
+                        <div class="pmrequest-row" v-if="rank_resualt.length > 0">
+                            <el-button @click="rankDownload" :disabled="loading">Скачать</el-button>
+                        </div>
                         <el-table :data="rank_resualt" empty-text="Сотрудников не найдено">
                             <el-table-column prop="person.numpersonal" label="Номер"></el-table-column>
                             <el-table-column prop="fullname(person)" label="ФИО" sortable></el-table-column>
@@ -505,6 +511,9 @@
                             </el-input>
                         </div>
                         <el-button @click="contract_request_button" type="success" plain>Отправить запрос</el-button>
+                        <div class="pmrequest-row" v-if="contruct_resualt.length > 0">
+                            <el-button @click="contructDownload" :disabled="loading">Скачать</el-button>
+                        </div>
                         <el-table :data="contruct_resualt" empty-text="Сотрудников не найдено">
                             <el-table-column prop="person.numpersonal" label="Номер"></el-table-column>
                             <el-table-column prop="fullname(person)" label="ФИО" sortable></el-table-column>
@@ -518,7 +527,7 @@
                     </el-collapse-item>
                     <el-collapse-item title="Отпуск" name="4" class="eld-eld-side-element-folder">
                         <div style="margin-bottom: 4px; box-shadow: 5px 5px 3px rgba(0,0,0,0.6); padding: 10px; border-radius: 10px; background: #f6b0b0;">
-                            <span class="demo-input-label">Количество оставшихся дней:</span>
+                            <span class="demo-input-label">Количество не использованных дней:</span>
                             <el-input-number placeholder="Выберите минимальное количество дней отпуска"
                                              v-model="vacation_request">
                             </el-input-number>
@@ -528,6 +537,9 @@
                             </el-switch>
                         </div>
                         <el-button @click="vacation_request_button" type="success" plain>Отправить запрос</el-button>
+                        <div class="pmrequest-row" v-if="vacation_resualt.length > 0">
+                            <el-button @click="vacationDownload" :disabled="loading">Скачать</el-button>
+                        </div>
                         <el-table :data="vacation_resualt" empty-text="Сотрудников не найдено">
                             <el-table-column prop="person.numpersonal" label="Номер"></el-table-column>
                             <el-table-column prop="fullname(person)" label="ФИО" sortable></el-table-column>
@@ -540,22 +552,57 @@
                         <!--<div>Implementation resualt.</div>-->
                     </el-collapse-item>
                     <el-collapse-item title="Награды" name="5" class="eld-eld-side-element-folder">
+                        <div style="margin-bottom: 4px; box-shadow: 5px 5px 3px rgba(0,0,0,0.6); padding: 10px; border-radius: 10px; background: #eeece0;">
+                            <el-select v-if="education_datas.all_specializations.length > 0" v-model="education_request.specializationList"
+                                       multiple
+                                       filterable
+                                       placeholder="Выберите тип награды"
+                                       class="eld-eld-body-select-long-request"
+                                       no-match-text="Не найдено">
+                                <el-option v-for="item in education_datas.all_specializations"
+                                           :key="item"
+                                           :label="item"
+                                           :value="item">
+                                </el-option>
+                            </el-select>
+                            <el-select v-if="education_datas.all_cvalifications.length > 0" v-model="education_request.cvalificationList"
+                                       multiple
+                                       filterable
+                                       placeholder="Выберите название награды"
+                                       class="eld-eld-body-select-long-request"
+                                       no-match-text="Не найдено">
+                                <el-option v-for="item in education_datas.all_cvalifications"
+                                           :key="item"
+                                           :label="item"
+                                           :value="item">
+                                </el-option>
+                            </el-select>
+                            <el-switch v-model="vacation_request"
+                                       active-text="сотрудник имеет награды данных категорий"
+                                       inactive-text="сотрудник не имеет награды данных категорий">
+                            </el-switch>
+                        </div>
                         <div style="margin-bottom: 4px; box-shadow: 5px 5px 3px rgba(0,0,0,0.6); padding: 10px; border-radius: 10px; background: #f6b0b0;">
-                            <span class="demo-input-label">Количество оставшихся дней:</span>
-                            <el-input-number placeholder="Выберите минимальное количество дней отпуска"
+                            <span class="demo-input-label">Минимальное количество наград:</span>
+                            <el-input-number placeholder="Выберите минимальное количество наград"
                                              v-model="vacation_request">
                             </el-input-number>
                             <el-switch v-model="vacation_request"
-                                       active-text="есть дни отпуска с прошлого периода"
+                                       active-text="награды других органов"
                                        inactive-text="">
                             </el-switch>
                         </div>
                         <el-button @click="vacation_request_button" type="success" plain>Отправить запрос</el-button>
+                        <div class="pmrequest-row" v-if="vacation_resualt.length > 0">
+                            <el-button @click="vacationDownload" :disabled="loading">Скачать</el-button>
+                        </div>
                         <el-table :data="vacation_resualt" empty-text="Сотрудников не найдено">
                             <el-table-column prop="person.numpersonal" label="Номер"></el-table-column>
                             <el-table-column prop="fullname(person)" label="ФИО" sortable></el-table-column>
-                            <el-table-column prop="vacation.cancel" label="оставшихся дней" sortable></el-table-column>
-                            <el-table-column prop="vacation.date_end" label="Дата окончания" sortable></el-table-column>
+                            <el-table-column prop="" label="Тип награды" sortable></el-table-column>
+                            <el-table-column prop="" label="название награды" sortable></el-table-column>
+                            <el-table-column prop="" label="Орган" sortable></el-table-column>
+                            <el-table-column prop="" label="Дата присваения" sortable></el-table-column>
                         </el-table>
                         <div class="pmrequest-row" v-if="vacation_resualt.length > 0">
                             <el-button @click="vacationDownload" :disabled="loading">Скачать</el-button>
@@ -564,20 +611,24 @@
                     </el-collapse-item>
                     <el-collapse-item title="Удостоверение" name="6" class="eld-eld-side-element-folder">
                         <div style="margin-bottom: 4px; box-shadow: 5px 5px 3px rgba(0,0,0,0.6); padding: 10px; border-radius: 10px; background: #f6b0b0;">
-                            <span class="demo-input-label">Количество оставшихся дней:</span>
-                            <el-input-number placeholder="Выберите минимальное количество дней отпуска"
-                                             v-model="vacation_request">
-                            </el-input-number>
+                            <span class="demo-input-label">Дата окончания удостоверения:</span>
+                            <el-input placeholder="Выберите дату"
+                                      v-model="contract_request.last_contract_date"
+                                      type="date">
+                            </el-input>
                             <el-switch v-model="vacation_request"
-                                       active-text="есть дни отпуска с прошлого периода"
+                                       active-text="Удостоверение не соответствует должности"
                                        inactive-text="">
                             </el-switch>
                         </div>
                         <el-button @click="vacation_request_button" type="success" plain>Отправить запрос</el-button>
+                        <div class="pmrequest-row" v-if="vacation_resualt.length > 0">
+                            <el-button @click="vacationDownload" :disabled="loading">Скачать</el-button>
+                        </div>
                         <el-table :data="vacation_resualt" empty-text="Сотрудников не найдено">
                             <el-table-column prop="person.numpersonal" label="Номер"></el-table-column>
                             <el-table-column prop="fullname(person)" label="ФИО" sortable></el-table-column>
-                            <el-table-column prop="vacation.cancel" label="оставшихся дней" sortable></el-table-column>
+                            <el-table-column prop="vacation.cancel" label="номер удостоверения" sortable></el-table-column>
                             <el-table-column prop="vacation.date_end" label="Дата окончания" sortable></el-table-column>
                         </el-table>
                         <div class="pmrequest-row" v-if="vacation_resualt.length > 0">
@@ -587,20 +638,24 @@
                     </el-collapse-item>
                     <el-collapse-item title="Аттестация" name="7" class="eld-eld-side-element-folder">
                         <div style="margin-bottom: 4px; box-shadow: 5px 5px 3px rgba(0,0,0,0.6); padding: 10px; border-radius: 10px; background: #f6b0b0;">
-                            <span class="demo-input-label">Количество оставшихся дней:</span>
-                            <el-input-number placeholder="Выберите минимальное количество дней отпуска"
-                                             v-model="vacation_request">
-                            </el-input-number>
+                            <span class="demo-input-label">Дата последеней аттестации:</span>
+                            <el-input placeholder="Выберите дату"
+                                      v-model="contract_request.last_contract_date"
+                                      type="date">
+                            </el-input>
                             <el-switch v-model="vacation_request"
-                                       active-text="есть дни отпуска с прошлого периода"
+                                       active-text="Аттестация просрочена"
                                        inactive-text="">
                             </el-switch>
                         </div>
                         <el-button @click="vacation_request_button" type="success" plain>Отправить запрос</el-button>
+                        <div class="pmrequest-row" v-if="vacation_resualt.length > 0">
+                            <el-button @click="vacationDownload" :disabled="loading">Скачать</el-button>
+                        </div>
                         <el-table :data="vacation_resualt" empty-text="Сотрудников не найдено">
                             <el-table-column prop="person.numpersonal" label="Номер"></el-table-column>
                             <el-table-column prop="fullname(person)" label="ФИО" sortable></el-table-column>
-                            <el-table-column prop="vacation.cancel" label="оставшихся дней" sortable></el-table-column>
+                            <el-table-column prop="vacation.cancel" label="Действительна" sortable></el-table-column>
                             <el-table-column prop="vacation.date_end" label="Дата окончания" sortable></el-table-column>
                         </el-table>
                         <div class="pmrequest-row" v-if="vacation_resualt.length > 0">
@@ -620,6 +675,9 @@
                             </el-switch>
                         </div>
                         <el-button @click="vacation_request_button" type="success" plain>Отправить запрос</el-button>
+                        <div class="pmrequest-row" v-if="vacation_resualt.length > 0">
+                            <el-button @click="vacationDownload" :disabled="loading">Скачать</el-button>
+                        </div>
                         <el-table :data="vacation_resualt" empty-text="Сотрудников не найдено">
                             <el-table-column prop="person.numpersonal" label="Номер"></el-table-column>
                             <el-table-column prop="fullname(person)" label="ФИО" sortable></el-table-column>
@@ -643,6 +701,9 @@
                             </el-switch>
                         </div>
                         <el-button @click="vacation_request_button" type="success" plain>Отправить запрос</el-button>
+                        <div class="pmrequest-row" v-if="vacation_resualt.length > 0">
+                            <el-button @click="vacationDownload" :disabled="loading">Скачать</el-button>
+                        </div>
                         <el-table :data="vacation_resualt" empty-text="Сотрудников не найдено">
                             <el-table-column prop="person.numpersonal" label="Номер"></el-table-column>
                             <el-table-column prop="fullname(person)" label="ФИО" sortable></el-table-column>
@@ -666,6 +727,9 @@
                             </el-switch>
                         </div>
                         <el-button @click="vacation_request_button" type="success" plain>Отправить запрос</el-button>
+                        <div class="pmrequest-row" v-if="vacation_resualt.length > 0">
+                            <el-button @click="vacationDownload" :disabled="loading">Скачать</el-button>
+                        </div>
                         <el-table :data="vacation_resualt" empty-text="Сотрудников не найдено">
                             <el-table-column prop="person.numpersonal" label="Номер"></el-table-column>
                             <el-table-column prop="fullname(person)" label="ФИО" sortable></el-table-column>
@@ -689,6 +753,9 @@
                             </el-switch>
                         </div>
                         <el-button @click="vacation_request_button" type="success" plain>Отправить запрос</el-button>
+                        <div class="pmrequest-row" v-if="vacation_resualt.length > 0">
+                            <el-button @click="vacationDownload" :disabled="loading">Скачать</el-button>
+                        </div>
                         <el-table :data="vacation_resualt" empty-text="Сотрудников не найдено">
                             <el-table-column prop="person.numpersonal" label="Номер"></el-table-column>
                             <el-table-column prop="fullname(person)" label="ФИО" sortable></el-table-column>
@@ -712,6 +779,9 @@
                             </el-switch>
                         </div>
                         <el-button @click="vacation_request_button" type="success" plain>Отправить запрос</el-button>
+                        <div class="pmrequest-row" v-if="vacation_resualt.length > 0">
+                            <el-button @click="vacationDownload" :disabled="loading">Скачать</el-button>
+                        </div>
                         <el-table :data="vacation_resualt" empty-text="Сотрудников не найдено">
                             <el-table-column prop="person.numpersonal" label="Номер"></el-table-column>
                             <el-table-column prop="fullname(person)" label="ФИО" sortable></el-table-column>
@@ -735,6 +805,9 @@
                             </el-switch>
                         </div>
                         <el-button @click="vacation_request_button" type="success" plain>Отправить запрос</el-button>
+                        <div class="pmrequest-row" v-if="vacation_resualt.length > 0">
+                            <el-button @click="vacationDownload" :disabled="loading">Скачать</el-button>
+                        </div>
                         <el-table :data="vacation_resualt" empty-text="Сотрудников не найдено">
                             <el-table-column prop="person.numpersonal" label="Номер"></el-table-column>
                             <el-table-column prop="fullname(person)" label="ФИО" sortable></el-table-column>

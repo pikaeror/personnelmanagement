@@ -271,8 +271,8 @@
                                     </div>
                                 </div>
 
-                                <el-dropdown v-if="!posdep.headingthisstructure" class="position-settings" placement="top" @command="handleCommand">
-                                    <div>Действия</div>
+                                <el-dropdown v-if="!posdep.headingthisstructure || $store.state.user.admin == 1" class="position-settings" placement="top" @command="handleCommand">
+                                    <div>Действия<div v-if="posdep.headingthisstructure">Начальник</div></div>
                                     <el-dropdown-menu slot="dropdown">
                                         <!--<el-dropdown-item v-if="hasAccessToEdit" :command="addDepartmentID(department.id)">Добавить подотдел</el-dropdown-item>-->
                                         <el-dropdown-item v-if="hasAccessToEdit && isUnsignedCreate(posdep)" :command="renamedecreePositionID(posdep.id)">Редактировать должность</el-dropdown-item>

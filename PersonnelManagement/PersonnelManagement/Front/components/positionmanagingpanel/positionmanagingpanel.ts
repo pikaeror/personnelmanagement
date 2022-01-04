@@ -766,6 +766,11 @@ export default class PositionmanagingpanelComponent extends Vue {
             headNum = 1;
         }
 
+        if (this.headid == -this.$store.state.positionsListId) {
+            headNum = 0;
+            this.headid = 0;
+        }
+
         let opchsNum: number = 0;
         if (this.opchs) {
             opchsNum = 1;

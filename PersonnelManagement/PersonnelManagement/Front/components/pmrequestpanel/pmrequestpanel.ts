@@ -798,10 +798,15 @@ export default class PmrequestComponent extends Vue {
     education_request_button() {
         this.education_request.current_structure = this.structureTrees;
         console.log("education request");
+        console.log(JSON.stringify(<Education_Request>(this.education_request)));
         fetch('api/request/PersonEducationRequest', {
             method: 'post',
             body: JSON.stringify(<Education_Request>(this.education_request)),
-            credentials: 'include'
+            credentials: 'include',
+            headers: new Headers({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            })
         })
             .then(response => response.json() as Promise<Education_respons[]>)
             .then(data => {
@@ -815,7 +820,11 @@ export default class PmrequestComponent extends Vue {
         fetch('api/request/PersonRankRequest', {
             method: 'post',
             body: JSON.stringify(<Rank_Request>(this.rank_request)),
-            credentials: 'include'
+            credentials: 'include',
+            headers: new Headers({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            })
         })
             .then(response => response.json() as Promise<Rank_respons[]>)
             .then(data => {
@@ -829,7 +838,11 @@ export default class PmrequestComponent extends Vue {
         fetch('api/request/PersonContructRequest', {
             method: 'post',
             body: JSON.stringify(<Contract_Request>(this.contract_request)),
-            credentials: 'include'
+            credentials: 'include',
+            headers: new Headers({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            })
         })
             .then(response => response.json() as Promise<Contract_respons[]>)
             .then(data => {
@@ -843,7 +856,11 @@ export default class PmrequestComponent extends Vue {
         fetch('api/request/PersonContructRequest', {
             method: 'post',
             body: JSON.stringify(<Vacation_Request>(this.vacation_request)),
-            credentials: 'include'
+            credentials: 'include',
+            headers: new Headers({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            })
         })
             .then(response => response.json() as Promise<Vacation_Response[]>)
             .then(data => {
@@ -857,7 +874,11 @@ export default class PmrequestComponent extends Vue {
         fetch('api/request/PersonContructRequest', {
             method: 'post',
             body: JSON.stringify(<Award_Request>(this.award_request)),
-            credentials: 'include'
+            credentials: 'include',
+            headers: new Headers({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            })
         })
             .then(response => response.json() as Promise<Award_respons[]>)
             .then(data => {
@@ -871,7 +892,11 @@ export default class PmrequestComponent extends Vue {
         fetch('api/request/PersonContructRequest', {
             method: 'post',
             body: JSON.stringify(<Certificate_Request>(this.certificate_request)),
-            credentials: 'include'
+            credentials: 'include',
+            headers: new Headers({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            })
         })
             .then(response => response.json() as Promise<Certificate_Respons[]>)
             .then(data => {

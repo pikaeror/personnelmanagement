@@ -14,6 +14,7 @@ namespace PersonnelManagement.Controllers
     public class RequestController : Controller
     {
         private Repository repository;
+        private ELDRequestWorker worker;
 
         public RequestController(Repository repository)
         {
@@ -48,6 +49,19 @@ namespace PersonnelManagement.Controllers
                 return structureTree;
             }
 
+            return null;
+        }
+
+        [HttpPost("PersonEducationRequest")]
+        public IEnumerable<Education_Respons> GetEducationRespons([FromBody]Education_Request education_Request)
+        {
+            string sessionid = Request.Cookies[Keys.COOKIES_SESSION];
+            User user = IdentityService.GetUserBySessionID(sessionid, repository);
+
+            if (IdentityService.IsLogined(sessionid, repository))
+            {
+                worker.GetEducation(education_Request);
+            }
             return null;
         }
     }

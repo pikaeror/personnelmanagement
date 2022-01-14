@@ -7659,7 +7659,7 @@ namespace PersonnelManagement.Models
             return mrds;
         }
 
-        public IEnumerable<Position> GetAllPositions(int structureID)
+        public List<Position> GetAllPositions(int structureID)
         {
             List<Position> positions = new List<Position>();
             Dictionary<int, List<Position>> positionsStructures = PositionsStructureAsKeyLocal();

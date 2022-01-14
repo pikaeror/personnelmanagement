@@ -29,4 +29,6 @@
     cancelcontinueBool: boolean;
 
     displayPrivelege: boolean;
+
+    closed: boolean;
 }

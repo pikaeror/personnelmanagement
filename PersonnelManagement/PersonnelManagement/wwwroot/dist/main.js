@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "e129a2d7a0b13843a430"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "f0e79c6750d102f373b8"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -19244,10 +19244,15 @@ let PmrequestComponent = class PmrequestComponent extends __WEBPACK_IMPORTED_MOD
     education_request_button() {
         this.education_request.current_structure = this.structureTrees;
         console.log("education request");
+        console.log(JSON.stringify((this.education_request)));
         fetch('api/request/PersonEducationRequest', {
             method: 'post',
             body: JSON.stringify((this.education_request)),
-            credentials: 'include'
+            credentials: 'include',
+            headers: new Headers({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            })
         })
             .then(response => response.json())
             .then(data => {
@@ -19260,7 +19265,11 @@ let PmrequestComponent = class PmrequestComponent extends __WEBPACK_IMPORTED_MOD
         fetch('api/request/PersonRankRequest', {
             method: 'post',
             body: JSON.stringify((this.rank_request)),
-            credentials: 'include'
+            credentials: 'include',
+            headers: new Headers({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            })
         })
             .then(response => response.json())
             .then(data => {
@@ -19273,7 +19282,11 @@ let PmrequestComponent = class PmrequestComponent extends __WEBPACK_IMPORTED_MOD
         fetch('api/request/PersonContructRequest', {
             method: 'post',
             body: JSON.stringify((this.contract_request)),
-            credentials: 'include'
+            credentials: 'include',
+            headers: new Headers({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            })
         })
             .then(response => response.json())
             .then(data => {
@@ -19286,7 +19299,11 @@ let PmrequestComponent = class PmrequestComponent extends __WEBPACK_IMPORTED_MOD
         fetch('api/request/PersonContructRequest', {
             method: 'post',
             body: JSON.stringify((this.vacation_request)),
-            credentials: 'include'
+            credentials: 'include',
+            headers: new Headers({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            })
         })
             .then(response => response.json())
             .then(data => {
@@ -19299,7 +19316,11 @@ let PmrequestComponent = class PmrequestComponent extends __WEBPACK_IMPORTED_MOD
         fetch('api/request/PersonContructRequest', {
             method: 'post',
             body: JSON.stringify((this.award_request)),
-            credentials: 'include'
+            credentials: 'include',
+            headers: new Headers({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            })
         })
             .then(response => response.json())
             .then(data => {
@@ -19312,7 +19333,11 @@ let PmrequestComponent = class PmrequestComponent extends __WEBPACK_IMPORTED_MOD
         fetch('api/request/PersonContructRequest', {
             method: 'post',
             body: JSON.stringify((this.certificate_request)),
-            credentials: 'include'
+            credentials: 'include',
+            headers: new Headers({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            })
         })
             .then(response => response.json())
             .then(data => {
@@ -50706,8 +50731,16 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticStyle: {
       "width": "15%"
     }
-  }), _vm._v(" "), _c('col')]), _vm._v(" "), _c('thead', [_c('tr', [_c('td', [_vm._v("Период предоставления, за какое время/год")]), _vm._v(" "), _c('td', [_vm._v("Вид отпуска")]), _vm._v(" "), _c('td', [_vm._v("Дата начала отпуска")]), _vm._v(" "), _c('td', [_vm._v("Дата окончания отпуска")]), _vm._v(" "), _c('td', [_vm._v("Количество дней")]), _vm._v(" "), (_vm.person.military) ? _c('td', [_vm._v("Время на проезд")]) : _vm._e(), _vm._v(" "), (!_vm.person.military) ? _c('td', [_vm._v("Праздничные дни")]) : _vm._e(), _vm._v(" "), _c('td', [_vm._v("Компенсация")]), _vm._v(" "), _c('td', [_vm._v("Отзыв")]), _vm._v(" "), _c('td', [_vm._v("Действия")])])]), _vm._v(" "), _vm._l((_vm.person.personvacations), function(personvacation) {
-    return _c('tr', [_c('td', [_c('div', [_vm._v("\n                                с " + _vm._s(_vm.printDate(personvacation.allowstartString)) + " по " + _vm._s(_vm.printDate(personvacation.allowendString)) + "\n                            ")])]), _vm._v(" "), _c('td', [_c('div', [_vm._v("\n                                " + _vm._s(_vm.getVacationtype(personvacation.vacationtype)) + "\n                            ")])]), _vm._v(" "), _c('td', [_c('div', [_vm._v("\n                                " + _vm._s(_vm.printDate(personvacation.dateString)) + "\n                            ")])]), _vm._v(" "), _c('td', [_c('div', [_vm._v("\n                                " + _vm._s(_vm.printDate(_vm.getVacationendString(personvacation))) + "\n                            ")])]), _vm._v(" "), _c('td', [_c('div', [_vm._v("\n                                " + _vm._s(personvacation.duration) + "\n                            ")])]), _vm._v(" "), (_vm.person.military) ? _c('td', [_c('div', [_vm._v("\n                                " + _vm._s(personvacation.trip) + "\n                            ")])]) : _vm._e(), _vm._v(" "), (!_vm.person.military) ? _c('td', [_c('div', [_vm._v("\n                                " + _vm._s(personvacation.holidays) + "\n                            ")])]) : _vm._e(), _vm._v(" "), _c('td', [(personvacation.compensationBool != null && personvacation.compensationBool) ? _c('div', [_vm._v("\n                                Компенсация дней " + _vm._s(personvacation.compensationdays) + ",  № приказа " + _vm._s(personvacation.compensationnumber) + " от " + _vm._s(_vm.printDate(personvacation.compensationdateString)) + "\n                            ")]) : _vm._e()]), _vm._v(" "), _c('td', [(personvacation.cancelBool != null && personvacation.cancelBool) ? _c('div', [_c('div', [_vm._v("\n                                    С " + _vm._s(_vm.printDate(personvacation.canceldateString)) + " по " + _vm._s(_vm.printDate(personvacation.canceldateendString)) + ". Дней - " + _vm._s(_vm.differenceBetweenTwoDays(personvacation.canceldate, personvacation.canceldateend) + 1) + ".\n                                    "), (personvacation.cancelcontinueBool != null && personvacation.cancelcontinueBool) ? [_vm._v("\n                                        Прибавить к концу отпуска.\n                                    ")] : _vm._e(), _vm._v(" "), [_vm._v("\n                                        Сохранить остаток.\n                                    ")]], 2)]) : _vm._e()]), _vm._v(" "), _c('td', [(personvacation.id != null && personvacation.id > 0) ? _c('div', [_c('div', [_c('el-button', {
+  }), _vm._v(" "), _c('col')]), _vm._v(" "), _c('thead', [_c('tr', [_c('td', [_vm._v("Период предоставления, за какое время/год")]), _vm._v(" "), _c('td', [_vm._v("Вид отпуска")]), _vm._v(" "), _c('td', [_vm._v("Дата начала отпуска")]), _vm._v(" "), _c('td', [_vm._v("Дата окончания отпуска")]), _vm._v(" "), _c('td', [_vm._v("Количество дней")]), _vm._v(" "), (_vm.person.military) ? _c('td', [_vm._v("Время на проезд")]) : _vm._e(), _vm._v(" "), (!_vm.person.military) ? _c('td', [_vm._v("Праздничные дни")]) : _vm._e(), _vm._v(" "), _c('td', [_vm._v("Компенсация")]), _vm._v(" "), _c('td', [_vm._v("Отзыв")]), _vm._v(" "), _c('td', [_vm._v("Закрыт")]), _vm._v(" "), _c('td', [_vm._v("Действия")])])]), _vm._v(" "), _vm._l((_vm.person.personvacations), function(personvacation) {
+    return _c('tr', [_c('td', [_c('div', [_vm._v("\n                                с " + _vm._s(_vm.printDate(personvacation.allowstartString)) + " по " + _vm._s(_vm.printDate(personvacation.allowendString)) + "\n                            ")])]), _vm._v(" "), _c('td', [_c('div', [_vm._v("\n                                " + _vm._s(_vm.getVacationtype(personvacation.vacationtype)) + "\n                            ")])]), _vm._v(" "), _c('td', [_c('div', [_vm._v("\n                                " + _vm._s(_vm.printDate(personvacation.dateString)) + "\n                            ")])]), _vm._v(" "), _c('td', [_c('div', [_vm._v("\n                                " + _vm._s(_vm.printDate(_vm.getVacationendString(personvacation))) + "\n                            ")])]), _vm._v(" "), _c('td', [_c('div', [_vm._v("\n                                " + _vm._s(personvacation.duration) + "\n                            ")])]), _vm._v(" "), (_vm.person.military) ? _c('td', [_c('div', [_vm._v("\n                                " + _vm._s(personvacation.trip) + "\n                            ")])]) : _vm._e(), _vm._v(" "), (!_vm.person.military) ? _c('td', [_c('div', [_vm._v("\n                                " + _vm._s(personvacation.holidays) + "\n                            ")])]) : _vm._e(), _vm._v(" "), _c('td', [(personvacation.compensationBool != null && personvacation.compensationBool) ? _c('div', [_vm._v("\n                                Компенсация дней " + _vm._s(personvacation.compensationdays) + ",  № приказа " + _vm._s(personvacation.compensationnumber) + " от " + _vm._s(_vm.printDate(personvacation.compensationdateString)) + "\n                            ")]) : _vm._e()]), _vm._v(" "), _c('td', [(personvacation.cancelBool != null && personvacation.cancelBool) ? _c('div', [_c('div', [_vm._v("\n                                    С " + _vm._s(_vm.printDate(personvacation.canceldateString)) + " по " + _vm._s(_vm.printDate(personvacation.canceldateendString)) + ". Дней - " + _vm._s(_vm.differenceBetweenTwoDays(personvacation.canceldate, personvacation.canceldateend) + 1) + ".\n                                    "), (personvacation.cancelcontinueBool != null && personvacation.cancelcontinueBool) ? [_vm._v("\n                                        Прибавить к концу отпуска.\n                                    ")] : _vm._e(), _vm._v(" "), [_vm._v("\n                                        Сохранить остаток.\n                                    ")]], 2)]) : _vm._e()]), _vm._v(" "), (personvacation.id != null && personvacation.id > 0) ? _c('td', [_c('div', [_c('el-checkbox', {
+      model: {
+        value: (personvacation.closed),
+        callback: function($$v) {
+          personvacation.closed = $$v
+        },
+        expression: "personvacation.closed"
+      }
+    })], 1)]) : _vm._e(), _vm._v(" "), _c('td', [(personvacation.id != null && personvacation.id > 0) ? _c('div', [_c('div', [_c('el-button', {
       attrs: {
         "size": "mini"
       },

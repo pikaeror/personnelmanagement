@@ -4330,6 +4330,7 @@
                                 <td v-if="!person.military">Праздничные дни</td>
                                 <td>Компенсация</td>
                                 <td>Отзыв</td>
+                                <td>Закрыт</td>
                                 <td>Действия</td>
                             </tr>
                         </thead>
@@ -4388,6 +4389,11 @@
                                     </div>
                                 </div>
 
+                            </td>
+                            <td v-if="personvacation.id != null && personvacation.id > 0">
+                                <div>
+                                    <el-checkbox v-model="personvacation.closed"></el-checkbox>
+                                </div>
                             </td>
                             <td>
                                 <div v-if="personvacation.id != null && personvacation.id > 0">

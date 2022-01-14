@@ -8,66 +8,12 @@ namespace PersonnelManagement.Models
     public class ELDRequestWorker
     {
         private User user;
-        private int paragraphId;
-        private int options;
-        private Repository p_repository;
+        private readonly Repository p_repository;
 
         public ELDRequestWorker(Repository repository, User user)
         {
             p_repository = repository;
             this.user = user;
-        }
-
-        public void Worker()
-        {
-            int structureId = p_repository.UsersLocal().Values.ToList().FirstOrDefault(p => p.Id == user.Id).Structure.Value;
-
-            switch (paragraphId)
-            {
-                case 6:
-                    {
-                        Educationdata educationdata = new Educationdata();
-                        educationdata.all_levels = Get_all_levels();
-                        educationdata.all_cvalifications = Get_all_cvalifications();
-                        educationdata.all_specializations = Get_all_specializations();
-                        break;
-                    }
-                case 20:
-                    {
-
-                        break;
-                    }
-                case 4:
-                    {
-
-                        break;
-                    }
-                case 14:
-                    {
-
-                        break;
-                    }
-                case 9:
-                    {
-
-                        break;
-                    }
-                case 10:
-                    {
-
-                        break;
-                    }
-                case 11:
-                    {
-
-                        break;
-                    }
-                case 12:
-                    {
-
-                        break;
-                    }
-            }
         }
 
         public List<string> Get_all_cvalifications()
@@ -128,11 +74,23 @@ namespace PersonnelManagement.Models
             p_repository.UpdateEducationlevelsLocal();
             List<string> all_levels = new List<string>();
             List<Educationlevel> educationlevels = p_repository.EducationlevelsLocal().Values.ToList();
+
             foreach (Educationlevel educationlevel in educationlevels)
             {
                 all_levels.Add(educationlevel.Levelname);
             }
             return all_levels;
+        }
+
+        public void GetEducation(Education_Request education_Request)
+        {
+            List<Position> positions = new List<Position>();
+
+
+            foreach (StructureTree structureTree in education_Request.Current_structure)
+            {
+                positions.Concat(p_repository.GetAllPositions(structureTree.Id));
+            }
         }
     }
 }

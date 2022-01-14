@@ -29,5 +29,6 @@ namespace PersonnelManagement.Models
         public string Orderwho { get; set; }
         public int Orderwhoid { get; set; }
         public int Orderid { get; set; }
+        public sbyte Closed { get; set; }
     }
 }

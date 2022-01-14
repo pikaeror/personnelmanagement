@@ -172,8 +172,10 @@
                     <hr />
                     <div>
                         <el-button type="danger" plain @click="removePerson()">Заархивировать личное дело</el-button>
+                        <el-button type="warning" plain>Сформировать документы</el-button>
                     </div>
                 </div>
+                
                 <!--Паспорт-->
                 <div v-if="menuid == 2">
                     <div class="eld-eld-title">
@@ -3395,10 +3397,23 @@
                     <div v-if="personjobMenu == 3">
                         <div class="eld-eld-body-subtitle">
                             Периоды, засчитываемые в выслугу лет
+                            <div style="justify-content: center;">
+                                <el-switch style="display: block"
+                                           v-model="printing_seniority"
+                                           active-color="#2ded82"
+                                           inactive-color="#33dbd3"
+                                           active-text="Пункт Б"
+                                           inactive-text="Пункт А"
+                                           active-value=seniority[1]
+                                           inactive-value=seniority[0]>
+                                </el-switch>
+                                <el-button type="warning" size="mini" round @click="printSeniority(printing_seniority)">Печать</el-button>
+                            </div>
                         </div>
+                        
                         <div class="eld-eld-body-row-flex">
                             <!--военная пенсия-->
-                            <table class="eld-eld-table">
+                            <table class="eld-eld-table" id=seniority[0]>
                                 <thead>
                                     <tr>
                                         <td colspan="6">
@@ -3629,7 +3644,7 @@
                                 </tr>
                             </table>
                             <!--смешанная пенсия-->
-                            <table class="eld-eld-table">
+                            <table class="eld-eld-table" id=seniority[1]>
                                 <thead>
                                     <tr>
                                         <td colspan="6">
@@ -4820,6 +4835,7 @@
                             <tr>
                                 <td>Вид</td>
                                 <td>Дата аттестации</td>
+                                <td>Скор(дд-мм-ГГ)</td>
                                 <td>Выводы комиссии</td>
                                 <td>Рекомендации</td>
                                 <td>Действия</td>
@@ -4834,6 +4850,11 @@
                             <td>
                                 <div class="eld-eld-body-select-short">
                                     {{printDate(personattestation.dateString)}}
+                                </div>
+                            </td>
+                            <td>
+                                <div class="eld-eld-body-select-short">
+                                    {{personattestation.validity}}
                                 </div>
                             </td>
                             <td>
@@ -4883,6 +4904,14 @@
                             <div class="eld-eld-body-row-short">
                                 Дата аттестации
                                 <el-input v-model="personattestationDate" type="date"></el-input>
+                            </div>
+                            <div style="max-width: 600px">
+                                Срок аттестации
+                                <div style="display: flex;">
+                                    Дни: <el-input size="mini" minlength="1" maxlength="2" type="string" max="31" v-model="personattestationValidation[0]">Дни</el-input>
+                                    Месяцы: <el-input size="mini" minlength="1" maxlength="2" type="string" max="12" v-model="personattestationValidation[1]">Месяцы</el-input>
+                                    Годы: <el-input size="mini" minlength="1" maxlength="2" type="string" max="99" v-model="personattestationValidation[2]">Года</el-input>
+                                </div>
                             </div>
                             <div class="eld-eld-body-row-flex">
                                 <div class="eld-eld-body-row-medium">

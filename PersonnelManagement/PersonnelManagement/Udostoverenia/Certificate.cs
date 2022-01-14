@@ -31,5 +31,6 @@ namespace PersonnelManagement.Udostoverenia
         public string RankInspector { get; set; }
         public string Extra { get; set; }
         public sbyte? Exclusive { get; set; }
+        public sbyte? Byadmin { get; set; }
     }
 }

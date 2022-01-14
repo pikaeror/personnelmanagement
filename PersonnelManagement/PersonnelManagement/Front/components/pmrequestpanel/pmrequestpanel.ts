@@ -26,6 +26,14 @@ import Rank_Request from '../../classes/Requests_classes/rank_request';
 import Rank_respons from '../../classes/Requests_classes/Rank_respons';
 import Contract_Request from '../../classes/Requests_classes/contract_request';
 import Contract_respons from '../../classes/Requests_classes/contract_respons';
+import Vacation_Request from '../../classes/Requests_classes/vacation_request';
+import Vacation_Response from '../../classes/Requests_classes/vacation_respons';
+import Award_Parameters from '../../classes/Requests_classes/award_parameters';
+import Award_Request from '../../classes/Requests_classes/award_request';
+import Award_respons from '../../classes/Requests_classes/award_respons';
+import Certificate_Request from '../../classes/Requests_classes/certificate_request';
+import Certificate_Respons from '../../classes/Requests_classes/certificate_respons';
+
 import Person from '../../classes/person';
 Vue.component(Button.name, Button);
 Vue.component(Input.name, Input);
@@ -146,8 +154,15 @@ export default class PmrequestComponent extends Vue {
     contract_request: Contract_Request;
     contruct_resualt: Contract_respons[];
 
-    vacation_request: any;
-    vacation_resualt: any[];
+    vacation_request: Vacation_Request;
+    vacation_resualt: Vacation_Response[];
+
+    award_datas: Award_Parameters;
+    award_request: Award_Request;
+    award_response: Award_respons[];
+
+    certificate_request: Certificate_Request;
+    certificate_response: Certificate_Respons[];
 
 
     @Prop({ default: false })
@@ -248,8 +263,15 @@ export default class PmrequestComponent extends Vue {
             contract_request: new Contract_Request(),
             contruct_resualt: [],
 
-            vacation_request: [],
+            vacation_request: new Vacation_Request(),
             vacation_resualt: [],
+
+            award_datas: new Award_Parameters(),
+            award_request: new Award_Request(),
+            award_response: [],
+
+            certificate_request: new Certificate_Request(),
+            certificate_response: [],
         }
     }
 
@@ -815,9 +837,52 @@ export default class PmrequestComponent extends Vue {
             });
     }
 
+    vacation_request_button() {
+        this.vacation_request.current_structure = this.structureTrees;
+        console.log("vacation request");
+        fetch('api/request/PersonContructRequest', {
+            method: 'post',
+            body: JSON.stringify(<Vacation_Request>(this.vacation_request)),
+            credentials: 'include'
+        })
+            .then(response => response.json() as Promise<Vacation_Response[]>)
+            .then(data => {
+                this.vacation_resualt = data;
+            });
+    }
+
+    award_request_button() {
+        this.award_request.current_structure = this.structureTrees;
+        console.log("awards request");
+        fetch('api/request/PersonContructRequest', {
+            method: 'post',
+            body: JSON.stringify(<Award_Request>(this.award_request)),
+            credentials: 'include'
+        })
+            .then(response => response.json() as Promise<Award_respons[]>)
+            .then(data => {
+                this.award_response = data;
+            });
+    }
+
+    certificate_request_button() {
+        this.certificate_request.current_structure = this.structureTrees;
+        console.log("certificate request");
+        fetch('api/request/PersonContructRequest', {
+            method: 'post',
+            body: JSON.stringify(<Certificate_Request>(this.certificate_request)),
+            credentials: 'include'
+        })
+            .then(response => response.json() as Promise<Certificate_Respons[]>)
+            .then(data => {
+                this.certificate_response = data;
+            });
+    }
+
     loder_old_eld_datas() {
         this.load_user_structure();
         this.load_educations_parameters();
+        this.load_award_datas();
     }
 
     async load_educations_parameters() {
@@ -835,6 +900,14 @@ export default class PmrequestComponent extends Vue {
                 if (data.id == null)
                     return;
                 this.structureTrees.push(data);
+            });
+    }
+
+    async load_award_datas() {
+        fetch('api/request/awarddata', { credentials: 'include' })
+            .then(response => response.json() as Promise<Award_Parameters>)
+            .then(data => {
+                this.award_datas = data;
             });
     }
 
@@ -886,6 +959,57 @@ export default class PmrequestComponent extends Vue {
             .then(x => x.blob())
             .then(x => {
                 download(x, "Запрос_Звание_ЭЛД");
+            })
+    }
+
+    vacationDownload() {
+        this.vacation_resualt.length
+        fetch('/api/Pmrequest', {
+            method: 'post',
+            body: JSON.stringify(<Vacation_Response[]>(this.vacation_resualt)),
+            credentials: 'include',
+            headers: new Headers({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            })
+        })
+            .then(x => x.blob())
+            .then(x => {
+                download(x, "Запрос_Отпуск_ЭЛД");
+            })
+    }
+
+    awardDownload() {
+        this.award_response.length
+        fetch('/api/Pmrequest', {
+            method: 'post',
+            body: JSON.stringify(<Award_respons[]>(this.award_response)),
+            credentials: 'include',
+            headers: new Headers({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            })
+        })
+            .then(x => x.blob())
+            .then(x => {
+                download(x, "Запрос_Награды_ЭЛД");
+            })
+    }
+
+    certificateDownload() {
+        this.certificate_response.length
+        fetch('/api/Pmrequest', {
+            method: 'post',
+            body: JSON.stringify(<Certificate_Respons[]>(this.certificate_response)),
+            credentials: 'include',
+            headers: new Headers({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            })
+        })
+            .then(x => x.blob())
+            .then(x => {
+                download(x, "Запрос_Удостоверения_ЭЛД");
             })
     }
 }

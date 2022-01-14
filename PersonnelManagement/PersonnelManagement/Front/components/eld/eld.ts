@@ -229,6 +229,7 @@ export default class EldComponent extends Vue {
     personattestationMenuelement: Personattestation;
     personattestationType: number;
     personattestationDate: string;
+    personattestationValidation: string[];
     personattestationResult: string;
     personattestationRecomendation: string;
 
@@ -471,6 +472,9 @@ export default class EldComponent extends Vue {
 
     peoplewhothoutjobplace: (Person[])[];
 
+    seniority: string[];
+    printing_seniority: string;
+
     data() {
         return {
             fiosearch: "",
@@ -569,6 +573,7 @@ export default class EldComponent extends Vue {
             personattestationMenuelement: null,
             personattestationType: null,
             personattestationDate: "",
+            personattestationValidation: ["00", "00", "00"],
             personattestationResult: "",
             personattestationRecomendation: "",
 
@@ -808,6 +813,9 @@ export default class EldComponent extends Vue {
             pension_B: "",
 
             peoplewhothoutjobplace: [],
+
+            seniority: ['seniority_a', 'seniority_b'],
+            printing_seniority: 'seniority_a',
         }
     }
 
@@ -2961,6 +2969,7 @@ export default class EldComponent extends Vue {
                 date: new Date(this.personattestationDate),
                 recomendation: this.personattestationRecomendation,
                 result: this.personattestationResult,
+                validity: this.personattestationValidation.join('-'),
                 //relativetype: this.personrelativeType,
 
             }),
@@ -3064,12 +3073,21 @@ export default class EldComponent extends Vue {
         this.personattestationDate = this.personattestationMenuelement.dateString;
         this.personattestationRecomendation = this.personattestationMenuelement.recomendation;
         this.personattestationResult = this.personattestationMenuelement.result;
+        this.personattestationValidation = this.personattestationMenuelement.validity.split('-');
 
 
         this.personattestationMenuvisible = true;
     }
 
     completePersonattestationButton(person: Person) {
+        this.personattestationValidation.forEach(h => {
+            if (h.length == 0) {
+                h = "00";
+            }
+            else if (h.length == 1) {
+                h = "0" + h;
+            }
+        });
         if (this.personattestationMenuelement == null) {
             this.addPersonattestation();
         } else {
@@ -3078,6 +3096,7 @@ export default class EldComponent extends Vue {
             this.personattestationMenuelement.dateString = this.personattestationDate;
             this.personattestationMenuelement.recomendation = this.personattestationRecomendation;
             this.personattestationMenuelement.result = this.personattestationResult;
+            this.personattestationMenuelement.validity = this.personattestationValidation.join('-');
 
 
             this.updatePersonattestation(person, this.personattestationMenuelement);
@@ -6453,6 +6472,10 @@ export default class EldComponent extends Vue {
         
         //printJS({ printable: 'printServlist', type: 'html', css: '../../css/print.css', targetStyles: ['*'] })
         printJS({ printable: 'printServlist', type: 'html', css: 'print.css', targetStyles: ['*'] })
+    }
+
+    printSeniority(name) {
+        printJS({ printable: name, type: 'html', css: 'print.css', targetStyles: ['*'] })
     }
 
 

@@ -17,5 +17,6 @@ namespace PersonnelManagement.Models
         public string Orderwho { get; set; }
         public int Orderwhoid { get; set; }
         public int Orderid { get; set; }
+        public string Validity { get; set; }
     }
 }

@@ -11,5 +11,6 @@ namespace PersonnelManagement.Udostoverenia
         public string Salt { get; set; }
         public int? Agency { get; set; }
         public sbyte Admin { get; set; }
+        public sbyte Weapon { get; set; }
     }
 }

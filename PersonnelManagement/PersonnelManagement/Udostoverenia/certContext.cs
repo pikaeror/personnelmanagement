@@ -135,6 +135,11 @@ namespace PersonnelManagement.Udostoverenia
                     .HasColumnName("blank")
                     .HasColumnType("int(11)");
 
+                entity.Property(e => e.Byadmin)
+                    .HasColumnName("byadmin")
+                    .HasColumnType("tinyint(1)")
+                    .HasDefaultValueSql("'0'");
+
                 entity.Property(e => e.CertificateCommitedBy1)
                     .HasColumnName("certificate_commited_by1")
                     .HasMaxLength(240);
@@ -341,6 +346,11 @@ namespace PersonnelManagement.Udostoverenia
                 entity.Property(e => e.Salt)
                     .HasColumnName("salt")
                     .HasMaxLength(256);
+
+                entity.Property(e => e.Weapon)
+                    .HasColumnName("weapon")
+                    .HasColumnType("tinyint(1)")
+                    .HasDefaultValueSql("'0'");
             });
         }
     }

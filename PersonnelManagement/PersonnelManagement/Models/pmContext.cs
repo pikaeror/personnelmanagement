@@ -140,9 +140,6 @@ namespace PersonnelManagement.Models
         public virtual DbSet<Vacationmilitary> Vacationmilitary { get; set; }
         public virtual DbSet<Vacationtype> Vacationtype { get; set; }
 
-        public pmContext(DbContextOptions<pmContext> options) : base(options) { }
-
-
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
@@ -151,6 +148,8 @@ namespace PersonnelManagement.Models
                 optionsBuilder.UseMySql("server=localhost;port=3306;userid=admin;treattinyasboolean=True;password=FVSH6S6aB4srgReT;database=pm;convert zero datetime=True;");
             }
         }
+
+        public pmContext(DbContextOptions<pmContext> options) : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -2509,6 +2508,12 @@ namespace PersonnelManagement.Models
                     .HasColumnName("result")
                     .HasMaxLength(4500)
                     .HasDefaultValueSql("''");
+
+                entity.Property(e => e.Validity)
+                    .IsRequired()
+                    .HasColumnName("validity")
+                    .HasMaxLength(255)
+                    .HasDefaultValueSql("'00-00-00'");
             });
 
             modelBuilder.Entity<Personchangedocuments>(entity =>
@@ -5258,6 +5263,11 @@ namespace PersonnelManagement.Models
                 entity.Property(e => e.Canceldateend)
                     .HasColumnName("canceldateend")
                     .HasColumnType("datetime");
+
+                entity.Property(e => e.Closed)
+                    .HasColumnName("closed")
+                    .HasColumnType("tinyint(1)")
+                    .HasDefaultValueSql("'0'");
 
                 entity.Property(e => e.Compensation)
                     .HasColumnName("compensation")

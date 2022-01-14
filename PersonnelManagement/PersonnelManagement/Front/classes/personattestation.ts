@@ -5,6 +5,7 @@
     date: Date;
     result: string;
     recomendation: string;
+    validity: string;
 
     dateString: string;
 }

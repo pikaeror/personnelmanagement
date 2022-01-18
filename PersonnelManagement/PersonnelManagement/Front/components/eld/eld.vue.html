@@ -4392,7 +4392,7 @@
                             </td>
                             <td v-if="personvacation.id != null && personvacation.id > 0">
                                 <div>
-                                    <el-checkbox v-model="personvacation.closed"></el-checkbox>
+                                    <el-checkbox v-model="personvacation.closed" @change="vacationchange(personvacation)"></el-checkbox>
                                 </div>
                             </td>
                             <td>
@@ -4841,7 +4841,7 @@
                             <tr>
                                 <td>Вид</td>
                                 <td>Дата аттестации</td>
-                                <td>Скор(дд-мм-ГГ)</td>
+                                <td>Дата следующей</td>
                                 <td>Выводы комиссии</td>
                                 <td>Рекомендации</td>
                                 <td>Действия</td>
@@ -4855,12 +4855,12 @@
                             </td>
                             <td>
                                 <div class="eld-eld-body-select-short">
-                                    {{printDate(personattestation.dateString)}}
+                                    {{printDate(personattestation.date)}}
                                 </div>
                             </td>
                             <td>
                                 <div class="eld-eld-body-select-short">
-                                    {{personattestation.validity}}
+                                    {{printDate(personattestation.validity)}}
                                 </div>
                             </td>
                             <td>
@@ -4907,16 +4907,30 @@
                                 </el-select>
                             </div>
 
-                            <div class="eld-eld-body-row-short">
-                                Дата аттестации
-                                <el-input v-model="personattestationDate" type="date"></el-input>
-                            </div>
+                            <!--<div class="eld-eld-body-row-short">
+                                Дата аттестации-->
+                                <!--<el-input v-model="personattestationDate" type="date"></el-input>-->
+                                <!--<el-date-picker v-model="personattestationDate"
+                                                type="date"
+                                                placeholder="Дата"
+                                                :local="en">
+                                </el-date-picker>
+                            </div>-->
                             <div style="max-width: 600px">
                                 Срок аттестации
-                                <div style="display: flex;">
-                                    Дни: <el-input size="mini" minlength="1" maxlength="2" type="string" max="31" v-model="personattestationValidation[0]">Дни</el-input>
-                                    Месяцы: <el-input size="mini" minlength="1" maxlength="2" type="string" max="12" v-model="personattestationValidation[1]">Месяцы</el-input>
-                                    Годы: <el-input size="mini" minlength="1" maxlength="2" type="string" max="99" v-model="personattestationValidation[2]">Года</el-input>
+                                <div style="display: flex; align-items: center;">
+                                    <div>С:</div>
+                                    <el-date-picker v-model="personattestationDate"
+                                                    type="date"
+                                                    placeholder="С"
+                                                    format="dd-MM-yyyy">
+                                    </el-date-picker>
+                                    <div>По:</div>
+                                    <el-date-picker v-model="personattestationValidation"
+                                                    type="date"
+                                                    placeholder="По"
+                                                    format="dd-MM-yyyy">
+                                    </el-date-picker>
                                 </div>
                             </div>
                             <div class="eld-eld-body-row-flex">
@@ -5307,6 +5321,7 @@
                                 <td>Страна</td>
                                 <td>Дата</td>
                                 <td>Количество дней</td>
+                                <td>Причина</td>
                                 <td>Действия</td>
                             </tr>
                         </thead>
@@ -5324,6 +5339,11 @@
                             <td>
                                 <div class="eld-eld-body-row-short">
                                     {{personworktrip.days}}
+                                </div>
+                            </td>
+                            <td>
+                                <div class="eld-eld-body-select-medium">
+                                    {{personworktrip.reason}}
                                 </div>
                             </td>
                             <td>
@@ -5347,6 +5367,10 @@
                         <hr />
                         <div class="eld-eld-body-add-title">
                             {{getPersonworktripUpdateName()}} служебную командировку
+                        </div>
+                        <div class="eld-eld-body-row-long">
+                            Причина командировки:
+                            <el-input v-model="personworktripReason" type="textarea" :rows="4"></el-input>
                         </div>
                         <div>
                             Страна

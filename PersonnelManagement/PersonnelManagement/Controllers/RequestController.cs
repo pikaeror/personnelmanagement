@@ -14,7 +14,6 @@ namespace PersonnelManagement.Controllers
     public class RequestController : Controller
     {
         private Repository repository;
-        private ELDRequestWorker worker;
 
         public RequestController(Repository repository)
         {
@@ -58,9 +57,26 @@ namespace PersonnelManagement.Controllers
             string sessionid = Request.Cookies[Keys.COOKIES_SESSION];
             User user = IdentityService.GetUserBySessionID(sessionid, repository);
 
+            ELDRequestWorker worker = new ELDRequestWorker(repository, user);
+
             if (IdentityService.IsLogined(sessionid, repository))
             {
-                worker.GetEducation(education_Request);
+                return worker.GetEducation(education_Request);
+            }
+            return null;
+        }
+
+        [HttpPost("PersonRankRequest")]
+        public IEnumerable<Rank_respons> GetRank_Respons([FromBody]Rank_request rank_Request)
+        {
+            string sessionid = Request.Cookies[Keys.COOKIES_SESSION];
+            User user = IdentityService.GetUserBySessionID(sessionid, repository);
+
+            ELDRequestWorker worker = new ELDRequestWorker(repository, user);
+
+            if (IdentityService.IsLogined(sessionid, repository))
+            {
+                return worker.GetRank(rank_Request);
             }
             return null;
         }

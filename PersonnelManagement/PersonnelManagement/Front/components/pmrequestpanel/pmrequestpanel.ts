@@ -33,6 +33,18 @@ import Award_Request from '../../classes/Requests_classes/award_request';
 import Award_respons from '../../classes/Requests_classes/award_respons';
 import Certificate_Request from '../../classes/Requests_classes/certificate_request';
 import Certificate_Respons from '../../classes/Requests_classes/certificate_respons';
+import Attestation_Request from '../../classes/Requests_classes/attestation_request';
+import Attestation_respons from '../../classes/Requests_classes/attestation_respons';
+import Language_Parameters from '../../classes/Requests_classes/language_parameters';
+import Language_Request from '../../classes/Requests_classes/language_request';
+import Language_respons from '../../classes/Requests_classes/language_respons';
+
+import Election_Parameters from '../../classes/Requests_classes/Election_parameters';
+import Election_Request from '../../classes/Requests_classes/election_request';
+import Election_respons from '../../classes/Requests_classes/election_respons';
+import Trip_Parameters from '../../classes/Requests_classes/trips_parameters';
+import Trip_Request from '../../classes/Requests_classes/trip_request';
+import Trip_respons from '../../classes/Requests_classes/trip_respons';
 
 import Person from '../../classes/person';
 Vue.component(Button.name, Button);
@@ -164,6 +176,21 @@ export default class PmrequestComponent extends Vue {
     certificate_request: Certificate_Request;
     certificate_response: Certificate_Respons[];
 
+    attestation_request: Attestation_Request;
+    attestation_response: Attestation_respons[];
+
+    language_datas: Language_Parameters;
+    language_request: Language_Request;
+    language_response: Language_respons[];
+
+    election_datas: Election_Parameters;
+    election_request: Election_Request;
+    election_response: Election_respons[];
+
+    trips_datas: Trip_Parameters;
+    trip_request: Trip_Request;
+    trip_response: Trip_respons[];
+
 
     @Prop({ default: false })
     visible: boolean;
@@ -272,6 +299,21 @@ export default class PmrequestComponent extends Vue {
 
             certificate_request: new Certificate_Request(),
             certificate_response: [],
+
+            attestation_request: new Attestation_Request(),
+            attestation_response: [],
+
+            language_datas: new Language_Parameters(),
+            language_request: new Language_Request(),
+            language_response: [],
+
+            election_datas: new Election_Parameters(),
+            election_request: new Election_Request(),
+            election_response: [],
+
+            trips_datas: new Trip_Parameters(),
+            trip_request: new Trip_Request(),
+            trip_response: [],
         }
     }
 
@@ -791,8 +833,19 @@ export default class PmrequestComponent extends Vue {
             list = [];
     }
 
-    fullname(person: Person): string {
-        return person.surname + ' ' + person.name + ' ' + person.fathername;
+    formatter_el_table_fullname(row, column, cellValue, index): string {
+        var person: Person = row.person;
+        return person.surname + " " + person.name + " " + person.fathername;
+    }
+
+    formatter_el_table_collumn_date(row, column, cellValue, index): string {
+        var output = "";
+        try {
+            output = cellValue.split("T")[0];
+        } catch (e) {
+            output = cellValue;
+        }
+        return output;
     }
 
     education_request_button() {
@@ -904,10 +957,85 @@ export default class PmrequestComponent extends Vue {
             });
     }
 
+    attestation_request_button() {
+        this.attestation_request.current_structure = this.structureTrees;
+        console.log("attestation request");
+        fetch('api/request/PersonContructRequest', {
+            method: 'post',
+            body: JSON.stringify(<Attestation_Request>(this.attestation_request)),
+            credentials: 'include',
+            headers: new Headers({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            })
+        })
+            .then(response => response.json() as Promise<Attestation_respons[]>)
+            .then(data => {
+                this.attestation_response = data;
+            });
+    }
+
+    language_request_button() {
+        this.language_request.current_structure = this.structureTrees;
+        console.log("language request");
+        fetch('api/request/PersonContructRequest', {
+            method: 'post',
+            body: JSON.stringify(<Language_Request>(this.language_request)),
+            credentials: 'include',
+            headers: new Headers({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            })
+        })
+            .then(response => response.json() as Promise<Language_respons[]>)
+            .then(data => {
+                this.language_response = data;
+            });
+    }
+
+    election_request_button() {
+        this.election_request.current_structure = this.structureTrees;
+        console.log("election request");
+        fetch('api/request/PersonContructRequest', {
+            method: 'post',
+            body: JSON.stringify(<Election_Request>(this.election_request)),
+            credentials: 'include',
+            headers: new Headers({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            })
+        })
+            .then(response => response.json() as Promise<Election_respons[]>)
+            .then(data => {
+                this.election_response = data;
+            });
+    }
+
+    trip_request_button() {
+        this.trip_request.current_structure = this.structureTrees;
+        console.log("election request");
+        fetch('api/request/PersonContructRequest', {
+            method: 'post',
+            body: JSON.stringify(<Trip_Request>(this.trip_request)),
+            credentials: 'include',
+            headers: new Headers({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            })
+        })
+            .then(response => response.json() as Promise<Trip_respons[]>)
+            .then(data => {
+                this.trip_response = data;
+            });
+    }
+
     loder_old_eld_datas() {
         this.load_user_structure();
         this.load_educations_parameters();
         this.load_award_datas();
+        this.load_Language_datas();
+        this.load_Election_datas();
+        this.load_Trips_datas();
     }
 
     async load_educations_parameters() {
@@ -933,6 +1061,30 @@ export default class PmrequestComponent extends Vue {
             .then(response => response.json() as Promise<Award_Parameters>)
             .then(data => {
                 this.award_datas = data;
+            });
+    }
+
+    async load_Language_datas() {
+        fetch('api/request/languagedata', { credentials: 'include' })
+            .then(response => response.json() as Promise<Language_Parameters>)
+            .then(data => {
+                this.language_datas = data;
+            });
+    }
+
+    async load_Election_datas() {
+        fetch('api/request/electiondata', { credentials: 'include' })
+            .then(response => response.json() as Promise<Election_Parameters>)
+            .then(data => {
+                this.election_datas = data;
+            });
+    }
+    
+    async load_Trips_datas() {
+        fetch('api/request/tripdata', { credentials: 'include' })
+            .then(response => response.json() as Promise<Trip_Parameters>)
+            .then(data => {
+                this.trips_datas = data;
             });
     }
 
@@ -1035,6 +1187,74 @@ export default class PmrequestComponent extends Vue {
             .then(x => x.blob())
             .then(x => {
                 download(x, "Запрос_Удостоверения_ЭЛД");
+            })
+    }
+
+    attestationDownload() {
+        this.certificate_response.length
+        fetch('/api/Pmrequest', {
+            method: 'post',
+            body: JSON.stringify(<Attestation_respons[]>(this.attestation_response)),
+            credentials: 'include',
+            headers: new Headers({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            })
+        })
+            .then(x => x.blob())
+            .then(x => {
+                download(x, "Запрос_Аттестации_ЭЛД");
+            })
+    }
+
+    languageDownload() {
+        this.certificate_response.length
+        fetch('/api/Pmrequest', {
+            method: 'post',
+            body: JSON.stringify(<Language_respons[]>(this.language_response)),
+            credentials: 'include',
+            headers: new Headers({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            })
+        })
+            .then(x => x.blob())
+            .then(x => {
+                download(x, "Запрос_Языки_ЭЛД");
+            })
+    }
+
+    electionDownload() {
+        this.election_response.length
+        fetch('/api/Pmrequest', {
+            method: 'post',
+            body: JSON.stringify(<Election_respons[]>(this.election_response)),
+            credentials: 'include',
+            headers: new Headers({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            })
+        })
+            .then(x => x.blob())
+            .then(x => {
+                download(x, "Запрос_участия_в_выборных_органах_ЭЛД");
+            })
+    }
+
+    tripDownload() {
+        this.election_response.length
+        fetch('/api/Pmrequest', {
+            method: 'post',
+            body: JSON.stringify(<Trip_respons[]>(this.trip_response)),
+            credentials: 'include',
+            headers: new Headers({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            })
+        })
+            .then(x => x.blob())
+            .then(x => {
+                download(x, "Запрос_служебные_командировки_ЭЛД");
             })
     }
 }

@@ -228,8 +228,8 @@ export default class EldComponent extends Vue {
     personattestationMenuvisible: boolean;
     personattestationMenuelement: Personattestation;
     personattestationType: number;
-    personattestationDate: string;
-    personattestationValidation: string[];
+    personattestationDate: Date;
+    personattestationValidation: Date;
     personattestationResult: string;
     personattestationRecomendation: string;
 
@@ -572,8 +572,8 @@ export default class EldComponent extends Vue {
             personattestationMenuvisible: false,
             personattestationMenuelement: null,
             personattestationType: null,
-            personattestationDate: "",
-            personattestationValidation: ["00", "00", "00"],
+            personattestationDate: new Date(0, 0, 0,),
+            personattestationValidation: new Date(0, 0, 0,),
             personattestationResult: "",
             personattestationRecomendation: "",
 
@@ -828,7 +828,7 @@ export default class EldComponent extends Vue {
         setInterval(this.countHolidays, 2000);
         setInterval(this.appointPosition, 1000);
         setInterval(this.autoupdatePerson, 10000);
-        setInterval(this.loadPeopleWhithoutJobPlace, 20000);
+        setInterval(this.loadPeopleWhithoutJobPlace, 40000);
 
         //this.loadPeopleWhithoutJobPlace();
         this.fetchStructureRewards();
@@ -1875,6 +1875,7 @@ export default class EldComponent extends Vue {
                 p.canceldateString = this.toDateInputValue(p.canceldate);
                 p.cancelcontinueBool = this.numberToBool(p.cancelcontinue);
                 p.canceldateendString = this.toDateInputValue(p.canceldateend);
+                //p.closed = this.numberToBool(p.closed);
             })
         }
 
@@ -2105,6 +2106,7 @@ export default class EldComponent extends Vue {
                 p.canceldate = new Date(p.canceldateString);
                 p.canceldateend = new Date(p.canceldateendString);
                 p.cancelcontinue = this.boolToNumb(p.cancelcontinueBool);
+                //p.closed = this.boolToNumb(p.closed);
             })
         }
 
@@ -2966,10 +2968,10 @@ export default class EldComponent extends Vue {
             body: JSON.stringify(<Personattestation>{
                 person: this.person.id,
                 attestationtype: this.personattestationType,
-                date: new Date(this.personattestationDate),
+                date: this.personattestationDate,
                 recomendation: this.personattestationRecomendation,
                 result: this.personattestationResult,
-                validity: this.personattestationValidation.join('-'),
+                validity: this.personattestationValidation,
                 //relativetype: this.personrelativeType,
 
             }),
@@ -3070,33 +3072,25 @@ export default class EldComponent extends Vue {
         this.personattestationMenuelement = personattestation;
 
         this.personattestationType = this.personattestationMenuelement.attestationtype;
-        this.personattestationDate = this.personattestationMenuelement.dateString;
+        this.personattestationDate = this.personattestationMenuelement.date;
         this.personattestationRecomendation = this.personattestationMenuelement.recomendation;
         this.personattestationResult = this.personattestationMenuelement.result;
-        this.personattestationValidation = this.personattestationMenuelement.validity.split('-');
+        this.personattestationValidation = this.personattestationMenuelement.validity;
 
 
         this.personattestationMenuvisible = true;
     }
 
     completePersonattestationButton(person: Person) {
-        this.personattestationValidation.forEach(h => {
-            if (h.length == 0) {
-                h = "00";
-            }
-            else if (h.length == 1) {
-                h = "0" + h;
-            }
-        });
         if (this.personattestationMenuelement == null) {
             this.addPersonattestation();
         } else {
 
             this.personattestationMenuelement.attestationtype = this.prepareNumToExport(this.personattestationType);
-            this.personattestationMenuelement.dateString = this.personattestationDate;
+            this.personattestationMenuelement.date = this.personattestationDate;
             this.personattestationMenuelement.recomendation = this.personattestationRecomendation;
             this.personattestationMenuelement.result = this.personattestationResult;
-            this.personattestationMenuelement.validity = this.personattestationValidation.join('-');
+            this.personattestationMenuelement.validity = this.personattestationValidation;
 
 
             this.updatePersonattestation(person, this.personattestationMenuelement);
@@ -7002,7 +6996,8 @@ export default class EldComponent extends Vue {
 
     getVacationdaysleft(person: Person): number {
         if (person != null && person.jobperiodcurrent != null) {
-            return person.jobperiodcurrent.vacationdaysgiven - person.jobperiodcurrent.vacationdaysconsumed;
+            return person.jobperiodcurrent.vacationdaysgiven - person.vacationdaysused;
+            //return person.jobperiodcurrent.vacationdaysgiven - person.jobperiodcurrent.vacationdaysconsumed;
         }
         return 0;
     }
@@ -8051,5 +8046,9 @@ export default class EldComponent extends Vue {
                 }
                 this.peoplewhothoutjobplace = output;
             })
+    }
+
+    vacationchange(personvacation) {
+        this.updatePersonvacation(this.person, personvacation);
     }
 }

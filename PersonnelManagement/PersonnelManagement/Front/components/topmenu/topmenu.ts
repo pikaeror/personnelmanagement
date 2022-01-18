@@ -104,7 +104,6 @@ import Dismissalclauses from '../../classes/dismissalclauses';
 import Cabinetdata from '../../classes/cabinetdata';
 import ExcertComposition from '../../classes/Excerts/excertComposition';
 import Mailexplorer from '../../classes/Mail/mailexplorer';
-
 Vue.component(Button.name, Button);
 Vue.component(Input.name, Input);
 Vue.component(Select.name, Select);

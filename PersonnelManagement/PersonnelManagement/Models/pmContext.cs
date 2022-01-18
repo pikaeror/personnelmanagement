@@ -2510,10 +2510,8 @@ namespace PersonnelManagement.Models
                     .HasDefaultValueSql("''");
 
                 entity.Property(e => e.Validity)
-                    .IsRequired()
                     .HasColumnName("validity")
-                    .HasMaxLength(255)
-                    .HasDefaultValueSql("'00-00-00'");
+                    .HasColumnType("datetime");
             });
 
             modelBuilder.Entity<Personchangedocuments>(entity =>

@@ -78,9 +78,12 @@ import Dismissalclauses from './classes/dismissalclauses';
 import VueRouter from 'vue-router';
 import Persondecreeoperation from './classes/persondecreeoperation';
 import Persondecreeblock from './classes/persondecreeblock';
+
+import locale from 'element-ui/lib/locale/lang/ru-RU'
 Vue.use(VueRouter);
 Vue.use(Vuex);
 Vue.use(DlgDraggable);
+Vue.use(Element, { locale });
 
 /**
  * Keys

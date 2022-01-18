@@ -12301,6 +12301,13 @@ namespace PersonnelManagement.Models
                 }
 
                 personManager.Vacationdaysused = 0;
+                foreach (Personvacation vacation in personManager.Personvacations.Where(r => r.Date.Value.Year >= user.Date.Value.Year))
+                {
+                    if(vacation.Closed)
+                    {
+                        personManager.Vacationdaysused += vacation.Duration;
+                    }
+                }
                 //foreach (Personvacation vacation in personManager.Personvacations)
                 //{
                 //    // 
@@ -12310,10 +12317,10 @@ namespace PersonnelManagement.Models
                 //    }
                 //}
 
-                if (personManager.Jobperiodcurrent != null)
+                /*if (personManager.Jobperiodcurrent != null)
                 {
                     personManager.Vacationdaysused = personManager.Jobperiodcurrent.Vacationdaysconsumed;
-                }
+                }*/
 
 
                 if (personManager.Jobperiodcurrent != null)
@@ -13548,12 +13555,13 @@ namespace PersonnelManagement.Models
             personvacationContext.Holidays = personvacation.Holidays;
             personvacationContext.Canceldateend = personvacation.Canceldateend;
             personvacationContext.Cancelcontinue = personvacation.Cancelcontinue;
+            personvacationContext.Closed = personvacation.Closed;
 
             //personcontractContext.Datestart = personcontract.Datestart;
             //personcontractContext.Dateend = personcontract.Dateend;
             //personcontractContext.Pay = personcontract.Pay;
 
-
+            context.Personvacation.Update(personvacationContext);
             SaveChanges();
             UpdatePersonvacationsLocal();
         }
@@ -13592,6 +13600,8 @@ namespace PersonnelManagement.Models
             //personcontractContext.Datestart = personcontract.Datestart;
             //personcontractContext.Dateend = personcontract.Dateend;
             //personcontractContext.Pay = personcontract.Pay;
+            personattestationContext.Validity = personattestation.Validity;
+            context.Personattestation.Update(personattestationContext);
 
 
             SaveChanges();

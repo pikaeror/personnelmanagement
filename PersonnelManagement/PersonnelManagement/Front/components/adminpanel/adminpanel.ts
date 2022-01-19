@@ -396,7 +396,6 @@ export default class AdminpanelComponent extends Vue {
         setInterval(this.fetchAltrankconditions, fetchAltrankconditionDelay);
         setInterval(this.fetchStructureregions, fetchStructureregionDelay);
         setInterval(this.fetchStructuretypes, fetchStructuretypeDelay);
-        setInterval(this.fetchIllcodes, fetchIllcodeDelay);
 
         this.filteredSubjects = this.subjects.filter(option => (option.category == 1 || option.category == 7));
     }
@@ -529,10 +528,6 @@ export default class AdminpanelComponent extends Vue {
         this.structuretypeStopUpdateTimer = updateDelayAfterEdit;
     }
 
-    startIllcodeUpdate() {
-        this.illcodeStopUpdateTimer = updateDelayAfterEdit;
-    }
-
     startStructureregionUpdate() {
         this.structureregionStopUpdateTimer = updateDelayAfterEdit;
     }
@@ -660,27 +655,6 @@ export default class AdminpanelComponent extends Vue {
                 (<any>Vue).notify(response);
                 //Vue.$forceUpdate();
             });
-
-        //fetch('/api/Users', {
-        //    method: 'post',
-        //    body: JSON.stringify(<User>{
-        //        name: this.newUserName, admin: this.newUserAdmin, structure: this.headid.toString(), masterpersonneleditor: this.newUserMasterPersonnelEditor,
-        //        personneleditor: this.newUserPersonnelEditor, structureeditor: this.newUserStructureEditor, personnelread: this.newUserPersonnelRead, structureread: this.newUserStructureRead,
-        //        firstname: this.newUserFirstname, surname: this.newUserSurname, patronymic: this.newUserPatronymic, positiontype: this.newUserPositiontype,
-        //    }),
-        //    credentials: 'include',
-        //    headers: new Headers({
-        //        'Accept': 'application/json',
-        //        'Content-Type': 'application/json'
-        //    })
-        //})
-        //    .then(response => { return response.json(); })
-        //    .then((response) => {
-        //        this.addUserResult = response;
-        //        this.fetchUsers(true);
-        //        (<any>Vue).notify(response);
-        //        //Vue.$forceUpdate();
-        //    });
         
     }
 
@@ -901,24 +875,6 @@ export default class AdminpanelComponent extends Vue {
         }
         if (this.structuretypeStopUpdateTimer > delayMinimum) {
             this.structuretypeStopUpdateTimer -= fetchStructuretypeDelay;
-        }
-    }
-
-    fetchIllcodes() {
-        if ($('#adminpanel-container').is(':visible') && this.activeNameIllcode === 'icfirst'
-            && this.illcodeStopUpdateTimer <= 0) {
-            fetch('api/Illcode', { credentials: 'include' })
-                .then(response => response.json() as Promise<Illcode[]>)
-                .then(data => {
-                    this.illcodes = data.sort((s1, s2) => {
-                        if (s1.name > s2.name) { return 1 };
-                        if (s1.name < s2.name) { return -1 };
-                        return 0;
-                    });
-                })
-        }
-        if (this.illcodeStopUpdateTimer > delayMinimum) {
-            this.illcodeStopUpdateTimer -= fetchIllcodeDelay;
         }
     }
 
@@ -1205,25 +1161,6 @@ export default class AdminpanelComponent extends Vue {
             });
     }
 
-    addIllcode(event: any) {
-        if (event) event.preventDefault();
-        fetch('/api/Illcode', {
-            method: 'post',
-            body: JSON.stringify(<Illcode>{
-                name: this.newIllcodeName,
-            }),
-            credentials: 'include',
-            headers: new Headers({
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            })
-        })
-            .then(response => { return response.json(); })
-            .then((response) => {
-                (<any>Vue).notify(response);
-            });
-    }
-
 
     getPositioncategoryByID(id: number) {
         return this.positioncategories.find(pc => pc.id == id).name;
@@ -1441,28 +1378,6 @@ export default class AdminpanelComponent extends Vue {
         }
 
         this.filterMethod('');
-
-        //positiontypeid: null,
-        //    subject1: null,
-        //    subject2: null,
-        //    subject3: null,
-        //    subject4: null,
-        //    subject5: null,
-        //    subject6: null,
-        //    subject7: null,
-        //    subject8: null,
-        //    subject9: null,
-        //    subject10: null,
-        //    subject11: null,
-        //    subject12: null,
-        //    subject13: null,
-        //    subject14: null,
-        //    subject15: null,
-        //    subject16: null,
-        //    subject17: null,
-        //    subject18: null,
-        //    subject19: null,
-        //    subject20: null,
     }
 
     updatePositiontypeDocument() {

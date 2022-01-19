@@ -8,7 +8,7 @@
             <div class="modepanel-element modepanel-element-org" @click="org()" v-if="structureModeAccess()">
                 Организационно-штатная работа
             </div>
-            <div class="modepanel-element modepanel-element-eld" @click="eld()" v-if="personnelRead()">
+            <!--<div class="modepanel-element modepanel-element-eld" @click="eld()" v-if="personnelRead()">
                 Электронное личное дело
             </div>
             <div class="modepanel-element modepanel-element-candidates" @click="candidates()" v-if="personnelRead()">
@@ -19,7 +19,7 @@
             </div>
             <div class="modepanel-element modepanel-element-eld" @click="decree()" v-if="personnelRead()">
                 Почта
-            </div>
+            </div>-->
             <div v-if="!structureEdit() && !personnelRead()"><i>Загрузка...</i></div>
         </div>
     </div>

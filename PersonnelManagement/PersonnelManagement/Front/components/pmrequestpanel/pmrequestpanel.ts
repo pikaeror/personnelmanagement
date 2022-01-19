@@ -19,6 +19,7 @@ import { Input, Button, Checkbox, Select, Option, Dialog } from 'element-ui';
 import Structureregion from '../../classes/structureregion';
 import educations_parameters from '../../classes/Requests_classes/educations_parameters';
 import Structure from '../../classes/Structure';
+import formatting from '../../classes/formating_functions/el_table_formatter';
 
 import Education_Request from '../../classes/Requests_classes/education_request';
 import Education_respons from '../../classes/Requests_classes/education_respons';
@@ -45,6 +46,9 @@ import Election_respons from '../../classes/Requests_classes/election_respons';
 import Trip_Parameters from '../../classes/Requests_classes/trips_parameters';
 import Trip_Request from '../../classes/Requests_classes/trip_request';
 import Trip_respons from '../../classes/Requests_classes/trip_respons';
+import Punishment_Parameters from '../../classes/Requests_classes/punishment_parameters';
+import Punishment_Request from '../../classes/Requests_classes/punishment_request';
+import Punishment_respons from '../../classes/Requests_classes/punishment_respons';
 
 import Person from '../../classes/person';
 Vue.component(Button.name, Button);
@@ -191,6 +195,10 @@ export default class PmrequestComponent extends Vue {
     trip_request: Trip_Request;
     trip_response: Trip_respons[];
 
+    punishment_datas: Punishment_Parameters;
+    punishment_request: Punishment_Request;
+    punishment_response: Punishment_respons[];
+
 
     @Prop({ default: false })
     visible: boolean;
@@ -314,8 +322,14 @@ export default class PmrequestComponent extends Vue {
             trips_datas: new Trip_Parameters(),
             trip_request: new Trip_Request(),
             trip_response: [],
+
+            punishment_datas: new Punishment_Parameters(),
+            punishment_request: new Punishment_Request(),
+            punishment_response: [],
         }
     }
+
+    formatting = formatting;
 
     mounted() {
         // setInterval(this.load_educations_parameters, 10000);
@@ -833,21 +847,6 @@ export default class PmrequestComponent extends Vue {
             list = [];
     }
 
-    formatter_el_table_fullname(row, column, cellValue, index): string {
-        var person: Person = row.person;
-        return person.surname + " " + person.name + " " + person.fathername;
-    }
-
-    formatter_el_table_collumn_date(row, column, cellValue, index): string {
-        var output = "";
-        try {
-            output = cellValue.split("T")[0];
-        } catch (e) {
-            output = cellValue;
-        }
-        return output;
-    }
-
     education_request_button() {
         this.education_request.current_structure = this.structureTrees;
         console.log("education request");
@@ -1029,6 +1028,24 @@ export default class PmrequestComponent extends Vue {
             });
     }
 
+    punishment_request_button() {
+        this.punishment_request.current_structure = this.structureTrees;
+        console.log("election request");
+        fetch('api/request/PersonContructRequest', {
+            method: 'post',
+            body: JSON.stringify(<Punishment_Request>(this.punishment_request)),
+            credentials: 'include',
+            headers: new Headers({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            })
+        })
+            .then(response => response.json() as Promise<Punishment_respons[]>)
+            .then(data => {
+                this.punishment_response = data;
+            });
+    }
+
     loder_old_eld_datas() {
         this.load_user_structure();
         this.load_educations_parameters();
@@ -1036,6 +1053,7 @@ export default class PmrequestComponent extends Vue {
         this.load_Language_datas();
         this.load_Election_datas();
         this.load_Trips_datas();
+        this.load_Punishment_datas();
     }
 
     async load_educations_parameters() {
@@ -1085,6 +1103,14 @@ export default class PmrequestComponent extends Vue {
             .then(response => response.json() as Promise<Trip_Parameters>)
             .then(data => {
                 this.trips_datas = data;
+            });
+    }
+
+    async load_Punishment_datas() {
+        fetch('api/request/tripdata', { credentials: 'include' })
+            .then(response => response.json() as Promise<Punishment_Parameters>)
+            .then(data => {
+                this.punishment_datas = data;
             });
     }
 
@@ -1255,6 +1281,23 @@ export default class PmrequestComponent extends Vue {
             .then(x => x.blob())
             .then(x => {
                 download(x, "Запрос_служебные_командировки_ЭЛД");
+            })
+    }
+
+    punishmentDownload() {
+        this.election_response.length
+        fetch('/api/Pmrequest', {
+            method: 'post',
+            body: JSON.stringify(<Punishment_respons[]>(this.punishment_response)),
+            credentials: 'include',
+            headers: new Headers({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            })
+        })
+            .then(x => x.blob())
+            .then(x => {
+                download(x, "Запрос_взыскания_ЭЛД");
             })
     }
 }

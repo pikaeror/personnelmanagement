@@ -14,7 +14,7 @@ namespace PersonnelManagement.Models
     {
         private Repository m_repository { get; set; }
         private User m_user { get; set; }
-        private pmContext m_context { get; set; }
+        private orgContext m_context { get; set; }
         private DateTime m_date { get; set; }
 
         public StructureCustomEditor(Repository repository, User user)

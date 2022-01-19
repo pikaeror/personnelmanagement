@@ -32,10 +32,10 @@ namespace PersonnelManagement
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<pmContext>(options => options.UseMySql(
-                Configuration.GetConnectionString("DefaultConnection")), ServiceLifetime.Transient);
-            services.AddDbContext<certContext>(options => options.UseMySql(
-                Configuration.GetConnectionString("CertConnection")), ServiceLifetime.Transient);
+            services.AddDbContext<orgContext>(options => options.UseMySql(
+                Configuration.GetConnectionString("EldConnection")), ServiceLifetime.Transient);
+            /*services.AddDbContext<certContext>(options => options.UseMySql(
+                Configuration.GetConnectionString("CertConnection")), ServiceLifetime.Transient);*/
             //services.AddTransient<IRepository, Repository>();
             services.AddTransient<Repository>();
             services.AddTransient<IdentityService>();

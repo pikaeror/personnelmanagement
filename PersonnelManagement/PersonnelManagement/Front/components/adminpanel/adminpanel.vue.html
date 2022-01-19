@@ -57,38 +57,6 @@
                     </el-tab-pane>
                     <el-tab-pane :label="userAddLabel()" name="usecond">
                         <form id="adminpanel-adduser">
-                            <!--<el-input v-model="newUserName" class="adminpanel-input" placeholder="Имя пользователя"></el-input>
-                            <div class="adminpanel-row">
-                                <el-input v-model="newUserSurname" class="adminpanel-input" @input="startUserUpdate" placeholder="Фамилия"></el-input>
-                                <el-input v-model="newUserFirstname" class="adminpanel-input" @input="startUserUpdate" placeholder="Имя"> </el-input>
-                                <el-input v-model="newUserPatronymic" class="adminpanel-input" @input="startUserUpdate" placeholder="Отчество"></el-input>
-                            </div>
-                            <div class="adminpanel-row">
-                                Должность <el-select @input="startUserUpdate" v-model="newUserPositiontype" placeholder="Загрузка..." loading-text="Загрузка" no-match-text="Совпадений не найдено" no-data-text="Нет данных" filterable>
-                                    <el-option v-for="ptype in positiontypesList" :title="ptype.name"
-                                               :key="ptype.id" :label="ptype.name" :value="ptype.id">
-                                    </el-option>
-                                </el-select>
-                            </div>
-                            <div v-if="headingStructureTree != null">
-                                {{headingStructureTree.tree}}
-                                <el-button @click="removeHeading" size="mini">Убрать подразделение</el-button>
-                            </div>
-                            <el-button @click="addHeading" size="mini">Добавить подразделение</el-button>
-                            <div class="adminpanel-row"><el-switch v-model="newUserAdmin" active-value="1" inactive-value="0" active-text="Администратор"> </el-switch></div>
-                            <br />
-                            <div>
-                                Старая форма модерации прав доступа
-                            </div>
-                            <div class="adminpanel-row"><el-switch v-model="newUserPersonnelEditor" active-value="1" inactive-value="0" active-text="Редактирование прохождения службы" @input="startUserUpdate"> </el-switch></div>
-                            <div class="adminpanel-row"><el-switch v-model="newUserPersonnelRead" active-value="1" inactive-value="0" active-text="Доступ к чтению прохождения службы" @input="startUserUpdate"> </el-switch></div>
-                            <div class="adminpanel-row"><el-switch v-model="newUserStructureEditor" active-value="1" inactive-value="0" active-text="Редактирование оргштатной работы" @input="startUserUpdate"> </el-switch></div>
-                            <div class="adminpanel-row"><el-switch v-model="newUserStructureRead" active-value="1" inactive-value="0" active-text="Доступ к чтению оргштатной работы" @input="startUserUpdate"> </el-switch></div>
-                            <div class="adminpanel-row"><el-switch v-model="newUserMasterPersonnelEditor" active-value="1" inactive-value="0" active-text="Редактирование кадров всех подразделений (ЦА МЧС)" @input="startUserUpdate"> </el-switch></div>
-
-                            <br />
-                            <br />-->
-
                             <div>
                                 Новая форма модерации прав доступа
                             </div>
@@ -125,15 +93,6 @@
                                     <el-button class="eld-eld-body-submenu-button" v-bind:class="{'eld-eld-body-submenu-button-selected': newUser.rights.menu == 1}" @click="updateRightsMenu(newUser.rights, 1)">
                                         Организационно-штатная работа
                                     </el-button>
-                                    <el-button class="eld-eld-body-submenu-button" v-bind:class="{'eld-eld-body-submenu-button-selected': newUser.rights.menu == 2}" @click="updateRightsMenu(newUser.rights, 2)">
-                                        Электронное личное дело
-                                    </el-button>
-                                    <el-button class="eld-eld-body-submenu-button" v-bind:class="{'eld-eld-body-submenu-button-selected': newUser.rights.menu == 3}" @click="updateRightsMenu(newUser.rights, 3)">
-                                        Кандидаты
-                                    </el-button>
-                                    <el-button class="eld-eld-body-submenu-button" v-bind:class="{'eld-eld-body-submenu-button-selected': newUser.rights.menu == 4}" @click="updateRightsMenu(newUser.rights, 4)">
-                                        Структура в лицах
-                                    </el-button>
                                     <el-button class="eld-eld-body-submenu-button" v-bind:class="{'eld-eld-body-submenu-button-selected': newUser.rights.menu == 5}" @click="updateRightsMenu(newUser.rights, 5)">
                                         Проекты приказов
                                     </el-button>
@@ -147,209 +106,11 @@
                                     <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.orgread" :active-value="1" :inactive-value="0" active-text="Просмотр орг-штатной структуры своего и подчиненных подразделений"> </el-switch></div>
                                     <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.orgreadall" :active-value="1" :inactive-value="0" active-text="Просмотр орг-штатной структуры всех подразделений"> </el-switch></div>
                                 </div>
-                                <!--Электронное личное дело-->
-                                <div v-if="newUser.rights.menu == 2">
-                                    <br />
-                                    <div>
-                                        <el-button @click="grantEldAllAccess(newUser.rights)">Предоставить все доступы</el-button>
-                                    </div>
-                                    <div>
-                                        <b>
-                                            Общие доступы
-                                        </b>
-                                    </div>
-                                    <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peopleedit" :active-value="1" :inactive-value="0" active-text="Редактирование личных дел работников своего и подчиненных подразделений"> </el-switch></div>
-                                    <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peopleread" :active-value="1" :inactive-value="0" active-text="Просмотр личных дел работников своего и подчиненных подразделений"> </el-switch></div>
-                                    <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peoplereadall" :active-value="1" :inactive-value="0" active-text="Просмотр личных дел работников всех подразделений"> </el-switch></div>
-
-
-                                    <div class="eld-eld-body-row-flex">
-                                        <div>
-                                            <div>
-                                                <b>
-                                                    Доступ к чтению
-                                                </b>
-                                            </div>
-                                            <div>
-                                                <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peoplereadmain" :active-value="1" :inactive-value="0" active-text="Главная страница"> </el-switch></div>
-                                                <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peoplereadpassport" :active-value="1" :inactive-value="0" active-text="Паспорт"> </el-switch></div>
-                                                <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peoplereadphoto" :active-value="1" :inactive-value="0" active-text="Фотографии"> </el-switch></div>
-                                                <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peoplereadcertificate" :active-value="1" :inactive-value="0" active-text="Удостоверения"> </el-switch></div>
-                                                <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peoplereadrelative" :active-value="1" :inactive-value="0" active-text="Родственники"> </el-switch></div>
-                                                <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peoplereadeducation" :active-value="1" :inactive-value="0" active-text="Образование"> </el-switch></div>
-                                                <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peoplereadeducationucp" :active-value="1" :inactive-value="0" active-text="Образование УГЗ"> </el-switch></div>
-                                                <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peoplereadjob" :active-value="1" :inactive-value="0" active-text="Трудовая деятельность"> </el-switch></div>
-                                                <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peoplereadjobprivelege" :active-value="1" :inactive-value="0" active-text="Выслуга лет на льготных условиях"> </el-switch></div>
-                                                <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peoplereadjobpension" :active-value="1" :inactive-value="0" active-text="Выслуга лет"> </el-switch></div>
-                                                <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peoplereadill" :active-value="1" :inactive-value="0" active-text="Листы нетрудоспособности"> </el-switch></div>
-                                                <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peoplereaddispanserization" :active-value="1" :inactive-value="0" active-text="Диспансеризация"> </el-switch></div>
-                                                <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peoplereadvvk" :active-value="1" :inactive-value="0" active-text="Военно-врачебная комиссия"> </el-switch></div>
-                                                <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peoplereadpfl" :active-value="1" :inactive-value="0" active-text="ПФЛ"> </el-switch></div>
-                                                <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peoplereadrank" :active-value="1" :inactive-value="0" active-text="Звания"> </el-switch></div>
-                                                <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peoplereadcontract" :active-value="1" :inactive-value="0" active-text="Контракты"> </el-switch></div>
-                                                <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peoplereadcontractvacation" :active-value="1" :inactive-value="0" active-text="Дополнительные соглашения по отпускам"> </el-switch></div>
-                                                <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peoplereadcontractstate" :active-value="1" :inactive-value="0" active-text="Стаж государственных служащих"> </el-switch></div>
-                                                <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peoplereadvacation" :active-value="1" :inactive-value="0" active-text="Отпуска"> </el-switch></div>
-                                                <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peoplereadreward" :active-value="1" :inactive-value="0" active-text="Награды и поощрения"> </el-switch></div>
-                                                <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peoplereadattestation" :active-value="1" :inactive-value="0" active-text="Аттестация"> </el-switch></div>
-                                                <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peoplereadlanguage" :active-value="1" :inactive-value="0" active-text="Иностранные языки"> </el-switch></div>
-                                                <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peoplereadscience" :active-value="1" :inactive-value="0" active-text="Научные труды, звания, изобретения"> </el-switch></div>
-                                                <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peoplereadelection" :active-value="1" :inactive-value="0" active-text="Участие в выборных органах"> </el-switch></div>
-                                                <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peoplereadworktrip" :active-value="1" :inactive-value="0" active-text="Служебные командировки"> </el-switch></div>
-                                                <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peoplereadpenalty" :active-value="1" :inactive-value="0" active-text="Взыскания"> </el-switch></div>
-                                                <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peoplereadphysical" :active-value="1" :inactive-value="0" active-text="Физическая подготовка"> </el-switch></div>
-                                                <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peoplereaddriver" :active-value="1" :inactive-value="0" active-text="Водительские удостоверения"> </el-switch></div>
-                                                <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peoplereadpermission" :active-value="1" :inactive-value="0" active-text="Разрешения и лицензии"> </el-switch></div>
-                                                <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peoplereadprivelege" :active-value="1" :inactive-value="0" active-text="Льготы"> </el-switch></div>
-                                                <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peoplereadwound" :active-value="1" :inactive-value="0" active-text="Ранения, контузии и другие увечья"> </el-switch></div>
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <div>
-                                                <b>
-                                                    Доступ к редактированию
-                                                </b>
-                                            </div>
-                                            <div>
-                                                <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peopleeditmain" :active-value="1" :inactive-value="0" active-text="Главная страница"> </el-switch></div>
-                                                <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peopleeditpassport" :active-value="1" :inactive-value="0" active-text="Паспорт"> </el-switch></div>
-                                                <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peopleeditphoto" :active-value="1" :inactive-value="0" active-text="Фотографии"> </el-switch></div>
-                                                <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peopleeditcertificate" :active-value="1" :inactive-value="0" active-text="Удостоверения"> </el-switch></div>
-                                                <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peopleeditrelative" :active-value="1" :inactive-value="0" active-text="Родственники"> </el-switch></div>
-                                                <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peopleediteducation" :active-value="1" :inactive-value="0" active-text="Образование"> </el-switch></div>
-                                                <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peopleediteducationucp" :active-value="1" :inactive-value="0" active-text="Образование УГЗ"> </el-switch></div>
-                                                <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peopleeditjob" :active-value="1" :inactive-value="0" active-text="Трудовая деятельность"> </el-switch></div>
-                                                <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peopleeditjobprivelege" :active-value="1" :inactive-value="0" active-text="Выслуга лет на льготных условиях"> </el-switch></div>
-                                                <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peopleeditjobpension" :active-value="1" :inactive-value="0" active-text="Выслуга лет"> </el-switch></div>
-                                                <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peopleeditill" :active-value="1" :inactive-value="0" active-text="Листы нетрудоспособности"> </el-switch></div>
-                                                <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peopleeditdispanserization" :active-value="1" :inactive-value="0" active-text="Диспансеризация"> </el-switch></div>
-                                                <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peopleeditvvk" :active-value="1" :inactive-value="0" active-text="Военно-врачебная комиссия"> </el-switch></div>
-                                                <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peopleeditpfl" :active-value="1" :inactive-value="0" active-text="ПФЛ"> </el-switch></div>
-                                                <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peopleeditrank" :active-value="1" :inactive-value="0" active-text="Звания"> </el-switch></div>
-                                                <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peopleeditcontract" :active-value="1" :inactive-value="0" active-text="Контракты"> </el-switch></div>
-                                                <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peopleeditcontractvacation" :active-value="1" :inactive-value="0" active-text="Дополнительные соглашения по отпускам"> </el-switch></div>
-                                                <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peopleeditcontractstate" :active-value="1" :inactive-value="0" active-text="Стаж государственных служащих"> </el-switch></div>
-                                                <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peopleeditvacation" :active-value="1" :inactive-value="0" active-text="Отпуска"> </el-switch></div>
-                                                <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peopleeditreward" :active-value="1" :inactive-value="0" active-text="Награды и поощрения"> </el-switch></div>
-                                                <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peopleeditattestation" :active-value="1" :inactive-value="0" active-text="Аттестация"> </el-switch></div>
-                                                <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peopleeditlanguage" :active-value="1" :inactive-value="0" active-text="Иностранные языки"> </el-switch></div>
-                                                <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peopleeditscience" :active-value="1" :inactive-value="0" active-text="Научные труды, звания, изобретения"> </el-switch></div>
-                                                <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peopleeditelection" :active-value="1" :inactive-value="0" active-text="Участие в выборных органах"> </el-switch></div>
-                                                <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peopleeditworktrip" :active-value="1" :inactive-value="0" active-text="Служебные командировки"> </el-switch></div>
-                                                <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peopleeditpenalty" :active-value="1" :inactive-value="0" active-text="Взыскания"> </el-switch></div>
-                                                <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peopleeditphysical" :active-value="1" :inactive-value="0" active-text="Физическая подготовка"> </el-switch></div>
-                                                <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peopleeditdriver" :active-value="1" :inactive-value="0" active-text="Водительские удостоверения"> </el-switch></div>
-                                                <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peopleeditpermission" :active-value="1" :inactive-value="0" active-text="Разрешения и лицензии"> </el-switch></div>
-                                                <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peopleeditprivelege" :active-value="1" :inactive-value="0" active-text="Льготы"> </el-switch></div>
-                                                <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peopleeditwound" :active-value="1" :inactive-value="0" active-text="Ранения, контузии и другие увечья"> </el-switch></div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!--<div class="eld-eld-body-row-flex">
-                                        <div>
-
-                                        </div>
-                                        <div>
-
-                                        </div>
-                                    </div>-->
-                                    <!--<div>
-                                        <b>
-                                            Запрет на просмотр
-                                        </b>
-                                    </div>
-                                    <div>
-                                        <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peoplereadmain" :active-value="0" :inactive-value="1" active-text="Главная страница"> </el-switch></div>
-                                        <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peoplereadpassport" :active-value="0" :inactive-value="1" active-text="Паспорт"> </el-switch></div>
-                                        <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peoplereadphoto" :active-value="0" :inactive-value="1" active-text="Фотографии"> </el-switch></div>
-                                        <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peoplereadcertificate" :active-value="0" :inactive-value="1" active-text="Удостоверения"> </el-switch></div>
-                                        <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peoplereadrelative" :active-value="0" :inactive-value="1" active-text="Родственники"> </el-switch></div>
-                                        <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peoplereadeducation" :active-value="0" :inactive-value="1" active-text="Образование"> </el-switch></div>
-                                        <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peoplereadeducationucp" :active-value="0" :inactive-value="1" active-text="Образование УГЗ"> </el-switch></div>
-                                        <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peoplereadjob" :active-value="0" :inactive-value="1" active-text="Трудовая деятельность"> </el-switch></div>
-                                        <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peoplereadjobprivelege" :active-value="0" :inactive-value="1" active-text="Выслуга лет на льготных условиях"> </el-switch></div>
-                                        <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peoplereadjobpension" :active-value="0" :inactive-value="1" active-text="Выслуга лет"> </el-switch></div>
-                                        <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peoplereadill" :active-value="0" :inactive-value="1" active-text="Листы нетрудоспособности"> </el-switch></div>
-                                        <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peoplereaddispanserization" :active-value="0" :inactive-value="1" active-text="Диспансеризация"> </el-switch></div>
-                                        <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peoplereadvvk" :active-value="0" :inactive-value="1" active-text="Военно-врачебная комиссия"> </el-switch></div>
-                                        <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peoplereadpfl" :active-value="0" :inactive-value="1" active-text="ПФЛ"> </el-switch></div>
-                                        <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peoplereadrank" :active-value="0" :inactive-value="1" active-text="Звания"> </el-switch></div>
-                                        <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peoplereadcontract" :active-value="0" :inactive-value="1" active-text="Контракты"> </el-switch></div>
-                                        <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peoplereadcontractvacation" :active-value="0" :inactive-value="1" active-text="Дополнительные соглашения по отпускам"> </el-switch></div>
-                                        <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peoplereadcontractstate" :active-value="0" :inactive-value="1" active-text="Стаж государственных служащих"> </el-switch></div>
-                                        <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peoplereadvacation" :active-value="0" :inactive-value="1" active-text="Отпуска"> </el-switch></div>
-                                        <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peoplereadreward" :active-value="0" :inactive-value="1" active-text="Награды и поощрения"> </el-switch></div>
-                                        <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peoplereadattestation" :active-value="0" :inactive-value="1" active-text="Аттестация"> </el-switch></div>
-                                        <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peoplereadlanguage" :active-value="0" :inactive-value="1" active-text="Иностранные языки"> </el-switch></div>
-                                        <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peoplereadscience" :active-value="0" :inactive-value="1" active-text="Научные труды, звания, изобретения"> </el-switch></div>
-                                        <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peoplereadelection" :active-value="0" :inactive-value="1" active-text="Участие в выборных органах"> </el-switch></div>
-                                        <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peoplereadworktrip" :active-value="0" :inactive-value="1" active-text="Служебные командировки"> </el-switch></div>
-                                        <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peoplereadpenalty" :active-value="0" :inactive-value="1" active-text="Взыскания"> </el-switch></div>
-                                        <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peoplereadphysical" :active-value="0" :inactive-value="1" active-text="Физическая подготовка"> </el-switch></div>
-                                        <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peoplereaddriver" :active-value="0" :inactive-value="1" active-text="Водительские удостоверения"> </el-switch></div>
-                                        <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peoplereadpermission" :active-value="0" :inactive-value="1" active-text="Разрешения и лицензии"> </el-switch></div>
-                                        <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peoplereadprivelege" :active-value="0" :inactive-value="1" active-text="Льготы"> </el-switch></div>
-                                        <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peoplereadwound" :active-value="0" :inactive-value="1" active-text="Ранения, контузии и другие увечья"> </el-switch></div>
-                                    </div>-->
-                                    <!--<div>
-                                        <b>
-                                            Запрет на редактирование
-                                        </b>
-                                    </div>
-                                    <div>
-                                        <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peopleeditmain" :active-value="0" :inactive-value="1" active-text="Главная страница"> </el-switch></div>
-                                        <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peopleeditpassport" :active-value="0" :inactive-value="1" active-text="Паспорт"> </el-switch></div>
-                                        <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peopleeditphoto" :active-value="0" :inactive-value="1" active-text="Фотографии"> </el-switch></div>
-                                        <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peopleeditcertificate" :active-value="0" :inactive-value="1" active-text="Удостоверения"> </el-switch></div>
-                                        <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peopleeditrelative" :active-value="0" :inactive-value="1" active-text="Родственники"> </el-switch></div>
-                                        <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peopleediteducation" :active-value="0" :inactive-value="1" active-text="Образование"> </el-switch></div>
-                                        <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peopleediteducationucp" :active-value="0" :inactive-value="1" active-text="Образование УГЗ"> </el-switch></div>
-                                        <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peopleeditjob" :active-value="0" :inactive-value="1" active-text="Трудовая деятельность"> </el-switch></div>
-                                        <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peopleeditjobprivelege" :active-value="0" :inactive-value="1" active-text="Выслуга лет на льготных условиях"> </el-switch></div>
-                                        <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peopleeditjobpension" :active-value="0" :inactive-value="1" active-text="Выслуга лет"> </el-switch></div>
-                                        <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peopleeditill" :active-value="0" :inactive-value="1" active-text="Листы нетрудоспособности"> </el-switch></div>
-                                        <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peopleeditdispanserization" :active-value="0" :inactive-value="1" active-text="Диспансеризация"> </el-switch></div>
-                                        <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peopleeditvvk" :active-value="0" :inactive-value="1" active-text="Военно-врачебная комиссия"> </el-switch></div>
-                                        <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peopleeditpfl" :active-value="0" :inactive-value="1" active-text="ПФЛ"> </el-switch></div>
-                                        <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peopleeditrank" :active-value="0" :inactive-value="1" active-text="Звания"> </el-switch></div>
-                                        <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peopleeditcontract" :active-value="0" :inactive-value="1" active-text="Контракты"> </el-switch></div>
-                                        <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peopleeditcontractvacation" :active-value="0" :inactive-value="1" active-text="Дополнительные соглашения по отпускам"> </el-switch></div>
-                                        <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peopleeditcontractstate" :active-value="0" :inactive-value="1" active-text="Стаж государственных служащих"> </el-switch></div>
-                                        <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peopleeditreward" :active-value="0" :inactive-value="1" active-text="Награды и поощрения"> </el-switch></div>
-                                        <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peopleeditattestation" :active-value="0" :inactive-value="1" active-text="Аттестация"> </el-switch></div>
-                                        <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peopleeditlanguage" :active-value="0" :inactive-value="1" active-text="Иностранные языки"> </el-switch></div>
-                                        <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peopleeditscience" :active-value="0" :inactive-value="1" active-text="Научные труды, звания, изобретения"> </el-switch></div>
-                                        <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peopleeditelection" :active-value="0" :inactive-value="1" active-text="Участие в выборных органах"> </el-switch></div>
-                                        <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peopleeditworktrip" :active-value="0" :inactive-value="1" active-text="Служебные командировки"> </el-switch></div>
-                                        <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peopleeditpenalty" :active-value="0" :inactive-value="1" active-text="Взыскания"> </el-switch></div>
-                                        <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peopleeditphysical" :active-value="0" :inactive-value="1" active-text="Физическая подготовка"> </el-switch></div>
-                                        <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peopleeditdriver" :active-value="0" :inactive-value="1" active-text="Водительские удостоверения"> </el-switch></div>
-                                        <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peopleeditpermission" :active-value="0" :inactive-value="1" active-text="Разрешения и лицензии"> </el-switch></div>
-                                        <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peopleeditprivelege" :active-value="0" :inactive-value="1" active-text="Льготы"> </el-switch></div>
-                                        <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peopleeditwound" :active-value="0" :inactive-value="1" active-text="Ранения, контузии и другие увечья"> </el-switch></div>
-                                    </div>-->
-
-                                </div>
-                                <!--Кандидаты-->
-                                <div v-if="newUser.rights.menu == 3">
-                                    <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.candidateedit" :active-value="1" :inactive-value="0" active-text="Редактирование кабинетов кандидатов на службу"> </el-switch></div>
-                                    <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.candidateblock" :active-value="1" :inactive-value="0" active-text="Блокировка доступа к кабинетам кандидатов на службу"> </el-switch></div>
-                                    <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.candidateread" :active-value="1" :inactive-value="0" active-text="Просмотр кабинетов кандидатов на службу"> </el-switch></div>
-                                </div>
-                                <!--Структура в лицах-->
-                                <div v-if="newUser.rights.menu == 4">
-                                    <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peopleorgread" :active-value="1" :inactive-value="0" active-text="Просмотр структуры в лицах своего и подчиненных подразделений"> </el-switch></div>
-                                    <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peopleorgreadall" :active-value="1" :inactive-value="0" active-text="Просмотр структуры в лицах всех подразделений"> </el-switch></div>
-                                </div>
                                 <!--Проекты приказов-->
                                 <div v-if="newUser.rights.menu == 5">
                                     <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peopledecreeedit" :active-value="1" :inactive-value="0" active-text="Редактирование проектов приказов"> </el-switch></div>
                                     <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peopledecreeread" :active-value="1" :inactive-value="0" active-text="Просмотр проектов приказов"> </el-switch></div>
                                 </div>
-
-
-                                
                             </div>
 
                             <div>
@@ -481,16 +242,6 @@
                                 <el-input v-model="newSubjectName1Filtered" class="adminpanel-subject-filter-name" placeholder="Поиск в разделе"></el-input>
                             </div>
                             <hr />
-                            <!--<div class="adminpanel-subject-filter-container">
-                                <div class="adminpanel-subject-filter-div">
-                                    Фильтр по роду
-                                </div>
-                                <el-select v-model="newSubjectGenderFiltered" class="adminpanel-subject-filter-name">
-                                    <el-option nullable v-for="subjectgender in subjectgenders" :key="subjectgender.id" :label="subjectgender.name" :value="subjectgender.id">
-
-                                    </el-option>
-                                </el-select>
-                            </div>-->
 
                             <div v-if="activeName === 'thirdsecond'">
                                 <div class="adminpanel-subject">
@@ -937,27 +688,7 @@
                     </el-tab-pane>
                 </el-tabs>
             </el-tab-pane>
-            <el-tab-pane label="Коды заболеваний" name="eleventh">
-                <el-tabs v-model="activeNameIllcode" @tab-click="handleClickIllcode">
-                    <el-tab-pane label="Список кодов заболеваний" name="icfirst">
-                        <div v-if="activeName === 'eleventh'">
-                            <div class="adminpanel-illcode" v-for="illcode in illcodes">
-                                <el-input class="adminpanel-illcode-input" @input="startIllcodeUpdate" v-model="illcode.name"></el-input>
-                                <el-button class="adminpanel-illcode-button" @click="updateIllcode(illcode)"><i class="el-icon-check"></i></el-button>
-                                <el-button class="adminpanel-illcode-button" disabled><i class="el-icon-close"></i></el-button>
-                            </div>
-                        </div>
-                    </el-tab-pane>
-                    <el-tab-pane label="Добавить код заболевания" name="icsecond">
-                        <el-input v-model="newIllcodeName" placeholder="Код заболевания"></el-input>
-                        <el-button class="adminpanel-submit" @click="addIllcode">Добавить</el-button>
-                    </el-tab-pane>
-                </el-tabs>
-            </el-tab-pane>
         </el-tabs>
-
-
-        
     </div>
 </template>
 <script src="./adminpanel.ts"></script>

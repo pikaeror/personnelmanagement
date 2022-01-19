@@ -465,10 +465,10 @@
                         </div>
                         <el-table :data="education_resualt" empty-text="Сотрудников не найдено">
                             <el-table-column prop="person.numpersonal" label="Номер"></el-table-column>
-                            <el-table-column prop="person.name" label="ФИО" sortable :formatter="formatter_el_table_fullname"></el-table-column>
+                            <el-table-column prop="person" label="ФИО" sortable :formatter="formatting.formatter_el_table_fullname"></el-table-column>
                             <el-table-column prop="education.speciality" label="Специальность" sortable></el-table-column>
                             <el-table-column prop="education.qualification" label="Квалификация" sortable></el-table-column>
-                            <el-table-column prop="education.end" label="Дата окончания" sortable :formatter="formatter_el_table_collumn_date"></el-table-column>
+                            <el-table-column prop="education.end" label="Дата окончания" sortable :formatter="formatting.formatter_el_table_collumn_date"></el-table-column>
                         </el-table>
                         <div class="pmrequest-row" v-if="education_resualt.length > 0">
                             <el-button @click="educationDownload" :disabled="loading">Скачать</el-button>
@@ -481,7 +481,7 @@
                             <el-date-picker placeholder="Выберите дату"
                                       v-model="rank_request.last_rank_date"
                                       type="date"
-                                      format="dd-MM-yyyy">
+                                      format="dd.MM.yyyy">
                             </el-date-picker>
                             <el-switch v-model="rank_request.corelate_rank"
                                        active-text="Не соответсвие должности"
@@ -494,10 +494,9 @@
                         </div>
                         <el-table :data="rank_resualt" empty-text="Сотрудников не найдено">
                             <el-table-column prop="person.numpersonal" label="Номер"></el-table-column>
-                            <el-table-column prop="person.surname" label="Фамилия" sortable></el-table-column>
-                            <el-table-column prop="person.name" label="Имя" sortable></el-table-column>
+                            <el-table-column prop="person" label="ФИО" sortable :formatter="formatting.formatter_el_table_fullname"></el-table-column>
                             <el-table-column prop="rank.name" label="Звание" sortable></el-table-column>
-                            <el-table-column prop="rank.date_end" label="Дата окончания" sortable :formatter="formatter_el_table_collumn_date"></el-table-column>
+                            <el-table-column prop="rank.date_end" label="Дата окончания" sortable :formatter="formatting.formatter_el_table_collumn_date"></el-table-column>
                         </el-table>
                         <div class="pmrequest-row" v-if="rank_resualt.length > 0">
                             <el-button @click="rankDownload" :disabled="loading">Скачать</el-button>
@@ -510,7 +509,7 @@
                             <el-date-picker placeholder="Выберите дату"
                                       v-model="contract_request.last_contract_date"
                                       type="date"
-                                      format="dd-MM-yyyy">
+                                      format="dd.MM.yyyy">
                             </el-date-picker>
                         </div>
                         <el-button @click="contract_request_button" type="success" plain>Отправить запрос</el-button>
@@ -519,9 +518,9 @@
                         </div>
                         <el-table :data="contruct_resualt" empty-text="Сотрудников не найдено">
                             <el-table-column prop="person.numpersonal" label="Номер"></el-table-column>
-                            <el-table-column prop="person.name" label="ФИО" sortable :formatter="formatter_el_table_fullname"></el-table-column>
+                            <el-table-column prop="person" label="ФИО" sortable :formatter="formatting.formatter_el_table_fullname"></el-table-column>
                             <el-table-column prop="contract.orderid" label="Номер приказа" sortable></el-table-column>
-                            <el-table-column prop="contract.dateend" label="Дата окончания" sortable :formatter="formatter_el_table_collumn_date"></el-table-column>
+                            <el-table-column prop="contract.dateend" label="Дата окончания" sortable :formatter="formatting.formatter_el_table_collumn_date"></el-table-column>
                         </el-table>
                         <div class="pmrequest-row" v-if="contruct_resualt.length > 0">
                             <el-button @click="contructDownload" :disabled="loading">Скачать</el-button>
@@ -545,7 +544,7 @@
                         </div>
                         <el-table :data="vacation_resualt" empty-text="Сотрудников не найдено">
                             <el-table-column prop="person.numpersonal" label="Номер"></el-table-column>
-                            <el-table-column prop="person.name" label="ФИО" sortable :formatter="formatter_el_table_fullname"></el-table-column>
+                            <el-table-column prop="person" label="ФИО" sortable :formatter="formatting.formatter_el_table_fullname"></el-table-column>
                             <el-table-column prop="education.main" label="Оставшихся дней" sortable></el-table-column>
                             <el-table-column prop="education.durationmax" label="Максимальное количество дней" sortable></el-table-column>
                         </el-table>
@@ -601,7 +600,7 @@
                         </div>
                         <el-table :data="award_response" empty-text="Сотрудников не найдено">
                             <el-table-column prop="person.numpersonal" label="Номер"></el-table-column>
-                            <el-table-column prop="person.name" label="ФИО" sortable :formatter="formatter_el_table_fullname"></el-table-column>
+                            <el-table-column prop="person" label="ФИО" sortable :formatter="formatting.formatter_el_table_fullname"></el-table-column>
                             <el-table-column prop="award_type.name" label="Тип награды" sortable></el-table-column>
                             <el-table-column prop="award.name" label="название награды" sortable></el-table-column>
                             <el-table-column prop="award_new.orderwho" label="Орган" sortable></el-table-column>
@@ -618,7 +617,7 @@
                             <el-date-picker placeholder="Выберите дату"
                                       v-model="certificate_request.data_end"
                                       type="date"
-                                            format="dd-MM-yyyy">
+                                            format="dd.MM.yyyy">
                             </el-date-picker>
                             <el-switch v-model="certificate_request.position_conformity"
                                        active-text="Удостоверение не соответствует должности"
@@ -631,9 +630,9 @@
                         </div>
                         <el-table :data="certificate_response" empty-text="Сотрудников не найдено">
                             <el-table-column prop="person.numpersonal" label="Номер"></el-table-column>
-                            <el-table-column prop="person.name" label="ФИО" sortable :formatter="formatter_el_table_fullname"></el-table-column>
+                            <el-table-column prop="person" label="ФИО" sortable :formatter="formatting.formatter_el_table_fullname"></el-table-column>
                             <el-table-column prop="certificate.numud" label="номер удостоверения" sortable></el-table-column>
-                            <el-table-column prop="certificate.expirationdate" label="Дата окончания" sortable :formatter="formatter_el_table_collumn_date"></el-table-column>
+                            <el-table-column prop="certificate.expirationdate" label="Дата окончания" sortable :formatter="formatting.formatter_el_table_collumn_date"></el-table-column>
                         </el-table>
                         <div class="pmrequest-row" v-if="certificate_response.length > 0">
                             <el-button @click="certificateDownload" :disabled="loading">Скачать</el-button>
@@ -645,12 +644,12 @@
                             <el-date-picker placeholder="С:"
                                             v-model="attestation_request.lastdatestart"
                                             type="date"
-                                            format="dd-MM-yyyy">
+                                            format="dd.MM.yyyy">
                             </el-date-picker>
                             <el-date-picker placeholder="По:"
                                             v-model="attestation_request.lastdateend"
                                             type="date"
-                                            format="dd-MM-yyyy">
+                                            format="dd.MM.yyyy">
                             </el-date-picker>
                             <el-switch v-model="attestation_request.overdue"
                                        active-text="Аттестация просрочена"
@@ -663,10 +662,10 @@
                         </div>
                         <el-table :data="attestation_response" empty-text="Сотрудников не найдено">
                             <el-table-column prop="person.numpersonal" label="Номер"></el-table-column>
-                            <el-table-column prop="person.name" label="ФИО" sortable :formatter="formatter_el_table_fullname"></el-table-column>
+                            <el-table-column prop="person" label="ФИО" sortable :formatter="formatting.formatter_el_table_fullname"></el-table-column>
                             <el-table-column prop="attestation.result" label="Результат"></el-table-column>
-                            <el-table-column prop="attestation.date" label="Дата проведения" sortable :formatter="formatter_el_table_collumn_date"></el-table-column>
-                            <el-table-column prop="attestation.validity" label="Дата окончания" sortable :formatter="formatter_el_table_collumn_date"></el-table-column>
+                            <el-table-column prop="attestation.date" label="Дата проведения" sortable :formatter="formatting.formatter_el_table_collumn_date"></el-table-column>
+                            <el-table-column prop="attestation.validity" label="Дата окончания" sortable :formatter="formatting.formatter_el_table_collumn_date"></el-table-column>
                         </el-table>
                         <div class="pmrequest-row" v-if="attestation_response.length > 0">
                             <el-button @click="attestationDownload" :disabled="loading">Скачать</el-button>
@@ -706,7 +705,7 @@
                         </div>
                         <el-table :data="language_response" empty-text="Сотрудников не найдено">
                             <el-table-column prop="person.numpersonal" label="Номер"></el-table-column>
-                            <el-table-column prop="person.name" label="ФИО" sortable :formatter="formatter_el_table_fullname"></el-table-column>
+                            <el-table-column prop="person" label="ФИО" sortable :formatter="formatting.formatter_el_table_fullname"></el-table-column>
                             <el-table-column prop="languages" label="язык" sortable></el-table-column>
                             <el-table-column prop="skill" label="уровень владения" sortable></el-table-column>
                         </el-table>
@@ -731,9 +730,9 @@
                         </div>
                         <el-table :data="vacation_resualt" empty-text="Сотрудников не найдено">
                             <el-table-column prop="person.numpersonal" label="Номер"></el-table-column>
-                            <el-table-column prop="person.name" label="ФИО" sortable :formatter="formatter_el_table_fullname"></el-table-column>
+                            <el-table-column prop="person.name" label="ФИО" sortable :formatter="formatting.formatter_el_table_fullname"></el-table-column>
                             <el-table-column prop="vacation.cancel" label="оставшихся дней" sortable></el-table-column>
-                            <el-table-column prop="vacation.date_end" label="Дата окончания" sortable :formatter="formatter_el_table_collumn_date"></el-table-column>
+                            <el-table-column prop="vacation.date_end" label="Дата окончания" sortable :formatter="formatting.formatter_el_table_collumn_date"></el-table-column>
                         </el-table>
                         <div class="pmrequest-row" v-if="vacation_resualt.length > 0">
                             <el-button @click="vacationDownload" :disabled="loading">Скачать</el-button>
@@ -786,7 +785,7 @@
                                                 type="daterange"
                                                 start-placeholder="С"
                                                 end-placeholder="По"
-                                                format="dd-MM-yyyy">
+                                                format="dd.MM.yyyy">
                                 </el-date-picker>
                             </div>
                             <div>
@@ -795,7 +794,7 @@
                                                 type="daterange"
                                                 start-placeholder="С"
                                                 end-placeholder="По"
-                                                format="dd-MM-yyyy">
+                                                format="dd.MM.yyyy">
                                 </el-date-picker>
                             </div>
                         </div>
@@ -805,12 +804,12 @@
                         </div>
                         <el-table :data="election_response" empty-text="Сотрудников не найдено">
                             <el-table-column prop="person.numpersonal" label="Номер"></el-table-column>
-                            <el-table-column prop="person.name" label="ФИО" sortable :formatter="formatter_el_table_fullname"></el-table-column>
+                            <el-table-column prop="person" label="ФИО" sortable :formatter="formatting.formatter_el_table_fullname"></el-table-column>
                             <el-table-column prop="election.location" label="Территория" sortable></el-table-column>
                             <el-table-column prop="election.electionwho" label="Должность" sortable></el-table-column>
                             <el-table-column prop="election.electionwhat" label="Орган" sortable></el-table-column>
-                            <el-table-column prop="election.electiondate" label="Вступление" sortable :formatter="formatter_el_table_collumn_date"></el-table-column>
-                            <el-table-column prop="election.electiondateend" label="Выбытие" sortable :formatter="formatter_el_table_collumn_date"></el-table-column>
+                            <el-table-column prop="election.electiondate" label="Вступление" sortable :formatter="formatting.formatter_el_table_collumn_date"></el-table-column>
+                            <el-table-column prop="election.electiondateend" label="Выбытие" sortable :formatter="formatting.formatter_el_table_collumn_date"></el-table-column>
                         </el-table>
                         <div class="pmrequest-row" v-if="election_response.length > 0">
                             <el-button @click="electionDownload" :disabled="loading">Скачать</el-button>
@@ -850,7 +849,7 @@
                                                 type="daterange"
                                                 start-placeholder="С"
                                                 end-placeholder="По"
-                                                format="dd-MM-yyyy">
+                                                format="dd.MM.yyyy">
                                 </el-date-picker>
                             </div>
                         </div>
@@ -860,9 +859,9 @@
                         </div>
                         <el-table :data="trip_response" empty-text="Сотрудников не найдено">
                             <el-table-column prop="person.numpersonal" label="Номер"></el-table-column>
-                            <el-table-column prop="person.name" label="ФИО" sortable :formatter="formatter_el_table_fullname"></el-table-column>
+                            <el-table-column prop="person" label="ФИО" sortable :formatter="formatting.formatter_el_table_fullname"></el-table-column>
                             <el-table-column prop="country" label="Страна" sortable></el-table-column>
-                            <el-table-column prop="trip.tripdate" label="Дата" sortable :formatter="formatter_el_table_collumn_date"></el-table-column>
+                            <el-table-column prop="trip.tripdate" label="Дата" sortable :formatter="formatting.formatter_el_table_collumn_date"></el-table-column>
                             <el-table-column prop="trip.days" label="Дней" sortable></el-table-column>
                             <el-table-column prop="trip.reason" label="Причина" sortable></el-table-column>
                         </el-table>
@@ -870,33 +869,61 @@
                             <el-button @click="tripDownload" :disabled="loading">Скачать</el-button>
                         </div>
                     </el-collapse-item>
-                    <!--<el-collapse-item title="Взыскания" name="12" class="eld-eld-side-element-folder">
+                    <el-collapse-item title="Взыскания" name="12" class="eld-eld-side-element-folder">
+                        <div style="margin-bottom: 4px; box-shadow: 5px 5px 3px rgba(0,0,0,0.6); padding: 10px; border-radius: 10px; background: #eeece0;">
+                            <el-select v-if="punishment_datas.type.length > 0" v-model="punishment_request.types"
+                                       multiple
+                                       filterable
+                                       placeholder="Выберите тип"
+                                       class="eld-eld-body-select-long-request"
+                                       no-match-text="Не найдено">
+                                <el-option v-for="item in punishment_datas.type"
+                                           :key="item"
+                                           :label="item"
+                                           :value="item">
+                                </el-option>
+                            </el-select>
+                            <el-select v-if="punishment_datas.who.length > 0" v-model="punishment_request.who"
+                                       multiple
+                                       filterable
+                                       placeholder="Выберите кто накладывал"
+                                       class="eld-eld-body-select-long-request"
+                                       no-match-text="Не найдено">
+                                <el-option v-for="item in punishment_datas.who"
+                                           :key="item"
+                                           :label="item"
+                                           :value="item">
+                                </el-option>
+                            </el-select>
+                        </div>
                         <div style="margin-bottom: 4px; box-shadow: 5px 5px 3px rgba(0,0,0,0.6); padding: 10px; border-radius: 10px; background: #f6b0b0;">
-                            <span class="demo-input-label">Количество оставшихся дней:</span>
-                            <el-input-number placeholder="Выберите минимальное количество дней отпуска"
-                                             v-model="">
-                            </el-input-number>
-                            <el-switch v-model=""
-                                       active-text="есть дни отпуска с прошлого периода"
-                                       inactive-text="">
-                            </el-switch>
+                            <div>
+                                <span class="demo-input-label">Выберите период наложения:</span>
+                                <el-date-picker v-model="punishment_request.period"
+                                                type="daterange"
+                                                start-placeholder="С"
+                                                end-placeholder="По"
+                                                format="dd.MM.yyyy">
+                                </el-date-picker>
+                            </div>
                         </div>
-                        <el-button @click="" type="success" plain>Отправить запрос</el-button>
-                        <div class="pmrequest-row" v-if="vacation_resualt.length > 0">
-                            <el-button @click="vacationDownload" :disabled="loading">Скачать</el-button>
+                        <el-button @click="punishment_request_button" type="success" plain>Отправить запрос</el-button>
+                        <div class="pmrequest-row" v-if="punishment_response.length > 0">
+                            <el-button @click="punishmentDownload" :disabled="loading">Скачать</el-button>
                         </div>
-                        <el-table :data="vacation_resualt" empty-text="Сотрудников не найдено">
+                        <el-table :data="punishment_response" empty-text="Сотрудников не найдено">
                             <el-table-column prop="person.numpersonal" label="Номер"></el-table-column>
-                            <el-table-column prop="person.name" label="ФИО" sortable :formatter="formatter_el_table_fullname"></el-table-column>
-                            <el-table-column prop="vacation.cancel" label="оставшихся дней" sortable></el-table-column>
-                            <el-table-column prop="vacation.date_end" label="Дата окончания" sortable></el-table-column>
+                            <el-table-column prop="person" label="ФИО" sortable :formatter="formatting.formatter_el_table_fullname"></el-table-column>
+                            <el-table-column prop="penalty_string" label="Тип" sortable></el-table-column>
+                            <el-table-column prop="penalty.violation" label="Нарушение" sortable></el-table-column>
+                            <el-table-column prop="penalty.orderwho" label="Наложил" sortable></el-table-column>
+                            <el-table-column prop="penalty.orderdate" label="Дата" sortable :formatter="formatting.formatter_el_table_collumn_date"></el-table-column>
                         </el-table>
-                        <div class="pmrequest-row" v-if="vacation_resualt.length > 0">
-                            <el-button @click="vacationDownload" :disabled="loading">Скачать</el-button>
-                        </div>-->
-                        <!--<div>Implementation resualt.</div>-->
-                    <!--</el-collapse-item>
-                    <el-collapse-item title="Водительское удостоверение" name="13" class="eld-eld-side-element-folder">
+                        <div class="pmrequest-row" v-if="punishment_response.length > 0">
+                            <el-button @click="punishmentDownload" :disabled="loading">Скачать</el-button>
+                        </div>
+                    </el-collapse-item>
+                    <!--<el-collapse-item title="Водительское удостоверение" name="13" class="eld-eld-side-element-folder">
                         <div style="margin-bottom: 4px; box-shadow: 5px 5px 3px rgba(0,0,0,0.6); padding: 10px; border-radius: 10px; background: #f6b0b0;">
                             <span class="demo-input-label">Количество оставшихся дней:</span>
                             <el-input-number placeholder="Выберите минимальное количество дней отпуска"
@@ -913,7 +940,7 @@
                         </div>
                         <el-table :data="vacation_resualt" empty-text="Сотрудников не найдено">
                             <el-table-column prop="person.numpersonal" label="Номер"></el-table-column>
-                            <el-table-column prop="person.name" label="ФИО" sortable :formatter="formatter_el_table_fullname"></el-table-column>
+                            <el-table-column prop="person.name" label="ФИО" sortable :formatter="formatting.formatter_el_table_fullname"></el-table-column>
                             <el-table-column prop="vacation.cancel" label="оставшихся дней" sortable></el-table-column>
                             <el-table-column prop="vacation.date_end" label="Дата окончания" sortable></el-table-column>
                         </el-table>

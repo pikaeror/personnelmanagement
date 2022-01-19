@@ -200,26 +200,10 @@ namespace PersonnelManagement.Models
 
         public CustomDate period { get; set; }
 
-        public Personjob job { get; set; }
-        public Personeducation education { get; set; }
-        public Personill ill { get; set; }
-        public Personworktrip worktrip { get; set; }
-        public Personvacation vacation { get; set; }
-
         public DataPeriod(DateTime start_date,
             DateTime? end_date = null,
-            double coef = 1,
-            Personjob job = null,
-            Personeducation education = null,
-            Personill ill = null,
-            Personworktrip worktrip = null,
-            Personvacation vacation = null)
+            double coef = 1)
         {
-            this.job = job;
-            this.education = education;
-            this.ill = ill;
-            this.worktrip = worktrip;
-            this.vacation = vacation;
             this.start_date = start_date;
             this.end_date = end_date == null ? DateTime.Today : end_date.GetValueOrDefault();
             this.multiply_coef = coef;
@@ -227,18 +211,8 @@ namespace PersonnelManagement.Models
         }
         public DataPeriod(DateTime start_date,
             int delta_days = 1,
-            double coef = 1,
-            Personjob job = null,
-            Personeducation education = null,
-            Personill ill = null,
-            Personworktrip worktrip = null,
-            Personvacation vacation = null)
+            double coef = 1)
         {
-            this.job = job;
-            this.education = education;
-            this.ill = ill;
-            this.worktrip = worktrip;
-            this.vacation = vacation;
             this.start_date = start_date;
             this.multiply_coef = coef;
             this.end_date = this.start_date.AddDays(delta_days);

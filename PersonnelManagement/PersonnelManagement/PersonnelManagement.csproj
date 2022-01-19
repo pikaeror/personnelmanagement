@@ -113,10 +113,6 @@
     <None Remove="Front\classes\user.ts" />
     <None Remove="Front\components\adminpanel\adminpanel.ts" />
     <None Remove="Front\components\app\app.ts" />
-    <None Remove="Front\components\candidates\candidates.ts" />
-    <None Remove="Front\components\decreeoperationelement\decreeoperationelement.vue.html" />
-    <None Remove="Front\components\decreeoperationelement\derceeoperationelement.ts" />
-    <None Remove="Front\components\decreeoperationtemplatecreator\decreeoperationtemplatecreator.ts" />
     <None Remove="Front\components\home\home.ts" />
     <None Remove="Front\components\login\login.ts" />
     <None Remove="Front\components\modepanel\modepanel.ts" />
@@ -232,10 +228,6 @@
     <TypeScriptCompile Include="Front\classes\user.ts" />
     <TypeScriptCompile Include="Front\components\adminpanel\adminpanel.ts" />
     <TypeScriptCompile Include="Front\components\app\app.ts" />
-    <TypeScriptCompile Include="Front\components\candidates\candidates.ts" />
-    <TypeScriptCompile Include="Front\components\decreeoperationelement\decreeoperationelement.vue.html" />
-    <TypeScriptCompile Include="Front\components\decreeoperationelement\derceeoperationelement.ts" />
-    <TypeScriptCompile Include="Front\components\decreeoperationtemplatecreator\decreeoperationtemplatecreator.ts" />
     <TypeScriptCompile Include="Front\components\home\home.ts" />
     <TypeScriptCompile Include="Front\components\login\login.ts" />
     <TypeScriptCompile Include="Front\components\modepanel\modepanel.ts" />

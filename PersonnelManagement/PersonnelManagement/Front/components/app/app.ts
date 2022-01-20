@@ -36,11 +36,9 @@ export default class AppComponent extends Vue {
         this.updateSubjects();
         this.updateSubjectgenders();
         this.updateSubjectcategories();
-        this.updateOrdernumbertypes();
         this.updateCitytypes();
         this.updateStreettypes();
         this.updateAreaothers();
-        this.updateRoles();
         
         setInterval(this.checkSidebar, 400);
         setInterval(this.updateUserRights, 1500);
@@ -259,10 +257,6 @@ export default class AppComponent extends Vue {
         this.$store.commit("updateSubjectcategories");
     }
 
-    updateOrdernumbertypes() {
-        this.$store.commit("updateOrdernumbertypes");
-    }
-
     updateCitytypes() {
         this.$store.commit("updateCitytypes");
     }
@@ -273,10 +267,6 @@ export default class AppComponent extends Vue {
 
     updateAreaothers() {
         this.$store.commit("updateAreaothers");
-    }
-
-    updateRoles() {
-        this.$store.commit("updateRoles");
     }
 
     get sidebar() {

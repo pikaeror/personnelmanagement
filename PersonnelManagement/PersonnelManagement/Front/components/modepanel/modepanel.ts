@@ -86,97 +86,9 @@ export default class CandidatesComponent extends Vue {
         this.$store.commit("updateUserAppearance", appearance);
         this.$store.commit("setModepanelVisible", 0);
         this.$store.commit("setpersondecree", null);
-        this.$store.commit("setmailmodeprevios", false);
         this.orgMode();
 
         fetch('api/Identity/Fullmode1', { credentials: 'include' })
-            //.then(response => {
-            //    return response.json() as Promise<string>;
-            //})
-            //.then(result => {
-
-            //})
-    }
-
-    eld() {
-        let appearance = {
-            positioncompact: this.$store.state.positioncompact,
-            sidebardisplay: 0,
-        }
-
-        this.$store.commit("updateUserAppearance", appearance);
-        this.$store.commit("setModepanelVisible", 0);
-        this.$store.commit("setpersondecree", null);
-        this.$store.commit("setmailmodeprevios", false);
-        this.peopleMode();
-        this.toggleEld();
-
-        fetch('api/Identity/Fullmode2', { credentials: 'include' })
-            //.then(response => {
-            //    return response.json() as Promise<string>;
-            //})
-            //.then(result => {
-
-            //})
-    }
-
-    decree() {
-        let appearance = {
-            positioncompact: this.$store.state.positioncompact,
-            sidebardisplay: 0,
-        }
-
-        this.$store.commit("updateUserAppearance", appearance);
-        this.$store.commit("setModepanelVisible", 0);
-
-        this.decreeMode();
-        this.toggleDecreeOperationElement();
-
-        fetch('api/Identity/Fullmode5', { credentials: 'include' })
-        //.then(response => {
-        //    return response.json() as Promise<string>;
-        //})
-        //.then(result => {
-
-        //})
-    }
-
-
-    candidates() {
-        let appearance = {
-            positioncompact: this.$store.state.positioncompact,
-            sidebardisplay: 0,
-        }
-
-        this.$store.commit("updateUserAppearance", appearance);
-        this.$store.commit("setModepanelVisible", 0);
-        this.$store.commit("setpersondecree", null);
-        this.$store.commit("setmailmodeprevios", false);
-        this.peopleMode();
-        this.toggleCandidates();
-
-        fetch('api/Identity/Fullmode3', { credentials: 'include' })
-            //.then(response => {
-            //    return response.json() as Promise<string>;
-            //})
-            //.then(result => {
-
-            //})
-    }
-
-    people() {
-        let appearance = {
-            positioncompact: this.$store.state.positioncompact,
-            sidebardisplay: 1,
-        }
-
-        this.$store.commit("updateUserAppearance", appearance);
-        this.$store.commit("setModepanelVisible", 0);
-        this.$store.commit("setpersondecree", null);
-        this.$store.commit("setmailmodeprevios", false);
-        this.peopleMode();
-
-        fetch('api/Identity/Fullmode4', { credentials: 'include' })
             //.then(response => {
             //    return response.json() as Promise<string>;
             //})
@@ -221,25 +133,6 @@ export default class CandidatesComponent extends Vue {
         //if (this.$store.state.)
     }
 
-    personnelRead(): boolean {
-        //alert(this.$store.state.structureeditor);
-        if (this.$store.state.admin == "1" || this.$store.state.personneleditorAccess == "1" || this.$store.state.personnelreadAccess == "1") {
-            return true;
-        } else {
-            return false;
-        }
-        //if (this.$store.state.)
-    }
-
-    personnelEdit(): boolean {
-        if (this.$store.state.admin == "1" || this.$store.state.personneleditorAccess == "1") {
-            return true;
-        } else {
-            return false;
-        }
-        //if (this.$store.state.)
-    }
-
     changeMode() {
         fetch('api/Identity/Switch', { credentials: 'include' })
             //.then(response => {
@@ -262,43 +155,8 @@ export default class CandidatesComponent extends Vue {
             //})
     }
 
-    peopleMode() {
-        fetch('api/Identity/People', { credentials: 'include' })
-            //.then(response => {
-            //    return response.json() as Promise<string>;
-            //})
-            //.then(result => {
-
-            //    //alert(JSON.stringify(result));
-            //})
-    }
-
     decreeMode() {
         fetch('api/Identity/Decree', { credentials: 'include' })
-    }
-
-    toggleEld() {
-        let toggle: number = this.$store.state.eldVisible;
-        if (toggle == 0) {
-            toggle = 1;
-        } else {
-            toggle = 0;
-        }
-
-        let toggleReverse: number = 0;
-        if (toggle == 0) {
-            toggleReverse = 1;
-        } else {
-            toggleReverse = 0;
-        }
-        this.$store.commit("setEldVisible", toggle);
-        let appearance = {
-            positioncompact: 0,
-            sidebardisplay: toggleReverse,
-        }
-        this.$store.commit("setPositionsListId", 0);
-
-        this.$store.commit("updateUserAppearance", appearance);
     }
 
     toggleDecreeOperationElement() {
@@ -324,29 +182,4 @@ export default class CandidatesComponent extends Vue {
 
         this.$store.commit("updateUserAppearance", appearance);
     }
-
-    toggleCandidates() {
-        let toggle: number = this.$store.state.candidatesVisible;
-        if (toggle == 0) {
-            toggle = 1;
-        } else {
-            toggle = 0;
-        }
-
-        let toggleReverse: number = 0;
-        if (toggle == 0) {
-            toggleReverse = 1;
-        } else {
-            toggleReverse = 0;
-        }
-        this.$store.commit("setCandidatesVisible", toggle);
-        let appearance = {
-            positioncompact: 0,
-            sidebardisplay: toggleReverse,
-        }
-        this.$store.commit("setPositionsListId", 0);
-
-        this.$store.commit("updateUserAppearance", appearance);
-    }
-
 }

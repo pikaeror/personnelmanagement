@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PersonnelManagement.Models;
 using PersonnelManagement.Services;
+using PersonnelManagement.USERS;
 
 namespace PersonnelManagement.Controllers
 {
@@ -141,7 +142,7 @@ namespace PersonnelManagement.Controllers
             if (IdentityService.IsLogined(sessionid, repository))
             {
                 User user = IdentityService.GetUserBySessionID(sessionid, repository);
-                repository.RememberUserStructureTree(get, user);
+                repository.GetContextUser().RememberUserStructureTree(get, user);
                 var allowedStructuresToRead = repository.GetAllowedStructuresToRead(user, ids, getFeatured, true);
 
                 //var length = allowedStructuresToRead.Count(); // Debug info
@@ -219,7 +220,7 @@ namespace PersonnelManagement.Controllers
             if (IdentityService.IsLogined(sessionid, repository))
             {
                 User user = IdentityService.GetUserBySessionID(sessionid, repository);
-                repository.RememberUserStructureTree(get, user);
+                repository.GetContextUser().RememberUserStructureTree(get, user);
                 var allowedStructuresToRead = repository.GetAllowedStructuresToRead(user, ids, getFeatured, true);
                 
                 //var length = allowedStructuresToRead.Count(); // Debug info

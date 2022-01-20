@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PersonnelManagement.Models;
 using PersonnelManagement.Services;
+using PersonnelManagement.USERS;
 
 namespace PersonnelManagement.Controllers
 {
@@ -63,7 +64,7 @@ namespace PersonnelManagement.Controllers
             {
                 // return repository.GetDecree 
                 user = IdentityService.GetUserBySessionID(sessionid, repository);
-                repository.DecreesSelectActive(user, id);
+                repository.GetContextUser().DecreesSelectActive(user, id);
             }
         }
 

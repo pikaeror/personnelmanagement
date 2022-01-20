@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Mvc;
 using PersonnelManagement.Models;
 using PersonnelManagement.Services;
 using PersonnelManagement.Utils;
+using PersonnelManagement.USERS;
 using X14 = DocumentFormat.OpenXml.Office2010.Excel;
 
 namespace PersonnelManagement.Controllers
@@ -799,8 +800,6 @@ namespace PersonnelManagement.Controllers
                 bool ranks = true;
                 bool tree = true;
 
-
-                int index = 0;
                 Row rowPrev = null;
                 PmrequestStructure structureFirst = structures.FirstOrDefault();
                 List<int> skipCategory = new List<int>();

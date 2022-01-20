@@ -10,6 +10,7 @@ using DocumentFormat.OpenXml;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Wordprocessing;
 using Remotion.Linq.Parsing.Structure.IntermediateModel;
+using PersonnelManagement.USERS;
 
 namespace PersonnelManagement.Models
 {

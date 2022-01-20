@@ -9,6 +9,7 @@ using System.Text.RegularExpressions;
 using DocumentFormat.OpenXml;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Wordprocessing;
+using PersonnelManagement.USERS;
 
 namespace PersonnelManagement.Models
 {

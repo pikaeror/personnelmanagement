@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PersonnelManagement.Models;
 using PersonnelManagement.Services;
+using PersonnelManagement.USERS;
 
 namespace PersonnelManagement.Controllers
 {
@@ -53,7 +54,7 @@ namespace PersonnelManagement.Controllers
                     user.Password = hash;
                     user.Salt = salt;
                     repository.SaveChanges();
-                    repository.UpdateUsersLocal();
+                    repository.GetContextUser().UpdateUsersLocal();
                     return new ObjectResult(Keys.SUCCESS_SHORT + ":Пароль изменен. Выполните вход.");
                 } else if (user.Password != null)
                 {
@@ -75,7 +76,7 @@ namespace PersonnelManagement.Controllers
                         }
                         user.Fullmode = 0; // Режим по умолчанию не выбран
                         repository.SaveChanges();
-                        repository.UpdateUsersLocal();
+                        repository.GetContextUser().UpdateUsersLocal();
                         return new ObjectResult(Keys.IDENTITY_SESSIONID_PREFIX + ":" + sessionId + ":" + Keys.SUCCESS_SHORT + ":Вход выполнен");
                     } else
                     {

@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using PersonnelManagement.Models;
 using PersonnelManagement.Services;
+using PersonnelManagement.USERS;
 
 namespace PersonnelManagement.Controllers
 {
@@ -37,9 +38,9 @@ namespace PersonnelManagement.Controllers
                     // Поменять на user models?
                     // return repository.Users;
                     List<User> users = new List<User>();
-                    foreach (User userToModel in repository.UsersLocal().Values)
+                    foreach (User userToModel in repository.GetContextUser().UsersLocal().Values)
                     {
-                        User model = userToModel.GetUserModel(repository);
+                        User model = userToModel.GetUserModel(repository.GetContextUser());
                         users.Add(model);
                     }
                     return users;
@@ -100,22 +101,22 @@ namespace PersonnelManagement.Controllers
              * Means, we add new user.
              */
             if (newUser.Id == 0) {
-                repository.SaveUser(newUser);
+                repository.GetContextUser().SaveUser(newUser);
                 return new ObjectResult(Keys.SUCCESS_SHORT + ":Пользователь успешно создан");
             } else if (newUser.Salt != null && newUser.Salt.Equals(Keys.STATUS_NULLIFYPASS))
             {
-                repository.NullifyPassUser(newUser);
+                repository.GetContextUser().NullifyPassUser(newUser);
                 return new ObjectResult(Keys.SUCCESS_SHORT + ":Пароль обнулен.");
             } else if (newUser.Salt != null && newUser.Salt.Equals(Keys.STATUS_DELETE))
             {
-                repository.DeleteUser(newUser);
+                repository.GetContextUser().DeleteUser(newUser);
                 return new ObjectResult(Keys.SUCCESS_SHORT + ":Пользователь удален.");
                 /**
                  * Simply update user by new values.
                  */
             } else
             {
-                repository.UpdateUser(newUser);
+                repository.GetContextUser().UpdateUser(newUser);
                 return new ObjectResult(Keys.SUCCESS_SHORT + ":Данные о пользователе обновлены.");
             }
         }

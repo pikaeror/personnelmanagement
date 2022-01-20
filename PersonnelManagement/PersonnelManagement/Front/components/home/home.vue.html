@@ -1,14 +1,8 @@
 ﻿<template>
     <div class="pm-component">
         <modepanel :visible="modepanelVisible"></modepanel>
-        <candidates :visible="candidatesVisible"></candidates>
-        <eld :visible="eldVisible"></eld>
         <departmentslist :visible="departmentsListId"></departmentslist>
         <positionslist :visible="positionsListVisible"></positionslist>
-        <derceeoperationelement :visible="decreeoperationelementVisible"></derceeoperationelement>
-        <el-dialog :visible="decreecreatorfunction" width="70%" @close="close()" v-draggable>
-            <decreeoperationtemplatecreator :visible="decreecreatorfunction" :input_decree="persondecree"></decreeoperationtemplatecreator>
-        </el-dialog>
     </div>
 </template>
 <script src="./home.ts"></script>

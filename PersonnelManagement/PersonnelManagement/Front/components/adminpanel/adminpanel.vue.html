@@ -616,44 +616,6 @@
                     </el-tab-pane>
                 </el-tabs>
             </el-tab-pane>
-            <el-tab-pane label="Вилки званий" name="seventh">
-                <el-tabs v-model="activeNameAltrankconditiongroup" @tab-click="handleClickAltrankconditiongroup">
-                    <el-tab-pane label="Список вилок званий" name="arcgfirst">
-                        <div class="adminpanel-altrankconditiongroup" v-for="altrankconditiongroup in altrankconditiongroups">
-                            <el-input class="adminpanel-altrankconditiongroup-input" @input="startAltrankconditiongroupUpdate" v-model="altrankconditiongroup.name"></el-input>
-                            <el-button class="adminpanel-altrankconditiongroup-button" @click="updateAltrankconditiongroup(altrankconditiongroup)"><i class="el-icon-check"></i></el-button>
-                            <el-button class="adminpanel-altrankconditiongroup-button" disabled><i class="el-icon-close"></i></el-button>
-                        </div>
-                    </el-tab-pane>
-                    <el-tab-pane label="Добавить вилку званий" name="arcgsecond">
-                        <el-input v-model="newAltrankconditiongroup" placeholder="Наименование вилки званий"></el-input>
-                        <el-button class="adminpanel-submit" @click="addAltrankconditiongroup">Добавить</el-button>
-                    </el-tab-pane>
-                </el-tabs>
-            </el-tab-pane>
-            <el-tab-pane label="Условия вилок званий" name="eighth">
-                <el-tabs v-model="activeNameAltrankcondition" @tab-click="handleClickAltrankcondition">
-                    <el-tab-pane label="Список условий для вилок званий" name="arcfirst">
-                        <div class="adminpanel-altrankcondition" v-for="altrankcondition in altrankconditions">
-                            <el-input class="adminpanel-altrankcondition-input" @input="startAltrankconditionUpdate" v-model="altrankcondition.name"></el-input>
-                            <el-select class="adminpanel-altrankcondition-input" @change="startAltrankconditionUpdate" v-model="altrankcondition.group">
-                                <el-option v-for="altrankconditiongroup in altrankconditiongroups" :key="altrankconditiongroup.id" :label="altrankconditiongroup.name" :value="altrankconditiongroup.id">
-                                </el-option>
-                            </el-select>
-                            <el-button class="adminpanel-altrankcondition-button" @click="updateAltrankcondition(altrankcondition)"><i class="el-icon-check"></i></el-button>
-                            <el-button class="adminpanel-altrankcondition-button" disabled><i class="el-icon-close"></i></el-button>
-                        </div>
-                    </el-tab-pane>
-                    <el-tab-pane label="Добавить условие для вилки званий" name="arcsecond">
-                        <el-input v-model="newAltrankcondition" placeholder="Наименование условия для вилки званий"></el-input>
-                        <el-select class="adminpanel-altrankcondition-input" v-model="newAltrankconditionaltrankconditiongroup">
-                            <el-option v-for="altrankconditiongroup in altrankconditiongroups" :key="altrankconditiongroup.id" :label="altrankconditiongroup.name" :value="altrankconditiongroup.id">
-                            </el-option>
-                        </el-select>
-                        <el-button class="adminpanel-submit" @click="addAltrankcondition">Добавить</el-button>
-                    </el-tab-pane>
-                </el-tabs>
-            </el-tab-pane>
             <el-tab-pane label="Области" name="ninth">
                 <el-tabs v-model="activeNameStructureregion" @tab-click="handleClickStructureregion">
                     <el-tab-pane label="Список областей" name="srfirst">

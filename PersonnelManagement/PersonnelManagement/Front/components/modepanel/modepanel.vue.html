@@ -5,22 +5,10 @@
             Выберите режим работы
         </div>
         <div class="modepanel-container ">
-            <div class="modepanel-element modepanel-element-org" @click="org()" v-if="structureModeAccess()">
+            <div class="modepanel-element modepanel-element-org" @click="org" v-if="structureModeAccess">
                 Организационно-штатная работа
             </div>
-            <!--<div class="modepanel-element modepanel-element-eld" @click="eld()" v-if="personnelRead()">
-                Электронное личное дело
-            </div>
-            <div class="modepanel-element modepanel-element-candidates" @click="candidates()" v-if="personnelRead()">
-                Кандидаты
-            </div>
-            <div class="modepanel-element modepanel-element-people" @click="people()" v-if="structureRead()">
-                Структура в лицах
-            </div>
-            <div class="modepanel-element modepanel-element-eld" @click="decree()" v-if="personnelRead()">
-                Почта
-            </div>-->
-            <div v-if="!structureEdit() && !personnelRead()"><i>Загрузка...</i></div>
+            <div v-else><i>Загрузка...</i></div>
         </div>
     </div>
 </template>

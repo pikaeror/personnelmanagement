@@ -745,7 +745,7 @@ export default class PositionslistComponent extends Vue {
          *  ибо там где есть доступ на структуру, там есть доступ и на кандидатов
          */
         let positionslist: PositionslistComponent = this;
-        fetch('api/Person/' + this.$store.state.positionsListId, { credentials: 'include' })
+        /*fetch('api/Person/' + this.$store.state.positionsListId, { credentials: 'include' })
             .then(response => response.json() as Promise<Person[]>)
             .then(data => {
                 
@@ -763,7 +763,7 @@ export default class PositionslistComponent extends Vue {
                             //this.lastSearchFio = fio;
                         }
                     })
-            });
+            });*/
 
 
         return result;

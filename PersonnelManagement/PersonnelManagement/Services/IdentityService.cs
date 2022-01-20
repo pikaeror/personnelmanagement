@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using PersonnelManagement.Models;
+using PersonnelManagement.USERS;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,12 +36,12 @@ namespace PersonnelManagement.Services
             {
                 return false;
             }
-            if (repository.SessionsLocal() == null)
+            if (repository.GetContextUser().SessionsLocal() == null)
             {
-                repository.UpdateSessionsLocal();
+                repository.GetContextUser().UpdateSessionsLocal();
             }
 
-            if (repository.SessionsLocal().GetValue(session) != null) // Не может коннектнуться
+            if (repository.GetContextUser().SessionsLocal().GetValue(session) != null) // Не может коннектнуться
             //if (repository.Sessions.Any(s => s.Id == session)) // Не может коннектнуться
             {
                 //Session sessionDB = repository.SessionsLocal().GetValue(session);
@@ -123,7 +124,7 @@ namespace PersonnelManagement.Services
 
             session.Userid = userID;
 
-            repository.AddSession(session);
+            repository.GetContextUser().AddSession(session);
             return sessionid;
         }
 
@@ -209,15 +210,15 @@ namespace PersonnelManagement.Services
 
         public static User GetUserBySessionID(string sessionid, Repository repository)
         {
-            Session session = repository.SessionsLocal().GetValue(sessionid);
+            Session session = repository.GetContextUser().SessionsLocal().GetValue(sessionid);
             //Session session = repository.Sessions.FirstOrDefault(s => s.Id == sessionid);
             if (session != null)
             {
-                if (repository.UsersLocal() == null)
+                if (repository.GetContextUser().UsersLocal() == null)
                 {
-                    repository.UpdateUsersLocal();
+                    repository.GetContextUser().UpdateUsersLocal();
                 }
-                User user = repository.UsersLocal()[session.Userid];
+                User user = repository.GetContextUser().UsersLocal()[session.Userid];
                 return user;
                 //return repository.Users.First(u => u.Id == (session.Userid));
             } else
@@ -229,14 +230,14 @@ namespace PersonnelManagement.Services
 
         public static bool canEditStructures(string sessionid, Repository repository)
         {
-            User user = repository.Users.First(u => u.Id == (repository.SessionsLocal()[sessionid].Userid));
+            User user = repository.Users.First(u => u.Id == (repository.GetContextUser().SessionsLocal()[sessionid].Userid));
             //User user = repository.Users.First(u => u.Id == (repository.Sessions.First(s => s.Id == sessionid).Userid));
             return (user.Structureeditor.GetValueOrDefault(0) == 1);
         }
 
         public static bool CanReadStructure(string sessionid, Repository repository, int structureid)
         {
-            User user = repository.Users.First(u => u.Id == (repository.SessionsLocal()[sessionid].Userid));
+            User user = repository.Users.First(u => u.Id == (repository.GetContextUser().SessionsLocal()[sessionid].Userid));
             //User user = repository.Users.First(u => u.Id == (repository.Sessions.First(s => s.Id == sessionid).Userid));
             return CanReadStructure(user, repository, structureid);
         }

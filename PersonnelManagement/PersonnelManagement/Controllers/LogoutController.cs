@@ -29,7 +29,7 @@ namespace PersonnelManagement.Controllers
             Response.Cookies.Delete(Keys.COOKIES_SESSION);
             if (sessionid != null)
             {
-                repository.RemoveSession(sessionid);
+                repository.GetContextUser().RemoveSession(sessionid);
             }
         }
 

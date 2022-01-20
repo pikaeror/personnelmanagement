@@ -19,65 +19,22 @@ import Structureregion from './classes/structureregion';
 import Structuretype from './classes/structuretype';
 import Usersettings from './classes/usersettings';
 import DlgDraggable from "vue-element-dialog-draggable";
-import Relativetype from './classes/relativetype';
-import Attestationtype from './classes/attestationtype';
-import Vacationmilitary from './classes/vacationmilitary';
-import Vacationtype from './classes/vacationtype';
-import Languagetype from './classes/languagetype';
-import Languageskill from './classes/languageskill';
-import Jobtype from './classes/jobtype';
-import Servicetype from './classes/servicetype';
-import Servicefeature from './classes/servicefeature';
-import Servicecoef from './classes/servicecoef';
-import Penalty from './classes/penalty';
 import Country from './classes/country';
-import Science from './classes/science';
-import Illcode from './classes/illcode';
-import Illregime from './classes/illregime';
-import Rewardtype from './classes/rewardtype';
-import Reward from './classes/reward';
-import Educationlevel from './classes/educationlevel';
-import Educationtype from './classes/educationtype';
-import Educationdocument from './classes/educationdocument';
-import Normativ from './classes/normativ';
-import Drivertype from './classes/drivertype';
-import Drivercategory from './classes/drivercategory';
-import Permissiontype from './classes/permissiontype';
-import Prooftype from './classes/prooftype';
-import Holiday from './classes/holiday';
-import Persondecreeblocktype from './classes/persondecreeblocktype';
-import Persondecreeblocksubtype from './classes/persondecreeblocksubtype';
 import Structure from './classes/Structure';
 import Region from './classes/region';
 import Area from './classes/area';
-import Fire from './classes/fire';
-import Appointtype from './classes/appointtype';
-import Transfertype from './classes/transfertype';
 import Subject from './classes/subject';
 import Subjectgender from './classes/subjectgender';
 import Subjectcategory from './classes/subjectcategory';
-import Interrupttype from './classes/interrupttype';
 import Changedocumentstype from './classes/changedocumentstype';
-import Setpersondatatype from './classes/setpersondatatype';
-import Rewardmoney from './classes/rewardmoney';
-import Persondecreelevel from './classes/persondecreelevel';
-import Ordernumbertype from './classes/ordernumbertype';
 import Streettype from './classes/streettype';
 import Citytype from './classes/citytype';
 import Areaother from './classes/areaother';
 import Externalorderwhotype from './classes/externalorderwhotype';
-import Persondecreetype from './classes/persondecreetype';
-import Educationadditionaltype from './classes/educationadditionaltype';
 import Citysubstate from './classes/citysubstate';
-import Educationstage from './classes/educationstage';
-import Educationpositiontype from './classes/educationpositiontype';
-import Role from './classes/role';
 import User from './classes/user';
-import Dismissalclauses from './classes/dismissalclauses';
 
 import VueRouter from 'vue-router';
-import Persondecreeoperation from './classes/persondecreeoperation';
-import Persondecreeblock from './classes/persondecreeblock';
 
 import locale from 'element-ui/lib/locale/lang/ru-RU'
 Vue.use(VueRouter);
@@ -265,34 +222,26 @@ const store = new Vuex.Store({
 
         decreeoperationelementVisible: 0,
         decreeoperationtemplatecreatorVisible: false,
-        persondecree: null,
         mailmodeprevios: false,
         chosenPosition: null,
-        chosenPersionDecreeBlock: <Persondecreeblock>{},
 
         eldVisible: 0,
-        eldId: 0,
-        eldPosition: 0,
-        eldStructure: 0,
-        eldAction: 0,
-        eldSelectedperson: 0,
         candidatesVisible: 0,
         candidatesId: 0,
         candidatesPosition: 0,
         candidatesStructure: 0,
         candidatesAction: 0,
-        candidatesSelectedperson: 0,
         modepanelVisible: 1,
         positionsListTitle: "Должности",
         forcePositionUpdate: false,
         login: "",
         currentstructuretree: "",
-        masterpersonneleditorAccess: "0",
         userStructure: "0",
         structureeditorAccess: "0",
         structurereadAccess: "0",
         personneleditorAccess: "0",
         personnelreadAccess: "0",
+        masterpersonneleditorAccess: "0",
         mode: "0",
         fullmode: "0",
         admin: "0",
@@ -303,7 +252,6 @@ const store = new Vuex.Store({
         positiontypes: Positiontype[""],
         positioncategories: Positioncategory[""],
         mrds: Mrd[""],
-        dismissalclauses: Dismissalclauses[""],
         altrankconditiongroups: Altrankconditiongroup[""],
         altrankconditions: Altrankcondition[""],
         decree: null,
@@ -316,60 +264,19 @@ const store = new Vuex.Store({
         featured: 0, // If selected featured structure then it stores its id, if no then 0 
         sidebarParentOpen: 0,
         user: User,
-        relativetypes: Relativetype[""],
-        attestationtypes: Attestationtype[""],
-        vacationmilitaries: Vacationmilitary[""],
-        vacationtypes: Vacationtype[""],
-        languagetypes: Languagetype[""],
-        languageskills: Languageskill[""],
-        jobtypes: Jobtype[""],
-        servicetypes: Servicetype[""],
-        servicefeatures: Servicefeature[""],
-        servicecoefs: Servicecoef[""],
-        penalties: Penalty[""],
         countries: Country[""],
-        sciences: [{ id: 1, name: "Научный труд" }, { id: 2, name: "Звание" }, { id: 3, name: "Изобретение" }],
-        illregimes: Illregime[""],
-        illcodes: Illcode[""],
-        rewardtypes: Rewardtype[""],
-        rewards: Reward[""],
-        educationlevels: Educationlevel[""],
-        educationtypes: Educationtype[""],
-        educationdocuments: Educationdocument[""],
-        normativs: Normativ[""],
-        drivertypes: Drivertype[""],
-        drivercategories: Drivercategory[""],
-        permissiontypes: Permissiontype[""],
-        prooftypes: Prooftype[""],
-        holidays: Holiday[""],
-        persondecreeblocktypes: Persondecreeblocktype[""],
-        persondecreeblocksubtypes: Persondecreeblocksubtype[""],
         regions: Region[""],
         areas: Area[""],
-        fires: Fire[""],
-        appointtypes: Appointtype[""],
-        transfertypes: Transfertype[""],
         subjects: Subject[""],
         subjectgenders: Subjectgender[""],
         subjectcategories: Subjectcategory[""],
-        interrupttypes: Interrupttype[""],
         changedocumentstypes: Changedocumentstype[""],
-        setpersondatatypes: Setpersondatatype[""],
-        rewardmoneys: Rewardmoney[""],
-        persondecreelevels: Persondecreelevel[""],
-        ordernumbertypes: Ordernumbertype[""],
-        structuresalldocument: String[""],
         streettypes: Streettype[""],
         structures: Structure[""],
         citytypes: Citytype[""],
         areaothers: Areaother[""],
         externalorderwhotypes: Externalorderwhotype[""],
-        persondecreetypes: Persondecreetype[""],
-        educationadditionaltypes: Educationadditionaltype[""],
         citysubstates: Citysubstate[""],
-        educationstages: Educationstage[""],
-        educationpositiontypes: Educationpositiontype[""],
-        roles: Role[""],
 
         /**
          * Modes
@@ -382,14 +289,6 @@ const store = new Vuex.Store({
         modeselectstructure: false,
         modeselectedstructure: 0,
         modecopy: false,
-        modeappointperson: false, // Режим назначения на должность для элд
-        modeappointedperson: 0,
-        modeappointpersondecree: false, // Режим назначения на должность для приказа
-        modeappointedpersondecree: 0,
-        modeappointpersondecreeStructure: false, // Режим назначения на должность для приказа
-        modeappointedpersondecreeStructure: 0,
-        modeappointpersonstructuredecree: false, // Режим прикомандирования к подразделению/начальнику подразделения для приказа
-        modeappointedpersonstructuredecree: 0,
         modecopystring: "", // String with copy data. "s=1" means copy structure with id 1 and all substructrures with the same or null type and all positions inclusive.
 
         oldcurrentmode: {"fullmode": "0",
@@ -409,10 +308,6 @@ const store = new Vuex.Store({
         lodingexcert: false,
     },
     mutations: {
-        setchosenpersiondecreeblock(state, n) {
-            state.chosenPersionDecreeBlock = n;
-        },
-
         setdecreeoperationelementVisible(state, n) {
             state.decreeoperationelementVisible = n;
         },
@@ -421,65 +316,17 @@ const store = new Vuex.Store({
             state.decreeoperationtemplatecreatorVisible = n;
         },
 
-        setpersondecree(state, n) {
-            state.persondecree = n;
-        },
-
         setmailmodeprevios(state, n) {
             state.mailmodeprevios = n;
         },
 
-        setchosenPosition(state, n) {
-            state.chosenPosition = n;
-        },
-
-        setEldId(state, n) {
-            state.eldId = n;
-
-        },
         setEldVisible(state, n) {
             state.eldVisible = n;
 
         },
-        setEldPosition(state, n) {
-            state.eldPosition = n;
 
-        },
-        setEldStructure(state, n) {
-            state.eldStructure = n;
-
-        },
-        setEldAction(state, n) {
-            state.eldAction = n;
-
-        },
-        setEldSelectedperson(state, n) {
-            state.eldSelectedperson = n;
-
-        },
-        setCandidatesId(state, n) {
-            state.candidatesId = n;
-
-        },
-        setCandidatesVisible(state, n) {
-            state.candidatesVisible = n;
-
-        },
-        setCandidatesPosition(state, n) {
-            state.candidatesPosition = n;
-
-        },
-        setCandidatesStructure(state, n) {
-            state.candidatesStructure = n;
-
-        },
-        setCandidatesAction(state, n) {
-            state.candidatesAction = n;
-
-        },
-        setCandidatesSelectedperson(state, n) {
-            state.candidatesSelectedperson = n;
-
+        setchosenPosition(state, n) {
+            state.chosenPosition = n;
         },
         setModepanelVisible(state, n) {
             state.modepanelVisible = n;
@@ -527,6 +374,12 @@ const store = new Vuex.Store({
         setUserStructure(state, n) {
             state.userStructure = n;
         },
+        setPersonneleditorAccess(state, n) {
+            state.personneleditorAccess = n;
+        },
+        setPersonnelreadAccess(state, n) {
+            state.personnelreadAccess = n;
+        },
         setMasterpersonneleditorAccess(state, n) {
             state.masterpersonneleditorAccess = n;
         },
@@ -535,12 +388,6 @@ const store = new Vuex.Store({
         },
         setStructurereadAccess(state, n) {
             state.structurereadAccess = n;
-        },
-        setPersonneleditorAccess(state, n) {
-            state.personneleditorAccess = n;
-        },
-        setPersonnelreadAccess(state, n) {
-            state.personnelreadAccess = n;
         },
         setMode(state, n) {
             state.mode = n;
@@ -705,105 +552,6 @@ const store = new Vuex.Store({
                     state.structuretypes = result;
                 })
         },
-        updateRelativetypes(state) {
-            fetch('api/Relativetype', { credentials: 'include' })
-                .then(response => {
-                    return response.json() as Promise<Relativetype[]>;
-                })
-                .then(result => {
-                    state.relativetypes = result;
-                })
-        },
-        updateAttestationtypes(state) {
-            fetch('api/Attestationtype', { credentials: 'include' })
-                .then(response => {
-                    return response.json() as Promise<Attestationtype[]>;
-                })
-                .then(result => {
-                    state.attestationtypes = result;
-                })
-        },
-        updateVacationmilitaries(state) {
-            fetch('api/Vacationmilitary', { credentials: 'include' })
-                .then(response => {
-                    return response.json() as Promise<Vacationmilitary[]>;
-                })
-                .then(result => {
-                    state.vacationmilitaries = result;
-                })
-        },
-        updateVacationtypes(state) {
-            fetch('api/Vacationtype', { credentials: 'include' })
-                .then(response => {
-                    return response.json() as Promise<Vacationtype[]>;
-                })
-                .then(result => {
-                    state.vacationtypes = result;
-                })
-        },
-        updateLanguagetypes(state) {
-            fetch('api/Languagetype', { credentials: 'include' })
-                .then(response => {
-                    return response.json() as Promise<Languagetype[]>;
-                })
-                .then(result => {
-                    state.languagetypes = result;
-                })
-        },
-        updateLanguageskills(state) {
-            fetch('api/Languageskill', { credentials: 'include' })
-                .then(response => {
-                    return response.json() as Promise<Languageskill[]>;
-                })
-                .then(result => {
-                    state.languageskills = result;
-                })
-        },
-        updateJobtypes(state) {
-            fetch('api/Jobtype', { credentials: 'include' })
-                .then(response => {
-                    return response.json() as Promise<Jobtype[]>;
-                })
-                .then(result => {
-                    state.jobtypes = result;
-                })
-        },
-        updateServicetypes(state) {
-            fetch('api/Servicetype', { credentials: 'include' })
-                .then(response => {
-                    return response.json() as Promise<Servicetype[]>;
-                })
-                .then(result => {
-                    state.servicetypes = result;
-                })
-        },
-        updateServicefeatures(state) {
-            fetch('api/Servicefeature', { credentials: 'include' })
-                .then(response => {
-                    return response.json() as Promise<Servicefeature[]>;
-                })
-                .then(result => {
-                    state.servicefeatures = result;
-                })
-        },
-        updateServicecoefs(state) {
-            fetch('api/Servicecoef', { credentials: 'include' })
-                .then(response => {
-                    return response.json() as Promise<Servicecoef[]>;
-                })
-                .then(result => {
-                    state.servicecoefs = result;
-                })
-        },
-        updatePenalties(state) {
-            fetch('api/Penalty', { credentials: 'include' })
-                .then(response => {
-                    return response.json() as Promise<Penalty[]>;
-                })
-                .then(result => {
-                    state.penalties = result;
-                })
-        },
         updateCountries(state) {
             fetch('api/Country', { credentials: 'include' })
                 .then(response => {
@@ -813,146 +561,6 @@ const store = new Vuex.Store({
                     state.countries = result;
                 })
         },
-        updateIllregimes(state) {
-            fetch('api/Illregime', { credentials: 'include' })
-                .then(response => {
-                    return response.json() as Promise<Illregime[]>;
-                })
-                .then(result => {
-                    state.illregimes = result;
-                })
-        },
-        updateIllcodes(state) {
-            fetch('api/Illcode', { credentials: 'include' })
-                .then(response => {
-                    return response.json() as Promise<Illcode[]>;
-                })
-                .then(result => {
-                    state.illcodes = result;
-                })
-        },
-        updateRewardtypes(state) {
-            fetch('api/Rewardtype', { credentials: 'include' })
-                .then(response => {
-                    return response.json() as Promise<Rewardtype[]>;
-                })
-                .then(result => {
-                    state.rewardtypes = result;
-                })
-        },
-        updateRewards(state) {
-            fetch('api/Reward', { credentials: 'include' })
-                .then(response => {
-                    return response.json() as Promise<Reward[]>;
-                })
-                .then(result => {
-                    state.rewards = result;
-                })
-        },
-        updateEducationlevels(state) {
-            fetch('api/Educationlevel', { credentials: 'include' })
-                .then(response => {
-                    return response.json() as Promise<Educationlevel[]>;
-                })
-                .then(result => {
-                    state.educationlevels = result;
-                })
-        },
-        updateEducationtypes(state) {
-            fetch('api/Educationtype', { credentials: 'include' })
-                .then(response => {
-                    return response.json() as Promise<Educationtype[]>;
-                })
-                .then(result => {
-                    state.educationtypes = result;
-                })
-        },
-        updateEducationdocuments(state) {
-            fetch('api/Educationdocument', { credentials: 'include' })
-                .then(response => {
-                    return response.json() as Promise<Educationdocument[]>;
-                })
-                .then(result => {
-                    state.educationdocuments = result;
-                })
-        },
-        updateNormativs(state) {
-            fetch('api/Normativ', { credentials: 'include' })
-                .then(response => {
-                    return response.json() as Promise<Normativ[]>;
-                })
-                .then(result => {
-                    state.normativs = result;
-                })
-        },
-        updateDrivertypes(state) {
-            fetch('api/Drivertype', { credentials: 'include' })
-                .then(response => {
-                    return response.json() as Promise<Drivertype[]>;
-                })
-                .then(result => {
-                    state.drivertypes = result;
-                })
-        },
-        updateDrivercategories(state) {
-            fetch('api/Drivercategory', { credentials: 'include' })
-                .then(response => {
-                    return response.json() as Promise<Drivercategory[]>;
-                })
-                .then(result => {
-                    state.drivercategories = result;
-                })
-        },
-        updatePermissiontypes(state) {
-            fetch('api/Permissiontype', { credentials: 'include' })
-                .then(response => {
-                    return response.json() as Promise<Permissiontype[]>;
-                })
-                .then(result => {
-                    state.permissiontypes = result;
-                })
-        },
-        updateProoftypes(state) {
-            fetch('api/Prooftype', { credentials: 'include' })
-                .then(response => {
-                    return response.json() as Promise<Prooftype[]>;
-                })
-                .then(result => {
-                    state.prooftypes = result;
-                })
-        },
-
-        updateHolidays(state) {
-            fetch('api/Holiday', { credentials: 'include' })
-                .then(response => {
-                    return response.json() as Promise<Holiday[]>;
-                })
-                .then(result => {
-                    state.holidays = result;
-                })
-        },
-
-        updatePersondecreeblocktypes(state) {
-            fetch('api/Persondecreeblocktype', { credentials: 'include' })
-                .then(response => {
-                    return response.json() as Promise<Persondecreeblocktype[]>;
-                })
-                .then(result => {
-                    state.persondecreeblocktypes = result;
-                })
-        },
-
-        updatePersondecreeblocksubtypes(state) {
-            fetch('api/Persondecreeblocksubtype', { credentials: 'include' })
-                .then(response => {
-                    return response.json() as Promise<Persondecreeblocksubtype[]>;
-                })
-                .then(result => {
-                    //alert(JSON.stringify(result));
-                    state.persondecreeblocksubtypes = result;
-                })
-        },
-
         updateStructureresAll(state) {
             fetch('api/Structure/All', { credentials: 'include' })
                 .then(response => {
@@ -986,49 +594,6 @@ const store = new Vuex.Store({
                 })
         },
 
-        updateFires(state) {
-            fetch('api/Fire', { credentials: 'include' })
-                .then(response => {
-                    return response.json() as Promise<Fire[]>;
-                })
-                .then(result => {
-                    //alert(JSON.stringify(result));
-                    state.fires = result;
-                })
-        },
-        
-        updateDismissalclauses(state) {
-            fetch('api/Dismissalclauses', { credentials: 'include' })
-                .then(response => {
-                    return response.json() as Promise<Dismissalclauses[]>;
-                })
-                .then(result => {
-                    //alert(JSON.stringify(result));
-                    state.dismissalclauses = result;
-                })
-        },
-
-        updateAppointtypes(state) {
-            fetch('api/Appointtype', { credentials: 'include' })
-                .then(response => {
-                    return response.json() as Promise<Appointtype[]>;
-                })
-                .then(result => {
-                    //alert(JSON.stringify(result));
-                    state.appointtypes = result;
-                })
-        },
-
-        updateTransfertypes(state) {
-            fetch('api/Transfertype', { credentials: 'include' })
-                .then(response => {
-                    return response.json() as Promise<Transfertype[]>;
-                })
-                .then(result => {
-                    state.transfertypes = result;
-                })
-        },
-
         updateSubjects(state) {
             fetch('api/Subject', { credentials: 'include' })
                 .then(response => {
@@ -1059,16 +624,6 @@ const store = new Vuex.Store({
                 })
         },
 
-        updateInterrupttypes(state) {
-            fetch('api/Interrupttype', { credentials: 'include' })
-                .then(response => {
-                    return response.json() as Promise<Interrupttype[]>;
-                })
-                .then(result => {
-                    state.interrupttypes = result;
-                })
-        },
-
         updateChangedocumentstypes(state) {
             fetch('api/Changedocumentstype', { credentials: 'include' })
                 .then(response => {
@@ -1076,56 +631,6 @@ const store = new Vuex.Store({
                 })
                 .then(result => {
                     state.changedocumentstypes = result;
-                })
-        },
-
-        updateSetpersondatatypes(state) {
-            fetch('api/Setpersondatatype', { credentials: 'include' })
-                .then(response => {
-                    return response.json() as Promise<Setpersondatatype[]>;
-                })
-                .then(result => {
-                    state.setpersondatatypes = result;
-                })
-        },
-
-        updateRewardmoneys(state) {
-            fetch('api/Rewardmoney', { credentials: 'include' })
-                .then(response => {
-                    return response.json() as Promise<Rewardmoney[]>;
-                })
-                .then(result => {
-                    state.rewardmoneys = result;
-                })
-        },
-
-        updatePersondecreelevels(state) {
-            fetch('api/Persondecreelevel', { credentials: 'include' })
-                .then(response => {
-                    return response.json() as Promise<Persondecreelevel[]>;
-                })
-                .then(result => {
-                    state.persondecreelevels = result;
-                })
-        },
-
-        updateOrdernumbertypes(state) {
-            fetch('api/Ordernumbertype', { credentials: 'include' })
-                .then(response => {
-                    return response.json() as Promise<Ordernumbertype[]>;
-                })
-                .then(result => {
-                    state.ordernumbertypes = result;
-                })
-        },
-
-        updateStructuresalldocument(state) {
-            fetch('api/DetailedStructure/Alldocument', { credentials: 'include' })
-                .then(response => {
-                    return response.json() as Promise<string[]>;
-                })
-                .then(result => {
-                    state.structuresalldocument = result;
                 })
         },
 
@@ -1169,26 +674,6 @@ const store = new Vuex.Store({
                 })
         },
 
-        updatePersondecreetypes(state) {
-            fetch('api/Persondecreetype', { credentials: 'include' })
-                .then(response => {
-                    return response.json() as Promise<Persondecreetype[]>;
-                })
-                .then(result => {
-                    state.persondecreetypes = result;
-                })
-        },
-
-        updateEducationadditionaltypes(state) {
-            fetch('api/Educationadditionaltype', { credentials: 'include' })
-                .then(response => {
-                    return response.json() as Promise<Educationadditionaltype[]>;
-                })
-                .then(result => {
-                    state.educationadditionaltypes = result;
-                })
-        },
-
         updateCitysubstates(state) {
             fetch('api/Citysubstate', { credentials: 'include' })
                 .then(response => {
@@ -1196,36 +681,6 @@ const store = new Vuex.Store({
                 })
                 .then(result => {
                     state.citysubstates = result;
-                })
-        },
-
-        updateEducationstages(state) {
-            fetch('api/Educationstage', { credentials: 'include' })
-                .then(response => {
-                    return response.json() as Promise<Educationstage[]>;
-                })
-                .then(result => {
-                    state.educationstages = result;
-                })
-        },
-
-        updateEducationpositiontypes(state) {
-            fetch('api/Educationpositiontype', { credentials: 'include' })
-                .then(response => {
-                    return response.json() as Promise<Educationpositiontype[]>;
-                })
-                .then(result => {
-                    state.educationpositiontypes = result;
-                })
-        },
-
-        updateRoles(state) {
-            fetch('api/Role', { credentials: 'include' })
-                .then(response => {
-                    return response.json() as Promise<Role[]>;
-                })
-                .then(result => {
-                    state.roles = result;
                 })
         },
 
@@ -1306,10 +761,10 @@ const store = new Vuex.Store({
                 state.oldcurrentmode.decreeoperationtemplatecreatorVisible = state.decreeoperationtemplatecreatorVisible;
 
                 state.fullmode = "1";
-                state.sidebarDisplay = "1",
+                state.sidebarDisplay = "1";
                 state.modepanelVisible = 0;
-                state.candidatesVisible = 0;
                 state.eldVisible = 0;
+                state.candidatesVisible = 0;
                 state.positionsListId = 1;
                 state.decreeoperationelementVisible = 0;
                 state.decreeoperationtemplatecreatorVisible = false;
@@ -1337,8 +792,8 @@ const store = new Vuex.Store({
                 state.fullmode = state.oldcurrentmode.fullmode;
                 state.sidebarDisplay = state.oldcurrentmode.sidebarDisplay;
                 state.modepanelVisible = state.oldcurrentmode.modepanelVisible;
+                state.oldcurrentmode.eldVisible = state.eldVisible;
                 state.candidatesVisible = state.oldcurrentmode.candidatesVisible;
-                state.eldVisible = state.oldcurrentmode.eldVisible;
                 state.positionsListId = state.oldcurrentmode.positionsListId;
                 state.decreeoperationelementVisible = state.oldcurrentmode.decreeoperationelementVisible;
                 state.decreeoperationtemplatecreatorVisible = state.oldcurrentmode.decreeoperationtemplatecreatorVisible;
@@ -1370,33 +825,6 @@ const store = new Vuex.Store({
         },
         setModecopy(state, n) {
             state.modecopy = n;
-        },
-        setModeappointperson(state, n) {
-            state.modeappointperson = n;
-        },
-        setModeappointedperson(state, n) {
-            state.modeappointedperson = n;
-        },
-        setModeappointpersondecree(state, n) {
-            state.modeappointpersondecree = n;
-        },
-        setModeappointpersondecreeStructure(state, n) {
-            state.modeappointpersondecreeStructure = n;
-        },
-        setModeappointpersondecreeStructureForCPU(state, n) {
-            state.modeselectstructureforCPU = n;
-        },
-        setModeappointedpersondecreeStructure(state, n) {
-            state.modeappointedpersondecreeStructure = n;
-        },
-        setModeappointedpersondecree(state, n) {
-            state.modeappointedpersondecree = n;
-        },
-        setModeappointpersonstructuredecree(state, n) {
-            state.modeappointpersonstructuredecree = n;
-        },
-        setModeappointedpersonstructuredecree(state, n) {
-            state.modeappointedpersonstructuredecree = n;
         },
 
         setModecopystring(state, n) {

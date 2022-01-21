@@ -20,10 +20,12 @@ namespace PersonnelManagement.Controllers
     {
 
         private Repository repository;
+        private DecreeWorker decreeWorker;
 
         public DecreesController(Repository repository)
         {
             this.repository = repository;
+            this.decreeWorker = new DecreeWorker(ref repository);
         }
 
         // Is allowed to edit structures.
@@ -154,6 +156,25 @@ namespace PersonnelManagement.Controllers
                 //return File(GenerateDocument(decreeManagement), "application/vnd.openxmlformats-officedocument.wordprocessingml.document", "test.docx");
             }
             return new ObjectResult(Keys.ERROR_SHORT + ":Произошла какая-то оказия");
+        }
+
+        [HttpPost("Finder")]
+        public IEnumerable<Decree> decreeFinder([FromBody] DecreeFinder decreeFinder)
+        {
+            string sessionid = Request.Cookies[Keys.COOKIES_SESSION];
+            User user = null;
+            List<Decree> output = new List<Decree>();
+            if (IdentityService.IsLogined(sessionid, repository))
+            {
+                user = IdentityService.GetUserBySessionID(sessionid, repository);
+                bool hasAccess = IdentityService.canEditStructures(sessionid, repository);
+                if (hasAccess)
+                {
+                    decreeWorker.reWriteDecreesNull(user, decreeFinder.rewrite);
+                    output = decreeWorker.FinderByFinder(decreeFinder);
+                }
+            }
+            return output;
         }
 
         public MemoryStream GenerateDocument(DecreeManagement decreeManagement)

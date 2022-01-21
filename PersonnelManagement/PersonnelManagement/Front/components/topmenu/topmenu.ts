@@ -12,42 +12,13 @@ import Structure from '../../classes/structure'
 import Rewardmoney from '../../classes/rewardmoney'
 import download from 'downloadjs';
 
-import Educationstage from '../../classes/educationstage';
-import Educationadditionaltype from '../../classes/educationadditionaltype';
-import Educationpositiontype from '../../classes/educationpositiontype';
-import Educationperiod from '../../classes/educationperiod';
 import Structureregion from '../../classes/structureregion';
 import Structuretype from '../../classes/structuretype';
 import StructureTree from '../../classes/structuretree';
 import Rank from '../../classes/rank';
-import Relativetype from '../../classes/relativetype';
-import Attestationtype from '../../classes/attestationtype';
-import Vacationtype from '../../classes/vacationtype';
-import Vacationmilitary from '../../classes/vacationmilitary';
-import Languagetype from '../../classes/languagetype';
-import Languageskill from '../../classes/languageskill';
-import Jobtype from '../../classes/jobtype';
-import Servicetype from '../../classes/servicetype';
-import Servicefeature from '../../classes/servicefeature';
-import Servicecoef from '../../classes/servicecoef';
-import Penalty from '../../classes/penalty';
 import Country from '../../classes/country';
-import Science from '../../classes/science';
-import Rewardtype from '../../classes/rewardtype';
-import Reward from '../../classes/reward';
-import Educationlevel from '../../classes/educationlevel';
-import Educationtype from '../../classes/educationtype';
-import Drivertype from '../../classes/drivertype';
-import Drivercategory from '../../classes/drivercategory';
-import Permissiontype from '../../classes/permissiontype';
-import Prooftype from '../../classes/prooftype';
-import Educationdocument from '../../classes/educationdocument';
-import Holiday from '../../classes/holiday';
 import User from '../../classes/user';
 import moment from 'moment';
-import Appointtype from '../../classes/appointtype';
-import Transfertype from '../../classes/transfertype';
-import Interrupttype from '../../classes/interrupttype';
 import Changedocumentstype from '../../classes/changedocumentstype';
 import Subject from '../../classes/subject';
 import Countycities from '../../classes/countrycities'
@@ -55,6 +26,10 @@ import Countrycities from '../../classes/countrycities';
 import Ordernumbertype from '../../classes/ordernumbertype';
 import Link from '../../classes/link';
 import Dismissalclauses from '../../classes/dismissalclauses';
+import formatter from '../../classes/formating_functions/el_table_formatter';
+
+import Decree from '../../classes/decree/decree';
+import DecreeFinder from '../../classes/decree/decree_finder';
 Vue.component(Button.name, Button);
 Vue.component(Input.name, Input);
 Vue.component(Select.name, Select);
@@ -130,6 +105,14 @@ class StructureManagement {
     }
 })
 export default class TopmenuComponent extends Vue {
+    formatter = formatter;
+
+    current_decree: Decree;
+    all_decrees: Decree[];
+
+    decree_find_parameters: DecreeFinder;
+
+    user: User;
 
     id: number;
     name: string;
@@ -258,6 +241,13 @@ export default class TopmenuComponent extends Vue {
 
     data() {
         return {
+            current_decree: new Decree(),
+            all_decrees: [],
+
+            decree_find_parameters: new DecreeFinder(),
+
+            user: new User(),
+
             id: 0,
             status: "renamestructure",
             name: "",
@@ -373,11 +363,23 @@ export default class TopmenuComponent extends Vue {
     }
 
     mounted() {
+        this.userObject();
         setInterval(this.checkSidebarAndAccessAndDecreeName, 250);
         setInterval(this.renewDecrees, 1000);
         this.fetchFeaturedStructures();
         this.fetchStructureRewards();
         this.fetchStructureRewardsAllowed();
+    }
+
+    userObject() {
+        fetch('api/Identity/User', { credentials: 'include' })
+            .then(response => {
+                return response.json() as Promise<User>;
+            })
+            .then(result => {
+                this.user = result;
+                //alert(JSON.stringify(result));
+            });
     }
 
     get modeselectstructure(): boolean {
@@ -392,50 +394,6 @@ export default class TopmenuComponent extends Vue {
         return this.$store.state.ranks;
     }
 
-    get relativetypes(): Relativetype[] {
-        return this.$store.state.relativetypes;
-    }
-
-    get attestations(): Attestationtype[] {
-        return this.$store.state.attestationtypes;
-    }
-
-    get vacations(): Vacationtype[] {
-        return this.$store.state.vacationtypes;
-    }
-
-    get vacationmilitaries(): Vacationmilitary[] {
-        return this.$store.state.vacationmilitaries;
-    }
-
-    get languagetypes(): Languagetype[] {
-        return this.$store.state.languagetypes;
-    }
-
-    get languageskills(): Languageskill[] {
-        return this.$store.state.languageskills;
-    }
-
-    get jobtypes(): Jobtype[] {
-        return this.$store.state.jobtypes;
-    }
-
-    get servicetypes(): Servicetype[] {
-        return this.$store.state.servicetypes;
-    }
-
-    get servicefeatures(): Servicefeature[] {
-        return this.$store.state.servicefeatures;
-    }
-
-    get servicecoefs(): Servicecoef[] {
-        return this.$store.state.servicecoefs;
-    }
-
-    get penalties(): Penalty[] {
-        return this.$store.state.penalties;
-    }
-
     get dismissalclauses(): Dismissalclauses[] {
         return this.$store.state.dismissalclauses;
     }
@@ -444,83 +402,12 @@ export default class TopmenuComponent extends Vue {
         return this.$store.state.countries;
     }
 
-    get sciences(): Science[] {
-        return this.$store.state.sciences;
-    }
-
-    get rewardtypes(): Rewardtype[] {
-        return this.$store.state.rewardtypes;
-    }
-
-    get rewards(): Reward[] {
-        return this.$store.state.rewards;
-    }
-
-    get educationlevels(): Educationlevel[] {
-        return this.$store.state.educationlevels;
-    }
-
-    get educationtypes(): Educationtype[] {
-        return this.$store.state.educationtypes;
-    }
-    get educationperiods(): Educationperiod[] {
-        return this.$store.state.educationperiods;
-    }
-
-    get educationadditionaltypes(): Educationadditionaltype[] {
-        return this.$store.state.educationadditionaltypes;
-    }
-
-    get educationstages(): Educationstage[] {
-        return this.$store.state.educationstages;
-    }
-
-    get educationpositiontypes(): Educationpositiontype[] {
-        return this.$store.state.educationpositiontypes;
-    }
-
-    get educationdocuments(): Educationdocument[] {
-        return this.$store.state.educationdocuments;
-    }
-
-    get drivertypes(): Drivertype[] {
-        return this.$store.state.drivertypes;
-    }
-
-    get drivercategories(): Drivercategory[] {
-        return this.$store.state.drivercategories;
-    }
-
-    get permissiontypes(): Permissiontype[] {
-        return this.$store.state.permissiontypes;
-    }
-
-    get prooftypes(): Prooftype[] {
-        return this.$store.state.prooftypes;
-    }
-
-    get holidays(): Holiday[] {
-        return this.$store.state.holidays;
-    }
-
     get regions(): Region[] {
         return this.$store.state.regions;
     }
 
     get areas(): Area[] {
         return this.$store.state.areas;
-    }
-
-    get appointtypes(): Appointtype[] {
-        return this.$store.state.appointtypes;
-    }
-
-    get transfertypes(): Transfertype[] {
-        return this.$store.state.transfertypes;
-    }
-
-    get interrupttypes(): Interrupttype[] {
-        return this.$store.state.interrupttypes;
     }
 
     get changedocumentstypes(): Changedocumentstype[] {
@@ -677,34 +564,20 @@ export default class TopmenuComponent extends Vue {
     }
 
     filterSignedDecree() {
-            //this.$store.commit("setDecree", 1);
-            fetch('/api/Decrees', {
-                method: 'post',
-                body: JSON.stringify(<Decreemanagement>{
-                    decreemanagementstatus: 6,
-                    dateactivestart: this.decreeFilterDateactiveStart,
-                    dateactiveend: this.decreeFilterDateactiveEnd,
-                    datesignedstart: this.decreeFilterDatesignedStart,
-                    datesignedend: this.decreeFilterDatesignedEnd,
-                    number: this.decreeFilterNumber,
-                    name: this.decreeFilterName,
-                    nickname: this.decreeFilterNickname,
-                    
-                    
-                }),
-                credentials: 'include',
-                headers: new Headers({
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                })
+        console.log(JSON.stringify(<DecreeFinder>(this.decree_find_parameters)));
+        fetch('/api/Decrees/Finder', {
+            method: 'post',
+            body: JSON.stringify(<DecreeFinder>(this.decree_find_parameters)),
+            credentials: 'include',
+            headers: new Headers({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
             })
-            .then(response => {
-                return response.json() as Promise<Decreemanagement[]>;
-            })
-                .then(result => {
-                    this.decreesSignedList = result;
-            });
-         
+        }).then(response => {
+            return response.json() as Promise<Decree[]>;
+        }).then(date => {
+            this.all_decrees = date;
+        });
     }
 
     decreeDeny() {
@@ -1607,30 +1480,6 @@ export default class TopmenuComponent extends Vue {
         return num;
     }
 
-    getRewardtype(rewardtype: number): string {
-        if (rewardtype == null || rewardtype == 0) {
-            return "";
-        }
-        let rtype: Rewardtype = this.rewardtypes.find(t => t.id == rewardtype);
-        if (rtype != null) {
-            return rtype.name;
-        } else {
-            return "";
-        }
-    }
-
-    getReward(reward: number): string {
-        if (reward == null || reward == 0) {
-            return "";
-        }
-        let rtype: Reward = this.rewards.find(t => t.id == reward);
-        if (rtype != null) {
-            return rtype.name;
-        } else {
-            return "";
-        }
-    }
-
     getRank(rank: number): string {
         if (rank == null || rank == 0) {
             return "";
@@ -1763,34 +1612,6 @@ export default class TopmenuComponent extends Vue {
             return inputstring.toLowerCase();
         }
         
-    }
-
-    getAppointtype(appointtype: number): string {
-        if (appointtype == null || appointtype == 0) {
-            return "";
-        }
-        let atype: Appointtype = this.appointtypes.find(at => at.id == appointtype);
-        if (atype != null) {
-            return atype.name;
-        } else {
-            return "";
-        }
-    }
-
-    getTransfertypeObject(transfertype: number): Transfertype {
-        if (transfertype == null || transfertype == 0) {
-            return null;
-        }
-        let transfertypeobject: Transfertype = this.transfertypes.find(t => t.id == transfertype);
-        return transfertypeobject;
-    }
-
-    getInterrupttypeObject(interrupttype: number): Interrupttype {
-        if (interrupttype == null || interrupttype == 0) {
-            return null;
-        }
-        let interrupttypeobject: Interrupttype = this.interrupttypes.find(i => i.id == interrupttype);
-        return interrupttypeobject;
     }
 
     getChangedocumentstypeObject(changedocumentstype: number): Changedocumentstype {
@@ -2032,30 +1853,5 @@ export default class TopmenuComponent extends Vue {
             links.push(link);
         })
         return links;
-    }
-
-    getVacationtypeObject(vacationtype: number): Vacationtype {
-        if (vacationtype == null || vacationtype == 0) {
-            return null;
-        }
-        let element: Vacationtype = this.vacations.find(t => t.id == vacationtype);
-        if (element != null) {
-            return element;
-        } else {
-            return null;
-        }
-    }
-
-    isMaternity(vacationid: number): boolean {
-        if (vacationid == null || vacationid == 0) {
-            return false;
-        }
-        let vacationtype: Vacationtype = this.getVacationtypeObject(vacationid);
-        if (vacationtype == null) {
-            return false;
-        }
-        if (vacationtype.maternity == 1) {
-            return true;
-        }
     }
 }

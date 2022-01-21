@@ -29,21 +29,21 @@
                                     <div>
                                         <b>Доступы:</b>
                                     </div>
-                                    <div>
+                                    <!--<div>
                                         <span class="adminpanel-row-label">Редактирование прохождения службы</span><span class="adminpanel-row-right">{{hasRightString(user.personneleditor)}}</span>
-                                    </div>
-                                    <div>
+                                    </div>-->
+                                    <!--<div>
                                         <span class="adminpanel-row-label">Доступ к чтению прохождения службы</span><span class="adminpanel-row-right">{{hasRightString(user.personnelread)}}</span>
-                                    </div>
+                                    </div>-->
                                     <div>
                                         <span class="adminpanel-row-label">Редактирование оргштатной работы</span><span class="adminpanel-row-right">{{hasRightString(user.structureeditor)}}</span>
                                     </div>
                                     <div>
                                         <span class="adminpanel-row-label">Доступ к чтению оргштатной работы</span><span class="adminpanel-row-right">{{hasRightString(user.structureread)}}</span>
                                     </div>
-                                    <div>
+                                    <!--<div>
                                         <span class="adminpanel-row-label">Редактирование кадров всех подразделений</span><span class="adminpanel-row-right">{{hasRightString(user.masterpersonneleditor)}}</span>
-                                    </div>
+                                    </div>-->
                                 </div>
                                 <div class="adminpanel-submit">
                                     <el-button :id="user.id" title="Редактировать" type="primary" @click="userEditStart(user)" size="small" icon="el-icon-edit" plain></el-button>
@@ -107,10 +107,10 @@
                                     <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.orgreadall" :active-value="1" :inactive-value="0" active-text="Просмотр орг-штатной структуры всех подразделений"> </el-switch></div>
                                 </div>
                                 <!--Проекты приказов-->
-                                <div v-if="newUser.rights.menu == 5">
+                                <!--<div v-if="newUser.rights.menu == 5">
                                     <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peopledecreeedit" :active-value="1" :inactive-value="0" active-text="Редактирование проектов приказов"> </el-switch></div>
                                     <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peopledecreeread" :active-value="1" :inactive-value="0" active-text="Просмотр проектов приказов"> </el-switch></div>
-                                </div>
+                                </div>-->
                             </div>
 
                             <div>

@@ -30,6 +30,7 @@ import formatter from '../../classes/formating_functions/el_table_formatter';
 
 import Decree from '../../classes/decree/decree';
 import DecreeFinder from '../../classes/decree/decree_finder';
+import decree_operation from '../../classes/decree/decree_operation';
 Vue.component(Button.name, Button);
 Vue.component(Input.name, Input);
 Vue.component(Select.name, Select);
@@ -113,6 +114,8 @@ export default class TopmenuComponent extends Vue {
     decree_find_parameters: DecreeFinder;
 
     user: User;
+
+    decree_operations: decree_operation[];
 
     id: number;
     name: string;
@@ -247,6 +250,8 @@ export default class TopmenuComponent extends Vue {
             decree_find_parameters: new DecreeFinder(),
 
             user: new User(),
+
+            decree_operations: [],
 
             id: 0,
             status: "renamestructure",
@@ -525,10 +530,10 @@ export default class TopmenuComponent extends Vue {
         }
     }
 
-    selectSignedDecree(event: any, id: number) {
+    selectSignedDecree(event: any, decree: Decree) {
         this.modalDecreeMenuSignedVisible = true;
-        this.fetchDecreeOperationsSigned(id);
-        this.fetchDecreeSigned(id);
+        this.fetchDecreeOperationsSigned(decree);
+        //this.fetchDecreeSigned(id);
     }
 
     selectCurrentDecree() {
@@ -836,7 +841,21 @@ export default class TopmenuComponent extends Vue {
             });
     }
 
-    fetchDecreeOperationsSigned(decree: number) {
+    fetchDecreeOperationsSigned(decree: Decree) {
+        console.log(JSON.stringify(<Decree>(decree)));
+        fetch('/api/DecreeOperations/Finder', {
+            method: 'post',
+            body: JSON.stringify(<Decree>(decree)),
+            credentials: 'include',
+            headers: new Headers({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            })
+        }).then(response => {
+            return response.json() as Promise<decree_operation[]>;
+        }).then(date => {
+            this.decree_operations = date;
+        });
         fetch('api/DecreeOperations/' + decree, { credentials: 'include' })
             .then(response => {
                 return response.json() as Promise<Decreeoperation[]>;

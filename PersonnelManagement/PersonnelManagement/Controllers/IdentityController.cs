@@ -158,7 +158,7 @@ namespace PersonnelManagement.Controllers
             if (IdentityService.IsLogined(Request.Cookies[Keys.COOKIES_SESSION], repository))
             {
                 user = IdentityService.GetUserBySessionID(sessionid, repository);
-                User contextUser = repository.Users.First(u => u.Id == user.Id);
+                User contextUser = repository.GetContextUser().User.First(u => u.Id == user.Id);
                 contextUser.Fullmode = id; // пока что ставим мод напрямую.
                 repository.SaveChanges();
                 repository.GetContextUser().UpdateUsersLocal();

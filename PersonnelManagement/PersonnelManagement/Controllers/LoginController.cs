@@ -17,12 +17,14 @@ namespace PersonnelManagement.Controllers
 
         private IdentityService identityService;
         private Repository repository;
+        private userContext userContext;
         //private static string salt = IdentityService.GenerateSalt();
 
         public LoginController(IdentityService identityService, Repository repository)
         {
             this.identityService = identityService;
             this.repository = repository;
+            this.userContext = repository.GetContextUser();
         }
 
 
@@ -40,7 +42,7 @@ namespace PersonnelManagement.Controllers
                 return new ObjectResult(Keys.ERROR_SHORT + ":Введите пароль");
             }
 
-            User user = repository.Users.FirstOrDefault(r => r.Name == login);
+            User user = userContext.User.FirstOrDefault(r => r.Name == login);
             /**
              * Login exists
              */
@@ -53,8 +55,9 @@ namespace PersonnelManagement.Controllers
                     string hash = IdentityService.CalculateHash(password, salt);
                     user.Password = hash;
                     user.Salt = salt;
-                    repository.SaveChanges();
-                    repository.GetContextUser().UpdateUsersLocal();
+                    userContext.User.Update(user);
+                    userContext.SaveChanges();
+                    userContext.UpdateUsersLocal();
                     return new ObjectResult(Keys.SUCCESS_SHORT + ":Пароль изменен. Выполните вход.");
                 } else if (user.Password != null)
                 {

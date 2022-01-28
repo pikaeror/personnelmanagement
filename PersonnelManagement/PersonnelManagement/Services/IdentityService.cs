@@ -230,14 +230,14 @@ namespace PersonnelManagement.Services
 
         public static bool canEditStructures(string sessionid, Repository repository)
         {
-            User user = repository.Users.First(u => u.Id == (repository.GetContextUser().SessionsLocal()[sessionid].Userid));
+            User user = repository.GetContextUser().User.First(u => u.Id == (repository.GetContextUser().SessionsLocal()[sessionid].Userid));
             //User user = repository.Users.First(u => u.Id == (repository.Sessions.First(s => s.Id == sessionid).Userid));
             return (user.Structureeditor.GetValueOrDefault(0) == 1);
         }
 
         public static bool CanReadStructure(string sessionid, Repository repository, int structureid)
         {
-            User user = repository.Users.First(u => u.Id == (repository.GetContextUser().SessionsLocal()[sessionid].Userid));
+            User user = repository.GetContextUser().User.First(u => u.Id == (repository.GetContextUser().SessionsLocal()[sessionid].Userid));
             //User user = repository.Users.First(u => u.Id == (repository.Sessions.First(s => s.Id == sessionid).Userid));
             return CanReadStructure(user, repository, structureid);
         }

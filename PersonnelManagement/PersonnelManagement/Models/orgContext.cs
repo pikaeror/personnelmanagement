@@ -22,6 +22,7 @@ namespace PersonnelManagement.Models
         public virtual DbSet<Position> Position { get; set; }
         public virtual DbSet<Positioncategory> Positioncategory { get; set; }
         public virtual DbSet<Positioncategoryrank> Positioncategoryrank { get; set; }
+        public virtual DbSet<Positiondecreeoperation> Positiondecreeoperation { get; set; }
         public virtual DbSet<Positionhistory> Positionhistory { get; set; }
         public virtual DbSet<Positionmrd> Positionmrd { get; set; }
         public virtual DbSet<Positiontype> Positiontype { get; set; }
@@ -30,6 +31,7 @@ namespace PersonnelManagement.Models
         public virtual DbSet<Sourceoffinancing> Sourceoffinancing { get; set; }
         public virtual DbSet<Streettype> Streettype { get; set; }
         public virtual DbSet<Structure> Structure { get; set; }
+        public virtual DbSet<Structuredecreeoperation> Structuredecreeoperation { get; set; }
         public virtual DbSet<Structureregion> Structureregion { get; set; }
         public virtual DbSet<Structuretype> Structuretype { get; set; }
         public virtual DbSet<Subject> Subject { get; set; }
@@ -45,8 +47,6 @@ namespace PersonnelManagement.Models
                 optionsBuilder.UseMySql("server=localhost;port=3306;userid=org_admin;treattinyasboolean=True;password=EldConnection22Standart;database=org;convert zero datetime=True;");
             }
         }
-
-        public orgContext(DbContextOptions<orgContext> options) : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -271,14 +271,17 @@ namespace PersonnelManagement.Models
                     .HasDefaultValueSql("'0'");
 
                 entity.Property(e => e.Name)
+                    .IsRequired()
                     .HasColumnName("name")
                     .HasMaxLength(1500);
 
                 entity.Property(e => e.Nickname)
+                    .IsRequired()
                     .HasColumnName("nickname")
                     .HasMaxLength(900);
 
                 entity.Property(e => e.Number)
+                    .IsRequired()
                     .HasColumnName("number")
                     .HasMaxLength(400);
 
@@ -289,7 +292,8 @@ namespace PersonnelManagement.Models
 
                 entity.Property(e => e.User)
                     .HasColumnName("user")
-                    .HasColumnType("int(11)");
+                    .HasColumnType("int(11)")
+                    .HasDefaultValueSql("'0'");
             });
 
             modelBuilder.Entity<Decreeoperation>(entity =>
@@ -777,6 +781,52 @@ namespace PersonnelManagement.Models
                     .HasMaxLength(600);
 
                 entity.Property(e => e.Rank).HasColumnName("rank");
+            });
+
+            modelBuilder.Entity<Positiondecreeoperation>(entity =>
+            {
+                entity.ToTable("positiondecreeoperation");
+
+                entity.HasIndex(e => e.Id)
+                    .HasName("id_UNIQUE")
+                    .IsUnique();
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Changed)
+                    .HasColumnName("changed")
+                    .HasColumnType("tinyint(1)")
+                    .HasDefaultValueSql("'0'");
+
+                entity.Property(e => e.Created)
+                    .HasColumnName("created")
+                    .HasColumnType("tinyint(1)")
+                    .HasDefaultValueSql("'0'");
+
+                entity.Property(e => e.Currentposition).HasColumnName("currentposition");
+
+                entity.Property(e => e.Currentstructure).HasColumnName("currentstructure");
+
+                entity.Property(e => e.Dateactive)
+                    .HasColumnName("dateactive")
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("'CURRENT_TIMESTAMP'");
+
+                entity.Property(e => e.Datecustom)
+                    .HasColumnName("datecustom")
+                    .HasColumnType("tinyint(1)")
+                    .HasDefaultValueSql("'0'");
+
+                entity.Property(e => e.Decree)
+                    .HasColumnName("decree")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Deleted)
+                    .HasColumnName("deleted")
+                    .HasColumnType("tinyint(1)")
+                    .HasDefaultValueSql("'0'");
+
+                entity.Property(e => e.Priviuseosition).HasColumnName("priviuseosition");
             });
 
             modelBuilder.Entity<Positionhistory>(entity =>
@@ -1423,6 +1473,50 @@ namespace PersonnelManagement.Models
                     .HasColumnName("subjectnumber")
                     .HasColumnType("int(11)")
                     .HasDefaultValueSql("'0'");
+            });
+
+            modelBuilder.Entity<Structuredecreeoperation>(entity =>
+            {
+                entity.ToTable("structuredecreeoperation");
+
+                entity.HasIndex(e => e.Id)
+                    .HasName("id_UNIQUE")
+                    .IsUnique();
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Changed)
+                    .HasColumnName("changed")
+                    .HasColumnType("tinyint(1)")
+                    .HasDefaultValueSql("'0'");
+
+                entity.Property(e => e.Created)
+                    .HasColumnName("created")
+                    .HasColumnType("tinyint(1)")
+                    .HasDefaultValueSql("'0'");
+
+                entity.Property(e => e.Currentstructure).HasColumnName("currentstructure");
+
+                entity.Property(e => e.Dateactive)
+                    .HasColumnName("dateactive")
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("'CURRENT_TIMESTAMP'");
+
+                entity.Property(e => e.Datecustom)
+                    .HasColumnName("datecustom")
+                    .HasColumnType("tinyint(1)")
+                    .HasDefaultValueSql("'0'");
+
+                entity.Property(e => e.Decree)
+                    .HasColumnName("decree")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Deleted)
+                    .HasColumnName("deleted")
+                    .HasColumnType("tinyint(1)")
+                    .HasDefaultValueSql("'0'");
+
+                entity.Property(e => e.Priveusestructure).HasColumnName("priveusestructure");
             });
 
             modelBuilder.Entity<Structureregion>(entity =>

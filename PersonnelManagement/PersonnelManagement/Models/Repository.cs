@@ -41,9 +41,6 @@ namespace PersonnelManagement.Models
         }
 
         // Поля для быстрого доступка к таблицам из контекста базы данных
-
-        public IQueryable<User> Users => contetUser.User;
-        public IQueryable<Session> Sessions => contetUser.Session;
         public IQueryable<Structure> Structures => context.Structure;
         public IQueryable<Position> Positions => context.Position;
         public IQueryable<Rank> Ranks => context.Rank;
@@ -73,8 +70,6 @@ namespace PersonnelManagement.Models
         public IQueryable<Areaother> Areaothers => context.Areaother;
         public IQueryable<Externalorderwhotype> Externalorderwhotypes => context.Externalorderwhotype;
         public IQueryable<Citysubstate> Citysubstates => context.Citysubstate;
-        public IQueryable<Rights> Rights => contetUser.Rights;
-        public IQueryable<Rightsstructure> Rightsstructures => contetUser.Rightsstructure;
 
         // Таймер. Используется для подсчета времени необходимого для следующего обновления локальных версий таблиц (StructuresLocal и иные). 
         private static Stopwatch stopWatch = Stopwatch.StartNew();
@@ -1494,7 +1489,7 @@ namespace PersonnelManagement.Models
         /// <param name="user"></param>
         public void AddNewDecree(DecreeManagement decreeManagement, User user)
         {
-            User contextUser = Users.First(u => u.Id == user.Id);
+            User contextUser = this.contetUser.User.First(u => u.Id == user.Id);
             DateTime date = contextUser.Date.GetValueOrDefault();
 
             Decree decree = new Decree();
@@ -1559,7 +1554,7 @@ namespace PersonnelManagement.Models
         /// <param name="user"></param>
         public void RemoveDecree(DecreeManagement decreeManagement, User user)
         {
-            User contextUser = Users.First(u => u.Id == user.Id);
+            User contextUser = this.contetUser.User.First(u => u.Id == user.Id);
             Decree decree = Decrees.First(d => d.Id == decreeManagement.Id);
             contextUser.Decree = 0;
             decree.Declined = 1;
@@ -1644,7 +1639,7 @@ namespace PersonnelManagement.Models
 
         public void AcceptDecree(DecreeManagement decreeManagement, User user)
         {
-            User contextUser = Users.First(u => u.Id == user.Id);
+            User contextUser = this.contetUser.User.First(u => u.Id == user.Id);
             Decree decree = Decrees.First(d => d.Id == decreeManagement.Id);
             UpdateStructuresLocal();
             foreach (Decreeoperation p in DecreeoperationsLocal().Values.ToList().FindAll(r => r.Decree == decree.Id))
@@ -1683,7 +1678,7 @@ namespace PersonnelManagement.Models
 
         public void UpdateDecree(DecreeManagement decreeManagement, User user)
         {
-            User contextUser = Users.First(u => u.Id == user.Id);
+            User contextUser = this.contetUser.User.First(u => u.Id == user.Id);
             Decree decree = Decrees.First(d => d.Id == decreeManagement.Id);
             //contextUser.Decree = 0;
             decree.Name = decreeManagement.Name;
@@ -1708,7 +1703,7 @@ namespace PersonnelManagement.Models
                     DecreeManagement decreeManagement = new DecreeManagement();
                     decreeManagement.Id = decree.Id;
                     decreeManagement.Signed = 1;
-                    decreeManagement.User = decree.User.GetValueOrDefault();
+                    decreeManagement.User = decree.User;
                     decreeManagement.Nickname = decree.Nickname;
                     decreeManagement.Name = decree.Name;
                     decreeManagement.Number = decree.Number;
@@ -3294,7 +3289,7 @@ namespace PersonnelManagement.Models
          */
         public bool SwitchUser(User user)
         {
-            User contextUser = Users.First(u => u.Id == user.Id);
+            User contextUser = this.contetUser.User.First(u => u.Id == user.Id);
             if (contextUser.Mode == 0)
             {
                 if (contextUser.Personnelread > 0 || contextUser.Admin.GetValueOrDefault() > 0 || contextUser.Masterpersonneleditor.GetValueOrDefault() > 0)
@@ -3328,7 +3323,7 @@ namespace PersonnelManagement.Models
          */
         public bool OrgUser(User user)
         {
-            User contextUser = Users.First(u => u.Id == user.Id);
+            User contextUser = this.contetUser.User.First(u => u.Id == user.Id);
             if (contextUser.Structureread > 0 || contextUser.Admin.GetValueOrDefault() > 0 || contextUser.Masterpersonneleditor.GetValueOrDefault() > 0)
             {
                 contextUser.Mode = 0;
@@ -3347,7 +3342,7 @@ namespace PersonnelManagement.Models
          */
         public bool PeopleUser(User user)
         {
-            User contextUser = Users.First(u => u.Id == user.Id);
+            User contextUser = this.contetUser.User.First(u => u.Id == user.Id);
             if (contextUser.Personnelread > 0 || contextUser.Admin.GetValueOrDefault() > 0 || contextUser.Masterpersonneleditor.GetValueOrDefault() > 0)
             {
                 contextUser.Mode = 1;
@@ -3743,7 +3738,7 @@ namespace PersonnelManagement.Models
         {
             DateTime dateTime = DateTime.Now;
             List<Session> list = null;
-            foreach (Session session in Sessions)
+            foreach (Session session in this.contetUser.Session)
             {
                 if (session.Expires < dateTime)
                 {
@@ -10247,8 +10242,8 @@ namespace PersonnelManagement.Models
                 }
             }
 
-            users.AddRange(UserManager.UsersToUserManagers(this, user, Users.Where(p => (p.Surname + " " + p.Firstname + " " + p.Patronymic).ToLower().Contains(fio.ToLower()))));
-            users.AddRange(UserManager.UsersToUserManagers(this, user, Users.Where(p => structureIds.Contains(p.Structure.GetValueOrDefault()))));
+            users.AddRange(UserManager.UsersToUserManagers(this, user, this.contetUser.User.Where(p => (p.Surname + " " + p.Firstname + " " + p.Patronymic).ToLower().Contains(fio.ToLower()))));
+            users.AddRange(UserManager.UsersToUserManagers(this, user, this.contetUser.User.Where(p => structureIds.Contains(p.Structure.GetValueOrDefault()))));
             users = users.DistinctBy(p => p.Id).ToList();
 
             return users;
@@ -10308,7 +10303,7 @@ namespace PersonnelManagement.Models
         public void InitializeRightsstructures(User user, Repository repository)
         {
             List<Rightsstructure> rightsstructures = new List<Rightsstructure>();
-            IEnumerable<Rightsstructure> existingRightstructures = repository.Rightsstructures.Where(r => r.Rights == contetUser.RightsLocal().Values.FirstOrDefault(d => d.User == user.Id).Id);
+            IEnumerable<Rightsstructure> existingRightstructures = this.contetUser.Rightsstructure.Where(r => r.Rights == contetUser.RightsLocal().Values.FirstOrDefault(d => d.User == user.Id).Id);
 
 
             List<Structure> allStructures = repository.GetChildrenList(user.Structure.GetValueOrDefault());

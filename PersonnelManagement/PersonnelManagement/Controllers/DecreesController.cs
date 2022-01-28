@@ -164,6 +164,7 @@ namespace PersonnelManagement.Controllers
             string sessionid = Request.Cookies[Keys.COOKIES_SESSION];
             User user = null;
             List<Decree> output = new List<Decree>();
+            //DateTime start = DateTime.Now;
             if (IdentityService.IsLogined(sessionid, repository))
             {
                 user = IdentityService.GetUserBySessionID(sessionid, repository);
@@ -174,6 +175,8 @@ namespace PersonnelManagement.Controllers
                     output = decreeWorker.FinderByFinder(decreeFinder);
                 }
             }
+            //DateTime end = DateTime.Now;
+            //DateTime delta = end - start;
             return output;
         }
 

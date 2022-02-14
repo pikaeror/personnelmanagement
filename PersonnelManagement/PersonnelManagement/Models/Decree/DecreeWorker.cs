@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Threading;
 
 namespace PersonnelManagement.Models
 {
@@ -65,6 +66,20 @@ namespace PersonnelManagement.Models
             context.Decree.UpdateRange(decrees);
             context.SaveChanges();
             m_repository.UpdateDecreesLocal();
+
+            DecreeOperationWorker decreeWorker = new DecreeOperationWorker(m_repository);
+            decreeWorker.user = user;
+            DecreeOperationWorker decreeWorker_s = new DecreeOperationWorker(m_repository);
+            decreeWorker_s.user = user;
+            Thread tr_p = new Thread(decreeWorker.partial_decreeoperations_pos);
+            Thread tr_s = new Thread(decreeWorker_s.partial_decreeoperations_str);
+            tr_p.Priority = ThreadPriority.Highest;
+            tr_s.Priority = ThreadPriority.Highest;
+            tr_p.Start();
+            System.Threading.Thread.Sleep(10000);
+            tr_s.Start();
+            tr_p.Join();
+            tr_s.Join();
         }
     }
 }

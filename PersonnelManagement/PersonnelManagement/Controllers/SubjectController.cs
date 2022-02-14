@@ -95,5 +95,15 @@ namespace PersonnelManagement.Controllers
             //return new ObjectResult(Keys.ERROR_SHORT + ":Произошла какая-то оказия");
         }
 
+        [HttpPost("elementSubject/{id}")]
+        public Elementsubject getElementSubject([FromRoute] int id)
+        {
+            if(id != 0)
+            {
+                return repository.GetContext().Elementsubject.Where(r => r.Id == id).FirstOrDefault();
+            }
+            return new Elementsubject();
+        }
+
     }
 }

@@ -42,7 +42,7 @@ namespace PersonnelManagement.Controllers
                 return new ObjectResult(Keys.ERROR_SHORT + ":Введите пароль");
             }
 
-            User user = userContext.User.FirstOrDefault(r => r.Name == login);
+            User user = userContext.User.FirstOrDefault(r => r.Name.GetHashCode() == login.GetHashCode());
             /**
              * Login exists
              */

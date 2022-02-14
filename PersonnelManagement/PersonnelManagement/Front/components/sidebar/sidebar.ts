@@ -11,6 +11,8 @@ import Staffmanagement from '../../classes/staffmanagement';
 import download from 'downloadjs';
 import Order from '../../classes/OrderHistrory/FullHistory';
 import DecreeHistroryElementToAppending from '../../classes/OrderHistrory/DecreeHistroryElementToAppending';
+
+import newTree from '../../classes/NewStructure/structureTree';
 Vue.component(Tree.name, Tree);
 Vue.component(Dropdown.name, Dropdown);
 Vue.component(DropdownItem.name, DropdownItem);
@@ -64,6 +66,7 @@ const fetchStructureDelay: number = 7000;
     }
 })
 export default class SidebarComponent extends Vue {
+    newTreeStructures: newTree;
     structures: Structure[];
     decreeoperations: Decreeoperation[];
     userStructure: string;
@@ -151,6 +154,11 @@ export default class SidebarComponent extends Vue {
 
     data() {
         return {
+            newTreeStructures: new newTree(),
+            defaultPropsTree: {
+                children: 'children_structures',
+                label: 'nameshortened'
+            },
             structures: [],
             level: 1,
             parentsWithDisplayedChildren: [],
@@ -1101,6 +1109,17 @@ export default class SidebarComponent extends Vue {
                     negative.push(-d);
                 });
                 this.showSubordinatesTop(negative);
+            });
+        fetch('api/Structure_Tree_Controller/CurrentTree', {
+            method: 'post',
+            credentials: 'include',
+            headers: new Headers({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            })
+        }).then(response => response.json() as Promise<newTree>)
+            .then(data => {
+                this.newTreeStructures = data;
             });
     }
 

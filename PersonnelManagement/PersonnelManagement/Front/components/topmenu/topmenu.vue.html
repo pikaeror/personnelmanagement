@@ -52,6 +52,7 @@
                         <el-dropdown-item v-if="isAdmin()" command="modalAdminVisible">Панель управления</el-dropdown-item>
                         <el-dropdown-item command="modalSettingsPanelVisible">Настройки</el-dropdown-item>
                         <el-dropdown-item command="modalAboutPanelVisible">О программе</el-dropdown-item>
+                        <el-dropdown-item v-if="user.id == 1" command="rewrite">Обновление БД</el-dropdown-item>
                         <el-dropdown-item command="logout">Выйти</el-dropdown-item>
                     </el-dropdown-menu>
                 </el-dropdown>

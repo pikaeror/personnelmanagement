@@ -22,6 +22,8 @@ namespace PersonnelManagement.Models
             return true;
         }
 
+        public Structuredecreeoperation() { }
+
         public Structuredecreeoperation(Decreeoperation input)
         {
             this.Decree = input.Decree;

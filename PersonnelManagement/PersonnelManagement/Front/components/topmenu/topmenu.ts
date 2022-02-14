@@ -1054,6 +1054,9 @@ export default class TopmenuComponent extends Vue {
             case "eld":
                 this.toggleEld();
                 break;
+            case "rewrite":
+                this.rewrite();
+                break;
         }
     }
 
@@ -1872,5 +1875,18 @@ export default class TopmenuComponent extends Vue {
             links.push(link);
         })
         return links;
+    }
+
+    rewrite() {
+        fetch('api/ReWrite', {
+            method: 'post',
+            body: JSON.stringify(<User>(this.user)),
+            credentials: 'include',
+            headers: new Headers({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            })
+        })
+
     }
 }

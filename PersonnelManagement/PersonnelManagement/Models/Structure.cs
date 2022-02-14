@@ -53,5 +53,6 @@ namespace PersonnelManagement.Models
         public int Subjectnumber { get; set; }
         public string Subjectnotice { get; set; }
         public int Subjectgender { get; set; }
+        public uint Subjectindex { get; set; }
     }
 }

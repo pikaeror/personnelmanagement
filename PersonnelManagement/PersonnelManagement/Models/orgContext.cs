@@ -16,6 +16,7 @@ namespace PersonnelManagement.Models
         public virtual DbSet<Country> Country { get; set; }
         public virtual DbSet<Decree> Decree { get; set; }
         public virtual DbSet<Decreeoperation> Decreeoperation { get; set; }
+        public virtual DbSet<Elementsubject> Elementsubject { get; set; }
         public virtual DbSet<Externalorderwhotype> Externalorderwhotype { get; set; }
         public virtual DbSet<Mrd> Mrd { get; set; }
         public virtual DbSet<Ordernumbertype> Ordernumbertype { get; set; }
@@ -354,6 +355,57 @@ namespace PersonnelManagement.Models
                 entity.Property(e => e.Subject)
                     .HasColumnName("subject")
                     .HasColumnType("int(11)");
+            });
+
+            modelBuilder.Entity<Elementsubject>(entity =>
+            {
+                entity.ToTable("elementsubject");
+
+                entity.HasIndex(e => e.Id)
+                    .HasName("id_UNIQUE")
+                    .IsUnique();
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Subject1).HasColumnName("subject1");
+
+                entity.Property(e => e.Subject10).HasColumnName("subject10");
+
+                entity.Property(e => e.Subject11).HasColumnName("subject11");
+
+                entity.Property(e => e.Subject12).HasColumnName("subject12");
+
+                entity.Property(e => e.Subject13).HasColumnName("subject13");
+
+                entity.Property(e => e.Subject14).HasColumnName("subject14");
+
+                entity.Property(e => e.Subject15).HasColumnName("subject15");
+
+                entity.Property(e => e.Subject16).HasColumnName("subject16");
+
+                entity.Property(e => e.Subject17).HasColumnName("subject17");
+
+                entity.Property(e => e.Subject18).HasColumnName("subject18");
+
+                entity.Property(e => e.Subject19).HasColumnName("subject19");
+
+                entity.Property(e => e.Subject2).HasColumnName("subject2");
+
+                entity.Property(e => e.Subject20).HasColumnName("subject20");
+
+                entity.Property(e => e.Subject3).HasColumnName("subject3");
+
+                entity.Property(e => e.Subject4).HasColumnName("subject4");
+
+                entity.Property(e => e.Subject5).HasColumnName("subject5");
+
+                entity.Property(e => e.Subject6).HasColumnName("subject6");
+
+                entity.Property(e => e.Subject7).HasColumnName("subject7");
+
+                entity.Property(e => e.Subject8).HasColumnName("subject8");
+
+                entity.Property(e => e.Subject9).HasColumnName("subject9");
             });
 
             modelBuilder.Entity<Externalorderwhotype>(entity =>
@@ -707,6 +759,8 @@ namespace PersonnelManagement.Models
                     .HasColumnName("subject9")
                     .HasColumnType("int(11)")
                     .HasDefaultValueSql("'0'");
+
+                entity.Property(e => e.Subjectindex).HasColumnName("subjectindex");
             });
 
             modelBuilder.Entity<Positioncategory>(entity =>
@@ -1227,6 +1281,9 @@ namespace PersonnelManagement.Models
                 entity.HasIndex(e => e.Parentstructure)
                     .HasName("PARENT");
 
+                entity.HasIndex(e => e.Subjectindex)
+                    .HasName("subject_idx");
+
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
                     .HasColumnType("int(11)");
@@ -1462,6 +1519,8 @@ namespace PersonnelManagement.Models
                     .HasColumnName("subjectgender")
                     .HasColumnType("int(11)")
                     .HasDefaultValueSql("'0'");
+
+                entity.Property(e => e.Subjectindex).HasColumnName("subjectindex");
 
                 entity.Property(e => e.Subjectnotice)
                     .IsRequired()

@@ -9,6 +9,18 @@ namespace PersonnelManagement.Models
 {
     public class DecreeOperationWorker
     {
+        public DecreeOperationWorker(Repository repo)
+        {
+            m_repository = repo;
+            position_decrees = m_repository.GetContext().Positiondecreeoperation;
+            structure_decrees = m_repository.GetContext().Structuredecreeoperation;
+            decree_operations = m_repository.GetContext().Decreeoperation;
+            structures = m_repository.GetContext().Structure;
+            positions = m_repository.GetContext().Position;
+            decrees = m_repository.DecreesLocal();
+
+        }
+
         public DecreeOperationWorker(ref Repository repo)
         {
             m_repository = repo;

@@ -1,0 +1,40 @@
+﻿@{
+    ViewData["Title"] = "Главная";
+}
+
+
+<link rel="stylesheet" href="~/css/loader.css?v=3" />
+<div id='app-root'>
+    <div id="loader-container">
+        <div id="loader-wrapper">
+            <div id="loader-text">Загрузка...</div>
+            <div id="loader-anim">
+                <div class="fingerprint-spinner">
+                    <div class="spinner-ring"></div>
+                    <div class="spinner-ring"></div>
+                    <div class="spinner-ring"></div>
+                    <div class="spinner-ring"></div>
+                    <div class="spinner-ring"></div>
+                    <div class="spinner-ring"></div>
+                    <div class="spinner-ring"></div>
+                    <div class="spinner-ring"></div>
+                    <div class="spinner-ring"></div>
+                </div>
+            </div>
+            <div id="loader-text-small">Кадры решают всё</div>
+        </div>
+    </div>
+</div>
+
+
+
+@section scripts {
+    <script src="~/dist/main.js" asp-append-version="true"></script>
+    @*<script>
+        function confirmExit() {
+            return 'Вы действительно хотите покинуть программу?';
+        }
+
+        window.onbeforeunload = confirmExit;
+    </script>*@
+}

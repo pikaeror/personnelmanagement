@@ -36,6 +36,8 @@ import User from './classes/user';
 
 import VueRouter from 'vue-router';
 
+import newStructureTree from './classes/NewStructure/structureTree';
+
 import locale from 'element-ui/lib/locale/lang/ru-RU'
 Vue.use(VueRouter);
 Vue.use(Vuex);
@@ -306,6 +308,8 @@ const store = new Vuex.Store({
         excertmenu: false,
         excertdecreeid: null,
         lodingexcert: false,
+
+        currentStructure: new newStructureTree(),
     },
     mutations: {
         setdecreeoperationelementVisible(state, n) {
@@ -353,6 +357,11 @@ const store = new Vuex.Store({
         setUser(state, n) {
             state.user = n;
         },
+
+        setcurrentStructure(state, n) {
+            state.currentStructure = n;
+        },
+
         setPositionsListId(state, n) {
             state.positionsListId = n;
         },

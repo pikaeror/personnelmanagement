@@ -15,6 +15,8 @@ namespace PersonnelManagement.Models
         [NotMapped]
         public string priveuse_name { get; set; }
 
+        public Positiondecreeoperation() { }
+
         public bool generateByDecree(ref Decree decree, IEnumerable<Structure> structures, IEnumerable<Position> positions, Repository repo, DateTime time)
         {
             if (decree.Id != this.Decree)

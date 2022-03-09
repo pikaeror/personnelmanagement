@@ -1372,7 +1372,7 @@ body {
     /* display: flex;
     justify-content: center;
     align-items: center;*/
-    padding: 7px;
+    padding: 5px;
     position: relative;
     background-color: #FFF;
 }
@@ -1409,7 +1409,7 @@ body {
     height: 100%;
     width: 100%;
     z-index: 3;
-    flex-basis: 50%;
+    flex-basis: 65%;
 }
 
 .position-name-transfer {
@@ -1421,7 +1421,7 @@ body {
     height: 100%;
     width: 100%;
     z-index: 3;
-    flex-basis: 50%;
+    flex-basis: 65%;
 }
 
 .position-grid {
@@ -1444,10 +1444,10 @@ body {
     justify-content: space-between;
     flex-direction: column;
     margin: 5px;
-    padding-right: 5px;
+    /*padding-right: 5px;*/
     border-right: 2px solid #DDD;
     min-height: 180px;
-    flex-basis: 25%;
+    flex-basis: 23%;
 }
 
 .position-rightblock {
@@ -1455,9 +1455,10 @@ body {
     justify-content: flex-start;
     flex-direction: column;
     margin: 5px;
-    padding-left: 3px;
+    /*padding-left: 3px;*/
     border-left: 2px solid #DDD;
-    flex-basis: 25%;
+    flex-basis: 12%;
+    align-items: center;
 }
 
 .position-sof {
@@ -3824,4 +3825,31 @@ eld-eld-body-row-flex-vertical{
     font-style: oblique;
     font-size: 10px;
     margin: auto;
+}
+/*-----------------el-tree--------------*/
+.el-tree {
+    background: rgba(170, 233, 166, 0.86);
+    color: #374037;
+    white-space: pre-wrap;
+    max-width: 99%;
+}
+.el-tree-node {
+    border: outset;
+    
+    /*max-height: 80px;*/
+}
+/*.el-tree-node__content {
+    height: 80px;
+}*/
+.el-tree-node__label {
+    font-family: 'Merriweather';
+    max-width: 99%;
+    
+}
+.el-tree-node > .el-tree-node__children {
+    margin-block: 2px 2px;
+    overflow: hidden;
+    background: inherit;
+    max-width: 99%;
+    white-space: pre-wrap;
 }

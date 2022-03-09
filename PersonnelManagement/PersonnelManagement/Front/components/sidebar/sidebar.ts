@@ -1346,4 +1346,11 @@ export default class SidebarComponent extends Vue {
             //this.reloaded = true;
         }
     }
+
+    testfunc(date) {
+        var g = 0;
+        /*this.$store.commit("setPositionsListId", -date.id);
+        this.$store.commit("setPositionsListTitle", date.name);*/
+        this.$store.commit("setcurrentStructure", date);
+    }
 }

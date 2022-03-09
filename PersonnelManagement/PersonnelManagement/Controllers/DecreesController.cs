@@ -171,7 +171,7 @@ namespace PersonnelManagement.Controllers
                 bool hasAccess = IdentityService.canEditStructures(sessionid, repository);
                 if (hasAccess)
                 {
-                    decreeWorker.reWriteDecreesNull(user, decreeFinder.rewrite);
+                    //decreeWorker.reWriteDecreesNull(user, decreeFinder.rewrite);
                     output = decreeWorker.FinderByFinder(decreeFinder);
                 }
             }

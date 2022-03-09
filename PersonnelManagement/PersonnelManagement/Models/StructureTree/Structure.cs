@@ -135,6 +135,22 @@ namespace PersonnelManagement.Models
             return Tuple.Create(structures.ContainsKey(structuredecreeoperations.Last().Currentstructure), structures[structuredecreeoperations.Last().Currentstructure]);
         }
 
+        public Tuple<bool, Structure> getActual(USERS.User user, in List<Structure> all_structures, in Dictionary<int, Decree> signed_decrees, in List<Structuredecreeoperation> all_operations)
+        {
+            long tiks = user.Date.GetValueOrDefault().Ticks;
+            Dictionary<int, Decree> decrees = signed_decrees;
+            Dictionary<uint, Structure> structures = this.getAll(all_structures).Values.ToDictionary(d => (uint)d.Id);
+            List<Structuredecreeoperation> structuredecreeoperations = all_operations.Where(r => (
+                structures.ContainsKey(r.Currentstructure) &&
+                decrees.ContainsKey(r.Decree)
+            )).ToList();
+            structuredecreeoperations.Sort((a, b) => a.Dateactive.GetValueOrDefault().Ticks.CompareTo(b.Dateactive.GetValueOrDefault().Ticks));
+            structuredecreeoperations = structuredecreeoperations.Where(r => r.Dateactive.GetValueOrDefault().Ticks <= tiks).ToList();
+            if (structuredecreeoperations.Count == 0 ||
+                !structures.ContainsKey(structuredecreeoperations.Last().Currentstructure)) { return Tuple.Create(false, this); }
+            return Tuple.Create(structures.ContainsKey(structuredecreeoperations.Last().Currentstructure), structures[structuredecreeoperations.Last().Currentstructure]);
+        }
+
         public Structure getOriginal(orgContext orgContext)
         {
             if(this.Changeorigin == 0) { return this; }

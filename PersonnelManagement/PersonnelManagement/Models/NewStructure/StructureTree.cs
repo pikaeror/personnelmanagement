@@ -182,12 +182,26 @@ namespace PersonnelManagement.Models.NewStructure
             List<Decree> all_decrees = orgContext.Decree.ToList();
             List<Structuredecreeoperation> all_operations = orgContext.Structuredecreeoperation.ToList();
             List<Rights> all_rights = userContext.Rights.ToList();
+            Dictionary<int, Decree> time_decrees = all_decrees.Where(r => r.Signed == 1).ToDictionary(r => r.Id);
+            all_decrees.Clear();
+            List<Positiondecreeoperation> all_position_operations = orgContext.Positiondecreeoperation.ToList().Where(r => time_decrees.ContainsKey(r.Decree)).ToList();
+            //time_decrees.Clear();
+            List<Position> all_positions = orgContext.Position.ToList();
+            Dictionary<int, Positiontype> all_positiontype = orgContext.Positiontype.ToDictionary(r => r.Id);
 
             Console.WriteLine("!!!!!!!!!!!!!!!!!!!!!!!DATA Base Done!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" + DateTime.Now.ToString());
-            this.GenerateCurrentTree(user, all_structures, all_decrees, all_operations, all_rights);
+            //this.GenerateCurrentTree(user, all_structures, all_decrees, all_operations, all_rights, all_positions, all_position_operations, all_positiontype);
+            this.GenerateCurrentTree(user, all_structures, time_decrees, all_operations, all_rights, all_positions, all_position_operations, all_positiontype);
         }
 
-        public void GenerateCurrentTree(in USERS.User user, in List<Structure> all_structures, in List<Decree> all_decrees, in List<Structuredecreeoperation> all_operations, in List<Rights> all_rights)
+        public void GenerateCurrentTree(in USERS.User user,
+            in List<Structure> all_structures,
+            in List<Decree> all_decrees,
+            in List<Structuredecreeoperation> all_operations,
+            in List<Rights> all_rights,
+            in List<Position> all_positions,
+            in List<Positiondecreeoperation> all_position_operations,
+            in Dictionary<int, Positiontype> all_positiontype)
         {
             if (user.CanReadAllStructures(all_rights))
             {
@@ -196,9 +210,11 @@ namespace PersonnelManagement.Models.NewStructure
                     Tuple<bool, Structure> current = str.getActual(user, all_structures, all_decrees, all_operations);
                     if (!current.Item1) { continue; }
                     StructureTree time = new Models.NewStructure.StructureTree(str);
-                    time.GenerateTreeById(str.Id, user, all_structures, all_decrees, all_operations);
+                    time.GenerateTreeById(str.Id, user, all_structures, all_decrees, all_operations, all_positions, all_position_operations, all_positiontype);
                     children_structures.Add(time);
+                    // this.GenerateActualPositions(user, current.Item2.getAll(all_structures), all_positions, all_position_operations);
                 }
+                //this.GenerateActualPositions(user, this, all_positions, all_position_operations);
                 this.Sorted();
                 return;
             }
@@ -208,10 +224,53 @@ namespace PersonnelManagement.Models.NewStructure
                 Tuple<bool, Structure> current = all_structures.First(r => r.Id == current_rules.Item2).getActual(user, all_structures, all_decrees, all_operations);
                 if (!current.Item1) { return; }
                 StructureTree time = new Models.NewStructure.StructureTree(current.Item2);
-                time.GenerateTreeById(current.Item2.Id, user, all_structures, all_decrees, all_operations);
+                time.GenerateTreeById(current.Item2.Id, user, all_structures, all_decrees, all_operations, all_positions, all_position_operations, all_positiontype);
                 children_structures.Add(time);
                 /*this.SetByStructure(current.Item2);
                 this.GenerateTreeByActual(current, user, all_structures, all_decrees, all_operations);*/
+
+                this.GenerateActualPositions(user, current.Item2.getAll(all_structures), all_positions, all_position_operations, all_decrees, all_positiontype);
+            }
+            this.Sorted();
+            return;
+        }
+
+        public void GenerateCurrentTree(in USERS.User user,
+            in List<Structure> all_structures,
+            in Dictionary<int, Decree> signed_decrees,
+            in List<Structuredecreeoperation> all_operations,
+            in List<Rights> all_rights,
+            in List<Position> all_positions,
+            in List<Positiondecreeoperation> all_position_operations,
+            in Dictionary<int, Positiontype> all_positiontype)
+        {
+            if (user.CanReadAllStructures(all_rights))
+            {
+                foreach (Structure str in all_structures.Where(r => r.Featured == 1))
+                {
+                    Tuple<bool, Structure> current = str.getActual(user, all_structures, signed_decrees, all_operations);
+                    if (!current.Item1) { continue; }
+                    StructureTree time = new Models.NewStructure.StructureTree(str);
+                    time.GenerateTreeById(str.Id, user, all_structures, signed_decrees, all_operations, all_positions, all_position_operations, all_positiontype);
+                    children_structures.Add(time);
+                    // this.GenerateActualPositions(user, current.Item2.getAll(all_structures), all_positions, all_position_operations);
+                }
+                //this.GenerateActualPositions(user, this, all_positions, all_position_operations);
+                this.Sorted();
+                return;
+            }
+            Tuple<bool, int> current_rules = user.CanReadStructures(all_rights);
+            if (current_rules.Item1)
+            {
+                Tuple<bool, Structure> current = all_structures.First(r => r.Id == current_rules.Item2).getActual(user, all_structures, signed_decrees, all_operations);
+                if (!current.Item1) { return; }
+                StructureTree time = new Models.NewStructure.StructureTree(current.Item2);
+                time.GenerateTreeById(current.Item2.Id, user, all_structures, signed_decrees, all_operations, all_positions, all_position_operations, all_positiontype);
+                children_structures.Add(time);
+                /*this.SetByStructure(current.Item2);
+                this.GenerateTreeByActual(current, user, all_structures, all_decrees, all_operations);*/
+
+                this.GenerateActualPositions(user, current.Item2.getAll(all_structures), all_positions, all_position_operations, signed_decrees, all_positiontype);
             }
             this.Sorted();
             return;
@@ -225,10 +284,30 @@ namespace PersonnelManagement.Models.NewStructure
             // List<Structure> children = orgContext.Structure.Where(r => r.Parentstructure == actual.Item2.Id).ToList();
         }
 
-        public void GenerateTreeById(int structure_id, in USERS.User user, in List<Structure> all_structures, in List<Decree> all_decrees, in List<Structuredecreeoperation> all_operations)
+        public void GenerateTreeById(int structure_id,
+            in USERS.User user,
+            in List<Structure> all_structures,
+            in List<Decree> all_decrees,
+            in List<Structuredecreeoperation> all_operations,
+            in List<Position> all_positions,
+            in List<Positiondecreeoperation> all_position_operations,
+            in Dictionary<int, Positiontype> all__positiontype)
         {
             Tuple<bool, Structure> actual = all_structures.First(r => r.Id == structure_id).getActual(user, all_structures, all_decrees, all_operations);
-            this.GenerateTreeByActual(actual, user, all_structures, all_decrees, all_operations);
+            this.GenerateTreeByActual(actual, user, all_structures, all_decrees, all_operations, all_positions, all_position_operations, all__positiontype);
+        }
+
+        public void GenerateTreeById(int structure_id,
+            in USERS.User user,
+            in List<Structure> all_structures,
+            in Dictionary<int, Decree> signed_decrees,
+            in List<Structuredecreeoperation> all_operations,
+            in List<Position> all_positions,
+            in List<Positiondecreeoperation> all_position_operations,
+            in Dictionary<int, Positiontype> all__positiontype)
+        {
+            Tuple<bool, Structure> actual = all_structures.First(r => r.Id == structure_id).getActual(user, all_structures, signed_decrees, all_operations);
+            this.GenerateTreeByActual(actual, user, all_structures, signed_decrees, all_operations, all_positions, all_position_operations, all__positiontype);
         }
 
         public void GenerateTreeByActual(Tuple<bool, Structure> tuple, in orgContext orgContext, in USERS.User user)
@@ -248,7 +327,14 @@ namespace PersonnelManagement.Models.NewStructure
             this.Sorted();
         }
 
-        public void GenerateTreeByActual(Tuple<bool, Structure> tuple, in USERS.User user, in List<Structure> all_structures, in List<Decree> all_decrees, in List<Structuredecreeoperation> all_operations)
+        public void GenerateTreeByActual(Tuple<bool, Structure> tuple,
+            in USERS.User user,
+            in List<Structure> all_structures,
+            in List<Decree> all_decrees,
+            in List<Structuredecreeoperation> all_operations,
+            in List<Position> all_positions,
+            in List<Positiondecreeoperation> all_position_operations,
+            in Dictionary<int, Positiontype> all_positiontype)
         {
             if (!tuple.Item1) { return; }
             Dictionary<int, Structure> all = tuple.Item2.getAll(all_structures);
@@ -259,15 +345,71 @@ namespace PersonnelManagement.Models.NewStructure
                 if (!flag.Item1) { continue; }
                 if (this.children_structures.Where(r => r.Id == flag.Item2.Id).Count() != 0) { continue; }
                 StructureTree time = new StructureTree(flag.Item2);
-                time.GenerateTreeByActual(flag, user, all_structures, all_decrees, all_operations);
+                time.GenerateTreeByActual(flag, user, all_structures, all_decrees, all_operations, all_positions, all_position_operations, all_positiontype);
                 this.children_structures.Add(time);
             }
+            this.GenerateActualPositions(user, all, all_positions, all_position_operations, all_decrees, all_positiontype);
+            this.Sorted();
+        }
+
+        public void GenerateTreeByActual(Tuple<bool, Structure> tuple,
+            in USERS.User user,
+            in List<Structure> all_structures,
+            in Dictionary<int, Decree> signed_decrees,
+            in List<Structuredecreeoperation> all_operations,
+            in List<Position> all_positions,
+            in List<Positiondecreeoperation> all_position_operations,
+            in Dictionary<int, Positiontype> all_positiontype)
+        {
+            if (!tuple.Item1) { return; }
+            Dictionary<int, Structure> all = tuple.Item2.getAll(all_structures);
+            List<Structure> children = all_structures.Where(r => all.ContainsKey(r.Parentstructure)).ToList();
+            foreach (Structure child in children)
+            {
+                Tuple<bool, Structure> flag = child.getActual(user, all_structures, signed_decrees, all_operations);
+                if (!flag.Item1) { continue; }
+                if (this.children_structures.Where(r => r.Id == flag.Item2.Id).Count() != 0) { continue; }
+                StructureTree time = new StructureTree(flag.Item2);
+                time.GenerateTreeByActual(flag, user, all_structures, signed_decrees, all_operations, all_positions, all_position_operations, all_positiontype);
+                this.children_structures.Add(time);
+            }
+            this.GenerateActualPositions(user, all, all_positions, all_position_operations, signed_decrees, all_positiontype);
             this.Sorted();
         }
 
         private void Sorted()
         {
             children_structures.Sort((a, b) => a.Priority.CompareTo(b.Priority));
+            actual_positions.Sort((a, b) => b.positiontype_data.Priority.CompareTo(a.positiontype_data.Priority));
+        }
+        private void GenerateActualPositions(in USERS.User user,
+            in Dictionary<int, Structure> all_structures,
+            in List<Position> all_positions,
+            in List<Positiondecreeoperation> all_operations,
+            in List<Decree> all_decree,
+            in Dictionary<int, Positiontype> positiontype)
+        {
+            Dictionary<int, Structure> original = all_structures;
+            List<Position> all_positions_by_structure = all_positions.Where(r => original.ContainsKey(r.Structure)).ToList();
+            foreach (Position iter in all_positions_by_structure)
+            {
+                if (iter.isActual(user, all_operations, all_decree, positiontype)) { this.actual_positions.Add(iter); }
+            }
+        }
+
+        private void GenerateActualPositions(in USERS.User user,
+            in Dictionary<int, Structure> all_structures,
+            in List<Position> all_positions,
+            in List<Positiondecreeoperation> all_operations,
+            in Dictionary<int, Decree> signed_decree,
+            in Dictionary<int, Positiontype> positiontype)
+        {
+            Dictionary<int, Structure> original = all_structures;
+            List<Position> all_positions_by_structure = all_positions.Where(r => original.ContainsKey(r.Structure)).ToList();
+            foreach(Position iter in all_positions_by_structure)
+            {
+                if(iter.isActual(user, all_operations, signed_decree, positiontype)) { this.actual_positions.Add(iter); }
+            }
         }
     }
 }

@@ -69,6 +69,10 @@ export default class HomeComponent extends Vue {
         return this.$store.state.modepanelVisible;
     }
 
+    get currentStructure() {
+        return this.$store.state.currentStructure;
+    }
+
     close() {
         this.$store.commit("setdecreeoperationtemplatecreatorVisible", false);
         //this.$store.commit("setmailmodeprevios", false);

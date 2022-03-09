@@ -118,6 +118,7 @@ namespace PersonnelManagement
         public static TV GetValue<TK, TV>(this IDictionary<TK, TV> dict, TK key, TV defaultValue = default(TV))
         {
             TV value;
+            if (!dict.ContainsKey(key)) { return defaultValue; }
             return dict.TryGetValue(key, out value) ? value : defaultValue;
         }
 

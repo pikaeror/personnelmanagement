@@ -1,4 +1,6 @@
-﻿export default class StructureTree {
+﻿import Position from '../../classes/position';
+
+export default class StructureTree {
     constructor() {
         this.id = 0;
         this.name = "";

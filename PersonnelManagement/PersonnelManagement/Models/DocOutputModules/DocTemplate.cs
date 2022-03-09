@@ -334,6 +334,16 @@ namespace PersonnelManagement.Models
 
             TableProperties header_property = new TableProperties(new TableBorders(new InsideVerticalBorder() { Val = new EnumValue<BorderValues>(BorderValues.Single), Size = 6 }));
             table.AppendChild<TableProperties>(header_property);
+            TableGrid tableGrid = new TableGrid(new GridColumn() { Width = "426" },
+                                                new GridColumn() { Width = "1500" },
+                                                new GridColumn() { Width = "142" },
+                                                new GridColumn() { Width = "283" },
+                                                new GridColumn() { Width = "1845" },
+                                                new GridColumn() { Width = "1276" },
+                                                new GridColumn() { Width = "783" },
+                                                new GridColumn() { Width = "1343" },
+                                                new GridColumn() { Width = "2269" });
+            table.AppendChild<TableGrid>(tableGrid);
 
             double full_positions = 0;
             writeResualt(table, repository, results.m_full_staff, out full_positions, flag_first_structure: true);

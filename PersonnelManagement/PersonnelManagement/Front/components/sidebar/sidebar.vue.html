@@ -1,7 +1,11 @@
 ﻿<template>
     <div>
         <div style="max-width: 98%">
-            <el-tree :data="newTreeStructures" :props="defaultPropsTree" node-key="id"></el-tree>
+            <el-tree :data="newTreeStructures" :props="defaultPropsTree" node-key="id" @node-click="testfunc">
+                <!--<span class="custom-tree-node" slot-scope="{ node, data }">-->
+                    <!--<span> {{ node.label }}</span>-->
+                <!--</span>-->
+            </el-tree>
         </div>
         <!--<transition-group name="slide-fade" tag="div">-->
         <!--<div class="sidebar-structure" v-bind:class="{ [structure.levelchild]: displayIt, 'sidebar-structure-user': isUserStructure(structure), 'sidebar-selected' : isSelected(structure.id), 'sidebar-structure-wc': structure.hasChildren }" v-for="structure in structures" v-bind:key="structure" v-if="!isDeletedSigned(structure)">

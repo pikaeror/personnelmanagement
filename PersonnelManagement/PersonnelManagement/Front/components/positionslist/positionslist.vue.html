@@ -1,10 +1,159 @@
 ﻿<template>
     <!--<div v-if="visible > 0" class="widget" style="overflow-y: scroll; max-height: 900px;">-->
-    <div v-if="visible > 0" class="widget" style="overflow-y: scroll; max-height: 900px;">
+    <div v-if="visible.id > 0" class="widget" style="overflow-y: scroll; max-height: 900px;">
         <div class="widget-title">
-            {{grandparent}}
+            {{visible.name}}
         </div>
-        
+        <div class="widget-title-block">
+            <div class="widget-content widget-content-inline">
+                <template v-for="current_position in visible.actual_positions">
+                    <div class="position">
+                        <div class="department-div">
+                            <div class="position-grid">
+                                <div class="position-grid-main">
+                                    <div class="position-leftblock">
+                                        <div class="position-sof">
+                                            <div>{{softs.get(current_position.sourceoffinancing).valueOf()}}</div>
+                                        </div>
+                                        <div class="position-mrd">
+                                            <div class="position-mrd-title">Метки рода деятельности</div>
+                                            <!--<div v-for="str in posdep.mrds">
+                            {{mrdsReadystr}}
+                        </div>-->
+                                        </div>
+                                    </div>
+                                    <div class="position-name">
+                                        <div class="position-nameblock">
+                                            <div class="position-nameblock-name">
+                                                <div :title="current_position.positiontype_data.name">
+                                                    <div v-if="current_position.positiontype_data.nameshort.length == 0">
+                                                        {{current_position.positiontype_data.name}}
+                                                    </div>
+                                                    <div v-else>
+                                                        {{current_position.positiontype_data.nameshort}}
+                                                    </div>
+
+                                                    <span v-if="current_position.part == 1">
+                                                        ({{current_position.partval}} ставки)
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="position-nameblock-rank">
+                                                <!--{{rankToString(posdep.rankcap)}}-->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="position-rightblock">
+                                        <div :title="current_position.last_decree.dateactive">
+                                            <i size="small" class="el-icon-info" ></i>
+                                            <!--{{formating.dateFormater(current_position.last_decree.dateactive)}}-->
+                                        </div>
+                                        <!--<div>-->
+                                            <!--Когда дата активна-->
+                                            <!--<div v-if="isSignedAndWillBeCreated(posdep)">
+                                                <div class="position-dateactive-descr">Вводится с </div>
+                                                <div class="position-dateactive position-dateactive-descr-green">{{beautifyDate(getDecreeStartDate(posdep))}}</div>
+                                            </div>
+                                            <div v-else>
+                                                <div class="position-dateactive-descr">Введена с </div>
+                                                <div class="position-dateactive ">{{beautifyDate(getDecreeStartDate(posdep))}}</div>
+                                            </div>
+                                        </div>
+                                        <div v-if="hasElementInactiveDate(posdep)">
+                                            <div class="position-dateinactive-descr ">Сокращается с </div>
+                                            <div class="position-dateinactive position-dateinactive-descr-red">{{beautifyDate(getElementInactiveDate(posdep))}}</div>
+                                        </div>
+                                        <div v-if="posdep.decertificate">
+                                            <div class="position-dateinactive-descr">Подлежит разаттестации с </div>
+                                            <div class="position-dateinactive">{{beautifyDate(getElementDecertificateDate(posdep))}}</div>
+                                        </div>
+                                        <div v-if="posdep.replacedbycivildatelimit">
+                                            <div class="position-dateinactive-descr">Может замещаться гражданским персоналом по </div>
+                                            <div class="position-dateinactive">{{beautifyDate(getElementReplacedbycivilDate(posdep))}}</div>
+                                        </div>-->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--<div class="position-grid">
+                <div class="position-grid-main">
+                    <div class="position-leftblock">
+                        <div class="position-sof">
+                            <div>{{position.sourceoffinancing}}</div>
+                        </div>
+                        <div class="position-mrd">
+                            <div class="position-mrd-title">Метки рода деятельности</div>-->
+                    <!--<div v-for="str in posdep.mrds">
+                {{str}}
+            </div>-->
+                    <!--</div>
+            </div>
+            <div class="position-name">
+                <div class="position-nameblock">
+
+                    <div class="position-nameblock-name">
+                        <div :title="positiontypeToString(posdep.positiontype)">
+                            {{positiontypeToStringShort(posdep.positiontype)}}
+                            <span v-if="position.part == 1">
+                                ({{position.partval}} ставки)
+                            </span>
+                        </div>-->
+                    <!--<div class="position-nameblock-name-alt" v-if="posdep.replacedbycivilpositiontypeobject != null && positiontypeGetId(posdep.positiontype) != posdep.replacedbycivilpositiontype">
+                ({{positiontypeToString(posdep.replacedbycivilpositiontypeobject)}})
+            </div>-->
+                    <!--</div>-->
+                    <!--<div class="position-nameblock-rank">
+                {{rankToString(posdep.rankcap)}}
+            </div>
+            <div class="position-nameblock-category">
+                {{positioncategoryToString(posdep.positioncategory)}}
+                {{displayClassCivilIfAvaiable(posdep)}}
+            </div>
+
+            <div class="position-nameblock-replaced" v-if="posdep.replacedbycivilpositiontypeobject != null">
+                Может быть замещен категорией {{positioncategoryReplacedToString(posdep.replacedbycivilpositioncategoryobjects)}} {{displayClassIfAvaiable(posdep)}}
+            </div>
+            <div>
+                <el-checkbox v-if="displayAltranksInterface(posdep)" v-model="posdep.displayaltrank" @change="markAltrank(posdep.displayaltrank, posdep.id)"><span style="font-size: 10px;">{{posdep.altranksgroup}}</span></el-checkbox>
+                <div v-if="posdep.displayaltrank" v-for="altrank in posdep.altranks" style="font-size: 10px;">
+                    {{altrank}}
+                </div>
+            </div>
+            <div class="position-nameblock-notice">
+                {{posdep.notice}}
+            </div>
+            <span class="position-isnotsignedandwillbecreated" v-if="isDecreeAddSigned(posdep)"> (Приказ на введение не подписан)</span>
+            <span class="position-isnotsignedandwillbecreated" v-if="isDecreeDeleteSigned(posdep)"> (Приказ на упразднение не подписан)</span>-->
+                    <!--</div>
+            </div>-->
+                    <!--<div class="position-rightblock">
+                <div>-->
+                    <!--Когда дата активна-->
+                    <!--<div v-if="isSignedAndWillBeCreated(posdep)">
+                        <div class="position-dateactive-descr">Вводится с </div><div class="position-dateactive position-dateactive-descr-green">{{beautifyDate(getDecreeStartDate(posdep))}}</div>
+                    </div>
+                    <div v-else>
+                        <div class="position-dateactive-descr">Введена с </div><div class="position-dateactive ">{{beautifyDate(getDecreeStartDate(posdep))}}</div>
+                    </div>
+
+                </div>
+                <div v-if="hasElementInactiveDate(posdep)">
+                    <div class="position-dateinactive-descr ">Сокращается с </div><div class="position-dateinactive position-dateinactive-descr-red">{{beautifyDate(getElementInactiveDate(posdep))}}</div>
+                </div>
+                <div v-if="posdep.decertificate">
+                    <div class="position-dateinactive-descr">Подлежит разаттестации с </div><div class="position-dateinactive">{{beautifyDate(getElementDecertificateDate(posdep))}}</div>
+                </div>
+                <div v-if="posdep.replacedbycivildatelimit">
+                    <div class="position-dateinactive-descr">Может замещаться гражданским персоналом по </div><div class="position-dateinactive">{{beautifyDate(getElementReplacedbycivilDate(posdep))}}</div>
+                </div>
+            </div>-->
+                    <!--</div>
+            </div>-->
+                </template>
+            </div>
+        </div>
         <div v-for="posdepgroup in posdepgroups">
             <i @click="close" class="el-icon-close widget-close"></i>
             <div class="widget-title-block">
@@ -107,89 +256,8 @@
 
                 <template v-for="posdep in posdepgroup.posdeps">
                     <div v-if="!personsMode()">
-                        <!--COMPACT VIEW-->
-                        <div v-bind:class="{'department-div': !posdep.isposition }" v-if="compactView()">
-                            <!--COMPACT POSITION-->
-                            <div v-bind:class="{'position-expiresoon' : posdep.expiresoon, 'position-willbeadded' : isDecreeAddSigned(posdep), 'position-willbedeleted' : isDecreeDeleteSigned(posdep), 'position-head': posdep.headingthisstructure}" class="position">
-                                <div class="position-photo" v-bind:class="{'position-nophoto': !hasPhoto(posdep)}">
-                                    <!--v-bind:style="{'background-image': photoCompact(posdep)}"-->
-                                </div>
-                                <div class="position-grid-compact">
-                                    <!--top part of compact position-->
-                                    <div class="position-grid-top-compact">
-                                        <div class="position-sof-compact">
-                                            <div v-for="str in posdep.sofmapstring">{{str}}</div>
-                                        </div>
-                                        <div class="position-name-compact">
-                                            <div class="position-nameblock-compact">
-                                                <div class="position-nameblock-name-compact">
-                                                    <!--{{positiontypeToString(posdep.positiontype)}}-->
-                                                    <div :title="positiontypeToString(posdep.positiontype)">
-                                                        {{positiontypeToStringShort(posdep.positiontype)}}
-                                                    </div>
-                                                </div>
-                                                <div class="position-nameblock-rank-compact">
-                                                    {{rankToString(posdep.rankcap)}}
-                                                </div>
-                                                <div class="position-nameblock-category-compact">
-                                                    {{positioncategoryToString(posdep.positioncategory)}}
-                                                </div>
-                                                <div class="position-nameblock-compact-bottom">
-
-                                                </div>
-                                                <div class="position-nameblock-replaced-compact" v-if="posdep.replacedbycivilquantity > 0">
-                                                    Может замещаться гражданским персоналом: {{posdep.replacedbycivilquantity}}
-                                                    <span class="position-nameblock-name-alt-compact" v-if="posdep.replacedbycivilpositiontypeobject != null && positiontypeGetId(posdep.positiontype) != posdep.replacedbycivilpositiontype">
-                                                        ({{positiontypeToString(posdep.replacedbycivilpositiontypeobject)}})
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="position-quantity-compact">
-                                            <span class="position-nameblock-compact-quantity">{{posdep.quantity}}</span>
-                                            <div v-for="str in posdep.altranksquantitystring">
-                                                {{str}}
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!--bottom part of compact position-->
-                                    <div class="position-grid-bottom-compact">
-                                        <div class="position-dateactiveblock-compact">
-                                            <div v-for="str in posdep.dateactive" class="position-dateactive-descr-green">{{str}}</div>
-
-                                        </div>
-                                        <div class="position-dateinactiveblock-compact">
-                                            <div v-for="str in posdep.dateinactive" class="position-dateinactive-descr-red">{{str}}</div>
-                                        </div>
-
-                                    </div>
-                                    <span class="position-isnotsignedandwillbecreated" v-if="isDeletedUnsigned(posdep) || isNotSignedAndWillBeCreated(posdep) || isNotSignedAndCreated(posdep) || isWillBeDeletedUnsigned(posdep)"> (Приказ не подписан)</span>
-                                </div>
-                                <el-dropdown v-if="!posdep.headingthisstructure" class="position-settings" placement="top" @command="handleCommand">
-                                    <div>Действия</div>
-                                    <el-dropdown-menu slot="dropdown">
-                                        <!--<el-dropdown-item v-if="hasAccessToEdit" :command="addDepartmentID(department.id)">Добавить подотдел</el-dropdown-item>-->
-                                        <el-dropdown-item v-if="hasAccessToEdit && isUnsignedCreate(posdep)" :command="renamedecreePositionID(posdep.id)">Редактировать должность</el-dropdown-item>
-                                        <el-dropdown-item v-if="hasAccessToEdit && !isUnsigned(posdep)" :command="renamePositionID(posdep.id)">Изменить должность</el-dropdown-item>
-                                        <el-dropdown-item v-if="hasAccessToEdit && isUnsigned(posdep)" :command="removedecreePositionID(posdep.id)">Убрать из проекта приказа</el-dropdown-item>
-                                        <el-dropdown-item v-if="hasAccessToEdit && !isUnsigned(posdep)" :command="removePositionID(posdep.id)">Сократить должность</el-dropdown-item>
-
-                                    </el-dropdown-menu>
-                                </el-dropdown>
-                                <el-popover placement="right"
-                                            title="Описание должности"
-                                            width="300"
-                                            trigger="hover">
-                                    <el-button slot="reference" class="position-info"><div>Инфо</div></el-button>
-                                    <div class="positionslist-inforow">Предельное звание — {{rankToString(posdep.rankcap)}}</div>
-                                    <div class="positionslist-inforow">Категория — {{positioncategoryToString(posdep.positioncategory)}}</div>
-                                    <div class="positionslist-inforow">Источник финансирования — {{sofToString(posdep.sof)}}</div>
-                                </el-popover>
-
-                            </div>
-                        </div>
                         <!--NOT COMPACT VIEW-->
-                        <div v-bind:class="{'department-div': !posdep.isposition }" v-else>
+                        <div v-bind:class="{'department-div': !posdep.isposition }">
                             <!--NOT COMPACT POSITION-->
                             <div v-bind:class="{'position-expiresoon' : posdep.expiresoon, 'position-willbeadded' : isDecreeAddSigned(posdep), 'position-willbedeleted' : isDecreeDeleteSigned(posdep), 'position-head' : posdep.headingthisstructure}" class="position">
                                 <!-- Оставить для прохождения службы    <div class="position-photo" v-bind:class="{'position-nophoto': !hasPhoto(posdep)}" v-bind:style="{'background-image': photoSrc(posdep)}">
@@ -346,92 +414,13 @@
                             </div>
                         </div>
                     </div>
-                    <div v-else>
-
-                        <!--Структура в лицах -->
-                        <div v-bind:class="{'department-div': !posdep.isposition }">
-                            <div @click="selectPosdep(posdep)" v-bind:class="{'position-person-expiresoon' : posdep.expiresoon, 'position-person-willbeadded' : isDecreeAddSigned(posdep), 'position-person-willbedeleted' : isDecreeDeleteSigned(posdep), 'position-person-head' : posdep.headingthisstructure}" class="position-person">
-                                <!-- Оставить для прохождения службы    <div class="position-photo" v-bind:class="{'position-nophoto': !hasPhoto(posdep)}" v-bind:style="{'background-image': photoSrc(posdep)}">
-                    </div>-->
-                                <div class="position-person-grid" >
-                                    <div class="position-person-grid-main">
-                                        <div class="position-person-leftblock">
-                                            <div class="position-person-sof">
-                                                <div v-for="str in posdep.sofmapstring">{{str}}</div>
-                                            </div>
-                                        </div>
-                                        <div class="position-person-nameblock">
-                                            <div class="position-person-nameblock-name" :title="positiontypeToString(posdep.positiontype)">
-                                                {{positiontypeToStringShort(posdep.positiontype)}}
-                                                <span v-if="posdep.part > 0">
-                                                    ({{posdep.partval}} ставки)
-                                                </span>
-                                                <span v-if="posdep.replacedbycivilpositiontypeobject != null && positiontypeGetId(posdep.positiontype) != posdep.replacedbycivilpositiontype">
-                                                    ({{positiontypeToString(posdep.replacedbycivilpositiontypeobject)}})
-                                                </span>
-                                                <span>
-                                                    ({{rankToString(posdep.rankcap)}})
-                                                </span>
-                                            </div>
-                                            <div class="position-person-nameblock-category">
-                                                {{positioncategoryToString(posdep.positioncategory)}}
-                                                {{displayClassCivilIfAvaiable(posdep)}}
-                                            </div>
-                                            <div class="position-person-nameblock-replaced" v-if="posdep.replacedbycivilpositiontypeobject != null">
-                                                Может быть замещен категорией {{positioncategoryReplacedToString(posdep.replacedbycivilpositioncategoryobjects)}} {{displayClassIfAvaiable(posdep)}}
-                                            </div>
-                                        </div>
-                                        <div class="position-person-rightblock">
-                                            <!--<el-button size="mini" class="position-person-button" @click="appoint(posdep)">Назначить</el-button>-->
-                                            <template v-if="getPerson(posdep) != null">
-                                                <!--<el-button size="mini" class="position-person-button" @click="takeoff(getPerson(posdep))">Снять</el-button>-->
-                                            </template>
-
-                                        </div>
-
-                                    </div>
-                                    <div class="position-person-grid-person">
-                                        <div v-if="getPerson(posdep) != null" >
-                                            <div class="position-person-grid-person-top">
-                                                <div>
-                                                    {{getPerson(posdep).surname}} {{getPerson(posdep).name}} {{getPerson(posdep).fathername}} ({{getPerson(posdep).age}} лет {{beautifyDate(getPerson(posdep).birthdateString)}})
-                                                </div>
-                                                <div>
-                                                    <span v-if="getPerson(posdep).actualRank != null">{{getPerson(posdep).actualRank.name.toLowerCase()}}</span>
-                                                </div>
-                                            </div>
-                                            <div class="position-person-grid-person-bottom">
-                                                <div>
-                                                    
-                                                </div>
-                                                <div>
-                                                    <div v-if="hasPhotopreview(getPerson(posdep).id)">
-                                                        <img :src="getPhotopreview(getPerson(posdep).id).photo64" class="position-person-grid-person-bottom-image"  />
-                                                    </div>
-                                                </div>
-                                                <div>
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="position-person-noperson" v-else>
-                                            Вакант
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                            </div>
-                        </div>
-                    </div>
-
                 </template>
 
             </div>
 
         </div>
         <div>
-            <div v-if="(structureInfos != null & structureInfos.length > 0) || previous != null" class="widget-title">
+            <div v-if="visible.children_structures.length > 0" class="widget-title">
                 Подразделения
             </div>
             <div class="widget-content widget-content-inline">
@@ -440,11 +429,11 @@
                         ←
                     </div>
                 </div>
-                <div v-if="structureInfos != null & structureInfos.length > 0" v-for="info in structureInfos" class="position-structure" @click="openStructureInfo($event, info)">
+                <div v-if="visible.children_structures.length > 0" v-for="info in visible.children_structures" class="position-structure" @click="openStructureInfo($event, info)">
                     <div class="position-structure-title">
                         {{info.name}}
                     </div>
-                    <div title="В скобках указана численность должностей, приказы которых еще не подписаны">
+                   <!-- <div title="В скобках указана численность должностей, приказы которых еще не подписаны">
                         Общая численность {{+info.positionCountSigned.toFixed(2)}}
                         <span v-if="info.positionCountUnsigned.toFixed(2) != 0">({{+info.positionCountUnsigned.toFixed(2)}})</span>
                     </div>
@@ -457,7 +446,7 @@
                     <br />
                     <div v-if="info != null && (info.positionAddFuture > 0 || info.positionRemoveFuture > 0) ">
                         Вводится {{+info.positionAddFuture.toFixed(2)}}, сокращается {{+info.positionRemoveFuture.toFixed(2)}}
-                    </div>
+                    </div>-->
                 </div>
             </div>
             

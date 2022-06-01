@@ -113,6 +113,10 @@
     <None Remove="Front\classes\user.ts" />
     <None Remove="Front\components\adminpanel\adminpanel.ts" />
     <None Remove="Front\components\app\app.ts" />
+    <None Remove="Front\components\candidates\candidates.ts" />
+    <None Remove="Front\components\decreeoperationelement\decreeoperationelement.vue.html" />
+    <None Remove="Front\components\decreeoperationelement\derceeoperationelement.ts" />
+    <None Remove="Front\components\decreeoperationtemplatecreator\decreeoperationtemplatecreator.ts" />
     <None Remove="Front\components\home\home.ts" />
     <None Remove="Front\components\login\login.ts" />
     <None Remove="Front\components\modepanel\modepanel.ts" />
@@ -131,6 +135,7 @@
     <PackageReference Include="HangFire.Core" Version="1.6.17" />
     <PackageReference Include="Hangfire.MemoryStorage.Core" Version="1.4.0" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.5" />
+    <PackageReference Include="Microsoft.Office.Interop.Word" Version="15.0.4797.1003" />
     <PackageReference Include="Microsoft.TypeScript.MSBuild" Version="4.0.3">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -138,9 +143,13 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.4" />
     <PackageReference Include="Moment.js" Version="2.24.0" />
     <PackageReference Include="MySql.Data.EntityFrameworkCore.Design" Version="6.10.5" />
+    <PackageReference Include="NetOffice.Word" Version="1.7.4.11" />
     <PackageReference Include="NodaTime" Version="2.4.8" />
     <PackageReference Include="Npm" Version="3.5.2" />
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySQL" Version="2.0.1" />
+    <PackageReference Include="System.Drawing.Common" Version="4.5.1" />
+    <PackageReference Include="System.Runtime" Version="4.3.1" />
+    <PackageReference Include="System.Runtime.InteropServices" Version="4.3.0" />
     <PackageReference Include="TimePeriodLibrary.NET" Version="2.1.1" />
   </ItemGroup>
 
@@ -228,6 +237,10 @@
     <TypeScriptCompile Include="Front\classes\user.ts" />
     <TypeScriptCompile Include="Front\components\adminpanel\adminpanel.ts" />
     <TypeScriptCompile Include="Front\components\app\app.ts" />
+    <TypeScriptCompile Include="Front\components\candidates\candidates.ts" />
+    <TypeScriptCompile Include="Front\components\decreeoperationelement\decreeoperationelement.vue.html" />
+    <TypeScriptCompile Include="Front\components\decreeoperationelement\derceeoperationelement.ts" />
+    <TypeScriptCompile Include="Front\components\decreeoperationtemplatecreator\decreeoperationtemplatecreator.ts" />
     <TypeScriptCompile Include="Front\components\home\home.ts" />
     <TypeScriptCompile Include="Front\components\login\login.ts" />
     <TypeScriptCompile Include="Front\components\modepanel\modepanel.ts" />

@@ -17,8 +17,40 @@ import Pmrequest from '../../classes/pmrequest';
 import Pmresult from '../../classes/pmresult';
 import { Input, Button, Checkbox, Select, Option, Dialog } from 'element-ui';
 import Structureregion from '../../classes/structureregion';
+import educations_parameters from '../../classes/Requests_classes/educations_parameters';
 import Structure from '../../classes/Structure';
 import formatting from '../../classes/formating_functions/el_table_formatter';
+
+import Education_Request from '../../classes/Requests_classes/education_request';
+import Education_respons from '../../classes/Requests_classes/education_respons';
+import Rank_Request from '../../classes/Requests_classes/rank_request';
+import Rank_respons from '../../classes/Requests_classes/Rank_respons';
+import Contract_Request from '../../classes/Requests_classes/contract_request';
+import Contract_respons from '../../classes/Requests_classes/contract_respons';
+import Vacation_Request from '../../classes/Requests_classes/vacation_request';
+import Vacation_Response from '../../classes/Requests_classes/vacation_respons';
+import Award_Parameters from '../../classes/Requests_classes/award_parameters';
+import Award_Request from '../../classes/Requests_classes/award_request';
+import Award_respons from '../../classes/Requests_classes/award_respons';
+import Certificate_Request from '../../classes/Requests_classes/certificate_request';
+import Certificate_Respons from '../../classes/Requests_classes/certificate_respons';
+import Attestation_Request from '../../classes/Requests_classes/attestation_request';
+import Attestation_respons from '../../classes/Requests_classes/attestation_respons';
+import Language_Parameters from '../../classes/Requests_classes/language_parameters';
+import Language_Request from '../../classes/Requests_classes/language_request';
+import Language_respons from '../../classes/Requests_classes/language_respons';
+
+import Election_Parameters from '../../classes/Requests_classes/Election_parameters';
+import Election_Request from '../../classes/Requests_classes/election_request';
+import Election_respons from '../../classes/Requests_classes/election_respons';
+import Trip_Parameters from '../../classes/Requests_classes/trips_parameters';
+import Trip_Request from '../../classes/Requests_classes/trip_request';
+import Trip_respons from '../../classes/Requests_classes/trip_respons';
+import Punishment_Parameters from '../../classes/Requests_classes/punishment_parameters';
+import Punishment_Request from '../../classes/Requests_classes/punishment_request';
+import Punishment_respons from '../../classes/Requests_classes/punishment_respons';
+
+import Person from '../../classes/person';
 Vue.component(Button.name, Button);
 Vue.component(Input.name, Input);
 Vue.component(Checkbox.name, Checkbox);
@@ -82,6 +114,7 @@ export default class PmrequestComponent extends Vue {
     mrd: any;
     notice: string;
     structuretype: any[];
+    removed: boolean;
     replacedbycivil: boolean;
     replacedbycivilnot: boolean;
     signed: boolean;
@@ -128,6 +161,46 @@ export default class PmrequestComponent extends Vue {
     structuresublevel: number; // Уровень вложенности для пункта выше
     structureselfcount: boolean; // Учитывать исключительно собственную численность подразделений, не включая численночть подчиненных
 
+    education_datas: educations_parameters;
+    education_request: Education_Request;
+    education_resualt: Education_respons[];
+
+    rank_request: Rank_Request;
+    rank_resualt: Rank_respons[];
+
+    contract_request: Contract_Request;
+    contruct_resualt: Contract_respons[];
+
+    vacation_request: Vacation_Request;
+    vacation_resualt: Vacation_Response[];
+
+    award_datas: Award_Parameters;
+    award_request: Award_Request;
+    award_response: Award_respons[];
+
+    certificate_request: Certificate_Request;
+    certificate_response: Certificate_Respons[];
+
+    attestation_request: Attestation_Request;
+    attestation_response: Attestation_respons[];
+
+    language_datas: Language_Parameters;
+    language_request: Language_Request;
+    language_response: Language_respons[];
+
+    election_datas: Election_Parameters;
+    election_request: Election_Request;
+    election_response: Election_respons[];
+
+    trips_datas: Trip_Parameters;
+    trip_request: Trip_Request;
+    trip_response: Trip_respons[];
+
+    punishment_datas: Punishment_Parameters;
+    punishment_request: Punishment_Request;
+    punishment_response: Punishment_respons[];
+
+    formatting = formatting;
 
     @Prop({ default: false })
     visible: boolean;
@@ -144,6 +217,14 @@ export default class PmrequestComponent extends Vue {
             {
                 value: '2',
                 label: 'Запрос по подразделениям'
+            },
+            {
+                value: '3',
+                label: 'Запрос Таблицы',
+            },
+            {
+                value: '4',
+                label: 'Запрос ЭЛД',
             }],
             type: null,
             rank: [],
@@ -157,6 +238,7 @@ export default class PmrequestComponent extends Vue {
             positioncategoryDisabled: false,
             positioncategoriesFiltred: [],
             
+            removed:false,
             positioncategoriesCivil: [],
             mrd: [],
             quantity: 1,
@@ -208,10 +290,49 @@ export default class PmrequestComponent extends Vue {
             structuresub: false, // Включать подчиненные подразделения тех, кто прошел фильтрацию
             structuresublevel: 0, // Уровень вложенности для пункта выше
             structureselfcount: false, // Учитывать исключительно собственную численность
+
+            education_datas: new educations_parameters(),
+            education_request: new Education_Request(),
+            education_resualt: [],
+
+            rank_request: new Rank_Request(),
+            rank_resualt: [],
+
+            contract_request: new Contract_Request(),
+            contruct_resualt: [],
+
+            vacation_request: new Vacation_Request(),
+            vacation_resualt: [],
+
+            award_datas: new Award_Parameters(),
+            award_request: new Award_Request(),
+            award_response: [],
+
+            certificate_request: new Certificate_Request(),
+            certificate_response: [],
+
+            attestation_request: new Attestation_Request(),
+            attestation_response: [],
+
+            language_datas: new Language_Parameters(),
+            language_request: new Language_Request(),
+            language_response: [],
+
+            election_datas: new Election_Parameters(),
+            election_request: new Election_Request(),
+            election_response: [],
+
+            trips_datas: new Trip_Parameters(),
+            trip_request: new Trip_Request(),
+            trip_response: [],
+
+            punishment_datas: new Punishment_Parameters(),
+            punishment_request: new Punishment_Request(),
+            punishment_response: [],
         }
     }
 
-    formatting = formatting;
+    
 
     mounted() {
         // setInterval(this.load_educations_parameters, 10000);
@@ -266,6 +387,18 @@ export default class PmrequestComponent extends Vue {
 
     tablerequest() {
         let p = 2;
+    }
+
+    stoped() {
+        this.loading = false;
+        fetch('/api/Pmrequest/Stoped', {
+            method: 'post',
+            credentials: 'include',
+            headers: new Headers({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            })
+        })
     }
 
     request() {
@@ -648,6 +781,14 @@ export default class PmrequestComponent extends Vue {
             })
     }
 
+    onTypeChange() {
+        this.structureTrees = [];
+        if (this.type == 4) {
+            console.log("chose variand ELD");
+            this.loder_old_eld_datas();
+        }
+    }
+
     arrayToString(array: any[]): string {
         if (array == null || array.length == 0) {
             return "";
@@ -676,7 +817,6 @@ export default class PmrequestComponent extends Vue {
         this.structureTrees = this.structureTrees.filter(c => c.id != id);
     }
 
-
     prepareTrees() {
         let getString: string = "";
         this.structurelist.forEach(c => {
@@ -688,7 +828,6 @@ export default class PmrequestComponent extends Vue {
                 .then(response => response.json() as Promise<StructureTree[]>)
                 .then(data => {
                     this.structureTrees = data;
-                    
                 });
         }
     }
@@ -719,5 +858,471 @@ export default class PmrequestComponent extends Vue {
             this.structureregion = [];
         else
             list = [];
+    }
+
+    education_request_button() {
+        this.education_request.current_structure = this.structureTrees;
+        console.log("education request");
+        console.log(JSON.stringify(<Education_Request>(this.education_request)));
+        fetch('api/request/PersonEducationRequest', {
+            method: 'post',
+            body: JSON.stringify(<Education_Request>(this.education_request)),
+            credentials: 'include',
+            headers: new Headers({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            })
+        })
+            .then(response => response.json() as Promise<Education_respons[]>)
+            .then(data => {
+                this.education_resualt = data;
+            });
+    }
+
+    rank_request_button() {
+        this.rank_request.current_structure = this.structureTrees;
+        console.log("rank request");
+        fetch('api/request/PersonRankRequest', {
+            method: 'post',
+            body: JSON.stringify(<Rank_Request>(this.rank_request)),
+            credentials: 'include',
+            headers: new Headers({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            })
+        })
+            .then(response => response.json() as Promise<Rank_respons[]>)
+            .then(data => {
+                this.rank_resualt = data;
+            });
+    }
+
+    contract_request_button() {
+        this.contract_request.current_structure = this.structureTrees;
+        console.log("contract request");
+        fetch('api/request/PersonContructRequest', {
+            method: 'post',
+            body: JSON.stringify(<Contract_Request>(this.contract_request)),
+            credentials: 'include',
+            headers: new Headers({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            })
+        })
+            .then(response => response.json() as Promise<Contract_respons[]>)
+            .then(data => {
+                this.contruct_resualt = data;
+            });
+    }
+
+    vacation_request_button() {
+        this.vacation_request.current_structure = this.structureTrees;
+        console.log("vacation request");
+        fetch('api/request/PersonVacationRequest', {
+            method: 'post',
+            body: JSON.stringify(<Vacation_Request>(this.vacation_request)),
+            credentials: 'include',
+            headers: new Headers({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            })
+        })
+            .then(response => response.json() as Promise<Vacation_Response[]>)
+            .then(data => {
+                this.vacation_resualt = data;
+            });
+    }
+
+    award_request_button() {
+        this.award_request.current_structure = this.structureTrees;
+        console.log("awards request");
+        fetch('api/request/PersonAwardRequest', {
+            method: 'post',
+            body: JSON.stringify(<Award_Request>(this.award_request)),
+            credentials: 'include',
+            headers: new Headers({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            })
+        })
+            .then(response => response.json() as Promise<Award_respons[]>)
+            .then(data => {
+                this.award_response = data;
+            });
+    }
+
+    certificate_request_button() {
+        this.certificate_request.current_structure = this.structureTrees;
+        console.log("certificate request");
+        fetch('api/request/PersonCertificateRequest', {
+            method: 'post',
+            body: JSON.stringify(<Certificate_Request>(this.certificate_request)),
+            credentials: 'include',
+            headers: new Headers({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            })
+        })
+            .then(response => response.json() as Promise<Certificate_Respons[]>)
+            .then(data => {
+                this.certificate_response = data;
+            });
+    }
+
+    attestation_request_button() {
+        this.attestation_request.current_structure = this.structureTrees;
+        console.log("attestation request");
+        fetch('api/request/PersonAttestationRequest', {
+            method: 'post',
+            body: JSON.stringify(<Attestation_Request>(this.attestation_request)),
+            credentials: 'include',
+            headers: new Headers({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            })
+        })
+            .then(response => response.json() as Promise<Attestation_respons[]>)
+            .then(data => {
+                this.attestation_response = data;
+            });
+    }
+
+    language_request_button() {
+        this.language_request.current_structure = this.structureTrees;
+        console.log("language request");
+        fetch('api/request/PersonLanguageRequest', {
+            method: 'post',
+            body: JSON.stringify(<Language_Request>(this.language_request)),
+            credentials: 'include',
+            headers: new Headers({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            })
+        })
+            .then(response => response.json() as Promise<Language_respons[]>)
+            .then(data => {
+                this.language_response = data;
+            });
+    }
+
+    election_request_button() {
+        this.election_request.current_structure = this.structureTrees;
+        console.log("election request");
+        fetch('api/request/PersonElectionRequest', {
+            method: 'post',
+            body: JSON.stringify(<Election_Request>(this.election_request)),
+            credentials: 'include',
+            headers: new Headers({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            })
+        })
+            .then(response => response.json() as Promise<Election_respons[]>)
+            .then(data => {
+                this.election_response = data;
+            });
+    }
+
+    trip_request_button() {
+        this.trip_request.current_structure = this.structureTrees;
+        console.log("election request");
+        fetch('api/request/PersonTripRequest', {
+            method: 'post',
+            body: JSON.stringify(<Trip_Request>(this.trip_request)),
+            credentials: 'include',
+            headers: new Headers({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            })
+        })
+            .then(response => response.json() as Promise<Trip_respons[]>)
+            .then(data => {
+                this.trip_response = data;
+            });
+    }
+
+    punishment_request_button() {
+        this.punishment_request.current_structure = this.structureTrees;
+        this.punishment_request.isremowed = this.removed;
+        console.log("election request");
+        fetch('api/request/PersonPunishmentRequest', {
+            method: 'post',
+            body: JSON.stringify(<Punishment_Request>(this.punishment_request)),
+            credentials: 'include',
+            headers: new Headers({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            })
+        })
+            .then(response => response.json() as Promise<Punishment_respons[]>)
+            .then(data => {
+                this.punishment_response = data;
+            });
+    }
+
+    loder_old_eld_datas() {
+        this.load_user_structure();
+        this.load_award_datas();
+        this.load_Language_datas();
+        this.load_Election_datas();
+        this.load_Trips_datas();
+        this.load_Punishment_datas();
+    }
+
+    load_user_structure() {
+        fetch('api/request/structureTree', { credentials: 'include' })
+            .then(response => response.json() as Promise<StructureTree>)
+            .then(data => {
+                if (data.id == null)
+                    return;
+                this.structureTrees.push(data);
+                this.load_educations_parameters(this.structureTrees);
+            });
+            
+    }
+
+    load_educations_parameters(structuretree :StructureTree[]) {
+        fetch('api/request/educationdata', {
+            method: 'post',
+            body: JSON.stringify(<StructureTree[]>(structuretree)),
+            credentials: 'include',
+            headers: new Headers({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            })
+        })
+            .then(response => response.json() as Promise<educations_parameters>)
+            .then(data => {
+                this.education_datas = data;
+            });
+    }
+
+    async load_award_datas() {
+        fetch('api/request/awarddata', { credentials: 'include' })
+            .then(response => response.json() as Promise<Award_Parameters>)
+            .then(data => {
+                this.award_datas = data;
+            });
+    }
+
+    async load_Language_datas() {
+        fetch('api/request/languagedata', { credentials: 'include' })
+            .then(response => response.json() as Promise<Language_Parameters>)
+            .then(data => {
+                this.language_datas = data;
+            });
+    }
+
+    async load_Election_datas() {
+        fetch('api/request/electiondata', { credentials: 'include' })
+            .then(response => response.json() as Promise<Election_Parameters>)
+            .then(data => {
+                this.election_datas = data;
+            });
+    }
+    
+    async load_Trips_datas() {
+        fetch('api/request/tripdata', { credentials: 'include' })
+            .then(response => response.json() as Promise<Trip_Parameters>)
+            .then(data => {
+                this.trips_datas = data;
+            });
+    }
+
+    async load_Punishment_datas() {
+        fetch('api/request/punishmentdata', { credentials: 'include' })
+            .then(response => response.json() as Promise<Punishment_Parameters>)
+            .then(data => {
+                this.punishment_datas = data;
+            });
+    }
+
+    educationDownload() {
+        this.education_resualt.length
+        fetch('/api/Pmrequest/educationDoc', {
+            method: 'post',
+            body: JSON.stringify(<Education_respons[]>(this.education_resualt)),
+            credentials: 'include',
+            headers: new Headers({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            })
+        })
+            .then(x => x.blob())
+            .then(x => {
+                download(x, "Запрос_Образование_ЭЛД");
+            })
+    }
+
+    rankDownload() {
+        this.education_resualt.length
+        fetch('/api/Pmrequest/rankDoc', {
+            method: 'post',
+            body: JSON.stringify(<Rank_respons[]>(this.rank_resualt)),
+            credentials: 'include',
+            headers: new Headers({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            })
+        })
+            .then(x => x.blob())
+            .then(x => {
+                download(x, "Запрос_Звание_ЭЛД");
+            })
+    }
+
+    contructDownload() {
+        this.education_resualt.length
+        fetch('/api/Pmrequest', {
+            method: 'post',
+            body: JSON.stringify(<Contract_respons[]>(this.contruct_resualt)),
+            credentials: 'include',
+            headers: new Headers({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            })
+        })
+            .then(x => x.blob())
+            .then(x => {
+                download(x, "Запрос_Контракт_ЭЛД");
+            })
+    }
+
+    vacationDownload() {
+        this.vacation_resualt.length
+        fetch('/api/Pmrequest', {
+            method: 'post',
+            body: JSON.stringify(<Vacation_Response[]>(this.vacation_resualt)),
+            credentials: 'include',
+            headers: new Headers({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            })
+        })
+            .then(x => x.blob())
+            .then(x => {
+                download(x, "Запрос_Отпуск_ЭЛД");
+            })
+    }
+
+    
+
+    awardDownload() {
+        this.award_response.length
+        fetch('/api/Pmrequest', {
+            method: 'post',
+            body: JSON.stringify(<Award_respons[]>(this.award_response)),
+            credentials: 'include',
+            headers: new Headers({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            })
+        })
+            .then(x => x.blob())
+            .then(x => {
+                download(x, "Запрос_Награды_ЭЛД");
+            })
+    }
+
+    certificateDownload() {
+        this.certificate_response.length
+        fetch('/api/Pmrequest', {
+            method: 'post',
+            body: JSON.stringify(<Certificate_Respons[]>(this.certificate_response)),
+            credentials: 'include',
+            headers: new Headers({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            })
+        })
+            .then(x => x.blob())
+            .then(x => {
+                download(x, "Запрос_Удостоверения_ЭЛД");
+            })
+    }
+
+    attestationDownload() {
+        this.certificate_response.length
+        fetch('/api/Pmrequest', {
+            method: 'post',
+            body: JSON.stringify(<Attestation_respons[]>(this.attestation_response)),
+            credentials: 'include',
+            headers: new Headers({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            })
+        })
+            .then(x => x.blob())
+            .then(x => {
+                download(x, "Запрос_Аттестации_ЭЛД");
+            })
+    }
+
+    languageDownload() {
+        this.certificate_response.length
+        fetch('/api/Pmrequest', {
+            method: 'post',
+            body: JSON.stringify(<Language_respons[]>(this.language_response)),
+            credentials: 'include',
+            headers: new Headers({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            })
+        })
+            .then(x => x.blob())
+            .then(x => {
+                download(x, "Запрос_Языки_ЭЛД");
+            })
+    }
+
+    electionDownload() {
+        this.election_response.length
+        fetch('/api/Pmrequest', {
+            method: 'post',
+            body: JSON.stringify(<Election_respons[]>(this.election_response)),
+            credentials: 'include',
+            headers: new Headers({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            })
+        })
+            .then(x => x.blob())
+            .then(x => {
+                download(x, "Запрос_участия_в_выборных_органах_ЭЛД");
+            })
+    }
+
+    tripDownload() {
+        this.election_response.length
+        fetch('/api/Pmrequest', {
+            method: 'post',
+            body: JSON.stringify(<Trip_respons[]>(this.trip_response)),
+            credentials: 'include',
+            headers: new Headers({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            })
+        })
+            .then(x => x.blob())
+            .then(x => {
+                download(x, "Запрос_служебные_командировки_ЭЛД");
+            })
+    }   
+
+    punishmentDownload() {
+        this.election_response.length
+        fetch('/api/Pmrequest/punishmentDoc', {
+            method: 'post',
+            body: JSON.stringify(<Punishment_respons[]>(this.punishment_response)),
+            credentials: 'include',
+            headers: new Headers({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            })
+        })
+            .then(x => x.blob())
+            .then(x => {
+                download(x, "Запрос_взыскания_ЭЛД");
+            })
     }
 }

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using PersonnelManagement.USERS;
 
 namespace PersonnelManagement.Models
 {
@@ -15,7 +14,7 @@ namespace PersonnelManagement.Models
     {
         private Repository m_repository { get; set; }
         private User m_user { get; set; }
-        private orgContext m_context { get; set; }
+        private pmContext m_context { get; set; }
         private DateTime m_date { get; set; }
 
         public StructureCustomEditor(Repository repository, User user)

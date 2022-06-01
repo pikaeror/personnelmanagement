@@ -16,7 +16,6 @@
                                 <div class="adminpanel-row">
                                     <b>Должность </b> {{getPositiontype(user.positiontype)}}
                                 </div>
-
                                 <div v-if="user.admin == '1'">
                                     С правами администратора
                                 </div>
@@ -29,21 +28,21 @@
                                     <div>
                                         <b>Доступы:</b>
                                     </div>
-                                    <!--<div>
+                                    <div>
                                         <span class="adminpanel-row-label">Редактирование прохождения службы</span><span class="adminpanel-row-right">{{hasRightString(user.personneleditor)}}</span>
-                                    </div>-->
-                                    <!--<div>
+                                    </div>
+                                    <div>
                                         <span class="adminpanel-row-label">Доступ к чтению прохождения службы</span><span class="adminpanel-row-right">{{hasRightString(user.personnelread)}}</span>
-                                    </div>-->
+                                    </div>
                                     <div>
                                         <span class="adminpanel-row-label">Редактирование оргштатной работы</span><span class="adminpanel-row-right">{{hasRightString(user.structureeditor)}}</span>
                                     </div>
                                     <div>
                                         <span class="adminpanel-row-label">Доступ к чтению оргштатной работы</span><span class="adminpanel-row-right">{{hasRightString(user.structureread)}}</span>
                                     </div>
-                                    <!--<div>
+                                    <div>
                                         <span class="adminpanel-row-label">Редактирование кадров всех подразделений</span><span class="adminpanel-row-right">{{hasRightString(user.masterpersonneleditor)}}</span>
-                                    </div>-->
+                                    </div>
                                 </div>
                                 <div class="adminpanel-submit">
                                     <el-button :id="user.id" title="Редактировать" type="primary" @click="userEditStart(user)" size="small" icon="el-icon-edit" plain></el-button>
@@ -51,7 +50,6 @@
                                     <el-button :id="user.id" title="Обнулить пароль" type="warning" @click="nullPassUserUpdate($event)" size="small" icon="el-icon-refresh" plain></el-button>
                                     <el-button :id="user.id" title="Удалить пользователя" type="danger" @click="deleteUser($event)" size="small" icon="el-icon-delete" plain></el-button>
                                 </div>
-
                             </div>
                         </div>
                     </el-tab-pane>
@@ -93,6 +91,15 @@
                                     <el-button class="eld-eld-body-submenu-button" v-bind:class="{'eld-eld-body-submenu-button-selected': newUser.rights.menu == 1}" @click="updateRightsMenu(newUser.rights, 1)">
                                         Организационно-штатная работа
                                     </el-button>
+                                    <el-button class="eld-eld-body-submenu-button" v-bind:class="{'eld-eld-body-submenu-button-selected': newUser.rights.menu == 2}" @click="updateRightsMenu(newUser.rights, 2)">
+                                        Электронное личное дело
+                                    </el-button>
+                                    <el-button class="eld-eld-body-submenu-button" v-bind:class="{'eld-eld-body-submenu-button-selected': newUser.rights.menu == 3}" @click="updateRightsMenu(newUser.rights, 3)">
+                                        Кандидаты
+                                    </el-button>
+                                    <el-button class="eld-eld-body-submenu-button" v-bind:class="{'eld-eld-body-submenu-button-selected': newUser.rights.menu == 4}" @click="updateRightsMenu(newUser.rights, 4)">
+                                        Структура в лицах
+                                    </el-button>
                                     <el-button class="eld-eld-body-submenu-button" v-bind:class="{'eld-eld-body-submenu-button-selected': newUser.rights.menu == 5}" @click="updateRightsMenu(newUser.rights, 5)">
                                         Проекты приказов
                                     </el-button>
@@ -106,17 +113,122 @@
                                     <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.orgread" :active-value="1" :inactive-value="0" active-text="Просмотр орг-штатной структуры своего и подчиненных подразделений"> </el-switch></div>
                                     <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.orgreadall" :active-value="1" :inactive-value="0" active-text="Просмотр орг-штатной структуры всех подразделений"> </el-switch></div>
                                 </div>
+                                <!--Электронное личное дело-->
+                                <div v-if="newUser.rights.menu == 2">
+                                    <br />
+                                    <div>
+                                        <el-button @click="grantEldAllAccess(newUser.rights)">Предоставить все доступы</el-button>
+                                    </div>
+                                    <div>
+                                        <b>
+                                            Общие доступы
+                                        </b>
+                                    </div>
+                                    <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peopleedit" :active-value="1" :inactive-value="0" active-text="Редактирование личных дел работников своего и подчиненных подразделений"> </el-switch></div>
+                                    <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peopleread" :active-value="1" :inactive-value="0" active-text="Просмотр личных дел работников своего и подчиненных подразделений"> </el-switch></div>
+                                    <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peoplereadall" :active-value="1" :inactive-value="0" active-text="Просмотр личных дел работников всех подразделений"> </el-switch></div>
+                                    <div class="eld-eld-body-row-flex">
+                                        <div>
+                                            <div>
+                                                <b>
+                                                    Доступ к чтению
+                                                </b>
+                                            </div>
+                                            <div>
+                                                <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peoplereadmain" :active-value="1" :inactive-value="0" active-text="Главная страница"> </el-switch></div>
+                                                <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peoplereadpassport" :active-value="1" :inactive-value="0" active-text="Паспорт"> </el-switch></div>
+                                                <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peoplereadphoto" :active-value="1" :inactive-value="0" active-text="Фотографии"> </el-switch></div>
+                                                <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peoplereadcertificate" :active-value="1" :inactive-value="0" active-text="Удостоверения"> </el-switch></div>
+                                                <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peoplereadrelative" :active-value="1" :inactive-value="0" active-text="Родственники"> </el-switch></div>
+                                                <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peoplereadeducation" :active-value="1" :inactive-value="0" active-text="Образование"> </el-switch></div>
+                                                <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peoplereadeducationucp" :active-value="1" :inactive-value="0" active-text="Образование УГЗ"> </el-switch></div>
+                                                <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peoplereadjob" :active-value="1" :inactive-value="0" active-text="Трудовая деятельность"> </el-switch></div>
+                                                <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peoplereadjobprivelege" :active-value="1" :inactive-value="0" active-text="Выслуга лет на льготных условиях"> </el-switch></div>
+                                                <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peoplereadjobpension" :active-value="1" :inactive-value="0" active-text="Выслуга лет"> </el-switch></div>
+                                                <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peoplereadill" :active-value="1" :inactive-value="0" active-text="Листы нетрудоспособности"> </el-switch></div>
+                                                <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peoplereaddispanserization" :active-value="1" :inactive-value="0" active-text="Диспансеризация"> </el-switch></div>
+                                                <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peoplereadvvk" :active-value="1" :inactive-value="0" active-text="Военно-врачебная комиссия"> </el-switch></div>
+                                                <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peoplereadpfl" :active-value="1" :inactive-value="0" active-text="ПФЛ"> </el-switch></div>
+                                                <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peoplereadrank" :active-value="1" :inactive-value="0" active-text="Звания"> </el-switch></div>
+                                                <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peoplereadcontract" :active-value="1" :inactive-value="0" active-text="Контракты"> </el-switch></div>
+                                                <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peoplereadcontractvacation" :active-value="1" :inactive-value="0" active-text="Дополнительные соглашения по отпускам"> </el-switch></div>
+                                                <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peoplereadcontractstate" :active-value="1" :inactive-value="0" active-text="Стаж государственных служащих"> </el-switch></div>
+                                                <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peoplereadvacation" :active-value="1" :inactive-value="0" active-text="Отпуска"> </el-switch></div>
+                                                <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peoplereadreward" :active-value="1" :inactive-value="0" active-text="Награды и поощрения"> </el-switch></div>
+                                                <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peoplereadattestation" :active-value="1" :inactive-value="0" active-text="Аттестация"> </el-switch></div>
+                                                <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peoplereadlanguage" :active-value="1" :inactive-value="0" active-text="Иностранные языки"> </el-switch></div>
+                                                <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peoplereadscience" :active-value="1" :inactive-value="0" active-text="Научные труды, звания, изобретения"> </el-switch></div>
+                                                <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peoplereadelection" :active-value="1" :inactive-value="0" active-text="Участие в выборных органах"> </el-switch></div>
+                                                <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peoplereadworktrip" :active-value="1" :inactive-value="0" active-text="Служебные командировки"> </el-switch></div>
+                                                <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peoplereadpenalty" :active-value="1" :inactive-value="0" active-text="Взыскания"> </el-switch></div>
+                                                <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peoplereadphysical" :active-value="1" :inactive-value="0" active-text="Физическая подготовка"> </el-switch></div>
+                                                <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peoplereaddriver" :active-value="1" :inactive-value="0" active-text="Водительские удостоверения"> </el-switch></div>
+                                                <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peoplereadpermission" :active-value="1" :inactive-value="0" active-text="Разрешения и лицензии"> </el-switch></div>
+                                                <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peoplereadprivelege" :active-value="1" :inactive-value="0" active-text="Льготы"> </el-switch></div>
+                                                <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peoplereadwound" :active-value="1" :inactive-value="0" active-text="Ранения, контузии и другие увечья"> </el-switch></div>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div>
+                                                <b>
+                                                    Доступ к редактированию
+                                                </b>
+                                            </div>
+                                            <div>
+                                                <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peopleeditmain" :active-value="1" :inactive-value="0" active-text="Главная страница"> </el-switch></div>
+                                                <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peopleeditpassport" :active-value="1" :inactive-value="0" active-text="Паспорт"> </el-switch></div>
+                                                <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peopleeditphoto" :active-value="1" :inactive-value="0" active-text="Фотографии"> </el-switch></div>
+                                                <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peopleeditcertificate" :active-value="1" :inactive-value="0" active-text="Удостоверения"> </el-switch></div>
+                                                <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peopleeditrelative" :active-value="1" :inactive-value="0" active-text="Родственники"> </el-switch></div>
+                                                <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peopleediteducation" :active-value="1" :inactive-value="0" active-text="Образование"> </el-switch></div>
+                                                <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peopleediteducationucp" :active-value="1" :inactive-value="0" active-text="Образование УГЗ"> </el-switch></div>
+                                                <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peopleeditjob" :active-value="1" :inactive-value="0" active-text="Трудовая деятельность"> </el-switch></div>
+                                                <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peopleeditjobprivelege" :active-value="1" :inactive-value="0" active-text="Выслуга лет на льготных условиях"> </el-switch></div>
+                                                <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peopleeditjobpension" :active-value="1" :inactive-value="0" active-text="Выслуга лет"> </el-switch></div>
+                                                <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peopleeditill" :active-value="1" :inactive-value="0" active-text="Листы нетрудоспособности"> </el-switch></div>
+                                                <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peopleeditdispanserization" :active-value="1" :inactive-value="0" active-text="Диспансеризация"> </el-switch></div>
+                                                <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peopleeditvvk" :active-value="1" :inactive-value="0" active-text="Военно-врачебная комиссия"> </el-switch></div>
+                                                <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peopleeditpfl" :active-value="1" :inactive-value="0" active-text="ПФЛ"> </el-switch></div>
+                                                <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peopleeditrank" :active-value="1" :inactive-value="0" active-text="Звания"> </el-switch></div>
+                                                <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peopleeditcontract" :active-value="1" :inactive-value="0" active-text="Контракты"> </el-switch></div>
+                                                <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peopleeditcontractvacation" :active-value="1" :inactive-value="0" active-text="Дополнительные соглашения по отпускам"> </el-switch></div>
+                                                <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peopleeditcontractstate" :active-value="1" :inactive-value="0" active-text="Стаж государственных служащих"> </el-switch></div>
+                                                <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peopleeditvacation" :active-value="1" :inactive-value="0" active-text="Отпуска"> </el-switch></div>
+                                                <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peopleeditreward" :active-value="1" :inactive-value="0" active-text="Награды и поощрения"> </el-switch></div>
+                                                <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peopleeditattestation" :active-value="1" :inactive-value="0" active-text="Аттестация"> </el-switch></div>
+                                                <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peopleeditlanguage" :active-value="1" :inactive-value="0" active-text="Иностранные языки"> </el-switch></div>
+                                                <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peopleeditscience" :active-value="1" :inactive-value="0" active-text="Научные труды, звания, изобретения"> </el-switch></div>
+                                                <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peopleeditelection" :active-value="1" :inactive-value="0" active-text="Участие в выборных органах"> </el-switch></div>
+                                                <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peopleeditworktrip" :active-value="1" :inactive-value="0" active-text="Служебные командировки"> </el-switch></div>
+                                                <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peopleeditpenalty" :active-value="1" :inactive-value="0" active-text="Взыскания"> </el-switch></div>
+                                                <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peopleeditphysical" :active-value="1" :inactive-value="0" active-text="Физическая подготовка"> </el-switch></div>
+                                                <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peopleeditdriver" :active-value="1" :inactive-value="0" active-text="Водительские удостоверения"> </el-switch></div>
+                                                <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peopleeditpermission" :active-value="1" :inactive-value="0" active-text="Разрешения и лицензии"> </el-switch></div>
+                                                <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peopleeditprivelege" :active-value="1" :inactive-value="0" active-text="Льготы"> </el-switch></div>
+                                                <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peopleeditwound" :active-value="1" :inactive-value="0" active-text="Ранения, контузии и другие увечья"> </el-switch></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--Кандидаты-->
+                                <div v-if="newUser.rights.menu == 3">
+                                    <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.candidateedit" :active-value="1" :inactive-value="0" active-text="Редактирование кабинетов кандидатов на службу"> </el-switch></div>
+                                    <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.candidateblock" :active-value="1" :inactive-value="0" active-text="Блокировка доступа к кабинетам кандидатов на службу"> </el-switch></div>
+                                    <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.candidateread" :active-value="1" :inactive-value="0" active-text="Просмотр кабинетов кандидатов на службу"> </el-switch></div>
+                                </div>
+                                <!--Структура в лицах-->
+                                <div v-if="newUser.rights.menu == 4">
+                                    <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peopleorgread" :active-value="1" :inactive-value="0" active-text="Просмотр структуры в лицах своего и подчиненных подразделений"> </el-switch></div>
+                                    <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peopleorgreadall" :active-value="1" :inactive-value="0" active-text="Просмотр структуры в лицах всех подразделений"> </el-switch></div>
+                                </div>
                                 <!--Проекты приказов-->
-                                <!--<div v-if="newUser.rights.menu == 5">
+                                <div v-if="newUser.rights.menu == 5">
                                     <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peopledecreeedit" :active-value="1" :inactive-value="0" active-text="Редактирование проектов приказов"> </el-switch></div>
                                     <div class="adminpanel-row"><el-switch @change="forceUpdate" v-model="newUser.rights.peopledecreeread" :active-value="1" :inactive-value="0" active-text="Просмотр проектов приказов"> </el-switch></div>
-                                </div>-->
+                                </div>
                             </div>
-
                             <div>
-
                             </div>
-
                             <el-button class="adminpanel-submit" @click="addUser($event)" v-if="!userEditMode()">Добавить</el-button>
                             <el-button class="adminpanel-submit" v-if="userEditMode()" @click="userEditComplete()">Редактировать</el-button>
                             <el-button class="adminpanel-submit" v-if="userEditMode()" @click="userEditCancel()">Отменить редактирование</el-button>
@@ -124,43 +236,42 @@
                     </el-tab-pane>
                     <el-tab-pane label="Права по должностям" name="uthird">
                         <div class="adminpanel-row">
-                            Должность <el-select @input="startUserUpdate" v-model="rightsPositiontype" placeholder="..." 
+                            Должность <el-select @input="startUserUpdate" v-model="rightsPositiontype" placeholder="..."
                                                  loading-text="..." no-match-text="Совпадений не найдено" no-data-text="Нет данных" class="eld-eld-body-row-medium" @change="selectPositionRights()" filterable>
                                 <el-option v-for="ptype in positiontypesList" :title="ptype.name"
                                            :key="ptype.id" :label="ptype.name" :value="ptype.id">
                                 </el-option>
                             </el-select>
-                                      <div v-if="rightsRights != null">
-                                          <div class="adminpanel-row">
-                                              Роль <el-select @input="startUserUpdate" v-model="rightsRights.role" placeholder="Роль" loading-text="..." no-match-text="Совпадений не найдено" no-data-text="Нет данных" filterable>
-                                                  <el-option v-for="role in roles" :title="role.name"
-                                                             :key="role.id" :label="role.name" :value="role.id">
-                                                  </el-option>
-                                              </el-select>
-                                          </div>
-                                          <div class="adminpanel-row"><el-switch v-model="rightsRights.admin" :active-value="1" :inactive-value="0" active-text="Администратор"> </el-switch></div>
-                                          <div class="adminpanel-row"><el-switch v-model="rightsRights.orgedit" :active-value="1" :inactive-value="0" active-text="Редактирование орг-штатной структуры всех подразделений"> </el-switch></div>
-                                          <div class="adminpanel-row"><el-switch v-model="rightsRights.orgread" :active-value="1" :inactive-value="0" active-text="Просмотр орг-штатной структуры своего и подчиненных подразделений"> </el-switch></div>
-                                          <div class="adminpanel-row"><el-switch v-model="rightsRights.orgreadall" :active-value="1" :inactive-value="0" active-text="Просмотр орг-штатной структуры всех подразделений"> </el-switch></div>
-                                          <div class="adminpanel-row"><el-switch v-model="rightsRights.peopleedit" :active-value="1" :inactive-value="0" active-text="Редактирование личных дел работников своего и подчиненных подразделений"> </el-switch></div>
-                                          <div class="adminpanel-row"><el-switch v-model="rightsRights.peopleread" :active-value="1" :inactive-value="0" active-text="Просмотр личных дел работников своего и подчиненных подразделений"> </el-switch></div>
-                                          <div class="adminpanel-row"><el-switch v-model="rightsRights.peoplereadall" :active-value="1" :inactive-value="0" active-text="Просмотр личных дел работников всех подразделений"> </el-switch></div>
-                                          <div class="adminpanel-row"><el-switch v-model="rightsRights.candidateedit" :active-value="1" :inactive-value="0" active-text="Редактирование кабинетов кандидатов на службу"> </el-switch></div>
-                                          <div class="adminpanel-row"><el-switch v-model="rightsRights.candidateread" :active-value="1" :inactive-value="0" active-text="Просмотр кабинетов кандидатов на службу"> </el-switch></div>
-                                          <div class="adminpanel-row"><el-switch v-model="rightsRights.peopleorgread" :active-value="1" :inactive-value="0" active-text="Просмотр структуры в лицах своего и подчиненных подразделений"> </el-switch></div>
-                                          <div class="adminpanel-row"><el-switch v-model="rightsRights.peopleorgreadall" :active-value="1" :inactive-value="0" active-text="Просмотр структуры в лицах всех подразделений"> </el-switch></div>
-                                          <div class="adminpanel-row"><el-switch v-model="rightsRights.peopledecreeedit" :active-value="1" :inactive-value="0" active-text="Редактирование проектов приказов"> </el-switch></div>
-                                          <div class="adminpanel-row"><el-switch v-model="rightsRights.peopledecreeread" :active-value="1" :inactive-value="0" active-text="Просмотр проектов приказов"> </el-switch></div>
+                            <div v-if="rightsRights != null">
+                                <div class="adminpanel-row">
+                                    Роль <el-select @input="startUserUpdate" v-model="rightsRights.role" placeholder="Роль" loading-text="..." no-match-text="Совпадений не найдено" no-data-text="Нет данных" filterable>
+                                        <el-option v-for="role in roles" :title="role.name"
+                                                   :key="role.id" :label="role.name" :value="role.id">
+                                        </el-option>
+                                    </el-select>
+                                </div>
+                                <div class="adminpanel-row"><el-switch v-model="rightsRights.admin" :active-value="1" :inactive-value="0" active-text="Администратор"> </el-switch></div>
+                                <div class="adminpanel-row"><el-switch v-model="rightsRights.orgedit" :active-value="1" :inactive-value="0" active-text="Редактирование орг-штатной структуры всех подразделений"> </el-switch></div>
+                                <div class="adminpanel-row"><el-switch v-model="rightsRights.orgread" :active-value="1" :inactive-value="0" active-text="Просмотр орг-штатной структуры своего и подчиненных подразделений"> </el-switch></div>
+                                <div class="adminpanel-row"><el-switch v-model="rightsRights.orgreadall" :active-value="1" :inactive-value="0" active-text="Просмотр орг-штатной структуры всех подразделений"> </el-switch></div>
+                                <div class="adminpanel-row"><el-switch v-model="rightsRights.peopleedit" :active-value="1" :inactive-value="0" active-text="Редактирование личных дел работников своего и подчиненных подразделений"> </el-switch></div>
+                                <div class="adminpanel-row"><el-switch v-model="rightsRights.peopleread" :active-value="1" :inactive-value="0" active-text="Просмотр личных дел работников своего и подчиненных подразделений"> </el-switch></div>
+                                <div class="adminpanel-row"><el-switch v-model="rightsRights.peoplereadall" :active-value="1" :inactive-value="0" active-text="Просмотр личных дел работников всех подразделений"> </el-switch></div>
+                                <div class="adminpanel-row"><el-switch v-model="rightsRights.candidateedit" :active-value="1" :inactive-value="0" active-text="Редактирование кабинетов кандидатов на службу"> </el-switch></div>
+                                <div class="adminpanel-row"><el-switch v-model="rightsRights.candidateread" :active-value="1" :inactive-value="0" active-text="Просмотр кабинетов кандидатов на службу"> </el-switch></div>
+                                <div class="adminpanel-row"><el-switch v-model="rightsRights.peopleorgread" :active-value="1" :inactive-value="0" active-text="Просмотр структуры в лицах своего и подчиненных подразделений"> </el-switch></div>
+                                <div class="adminpanel-row"><el-switch v-model="rightsRights.peopleorgreadall" :active-value="1" :inactive-value="0" active-text="Просмотр структуры в лицах всех подразделений"> </el-switch></div>
+                                <div class="adminpanel-row"><el-switch v-model="rightsRights.peopledecreeedit" :active-value="1" :inactive-value="0" active-text="Редактирование проектов приказов"> </el-switch></div>
+                                <div class="adminpanel-row"><el-switch v-model="rightsRights.peopledecreeread" :active-value="1" :inactive-value="0" active-text="Просмотр проектов приказов"> </el-switch></div>
 
-                                          <br />
-                                          <br />
-
-                                          <div>
-                                              <el-button @click="updatePositiontypeRights()">
-                                                  Сохранить
-                                              </el-button>
-                                          </div>
-                                      </div>
+                                <br />
+                                <br />
+                                <div>
+                                    <el-button @click="updatePositiontypeRights()">
+                                        Сохранить
+                                    </el-button>
+                                </div>
+                            </div>
                         </div>
                     </el-tab-pane>
                 </el-tabs>
@@ -170,12 +281,10 @@
                     <el-tab-pane label="Список званий" name="rfirst">
                         <div v-if="activeName === 'second'">
                             <div class="adminpanel-rank" v-for="rank in ranks">
-
                                 <el-input class="adminpanel-rank-input" @input="startRankUpdate" v-model="rank.name"></el-input>
                                 <el-input-number class="adminpanel-rank-input" v-model="rank.maxPeriod" controls-position="right" :min="0" :max="20"></el-input-number>
                                 <el-select class="adminpanel-rank-input" @change="startRankUpdate" v-model="rank.positioncategory">
                                     <el-option v-for="positioncategory in positioncategoriesnocivil" :key="positioncategory.id" :label="positioncategory.name" :value="positioncategory.id">
-
                                     </el-option>
                                 </el-select>        <!--getPositioncategoryByID(rank.positioncategory)-->
                                 <el-button class="adminpanel-rank-button" @click="updateRank(rank)"><i class="el-icon-check"></i></el-button>
@@ -190,7 +299,6 @@
                         <el-input-number class="adminpanel-rank-input" v-model="new_rank_maximum_period" controls-position="right" :min="0" :max="20"></el-input-number>
                         <el-select class="adminpanel-rank-input" v-model="newRankPositioncategory">
                             <el-option v-for="positioncategory in positioncategoriesnocivil" :key="positioncategory.id" :label="positioncategory.name" :value="positioncategory.id">
-
                             </el-option>
                         </el-select>
                         <el-button class="adminpanel-submit" @click="addRank">Добавить</el-button>
@@ -220,7 +328,6 @@
                     <el-tabs v-model="activeNameSubject" @tab-click="handleClickSubject">
                         <el-tab-pane label="Список наименований" name="sufirst">
                             <div class="adminpanel-subject-category-container">
-
                                 <div v-for="subjectcategory in subjectcategories" v-if="subjectcategory.category == 0" @click="newSubjectCategoryFiltered = subjectcategory.id" class="adminpanel-subject-category"
                                      v-bind:class="{'adminpanel-subject-category-active': newSubjectCategoryFiltered == subjectcategory.id}">
                                     {{subjectcategory.name}}
@@ -242,7 +349,6 @@
                                 <el-input v-model="newSubjectName1Filtered" class="adminpanel-subject-filter-name" placeholder="Поиск в разделе"></el-input>
                             </div>
                             <hr />
-
                             <div v-if="activeName === 'thirdsecond'">
                                 <div class="adminpanel-subject">
                                     <div class="adminpanel-subject-text">
@@ -277,7 +383,7 @@
                                 <div class="adminpanel-subject-container">
                                     <div class="adminpanel-subject" v-for="subject in subjects"
                                          v-if="(newSubjectCategoryFiltered == 0 || subject.category == newSubjectCategoryFiltered) && (newSubjectName1Filtered.length == 0 || subject.name1.startsWith(newSubjectName1Filtered))
-                                 && (newSubjectGenderFiltered == 0 || subject.gender == newSubjectGenderFiltered)">
+                                              && (newSubjectGenderFiltered == 0 || subject.gender == newSubjectGenderFiltered)">
                                         <div class="adminpanel-subject-text">
                                             {{subject.name1}}
                                         </div>
@@ -305,13 +411,9 @@
                                         <el-button class="adminpanel-subject-button" @click="updateSubject(subject)"><i class="el-icon-edit"></i></el-button>
                                         <el-button class="adminpanel-subject-button" disabled><i class="el-icon-close"></i></el-button>
                                         <div>
-
-
                                         </div>
-
                                     </div>
                                 </div>
-
                             </div>
                         </el-tab-pane>
                         <el-tab-pane :label="addeditSubjectName()" name="susecond">
@@ -324,49 +426,42 @@
                                 </div>
                                 <el-input class="adminpanel-subject-input" v-model="newSubjectName1" placeholder="Наименование в именительном падеже" @input="onSubjectName1Change()"></el-input>
                             </div>
-
                             <div class="adminpanel-subject-input-row">
                                 <div class="adminpanel-subject-input-text">
                                     родительном падеже (нет кого/чего)
                                 </div>
                                 <el-input v-model="newSubjectName2" placeholder="Наименование в родительном падеже"></el-input>
                             </div>
-
                             <div class="adminpanel-subject-input-row">
                                 <div class="adminpanel-subject-input-text">
                                     дательном падеже (дать кому/чему)
                                 </div>
                                 <el-input v-model="newSubjectName3" placeholder="Наименование в дательном падеже"></el-input>
                             </div>
-
                             <div class="adminpanel-subject-input-row">
                                 <div class="adminpanel-subject-input-text">
                                     винительном падеже (винить кого/что)
                                 </div>
                                 <el-input v-model="newSubjectName4" placeholder="Наименование в винительном падеже"></el-input>
                             </div>
-
                             <div class="adminpanel-subject-input-row">
                                 <div class="adminpanel-subject-input-text">
                                     творительном падеже (творить кем/чем)
                                 </div>
                                 <el-input v-model="newSubjectName5" placeholder="Наименование в творительном падеже"></el-input>
                             </div>
-
                             <div class="adminpanel-subject-input-row">
                                 <div class="adminpanel-subject-input-text">
                                     предложном падеже (о ком/о чем)
                                 </div>
                                 <el-input v-model="newSubjectName6" placeholder="Наименование в предложном падеже"></el-input>
                             </div>
-
                             <br />
                             <div>
                                 Род
                             </div>
                             <el-select v-model="newSubjectGender">
                                 <el-option nullable v-for="subjectgender in subjectgenders" :key="subjectgender.id" :label="subjectgender.name" :value="subjectgender.id">
-
                                 </el-option>
                             </el-select>
                             <div>
@@ -374,7 +469,6 @@
                             </div>
                             <el-select v-model="newSubjectCategory">
                                 <el-option nullable v-for="subjectcategory in subjectcategories" :key="subjectcategory.id" :label="subjectcategory.name" :value="subjectcategory.id">
-
                                 </el-option>
                             </el-select>
                             <el-checkbox v-if="newSubjectCategory != null && (newSubjectCategory == 1 || newSubjectCategory == 7)" v-model="newSubjectDropword">Отбрасывать слово при полном наименовании (чтобы избежать начальник отдела Отдела информационных технологий)</el-checkbox>
@@ -385,7 +479,6 @@
                                 <el-button class="adminpanel-submit" @click="addSubject">Отредактировать</el-button>
                                 <el-button class="adminpanel-submit" @click="updateSubjectCancel">Отменить редактирование</el-button>
                             </div>
-
                         </el-tab-pane>
                     </el-tabs>
                 </div>
@@ -397,15 +490,11 @@
                         <div v-if="activeName === 'fourth'">
                             <div class="adminpanel-positiontype adminpanel-positiontype-label-top ">
                                 <div class="adminpanel-positiontype-label">Полное наименование</div>
-                                <!--<div class="adminpanel-positiontype-label">Полный родительный</div>
-                            <div class="adminpanel-positiontype-label">Полный дательный</div>-->
                                 <div class="adminpanel-positiontype-label">Сокращенное наименование</div>
                                 <div class="adminpanel-positiontype-label">Значимость</div>
                             </div>
                             <div class="adminpanel-positiontype" v-for="positiontype in positiontypes">
                                 <el-input class="adminpanel-positiontype-input" @input="startPositiontypeUpdate" size="mini" :title="positiontype.name" v-model="positiontype.name"></el-input>
-                                <!--<el-input class="adminpanel-positiontype-input" @input="startPositiontypeUpdate" size="mini" :title="positiontype.name2" v-model="positiontype.name2"></el-input>
-                            <el-input class="adminpanel-positiontype-input" @input="startPositiontypeUpdate" size="mini" :title="positiontype.name3" v-model="positiontype.name3"></el-input>-->
                                 <el-input class="adminpanel-positiontype-input" :title="positiontype.nameshort" @input="startPositiontypeUpdate" size="mini" v-model="positiontype.nameshort"></el-input>
                                 <el-input class="adminpanel-positiontype-number-small" @input="startPositiontypeUpdate" size="mini" type="number" v-model="positiontype.priority"></el-input>
                                 <el-button class="adminpanel-positiontype-button" size="mini" @click="updatePositiontype(positiontype)"><i class="el-icon-check"></i></el-button>
@@ -420,7 +509,7 @@
                                 <div>Наименование должности для документов</div>
                                 <div class="positionmanagementpanel-document-flexrow">
                                     <el-select class="positionmanagementpanel-document-select"
-                                               filterable :filter-method="filterMethod" no-data-text="Не найдено" no-match-text="Не найдено"  clearable v-model="subject1" placeholder="Часть">
+                                               filterable :filter-method="filterMethod" no-data-text="Не найдено" no-match-text="Не найдено" clearable v-model="subject1" placeholder="Часть">
                                         <el-option v-for="subject in filteredSubjects"
                                                    :key="subject.id" :label="subject.name1" :value="subject.id">
                                         </el-option>
@@ -438,7 +527,7 @@
                                         </el-option>
                                     </el-select>
                                     <el-select class="positionmanagementpanel-document-select"
-                                               filterable  :filter-method="filterMethod" no-data-text="Не найдено" no-match-text="Не найдено" clearable v-model="subject4" placeholder="Часть">
+                                               filterable :filter-method="filterMethod" no-data-text="Не найдено" no-match-text="Не найдено" clearable v-model="subject4" placeholder="Часть">
                                         <el-option v-for="subject in filteredSubjects"
                                                    :key="subject.id" :label="subject.name1" :value="subject.id">
                                         </el-option>
@@ -479,7 +568,6 @@
                                                    :key="subject.id" :label="subject.name1" :value="subject.id">
                                         </el-option>
                                     </el-select>
-
                                 </div>
                                 <div class="positionmanagementpanel-document-structure">
                                     Полное наименование подразделения
@@ -557,10 +645,6 @@
                     <el-tab-pane label="Добавить наименование должности" name="psecond">
                         Наименование должности
                         <el-input v-model="newPositiontypeName"></el-input>
-                        <!--Наименование должности в родительном падеже
-                    <el-input v-model="newPositiontypeName2"></el-input>
-                    Наименование должности в дательном падеже
-                    <el-input v-model="newPositiontypeName3"></el-input>-->
                         Сокращенное наименование
                         <el-input v-model="newPositiontypeNameshort"></el-input>
                         Значимость от 0 до 100 (чем выше значимость, тем выше в списке)<el-input v-model="newPositiontypePriority" type="number"></el-input>
@@ -586,11 +670,9 @@
                         <div>
                             <el-checkbox v-model="newPositioncategoryCivil">Гражданская категория</el-checkbox>
                         </div>
-
                         <div>
                             <el-checkbox v-model="newPositioncategoryVariable" :disabled="newPositioncategoryCivil">Переменный состав</el-checkbox>
                         </div>
-
                         <el-button class="adminpanel-submit" @click="addPositioncategory">Добавить</el-button>
                     </el-tab-pane>
                 </el-tabs>
@@ -616,22 +698,203 @@
                     </el-tab-pane>
                 </el-tabs>
             </el-tab-pane>
-            <el-tab-pane label="Области" name="ninth">
-                <el-tabs v-model="activeNameStructureregion" @tab-click="handleClickStructureregion">
-                    <el-tab-pane label="Список областей" name="srfirst">
-                        <div v-if="activeName === 'ninth'">
-                            <div class="adminpanel-structureregion" v-for="structureregion in structureregions">
-                                <el-input class="adminpanel-structureregion-input" @input="startStructureregionUpdate" v-model="structureregion.name"></el-input>
-                                <el-button class="adminpanel-structureregion-button" @click="updateStructureregion(structureregion)"><i class="el-icon-check"></i></el-button>
-                                <el-button class="adminpanel-structureregion-button" disabled><i class="el-icon-close"></i></el-button>
-                            </div>
+            <el-tab-pane label="Вилки званий" name="seventh">
+                <el-tabs v-model="activeNameAltrankconditiongroup" @tab-click="handleClickAltrankconditiongroup">
+                    <el-tab-pane label="Список вилок званий" name="arcgfirst">
+                        <div class="adminpanel-altrankconditiongroup" v-for="altrankconditiongroup in altrankconditiongroups">
+                            <el-input class="adminpanel-altrankconditiongroup-input" @input="startAltrankconditiongroupUpdate" v-model="altrankconditiongroup.name"></el-input>
+                            <el-button class="adminpanel-altrankconditiongroup-button" @click="updateAltrankconditiongroup(altrankconditiongroup)"><i class="el-icon-check"></i></el-button>
+                            <el-button class="adminpanel-altrankconditiongroup-button" disabled><i class="el-icon-close"></i></el-button>
                         </div>
                     </el-tab-pane>
-                    <el-tab-pane label="Добавить область" name="srsecond">
-                        <el-input v-model="newStructureregionName" placeholder="Название области"></el-input>
-                        <el-button class="adminpanel-submit" @click="addStructureregion">Добавить</el-button>
+                    <el-tab-pane label="Добавить вилку званий" name="arcgsecond">
+                        <el-input v-model="newAltrankconditiongroup" placeholder="Наименование вилки званий"></el-input>
+                        <el-button class="adminpanel-submit" @click="addAltrankconditiongroup">Добавить</el-button>
                     </el-tab-pane>
                 </el-tabs>
+            </el-tab-pane>
+            <el-tab-pane label="Условия вилок званий" name="eighth">
+                <el-tabs v-model="activeNameAltrankcondition" @tab-click="handleClickAltrankcondition">
+                    <el-tab-pane label="Список условий для вилок званий" name="arcfirst">
+                        <div class="adminpanel-altrankcondition" v-for="altrankcondition in altrankconditions">
+                            <el-input class="adminpanel-altrankcondition-input" @input="startAltrankconditionUpdate" v-model="altrankcondition.name"></el-input>
+                            <el-select class="adminpanel-altrankcondition-input" @change="startAltrankconditionUpdate" v-model="altrankcondition.group">
+                                <el-option v-for="altrankconditiongroup in altrankconditiongroups" :key="altrankconditiongroup.id" :label="altrankconditiongroup.name" :value="altrankconditiongroup.id">
+                                </el-option>
+                            </el-select>
+                            <el-button class="adminpanel-altrankcondition-button" @click="updateAltrankcondition(altrankcondition)"><i class="el-icon-check"></i></el-button>
+                            <el-button class="adminpanel-altrankcondition-button" disabled><i class="el-icon-close"></i></el-button>
+                        </div>
+                    </el-tab-pane>
+                    <el-tab-pane label="Добавить условие для вилки званий" name="arcsecond">
+                        <el-input v-model="newAltrankcondition" placeholder="Наименование условия для вилки званий"></el-input>
+                        <el-select class="adminpanel-altrankcondition-input" v-model="newAltrankconditionaltrankconditiongroup">
+                            <el-option v-for="altrankconditiongroup in altrankconditiongroups" :key="altrankconditiongroup.id" :label="altrankconditiongroup.name" :value="altrankconditiongroup.id">
+                            </el-option>
+                        </el-select>
+                        <el-button class="adminpanel-submit" @click="addAltrankcondition">Добавить</el-button>
+                    </el-tab-pane>
+                </el-tabs>
+            </el-tab-pane>
+            <!--Области, районы, города, улицы и их склонения-->
+            <el-tab-pane label="Место нахождения" name="ninth">
+                <div>
+                    <el-tabs v-model="activeNameLocationtype" @tab-click="handleClickSubject">
+                        <el-tab-pane label="Список наименований" name="loctype">
+                            <div class="adminpanel-subject-category-container">
+                                <div v-for="locationtype in locationtypes" class="adminpanel-subject-category">
+                                    {{locationtype.locationtypename}}
+                                </div>
+                                <div @click="newSubjectCategoryFiltered = 0" class="adminpanel-subject-category" v-bind:class="{'adminpanel-subject-category-active': newSubjectCategoryFiltered == 0}">
+                                    Все
+                                </div>
+                            </div>
+                            <div class="adminpanel-subject-category-container">
+                                <div v-for="subjectcategory in subjectcategories"
+                                     v-if="newSubjectCategoryFiltered != 0 && (subjectcategory.category == newSubjectCategoryFiltered || subjectcategory.id == newSubjectCategoryFiltered || (fatherSubjectcategoryid(newSubjectCategoryFiltered) == subjectcategory.id))"
+                                     @click="newSubjectCategoryFiltered = subjectcategory.id" class="adminpanel-subject-category"
+                                     v-bind:class="{'adminpanel-subject-category-active': newSubjectCategoryFiltered == subjectcategory.id}">
+                                    {{subjectcategory.name}}
+                                </div>
+                            </div>
+                            <br />
+                            <div class="adminpanel-subject-filter-container">
+                                <el-input v-model="newSubjectName1Filtered" class="adminpanel-subject-filter-name" placeholder="Поиск в разделе"></el-input>
+                            </div>
+                            <hr />
+                            <div v-if="activeName === 'thirdsecond'">
+                                <div class="adminpanel-subject">
+                                    <div class="adminpanel-subject-text">
+                                        Именительный падеж
+                                    </div>
+                                    <div class="adminpanel-subject-text">
+                                        Родительный падеж
+                                    </div>
+                                    <div class="adminpanel-subject-text">
+                                        Дательный падеж
+                                    </div>
+                                    <div class="adminpanel-subject-text">
+                                        Винительный падеж
+                                    </div>
+                                    <div class="adminpanel-subject-text">
+                                        Творительный падеж
+                                    </div>
+                                    <div class="adminpanel-subject-text">
+                                        Предложный падеж
+                                    </div>
+                                    <div class="adminpanel-subject-text">
+                                        Род
+                                    </div>
+                                    <div class="adminpanel-subject-text">
+                                        Категория
+                                    </div>
+                                    <div class="adminpanel-subject-text">
+                                        Действия
+                                    </div>
+                                </div>
+                                <hr />
+                                <div class="adminpanel-subject-container">
+                                    <div class="adminpanel-subject" v-for="subject in subjects"
+                                         v-if="(newSubjectCategoryFiltered == 0 || subject.category == newSubjectCategoryFiltered) && (newSubjectName1Filtered.length == 0 || subject.name1.startsWith(newSubjectName1Filtered))
+                                              && (newSubjectGenderFiltered == 0 || subject.gender == newSubjectGenderFiltered)">
+                                        <div class="adminpanel-subject-text">
+                                            {{subject.name1}}
+                                        </div>
+                                        <div class="adminpanel-subject-text">
+                                            {{subject.name2}}
+                                        </div>
+                                        <div class="adminpanel-subject-text">
+                                            {{subject.name3}}
+                                        </div>
+                                        <div class="adminpanel-subject-text">
+                                            {{subject.name4}}
+                                        </div>
+                                        <div class="adminpanel-subject-text">
+                                            {{subject.name5}}
+                                        </div>
+                                        <div class="adminpanel-subject-text">
+                                            {{subject.name6}}
+                                        </div>
+                                        <div class="adminpanel-subject-text">
+                                            {{getSubjectgender(subject.gender)}}
+                                        </div>
+                                        <div class="adminpanel-subject-text">
+                                            {{getSubjectcategory(subject.category)}}
+                                        </div>
+                                        <el-button class="adminpanel-subject-button" @click="updateSubject(subject)"><i class="el-icon-edit"></i></el-button>
+                                        <el-button class="adminpanel-subject-button" disabled><i class="el-icon-close"></i></el-button>
+                                        <div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </el-tab-pane>
+                        <el-tab-pane :label="addeditSubjectName()" name="susecond">
+                            <div>
+                                Наименование в
+                            </div>
+                            <div class="adminpanel-subject-input-row">
+                                <div class="adminpanel-subject-input-text">
+                                    именительном падеже (кто/что)
+                                </div>
+                                <el-input class="adminpanel-subject-input" v-model="newSubjectName1" placeholder="Наименование в именительном падеже" @input="onSubjectName1Change()"></el-input>
+                            </div>
+                            <div class="adminpanel-subject-input-row">
+                                <div class="adminpanel-subject-input-text">
+                                    родительном падеже (нет кого/чего)
+                                </div>
+                                <el-input v-model="newSubjectName2" placeholder="Наименование в родительном падеже"></el-input>
+                            </div>
+                            <div class="adminpanel-subject-input-row">
+                                <div class="adminpanel-subject-input-text">
+                                    дательном падеже (дать кому/чему)
+                                </div>
+                                <el-input v-model="newSubjectName3" placeholder="Наименование в дательном падеже"></el-input>
+                            </div>
+                            <div class="adminpanel-subject-input-row">
+                                <div class="adminpanel-subject-input-text">
+                                    винительном падеже (винить кого/что)
+                                </div>
+                                <el-input v-model="newSubjectName4" placeholder="Наименование в винительном падеже"></el-input>
+                            </div>
+                            <div class="adminpanel-subject-input-row">
+                                <div class="adminpanel-subject-input-text">
+                                    творительном падеже (творить кем/чем)
+                                </div>
+                                <el-input v-model="newSubjectName5" placeholder="Наименование в творительном падеже"></el-input>
+                            </div>
+                            <div class="adminpanel-subject-input-row">
+                                <div class="adminpanel-subject-input-text">
+                                    предложном падеже (о ком/о чем)
+                                </div>
+                                <el-input v-model="newSubjectName6" placeholder="Наименование в предложном падеже"></el-input>
+                            </div>
+                            <br />
+                            <div>
+                                Род
+                            </div>
+                            <el-select v-model="newSubjectGender">
+                                <el-option nullable v-for="subjectgender in subjectgenders" :key="subjectgender.id" :label="subjectgender.name" :value="subjectgender.id">
+                                </el-option>
+                            </el-select>
+                            <div>
+                                Категория
+                            </div>
+                            <el-select v-model="newSubjectCategory">
+                                <el-option nullable v-for="subjectcategory in subjectcategories" :key="subjectcategory.id" :label="subjectcategory.name" :value="subjectcategory.id">
+                                </el-option>
+                            </el-select>
+                            <el-checkbox v-if="newSubjectCategory != null && (newSubjectCategory == 1 || newSubjectCategory == 7)" v-model="newSubjectDropword">Отбрасывать слово при полном наименовании (чтобы избежать начальник отдела Отдела информационных технологий)</el-checkbox>
+                            <div v-if="newSubjectId == 0">
+                                <el-button class="adminpanel-submit" @click="addSubject">Добавить</el-button>
+                            </div>
+                            <div v-else>
+                                <el-button class="adminpanel-submit" @click="addSubject">Отредактировать</el-button>
+                                <el-button class="adminpanel-submit" @click="updateSubjectCancel">Отменить редактирование</el-button>
+                            </div>
+                        </el-tab-pane>
+                    </el-tabs>
+                </div>
             </el-tab-pane>
             <el-tab-pane label="Метки типов подразделений" name="tenth">
                 <el-tabs v-model="activeNameStructuretype" @tab-click="handleClickStructuretype">
@@ -647,6 +910,48 @@
                     <el-tab-pane label="Добавить метку типа подразделения" name="stsecond">
                         <el-input v-model="newStructuretypeName" placeholder="Название метки типа подразделения"></el-input>
                         <el-button class="adminpanel-submit" @click="addStructuretype">Добавить</el-button>
+                    </el-tab-pane>
+                </el-tabs>
+            </el-tab-pane>
+            <!--<el-tab-pane label="Коды заболеваний" name="eleventh">
+                <el-tabs v-model="activeNameIllcode" @tab-click="handleClickIllcode">
+                    <el-tab-pane label="Список кодов заболеваний" name="icfirst">
+                        <div v-if="activeName === 'eleventh'">
+                            <div class="adminpanel-illcode" v-for="illcode in illcodes">
+                                <el-input class="adminpanel-illcode-input" @input="startIllcodeUpdate" v-model="illcode.name"></el-input>
+                                <el-button class="adminpanel-illcode-button" @click="updateIllcode(illcode)"><i class="el-icon-check"></i></el-button>
+                                <el-button class="adminpanel-illcode-button" disabled><i class="el-icon-close"></i></el-button>
+                            </div>
+                        </div>
+                    </el-tab-pane>
+                    <el-tab-pane label="Добавить код заболевания" name="icsecond">
+                        <el-input v-model="newIllcodeName" placeholder="Код заболевания"></el-input>
+                        <el-button class="adminpanel-submit" @click="addIllcode">Добавить</el-button>
+                    </el-tab-pane>
+                </el-tabs>
+            </el-tab-pane>-->
+            <el-tab-pane label="Штатная комиссия" name="twelve">
+                <el-tabs v-model="staffComission" @tab-click="handleClickStaff">
+                    <el-tab-pane label="Список штатной комиссии" name="staffcommfirst">
+                        <div v-if="activeName === 'twelve'">
+                            <div class="adminpanel-illcode" style="margin-bottom: 3px" v-for="person in staffComissionList">
+                                <el-input class="adminpanel-illcode-input" @input="startStaffComissionUpdate" v-model="person.fio"></el-input>
+                                <div class="adminpanel-illcode-button" style="line-height: 0px;">
+                                    <el-row style="height: 20px;">
+                                        <el-button @click="upStaffPerson(person)" style="height: 20px; padding-bottom: 0px; padding-top: 0px;"><i class="el-icon-arrow-up"></i></el-button>
+                                    </el-row>
+                                    <el-row style="height: 20px;">
+                                        <el-button @click="downStaffPerson(person)" style="height: 20px; padding-bottom: 0px; padding-top: 0px;"><i class="el-icon-arrow-down"></i></el-button>
+                                    </el-row>
+                                </div>
+                                <el-button class="adminpanel-illcode-button" @click="updateStaffPerson(person)"><i class="el-icon-check"></i></el-button>
+                                <el-button class="adminpanel-illcode-button" @click="removeStaffPerson(person)"><i class="el-icon-close"></i></el-button>
+                            </div>
+                        </div>
+                    </el-tab-pane>
+                    <el-tab-pane label="Добавить члена штатной комиссии" name="staffcommsecond">
+                        <el-input v-model="newStaffComissionName.fio" placeholder="ФИО"></el-input>
+                        <el-button class="adminpanel-submit" @click="addStaffPerson">Добавить</el-button>
                     </el-tab-pane>
                 </el-tabs>
             </el-tab-pane>

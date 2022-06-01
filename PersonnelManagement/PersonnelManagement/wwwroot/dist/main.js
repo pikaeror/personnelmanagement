@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "76197207009a6ad24668"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "ce5e6bc72f9eaaae88f3"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -706,7 +706,7 @@
 /******/ 	__webpack_require__.h = function() { return hotCurrentHash; };
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return hotCreateRequire(129)(__webpack_require__.s = 129);
+/******/ 	return hotCreateRequire(185)(__webpack_require__.s = 185);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -938,9 +938,9 @@ module.exports = function normalizeComponent (
 Object.defineProperty(exports, "__esModule", { value: true });
 var vue_1 = __webpack_require__(0);
 exports.Vue = vue_1.default;
-var vue_class_component_1 = __webpack_require__(87);
+var vue_class_component_1 = __webpack_require__(143);
 exports.Component = vue_class_component_1.default;
-__webpack_require__(76);
+__webpack_require__(132);
 /**
  * decorator of an inject
  * @param key key
@@ -1043,71 +1043,6 @@ module.exports = (__webpack_require__(5))(206);
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-class StructureTree {
-    constructor() {
-        this.id = 0;
-        this.name = "";
-        this.parentstructure = 0;
-        this.featured = false;
-        this.nameshortened = "";
-        this.structuretype = 0;
-        this.structureregion = 0;
-        this.city = "";
-        this.street = "";
-        this.rank = 0;
-        this.department = false;
-        this.curator = 0;
-        this.head = 0;
-        this.changeorigin = 0;
-        this.changestructurelast = 0;
-        this.changestructurerename = false;
-        this.changestructureall = false;
-        this.changestructurerank = false;
-        this.changestructurelocation = false;
-        this.changestructureparent = false;
-        this.priority = 0;
-        this.printreward = false;
-        this.main = false;
-        this.name1 = "";
-        this.name2 = "";
-        this.name3 = "";
-        this.name4 = "";
-        this.name5 = "";
-        this.name6 = "";
-        this.separatestructure = false;
-        this.subject1 = 0;
-        this.subject2 = 0;
-        this.subject3 = 0;
-        this.subject4 = 0;
-        this.subject5 = 0;
-        this.subject6 = 0;
-        this.subject7 = 0;
-        this.subject8 = 0;
-        this.subject9 = 0;
-        this.subject10 = 0;
-        this.subject11 = 0;
-        this.subject12 = 0;
-        this.subject13 = 0;
-        this.subject14 = 0;
-        this.subject15 = 0;
-        this.subjectnumber = 0;
-        this.subjectnotice = "";
-        this.subjectgender = 0;
-        this.subjectindex = 0;
-        this.children_structures = [];
-        this.actual_positions = [];
-    }
-    ;
-}
-/* harmony export (immutable) */ __webpack_exports__["a"] = StructureTree;
-
-//# sourceMappingURL=structureTree.js.map
-
-/***/ }),
-/* 8 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
 class Decreeoperationsrequest {
 }
 /* harmony export (immutable) */ __webpack_exports__["a"] = Decreeoperationsrequest;
@@ -1115,49 +1050,115 @@ class Decreeoperationsrequest {
 //# sourceMappingURL=decreeoperationsrequest.js.map
 
 /***/ }),
+/* 8 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(123)();
+// imports
+
+
+// module
+exports.push([module.i, "\r\n/*##########################    TEST DATA    ######################################*/\r\n\r\n.row{\r\n    margin-bottom:10px;\r\n}\r\n\r\n\r\n/*##########################      MAIN      ######################################*/\r\n\r\n@font-face {\r\n    font-family: 'Merriweather';\r\n    src: url(" + __webpack_require__(136) + "); /* font-family: 'Merriweather', serif; */\r\n}\r\n\r\n@font-face {\r\n    font-family: 'Montserrat';\r\n    src: url(" + __webpack_require__(137) + "); /* font-family: 'Montserrat', sans-serif; */\r\n}\r\n\r\nbody {\r\n    font-family: 'Montserrat', sans-serif;\r\n    color: #333;\r\n}\r\n\r\n.el-dialog__body {\r\n    color: #333;\r\n}\r\n\r\n.el-button{\r\n    color: #333;\r\n}\r\n\r\n.el-button--success {\r\n    color: #FFF;\r\n}\r\n\r\n.el-button--primary {\r\n    color: #FFF;\r\n}\r\n\r\n.el-button--danger {\r\n    color: #FFF;\r\n}\r\n\r\n.el-button--warning {\r\n    color: #FFF;\r\n}\r\n\r\n.el-input__inner {\r\n    color: #333;\r\n}\r\n\r\n.el-input-bold{\r\n    font-weight: 600;\r\n}\r\n\r\n\r\n\r\n.el-dropdown-menu__item {\r\n    color: #333;\r\n}\r\n\r\n.el-checkbox{\r\n    color: #333;\r\n}\r\n\r\n.el-select-dropdown__item.hover {\r\n    background-color: #FFB4B4;\r\n    color: #FFF;\r\n}\r\n\r\n.checkbox-big{\r\n    \r\n}\r\n\r\n\r\n.checkbox-big .el-checkbox__inner {\r\n    width: 30px;\r\n    height: 30px;\r\n    border: 1px solid black !important;\r\n}\r\n\r\n.checkbox-big .el-checkbox__inner::after{\r\n    height: 15px;\r\n    font-weight: 600;\r\n    /*width: 10px;*/\r\n    top: 6px;\r\n    left: 12px;\r\n    \r\n}\r\n\r\n.container-grid {\r\n    display: grid;\r\n    grid-template-rows: minmax(100px, 9%) auto;\r\n    grid-template-columns: minmax(250px, 22%) auto;\r\n    grid-template-areas: \"header header\" \"sidebar main\";\r\n    height: 100vh;\r\n}\r\n\r\n.container-grid-nosidebar {\r\n    display: grid;\r\n    grid-template-rows: minmax(100px, 9%) auto;\r\n    grid-template-columns: 0 auto;\r\n    grid-template-areas: \"header header\" \"sidebar main\";\r\n    height: 100vh;\r\n}\r\n\r\n@media only screen and (max-width: 500px){\r\n    .container-grid {\r\n        display: grid;\r\n        grid-template-rows: minmax(100px, 9%) minmax(90px, 30%) auto;\r\n        grid-template-areas: \"header header\" \"sidebar sidebar\" \"main main\";\r\n        height: 100vh;\r\n    }\r\n\r\n    .container-grid-nosidebar {\r\n        display: grid;\r\n        grid-template-rows: minmax(100px, 9%) 0 auto;\r\n        grid-template-areas: \"header header\" \"sidebar sidebar\" \"main main\";\r\n        height: 100vh;\r\n    }\r\n} \r\n\r\n\r\n\r\n.top-menu {\r\n    background-color: #EEEEEE;\r\n    box-shadow: rgba(0,0,0,0.2) -0px -2px 2px inset;\r\n    border-bottom: 5px dashed #DDDDDD;\r\n   \r\n    /*min-height: 100px;*/\r\n    /*max-height: 150px;*/\r\n    grid-area: header;\r\n}\r\n\r\n.side-bar {\r\n    box-shadow: rgba(0,0,0,0.2) 0px 5px 10px inset;\r\n    background-color: #f4f4f4;\r\n    border-right: 5px dashed #DDDDDD;\r\n    grid-area: sidebar;\r\n    overflow-y: scroll;\r\n    padding-top: 5px;\r\n}\r\n\r\n.side-bar-no {\r\n    display: none;\r\n}\r\n\r\n.side-bar::-webkit-scrollbar {\r\n    display: none;\r\n}\r\n\r\n.main {\r\n    grid-area: main;\r\n    background-color: #f4f4f4;\r\n    box-shadow: rgba(0,0,0,0.2) 5px 5px 10px inset;\r\n    overflow-y: scroll;\r\n}\r\n\r\n.main::-webkit-scrollbar {\r\n    display: none;\r\n}\r\n\r\n\r\n\r\n/*################      PERSONNEL MANAGEMENT SPECIAL      ########################*/\r\n\r\n.pm-component{\r\n    margin:15px;\r\n}\r\n\r\n/*##########################    SIDE BAR    ######################################*/\r\n\r\n.sidebar{\r\n    \r\n}\r\n\r\n.sidebar-structure{\r\n    margin-top: 5px;\r\n    margin-left: 5px;\r\n    margin-right: 5px;\r\n    padding-left: 5px;\r\n    \r\n    min-height: 50px;\r\n    display: flex;\r\n    justify-content: space-between;\r\n    align-items: center;\r\n    box-shadow: rgba(0,0,0,0.4) 0px 0px 2px inset;\r\n    background-color: white;\r\n    border-radius: 0px 5px 5px 0px;\r\n    border-left: 3px groove #AAF;\r\n}\r\n\r\n.sidebar-structure-wc {\r\n    border-bottom: 2px solid #A4A4F4;\r\n}\r\n\r\n.sidebar-structure-title-childrenhas{\r\n    \r\n}\r\n\r\n.sidebar-structure-title-childrenno{\r\n\r\n}\r\n\r\n.sidebar-structure-title-childrenshowed {\r\n}\r\n\r\n/*.sidebar-structure-child {\r\n    margin-left: 75px;\r\n    border-left: 3px groove #22F;\r\n}*/\r\n\r\n.sidebar-structure-0 {\r\n    margin-left: 5px;\r\n    border-left: 3px groove #66F;\r\n}\r\n\r\n.sidebar-structure-0 > .sidebar-structuretext {\r\n    text-shadow: 0px 0px 1px #111;\r\n}\r\n\r\n.sidebar-structure-1 {\r\n    margin-left: 20px;\r\n    border-left: 3px groove #77F;\r\n    \r\n}\r\n\r\n.sidebar-structure-1 > .sidebar-structuretext {\r\n    text-shadow: 0px 0px 1px #333;\r\n}\r\n\r\n.sidebar-structure-2 {\r\n    margin-left: 35px;\r\n    border-left: 3px groove #8FF;\r\n}\r\n\r\n\r\n\r\n.sidebar-structure-3 {\r\n    margin-left: 50px;\r\n    border-left: 3px groove #FF9;\r\n}\r\n\r\n.sidebar-structure-3 > .sidebar-structuretext {\r\n    font-style: italic;\r\n}\r\n\r\n.sidebar-structure-4 {\r\n    margin-left: 60px;\r\n    border-left: 3px groove #FAF;\r\n}\r\n\r\n.sidebar-structure-5 {\r\n    margin-left: 70px;\r\n    border-left: 3px groove #BBB;\r\n}\r\n\r\n.sidebar-structure-6 {\r\n    margin-left: 75px;\r\n    border-left: 3px groove #FCC;\r\n}\r\n\r\n.sidebar-structure-7 {\r\n    margin-left: 80px;\r\n    border-left: 3px groove #DDF;\r\n}\r\n\r\n.sidebar-structure-user {\r\n    box-shadow: #99F 0px 0px 2px;\r\n    background-color: #f2f2ff;\r\n}\r\n\r\n.sidebar-selected {\r\n    border-bottom: 3px solid #f4a4a4;\r\n}\r\n\r\n.sidebar-structuretext{\r\n    cursor: pointer;\r\n    color: black;\r\n    text-align: center;\r\n    width: 100%;\r\n    margin-right: 5px;\r\n    \r\n    \r\n    /*text-shadow: 0px 0px 20px #333;*/\r\n}\r\n\r\n.sidebar-structurechecked{\r\n    margin-left: 5px;\r\n    color: red;\r\n    font-weight: 600;\r\n}\r\n\r\n.sidebar-structuredropdown {\r\n    min-width: 45px;\r\n    max-width: 45px;\r\n    align-self: stretch;\r\n    display: flex;\r\n    justify-content: center;\r\n    box-shadow: #DDDDDD -2px 0px 0px;\r\n    text-align: center;\r\n}\r\n\r\n.sidebar-structuredropdown:hover {\r\n    border-radius: 0px 5px 5px 0px;\r\n    color: red;\r\n    \r\n}\r\n\r\n.sidebar-action{\r\n    display: flex;\r\n    background-color: rgba(255,255,255,0.92);\r\n    font-size: 14px;\r\n}\r\n\r\n.sidebar-action-left{\r\n    border-right: 2px solid #EEE;\r\n    padding-right: 0px;\r\n}\r\n\r\n.sidebar-action-right {\r\n    margin-left: 2px;\r\n    margin-right: 8px;\r\n}\r\n\r\n.sidebar-icon {\r\n    word-wrap: break-word;\r\n    align-self: center;\r\n    font-size: 12px;\r\n    border-bottom: 1px solid #CCCCCC;\r\n    border-radius: 3px;\r\n}\r\n\r\n.sidebar-more {\r\n    font-size: 16px;\r\n    float: right;\r\n    margin-top: 15px;\r\n    margin-right: 5px;\r\n    padding-left: 5px;\r\n    padding-right: 5px;\r\n    border: 1px solid #DDDDDD;\r\n    box-shadow: #DDDDDD 0px 0px 3px;\r\n    border-radius: 8px;\r\n}\r\n\r\n.sidebar-more:hover{\r\n    box-shadow: #AAAAAA 0px 0px 5px;\r\n    color: red;\r\n}\r\n\r\n.sidebar-notsignedandcreated {\r\n    color: blue;\r\n    font-weight: 600;\r\n    font-size: 10px;\r\n}\r\n\r\n.sidebar-issignedandwillbecreated {\r\n    color: #6622FF;\r\n    font-weight: 600;\r\n    font-size: 10px;\r\n}\r\n\r\n.sidebar-isnotsignedandwillbecreated {\r\n    color: #0B9;\r\n    font-weight: 600;\r\n    font-size: 10px;\r\n}\r\n\r\n.sidebar-isdeletedunsigned {\r\n    color: darkorange;\r\n    font-weight: 600;\r\n    font-size: 10px;\r\n}\r\n\r\n.sidebar-iswillbedeletedsigned {\r\n    color: red;\r\n    font-weight: 600;\r\n    font-size: 10px;\r\n}\r\n\r\n.sidebar-iswillbedeletedunsigned {\r\n    color: orange;\r\n    font-weight: 600;\r\n    font-size: 10px;\r\n}\r\n\r\n.sidebar-buttongroup {\r\n    margin-top: 10px;\r\n    padding-right: 20px;\r\n}\r\n\r\n.sidebar-button{\r\n    margin-left: 10px;\r\n    margin-bottom: 3px;\r\n    width: 100%;\r\n}\r\n\r\n.sidebar-arrow-group{\r\n    display: flex;\r\n    flex-direction:column;\r\n}\r\n\r\n.sidebar-arrow {\r\n    margin: 3px;\r\n    border-radius: 3px;\r\n    border: 1px solid #E1E1E1;\r\n    font-size: 18px;\r\n    cursor: pointer;\r\n    \r\n}\r\n\r\n.sidebar-input{\r\n    width: 45px;\r\n    max-width: 45px;\r\n    margin: 0px; \r\n}\r\n\r\n.sidebar-input input{\r\n    \r\n    padding: 2px;\r\n    height: 30px;\r\n}\r\n\r\n.sidebar-button-priority {\r\n    width: 40px;\r\n    max-width: 40px;\r\n    padding: 0px;\r\n    height: 30px;\r\n    margin-left: 0px;\r\n    margin-right: 2px;\r\n}\r\n\r\n\r\n\r\n/*##########################     LOGIN      ######################################*/\r\n\r\n#login-container {\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\r\n    height: 100vh;\r\n}\r\n\r\n#login-warning {\r\n    font-size: 16px;\r\n    font-weight: bold;\r\n    text-align: center;\r\n    margin-bottom: 10px;\r\n}\r\n\r\n#login-logo-wrapper{\r\n    width: 100%;\r\n    height: 72px;\r\n    margin-top:10px;\r\n    margin-bottom: 10px;\r\n    display: flex;\r\n    justify-content: center;\r\n}\r\n\r\n#login-logo {\r\n    width: 72px;\r\n    filter: drop-shadow(2px 2px 2px #555);\r\n}\r\n\r\n#login-wrapper {\r\n    background-color: #EEEEEE;\r\n    margin-top: -10vh;\r\n    width: 360px;\r\n    /* height: 350px; */\r\n    border: 5px dashed #DDDDDD;\r\n    border-radius: 10px;\r\n    padding: 15px;\r\n    box-shadow: rgba(0,0,0,0.2) 0px 0px 20px inset;\r\n}\r\n\r\n#login-title {\r\n    font-family: 'Merriweather', serif;\r\n    font-size: 36px;\r\n    text-align: center;\r\n    text-shadow: 2px 2px 4px #AAA;\r\n}\r\n\r\n.login-input {\r\n    font-size: 16px;\r\n}\r\n\r\n.login-button {\r\n    width: 100%;\r\n    font-size: 16px;\r\n    align-self: center;\r\n}\r\n\r\n\r\n/*########################     TOP MENU      ####################################*/\r\n\r\n#topmenu {\r\n    margin: 0px;\r\n}\r\n\r\n#topmenu-container {\r\n    margin-left: 15px;\r\n    display: flex;\r\n    min-height: 90px;\r\n    height: 9vh;\r\n    /* height:100px; */\r\n    align-items: center;\r\n    justify-content: space-between;\r\n   \r\n}\r\n\r\n\r\n#topmenu-logo {\r\n    margin-bottom: 10px;\r\n    width: 40px;\r\n    height: 40px;\r\n    filter: drop-shadow(2px 2px 2px #555);\r\n    cursor: pointer;\r\n}\r\n\r\n#topmenu-rightblock {\r\n    min-width: 450px;\r\n    width: 600px;\r\n    margin-right: 5px;\r\n    display: flex;\r\n    align-items: center;\r\n    justify-content: flex-end;\r\n}\r\n\r\n#topmenu-logoblock {\r\n    \r\n    align-self: stretch;\r\n    margin-right: 0px;\r\n    padding-right: 5px;\r\n    display: flex;\r\n    align-items: center;\r\n    \r\n}\r\n\r\n#topmenu-appname {\r\n    margin-left: 10px;\r\n    cursor: pointer;\r\n    font-family: Merriweather;\r\n    font-size: 28px;\r\n    text-shadow: 2px 2px 4px #AAA;\r\n}\r\n\r\n#topmenu a {\r\n    color: black;\r\n    cursor: pointer;\r\n}\r\n\r\n.topmenu-mode{\r\n    \r\n    font-size: 12px;\r\n    margin-left: 0px;\r\n    max-width: 520px;\r\n}\r\n\r\n.topmenu-structurechecked {\r\n    margin-left: 5px;\r\n    color: red;\r\n    font-weight: 600;\r\n}\r\n\r\n#topmenu-featuredlist{\r\n    display: flex;\r\n    flex-wrap: wrap;\r\n    /*width: 1000px;*/\r\n   /*align-self: stretch;*/\r\n}\r\n\r\n.topmenu-featured {\r\n    display: flex;\r\n    font-size: 12px;\r\n    margin: 1px;\r\n    background-color: #FEFEFE;\r\n    border: 1px solid #DDD;\r\n    padding: 1px;\r\n    border-radius: 4px;\r\n    box-shadow: hsl(0,0%,90%) 0px 2px 2px;\r\n    cursor: pointer;\r\n}\r\n\r\n.topmenu-featured:hover{\r\n    \r\n    background-color: #EEF;\r\n    color: #88F;\r\n}\r\n\r\n.topmenu-structurename{\r\n    \r\n}\r\n\r\n.topmenu-structuredropdown {\r\n    min-width: 30px;\r\n    max-width: 30px;\r\n    align-self: stretch;\r\n    display: flex;\r\n    justify-content: center;\r\n    box-shadow: #DDDDDD -2px 0px 0px;\r\n    text-align: center;\r\n}\r\n\r\n.topmenu-rightblock-text {\r\n    \r\n    display: flex;\r\n    flex-direction: column;\r\n    align-content: center;\r\n    justify-content: center;\r\n    margin-right: 5px;\r\n    margin-left: 0px;\r\n    border-bottom: 1px solid #D4D4D4;\r\n    border-radius: 3px;\r\n}\r\n\r\n.topmenu-rightblock-date{\r\n    text-align: right;\r\n    cursor: pointer;\r\n}\r\n\r\n.topmenu-rightblock-date-date:hover{\r\n    color: #FFF;\r\n    text-shadow: 0px 0px 4px #A00;\r\n}\r\n\r\n.topmenu-rightblock-mode{\r\n    text-decoration:underline;\r\n    text-align: left;\r\n    cursor: pointer;\r\n}\r\n\r\n.topmenu-rightblock-decreename {\r\n    text-align: right;\r\n    color: #EE5555;\r\n    font-weight: 600;\r\n    cursor: pointer;\r\n}\r\n\r\n.topmenu-rightblock-login {\r\n    text-align: right;\r\n}\r\n\r\n.topmenu-rightblock-button {\r\n    padding-left: 12px;\r\n    padding-right: 12px;\r\n    padding-top: 10px;\r\n    padding-bottom: 10px;\r\n    box-shadow: rgba(0,0,0,0.2) 2px 2px 2px;\r\n}\r\n\r\n.topmenu-rightblock-button:hover {\r\n    box-shadow: rgba(122,0,255,0.4) 2px 2px 2px;\r\n}\r\n\r\n.decrees-create {\r\n    display: flex;\r\n}\r\n\r\n.decrees-element {\r\n    margin: 15px;\r\n    border-radius: 5px;\r\n    border: 2px solid #F2F2F2;\r\n    padding: 8px;\r\n}\r\n\r\n.decrees-margintop {\r\n    margin-top: 10px;\r\n}\r\n\r\n.decrees-selected {\r\n    background-color: #FCFCFF;\r\n    border: 2px solid #A2A2F2;\r\n}\r\n\r\n.decreeoperation-panel{\r\n    margin: 10px;\r\n    border-radius: 5px;\r\n    border: 2px solid #F2F2F2;\r\n}\r\n\r\n.decreeoperation-element {\r\n    border-top: 2px solid #F2F2F2;\r\n    border-bottom: 2px solid #F2F2F2;\r\n    margin: 10px;\r\n    font-size: 12px;\r\n    padding: 2px;\r\n    padding-left: 5px;\r\n}\r\n\r\n.decreeoperation-button {\r\n    margin-bottom: 5px;\r\n}\r\n\r\n\r\n.decreeoperation-nickname {\r\n    font-size: 18px;\r\n    font-weight: 600;\r\n    margin-bottom: 10px;\r\n}\r\n\r\n.decreeoperation-row{\r\n    display: flex;\r\n    align-items: center;\r\n}\r\n\r\n.decreeoperation-row-text{\r\n    flex-basis: 50%;\r\n}\r\n\r\n.decreeoperation-label-bold{\r\n    font-weight: 600;\r\n}\r\n\r\n.decreeoperation-ranklevel-0 {\r\n    margin-left: 10px;\r\n}\r\n\r\n.decreeoperation-ranklevel-1 {\r\n    margin-left: 25px;\r\n    border-left: 2px groove #77F;\r\n}\r\n\r\n.decreeoperation-ranklevel-2 {\r\n    margin-left: 40px;\r\n    border-left: 2px groove #88F;\r\n}\r\n\r\n.decreeoperation-ranklevel-3 {\r\n    margin-left: 55px;\r\n    border-left: 2px groove #99F;\r\n}\r\n\r\n.decreeoperation-ranklevel-4 {\r\n    margin-left: 70px;\r\n    border-left: 2px groove #AAF;\r\n}\r\n\r\n.decreeoperation-ranklevel-5 {\r\n    margin-left: 85px;\r\n    border-left: 2px groove #BBF;\r\n}\r\n\r\n.decreeoperation-ranklevel-6 {\r\n    margin-left: 100px;\r\n    border-left: 2px groove #CCF;\r\n}\r\n\r\n.decreeoperation-ranklevel-7 {\r\n    margin-left: 115px;\r\n    border-left: 2px groove #DDF;\r\n}\r\n\r\n.decreeoperation-ranklevel-8 {\r\n    margin-left: 130px;\r\n    border-left: 2px groove #EEF;\r\n}\r\n\r\n.decreeoperation-signed-decree-block{\r\n    padding-top: 2px;\r\n    margin-top: 4px;\r\n    border-top: 2px solid #D4D4E4;\r\n}\r\n\r\n.decreeoperation-signed-row-label {\r\n    min-width: 210px;\r\n}\r\n\r\n/*########################     ADMIN PANEL      #################################*/\r\n\r\n.adminpanel-title {\r\n    text-align:center;\r\n    font-family: Merriweather;\r\n    font-size:26px;\r\n    margin-bottom: 20px;\r\n}\r\n\r\n#adminpanel-users {\r\n    /*max-height: 200px;*/\r\n}\r\n\r\n#adminpanel-adduser {\r\n    /*padding: 10px;*/\r\n}\r\n\r\n.adminpanel-usercard {\r\n    border: 2px dashed hsl(0,0%,80%);\r\n    box-shadow: hsl(0,0%,80%) 0px 4px 10px;\r\n    padding: 5px;\r\n    margin: 5px;\r\n}\r\n\r\n.adminpanel-switch{\r\n    width: 400px;\r\n}\r\n\r\n.adminpanel-label {\r\n    \r\n}\r\n\r\n.adminpanel-row {\r\n    margin-top: 5px;\r\n    margin-bottom: 5px;\r\n}\r\n\r\n.adminpanel-row-label {\r\n    width: 400px;\r\n    display: inline-block;\r\n}\r\n\r\n.adminpanel-row-right{\r\n    font-weight: 600;\r\n    font-size: 24px;\r\n    color: #33A;\r\n}\r\n\r\n.adminpanel-submit {\r\n    margin-top: 10px;\r\n}\r\n\r\n.adminpanel-input {\r\n    margin-left: 0px;\r\n    width: 300px;\r\n    min-width: 100px;\r\n    \r\n    \r\n}\r\n\r\n#adminpanel-createuserwarning {\r\n    margin-left: 20px;\r\n    display: inline;\r\n}\r\n\r\n.adminpanel-rank{\r\n    display: flex;\r\n}\r\n\r\n.adminpanel-rank-input{\r\n   margin-right: 10px;\r\n}\r\n\r\n.adminpanel-rank-button{\r\n    \r\n}\r\n\r\n.adminpanel-sof {\r\n    display: flex;\r\n}\r\n\r\n.adminpanel-sof-input {\r\n    margin-right: 10px;\r\n}\r\n\r\n.adminpanel-sof-button {\r\n}\r\n\r\n.adminpanel-subject-category-container{\r\n    display: flex;\r\n}\r\n\r\n.adminpanel-subject-filter-container {\r\n    display: flex;\r\n}\r\n\r\n.adminpanel-subject-filter-div{\r\n    width: 300px;\r\n}\r\n\r\n.adminpanel-subject-filter-name{\r\n    width: 300px;\r\n}\r\n\r\n.adminpanel-subject-category {\r\n    border: 2px solid #99F;\r\n    margin: 4px;\r\n    border-radius: 8px;\r\n    padding: 2px;\r\n    cursor: pointer;\r\n    /*width: 200px;*/\r\n}\r\n\r\n.adminpanel-subject-category:hover{\r\n    background-color: #99F;\r\n    color: white;\r\n}\r\n\r\n.adminpanel-subject-category-active {\r\n    border: 2px solid #F99;\r\n    box-shadow: #F99 1px 1px 4px;\r\n}\r\n\r\n.adminpanel-subject-category-active:hover {\r\n    background-color: #F99;\r\n    color: white;\r\n}\r\n\r\n\r\n.adminpanel-subject:nth-child(2n + 1) {\r\n    background-color: #F2F2F2;\r\n}\r\n\r\n.adminpanel-subject {\r\n    display: flex;\r\n    margin-bottom: 10px;\r\n}\r\n\r\n.adminpanel-subject-input-row{\r\n    display: flex;\r\n}\r\n\r\n.adminpanel-subject-input {\r\n    \r\n    \r\n}\r\n\r\n.adminpanel-subject-input-text {\r\n    width: 400px;\r\n    margin-top: 5px;\r\n}\r\n\r\n.adminpanel-subject-text {\r\n    margin-right: 10px;\r\n    width: 15%;\r\n    font-size: 14px;\r\n}\r\n\r\n.adminpanel-subject-button {\r\n}\r\n\r\n.adminpanel-positiontype {\r\n    display: flex;\r\n}\r\n\r\n.adminpanel-positiontype-input {\r\n    margin-right: 10px;\r\n}\r\n\r\n.adminpanel-positiontype-input-smaller {\r\n    max-width: 300px;\r\n}\r\n\r\n.adminpanel-positiontype-label {\r\n    margin-right: 5px;\r\n    display: flex;\r\n    align-items: center;\r\n    font-size: 12px;\r\n}\r\n\r\n.adminpanel-positiontype-label-top {\r\n    display: flex;\r\n    justify-content: space-around;\r\n}\r\n\r\n.adminpanel-positiontype-number {\r\n    margin-right: 10px;\r\n    max-width: 150px;\r\n}\r\n\r\n.adminpanel-positiontype-number-small {\r\n    margin-right: 10px;\r\n    max-width: 80px;\r\n}\r\n\r\n.adminpanel-positiontype-button {\r\n}\r\n\r\n.adminpanel-positioncategory {\r\n    display: flex;\r\n}\r\n\r\n.adminpanel-positioncategory-input {\r\n    margin-right: 10px;\r\n}\r\n\r\n.adminpanel-positioncategory-button {\r\n}\r\n\r\n.adminpanel-mrd {\r\n    display: flex;\r\n}\r\n\r\n.adminpanel-mrd-input {\r\n    margin-right: 10px;\r\n}\r\n\r\n.adminpanel-mrd-button {\r\n}\r\n\r\n.adminpanel-altrankconditiongroup {\r\n    display: flex;\r\n}\r\n\r\n.adminpanel-altrankconditiongroup-input {\r\n    margin-right: 10px;\r\n}\r\n\r\n.adminpanel-altrankconditiongroup-button {\r\n}\r\n\r\n.adminpanel-altrankcondition {\r\n    display: flex;\r\n}\r\n\r\n.adminpanel-altrankcondition-input {\r\n    margin-right: 10px;\r\n}\r\n\r\n.adminpanel-altrankcondition-button {\r\n}\r\n\r\n.adminpanel-structureregion {\r\n    display: flex;\r\n}\r\n\r\n.adminpanel-structureregion-input {\r\n    margin-right: 10px;\r\n}\r\n\r\n.adminpanel-structureregion-button {\r\n}\r\n\r\n.adminpanel-structuretype {\r\n    display: flex;\r\n}\r\n\r\n.adminpanel-structuretype-input {\r\n    margin-right: 10px;\r\n}\r\n\r\n.adminpanel-structuretype-button {\r\n}\r\n\r\n.adminpanel-illcode {\r\n    display: flex;\r\n}\r\n\r\n.adminpanel-illcode-input {\r\n    margin-right: 10px;\r\n}\r\n\r\n.adminpanel-illcode-button {\r\n}\r\n\r\n\r\n/*####################     STRUCTURE MANAGEMENT PANEL      #########################*/\r\n\r\n#structuremanagementpanel{\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items:flex-start;\r\n    flex-direction: column;\r\n}\r\n\r\n.structuremanagementpanel-intro{\r\n    font-size:20px;\r\n}\r\n\r\n.structuremanagementpanel-input {\r\n    margin-top: 10px;\r\n}\r\n\r\n.structuremanagementpanel-checkbox{\r\n    margin-top: 15px;\r\n    align-self:flex-start;\r\n    \r\n}\r\n\r\n.structuremanagementpanel-document-select{\r\n    width: 150px;\r\n}\r\n\r\n.structuremanagementpanel-document-row{\r\n    display: flex;\r\n}\r\n\r\n.structuremanagementpanel-document-row-text {\r\n    padding-top: 15px;\r\n    width: 400px;\r\n}\r\n\r\n.structuremanagementpanel-freezed {\r\n    display: none;\r\n}\r\n\r\n#structuremanagementpanel-yesno{\r\n    margin-top: 10px;\r\n}\r\n\r\n#structuremanagementpanel-yes{\r\n    width: 100px;\r\n}\r\n\r\n#structuremanagementpanel-no {\r\n    width: 100px;\r\n}\r\n\r\n/*####################          CONTENT          #########################*/\r\n\r\n.widget {\r\n    box-shadow: #999 0px 2px 16px;\r\n    padding: 8px;\r\n    margin-bottom: 30px;\r\n    /*border-top: 2px solid #555;*/\r\n    width: 100%;\r\n    border-radius: 4px;\r\n    position: relative;\r\n    \r\n}\r\n\r\n.widget-title {\r\n    margin-bottom: 10px;\r\n    font-size: 22px;\r\n    font-family: 'Merriweather', serif;\r\n    text-align: center;\r\n}\r\n\r\n.widget-info{\r\n    font-weight: 600;\r\n}\r\n\r\n.widget-title-block{\r\n    display: flex;\r\n    justify-content: space-around;\r\n    margin-bottom: 5px;\r\n}\r\n\r\n.widget-title-block-left {\r\n    flex-basis: 20%;\r\n    padding-left: 5px;\r\n}\r\n\r\n.widget-title-block-middle {\r\n    flex-basis: 60%;\r\n}\r\n\r\n.widget-title-block-right{\r\n    flex-basis: 20%;\r\n    text-align: right;\r\n    padding-right: 20px;\r\n}\r\n\r\n.widget-title-block-addremove-openlist{\r\n    cursor: pointer;\r\n}\r\n\r\n.widget-title-block-addremove-excelbutton {\r\n    position: absolute;\r\n    right: 10px;\r\n    border: 2px solid #9C9;\r\n    border-radius: 5px;\r\n    padding: 1px;\r\n    padding-left: 5px;\r\n    padding-right: 5px;\r\n    color: white;\r\n    background-color: #7C7;\r\n    cursor: pointer;\r\n}\r\n\r\n.widget-title-block-addremove-excelbutton:hover {\r\n    background-color: #8D8;\r\n    border: 2px dashed #7A7;\r\n}\r\n\r\n.widget-title-block-addremove-list{\r\n    min-height: 100px;\r\n}\r\n\r\n.widget-title-block-addremove-div {\r\n    text-align: left;\r\n    margin-left: 120px;\r\n    display: flex;\r\n    justify-content: space-between;\r\n}\r\n\r\n.widget-title-block-add {\r\n    color: #99F;\r\n}\r\n\r\n.widget-title-block-remove {\r\n    color: #F55;\r\n}\r\n\r\n\r\n.widget-title-block-addremove-label {\r\n    text-align: right;\r\n}\r\n\r\n.widget-title-block-addremove {\r\n    width: 40px;\r\n    min-width: 40px;\r\n    font-weight: 300;\r\n}\r\n\r\n.widget-title-block-addremove-date {\r\n    font-weight: 300;\r\n}\r\n\r\n.widget-content {\r\n    \r\n}\r\n\r\n.widget-content-inline{\r\n    display: flex;\r\n    flex-wrap: wrap;\r\n    \r\n}\r\n\r\n.widget-close {\r\n    position: absolute;\r\n    top: 10px;\r\n    left: calc(100% - 30px);\r\n    cursor: pointer;\r\n    font-size: 18px;\r\n}\r\n\r\n.widget-close:hover{\r\n    color: red;\r\n    font-weight: 600;\r\n}\r\n\r\n\r\n/*####################     DEPARTMENTS LIST      #########################*/\r\n\r\n.department {\r\n    box-shadow: #AAA 0px 2px 4px;\r\n    padding: 5px;\r\n    margin-bottom: 20px;\r\n    margin-right: 20px;\r\n    width: 100%;\r\n    border-radius: 4px;\r\n    width: 250px;\r\n    height: 200px;\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\r\n    position: relative;\r\n}\r\n\r\n.department:hover {\r\n    box-shadow: #AAAAFF 0px 2px 16px;\r\n    transition: box-shadow 0.2s ease-in-out;\r\n}\r\n\r\n\r\n\r\n\r\n.department-name {\r\n    text-align: center;\r\n    cursor: pointer;\r\n    display: flex;\r\n    justify-content: center;\r\n    flex-direction: column;\r\n    height: 100%;\r\n    width: 100%;\r\n}\r\n\r\n.department-addnew {\r\n    color: transparent;\r\n    text-shadow: 0 0 2px rgba(0,0,0,0.5);\r\n    font-size: 40px;\r\n    width: 150px;\r\n    height: 150px;\r\n    display: flex;\r\n    justify-content: center;\r\n    flex-direction: column;\r\n}\r\n\r\n\r\n.department-addnew:hover {\r\n    color: black;\r\n    text-shadow: 0 0 0px;\r\n    transition: color 0.4s ease-in-out, text-shadow 0.4s ease-in-out;\r\n}\r\n\r\n.department-settings {\r\n    position: absolute;\r\n    top: 8px;\r\n    border: 1px solid #CCCCCC;\r\n    font-size: 10px;\r\n    padding: 2px;\r\n    border-radius: 5px;\r\n    left: calc(5px);\r\n    color: gray;\r\n    cursor: pointer;\r\n    z-index: 4;\r\n}\r\n\r\n.department-settings:hover{\r\n    color:black;\r\n\r\n}\r\n\r\n.department-notsignedandcreated {\r\n    color: blue;\r\n    font-weight: 600;\r\n    font-size: 10px;\r\n}\r\n\r\n.department-issignedandwillbecreated {\r\n    color: lightblue;\r\n    font-weight: 600;\r\n    font-size: 10px;\r\n}\r\n\r\n.department-isnotsignedandwillbecreated {\r\n    color: darkcyan;\r\n    font-weight: 600;\r\n    font-size: 10px;\r\n}\r\n\r\n.department-isdeletedunsigned {\r\n    color: darkorange;\r\n    font-weight: 600;\r\n    font-size: 10px;\r\n}\r\n\r\n.department-iswillbedeletedsigned {\r\n    color: red;\r\n    font-weight: 600;\r\n    font-size: 10px;\r\n}\r\n\r\n.department-iswillbedeletedunsigned {\r\n    color: orange;\r\n    font-weight: 600;\r\n    font-size: 10px;\r\n}\r\n\r\n\r\n/*####################     DEPARTMENT MANAGEMENT PANEL      #########################*/\r\n\r\n#departmentmanagementpanel {\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\r\n    flex-direction: column;\r\n}\r\n\r\n#departmentmanagementpanel-input {\r\n    margin-top: 10px;\r\n}\r\n\r\n.departmentmanagementpanel-freezed {\r\n    display: none;\r\n}\r\n\r\n#departmentmanagementpanel-yesno {\r\n    margin-top: 10px;\r\n}\r\n\r\n#departmentmanagementpanel-yes {\r\n    width: 100px;\r\n}\r\n\r\n#departmentmanagementpanel-no {\r\n    width: 100px;\r\n}\r\n\r\n\r\n/*####################     POSITIONS LIST      #########################*/\r\n\r\n.position {\r\n    box-shadow: #AAA 0px 2px 4px;\r\n    margin-bottom: 9px;\r\n    margin-right: 9px;\r\n    width: 100%;\r\n    border-radius: 4px;\r\n    width: 340px;\r\n    height: 280px;\r\n    max-width: 340px;\r\n    /* display: flex;\r\n    justify-content: center;\r\n    align-items: center;*/\r\n    padding: 7px;\r\n    position: relative;\r\n    background-color: #FFF;\r\n}\r\n\r\n.position:hover {\r\n    box-shadow: #AAAAFF 0px 2px 16px;\r\n    transition: box-shadow 0.2s ease-in-out;\r\n}\r\n\r\n\r\n.position-expiresoon {\r\n    box-shadow: #704214 0px 2px 8px;\r\n}\r\n\r\n.position-willbeadded {\r\n    background-color: #E5FFE5;\r\n}\r\n\r\n.position-willbedeleted {\r\n    background-color: #FFE5E5;\r\n}\r\n\r\n.position-expiresoon:hover {\r\n    box-shadow: #704214 0px 2px 16px;\r\n    transition: box-shadow 0.2s ease-in-out;\r\n}\r\n\r\n.position-name {\r\n    text-align: center;\r\n    cursor: pointer;\r\n    display: flex;\r\n    justify-content: flex-start;\r\n    flex-direction: column;\r\n    height: 100%;\r\n    width: 100%;\r\n    z-index: 3;\r\n    flex-basis: 50%;\r\n}\r\n\r\n.position-name-transfer {\r\n    text-align: center;\r\n    cursor: pointer;\r\n    display: flex;\r\n    justify-content: flex-start;\r\n    flex-direction: column;\r\n    height: 100%;\r\n    width: 100%;\r\n    z-index: 3;\r\n    flex-basis: 50%;\r\n}\r\n\r\n.position-grid {\r\n    display: flex;\r\n    justify-content: space-between;\r\n    flex-direction: column;\r\n    margin-top: 15px;\r\n    width: 330px;\r\n    height: 245px;\r\n}\r\n\r\n.position-grid-main {\r\n    display: flex;\r\n    justify-content: center;\r\n    flex-direction: row;\r\n}\r\n\r\n.position-leftblock {\r\n    display: flex;\r\n    justify-content: space-between;\r\n    flex-direction: column;\r\n    margin: 5px;\r\n    padding-right: 5px;\r\n    border-right: 2px solid #DDD;\r\n    min-height: 180px;\r\n    flex-basis: 25%;\r\n}\r\n\r\n.position-rightblock {\r\n    display: flex;\r\n    justify-content: flex-start;\r\n    flex-direction: column;\r\n    margin: 5px;\r\n    padding-left: 3px;\r\n    border-left: 2px solid #DDD;\r\n    flex-basis: 25%;\r\n}\r\n\r\n.position-sof {\r\n    display: flex;\r\n    justify-content: flex-start;\r\n    flex-direction: column;\r\n    margin: 0px;\r\n}\r\n\r\n.position-mrd {\r\n    margin-top: 5px;\r\n    font-size: 11.5px;\r\n    width: 100%;\r\n    word-wrap: break-word;\r\n    /*border-top: 2px solid #DDD;*/\r\n}\r\n\r\n.position-mrd-title{\r\n    font-weight: 600;\r\n}\r\n\r\n.position-nameblock {\r\n    min-height: 50px;\r\n    display: flex;\r\n    flex-direction: column;\r\n    justify-content: center;\r\n    /*background-color: rgba(244,244,244, 0.9);*/\r\n    border-radius: 0px 0px 5px 5px;\r\n    margin-bottom: -5px;\r\n    min-width: 150px;\r\n    /*text-shadow: 1px 1px 0px #FFF;*/\r\n}\r\n\r\n.position-nameblock:hover{\r\n\r\n}\r\n\r\n.position-nameblock-name {\r\n    margin-top: -15px;\r\n    font-size: 13px;\r\n    font-weight: 600;\r\n}\r\n\r\n.position-nameblock-name-alt{\r\n    font-size: 12px;\r\n}\r\n\r\n.position-nameblock-rank {\r\n    margin-top: 5px;\r\n    font-size: 12px;\r\n}\r\n\r\n.position-nameblock-category {\r\n    margin-top: 5px;\r\n    font-size: 12px;\r\n    border-bottom: 2px solid #DDD;\r\n}\r\n\r\n.position-nameblock-replaced {\r\n    margin-top: 5px;\r\n    font-size: 12px;\r\n}\r\n\r\n.position-nameblock-notice{\r\n    font-size: 11px;\r\n    margin-top:3px;\r\n}\r\n\r\n\r\n.position-dateactive-descr{\r\n    font-size: 11.5px;\r\n}\r\n\r\n.position-dateactive{\r\n    font-weight: 600;\r\n}\r\n\r\n.position-dateinactive-descr {\r\n    font-size: 11.5px;\r\n}\r\n\r\n.position-dateinactive-descr-red{\r\n    color: #F33;\r\n    text-shadow: 0px 0px 2px #F99;\r\n}\r\n\r\n.position-dateactive-descr-green {\r\n    color: #393;\r\n    text-shadow: 0px 0px 2px #9F9;\r\n}\r\n\r\n.position-dateinactive{\r\n    font-weight: 600;\r\n}\r\n\r\n\r\n.position-grid-compact {\r\n    display: flex;\r\n    justify-content: space-between;\r\n    flex-direction: column;\r\n    margin-top: 15px;\r\n    width: 330px;\r\n    height: 245px;\r\n}\r\n\r\n.position-grid-top-compact {\r\n    display: flex;\r\n    justify-content: center;\r\n    flex-direction: row;\r\n    \r\n}\r\n\r\n\r\n.position-sof-compact {\r\n    display: flex;\r\n    justify-content: flex-start;\r\n    flex-direction: column;\r\n    margin: 5px;\r\n    flex-basis: 20%;\r\n    padding-right: 5px;\r\n    border-right: 2px solid #DDD;\r\n}\r\n\r\n.position-quantity-compact {\r\n    display: flex;\r\n    justify-content: flex-start;\r\n    align-items: center;\r\n    flex-direction: column;\r\n    margin: 5px;\r\n    flex-basis: 20%;\r\n    padding-left: 5px;\r\n    border-left: 2px solid #DDD;\r\n}\r\n\r\n.position-name-compact {\r\n    text-align: center;\r\n    cursor: pointer;\r\n    display: flex;\r\n    justify-content: center;\r\n    flex-direction: column;\r\n    height: 100%;\r\n    width: 100%;\r\n    z-index: 3;\r\n    margin: 5px;\r\n}\r\n\r\n.position-nameblock-name-compact{\r\n    font-weight: 600;\r\n}\r\n\r\n.position-nameblock-name-alt-compact {\r\n    font-size: 12px;\r\n}\r\n\r\n.position-nameblock-rank-compact {\r\n    margin-top: 12px;\r\n    font-size: 12px;\r\n\r\n}\r\n\r\n.position-nameblock-replaced-compact{\r\n    margin-top: 16px;\r\n    font-size: 12px;\r\n}\r\n\r\n.position-nameblock-category-compact {\r\n    margin-top: 8px;\r\n    font-size: 12px;\r\n}\r\n\r\n.position-nameblock-compact {\r\n    min-height: 50px;\r\n    display: flex;\r\n    flex-direction: column;\r\n    justify-content: center;\r\n    background-color: rgba(244,244,244, 0.2);\r\n    border-radius: 0px 0px 5px 5px;\r\n    margin-bottom: -5px;\r\n    min-width: 150px;\r\n    margin-left: -5px;\r\n    /*text-shadow: 1px 1px 0px #FFF;*/\r\n}\r\n\r\n.position-nameblock-compact-bottom{\r\n    margin-top: 10px;\r\n}\r\n\r\n.position-nameblock-compact-quantity {\r\n    font-weight: 900;\r\n    font-size: 18px;\r\n    padding-left: 5px;\r\n    padding-right: 5px;\r\n    border-bottom: 2px solid #DDD;\r\n}\r\n\r\n.position-grid-bottom-compact {\r\n    display: flex;\r\n    justify-content: center;\r\n    flex-direction: row;\r\n    padding-top: 3px;\r\n    border-top: 2px solid #DDD;\r\n    font-size: 12px;\r\n}\r\n\r\n.position-dateactiveblock-compact{\r\n    padding: 5px;\r\n}\r\n\r\n.position-dateinactiveblock-compact{\r\n    padding: 5px;\r\n}\r\n\r\n\r\n.position-addnew {\r\n    color: transparent;\r\n    text-shadow: 0 0 2px rgba(0,0,0,0.5);\r\n    font-size: 40px;\r\n    width: 320px;\r\n    height: 260px;\r\n    display: flex;\r\n    justify-content: center;\r\n    flex-direction: column;\r\n}\r\n\r\n\r\n.position-addnew:hover {\r\n    color: black;\r\n    text-shadow: 0 0 0px;\r\n    transition: color 0.4s ease-in-out, text-shadow 0.4s ease-in-out;\r\n}\r\n\r\n.position-transfer {\r\n    font-size: 18px;\r\n    width: 450px;\r\n    height: 360px;\r\n    display: flex;\r\n    justify-content: center;\r\n    flex-direction: column;\r\n}\r\n\r\n.position-settings {\r\n    position: absolute;\r\n    top: 8px;\r\n    border: 1px solid #CCCCCC;\r\n    font-size: 10px;\r\n    padding: 2px;\r\n    border-radius: 5px;\r\n    left: calc(5px);\r\n    color: gray;\r\n    cursor: pointer;\r\n    z-index: 4;\r\n}\r\n\r\n.position-settings:hover {\r\n    color: black;\r\n}\r\n\r\n.position-info {\r\n    position: absolute;\r\n    top: 8px;\r\n    border: 1px solid #CCCCCC;\r\n    font-size: 10px;\r\n    padding: 2px;\r\n    padding-top: 4px;\r\n    padding-bottom: 4px;\r\n    border-radius: 5px;\r\n    left: calc(100% - 40px);\r\n    color: gray;\r\n    cursor: pointer;\r\n    z-index: 4;\r\n    background: none;\r\n}\r\n\r\n.position-additional {\r\n    position: absolute;\r\n    top: 8px;\r\n    border: 1px solid #CCCCCC;\r\n    font-size: 10px;\r\n    padding: 2px;\r\n    padding-top: 4px;\r\n    padding-bottom: 4px;\r\n    border-radius: 5px;\r\n    left: calc(100% - 70px);\r\n    color: gray;\r\n    cursor: pointer;\r\n    z-index: 4;\r\n    background: none;\r\n}\r\n\r\n.position-info:hover {\r\n    color: black;\r\n    background: none;\r\n}\r\n\r\n\r\n.position-plus{\r\n    height: 100%;\r\n    display: flex;\r\n    flex-direction: column;\r\n    justify-content: center;\r\n    width:100%;\r\n}\r\n\r\n.position-photo {\r\n    z-index: 0;\r\n    position: absolute;\r\n    display: block;\r\n    width: 100%;\r\n    height: 100%;\r\n    background-repeat: no-repeat;\r\n    background-size: 100%;\r\n    background-position: center;\r\n    border-radius: 5px;\r\n    \r\n}\r\n\r\n.position-nophoto {\r\n    /*filter: opacity(20%);*/\r\n}\r\n\r\n.department-div{\r\n    width: 100% !important;\r\n}\r\n\r\n.subdepartment {\r\n    box-shadow: #AAA 0px 2px 4px;\r\n    padding: 5px;\r\n    margin-bottom: 20px;\r\n    margin-top: 20px;\r\n    /*width: 100%;*/\r\n    /*width: 1480px;*/\r\n    border-radius: 4px;\r\n    height: 40px;\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\r\n    background-size: 2000px 2000px;\r\n    background-color: #F4F4F4;\r\n    background-image: repeating-linear-gradient(135deg, transparent, transparent 20px, #F8F8F8 20px, #F8F8F8 40px);\r\n    position: relative;\r\n}\r\n\r\n.subdepartment-name {\r\n    text-align: center;\r\n    cursor: pointer;\r\n    display: flex;\r\n    justify-content: center;\r\n    flex-direction: column;\r\n    height: 100%;\r\n    width: 100%;\r\n    z-index: 3;\r\n}\r\n\r\n.position-head{\r\n    border: 2px solid #FFAAAA;\r\n}\r\n\r\n.positionslist-inforow {\r\n    margin-top: 10px;\r\n    margin-bottom: 10px;\r\n}\r\n\r\n.position-history-title{\r\n    font-size: 16px;\r\n}\r\n\r\n.position-curation{\r\n    margin-top: 10px;\r\n}\r\n\r\n.position-curation-title{\r\n    font-size: 16px;\r\n}\r\n\r\n.position-curation-element{\r\n    padding-left: 2px;\r\n    margin-left: 3px;\r\n    margin-top: 3px;\r\n    font-size: 12px;\r\n    border-left: 2px solid #AAAAFF;\r\n}\r\n\r\n\r\n.position-curation-elementname {\r\n    font-weight: 600;\r\n}\r\n\r\n.position-heading {\r\n    margin-top: 10px;\r\n}\r\n\r\n.position-heading-title {\r\n    font-size: 16px;\r\n}\r\n\r\n.position-heading-element {\r\n    padding-left: 2px;\r\n    margin-left: 3px;\r\n    margin-top: 3px;\r\n    font-size: 12px;\r\n    border-left: 2px solid #AAAAFF;\r\n}\r\n\r\n.position-heading-elementname {\r\n    font-weight: 600;\r\n}\r\n\r\n.subdepartment-expiresoon {\r\n    box-shadow: #704214 0px 2px 8px;\r\n    background-size: 2000px 2000px;\r\n    background-image: repeating-linear-gradient(135deg, transparent, transparent 20px, #faf0e5 20px, #faf0e5 40px);\r\n}\r\n\r\n.subdepartment-info {\r\n    position: absolute;\r\n    top: 8px;\r\n    border: 1px solid #CCCCCC;\r\n    font-size: 10px;\r\n    padding: 2px;\r\n    padding-top: 4px;\r\n    padding-bottom: 4px;\r\n    border-radius: 5px;\r\n    left: calc(70px);\r\n    color: gray;\r\n    cursor: pointer;\r\n    z-index: 4;\r\n    background: none;\r\n}\r\n\r\n.subdepartment-info:hover {\r\n    color: black;\r\n    background: none;\r\n}\r\n\r\n.subdepartment-expiresoon:hover {\r\n    box-shadow: #704214 0px 2px 32px;\r\n    transition: box-shadow 0.2s ease-in-out;\r\n}\r\n\r\n.position-notsignedandcreated {\r\n    color: blue;\r\n    font-weight: 600;\r\n    font-size: 10px;\r\n}\r\n\r\n.position-issignedandwillbecreated {\r\n    color: lightblue;\r\n    font-weight: 600;\r\n    font-size: 10px;\r\n}\r\n\r\n.position-isnotsignedandwillbecreated {\r\n    color: darkcyan;\r\n    font-weight: 600;\r\n    font-size: 10px;\r\n}\r\n\r\n.position-isdeletedunsigned {\r\n    color: darkorange;\r\n    font-weight: 600;\r\n    font-size: 10px;\r\n}\r\n\r\n.position-iswillbedeletedsigned {\r\n    color: red;\r\n    font-weight: 600;\r\n    font-size: 10px;\r\n}\r\n\r\n.position-iswillbedeletedunsigned {\r\n    color: orange;\r\n    font-weight: 600;\r\n    font-size: 10px;\r\n}\r\n\r\n\r\n.position-structure {\r\n    box-shadow: #AAA 0px 2px 4px;\r\n    margin-bottom: 10px;\r\n    margin-right: 10px;\r\n    width: 100%;\r\n    border-radius: 4px;\r\n    width: 270px;\r\n    height: 270px;\r\n    /* display: flex;\r\n    justify-content: center;\r\n    align-items: center;*/\r\n    padding: 5px;\r\n    position: relative;\r\n    font-size: 14px;\r\n    cursor: pointer;\r\n    background-color: #FFF;\r\n}\r\n\r\n\r\n\r\n.position-structure:hover {\r\n    box-shadow: #AAAAFF 0px 2px 16px;\r\n    transition: box-shadow 0.2s ease-in-out;\r\n}\r\n\r\n.position-structure-title {\r\n    font-weight: 600;\r\n    font-size: 14px;\r\n    text-align: center;\r\n    border-bottom: 2px solid #D4D4D4;\r\n    margin-bottom: 5px;\r\n}\r\n\r\n.position-structure-back {\r\n    font-weight: 600;\r\n    font-size: 56px;\r\n    text-align: center;\r\n    line-height: 240px;\r\n    height: 100%;\r\n    vertical-align: middle;\r\n    margin-bottom: 5px;\r\n    \r\n}\r\n\r\n\r\n/*####################     POSITION PERSON MANAGEMENT PANEL      #########################*/\r\n\r\n.position-person {\r\n    box-shadow: #AAA 0px 2px 4px;\r\n    margin-bottom: 10px;\r\n    margin-right: 10px;\r\n    width: 100%;\r\n    border-radius: 4px;\r\n    width: 450px;\r\n    height: 360px;\r\n    /* display: flex;\r\n    justify-content: center;\r\n    align-items: center;*/\r\n    padding: 5px;\r\n    position: relative;\r\n    cursor: pointer;\r\n    background-color: #FFF;\r\n}\r\n\r\n.position-person:hover {\r\n    box-shadow: #AAAAFF 0px 2px 16px;\r\n    transition: box-shadow 0.2s ease-in-out;\r\n}\r\n\r\n\r\n.position-person-expiresoon {\r\n    box-shadow: #704214 0px 2px 8px;\r\n}\r\n\r\n.position-person-willbeadded {\r\n    background-color: #E5FFE5;\r\n}\r\n\r\n.position-person-willbedeleted {\r\n    background-color: #FFE5E5;\r\n}\r\n\r\n.position-person-expiresoon:hover {\r\n    box-shadow: #704214 0px 2px 16px;\r\n    transition: box-shadow 0.2s ease-in-out;\r\n}\r\n\r\n.position-person-name {\r\n    text-align: center;\r\n    cursor: pointer;\r\n    display: flex;\r\n    justify-content: flex-start;\r\n    flex-direction: column;\r\n    height: 100%;\r\n    width: 100%;\r\n    z-index: 3;\r\n    flex-basis: 50%;\r\n\r\n}\r\n\r\n.position-person-grid {\r\n    display: flex;\r\n    justify-content: space-between;\r\n    flex-direction: column;\r\n    margin-top: 15px;\r\n    width: 440px;\r\n    /*height: 280px;*/\r\n}\r\n\r\n.position-person-grid-main {\r\n    display: flex;\r\n    width: 100%;\r\n    /*background-color: red;*/\r\n    justify-content: space-around;\r\n    flex-direction: row;\r\n    max-height:120px;\r\n}\r\n\r\n.position-person-leftblock {\r\n    display: flex;\r\n    justify-content: space-between;\r\n    flex-direction: column;\r\n    margin: 5px;\r\n    padding-right: 5px;\r\n    border-right: 2px solid #DDD;\r\n    min-height: 120px;\r\n    flex-basis: 20%;\r\n}\r\n\r\n.position-person-rightblock {\r\n    display: flex;\r\n    justify-content: flex-start;\r\n    flex-direction: column;\r\n    margin: 5px;\r\n    padding-left: 3px;\r\n    border-left: 2px solid #DDD;\r\n    flex-basis: 20%;\r\n    \r\n}\r\n\r\n.position-person-button{\r\n    padding: 1px;\r\n    font-size: 10px;\r\n    margin: 0px;\r\n}\r\n\r\n.position-person-sof {\r\n    display: flex;\r\n    justify-content: flex-start;\r\n    flex-direction: column;\r\n    margin: 0px;\r\n}\r\n\r\n.position-person-noperson {\r\n    display: flex;\r\n    height: 100px;\r\n    justify-content: center;\r\n    flex-direction: row;\r\n    align-items: center;\r\n    font-size: 24px;\r\n    color: #444;\r\n    font-family: Merriweather;\r\n    margin: 0px;\r\n}\r\n\r\n.position-person-mrd {\r\n    margin-top: 5px;\r\n    font-size: 12px;\r\n    /*border-top: 2px solid #DDD;*/\r\n}\r\n\r\n.position-person-mrd-title {\r\n    font-weight: 600;\r\n}\r\n\r\n.position-person-nameblock {\r\n    min-height: 50px;\r\n    display: flex;\r\n    flex-direction: column;\r\n    justify-content: center;\r\n    /*background-color: rgba(244,244,244, 0.9);*/\r\n    border-radius: 0px 0px 5px 5px;\r\n    margin-bottom: -5px;\r\n    min-width: 150px;\r\n    /*text-shadow: 1px 1px 0px #FFF;*/\r\n}\r\n\r\n.position-nameblock:hover {\r\n}\r\n\r\n.position-person-nameblock-name {\r\n    margin-top: -15px;\r\n    text-align: center;\r\n    /*font-size: 13px;\r\n    font-weight: 600;*/\r\n}\r\n\r\n.position-person-nameblock-name-alt {\r\n    font-size: 12px;\r\n}\r\n\r\n.position-person-nameblock-rank {\r\n    margin-top: 5px;\r\n    font-size: 12px;\r\n}\r\n\r\n.position-person-grid-person {\r\n    display: flex;\r\n    width: 100%;\r\n    /*background-color: red;*/\r\n    justify-content: space-around;\r\n    flex-direction: column;\r\n\r\n}\r\n\r\n.position-person-grid-person-top{\r\n    text-align: center;\r\n}\r\n\r\n.position-person-grid-person-bottom {\r\n    display: flex;\r\n    width: 100%;\r\n    /*background-color: red;*/\r\n    justify-content: space-around;\r\n    flex-direction: row;\r\n}\r\n\r\n.position-person-grid-person-bottom-image{\r\n    height: 170px;\r\n    cursor: pointer;\r\n\r\n}\r\n\r\n.position-person-nameblock-category {\r\n    margin-top: 5px;\r\n    font-size: 12px;\r\n    border-bottom: 2px solid #DDD;\r\n}\r\n\r\n.position-person-nameblock-replaced {\r\n    margin-top: 5px;\r\n    font-size: 12px;\r\n}\r\n\r\n.position-person-nameblock-notice {\r\n    font-size: 11px;\r\n    margin-top: 3px;\r\n}\r\n\r\n.position-person-head {\r\n    border: 2px solid #FFAAAA;\r\n}\r\n\r\n.position-future-add {\r\n    color: #0A0;\r\n}\r\n\r\n.position-future-delete {\r\n    color: #A00;\r\n}\r\n\r\n/*####################     POSITION MANAGEMENT PANEL      #########################*/\r\n\r\n#positionmanagementpanel {\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: flex-start;\r\n    flex-direction: column;\r\n}\r\n\r\n.positionmanagementpanel-title{\r\n    text-align: center;\r\n    width: 100%;\r\n}\r\n\r\n.positionmanagementpanel-rankcap{\r\n    width: 100%;\r\n}\r\n\r\n#positionmanagementpanel-input {\r\n    margin-top: 10px;\r\n}\r\n\r\n.positionmanagementpanel-freezed {\r\n    display: none;\r\n}\r\n\r\n#positionmanagementpanel-yesno {\r\n    margin-top: 10px;\r\n}\r\n\r\n.positionmanagementpanel-margin {\r\n    margin-top: 10px;\r\n}\r\n\r\n.positionmanagementpanel-altrank-row{\r\n   \r\n}\r\n\r\n.positionmanagementpanel-left-margin{\r\n    margin-left: 8px;\r\n}\r\n\r\n.positionmanagementpanel-left {\r\n    white-space: nowrap;\r\n    display: flex;\r\n    justify-content: flex-start;\r\n    align-items: center;\r\n}\r\n\r\n.positionmanagementpanel-row {\r\n    \r\n    white-space: nowrap;\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\r\n}\r\n\r\n.positionmanagementpanel-fromit{\r\n    margin-top: 10px;\r\n}\r\n\r\n.positionmanagementpanel-label {\r\n    align-self: center;\r\n    margin-right: 10px;\r\n}\r\n\r\n.positionmanagementpanel-replacedbycivil{\r\n    width: 99%;\r\n    margin-bottom: 20px;\r\n    margin-left: 5px;\r\n    padding: 3px;\r\n    border-left: 2px solid #5599FF;\r\n    border-radius: 3px;\r\n}\r\n\r\n.positionmanagementpanel-rbcd{\r\n    margin-top: 10px;\r\n    margin-left: 5px;\r\n    padding-left: 3px;\r\n    border-left: 2px solid #ff88ff;\r\n}\r\n\r\n.positionmanagementpanel-flexrow {\r\n    display: flex;\r\n    justify-content: space-between;\r\n    flex-wrap: nowrap;\r\n    align-items: flex-end;\r\n    width: 100%;\r\n    /*background-color: rgba(122,122,122,0.4)*/\r\n}\r\n\r\n.positionmanagementpanel-flexrow-text {\r\n    height: 34px;\r\n    vertical-align: middle;\r\n    /*background-color: rgba(122,122,122,0.7);*/\r\n}\r\n\r\n.positionmanagementpanel-flexrow-text-first{\r\n    margin-left: 15px;\r\n}\r\n\r\n.positionmanagementpanel-flexrow-element-25{\r\n    flex-basis: 25%;\r\n}\r\n\r\n.positionmanagementpanel-flexrow-element-33{\r\n    flex-basis: 33%;\r\n}\r\n\r\n.positionmanagementpanel-flexrow-element-40 {\r\n    flex-basis: 40%;\r\n}\r\n\r\n.positionmanagementpanel-flexrow-element-50 {\r\n    flex-basis: 50%;\r\n}\r\n\r\n.positionmanagementpanel-flexrow-element-60 {\r\n    flex-basis: 60%;\r\n}\r\n\r\n.positionmanagementpanel-flexrow-element-66 {\r\n    flex-basis: 66%;\r\n}\r\n\r\n.positionmanagementpanel-flexrow-element-75 {\r\n    flex-basis: 75%;\r\n}\r\n\r\n.positionmanagementpanel-document-flexrow {\r\n    display: flex;\r\n    flex-wrap: wrap;\r\n    /*background-color: rgba(122,122,122,0.4)*/\r\n}\r\n\r\n.positionmanagementpanel-document-select {\r\n    width: 150px;\r\n}\r\n\r\n.positionmanagementpanel-document-structure{\r\n    margin: 5px;\r\n}\r\n\r\n#positionmanagementpanel-yes {\r\n    width: 100px;\r\n}\r\n\r\n#departmentmanagementpanel-no {\r\n    width: 100px;\r\n}\r\n\r\n.positionmanagementpanel-table {\r\n    border-top: 2px solid #AA77FF;\r\n    border-bottom: 2px solid #AA77FF;\r\n    text-align: center;\r\n    padding: 2px;\r\n}\r\n\r\n.positionmanagementpanel-table td{\r\n    padding-left: 3px;\r\n    padding-right: 3px;\r\n}\r\n\r\n.positionmanagementpanel-table input{\r\n    margin-left: 2px;\r\n}\r\n\r\n\r\n\r\n.positionmanagementpanel-thead {\r\n    border-bottom: 2px solid #AA77FF;\r\n}\r\n\r\n.positionmanagementpanel-thead td {\r\n    padding: 2px;\r\n    border-bottom: 2px solid #AA77FF;\r\n}\r\n\r\n.positionmanagementpanel-tbody tr {\r\n    background-color: white;\r\n}\r\n\r\n.positionmanagementpanel-tbody tr:nth-child(even) {\r\n    background-color: #D7D7D7;\r\n}\r\n\r\n\r\n\r\n.positionmanagementpanel-tr {\r\n}\r\n\r\n.positionmanagementpanel-td{\r\n\r\n}\r\n\r\n.positionmanagementpanel-curation{\r\n    padding-left: 3px;\r\n    margin-left: 5px;\r\n    border-left: 2px solid #00FFFF;\r\n}\r\n\r\n.positionmanagementpanel-curation-element {\r\n    margin-top: 5px;\r\n    padding-bottom: 3px;\r\n    margin-bottom: 5px;\r\n    border-bottom: 2px solid #E4E4E4;\r\n}\r\n\r\n.positionmanagementpanel-head {\r\n    padding-left: 3px;\r\n    margin-left: 5px;\r\n    border-left: 2px solid #FF55FF;\r\n}\r\n/*#######################     SETTINGS      ##########################*/\r\n.settingspanel-title {\r\n    text-align: center;\r\n    font-family: Merriweather;\r\n    font-size: 26px;\r\n    margin-bottom: 20px;\r\n}\r\n\r\n.settingspanel-datetitle{\r\n    margin-bottom: 10px;\r\n    text-align: center;\r\n}\r\n\r\n.settingspanel-dateinput{\r\n\r\n}\r\n\r\n.settingspanel-datebuttons{\r\n    margin-top: 10px;\r\n\r\n}\r\n\r\n\r\n/*####################     DECREE HISTORY      #########################*/\r\n\r\n.decreehistory-create {\r\n    display: flex;\r\n}\r\n\r\n.decreehistory-element {\r\n    margin: 15px;\r\n    border-radius: 5px;\r\n    border: 2px solid #F2F2F2;\r\n    padding: 8px;\r\n}\r\n\r\n.decreehistory-margintop {\r\n    margin-top: 10px;\r\n}\r\n\r\n.decreehistory-selected {\r\n    background-color: #FCFCFF;\r\n    border: 2px solid #A2A2F2;\r\n}\r\n\r\n.decreehistory-panel {\r\n    margin: 10px;\r\n    border-radius: 5px;\r\n    border: 2px solid #F2F2F2;\r\n}\r\n\r\n.decreehistory-element {\r\n    border-top: 2px solid #F2F2F2;\r\n    border-bottom: 2px solid #F2F2F2;\r\n    margin: 10px;\r\n}\r\n\r\n\r\n/*####################     PMREQUEST      #########################*/\r\n\r\n.pmrequest-title{\r\n    font-size: 20px;\r\n    padding-bottom: 10px;\r\n    font-weight: 500;\r\n}\r\n\r\n.pmrequest-row{\r\n    margin-top: 5px;\r\n    margin-bottom: 5px;\r\n    display: flex;\r\n    align-items: center;\r\n}\r\n\r\n.pmrequest-block {\r\n    padding-left: 5px;\r\n    border-left: 2px solid #AA99FF;\r\n    border-radius: 5px;\r\n}\r\n\r\n.pmrequest-label {\r\n    width: 200px;\r\n    margin-left: 15px;\r\n}\r\n\r\n.pmrequest-select{\r\n    width: 100%;\r\n}\r\n\r\n\r\n.pmrequest-marginleft{\r\n    margin-left: 20px;\r\n}\r\n\r\n.pmrequest-structure-element {\r\n    padding-left: 2px;\r\n    margin-left: 3px;\r\n    margin-top: 3px;\r\n    font-size: 12px;\r\n    border-left: 2px solid #AAAAFF;\r\n}\r\n\r\n.pmrequest-input-num{\r\n    width: 100px;\r\n}\r\n\r\n.pmrequest-spinner{\r\n    margin-left: 20px;\r\n}\r\n\r\n.pmrequest-singlerank{\r\n    margin-bottom: 15px;\r\n    padding: 2px;\r\n    border: solid 2px #EAEAEA;\r\n}\r\n\r\n.pmrequest-singlerank-title{\r\n    margin-bottom: 15px;\r\n}\r\n\r\n.pmrequest-singlerank-new{\r\n    margin-bottom: 30px;\r\n    font-size: 14px;\r\n}\r\n\r\n.pmrequest-table{\r\n    border: 3px solid #EAEAEA;\r\n    padding: 4px;\r\n}\r\n\r\n.pmrequest-table-tr {\r\n    border: 2px solid #EAEAEA;\r\n}\r\n\r\n.pmrequest-table-td {\r\n    padding: 2px;\r\n    border: 2px solid #EAEAEA;\r\n}\r\n\r\n.pmrequest-tablenew {\r\n    border: 2px solid #333;\r\n    padding: 4px;\r\n    width: 100%;\r\n}\r\n\r\n.pmrequest-tablenew > tr {\r\n    padding: 4px;\r\n    border: 2px solid #333;\r\n}\r\n\r\n.pmrequest-tablenew > tr> td {\r\n    padding-left: 4px;\r\n}\r\n\r\n\r\n.pmrequest-tablenew-td-border {\r\n    \r\n    border: 2px solid #333;\r\n}\r\n\r\n.pmrequest-tablenew-td-back-red{\r\n    background-color: #FFCACA;\r\n}\r\n\r\n.pmrequest-tablenew-td-back-green {\r\n    background-color: #CAFFCA;\r\n}\r\n\r\n.pmrequest-tablenew-back-brown {\r\n    background-color: #FFCC88;\r\n}\r\n\r\n.pmrequest-tablenew-back-green {\r\n    background-color: #CAFFCA;\r\n}\r\n\r\n.pmrequest-tablenew-back-silver {\r\n    background-color: #EAEAEA;\r\n}\r\n\r\n.pmrequest-tablenew-sub {\r\n    width: 100%;\r\n}\r\n\r\n.pmrequest-tablenew-td-subfield{\r\n    padding-right: 10px;\r\n}\r\n\r\n.pmrequest-tablenew-td-subnumber {\r\n    padding-left: 6px;\r\n    border-left: 2px solid #333;\r\n    width: 100px;\r\n}\r\n\r\n.pmrequest-tablenew-text-middle{\r\n    text-align:center;\r\n}\r\n\r\n.pmrequest-tablenew-td-autowidth {\r\n    padding-left: 6px;\r\n    border-left: 2px solid #333;\r\n}\r\n\r\n.pmrequest-tablenew-td-border-bottom {\r\n    border-bottom: 2px solid #333;\r\n}\r\n\r\n.pmrequest-tablenew-td-heightmax{\r\n    \r\n}\r\n\r\n.pmrequest-tablenew-td-border-left {\r\n    padding-left: 6px;\r\n    border-left: 2px solid #333;\r\n}\r\n\r\n.pmrequest-autowidth {\r\n    table-layout: fixed;\r\n    width: 100%;\r\n}\r\n\r\n.pmrequest-tablenew-td-table {\r\n    padding: 0px;\r\n    border: 2px solid #333;\r\n}\r\n\r\n\r\n/*##################    CANDIDATES     ######################*/\r\n\r\n.candidates-top-block {\r\n    padding-bottom: 4px;\r\n    border-bottom: 4px dashed #D9D9D9;\r\n    margin-bottom: 4px;\r\n    padding: 4px;\r\n}\r\n\r\n.candidates-title {\r\n    font-size: 24px;\r\n    text-align: center;\r\n    font-family: Merriweather;\r\n}\r\n\r\n.candidates-accordeon{\r\n    max-width: 99.9%;\r\n}\r\n\r\n.candidates-accordeon-title{\r\n    font-weight: 600;\r\n    font-size: 16px;\r\n}\r\n\r\n.candidates-cabinetes {\r\n    padding: 4px;\r\n    margin-top: 2px;\r\n    margin-bottom: 4px;\r\n    border-right: 2px solid #D4D4D4;\r\n    border-left: 2px solid #D4D4D4;\r\n    border-top: 2px solid #D4D4D4;\r\n    border-bottom: 2px solid #BAF;\r\n    border-radius: 0px 0px 6px 6px;\r\n}\r\n\r\n.candidates-cabinetes-element {\r\n    margin-top: 4px;\r\n    box-shadow: #DDD 2px 2px 2px;\r\n    padding: 4px;\r\n    min-height: 35px;\r\n}\r\n\r\n.candidates-cabinetes-element:hover {\r\n    box-shadow: #87D 0px 0px 6px;\r\n    /*border: 1px solid #BAF;*/\r\n    cursor: pointer;\r\n}\r\n\r\n.candidates-cabinetes-element-delete{\r\n    position: absolute;\r\n    right: 20px;\r\n}\r\n\r\n.candidates-hr{\r\n\r\n}\r\n\r\n.candidates-cabinete {\r\n    margin: 5px;\r\n    min-height: 400px;\r\n    box-shadow: #DDD 2px 2px 8px;\r\n    padding: 4px;\r\n}\r\n\r\n.candidates-cabinete-title {\r\n    text-align: center;\r\n    font-size: 24px;\r\n    font-family: Merriweather;\r\n}\r\n\r\n.candidates-cabinete-subtitle {\r\n    text-align: center;\r\n    font-size: 20px;\r\n}\r\n\r\n.candidates-cabinete-close{\r\n    position: absolute;\r\n    right: 20px;\r\n    margin-top: 0px;\r\n}\r\n\r\n.candidates-cabinete-close-button{\r\n    background-color: rgba(0,0,0,0);\r\n    font-weight: 600;\r\n    border: none;\r\n}\r\n\r\n.candidates-cabinete-close-button:hover{\r\n    background-color: rgba(0,0,0,0);\r\n    color: red;\r\n}\r\n\r\n.candidates-cabinete-actions{\r\n    padding-bottom: 4px;\r\n    border-bottom: 2px solid #DDD;\r\n}\r\n\r\n.candidates-cabinete-content {\r\n    display: flex;\r\n    flex-direction: column;\r\n\r\n    align-items: center;\r\n}\r\n\r\n.candidates-cabinete-document {\r\n    margin-top: 5px;\r\n    margin-right: 4px;\r\n    background-color: white;\r\n    padding: 4px;\r\n    border: 2px solid #E4E4E4;\r\n    border-radius: 2px;\r\n    box-shadow: #DDD 2px 2px 4px;\r\n    min-height: 80px;\r\n    max-width: 600px;\r\n    width: 600px;\r\n}\r\n\r\n.candidates-cabinete-document-title{\r\n    font-size: 14px;\r\n    text-align: center;\r\n    font-weight: 600;\r\n}\r\n\r\n.candidates-cabinete-document-actions{\r\n    margin-top: 8px;\r\n    margin-left: 4px;\r\n}\r\n\r\n.candidates-cabinete-document-button + .el-button {\r\n    margin-right: 0px;\r\n    margin-left: 0px;\r\n}\r\n\r\n.candidates-cabinete-remove {\r\n    margin-top: 5px;\r\n    display: flex;\r\n    max-width: 600px;\r\n    width: 600px;\r\n    justify-content: center;\r\n    box-shadow: #DDD 2px 2px 4px;\r\n}\r\n\r\n.candidates-cabinete-remove-button {\r\n    width: 100%;\r\n}\r\n\r\n.candidates-cabinete-info{\r\n    display: flex;\r\n    justify-content: center;\r\n    color: #777;\r\n    font-size: 13px;\r\n    margin: 3px;\r\n    margin-right: 10px;\r\n}\r\n\r\n.candidates-cabinete-info-element{\r\n    margin-right: 10px;\r\n    border: 1px solid #DDD;\r\n    border-radius: 3px;\r\n    padding: 2px;\r\n}\r\n\r\n/*####################     ELD      #########################*/\r\n.eld-top-block {\r\n    padding-bottom: 4px;\r\n    border-bottom: 4px dashed #D9D9D9;\r\n    margin-bottom: 4px;\r\n    padding: 4px;\r\n}\r\n\r\n.eld-search-and-create {\r\n    display: flex;\r\n    justify-content: space-between;\r\n}\r\n\r\n.eld-search-and-create:hover .eld-search-and-create-advice{\r\n    display: inline;\r\n}\r\n\r\n.eld-search-and-create-advice{\r\n    margin-right: 10px;\r\n    font-weight: 300;\r\n    font-size: 12px;\r\n    font-style: italic;\r\n    display: none;\r\n    color: #A4A4A4;\r\n}\r\n\r\n.eld-title{\r\n    font-size: 24px;\r\n    text-align: center;\r\n    font-family: Merriweather;\r\n\r\n}\r\n\r\n.eld-search{\r\n    display:flex;\r\n    flex-direction: column;\r\n    justify-content: flex-end;\r\n    \r\n}\r\n\r\n.eld-search-input{\r\n    width:300px;\r\n    margin-right: 5px;\r\n}\r\n\r\n.eld-search-main {\r\n    box-shadow: #CCC 0px 2px 2px;\r\n    padding-bottom: 4px;\r\n    \r\n}\r\n\r\n\r\n.eld-search-main-title {\r\n    text-align: center;\r\n    font-size: 21px;\r\n    font-family:Merriweather;\r\n}\r\n\r\n.eld-search-element{\r\n    cursor: pointer;\r\n    box-shadow: #CCC 0px 2px 2px;\r\n    margin: 4px;\r\n    padding: 4px;\r\n    border: 2px solid #CCC;\r\n    border-radius: 2px;\r\n    min-height: 100px;\r\n}\r\n\r\n.eld-search-element:hover{\r\n    background-color:#FFFFFA;\r\n    border: 2px solid #CFCFCC;\r\n    box-shadow: #CFCFCC 0px 2px 2px;\r\n}\r\n\r\n.eld-search-element-image {\r\n    margin: 4px;\r\n    min-width: 10%;\r\n    width: 10%;\r\n    max-width: 10%;\r\n}\r\n\r\n.eld-search-element-user {\r\n    box-shadow: #CCC 0px 2px 2px;\r\n    margin: 4px;\r\n    padding: 4px;\r\n    border: 2px solid #CCC;\r\n    border-radius: 2px;\r\n}\r\n\r\n.eld-eld {\r\n    border-top: 4px solid #DDD;\r\n    display: flex;\r\n    min-height: 500px;\r\n    box-shadow: #CCC 0px 0px 4px;\r\n    margin-top: 20px;\r\n}\r\n\r\n.eld-eld-title{\r\n    text-align: center;\r\n    font-size: 24px;\r\n    font-weight: 600;\r\n\r\n}\r\n\r\n.eld-eld-side {\r\n    /*flex-basis: 18%;*/\r\n    max-width: 250px;\r\n    \r\n    border-right: 4px solid #DDD;\r\n    box-shadow: #CCC 2px 0px 3px;\r\n}\r\n\r\n.eld-eld-side-mail {\r\n    /*flex-basis: 18%;*/\r\n    max-width: 17%;\r\n    min-width: 15%;\r\n    border-right: 4px solid #DDD;\r\n    box-shadow: #CCC 2px 0px 3px;\r\n}\r\n\r\n.eld-eld-main{\r\n    padding-left: 4px;\r\n    width: 100%;\r\n    min-height: 735px;\r\n}\r\n\r\n.eld-eld-main-mail {\r\n    max-width: 83%;\r\n    min-width: 85%;\r\n    padding-left: 4px;\r\n    /*width: 100%;*/\r\n    min-height: 735px;\r\n}\r\n\r\n.eld-eld-label {\r\n    min-width: 120px;\r\n    font-weight: 600;\r\n}\r\n\r\n.eld-eld-side-element-folder-union {\r\n    border: none;\r\n    border-bottom: 2px solid #D4D4D4;\r\n    border-radius: 0px;\r\n    background-color: rgba(31 199 165 / 80%);\r\n    margin: 4px;\r\n    padding: 2px;\r\n    font-size: 14px;\r\n    font-family: Merriweather;\r\n    text-align: center;\r\n    cursor: pointer;\r\n}\r\n\r\n.eld-eld-side-element{\r\n    border: none;\r\n    border-bottom: 2px solid #D4D4D4;\r\n    border-radius: 0px;\r\n    margin: 4px;\r\n    padding: 2px;\r\n    font-size: 14px;\r\n    font-family: Merriweather;\r\n    text-align: center;\r\n    cursor: pointer;\r\n}\r\n\r\n.eld-eld-side-element:hover {\r\n    border-bottom: 2px solid #D4D4F4;\r\n    color: #449;\r\n}\r\n\r\n.eld-eld-side-element-selected {\r\n    border-bottom: 2px solid #A4A4F4;\r\n}\r\n\r\n.eld-eld-side-element-selected:hover{\r\n    border-bottom: 2px solid #A4A4F4;\r\n}\r\n\r\n.eld-search-element-button{\r\n    margin-left: 5px;\r\n}\r\n\r\n.eld-eld-main-head {\r\n    text-align: center;\r\n    width: 100%;\r\n    font-size: 21px;\r\n    border-bottom: 4px dotted #CCC;\r\n    font-family: Merriweather;\r\n    padding: 4px;\r\n    margin-bottom: 4px;\r\n}\r\n\r\n.eld-eld-main-head-position {\r\n    font-size: 18px;\r\n}\r\n\r\n.eld-eld-main-head-partbutton {\r\n    margin-right: 0px;\r\n    margin-left: 0px;\r\n    border-radius: 4px 0px 0px 4px;\r\n    background-color: rgba(255,255,255,0.4);\r\n}\r\n\r\n.eld-eld-main-head-partbutton + .el-button {\r\n    margin-right: 0px;\r\n    margin-left: 0px;\r\n    border-left: 0px;\r\n    border-radius: 0px 0px 0px 0px;\r\n}\r\n\r\n.eld-eld-main-head-image {\r\n    margin: 4px;\r\n    min-width: 10%;\r\n    max-width: 15%;\r\n}\r\n\r\n.eld-eld-body{\r\n\r\n}\r\n\r\n.eld-eld-body-row-flex {\r\n    display: flex;\r\n}\r\n\r\n.eld-eld-body-row-flex-center {\r\n    display: flex;\r\n    justify-content: center;\r\n}\r\n\r\n.eld-eld-body-row-flex-spacebetween {\r\n    display: flex;\r\n    justify-content: space-between;\r\n}\r\n\r\neld-eld-body-row-flex-vertical{\r\n    display: flex;\r\n    flex-direction: column;\r\n}\r\n\r\n.eld-eld-body-textcenter {\r\n    text-align: center;\r\n}\r\n\r\n.eld-eld-body-row-long{\r\n    max-width: 800px;\r\n    width: 800px;\r\n}\r\n\r\n.eld-eld-body-row-medium {\r\n    max-width: 400px;\r\n    width: 400px;\r\n}\r\n\r\n.eld-eld-body-row-right{\r\n    display: flex;\r\n    flex-direction: row-reverse;\r\n}\r\n\r\n.eld-eld-body-row-short {\r\n    max-width: 160px;\r\n    width: 160px;\r\n}\r\n\r\n.eld-eld-body-row-shortest {\r\n    max-width: 135px;\r\n    width: 135px;\r\n}\r\n\r\n.eld-eld-body-row-shortest-input input{\r\n    padding: 2px;\r\n}\r\n\r\n.eld-eld-body-row-tiny {\r\n    max-width: 80px;\r\n    width: 80px;\r\n}\r\n\r\n.eld-eld-body-row-mediumshort {\r\n    max-width: 200px;\r\n    width: 200px;\r\n}\r\n\r\n.eld-eld-body-row-mediumshorter {\r\n    max-width: 300px;\r\n    width: 300px;\r\n}\r\n\r\n.eld-eld-body-submenu-button{\r\n    background-color: rgba(0,0,0,0);\r\n    border: none;\r\n    border-radius: 0px;\r\n    border-bottom: 2px solid #AAF;\r\n}\r\n\r\n.eld-eld-body-submenu-button-selected {\r\n    background-color: rgba(0,0,200,0.08);\r\n    border-top-left-radius: 10px;\r\n    border-top-right-radius: 10px;\r\n    color: #002;\r\n    font-weight: 600;\r\n\r\n    border-bottom: 2px solid #AAF;\r\n}\r\n\r\n.eld-eld-body-submenu-button-selected:focus{\r\n    background-color: rgba(0,0,200,0.08);\r\n    border-top-left-radius: 10px;\r\n    border-top-right-radius: 10px;\r\n    color: #002;\r\n    font-weight: 600;\r\n\r\n    border-bottom: 2px solid #AAF;\r\n}\r\n\r\n.eld-eld-body-row-add {\r\n    margin: 10px;\r\n    margin-left: 2px;\r\n}\r\n\r\n.eld-eld-body-select-verylong {\r\n    max-width: 1000px;\r\n    width: 1000px;\r\n}\r\n\r\n.eld-eld-body-row-selectcontainer{\r\n    margin-bottom: 5px;\r\n}\r\n\r\n.eld-eld-body-row-case{\r\n    margin-top: 10px;\r\n    margin-right: 10px;\r\n    width: 230px;\r\n}\r\n\r\n.eld-eld-body-select-long {\r\n    max-width: 800px;\r\n    width: 800px;\r\n}\r\n\r\n.eld-eld-body-select-long-request {\r\n    max-width: 100%;\r\n    min-width: 60%;\r\n    width: 100%;\r\n}\r\n\r\n\r\n.eld-eld-body-select-medium {\r\n    max-width: 400px;\r\n    width: 400px;\r\n}\r\n\r\n.eld-eld-body-select-mediumshort {\r\n    max-width: 300px;\r\n    width: 300px;\r\n}\r\n\r\n.eld-eld-body-subtitle {\r\n    font-size: 18px;\r\n    text-align: center;\r\n    margin-bottom: 10px;\r\n}\r\n\r\n.eld-eld-body-row-inline-text-margin{\r\n    margin-top: 8px;\r\n    margin-left: 8px;\r\n}\r\n\r\n.eld-eld-body-civilduration {\r\n    background-color: white;\r\n\r\n}\r\n\r\n.eld-eld-body-civilduration-margin {\r\n    height: 60px;\r\n    background-color: #F4F4F4;\r\n}\r\n\r\n.eld-eld-body-civilduration-padding-bottom{\r\n    padding-bottom: 6px;\r\n    padding-left: 6px;\r\n}\r\n\r\n.eld-eld-body-civilduration-padding-top {\r\n    padding-top: 6px;\r\n    padding-left: 6px;\r\n}\r\n\r\n.eld-eld-body-add-title {\r\n    font-size: 18px;\r\n    text-align: center;\r\n}\r\n\r\n.eld-eld-body-jobperiod-emptyspace{\r\n    margin-left: 44px;\r\n}\r\n\r\n.eld-eld-body-button-text {\r\n    cursor: pointer;\r\n    text-align: center;\r\n    text-decoration: underline;\r\n    font-size: 13px;\r\n}\r\n\r\n.eld-eld-media-element {\r\n    border-bottom: 3px solid #DDD;\r\n    padding-bottom: 4px;\r\n    margin-bottom: 4px;\r\n}\r\n\r\n.eld-eld-body-indinput {\r\n    border: solid 1px #449;\r\n    width: 400px;\r\n    background: repeating-linear-gradient(90deg, #ffffff 0px, #ffffff 25px, #000000 26px);\r\n    color: #777;\r\n    font-family: monospace;\r\n    letter-spacing: 1.57ch;\r\n    font-size: 18px;\r\n    padding-left: 0.85ch;\r\n    max-width: 367px;\r\n    width: 367px;\r\n    height: 40px;\r\n}\r\n\r\n.eld-eld-body-indinput:focus{\r\n    outline: none;\r\n    color: dodgerblue;\r\n}\r\n\r\n.eld-eld-body-passpinput {\r\n    max-width: 238px;\r\n    width: 238px;\r\n    margin-left: 5px;\r\n}\r\n\r\n.eld-eld-vacation-daysleft {\r\n    margin: 3px;\r\n    border: 1px solid #999;\r\n    \r\n}\r\n\r\n.eld-eld-vacation-daysleft-title {\r\n    border-bottom: 1px solid #999;\r\n    text-align: center;\r\n    padding: 3px;\r\n}\r\n\r\n.eld-eld-vacation-daysleft-number {\r\n    padding: 3px;\r\n    text-align: center;\r\n    font-size: 24px;\r\n}\r\n\r\n.eld-eld-vacation-daysfull {\r\n    margin: 3px;\r\n    border: 1px solid #999;\r\n}\r\n\r\n.eld-eld-vacation-daysfull-title {\r\n    border-bottom: 1px solid #999;\r\n    text-align: center;\r\n    padding: 3px;\r\n    border-right: 1px solid #999;\r\n}\r\n\r\n.eld-eld-vacation-daysfull-number {\r\n    padding: 3px;\r\n    text-align: center;\r\n    font-size: 24px;\r\n    border-right: 1px solid #999;\r\n}\r\n\r\n.eld-eld-vacation-daysfull-number-shift {\r\n    font-size: 13px;\r\n}\r\n\r\n.eld-eld-vacation-daysfull-detailed {\r\n    padding: 3px;\r\n    font-size: 13px;\r\n}\r\n\r\n.eld-eld-vacation-daysgiven {\r\n    margin: 3px;\r\n    border: 1px solid #999;\r\n}\r\n\r\n.eld-eld-vacation-daysgiven-title {\r\n    border-bottom: 1px solid #999;\r\n    text-align: center;\r\n    padding: 3px;\r\n}\r\n\r\n.eld-eld-vacation-daysgiven-number {\r\n    padding: 3px;\r\n    text-align: center;\r\n    font-size: 24px;\r\n}\r\n\r\n.eld-eld-media-label {\r\n    min-width: 100px;\r\n    font-weight: 600;\r\n}\r\n\r\n.eld-eld-media-image {\r\n    margin: 4px;\r\n    max-width: 30%;\r\n}\r\n\r\n.eld-eld-table{\r\n    margin: 3px;\r\n    box-shadow: rgba(0,0,0,0.2) 1px 1px 4px;\r\n    background-color: #FFF;\r\n}\r\n\r\n.eld-eld-table input{\r\n    border: none;\r\n    border-bottom: 2px solid;\r\n    border-color: #E4E4E4;\r\n    border-radius: 0px;\r\n    background-color: rgba(250,250,250,0);\r\n}\r\n\r\n.eld-eld-table textarea{\r\n    border: none;\r\n    border-bottom: 2px solid;\r\n    border-color: #E4E4E4;\r\n    border-radius: 0px;\r\n    background-color: rgba(250,250,250,0);\r\n}\r\n\r\n.eld-eld-table .el-checkbox{\r\n    margin-top: 10px;\r\n    margin-bottom: 10px;\r\n}\r\n\r\n.eld-eld-table label{\r\n    margin: 0px;\r\n}\r\n\r\n.eld-eld-table div{\r\n    text-align: center;\r\n}\r\n\r\n.eld-eld-table input:hover{\r\n    border-bottom: 2px solid #C2C2F2;\r\n\r\n}\r\n\r\n.eld-eld-table input:focus{\r\n    border-bottom: 2px solid #C2C2F2;\r\n\r\n}\r\n\r\n.eld-eld-table textarea:hover{\r\n    border-bottom: 2px solid #C2C2F2;\r\n\r\n}\r\n\r\n.eld-eld-table textarea:focus{\r\n    border-bottom: 2px solid #C2C2F2;\r\n\r\n}\r\n\r\n.eld-eld-table thead{\r\n    font-weight: 600;\r\n    text-align: center;\r\n}\r\n\r\n.eld-eld-table tr{\r\n    border: 2px solid #D6D6D6;\r\n    padding: 2px;\r\n   \r\n}\r\n\r\n.eld-eld-table button{\r\n    width: 125px;\r\n    background-color: rgba(255,255,255,0.5);\r\n}\r\n\r\n.eld-eld-table tr:hover{\r\n    box-shadow: rgba(0,0,0,0.4) 0px 0px 4px;\r\n}\r\n\r\n.eld-eld-table td{\r\n    border: 2px solid #D6D6D6;\r\n    padding: 2px;\r\n    vertical-align: top;\r\n}\r\n\r\n.el-upload__input{\r\n    display:none !important;\r\n}\r\n\r\n.printServlist-main{\r\n    display:flex;\r\n    margin-top: 10px;\r\n    justify-content: center;\r\n}\r\n\r\n/*###################     MODEPANEL      ########################*/\r\n\r\n.modepanel-element{\r\n    border: 2px solid #c8c8c8;\r\n    cursor: pointer;\r\n    height: 165px;\r\n    width: 165px;\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\r\n    text-align: center;\r\n    border-radius: 8px;\r\n    margin: 10px;\r\n    padding: 5px;\r\n    font-size: 16px;\r\n    text-shadow: 2px 2px 4px #333;\r\n}\r\n\r\n.modepanel-element:hover{\r\n    box-shadow: 0px 0px 6px #A77;\r\n}\r\n\r\n.modepanel-element-org{\r\n    border-color: #44A;\r\n    background-color: #66C;\r\n    color: white;\r\n}\r\n\r\n.modepanel-element-eld {\r\n    border-color: #097;\r\n    background-color: #2A9;\r\n    color: white;\r\n}\r\n\r\n.modepanel-element-candidates {\r\n    border-color: #8A0;\r\n    background-color: #AC2;\r\n    color: white;\r\n}\r\n\r\n.modepanel-element-people {\r\n    border-color: #07A;\r\n    background-color: #29C;\r\n    color: white;\r\n}\r\n\r\n.modepanel-container{\r\n    display: flex;\r\n    justify-content: center;\r\n}\r\n\r\n\r\n/*####################     PERSON DECREES      #########################*/\r\n\r\n.persondecrees-create {\r\n    display: flex;\r\n}\r\n\r\n.persondecrees-element {\r\n    margin: 15px;\r\n    border-radius: 5px;\r\n    border: 2px solid #F2F2F2;\r\n    padding: 8px;\r\n    display: flex;\r\n    \r\n    justify-content: space-between;\r\n}\r\n\r\n.persondecrees-actionmenu{\r\n    padding-top: 12px;\r\n}\r\n\r\n.persondecrees-element-author {\r\n    font-size: 12px;\r\n}\r\n\r\n.persondecrees-element-checkboxcontainer{\r\n    display: flex;\r\n    flex-direction: column;\r\n    align-content: center;\r\n    justify-content: center;\r\n    padding-right: 6px;\r\n}\r\n\r\n.persondecrees-margintop {\r\n    margin-top: 10px;\r\n}\r\n\r\n.persondecrees-selected {\r\n    background-color: #FCFCFF;\r\n    border: 2px solid #A2A2F2;\r\n}\r\n\r\n.persondecreeoperation-panel {\r\n    margin: 10px;\r\n    border-radius: 5px;\r\n    border: 2px solid #F2F2F2;\r\n}\r\n\r\n.persondecreeoperation-element {\r\n    border-top: 2px solid #F2F2F2;\r\n    border-bottom: 2px solid #F2F2F2;\r\n    margin: 10px;\r\n    font-size: 12px;\r\n    padding: 2px;\r\n    padding-left: 5px;\r\n}\r\n\r\n.persondecreeoperation-button {\r\n    margin-bottom: 5px;\r\n}\r\n\r\n.persondecreeoperation-vacationperiod-period {\r\n    display: inline-block;\r\n    width: 200px;\r\n}\r\n\r\n.persondecreeoperation-vacationperiod-days{\r\n    margin-top: 5px;\r\n}\r\n\r\n.persondecreeoperation-nickname {\r\n    font-size: 18px;\r\n    font-weight: 600;\r\n    margin-bottom: 10px;\r\n}\r\n\r\n.persondecreeoperation-row-warning{\r\n    color: red;\r\n    font-style: italic;\r\n}\r\n\r\n.persondecreeoperation-row {\r\n    display: flex;\r\n    align-items: center;\r\n}\r\n\r\n.persondecreeoperation-row-text {\r\n    flex-basis: 50%;\r\n}\r\n\r\n.persondecreeoperation-row-text-label{\r\n    font-weight: 600;\r\n    font-size: 16px;\r\n}\r\n\r\n.persondecreeoperation-label-bold {\r\n    font-weight: 600;\r\n}\r\n\r\n.persondecreeoperation-part{\r\n    border-bottom: 2px solid #EAEAEA;\r\n    margin: 3px;\r\n}\r\n\r\n.persondecreeoperation-part-title {\r\n    text-align: center;\r\n    font-size: 20px;\r\n}\r\n\r\n.persondecreeoperation-part-list{\r\n\r\n}\r\n\r\n.persondecreeoperation-part-list-element {\r\n    border-radius: 2px;\r\n    padding-left: 2px;\r\n    padding-right: 2px;\r\n    margin-left: 4px;\r\n    display: flex;\r\n    justify-content: space-between;\r\n    /*width: 850px;*/\r\n    width: 100%\r\n}\r\n\r\n.persondecreeoperation-part-list-element-indent{\r\n    text-indent: 10mm; \r\n}\r\n\r\n.persondecreeoperation-part-list-element-intro {\r\n    \r\n    margin-bottom: 7px;\r\n}\r\n\r\n.persondecreeoperation-part-list-element-margin-small {\r\n    margin-bottom: 0.2cm;\r\n}\r\n\r\n.persondecreeoperation-part-list-element-margin {\r\n    margin-bottom: 0.5cm;\r\n}\r\n\r\n.persondecreeoperation-part-list-element-margin-big {\r\n    margin-bottom: 0.75cm;\r\n}\r\n\r\n.persondecreeoperation-part-list-element-sub {\r\n    margin-bottom: 0.5cm;\r\n    text-align: center;\r\n    width: 700px;\r\n}\r\n\r\n.persondecreeoperation-part-list-element-sub-sub {\r\n    text-align: center;\r\n    width: 700px;\r\n}\r\n\r\n.persondecreeoperation-part-list-element-info{\r\n\r\n}\r\n\r\n.persondecreeoperation-part-list-element-actions {\r\n}\r\n\r\n.persondecreeoperation-part-list-element-name{\r\n    /*font-weight: 600;*/\r\n}\r\n\r\n.persondecreeoperation-part-list-element-other {\r\n}\r\n\r\n.persondecreeoperation-part-list-title {\r\n    text-align: center;\r\n    font-size: 18px;\r\n    margin-top: 20px;\r\n}\r\n\r\n.persondecreeoperation-part-add-title {\r\n    text-align: center;\r\n    font-size: 18px;\r\n    margin-top: 5px;\r\n}\r\n\r\n.persondecreeblock {\r\n    border-top: 3px solid #EEE;\r\n    border-bottom: 3px solid #EEE;\r\n    padding: 5px;\r\n    margin-top: 10px;\r\n    padding-left: 15px;\r\n}\r\n\r\n.persondecreeblock-element {\r\n    /*border-top: 3px solid #EEE;\r\n    border-bottom: 3px solid #EEE;*/\r\n    padding: 5px;\r\n    /*margin-top: 10px;\r\n    padding-left: 15px;*/\r\n}\r\n\r\n.persondecreeblock-title {\r\n    text-align: center;\r\n    font-size: 20px;\r\n    font-weight: 600;\r\n}\r\n\r\n.input-margin-left{\r\n    margin-left: 10px;\r\n}\r\n\r\n.input-padding-left-small {\r\n    padding-left: 5px;\r\n}\r\n\r\n.input-padding-right-small {\r\n    padding-right: 5px;\r\n}\r\n\r\n.validation-error{\r\n    border: 2px solid red;\r\n    border-radius: 7px;\r\n}\r\n\r\n.small-text-centered {\r\n    text-align: center;\r\n    font-size: 10px;\r\n}\r\n\r\n.bold-text-centered {\r\n    text-align: center;\r\n    font-weight: 600;\r\n}\r\n\r\n.text-centered {\r\n    text-align: center;\r\n}\r\n\r\n/*####################     POPOVER      #########################*/\r\n.popover-inforow {\r\n    margin-top: 4px;\r\n    margin-bottom: 4px;\r\n}\r\n\r\n.popover-dropdown {\r\n    margin-top: 0px;\r\n    margin-bottom: 0px;\r\n    padding-top: 0px;\r\n    padding-bottom: 0px;\r\n    padding-left: 4px;\r\n    padding-right: 2px;\r\n    font-size: 14px;\r\n}\r\n\r\n.popover-label {\r\n    width: 200px;\r\n    margin-top: 0px;\r\n    margin-bottom: 0px;\r\n}\r\n\r\n.popover-inforow-hr {\r\n    margin-top: 6px;\r\n    margin-bottom: 6px;\r\n}\r\n\r\n.popover-inforow-debug {\r\n    color: #BBB;\r\n}\r\n\r\n/*####################     LOADING      #########################*/\r\n\r\n.loading-spinner {\r\n    margin-left: 20px;\r\n}\r\n\r\n.loading-row {\r\n    margin-top: 5px;\r\n    margin-bottom: 5px;\r\n    display: flex;\r\n    align-items: center;\r\n}\r\n\r\n\r\n/*####################     TRANSITIONS      #########################*/\r\n/* Enter and leave animations can use different */\r\n/* durations and timing functions.              */\r\n.slide-fade-enter-active {\r\n    transition: all .3s ease;\r\n}\r\n\r\n.slide-fade-leave-active {\r\n    transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);\r\n}\r\n\r\n.slide-fade-enter, .slide-fade-leave-to\r\n/* .slide-fade-leave-active below version 2.1.8 */ {\r\n    transform: translateX(10px);\r\n    opacity: 0;\r\n}\r\n\r\n\r\n/*Костино*/\r\n\r\n.str1 {\r\n    position: relative;\r\n    font-size: 0.5cm;\r\n    float: left;\r\n    z-index: 1;\r\n    background-image: url(" + __webpack_require__(139) + ");\r\n    background-repeat: repeat-x;\r\n}\r\n\r\n.str2 {\r\n    position: relative;\r\n    font-size: 0.5cm;\r\n    text-indent: 15px;\r\n    background-image: url(" + __webpack_require__(141) + ");\r\n    background-repeat: repeat;\r\n}\r\n\r\n.page {\r\n    width: 100%;\r\n}\r\n\r\n#ab p {\r\n    /*line-height: 0.3cm;*/\r\n    text-indent: 1.25cm;\r\n}\r\n\r\n#ab > ol {\r\n    margin-left: 3cm;\r\n}\r\n\r\n.strP1 {\r\n    position: relative;\r\n    font-size: 0.5cm;\r\n    float: left;\r\n    z-index: 1;\r\n    background-image: url(" + __webpack_require__(140) + ");\r\n    background-repeat: repeat-x;\r\n    -webkit-print-color-adjust: exact;\r\n}\r\n\r\n.strP2 {\r\n    position: relative;\r\n    font-size: 0.5cm;\r\n    /*text-indent: 0px;*/\r\n    background-image: url(" + __webpack_require__(142) + ");\r\n    background-repeat: repeat;\r\n    -webkit-print-color-adjust: exact;\r\n}\r\n\r\n.page {\r\n    width: 100%;\r\n}\r\n\r\n.page p {\r\n    font-size: 0.5cm;\r\n}\r\n\r\n.el-table .all {\r\n    background: #ef65653d;\r\n}\r\n\r\n.el-table .success-row {\r\n    background: #f0f9eb;\r\n}\r\n\r\n.el-table .unopen-row {\r\n    background: #4251ff4d;\r\n    font-weight: bold;\r\n    border: groove;\r\n}\r\n\r\n\r\n.el-mail-number-decrees {\r\n    text-align-last: right;\r\n    align-items: center;\r\n    font-family: Arial;\r\n    font-weight: bold;\r\n    font-style: oblique;\r\n    font-size: 10px;\r\n    margin: auto;\r\n}", ""]);
+
+// exports
+
+
+/***/ }),
 /* 9 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-var formatting;
-(function (formatting) {
-    function formatter_el_table_fullname(row, column, cellValue, index) {
-        var person = cellValue;
-        return person.surname + " " + person.name + " " + person.fathername;
+class Countrycities {
+    constructor() {
+        this.country = null;
+        this.cities = new Array();
+        this.citytoadd = "";
     }
-    formatting.formatter_el_table_fullname = formatter_el_table_fullname;
-    function formatter_el_table_collumn_date(row, column, cellValue, index) {
-        var output = "";
-        try {
-            var date = new Date(cellValue);
-            output = date.toLocaleDateString('ru-Ru', { day: '2-digit', month: '2-digit', year: 'numeric' });
-        }
-        catch (e) {
-            output = cellValue;
-        }
-        return output;
+    addCity() {
+        alert(this.citytoadd);
+        this.cities.push(this.citytoadd);
+        this.citytoadd = "";
     }
-    formatting.formatter_el_table_collumn_date = formatter_el_table_collumn_date;
-    function dateFormater(date) {
-        var output = "";
-        try {
-            output = date.toLocaleDateString('ru-Ru', { day: '2-digit', month: '2-digit', year: 'numeric' });
+    /**
+     * Превращаем объект в строку
+     *
+     */
+    countrycitiesToString() {
+        let str = "";
+        if (this.country != null) {
+            str += this.country.toString();
         }
-        catch (e) {
+        else {
+            str += 0;
         }
-        return output;
+        this.cities.forEach(c => {
+            str += "&";
+            str += c;
+        });
+        if (this.citytoadd != null && this.citytoadd.length > 0) {
+            str += "&";
+            str += this.citytoadd;
+        }
+        return str;
     }
-    formatting.dateFormater = dateFormater;
-})(formatting || (formatting = {}));
-/* harmony default export */ __webpack_exports__["a"] = (formatting);
-//# sourceMappingURL=el_table_formatter.js.map
+    /**
+     * Превращаем строку в объект
+     * @param str
+     */
+    static stringToCountrycities(str) {
+        let countrycities = new Countrycities();
+        let parts = str.split('&');
+        let first = true;
+        parts.forEach(p => {
+            // Записываем id страны
+            if (first) {
+                countrycities.country = Number.parseInt(p);
+                // Превращаем в null для визуального отображения в input;
+                if (countrycities.country == 0) {
+                    countrycities.country = null;
+                }
+                first = false;
+                // Записываем название города
+            }
+            else {
+                countrycities.cities.push(p);
+            }
+        });
+        return countrycities;
+    }
+    /**
+     * Превращаем список объектов в строку
+     * @param list
+     */
+    static countrycitiesListToString(list) {
+        let str = "";
+        list.forEach(c => {
+            if (str.length > 0) {
+                str += "%";
+            }
+            str += c.countrycitiesToString();
+        });
+        return str;
+    }
+    static stringToCountrycitiesList(str) {
+        let list = new Array();
+        let bigparts = str.split('%');
+        bigparts.forEach(s => {
+            list.push(Countrycities.stringToCountrycities(s));
+        });
+        return list;
+    }
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = Countrycities;
+
+//# sourceMappingURL=countrycities.js.map
 
 /***/ }),
 /* 10 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__rights__ = __webpack_require__(40);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__rights__ = __webpack_require__(88);
 
 class User {
     constructor() {
@@ -1173,20 +1174,6 @@ class User {
 
 /***/ }),
 /* 11 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(67)();
-// imports
-
-
-// module
-exports.push([module.i, "\r\n/*##########################    TEST DATA    ######################################*/\r\n\r\n.row{\r\n    margin-bottom:10px;\r\n}\r\n\r\n\r\n/*##########################      MAIN      ######################################*/\r\n\r\n@font-face {\r\n    font-family: 'Merriweather';\r\n    src: url(" + __webpack_require__(80) + "); /* font-family: 'Merriweather', serif; */\r\n}\r\n\r\n@font-face {\r\n    font-family: 'Montserrat';\r\n    src: url(" + __webpack_require__(81) + "); /* font-family: 'Montserrat', sans-serif; */\r\n}\r\n\r\nbody {\r\n    font-family: 'Montserrat', sans-serif;\r\n    color: #333;\r\n}\r\n\r\n.el-dialog__body {\r\n    color: #333;\r\n}\r\n\r\n.el-button{\r\n    color: #333;\r\n}\r\n\r\n.el-button--success {\r\n    color: #FFF;\r\n}\r\n\r\n.el-button--primary {\r\n    color: #FFF;\r\n}\r\n\r\n.el-button--danger {\r\n    color: #FFF;\r\n}\r\n\r\n.el-button--warning {\r\n    color: #FFF;\r\n}\r\n\r\n.el-input__inner {\r\n    color: #333;\r\n}\r\n\r\n.el-input-bold{\r\n    font-weight: 600;\r\n}\r\n\r\n\r\n\r\n.el-dropdown-menu__item {\r\n    color: #333;\r\n}\r\n\r\n.el-checkbox{\r\n    color: #333;\r\n}\r\n\r\n.el-select-dropdown__item.hover {\r\n    background-color: #FFB4B4;\r\n    color: #FFF;\r\n}\r\n\r\n.checkbox-big{\r\n    \r\n}\r\n\r\n\r\n.checkbox-big .el-checkbox__inner {\r\n    width: 30px;\r\n    height: 30px;\r\n    border: 1px solid black !important;\r\n}\r\n\r\n.checkbox-big .el-checkbox__inner::after{\r\n    height: 15px;\r\n    font-weight: 600;\r\n    /*width: 10px;*/\r\n    top: 6px;\r\n    left: 12px;\r\n    \r\n}\r\n\r\n.container-grid {\r\n    display: grid;\r\n    grid-template-rows: minmax(100px, 9%) auto;\r\n    grid-template-columns: minmax(250px, 22%) auto;\r\n    grid-template-areas: \"header header\" \"sidebar main\";\r\n    height: 100vh;\r\n}\r\n\r\n.container-grid-nosidebar {\r\n    display: grid;\r\n    grid-template-rows: minmax(100px, 9%) auto;\r\n    grid-template-columns: 0 auto;\r\n    grid-template-areas: \"header header\" \"sidebar main\";\r\n    height: 100vh;\r\n}\r\n\r\n@media only screen and (max-width: 500px){\r\n    .container-grid {\r\n        display: grid;\r\n        grid-template-rows: minmax(100px, 9%) minmax(90px, 30%) auto;\r\n        grid-template-areas: \"header header\" \"sidebar sidebar\" \"main main\";\r\n        height: 100vh;\r\n    }\r\n\r\n    .container-grid-nosidebar {\r\n        display: grid;\r\n        grid-template-rows: minmax(100px, 9%) 0 auto;\r\n        grid-template-areas: \"header header\" \"sidebar sidebar\" \"main main\";\r\n        height: 100vh;\r\n    }\r\n} \r\n\r\n\r\n\r\n.top-menu {\r\n    background-color: #EEEEEE;\r\n    box-shadow: rgba(0,0,0,0.2) -0px -2px 2px inset;\r\n    border-bottom: 5px dashed #DDDDDD;\r\n   \r\n    /*min-height: 100px;*/\r\n    /*max-height: 150px;*/\r\n    grid-area: header;\r\n}\r\n\r\n.side-bar {\r\n    box-shadow: rgba(0,0,0,0.2) 0px 5px 10px inset;\r\n    background-color: #f4f4f4;\r\n    border-right: 5px dashed #DDDDDD;\r\n    grid-area: sidebar;\r\n    overflow-y: scroll;\r\n    padding-top: 5px;\r\n}\r\n\r\n.side-bar-no {\r\n    display: none;\r\n}\r\n\r\n.side-bar::-webkit-scrollbar {\r\n    display: none;\r\n}\r\n\r\n.main {\r\n    grid-area: main;\r\n    background-color: #f4f4f4;\r\n    box-shadow: rgba(0,0,0,0.2) 5px 5px 10px inset;\r\n    overflow-y: scroll;\r\n}\r\n\r\n.main::-webkit-scrollbar {\r\n    display: none;\r\n}\r\n\r\n\r\n\r\n/*################      PERSONNEL MANAGEMENT SPECIAL      ########################*/\r\n\r\n.pm-component{\r\n    margin:15px;\r\n}\r\n\r\n/*##########################    SIDE BAR    ######################################*/\r\n\r\n.sidebar{\r\n    \r\n}\r\n\r\n.sidebar-structure{\r\n    margin-top: 5px;\r\n    margin-left: 5px;\r\n    margin-right: 5px;\r\n    padding-left: 5px;\r\n    \r\n    min-height: 50px;\r\n    display: flex;\r\n    justify-content: space-between;\r\n    align-items: center;\r\n    box-shadow: rgba(0,0,0,0.4) 0px 0px 2px inset;\r\n    background-color: white;\r\n    border-radius: 0px 5px 5px 0px;\r\n    border-left: 3px groove #AAF;\r\n}\r\n\r\n.sidebar-structure-wc {\r\n    border-bottom: 2px solid #A4A4F4;\r\n}\r\n\r\n.sidebar-structure-title-childrenhas{\r\n    \r\n}\r\n\r\n.sidebar-structure-title-childrenno{\r\n\r\n}\r\n\r\n.sidebar-structure-title-childrenshowed {\r\n}\r\n\r\n/*.sidebar-structure-child {\r\n    margin-left: 75px;\r\n    border-left: 3px groove #22F;\r\n}*/\r\n\r\n.sidebar-structure-0 {\r\n    margin-left: 5px;\r\n    border-left: 3px groove #66F;\r\n}\r\n\r\n.sidebar-structure-0 > .sidebar-structuretext {\r\n    text-shadow: 0px 0px 1px #111;\r\n}\r\n\r\n.sidebar-structure-1 {\r\n    margin-left: 20px;\r\n    border-left: 3px groove #77F;\r\n    \r\n}\r\n\r\n.sidebar-structure-1 > .sidebar-structuretext {\r\n    text-shadow: 0px 0px 1px #333;\r\n}\r\n\r\n.sidebar-structure-2 {\r\n    margin-left: 35px;\r\n    border-left: 3px groove #8FF;\r\n}\r\n\r\n\r\n\r\n.sidebar-structure-3 {\r\n    margin-left: 50px;\r\n    border-left: 3px groove #FF9;\r\n}\r\n\r\n.sidebar-structure-3 > .sidebar-structuretext {\r\n    font-style: italic;\r\n}\r\n\r\n.sidebar-structure-4 {\r\n    margin-left: 60px;\r\n    border-left: 3px groove #FAF;\r\n}\r\n\r\n.sidebar-structure-5 {\r\n    margin-left: 70px;\r\n    border-left: 3px groove #BBB;\r\n}\r\n\r\n.sidebar-structure-6 {\r\n    margin-left: 75px;\r\n    border-left: 3px groove #FCC;\r\n}\r\n\r\n.sidebar-structure-7 {\r\n    margin-left: 80px;\r\n    border-left: 3px groove #DDF;\r\n}\r\n\r\n.sidebar-structure-user {\r\n    box-shadow: #99F 0px 0px 2px;\r\n    background-color: #f2f2ff;\r\n}\r\n\r\n.sidebar-selected {\r\n    border-bottom: 3px solid #f4a4a4;\r\n}\r\n\r\n.sidebar-structuretext{\r\n    cursor: pointer;\r\n    color: black;\r\n    text-align: center;\r\n    width: 100%;\r\n    margin-right: 5px;\r\n    \r\n    \r\n    /*text-shadow: 0px 0px 20px #333;*/\r\n}\r\n\r\n.sidebar-structurechecked{\r\n    margin-left: 5px;\r\n    color: red;\r\n    font-weight: 600;\r\n}\r\n\r\n.sidebar-structuredropdown {\r\n    min-width: 45px;\r\n    max-width: 45px;\r\n    align-self: stretch;\r\n    display: flex;\r\n    justify-content: center;\r\n    box-shadow: #DDDDDD -2px 0px 0px;\r\n    text-align: center;\r\n}\r\n\r\n.sidebar-structuredropdown:hover {\r\n    border-radius: 0px 5px 5px 0px;\r\n    color: red;\r\n    \r\n}\r\n\r\n.sidebar-action{\r\n    display: flex;\r\n    background-color: rgba(255,255,255,0.92);\r\n    font-size: 14px;\r\n}\r\n\r\n.sidebar-action-left{\r\n    border-right: 2px solid #EEE;\r\n    padding-right: 0px;\r\n}\r\n\r\n.sidebar-action-right {\r\n    margin-left: 2px;\r\n    margin-right: 8px;\r\n}\r\n\r\n.sidebar-icon {\r\n    word-wrap: break-word;\r\n    align-self: center;\r\n    font-size: 12px;\r\n    border-bottom: 1px solid #CCCCCC;\r\n    border-radius: 3px;\r\n}\r\n\r\n.sidebar-more {\r\n    font-size: 16px;\r\n    float: right;\r\n    margin-top: 15px;\r\n    margin-right: 5px;\r\n    padding-left: 5px;\r\n    padding-right: 5px;\r\n    border: 1px solid #DDDDDD;\r\n    box-shadow: #DDDDDD 0px 0px 3px;\r\n    border-radius: 8px;\r\n}\r\n\r\n.sidebar-more:hover{\r\n    box-shadow: #AAAAAA 0px 0px 5px;\r\n    color: red;\r\n}\r\n\r\n.sidebar-notsignedandcreated {\r\n    color: blue;\r\n    font-weight: 600;\r\n    font-size: 10px;\r\n}\r\n\r\n.sidebar-issignedandwillbecreated {\r\n    color: #6622FF;\r\n    font-weight: 600;\r\n    font-size: 10px;\r\n}\r\n\r\n.sidebar-isnotsignedandwillbecreated {\r\n    color: #0B9;\r\n    font-weight: 600;\r\n    font-size: 10px;\r\n}\r\n\r\n.sidebar-isdeletedunsigned {\r\n    color: darkorange;\r\n    font-weight: 600;\r\n    font-size: 10px;\r\n}\r\n\r\n.sidebar-iswillbedeletedsigned {\r\n    color: red;\r\n    font-weight: 600;\r\n    font-size: 10px;\r\n}\r\n\r\n.sidebar-iswillbedeletedunsigned {\r\n    color: orange;\r\n    font-weight: 600;\r\n    font-size: 10px;\r\n}\r\n\r\n.sidebar-buttongroup {\r\n    margin-top: 10px;\r\n    padding-right: 20px;\r\n}\r\n\r\n.sidebar-button{\r\n    margin-left: 10px;\r\n    margin-bottom: 3px;\r\n    width: 100%;\r\n}\r\n\r\n.sidebar-arrow-group{\r\n    display: flex;\r\n    flex-direction:column;\r\n}\r\n\r\n.sidebar-arrow {\r\n    margin: 3px;\r\n    border-radius: 3px;\r\n    border: 1px solid #E1E1E1;\r\n    font-size: 18px;\r\n    cursor: pointer;\r\n    \r\n}\r\n\r\n.sidebar-input{\r\n    width: 45px;\r\n    max-width: 45px;\r\n    margin: 0px; \r\n}\r\n\r\n.sidebar-input input{\r\n    \r\n    padding: 2px;\r\n    height: 30px;\r\n}\r\n\r\n.sidebar-button-priority {\r\n    width: 40px;\r\n    max-width: 40px;\r\n    padding: 0px;\r\n    height: 30px;\r\n    margin-left: 0px;\r\n    margin-right: 2px;\r\n}\r\n\r\n\r\n\r\n/*##########################     LOGIN      ######################################*/\r\n\r\n#login-container {\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\r\n    height: 100vh;\r\n}\r\n\r\n#login-warning {\r\n    font-size: 16px;\r\n    font-weight: bold;\r\n    text-align: center;\r\n    margin-bottom: 10px;\r\n}\r\n\r\n#login-logo-wrapper{\r\n    width: 100%;\r\n    height: 72px;\r\n    margin-top:10px;\r\n    margin-bottom: 10px;\r\n    display: flex;\r\n    justify-content: center;\r\n}\r\n\r\n#login-logo {\r\n    width: 72px;\r\n    filter: drop-shadow(2px 2px 2px #555);\r\n}\r\n\r\n#login-wrapper {\r\n    background-color: #EEEEEE;\r\n    margin-top: -10vh;\r\n    width: 360px;\r\n    /* height: 350px; */\r\n    border: 5px dashed #DDDDDD;\r\n    border-radius: 10px;\r\n    padding: 15px;\r\n    box-shadow: rgba(0,0,0,0.2) 0px 0px 20px inset;\r\n}\r\n\r\n#login-title {\r\n    font-family: 'Merriweather', serif;\r\n    font-size: 36px;\r\n    text-align: center;\r\n    text-shadow: 2px 2px 4px #AAA;\r\n}\r\n\r\n.login-input {\r\n    font-size: 16px;\r\n}\r\n\r\n.login-button {\r\n    width: 100%;\r\n    font-size: 16px;\r\n    align-self: center;\r\n}\r\n\r\n\r\n/*########################     TOP MENU      ####################################*/\r\n\r\n#topmenu {\r\n    margin: 0px;\r\n}\r\n\r\n#topmenu-container {\r\n    margin-left: 15px;\r\n    display: flex;\r\n    min-height: 90px;\r\n    height: 9vh;\r\n    /* height:100px; */\r\n    align-items: center;\r\n    justify-content: space-between;\r\n   \r\n}\r\n\r\n\r\n#topmenu-logo {\r\n    margin-bottom: 10px;\r\n    width: 40px;\r\n    height: 40px;\r\n    filter: drop-shadow(2px 2px 2px #555);\r\n    cursor: pointer;\r\n}\r\n\r\n#topmenu-rightblock {\r\n    min-width: 450px;\r\n    width: 600px;\r\n    margin-right: 5px;\r\n    display: flex;\r\n    align-items: center;\r\n    justify-content: flex-end;\r\n}\r\n\r\n#topmenu-logoblock {\r\n    \r\n    align-self: stretch;\r\n    margin-right: 0px;\r\n    padding-right: 5px;\r\n    display: flex;\r\n    align-items: center;\r\n    \r\n}\r\n\r\n#topmenu-appname {\r\n    margin-left: 10px;\r\n    cursor: pointer;\r\n    font-family: Merriweather;\r\n    font-size: 28px;\r\n    text-shadow: 2px 2px 4px #AAA;\r\n}\r\n\r\n#topmenu a {\r\n    color: black;\r\n    cursor: pointer;\r\n}\r\n\r\n.topmenu-mode{\r\n    \r\n    font-size: 12px;\r\n    margin-left: 0px;\r\n    max-width: 520px;\r\n}\r\n\r\n.topmenu-structurechecked {\r\n    margin-left: 5px;\r\n    color: red;\r\n    font-weight: 600;\r\n}\r\n\r\n#topmenu-featuredlist{\r\n    display: flex;\r\n    flex-wrap: wrap;\r\n    /*width: 1000px;*/\r\n   /*align-self: stretch;*/\r\n}\r\n\r\n.topmenu-featured {\r\n    display: flex;\r\n    font-size: 12px;\r\n    margin: 1px;\r\n    background-color: #FEFEFE;\r\n    border: 1px solid #DDD;\r\n    padding: 1px;\r\n    border-radius: 4px;\r\n    box-shadow: hsl(0,0%,90%) 0px 2px 2px;\r\n    cursor: pointer;\r\n}\r\n\r\n.topmenu-featured:hover{\r\n    \r\n    background-color: #EEF;\r\n    color: #88F;\r\n}\r\n\r\n.topmenu-structurename{\r\n    \r\n}\r\n\r\n.topmenu-structuredropdown {\r\n    min-width: 30px;\r\n    max-width: 30px;\r\n    align-self: stretch;\r\n    display: flex;\r\n    justify-content: center;\r\n    box-shadow: #DDDDDD -2px 0px 0px;\r\n    text-align: center;\r\n}\r\n\r\n.topmenu-rightblock-text {\r\n    \r\n    display: flex;\r\n    flex-direction: column;\r\n    align-content: center;\r\n    justify-content: center;\r\n    margin-right: 5px;\r\n    margin-left: 0px;\r\n    border-bottom: 1px solid #D4D4D4;\r\n    border-radius: 3px;\r\n}\r\n\r\n.topmenu-rightblock-date{\r\n    text-align: right;\r\n    cursor: pointer;\r\n}\r\n\r\n.topmenu-rightblock-date-date:hover{\r\n    color: #FFF;\r\n    text-shadow: 0px 0px 4px #A00;\r\n}\r\n\r\n.topmenu-rightblock-mode{\r\n    text-decoration:underline;\r\n    text-align: left;\r\n    cursor: pointer;\r\n}\r\n\r\n.topmenu-rightblock-decreename {\r\n    text-align: right;\r\n    color: #EE5555;\r\n    font-weight: 600;\r\n    cursor: pointer;\r\n}\r\n\r\n.topmenu-rightblock-login {\r\n    text-align: right;\r\n}\r\n\r\n.topmenu-rightblock-button {\r\n    padding-left: 12px;\r\n    padding-right: 12px;\r\n    padding-top: 10px;\r\n    padding-bottom: 10px;\r\n    box-shadow: rgba(0,0,0,0.2) 2px 2px 2px;\r\n}\r\n\r\n.topmenu-rightblock-button:hover {\r\n    box-shadow: rgba(122,0,255,0.4) 2px 2px 2px;\r\n}\r\n\r\n.decrees-create {\r\n    display: flex;\r\n}\r\n\r\n.decrees-element {\r\n    margin: 15px;\r\n    border-radius: 5px;\r\n    border: 2px solid #F2F2F2;\r\n    padding: 8px;\r\n}\r\n\r\n.decrees-margintop {\r\n    margin-top: 10px;\r\n}\r\n\r\n.decrees-selected {\r\n    background-color: #FCFCFF;\r\n    border: 2px solid #A2A2F2;\r\n}\r\n\r\n.decreeoperation-panel{\r\n    margin: 10px;\r\n    border-radius: 5px;\r\n    border: 2px solid #F2F2F2;\r\n}\r\n\r\n.decreeoperation-element {\r\n    border-top: 2px solid #F2F2F2;\r\n    border-bottom: 2px solid #F2F2F2;\r\n    margin: 10px;\r\n    font-size: 12px;\r\n    padding: 2px;\r\n    padding-left: 5px;\r\n}\r\n\r\n.decreeoperation-button {\r\n    margin-bottom: 5px;\r\n}\r\n\r\n\r\n.decreeoperation-nickname {\r\n    font-size: 18px;\r\n    font-weight: 600;\r\n    margin-bottom: 10px;\r\n}\r\n\r\n.decreeoperation-row{\r\n    display: flex;\r\n    align-items: center;\r\n}\r\n\r\n.decreeoperation-row-text{\r\n    flex-basis: 50%;\r\n}\r\n\r\n.decreeoperation-label-bold{\r\n    font-weight: 600;\r\n}\r\n\r\n.decreeoperation-ranklevel-0 {\r\n    margin-left: 10px;\r\n}\r\n\r\n.decreeoperation-ranklevel-1 {\r\n    margin-left: 25px;\r\n    border-left: 2px groove #77F;\r\n}\r\n\r\n.decreeoperation-ranklevel-2 {\r\n    margin-left: 40px;\r\n    border-left: 2px groove #88F;\r\n}\r\n\r\n.decreeoperation-ranklevel-3 {\r\n    margin-left: 55px;\r\n    border-left: 2px groove #99F;\r\n}\r\n\r\n.decreeoperation-ranklevel-4 {\r\n    margin-left: 70px;\r\n    border-left: 2px groove #AAF;\r\n}\r\n\r\n.decreeoperation-ranklevel-5 {\r\n    margin-left: 85px;\r\n    border-left: 2px groove #BBF;\r\n}\r\n\r\n.decreeoperation-ranklevel-6 {\r\n    margin-left: 100px;\r\n    border-left: 2px groove #CCF;\r\n}\r\n\r\n.decreeoperation-ranklevel-7 {\r\n    margin-left: 115px;\r\n    border-left: 2px groove #DDF;\r\n}\r\n\r\n.decreeoperation-ranklevel-8 {\r\n    margin-left: 130px;\r\n    border-left: 2px groove #EEF;\r\n}\r\n\r\n.decreeoperation-signed-decree-block{\r\n    padding-top: 2px;\r\n    margin-top: 4px;\r\n    border-top: 2px solid #D4D4E4;\r\n}\r\n\r\n.decreeoperation-signed-row-label {\r\n    min-width: 210px;\r\n}\r\n\r\n/*########################     ADMIN PANEL      #################################*/\r\n\r\n.adminpanel-title {\r\n    text-align:center;\r\n    font-family: Merriweather;\r\n    font-size:26px;\r\n    margin-bottom: 20px;\r\n}\r\n\r\n#adminpanel-users {\r\n    /*max-height: 200px;*/\r\n}\r\n\r\n#adminpanel-adduser {\r\n    /*padding: 10px;*/\r\n}\r\n\r\n.adminpanel-usercard {\r\n    border: 2px dashed hsl(0,0%,80%);\r\n    box-shadow: hsl(0,0%,80%) 0px 4px 10px;\r\n    padding: 5px;\r\n    margin: 5px;\r\n}\r\n\r\n.adminpanel-switch{\r\n    width: 400px;\r\n}\r\n\r\n.adminpanel-label {\r\n    \r\n}\r\n\r\n.adminpanel-row {\r\n    margin-top: 5px;\r\n    margin-bottom: 5px;\r\n}\r\n\r\n.adminpanel-row-label {\r\n    width: 400px;\r\n    display: inline-block;\r\n}\r\n\r\n.adminpanel-row-right{\r\n    font-weight: 600;\r\n    font-size: 24px;\r\n    color: #33A;\r\n}\r\n\r\n.adminpanel-submit {\r\n    margin-top: 10px;\r\n}\r\n\r\n.adminpanel-input {\r\n    margin-left: 0px;\r\n    width: 300px;\r\n    min-width: 100px;\r\n    \r\n    \r\n}\r\n\r\n#adminpanel-createuserwarning {\r\n    margin-left: 20px;\r\n    display: inline;\r\n}\r\n\r\n.adminpanel-rank{\r\n    display: flex;\r\n}\r\n\r\n.adminpanel-rank-input{\r\n   margin-right: 10px;\r\n}\r\n\r\n.adminpanel-rank-button{\r\n    \r\n}\r\n\r\n.adminpanel-sof {\r\n    display: flex;\r\n}\r\n\r\n.adminpanel-sof-input {\r\n    margin-right: 10px;\r\n}\r\n\r\n.adminpanel-sof-button {\r\n}\r\n\r\n.adminpanel-subject-category-container{\r\n    display: flex;\r\n}\r\n\r\n.adminpanel-subject-filter-container {\r\n    display: flex;\r\n}\r\n\r\n.adminpanel-subject-filter-div{\r\n    width: 300px;\r\n}\r\n\r\n.adminpanel-subject-filter-name{\r\n    width: 300px;\r\n}\r\n\r\n.adminpanel-subject-category {\r\n    border: 2px solid #99F;\r\n    margin: 4px;\r\n    border-radius: 8px;\r\n    padding: 2px;\r\n    cursor: pointer;\r\n    /*width: 200px;*/\r\n}\r\n\r\n.adminpanel-subject-category:hover{\r\n    background-color: #99F;\r\n    color: white;\r\n}\r\n\r\n.adminpanel-subject-category-active {\r\n    border: 2px solid #F99;\r\n    box-shadow: #F99 1px 1px 4px;\r\n}\r\n\r\n.adminpanel-subject-category-active:hover {\r\n    background-color: #F99;\r\n    color: white;\r\n}\r\n\r\n\r\n.adminpanel-subject:nth-child(2n + 1) {\r\n    background-color: #F2F2F2;\r\n}\r\n\r\n.adminpanel-subject {\r\n    display: flex;\r\n    margin-bottom: 10px;\r\n}\r\n\r\n.adminpanel-subject-input-row{\r\n    display: flex;\r\n}\r\n\r\n.adminpanel-subject-input {\r\n    \r\n    \r\n}\r\n\r\n.adminpanel-subject-input-text {\r\n    width: 400px;\r\n    margin-top: 5px;\r\n}\r\n\r\n.adminpanel-subject-text {\r\n    margin-right: 10px;\r\n    width: 15%;\r\n    font-size: 14px;\r\n}\r\n\r\n.adminpanel-subject-button {\r\n}\r\n\r\n.adminpanel-positiontype {\r\n    display: flex;\r\n}\r\n\r\n.adminpanel-positiontype-input {\r\n    margin-right: 10px;\r\n}\r\n\r\n.adminpanel-positiontype-input-smaller {\r\n    max-width: 300px;\r\n}\r\n\r\n.adminpanel-positiontype-label {\r\n    margin-right: 5px;\r\n    display: flex;\r\n    align-items: center;\r\n    font-size: 12px;\r\n}\r\n\r\n.adminpanel-positiontype-label-top {\r\n    display: flex;\r\n    justify-content: space-around;\r\n}\r\n\r\n.adminpanel-positiontype-number {\r\n    margin-right: 10px;\r\n    max-width: 150px;\r\n}\r\n\r\n.adminpanel-positiontype-number-small {\r\n    margin-right: 10px;\r\n    max-width: 80px;\r\n}\r\n\r\n.adminpanel-positiontype-button {\r\n}\r\n\r\n.adminpanel-positioncategory {\r\n    display: flex;\r\n}\r\n\r\n.adminpanel-positioncategory-input {\r\n    margin-right: 10px;\r\n}\r\n\r\n.adminpanel-positioncategory-button {\r\n}\r\n\r\n.adminpanel-mrd {\r\n    display: flex;\r\n}\r\n\r\n.adminpanel-mrd-input {\r\n    margin-right: 10px;\r\n}\r\n\r\n.adminpanel-mrd-button {\r\n}\r\n\r\n.adminpanel-altrankconditiongroup {\r\n    display: flex;\r\n}\r\n\r\n.adminpanel-altrankconditiongroup-input {\r\n    margin-right: 10px;\r\n}\r\n\r\n.adminpanel-altrankconditiongroup-button {\r\n}\r\n\r\n.adminpanel-altrankcondition {\r\n    display: flex;\r\n}\r\n\r\n.adminpanel-altrankcondition-input {\r\n    margin-right: 10px;\r\n}\r\n\r\n.adminpanel-altrankcondition-button {\r\n}\r\n\r\n.adminpanel-structureregion {\r\n    display: flex;\r\n}\r\n\r\n.adminpanel-structureregion-input {\r\n    margin-right: 10px;\r\n}\r\n\r\n.adminpanel-structureregion-button {\r\n}\r\n\r\n.adminpanel-structuretype {\r\n    display: flex;\r\n}\r\n\r\n.adminpanel-structuretype-input {\r\n    margin-right: 10px;\r\n}\r\n\r\n.adminpanel-structuretype-button {\r\n}\r\n\r\n.adminpanel-illcode {\r\n    display: flex;\r\n}\r\n\r\n.adminpanel-illcode-input {\r\n    margin-right: 10px;\r\n}\r\n\r\n.adminpanel-illcode-button {\r\n}\r\n\r\n\r\n/*####################     STRUCTURE MANAGEMENT PANEL      #########################*/\r\n\r\n#structuremanagementpanel{\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items:flex-start;\r\n    flex-direction: column;\r\n}\r\n\r\n.structuremanagementpanel-intro{\r\n    font-size:20px;\r\n}\r\n\r\n.structuremanagementpanel-input {\r\n    margin-top: 10px;\r\n}\r\n\r\n.structuremanagementpanel-checkbox{\r\n    margin-top: 15px;\r\n    align-self:flex-start;\r\n    \r\n}\r\n\r\n.structuremanagementpanel-document-select{\r\n    width: 150px;\r\n}\r\n\r\n.structuremanagementpanel-document-row{\r\n    display: flex;\r\n}\r\n\r\n.structuremanagementpanel-document-row-text {\r\n    padding-top: 15px;\r\n    width: 400px;\r\n}\r\n\r\n.structuremanagementpanel-freezed {\r\n    display: none;\r\n}\r\n\r\n#structuremanagementpanel-yesno{\r\n    margin-top: 10px;\r\n}\r\n\r\n#structuremanagementpanel-yes{\r\n    width: 100px;\r\n}\r\n\r\n#structuremanagementpanel-no {\r\n    width: 100px;\r\n}\r\n\r\n/*####################          CONTENT          #########################*/\r\n\r\n.widget {\r\n    box-shadow: #999 0px 2px 16px;\r\n    padding: 8px;\r\n    margin-bottom: 30px;\r\n    /*border-top: 2px solid #555;*/\r\n    width: 100%;\r\n    border-radius: 4px;\r\n    position: relative;\r\n    \r\n}\r\n\r\n.widget-title {\r\n    margin-bottom: 10px;\r\n    font-size: 22px;\r\n    font-family: 'Merriweather', serif;\r\n    text-align: center;\r\n}\r\n\r\n.widget-info{\r\n    font-weight: 600;\r\n}\r\n\r\n.widget-title-block{\r\n    display: flex;\r\n    justify-content: space-around;\r\n    margin-bottom: 5px;\r\n}\r\n\r\n.widget-title-block-left {\r\n    flex-basis: 20%;\r\n    padding-left: 5px;\r\n}\r\n\r\n.widget-title-block-middle {\r\n    flex-basis: 60%;\r\n}\r\n\r\n.widget-title-block-right{\r\n    flex-basis: 20%;\r\n    text-align: right;\r\n    padding-right: 20px;\r\n}\r\n\r\n.widget-title-block-addremove-openlist{\r\n    cursor: pointer;\r\n}\r\n\r\n.widget-title-block-addremove-excelbutton {\r\n    position: absolute;\r\n    right: 10px;\r\n    border: 2px solid #9C9;\r\n    border-radius: 5px;\r\n    padding: 1px;\r\n    padding-left: 5px;\r\n    padding-right: 5px;\r\n    color: white;\r\n    background-color: #7C7;\r\n    cursor: pointer;\r\n}\r\n\r\n.widget-title-block-addremove-excelbutton:hover {\r\n    background-color: #8D8;\r\n    border: 2px dashed #7A7;\r\n}\r\n\r\n.widget-title-block-addremove-list{\r\n    min-height: 100px;\r\n}\r\n\r\n.widget-title-block-addremove-div {\r\n    text-align: left;\r\n    margin-left: 120px;\r\n    display: flex;\r\n    justify-content: space-between;\r\n}\r\n\r\n.widget-title-block-add {\r\n    color: #99F;\r\n}\r\n\r\n.widget-title-block-remove {\r\n    color: #F55;\r\n}\r\n\r\n\r\n.widget-title-block-addremove-label {\r\n    text-align: right;\r\n}\r\n\r\n.widget-title-block-addremove {\r\n    width: 40px;\r\n    min-width: 40px;\r\n    font-weight: 300;\r\n}\r\n\r\n.widget-title-block-addremove-date {\r\n    font-weight: 300;\r\n}\r\n\r\n.widget-content {\r\n    \r\n}\r\n\r\n.widget-content-inline{\r\n    display: flex;\r\n    flex-wrap: wrap;\r\n    \r\n}\r\n\r\n.widget-close {\r\n    position: absolute;\r\n    top: 10px;\r\n    left: calc(100% - 30px);\r\n    cursor: pointer;\r\n    font-size: 18px;\r\n}\r\n\r\n.widget-close:hover{\r\n    color: red;\r\n    font-weight: 600;\r\n}\r\n\r\n\r\n/*####################     DEPARTMENTS LIST      #########################*/\r\n\r\n.department {\r\n    box-shadow: #AAA 0px 2px 4px;\r\n    padding: 5px;\r\n    margin-bottom: 20px;\r\n    margin-right: 20px;\r\n    width: 100%;\r\n    border-radius: 4px;\r\n    width: 250px;\r\n    height: 200px;\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\r\n    position: relative;\r\n}\r\n\r\n.department:hover {\r\n    box-shadow: #AAAAFF 0px 2px 16px;\r\n    transition: box-shadow 0.2s ease-in-out;\r\n}\r\n\r\n\r\n\r\n\r\n.department-name {\r\n    text-align: center;\r\n    cursor: pointer;\r\n    display: flex;\r\n    justify-content: center;\r\n    flex-direction: column;\r\n    height: 100%;\r\n    width: 100%;\r\n}\r\n\r\n.department-addnew {\r\n    color: transparent;\r\n    text-shadow: 0 0 2px rgba(0,0,0,0.5);\r\n    font-size: 40px;\r\n    width: 150px;\r\n    height: 150px;\r\n    display: flex;\r\n    justify-content: center;\r\n    flex-direction: column;\r\n}\r\n\r\n\r\n.department-addnew:hover {\r\n    color: black;\r\n    text-shadow: 0 0 0px;\r\n    transition: color 0.4s ease-in-out, text-shadow 0.4s ease-in-out;\r\n}\r\n\r\n.department-settings {\r\n    position: absolute;\r\n    top: 8px;\r\n    border: 1px solid #CCCCCC;\r\n    font-size: 10px;\r\n    padding: 2px;\r\n    border-radius: 5px;\r\n    left: calc(5px);\r\n    color: gray;\r\n    cursor: pointer;\r\n    z-index: 4;\r\n}\r\n\r\n.department-settings:hover{\r\n    color:black;\r\n\r\n}\r\n\r\n.department-notsignedandcreated {\r\n    color: blue;\r\n    font-weight: 600;\r\n    font-size: 10px;\r\n}\r\n\r\n.department-issignedandwillbecreated {\r\n    color: lightblue;\r\n    font-weight: 600;\r\n    font-size: 10px;\r\n}\r\n\r\n.department-isnotsignedandwillbecreated {\r\n    color: darkcyan;\r\n    font-weight: 600;\r\n    font-size: 10px;\r\n}\r\n\r\n.department-isdeletedunsigned {\r\n    color: darkorange;\r\n    font-weight: 600;\r\n    font-size: 10px;\r\n}\r\n\r\n.department-iswillbedeletedsigned {\r\n    color: red;\r\n    font-weight: 600;\r\n    font-size: 10px;\r\n}\r\n\r\n.department-iswillbedeletedunsigned {\r\n    color: orange;\r\n    font-weight: 600;\r\n    font-size: 10px;\r\n}\r\n\r\n\r\n/*####################     DEPARTMENT MANAGEMENT PANEL      #########################*/\r\n\r\n#departmentmanagementpanel {\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\r\n    flex-direction: column;\r\n}\r\n\r\n#departmentmanagementpanel-input {\r\n    margin-top: 10px;\r\n}\r\n\r\n.departmentmanagementpanel-freezed {\r\n    display: none;\r\n}\r\n\r\n#departmentmanagementpanel-yesno {\r\n    margin-top: 10px;\r\n}\r\n\r\n#departmentmanagementpanel-yes {\r\n    width: 100px;\r\n}\r\n\r\n#departmentmanagementpanel-no {\r\n    width: 100px;\r\n}\r\n\r\n\r\n/*####################     POSITIONS LIST      #########################*/\r\n\r\n.position {\r\n    box-shadow: #AAA 0px 2px 4px;\r\n    margin-bottom: 9px;\r\n    margin-right: 9px;\r\n    width: 100%;\r\n    border-radius: 4px;\r\n    width: 340px;\r\n    height: 280px;\r\n    max-width: 340px;\r\n    /* display: flex;\r\n    justify-content: center;\r\n    align-items: center;*/\r\n    padding: 5px;\r\n    position: relative;\r\n    background-color: #FFF;\r\n}\r\n\r\n.position:hover {\r\n    box-shadow: #AAAAFF 0px 2px 16px;\r\n    transition: box-shadow 0.2s ease-in-out;\r\n}\r\n\r\n\r\n.position-expiresoon {\r\n    box-shadow: #704214 0px 2px 8px;\r\n}\r\n\r\n.position-willbeadded {\r\n    background-color: #E5FFE5;\r\n}\r\n\r\n.position-willbedeleted {\r\n    background-color: #FFE5E5;\r\n}\r\n\r\n.position-expiresoon:hover {\r\n    box-shadow: #704214 0px 2px 16px;\r\n    transition: box-shadow 0.2s ease-in-out;\r\n}\r\n\r\n.position-name {\r\n    text-align: center;\r\n    cursor: pointer;\r\n    display: flex;\r\n    justify-content: flex-start;\r\n    flex-direction: column;\r\n    height: 100%;\r\n    width: 100%;\r\n    z-index: 3;\r\n    flex-basis: 65%;\r\n}\r\n\r\n.position-name-transfer {\r\n    text-align: center;\r\n    cursor: pointer;\r\n    display: flex;\r\n    justify-content: flex-start;\r\n    flex-direction: column;\r\n    height: 100%;\r\n    width: 100%;\r\n    z-index: 3;\r\n    flex-basis: 65%;\r\n}\r\n\r\n.position-grid {\r\n    display: flex;\r\n    justify-content: space-between;\r\n    flex-direction: column;\r\n    margin-top: 15px;\r\n    width: 330px;\r\n    height: 245px;\r\n}\r\n\r\n.position-grid-main {\r\n    display: flex;\r\n    justify-content: center;\r\n    flex-direction: row;\r\n}\r\n\r\n.position-leftblock {\r\n    display: flex;\r\n    justify-content: space-between;\r\n    flex-direction: column;\r\n    margin: 5px;\r\n    /*padding-right: 5px;*/\r\n    border-right: 2px solid #DDD;\r\n    min-height: 180px;\r\n    flex-basis: 23%;\r\n}\r\n\r\n.position-rightblock {\r\n    display: flex;\r\n    justify-content: flex-start;\r\n    flex-direction: column;\r\n    margin: 5px;\r\n    /*padding-left: 3px;*/\r\n    border-left: 2px solid #DDD;\r\n    flex-basis: 12%;\r\n    align-items: center;\r\n}\r\n\r\n.position-sof {\r\n    display: flex;\r\n    justify-content: flex-start;\r\n    flex-direction: column;\r\n    margin: 0px;\r\n}\r\n\r\n.position-mrd {\r\n    margin-top: 5px;\r\n    font-size: 11.5px;\r\n    width: 100%;\r\n    word-wrap: break-word;\r\n    /*border-top: 2px solid #DDD;*/\r\n}\r\n\r\n.position-mrd-title{\r\n    font-weight: 600;\r\n}\r\n\r\n.position-nameblock {\r\n    min-height: 50px;\r\n    display: flex;\r\n    flex-direction: column;\r\n    justify-content: center;\r\n    /*background-color: rgba(244,244,244, 0.9);*/\r\n    border-radius: 0px 0px 5px 5px;\r\n    margin-bottom: -5px;\r\n    min-width: 150px;\r\n    /*text-shadow: 1px 1px 0px #FFF;*/\r\n}\r\n\r\n.position-nameblock:hover{\r\n\r\n}\r\n\r\n.position-nameblock-name {\r\n    margin-top: -15px;\r\n    font-size: 13px;\r\n    font-weight: 600;\r\n}\r\n\r\n.position-nameblock-name-alt{\r\n    font-size: 12px;\r\n}\r\n\r\n.position-nameblock-rank {\r\n    margin-top: 5px;\r\n    font-size: 12px;\r\n}\r\n\r\n.position-nameblock-category {\r\n    margin-top: 5px;\r\n    font-size: 12px;\r\n    border-bottom: 2px solid #DDD;\r\n}\r\n\r\n.position-nameblock-replaced {\r\n    margin-top: 5px;\r\n    font-size: 12px;\r\n}\r\n\r\n.position-nameblock-notice{\r\n    font-size: 11px;\r\n    margin-top:3px;\r\n}\r\n\r\n\r\n.position-dateactive-descr{\r\n    font-size: 11.5px;\r\n}\r\n\r\n.position-dateactive{\r\n    font-weight: 600;\r\n}\r\n\r\n.position-dateinactive-descr {\r\n    font-size: 11.5px;\r\n}\r\n\r\n.position-dateinactive-descr-red{\r\n    color: #F33;\r\n    text-shadow: 0px 0px 2px #F99;\r\n}\r\n\r\n.position-dateactive-descr-green {\r\n    color: #393;\r\n    text-shadow: 0px 0px 2px #9F9;\r\n}\r\n\r\n.position-dateinactive{\r\n    font-weight: 600;\r\n}\r\n\r\n\r\n.position-grid-compact {\r\n    display: flex;\r\n    justify-content: space-between;\r\n    flex-direction: column;\r\n    margin-top: 15px;\r\n    width: 330px;\r\n    height: 245px;\r\n}\r\n\r\n.position-grid-top-compact {\r\n    display: flex;\r\n    justify-content: center;\r\n    flex-direction: row;\r\n    \r\n}\r\n\r\n\r\n.position-sof-compact {\r\n    display: flex;\r\n    justify-content: flex-start;\r\n    flex-direction: column;\r\n    margin: 5px;\r\n    flex-basis: 20%;\r\n    padding-right: 5px;\r\n    border-right: 2px solid #DDD;\r\n}\r\n\r\n.position-quantity-compact {\r\n    display: flex;\r\n    justify-content: flex-start;\r\n    align-items: center;\r\n    flex-direction: column;\r\n    margin: 5px;\r\n    flex-basis: 20%;\r\n    padding-left: 5px;\r\n    border-left: 2px solid #DDD;\r\n}\r\n\r\n.position-name-compact {\r\n    text-align: center;\r\n    cursor: pointer;\r\n    display: flex;\r\n    justify-content: center;\r\n    flex-direction: column;\r\n    height: 100%;\r\n    width: 100%;\r\n    z-index: 3;\r\n    margin: 5px;\r\n}\r\n\r\n.position-nameblock-name-compact{\r\n    font-weight: 600;\r\n}\r\n\r\n.position-nameblock-name-alt-compact {\r\n    font-size: 12px;\r\n}\r\n\r\n.position-nameblock-rank-compact {\r\n    margin-top: 12px;\r\n    font-size: 12px;\r\n\r\n}\r\n\r\n.position-nameblock-replaced-compact{\r\n    margin-top: 16px;\r\n    font-size: 12px;\r\n}\r\n\r\n.position-nameblock-category-compact {\r\n    margin-top: 8px;\r\n    font-size: 12px;\r\n}\r\n\r\n.position-nameblock-compact {\r\n    min-height: 50px;\r\n    display: flex;\r\n    flex-direction: column;\r\n    justify-content: center;\r\n    background-color: rgba(244,244,244, 0.2);\r\n    border-radius: 0px 0px 5px 5px;\r\n    margin-bottom: -5px;\r\n    min-width: 150px;\r\n    margin-left: -5px;\r\n    /*text-shadow: 1px 1px 0px #FFF;*/\r\n}\r\n\r\n.position-nameblock-compact-bottom{\r\n    margin-top: 10px;\r\n}\r\n\r\n.position-nameblock-compact-quantity {\r\n    font-weight: 900;\r\n    font-size: 18px;\r\n    padding-left: 5px;\r\n    padding-right: 5px;\r\n    border-bottom: 2px solid #DDD;\r\n}\r\n\r\n.position-grid-bottom-compact {\r\n    display: flex;\r\n    justify-content: center;\r\n    flex-direction: row;\r\n    padding-top: 3px;\r\n    border-top: 2px solid #DDD;\r\n    font-size: 12px;\r\n}\r\n\r\n.position-dateactiveblock-compact{\r\n    padding: 5px;\r\n}\r\n\r\n.position-dateinactiveblock-compact{\r\n    padding: 5px;\r\n}\r\n\r\n\r\n.position-addnew {\r\n    color: transparent;\r\n    text-shadow: 0 0 2px rgba(0,0,0,0.5);\r\n    font-size: 40px;\r\n    width: 320px;\r\n    height: 260px;\r\n    display: flex;\r\n    justify-content: center;\r\n    flex-direction: column;\r\n}\r\n\r\n\r\n.position-addnew:hover {\r\n    color: black;\r\n    text-shadow: 0 0 0px;\r\n    transition: color 0.4s ease-in-out, text-shadow 0.4s ease-in-out;\r\n}\r\n\r\n.position-transfer {\r\n    font-size: 18px;\r\n    width: 450px;\r\n    height: 360px;\r\n    display: flex;\r\n    justify-content: center;\r\n    flex-direction: column;\r\n}\r\n\r\n.position-settings {\r\n    position: absolute;\r\n    top: 8px;\r\n    border: 1px solid #CCCCCC;\r\n    font-size: 10px;\r\n    padding: 2px;\r\n    border-radius: 5px;\r\n    left: calc(5px);\r\n    color: gray;\r\n    cursor: pointer;\r\n    z-index: 4;\r\n}\r\n\r\n.position-settings:hover {\r\n    color: black;\r\n}\r\n\r\n.position-info {\r\n    position: absolute;\r\n    top: 8px;\r\n    border: 1px solid #CCCCCC;\r\n    font-size: 10px;\r\n    padding: 2px;\r\n    padding-top: 4px;\r\n    padding-bottom: 4px;\r\n    border-radius: 5px;\r\n    left: calc(100% - 40px);\r\n    color: gray;\r\n    cursor: pointer;\r\n    z-index: 4;\r\n    background: none;\r\n}\r\n\r\n.position-additional {\r\n    position: absolute;\r\n    top: 8px;\r\n    border: 1px solid #CCCCCC;\r\n    font-size: 10px;\r\n    padding: 2px;\r\n    padding-top: 4px;\r\n    padding-bottom: 4px;\r\n    border-radius: 5px;\r\n    left: calc(100% - 70px);\r\n    color: gray;\r\n    cursor: pointer;\r\n    z-index: 4;\r\n    background: none;\r\n}\r\n\r\n.position-info:hover {\r\n    color: black;\r\n    background: none;\r\n}\r\n\r\n\r\n.position-plus{\r\n    height: 100%;\r\n    display: flex;\r\n    flex-direction: column;\r\n    justify-content: center;\r\n    width:100%;\r\n}\r\n\r\n.position-photo {\r\n    z-index: 0;\r\n    position: absolute;\r\n    display: block;\r\n    width: 100%;\r\n    height: 100%;\r\n    background-repeat: no-repeat;\r\n    background-size: 100%;\r\n    background-position: center;\r\n    border-radius: 5px;\r\n    \r\n}\r\n\r\n.position-nophoto {\r\n    /*filter: opacity(20%);*/\r\n}\r\n\r\n.department-div{\r\n    width: 100% !important;\r\n}\r\n\r\n.subdepartment {\r\n    box-shadow: #AAA 0px 2px 4px;\r\n    padding: 5px;\r\n    margin-bottom: 20px;\r\n    margin-top: 20px;\r\n    /*width: 100%;*/\r\n    /*width: 1480px;*/\r\n    border-radius: 4px;\r\n    height: 40px;\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\r\n    background-size: 2000px 2000px;\r\n    background-color: #F4F4F4;\r\n    background-image: repeating-linear-gradient(135deg, transparent, transparent 20px, #F8F8F8 20px, #F8F8F8 40px);\r\n    position: relative;\r\n}\r\n\r\n.subdepartment-name {\r\n    text-align: center;\r\n    cursor: pointer;\r\n    display: flex;\r\n    justify-content: center;\r\n    flex-direction: column;\r\n    height: 100%;\r\n    width: 100%;\r\n    z-index: 3;\r\n}\r\n\r\n.position-head{\r\n    border: 2px solid #FFAAAA;\r\n}\r\n\r\n.positionslist-inforow {\r\n    margin-top: 10px;\r\n    margin-bottom: 10px;\r\n}\r\n\r\n.position-history-title{\r\n    font-size: 16px;\r\n}\r\n\r\n.position-curation{\r\n    margin-top: 10px;\r\n}\r\n\r\n.position-curation-title{\r\n    font-size: 16px;\r\n}\r\n\r\n.position-curation-element{\r\n    padding-left: 2px;\r\n    margin-left: 3px;\r\n    margin-top: 3px;\r\n    font-size: 12px;\r\n    border-left: 2px solid #AAAAFF;\r\n}\r\n\r\n\r\n.position-curation-elementname {\r\n    font-weight: 600;\r\n}\r\n\r\n.position-heading {\r\n    margin-top: 10px;\r\n}\r\n\r\n.position-heading-title {\r\n    font-size: 16px;\r\n}\r\n\r\n.position-heading-element {\r\n    padding-left: 2px;\r\n    margin-left: 3px;\r\n    margin-top: 3px;\r\n    font-size: 12px;\r\n    border-left: 2px solid #AAAAFF;\r\n}\r\n\r\n.position-heading-elementname {\r\n    font-weight: 600;\r\n}\r\n\r\n.subdepartment-expiresoon {\r\n    box-shadow: #704214 0px 2px 8px;\r\n    background-size: 2000px 2000px;\r\n    background-image: repeating-linear-gradient(135deg, transparent, transparent 20px, #faf0e5 20px, #faf0e5 40px);\r\n}\r\n\r\n.subdepartment-info {\r\n    position: absolute;\r\n    top: 8px;\r\n    border: 1px solid #CCCCCC;\r\n    font-size: 10px;\r\n    padding: 2px;\r\n    padding-top: 4px;\r\n    padding-bottom: 4px;\r\n    border-radius: 5px;\r\n    left: calc(70px);\r\n    color: gray;\r\n    cursor: pointer;\r\n    z-index: 4;\r\n    background: none;\r\n}\r\n\r\n.subdepartment-info:hover {\r\n    color: black;\r\n    background: none;\r\n}\r\n\r\n.subdepartment-expiresoon:hover {\r\n    box-shadow: #704214 0px 2px 32px;\r\n    transition: box-shadow 0.2s ease-in-out;\r\n}\r\n\r\n.position-notsignedandcreated {\r\n    color: blue;\r\n    font-weight: 600;\r\n    font-size: 10px;\r\n}\r\n\r\n.position-issignedandwillbecreated {\r\n    color: lightblue;\r\n    font-weight: 600;\r\n    font-size: 10px;\r\n}\r\n\r\n.position-isnotsignedandwillbecreated {\r\n    color: darkcyan;\r\n    font-weight: 600;\r\n    font-size: 10px;\r\n}\r\n\r\n.position-isdeletedunsigned {\r\n    color: darkorange;\r\n    font-weight: 600;\r\n    font-size: 10px;\r\n}\r\n\r\n.position-iswillbedeletedsigned {\r\n    color: red;\r\n    font-weight: 600;\r\n    font-size: 10px;\r\n}\r\n\r\n.position-iswillbedeletedunsigned {\r\n    color: orange;\r\n    font-weight: 600;\r\n    font-size: 10px;\r\n}\r\n\r\n\r\n.position-structure {\r\n    box-shadow: #AAA 0px 2px 4px;\r\n    margin-bottom: 10px;\r\n    margin-right: 10px;\r\n    width: 100%;\r\n    border-radius: 4px;\r\n    width: 270px;\r\n    height: 270px;\r\n    /* display: flex;\r\n    justify-content: center;\r\n    align-items: center;*/\r\n    padding: 5px;\r\n    position: relative;\r\n    font-size: 14px;\r\n    cursor: pointer;\r\n    background-color: #FFF;\r\n}\r\n\r\n\r\n\r\n.position-structure:hover {\r\n    box-shadow: #AAAAFF 0px 2px 16px;\r\n    transition: box-shadow 0.2s ease-in-out;\r\n}\r\n\r\n.position-structure-title {\r\n    font-weight: 600;\r\n    font-size: 14px;\r\n    text-align: center;\r\n    border-bottom: 2px solid #D4D4D4;\r\n    margin-bottom: 5px;\r\n}\r\n\r\n.position-structure-back {\r\n    font-weight: 600;\r\n    font-size: 56px;\r\n    text-align: center;\r\n    line-height: 240px;\r\n    height: 100%;\r\n    vertical-align: middle;\r\n    margin-bottom: 5px;\r\n    \r\n}\r\n\r\n\r\n/*####################     POSITION PERSON MANAGEMENT PANEL      #########################*/\r\n\r\n.position-person {\r\n    box-shadow: #AAA 0px 2px 4px;\r\n    margin-bottom: 10px;\r\n    margin-right: 10px;\r\n    width: 100%;\r\n    border-radius: 4px;\r\n    width: 450px;\r\n    height: 360px;\r\n    /* display: flex;\r\n    justify-content: center;\r\n    align-items: center;*/\r\n    padding: 5px;\r\n    position: relative;\r\n    cursor: pointer;\r\n    background-color: #FFF;\r\n}\r\n\r\n.position-person:hover {\r\n    box-shadow: #AAAAFF 0px 2px 16px;\r\n    transition: box-shadow 0.2s ease-in-out;\r\n}\r\n\r\n\r\n.position-person-expiresoon {\r\n    box-shadow: #704214 0px 2px 8px;\r\n}\r\n\r\n.position-person-willbeadded {\r\n    background-color: #E5FFE5;\r\n}\r\n\r\n.position-person-willbedeleted {\r\n    background-color: #FFE5E5;\r\n}\r\n\r\n.position-person-expiresoon:hover {\r\n    box-shadow: #704214 0px 2px 16px;\r\n    transition: box-shadow 0.2s ease-in-out;\r\n}\r\n\r\n.position-person-name {\r\n    text-align: center;\r\n    cursor: pointer;\r\n    display: flex;\r\n    justify-content: flex-start;\r\n    flex-direction: column;\r\n    height: 100%;\r\n    width: 100%;\r\n    z-index: 3;\r\n    flex-basis: 50%;\r\n\r\n}\r\n\r\n.position-person-grid {\r\n    display: flex;\r\n    justify-content: space-between;\r\n    flex-direction: column;\r\n    margin-top: 15px;\r\n    width: 440px;\r\n    /*height: 280px;*/\r\n}\r\n\r\n.position-person-grid-main {\r\n    display: flex;\r\n    width: 100%;\r\n    /*background-color: red;*/\r\n    justify-content: space-around;\r\n    flex-direction: row;\r\n    max-height:120px;\r\n}\r\n\r\n.position-person-leftblock {\r\n    display: flex;\r\n    justify-content: space-between;\r\n    flex-direction: column;\r\n    margin: 5px;\r\n    padding-right: 5px;\r\n    border-right: 2px solid #DDD;\r\n    min-height: 120px;\r\n    flex-basis: 20%;\r\n}\r\n\r\n.position-person-rightblock {\r\n    display: flex;\r\n    justify-content: flex-start;\r\n    flex-direction: column;\r\n    margin: 5px;\r\n    padding-left: 3px;\r\n    border-left: 2px solid #DDD;\r\n    flex-basis: 20%;\r\n    \r\n}\r\n\r\n.position-person-button{\r\n    padding: 1px;\r\n    font-size: 10px;\r\n    margin: 0px;\r\n}\r\n\r\n.position-person-sof {\r\n    display: flex;\r\n    justify-content: flex-start;\r\n    flex-direction: column;\r\n    margin: 0px;\r\n}\r\n\r\n.position-person-noperson {\r\n    display: flex;\r\n    height: 100px;\r\n    justify-content: center;\r\n    flex-direction: row;\r\n    align-items: center;\r\n    font-size: 24px;\r\n    color: #444;\r\n    font-family: Merriweather;\r\n    margin: 0px;\r\n}\r\n\r\n.position-person-mrd {\r\n    margin-top: 5px;\r\n    font-size: 12px;\r\n    /*border-top: 2px solid #DDD;*/\r\n}\r\n\r\n.position-person-mrd-title {\r\n    font-weight: 600;\r\n}\r\n\r\n.position-person-nameblock {\r\n    min-height: 50px;\r\n    display: flex;\r\n    flex-direction: column;\r\n    justify-content: center;\r\n    /*background-color: rgba(244,244,244, 0.9);*/\r\n    border-radius: 0px 0px 5px 5px;\r\n    margin-bottom: -5px;\r\n    min-width: 150px;\r\n    /*text-shadow: 1px 1px 0px #FFF;*/\r\n}\r\n\r\n.position-nameblock:hover {\r\n}\r\n\r\n.position-person-nameblock-name {\r\n    margin-top: -15px;\r\n    text-align: center;\r\n    /*font-size: 13px;\r\n    font-weight: 600;*/\r\n}\r\n\r\n.position-person-nameblock-name-alt {\r\n    font-size: 12px;\r\n}\r\n\r\n.position-person-nameblock-rank {\r\n    margin-top: 5px;\r\n    font-size: 12px;\r\n}\r\n\r\n.position-person-grid-person {\r\n    display: flex;\r\n    width: 100%;\r\n    /*background-color: red;*/\r\n    justify-content: space-around;\r\n    flex-direction: column;\r\n\r\n}\r\n\r\n.position-person-grid-person-top{\r\n    text-align: center;\r\n}\r\n\r\n.position-person-grid-person-bottom {\r\n    display: flex;\r\n    width: 100%;\r\n    /*background-color: red;*/\r\n    justify-content: space-around;\r\n    flex-direction: row;\r\n}\r\n\r\n.position-person-grid-person-bottom-image{\r\n    height: 170px;\r\n    cursor: pointer;\r\n\r\n}\r\n\r\n.position-person-nameblock-category {\r\n    margin-top: 5px;\r\n    font-size: 12px;\r\n    border-bottom: 2px solid #DDD;\r\n}\r\n\r\n.position-person-nameblock-replaced {\r\n    margin-top: 5px;\r\n    font-size: 12px;\r\n}\r\n\r\n.position-person-nameblock-notice {\r\n    font-size: 11px;\r\n    margin-top: 3px;\r\n}\r\n\r\n.position-person-head {\r\n    border: 2px solid #FFAAAA;\r\n}\r\n\r\n.position-future-add {\r\n    color: #0A0;\r\n}\r\n\r\n.position-future-delete {\r\n    color: #A00;\r\n}\r\n\r\n/*####################     POSITION MANAGEMENT PANEL      #########################*/\r\n\r\n#positionmanagementpanel {\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: flex-start;\r\n    flex-direction: column;\r\n}\r\n\r\n.positionmanagementpanel-title{\r\n    text-align: center;\r\n    width: 100%;\r\n}\r\n\r\n.positionmanagementpanel-rankcap{\r\n    width: 100%;\r\n}\r\n\r\n#positionmanagementpanel-input {\r\n    margin-top: 10px;\r\n}\r\n\r\n.positionmanagementpanel-freezed {\r\n    display: none;\r\n}\r\n\r\n#positionmanagementpanel-yesno {\r\n    margin-top: 10px;\r\n}\r\n\r\n.positionmanagementpanel-margin {\r\n    margin-top: 10px;\r\n}\r\n\r\n.positionmanagementpanel-altrank-row{\r\n   \r\n}\r\n\r\n.positionmanagementpanel-left-margin{\r\n    margin-left: 8px;\r\n}\r\n\r\n.positionmanagementpanel-left {\r\n    white-space: nowrap;\r\n    display: flex;\r\n    justify-content: flex-start;\r\n    align-items: center;\r\n}\r\n\r\n.positionmanagementpanel-row {\r\n    \r\n    white-space: nowrap;\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\r\n}\r\n\r\n.positionmanagementpanel-fromit{\r\n    margin-top: 10px;\r\n}\r\n\r\n.positionmanagementpanel-label {\r\n    align-self: center;\r\n    margin-right: 10px;\r\n}\r\n\r\n.positionmanagementpanel-replacedbycivil{\r\n    width: 99%;\r\n    margin-bottom: 20px;\r\n    margin-left: 5px;\r\n    padding: 3px;\r\n    border-left: 2px solid #5599FF;\r\n    border-radius: 3px;\r\n}\r\n\r\n.positionmanagementpanel-rbcd{\r\n    margin-top: 10px;\r\n    margin-left: 5px;\r\n    padding-left: 3px;\r\n    border-left: 2px solid #ff88ff;\r\n}\r\n\r\n.positionmanagementpanel-flexrow {\r\n    display: flex;\r\n    justify-content: space-between;\r\n    flex-wrap: nowrap;\r\n    align-items: flex-end;\r\n    width: 100%;\r\n    /*background-color: rgba(122,122,122,0.4)*/\r\n}\r\n\r\n.positionmanagementpanel-flexrow-text {\r\n    height: 34px;\r\n    vertical-align: middle;\r\n    /*background-color: rgba(122,122,122,0.7);*/\r\n}\r\n\r\n.positionmanagementpanel-flexrow-text-first{\r\n    margin-left: 15px;\r\n}\r\n\r\n.positionmanagementpanel-flexrow-element-25{\r\n    flex-basis: 25%;\r\n}\r\n\r\n.positionmanagementpanel-flexrow-element-33{\r\n    flex-basis: 33%;\r\n}\r\n\r\n.positionmanagementpanel-flexrow-element-40 {\r\n    flex-basis: 40%;\r\n}\r\n\r\n.positionmanagementpanel-flexrow-element-50 {\r\n    flex-basis: 50%;\r\n}\r\n\r\n.positionmanagementpanel-flexrow-element-60 {\r\n    flex-basis: 60%;\r\n}\r\n\r\n.positionmanagementpanel-flexrow-element-66 {\r\n    flex-basis: 66%;\r\n}\r\n\r\n.positionmanagementpanel-flexrow-element-75 {\r\n    flex-basis: 75%;\r\n}\r\n\r\n.positionmanagementpanel-document-flexrow {\r\n    display: flex;\r\n    flex-wrap: wrap;\r\n    /*background-color: rgba(122,122,122,0.4)*/\r\n}\r\n\r\n.positionmanagementpanel-document-select {\r\n    width: 150px;\r\n}\r\n\r\n.positionmanagementpanel-document-structure{\r\n    margin: 5px;\r\n}\r\n\r\n#positionmanagementpanel-yes {\r\n    width: 100px;\r\n}\r\n\r\n#departmentmanagementpanel-no {\r\n    width: 100px;\r\n}\r\n\r\n.positionmanagementpanel-table {\r\n    border-top: 2px solid #AA77FF;\r\n    border-bottom: 2px solid #AA77FF;\r\n    text-align: center;\r\n    padding: 2px;\r\n}\r\n\r\n.positionmanagementpanel-table td{\r\n    padding-left: 3px;\r\n    padding-right: 3px;\r\n}\r\n\r\n.positionmanagementpanel-table input{\r\n    margin-left: 2px;\r\n}\r\n\r\n\r\n\r\n.positionmanagementpanel-thead {\r\n    border-bottom: 2px solid #AA77FF;\r\n}\r\n\r\n.positionmanagementpanel-thead td {\r\n    padding: 2px;\r\n    border-bottom: 2px solid #AA77FF;\r\n}\r\n\r\n.positionmanagementpanel-tbody tr {\r\n    background-color: white;\r\n}\r\n\r\n.positionmanagementpanel-tbody tr:nth-child(even) {\r\n    background-color: #D7D7D7;\r\n}\r\n\r\n\r\n\r\n.positionmanagementpanel-tr {\r\n}\r\n\r\n.positionmanagementpanel-td{\r\n\r\n}\r\n\r\n.positionmanagementpanel-curation{\r\n    padding-left: 3px;\r\n    margin-left: 5px;\r\n    border-left: 2px solid #00FFFF;\r\n}\r\n\r\n.positionmanagementpanel-curation-element {\r\n    margin-top: 5px;\r\n    padding-bottom: 3px;\r\n    margin-bottom: 5px;\r\n    border-bottom: 2px solid #E4E4E4;\r\n}\r\n\r\n.positionmanagementpanel-head {\r\n    padding-left: 3px;\r\n    margin-left: 5px;\r\n    border-left: 2px solid #FF55FF;\r\n}\r\n/*#######################     SETTINGS      ##########################*/\r\n.settingspanel-title {\r\n    text-align: center;\r\n    font-family: Merriweather;\r\n    font-size: 26px;\r\n    margin-bottom: 20px;\r\n}\r\n\r\n.settingspanel-datetitle{\r\n    margin-bottom: 10px;\r\n    text-align: center;\r\n}\r\n\r\n.settingspanel-dateinput{\r\n\r\n}\r\n\r\n.settingspanel-datebuttons{\r\n    margin-top: 10px;\r\n\r\n}\r\n\r\n\r\n/*####################     DECREE HISTORY      #########################*/\r\n\r\n.decreehistory-create {\r\n    display: flex;\r\n}\r\n\r\n.decreehistory-element {\r\n    margin: 15px;\r\n    border-radius: 5px;\r\n    border: 2px solid #F2F2F2;\r\n    padding: 8px;\r\n}\r\n\r\n.decreehistory-margintop {\r\n    margin-top: 10px;\r\n}\r\n\r\n.decreehistory-selected {\r\n    background-color: #FCFCFF;\r\n    border: 2px solid #A2A2F2;\r\n}\r\n\r\n.decreehistory-panel {\r\n    margin: 10px;\r\n    border-radius: 5px;\r\n    border: 2px solid #F2F2F2;\r\n}\r\n\r\n.decreehistory-element {\r\n    border-top: 2px solid #F2F2F2;\r\n    border-bottom: 2px solid #F2F2F2;\r\n    margin: 10px;\r\n}\r\n\r\n\r\n/*####################     PMREQUEST      #########################*/\r\n\r\n.pmrequest-title{\r\n    font-size: 20px;\r\n    padding-bottom: 10px;\r\n    font-weight: 500;\r\n}\r\n\r\n.pmrequest-row{\r\n    margin-top: 5px;\r\n    margin-bottom: 5px;\r\n    display: flex;\r\n    align-items: center;\r\n}\r\n\r\n.pmrequest-block {\r\n    padding-left: 5px;\r\n    border-left: 2px solid #AA99FF;\r\n    border-radius: 5px;\r\n}\r\n\r\n.pmrequest-label {\r\n    width: 200px;\r\n    margin-left: 15px;\r\n}\r\n\r\n.pmrequest-select{\r\n    width: 100%;\r\n}\r\n\r\n\r\n.pmrequest-marginleft{\r\n    margin-left: 20px;\r\n}\r\n\r\n.pmrequest-structure-element {\r\n    padding-left: 2px;\r\n    margin-left: 3px;\r\n    margin-top: 3px;\r\n    font-size: 12px;\r\n    border-left: 2px solid #AAAAFF;\r\n}\r\n\r\n.pmrequest-input-num{\r\n    width: 100px;\r\n}\r\n\r\n.pmrequest-spinner{\r\n    margin-left: 20px;\r\n}\r\n\r\n.pmrequest-singlerank{\r\n    margin-bottom: 15px;\r\n    padding: 2px;\r\n    border: solid 2px #EAEAEA;\r\n}\r\n\r\n.pmrequest-singlerank-title{\r\n    margin-bottom: 15px;\r\n}\r\n\r\n.pmrequest-singlerank-new{\r\n    margin-bottom: 30px;\r\n    font-size: 14px;\r\n}\r\n\r\n.pmrequest-table{\r\n    border: 3px solid #EAEAEA;\r\n    padding: 4px;\r\n}\r\n\r\n.pmrequest-table-tr {\r\n    border: 2px solid #EAEAEA;\r\n}\r\n\r\n.pmrequest-table-td {\r\n    padding: 2px;\r\n    border: 2px solid #EAEAEA;\r\n}\r\n\r\n.pmrequest-tablenew {\r\n    border: 2px solid #333;\r\n    padding: 4px;\r\n    width: 100%;\r\n}\r\n\r\n.pmrequest-tablenew > tr {\r\n    padding: 4px;\r\n    border: 2px solid #333;\r\n}\r\n\r\n.pmrequest-tablenew > tr> td {\r\n    padding-left: 4px;\r\n}\r\n\r\n\r\n.pmrequest-tablenew-td-border {\r\n    \r\n    border: 2px solid #333;\r\n}\r\n\r\n.pmrequest-tablenew-td-back-red{\r\n    background-color: #FFCACA;\r\n}\r\n\r\n.pmrequest-tablenew-td-back-green {\r\n    background-color: #CAFFCA;\r\n}\r\n\r\n.pmrequest-tablenew-back-brown {\r\n    background-color: #FFCC88;\r\n}\r\n\r\n.pmrequest-tablenew-back-green {\r\n    background-color: #CAFFCA;\r\n}\r\n\r\n.pmrequest-tablenew-back-silver {\r\n    background-color: #EAEAEA;\r\n}\r\n\r\n.pmrequest-tablenew-sub {\r\n    width: 100%;\r\n}\r\n\r\n.pmrequest-tablenew-td-subfield{\r\n    padding-right: 10px;\r\n}\r\n\r\n.pmrequest-tablenew-td-subnumber {\r\n    padding-left: 6px;\r\n    border-left: 2px solid #333;\r\n    width: 100px;\r\n}\r\n\r\n.pmrequest-tablenew-text-middle{\r\n    text-align:center;\r\n}\r\n\r\n.pmrequest-tablenew-td-autowidth {\r\n    padding-left: 6px;\r\n    border-left: 2px solid #333;\r\n}\r\n\r\n.pmrequest-tablenew-td-border-bottom {\r\n    border-bottom: 2px solid #333;\r\n}\r\n\r\n.pmrequest-tablenew-td-heightmax{\r\n    \r\n}\r\n\r\n.pmrequest-tablenew-td-border-left {\r\n    padding-left: 6px;\r\n    border-left: 2px solid #333;\r\n}\r\n\r\n.pmrequest-autowidth {\r\n    table-layout: fixed;\r\n    width: 100%;\r\n}\r\n\r\n.pmrequest-tablenew-td-table {\r\n    padding: 0px;\r\n    border: 2px solid #333;\r\n}\r\n\r\n\r\n/*##################    CANDIDATES     ######################*/\r\n\r\n.candidates-top-block {\r\n    padding-bottom: 4px;\r\n    border-bottom: 4px dashed #D9D9D9;\r\n    margin-bottom: 4px;\r\n    padding: 4px;\r\n}\r\n\r\n.candidates-title {\r\n    font-size: 24px;\r\n    text-align: center;\r\n    font-family: Merriweather;\r\n}\r\n\r\n.candidates-accordeon{\r\n    max-width: 99.9%;\r\n}\r\n\r\n.candidates-accordeon-title{\r\n    font-weight: 600;\r\n    font-size: 16px;\r\n}\r\n\r\n.candidates-cabinetes {\r\n    padding: 4px;\r\n    margin-top: 2px;\r\n    margin-bottom: 4px;\r\n    border-right: 2px solid #D4D4D4;\r\n    border-left: 2px solid #D4D4D4;\r\n    border-top: 2px solid #D4D4D4;\r\n    border-bottom: 2px solid #BAF;\r\n    border-radius: 0px 0px 6px 6px;\r\n}\r\n\r\n.candidates-cabinetes-element {\r\n    margin-top: 4px;\r\n    box-shadow: #DDD 2px 2px 2px;\r\n    padding: 4px;\r\n    min-height: 35px;\r\n}\r\n\r\n.candidates-cabinetes-element:hover {\r\n    box-shadow: #87D 0px 0px 6px;\r\n    /*border: 1px solid #BAF;*/\r\n    cursor: pointer;\r\n}\r\n\r\n.candidates-cabinetes-element-delete{\r\n    position: absolute;\r\n    right: 20px;\r\n}\r\n\r\n.candidates-hr{\r\n\r\n}\r\n\r\n.candidates-cabinete {\r\n    margin: 5px;\r\n    min-height: 400px;\r\n    box-shadow: #DDD 2px 2px 8px;\r\n    padding: 4px;\r\n}\r\n\r\n.candidates-cabinete-title {\r\n    text-align: center;\r\n    font-size: 24px;\r\n    font-family: Merriweather;\r\n}\r\n\r\n.candidates-cabinete-subtitle {\r\n    text-align: center;\r\n    font-size: 20px;\r\n}\r\n\r\n.candidates-cabinete-close{\r\n    position: absolute;\r\n    right: 20px;\r\n    margin-top: 0px;\r\n}\r\n\r\n.candidates-cabinete-close-button{\r\n    background-color: rgba(0,0,0,0);\r\n    font-weight: 600;\r\n    border: none;\r\n}\r\n\r\n.candidates-cabinete-close-button:hover{\r\n    background-color: rgba(0,0,0,0);\r\n    color: red;\r\n}\r\n\r\n.candidates-cabinete-actions{\r\n    padding-bottom: 4px;\r\n    border-bottom: 2px solid #DDD;\r\n}\r\n\r\n.candidates-cabinete-content {\r\n    display: flex;\r\n    flex-direction: column;\r\n\r\n    align-items: center;\r\n}\r\n\r\n.candidates-cabinete-document {\r\n    margin-top: 5px;\r\n    margin-right: 4px;\r\n    background-color: white;\r\n    padding: 4px;\r\n    border: 2px solid #E4E4E4;\r\n    border-radius: 2px;\r\n    box-shadow: #DDD 2px 2px 4px;\r\n    min-height: 80px;\r\n    max-width: 600px;\r\n    width: 600px;\r\n}\r\n\r\n.candidates-cabinete-document-title{\r\n    font-size: 14px;\r\n    text-align: center;\r\n    font-weight: 600;\r\n}\r\n\r\n.candidates-cabinete-document-actions{\r\n    margin-top: 8px;\r\n    margin-left: 4px;\r\n}\r\n\r\n.candidates-cabinete-document-button + .el-button {\r\n    margin-right: 0px;\r\n    margin-left: 0px;\r\n}\r\n\r\n.candidates-cabinete-remove {\r\n    margin-top: 5px;\r\n    display: flex;\r\n    max-width: 600px;\r\n    width: 600px;\r\n    justify-content: center;\r\n    box-shadow: #DDD 2px 2px 4px;\r\n}\r\n\r\n.candidates-cabinete-remove-button {\r\n    width: 100%;\r\n}\r\n\r\n.candidates-cabinete-info{\r\n    display: flex;\r\n    justify-content: center;\r\n    color: #777;\r\n    font-size: 13px;\r\n    margin: 3px;\r\n    margin-right: 10px;\r\n}\r\n\r\n.candidates-cabinete-info-element{\r\n    margin-right: 10px;\r\n    border: 1px solid #DDD;\r\n    border-radius: 3px;\r\n    padding: 2px;\r\n}\r\n\r\n/*####################     ELD      #########################*/\r\n.eld-top-block {\r\n    padding-bottom: 4px;\r\n    border-bottom: 4px dashed #D9D9D9;\r\n    margin-bottom: 4px;\r\n    padding: 4px;\r\n}\r\n\r\n.eld-search-and-create {\r\n    display: flex;\r\n    justify-content: space-between;\r\n}\r\n\r\n.eld-search-and-create:hover .eld-search-and-create-advice{\r\n    display: inline;\r\n}\r\n\r\n.eld-search-and-create-advice{\r\n    margin-right: 10px;\r\n    font-weight: 300;\r\n    font-size: 12px;\r\n    font-style: italic;\r\n    display: none;\r\n    color: #A4A4A4;\r\n}\r\n\r\n.eld-title{\r\n    font-size: 24px;\r\n    text-align: center;\r\n    font-family: Merriweather;\r\n\r\n}\r\n\r\n.eld-search{\r\n    display:flex;\r\n    flex-direction: column;\r\n    justify-content: flex-end;\r\n    \r\n}\r\n\r\n.eld-search-input{\r\n    width:300px;\r\n    margin-right: 5px;\r\n}\r\n\r\n.eld-search-main {\r\n    box-shadow: #CCC 0px 2px 2px;\r\n    padding-bottom: 4px;\r\n    \r\n}\r\n\r\n\r\n.eld-search-main-title {\r\n    text-align: center;\r\n    font-size: 21px;\r\n    font-family:Merriweather;\r\n}\r\n\r\n.eld-search-element{\r\n    cursor: pointer;\r\n    box-shadow: #CCC 0px 2px 2px;\r\n    margin: 4px;\r\n    padding: 4px;\r\n    border: 2px solid #CCC;\r\n    border-radius: 2px;\r\n    min-height: 100px;\r\n}\r\n\r\n.eld-search-element:hover{\r\n    background-color:#FFFFFA;\r\n    border: 2px solid #CFCFCC;\r\n    box-shadow: #CFCFCC 0px 2px 2px;\r\n}\r\n\r\n.eld-search-element-image {\r\n    margin: 4px;\r\n    min-width: 10%;\r\n    width: 10%;\r\n    max-width: 10%;\r\n}\r\n\r\n.eld-search-element-user {\r\n    box-shadow: #CCC 0px 2px 2px;\r\n    margin: 4px;\r\n    padding: 4px;\r\n    border: 2px solid #CCC;\r\n    border-radius: 2px;\r\n}\r\n\r\n.eld-eld {\r\n    border-top: 4px solid #DDD;\r\n    display: flex;\r\n    min-height: 500px;\r\n    box-shadow: #CCC 0px 0px 4px;\r\n    margin-top: 20px;\r\n}\r\n\r\n.eld-eld-title{\r\n    text-align: center;\r\n    font-size: 24px;\r\n    font-weight: 600;\r\n\r\n}\r\n\r\n.eld-eld-side {\r\n    /*flex-basis: 18%;*/\r\n    max-width: 250px;\r\n    \r\n    border-right: 4px solid #DDD;\r\n    box-shadow: #CCC 2px 0px 3px;\r\n}\r\n\r\n.eld-eld-side-mail {\r\n    /*flex-basis: 18%;*/\r\n    max-width: 17%;\r\n    min-width: 15%;\r\n    border-right: 4px solid #DDD;\r\n    box-shadow: #CCC 2px 0px 3px;\r\n}\r\n\r\n.eld-eld-main{\r\n    padding-left: 4px;\r\n    width: 100%;\r\n    min-height: 735px;\r\n}\r\n\r\n.eld-eld-main-mail {\r\n    max-width: 83%;\r\n    min-width: 85%;\r\n    padding-left: 4px;\r\n    /*width: 100%;*/\r\n    min-height: 735px;\r\n}\r\n\r\n.eld-eld-label {\r\n    min-width: 120px;\r\n    font-weight: 600;\r\n}\r\n\r\n.eld-eld-side-element-folder-union {\r\n    border: none;\r\n    border-bottom: 2px solid #D4D4D4;\r\n    border-radius: 0px;\r\n    background-color: rgba(31 199 165 / 80%);\r\n    margin: 4px;\r\n    padding: 2px;\r\n    font-size: 14px;\r\n    font-family: Merriweather;\r\n    text-align: center;\r\n    cursor: pointer;\r\n}\r\n\r\n.eld-eld-side-element{\r\n    border: none;\r\n    border-bottom: 2px solid #D4D4D4;\r\n    border-radius: 0px;\r\n    margin: 4px;\r\n    padding: 2px;\r\n    font-size: 14px;\r\n    font-family: Merriweather;\r\n    text-align: center;\r\n    cursor: pointer;\r\n}\r\n\r\n.eld-eld-side-element:hover {\r\n    border-bottom: 2px solid #D4D4F4;\r\n    color: #449;\r\n}\r\n\r\n.eld-eld-side-element-selected {\r\n    border-bottom: 2px solid #A4A4F4;\r\n}\r\n\r\n.eld-eld-side-element-selected:hover{\r\n    border-bottom: 2px solid #A4A4F4;\r\n}\r\n\r\n.eld-search-element-button{\r\n    margin-left: 5px;\r\n}\r\n\r\n.eld-eld-main-head {\r\n    text-align: center;\r\n    width: 100%;\r\n    font-size: 21px;\r\n    border-bottom: 4px dotted #CCC;\r\n    font-family: Merriweather;\r\n    padding: 4px;\r\n    margin-bottom: 4px;\r\n}\r\n\r\n.eld-eld-main-head-position {\r\n    font-size: 18px;\r\n}\r\n\r\n.eld-eld-main-head-partbutton {\r\n    margin-right: 0px;\r\n    margin-left: 0px;\r\n    border-radius: 4px 0px 0px 4px;\r\n    background-color: rgba(255,255,255,0.4);\r\n}\r\n\r\n.eld-eld-main-head-partbutton + .el-button {\r\n    margin-right: 0px;\r\n    margin-left: 0px;\r\n    border-left: 0px;\r\n    border-radius: 0px 0px 0px 0px;\r\n}\r\n\r\n.eld-eld-main-head-image {\r\n    margin: 4px;\r\n    min-width: 10%;\r\n    max-width: 15%;\r\n}\r\n\r\n.eld-eld-body{\r\n\r\n}\r\n\r\n.eld-eld-body-row-flex {\r\n    display: flex;\r\n}\r\n\r\n.eld-eld-body-row-flex-center {\r\n    display: flex;\r\n    justify-content: center;\r\n}\r\n\r\n.eld-eld-body-row-flex-spacebetween {\r\n    display: flex;\r\n    justify-content: space-between;\r\n}\r\n\r\neld-eld-body-row-flex-vertical{\r\n    display: flex;\r\n    flex-direction: column;\r\n}\r\n\r\n.eld-eld-body-textcenter {\r\n    text-align: center;\r\n}\r\n\r\n.eld-eld-body-row-long{\r\n    max-width: 800px;\r\n    width: 800px;\r\n}\r\n\r\n.eld-eld-body-row-medium {\r\n    max-width: 400px;\r\n    width: 400px;\r\n}\r\n\r\n.eld-eld-body-row-right{\r\n    display: flex;\r\n    flex-direction: row-reverse;\r\n}\r\n\r\n.eld-eld-body-row-short {\r\n    max-width: 160px;\r\n    width: 160px;\r\n}\r\n\r\n.eld-eld-body-row-shortest {\r\n    max-width: 135px;\r\n    width: 135px;\r\n}\r\n\r\n.eld-eld-body-row-shortest-input input{\r\n    padding: 2px;\r\n}\r\n\r\n.eld-eld-body-row-tiny {\r\n    max-width: 80px;\r\n    width: 80px;\r\n}\r\n\r\n.eld-eld-body-row-mediumshort {\r\n    max-width: 200px;\r\n    width: 200px;\r\n}\r\n\r\n.eld-eld-body-row-mediumshorter {\r\n    max-width: 300px;\r\n    width: 300px;\r\n}\r\n\r\n.eld-eld-body-submenu-button{\r\n    background-color: rgba(0,0,0,0);\r\n    border: none;\r\n    border-radius: 0px;\r\n    border-bottom: 2px solid #AAF;\r\n}\r\n\r\n.eld-eld-body-submenu-button-selected {\r\n    background-color: rgba(0,0,200,0.08);\r\n    border-top-left-radius: 10px;\r\n    border-top-right-radius: 10px;\r\n    color: #002;\r\n    font-weight: 600;\r\n\r\n    border-bottom: 2px solid #AAF;\r\n}\r\n\r\n.eld-eld-body-submenu-button-selected:focus{\r\n    background-color: rgba(0,0,200,0.08);\r\n    border-top-left-radius: 10px;\r\n    border-top-right-radius: 10px;\r\n    color: #002;\r\n    font-weight: 600;\r\n\r\n    border-bottom: 2px solid #AAF;\r\n}\r\n\r\n.eld-eld-body-row-add {\r\n    margin: 10px;\r\n    margin-left: 2px;\r\n}\r\n\r\n.eld-eld-body-select-verylong {\r\n    max-width: 1000px;\r\n    width: 1000px;\r\n}\r\n\r\n.eld-eld-body-row-selectcontainer{\r\n    margin-bottom: 5px;\r\n}\r\n\r\n.eld-eld-body-row-case{\r\n    margin-top: 10px;\r\n    margin-right: 10px;\r\n    width: 230px;\r\n}\r\n\r\n.eld-eld-body-select-long {\r\n    max-width: 800px;\r\n    width: 800px;\r\n}\r\n\r\n.eld-eld-body-select-long-request {\r\n    max-width: 100%;\r\n    min-width: 60%;\r\n    width: 100%;\r\n}\r\n\r\n\r\n.eld-eld-body-select-medium {\r\n    max-width: 400px;\r\n    width: 400px;\r\n}\r\n\r\n.eld-eld-body-select-mediumshort {\r\n    max-width: 300px;\r\n    width: 300px;\r\n}\r\n\r\n.eld-eld-body-subtitle {\r\n    font-size: 18px;\r\n    text-align: center;\r\n    margin-bottom: 10px;\r\n}\r\n\r\n.eld-eld-body-row-inline-text-margin{\r\n    margin-top: 8px;\r\n    margin-left: 8px;\r\n}\r\n\r\n.eld-eld-body-civilduration {\r\n    background-color: white;\r\n\r\n}\r\n\r\n.eld-eld-body-civilduration-margin {\r\n    height: 60px;\r\n    background-color: #F4F4F4;\r\n}\r\n\r\n.eld-eld-body-civilduration-padding-bottom{\r\n    padding-bottom: 6px;\r\n    padding-left: 6px;\r\n}\r\n\r\n.eld-eld-body-civilduration-padding-top {\r\n    padding-top: 6px;\r\n    padding-left: 6px;\r\n}\r\n\r\n.eld-eld-body-add-title {\r\n    font-size: 18px;\r\n    text-align: center;\r\n}\r\n\r\n.eld-eld-body-jobperiod-emptyspace{\r\n    margin-left: 44px;\r\n}\r\n\r\n.eld-eld-body-button-text {\r\n    cursor: pointer;\r\n    text-align: center;\r\n    text-decoration: underline;\r\n    font-size: 13px;\r\n}\r\n\r\n.eld-eld-media-element {\r\n    border-bottom: 3px solid #DDD;\r\n    padding-bottom: 4px;\r\n    margin-bottom: 4px;\r\n}\r\n\r\n.eld-eld-body-indinput {\r\n    border: solid 1px #449;\r\n    width: 400px;\r\n    background: repeating-linear-gradient(90deg, #ffffff 0px, #ffffff 25px, #000000 26px);\r\n    color: #777;\r\n    font-family: monospace;\r\n    letter-spacing: 1.57ch;\r\n    font-size: 18px;\r\n    padding-left: 0.85ch;\r\n    max-width: 367px;\r\n    width: 367px;\r\n    height: 40px;\r\n}\r\n\r\n.eld-eld-body-indinput:focus{\r\n    outline: none;\r\n    color: dodgerblue;\r\n}\r\n\r\n.eld-eld-body-passpinput {\r\n    max-width: 238px;\r\n    width: 238px;\r\n    margin-left: 5px;\r\n}\r\n\r\n.eld-eld-vacation-daysleft {\r\n    margin: 3px;\r\n    border: 1px solid #999;\r\n    \r\n}\r\n\r\n.eld-eld-vacation-daysleft-title {\r\n    border-bottom: 1px solid #999;\r\n    text-align: center;\r\n    padding: 3px;\r\n}\r\n\r\n.eld-eld-vacation-daysleft-number {\r\n    padding: 3px;\r\n    text-align: center;\r\n    font-size: 24px;\r\n}\r\n\r\n.eld-eld-vacation-daysfull {\r\n    margin: 3px;\r\n    border: 1px solid #999;\r\n}\r\n\r\n.eld-eld-vacation-daysfull-title {\r\n    border-bottom: 1px solid #999;\r\n    text-align: center;\r\n    padding: 3px;\r\n    border-right: 1px solid #999;\r\n}\r\n\r\n.eld-eld-vacation-daysfull-number {\r\n    padding: 3px;\r\n    text-align: center;\r\n    font-size: 24px;\r\n    border-right: 1px solid #999;\r\n}\r\n\r\n.eld-eld-vacation-daysfull-number-shift {\r\n    font-size: 13px;\r\n}\r\n\r\n.eld-eld-vacation-daysfull-detailed {\r\n    padding: 3px;\r\n    font-size: 13px;\r\n}\r\n\r\n.eld-eld-vacation-daysgiven {\r\n    margin: 3px;\r\n    border: 1px solid #999;\r\n}\r\n\r\n.eld-eld-vacation-daysgiven-title {\r\n    border-bottom: 1px solid #999;\r\n    text-align: center;\r\n    padding: 3px;\r\n}\r\n\r\n.eld-eld-vacation-daysgiven-number {\r\n    padding: 3px;\r\n    text-align: center;\r\n    font-size: 24px;\r\n}\r\n\r\n.eld-eld-media-label {\r\n    min-width: 100px;\r\n    font-weight: 600;\r\n}\r\n\r\n.eld-eld-media-image {\r\n    margin: 4px;\r\n    max-width: 30%;\r\n}\r\n\r\n.eld-eld-table{\r\n    margin: 3px;\r\n    box-shadow: rgba(0,0,0,0.2) 1px 1px 4px;\r\n    background-color: #FFF;\r\n}\r\n\r\n.eld-eld-table input{\r\n    border: none;\r\n    border-bottom: 2px solid;\r\n    border-color: #E4E4E4;\r\n    border-radius: 0px;\r\n    background-color: rgba(250,250,250,0);\r\n}\r\n\r\n.eld-eld-table textarea{\r\n    border: none;\r\n    border-bottom: 2px solid;\r\n    border-color: #E4E4E4;\r\n    border-radius: 0px;\r\n    background-color: rgba(250,250,250,0);\r\n}\r\n\r\n.eld-eld-table .el-checkbox{\r\n    margin-top: 10px;\r\n    margin-bottom: 10px;\r\n}\r\n\r\n.eld-eld-table label{\r\n    margin: 0px;\r\n}\r\n\r\n.eld-eld-table div{\r\n    text-align: center;\r\n}\r\n\r\n.eld-eld-table input:hover{\r\n    border-bottom: 2px solid #C2C2F2;\r\n\r\n}\r\n\r\n.eld-eld-table input:focus{\r\n    border-bottom: 2px solid #C2C2F2;\r\n\r\n}\r\n\r\n.eld-eld-table textarea:hover{\r\n    border-bottom: 2px solid #C2C2F2;\r\n\r\n}\r\n\r\n.eld-eld-table textarea:focus{\r\n    border-bottom: 2px solid #C2C2F2;\r\n\r\n}\r\n\r\n.eld-eld-table thead{\r\n    font-weight: 600;\r\n    text-align: center;\r\n}\r\n\r\n.eld-eld-table tr{\r\n    border: 2px solid #D6D6D6;\r\n    padding: 2px;\r\n   \r\n}\r\n\r\n.eld-eld-table button{\r\n    width: 125px;\r\n    background-color: rgba(255,255,255,0.5);\r\n}\r\n\r\n.eld-eld-table tr:hover{\r\n    box-shadow: rgba(0,0,0,0.4) 0px 0px 4px;\r\n}\r\n\r\n.eld-eld-table td{\r\n    border: 2px solid #D6D6D6;\r\n    padding: 2px;\r\n    vertical-align: top;\r\n}\r\n\r\n.el-upload__input{\r\n    display:none !important;\r\n}\r\n\r\n.printServlist-main{\r\n    display:flex;\r\n    margin-top: 10px;\r\n    justify-content: center;\r\n}\r\n\r\n/*###################     MODEPANEL      ########################*/\r\n\r\n.modepanel-element{\r\n    border: 2px solid #c8c8c8;\r\n    cursor: pointer;\r\n    height: 165px;\r\n    width: 165px;\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\r\n    text-align: center;\r\n    border-radius: 8px;\r\n    margin: 10px;\r\n    padding: 5px;\r\n    font-size: 16px;\r\n    text-shadow: 2px 2px 4px #333;\r\n}\r\n\r\n.modepanel-element:hover{\r\n    box-shadow: 0px 0px 6px #A77;\r\n}\r\n\r\n.modepanel-element-org{\r\n    border-color: #44A;\r\n    background-color: #66C;\r\n    color: white;\r\n}\r\n\r\n.modepanel-element-eld {\r\n    border-color: #097;\r\n    background-color: #2A9;\r\n    color: white;\r\n}\r\n\r\n.modepanel-element-candidates {\r\n    border-color: #8A0;\r\n    background-color: #AC2;\r\n    color: white;\r\n}\r\n\r\n.modepanel-element-people {\r\n    border-color: #07A;\r\n    background-color: #29C;\r\n    color: white;\r\n}\r\n\r\n.modepanel-container{\r\n    display: flex;\r\n    justify-content: center;\r\n}\r\n\r\n\r\n/*####################     PERSON DECREES      #########################*/\r\n\r\n.persondecrees-create {\r\n    display: flex;\r\n}\r\n\r\n.persondecrees-element {\r\n    margin: 15px;\r\n    border-radius: 5px;\r\n    border: 2px solid #F2F2F2;\r\n    padding: 8px;\r\n    display: flex;\r\n    \r\n    justify-content: space-between;\r\n}\r\n\r\n.persondecrees-actionmenu{\r\n    padding-top: 12px;\r\n}\r\n\r\n.persondecrees-element-author {\r\n    font-size: 12px;\r\n}\r\n\r\n.persondecrees-element-checkboxcontainer{\r\n    display: flex;\r\n    flex-direction: column;\r\n    align-content: center;\r\n    justify-content: center;\r\n    padding-right: 6px;\r\n}\r\n\r\n.persondecrees-margintop {\r\n    margin-top: 10px;\r\n}\r\n\r\n.persondecrees-selected {\r\n    background-color: #FCFCFF;\r\n    border: 2px solid #A2A2F2;\r\n}\r\n\r\n.persondecreeoperation-panel {\r\n    margin: 10px;\r\n    border-radius: 5px;\r\n    border: 2px solid #F2F2F2;\r\n}\r\n\r\n.persondecreeoperation-element {\r\n    border-top: 2px solid #F2F2F2;\r\n    border-bottom: 2px solid #F2F2F2;\r\n    margin: 10px;\r\n    font-size: 12px;\r\n    padding: 2px;\r\n    padding-left: 5px;\r\n}\r\n\r\n.persondecreeoperation-button {\r\n    margin-bottom: 5px;\r\n}\r\n\r\n.persondecreeoperation-vacationperiod-period {\r\n    display: inline-block;\r\n    width: 200px;\r\n}\r\n\r\n.persondecreeoperation-vacationperiod-days{\r\n    margin-top: 5px;\r\n}\r\n\r\n.persondecreeoperation-nickname {\r\n    font-size: 18px;\r\n    font-weight: 600;\r\n    margin-bottom: 10px;\r\n}\r\n\r\n.persondecreeoperation-row-warning{\r\n    color: red;\r\n    font-style: italic;\r\n}\r\n\r\n.persondecreeoperation-row {\r\n    display: flex;\r\n    align-items: center;\r\n}\r\n\r\n.persondecreeoperation-row-text {\r\n    flex-basis: 50%;\r\n}\r\n\r\n.persondecreeoperation-row-text-label{\r\n    font-weight: 600;\r\n    font-size: 16px;\r\n}\r\n\r\n.persondecreeoperation-label-bold {\r\n    font-weight: 600;\r\n}\r\n\r\n.persondecreeoperation-part{\r\n    border-bottom: 2px solid #EAEAEA;\r\n    margin: 3px;\r\n}\r\n\r\n.persondecreeoperation-part-title {\r\n    text-align: center;\r\n    font-size: 20px;\r\n}\r\n\r\n.persondecreeoperation-part-list{\r\n\r\n}\r\n\r\n.persondecreeoperation-part-list-element {\r\n    border-radius: 2px;\r\n    padding-left: 2px;\r\n    padding-right: 2px;\r\n    margin-left: 4px;\r\n    display: flex;\r\n    justify-content: space-between;\r\n    /*width: 850px;*/\r\n    width: 100%\r\n}\r\n\r\n.persondecreeoperation-part-list-element-indent{\r\n    text-indent: 10mm; \r\n}\r\n\r\n.persondecreeoperation-part-list-element-intro {\r\n    \r\n    margin-bottom: 7px;\r\n}\r\n\r\n.persondecreeoperation-part-list-element-margin-small {\r\n    margin-bottom: 0.2cm;\r\n}\r\n\r\n.persondecreeoperation-part-list-element-margin {\r\n    margin-bottom: 0.5cm;\r\n}\r\n\r\n.persondecreeoperation-part-list-element-margin-big {\r\n    margin-bottom: 0.75cm;\r\n}\r\n\r\n.persondecreeoperation-part-list-element-sub {\r\n    margin-bottom: 0.5cm;\r\n    text-align: center;\r\n    width: 700px;\r\n}\r\n\r\n.persondecreeoperation-part-list-element-sub-sub {\r\n    text-align: center;\r\n    width: 700px;\r\n}\r\n\r\n.persondecreeoperation-part-list-element-info{\r\n\r\n}\r\n\r\n.persondecreeoperation-part-list-element-actions {\r\n}\r\n\r\n.persondecreeoperation-part-list-element-name{\r\n    /*font-weight: 600;*/\r\n}\r\n\r\n.persondecreeoperation-part-list-element-other {\r\n}\r\n\r\n.persondecreeoperation-part-list-title {\r\n    text-align: center;\r\n    font-size: 18px;\r\n    margin-top: 20px;\r\n}\r\n\r\n.persondecreeoperation-part-add-title {\r\n    text-align: center;\r\n    font-size: 18px;\r\n    margin-top: 5px;\r\n}\r\n\r\n.persondecreeblock {\r\n    border-top: 3px solid #EEE;\r\n    border-bottom: 3px solid #EEE;\r\n    padding: 5px;\r\n    margin-top: 10px;\r\n    padding-left: 15px;\r\n}\r\n\r\n.persondecreeblock-element {\r\n    /*border-top: 3px solid #EEE;\r\n    border-bottom: 3px solid #EEE;*/\r\n    padding: 5px;\r\n    /*margin-top: 10px;\r\n    padding-left: 15px;*/\r\n}\r\n\r\n.persondecreeblock-title {\r\n    text-align: center;\r\n    font-size: 20px;\r\n    font-weight: 600;\r\n}\r\n\r\n.input-margin-left{\r\n    margin-left: 10px;\r\n}\r\n\r\n.input-padding-left-small {\r\n    padding-left: 5px;\r\n}\r\n\r\n.input-padding-right-small {\r\n    padding-right: 5px;\r\n}\r\n\r\n.validation-error{\r\n    border: 2px solid red;\r\n    border-radius: 7px;\r\n}\r\n\r\n.small-text-centered {\r\n    text-align: center;\r\n    font-size: 10px;\r\n}\r\n\r\n.bold-text-centered {\r\n    text-align: center;\r\n    font-weight: 600;\r\n}\r\n\r\n.text-centered {\r\n    text-align: center;\r\n}\r\n\r\n/*####################     POPOVER      #########################*/\r\n.popover-inforow {\r\n    margin-top: 4px;\r\n    margin-bottom: 4px;\r\n}\r\n\r\n.popover-dropdown {\r\n    margin-top: 0px;\r\n    margin-bottom: 0px;\r\n    padding-top: 0px;\r\n    padding-bottom: 0px;\r\n    padding-left: 4px;\r\n    padding-right: 2px;\r\n    font-size: 14px;\r\n}\r\n\r\n.popover-label {\r\n    width: 200px;\r\n    margin-top: 0px;\r\n    margin-bottom: 0px;\r\n}\r\n\r\n.popover-inforow-hr {\r\n    margin-top: 6px;\r\n    margin-bottom: 6px;\r\n}\r\n\r\n.popover-inforow-debug {\r\n    color: #BBB;\r\n}\r\n\r\n/*####################     LOADING      #########################*/\r\n\r\n.loading-spinner {\r\n    margin-left: 20px;\r\n}\r\n\r\n.loading-row {\r\n    margin-top: 5px;\r\n    margin-bottom: 5px;\r\n    display: flex;\r\n    align-items: center;\r\n}\r\n\r\n\r\n/*####################     TRANSITIONS      #########################*/\r\n/* Enter and leave animations can use different */\r\n/* durations and timing functions.              */\r\n.slide-fade-enter-active {\r\n    transition: all .3s ease;\r\n}\r\n\r\n.slide-fade-leave-active {\r\n    transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);\r\n}\r\n\r\n.slide-fade-enter, .slide-fade-leave-to\r\n/* .slide-fade-leave-active below version 2.1.8 */ {\r\n    transform: translateX(10px);\r\n    opacity: 0;\r\n}\r\n\r\n\r\n/*Костино*/\r\n\r\n.str1 {\r\n    position: relative;\r\n    font-size: 0.5cm;\r\n    float: left;\r\n    z-index: 1;\r\n    background-image: url(" + __webpack_require__(83) + ");\r\n    background-repeat: repeat-x;\r\n}\r\n\r\n.str2 {\r\n    position: relative;\r\n    font-size: 0.5cm;\r\n    text-indent: 15px;\r\n    background-image: url(" + __webpack_require__(85) + ");\r\n    background-repeat: repeat;\r\n}\r\n\r\n.page {\r\n    width: 100%;\r\n}\r\n\r\n#ab p {\r\n    /*line-height: 0.3cm;*/\r\n    text-indent: 1.25cm;\r\n}\r\n\r\n#ab > ol {\r\n    margin-left: 3cm;\r\n}\r\n\r\n.strP1 {\r\n    position: relative;\r\n    font-size: 0.5cm;\r\n    float: left;\r\n    z-index: 1;\r\n    background-image: url(" + __webpack_require__(84) + ");\r\n    background-repeat: repeat-x;\r\n    -webkit-print-color-adjust: exact;\r\n}\r\n\r\n.strP2 {\r\n    position: relative;\r\n    font-size: 0.5cm;\r\n    /*text-indent: 0px;*/\r\n    background-image: url(" + __webpack_require__(86) + ");\r\n    background-repeat: repeat;\r\n    -webkit-print-color-adjust: exact;\r\n}\r\n\r\n.page {\r\n    width: 100%;\r\n}\r\n\r\n.page p {\r\n    font-size: 0.5cm;\r\n}\r\n\r\n.el-table .all {\r\n    background: #ef65653d;\r\n}\r\n\r\n.el-table .success-row {\r\n    background: #f0f9eb;\r\n}\r\n\r\n.el-table .unopen-row {\r\n    background: #4251ff4d;\r\n    font-weight: bold;\r\n    border: groove;\r\n}\r\n\r\n\r\n.el-mail-number-decrees {\r\n    text-align-last: right;\r\n    align-items: center;\r\n    font-family: Arial;\r\n    font-weight: bold;\r\n    font-style: oblique;\r\n    font-size: 10px;\r\n    margin: auto;\r\n}\r\n/*-----------------el-tree--------------*/\r\n.el-tree {\r\n    background: rgba(170, 233, 166, 0.86);\r\n    color: #374037;\r\n    white-space: pre-wrap;\r\n    max-width: 99%;\r\n}\r\n.el-tree-node {\r\n    border: outset;\r\n    \r\n    /*max-height: 80px;*/\r\n}\r\n/*.el-tree-node__content {\r\n    height: 80px;\r\n}*/\r\n.el-tree-node__label {\r\n    font-family: 'Merriweather';\r\n    max-width: 99%;\r\n    \r\n}\r\n.el-tree-node > .el-tree-node__children {\r\n    margin-block: 2px 2px;\r\n    overflow: hidden;\r\n    background: inherit;\r\n    max-width: 99%;\r\n    white-space: pre-wrap;\r\n}", ""]);
-
-// exports
-
-
-/***/ }),
-/* 12 */
 /***/ (function(module, exports) {
 
 var ENTITIES = [['Aacute', [193]], ['aacute', [225]], ['Abreve', [258]], ['abreve', [259]], ['ac', [8766]], ['acd', [8767]], ['acE', [8766, 819]], ['Acirc', [194]], ['acirc', [226]], ['acute', [180]], ['Acy', [1040]], ['acy', [1072]], ['AElig', [198]], ['aelig', [230]], ['af', [8289]], ['Afr', [120068]], ['afr', [120094]], ['Agrave', [192]], ['agrave', [224]], ['alefsym', [8501]], ['aleph', [8501]], ['Alpha', [913]], ['alpha', [945]], ['Amacr', [256]], ['amacr', [257]], ['amalg', [10815]], ['amp', [38]], ['AMP', [38]], ['andand', [10837]], ['And', [10835]], ['and', [8743]], ['andd', [10844]], ['andslope', [10840]], ['andv', [10842]], ['ang', [8736]], ['ange', [10660]], ['angle', [8736]], ['angmsdaa', [10664]], ['angmsdab', [10665]], ['angmsdac', [10666]], ['angmsdad', [10667]], ['angmsdae', [10668]], ['angmsdaf', [10669]], ['angmsdag', [10670]], ['angmsdah', [10671]], ['angmsd', [8737]], ['angrt', [8735]], ['angrtvb', [8894]], ['angrtvbd', [10653]], ['angsph', [8738]], ['angst', [197]], ['angzarr', [9084]], ['Aogon', [260]], ['aogon', [261]], ['Aopf', [120120]], ['aopf', [120146]], ['apacir', [10863]], ['ap', [8776]], ['apE', [10864]], ['ape', [8778]], ['apid', [8779]], ['apos', [39]], ['ApplyFunction', [8289]], ['approx', [8776]], ['approxeq', [8778]], ['Aring', [197]], ['aring', [229]], ['Ascr', [119964]], ['ascr', [119990]], ['Assign', [8788]], ['ast', [42]], ['asymp', [8776]], ['asympeq', [8781]], ['Atilde', [195]], ['atilde', [227]], ['Auml', [196]], ['auml', [228]], ['awconint', [8755]], ['awint', [10769]], ['backcong', [8780]], ['backepsilon', [1014]], ['backprime', [8245]], ['backsim', [8765]], ['backsimeq', [8909]], ['Backslash', [8726]], ['Barv', [10983]], ['barvee', [8893]], ['barwed', [8965]], ['Barwed', [8966]], ['barwedge', [8965]], ['bbrk', [9141]], ['bbrktbrk', [9142]], ['bcong', [8780]], ['Bcy', [1041]], ['bcy', [1073]], ['bdquo', [8222]], ['becaus', [8757]], ['because', [8757]], ['Because', [8757]], ['bemptyv', [10672]], ['bepsi', [1014]], ['bernou', [8492]], ['Bernoullis', [8492]], ['Beta', [914]], ['beta', [946]], ['beth', [8502]], ['between', [8812]], ['Bfr', [120069]], ['bfr', [120095]], ['bigcap', [8898]], ['bigcirc', [9711]], ['bigcup', [8899]], ['bigodot', [10752]], ['bigoplus', [10753]], ['bigotimes', [10754]], ['bigsqcup', [10758]], ['bigstar', [9733]], ['bigtriangledown', [9661]], ['bigtriangleup', [9651]], ['biguplus', [10756]], ['bigvee', [8897]], ['bigwedge', [8896]], ['bkarow', [10509]], ['blacklozenge', [10731]], ['blacksquare', [9642]], ['blacktriangle', [9652]], ['blacktriangledown', [9662]], ['blacktriangleleft', [9666]], ['blacktriangleright', [9656]], ['blank', [9251]], ['blk12', [9618]], ['blk14', [9617]], ['blk34', [9619]], ['block', [9608]], ['bne', [61, 8421]], ['bnequiv', [8801, 8421]], ['bNot', [10989]], ['bnot', [8976]], ['Bopf', [120121]], ['bopf', [120147]], ['bot', [8869]], ['bottom', [8869]], ['bowtie', [8904]], ['boxbox', [10697]], ['boxdl', [9488]], ['boxdL', [9557]], ['boxDl', [9558]], ['boxDL', [9559]], ['boxdr', [9484]], ['boxdR', [9554]], ['boxDr', [9555]], ['boxDR', [9556]], ['boxh', [9472]], ['boxH', [9552]], ['boxhd', [9516]], ['boxHd', [9572]], ['boxhD', [9573]], ['boxHD', [9574]], ['boxhu', [9524]], ['boxHu', [9575]], ['boxhU', [9576]], ['boxHU', [9577]], ['boxminus', [8863]], ['boxplus', [8862]], ['boxtimes', [8864]], ['boxul', [9496]], ['boxuL', [9563]], ['boxUl', [9564]], ['boxUL', [9565]], ['boxur', [9492]], ['boxuR', [9560]], ['boxUr', [9561]], ['boxUR', [9562]], ['boxv', [9474]], ['boxV', [9553]], ['boxvh', [9532]], ['boxvH', [9578]], ['boxVh', [9579]], ['boxVH', [9580]], ['boxvl', [9508]], ['boxvL', [9569]], ['boxVl', [9570]], ['boxVL', [9571]], ['boxvr', [9500]], ['boxvR', [9566]], ['boxVr', [9567]], ['boxVR', [9568]], ['bprime', [8245]], ['breve', [728]], ['Breve', [728]], ['brvbar', [166]], ['bscr', [119991]], ['Bscr', [8492]], ['bsemi', [8271]], ['bsim', [8765]], ['bsime', [8909]], ['bsolb', [10693]], ['bsol', [92]], ['bsolhsub', [10184]], ['bull', [8226]], ['bullet', [8226]], ['bump', [8782]], ['bumpE', [10926]], ['bumpe', [8783]], ['Bumpeq', [8782]], ['bumpeq', [8783]], ['Cacute', [262]], ['cacute', [263]], ['capand', [10820]], ['capbrcup', [10825]], ['capcap', [10827]], ['cap', [8745]], ['Cap', [8914]], ['capcup', [10823]], ['capdot', [10816]], ['CapitalDifferentialD', [8517]], ['caps', [8745, 65024]], ['caret', [8257]], ['caron', [711]], ['Cayleys', [8493]], ['ccaps', [10829]], ['Ccaron', [268]], ['ccaron', [269]], ['Ccedil', [199]], ['ccedil', [231]], ['Ccirc', [264]], ['ccirc', [265]], ['Cconint', [8752]], ['ccups', [10828]], ['ccupssm', [10832]], ['Cdot', [266]], ['cdot', [267]], ['cedil', [184]], ['Cedilla', [184]], ['cemptyv', [10674]], ['cent', [162]], ['centerdot', [183]], ['CenterDot', [183]], ['cfr', [120096]], ['Cfr', [8493]], ['CHcy', [1063]], ['chcy', [1095]], ['check', [10003]], ['checkmark', [10003]], ['Chi', [935]], ['chi', [967]], ['circ', [710]], ['circeq', [8791]], ['circlearrowleft', [8634]], ['circlearrowright', [8635]], ['circledast', [8859]], ['circledcirc', [8858]], ['circleddash', [8861]], ['CircleDot', [8857]], ['circledR', [174]], ['circledS', [9416]], ['CircleMinus', [8854]], ['CirclePlus', [8853]], ['CircleTimes', [8855]], ['cir', [9675]], ['cirE', [10691]], ['cire', [8791]], ['cirfnint', [10768]], ['cirmid', [10991]], ['cirscir', [10690]], ['ClockwiseContourIntegral', [8754]], ['clubs', [9827]], ['clubsuit', [9827]], ['colon', [58]], ['Colon', [8759]], ['Colone', [10868]], ['colone', [8788]], ['coloneq', [8788]], ['comma', [44]], ['commat', [64]], ['comp', [8705]], ['compfn', [8728]], ['complement', [8705]], ['complexes', [8450]], ['cong', [8773]], ['congdot', [10861]], ['Congruent', [8801]], ['conint', [8750]], ['Conint', [8751]], ['ContourIntegral', [8750]], ['copf', [120148]], ['Copf', [8450]], ['coprod', [8720]], ['Coproduct', [8720]], ['copy', [169]], ['COPY', [169]], ['copysr', [8471]], ['CounterClockwiseContourIntegral', [8755]], ['crarr', [8629]], ['cross', [10007]], ['Cross', [10799]], ['Cscr', [119966]], ['cscr', [119992]], ['csub', [10959]], ['csube', [10961]], ['csup', [10960]], ['csupe', [10962]], ['ctdot', [8943]], ['cudarrl', [10552]], ['cudarrr', [10549]], ['cuepr', [8926]], ['cuesc', [8927]], ['cularr', [8630]], ['cularrp', [10557]], ['cupbrcap', [10824]], ['cupcap', [10822]], ['CupCap', [8781]], ['cup', [8746]], ['Cup', [8915]], ['cupcup', [10826]], ['cupdot', [8845]], ['cupor', [10821]], ['cups', [8746, 65024]], ['curarr', [8631]], ['curarrm', [10556]], ['curlyeqprec', [8926]], ['curlyeqsucc', [8927]], ['curlyvee', [8910]], ['curlywedge', [8911]], ['curren', [164]], ['curvearrowleft', [8630]], ['curvearrowright', [8631]], ['cuvee', [8910]], ['cuwed', [8911]], ['cwconint', [8754]], ['cwint', [8753]], ['cylcty', [9005]], ['dagger', [8224]], ['Dagger', [8225]], ['daleth', [8504]], ['darr', [8595]], ['Darr', [8609]], ['dArr', [8659]], ['dash', [8208]], ['Dashv', [10980]], ['dashv', [8867]], ['dbkarow', [10511]], ['dblac', [733]], ['Dcaron', [270]], ['dcaron', [271]], ['Dcy', [1044]], ['dcy', [1076]], ['ddagger', [8225]], ['ddarr', [8650]], ['DD', [8517]], ['dd', [8518]], ['DDotrahd', [10513]], ['ddotseq', [10871]], ['deg', [176]], ['Del', [8711]], ['Delta', [916]], ['delta', [948]], ['demptyv', [10673]], ['dfisht', [10623]], ['Dfr', [120071]], ['dfr', [120097]], ['dHar', [10597]], ['dharl', [8643]], ['dharr', [8642]], ['DiacriticalAcute', [180]], ['DiacriticalDot', [729]], ['DiacriticalDoubleAcute', [733]], ['DiacriticalGrave', [96]], ['DiacriticalTilde', [732]], ['diam', [8900]], ['diamond', [8900]], ['Diamond', [8900]], ['diamondsuit', [9830]], ['diams', [9830]], ['die', [168]], ['DifferentialD', [8518]], ['digamma', [989]], ['disin', [8946]], ['div', [247]], ['divide', [247]], ['divideontimes', [8903]], ['divonx', [8903]], ['DJcy', [1026]], ['djcy', [1106]], ['dlcorn', [8990]], ['dlcrop', [8973]], ['dollar', [36]], ['Dopf', [120123]], ['dopf', [120149]], ['Dot', [168]], ['dot', [729]], ['DotDot', [8412]], ['doteq', [8784]], ['doteqdot', [8785]], ['DotEqual', [8784]], ['dotminus', [8760]], ['dotplus', [8724]], ['dotsquare', [8865]], ['doublebarwedge', [8966]], ['DoubleContourIntegral', [8751]], ['DoubleDot', [168]], ['DoubleDownArrow', [8659]], ['DoubleLeftArrow', [8656]], ['DoubleLeftRightArrow', [8660]], ['DoubleLeftTee', [10980]], ['DoubleLongLeftArrow', [10232]], ['DoubleLongLeftRightArrow', [10234]], ['DoubleLongRightArrow', [10233]], ['DoubleRightArrow', [8658]], ['DoubleRightTee', [8872]], ['DoubleUpArrow', [8657]], ['DoubleUpDownArrow', [8661]], ['DoubleVerticalBar', [8741]], ['DownArrowBar', [10515]], ['downarrow', [8595]], ['DownArrow', [8595]], ['Downarrow', [8659]], ['DownArrowUpArrow', [8693]], ['DownBreve', [785]], ['downdownarrows', [8650]], ['downharpoonleft', [8643]], ['downharpoonright', [8642]], ['DownLeftRightVector', [10576]], ['DownLeftTeeVector', [10590]], ['DownLeftVectorBar', [10582]], ['DownLeftVector', [8637]], ['DownRightTeeVector', [10591]], ['DownRightVectorBar', [10583]], ['DownRightVector', [8641]], ['DownTeeArrow', [8615]], ['DownTee', [8868]], ['drbkarow', [10512]], ['drcorn', [8991]], ['drcrop', [8972]], ['Dscr', [119967]], ['dscr', [119993]], ['DScy', [1029]], ['dscy', [1109]], ['dsol', [10742]], ['Dstrok', [272]], ['dstrok', [273]], ['dtdot', [8945]], ['dtri', [9663]], ['dtrif', [9662]], ['duarr', [8693]], ['duhar', [10607]], ['dwangle', [10662]], ['DZcy', [1039]], ['dzcy', [1119]], ['dzigrarr', [10239]], ['Eacute', [201]], ['eacute', [233]], ['easter', [10862]], ['Ecaron', [282]], ['ecaron', [283]], ['Ecirc', [202]], ['ecirc', [234]], ['ecir', [8790]], ['ecolon', [8789]], ['Ecy', [1069]], ['ecy', [1101]], ['eDDot', [10871]], ['Edot', [278]], ['edot', [279]], ['eDot', [8785]], ['ee', [8519]], ['efDot', [8786]], ['Efr', [120072]], ['efr', [120098]], ['eg', [10906]], ['Egrave', [200]], ['egrave', [232]], ['egs', [10902]], ['egsdot', [10904]], ['el', [10905]], ['Element', [8712]], ['elinters', [9191]], ['ell', [8467]], ['els', [10901]], ['elsdot', [10903]], ['Emacr', [274]], ['emacr', [275]], ['empty', [8709]], ['emptyset', [8709]], ['EmptySmallSquare', [9723]], ['emptyv', [8709]], ['EmptyVerySmallSquare', [9643]], ['emsp13', [8196]], ['emsp14', [8197]], ['emsp', [8195]], ['ENG', [330]], ['eng', [331]], ['ensp', [8194]], ['Eogon', [280]], ['eogon', [281]], ['Eopf', [120124]], ['eopf', [120150]], ['epar', [8917]], ['eparsl', [10723]], ['eplus', [10865]], ['epsi', [949]], ['Epsilon', [917]], ['epsilon', [949]], ['epsiv', [1013]], ['eqcirc', [8790]], ['eqcolon', [8789]], ['eqsim', [8770]], ['eqslantgtr', [10902]], ['eqslantless', [10901]], ['Equal', [10869]], ['equals', [61]], ['EqualTilde', [8770]], ['equest', [8799]], ['Equilibrium', [8652]], ['equiv', [8801]], ['equivDD', [10872]], ['eqvparsl', [10725]], ['erarr', [10609]], ['erDot', [8787]], ['escr', [8495]], ['Escr', [8496]], ['esdot', [8784]], ['Esim', [10867]], ['esim', [8770]], ['Eta', [919]], ['eta', [951]], ['ETH', [208]], ['eth', [240]], ['Euml', [203]], ['euml', [235]], ['euro', [8364]], ['excl', [33]], ['exist', [8707]], ['Exists', [8707]], ['expectation', [8496]], ['exponentiale', [8519]], ['ExponentialE', [8519]], ['fallingdotseq', [8786]], ['Fcy', [1060]], ['fcy', [1092]], ['female', [9792]], ['ffilig', [64259]], ['fflig', [64256]], ['ffllig', [64260]], ['Ffr', [120073]], ['ffr', [120099]], ['filig', [64257]], ['FilledSmallSquare', [9724]], ['FilledVerySmallSquare', [9642]], ['fjlig', [102, 106]], ['flat', [9837]], ['fllig', [64258]], ['fltns', [9649]], ['fnof', [402]], ['Fopf', [120125]], ['fopf', [120151]], ['forall', [8704]], ['ForAll', [8704]], ['fork', [8916]], ['forkv', [10969]], ['Fouriertrf', [8497]], ['fpartint', [10765]], ['frac12', [189]], ['frac13', [8531]], ['frac14', [188]], ['frac15', [8533]], ['frac16', [8537]], ['frac18', [8539]], ['frac23', [8532]], ['frac25', [8534]], ['frac34', [190]], ['frac35', [8535]], ['frac38', [8540]], ['frac45', [8536]], ['frac56', [8538]], ['frac58', [8541]], ['frac78', [8542]], ['frasl', [8260]], ['frown', [8994]], ['fscr', [119995]], ['Fscr', [8497]], ['gacute', [501]], ['Gamma', [915]], ['gamma', [947]], ['Gammad', [988]], ['gammad', [989]], ['gap', [10886]], ['Gbreve', [286]], ['gbreve', [287]], ['Gcedil', [290]], ['Gcirc', [284]], ['gcirc', [285]], ['Gcy', [1043]], ['gcy', [1075]], ['Gdot', [288]], ['gdot', [289]], ['ge', [8805]], ['gE', [8807]], ['gEl', [10892]], ['gel', [8923]], ['geq', [8805]], ['geqq', [8807]], ['geqslant', [10878]], ['gescc', [10921]], ['ges', [10878]], ['gesdot', [10880]], ['gesdoto', [10882]], ['gesdotol', [10884]], ['gesl', [8923, 65024]], ['gesles', [10900]], ['Gfr', [120074]], ['gfr', [120100]], ['gg', [8811]], ['Gg', [8921]], ['ggg', [8921]], ['gimel', [8503]], ['GJcy', [1027]], ['gjcy', [1107]], ['gla', [10917]], ['gl', [8823]], ['glE', [10898]], ['glj', [10916]], ['gnap', [10890]], ['gnapprox', [10890]], ['gne', [10888]], ['gnE', [8809]], ['gneq', [10888]], ['gneqq', [8809]], ['gnsim', [8935]], ['Gopf', [120126]], ['gopf', [120152]], ['grave', [96]], ['GreaterEqual', [8805]], ['GreaterEqualLess', [8923]], ['GreaterFullEqual', [8807]], ['GreaterGreater', [10914]], ['GreaterLess', [8823]], ['GreaterSlantEqual', [10878]], ['GreaterTilde', [8819]], ['Gscr', [119970]], ['gscr', [8458]], ['gsim', [8819]], ['gsime', [10894]], ['gsiml', [10896]], ['gtcc', [10919]], ['gtcir', [10874]], ['gt', [62]], ['GT', [62]], ['Gt', [8811]], ['gtdot', [8919]], ['gtlPar', [10645]], ['gtquest', [10876]], ['gtrapprox', [10886]], ['gtrarr', [10616]], ['gtrdot', [8919]], ['gtreqless', [8923]], ['gtreqqless', [10892]], ['gtrless', [8823]], ['gtrsim', [8819]], ['gvertneqq', [8809, 65024]], ['gvnE', [8809, 65024]], ['Hacek', [711]], ['hairsp', [8202]], ['half', [189]], ['hamilt', [8459]], ['HARDcy', [1066]], ['hardcy', [1098]], ['harrcir', [10568]], ['harr', [8596]], ['hArr', [8660]], ['harrw', [8621]], ['Hat', [94]], ['hbar', [8463]], ['Hcirc', [292]], ['hcirc', [293]], ['hearts', [9829]], ['heartsuit', [9829]], ['hellip', [8230]], ['hercon', [8889]], ['hfr', [120101]], ['Hfr', [8460]], ['HilbertSpace', [8459]], ['hksearow', [10533]], ['hkswarow', [10534]], ['hoarr', [8703]], ['homtht', [8763]], ['hookleftarrow', [8617]], ['hookrightarrow', [8618]], ['hopf', [120153]], ['Hopf', [8461]], ['horbar', [8213]], ['HorizontalLine', [9472]], ['hscr', [119997]], ['Hscr', [8459]], ['hslash', [8463]], ['Hstrok', [294]], ['hstrok', [295]], ['HumpDownHump', [8782]], ['HumpEqual', [8783]], ['hybull', [8259]], ['hyphen', [8208]], ['Iacute', [205]], ['iacute', [237]], ['ic', [8291]], ['Icirc', [206]], ['icirc', [238]], ['Icy', [1048]], ['icy', [1080]], ['Idot', [304]], ['IEcy', [1045]], ['iecy', [1077]], ['iexcl', [161]], ['iff', [8660]], ['ifr', [120102]], ['Ifr', [8465]], ['Igrave', [204]], ['igrave', [236]], ['ii', [8520]], ['iiiint', [10764]], ['iiint', [8749]], ['iinfin', [10716]], ['iiota', [8489]], ['IJlig', [306]], ['ijlig', [307]], ['Imacr', [298]], ['imacr', [299]], ['image', [8465]], ['ImaginaryI', [8520]], ['imagline', [8464]], ['imagpart', [8465]], ['imath', [305]], ['Im', [8465]], ['imof', [8887]], ['imped', [437]], ['Implies', [8658]], ['incare', [8453]], ['in', [8712]], ['infin', [8734]], ['infintie', [10717]], ['inodot', [305]], ['intcal', [8890]], ['int', [8747]], ['Int', [8748]], ['integers', [8484]], ['Integral', [8747]], ['intercal', [8890]], ['Intersection', [8898]], ['intlarhk', [10775]], ['intprod', [10812]], ['InvisibleComma', [8291]], ['InvisibleTimes', [8290]], ['IOcy', [1025]], ['iocy', [1105]], ['Iogon', [302]], ['iogon', [303]], ['Iopf', [120128]], ['iopf', [120154]], ['Iota', [921]], ['iota', [953]], ['iprod', [10812]], ['iquest', [191]], ['iscr', [119998]], ['Iscr', [8464]], ['isin', [8712]], ['isindot', [8949]], ['isinE', [8953]], ['isins', [8948]], ['isinsv', [8947]], ['isinv', [8712]], ['it', [8290]], ['Itilde', [296]], ['itilde', [297]], ['Iukcy', [1030]], ['iukcy', [1110]], ['Iuml', [207]], ['iuml', [239]], ['Jcirc', [308]], ['jcirc', [309]], ['Jcy', [1049]], ['jcy', [1081]], ['Jfr', [120077]], ['jfr', [120103]], ['jmath', [567]], ['Jopf', [120129]], ['jopf', [120155]], ['Jscr', [119973]], ['jscr', [119999]], ['Jsercy', [1032]], ['jsercy', [1112]], ['Jukcy', [1028]], ['jukcy', [1108]], ['Kappa', [922]], ['kappa', [954]], ['kappav', [1008]], ['Kcedil', [310]], ['kcedil', [311]], ['Kcy', [1050]], ['kcy', [1082]], ['Kfr', [120078]], ['kfr', [120104]], ['kgreen', [312]], ['KHcy', [1061]], ['khcy', [1093]], ['KJcy', [1036]], ['kjcy', [1116]], ['Kopf', [120130]], ['kopf', [120156]], ['Kscr', [119974]], ['kscr', [120000]], ['lAarr', [8666]], ['Lacute', [313]], ['lacute', [314]], ['laemptyv', [10676]], ['lagran', [8466]], ['Lambda', [923]], ['lambda', [955]], ['lang', [10216]], ['Lang', [10218]], ['langd', [10641]], ['langle', [10216]], ['lap', [10885]], ['Laplacetrf', [8466]], ['laquo', [171]], ['larrb', [8676]], ['larrbfs', [10527]], ['larr', [8592]], ['Larr', [8606]], ['lArr', [8656]], ['larrfs', [10525]], ['larrhk', [8617]], ['larrlp', [8619]], ['larrpl', [10553]], ['larrsim', [10611]], ['larrtl', [8610]], ['latail', [10521]], ['lAtail', [10523]], ['lat', [10923]], ['late', [10925]], ['lates', [10925, 65024]], ['lbarr', [10508]], ['lBarr', [10510]], ['lbbrk', [10098]], ['lbrace', [123]], ['lbrack', [91]], ['lbrke', [10635]], ['lbrksld', [10639]], ['lbrkslu', [10637]], ['Lcaron', [317]], ['lcaron', [318]], ['Lcedil', [315]], ['lcedil', [316]], ['lceil', [8968]], ['lcub', [123]], ['Lcy', [1051]], ['lcy', [1083]], ['ldca', [10550]], ['ldquo', [8220]], ['ldquor', [8222]], ['ldrdhar', [10599]], ['ldrushar', [10571]], ['ldsh', [8626]], ['le', [8804]], ['lE', [8806]], ['LeftAngleBracket', [10216]], ['LeftArrowBar', [8676]], ['leftarrow', [8592]], ['LeftArrow', [8592]], ['Leftarrow', [8656]], ['LeftArrowRightArrow', [8646]], ['leftarrowtail', [8610]], ['LeftCeiling', [8968]], ['LeftDoubleBracket', [10214]], ['LeftDownTeeVector', [10593]], ['LeftDownVectorBar', [10585]], ['LeftDownVector', [8643]], ['LeftFloor', [8970]], ['leftharpoondown', [8637]], ['leftharpoonup', [8636]], ['leftleftarrows', [8647]], ['leftrightarrow', [8596]], ['LeftRightArrow', [8596]], ['Leftrightarrow', [8660]], ['leftrightarrows', [8646]], ['leftrightharpoons', [8651]], ['leftrightsquigarrow', [8621]], ['LeftRightVector', [10574]], ['LeftTeeArrow', [8612]], ['LeftTee', [8867]], ['LeftTeeVector', [10586]], ['leftthreetimes', [8907]], ['LeftTriangleBar', [10703]], ['LeftTriangle', [8882]], ['LeftTriangleEqual', [8884]], ['LeftUpDownVector', [10577]], ['LeftUpTeeVector', [10592]], ['LeftUpVectorBar', [10584]], ['LeftUpVector', [8639]], ['LeftVectorBar', [10578]], ['LeftVector', [8636]], ['lEg', [10891]], ['leg', [8922]], ['leq', [8804]], ['leqq', [8806]], ['leqslant', [10877]], ['lescc', [10920]], ['les', [10877]], ['lesdot', [10879]], ['lesdoto', [10881]], ['lesdotor', [10883]], ['lesg', [8922, 65024]], ['lesges', [10899]], ['lessapprox', [10885]], ['lessdot', [8918]], ['lesseqgtr', [8922]], ['lesseqqgtr', [10891]], ['LessEqualGreater', [8922]], ['LessFullEqual', [8806]], ['LessGreater', [8822]], ['lessgtr', [8822]], ['LessLess', [10913]], ['lesssim', [8818]], ['LessSlantEqual', [10877]], ['LessTilde', [8818]], ['lfisht', [10620]], ['lfloor', [8970]], ['Lfr', [120079]], ['lfr', [120105]], ['lg', [8822]], ['lgE', [10897]], ['lHar', [10594]], ['lhard', [8637]], ['lharu', [8636]], ['lharul', [10602]], ['lhblk', [9604]], ['LJcy', [1033]], ['ljcy', [1113]], ['llarr', [8647]], ['ll', [8810]], ['Ll', [8920]], ['llcorner', [8990]], ['Lleftarrow', [8666]], ['llhard', [10603]], ['lltri', [9722]], ['Lmidot', [319]], ['lmidot', [320]], ['lmoustache', [9136]], ['lmoust', [9136]], ['lnap', [10889]], ['lnapprox', [10889]], ['lne', [10887]], ['lnE', [8808]], ['lneq', [10887]], ['lneqq', [8808]], ['lnsim', [8934]], ['loang', [10220]], ['loarr', [8701]], ['lobrk', [10214]], ['longleftarrow', [10229]], ['LongLeftArrow', [10229]], ['Longleftarrow', [10232]], ['longleftrightarrow', [10231]], ['LongLeftRightArrow', [10231]], ['Longleftrightarrow', [10234]], ['longmapsto', [10236]], ['longrightarrow', [10230]], ['LongRightArrow', [10230]], ['Longrightarrow', [10233]], ['looparrowleft', [8619]], ['looparrowright', [8620]], ['lopar', [10629]], ['Lopf', [120131]], ['lopf', [120157]], ['loplus', [10797]], ['lotimes', [10804]], ['lowast', [8727]], ['lowbar', [95]], ['LowerLeftArrow', [8601]], ['LowerRightArrow', [8600]], ['loz', [9674]], ['lozenge', [9674]], ['lozf', [10731]], ['lpar', [40]], ['lparlt', [10643]], ['lrarr', [8646]], ['lrcorner', [8991]], ['lrhar', [8651]], ['lrhard', [10605]], ['lrm', [8206]], ['lrtri', [8895]], ['lsaquo', [8249]], ['lscr', [120001]], ['Lscr', [8466]], ['lsh', [8624]], ['Lsh', [8624]], ['lsim', [8818]], ['lsime', [10893]], ['lsimg', [10895]], ['lsqb', [91]], ['lsquo', [8216]], ['lsquor', [8218]], ['Lstrok', [321]], ['lstrok', [322]], ['ltcc', [10918]], ['ltcir', [10873]], ['lt', [60]], ['LT', [60]], ['Lt', [8810]], ['ltdot', [8918]], ['lthree', [8907]], ['ltimes', [8905]], ['ltlarr', [10614]], ['ltquest', [10875]], ['ltri', [9667]], ['ltrie', [8884]], ['ltrif', [9666]], ['ltrPar', [10646]], ['lurdshar', [10570]], ['luruhar', [10598]], ['lvertneqq', [8808, 65024]], ['lvnE', [8808, 65024]], ['macr', [175]], ['male', [9794]], ['malt', [10016]], ['maltese', [10016]], ['Map', [10501]], ['map', [8614]], ['mapsto', [8614]], ['mapstodown', [8615]], ['mapstoleft', [8612]], ['mapstoup', [8613]], ['marker', [9646]], ['mcomma', [10793]], ['Mcy', [1052]], ['mcy', [1084]], ['mdash', [8212]], ['mDDot', [8762]], ['measuredangle', [8737]], ['MediumSpace', [8287]], ['Mellintrf', [8499]], ['Mfr', [120080]], ['mfr', [120106]], ['mho', [8487]], ['micro', [181]], ['midast', [42]], ['midcir', [10992]], ['mid', [8739]], ['middot', [183]], ['minusb', [8863]], ['minus', [8722]], ['minusd', [8760]], ['minusdu', [10794]], ['MinusPlus', [8723]], ['mlcp', [10971]], ['mldr', [8230]], ['mnplus', [8723]], ['models', [8871]], ['Mopf', [120132]], ['mopf', [120158]], ['mp', [8723]], ['mscr', [120002]], ['Mscr', [8499]], ['mstpos', [8766]], ['Mu', [924]], ['mu', [956]], ['multimap', [8888]], ['mumap', [8888]], ['nabla', [8711]], ['Nacute', [323]], ['nacute', [324]], ['nang', [8736, 8402]], ['nap', [8777]], ['napE', [10864, 824]], ['napid', [8779, 824]], ['napos', [329]], ['napprox', [8777]], ['natural', [9838]], ['naturals', [8469]], ['natur', [9838]], ['nbsp', [160]], ['nbump', [8782, 824]], ['nbumpe', [8783, 824]], ['ncap', [10819]], ['Ncaron', [327]], ['ncaron', [328]], ['Ncedil', [325]], ['ncedil', [326]], ['ncong', [8775]], ['ncongdot', [10861, 824]], ['ncup', [10818]], ['Ncy', [1053]], ['ncy', [1085]], ['ndash', [8211]], ['nearhk', [10532]], ['nearr', [8599]], ['neArr', [8663]], ['nearrow', [8599]], ['ne', [8800]], ['nedot', [8784, 824]], ['NegativeMediumSpace', [8203]], ['NegativeThickSpace', [8203]], ['NegativeThinSpace', [8203]], ['NegativeVeryThinSpace', [8203]], ['nequiv', [8802]], ['nesear', [10536]], ['nesim', [8770, 824]], ['NestedGreaterGreater', [8811]], ['NestedLessLess', [8810]], ['nexist', [8708]], ['nexists', [8708]], ['Nfr', [120081]], ['nfr', [120107]], ['ngE', [8807, 824]], ['nge', [8817]], ['ngeq', [8817]], ['ngeqq', [8807, 824]], ['ngeqslant', [10878, 824]], ['nges', [10878, 824]], ['nGg', [8921, 824]], ['ngsim', [8821]], ['nGt', [8811, 8402]], ['ngt', [8815]], ['ngtr', [8815]], ['nGtv', [8811, 824]], ['nharr', [8622]], ['nhArr', [8654]], ['nhpar', [10994]], ['ni', [8715]], ['nis', [8956]], ['nisd', [8954]], ['niv', [8715]], ['NJcy', [1034]], ['njcy', [1114]], ['nlarr', [8602]], ['nlArr', [8653]], ['nldr', [8229]], ['nlE', [8806, 824]], ['nle', [8816]], ['nleftarrow', [8602]], ['nLeftarrow', [8653]], ['nleftrightarrow', [8622]], ['nLeftrightarrow', [8654]], ['nleq', [8816]], ['nleqq', [8806, 824]], ['nleqslant', [10877, 824]], ['nles', [10877, 824]], ['nless', [8814]], ['nLl', [8920, 824]], ['nlsim', [8820]], ['nLt', [8810, 8402]], ['nlt', [8814]], ['nltri', [8938]], ['nltrie', [8940]], ['nLtv', [8810, 824]], ['nmid', [8740]], ['NoBreak', [8288]], ['NonBreakingSpace', [160]], ['nopf', [120159]], ['Nopf', [8469]], ['Not', [10988]], ['not', [172]], ['NotCongruent', [8802]], ['NotCupCap', [8813]], ['NotDoubleVerticalBar', [8742]], ['NotElement', [8713]], ['NotEqual', [8800]], ['NotEqualTilde', [8770, 824]], ['NotExists', [8708]], ['NotGreater', [8815]], ['NotGreaterEqual', [8817]], ['NotGreaterFullEqual', [8807, 824]], ['NotGreaterGreater', [8811, 824]], ['NotGreaterLess', [8825]], ['NotGreaterSlantEqual', [10878, 824]], ['NotGreaterTilde', [8821]], ['NotHumpDownHump', [8782, 824]], ['NotHumpEqual', [8783, 824]], ['notin', [8713]], ['notindot', [8949, 824]], ['notinE', [8953, 824]], ['notinva', [8713]], ['notinvb', [8951]], ['notinvc', [8950]], ['NotLeftTriangleBar', [10703, 824]], ['NotLeftTriangle', [8938]], ['NotLeftTriangleEqual', [8940]], ['NotLess', [8814]], ['NotLessEqual', [8816]], ['NotLessGreater', [8824]], ['NotLessLess', [8810, 824]], ['NotLessSlantEqual', [10877, 824]], ['NotLessTilde', [8820]], ['NotNestedGreaterGreater', [10914, 824]], ['NotNestedLessLess', [10913, 824]], ['notni', [8716]], ['notniva', [8716]], ['notnivb', [8958]], ['notnivc', [8957]], ['NotPrecedes', [8832]], ['NotPrecedesEqual', [10927, 824]], ['NotPrecedesSlantEqual', [8928]], ['NotReverseElement', [8716]], ['NotRightTriangleBar', [10704, 824]], ['NotRightTriangle', [8939]], ['NotRightTriangleEqual', [8941]], ['NotSquareSubset', [8847, 824]], ['NotSquareSubsetEqual', [8930]], ['NotSquareSuperset', [8848, 824]], ['NotSquareSupersetEqual', [8931]], ['NotSubset', [8834, 8402]], ['NotSubsetEqual', [8840]], ['NotSucceeds', [8833]], ['NotSucceedsEqual', [10928, 824]], ['NotSucceedsSlantEqual', [8929]], ['NotSucceedsTilde', [8831, 824]], ['NotSuperset', [8835, 8402]], ['NotSupersetEqual', [8841]], ['NotTilde', [8769]], ['NotTildeEqual', [8772]], ['NotTildeFullEqual', [8775]], ['NotTildeTilde', [8777]], ['NotVerticalBar', [8740]], ['nparallel', [8742]], ['npar', [8742]], ['nparsl', [11005, 8421]], ['npart', [8706, 824]], ['npolint', [10772]], ['npr', [8832]], ['nprcue', [8928]], ['nprec', [8832]], ['npreceq', [10927, 824]], ['npre', [10927, 824]], ['nrarrc', [10547, 824]], ['nrarr', [8603]], ['nrArr', [8655]], ['nrarrw', [8605, 824]], ['nrightarrow', [8603]], ['nRightarrow', [8655]], ['nrtri', [8939]], ['nrtrie', [8941]], ['nsc', [8833]], ['nsccue', [8929]], ['nsce', [10928, 824]], ['Nscr', [119977]], ['nscr', [120003]], ['nshortmid', [8740]], ['nshortparallel', [8742]], ['nsim', [8769]], ['nsime', [8772]], ['nsimeq', [8772]], ['nsmid', [8740]], ['nspar', [8742]], ['nsqsube', [8930]], ['nsqsupe', [8931]], ['nsub', [8836]], ['nsubE', [10949, 824]], ['nsube', [8840]], ['nsubset', [8834, 8402]], ['nsubseteq', [8840]], ['nsubseteqq', [10949, 824]], ['nsucc', [8833]], ['nsucceq', [10928, 824]], ['nsup', [8837]], ['nsupE', [10950, 824]], ['nsupe', [8841]], ['nsupset', [8835, 8402]], ['nsupseteq', [8841]], ['nsupseteqq', [10950, 824]], ['ntgl', [8825]], ['Ntilde', [209]], ['ntilde', [241]], ['ntlg', [8824]], ['ntriangleleft', [8938]], ['ntrianglelefteq', [8940]], ['ntriangleright', [8939]], ['ntrianglerighteq', [8941]], ['Nu', [925]], ['nu', [957]], ['num', [35]], ['numero', [8470]], ['numsp', [8199]], ['nvap', [8781, 8402]], ['nvdash', [8876]], ['nvDash', [8877]], ['nVdash', [8878]], ['nVDash', [8879]], ['nvge', [8805, 8402]], ['nvgt', [62, 8402]], ['nvHarr', [10500]], ['nvinfin', [10718]], ['nvlArr', [10498]], ['nvle', [8804, 8402]], ['nvlt', [60, 8402]], ['nvltrie', [8884, 8402]], ['nvrArr', [10499]], ['nvrtrie', [8885, 8402]], ['nvsim', [8764, 8402]], ['nwarhk', [10531]], ['nwarr', [8598]], ['nwArr', [8662]], ['nwarrow', [8598]], ['nwnear', [10535]], ['Oacute', [211]], ['oacute', [243]], ['oast', [8859]], ['Ocirc', [212]], ['ocirc', [244]], ['ocir', [8858]], ['Ocy', [1054]], ['ocy', [1086]], ['odash', [8861]], ['Odblac', [336]], ['odblac', [337]], ['odiv', [10808]], ['odot', [8857]], ['odsold', [10684]], ['OElig', [338]], ['oelig', [339]], ['ofcir', [10687]], ['Ofr', [120082]], ['ofr', [120108]], ['ogon', [731]], ['Ograve', [210]], ['ograve', [242]], ['ogt', [10689]], ['ohbar', [10677]], ['ohm', [937]], ['oint', [8750]], ['olarr', [8634]], ['olcir', [10686]], ['olcross', [10683]], ['oline', [8254]], ['olt', [10688]], ['Omacr', [332]], ['omacr', [333]], ['Omega', [937]], ['omega', [969]], ['Omicron', [927]], ['omicron', [959]], ['omid', [10678]], ['ominus', [8854]], ['Oopf', [120134]], ['oopf', [120160]], ['opar', [10679]], ['OpenCurlyDoubleQuote', [8220]], ['OpenCurlyQuote', [8216]], ['operp', [10681]], ['oplus', [8853]], ['orarr', [8635]], ['Or', [10836]], ['or', [8744]], ['ord', [10845]], ['order', [8500]], ['orderof', [8500]], ['ordf', [170]], ['ordm', [186]], ['origof', [8886]], ['oror', [10838]], ['orslope', [10839]], ['orv', [10843]], ['oS', [9416]], ['Oscr', [119978]], ['oscr', [8500]], ['Oslash', [216]], ['oslash', [248]], ['osol', [8856]], ['Otilde', [213]], ['otilde', [245]], ['otimesas', [10806]], ['Otimes', [10807]], ['otimes', [8855]], ['Ouml', [214]], ['ouml', [246]], ['ovbar', [9021]], ['OverBar', [8254]], ['OverBrace', [9182]], ['OverBracket', [9140]], ['OverParenthesis', [9180]], ['para', [182]], ['parallel', [8741]], ['par', [8741]], ['parsim', [10995]], ['parsl', [11005]], ['part', [8706]], ['PartialD', [8706]], ['Pcy', [1055]], ['pcy', [1087]], ['percnt', [37]], ['period', [46]], ['permil', [8240]], ['perp', [8869]], ['pertenk', [8241]], ['Pfr', [120083]], ['pfr', [120109]], ['Phi', [934]], ['phi', [966]], ['phiv', [981]], ['phmmat', [8499]], ['phone', [9742]], ['Pi', [928]], ['pi', [960]], ['pitchfork', [8916]], ['piv', [982]], ['planck', [8463]], ['planckh', [8462]], ['plankv', [8463]], ['plusacir', [10787]], ['plusb', [8862]], ['pluscir', [10786]], ['plus', [43]], ['plusdo', [8724]], ['plusdu', [10789]], ['pluse', [10866]], ['PlusMinus', [177]], ['plusmn', [177]], ['plussim', [10790]], ['plustwo', [10791]], ['pm', [177]], ['Poincareplane', [8460]], ['pointint', [10773]], ['popf', [120161]], ['Popf', [8473]], ['pound', [163]], ['prap', [10935]], ['Pr', [10939]], ['pr', [8826]], ['prcue', [8828]], ['precapprox', [10935]], ['prec', [8826]], ['preccurlyeq', [8828]], ['Precedes', [8826]], ['PrecedesEqual', [10927]], ['PrecedesSlantEqual', [8828]], ['PrecedesTilde', [8830]], ['preceq', [10927]], ['precnapprox', [10937]], ['precneqq', [10933]], ['precnsim', [8936]], ['pre', [10927]], ['prE', [10931]], ['precsim', [8830]], ['prime', [8242]], ['Prime', [8243]], ['primes', [8473]], ['prnap', [10937]], ['prnE', [10933]], ['prnsim', [8936]], ['prod', [8719]], ['Product', [8719]], ['profalar', [9006]], ['profline', [8978]], ['profsurf', [8979]], ['prop', [8733]], ['Proportional', [8733]], ['Proportion', [8759]], ['propto', [8733]], ['prsim', [8830]], ['prurel', [8880]], ['Pscr', [119979]], ['pscr', [120005]], ['Psi', [936]], ['psi', [968]], ['puncsp', [8200]], ['Qfr', [120084]], ['qfr', [120110]], ['qint', [10764]], ['qopf', [120162]], ['Qopf', [8474]], ['qprime', [8279]], ['Qscr', [119980]], ['qscr', [120006]], ['quaternions', [8461]], ['quatint', [10774]], ['quest', [63]], ['questeq', [8799]], ['quot', [34]], ['QUOT', [34]], ['rAarr', [8667]], ['race', [8765, 817]], ['Racute', [340]], ['racute', [341]], ['radic', [8730]], ['raemptyv', [10675]], ['rang', [10217]], ['Rang', [10219]], ['rangd', [10642]], ['range', [10661]], ['rangle', [10217]], ['raquo', [187]], ['rarrap', [10613]], ['rarrb', [8677]], ['rarrbfs', [10528]], ['rarrc', [10547]], ['rarr', [8594]], ['Rarr', [8608]], ['rArr', [8658]], ['rarrfs', [10526]], ['rarrhk', [8618]], ['rarrlp', [8620]], ['rarrpl', [10565]], ['rarrsim', [10612]], ['Rarrtl', [10518]], ['rarrtl', [8611]], ['rarrw', [8605]], ['ratail', [10522]], ['rAtail', [10524]], ['ratio', [8758]], ['rationals', [8474]], ['rbarr', [10509]], ['rBarr', [10511]], ['RBarr', [10512]], ['rbbrk', [10099]], ['rbrace', [125]], ['rbrack', [93]], ['rbrke', [10636]], ['rbrksld', [10638]], ['rbrkslu', [10640]], ['Rcaron', [344]], ['rcaron', [345]], ['Rcedil', [342]], ['rcedil', [343]], ['rceil', [8969]], ['rcub', [125]], ['Rcy', [1056]], ['rcy', [1088]], ['rdca', [10551]], ['rdldhar', [10601]], ['rdquo', [8221]], ['rdquor', [8221]], ['CloseCurlyDoubleQuote', [8221]], ['rdsh', [8627]], ['real', [8476]], ['realine', [8475]], ['realpart', [8476]], ['reals', [8477]], ['Re', [8476]], ['rect', [9645]], ['reg', [174]], ['REG', [174]], ['ReverseElement', [8715]], ['ReverseEquilibrium', [8651]], ['ReverseUpEquilibrium', [10607]], ['rfisht', [10621]], ['rfloor', [8971]], ['rfr', [120111]], ['Rfr', [8476]], ['rHar', [10596]], ['rhard', [8641]], ['rharu', [8640]], ['rharul', [10604]], ['Rho', [929]], ['rho', [961]], ['rhov', [1009]], ['RightAngleBracket', [10217]], ['RightArrowBar', [8677]], ['rightarrow', [8594]], ['RightArrow', [8594]], ['Rightarrow', [8658]], ['RightArrowLeftArrow', [8644]], ['rightarrowtail', [8611]], ['RightCeiling', [8969]], ['RightDoubleBracket', [10215]], ['RightDownTeeVector', [10589]], ['RightDownVectorBar', [10581]], ['RightDownVector', [8642]], ['RightFloor', [8971]], ['rightharpoondown', [8641]], ['rightharpoonup', [8640]], ['rightleftarrows', [8644]], ['rightleftharpoons', [8652]], ['rightrightarrows', [8649]], ['rightsquigarrow', [8605]], ['RightTeeArrow', [8614]], ['RightTee', [8866]], ['RightTeeVector', [10587]], ['rightthreetimes', [8908]], ['RightTriangleBar', [10704]], ['RightTriangle', [8883]], ['RightTriangleEqual', [8885]], ['RightUpDownVector', [10575]], ['RightUpTeeVector', [10588]], ['RightUpVectorBar', [10580]], ['RightUpVector', [8638]], ['RightVectorBar', [10579]], ['RightVector', [8640]], ['ring', [730]], ['risingdotseq', [8787]], ['rlarr', [8644]], ['rlhar', [8652]], ['rlm', [8207]], ['rmoustache', [9137]], ['rmoust', [9137]], ['rnmid', [10990]], ['roang', [10221]], ['roarr', [8702]], ['robrk', [10215]], ['ropar', [10630]], ['ropf', [120163]], ['Ropf', [8477]], ['roplus', [10798]], ['rotimes', [10805]], ['RoundImplies', [10608]], ['rpar', [41]], ['rpargt', [10644]], ['rppolint', [10770]], ['rrarr', [8649]], ['Rrightarrow', [8667]], ['rsaquo', [8250]], ['rscr', [120007]], ['Rscr', [8475]], ['rsh', [8625]], ['Rsh', [8625]], ['rsqb', [93]], ['rsquo', [8217]], ['rsquor', [8217]], ['CloseCurlyQuote', [8217]], ['rthree', [8908]], ['rtimes', [8906]], ['rtri', [9657]], ['rtrie', [8885]], ['rtrif', [9656]], ['rtriltri', [10702]], ['RuleDelayed', [10740]], ['ruluhar', [10600]], ['rx', [8478]], ['Sacute', [346]], ['sacute', [347]], ['sbquo', [8218]], ['scap', [10936]], ['Scaron', [352]], ['scaron', [353]], ['Sc', [10940]], ['sc', [8827]], ['sccue', [8829]], ['sce', [10928]], ['scE', [10932]], ['Scedil', [350]], ['scedil', [351]], ['Scirc', [348]], ['scirc', [349]], ['scnap', [10938]], ['scnE', [10934]], ['scnsim', [8937]], ['scpolint', [10771]], ['scsim', [8831]], ['Scy', [1057]], ['scy', [1089]], ['sdotb', [8865]], ['sdot', [8901]], ['sdote', [10854]], ['searhk', [10533]], ['searr', [8600]], ['seArr', [8664]], ['searrow', [8600]], ['sect', [167]], ['semi', [59]], ['seswar', [10537]], ['setminus', [8726]], ['setmn', [8726]], ['sext', [10038]], ['Sfr', [120086]], ['sfr', [120112]], ['sfrown', [8994]], ['sharp', [9839]], ['SHCHcy', [1065]], ['shchcy', [1097]], ['SHcy', [1064]], ['shcy', [1096]], ['ShortDownArrow', [8595]], ['ShortLeftArrow', [8592]], ['shortmid', [8739]], ['shortparallel', [8741]], ['ShortRightArrow', [8594]], ['ShortUpArrow', [8593]], ['shy', [173]], ['Sigma', [931]], ['sigma', [963]], ['sigmaf', [962]], ['sigmav', [962]], ['sim', [8764]], ['simdot', [10858]], ['sime', [8771]], ['simeq', [8771]], ['simg', [10910]], ['simgE', [10912]], ['siml', [10909]], ['simlE', [10911]], ['simne', [8774]], ['simplus', [10788]], ['simrarr', [10610]], ['slarr', [8592]], ['SmallCircle', [8728]], ['smallsetminus', [8726]], ['smashp', [10803]], ['smeparsl', [10724]], ['smid', [8739]], ['smile', [8995]], ['smt', [10922]], ['smte', [10924]], ['smtes', [10924, 65024]], ['SOFTcy', [1068]], ['softcy', [1100]], ['solbar', [9023]], ['solb', [10692]], ['sol', [47]], ['Sopf', [120138]], ['sopf', [120164]], ['spades', [9824]], ['spadesuit', [9824]], ['spar', [8741]], ['sqcap', [8851]], ['sqcaps', [8851, 65024]], ['sqcup', [8852]], ['sqcups', [8852, 65024]], ['Sqrt', [8730]], ['sqsub', [8847]], ['sqsube', [8849]], ['sqsubset', [8847]], ['sqsubseteq', [8849]], ['sqsup', [8848]], ['sqsupe', [8850]], ['sqsupset', [8848]], ['sqsupseteq', [8850]], ['square', [9633]], ['Square', [9633]], ['SquareIntersection', [8851]], ['SquareSubset', [8847]], ['SquareSubsetEqual', [8849]], ['SquareSuperset', [8848]], ['SquareSupersetEqual', [8850]], ['SquareUnion', [8852]], ['squarf', [9642]], ['squ', [9633]], ['squf', [9642]], ['srarr', [8594]], ['Sscr', [119982]], ['sscr', [120008]], ['ssetmn', [8726]], ['ssmile', [8995]], ['sstarf', [8902]], ['Star', [8902]], ['star', [9734]], ['starf', [9733]], ['straightepsilon', [1013]], ['straightphi', [981]], ['strns', [175]], ['sub', [8834]], ['Sub', [8912]], ['subdot', [10941]], ['subE', [10949]], ['sube', [8838]], ['subedot', [10947]], ['submult', [10945]], ['subnE', [10955]], ['subne', [8842]], ['subplus', [10943]], ['subrarr', [10617]], ['subset', [8834]], ['Subset', [8912]], ['subseteq', [8838]], ['subseteqq', [10949]], ['SubsetEqual', [8838]], ['subsetneq', [8842]], ['subsetneqq', [10955]], ['subsim', [10951]], ['subsub', [10965]], ['subsup', [10963]], ['succapprox', [10936]], ['succ', [8827]], ['succcurlyeq', [8829]], ['Succeeds', [8827]], ['SucceedsEqual', [10928]], ['SucceedsSlantEqual', [8829]], ['SucceedsTilde', [8831]], ['succeq', [10928]], ['succnapprox', [10938]], ['succneqq', [10934]], ['succnsim', [8937]], ['succsim', [8831]], ['SuchThat', [8715]], ['sum', [8721]], ['Sum', [8721]], ['sung', [9834]], ['sup1', [185]], ['sup2', [178]], ['sup3', [179]], ['sup', [8835]], ['Sup', [8913]], ['supdot', [10942]], ['supdsub', [10968]], ['supE', [10950]], ['supe', [8839]], ['supedot', [10948]], ['Superset', [8835]], ['SupersetEqual', [8839]], ['suphsol', [10185]], ['suphsub', [10967]], ['suplarr', [10619]], ['supmult', [10946]], ['supnE', [10956]], ['supne', [8843]], ['supplus', [10944]], ['supset', [8835]], ['Supset', [8913]], ['supseteq', [8839]], ['supseteqq', [10950]], ['supsetneq', [8843]], ['supsetneqq', [10956]], ['supsim', [10952]], ['supsub', [10964]], ['supsup', [10966]], ['swarhk', [10534]], ['swarr', [8601]], ['swArr', [8665]], ['swarrow', [8601]], ['swnwar', [10538]], ['szlig', [223]], ['Tab', [9]], ['target', [8982]], ['Tau', [932]], ['tau', [964]], ['tbrk', [9140]], ['Tcaron', [356]], ['tcaron', [357]], ['Tcedil', [354]], ['tcedil', [355]], ['Tcy', [1058]], ['tcy', [1090]], ['tdot', [8411]], ['telrec', [8981]], ['Tfr', [120087]], ['tfr', [120113]], ['there4', [8756]], ['therefore', [8756]], ['Therefore', [8756]], ['Theta', [920]], ['theta', [952]], ['thetasym', [977]], ['thetav', [977]], ['thickapprox', [8776]], ['thicksim', [8764]], ['ThickSpace', [8287, 8202]], ['ThinSpace', [8201]], ['thinsp', [8201]], ['thkap', [8776]], ['thksim', [8764]], ['THORN', [222]], ['thorn', [254]], ['tilde', [732]], ['Tilde', [8764]], ['TildeEqual', [8771]], ['TildeFullEqual', [8773]], ['TildeTilde', [8776]], ['timesbar', [10801]], ['timesb', [8864]], ['times', [215]], ['timesd', [10800]], ['tint', [8749]], ['toea', [10536]], ['topbot', [9014]], ['topcir', [10993]], ['top', [8868]], ['Topf', [120139]], ['topf', [120165]], ['topfork', [10970]], ['tosa', [10537]], ['tprime', [8244]], ['trade', [8482]], ['TRADE', [8482]], ['triangle', [9653]], ['triangledown', [9663]], ['triangleleft', [9667]], ['trianglelefteq', [8884]], ['triangleq', [8796]], ['triangleright', [9657]], ['trianglerighteq', [8885]], ['tridot', [9708]], ['trie', [8796]], ['triminus', [10810]], ['TripleDot', [8411]], ['triplus', [10809]], ['trisb', [10701]], ['tritime', [10811]], ['trpezium', [9186]], ['Tscr', [119983]], ['tscr', [120009]], ['TScy', [1062]], ['tscy', [1094]], ['TSHcy', [1035]], ['tshcy', [1115]], ['Tstrok', [358]], ['tstrok', [359]], ['twixt', [8812]], ['twoheadleftarrow', [8606]], ['twoheadrightarrow', [8608]], ['Uacute', [218]], ['uacute', [250]], ['uarr', [8593]], ['Uarr', [8607]], ['uArr', [8657]], ['Uarrocir', [10569]], ['Ubrcy', [1038]], ['ubrcy', [1118]], ['Ubreve', [364]], ['ubreve', [365]], ['Ucirc', [219]], ['ucirc', [251]], ['Ucy', [1059]], ['ucy', [1091]], ['udarr', [8645]], ['Udblac', [368]], ['udblac', [369]], ['udhar', [10606]], ['ufisht', [10622]], ['Ufr', [120088]], ['ufr', [120114]], ['Ugrave', [217]], ['ugrave', [249]], ['uHar', [10595]], ['uharl', [8639]], ['uharr', [8638]], ['uhblk', [9600]], ['ulcorn', [8988]], ['ulcorner', [8988]], ['ulcrop', [8975]], ['ultri', [9720]], ['Umacr', [362]], ['umacr', [363]], ['uml', [168]], ['UnderBar', [95]], ['UnderBrace', [9183]], ['UnderBracket', [9141]], ['UnderParenthesis', [9181]], ['Union', [8899]], ['UnionPlus', [8846]], ['Uogon', [370]], ['uogon', [371]], ['Uopf', [120140]], ['uopf', [120166]], ['UpArrowBar', [10514]], ['uparrow', [8593]], ['UpArrow', [8593]], ['Uparrow', [8657]], ['UpArrowDownArrow', [8645]], ['updownarrow', [8597]], ['UpDownArrow', [8597]], ['Updownarrow', [8661]], ['UpEquilibrium', [10606]], ['upharpoonleft', [8639]], ['upharpoonright', [8638]], ['uplus', [8846]], ['UpperLeftArrow', [8598]], ['UpperRightArrow', [8599]], ['upsi', [965]], ['Upsi', [978]], ['upsih', [978]], ['Upsilon', [933]], ['upsilon', [965]], ['UpTeeArrow', [8613]], ['UpTee', [8869]], ['upuparrows', [8648]], ['urcorn', [8989]], ['urcorner', [8989]], ['urcrop', [8974]], ['Uring', [366]], ['uring', [367]], ['urtri', [9721]], ['Uscr', [119984]], ['uscr', [120010]], ['utdot', [8944]], ['Utilde', [360]], ['utilde', [361]], ['utri', [9653]], ['utrif', [9652]], ['uuarr', [8648]], ['Uuml', [220]], ['uuml', [252]], ['uwangle', [10663]], ['vangrt', [10652]], ['varepsilon', [1013]], ['varkappa', [1008]], ['varnothing', [8709]], ['varphi', [981]], ['varpi', [982]], ['varpropto', [8733]], ['varr', [8597]], ['vArr', [8661]], ['varrho', [1009]], ['varsigma', [962]], ['varsubsetneq', [8842, 65024]], ['varsubsetneqq', [10955, 65024]], ['varsupsetneq', [8843, 65024]], ['varsupsetneqq', [10956, 65024]], ['vartheta', [977]], ['vartriangleleft', [8882]], ['vartriangleright', [8883]], ['vBar', [10984]], ['Vbar', [10987]], ['vBarv', [10985]], ['Vcy', [1042]], ['vcy', [1074]], ['vdash', [8866]], ['vDash', [8872]], ['Vdash', [8873]], ['VDash', [8875]], ['Vdashl', [10982]], ['veebar', [8891]], ['vee', [8744]], ['Vee', [8897]], ['veeeq', [8794]], ['vellip', [8942]], ['verbar', [124]], ['Verbar', [8214]], ['vert', [124]], ['Vert', [8214]], ['VerticalBar', [8739]], ['VerticalLine', [124]], ['VerticalSeparator', [10072]], ['VerticalTilde', [8768]], ['VeryThinSpace', [8202]], ['Vfr', [120089]], ['vfr', [120115]], ['vltri', [8882]], ['vnsub', [8834, 8402]], ['vnsup', [8835, 8402]], ['Vopf', [120141]], ['vopf', [120167]], ['vprop', [8733]], ['vrtri', [8883]], ['Vscr', [119985]], ['vscr', [120011]], ['vsubnE', [10955, 65024]], ['vsubne', [8842, 65024]], ['vsupnE', [10956, 65024]], ['vsupne', [8843, 65024]], ['Vvdash', [8874]], ['vzigzag', [10650]], ['Wcirc', [372]], ['wcirc', [373]], ['wedbar', [10847]], ['wedge', [8743]], ['Wedge', [8896]], ['wedgeq', [8793]], ['weierp', [8472]], ['Wfr', [120090]], ['wfr', [120116]], ['Wopf', [120142]], ['wopf', [120168]], ['wp', [8472]], ['wr', [8768]], ['wreath', [8768]], ['Wscr', [119986]], ['wscr', [120012]], ['xcap', [8898]], ['xcirc', [9711]], ['xcup', [8899]], ['xdtri', [9661]], ['Xfr', [120091]], ['xfr', [120117]], ['xharr', [10231]], ['xhArr', [10234]], ['Xi', [926]], ['xi', [958]], ['xlarr', [10229]], ['xlArr', [10232]], ['xmap', [10236]], ['xnis', [8955]], ['xodot', [10752]], ['Xopf', [120143]], ['xopf', [120169]], ['xoplus', [10753]], ['xotime', [10754]], ['xrarr', [10230]], ['xrArr', [10233]], ['Xscr', [119987]], ['xscr', [120013]], ['xsqcup', [10758]], ['xuplus', [10756]], ['xutri', [9651]], ['xvee', [8897]], ['xwedge', [8896]], ['Yacute', [221]], ['yacute', [253]], ['YAcy', [1071]], ['yacy', [1103]], ['Ycirc', [374]], ['ycirc', [375]], ['Ycy', [1067]], ['ycy', [1099]], ['yen', [165]], ['Yfr', [120092]], ['yfr', [120118]], ['YIcy', [1031]], ['yicy', [1111]], ['Yopf', [120144]], ['yopf', [120170]], ['Yscr', [119988]], ['yscr', [120014]], ['YUcy', [1070]], ['yucy', [1102]], ['yuml', [255]], ['Yuml', [376]], ['Zacute', [377]], ['zacute', [378]], ['Zcaron', [381]], ['zcaron', [382]], ['Zcy', [1047]], ['zcy', [1079]], ['Zdot', [379]], ['zdot', [380]], ['zeetrf', [8488]], ['ZeroWidthSpace', [8203]], ['Zeta', [918]], ['zeta', [950]], ['zfr', [120119]], ['Zfr', [8488]], ['ZHcy', [1046]], ['zhcy', [1078]], ['zigrarr', [8669]], ['zopf', [120171]], ['Zopf', [8484]], ['Zscr', [119989]], ['zscr', [120015]], ['zwj', [8205]], ['zwnj', [8204]]];
@@ -1382,7 +1369,7 @@ module.exports = Html5Entities;
 
 
 /***/ }),
-/* 13 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;(function(root, factory) {
@@ -1614,14 +1601,14 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;(function(root
 
 
 /***/ }),
-/* 14 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(3)(
   /* script */
-  __webpack_require__(65),
+  __webpack_require__(121),
   /* template */
-  __webpack_require__(102),
+  __webpack_require__(158),
   /* scopeId */
   null,
   /* cssModules */
@@ -1648,47 +1635,88 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 15 */
+/* 14 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__css_styles_css__ = __webpack_require__(79);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__css_styles_css__ = __webpack_require__(135);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__css_styles_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__css_styles_css__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_bootstrap__ = __webpack_require__(122);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_bootstrap__ = __webpack_require__(178);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_bootstrap___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_bootstrap__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_element_ui__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_element_ui___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_element_ui__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_vuex__ = __webpack_require__(126);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__classes_rank__ = __webpack_require__(38);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__classes_sourceoffinancing__ = __webpack_require__(41);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__classes_positiontype__ = __webpack_require__(37);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__classes_positioncategory__ = __webpack_require__(36);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__classes_mrd__ = __webpack_require__(34);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__classes_altrankcondition__ = __webpack_require__(21);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__classes_altrankconditiongroup__ = __webpack_require__(22);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__classes_structureregion__ = __webpack_require__(43);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__classes_structuretype__ = __webpack_require__(44);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13_vue_element_dialog_draggable__ = __webpack_require__(124);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_vuex__ = __webpack_require__(182);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__classes_rank__ = __webpack_require__(82);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__classes_sourceoffinancing__ = __webpack_require__(94);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__classes_positiontype__ = __webpack_require__(80);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__classes_positioncategory__ = __webpack_require__(79);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__classes_mrd__ = __webpack_require__(68);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__classes_altrankcondition__ = __webpack_require__(37);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__classes_altrankconditiongroup__ = __webpack_require__(38);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__classes_structureregion__ = __webpack_require__(96);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__classes_structuretype__ = __webpack_require__(97);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13_vue_element_dialog_draggable__ = __webpack_require__(180);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13_vue_element_dialog_draggable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_13_vue_element_dialog_draggable__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__classes_country__ = __webpack_require__(28);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__classes_Structure__ = __webpack_require__(18);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__classes_region__ = __webpack_require__(39);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__classes_area__ = __webpack_require__(23);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__classes_subject__ = __webpack_require__(45);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__classes_subjectgender__ = __webpack_require__(47);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__classes_subjectcategory__ = __webpack_require__(46);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__classes_changedocumentstype__ = __webpack_require__(25);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__classes_streettype__ = __webpack_require__(42);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__classes_citytype__ = __webpack_require__(27);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__classes_areaother__ = __webpack_require__(24);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__classes_externalorderwhotype__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__classes_citysubstate__ = __webpack_require__(26);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__classes_user__ = __webpack_require__(10);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_28_vue_router__ = __webpack_require__(125);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__classes_NewStructure_structureTree__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_30_element_ui_lib_locale_lang_ru_RU__ = __webpack_require__(68);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_30_element_ui_lib_locale_lang_ru_RU___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_30_element_ui_lib_locale_lang_ru_RU__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__classes_relativetype__ = __webpack_require__(84);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__classes_attestationtype__ = __webpack_require__(42);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__classes_vacationmilitary__ = __webpack_require__(102);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__classes_vacationtype__ = __webpack_require__(103);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__classes_languagetype__ = __webpack_require__(65);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__classes_languageskill__ = __webpack_require__(64);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__classes_jobtype__ = __webpack_require__(63);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__classes_servicetype__ = __webpack_require__(92);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__classes_servicefeature__ = __webpack_require__(91);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__classes_servicecoef__ = __webpack_require__(90);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__classes_penalty__ = __webpack_require__(71);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__classes_country__ = __webpack_require__(46);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__classes_illcode__ = __webpack_require__(60);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__classes_illregime__ = __webpack_require__(61);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__classes_rewardtype__ = __webpack_require__(87);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__classes_reward__ = __webpack_require__(85);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_30__classes_educationlevel__ = __webpack_require__(52);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_31__classes_educationtype__ = __webpack_require__(55);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_32__classes_educationdocument__ = __webpack_require__(51);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_33__classes_normativ__ = __webpack_require__(69);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_34__classes_drivertype__ = __webpack_require__(49);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_35__classes_drivercategory__ = __webpack_require__(48);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_36__classes_permissiontype__ = __webpack_require__(73);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_37__classes_prooftype__ = __webpack_require__(81);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_38__classes_holiday__ = __webpack_require__(59);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_39__classes_persondecreeblocktype__ = __webpack_require__(75);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_40__classes_persondecreeblocksubtype__ = __webpack_require__(74);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_41__classes_Structure__ = __webpack_require__(35);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_42__classes_region__ = __webpack_require__(83);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_43__classes_area__ = __webpack_require__(40);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_44__classes_fire__ = __webpack_require__(57);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_45__classes_appointtype__ = __webpack_require__(39);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_46__classes_transfertype__ = __webpack_require__(101);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_47__classes_subject__ = __webpack_require__(98);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_48__classes_subjectgender__ = __webpack_require__(100);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_49__classes_subjectcategory__ = __webpack_require__(99);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_50__classes_interrupttype__ = __webpack_require__(62);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_51__classes_changedocumentstype__ = __webpack_require__(43);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_52__classes_setpersondatatype__ = __webpack_require__(93);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_53__classes_rewardmoney__ = __webpack_require__(86);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_54__classes_persondecreelevel__ = __webpack_require__(76);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_55__classes_ordernumbertype__ = __webpack_require__(70);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_56__classes_streettype__ = __webpack_require__(95);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_57__classes_citytype__ = __webpack_require__(45);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_58__classes_areaother__ = __webpack_require__(41);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_59__classes_externalorderwhotype__ = __webpack_require__(56);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_60__classes_persondecreetype__ = __webpack_require__(78);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_61__classes_educationadditionaltype__ = __webpack_require__(50);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_62__classes_citysubstate__ = __webpack_require__(44);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_63__classes_educationstage__ = __webpack_require__(54);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_64__classes_educationpositiontype__ = __webpack_require__(53);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_65__classes_role__ = __webpack_require__(89);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_66__classes_user__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_67__classes_dismissalclauses__ = __webpack_require__(47);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_68__classes_locationtype__ = __webpack_require__(67);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_69_vue_router__ = __webpack_require__(181);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_70_element_ui_lib_locale_lang_ru_RU__ = __webpack_require__(124);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_70_element_ui_lib_locale_lang_ru_RU___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_70_element_ui_lib_locale_lang_ru_RU__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_71__classes_penaltytype__ = __webpack_require__(72);
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
@@ -1731,10 +1759,51 @@ var Vue = __webpack_require__(0).default;
 
 
 
-Vue.use(__WEBPACK_IMPORTED_MODULE_28_vue_router__["default"]);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Vue.use(__WEBPACK_IMPORTED_MODULE_69_vue_router__["default"]);
 Vue.use(__WEBPACK_IMPORTED_MODULE_3_vuex__["default"]);
 Vue.use(__WEBPACK_IMPORTED_MODULE_13_vue_element_dialog_draggable___default.a);
-Vue.use(__WEBPACK_IMPORTED_MODULE_2_element_ui___default.a, { locale: __WEBPACK_IMPORTED_MODULE_30_element_ui_lib_locale_lang_ru_RU___default.a });
+Vue.use(__WEBPACK_IMPORTED_MODULE_2_element_ui___default.a, { locale: __WEBPACK_IMPORTED_MODULE_70_element_ui_lib_locale_lang_ru_RU___default.a });
 /**
  * Keys
  */
@@ -1882,8 +1951,8 @@ Vue.getKeyByValue = function (data, value) {
     return null;
 };
 const routes = [
-    { path: '/login', component: __webpack_require__(93) },
-    { path: '/', component: __webpack_require__(92) },
+    { path: '/login', component: __webpack_require__(149) },
+    { path: '/', component: __webpack_require__(148) },
 ];
 // this.$store.state.departmentsListId; - Getter
 // this.$store.state.parentStructures
@@ -1896,25 +1965,33 @@ const store = new __WEBPACK_IMPORTED_MODULE_3_vuex__["default"].Store({
         positionsListId: 0,
         decreeoperationelementVisible: 0,
         decreeoperationtemplatecreatorVisible: false,
+        persondecree: null,
         mailmodeprevios: false,
         chosenPosition: null,
+        chosenPersionDecreeBlock: {},
         eldVisible: 0,
+        eldId: 0,
+        eldPosition: 0,
+        eldStructure: 0,
+        eldAction: 0,
+        eldSelectedperson: 0,
         candidatesVisible: 0,
         candidatesId: 0,
         candidatesPosition: 0,
         candidatesStructure: 0,
         candidatesAction: 0,
+        candidatesSelectedperson: 0,
         modepanelVisible: 1,
         positionsListTitle: "Должности",
         forcePositionUpdate: false,
         login: "",
         currentstructuretree: "",
+        masterpersonneleditorAccess: "0",
         userStructure: "0",
         structureeditorAccess: "0",
         structurereadAccess: "0",
         personneleditorAccess: "0",
         personnelreadAccess: "0",
-        masterpersonneleditorAccess: "0",
         mode: "0",
         fullmode: "0",
         admin: "0",
@@ -1925,6 +2002,7 @@ const store = new __WEBPACK_IMPORTED_MODULE_3_vuex__["default"].Store({
         positiontypes: __WEBPACK_IMPORTED_MODULE_6__classes_positiontype__["a" /* default */][""],
         positioncategories: __WEBPACK_IMPORTED_MODULE_7__classes_positioncategory__["a" /* default */][""],
         mrds: __WEBPACK_IMPORTED_MODULE_8__classes_mrd__["a" /* default */][""],
+        dismissalclauses: __WEBPACK_IMPORTED_MODULE_67__classes_dismissalclauses__["a" /* default */][""],
         altrankconditiongroups: __WEBPACK_IMPORTED_MODULE_10__classes_altrankconditiongroup__["a" /* default */][""],
         altrankconditions: __WEBPACK_IMPORTED_MODULE_9__classes_altrankcondition__["a" /* default */][""],
         decree: null,
@@ -1936,20 +2014,63 @@ const store = new __WEBPACK_IMPORTED_MODULE_3_vuex__["default"].Store({
         grandparent: "",
         featured: 0,
         sidebarParentOpen: 0,
-        user: __WEBPACK_IMPORTED_MODULE_27__classes_user__["a" /* default */],
-        countries: __WEBPACK_IMPORTED_MODULE_14__classes_country__["a" /* default */][""],
-        regions: __WEBPACK_IMPORTED_MODULE_16__classes_region__["a" /* default */][""],
-        areas: __WEBPACK_IMPORTED_MODULE_17__classes_area__["a" /* default */][""],
-        subjects: __WEBPACK_IMPORTED_MODULE_18__classes_subject__["a" /* default */][""],
-        subjectgenders: __WEBPACK_IMPORTED_MODULE_19__classes_subjectgender__["a" /* default */][""],
-        subjectcategories: __WEBPACK_IMPORTED_MODULE_20__classes_subjectcategory__["a" /* default */][""],
-        changedocumentstypes: __WEBPACK_IMPORTED_MODULE_21__classes_changedocumentstype__["a" /* default */][""],
-        streettypes: __WEBPACK_IMPORTED_MODULE_22__classes_streettype__["a" /* default */][""],
-        structures: __WEBPACK_IMPORTED_MODULE_15__classes_Structure__["a" /* default */][""],
-        citytypes: __WEBPACK_IMPORTED_MODULE_23__classes_citytype__["a" /* default */][""],
-        areaothers: __WEBPACK_IMPORTED_MODULE_24__classes_areaother__["a" /* default */][""],
-        externalorderwhotypes: __WEBPACK_IMPORTED_MODULE_25__classes_externalorderwhotype__["a" /* default */][""],
-        citysubstates: __WEBPACK_IMPORTED_MODULE_26__classes_citysubstate__["a" /* default */][""],
+        user: __WEBPACK_IMPORTED_MODULE_66__classes_user__["a" /* default */],
+        relativetypes: __WEBPACK_IMPORTED_MODULE_14__classes_relativetype__["a" /* default */][""],
+        attestationtypes: __WEBPACK_IMPORTED_MODULE_15__classes_attestationtype__["a" /* default */][""],
+        vacationmilitaries: __WEBPACK_IMPORTED_MODULE_16__classes_vacationmilitary__["a" /* default */][""],
+        vacationtypes: __WEBPACK_IMPORTED_MODULE_17__classes_vacationtype__["a" /* default */][""],
+        languagetypes: __WEBPACK_IMPORTED_MODULE_18__classes_languagetype__["a" /* default */][""],
+        languageskills: __WEBPACK_IMPORTED_MODULE_19__classes_languageskill__["a" /* default */][""],
+        jobtypes: __WEBPACK_IMPORTED_MODULE_20__classes_jobtype__["a" /* default */][""],
+        servicetypes: __WEBPACK_IMPORTED_MODULE_21__classes_servicetype__["a" /* default */][""],
+        servicefeatures: __WEBPACK_IMPORTED_MODULE_22__classes_servicefeature__["a" /* default */][""],
+        servicecoefs: __WEBPACK_IMPORTED_MODULE_23__classes_servicecoef__["a" /* default */][""],
+        penalties: __WEBPACK_IMPORTED_MODULE_24__classes_penalty__["a" /* default */][""],
+        penaltytypes: __WEBPACK_IMPORTED_MODULE_71__classes_penaltytype__["a" /* default */][""],
+        countries: __WEBPACK_IMPORTED_MODULE_25__classes_country__["a" /* default */][""],
+        sciences: [{ id: 1, name: "Научный труд" }, { id: 2, name: "Звание" }, { id: 3, name: "Изобретение" }],
+        illregimes: __WEBPACK_IMPORTED_MODULE_27__classes_illregime__["a" /* default */][""],
+        illcodes: __WEBPACK_IMPORTED_MODULE_26__classes_illcode__["a" /* default */][""],
+        rewardtypes: __WEBPACK_IMPORTED_MODULE_28__classes_rewardtype__["a" /* default */][""],
+        rewards: __WEBPACK_IMPORTED_MODULE_29__classes_reward__["a" /* default */][""],
+        educationlevels: __WEBPACK_IMPORTED_MODULE_30__classes_educationlevel__["a" /* default */][""],
+        educationtypes: __WEBPACK_IMPORTED_MODULE_31__classes_educationtype__["a" /* default */][""],
+        educationdocuments: __WEBPACK_IMPORTED_MODULE_32__classes_educationdocument__["a" /* default */][""],
+        normativs: __WEBPACK_IMPORTED_MODULE_33__classes_normativ__["a" /* default */][""],
+        drivertypes: __WEBPACK_IMPORTED_MODULE_34__classes_drivertype__["a" /* default */][""],
+        drivercategories: __WEBPACK_IMPORTED_MODULE_35__classes_drivercategory__["a" /* default */][""],
+        permissiontypes: __WEBPACK_IMPORTED_MODULE_36__classes_permissiontype__["a" /* default */][""],
+        prooftypes: __WEBPACK_IMPORTED_MODULE_37__classes_prooftype__["a" /* default */][""],
+        holidays: __WEBPACK_IMPORTED_MODULE_38__classes_holiday__["a" /* default */][""],
+        persondecreeblocktypes: __WEBPACK_IMPORTED_MODULE_39__classes_persondecreeblocktype__["a" /* default */][""],
+        persondecreeblocksubtypes: __WEBPACK_IMPORTED_MODULE_40__classes_persondecreeblocksubtype__["a" /* default */][""],
+        regions: __WEBPACK_IMPORTED_MODULE_42__classes_region__["a" /* default */][""],
+        areas: __WEBPACK_IMPORTED_MODULE_43__classes_area__["a" /* default */][""],
+        fires: __WEBPACK_IMPORTED_MODULE_44__classes_fire__["a" /* default */][""],
+        appointtypes: __WEBPACK_IMPORTED_MODULE_45__classes_appointtype__["a" /* default */][""],
+        transfertypes: __WEBPACK_IMPORTED_MODULE_46__classes_transfertype__["a" /* default */][""],
+        subjects: __WEBPACK_IMPORTED_MODULE_47__classes_subject__["a" /* default */][""],
+        subjectgenders: __WEBPACK_IMPORTED_MODULE_48__classes_subjectgender__["a" /* default */][""],
+        subjectcategories: __WEBPACK_IMPORTED_MODULE_49__classes_subjectcategory__["a" /* default */][""],
+        locationtypes: __WEBPACK_IMPORTED_MODULE_68__classes_locationtype__["a" /* default */][""],
+        interrupttypes: __WEBPACK_IMPORTED_MODULE_50__classes_interrupttype__["a" /* default */][""],
+        changedocumentstypes: __WEBPACK_IMPORTED_MODULE_51__classes_changedocumentstype__["a" /* default */][""],
+        setpersondatatypes: __WEBPACK_IMPORTED_MODULE_52__classes_setpersondatatype__["a" /* default */][""],
+        rewardmoneys: __WEBPACK_IMPORTED_MODULE_53__classes_rewardmoney__["a" /* default */][""],
+        persondecreelevels: __WEBPACK_IMPORTED_MODULE_54__classes_persondecreelevel__["a" /* default */][""],
+        ordernumbertypes: __WEBPACK_IMPORTED_MODULE_55__classes_ordernumbertype__["a" /* default */][""],
+        structuresalldocument: String[""],
+        streettypes: __WEBPACK_IMPORTED_MODULE_56__classes_streettype__["a" /* default */][""],
+        structures: __WEBPACK_IMPORTED_MODULE_41__classes_Structure__["a" /* default */][""],
+        citytypes: __WEBPACK_IMPORTED_MODULE_57__classes_citytype__["a" /* default */][""],
+        areaothers: __WEBPACK_IMPORTED_MODULE_58__classes_areaother__["a" /* default */][""],
+        externalorderwhotypes: __WEBPACK_IMPORTED_MODULE_59__classes_externalorderwhotype__["a" /* default */][""],
+        persondecreetypes: __WEBPACK_IMPORTED_MODULE_60__classes_persondecreetype__["a" /* default */][""],
+        educationadditionaltypes: __WEBPACK_IMPORTED_MODULE_61__classes_educationadditionaltype__["a" /* default */][""],
+        citysubstates: __WEBPACK_IMPORTED_MODULE_62__classes_citysubstate__["a" /* default */][""],
+        educationstages: __WEBPACK_IMPORTED_MODULE_63__classes_educationstage__["a" /* default */][""],
+        educationpositiontypes: __WEBPACK_IMPORTED_MODULE_64__classes_educationpositiontype__["a" /* default */][""],
+        roles: __WEBPACK_IMPORTED_MODULE_65__classes_role__["a" /* default */][""],
         /**
          * Modes
          */
@@ -1961,6 +2082,14 @@ const store = new __WEBPACK_IMPORTED_MODULE_3_vuex__["default"].Store({
         modeselectstructure: false,
         modeselectedstructure: 0,
         modecopy: false,
+        modeappointperson: false,
+        modeappointedperson: 0,
+        modeappointpersondecree: false,
+        modeappointedpersondecree: 0,
+        modeappointpersondecreeStructure: false,
+        modeappointedpersondecreeStructure: 0,
+        modeappointpersonstructuredecree: false,
+        modeappointedpersonstructuredecree: 0,
         modecopystring: "",
         oldcurrentmode: { "fullmode": "0",
             "sidebarDisplay": "0",
@@ -1975,23 +2104,61 @@ const store = new __WEBPACK_IMPORTED_MODULE_3_vuex__["default"].Store({
         excertmenu: false,
         excertdecreeid: null,
         lodingexcert: false,
-        currentStructure: new __WEBPACK_IMPORTED_MODULE_29__classes_NewStructure_structureTree__["a" /* default */](),
     },
     mutations: {
+        setchosenpersiondecreeblock(state, n) {
+            state.chosenPersionDecreeBlock = n;
+        },
         setdecreeoperationelementVisible(state, n) {
             state.decreeoperationelementVisible = n;
         },
         setdecreeoperationtemplatecreatorVisible(state, n) {
             state.decreeoperationtemplatecreatorVisible = n;
         },
+        setpersondecree(state, n) {
+            state.persondecree = n;
+        },
         setmailmodeprevios(state, n) {
             state.mailmodeprevios = n;
+        },
+        setchosenPosition(state, n) {
+            state.chosenPosition = n;
+        },
+        setEldId(state, n) {
+            state.eldId = n;
         },
         setEldVisible(state, n) {
             state.eldVisible = n;
         },
-        setchosenPosition(state, n) {
-            state.chosenPosition = n;
+        setEldPosition(state, n) {
+            state.eldPosition = n;
+        },
+        setEldStructure(state, n) {
+            state.eldStructure = n;
+        },
+        setEldAction(state, n) {
+            state.eldAction = n;
+        },
+        setEldSelectedperson(state, n) {
+            state.eldSelectedperson = n;
+        },
+        setCandidatesId(state, n) {
+            state.candidatesId = n;
+        },
+        setCandidatesVisible(state, n) {
+            state.candidatesVisible = n;
+        },
+        setCandidatesPosition(state, n) {
+            state.candidatesPosition = n;
+        },
+        setCandidatesStructure(state, n) {
+            state.candidatesStructure = n;
+        },
+        setCandidatesAction(state, n) {
+            state.candidatesAction = n;
+        },
+        setCandidatesSelectedperson(state, n) {
+            state.candidatesSelectedperson = n;
         },
         setModepanelVisible(state, n) {
             state.modepanelVisible = n;
@@ -2015,9 +2182,6 @@ const store = new __WEBPACK_IMPORTED_MODULE_3_vuex__["default"].Store({
         setUser(state, n) {
             state.user = n;
         },
-        setcurrentStructure(state, n) {
-            state.currentStructure = n;
-        },
         setPositionsListId(state, n) {
             state.positionsListId = n;
         },
@@ -2039,12 +2203,6 @@ const store = new __WEBPACK_IMPORTED_MODULE_3_vuex__["default"].Store({
         setUserStructure(state, n) {
             state.userStructure = n;
         },
-        setPersonneleditorAccess(state, n) {
-            state.personneleditorAccess = n;
-        },
-        setPersonnelreadAccess(state, n) {
-            state.personnelreadAccess = n;
-        },
         setMasterpersonneleditorAccess(state, n) {
             state.masterpersonneleditorAccess = n;
         },
@@ -2053,6 +2211,12 @@ const store = new __WEBPACK_IMPORTED_MODULE_3_vuex__["default"].Store({
         },
         setStructurereadAccess(state, n) {
             state.structurereadAccess = n;
+        },
+        setPersonneleditorAccess(state, n) {
+            state.personneleditorAccess = n;
+        },
+        setPersonnelreadAccess(state, n) {
+            state.personnelreadAccess = n;
         },
         setMode(state, n) {
             state.mode = n;
@@ -2217,6 +2381,114 @@ const store = new __WEBPACK_IMPORTED_MODULE_3_vuex__["default"].Store({
                 state.structuretypes = result;
             });
         },
+        /*updateRelativetypes(state) {
+            fetch('api/Relativetype', { credentials: 'include' })
+                .then(response => {
+                    return response.json() as Promise<Relativetype[]>;
+                })
+                .then(result => {
+                    state.relativetypes = result;
+                })
+        },
+        updateAttestationtypes(state) {
+            fetch('api/Attestationtype', { credentials: 'include' })
+                .then(response => {
+                    return response.json() as Promise<Attestationtype[]>;
+                })
+                .then(result => {
+                    state.attestationtypes = result;
+                })
+        },
+        updateVacationmilitaries(state) {
+            fetch('api/Vacationmilitary', { credentials: 'include' })
+                .then(response => {
+                    return response.json() as Promise<Vacationmilitary[]>;
+                })
+                .then(result => {
+                    state.vacationmilitaries = result;
+                })
+        },
+        updateVacationtypes(state) {
+            fetch('api/Vacationtype', { credentials: 'include' })
+                .then(response => {
+                    return response.json() as Promise<Vacationtype[]>;
+                })
+                .then(result => {
+                    state.vacationtypes = result;
+                })
+        },
+        updateLanguagetypes(state) {
+            fetch('api/Languagetype', { credentials: 'include' })
+                .then(response => {
+                    return response.json() as Promise<Languagetype[]>;
+                })
+                .then(result => {
+                    state.languagetypes = result;
+                })
+        },
+        updateLanguageskills(state) {
+            fetch('api/Languageskill', { credentials: 'include' })
+                .then(response => {
+                    return response.json() as Promise<Languageskill[]>;
+                })
+                .then(result => {
+                    state.languageskills = result;
+                })
+        },*/
+        /*updateJobtypes(state) {
+            fetch('api/Jobtype', { credentials: 'include' })
+                .then(response => {
+                    return response.json() as Promise<Jobtype[]>;
+                })
+                .then(result => {
+                    state.jobtypes = result;
+                })
+        },*/
+        /*updateServicetypes(state) {
+            fetch('api/Servicetype', { credentials: 'include' })
+                .then(response => {
+                    return response.json() as Promise<Servicetype[]>;
+                })
+                .then(result => {
+                    state.servicetypes = result;
+                })
+        },
+        updateServicefeatures(state) {
+            fetch('api/Servicefeature', { credentials: 'include' })
+                .then(response => {
+                    return response.json() as Promise<Servicefeature[]>;
+                })
+                .then(result => {
+                    state.servicefeatures = result;
+                })
+        },
+        updateServicecoefs(state) {
+            fetch('api/Servicecoef', { credentials: 'include' })
+                .then(response => {
+                    return response.json() as Promise<Servicecoef[]>;
+                })
+                .then(result => {
+                    state.servicecoefs = result;
+                })
+        },*/
+        /*updatePenalties(state) {
+            fetch('api/Penalty', { credentials: 'include' })
+                .then(response => {
+                    return response.json() as Promise<Penalty[]>;
+                })
+                .then(result => {
+                    state.penalties = result;
+                })
+        },
+        updatePenaltytypes(state) {
+            fetch('api/Penaltytype', { credentials: 'include' })
+                .then(response => {
+                    return response.json() as Promise<Penaltytype[]>;
+                })
+                .then(result => {
+                    state.penaltytypes = result;
+                })
+        },*/
         updateCountries(state) {
             fetch('api/Country', { credentials: 'include' })
                 .then(response => {
@@ -2226,6 +2498,144 @@ const store = new __WEBPACK_IMPORTED_MODULE_3_vuex__["default"].Store({
                 state.countries = result;
             });
         },
+        /* updateIllregimes(state) {
+             fetch('api/Illregime', { credentials: 'include' })
+                 .then(response => {
+                     return response.json() as Promise<Illregime[]>;
+                 })
+                 .then(result => {
+                     state.illregimes = result;
+                 })
+         },
+         updateIllcodes(state) {
+             fetch('api/Illcode', { credentials: 'include' })
+                 .then(response => {
+                     return response.json() as Promise<Illcode[]>;
+                 })
+                 .then(result => {
+                     state.illcodes = result;
+                 })
+         },*/
+        /*updateRewardtypes(state) {
+            fetch('api/Rewardtype', { credentials: 'include' })
+                .then(response => {
+                    return response.json() as Promise<Rewardtype[]>;
+                })
+                .then(result => {
+                    state.rewardtypes = result;
+                })
+        },
+        updateRewards(state) {
+            fetch('api/Reward', { credentials: 'include' })
+                .then(response => {
+                    return response.json() as Promise<Reward[]>;
+                })
+                .then(result => {
+                    state.rewards = result;
+                })
+        },*/
+        /*updateEducationlevels(state) {
+            fetch('api/Educationlevel', { credentials: 'include' })
+                .then(response => {
+                    return response.json() as Promise<Educationlevel[]>;
+                })
+                .then(result => {
+                    state.educationlevels = result;
+                })
+        },
+        updateEducationtypes(state) {
+            fetch('api/Educationtype', { credentials: 'include' })
+                .then(response => {
+                    return response.json() as Promise<Educationtype[]>;
+                })
+                .then(result => {
+                    state.educationtypes = result;
+                })
+        },
+        updateEducationdocuments(state) {
+            fetch('api/Educationdocument', { credentials: 'include' })
+                .then(response => {
+                    return response.json() as Promise<Educationdocument[]>;
+                })
+                .then(result => {
+                    state.educationdocuments = result;
+                })
+        },
+        updateNormativs(state) {
+            fetch('api/Normativ', { credentials: 'include' })
+                .then(response => {
+                    return response.json() as Promise<Normativ[]>;
+                })
+                .then(result => {
+                    state.normativs = result;
+                })
+        },
+        updateDrivertypes(state) {
+            fetch('api/Drivertype', { credentials: 'include' })
+                .then(response => {
+                    return response.json() as Promise<Drivertype[]>;
+                })
+                .then(result => {
+                    state.drivertypes = result;
+                })
+        },
+        updateDrivercategories(state) {
+            fetch('api/Drivercategory', { credentials: 'include' })
+                .then(response => {
+                    return response.json() as Promise<Drivercategory[]>;
+                })
+                .then(result => {
+                    state.drivercategories = result;
+                })
+        },*/
+        /*updatePermissiontypes(state) {
+            fetch('api/Permissiontype', { credentials: 'include' })
+                .then(response => {
+                    return response.json() as Promise<Permissiontype[]>;
+                })
+                .then(result => {
+                    state.permissiontypes = result;
+                })
+        },*/
+        updateProoftypes(state) {
+            fetch('api/Prooftype', { credentials: 'include' })
+                .then(response => {
+                return response.json();
+            })
+                .then(result => {
+                state.prooftypes = result;
+            });
+        },
+        /*updateHolidays(state) {
+            fetch('api/Holiday', { credentials: 'include' })
+                .then(response => {
+                    return response.json() as Promise<Holiday[]>;
+                })
+                .then(result => {
+                    state.holidays = result;
+                })
+        },
+
+        updatePersondecreeblocktypes(state) {
+            fetch('api/Persondecreeblocktype', { credentials: 'include' })
+                .then(response => {
+                    return response.json() as Promise<Persondecreeblocktype[]>;
+                })
+                .then(result => {
+                    state.persondecreeblocktypes = result;
+                })
+        },
+
+        updatePersondecreeblocksubtypes(state) {
+            fetch('api/Persondecreeblocksubtype', { credentials: 'include' })
+                .then(response => {
+                    return response.json() as Promise<Persondecreeblocksubtype[]>;
+                })
+                .then(result => {
+                    //alert(JSON.stringify(result));
+                    state.persondecreeblocksubtypes = result;
+                })
+        },*/
         updateStructureresAll(state) {
             fetch('api/Structure/All', { credentials: 'include' })
                 .then(response => {
@@ -2256,6 +2666,45 @@ const store = new __WEBPACK_IMPORTED_MODULE_3_vuex__["default"].Store({
                 state.areas = result;
             });
         },
+        /*updateFires(state) {
+            fetch('api/Fire', { credentials: 'include' })
+                .then(response => {
+                    return response.json() as Promise<Fire[]>;
+                })
+                .then(result => {
+                    //alert(JSON.stringify(result));
+                    state.fires = result;
+                })
+        },*/
+        updateDismissalclauses(state) {
+            fetch('api/Dismissalclauses', { credentials: 'include' })
+                .then(response => {
+                return response.json();
+            })
+                .then(result => {
+                //alert(JSON.stringify(result));
+                state.dismissalclauses = result;
+            });
+        },
+        /*updateAppointtypes(state) {
+            fetch('api/Appointtype', { credentials: 'include' })
+                .then(response => {
+                    return response.json() as Promise<Appointtype[]>;
+                })
+                .then(result => {
+                    //alert(JSON.stringify(result));
+                    state.appointtypes = result;
+                })
+        },*/
+        updateTransfertypes(state) {
+            fetch('api/Transfertype', { credentials: 'include' })
+                .then(response => {
+                return response.json();
+            })
+                .then(result => {
+                state.transfertypes = result;
+            });
+        },
         updateSubjects(state) {
             fetch('api/Subject', { credentials: 'include' })
                 .then(response => {
@@ -2283,13 +2732,78 @@ const store = new __WEBPACK_IMPORTED_MODULE_3_vuex__["default"].Store({
                 state.subjectcategories = result;
             });
         },
+        /*updateLocationtypes(state) {
+            fetch('api/Locationtype', {credentials: 'include'})
+            .then(response => {
+                return response.json() as Promise<Locationtype[]>;
+            })
+            .then(result => {
+                state.locationtypes = result;
+            })
+        },
+
+        updateInterrupttypes(state) {
+            fetch('api/Interrupttype', { credentials: 'include' })
+                .then(response => {
+                    return response.json() as Promise<Interrupttype[]>;
+                })
+                .then(result => {
+                    state.interrupttypes = result;
+                })
+        },
+
         updateChangedocumentstypes(state) {
             fetch('api/Changedocumentstype', { credentials: 'include' })
+                .then(response => {
+                    return response.json() as Promise<Changedocumentstype[]>;
+                })
+                .then(result => {
+                    state.changedocumentstypes = result;
+                })
+        },*/
+        updateSetpersondatatypes(state) {
+            fetch('api/Setpersondatatype', { credentials: 'include' })
                 .then(response => {
                 return response.json();
             })
                 .then(result => {
-                state.changedocumentstypes = result;
+                state.setpersondatatypes = result;
+            });
+        },
+        /*updateRewardmoneys(state) {
+            fetch('api/Rewardmoney', { credentials: 'include' })
+                .then(response => {
+                    return response.json() as Promise<Rewardmoney[]>;
+                })
+                .then(result => {
+                    state.rewardmoneys = result;
+                })
+        },*/
+        /*updatePersondecreelevels(state) {
+            fetch('api/Persondecreelevel', { credentials: 'include' })
+                .then(response => {
+                    return response.json() as Promise<Persondecreelevel[]>;
+                })
+                .then(result => {
+                    state.persondecreelevels = result;
+                })
+        },*/
+        updateOrdernumbertypes(state) {
+            fetch('api/Ordernumbertype', { credentials: 'include' })
+                .then(response => {
+                return response.json();
+            })
+                .then(result => {
+                state.ordernumbertypes = result;
+            });
+        },
+        updateStructuresalldocument(state) {
+            fetch('api/DetailedStructure/Alldocument', { credentials: 'include' })
+                .then(response => {
+                return response.json();
+            })
+                .then(result => {
+                state.structuresalldocument = result;
             });
         },
         updateCitytypes(state) {
@@ -2319,15 +2833,35 @@ const store = new __WEBPACK_IMPORTED_MODULE_3_vuex__["default"].Store({
                 state.areaothers = result;
             });
         },
-        updateExternalorderwhotypes(state) {
+        /*updateExternalorderwhotypes(state) {
             fetch('api/Externalorderwhotype', { credentials: 'include' })
                 .then(response => {
-                return response.json();
-            })
+                    return response.json() as Promise<Externalorderwhotype[]>;
+                })
                 .then(result => {
-                state.externalorderwhotypes = result;
-            });
+                    state.externalorderwhotypes = result;
+                })
         },
+
+        updatePersondecreetypes(state) {
+            fetch('api/Persondecreetype', { credentials: 'include' })
+                .then(response => {
+                    return response.json() as Promise<Persondecreetype[]>;
+                })
+                .then(result => {
+                    state.persondecreetypes = result;
+                })
+        },
+
+        updateEducationadditionaltypes(state) {
+            fetch('api/Educationadditionaltype', { credentials: 'include' })
+                .then(response => {
+                    return response.json() as Promise<Educationadditionaltype[]>;
+                })
+                .then(result => {
+                    state.educationadditionaltypes = result;
+                })
+        },*/
         updateCitysubstates(state) {
             fetch('api/Citysubstate', { credentials: 'include' })
                 .then(response => {
@@ -2335,6 +2869,34 @@ const store = new __WEBPACK_IMPORTED_MODULE_3_vuex__["default"].Store({
             })
                 .then(result => {
                 state.citysubstates = result;
+            });
+        },
+        /*updateEducationstages(state) {
+            fetch('api/Educationstage', { credentials: 'include' })
+                .then(response => {
+                    return response.json() as Promise<Educationstage[]>;
+                })
+                .then(result => {
+                    state.educationstages = result;
+                })
+        },
+
+        updateEducationpositiontypes(state) {
+            fetch('api/Educationpositiontype', { credentials: 'include' })
+                .then(response => {
+                    return response.json() as Promise<Educationpositiontype[]>;
+                })
+                .then(result => {
+                    state.educationpositiontypes = result;
+                })
+        },*/
+        updateRoles(state) {
+            fetch('api/Role', { credentials: 'include' })
+                .then(response => {
+                return response.json();
+            })
+                .then(result => {
+                state.roles = result;
             });
         },
         //areaothers: Areaother[""],
@@ -2410,10 +2972,10 @@ const store = new __WEBPACK_IMPORTED_MODULE_3_vuex__["default"].Store({
                 state.oldcurrentmode.decreeoperationelementVisible = state.decreeoperationelementVisible;
                 state.oldcurrentmode.decreeoperationtemplatecreatorVisible = state.decreeoperationtemplatecreatorVisible;
                 state.fullmode = "1";
-                state.sidebarDisplay = "1";
-                state.modepanelVisible = 0;
-                state.eldVisible = 0;
+                state.sidebarDisplay = "1",
+                    state.modepanelVisible = 0;
                 state.candidatesVisible = 0;
+                state.eldVisible = 0;
                 state.positionsListId = 1;
                 state.decreeoperationelementVisible = 0;
                 state.decreeoperationtemplatecreatorVisible = false;
@@ -2442,8 +3004,8 @@ const store = new __WEBPACK_IMPORTED_MODULE_3_vuex__["default"].Store({
                 state.fullmode = state.oldcurrentmode.fullmode;
                 state.sidebarDisplay = state.oldcurrentmode.sidebarDisplay;
                 state.modepanelVisible = state.oldcurrentmode.modepanelVisible;
-                state.oldcurrentmode.eldVisible = state.eldVisible;
                 state.candidatesVisible = state.oldcurrentmode.candidatesVisible;
+                state.eldVisible = state.oldcurrentmode.eldVisible;
                 state.positionsListId = state.oldcurrentmode.positionsListId;
                 state.decreeoperationelementVisible = state.oldcurrentmode.decreeoperationelementVisible;
                 state.decreeoperationtemplatecreatorVisible = state.oldcurrentmode.decreeoperationtemplatecreatorVisible;
@@ -2476,6 +3038,33 @@ const store = new __WEBPACK_IMPORTED_MODULE_3_vuex__["default"].Store({
         setModecopy(state, n) {
             state.modecopy = n;
         },
+        setModeappointperson(state, n) {
+            state.modeappointperson = n;
+        },
+        setModeappointedperson(state, n) {
+            state.modeappointedperson = n;
+        },
+        setModeappointpersondecree(state, n) {
+            state.modeappointpersondecree = n;
+        },
+        setModeappointpersondecreeStructure(state, n) {
+            state.modeappointpersondecreeStructure = n;
+        },
+        setModeappointpersondecreeStructureForCPU(state, n) {
+            state.modeselectstructureforCPU = n;
+        },
+        setModeappointedpersondecreeStructure(state, n) {
+            state.modeappointedpersondecreeStructure = n;
+        },
+        setModeappointedpersondecree(state, n) {
+            state.modeappointedpersondecree = n;
+        },
+        setModeappointpersonstructuredecree(state, n) {
+            state.modeappointpersonstructuredecree = n;
+        },
+        setModeappointedpersonstructuredecree(state, n) {
+            state.modeappointedpersonstructuredecree = n;
+        },
         setModecopystring(state, n) {
             state.modecopystring = n; // String with copy data. "s=1" means copy structure with id 1 and all substructrures with the same or null type and all positions inclusive.
         },
@@ -2484,7 +3073,7 @@ const store = new __WEBPACK_IMPORTED_MODULE_3_vuex__["default"].Store({
 new Vue({
     el: '#app-root',
     //mixins: globals,
-    router: new __WEBPACK_IMPORTED_MODULE_28_vue_router__["default"]({ mode: 'history', routes: routes }),
+    router: new __WEBPACK_IMPORTED_MODULE_69_vue_router__["default"]({ mode: 'history', routes: routes }),
     store,
     data: {
         currentRoute: window.location.pathname,
@@ -2493,17 +3082,17 @@ new Vue({
         //alert(window.location.pathname);
         //this.currentRoute
         if (window.location.pathname != '/login') {
-            return h(__webpack_require__(89));
+            return h(__webpack_require__(145));
         }
         else {
-            return h(__webpack_require__(95));
+            return h(__webpack_require__(151));
         }
     }
 });
 
 
 /***/ }),
-/* 16 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(__resourceQuery, module) {/*eslint-env browser*/
@@ -2519,7 +3108,7 @@ var options = {
   name: ''
 };
 if (true) {
-  var querystring = __webpack_require__(75);
+  var querystring = __webpack_require__(131);
   var overrides = querystring.parse(__resourceQuery.slice(1));
   if (overrides.path) options.path = overrides.path;
   if (overrides.timeout) options.timeout = overrides.timeout;
@@ -2639,11 +3228,11 @@ if (typeof window !== 'undefined') {
 }
 
 function createReporter() {
-  var strip = __webpack_require__(77);
+  var strip = __webpack_require__(133);
 
   var overlay;
   if (typeof document !== 'undefined' && options.overlay) {
-    overlay = __webpack_require__(118);
+    overlay = __webpack_require__(174);
   }
 
   var styles = {
@@ -2696,7 +3285,7 @@ function createReporter() {
   };
 }
 
-var processUpdate = __webpack_require__(119);
+var processUpdate = __webpack_require__(175);
 
 var customHandler;
 var subscribeAllHandler;
@@ -2761,16 +3350,324 @@ if (module) {
   };
 }
 
-/* WEBPACK VAR INJECTION */}.call(exports, "?path=__webpack_hmr&dynamicPublicPath=true", __webpack_require__(121)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, "?path=__webpack_hmr&dynamicPublicPath=true", __webpack_require__(177)(module)))
 
 /***/ }),
-/* 17 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = (__webpack_require__(5))(197);
 
 /***/ }),
+/* 17 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+class Election_Parameters {
+    constructor() {
+        this.location = [];
+        this.rank = [];
+        this.place = [];
+    }
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = Election_Parameters;
+
+//# sourceMappingURL=Election_parameters.js.map
+
+/***/ }),
 /* 18 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+class Attestation_Request {
+    constructor() {
+        this.current_structure = [];
+        this.lastdatestart = new Date();
+        this.lastdateend = new Date();
+        this.overdue = true;
+    }
+    ;
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = Attestation_Request;
+
+//# sourceMappingURL=attestation_request.js.map
+
+/***/ }),
+/* 19 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+class Award_Parameters {
+    constructor() {
+        this.awards = [];
+        this.award_type = [];
+    }
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = Award_Parameters;
+
+//# sourceMappingURL=award_parameters.js.map
+
+/***/ }),
+/* 20 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+class Award_Request {
+    constructor() {
+        this.current_structure = [];
+        this.awards = [];
+        this.awards_type = [];
+        this.keep = true;
+        this.min_awards_number = 0;
+        this.others = false;
+    }
+    ;
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = Award_Request;
+
+//# sourceMappingURL=award_request.js.map
+
+/***/ }),
+/* 21 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+class Certificate_Request {
+    constructor() {
+        this.current_structure = [];
+        this.data_end = new Date();
+        this.position_conformity = false;
+    }
+    ;
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = Certificate_Request;
+
+//# sourceMappingURL=certificate_request.js.map
+
+/***/ }),
+/* 22 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+class Contract_Request {
+    constructor() {
+        var currentdate = new Date();
+        this.current_structure = [];
+        this.last_contract_date = [new Date(currentdate), new Date(currentdate)];
+        this.last_contract_date[1].setMonth(currentdate.getMonth() + 2);
+    }
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = Contract_Request;
+
+//# sourceMappingURL=contract_request.js.map
+
+/***/ }),
+/* 23 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+class Education_Request {
+    constructor() {
+        this.current_structure = [];
+        this.educationLevel = [];
+        this.specializationList = [];
+        this.cvalificationList = [];
+    }
+    ;
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = Education_Request;
+
+//# sourceMappingURL=education_request.js.map
+
+/***/ }),
+/* 24 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+class educations_parameters {
+    constructor() {
+        this.all_cvalifications = [];
+        this.all_levels = [];
+        this.all_specializations = [];
+    }
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = educations_parameters;
+
+//# sourceMappingURL=educations_parameters.js.map
+
+/***/ }),
+/* 25 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+class Election_Request {
+    constructor() {
+        this.current_structure = [];
+        this.locations = [];
+        this.ranks = [];
+        this.places = [];
+        this.startperiod = { minDate: new Date(), maxDate: new Date() };
+        this.endperiod = { minDate: new Date(), maxDate: new Date() };
+    }
+    ;
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = Election_Request;
+
+//# sourceMappingURL=election_request.js.map
+
+/***/ }),
+/* 26 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+class Language_Parameters {
+    constructor() {
+        this.language = [];
+        this.language_skill = [];
+    }
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = Language_Parameters;
+
+//# sourceMappingURL=language_parameters.js.map
+
+/***/ }),
+/* 27 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+class Language_Request {
+    constructor() {
+        this.current_structure = [];
+        this.languages = [];
+        this.skills = [];
+    }
+    ;
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = Language_Request;
+
+//# sourceMappingURL=language_request.js.map
+
+/***/ }),
+/* 28 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+class Punishment_Parameters {
+    constructor() {
+        this.type = [];
+        this.penaltytype = [];
+    }
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = Punishment_Parameters;
+
+//# sourceMappingURL=punishment_parameters.js.map
+
+/***/ }),
+/* 29 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+class Punishment_Request {
+    constructor() {
+        this.current_structure = [];
+        this.penaltytypes = [];
+        this.types = [];
+        this.who = [];
+        //this.period = { minDate: new Date(), maxDate: new Date() };
+    }
+    ;
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = Punishment_Request;
+
+//# sourceMappingURL=punishment_request.js.map
+
+/***/ }),
+/* 30 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+class Rank_Request {
+    constructor() {
+        this.current_structure = [];
+        this.first_rank_date = new Date();
+        this.last_rank_date = new Date();
+    }
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = Rank_Request;
+
+//# sourceMappingURL=rank_request.js.map
+
+/***/ }),
+/* 31 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+class Trip_Request {
+    constructor() {
+        this.current_structure = [];
+        this.country = [];
+        this.reason = [];
+        this.period = { minDate: new Date(), maxDate: new Date() };
+    }
+    ;
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = Trip_Request;
+
+//# sourceMappingURL=trip_request.js.map
+
+/***/ }),
+/* 32 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+class Trip_Parameters {
+    constructor() {
+        this.countres = [];
+        this.reasons = [];
+    }
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = Trip_Parameters;
+
+//# sourceMappingURL=trips_parameters.js.map
+
+/***/ }),
+/* 33 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+class Vacation_Request {
+    constructor() {
+        this.current_structure = [];
+        this.minimal_days = 0;
+        this.old_year_days = false;
+        var currentdate = new Date();
+        this.date_range = [new Date(currentdate), new Date(currentdate)];
+        this.date_range[1].setMonth(currentdate.getMonth() + 1);
+        this.dates_count = false;
+    }
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = Vacation_Request;
+
+//# sourceMappingURL=vacation_request.js.map
+
+/***/ }),
+/* 34 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+class StaffComission {
+    constructor() {
+        this.id = 0;
+        this.fio = "";
+        this.rank = 0;
+    }
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = StaffComission;
+
+//# sourceMappingURL=StaffComission.js.map
+
+/***/ }),
+/* 35 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2781,156 +3678,7 @@ class Structure {
 //# sourceMappingURL=Structure.js.map
 
 /***/ }),
-/* 19 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-class elementsubject {
-    constructor() {
-        this.id = 0;
-        this.subject1 = 0;
-        this.subject2 = 0;
-        this.subject3 = 0;
-        this.subject4 = 0;
-        this.subject5 = 0;
-        this.subject6 = 0;
-        this.subject7 = 0;
-        this.subject8 = 0;
-        this.subject9 = 0;
-        this.subject10 = 0;
-        this.subject11 = 0;
-        this.subject12 = 0;
-        this.subject13 = 0;
-        this.subject14 = 0;
-        this.subject15 = 0;
-        this.subject16 = 0;
-        this.subject17 = 0;
-        this.subject18 = 0;
-        this.subject19 = 0;
-        this.subject20 = 0;
-    }
-    setSubjects(list) {
-        var len = list.length;
-        if (len >= 1) {
-            this.subject1 = list[0];
-        }
-        if (len >= 2) {
-            this.subject2 = list[1];
-        }
-        if (len >= 3) {
-            this.subject3 = list[2];
-        }
-        if (len >= 4) {
-            this.subject4 = list[3];
-        }
-        if (len >= 5) {
-            this.subject5 = list[4];
-        }
-        if (len >= 6) {
-            this.subject6 = list[5];
-        }
-        if (len >= 7) {
-            this.subject7 = list[6];
-        }
-        if (len >= 8) {
-            this.subject8 = list[7];
-        }
-        if (len >= 9) {
-            this.subject9 = list[8];
-        }
-        if (len >= 10) {
-            this.subject10 = list[9];
-        }
-        if (len >= 11) {
-            this.subject11 = list[10];
-        }
-        if (len >= 12) {
-            this.subject12 = list[11];
-        }
-        if (len >= 13) {
-            this.subject13 = list[12];
-        }
-        if (len >= 14) {
-            this.subject14 = list[13];
-        }
-        if (len >= 15) {
-            this.subject15 = list[14];
-        }
-        if (len >= 16) {
-            this.subject16 = list[15];
-        }
-        if (len >= 17) {
-            this.subject17 = list[16];
-        }
-        if (len >= 18) {
-            this.subject18 = list[17];
-        }
-        if (len >= 19) {
-            this.subject19 = list[18];
-        }
-        if (len == 20) {
-            this.subject20 = list[19];
-        }
-    }
-    ;
-    getSubjectStructure() {
-        var output = [
-            this.subject1,
-            this.subject2,
-            this.subject3,
-            this.subject4,
-            this.subject5,
-            this.subject6,
-            this.subject7,
-            this.subject8,
-            this.subject9,
-            this.subject10,
-            this.subject11,
-            this.subject12,
-            this.subject13,
-            this.subject14,
-            this.subject15,
-            this.subject16,
-            this.subject17,
-            this.subject18,
-            this.subject19,
-            this.subject20
-        ];
-        output = output.filter(r => r > 0);
-        return output;
-    }
-    ;
-    setElementByPromis(object) {
-        this.id = object.id;
-        this.subject1 = object.subject1;
-        this.subject2 = object.subject2;
-        this.subject3 = object.subject3;
-        this.subject4 = object.subject4;
-        this.subject5 = object.subject5;
-        this.subject6 = object.subject6;
-        this.subject7 = object.subject7;
-        this.subject8 = object.subject8;
-        this.subject9 = object.subject9;
-        this.subject10 = object.subject10;
-        this.subject11 = object.subject11;
-        this.subject12 = object.subject12;
-        this.subject13 = object.subject13;
-        this.subject14 = object.subject14;
-        this.subject15 = object.subject15;
-        this.subject16 = object.subject16;
-        this.subject17 = object.subject17;
-        this.subject18 = object.subject18;
-        this.subject19 = object.subject19;
-        this.subject20 = object.subject20;
-    }
-    ;
-}
-/* harmony export (immutable) */ __webpack_exports__["a"] = elementsubject;
-
-//# sourceMappingURL=elementsubject.js.map
-
-/***/ }),
-/* 20 */
+/* 36 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2941,7 +3689,7 @@ class Altrank {
 //# sourceMappingURL=altrank.js.map
 
 /***/ }),
-/* 21 */
+/* 37 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2952,7 +3700,7 @@ class Altrankcondition {
 //# sourceMappingURL=altrankcondition.js.map
 
 /***/ }),
-/* 22 */
+/* 38 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2963,7 +3711,18 @@ class Altrankconditiongroup {
 //# sourceMappingURL=altrankconditiongroup.js.map
 
 /***/ }),
-/* 23 */
+/* 39 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+class Appointtype {
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = Appointtype;
+
+//# sourceMappingURL=appointtype.js.map
+
+/***/ }),
+/* 40 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2974,7 +3733,7 @@ class Area {
 //# sourceMappingURL=area.js.map
 
 /***/ }),
-/* 24 */
+/* 41 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2985,7 +3744,18 @@ class Areaother {
 //# sourceMappingURL=areaother.js.map
 
 /***/ }),
-/* 25 */
+/* 42 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+class Attestationtype {
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = Attestationtype;
+
+//# sourceMappingURL=attestationtype.js.map
+
+/***/ }),
+/* 43 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2996,7 +3766,7 @@ class Changedocumentstype {
 //# sourceMappingURL=changedocumentstype.js.map
 
 /***/ }),
-/* 26 */
+/* 44 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3007,7 +3777,7 @@ class Citysubstate {
 //# sourceMappingURL=citysubstate.js.map
 
 /***/ }),
-/* 27 */
+/* 45 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3018,7 +3788,7 @@ class Citytype {
 //# sourceMappingURL=citytype.js.map
 
 /***/ }),
-/* 28 */
+/* 46 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3029,150 +3799,106 @@ class Country {
 //# sourceMappingURL=country.js.map
 
 /***/ }),
-/* 29 */
+/* 47 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-class Countrycities {
-    constructor() {
-        this.country = null;
-        this.cities = new Array();
-        this.citytoadd = "";
-    }
-    addCity() {
-        alert(this.citytoadd);
-        this.cities.push(this.citytoadd);
-        this.citytoadd = "";
-    }
-    /**
-     * Превращаем объект в строку
-     *
-     */
-    countrycitiesToString() {
-        let str = "";
-        if (this.country != null) {
-            str += this.country.toString();
-        }
-        else {
-            str += 0;
-        }
-        this.cities.forEach(c => {
-            str += "&";
-            str += c;
-        });
-        if (this.citytoadd != null && this.citytoadd.length > 0) {
-            str += "&";
-            str += this.citytoadd;
-        }
-        return str;
-    }
-    /**
-     * Превращаем строку в объект
-     * @param str
-     */
-    static stringToCountrycities(str) {
-        let countrycities = new Countrycities();
-        let parts = str.split('&');
-        let first = true;
-        parts.forEach(p => {
-            // Записываем id страны
-            if (first) {
-                countrycities.country = Number.parseInt(p);
-                // Превращаем в null для визуального отображения в input;
-                if (countrycities.country == 0) {
-                    countrycities.country = null;
-                }
-                first = false;
-                // Записываем название города
-            }
-            else {
-                countrycities.cities.push(p);
-            }
-        });
-        return countrycities;
-    }
-    /**
-     * Превращаем список объектов в строку
-     * @param list
-     */
-    static countrycitiesListToString(list) {
-        let str = "";
-        list.forEach(c => {
-            if (str.length > 0) {
-                str += "%";
-            }
-            str += c.countrycitiesToString();
-        });
-        return str;
-    }
-    static stringToCountrycitiesList(str) {
-        let list = new Array();
-        let bigparts = str.split('%');
-        bigparts.forEach(s => {
-            list.push(Countrycities.stringToCountrycities(s));
-        });
-        return list;
-    }
+class Dismissalclauses {
 }
-/* harmony export (immutable) */ __webpack_exports__["a"] = Countrycities;
+/* harmony export (immutable) */ __webpack_exports__["a"] = Dismissalclauses;
 
-//# sourceMappingURL=countrycities.js.map
+//# sourceMappingURL=dismissalclauses.js.map
 
 /***/ }),
-/* 30 */
+/* 48 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-class Decree {
-    constructor() {
-        this.id = 0;
-        this.name = "";
-        this.signed = false;
-        this.declined = false;
-        this.dateactive = new Date();
-        this.datesigned = new Date();
-        this.user = 0;
-        this.nickname = "";
-        this.number = "";
-        this.historycal = 0;
-    }
+class Drivercategory {
 }
-/* harmony export (immutable) */ __webpack_exports__["a"] = Decree;
+/* harmony export (immutable) */ __webpack_exports__["a"] = Drivercategory;
 
-//# sourceMappingURL=decree.js.map
+//# sourceMappingURL=drivercategory.js.map
 
 /***/ }),
-/* 31 */
+/* 49 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-class DecreeFinder {
-    constructor() {
-        var current_date = new Date();
-        this.dates = {
-            minDate: new Date(),
-            maxDate: new Date()
-        };
-        this.dates.minDate.setFullYear(current_date.getFullYear() - 10);
-        this.dates.maxDate.setFullYear(current_date.getFullYear() + 10);
-        this.number = "";
-        this.name = "";
-        this.date_started = {
-            minDate: new Date(),
-            maxDate: new Date()
-        };
-        this.date_started.minDate.setFullYear(current_date.getFullYear() - 10);
-        this.date_started.maxDate.setFullYear(current_date.getFullYear() + 10);
-        this.nickname = "";
-        this.rewrite = false;
-    }
+class Drivertype {
 }
-/* harmony export (immutable) */ __webpack_exports__["a"] = DecreeFinder;
+/* harmony export (immutable) */ __webpack_exports__["a"] = Drivertype;
 
-//# sourceMappingURL=decree_finder.js.map
+//# sourceMappingURL=drivertype.js.map
 
 /***/ }),
-/* 32 */
+/* 50 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+class Educationadditionaltype {
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = Educationadditionaltype;
+
+//# sourceMappingURL=educationadditionaltype.js.map
+
+/***/ }),
+/* 51 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+class Educationdocument {
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = Educationdocument;
+
+//# sourceMappingURL=educationdocument.js.map
+
+/***/ }),
+/* 52 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+class Educationlevel {
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = Educationlevel;
+
+//# sourceMappingURL=educationlevel.js.map
+
+/***/ }),
+/* 53 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+class Educationpositiontype {
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = Educationpositiontype;
+
+//# sourceMappingURL=educationpositiontype.js.map
+
+/***/ }),
+/* 54 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+class Educationstage {
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = Educationstage;
+
+//# sourceMappingURL=educationstage.js.map
+
+/***/ }),
+/* 55 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+class Educationtype {
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = Educationtype;
+
+//# sourceMappingURL=educationtype.js.map
+
+/***/ }),
+/* 56 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3183,7 +3909,123 @@ class Externalorderwhotype {
 //# sourceMappingURL=externalorderwhotype.js.map
 
 /***/ }),
-/* 33 */
+/* 57 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+class Fire {
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = Fire;
+
+//# sourceMappingURL=fire.js.map
+
+/***/ }),
+/* 58 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var formatting;
+(function (formatting) {
+    function formatter_el_table_fullname(row, column, cellValue, index) {
+        var person = cellValue;
+        return person.surname + " " + person.name + " " + person.fathername;
+    }
+    formatting.formatter_el_table_fullname = formatter_el_table_fullname;
+    function formatter_el_table_collumn_date(row, column, cellValue, index) {
+        var output = "";
+        try {
+            var date = new Date(cellValue);
+            output = date.toLocaleDateString('ru-Ru', { day: '2-digit', month: '2-digit', year: 'numeric' });
+        }
+        catch (e) {
+            output = cellValue;
+        }
+        return output;
+    }
+    formatting.formatter_el_table_collumn_date = formatter_el_table_collumn_date;
+})(formatting || (formatting = {}));
+/* harmony default export */ __webpack_exports__["a"] = (formatting);
+//# sourceMappingURL=el_table_formatter.js.map
+
+/***/ }),
+/* 59 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+class Holiday {
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = Holiday;
+
+//# sourceMappingURL=holiday.js.map
+
+/***/ }),
+/* 60 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+class Illcode {
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = Illcode;
+
+//# sourceMappingURL=illcode.js.map
+
+/***/ }),
+/* 61 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+class Illregime {
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = Illregime;
+
+//# sourceMappingURL=illregime.js.map
+
+/***/ }),
+/* 62 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+class Interrupttype {
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = Interrupttype;
+
+//# sourceMappingURL=interrupttype.js.map
+
+/***/ }),
+/* 63 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+class Jobtype {
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = Jobtype;
+
+//# sourceMappingURL=jobtype.js.map
+
+/***/ }),
+/* 64 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+class Languageskill {
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = Languageskill;
+
+//# sourceMappingURL=languageskill.js.map
+
+/***/ }),
+/* 65 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+class Languagetype {
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = Languagetype;
+
+//# sourceMappingURL=languagetype.js.map
+
+/***/ }),
+/* 66 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3194,7 +4036,22 @@ class Link {
 //# sourceMappingURL=link.js.map
 
 /***/ }),
-/* 34 */
+/* 67 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+class Locationtype {
+    constructor() {
+        this.id = 0;
+        this.locationtypename = "";
+    }
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = Locationtype;
+
+//# sourceMappingURL=locationtype.js.map
+
+/***/ }),
+/* 68 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3205,11 +4062,108 @@ class Mrd {
 //# sourceMappingURL=mrd.js.map
 
 /***/ }),
-/* 35 */
+/* 69 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__countrycities__ = __webpack_require__(29);
+class Normativ {
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = Normativ;
+
+//# sourceMappingURL=normativ.js.map
+
+/***/ }),
+/* 70 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+class Ordernumbertype {
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = Ordernumbertype;
+
+//# sourceMappingURL=ordernumbertype.js.map
+
+/***/ }),
+/* 71 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+class Penalty {
+    constructor() {
+        this.id = 0;
+        this.name = "";
+        this.isspoken = 0;
+    }
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = Penalty;
+
+//# sourceMappingURL=penalty.js.map
+
+/***/ }),
+/* 72 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+class Penaltytype {
+    constructor() {
+        this.id = 0;
+        this.name = "";
+    }
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = Penaltytype;
+
+//# sourceMappingURL=penaltytype.js.map
+
+/***/ }),
+/* 73 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+class Permissiontype {
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = Permissiontype;
+
+//# sourceMappingURL=permissiontype.js.map
+
+/***/ }),
+/* 74 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+class Persondecreeblocksubtype {
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = Persondecreeblocksubtype;
+
+//# sourceMappingURL=persondecreeblocksubtype.js.map
+
+/***/ }),
+/* 75 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+class Persondecreeblocktype {
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = Persondecreeblocktype;
+
+//# sourceMappingURL=persondecreeblocktype.js.map
+
+/***/ }),
+/* 76 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+class Persondecreelevel {
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = Persondecreelevel;
+
+//# sourceMappingURL=persondecreelevel.js.map
+
+/***/ }),
+/* 77 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__countrycities__ = __webpack_require__(9);
 
 class FeaturedStructure {
     constructor(name = '', id = '') {
@@ -3241,7 +4195,18 @@ class Persondecreeoperation {
 //# sourceMappingURL=persondecreeoperation.js.map
 
 /***/ }),
-/* 36 */
+/* 78 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+class Persondecreetype {
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = Persondecreetype;
+
+//# sourceMappingURL=persondecreetype.js.map
+
+/***/ }),
+/* 79 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3252,7 +4217,7 @@ class Positioncategory {
 //# sourceMappingURL=positioncategory.js.map
 
 /***/ }),
-/* 37 */
+/* 80 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3266,7 +4231,18 @@ class Positiontype {
 //# sourceMappingURL=positiontype.js.map
 
 /***/ }),
-/* 38 */
+/* 81 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+class Prooftype {
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = Prooftype;
+
+//# sourceMappingURL=prooftype.js.map
+
+/***/ }),
+/* 82 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3280,7 +4256,7 @@ class Rank {
 //# sourceMappingURL=rank.js.map
 
 /***/ }),
-/* 39 */
+/* 83 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3291,7 +4267,51 @@ class Region {
 //# sourceMappingURL=region.js.map
 
 /***/ }),
-/* 40 */
+/* 84 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+class Relativetype {
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = Relativetype;
+
+//# sourceMappingURL=relativetype.js.map
+
+/***/ }),
+/* 85 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+class Reward {
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = Reward;
+
+//# sourceMappingURL=reward.js.map
+
+/***/ }),
+/* 86 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+class Rewardmoney {
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = Rewardmoney;
+
+//# sourceMappingURL=rewardmoney.js.map
+
+/***/ }),
+/* 87 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+class Rewardtype {
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = Rewardtype;
+
+//# sourceMappingURL=rewardtype.js.map
+
+/***/ }),
+/* 88 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3311,7 +4331,62 @@ class Rights {
 //# sourceMappingURL=rights.js.map
 
 /***/ }),
-/* 41 */
+/* 89 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+class Role {
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = Role;
+
+//# sourceMappingURL=role.js.map
+
+/***/ }),
+/* 90 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+class Servicecoef {
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = Servicecoef;
+
+//# sourceMappingURL=servicecoef.js.map
+
+/***/ }),
+/* 91 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+class Servicefeature {
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = Servicefeature;
+
+//# sourceMappingURL=servicefeature.js.map
+
+/***/ }),
+/* 92 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+class Servicetype {
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = Servicetype;
+
+//# sourceMappingURL=servicetype.js.map
+
+/***/ }),
+/* 93 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+class Setpersondatatype {
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = Setpersondatatype;
+
+//# sourceMappingURL=setpersondatatype.js.map
+
+/***/ }),
+/* 94 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3325,7 +4400,7 @@ class Sourceoffinancing {
 //# sourceMappingURL=sourceoffinancing.js.map
 
 /***/ }),
-/* 42 */
+/* 95 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3336,7 +4411,7 @@ class Streettype {
 //# sourceMappingURL=streettype.js.map
 
 /***/ }),
-/* 43 */
+/* 96 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3347,7 +4422,7 @@ class Structureregion {
 //# sourceMappingURL=structureregion.js.map
 
 /***/ }),
-/* 44 */
+/* 97 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3358,7 +4433,7 @@ class Structuretype {
 //# sourceMappingURL=structuretype.js.map
 
 /***/ }),
-/* 45 */
+/* 98 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3369,7 +4444,7 @@ class Subject {
 //# sourceMappingURL=subject.js.map
 
 /***/ }),
-/* 46 */
+/* 99 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3380,7 +4455,7 @@ class Subjectcategory {
 //# sourceMappingURL=subjectcategory.js.map
 
 /***/ }),
-/* 47 */
+/* 100 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3391,7 +4466,40 @@ class Subjectgender {
 //# sourceMappingURL=subjectgender.js.map
 
 /***/ }),
-/* 48 */
+/* 101 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+class Transfertype {
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = Transfertype;
+
+//# sourceMappingURL=transfertype.js.map
+
+/***/ }),
+/* 102 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+class Vacationmilitary {
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = Vacationmilitary;
+
+//# sourceMappingURL=vacationmilitary.js.map
+
+/***/ }),
+/* 103 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+class Vacationtype {
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = Vacationtype;
+
+//# sourceMappingURL=vacationtype.js.map
+
+/***/ }),
+/* 104 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3574,7 +4682,7 @@ ansiHTML.reset()
 
 
 /***/ }),
-/* 49 */
+/* 105 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3585,7 +4693,7 @@ module.exports = function () {
 
 
 /***/ }),
-/* 50 */
+/* 106 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3596,9 +4704,9 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.inputHandler = exports.allowedKeys = undefined;
 
-var _isCharacterKeypress = __webpack_require__(52);
+var _isCharacterKeypress = __webpack_require__(108);
 
-var _vanillaMasker = __webpack_require__(13);
+var _vanillaMasker = __webpack_require__(12);
 
 var _vanillaMasker2 = _interopRequireDefault(_vanillaMasker);
 
@@ -3652,7 +4760,7 @@ var broadcast = function broadcast(ev) {
 };
 
 /***/ }),
-/* 51 */
+/* 107 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3662,7 +4770,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _vanillaMasker = __webpack_require__(13);
+var _vanillaMasker = __webpack_require__(12);
 
 var _vanillaMasker2 = _interopRequireDefault(_vanillaMasker);
 
@@ -3670,7 +4778,7 @@ var _vue = __webpack_require__(0);
 
 var _vue2 = _interopRequireDefault(_vue);
 
-var _eventListener = __webpack_require__(50);
+var _eventListener = __webpack_require__(106);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -3728,7 +4836,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 52 */
+/* 108 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3747,7 +4855,7 @@ var isCharacterKeyPress = exports.isCharacterKeyPress = function isCharacterKeyP
 };
 
 /***/ }),
-/* 53 */
+/* 109 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3757,15 +4865,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_property_decorator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_vue_property_decorator__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_element_ui__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_element_ui___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_element_ui__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_jquery__ = __webpack_require__(127);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_jquery__ = __webpack_require__(183);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_jquery__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__classes_user__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__classes_StaffComission__ = __webpack_require__(34);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -3814,6 +4924,7 @@ const fetchSubjectsDelay = 9000;
 const fetchStructureregionDelay = 9000;
 const fetchStructuretypeDelay = 9000;
 const fetchIllcodeDelay = 9000;
+const fetchStaffComissionDelay = 9000;
 const updateDelayAfterEdit = 24000;
 const delayMinimum = -20000;
 let AdminpanelComponent = class AdminpanelComponent extends __WEBPACK_IMPORTED_MODULE_0_vue__["default"] {
@@ -3894,10 +5005,14 @@ let AdminpanelComponent = class AdminpanelComponent extends __WEBPACK_IMPORTED_M
             structureregionStopUpdateTimer: 0,
             newStructuretypeName: "",
             structuretypes: [],
+            locationtypes: [],
             structuretypeStopUpdateTimer: 0,
             newIllcodeName: "",
             illcodes: [],
             illcodeStopUpdateTimer: 0,
+            newStaffComissionName: new __WEBPACK_IMPORTED_MODULE_5__classes_StaffComission__["a" /* default */](),
+            staffComissionList: [],
+            staffComissionStopUpdateTimer: 0,
             testSwitch: "1",
             activeName: "first",
             activeNameRank: "rfirst",
@@ -3912,6 +5027,8 @@ let AdminpanelComponent = class AdminpanelComponent extends __WEBPACK_IMPORTED_M
             activeNameStructureregion: "srfirst",
             activeNameStructuretype: "stfirst",
             activeNameIllcode: "icfirst",
+            activeNameLocationtype: "loctype",
+            staffComission: "staffcommfirst",
             head: false,
             headid: 0,
             headingStructureTree: null,
@@ -3960,6 +5077,7 @@ let AdminpanelComponent = class AdminpanelComponent extends __WEBPACK_IMPORTED_M
         this.fetchAltrankconditions();
         this.fetchStructureregions();
         this.fetchStructuretypes();
+        this.fetchStaffComission();
         setInterval(this.fetchUsers, fetchUserDelay); //$(element).is(':visible')
         setInterval(this.fetchRanks, fetchRanksDelay);
         setInterval(this.fetchSofs, fetchSofsDelay);
@@ -3971,6 +5089,8 @@ let AdminpanelComponent = class AdminpanelComponent extends __WEBPACK_IMPORTED_M
         setInterval(this.fetchAltrankconditions, fetchAltrankconditionDelay);
         setInterval(this.fetchStructureregions, fetchStructureregionDelay);
         setInterval(this.fetchStructuretypes, fetchStructuretypeDelay);
+        // setInterval(this.fetchIllcodes, fetchIllcodeDelay);
+        setInterval(this.fetchStaffComission, fetchStaffComissionDelay);
         this.filteredSubjects = this.subjects.filter(option => (option.category == 1 || option.category == 7));
     }
     onVisibleChange(value, oldValue) {
@@ -4038,6 +5158,21 @@ let AdminpanelComponent = class AdminpanelComponent extends __WEBPACK_IMPORTED_M
             return "";
         }
     }
+    get locationtypes() {
+        return this.$store.state.locationtypes;
+    }
+    getLocationtype(locationtype) {
+        if (locationtype == null || locationtype == 0) {
+            return "";
+        }
+        let ltype = this.locationtypes.find(p => p.id == locationtype);
+        if (ltype != null) {
+            return ltype.locationtypename;
+        }
+        else {
+            return "";
+        }
+    }
     fetchUsers(force) {
         //$('adminpanel-container').
         if ((__WEBPACK_IMPORTED_MODULE_3_jquery___default()('#adminpanel-container').is(':visible') && this.activeNameUser === 'ufirst'
@@ -4046,17 +5181,6 @@ let AdminpanelComponent = class AdminpanelComponent extends __WEBPACK_IMPORTED_M
                 .then(response => response.json())
                 .then(data => {
                 data.forEach(u => {
-                    //if (u.admin == "1") { u.admin = "1" };
-                    ////if (u.admin == null) { u.admin = "0" };
-                    //if (u.structureeditor == "1") { u.structureeditor = "1" };
-                    //if (u.structureread == "1") { u.structureread = "1" };
-                    ////if (u.structure_editor == null) { u.structure_editor = "0" };
-                    //if (u.masterpersonneleditor == "1") { u.masterpersonneleditor = "1" };
-                    ////if (u.master_personnel_editor == null) { u.master_personnel_editor = "0" };
-                    //if (u.personneleditor == "1") { u.personneleditor = "1" };
-                    //if (u.personnelread == "1") { u.personnelread = "1" };
-                    ////if (u.personnel_editor == null) { u.personnel_editor = "0" };
-                    ////if (u.structure == null) { u.structure = "1" };
                     u.structurename = this.structuresAll[u.structure];
                     //alert(u.firstname);
                 });
@@ -4080,6 +5204,12 @@ let AdminpanelComponent = class AdminpanelComponent extends __WEBPACK_IMPORTED_M
     }
     startStructuretypeUpdate() {
         this.structuretypeStopUpdateTimer = updateDelayAfterEdit;
+    }
+    startIllcodeUpdate() {
+        this.illcodeStopUpdateTimer = updateDelayAfterEdit;
+    }
+    startStaffComissionUpdate() {
+        this.staffComissionStopUpdateTimer = updateDelayAfterEdit;
     }
     startStructureregionUpdate() {
         this.structureregionStopUpdateTimer = updateDelayAfterEdit;
@@ -4431,6 +5561,39 @@ let AdminpanelComponent = class AdminpanelComponent extends __WEBPACK_IMPORTED_M
             this.structuretypeStopUpdateTimer -= fetchStructuretypeDelay;
         }
     }
+    /*    fetchIllcodes() {
+            if ($('#adminpanel-container').is(':visible') && this.activeNameIllcode === 'icfirst'
+                && this.illcodeStopUpdateTimer <= 0) {
+                fetch('api/Illcode', { credentials: 'include' })
+                    .then(response => response.json() as Promise<Illcode[]>)
+                    .then(data => {
+                        this.illcodes = data.sort((s1, s2) => {
+                            if (s1.name > s2.name) { return 1 };
+                            if (s1.name < s2.name) { return -1 };
+                            return 0;
+                        });
+                    })
+            }
+            if (this.illcodeStopUpdateTimer > delayMinimum) {
+                this.illcodeStopUpdateTimer -= fetchIllcodeDelay;
+            }
+        }*/
+    fetchStaffComission() {
+        if (__WEBPACK_IMPORTED_MODULE_3_jquery___default()('#adminpanel-container').is(':visible') && this.staffComission === 'staffcommfirst'
+            && this.staffComissionStopUpdateTimer <= 0) {
+            fetch('api/StaffComission', { method: 'get', credentials: 'include' })
+                .then(response => response.json())
+                .then(data => {
+                this.staffComissionList = data;
+                /*this.staffComissionList.sort((s1, s2) =>
+                    s1.rank - s2.rank
+                );*/
+            });
+        }
+        if (this.staffComissionStopUpdateTimer > delayMinimum) {
+            this.staffComissionStopUpdateTimer -= fetchStaffComissionDelay;
+        }
+    }
     addRank(event) {
         if (event)
             event.preventDefault();
@@ -4706,6 +5869,114 @@ let AdminpanelComponent = class AdminpanelComponent extends __WEBPACK_IMPORTED_M
             __WEBPACK_IMPORTED_MODULE_0_vue__["default"].notify(response);
         });
     }
+    addIllcode(event) {
+        if (event)
+            event.preventDefault();
+        fetch('/api/Illcode', {
+            method: 'post',
+            body: JSON.stringify({
+                name: this.newIllcodeName,
+            }),
+            credentials: 'include',
+            headers: new Headers({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            })
+        })
+            .then(response => { return response.json(); })
+            .then((response) => {
+            __WEBPACK_IMPORTED_MODULE_0_vue__["default"].notify(response);
+        });
+    }
+    addStaffPerson(event) {
+        if (event)
+            event.preventDefault();
+        fetch('/api/StaffComission/Add', {
+            method: 'post',
+            body: JSON.stringify(this.newStaffComissionName),
+            credentials: 'include',
+            headers: new Headers({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            })
+        })
+            .then(response => { return response.json(); })
+            .then((response) => {
+            __WEBPACK_IMPORTED_MODULE_0_vue__["default"].notify(response);
+            this.staffComissionStopUpdateTimer = -1;
+            this.fetchStaffComission();
+            this.newStaffComissionName = new __WEBPACK_IMPORTED_MODULE_5__classes_StaffComission__["a" /* default */]();
+            this.staffComission = 'staffcommfirst';
+        });
+    }
+    upStaffPerson(person) {
+        fetch('/api/StaffComission/UP', {
+            method: 'post',
+            body: JSON.stringify(person),
+            credentials: 'include',
+            headers: new Headers({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            })
+        })
+            .then(response => { return response.json(); })
+            .then((response) => {
+            __WEBPACK_IMPORTED_MODULE_0_vue__["default"].notify(response);
+            this.staffComissionStopUpdateTimer = -1;
+            this.fetchStaffComission();
+        });
+    }
+    downStaffPerson(person) {
+        fetch('/api/StaffComission/DOWN', {
+            method: 'post',
+            body: JSON.stringify(person),
+            credentials: 'include',
+            headers: new Headers({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            })
+        })
+            .then(response => { return response.json(); })
+            .then((response) => {
+            __WEBPACK_IMPORTED_MODULE_0_vue__["default"].notify(response);
+            this.staffComissionStopUpdateTimer = -1;
+            this.fetchStaffComission();
+        });
+    }
+    removeStaffPerson(person) {
+        fetch('/api/StaffComission/Remove', {
+            method: 'post',
+            body: JSON.stringify(person),
+            credentials: 'include',
+            headers: new Headers({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            })
+        })
+            .then(response => { return response.json(); })
+            .then((response) => {
+            __WEBPACK_IMPORTED_MODULE_0_vue__["default"].notify(response);
+            this.staffComissionStopUpdateTimer = -1;
+            this.fetchStaffComission();
+        });
+    }
+    updateStaffPerson(person) {
+        fetch('/api/StaffComission/Update', {
+            method: 'post',
+            body: JSON.stringify(person),
+            credentials: 'include',
+            headers: new Headers({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            })
+        })
+            .then(response => { return response.json(); })
+            .then((response) => {
+            __WEBPACK_IMPORTED_MODULE_0_vue__["default"].notify(response);
+            this.staffComissionStopUpdateTimer = -1;
+            this.fetchStaffComission();
+        });
+    }
     getPositioncategoryByID(id) {
         return this.positioncategories.find(pc => pc.id == id).name;
     }
@@ -4740,6 +6011,8 @@ let AdminpanelComponent = class AdminpanelComponent extends __WEBPACK_IMPORTED_M
     handleClickStructuretype(tab, event) {
     }
     handleClickStructureregion(tab, event) {
+    }
+    handleClickStaff(tab, event) {
     }
     updatePositiontype(positiontype) {
         fetch('/api/Positiontype', {
@@ -5110,8 +6383,6 @@ let AdminpanelComponent = class AdminpanelComponent extends __WEBPACK_IMPORTED_M
         this.headingStructureTree = null;
         if (this.newUser != null) {
             this.newUser.structure = 0;
-            //this.newUser.structure = ""; 
-            // this.headid.toString()
         }
     }
     prepareTrees() {
@@ -5471,7 +6742,7 @@ AdminpanelComponent = __decorate([
 
 
 /***/ }),
-/* 54 */
+/* 110 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -5505,16 +6776,61 @@ let AppComponent = class AppComponent extends __WEBPACK_IMPORTED_MODULE_0_vue__[
         this.updateAltrankconditions();
         this.updateStructureregions();
         this.updateStructuretypes();
+        this.updateRelativetypes();
+        this.updateAttestationtypes();
+        this.updateVacationmilitaries();
+        this.updateVacationtypes();
+        this.updateLanguagetypes();
+        this.updateLanguageskills();
+        this.updateJobtypes();
+        this.updateServicetypes();
+        this.updateServicefeatures();
+        this.updateServicecoefs();
+        this.updatePenalties();
+        this.updatePenaltytypes();
         this.updateCountries();
+        this.updateIllregimes();
+        this.updateIllcodes();
+        this.updateRewardtypes();
+        this.updateRewards();
+        this.updateEducationlevels();
+        this.updateEducationtypes();
+        this.updateEducationdocuments();
+        this.updateNormativs();
+        this.updateDrivertypes();
+        this.updateDrivercategories();
+        this.updatePermissiontypes();
+        this.updateProoftypes();
+        this.updateHolidays();
+        this.updatePersondecreeblocktypes();
+        this.updatePersondecreeblocksubtypes();
         this.updateStructureresAll();
         this.updateRegions();
         this.updateAreas();
+        this.updateFires();
+        this.updateAppointtypes();
+        this.updateTransfertypes();
         this.updateSubjects();
         this.updateSubjectgenders();
         this.updateSubjectcategories();
+        this.updateLocationtypes();
+        this.updateInterrupttypes();
+        this.updateChangedocumentstypes();
+        this.updateSetpersondatatypes();
+        this.updateRewardmoneys();
+        this.updateOrdernumbertypes();
+        this.updateStructuresalldocument();
         this.updateCitytypes();
         this.updateStreettypes();
         this.updateAreaothers();
+        this.updateExternalorderwhotypes();
+        this.updatePersondecreetypes();
+        this.updateEducationadditionaltypes();
+        this.updateCitysubstates();
+        this.updateEducationstages();
+        this.updateEducationpositiontypes();
+        this.updateRoles();
+        this.updateDismissalclauses();
         setInterval(this.checkSidebar, 400);
         setInterval(this.updateUserRights, 1500);
         //setInterval(this.updateRanksGlobal, 30000); 
@@ -5555,6 +6871,18 @@ let AppComponent = class AppComponent extends __WEBPACK_IMPORTED_MODULE_0_vue__[
                 if (this.$store.state.fullmode == "1") {
                     this.org();
                 }
+                else if (this.$store.state.fullmode == "2") {
+                    this.eld();
+                }
+                else if (this.$store.state.fullmode == "3") {
+                    this.candidates();
+                }
+                else if (this.$store.state.fullmode == "4") {
+                    this.people();
+                }
+                else if (this.$store.state.fullmode == "5") {
+                    this.decree();
+                }
             }
             if (this.$store.state.fullmode != "1") {
                 this.$store.commit("setSidebarDisplay", s[__WEBPACK_IMPORTED_MODULE_0_vue__["default"].keys["IDENTITY_SIDEBAR_DISPLAY_KEY"]]);
@@ -5578,6 +6906,45 @@ let AppComponent = class AppComponent extends __WEBPACK_IMPORTED_MODULE_0_vue__[
         this.$store.commit("updateUserAppearance", appearance);
         this.$store.commit("setModepanelVisible", 0);
         this.orgMode();
+    }
+    eld() {
+        let appearance = {
+            positioncompact: this.$store.state.positioncompact,
+            sidebardisplay: 0,
+        };
+        this.$store.commit("updateUserAppearance", appearance);
+        this.$store.commit("setModepanelVisible", 0);
+        this.peopleMode();
+        this.toggleEld();
+    }
+    candidates() {
+        let appearance = {
+            positioncompact: this.$store.state.positioncompact,
+            sidebardisplay: 0,
+        };
+        this.$store.commit("updateUserAppearance", appearance);
+        this.$store.commit("setModepanelVisible", 0);
+        this.peopleMode();
+        this.toggleCandidates();
+    }
+    people() {
+        let appearance = {
+            positioncompact: this.$store.state.positioncompact,
+            sidebardisplay: 1,
+        };
+        this.$store.commit("updateUserAppearance", appearance);
+        this.$store.commit("setModepanelVisible", 0);
+        this.peopleMode();
+    }
+    decree() {
+        let appearance = {
+            positioncompact: this.$store.state.positioncompact,
+            sidebardisplay: 0,
+        };
+        this.$store.commit("updateUserAppearance", appearance);
+        this.$store.commit("setModepanelVisible", 0);
+        this.decreeMode();
+        this.toggleDecreeOperationElement();
     }
     isAdmin() {
         if (this.$store.state.admin == "1") {
@@ -5606,6 +6973,25 @@ let AppComponent = class AppComponent extends __WEBPACK_IMPORTED_MODULE_0_vue__[
         }
         //if (this.$store.state.)
     }
+    personnelRead() {
+        //alert(this.$store.state.structureeditor);
+        if (this.$store.state.admin == "1" || this.$store.state.personneleditorAccess == "1" || this.$store.state.personnelreadAccess == "1") {
+            return true;
+        }
+        else {
+            return false;
+        }
+        //if (this.$store.state.)
+    }
+    personnelEdit() {
+        if (this.$store.state.admin == "1" || this.$store.state.personneleditorAccess == "1") {
+            return true;
+        }
+        else {
+            return false;
+        }
+        //if (this.$store.state.)
+    }
     changeMode() {
         fetch('api/Identity/Switch', { credentials: 'include' });
         //.then(response => {
@@ -5627,6 +7013,39 @@ let AppComponent = class AppComponent extends __WEBPACK_IMPORTED_MODULE_0_vue__[
     decreeMode() {
         fetch('api/Identity/Decree', { credentials: 'include' });
     }
+    peopleMode() {
+        //fetch('api/Identity/People', { credentials: 'include' })
+        //    .then(response => {
+        //        return response.json() as Promise<string>;
+        //    })
+        //    .then(result => {
+        //        //alert(JSON.stringify(result));
+        //    })
+        fetch('api/Identity/People', { credentials: 'include' });
+    }
+    toggleEld() {
+        let toggle = this.$store.state.eldVisible;
+        if (toggle == 0) {
+            toggle = 1;
+        }
+        else {
+            toggle = 0;
+        }
+        let toggleReverse = 0;
+        if (toggle == 0) {
+            toggleReverse = 1;
+        }
+        else {
+            toggleReverse = 0;
+        }
+        this.$store.commit("setEldVisible", toggle);
+        let appearance = {
+            positioncompact: 0,
+            sidebardisplay: toggleReverse,
+        };
+        this.$store.commit("setPositionsListId", 0);
+        this.$store.commit("updateUserAppearance", appearance);
+    }
     toggleDecreeOperationElement() {
         let toggle = this.$store.state.decreeoperationelementVisible;
         if (toggle == 0) {
@@ -5643,6 +7062,29 @@ let AppComponent = class AppComponent extends __WEBPACK_IMPORTED_MODULE_0_vue__[
             toggleReverse = 0;
         }
         this.$store.commit("setdecreeoperationelementVisible", toggle);
+        let appearance = {
+            positioncompact: 0,
+            sidebardisplay: toggleReverse,
+        };
+        this.$store.commit("setPositionsListId", 0);
+        this.$store.commit("updateUserAppearance", appearance);
+    }
+    toggleCandidates() {
+        let toggle = this.$store.state.candidatesVisible;
+        if (toggle == 0) {
+            toggle = 1;
+        }
+        else {
+            toggle = 0;
+        }
+        let toggleReverse = 0;
+        if (toggle == 0) {
+            toggleReverse = 1;
+        }
+        else {
+            toggleReverse = 0;
+        }
+        this.$store.commit("setCandidatesVisible", toggle);
         let appearance = {
             positioncompact: 0,
             sidebardisplay: toggleReverse,
@@ -5677,8 +7119,89 @@ let AppComponent = class AppComponent extends __WEBPACK_IMPORTED_MODULE_0_vue__[
     updateStructuretypes() {
         this.$store.commit("updateStructuretypes");
     }
+    updateRelativetypes() {
+        // this.$store.commit("updateRelativetypes");
+    }
+    updateAttestationtypes() {
+        // this.$store.commit("updateAttestationtypes");
+    }
+    updateVacationmilitaries() {
+        // this.$store.commit("updateVacationmilitaries");
+    }
+    updateVacationtypes() {
+        // this.$store.commit("updateVacationtypes");
+    }
+    updateLanguagetypes() {
+        // this.$store.commit("updateLanguagetypes");
+    }
+    updateLanguageskills() {
+        // this.$store.commit("updateLanguageskills");
+    }
+    updateJobtypes() {
+        // this.$store.commit("updateJobtypes");
+    }
+    updateServicetypes() {
+        // this.$store.commit("updateServicetypes");
+    }
+    updateServicefeatures() {
+        // this.$store.commit("updateServicefeatures");
+    }
+    updateServicecoefs() {
+        // this.$store.commit("updateServicecoefs");
+    }
+    updatePenalties() {
+        // this.$store.commit("updatePenalties");
+    }
+    updatePenaltytypes() {
+        // this.$store.commit("updatePenaltytypes");
+    }
     updateCountries() {
         this.$store.commit("updateCountries");
+    }
+    updateIllregimes() {
+        // this.$store.commit("updateIllregimes");
+    }
+    updateIllcodes() {
+        // this.$store.commit("updateIllcodes");
+    }
+    updateRewardtypes() {
+        // this.$store.commit("updateRewardtypes");
+    }
+    updateRewards() {
+        // this.$store.commit("updateRewards");
+    }
+    updateEducationlevels() {
+        // this.$store.commit("updateEducationlevels");
+    }
+    updateEducationtypes() {
+        // this.$store.commit("updateEducationtypes");
+    }
+    updateEducationdocuments() {
+        // this.$store.commit("updateEducationdocuments");
+    }
+    updateNormativs() {
+        // this.$store.commit("updateNormativs");
+    }
+    updateDrivertypes() {
+        // this.$store.commit("updateDrivertypes");
+    }
+    updateDrivercategories() {
+        // this.$store.commit("updateDrivercategories");
+    }
+    updatePermissiontypes() {
+        // this.$store.commit("updatePermissiontypes");
+    }
+    updateProoftypes() {
+        this.$store.commit("updateProoftypes");
+    }
+    updateHolidays() {
+        // this.$store.commit("updateHolidays");
+    }
+    updatePersondecreeblocktypes() {
+        // this.$store.commit("updatePersondecreeblocktypes");
+    }
+    updatePersondecreeblocksubtypes() {
+        // this.$store.commit("updatePersondecreeblocksubtypes");
     }
     updateStructureresAll() {
         this.$store.commit("updateStructureresAll");
@@ -5689,6 +7212,18 @@ let AppComponent = class AppComponent extends __WEBPACK_IMPORTED_MODULE_0_vue__[
     updateAreas() {
         this.$store.commit("updateAreas");
     }
+    updateFires() {
+        // this.$store.commit("updateFires");
+    }
+    updateDismissalclauses() {
+        this.$store.commit("updateDismissalclauses");
+    }
+    updateAppointtypes() {
+        // this.$store.commit("updateAppointtypes");
+    }
+    updateTransfertypes() {
+        this.$store.commit("updateTransfertypes");
+    }
     updateSubjects() {
         this.$store.commit("updateSubjects");
     }
@@ -5697,6 +7232,30 @@ let AppComponent = class AppComponent extends __WEBPACK_IMPORTED_MODULE_0_vue__[
     }
     updateSubjectcategories() {
         this.$store.commit("updateSubjectcategories");
+    }
+    updateLocationtypes() {
+        // this.$store.commit("updateLocationtypes");
+    }
+    updateInterrupttypes() {
+        // this.$store.commit("updateInterrupttypes");
+    }
+    updateChangedocumentstypes() {
+        // this.$store.commit("updateChangedocumentstypes");
+    }
+    updateSetpersondatatypes() {
+        this.$store.commit("updateSetpersondatatypes");
+    }
+    updateRewardmoneys() {
+        // this.$store.commit("updateRewardmoneys");
+    }
+    updatePersondecreelevels() {
+        this.$store.commit("updatePersondecreelevels");
+    }
+    updateOrdernumbertypes() {
+        this.$store.commit("updateOrdernumbertypes");
+    }
+    updateStructuresalldocument() {
+        this.$store.commit("updateStructuresalldocument");
     }
     updateCitytypes() {
         this.$store.commit("updateCitytypes");
@@ -5707,6 +7266,27 @@ let AppComponent = class AppComponent extends __WEBPACK_IMPORTED_MODULE_0_vue__[
     updateAreaothers() {
         this.$store.commit("updateAreaothers");
     }
+    updateExternalorderwhotypes() {
+        // this.$store.commit("updateExternalorderwhotypes");
+    }
+    updatePersondecreetypes() {
+        // this.$store.commit("updatePersondecreetypes");
+    }
+    updateEducationadditionaltypes() {
+        // this.$store.commit("updateEducationadditionaltypes");
+    }
+    updateCitysubstates() {
+        this.$store.commit("updateCitysubstates");
+    }
+    updateEducationstages() {
+        // this.$store.commit("updateEducationstages");
+    }
+    updateEducationpositiontypes() {
+        // this.$store.commit("updateEducationpositiontypes");
+    }
+    updateRoles() {
+        this.$store.commit("updateRoles");
+    }
     get sidebar() {
         return this.sidebarDisplay;
         //return (<any>Vue).sidebar;
@@ -5715,8 +7295,8 @@ let AppComponent = class AppComponent extends __WEBPACK_IMPORTED_MODULE_0_vue__[
 AppComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_vue_property_decorator__["Component"])({
         components: {
-            SideBar: __webpack_require__(100),
-            TopMenu: __webpack_require__(101),
+            SideBar: __webpack_require__(156),
+            TopMenu: __webpack_require__(157),
         }
     })
 ], AppComponent);
@@ -5724,7 +7304,7 @@ AppComponent = __decorate([
 
 
 /***/ }),
-/* 55 */
+/* 111 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -5856,7 +7436,7 @@ DepartmentmanagingpanelComponent = __decorate([
 
 
 /***/ }),
-/* 56 */
+/* 112 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -5866,7 +7446,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_property_decorator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_vue_property_decorator__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_element_ui__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_element_ui___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_element_ui__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__classes_decreeoperationsrequest__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__classes_decreeoperationsrequest__ = __webpack_require__(7);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -5897,7 +7477,7 @@ class Department {
 const subordinateStr = "subordinate";
 const fetchDepartmentDelay = 6000;
 const fetchDepartmentForceDelay = 250;
-__WEBPACK_IMPORTED_MODULE_0_vue__["default"].component('Departmentmanagingpanel', __webpack_require__(90));
+__WEBPACK_IMPORTED_MODULE_0_vue__["default"].component('Departmentmanagingpanel', __webpack_require__(146));
 let DepartmentslistComponent = class DepartmentslistComponent extends __WEBPACK_IMPORTED_MODULE_0_vue__["default"] {
     data() {
         return {
@@ -6161,6 +7741,9 @@ let DepartmentslistComponent = class DepartmentslistComponent extends __WEBPACK_
         this.$store.commit("setForcePositionUpdate", true);
         //alert('Послушай, скажи мне друг. Ты всюду был, ты знаешь всё на свете. Не то что я, гуляка человек.' );
     }
+    checkerbyeditormode() {
+        return this.$store.state.user.onlyreadflagtoeditor == 1 ? true : false;
+    }
 };
 __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_vue_property_decorator__["Prop"])({ default: 0 })
@@ -6174,7 +7757,7 @@ DepartmentslistComponent = __decorate([
 
 
 /***/ }),
-/* 57 */
+/* 113 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -6182,9 +7765,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_property_decorator__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_property_decorator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_vue_property_decorator__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_awesome_mask__ = __webpack_require__(51);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_awesome_mask__ = __webpack_require__(107);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_awesome_mask___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_awesome_mask__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_vue_text_mask__ = __webpack_require__(117);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_vue_text_mask__ = __webpack_require__(173);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_vue_text_mask___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_vue_text_mask__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_element_ui__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_element_ui___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_element_ui__);
@@ -6251,11 +7834,23 @@ let HomeComponent = class HomeComponent extends __WEBPACK_IMPORTED_MODULE_0_vue_
     get positionsListVisible() {
         return this.$store.state.positionsListId != null && !isNaN(this.$store.state.positionsListId) && this.$store.state.positionsListId != 0;
     }
+    get eldVisible() {
+        return this.$store.state.eldVisible;
+    }
+    get candidatesVisible() {
+        return this.$store.state.candidatesVisible;
+    }
     get modepanelVisible() {
         return this.$store.state.modepanelVisible;
     }
-    get currentStructure() {
-        return this.$store.state.currentStructure;
+    get decreeoperationelementVisible() {
+        return this.$store.state.decreeoperationelementVisible;
+    }
+    get decreecreatorfunction() {
+        return this.$store.state.decreeoperationtemplatecreatorVisible;
+    }
+    get persondecree() {
+        return this.$store.state.persondecree;
     }
     close() {
         this.$store.commit("setdecreeoperationtemplatecreatorVisible", false);
@@ -6265,9 +7860,11 @@ let HomeComponent = class HomeComponent extends __WEBPACK_IMPORTED_MODULE_0_vue_
 HomeComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_vue_property_decorator__["Component"])({
         components: {
-            Departmentslist: __webpack_require__(91),
-            Positionslist: __webpack_require__(98),
-            Modepanel: __webpack_require__(94),
+            Departmentslist: __webpack_require__(147),
+            Positionslist: __webpack_require__(154),
+            // Eld: require('../eld/eld.vue.html'),
+            // Candidates: require('../candidates/candidates.vue.html'),
+            Modepanel: __webpack_require__(150),
         }
     })
 ], HomeComponent);
@@ -6275,7 +7872,7 @@ HomeComponent = __decorate([
 
 
 /***/ }),
-/* 58 */
+/* 114 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -6348,7 +7945,7 @@ LoginComponent = __decorate([
 
 
 /***/ }),
-/* 59 */
+/* 115 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -6394,6 +7991,7 @@ let CandidatesComponent = class CandidatesComponent extends __WEBPACK_IMPORTED_M
         this.$store.commit("updateUserAppearance", appearance);
         this.$store.commit("setModepanelVisible", 0);
         this.$store.commit("setpersondecree", null);
+        this.$store.commit("setmailmodeprevios", false);
         this.orgMode();
         fetch('api/Identity/Fullmode1', { credentials: 'include' });
         //.then(response => {
@@ -6495,7 +8093,7 @@ CandidatesComponent = __decorate([
 
 
 /***/ }),
-/* 60 */
+/* 116 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -6507,13 +8105,55 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_element_ui___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_element_ui__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_downloadjs__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_downloadjs___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_downloadjs__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__classes_formating_functions_el_table_formatter__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__classes_Requests_classes_educations_parameters__ = __webpack_require__(24);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__classes_formating_functions_el_table_formatter__ = __webpack_require__(58);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__classes_Requests_classes_education_request__ = __webpack_require__(23);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__classes_Requests_classes_rank_request__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__classes_Requests_classes_contract_request__ = __webpack_require__(22);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__classes_Requests_classes_vacation_request__ = __webpack_require__(33);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__classes_Requests_classes_award_parameters__ = __webpack_require__(19);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__classes_Requests_classes_award_request__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__classes_Requests_classes_certificate_request__ = __webpack_require__(21);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__classes_Requests_classes_attestation_request__ = __webpack_require__(18);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__classes_Requests_classes_language_parameters__ = __webpack_require__(26);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__classes_Requests_classes_language_request__ = __webpack_require__(27);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__classes_Requests_classes_Election_parameters__ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__classes_Requests_classes_election_request__ = __webpack_require__(25);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__classes_Requests_classes_trips_parameters__ = __webpack_require__(32);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__classes_Requests_classes_trip_request__ = __webpack_require__(31);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__classes_Requests_classes_punishment_parameters__ = __webpack_require__(28);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__classes_Requests_classes_punishment_request__ = __webpack_require__(29);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -6538,7 +8178,7 @@ class Civil {
 let PmrequestComponent = class PmrequestComponent extends __WEBPACK_IMPORTED_MODULE_0_vue__["default"] {
     constructor() {
         super(...arguments);
-        this.formatting = __WEBPACK_IMPORTED_MODULE_4__classes_formating_functions_el_table_formatter__["a" /* default */];
+        this.formatting = __WEBPACK_IMPORTED_MODULE_5__classes_formating_functions_el_table_formatter__["a" /* default */];
     }
     data() {
         return {
@@ -6549,6 +8189,14 @@ let PmrequestComponent = class PmrequestComponent extends __WEBPACK_IMPORTED_MOD
                 {
                     value: '2',
                     label: 'Запрос по подразделениям'
+                },
+                {
+                    value: '3',
+                    label: 'Запрос Таблицы',
+                },
+                {
+                    value: '4',
+                    label: 'Запрос ЭЛД',
                 }],
             type: null,
             rank: [],
@@ -6561,6 +8209,7 @@ let PmrequestComponent = class PmrequestComponent extends __WEBPACK_IMPORTED_MOD
             positioncategory: null,
             positioncategoryDisabled: false,
             positioncategoriesFiltred: [],
+            removed: false,
             positioncategoriesCivil: [],
             mrd: [],
             quantity: 1,
@@ -6605,6 +8254,34 @@ let PmrequestComponent = class PmrequestComponent extends __WEBPACK_IMPORTED_MOD
             structuresub: false,
             structuresublevel: 0,
             structureselfcount: false,
+            education_datas: new __WEBPACK_IMPORTED_MODULE_4__classes_Requests_classes_educations_parameters__["a" /* default */](),
+            education_request: new __WEBPACK_IMPORTED_MODULE_6__classes_Requests_classes_education_request__["a" /* default */](),
+            education_resualt: [],
+            rank_request: new __WEBPACK_IMPORTED_MODULE_7__classes_Requests_classes_rank_request__["a" /* default */](),
+            rank_resualt: [],
+            contract_request: new __WEBPACK_IMPORTED_MODULE_8__classes_Requests_classes_contract_request__["a" /* default */](),
+            contruct_resualt: [],
+            vacation_request: new __WEBPACK_IMPORTED_MODULE_9__classes_Requests_classes_vacation_request__["a" /* default */](),
+            vacation_resualt: [],
+            award_datas: new __WEBPACK_IMPORTED_MODULE_10__classes_Requests_classes_award_parameters__["a" /* default */](),
+            award_request: new __WEBPACK_IMPORTED_MODULE_11__classes_Requests_classes_award_request__["a" /* default */](),
+            award_response: [],
+            certificate_request: new __WEBPACK_IMPORTED_MODULE_12__classes_Requests_classes_certificate_request__["a" /* default */](),
+            certificate_response: [],
+            attestation_request: new __WEBPACK_IMPORTED_MODULE_13__classes_Requests_classes_attestation_request__["a" /* default */](),
+            attestation_response: [],
+            language_datas: new __WEBPACK_IMPORTED_MODULE_14__classes_Requests_classes_language_parameters__["a" /* default */](),
+            language_request: new __WEBPACK_IMPORTED_MODULE_15__classes_Requests_classes_language_request__["a" /* default */](),
+            language_response: [],
+            election_datas: new __WEBPACK_IMPORTED_MODULE_16__classes_Requests_classes_Election_parameters__["a" /* default */](),
+            election_request: new __WEBPACK_IMPORTED_MODULE_17__classes_Requests_classes_election_request__["a" /* default */](),
+            election_response: [],
+            trips_datas: new __WEBPACK_IMPORTED_MODULE_18__classes_Requests_classes_trips_parameters__["a" /* default */](),
+            trip_request: new __WEBPACK_IMPORTED_MODULE_19__classes_Requests_classes_trip_request__["a" /* default */](),
+            trip_response: [],
+            punishment_datas: new __WEBPACK_IMPORTED_MODULE_20__classes_Requests_classes_punishment_parameters__["a" /* default */](),
+            punishment_request: new __WEBPACK_IMPORTED_MODULE_21__classes_Requests_classes_punishment_request__["a" /* default */](),
+            punishment_response: [],
         };
     }
     mounted() {
@@ -6649,6 +8326,17 @@ let PmrequestComponent = class PmrequestComponent extends __WEBPACK_IMPORTED_MOD
     }
     tablerequest() {
         let p = 2;
+    }
+    stoped() {
+        this.loading = false;
+        fetch('/api/Pmrequest/Stoped', {
+            method: 'post',
+            credentials: 'include',
+            headers: new Headers({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            })
+        });
     }
     request() {
         /*this.exceldialogvisible = true;
@@ -6983,6 +8671,13 @@ let PmrequestComponent = class PmrequestComponent extends __WEBPACK_IMPORTED_MOD
             this.exceldialogvisible = false;
         });
     }
+    onTypeChange() {
+        this.structureTrees = [];
+        if (this.type == 4) {
+            console.log("chose variand ELD");
+            this.loder_old_eld_datas();
+        }
+    }
     arrayToString(array) {
         if (array == null || array.length == 0) {
             return "";
@@ -7044,6 +8739,449 @@ let PmrequestComponent = class PmrequestComponent extends __WEBPACK_IMPORTED_MOD
         else
             list = [];
     }
+    education_request_button() {
+        this.education_request.current_structure = this.structureTrees;
+        console.log("education request");
+        console.log(JSON.stringify((this.education_request)));
+        fetch('api/request/PersonEducationRequest', {
+            method: 'post',
+            body: JSON.stringify((this.education_request)),
+            credentials: 'include',
+            headers: new Headers({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            })
+        })
+            .then(response => response.json())
+            .then(data => {
+            this.education_resualt = data;
+        });
+    }
+    rank_request_button() {
+        this.rank_request.current_structure = this.structureTrees;
+        console.log("rank request");
+        fetch('api/request/PersonRankRequest', {
+            method: 'post',
+            body: JSON.stringify((this.rank_request)),
+            credentials: 'include',
+            headers: new Headers({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            })
+        })
+            .then(response => response.json())
+            .then(data => {
+            this.rank_resualt = data;
+        });
+    }
+    contract_request_button() {
+        this.contract_request.current_structure = this.structureTrees;
+        console.log("contract request");
+        fetch('api/request/PersonContructRequest', {
+            method: 'post',
+            body: JSON.stringify((this.contract_request)),
+            credentials: 'include',
+            headers: new Headers({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            })
+        })
+            .then(response => response.json())
+            .then(data => {
+            this.contruct_resualt = data;
+        });
+    }
+    vacation_request_button() {
+        this.vacation_request.current_structure = this.structureTrees;
+        console.log("vacation request");
+        fetch('api/request/PersonVacationRequest', {
+            method: 'post',
+            body: JSON.stringify((this.vacation_request)),
+            credentials: 'include',
+            headers: new Headers({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            })
+        })
+            .then(response => response.json())
+            .then(data => {
+            this.vacation_resualt = data;
+        });
+    }
+    award_request_button() {
+        this.award_request.current_structure = this.structureTrees;
+        console.log("awards request");
+        fetch('api/request/PersonAwardRequest', {
+            method: 'post',
+            body: JSON.stringify((this.award_request)),
+            credentials: 'include',
+            headers: new Headers({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            })
+        })
+            .then(response => response.json())
+            .then(data => {
+            this.award_response = data;
+        });
+    }
+    certificate_request_button() {
+        this.certificate_request.current_structure = this.structureTrees;
+        console.log("certificate request");
+        fetch('api/request/PersonCertificateRequest', {
+            method: 'post',
+            body: JSON.stringify((this.certificate_request)),
+            credentials: 'include',
+            headers: new Headers({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            })
+        })
+            .then(response => response.json())
+            .then(data => {
+            this.certificate_response = data;
+        });
+    }
+    attestation_request_button() {
+        this.attestation_request.current_structure = this.structureTrees;
+        console.log("attestation request");
+        fetch('api/request/PersonAttestationRequest', {
+            method: 'post',
+            body: JSON.stringify((this.attestation_request)),
+            credentials: 'include',
+            headers: new Headers({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            })
+        })
+            .then(response => response.json())
+            .then(data => {
+            this.attestation_response = data;
+        });
+    }
+    language_request_button() {
+        this.language_request.current_structure = this.structureTrees;
+        console.log("language request");
+        fetch('api/request/PersonLanguageRequest', {
+            method: 'post',
+            body: JSON.stringify((this.language_request)),
+            credentials: 'include',
+            headers: new Headers({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            })
+        })
+            .then(response => response.json())
+            .then(data => {
+            this.language_response = data;
+        });
+    }
+    election_request_button() {
+        this.election_request.current_structure = this.structureTrees;
+        console.log("election request");
+        fetch('api/request/PersonElectionRequest', {
+            method: 'post',
+            body: JSON.stringify((this.election_request)),
+            credentials: 'include',
+            headers: new Headers({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            })
+        })
+            .then(response => response.json())
+            .then(data => {
+            this.election_response = data;
+        });
+    }
+    trip_request_button() {
+        this.trip_request.current_structure = this.structureTrees;
+        console.log("election request");
+        fetch('api/request/PersonTripRequest', {
+            method: 'post',
+            body: JSON.stringify((this.trip_request)),
+            credentials: 'include',
+            headers: new Headers({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            })
+        })
+            .then(response => response.json())
+            .then(data => {
+            this.trip_response = data;
+        });
+    }
+    punishment_request_button() {
+        this.punishment_request.current_structure = this.structureTrees;
+        this.punishment_request.isremowed = this.removed;
+        console.log("election request");
+        fetch('api/request/PersonPunishmentRequest', {
+            method: 'post',
+            body: JSON.stringify((this.punishment_request)),
+            credentials: 'include',
+            headers: new Headers({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            })
+        })
+            .then(response => response.json())
+            .then(data => {
+            this.punishment_response = data;
+        });
+    }
+    loder_old_eld_datas() {
+        this.load_user_structure();
+        this.load_award_datas();
+        this.load_Language_datas();
+        this.load_Election_datas();
+        this.load_Trips_datas();
+        this.load_Punishment_datas();
+    }
+    load_user_structure() {
+        fetch('api/request/structureTree', { credentials: 'include' })
+            .then(response => response.json())
+            .then(data => {
+            if (data.id == null)
+                return;
+            this.structureTrees.push(data);
+            this.load_educations_parameters(this.structureTrees);
+        });
+    }
+    load_educations_parameters(structuretree) {
+        fetch('api/request/educationdata', {
+            method: 'post',
+            body: JSON.stringify((structuretree)),
+            credentials: 'include',
+            headers: new Headers({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            })
+        })
+            .then(response => response.json())
+            .then(data => {
+            this.education_datas = data;
+        });
+    }
+    load_award_datas() {
+        return __awaiter(this, void 0, void 0, function* () {
+            fetch('api/request/awarddata', { credentials: 'include' })
+                .then(response => response.json())
+                .then(data => {
+                this.award_datas = data;
+            });
+        });
+    }
+    load_Language_datas() {
+        return __awaiter(this, void 0, void 0, function* () {
+            fetch('api/request/languagedata', { credentials: 'include' })
+                .then(response => response.json())
+                .then(data => {
+                this.language_datas = data;
+            });
+        });
+    }
+    load_Election_datas() {
+        return __awaiter(this, void 0, void 0, function* () {
+            fetch('api/request/electiondata', { credentials: 'include' })
+                .then(response => response.json())
+                .then(data => {
+                this.election_datas = data;
+            });
+        });
+    }
+    load_Trips_datas() {
+        return __awaiter(this, void 0, void 0, function* () {
+            fetch('api/request/tripdata', { credentials: 'include' })
+                .then(response => response.json())
+                .then(data => {
+                this.trips_datas = data;
+            });
+        });
+    }
+    load_Punishment_datas() {
+        return __awaiter(this, void 0, void 0, function* () {
+            fetch('api/request/punishmentdata', { credentials: 'include' })
+                .then(response => response.json())
+                .then(data => {
+                this.punishment_datas = data;
+            });
+        });
+    }
+    educationDownload() {
+        this.education_resualt.length;
+        fetch('/api/Pmrequest/educationDoc', {
+            method: 'post',
+            body: JSON.stringify((this.education_resualt)),
+            credentials: 'include',
+            headers: new Headers({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            })
+        })
+            .then(x => x.blob())
+            .then(x => {
+            __WEBPACK_IMPORTED_MODULE_3_downloadjs___default()(x, "Запрос_Образование_ЭЛД");
+        });
+    }
+    rankDownload() {
+        this.education_resualt.length;
+        fetch('/api/Pmrequest/rankDoc', {
+            method: 'post',
+            body: JSON.stringify((this.rank_resualt)),
+            credentials: 'include',
+            headers: new Headers({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            })
+        })
+            .then(x => x.blob())
+            .then(x => {
+            __WEBPACK_IMPORTED_MODULE_3_downloadjs___default()(x, "Запрос_Звание_ЭЛД");
+        });
+    }
+    contructDownload() {
+        this.education_resualt.length;
+        fetch('/api/Pmrequest', {
+            method: 'post',
+            body: JSON.stringify((this.contruct_resualt)),
+            credentials: 'include',
+            headers: new Headers({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            })
+        })
+            .then(x => x.blob())
+            .then(x => {
+            __WEBPACK_IMPORTED_MODULE_3_downloadjs___default()(x, "Запрос_Контракт_ЭЛД");
+        });
+    }
+    vacationDownload() {
+        this.vacation_resualt.length;
+        fetch('/api/Pmrequest', {
+            method: 'post',
+            body: JSON.stringify((this.vacation_resualt)),
+            credentials: 'include',
+            headers: new Headers({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            })
+        })
+            .then(x => x.blob())
+            .then(x => {
+            __WEBPACK_IMPORTED_MODULE_3_downloadjs___default()(x, "Запрос_Отпуск_ЭЛД");
+        });
+    }
+    awardDownload() {
+        this.award_response.length;
+        fetch('/api/Pmrequest', {
+            method: 'post',
+            body: JSON.stringify((this.award_response)),
+            credentials: 'include',
+            headers: new Headers({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            })
+        })
+            .then(x => x.blob())
+            .then(x => {
+            __WEBPACK_IMPORTED_MODULE_3_downloadjs___default()(x, "Запрос_Награды_ЭЛД");
+        });
+    }
+    certificateDownload() {
+        this.certificate_response.length;
+        fetch('/api/Pmrequest', {
+            method: 'post',
+            body: JSON.stringify((this.certificate_response)),
+            credentials: 'include',
+            headers: new Headers({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            })
+        })
+            .then(x => x.blob())
+            .then(x => {
+            __WEBPACK_IMPORTED_MODULE_3_downloadjs___default()(x, "Запрос_Удостоверения_ЭЛД");
+        });
+    }
+    attestationDownload() {
+        this.certificate_response.length;
+        fetch('/api/Pmrequest', {
+            method: 'post',
+            body: JSON.stringify((this.attestation_response)),
+            credentials: 'include',
+            headers: new Headers({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            })
+        })
+            .then(x => x.blob())
+            .then(x => {
+            __WEBPACK_IMPORTED_MODULE_3_downloadjs___default()(x, "Запрос_Аттестации_ЭЛД");
+        });
+    }
+    languageDownload() {
+        this.certificate_response.length;
+        fetch('/api/Pmrequest', {
+            method: 'post',
+            body: JSON.stringify((this.language_response)),
+            credentials: 'include',
+            headers: new Headers({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            })
+        })
+            .then(x => x.blob())
+            .then(x => {
+            __WEBPACK_IMPORTED_MODULE_3_downloadjs___default()(x, "Запрос_Языки_ЭЛД");
+        });
+    }
+    electionDownload() {
+        this.election_response.length;
+        fetch('/api/Pmrequest', {
+            method: 'post',
+            body: JSON.stringify((this.election_response)),
+            credentials: 'include',
+            headers: new Headers({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            })
+        })
+            .then(x => x.blob())
+            .then(x => {
+            __WEBPACK_IMPORTED_MODULE_3_downloadjs___default()(x, "Запрос_участия_в_выборных_органах_ЭЛД");
+        });
+    }
+    tripDownload() {
+        this.election_response.length;
+        fetch('/api/Pmrequest', {
+            method: 'post',
+            body: JSON.stringify((this.trip_response)),
+            credentials: 'include',
+            headers: new Headers({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            })
+        })
+            .then(x => x.blob())
+            .then(x => {
+            __WEBPACK_IMPORTED_MODULE_3_downloadjs___default()(x, "Запрос_служебные_командировки_ЭЛД");
+        });
+    }
+    punishmentDownload() {
+        this.election_response.length;
+        fetch('/api/Pmrequest/punishmentDoc', {
+            method: 'post',
+            body: JSON.stringify((this.punishment_response)),
+            credentials: 'include',
+            headers: new Headers({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            })
+        })
+            .then(x => x.blob())
+            .then(x => {
+            __WEBPACK_IMPORTED_MODULE_3_downloadjs___default()(x, "Запрос_взыскания_ЭЛД");
+        });
+    }
 };
 __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_vue_property_decorator__["Prop"])({ default: false })
@@ -7061,7 +9199,7 @@ PmrequestComponent = __decorate([
 
 
 /***/ }),
-/* 61 */
+/* 117 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -7071,7 +9209,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_property_decorator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_vue_property_decorator__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_element_ui__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_element_ui___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_element_ui__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__classes_altrank__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__classes_altrank__ = __webpack_require__(36);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8492,6 +10630,9 @@ let PositionmanagingpanelComponent = class PositionmanagingpanelComponent extend
         }
         this.filteredSubjects = [...new Set(this.filteredSubjects)];
     }
+    checkerbyeditormode() {
+        return this.$store.state.user.onlyreadflagtoeditor == 1 ? true : false;
+    }
 };
 __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_vue_property_decorator__["Prop"])({ default: 'Dr' })
@@ -8518,7 +10659,7 @@ PositionmanagingpanelComponent = __decorate([
 
 
 /***/ }),
-/* 62 */
+/* 118 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -8528,13 +10669,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_property_decorator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_vue_property_decorator__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_element_ui__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_element_ui___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_element_ui__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_lodash__ = __webpack_require__(123);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_lodash__ = __webpack_require__(179);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_lodash__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__classes_decreeoperationsrequest__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__classes_decreeoperationsrequest__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_downloadjs__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_downloadjs___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_downloadjs__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__classes_formating_functions_el_table_formatter__ = __webpack_require__(9);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__classes_NewStructure_structureTree__ = __webpack_require__(7);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8554,8 +10693,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 
 
 // import rand from 'random-seed';
-
-
 
 
 
@@ -8580,12 +10717,8 @@ class PosDep {
 }
 const fetchPositionDelay = 4000;
 const fetchPositionForceDelay = 250;
-__WEBPACK_IMPORTED_MODULE_0_vue__["default"].component('Positionmanagingpanel', __webpack_require__(97));
+__WEBPACK_IMPORTED_MODULE_0_vue__["default"].component('Positionmanagingpanel', __webpack_require__(153));
 let PositionslistComponent = class PositionslistComponent extends __WEBPACK_IMPORTED_MODULE_0_vue__["default"] {
-    constructor() {
-        super(...arguments);
-        this.formating = __WEBPACK_IMPORTED_MODULE_6__classes_formating_functions_el_table_formatter__["a" /* default */];
-    }
     data() {
         return {
             structureinfo: null,
@@ -8605,7 +10738,6 @@ let PositionslistComponent = class PositionslistComponent extends __WEBPACK_IMPO
             posdepsAfter: [],
             posdepsDecrees: [],
             posdepsPadding: [],
-            softs: new Map(),
             mrdsReady: new Map(),
             altranksReady: new Map(),
             altranksGroupsReady: new Map(),
@@ -8655,12 +10787,16 @@ let PositionslistComponent = class PositionslistComponent extends __WEBPACK_IMPO
             decertificateBool: false,
             decertificateDate: "",
             structureInfos: [],
+            /**
+             * Прохождение службы
+             */
+            persons: [],
+            photosPreview: [],
         };
     }
     mounted() {
         setInterval(this.forceFetch, fetchPositionForceDelay);
         setInterval(this.fetchPositionsRegular, fetchPositionDelay);
-        setInterval(this.getsofs, fetchPositionDelay);
         this.posdepgroups = new Array();
         this.posdeps = new Array();
         this.posdepsBeforeNew = new Array();
@@ -9115,7 +11251,7 @@ let PositionslistComponent = class PositionslistComponent extends __WEBPACK_IMPO
                 return;
             }
             if (this.isDeletedUnsigned(posdep)) {
-                let p = positionsCompactUnsigned.find(p => p.positiontype.id == posdep.positiontype.id && p.positioncategory == posdep.positioncategory);
+                let p = positionsCompactUnsigned.find(p => p.positiontype.id == posdep.positiontype.id && p.positioncategory.id == posdep.positioncategory.id);
                 if (p == null) {
                     let clone = __WEBPACK_IMPORTED_MODULE_3_lodash___default.a.cloneDeep(posdep);
                     this.clearifyClone(clone);
@@ -9123,11 +11259,13 @@ let PositionslistComponent = class PositionslistComponent extends __WEBPACK_IMPO
                     posdep.cloned = true;
                 }
                 else {
+                    //this.putToSofmap(p.sofmap, posdep, padding);
                     this.putToDateinactiveMap(p.dateinactivemap, posdep);
+                    p.quantity += posdep.partval;
                 }
             }
             if (this.isWillBeDeletedSigned(posdep)) {
-                let p = positionsCompactSigned.find(p => p.positiontype.id == posdep.positiontype.id && p.positioncategory == posdep.positioncategory);
+                let p = positionsCompactSigned.find(p => p.positiontype.id == posdep.positiontype.id && p.positioncategory.id == posdep.positioncategory.id);
                 if (p == null) {
                     let clone = __WEBPACK_IMPORTED_MODULE_3_lodash___default.a.cloneDeep(posdep);
                     this.clearifyClone(clone);
@@ -9135,11 +11273,13 @@ let PositionslistComponent = class PositionslistComponent extends __WEBPACK_IMPO
                     posdep.cloned = true;
                 }
                 else {
+                    //this.putToSofmap(p.sofmap, posdep, padding);
                     this.putToDateinactiveMap(p.dateinactivemap, posdep);
+                    p.quantity += posdep.partval;
                 }
             }
             if (this.isWillBeDeletedUnsigned(posdep)) {
-                let p = positionsCompactUnsigned.find(p => p.positiontype.id == posdep.positiontype.id && p.positioncategory == posdep.positioncategory);
+                let p = positionsCompactUnsigned.find(p => p.positiontype.id == posdep.positiontype.id && p.positioncategory.id == posdep.positioncategory.id);
                 if (p == null) {
                     let clone = __WEBPACK_IMPORTED_MODULE_3_lodash___default.a.cloneDeep(posdep);
                     this.clearifyClone(clone);
@@ -9147,7 +11287,9 @@ let PositionslistComponent = class PositionslistComponent extends __WEBPACK_IMPO
                     posdep.cloned = true;
                 }
                 else {
+                    //this.putToSofmap(p.sofmap, posdep, padding);
                     this.putToDateinactiveMap(p.dateinactivemap, posdep);
+                    p.quantity += posdep.partval;
                 }
             }
             /**
@@ -9219,7 +11361,7 @@ let PositionslistComponent = class PositionslistComponent extends __WEBPACK_IMPO
      * @param posdep
      */
     clearifyClone(posdep) {
-        posdep.quantity = 0;
+        //posdep.quantity = 0;
         posdep.replacedbycivilquantity = 0;
         posdep.sofmap = new Map();
         posdep.dateactivemap = new Map();
@@ -9320,8 +11462,7 @@ let PositionslistComponent = class PositionslistComponent extends __WEBPACK_IMPO
         }
     }
     close() {
-        this.visible = new __WEBPACK_IMPORTED_MODULE_7__classes_NewStructure_structureTree__["a" /* default */]();
-        this.$store.commit("setcurrentStructure", this.visible);
+        this.$store.commit("setPositionsListId", 0);
     }
     rankToString(rank) {
         if (rank == null) {
@@ -9643,7 +11784,8 @@ let PositionslistComponent = class PositionslistComponent extends __WEBPACK_IMPO
         return this.removePositiondecree + "_" + id;
     }
     decertificatePositionID(id) {
-        return this.decertificatePosition + "_" + id;
+        if (this.checkerbyeditormode())
+            return this.decertificatePosition + "_" + id;
     }
     addDepartmentID(id) {
         return this.addNewDepartment + "_" + id;
@@ -10224,6 +12366,12 @@ let PositionslistComponent = class PositionslistComponent extends __WEBPACK_IMPO
             return true;
         }
     }
+    getPerson(posdep) {
+        let person = this.persons.find(d => d.position == posdep.id);
+        return person;
+        // if
+        //return null;
+    }
     appoint(position) {
         let toggle = 1;
         let toggleReverse = 0;
@@ -10239,12 +12387,39 @@ let PositionslistComponent = class PositionslistComponent extends __WEBPACK_IMPO
     }
     takeoff(person) {
         let id = person.id.toString();
-        fetch('api/Person/Takeoff' + id, { credentials: 'include' })
+        /*fetch('api/Person/Takeoff' + id, { credentials: 'include' })
             .then(response => {
-            return response.json();
-        })
+                return response.json() as Promise<number>;
+            })
             .then(response => {
-        });
+            })*/
+    }
+    hasPhotopreview(personid) {
+        if (this.photosPreview == null || this.photosPreview.length == 0) {
+            return false;
+        }
+        if (this.photosPreview.find(p => p.person == personid)) {
+            return true;
+        }
+        return false;
+    }
+    getPhotopreview(personid) {
+        return this.photosPreview.find(p => p.person == personid);
+    }
+    /**
+     * После загрузки с базы данных нам нужно Даты превратить в string эквивалент
+     */
+    prepareToImport(person) {
+        //person.birthdateString = this.toDateInputValue(new Date());
+        person.birthdateString = this.toDateInputValue(person.birthdate);
+        person.passportdatestartString = this.toDateInputValue(person.passportdatestart);
+        person.passportdateendString = this.toDateInputValue(person.passportdateend);
+        person.age = this.getAge(person.birthdateString).toString();
+    }
+    prepareToExport(person) {
+        person.birthdate = new Date(person.birthdateString);
+        person.passportdatestart = new Date(person.passportdatestartString);
+        person.passportdateend = new Date(person.passportdateendString);
     }
     getAge(dateString) {
         var today = new Date();
@@ -10307,6 +12482,46 @@ let PositionslistComponent = class PositionslistComponent extends __WEBPACK_IMPO
             __WEBPACK_IMPORTED_MODULE_5_downloadjs___default()(x, "Запрос_" + ddString + mmString + yyyy);
         });
     }
+    selectPosdep(position) {
+        // Если назначаем на должность через ЭЛД
+        if (this.$store.state.modeappointperson) {
+            this.$store.commit("setModeappointedperson", position.id);
+            this.$store.commit("setModeappointperson", false);
+            let appearance = {
+                positioncompact: this.$store.state.positioncompact,
+                sidebardisplay: 0,
+            };
+            this.$store.commit("setEldVisible", 1);
+            this.$store.commit("setPositionsListId", position.id);
+            this.$store.commit("updateUserAppearance", appearance);
+        }
+        else 
+        // Если назначаем на должность через проекты приказов ЭЛД
+        if (this.$store.state.modeappointpersondecree) {
+            if (this.$store.state.mailmodeprevios) {
+                this.$store.commit("setdecreeoperationtemplatecreatorVisible", this.$store.state.persondecree != null ? true : false);
+                this.$store.commit("setdecreeoperationelementVisible", true);
+                this.$store.commit("setmailmodeprevios", false);
+                this.$store.commit("setchosenPosition", position);
+            }
+            else {
+                this.$store.commit("setModeappointedpersondecree", position.id);
+            }
+            this.$store.commit("setModeappointpersondecree", false);
+            let appearance = {
+                positioncompact: this.$store.state.positioncompact,
+                sidebardisplay: 0,
+            };
+            //this.$store.commit("setModeappointpersondecreeenablepersondecree", true); // При помощи этого посылаем информацию topmenu о том, что необходимо вернуть отображение меню проекта приказов.
+            //this.$store.commit("setEldVisible", 1); - поменять на 
+            this.$store.commit("setPositionsListId", 0);
+            this.$store.commit("updateUserAppearance", appearance);
+        }
+        else if (this.getPerson(position) != null) {
+            //@click="openProfile(getPerson(posdep))"
+            this.openProfile(this.getPerson(position));
+        }
+    }
     appointPersonToStructure() {
         // Если назначаем на должность через проекты приказов ЭЛД
         if (this.$store.state.modeappointpersonstructuredecree) {
@@ -10322,21 +12537,12 @@ let PositionslistComponent = class PositionslistComponent extends __WEBPACK_IMPO
             this.$store.commit("updateUserAppearance", appearance);
         }
     }
-    getsofs() {
-        var sofs = this.$store.state.sofs;
-        var output = new Map();
-        sofs.forEach(r => {
-            var time = r.name.split(' ');
-            time = [time[0][0].toUpperCase(), time[1][0].toUpperCase()];
-            output.set(r.id, time.join(''));
-        });
-        this.softs = output;
-        /*var t = new Date();
-        t.toDateString()*/
+    checkerbyeditormode() {
+        return this.$store.state.user.onlyreadflagtoeditor == 1 ? true : false;
     }
 };
 __decorate([
-    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_vue_property_decorator__["Prop"])({ default: new __WEBPACK_IMPORTED_MODULE_7__classes_NewStructure_structureTree__["a" /* default */]() })
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_vue_property_decorator__["Prop"])({ default: 0 })
 ], PositionslistComponent.prototype, "visible", void 0);
 PositionslistComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_vue_property_decorator__["Component"])({
@@ -10347,7 +12553,7 @@ PositionslistComponent = __decorate([
 
 
 /***/ }),
-/* 63 */
+/* 119 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -10435,7 +12641,7 @@ AdminpanelComponent = __decorate([
 
 
 /***/ }),
-/* 64 */
+/* 120 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -10445,10 +12651,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_property_decorator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_vue_property_decorator__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_element_ui__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_element_ui___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_element_ui__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__classes_decreeoperationsrequest__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__classes_decreeoperationsrequest__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_downloadjs__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_downloadjs___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_downloadjs__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__classes_NewStructure_structureTree__ = __webpack_require__(7);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -10463,7 +12668,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-
 
 
 
@@ -10486,11 +12690,6 @@ const fetchStructureDelay = 7000;
 let SidebarComponent = class SidebarComponent extends __WEBPACK_IMPORTED_MODULE_0_vue__["default"] {
     data() {
         return {
-            newTreeStructures: new __WEBPACK_IMPORTED_MODULE_5__classes_NewStructure_structureTree__["a" /* default */](),
-            defaultPropsTree: {
-                children: 'children_structures',
-                label: 'nameshortened'
-            },
             structures: [],
             level: 1,
             parentsWithDisplayedChildren: [],
@@ -10831,7 +13030,8 @@ let SidebarComponent = class SidebarComponent extends __WEBPACK_IMPORTED_MODULE_
         return this.renameStructure + "_" + id;
     }
     renameStructureIDnodecree(id) {
-        return this.renameStructurenodecree + "_" + id;
+        if (this.checkerbyeditormode())
+            return this.renameStructurenodecree + "_" + id;
     }
     removeStructureID(id) {
         return this.removeStructure + "_" + id;
@@ -11354,17 +13554,6 @@ let SidebarComponent = class SidebarComponent extends __WEBPACK_IMPORTED_MODULE_
                 });
                 this.showSubordinatesTop(negative);
             });
-            fetch('api/Structure_Tree_Controller/CurrentTree', {
-                method: 'post',
-                credentials: 'include',
-                headers: new Headers({
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                })
-            }).then(response => response.json())
-                .then(data => {
-                this.newTreeStructures = data;
-            });
         });
     }
     addNewStructureCommand() {
@@ -11568,17 +13757,15 @@ let SidebarComponent = class SidebarComponent extends __WEBPACK_IMPORTED_MODULE_
             //this.reloaded = true;
         }
     }
-    testfunc(date) {
-        var g = 0;
-        /*this.$store.commit("setPositionsListId", -date.id);
-        this.$store.commit("setPositionsListTitle", date.name);*/
-        this.$store.commit("setcurrentStructure", date);
+    checkerbyeditormode() {
+        // console.log(["checker", this.$store.state.user.onlyreadflagtoeditor]);
+        return this.$store.state.user.onlyreadflagtoeditor == 1 ? true : false;
     }
 };
 SidebarComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_vue_property_decorator__["Component"])({
         components: {
-            Structuremanagingpanel: __webpack_require__(14)
+            Structuremanagingpanel: __webpack_require__(13)
         }
     })
 ], SidebarComponent);
@@ -11586,7 +13773,7 @@ SidebarComponent = __decorate([
 
 
 /***/ }),
-/* 65 */
+/* 121 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -11596,14 +13783,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_property_decorator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_vue_property_decorator__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_element_ui__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_element_ui___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_element_ui__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__classes_Subject_classes_elementsubject__ = __webpack_require__(19);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-
 
 
 
@@ -11621,10 +13806,6 @@ class StructureManagement {
 let StructuremanagingpanelComponent = class StructuremanagingpanelComponent extends __WEBPACK_IMPORTED_MODULE_0_vue__["default"] {
     data() {
         return {
-            subject_name_parts: [],
-            subject_name_full: "",
-            all_subjects: [],
-            current_subject: null,
             id: 0,
             status: "renamestructure",
             name: "",
@@ -11787,7 +13968,6 @@ let StructuremanagingpanelComponent = class StructuremanagingpanelComponent exte
         }
         this.filteredSubjects = this.subjects.filter(option => (option.category == 2 || option.category == 8));
         this.$refs.inputstructuremanagementname.focus();
-        this.all_subjects = this.filteredSubjects;
     }
     onVisibleChange(value, oldValue) {
         if (value && this.structureselectionprocess) {
@@ -12087,21 +14267,6 @@ let StructuremanagingpanelComponent = class StructuremanagingpanelComponent exte
                 this.subjectgender = data.subjectgender;
             }
             this.subjectnotice = data.subjectnotice;
-            fetch('api/Subject/elementSubject/' + data.subjectindex, {
-                method: 'post',
-                credentials: 'include',
-                headers: new Headers({
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                })
-            })
-                .then(response => response.json())
-                .then(data => {
-                var time = new __WEBPACK_IMPORTED_MODULE_3__classes_Subject_classes_elementsubject__["a" /* default */]();
-                time.setElementByPromis(data);
-                this.subject_name_parts = time.getSubjectStructure();
-                this.full_subject_name();
-            });
         });
     }
     prepareTrees() {
@@ -12211,23 +14376,6 @@ let StructuremanagingpanelComponent = class StructuremanagingpanelComponent exte
         }
         this.filteredSubjects = [...new Set(this.filteredSubjects)];
     }
-    full_subject_name() {
-        var name = [""];
-        this.subject_name_parts.forEach(r => {
-            name.push(this.getSubject(r).name);
-        });
-        this.subject_name_full = name.join(" ");
-    }
-    add_subject() {
-        if (this.current_subject != null && this.current_subject != 0)
-            this.subject_name_parts.push(this.current_subject);
-        this.current_subject = null;
-        this.full_subject_name();
-    }
-    remove_last_subject() {
-        this.subject_name_parts.pop();
-        this.full_subject_name();
-    }
 };
 __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_vue_property_decorator__["Prop"])({ default: "" })
@@ -12251,7 +14399,7 @@ StructuremanagingpanelComponent = __decorate([
 
 
 /***/ }),
-/* 66 */
+/* 122 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -12261,25 +14409,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_property_decorator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_vue_property_decorator__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_element_ui__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_element_ui___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_element_ui__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__classes_persondecreeoperation__ = __webpack_require__(35);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__classes_persondecreeoperation__ = __webpack_require__(77);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_downloadjs__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_downloadjs___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_downloadjs__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__classes_user__ = __webpack_require__(10);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_moment__ = __webpack_require__(120);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_moment__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__classes_link__ = __webpack_require__(33);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__classes_formating_functions_el_table_formatter__ = __webpack_require__(9);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__classes_decree_decree__ = __webpack_require__(30);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__classes_decree_decree_finder__ = __webpack_require__(31);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_moment__ = __webpack_require__(176);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_moment__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__classes_countrycities__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__classes_link__ = __webpack_require__(66);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-
-
-
 
 
 
@@ -12313,20 +14455,11 @@ class excerptStructures {
 class StructureManagement {
 }
 let TopmenuComponent = class TopmenuComponent extends __WEBPACK_IMPORTED_MODULE_0_vue__["default"] {
-    constructor() {
-        super(...arguments);
-        this.formatter = __WEBPACK_IMPORTED_MODULE_8__classes_formating_functions_el_table_formatter__["a" /* default */];
-    }
     onDecreeDatesignedChange(value, oldValue) {
         this.decreeDateactive = this.decreeDatesigned;
     }
     data() {
         return {
-            current_decree: new __WEBPACK_IMPORTED_MODULE_9__classes_decree_decree__["a" /* default */](),
-            all_decrees: [],
-            decree_find_parameters: new __WEBPACK_IMPORTED_MODULE_10__classes_decree_decree_finder__["a" /* default */](),
-            user: new __WEBPACK_IMPORTED_MODULE_5__classes_user__["a" /* default */](),
-            decree_operations: [],
             id: 0,
             status: "renamestructure",
             name: "",
@@ -12412,37 +14545,50 @@ let TopmenuComponent = class TopmenuComponent extends __WEBPACK_IMPORTED_MODULE_
             decreeFilterDateactiveEnd: "",
             decreeFilterDatesignedStart: "",
             decreeFilterDatesignedEnd: "",
+            personFromStructure: [],
             candidateSearch: [],
             decreesSignedList: [],
             decreeSignedOperations: [],
             modalDecreeMenuSignedVisible: false,
-            modalPersondecreesMenuVisible: false,
-            modalPersondecreeMenuVisible: false,
+            moveorder: false,
+            usersearch: "",
+            userSelected: null,
+            usersSearch: [],
             structuresReward: [],
             structuresRewardAllowedToSelect: [],
             structuresElders: [],
+            personvacationHolidays: null,
+            //rewardmoneys: [],
             customwidth: false,
             excertmode: false,
             excertstructlist: [],
+            checkedDecreeResualt: "",
+            value5: this.$store.state.user.onlyreadflagtoeditor == 1 ? true : false,
         };
     }
     mounted() {
-        this.userObject();
         setInterval(this.checkSidebarAndAccessAndDecreeName, 250);
         setInterval(this.renewDecrees, 1000);
         this.fetchFeaturedStructures();
         this.fetchStructureRewards();
         this.fetchStructureRewardsAllowed();
-    }
-    userObject() {
-        fetch('api/Identity/User', { credentials: 'include' })
-            .then(response => {
-            return response.json();
-        })
-            .then(result => {
-            this.user = result;
-            //alert(JSON.stringify(result));
-        });
+        this.fetchStructureElders();
+        //this.$store.commit("setDepartmentsListId", 7);
+        //let rewardmoney1: Rewardmoney = new Rewardmoney();
+        //rewardmoney1.id = 1;
+        //rewardmoney1.name = "должностного оклада";
+        //rewardmoney1.rewardmoneytype = "должностного оклада";
+        //let rewardmoney2: Rewardmoney = new Rewardmoney();
+        //rewardmoney2.id = 2;
+        //rewardmoney2.name = "оклада денежного содержания";
+        //rewardmoney2.rewardmoneytype = "рублей";
+        //let rewardmoney3: Rewardmoney = new Rewardmoney();
+        //rewardmoney3.id = 3;
+        //rewardmoney3.name = "расчетного денежного оклада";
+        //rewardmoney3.rewardmoneytype = "рублей";
+        //this.rewardmoneys.push(rewardmoney1);
+        //this.rewardmoneys.push(rewardmoney2);
+        //this.rewardmoneys.push(rewardmoney3);
     }
     get modeselectstructure() {
         return this.$store.state.modeselectstructure;
@@ -12453,11 +14599,107 @@ let TopmenuComponent = class TopmenuComponent extends __WEBPACK_IMPORTED_MODULE_
     get ranks() {
         return this.$store.state.ranks;
     }
+    get relativetypes() {
+        return this.$store.state.relativetypes;
+    }
+    get attestations() {
+        return this.$store.state.attestationtypes;
+    }
+    get vacations() {
+        return this.$store.state.vacationtypes;
+    }
+    get vacationmilitaries() {
+        return this.$store.state.vacationmilitaries;
+    }
+    get languagetypes() {
+        return this.$store.state.languagetypes;
+    }
+    get languageskills() {
+        return this.$store.state.languageskills;
+    }
+    get jobtypes() {
+        return this.$store.state.jobtypes;
+    }
+    get servicetypes() {
+        return this.$store.state.servicetypes;
+    }
+    get servicefeatures() {
+        return this.$store.state.servicefeatures;
+    }
+    get servicecoefs() {
+        return this.$store.state.servicecoefs;
+    }
+    get penalties() {
+        return this.$store.state.penalties;
+    }
     get dismissalclauses() {
         return this.$store.state.dismissalclauses;
     }
     get countries() {
         return this.$store.state.countries;
+    }
+    get sciences() {
+        return this.$store.state.sciences;
+    }
+    get illregimes() {
+        return this.$store.state.illregimes;
+    }
+    get illcodes() {
+        return this.$store.state.illcodes;
+    }
+    get rewardtypes() {
+        return this.$store.state.rewardtypes;
+    }
+    get rewards() {
+        return this.$store.state.rewards;
+    }
+    get educationlevels() {
+        return this.$store.state.educationlevels;
+    }
+    get educationtypes() {
+        return this.$store.state.educationtypes;
+    }
+    get educationperiods() {
+        return this.$store.state.educationperiods;
+    }
+    get educationadditionaltypes() {
+        return this.$store.state.educationadditionaltypes;
+    }
+    get educationstages() {
+        return this.$store.state.educationstages;
+    }
+    get educationpositiontypes() {
+        return this.$store.state.educationpositiontypes;
+    }
+    get educationdocuments() {
+        return this.$store.state.educationdocuments;
+    }
+    get normativs() {
+        return this.$store.state.normativs;
+    }
+    get drivertypes() {
+        return this.$store.state.drivertypes;
+    }
+    get drivercategories() {
+        return this.$store.state.drivercategories;
+    }
+    get permissiontypes() {
+        return this.$store.state.permissiontypes;
+    }
+    get personeducation() {
+        return this.$store.state.personeducation;
+    }
+    get prooftypes() {
+        return this.$store.state.prooftypes;
+    }
+    get holidays() {
+        return this.$store.state.holidays;
+    }
+    get persondecreeblocktypes() {
+        return this.$store.state.persondecreeblocktypes;
+    }
+    get persondecreeblocksubtypes() {
+        return this.$store.state.persondecreeblocksubtypes;
     }
     get regions() {
         return this.$store.state.regions;
@@ -12465,8 +14707,23 @@ let TopmenuComponent = class TopmenuComponent extends __WEBPACK_IMPORTED_MODULE_
     get areas() {
         return this.$store.state.areas;
     }
+    get fires() {
+        return this.$store.state.fires;
+    }
+    get appointtypes() {
+        return this.$store.state.appointtypes;
+    }
+    get transfertypes() {
+        return this.$store.state.transfertypes;
+    }
+    get interrupttypes() {
+        return this.$store.state.interrupttypes;
+    }
     get changedocumentstypes() {
         return this.$store.state.changedocumentstypes;
+    }
+    get setpersondatatypes() {
+        return this.$store.state.setpersondatatypes;
     }
     get rewardmoneys() {
         return this.$store.state.rewardmoneys;
@@ -12502,6 +14759,7 @@ let TopmenuComponent = class TopmenuComponent extends __WEBPACK_IMPORTED_MODULE_
         __WEBPACK_IMPORTED_MODULE_0_vue__["default"].sidebar = !__WEBPACK_IMPORTED_MODULE_0_vue__["default"].sidebar;
     }
     checkSidebarAndAccessAndDecreeName() {
+        this.value5 = this.$store.state.user.onlyreadflagtoeditor == 1 ? true : false;
         //alert((<any>Vue).sidebar);
         this.sidebarDisplay = __WEBPACK_IMPORTED_MODULE_0_vue__["default"].sidebar;
         this.structureeditorAccess = this.$store.state.structureeditorAccess;
@@ -12563,10 +14821,11 @@ let TopmenuComponent = class TopmenuComponent extends __WEBPACK_IMPORTED_MODULE_
             this.selectCurrentDecree();
         }
     }
-    selectSignedDecree(event, decree) {
+    selectSignedDecree(event, id) {
         this.modalDecreeMenuSignedVisible = true;
-        this.fetchDecreeOperationsSigned(decree);
-        //this.fetchDecreeSigned(id);
+        this.fetchDecreeOperationsSigned(id);
+        this.fetchDecreeSigned(id);
+        this.checkedDecreeResualt = "";
     }
     selectCurrentDecree() {
         if (this.$store.state.decree != 0) {
@@ -12598,19 +14857,30 @@ let TopmenuComponent = class TopmenuComponent extends __WEBPACK_IMPORTED_MODULE_
         }
     }
     filterSignedDecree() {
-        console.log(JSON.stringify((this.decree_find_parameters)));
-        fetch('/api/Decrees/Finder', {
+        //this.$store.commit("setDecree", 1);
+        fetch('/api/Decrees', {
             method: 'post',
-            body: JSON.stringify((this.decree_find_parameters)),
+            body: JSON.stringify({
+                decreemanagementstatus: 6,
+                dateactivestart: this.decreeFilterDateactiveStart,
+                dateactiveend: this.decreeFilterDateactiveEnd,
+                datesignedstart: this.decreeFilterDatesignedStart,
+                datesignedend: this.decreeFilterDatesignedEnd,
+                number: this.decreeFilterNumber,
+                name: this.decreeFilterName,
+                nickname: this.decreeFilterNickname,
+            }),
             credentials: 'include',
             headers: new Headers({
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             })
-        }).then(response => {
+        })
+            .then(response => {
             return response.json();
-        }).then(date => {
-            this.all_decrees = date;
+        })
+            .then(result => {
+            this.decreesSignedList = result;
         });
     }
     decreeDeny() {
@@ -12668,7 +14938,7 @@ let TopmenuComponent = class TopmenuComponent extends __WEBPACK_IMPORTED_MODULE_
                 'Content-Type': 'application/json'
             })
         }).then(x => x.blob())
-            .then(x => __WEBPACK_IMPORTED_MODULE_4_downloadjs___default()(x, this.decreeName));
+            .then(x => __WEBPACK_IMPORTED_MODULE_4_downloadjs___default()(x, this.decreeName + ".docx"));
     }
     decreeAccept() {
         let csharpDateActive = new Date(this.decreeDateactive);
@@ -12775,22 +15045,22 @@ let TopmenuComponent = class TopmenuComponent extends __WEBPACK_IMPORTED_MODULE_
                 featuredStructure.id = f.id;
                 this.featured.push(featuredStructure);
             });
-        }); /*
-    fetch('api/Persondecreeoperationexcert/structureslist', { credentials: 'include' })
-        .then(response => {
-            return response.json() as Promise<Array<FeaturedStructure>>;
-        })
-        .then(result => {
-            let Structures = result;
-            this.excertstructlist = new Array();
-
-            Structures.forEach(f => {
-                let featuredStructure: FeaturedStructure = new FeaturedStructure();
-                featuredStructure.name = f.name;
-                featuredStructure.id = f.id;
-                this.excertstructlist.push(featuredStructure);
+        });
+        /*fetch('api/Persondecreeoperationexcert/structureslist', { credentials: 'include' })
+            .then(response => {
+                return response.json() as Promise<Array<FeaturedStructure>>;
             })
-        });*/
+            .then(result => {
+                let Structures = result;
+                this.excertstructlist = new Array();
+
+                Structures.forEach(f => {
+                    let featuredStructure: FeaturedStructure = new FeaturedStructure();
+                    featuredStructure.name = f.name;
+                    featuredStructure.id = f.id;
+                    this.excertstructlist.push(featuredStructure);
+                })
+            });*/
     }
     fetchDecree() {
         fetch('api/Decrees/' + this.$store.state.decree, { credentials: 'include' })
@@ -12846,20 +15116,6 @@ let TopmenuComponent = class TopmenuComponent extends __WEBPACK_IMPORTED_MODULE_
         });
     }
     fetchDecreeOperationsSigned(decree) {
-        console.log(JSON.stringify((decree)));
-        fetch('/api/DecreeOperations/Finder', {
-            method: 'post',
-            body: JSON.stringify((decree)),
-            credentials: 'include',
-            headers: new Headers({
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            })
-        }).then(response => {
-            return response.json();
-        }).then(date => {
-            this.decree_operations = date;
-        });
         fetch('api/DecreeOperations/' + decree, { credentials: 'include' })
             .then(response => {
             return response.json();
@@ -13035,11 +15291,11 @@ let TopmenuComponent = class TopmenuComponent extends __WEBPACK_IMPORTED_MODULE_
             case "decreesvisible":
                 this.modalDecreesSignedMenuVisible = true;
                 break;
+            case "candidates":
+                this.toggleCandidates();
+                break;
             case "eld":
                 this.toggleEld();
-                break;
-            case "rewrite":
-                this.rewrite();
                 break;
         }
     }
@@ -13068,9 +15324,6 @@ let TopmenuComponent = class TopmenuComponent extends __WEBPACK_IMPORTED_MODULE_
         if (!this.$store.state.modeselectstructure) {
             this.modalPmrequestPanelVisible = false;
         }
-    }
-    get displaySelectmodewarning() {
-        return (this.$store.state.modeselectcuration || this.$store.state.modeselectheading || this.$store.state.modeselectstructure || this.$store.state.modeappointpersondecree || this.$store.state.modeappointpersonstructuredecree || this.$store.state.modeappointpersondecreeStructure);
     }
     get displayAppointpersonmodewarning() {
         return this.$store.state.modeappointperson;
@@ -13147,69 +15400,6 @@ let TopmenuComponent = class TopmenuComponent extends __WEBPACK_IMPORTED_MODULE_
             return false;
         }
         //if (this.$store.state.)
-    }
-    successmode() {
-        if (this.num == 1) {
-            this.numberStructure = this.$store.state.modeappointedpersondecreeStructure;
-            this.$store.commit("setModeappointedpersondecreeStructure", 0);
-            this.$store.commit("setModeappointpersondecreeStructure", false);
-            this.$store.commit("setModeselectedstructure", 0);
-            this.$store.commit("setModeselectstructure", false);
-            this.num = 0;
-            return;
-        }
-        else if (this.num == 2) {
-            this.numberNewStructure = this.$store.state.modeappointedpersondecreeStructure;
-            this.structureNewName = this.getStructureName(this.numberNewStructure);
-            this.newCourseName = this.getStructureById(Number.parseInt(this.getStructureById(this.numberNewStructure).parentstructure)).name2;
-            this.facultyName = this.getStructureById(Number.parseInt(this.getStructureById(Number.parseInt(this.getStructureById(this.numberNewStructure).parentstructure)).parentstructure)).name2;
-            this.$store.commit("setModeappointedpersondecreeStructure", 0);
-            this.$store.commit("setModeappointpersondecreeStructure", false);
-            this.$store.commit("setModeselectedstructure", 0);
-            this.$store.commit("setModeselectstructure", false);
-            this.num = 0;
-            return;
-        }
-        else if (this.num == 3) {
-            this.numberStructure = this.$store.state.modeappointedpersondecreeStructure;
-            this.structureName = this.getStructureName(this.numberStructure);
-            this.courseName = this.getStructureById(Number.parseInt(this.getStructureById(this.numberStructure).parentstructure)).name2;
-            this.specialityName = this.getStructureById(Number.parseInt(this.getStructureById(Number.parseInt(this.getStructureById(this.numberStructure).parentstructure)).parentstructure)).name2;
-            this.facultyName = this.getStructureById(Number.parseInt(this.getStructureById(Number.parseInt(this.getStructureById(Number.parseInt(this.getStructureById(this.numberStructure).parentstructure)).parentstructure)).parentstructure)).name2;
-            this.$store.commit("setModeappointedpersondecreeStructure", 0);
-            this.$store.commit("setModeappointpersondecreeStructure", false);
-            this.$store.commit("setModeselectedstructure", 0);
-            this.$store.commit("setModeselectstructure", false);
-            this.num = 0;
-            return;
-        }
-        else if (this.num == 4) {
-            this.numberStructure = this.$store.state.modeappointedpersondecreeStructure;
-            this.$store.commit("setModeappointedpersondecreeStructure", 0);
-            this.$store.commit("setModeappointpersondecreeStructure", false);
-            this.$store.commit("setModeselectedstructure", 0);
-            this.$store.commit("setModeselectstructure", false);
-            this.num = 0;
-            return;
-        }
-        else if (this.num == 5) {
-            this.numberNewStructure = this.$store.state.modeappointedpersondecreeStructure;
-            this.structureNewName = this.getStructureName(this.numberNewStructure);
-            this.$store.commit("setModeappointedpersondecreeStructure", 0);
-            this.$store.commit("setModeappointpersondecreeStructure", false);
-            this.$store.commit("setModeselectedstructure", 0);
-            this.$store.commit("setModeselectstructure", false);
-            this.num = 0;
-            return;
-        }
-        else {
-            this.$store.commit("setModeappointedpersondecreeStructure", 0);
-            this.$store.commit("setModeappointpersondecreeStructure", false);
-            this.$store.commit("setModeselectedstructure", 0);
-            this.$store.commit("setModeselectstructure", false);
-            this.num = 0;
-            return;
-        }
     }
     structureModeAccess() {
         if (this.$store.state.admin == "1" || this.$store.state.structureeditorAccess == "1" || this.$store.state.personnelreadAccess == "1") {
@@ -13313,6 +15503,334 @@ let TopmenuComponent = class TopmenuComponent extends __WEBPACK_IMPORTED_MODULE_
         }
         //return this.$store.state.modepanelVisible;
     }
+    onPersondecreeDatesignedChange(value, oldValue) {
+        this.decreeDateactive = this.decreeDatesigned;
+    }
+    searchPersons(fio) {
+        fetch('api/Person/Search' + fio, { credentials: 'include' })
+            .then(response => {
+            return response.json();
+        })
+            .then(result => {
+            this.personssearch = result;
+            this.person = null;
+            fetch('api/Person/Photospreview' + fio, { credentials: 'include' })
+                .then(response => {
+                return response.json();
+            })
+                .then(personphotos => {
+                if (personphotos != null) {
+                    personphotos.forEach(p => p.photo64 = p.photo64header + "," + p.photo64);
+                    this.photosPreview = personphotos;
+                    this.lastSearchFio = fio;
+                }
+            });
+        });
+    }
+    /**
+     * Поиск людей специально внутри проекта приказов
+     * @param fio
+     * @param block
+     */
+    searchPersonsBlock(block) {
+        block.searchiteration = block.searchiteration + 1;
+        let searchiteration = block.searchiteration;
+        let fio = block.fiosearch;
+        fetch('api/Person/Search' + fio, { credentials: 'include' })
+            .then(response => {
+            return response.json();
+        })
+            .then(result => {
+            if (searchiteration < block.searchiteration) {
+                return;
+            }
+            block.personssearch = result;
+            //this.person = null;
+            fetch('api/Person/Photospreview' + fio, { credentials: 'include' })
+                .then(response => {
+                return response.json();
+            })
+                .then(personphotos => {
+                if (personphotos != null) {
+                    personphotos.forEach(p => p.photo64 = p.photo64header + "," + p.photo64);
+                    block.photosPreview = personphotos;
+                    //this.lastSearchFio = fio;
+                }
+            });
+        });
+    }
+    searchCandidatsBlock(block) {
+        block.searchiterationCandidate = block.searchiterationCandidate + 1;
+        let searchiterationCandidate = block.searchiterationCandidate;
+        let fio = block.fiocandidatesearch;
+        fetch('api/Cabinet/Search' + fio, { credentials: 'include' })
+            .then(response => {
+            return response.json();
+        })
+            .then(result => {
+            if (searchiterationCandidate < block.searchiterationCandidate) {
+                return;
+            }
+            block.candidatessearch = result;
+        });
+    }
+    /**
+     * После загрузки с базы данных нам нужно Даты превратить в string эквивалент
+     */
+    prepareToImport(person) {
+        //person.birthdateString = this.toDateInputValue(new Date());
+        person.birthdateString = this.toDateInputValue(person.birthdate);
+        person.passportdatestartString = this.toDateInputValue(person.passportdatestart);
+        person.passportdateendString = this.toDateInputValue(person.passportdateend);
+        person.age = this.getAge(person.birthdateString).toString();
+        if (person.personranks != null) {
+            person.personranks.forEach(p => {
+                p.decreedateString = this.toDateInputValue(p.decreedate);
+            });
+        }
+        if (person.personcontracts != null) {
+            person.personcontracts.forEach(p => {
+                p.datestartString = this.toDateInputValue(p.datestart);
+                p.dateendString = this.toDateInputValue(p.dateend);
+                p.payBool = this.numberToBool(p.pay);
+            });
+        }
+        if (person.personrelatives != null) {
+            person.personrelatives.forEach(p => {
+                p.birthdayString = this.toDateInputValue(p.birthday);
+            });
+        }
+        if (person.personattestations != null) {
+            person.personattestations.forEach(p => {
+                p.dateString = this.toDateInputValue(p.date);
+            });
+        }
+        if (person.personvacations != null) {
+            person.personvacations.forEach(p => {
+                p.dateString = this.toDateInputValue(p.date);
+                p.compensationBool = this.numberToBool(p.compensation);
+                p.compensationdateString = this.toDateInputValue(p.compensationdate);
+                p.cancelBool = this.numberToBool(p.cancel);
+                p.allowstartString = this.toDateInputValue(p.allowstart);
+                p.allowendString = this.toDateInputValue(p.allowend);
+                p.canceldateString = this.toDateInputValue(p.canceldate);
+                p.cancelcontinueBool = this.numberToBool(p.cancelcontinue);
+                p.canceldateendString = this.toDateInputValue(p.canceldateend);
+            });
+        }
+        if (person.personeducations != null) {
+            person.personeducations.forEach(p => {
+                p.startString = this.toDateInputValue(p.start);
+                p.endString = this.toDateInputValue(p.end);
+                p.cadetBool = this.numberToBool(p.cadet);
+                p.interruptedBool = this.numberToBool(p.interrupted);
+            });
+        }
+        if (person.personjobs != null) {
+            person.personjobs.forEach(p => {
+                //alert(p.orderdate == null);
+                p.startString = this.toDateInputValue(p.start);
+                p.endString = this.toDateInputValue(p.end);
+                p.orderdateString = this.toDateInputValue(p.orderdate);
+                p.actualBool = this.numberToBool(p.actual);
+                p.mchsBool = this.numberToBool(p.mchs);
+                //alert(p.startString);
+            });
+        }
+        if (person.personpenalties != null) {
+            person.personpenalties.forEach(p => {
+                p.orderdateString = this.toDateInputValue(p.orderdate);
+            });
+        }
+        if (person.personworktrips != null) {
+            person.personworktrips.forEach(p => {
+                p.tripdateString = this.toDateInputValue(p.tripdate);
+            });
+        }
+        if (person.personelections != null) {
+            person.personelections.forEach(p => {
+                p.electiondateString = this.toDateInputValue(p.electiondate);
+                p.electiondateendString = this.toDateInputValue(p.electiondateend);
+            });
+        }
+        if (person.personsciences != null) {
+            person.personsciences.forEach(p => {
+                p.sciencedateString = this.toDateInputValue(p.sciencedate);
+            });
+        }
+        if (person.personrewards != null) {
+            person.personrewards.forEach(p => {
+                p.rewarddateString = this.toDateInputValue(p.rewarddate);
+            });
+        }
+        if (person.personills != null) {
+            person.personills.forEach(p => {
+                p.datestartString = this.toDateInputValue(p.datestart);
+                p.dateendString = this.toDateInputValue(p.dateend);
+                p.illtypeBool = this.numberToBool(p.illtype);
+            });
+        }
+        if (person.personphysicals != null) {
+            person.personphysicals.forEach(p => {
+                p.physicaldateString = this.toDateInputValue(p.physicaldate);
+            });
+        }
+        if (person.persondrivers != null) {
+            person.persondrivers.forEach(p => {
+                p.datestartString = this.toDateInputValue(p.datestart);
+                p.dateendString = this.toDateInputValue(p.dateend);
+            });
+        }
+        if (person.personpermissions != null) {
+            person.personpermissions.forEach(p => {
+                p.datestartString = this.toDateInputValue(p.datestart);
+                p.dateendString = this.toDateInputValue(p.dateend);
+            });
+        }
+        if (person.persondispanserizations != null) {
+            person.persondispanserizations.forEach(p => {
+                p.dateString = this.toDateInputValue(p.date);
+            });
+        }
+        if (person.personvvks != null) {
+            person.personvvks.forEach(p => {
+                p.dateString = this.toDateInputValue(p.date);
+            });
+        }
+        if (person.personjobpriveleges != null) {
+            person.personjobpriveleges.forEach(p => {
+                p.startString = this.toDateInputValue(p.start);
+                p.endString = this.toDateInputValue(p.end);
+                p.proofdateString = this.toDateInputValue(p.proofdate);
+                p.documentdateString = this.toDateInputValue(p.documentdate);
+            });
+        }
+    }
+    prepareToExport(person) {
+        person.birthdate = this.prepareDateToExport(person.birthdateString);
+        person.passportdatestart = new Date(person.passportdatestartString);
+        person.passportdateend = new Date(person.passportdateendString);
+        if (person.personranks != null) {
+            person.personranks.forEach(p => {
+                p.decreedate = new Date(p.decreedateString);
+            });
+        }
+        if (person.personcontracts != null) {
+            person.personcontracts.forEach(p => {
+                p.datestart = new Date(p.datestartString);
+                p.dateend = new Date(p.dateendString);
+                p.pay = this.boolToNumb(p.payBool);
+            });
+        }
+        if (person.personrelatives != null) {
+            person.personrelatives.forEach(p => {
+                p.birthday = new Date(p.birthdayString);
+            });
+        }
+        if (person.personattestations != null) {
+            person.personattestations.forEach(p => {
+                p.date = new Date(p.dateString);
+            });
+        }
+        if (person.personvacations != null) {
+            person.personvacations.forEach(p => {
+                p.date = new Date(p.dateString);
+                p.compensation = this.boolToNumb(p.compensationBool);
+                p.compensationdate = new Date(p.compensationdateString);
+                p.cancel = this.boolToNumb(p.cancelBool);
+                p.allowstart = new Date(p.allowstartString);
+                p.allowend = new Date(p.allowendString);
+                p.canceldate = new Date(p.canceldateString);
+                p.canceldateend = new Date(p.canceldateendString);
+                p.cancelcontinue = this.boolToNumb(p.cancelcontinueBool);
+            });
+        }
+        if (person.personeducations != null) {
+            person.personeducations.forEach(p => {
+                p.start = new Date(p.startString);
+                p.end = new Date(p.endString);
+                p.cadet = this.boolToNumb(p.cadetBool);
+                p.interrupted = this.boolToNumb(p.interruptedBool);
+            });
+        }
+        if (person.personjobs != null) {
+            person.personjobs.forEach(p => {
+                p.start = new Date(p.startString);
+                p.end = new Date(p.endString);
+                p.orderdate = new Date(p.orderdateString);
+                p.actual = this.boolToNumb(p.actualBool);
+                p.mchs = this.boolToNumb(p.mchsBool);
+            });
+        }
+        if (person.personpenalties != null) {
+            person.personpenalties.forEach(p => {
+                p.orderdate = new Date(p.orderdateString);
+            });
+        }
+        if (person.personworktrips != null) {
+            person.personworktrips.forEach(p => {
+                p.tripdate = new Date(p.tripdateString);
+            });
+        }
+        if (person.personelections != null) {
+            person.personelections.forEach(p => {
+                p.electiondate = new Date(p.electiondateString);
+                p.electiondateend = new Date(p.electiondateendString);
+            });
+        }
+        if (person.personsciences != null) {
+            person.personsciences.forEach(p => {
+                p.sciencedate = new Date(p.sciencedateString);
+            });
+        }
+        if (person.personrewards != null) {
+            person.personrewards.forEach(p => {
+                p.rewarddate = new Date(p.rewarddateString);
+            });
+        }
+        if (person.personills != null) {
+            person.personills.forEach(p => {
+                p.datestart = new Date(p.datestartString);
+                p.dateend = new Date(p.dateendString);
+                p.illtype = this.boolToNumb(p.illtypeBool);
+            });
+        }
+        if (person.personphysicals != null) {
+            person.personphysicals.forEach(p => {
+                p.physicaldate = new Date(p.physicaldateString);
+            });
+        }
+        if (person.persondrivers != null) {
+            person.persondrivers.forEach(p => {
+                p.datestart = new Date(p.datestartString);
+                p.dateend = new Date(p.dateendString);
+            });
+        }
+        if (person.personpermissions != null) {
+            person.personpermissions.forEach(p => {
+                p.datestart = new Date(p.datestartString);
+                p.dateend = new Date(p.dateendString);
+            });
+        }
+        if (person.persondispanserizations != null) {
+            person.persondispanserizations.forEach(p => {
+                p.date = new Date(p.dateString);
+            });
+        }
+        if (person.personvvks != null) {
+            person.personvvks.forEach(p => {
+                p.date = new Date(p.dateString);
+            });
+        }
+        if (person.personjobpriveleges != null) {
+            person.personjobpriveleges.forEach(p => {
+                p.start = new Date(p.startString);
+                p.end = new Date(p.endString);
+                p.proofdate = new Date(p.proofdateString);
+                p.documentdate = new Date(p.documentdateString);
+            });
+        }
+    }
     getAge(dateString) {
         var today = new Date();
         var birthDate = new Date(dateString);
@@ -13346,31 +15864,154 @@ let TopmenuComponent = class TopmenuComponent extends __WEBPACK_IMPORTED_MODULE_
         return new Date(date);
     }
     /**
-     * Превращает строку input в date. Nullable допускает возможность отсутствия даты.
-     * @param date
+     * Добавляем сотрудника по айди в блок в режиме множественного добавления, когда несколько человек привязаны к одной операции.
+     * @param id
+     * @param block
      */
-    prepareDateToExportNullable(date) {
-        if (date == null || date.length == 0) {
-            return null;
-        }
-        return new Date(date);
+    selectPersonBlockNonAutoMultiselect(id, block) {
+        fetch('api/Person/Single' + id, { credentials: 'include' })
+            .then(response => {
+            return response.json();
+        })
+            .then(person => {
+            if (person != null) {
+                this.prepareToImport(person);
+                block.optionarraypersonArray.push(person.id);
+                block.optionarraypersonObjects.push(person);
+                //block.person = person;
+                //block.optionarraypersonObjects.length
+                block.personssearch = [];
+                block.fiosearch = "";
+                block.nonperson = ""; // Если был человек не из МЧС, убираем.
+                // Если присвоить
+                if (block.persondecreeblocktype == 14) {
+                    block.persondecreeblocksub = null; // Обнуляем список доступных званий для выбора
+                }
+                block.personssearchadditional = false; // Там где добавляем сразу несколько людей, помечать, что уже хотя бы один человек добавлен,
+                // чтобы скрыть строку поиска и показать кнопку "добавить".
+                //this.addPersonblockelement(block); - отрубаем автоматическое дополнение. Но тогда для добавления отдельно должна быть кнопка.
+            }
+        });
     }
-    /**
-     * Превращаем массив чисел в строку, разделенную ",".
-     * @param array
-     */
-    prepareArrayNumberToExportNullable(array) {
-        let str = "";
-        if (array == null) {
+    multipersonAddAdditional(block) {
+        block.personssearchadditional = true;
+    }
+    multicountryAddAdditional(block) {
+        block.countrycitiesList.push(new __WEBPACK_IMPORTED_MODULE_6__classes_countrycities__["a" /* default */]());
+    }
+    getEducationtype(educationtype) {
+        if (educationtype == null || educationtype == 0) {
             return "";
         }
-        array.forEach(a => {
-            if (str.length > 0) {
-                str += ",";
-            }
-            str += a.toString();
-        });
-        return str;
+        let etype = this.educationtypes.find(t => t.id == educationtype);
+        if (etype != null) {
+            return etype.name;
+        }
+        else {
+            return "";
+        }
+    }
+    getEducationperiod(educationperiod) {
+        if (educationperiod == null || educationperiod == 0) {
+            return null;
+        }
+        let eperiod = this.educationperiods.find(t => t.id == educationperiod);
+        if (eperiod != null) {
+            return eperiod;
+        }
+        else {
+            return null;
+        }
+    }
+    getEducationlevel(educationlevel) {
+        if (educationlevel == null || educationlevel == 0) {
+            return "";
+        }
+        let object = this.educationlevels.find(e => e.id == educationlevel);
+        if (object != null) {
+            return object.levelname;
+        }
+        else {
+            return "";
+        }
+    }
+    getFullEducationlevel(educationlevel) {
+        if (educationlevel == null || educationlevel == 0) {
+            return "";
+        }
+        let object = this.educationlevels.find(e => e.id == educationlevel);
+        if (object != null) {
+            return object.levelcomment;
+        }
+        else {
+            return "";
+        }
+    }
+    getEducationstage(educationstage) {
+        if (educationstage == null || educationstage == 0) {
+            return "";
+        }
+        let object = this.educationstages.find(e => e.id == educationstage);
+        if (object != null) {
+            return object.name;
+        }
+        else {
+            return "";
+        }
+    }
+    getEducationpositiontype(educationpositiontype) {
+        if (educationpositiontype == null || educationpositiontype == 0) {
+            return "";
+        }
+        let object = this.educationpositiontypes.find(e => e.id == educationpositiontype);
+        if (object != null) {
+            return object.name;
+        }
+        else {
+            return "";
+        }
+    }
+    getEducationadditionaltype(educationadditionaltype) {
+        if (educationadditionaltype == null || educationadditionaltype == 0) {
+            return "";
+        }
+        let etype = this.educationadditionaltypes.find(t => t.id == educationadditionaltype);
+        if (etype != null) {
+            return etype.name;
+        }
+        else {
+            return "";
+        }
+    }
+    getEducationdocument(educationdocument) {
+        if (educationdocument == null || educationdocument == 0) {
+            return "";
+        }
+        let etype = this.educationdocuments.find(t => t.id == educationdocument);
+        if (etype != null) {
+            return etype.name;
+        }
+        else {
+            return "";
+        }
+    }
+    getPersoneducation(personId) {
+        if (personId == null || personId == 0) {
+            return null;
+        }
+        let personeducation = this.personeducation.find(e => e.id == personId);
+        if (personeducation != null) {
+            return personeducation;
+        }
+        else {
+            return null;
+        }
+    }
+    getPersoneducationUpdateButtonName() {
+        return SAVE_LABEL;
+    }
+    removeEducationperiod(educationtypeblock, educationperiod) {
+        educationtypeblock.educationperiods = educationtypeblock.educationperiods.filter(e => e != educationperiod);
     }
     forceUpdate() {
         this.$forceUpdate();
@@ -13423,6 +16064,17 @@ let TopmenuComponent = class TopmenuComponent extends __WEBPACK_IMPORTED_MODULE_
             this.$emit('update:visiblevar', false);
         });
     }
+    closeSearch() {
+        this.personssearch = [];
+    }
+    closeSearchBlock(block) {
+        block.personssearch = [];
+    }
+    rerenderSearch() {
+        if (this.personssearch != null && this.personssearch.length > 0) {
+            this.searchPersons(this.lastSearchFio);
+        }
+    }
     /**
      * Убираем null значения у num и меняем их на 0
      * @param num
@@ -13445,6 +16097,60 @@ let TopmenuComponent = class TopmenuComponent extends __WEBPACK_IMPORTED_MODULE_
         }
         return num;
     }
+    getPersondecreeblockname(block) {
+        let type = this.persondecreeblocktypes.find(p => p.id == block.persondecreeblocktype);
+        if (type != null) {
+            return type.name;
+        }
+        else {
+            return "";
+        }
+    }
+    getPersondecreeblocksubname(block) {
+        let type = this.persondecreeblocksubtypes.find(p => p.id == block.persondecreeblocksubtype);
+        if (type != null) {
+            return type.name;
+        }
+        else {
+            return "";
+        }
+    }
+    getPersondecreeblocksubtype(persondecreeblocksubtypeid) {
+        if (persondecreeblocksubtypeid == null || persondecreeblocksubtypeid == 0) {
+            return "";
+        }
+        let persondecreeblocksubtype = this.persondecreeblocksubtypes.find(t => t.id == persondecreeblocksubtypeid);
+        if (persondecreeblocksubtype != null) {
+            return persondecreeblocksubtype.name;
+        }
+        else {
+            return "";
+        }
+    }
+    getRewardtype(rewardtype) {
+        if (rewardtype == null || rewardtype == 0) {
+            return "";
+        }
+        let rtype = this.rewardtypes.find(t => t.id == rewardtype);
+        if (rtype != null) {
+            return rtype.name;
+        }
+        else {
+            return "";
+        }
+    }
+    getReward(reward) {
+        if (reward == null || reward == 0) {
+            return "";
+        }
+        let rtype = this.rewards.find(t => t.id == reward);
+        if (rtype != null) {
+            return rtype.name;
+        }
+        else {
+            return "";
+        }
+    }
     getRank(rank) {
         if (rank == null || rank == 0) {
             return "";
@@ -13456,6 +16162,128 @@ let TopmenuComponent = class TopmenuComponent extends __WEBPACK_IMPORTED_MODULE_
         else {
             return "";
         }
+    }
+    searchUsers(search) {
+        fetch('api/Users/Search' + search, { credentials: 'include' })
+            .then(response => {
+            return response.json();
+        })
+            .then(result => {
+            result.forEach(r => {
+                if (r.positionString == null) {
+                    r.positionString = "";
+                }
+            });
+            this.usersSearch = result;
+            this.userSelected = null;
+        });
+    }
+    hasUserSearchResults() {
+        if (this.usersSearch != null && this.usersSearch.length > 0) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+    persondecreeblocksubChange(persondecreeblock) {
+        persondecreeblock.optionstring1 = "";
+        persondecreeblock.optionstring2 = "";
+        persondecreeblock.optionstring3 = "";
+        persondecreeblock.optionstring4 = "";
+        persondecreeblock.optionstring5 = "";
+        persondecreeblock.optionstring6 = "";
+        persondecreeblock.optionstring7 = "";
+        persondecreeblock.optionstring8 = "";
+        persondecreeblock.optionnumber1 = null;
+        persondecreeblock.optionnumber2 = null;
+        persondecreeblock.optionnumber3 = null;
+        persondecreeblock.optionnumber4 = null;
+        persondecreeblock.optionnumber5 = null;
+        persondecreeblock.optionnumber6 = null;
+        persondecreeblock.optionnumber7 = null;
+        persondecreeblock.optionnumber8 = null;
+        persondecreeblock.optionnumber9 = null;
+        persondecreeblock.optionnumber10 = null;
+        persondecreeblock.optionnumber11 = null;
+        persondecreeblock.optiondate1 = null;
+        persondecreeblock.optiondate2 = null;
+        persondecreeblock.optiondate3 = null;
+        persondecreeblock.optiondate4 = null;
+        persondecreeblock.optiondate5 = null;
+        persondecreeblock.optiondate6 = null;
+        persondecreeblock.optiondate7 = null;
+        persondecreeblock.optiondate8 = null;
+        //this.toDateInputValue(Date.now);
+        persondecreeblock.optiondate1String = this.getdate();
+        persondecreeblock.optiondate2String = "";
+        persondecreeblock.optiondate3String = "";
+        persondecreeblock.optiondate4String = "";
+        persondecreeblock.optiondate5String = "";
+        persondecreeblock.optiondate6String = "";
+        persondecreeblock.optiondate7String = "";
+        persondecreeblock.optiondate8String = "";
+        //persondecreeblock.subvaluenumber1 = null;
+        persondecreeblock.subvaluenumber2 = null;
+        persondecreeblock.subvaluestring1 = "";
+        persondecreeblock.subvaluestring2 = "";
+        if (persondecreeblock.person != null && persondecreeblock.person.surname2.length > 0 && persondecreeblock.person.name2.length > 0
+            && persondecreeblock.person.fathername2.length > 0) {
+            if (persondecreeblock.person.actualRank != null) {
+                persondecreeblock.optionstring3 = "рапорт " + persondecreeblock.person.surname2 + " " + persondecreeblock.person.name2[0].toUpperCase() + "." + persondecreeblock.person.fathername2[0].toUpperCase() + ".";
+            }
+            else {
+                persondecreeblock.optionstring3 = "заявление " + persondecreeblock.person.surname2 + " " + persondecreeblock.person.name2[0].toUpperCase() + "." + persondecreeblock.person.fathername2[0].toUpperCase() + ".";
+            }
+        }
+    }
+    firerewardchange(persondecreeblock) {
+        persondecreeblock.optionstring4 = "";
+        persondecreeblock.optionstring5 = "";
+        persondecreeblock.optionstring6 = "";
+        persondecreeblock.optionstring7 = "";
+        persondecreeblock.optionstring8 = "";
+        persondecreeblock.optionnumber7 = null;
+        persondecreeblock.optionnumber8 = null;
+        persondecreeblock.optionnumber10 = null;
+        persondecreeblock.optionnumber11 = null;
+        persondecreeblock.optiondate5 = null;
+        persondecreeblock.optiondate6 = null;
+        persondecreeblock.optiondate7 = null;
+        persondecreeblock.optiondate8 = null;
+    }
+    rewardChestsign(reward) {
+        if (reward.rewardtype != 1) {
+            return false;
+        }
+        if (reward.name.startsWith("Нагрудный знак")) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+    rewardMedal(reward) {
+        if (reward.rewardtype != 1) {
+            return false;
+        }
+        if (reward.name.startsWith("Медаль")) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+    beautifyString(text) {
+        if (text == null || text.length == 0) {
+            return "";
+        }
+        if (text.length == 1) {
+            return text.charAt(0).toLowerCase();
+        }
+        text = text.trim();
+        text = text.charAt(0).toLowerCase() + text.substring(1);
+        return text;
     }
     fetchStructureRewards() {
         fetch('api/DetailedStructure/Rewards', { credentials: 'include' })
@@ -13470,6 +16298,14 @@ let TopmenuComponent = class TopmenuComponent extends __WEBPACK_IMPORTED_MODULE_
             .then(data => {
             //alert(JSON.stringify(data));
             this.structuresRewardAllowedToSelect = data;
+        });
+    }
+    fetchStructureElders() {
+        fetch('api/DetailedStructure/Elders', { credentials: 'include' })
+            .then(response => response.json())
+            .then(data => {
+            //alert(JSON.stringify(data));
+            this.structuresElders = data;
         });
     }
     getStructureName(structureid) {
@@ -13512,6 +16348,46 @@ let TopmenuComponent = class TopmenuComponent extends __WEBPACK_IMPORTED_MODULE_
             return "";
         }
     }
+    getRewardmoneytype(rewardmoneyid, count = "1") {
+        if (rewardmoneyid == null || rewardmoneyid == 0) {
+            return "";
+        }
+        // В зависимости от того в единственном или множественном числе
+        let countNum = Number.parseFloat(count);
+        let rewardmoney = this.rewardmoneys.find(t => t.id == rewardmoneyid);
+        if (rewardmoney != null && countNum <= 1) {
+            return rewardmoney.rewardmoneytype;
+        }
+        else if (rewardmoney != null) {
+            return rewardmoney.rewardmoneytypeplural;
+        }
+        else {
+            return "";
+        }
+    }
+    RewardNotOne(rewardstring) {
+        if (rewardstring == null) {
+            return true;
+        }
+        if (rewardstring.trim() === "1") {
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
+    getPenalty(penaltyid) {
+        if (penaltyid == null || penaltyid == 0) {
+            return "";
+        }
+        let penalty = this.penalties.find(t => t.id == penaltyid);
+        if (penalty != null) {
+            return penalty.name;
+        }
+        else {
+            return "";
+        }
+    }
     printDate(date) {
         if (date == null) {
             return "";
@@ -13544,6 +16420,20 @@ let TopmenuComponent = class TopmenuComponent extends __WEBPACK_IMPORTED_MODULE_
         //this.orgMode();
     }
     /**
+     * Медаль «160 год пажарнай службе Беларусі» меняет на «160 год пажарнай службе Беларусі» и т.п.
+     * @param rewardString
+     */
+    cutRewardString(rewardString) {
+        if (rewardString == null || rewardString.length == 0) {
+            return "";
+        }
+        if (!rewardString.includes("«")) {
+            return rewardString;
+        }
+        let result = "«" + rewardString.substr(rewardString.indexOf("«") + 1);
+        return result;
+    }
+    /**
      * Ставит запятую с пробелом, если определенная строка не пуста, иначе просто пробел.
      * @param inputstring
      */
@@ -13570,6 +16460,39 @@ let TopmenuComponent = class TopmenuComponent extends __WEBPACK_IMPORTED_MODULE_
             return inputstring.toLowerCase();
         }
     }
+    getAppointtype(appointtype) {
+        if (appointtype == null || appointtype == 0) {
+            return "";
+        }
+        let atype = this.appointtypes.find(at => at.id == appointtype);
+        if (atype != null) {
+            return atype.name;
+        }
+        else {
+            return "";
+        }
+    }
+    getFireObject(fire) {
+        if (fire == null || fire == 0) {
+            return null;
+        }
+        let fireobject = this.fires.find(f => f.id == fire);
+        return fireobject;
+    }
+    getTransfertypeObject(transfertype) {
+        if (transfertype == null || transfertype == 0) {
+            return null;
+        }
+        let transfertypeobject = this.transfertypes.find(t => t.id == transfertype);
+        return transfertypeobject;
+    }
+    getInterrupttypeObject(interrupttype) {
+        if (interrupttype == null || interrupttype == 0) {
+            return null;
+        }
+        let interrupttypeobject = this.interrupttypes.find(i => i.id == interrupttype);
+        return interrupttypeobject;
+    }
     getChangedocumentstypeObject(changedocumentstype) {
         if (changedocumentstype == null || changedocumentstype == 0) {
             return null;
@@ -13581,7 +16504,7 @@ let TopmenuComponent = class TopmenuComponent extends __WEBPACK_IMPORTED_MODULE_
         if (date == null) {
             return "";
         }
-        return __WEBPACK_IMPORTED_MODULE_6_moment___default()(date).locale('ru').format('D MMMM YYYY [года]');
+        return __WEBPACK_IMPORTED_MODULE_5_moment___default()(date).locale('ru').format('D MMMM YYYY [года]');
     }
     printDateDocumentFromString(date) {
         if (date == null) {
@@ -13592,7 +16515,7 @@ let TopmenuComponent = class TopmenuComponent extends __WEBPACK_IMPORTED_MODULE_
             return "";
         }
         let dateDate = new Date(Number.parseInt(dateSplit[2]), Number.parseInt(dateSplit[1]) - 1, Number.parseInt(dateSplit[0]));
-        return __WEBPACK_IMPORTED_MODULE_6_moment___default()(dateDate).locale('ru').format('D MMMM YYYY [года]');
+        return __WEBPACK_IMPORTED_MODULE_5_moment___default()(dateDate).locale('ru').format('D MMMM YYYY [года]');
     }
     changeTest() {
     }
@@ -13603,6 +16526,33 @@ let TopmenuComponent = class TopmenuComponent extends __WEBPACK_IMPORTED_MODULE_
         else {
             return false;
         }
+    }
+    filterRankGain(rank, person) {
+        let allow = false;
+        if (person == null || person.actualRank == null) {
+            return true;
+        }
+        else {
+            if (rank.id <= person.actualRank.id) {
+                return false;
+            }
+            // Рядовой и младший начальствующий состав
+            if (person.actualRank.positioncategory == 1 || person.actualRank.positioncategory == 2) {
+                // Если выше лейтенанта, не отображать
+                if (rank.id > 9) {
+                    return false;
+                }
+                // Остальные
+            }
+            else {
+                // Допускает только на одно звание выше. Но при этом не допускает полковника и генералов, так как их присваивает только президент.
+                if (rank.id > person.actualRank.id + 1 || rank.id >= 14) {
+                    return false;
+                }
+            }
+            return true;
+        }
+        //return false;
     }
     getSubject(subject) {
         if (subject == null || subject == 0) {
@@ -13630,6 +16580,9 @@ let TopmenuComponent = class TopmenuComponent extends __WEBPACK_IMPORTED_MODULE_
         else {
             return "суток";
         }
+    }
+    getAllPersondecreeblocksubs(persondecreeblocksubs) {
+        return true;
     }
     /**
      * Определяем, выводить календарный день, календарного дня или календарных дней
@@ -13726,6 +16679,44 @@ let TopmenuComponent = class TopmenuComponent extends __WEBPACK_IMPORTED_MODULE_
             return "лет";
         }
     }
+    jobperiodvacationinitializeAll(persondecreeblock) {
+        if (persondecreeblock == null || persondecreeblock.person == null || persondecreeblock.person.jobperiods == null) {
+            return;
+        }
+        let lastJobperiod = null;
+        persondecreeblock.person.jobperiods.forEach(p => {
+            let least = 2000;
+            if (p.vacationdaystransferleft > p.vacationdaysgivenclear) {
+                least = p.vacationdaysgivenclear;
+            }
+            else {
+                least = p.vacationdaystransferleft;
+            }
+            p.vacationselecteddays = least;
+            lastJobperiod = p;
+            p.vacationselectedshow = true;
+            p.vacationmax = least;
+        });
+        if (lastJobperiod != null) {
+            lastJobperiod.vacationselected = 1;
+            lastJobperiod.vacationselectedshow = false;
+        }
+    }
+    jobperiodvacationselect(jobperiod) {
+        jobperiod.vacationselecteddays = jobperiod.vacationdaystransferleft;
+    }
+    getVacationtype(vacationtype) {
+        if (vacationtype == null || vacationtype == 0) {
+            return null;
+        }
+        let vtype = this.vacations.find(p => p.id == vacationtype);
+        if (vtype != null) {
+            return vtype;
+        }
+        else {
+            return null;
+        }
+    }
     getCountry(country) {
         if (country == null || country == 0) {
             return null;
@@ -13738,8 +16729,229 @@ let TopmenuComponent = class TopmenuComponent extends __WEBPACK_IMPORTED_MODULE_
             return null;
         }
     }
+    jobperiodvacationchange(event, jobperiod, persondecreeblock) {
+        let input = event.target;
+        if (persondecreeblock == null || persondecreeblock.person == null || persondecreeblock.person.jobperiods == null) {
+            return;
+        }
+        let count = 0;
+        persondecreeblock.person.jobperiods.forEach(p => {
+            if (p.vacationselected > 0 && p.vacationselecteddays != null) {
+                count = count + Number.parseInt(p.vacationselecteddays.toString());
+            }
+        });
+        if (jobperiod.vacationselecteddays != null && jobperiod.vacationselecteddays > jobperiod.vacationmax) {
+            jobperiod.vacationselecteddays = jobperiod.vacationmax;
+            input.value = jobperiod.vacationselecteddays;
+        }
+        else if (jobperiod.vacationselecteddays != null && jobperiod.vacationselecteddays < 0) {
+            jobperiod.vacationselecteddays = 0;
+            input.value = 0;
+        }
+        //persondecreeblock.optionnumber1 = 5;
+    }
     getRefVacationinput(index) {
         return "refvacationinput" + index;
+    }
+    /**
+     * Так как мы не можем передать jobperiod'ы в persondecreeoperation, мы превращаем их в строковый эквивалент
+     *
+     * @param persondecreeblock
+     */
+    stringifyJobperiods(persondecreeblock) {
+        if (persondecreeblock == null || persondecreeblock.person == null || persondecreeblock.person.jobperiods == null) {
+            return;
+        }
+        let str = "";
+        persondecreeblock.person.jobperiods.forEach(p => {
+            if (p.vacationselected > 0 && p.vacationselecteddays != null && p.vacationselecteddays > 0) {
+                //alert(p.start);
+                //str += new Date(p.start).getFullYear().toString(); // вначале записываем год.
+                str += this.printDate(p.start); // вначале записываем  начало периода.
+                str += "+"; // разделитель между периодами.
+                str += this.printDate(p.end); //  потом окончание периода.
+                str += "%"; // разделитель внутри одного jobperiod
+                str += p.vacationselecteddays;
+                str += ";";
+            }
+        });
+        if (str.length > 0) {
+            str = str.slice(0, -1);
+        }
+        persondecreeblock.optionstring5 = str;
+    }
+    /**
+     * Здесь генерируем текст на вроде "часть основного отпуска за 2020 год" или "часть основного отпуска за 2019 и 2020 года"
+     * или дополнительный день отдыха за ранее отработанное время
+     * @param persondecreeoperation
+     */
+    provideblocksubtext(persondecreeblocksub, decreeoperation) {
+        let str = "";
+        if (persondecreeblocksub.persondecreeblocksubtype > 0) {
+            // отпуск
+            if (persondecreeblocksub.persondecreeblocksubtype == 11) {
+                let vacationtype = this.getVacationtype(persondecreeblocksub.subvaluenumber1);
+                str += vacationtype.name2;
+                if (vacationtype.main > 0 && vacationtype.military) {
+                    if (persondecreeblocksub.subvaluestring1.length > 0 && persondecreeblocksub.subvaluestring2.length > 0) {
+                        str += " за " + this.getPeriodYearFromString(persondecreeblocksub.subvaluestring1) + " и " + this.getPeriodYearFromString(persondecreeblocksub.subvaluestring2) + " года:";
+                    }
+                    else if (persondecreeblocksub.subvaluestring1.length > 0) {
+                        str += " за " + this.getPeriodYearFromString(persondecreeblocksub.subvaluestring1) + " год:";
+                    }
+                    else {
+                        str += ":";
+                    }
+                }
+                // дополнительный день отдыха
+            }
+            else if (persondecreeblocksub.persondecreeblocksubtype == 12) {
+                str += "дополнительный день отдыха за ранее отработанное время:";
+            }
+            else if (persondecreeblocksub.persondecreeblocksubtype == 15) {
+                str += "дополнительныe дни отдыха за ранее отработанное время:";
+            }
+        }
+        return str;
+    }
+    /**
+    * Здесь генерируем текст на вроде "часть основного отпуска за 2020 год" или "часть основного отпуска за 2019 и 2020 года"
+    * или дополнительный день отдыха за ранее отработанное время
+    * @param persondecreeoperation
+    */
+    provideSetSubBlockText(persondecreeblocksub, decreeoperation) {
+        let str = "";
+        if (persondecreeblocksub.persondecreeblocksubtype == 1) {
+            str += "в соответствии со статьей 43 Закона Республики Беларусь от 14 июня 2003 г. «О государственной службе в Республике Беларусь» стаж государственной службы";
+            return str;
+        }
+        if (persondecreeblocksub.persondecreeblocksubtype == 2) {
+            str += "с " + this.printDateDocument(decreeoperation.optiondate1) + " (на период действия дисциплинарного взыскания) ежемесячную премию в размере " + decreeoperation.optionnumber2 + " % оклада денежного содержания.";
+            return str;
+        }
+        if (persondecreeblocksub.persondecreeblocksubtype == 3) {
+            str += "стаж работы ";
+            return str;
+        }
+        if (persondecreeblocksub.persondecreeblocksubtype == 4) {
+            str += "выслуга лет";
+            return str;
+        }
+        if (persondecreeblocksub.persondecreeblocksubtype == 5) {
+            str += "в соответствии с приказом МЧС Республики Беларусь от 31.01.2012 № 240 дсп «Об утверждении инструкции о порядке и условиях выплаты денежного довольствия лицам рядового и начальствующего состава органов и подразделений по чрезвычайным ситуациям Республики Беларусь» за высокие показатели в учебе по итогам "
+                + decreeoperation.optionstring3 + " учебного года повышение должностного оклада с ";
+            let count;
+            return str;
+        }
+    }
+    provideEnrollAStudent(persondecreeblocksub) {
+        let str = "";
+        if (persondecreeblocksub.subvaluestring1 == "Курсант") {
+            str += "курсантами " + persondecreeblocksub.subvaluestring2 + "а специальностей " + this.getFullEducationlevel(persondecreeblocksub.subvaluenumber4) + " " + this.getEducationstage(persondecreeblocksub.subvaluenumber1) + " (" + this.getEducationtype(persondecreeblocksub.subvaluenumber2) + " форма обучения) государственного учреждения образования «Университет гражданской защиты Министерства по чрезвычайным ситуациям Республики Беларусь» с " + this.printDateDocument(persondecreeblocksub.subvaluedate2) + " абитуриентов, успешно выдержавших вступительные испытания, профессиональный отбор, прошедших по конкурсу и заключивших контракт о службе, присвоив первое специальное звание « " + this.getRank(persondecreeblocksub.subvaluenumber3) + " »:";
+            return str;
+        }
+        if (persondecreeblocksub.subvaluedate1 != null) {
+            str += "в соответствии с Правилами приема лиц для получения " + this.getFullEducationlevel(persondecreeblocksub.subvaluenumber1) + " " + this.getEducationstage(persondecreeblocksub.subvaluenumber2) + " , утвержденными Указом Президента Республики Беларусь от 07.02.2006 № 80, Порядком приема в государственное учреждение образования «Университет гражданской защиты Министерства по чрезвычайным ситуациям Республики Беларусь» для получения " + this.getFullEducationlevel(persondecreeblocksub.subvaluenumber1) + " " + this.getEducationstage(persondecreeblocksub.subvaluenumber2) + " в 2020 году, утвержденным 09.09.2019, и на основании решения приемной комиссии университета (протокол заседания от " + this.printDateDocument(persondecreeblocksub.subvaluedate1) + " №" + persondecreeblocksub.subvaluenumber3 + "):";
+            return str;
+        }
+        return str;
+    }
+    provideTranslateSubBlockText(persondecreeblocksub) {
+        let str = "";
+        str += "в соответствии с пунктом 44 Правил проведения аттестации студентов, курсантов, слушателей при освоении содержания образовательных программ высшего образования, утвержденных постановлением Министерства образования Республики Беларусь от 20.05.2012 № 53 по результатам " + persondecreeblocksub.subvaluestring1 + " :";
+        return str;
+    }
+    provideDeductSubBlockText(persondecreeblocksub) {
+        let str = "в соответствии с подпунктом ";
+        if (persondecreeblocksub) {
+            if (this.dismissalclauses[persondecreeblocksub.persondecreeblocksubtype].paragraph > 170 && this.dismissalclauses[persondecreeblocksub.persondecreeblocksubtype].paragraph < 180) {
+                str += this.dismissalclauses[persondecreeblocksub.persondecreeblocksubtype].paragraph + "." + this.dismissalclauses[persondecreeblocksub.persondecreeblocksubtype].subparagraph + " пункта " + this.dismissalclauses[persondecreeblocksub.persondecreeblocksubtype].paragraph + " Положении о прохождении службы в органах и подразделениях по чрезвычайным ситуациям Республики Беларусь (" + this.dismissalclauses[persondecreeblocksub.persondecreeblocksubtype].titleofarticles + ") ";
+                if (persondecreeblocksub.subvaluenumber1 == 1) {
+                    str += " и уволить в запас (с постановкой на воинский учёт) из органов подразделений по чрезвычайным ситуациям по подпункту ";
+                    if (this.dismissalclauses[persondecreeblocksub.subvaluenumber2].paragraph > 170 && this.dismissalclauses[persondecreeblocksub.subvaluenumber2].paragraph < 180) {
+                        str += this.dismissalclauses[persondecreeblocksub.subvaluenumber2].paragraph + "." + this.dismissalclauses[persondecreeblocksub.subvaluenumber2].subparagraph + " пункта " + this.dismissalclauses[persondecreeblocksub.subvaluenumber2].paragraph + " Положении о прохождении службы в органах и подразделениях по чрезвычайным ситуациям Республики Беларусь (" + this.dismissalclauses[persondecreeblocksub.subvaluenumber2].titleofarticles + ") ";
+                        return str;
+                    }
+                    else if (this.dismissalclauses[persondecreeblocksub.subvaluenumber2].paragraph > 0 && this.dismissalclauses[persondecreeblocksub.subvaluenumber2].paragraph < 7) {
+                        str += this.dismissalclauses[persondecreeblocksub.subvaluenumber2].paragraph + "." + this.dismissalclauses[persondecreeblocksub.subvaluenumber2].subparagraph + " пункта " + this.dismissalclauses[persondecreeblocksub.subvaluenumber2].paragraph + " статьи 79 Кодекса Республики Беларусь об образовании (" + this.dismissalclauses[persondecreeblocksub.subvaluenumber2].titleofarticles + ") ";
+                        return str;
+                    }
+                    else
+                        return str;
+                }
+                else
+                    return str;
+            }
+            else if (this.dismissalclauses[persondecreeblocksub.persondecreeblocksubtype].paragraph > 0 && this.dismissalclauses[persondecreeblocksub.persondecreeblocksubtype].paragraph < 7) {
+                str += this.dismissalclauses[persondecreeblocksub.persondecreeblocksubtype].paragraph + "." + this.dismissalclauses[persondecreeblocksub.persondecreeblocksubtype].subparagraph + " пункта " + this.dismissalclauses[persondecreeblocksub.persondecreeblocksubtype].paragraph + " статьи 79 Кодекса Республики Беларусь об образовании (" + this.dismissalclauses[persondecreeblocksub.persondecreeblocksubtype].titleofarticles + ") ";
+                if (persondecreeblocksub.subvaluenumber1 == 1) {
+                    str += " и уволить в запас (с постановкой на воинский учёт) из органов подразделений по чрезвычайным ситуациям по подпункту ";
+                    if (this.dismissalclauses[persondecreeblocksub.subvaluenumber2].paragraph > 170 && this.dismissalclauses[persondecreeblocksub.subvaluenumber2].paragraph < 180) {
+                        str += this.dismissalclauses[persondecreeblocksub.subvaluenumber2].paragraph + "." + this.dismissalclauses[persondecreeblocksub.subvaluenumber2].subparagraph + " пункта " + this.dismissalclauses[persondecreeblocksub.subvaluenumber2].paragraph + " Положении о прохождении службы в органах и подразделениях по чрезвычайным ситуациям Республики Беларусь (" + this.dismissalclauses[persondecreeblocksub.subvaluenumber2].titleofarticles + ") ";
+                        return str;
+                    }
+                    else if (this.dismissalclauses[persondecreeblocksub.subvaluenumber2].paragraph > 0 && this.dismissalclauses[persondecreeblocksub.subvaluenumber2].paragraph < 7) {
+                        str += this.dismissalclauses[persondecreeblocksub.subvaluenumber2].paragraph + "." + this.dismissalclauses[persondecreeblocksub.subvaluenumber2].subparagraph + " пункта " + this.dismissalclauses[persondecreeblocksub.subvaluenumber2].paragraph + " статьи 79 Кодекса Республики Беларусь об образовании (" + this.dismissalclauses[persondecreeblocksub.subvaluenumber2].titleofarticles + ") ";
+                        return str;
+                    }
+                    else
+                        return str;
+                }
+                else
+                    return str;
+            }
+            else
+                return str;
+        }
+    }
+    provideUpSubBlockText(persondecreeblocksub) {
+        let str = "";
+        str += "в соответствии с пунктом " + persondecreeblocksub.subvaluestring1 + " приказа Министерства по чрезвычайным ситуациям Республики Беларусь «Об оплате труда лиц рядового и начальствующего состава органов и подразделений по чрезвычайным ситуациям Республики Беларусь» от 09.07.2013 № 180 дсп должностной оклад курсантам, признанным в соответствии с законодательством детьми-сиротами, детьми, оставшимися без попечения родителей, а также лицами из числа детей-сирот и детей, оставшихся без попечения родителей, ";
+        return str;
+    }
+    provideRestoreSubBlockText(persondecreeblocksub) {
+        let str = "";
+        str += "в соответствии с пунктом 2 статьи 80 Кодекса Республики Беларусь об образовании на " + persondecreeblocksub.subvaluestring2 + " по специальности « " + persondecreeblocksub.subvaluestring1 + " » (на условиях оплаты):";
+        return str;
+    }
+    isSocialVacation(persondecreeoperation) {
+        let vacationtype = this.getVacationtype(persondecreeoperation.subvaluenumber1);
+        if (vacationtype == null) {
+            return false;
+        }
+        return vacationtype.social;
+    }
+    /**
+     * Информация в скобочках "(с учетом 1 дня на проезд)", если есть дни на проезд и/или если части отпуска за разные года
+     * @param persondecreeoperation
+     */
+    vacationanyadditionalinfo(persondecreeoperation) {
+        let str = "";
+        let anycondition = false;
+        // взято по 2 части с 2 разных лет
+        if (persondecreeoperation.subvaluestring1.length > 0 && persondecreeoperation.subvaluestring2.length > 0) {
+            if (!anycondition) {
+                str += " (";
+            }
+            anycondition = true;
+            str += persondecreeoperation.optionnumber4 + " календарных дней за " + this.getPeriodYearFromString(persondecreeoperation.subvaluestring1) + " год, ";
+            str += persondecreeoperation.optionnumber5 + " календарных дней за " + this.getPeriodYearFromString(persondecreeoperation.subvaluestring2) + " год";
+        }
+        // есть дни на проезд
+        if (persondecreeoperation.optionnumber2 > 0) {
+            if (!anycondition) {
+                str += " (";
+            }
+            else {
+                str += ", ";
+            }
+            str += "с учетом " + persondecreeoperation.optionnumber2 + " " + this.getDayPluralString(persondecreeoperation.optionnumber2) + " на проезд";
+            anycondition = true;
+        }
+        if (anycondition) {
+            str += ")";
+        }
+        return str;
     }
     getPeriodStartFromString(jobperiodstring) {
         return jobperiodstring.split('+')[0];
@@ -13758,12 +16970,138 @@ let TopmenuComponent = class TopmenuComponent extends __WEBPACK_IMPORTED_MODULE_
         }
         return jobperiodstring.split('+')[0].split('.')[2];
     }
+    vacationcivilperiodsadditionalinfo(persondecreeoperation) {
+        let str = "";
+        let anycondition = false;
+        // взято по 2 части с 2 разных лет
+        if (persondecreeoperation.subvaluestring1.length > 0 && persondecreeoperation.subvaluestring2.length > 0) {
+            if (!anycondition) {
+                str += " (";
+            }
+            anycondition = true;
+            str += persondecreeoperation.optionnumber4 + " календарных дней за период работы с " + this.printDateDocumentFromString(this.getPeriodStartFromString(persondecreeoperation.subvaluestring1))
+                + " по " + this.printDateDocumentFromString(this.getPeriodEndFromString(persondecreeoperation.subvaluestring1)) + " и ";
+            str += persondecreeoperation.optionnumber5 + " календарных дней за период работы с " + this.printDateDocumentFromString(this.getPeriodStartFromString(persondecreeoperation.subvaluestring2))
+                + " по " + this.printDateDocumentFromString(this.getPeriodEndFromString(persondecreeoperation.subvaluestring2));
+        }
+        else if (persondecreeoperation.subvaluestring1.length > 0) {
+            str += " за период работы с " + this.printDateDocumentFromString(this.getPeriodStartFromString(persondecreeoperation.subvaluestring1))
+                + " по " + this.printDateDocumentFromString(this.getPeriodEndFromString(persondecreeoperation.subvaluestring1));
+        }
+        if (anycondition) {
+            str += ")";
+        }
+        return str;
+    }
+    vacationcivilholidaysadditionalinfo(persondecreeoperation) {
+        if (persondecreeoperation.optionnumber8 == null || persondecreeoperation.optionnumber8 == 0) {
+            return "";
+        }
+        let str = "(";
+        str += "с учетом " + persondecreeoperation.optionnumber8 + " неоплачиваемого праздничного дня";
+        str += ")";
+        return str;
+    }
+    vacationtraveltext(persondecreeoperation) {
+        let str = "";
+        //if (persondecreeoperation.optionarray1Array.length > 0 || persondecreeoperation.optionstring2.length > 0) {
+        //    str += " с выездом в ";
+        //    // Если есть страна
+        //    if (persondecreeoperation.optionarray1Array.length > 0) {
+        //        //let country: Country = this.getCountry(persondecreeoperation.optionnumber3); - старый код, когда отображались единично страны
+        //        //str += country.name4;
+        //        let muiltiple: boolean = false;
+        //        persondecreeoperation.optionarray1Array.forEach(a => {
+        //            if (muiltiple) {
+        //                str += ", "
+        //            }
+        //            let country: Country = this.getCountry(a);
+        //            str += country.name4;
+        //            muiltiple = true;
+        //        })
+        //    // если страны нет, но есть город, то его в скобки не берем.
+        //    } else {
+        //        str += persondecreeoperation.optionstring2;
+        //    }
+        //    // Если есть и страна и город пребывания. Здесь город берем в скобки
+        //    if (persondecreeoperation.optionarray1Array.length > 0 && persondecreeoperation.optionstring2.length > 0) {
+        //        str += " (" + persondecreeoperation.optionstring2 + ")";
+        //    }
+        //}
+        if (persondecreeoperation.countrycitiesList != null && persondecreeoperation.countrycitiesList.length > 0) {
+            let anyCountry = false;
+            let anyCity = false;
+            persondecreeoperation.countrycitiesList.forEach(c => {
+                let anyCountryHere = false;
+                let anyCityHere = false;
+                // Уже были страны или города до этого. То есть продолжение списка.
+                if (anyCountry || anyCity) {
+                    str += ", ";
+                }
+                // записана ли страна
+                if (c.country != null && c.country > 0) {
+                    anyCountryHere = true;
+                    if (!anyCountry && !anyCity) {
+                        str += " с выездом в ";
+                    }
+                    if (!anyCountry) {
+                        anyCountry = true;
+                    }
+                    let country = this.getCountry(c.country);
+                    str += country.name4;
+                }
+                c.cities.forEach(city => {
+                    if (city.length > 0) {
+                        if (!anyCountry && !anyCity) {
+                            str += " с выездом в ";
+                        }
+                        if (!anyCity) {
+                            anyCity = true;
+                        }
+                        if (!anyCityHere && anyCountryHere) {
+                            str += " (";
+                        }
+                        if (anyCityHere) {
+                            str += ", ";
+                        }
+                        anyCityHere = true;
+                    }
+                    str += city;
+                });
+                if (anyCountryHere && anyCityHere) {
+                    str += ")";
+                }
+            });
+        }
+        return str;
+    }
+    countTripfinaldate(persondecreeblock) {
+        if (persondecreeblock.optiondate1String == null) {
+            return null;
+        }
+        let dateend = new Date(persondecreeblock.optiondate1String);
+        if (persondecreeblock.optionnumber2 == null) {
+            persondecreeblock.optionnumber2 = 0;
+        }
+        let durationlocal = persondecreeblock.optionnumber2;
+        durationlocal = Number.parseInt(durationlocal.toString());
+        let addition = durationlocal - 1;
+        if (addition < 0) {
+            addition = 0;
+        }
+        dateend.setDate(dateend.getDate() + addition);
+        persondecreeblock.optiondate3String = this.toDateInputValue(dateend);
+        return this.toDateInputValue(dateend);
+    }
     addCity(contrycities) {
         contrycities.cities.push(contrycities.citytoadd);
         contrycities.citytoadd = "";
     }
     deleteCity(city, countrycities) {
         countrycities.cities = countrycities.cities.filter(c => c != city);
+    }
+    deleteCountrycities(countrycities, persondecreeBlock) {
+        persondecreeBlock.countrycitiesList = persondecreeBlock.countrycitiesList.filter(c => c != countrycities);
     }
     ordernumbertypeSearch(queryString, cb) {
         var links = this.OrdernumbertypesToArrayFilterable();
@@ -13805,15 +17143,164 @@ let TopmenuComponent = class TopmenuComponent extends __WEBPACK_IMPORTED_MODULE_
         });
         return links;
     }
-    rewrite() {
-        fetch('api/ReWrite', {
+    getVacationtypeObject(vacationtype) {
+        if (vacationtype == null || vacationtype == 0) {
+            return null;
+        }
+        let element = this.vacations.find(t => t.id == vacationtype);
+        if (element != null) {
+            return element;
+        }
+        else {
+            return null;
+        }
+    }
+    isMaternity(vacationid) {
+        if (vacationid == null || vacationid == 0) {
+            return false;
+        }
+        let vacationtype = this.getVacationtypeObject(vacationid);
+        if (vacationtype == null) {
+            return false;
+        }
+        if (vacationtype.maternity == 1) {
+            return true;
+        }
+    }
+    vacationDateendChange(persondecreeblock) {
+        // persondecreeBlock.optiondate1String - начало
+        // persondecreeBlock.optiondate3String
+        if (persondecreeblock.optiondate3String == null || persondecreeblock.optiondate3String.length == 0 || persondecreeblock.optiondate1String == null || persondecreeblock.optiondate1String.length == 0) {
+            return;
+        }
+        let diff = __WEBPACK_IMPORTED_MODULE_5_moment___default()(persondecreeblock.optiondate3String).diff(persondecreeblock.optiondate1String, 'days');
+        persondecreeblock.optionnumber1 = diff;
+    }
+    numpersonalchange(event, numpersonal) {
+        //alert(numpersonal);
+        let input = event.target;
+        if (numpersonal == null) {
+            return;
+        }
+        numpersonal = numpersonal.toUpperCase();
+        if (numpersonal.length == 1) {
+            numpersonal += "-";
+        }
+        if (numpersonal.length == 2) {
+            numpersonal = numpersonal.substring(0, 1) + "-";
+        }
+        if (numpersonal.length > 2) {
+            numpersonal = numpersonal.substring(0, 1) + "-" + numpersonal.substring(2);
+        }
+        if (numpersonal.length > 0 && !this.isLetterCyrillic(numpersonal[0])) {
+            numpersonal = numpersonal.substring(0, 0);
+        }
+        if (numpersonal.length > 2 && !this.isNum(numpersonal[2])) {
+            numpersonal = numpersonal.substring(0, 2);
+        }
+        if (numpersonal.length > 3 && !this.isNum(numpersonal[3])) {
+            numpersonal = numpersonal.substring(0, 3);
+        }
+        if (numpersonal.length > 4 && !this.isNum(numpersonal[4])) {
+            numpersonal = numpersonal.substring(0, 4);
+        }
+        if (numpersonal.length > 5 && !this.isNum(numpersonal[5])) {
+            numpersonal = numpersonal.substring(0, 5);
+        }
+        if (numpersonal.length > 6 && !this.isNum(numpersonal[6])) {
+            numpersonal = numpersonal.substring(0, 6);
+        }
+        input.value = numpersonal;
+        //alert(input.value);
+        //persondecreeblock.optionnumber1 = 5;
+    }
+    getCourse(semestr) {
+        if (semestr > 0 && semestr < 3) {
+            return 1;
+        }
+        else if (semestr < 5) {
+            return 2;
+        }
+        else if (semestr < 7) {
+            return 3;
+        }
+        else if (semestr < 9) {
+            return 4;
+        }
+        return 0;
+    }
+    checkDecreeOperations() {
+        console.log(JSON.stringify((this.decreeId)));
+        fetch('/api/DecreeOperations/Checked', {
             method: 'post',
-            body: JSON.stringify((this.user)),
+            body: JSON.stringify((this.decreeId)),
             credentials: 'include',
             headers: new Headers({
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             })
+        }).then(response => { return response.json(); })
+            .then((response) => {
+            __WEBPACK_IMPORTED_MODULE_0_vue__["default"].notify(response);
+            this.checkedDecreeResualt = response.split(':')[1];
+        });
+    }
+    special_acces() {
+        var actual_user = this.$store.state.user;
+        if (actual_user.id == 1 || actual_user.id == 49) {
+            return true;
+        }
+        return false;
+    }
+    unsigned_decree() {
+        console.log(this.decreeId);
+        fetch('/api/Decrees/unsigned', {
+            method: 'post',
+            body: JSON.stringify((this.decreeId)),
+            credentials: 'include',
+            headers: new Headers({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            })
+        }).then(response => { return response.json(); })
+            .then((response) => {
+            __WEBPACK_IMPORTED_MODULE_0_vue__["default"].notify(response);
+            this.modalDecreeMenuSignedVisible = false;
+            this.decreesSignedList = [];
+            this.modalDecreesSignedMenuVisible = false;
+        });
+    }
+    changeusereditorflag() {
+        console.log(this.value5);
+        var user = this.$store.state.user;
+        user.onlyreadflagtoeditor = this.value5 === true ? 1 : 0;
+        fetch('/api/Users', {
+            method: 'post',
+            body: JSON.stringify(user),
+            credentials: 'include',
+            headers: new Headers({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            })
+        })
+            .then(response => { return response.json(); })
+            .then((response) => {
+            __WEBPACK_IMPORTED_MODULE_0_vue__["default"].forceStructureUpdate = true;
+            __WEBPACK_IMPORTED_MODULE_0_vue__["default"].notify(response);
+        }).then(r => {
+            fetch('/api/Users/update', {
+                method: 'post',
+                body: JSON.stringify(user),
+                credentials: 'include',
+                headers: new Headers({
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                })
+            }).then(response => { return response.json(); })
+                .then(data => {
+                this.value5 = data.onlyreadflagtoeditor == 1 ? true : false;
+                this.$store.state.setUser(data);
+            });
         });
     }
 };
@@ -13832,10 +17319,10 @@ __decorate([
 TopmenuComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_vue_property_decorator__["Component"])({
         components: {
-            AdminPanel: __webpack_require__(88),
-            Structuremanagingpanel: __webpack_require__(14),
-            Settingspanel: __webpack_require__(99),
-            Pmrequestpanel: __webpack_require__(96)
+            AdminPanel: __webpack_require__(144),
+            Structuremanagingpanel: __webpack_require__(13),
+            Settingspanel: __webpack_require__(155),
+            Pmrequestpanel: __webpack_require__(152)
         }
     })
 ], TopmenuComponent);
@@ -13843,7 +17330,7 @@ TopmenuComponent = __decorate([
 
 
 /***/ }),
-/* 67 */
+/* 123 */
 /***/ (function(module, exports) {
 
 /*
@@ -13899,7 +17386,7 @@ module.exports = function() {
 
 
 /***/ }),
-/* 68 */
+/* 124 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14017,19 +17504,19 @@ exports.default = {
 };
 
 /***/ }),
-/* 69 */
+/* 125 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = {
-  XmlEntities: __webpack_require__(71),
-  Html4Entities: __webpack_require__(70),
-  Html5Entities: __webpack_require__(12),
-  AllHtmlEntities: __webpack_require__(12)
+  XmlEntities: __webpack_require__(127),
+  Html4Entities: __webpack_require__(126),
+  Html5Entities: __webpack_require__(11),
+  AllHtmlEntities: __webpack_require__(11)
 };
 
 
 /***/ }),
-/* 70 */
+/* 126 */
 /***/ (function(module, exports) {
 
 var HTML_ALPHA = ['apos', 'nbsp', 'iexcl', 'cent', 'pound', 'curren', 'yen', 'brvbar', 'sect', 'uml', 'copy', 'ordf', 'laquo', 'not', 'shy', 'reg', 'macr', 'deg', 'plusmn', 'sup2', 'sup3', 'acute', 'micro', 'para', 'middot', 'cedil', 'sup1', 'ordm', 'raquo', 'frac14', 'frac12', 'frac34', 'iquest', 'Agrave', 'Aacute', 'Acirc', 'Atilde', 'Auml', 'Aring', 'Aelig', 'Ccedil', 'Egrave', 'Eacute', 'Ecirc', 'Euml', 'Igrave', 'Iacute', 'Icirc', 'Iuml', 'ETH', 'Ntilde', 'Ograve', 'Oacute', 'Ocirc', 'Otilde', 'Ouml', 'times', 'Oslash', 'Ugrave', 'Uacute', 'Ucirc', 'Uuml', 'Yacute', 'THORN', 'szlig', 'agrave', 'aacute', 'acirc', 'atilde', 'auml', 'aring', 'aelig', 'ccedil', 'egrave', 'eacute', 'ecirc', 'euml', 'igrave', 'iacute', 'icirc', 'iuml', 'eth', 'ntilde', 'ograve', 'oacute', 'ocirc', 'otilde', 'ouml', 'divide', 'oslash', 'ugrave', 'uacute', 'ucirc', 'uuml', 'yacute', 'thorn', 'yuml', 'quot', 'amp', 'lt', 'gt', 'OElig', 'oelig', 'Scaron', 'scaron', 'Yuml', 'circ', 'tilde', 'ensp', 'emsp', 'thinsp', 'zwnj', 'zwj', 'lrm', 'rlm', 'ndash', 'mdash', 'lsquo', 'rsquo', 'sbquo', 'ldquo', 'rdquo', 'bdquo', 'dagger', 'Dagger', 'permil', 'lsaquo', 'rsaquo', 'euro', 'fnof', 'Alpha', 'Beta', 'Gamma', 'Delta', 'Epsilon', 'Zeta', 'Eta', 'Theta', 'Iota', 'Kappa', 'Lambda', 'Mu', 'Nu', 'Xi', 'Omicron', 'Pi', 'Rho', 'Sigma', 'Tau', 'Upsilon', 'Phi', 'Chi', 'Psi', 'Omega', 'alpha', 'beta', 'gamma', 'delta', 'epsilon', 'zeta', 'eta', 'theta', 'iota', 'kappa', 'lambda', 'mu', 'nu', 'xi', 'omicron', 'pi', 'rho', 'sigmaf', 'sigma', 'tau', 'upsilon', 'phi', 'chi', 'psi', 'omega', 'thetasym', 'upsih', 'piv', 'bull', 'hellip', 'prime', 'Prime', 'oline', 'frasl', 'weierp', 'image', 'real', 'trade', 'alefsym', 'larr', 'uarr', 'rarr', 'darr', 'harr', 'crarr', 'lArr', 'uArr', 'rArr', 'dArr', 'hArr', 'forall', 'part', 'exist', 'empty', 'nabla', 'isin', 'notin', 'ni', 'prod', 'sum', 'minus', 'lowast', 'radic', 'prop', 'infin', 'ang', 'and', 'or', 'cap', 'cup', 'int', 'there4', 'sim', 'cong', 'asymp', 'ne', 'equiv', 'le', 'ge', 'sub', 'sup', 'nsub', 'sube', 'supe', 'oplus', 'otimes', 'perp', 'sdot', 'lceil', 'rceil', 'lfloor', 'rfloor', 'lang', 'rang', 'loz', 'spades', 'clubs', 'hearts', 'diams'];
@@ -14182,7 +17669,7 @@ module.exports = Html4Entities;
 
 
 /***/ }),
-/* 71 */
+/* 127 */
 /***/ (function(module, exports) {
 
 var ALPHA_INDEX = {
@@ -14343,7 +17830,7 @@ module.exports = XmlEntities;
 
 
 /***/ }),
-/* 72 */
+/* 128 */
 /***/ (function(module, exports) {
 
 // shim for using process in browser
@@ -14533,7 +18020,7 @@ process.umask = function() { return 0; };
 
 
 /***/ }),
-/* 73 */
+/* 129 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14624,7 +18111,7 @@ var isArray = Array.isArray || function (xs) {
 
 
 /***/ }),
-/* 74 */
+/* 130 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14716,18 +18203,18 @@ var objectKeys = Object.keys || function (obj) {
 
 
 /***/ }),
-/* 75 */
+/* 131 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-exports.decode = exports.parse = __webpack_require__(73);
-exports.encode = exports.stringify = __webpack_require__(74);
+exports.decode = exports.parse = __webpack_require__(129);
+exports.encode = exports.stringify = __webpack_require__(130);
 
 
 /***/ }),
-/* 76 */
+/* 132 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(process, global) {/*! *****************************************************************************
@@ -15855,15 +19342,15 @@ var Reflect;
             Function("return this;")());
 })(Reflect || (Reflect = {}));
 //# sourceMappingURL=Reflect.js.map
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(72), __webpack_require__(128)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(128), __webpack_require__(184)))
 
 /***/ }),
-/* 77 */
+/* 133 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-var ansiRegex = __webpack_require__(49)();
+var ansiRegex = __webpack_require__(105)();
 
 module.exports = function (str) {
 	return typeof str === 'string' ? str.replace(ansiRegex, '') : str;
@@ -15871,7 +19358,7 @@ module.exports = function (str) {
 
 
 /***/ }),
-/* 78 */
+/* 134 */
 /***/ (function(module, exports) {
 
 /*
@@ -16123,23 +19610,23 @@ function updateLink(linkElement, obj) {
 
 
 /***/ }),
-/* 79 */
+/* 135 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(11);
+var content = __webpack_require__(8);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // add the styles to the DOM
-var update = __webpack_require__(78)(content, {});
+var update = __webpack_require__(134)(content, {});
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(true) {
 	// When the styles change, update the <style> tags
 	if(!content.locals) {
-		module.hot.accept(11, function() {
-			var newContent = __webpack_require__(11);
+		module.hot.accept(8, function() {
+			var newContent = __webpack_require__(8);
 			if(typeof newContent === 'string') newContent = [[module.i, newContent, '']];
 			update(newContent);
 		});
@@ -16149,49 +19636,49 @@ if(true) {
 }
 
 /***/ }),
-/* 80 */
+/* 136 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "f96a44b40f99ae4b63f275f1142f7c98.ttf";
 
 /***/ }),
-/* 81 */
+/* 137 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "9c46095118380d38f12e67c916b427f9.ttf";
 
 /***/ }),
-/* 82 */
+/* 138 */
 /***/ (function(module, exports) {
 
 module.exports = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAgAAAAIACAYAAAD0eNT6AAAACXBIWXMAAA3XAAAN1wFCKJt4AAAgAElEQVR42uzdaZBd93nn9+85595z97X3Dd3oxkpAAkGIokgJsuWFWsaJnUSVKs+LMS3XeGK9ssa2XJNKJRlpknkhT6JxpexkpjKCq5LyzDiZ0thTlbEsr7BEiqK4AARAorF1N3q9fff1nHPvOXnRDQ4picTWDfTy+1ShiCab3fc+53/P8/z/53+eAyIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiL3ylAI5F4sLdX6CYWPB3AowD8MxiFgHANzx77ogFZAcAOMWQKuGfjXqoOJKycMw9URFREVACIfYHG19fHA4NeB/wKw9sBbWguC4Pdtgt8fGkqu6giLiAoAkTsT5yAwb691/q5hBL8OnNmjb9OB4A993/9nB4ZTb+qoi4gKANnXisUg3e51/hCCz+2PagfXMIxfGxuM/SsdfRFRASD70sJa55BB74/BOL4P3/7XxwZiv2kYRk8jQURUAMi+cXul/dOYwR8Buf0ag4DgW27I+a9n8vmqRoSI7HWmQiDzq50ZzODf7+fkv1ENG8/bvegfaESIiAoA2fuz3iAwTcP/AyChaIAR8POLa+0vKBIiogJA9rSltfZvAh9XJN5VFBF8fWWlfVCREBEVALInza/UTwYGX1EkfkTKM4M/CIJAnw8RUQEge/DgW9bXgYgi8aMMOHt7rfN3FQkRUQEge8rSWvsTBPy0IvEBRYAR/HdBEFiKhIioAJA9wzeC/1FRuKujt9c6v6gwiIgKANHsX6sAIiIqAESzf60CiIioABDN/rUKICKiAkA0+9cqgIjIjp3cKAR7Q7nm5oH0B32P6/kf6frBHylaD/RBuRGPWs8HAXpYkOx3tVzaLikMKgDk8SX8GPBF4FngDDClqIjIIzIHvAK8CPxeLm23FRIVAPJokv+zwB8AhxUNEXnMZoFfyqXtFxWK3UV7AHZf8v8S8LdK/iKyQxwG/nbz3CRaAZBtSv4fYWPJLaRoiMgO0wWezaXtVxQKFQCytck/ArwKPKFoiMgOdRl4Kpe2HYVi59MlgN3jl5X8RWSHe2LzXCUqAGQLPaMQiIjOVaICYP/5iEIgIjpXyVbRHoBdYPP6fxNQO1oR2el6QEL7ALQCIFsjpuQvIruEtXnOEhUAIiIiogJAREREVACIiIiICgARERFRASAiIiIqAEREREQFgIiIiDwYPVXuMbm91jLYeIzmGeAAH9CUqeV0o2Hr4Wo1Pwjodnt4Xo9ut0cQ7JFAGhCyTMLhEOGQiWmqphV53Lye/+u311qdD/iWAJgHfgDMjg/GA0XtsZw+5REn/gHg68DPAent/F2O69FodHBcj17P3xfxNU2DcDhEKhElFotowInsfDXgPwC/Pj4YLygcKgD2avL/r4DfBwa28/e02g71RhvX7e7reIcsi2QySjIRxTA01EV2uALwa+OD8f9XoVABsNeS/98H/sV2/g7P67FeqtHt9hTwH1oVyOdSxKK2giGy8/3q+GD8XyoMKgD2SvKfAi4Cye36He2OS7FUJwh0Ke39ZNJx0qm4AiGyszWAD40Pxm8pFNs8OVIItj35G8A3tjP51+pt1os1Jf+7qNZaKpJEdr4k8I3Nc6eoANjVDgM/uX1JrUm11lSU71Gr7bBerCkQIjvbT26eO0UFwK52Zrt+sON61OptRfg+dRyPekNxE9mv505RAbCrB3EQBJTKDUX3AVVrLTxtlhRRAaACQLbRse34oZVqU7v9H7qAqisQIvvs3CkqAB6lLe+26LgejWZHkX1IrtvVpQCRfXTuFBUAu16t1lIQtki93tZdASKiAkB2Psf16DieArFFer6v1RQRUQEgmv1rFUBERAWAaPavVQARERUAotm/VgFERFQAiGb/WgUQEVEBIJr97/oYaxVARPYR3Wf5GBgGmIaBaRpYprHxSMYPeOxF4AeMDGYUuEfAMk1MS88gEdlWAQRAzw/w/QA/CFDtrQJg7wfcMrBDFsb95BjLwLK0WCMie2UWdKfg3vhLEIDb7dHtqQpQAbBHx7sdtghpdiki8t7zowGRsIVlBrheD5UBj4amlY+Ikr+IyF1mpJaBHbYUCBUAe4dlGkr+IiL3WATcuTQgKgB2fYwjqmhFRO7Z5jlT+UkFwK6f/acMFbMiIvfMMDbOnYqECoDdXgDo/j0REZ07VQDsuwCbRlpREBHRuVMFwD5jQERREBHRuVMFgIiIiKgAEBERERUAIiIiogJAREREVACIiIiICgARERFRASAiIiL3SI8DfkAvvjYfBg4D9gd9X8fxQuYWPdii47h4blePyrxHlmUSi0Yw9WARkV3H94PQi6/NP3mXb3OB2WdPH/AUsfunM+P9Jf3jwK8BHwWeZBsbVXQ6DrVaA9f18DwP1/UIAqX+BxEOh7DtMOFwmHg8RiqVwNADGkT2Cgd4HXgZ+P1nTx+4opCoANjKxG8CvwF8BYhu5++q15uUShXa7Y4Cv40FQS6XIZtNY5q6Ciayh3SA/x74Z8+ePuArHCoAHjb528C3gJ/Y3sTfYG2thOdpJetRMU2TXC5Df39OKwIie8tfA88/e/qAq1B8wDlQIbir/2G7k3+hUGRxcVXJ/xHzfZ9isczCwjK9Xk8BEdk7fmLz3C1aAXjg2f9Hge8C1nYloKWlNRqNpoL9mIXDYcbHh4lEbAVDZG/oAc89e/rAywqFVgAexP+0Xcm/1+sxN7eo5L9DeJ7H3NwirVZbwRDZG6zNc7ioALjv2b8BPL1dP39lZR3H0eWpnWRjRWaVXk97h0T2iKc3z+WiAuC+zACZ7fjBtVqDer2hCO9A3W6PlZWCAiGyN2Q2z+WiAuC+PLkdP7Tb7bK6qgSzk9XrDWo1FWgiOperANivktvxQ1dWClpi3gVWVwu6M0BE53IVALI12u0OjUZLgdgFej2fYrGiQIiICgB5eOvrJQVhF6lUqloFEBEVAPLws/9mU7eY7Sa+H2gVQERUAIhm/1oFEBFRASCa/WsVQEREBYBo9r+3VwG6Xa0CiIgKALkPrZZm/3thFaBU0iqAiOwtIYXg/oVDFtFomIgduutjZGthg9SxSQVtlzMMg0w2gWmqZhbZKYIgwHG7dDoenlbpVABsp75cgnwmgWXdexLoyyYUOBGRbdbr+ZSqTYplPWBNBcAWssMhRocyRCNhBUNEZAeyLJOBfIpUIsrSahXX6yood6H1zLsIhyymxvuU/EVEdoFoJMzUeB/hkKVgqAB4OCODGUxTT5MUEdk1ic00GBnMKBAqAB5cLhMnHrMVCBGRXSYes8ll4gqECoAHk0nFFAQREZ3DVQDsJ5ZlhiO2rvuLiOxWETuMZZk6kasAuD/pZHTC0KV/EZFdyzA2zuWKhAqA+6wcQ8OKgoiIzuUqAPZd5WgoNiIiOperABAREREVACIiIqICQERERFQAiIiIiAoAERERUQEgIiIiKgBERETkUds3ve7+19/7f54APg58FPgIkPug77ftcJ8dDiU1REREdi/X6zZc1yve5dvKwCvAy8B3vvTFz19WAbA3En8C+Brw3+yngkdERB5IAPzvwG996Yufb6oA2L3J/6PAHwLTGtMiInIfbgC/+KUvfv5lFQC7L/nngDeBUY1jERF5AEvAyS998fPlvfjm9vImwP9NyV9ERB7C6GYu0QrALpr9/yzwLY1dERHZAs9/6Yuf/zOtAOwOP6PxKiIiyinvL7RHD9YZjdcHZ1kBGxthoddTqwgR2ff2ZE7ZE5cA5s6fs3nXasa/u5hcATIasw8mlaxjmT4A9WZKRYCI7HfV//JDjeF3fe1Pnn3B1QrA40n4Y8A/AD7Nxi1+/Xf+Wy/QSH0YphmQThaJRVsEgYHrHaDVTigwIrKfZXoBbct4Tx5aZ+NWwT8F/o/Jsy8sqgDY3sRvAf8z8A/Zu5cvHqtw2CGTXmUgv0zHiVKtZ1UAiIj8qP7NPx8F/tHc+XP/C/DfTp59obdrJny7KPnHgf8IfFnJf/sk43XSyQJDA9fIZpZIJ4uEQj0FRkTkgyfTXwb+42auUgGwxX4P7e7fVpbVI5UskkoWyaQXSSeLpFNFopG2giMicnc/s5mrVABs4ez/F4Ff0tjaXtFIm0yqQBDq0PYDPMshlVwnlSxhGNpcISJyD35pM2epANiC5B9n42E+sp0DwQxIJcokEwXKXZPLa+PM1bKYkTrZ1CoRu6MgiYjcm6/thksBu2EF4B8CYxpP2ytid8hllzGjdW7Uc/z59TO8ujJFy/DIZlZIJSsYepaiiMi9GNvMXSoAHmL2PwT8tsbS9s/+08kSucwyTbpcLw/wVzef4rWlIyy14kSTRfpyS9oLICJy7357M4ftWDt9N/1XgKTG0faKRRv05RcIxUvM11NcKUxyZW2Kphvj6MA844mb5HOLVKrDOO4ovq+lANnDBbFhkMmkCIUsBWOH832fSrVBr7cj71RKbuawf6AC4P5n/08Av6Ihvr3CoS65zBr5/AK1oMtbpRHeWpui3E4TABeWZ5jOFjmWLDLQN0+jlaLRTCtwsqfE41FOHJ9hsD9PPp/BstT9ctcUAUFApVJnvVjmrbdvUirXdtLL+5W58+f++eTZFy6rALg/XwNUgm/nTMcMSCUrDA3cxIyWuVbu57WlwyxUB+kFJpV2iour00znlxmKvUUuP0+13ofrRXFdWwGUPeHQzAQfPXMS2w4rGLvxPGYY5HNp8rk0h6YneOPiVS6+OYsf7Ig7l6zNXPZ3dmTsdujs/6eBz2lo/yg77BGPtYnH2oSsh1v2ikZaDPQtkMneZsUN8/ryQa4Upqi7G5tXe4HJ7eogrywe5a3SAD27xtDATdLJEubmswIelGFANOIQj7WJRdtYlq+DK4/cJz/xFJ949rSS/56Z1JicPnWMz376EztpFedzmzlNBcA9JH8T+B0N5R8vFOqSTRcYG77B+Og1cpkydth7gELCJZ9dYXDgOk2zzcX1MX6wdJSVeh8RPKKGQ9Rwabox3ipM8v3FQyy0YsTTSwz2z5GI1R/orgDTDIhFWwz2LTI59hYjg3MkEzW0q0Aex8x/empcgdiDBvpznD51fCe9pN/ZzG07K5/swGP394AnNYTfXyJeY3hgjkikTqU6QLk6TKU2QKOVxvMid92kZ5o+6VSJ4cHrhBIFLpXyvLxwjOvFcTpdmyl7iajhbBRk7ihrjRyvLh1hLLNO7sBb9PffoNVO43UjdJzoPb1my+oRi7ZIJ4vkMivkssvEom3K1VHajp41II9WPB7lo2dOKhB72Inj08wvLLNWKO2El/PkZm47pwLg/Wf/ceCfaOi+P9e18bohInaVsaFZBvPXKVVHqFSHqDUGqDfzNFs52p0Ermf/2Ef5JuI1Bvtvkc7Nc7sT4XuLR7iwcohSO03M7HDYnmcivEI7iND0Yyx4w9yqjPDS/BMMJyp8dHCRkaFZHCdBoTRKt/ujw8gwAiyrR8TukIjXSMTLZFLrZFKr5DPLpFMF2k6Waq2PTidKz9emK3mUyWFGy/57nGEYnD51jD/99nd3ykv6J3Pnz/3bybMvtFQA/Hhq+nMX3Z5FtTZAtd7HYP91+swbJENL9Nl91Af7afj9NDs5mq0M7U6adieF4yboOHEc1yYc8ujPL9LXf5Oy7/Py0iFevv0Ei7UBggCGw0VORq/xTPwiK91+lr0BCt0cDSfOlcIUg8ky/bE6R9KrDA9ex3FjVGr9GAaEQh4Ru03EbhKNNIjH6sSidZLxMvFQiRTrpKwCiVCVnmFTaB6gVBmm2UoTqNOwPEKD/XkFYR/o78vupJdzpznQjpnk7pgCQE1/7l2zlaJcHaFcHSFtLWMvlwmtVkmFF/AyadqJLK2+DB0zQ6ebouPG6ThJXDdGKOSSyy/Qspq8tjbG39w8xbXNpf+U2eJo5BYno9d5OnaZBW+I684Et9xR5rwRCs0cry4epS9eIzVzkbG+W0ybPSq1ASzTx7Zb2HaLqN0gEm4Qp0bUqxNvl7EbVcLVFma8izFm0swPUa6OUKkN4Xq6o0AeHdMwyOczCsQ+EA6HSKeT1GqNnfKSfnvu/Ll/OXn2hVUVAO+lpj/3yPVsqrUhqrUhmnae9GqN3ps9aHQJ93ew+wukc2H8VBQvlsCNJHDSCdxwDCvuU+qGuLw6zl9eP8nllQlqrSiW4TFiLvGEdYXD5iwDxhpWyOPJ2BWuu+OUe2mqvSTz1SFenD9JNtrgUxNXmRi5xEA+htnrYXdbhL02dqdOtNok1Gxi1lyCko+/HtCrQXDAIIhFqIaHqNSGaDSzBIG2AMqjk8mkdJ//PpLPpXdSAbCjmgPtiAJg7vy5E6jpz32pNzNU6kPUBoZI2EvQbNG7EIAdYOTAyPsYGZdIpkYsD+a0iTEVYi2a5ub1Sf76+2Fef7PEeuUyASaGCZY1SzFykTdiKyzbPcLhMp3QVQYZZiDoo8UMHS/CtfVx/iZ8iky0RV/6VQ73XSW81oZll2DFJ6gHBFUIqgHdCvilAGobQ98cN3DtNLXuALX6AK4X0cGUR3vSU4c/He/H61fmzp/73cmzL1xSAbBBTX/uexUgQq3eRz3fR18mjT3QhlgAbgBNoBPgLxgQgWDKIEgHlGI9Xq/6fOf1MOu3bUZ8gzi3cRyXRDzCU0M2hzLHsc081V4H32tQbzq49QVC7itg+5AapxakuFI4SMLukI7UiQ3XONCoY9zs0bsYEBQgcIKN2wRNMFwIfDBzBuagSSvRR73dR72ZV1thEdlv7jQHeuy9bh57ATB3/tzPAJ/VmLg/vm/QaOaot/tox7JE+9YwckAdrH4wUxB4AUHYwBg2qESTXFwM81eX86wspjmYyjN5cIhiYY0bN9bwuh750DgDY2eIJ2L0ui5dp0GmVeJQpYVT8HFLV1lsl3GS4xR7g7xhHSIWdoh2Hcygy2hkBTPRJegEGNkAIwb0oFeGAAOjH/x8lJadp1nO0+7EdSBFZD/67Nz5cz8zefaFb+/bAkBNfx5Ou5Og2c7QymfJZsIYWR/cADML1ngAcYMgY1Dts7ncjvDtN0J872WPCG1OnE3x3JkPY1kWV69eZW5ujnQ6zfTMDIcPHyaVStFqtSiVSiwuLtG/sMzAwjoXlkpcazkUuy3W/FF+YBwlYrnYkx4fO9JjJLtGaLELDhjhAL9iEDgQeGDkDbqpOE0/Q7OVodvVbVgism/9ztz5c09Nnn3hsbVBfdwrAH8POKVx8GC8rk27k6JtZugmYpgpF3/RIOgGkDYwDxnUkgZvrcFfXTCZvTFELnuQ8YERwuEwhUKBqakpjh8/TiwW49atW1y6dAnP8zh+/DgjIyOMjY1x9OhRPlQocOLaNWYuX+el2RVeLy5xuxqwGIzyPfMEYatHeLrLx477DE8UsApdggr41Y3kT8TAyEInmqHtpml3dOufiOxrp3jMzYEeWwGgpj8Pz/cNOp00nW4KL5Ykmq5CCALLIEgalGMGl5YM/vL7Ia5dz9OfPMETR0+TSafodDrMzs5SKpUYGxujv78fgKWlJd58803W19c5cuQI09PT5PN5xsfHN/45NsbY8BVSr1zlpaVlblQDbptjvGSdIGR2sWZ8nk5fZsQsYDg9gl5A0GFjY2LGpBNJ0qqlaHfU/U9E9r3H2hzoca4A/AZq+vPQOk6SjpvEiSaJ9YN50MAYgVLK4PKSwZ+/ZHHz1jD53GnOfvJznDlzhmg0ytzcHFevXqVUKjE7O0smkyESidDX10e9Xmd1dZV6vc78/DxjY2MMDg6SzWYZGRnhk4kEsVgM828v0F1Y4VbFYs4aw+DDAATTBh9JXWa4rwDxLoTBSEOQtumEUjhuCteN6uCJyH43tpkLv7pvCoC58+eGgS/r2G9FARCj48RxMwmsGRMjG1AxTa62bf7mdYvZa4Nksh/hE2c/x3PPPcfw8DCWZZHJZMjn88zOzrK0tES9XqfVauH7Pq1Wi3a7TavVolgssry8TCwWY3JykvHxccbHx3n61Alc16PpXKS9usJSJcKt0CgBp/ADE286xNPJSwxPrWHUPcwBg148hhMk6TgJuj3d9CEiAnx5sznQyn5ZAfjHqOnPlvC6Nl43iheJwFSIcs7mrVthXrqa5srbNonkhzlz5pM8/fTTjIyMYJobDVASiQSHDx9mYGCAhYUFbt68SbFYxPM8otEo7XabpaUl5ufnGRoaYmRkhFAohGmaxGIxDhw4wEc+fJxSpUqpc4t6eYVaI8MtY4Seb+L2wjgTYZ4efpPxyAqhpEcnm8DpJug4CV3/lz3L933W1tZZXFyhWCzjBzvjUdeWaTE42MfY2Ah9fTkMY2tvwe31ehSLFQrFCs1m+67fn0zGGejLks9lsPZ3b4bkZk585M2BHnkBoKY/W8cwAiJ2i4jdwoo7FOI5Xp+P8upcH5cuGYTDYxw79hRPPfUUo6Oj7yT/O0zTJJ/Pk8lkmJiYYHFxkVu3blEoFAiHwyQSCVqt1jv7Be78P3dWEcbGxnj6w8dYWK+y1Kpxpb6CF80wXx2m61t0ujbN8SjPjV9kOr+I50dxS1E8T8v/svc4jsO3/uyvuXDxCl2vu6Nfq23bPP30k3zqJ5/Dsh4u+dYbLV586Q2WV9cJHqCyN02D0eFBnv3Yh0nEY/t1+DyW5kCPYwVATX+24sBZPZKJKoP98+TzC5S7Ya5fP8h3XkuzdC1Gu9njQ0eOcfjwYaampohE3r/jnmVZ5PN5stksk5OTrK2tcePGDX7wgx/geR7hcJjJyUkOHjzI6OgoyWTynZPIwakpnjy0yGzhOkvzJcqdGl0rz2JtAK8XouVGaMzE+WT+dYZjPWLRBrFoAzuc0TMAZM+4fv0mf/wn39pJLWc/kOu6fOc7LzM7e4Nf+IXPMDI89EA/58rbN/nBa1fodh+84PH9gNtLq3zzT/6Kj545weFDB/bjEHoszYEeaSLebPrzle38HQHw9treTix22CWXLTA2PEvf0FUaZofX10b401eGWVwYwi2aHOjr48jhQ5w4cYLJyckfmf3/+BUFg0gkQjgcxnEcGo0G0WiUoaEhRkdHGR8fZ2JigtHRUWx7I8aRSISg51EoFFgtVyk5YCaydAnTdGOU22nK7TSeHyZqd0mEHeK2SxCE6PVser2wngUgj1QiHuPIocktTf7/1//973Acd9fFotls8fobl3ni+BHi9zn7fv3C2/zgtcv4/tZc4vB9n4XbK4TDIQYHtu5pjfO3VyiVaw/9c44Nupjbe6o6/KUv/MJ3vv6Nb97YcysAavrz8EzTJxZt0pdbYWjgBpH0Eqtdg9eWZ/jOW6MsvO1y0I6Qiy5yeGaavr4+JiYm7nmJr9vtUigUmJ2d5fr161SrVQ4fPszExAQTExOkUilisRjR6MYSfhAEGIbB2NgYh0ZynFm9jXf7Mm1s1sxxGr0YxVaGN5YP0/KilNtpnh2f5WBymQMTLeKxKoXiAWqNrJoCya7kOA5//Cff2tXvodft8s1v/n984Qu/eE8TBYBSqcqFN2e35fW8+sZbjI8NkUnvy21ij7Q50KO8BPBLqOnPAzEMsMMO6WSJgb4F8n1zdO0as80kLy3O8L25Y9y46jDarTOadRnKDjAwMEBfXx+ZzN0fexoEAbVajfn5+XfuCvB9nwMHDnDs2DGmpqZIJBLve30vnU5zYGSA4wsBQfkqHbPJXPQ0bztTlLoZak6Cy2sHabgxiq00zx14iyfyawyOXiaZKLNaOEi5OkS7k9CzAWRX+daf/fWuWfb/IItLK3z3O9/nE2efuafzxd+++NqWzfx/tCDp8bfffY3PffoTW75RcRc4tZkrv7FnCgA1/XmIAxTySMZr5LPL9PfNYSfXqQQ+lwojfG/hKK8uH2FhJUKkdp0jB6L0Rx1GBjc26Q0NDREKhT5wxl+tVllcXGRubo5CoUCz2Xxnl/+RI0cYHR19Z//AD38Y73xtWRYjw8MMpyNEskWC4Bqn0xX+pnmGNzqHWe720+5GuF4cp+4kKDSzrE5c4cmhW0zkbjEVr5AtT1AojlOt53HcqC4LyI7n+z4XLl7ZM+/n9QuX7qkAKJVrW7Kk/kEK62VqtSaZzL5cBfgnc+fP/ZtH0RzoUa0A/AYwqlPGvQuHusRjDXKZVfK528SSa7jhNlcbSS4Uxvn+7WO8VZhkrZHBr9xiKupxZCBNPnBJpVIA73T3ezfP86jX66ytrbG0tMTa2hr1eh3P8zYS+cgIBw8e5ODBg+RyuXteEuzr6yMU7ycfjxCtXWcm0aA/VKE/VOb77RPMuSM0enGWa3003BiFZpalep6PjF7nSG6d/NBbJFOrlMvjFMsj1Js5XDeiQkB2rLW19R2/2/9+lEplHMf5wA3DAMVS5ZG8nmKpsl8LgFEeUXOgbS8A1PTn3plmgB12icdqZNIFsukVEqk1uqEmt50IbxcmeH1lhourMyxUBmm4MXBbxNoFpkZNxrMRcGL0ej1M08SyLMrlMu12m3q9TrlcplgsUqlUaLVadLtdfN/HMAySySQTExNMT08zODiIbdv4vv+eZb47lwDuzPzf/XUkEsGyU7ihNL1ul0lrgWyiRb9VZiRU4JX2E7ztHGS1m6fWiXNlbYpSK81CZYjTY1c5MbDIVKLAULRCNrNItTZCpTZIo5mj48TpdnXjiOwsi4sre+r9BAGsrKwxOT3S+NwAAB6jSURBVDnxwYm5WH0kr2e9WGH64Ph+HV6PpDnQo1gB+Apq+vPBByHUJRZpkUqVyKQKpJMFovEyXshhxQlzvTDCxbUDXFyd4WZplHInBT7krSoh5xaR+kWcxYBrZgbPdQmCANM06XQ6uK77ngKgVCpRr9dxHAfTNEmlUoyOjjIxMUE4HKZcLv9Iwv/hv/8wwzAIgoBXX32deLXAgcCg2+0yFl8jYbYZDJWZspe40DnC5c4019wJ1rp5blcHKXdSLFQHuTZ0kw8P3+BIfpXx5CqDiRL9+TkazX5q9QFqjT6arTSuF6HXMzVo5LGrN5p77j016ndfdW53Oo/ktTyq37NDJTdz56/u2gJgs+nPF3SqeH+27ZJJbWzuG8jPkU2vEI1VKHohrhbGeOn2MV5dOsL10hjrzSxuLwQY5K0qT0RuMJF4mczgRRJBl3QzwWKpR8fMYcUGWF1dxXVdWq0W9XqdSqVCvV4nCAIymQzDw8MMDAyQTqcJhUI0m02azeZ7kv2Pu+7/fnsBfD+gRwisCF7XwTQC8qEaSWuWkXCBI5EFXrfnebF1ilfbx5hzR2k4ca4WJ1ht5rlRGuOJgZucGb/K6eGbTOUWGAls6vVBytUR1kuTNJo5ao087Y7uGpDHa2R4cM+9p6Hhgbt+Ty6XYX5h+1c/8tnMfh9iX5g7f+6fb2dzoO1eAVDTn3sUDnVJxGvksivYkRLNRhYvGKPQzLJc66fYzGwm///EwicX9ZjON4g3F/CdNovlMB3zEF3XplAovJOg4/E4iUQC0zTfuTxgmuY7Pf/fPcu/k+Tfff3/3Un/3X9/d7FQqVTAcyBh0nvXgoFteAyFSviYFLpZ4maHd5cQfmBS6SQJyiNEQy5TuWUM0yERLxC3DAzDouNkMU1fA0V2jLHRoT31fmzbpq8vd9fv689nH8nryfft+wJg25sDbVsBMHf+3M8Cn9Vp4u56PYtGM83y2hStdoJYvELH8BiIujwz9hYpu8Wbq9NcL41RbGXweiH8wKTUy7AWOUxfymB8LMtw9ya+WWO+5bMGJKNsJFpj41ZCwwADnwAf6G50TeLO9XwICAAD3zcwrDChkE0kEsE0zXeKgnevANxZ+r+j0WgQlGI4vRBNZ+PHBxjUewnmvWEudA7zRvsI894wneDOnQUBcbvDSKrIkf55TgzeYia3itlNsFo4itGN02j0U2/00+7E6fla/pedIZlKks2kqVRre+L9jI4O39Ntd/19mR/57G810zQeWaGxw3127vy5n508+8Kf7ZoCQE1/7p3r2pTcAeqNHNHoOKlEeWMfQKrAUHKd/OAS05kiR/oWubg2xcWVGW6VRyi3U1x2Zlj0BrnuTTHfm+S4dRkzc5Uhu0nWvUTOmX/PjP6dD/d7ZvC8s9nP9zc+0KWmQclJYWVmGBydZmho6MeeGH743wVBQKG7SstdZKlSoT8DNbOfy840r7RP8Gr7GJc70yx1B2j7McKWx0RyjSMD85wavsbx/kUmU2WyhkHQyVOoD1KrD1Fr9NFqp3HdCD31CZAd5Pnnf5J/+0d/vOvfh2ma/OzPfvKevjcWi3Li+AxvXr62ba/nwyePEImoVfim35k7f+70djQH2q4VgF+CzYfDyz3xuiG8RoZGM02pMkIiXiWbXiOXWWI0vcbAyAIHswUO9S3xyu2jXFydZrE6SKmbod5JsNLt53p4hPHwCAeDNxixZhkOrhMxvI05frD5584/3v33Owl8c3KdAhrVJC3PxckNks0eJZ1Ov2fm/8MFgGEYuK7LYtKmetNhtt1jbSmgnDrOy86TvNY+xi1vlFovSQCkow2mc0ucGXuLM6PXOJxdJ2tBr52hXBmhXB2jWu/feHSw7gCQHer48cOcPHGUNy+9vavfxyc+8QyjI/d+SeP0qaMs3F6hug1NkPryGT588rAG17vqIbapOdCWFwBq+vNwgsCg40ToOIPU6jlKlWHy2WUG+uaZTq8yPDHLRKrIeGaNl28/wbXiOJV2imWvn5qfYD3ch5nqZzKR52DsItP2Iknr/vpJVJpwYLHL260OieEIM9MHOXrs+F3vD+71eiwsHObC96Ncfs3kB+sdbjY+xJXwM6z2+vGCELblMZIq8sTgTZ6ZuMzpoTnG4y1MJ0NpbYJCcWIj8XcS9Hwlftn5PvvZn6awXmJ1tbArX//M9BSfPPux+/p/LMvi7Cee4s//4nu0O86WvZZ4IsonP/7UPfcf2Ue2pTnQlp9hv/SFX/hHwH/+2BIoe+dhQL5v4bhxmu0srVaOoBslFXYYyZQYzayRidUIgE43QsuL0vEjlHtp1rt5ir0MXhAmanokzDZRw+Veu2pGwhA2uzSbLQrVHl0rSzIzQHqzrfCP6wNw55+JRAIjHGe9ZfH95RgXav0sB6P0QnESdodDfYt8fPIizx96jaeH5xkKGXSqEywunWBp7RDl6iCOGyMIdAKQ7bHVDwMKh8OcPn0SDIOFhaVtvTa+lcLhMJ/99Kf49Gd+CvMBnnITj0U5NDNBs9WmUqk/9Os5ND3BT3/qmS1/JPAuehjQB0kB7te/8c2/3rEFwGbTn38NPLYMvBefBtjrheg4CZrtDJ1OGtuA/niN0WyBvkQJw/BpeRFabgzXD9Pw45R6GYq9LJ3AJmq6JK02iR/aff9+DANiNhiBQ63RodS0MCJ9ZHIDxOPx970N8M7MIJFIghGmXG1ye71JxQnIZn2eGFngZ2Z+wE9Nv8kT2SIRN8fa6lFuLx9nvTRKq51U4pddVwDAxjX0g1MTHD0yQzQSJRwO0W47D/WY3G1574k4k5PjnDx5jP/s555nZmaKh2m3HwqFmDowSn9/Ftu2MQwDx/UI/LsXQZZl0d+X48D4MKefPMbJJw7d84PL9mEBAPD0l77wC9/4+je+uWXXXbb6EoCa/mzbaoBBs5XE9SK0O0kGWzkGB67zZF+BbOQVsrEG3537ELPFcWpOgnIvzcXOIZp+lKYfw/VtTseuMBwqYhp330sStuBAX0DDWeVy7RUW3hoile0nFnuSRCLxI4n/3V/H43GOzBzkbKXGavUCocJ1cvEr/OShIs+N36I/DJ3KJEurhymWR2i3k9rdL3vC8PAgw+/qD9BstcDfGSsChmUSj8W25WePjw4xvnlbpO8HOK67scP4A2YZ0Yi9Hx/28zC2vDnQlhUAc+fPnURNf7ad54UpVwfpOHFarTTDQ9eYSS8Tn75IJtIkfutJLq9NUWqnafoxrjqTeEEIx7fxAouPxC8zElrHMnp3/V1xG6b7uzTcea6vvsj1NweIxBJMTk5hmiZBELzzB3jP177vM5RPc3woRqPyNkPm2xwNewxZUYqFYyytzFCpDuC4ER1U2cOrDfF9955N0yAW1ed6m3xh7vy53508+8KbO20FQE1/HulqQIpud4qOk+DgAZjuv07uyCukow1ioQ4XVg6x1szhBDY33HF6gUU3sPAxeTp2idHwGtY9rATkEjDd16Sx+ja3Zv+cv1yvkh3cKAD8wKAXsNH0J3hvAWAYAV2vw9L1q1C4TM+/TGN4hMXeFKXqMYqVfu3uFxG5P3eaA21Jj50tKQA2m/58Rsfm0XLcCOvlYZLJMtnMCsfyl0hMVknQJhZ2eXXpCMv1flw/zC1vFL9l4mMSYPBR401GQ3cvAgwDRjLQcEpQu8Di2ird5iAdEtz2Bpl3h1jvpjcaCQUbrYRioTYTmVUmMitM5BdJt9fIJB1CHYtmO0WzrVv7REQe0Ge2qjnQQxcAavrzePV6IXq9MD3XIl5pM9MpEbZd4tMdoiGH799+goXqIJ4fYt4bhnduIgl4Jh4wGircdU+AHYLJvI9lrBDrrbBcjnLLneSVVpg3OgMU7+xzMkySdpsj/bc5GL/EgD1LvlKBwCceMYhlO7TsDnbYQVtFREQe2JY0B9qKFYAXUNOfx8Y0wQ472IaHseISXnSYZBH7oEf0sEvI6sH8SeYrw+8pAkyjR8joYcV6DIeKGMYHb1RKROHIMEwM2lx1JlhrnMGvnyXoHIFeGjBIRZocG5jjp2fWeX7C54kGpN+EwDMwDxi0DnS4Hm1TbbR14EREHtyHN3Pvv3psBcBm05+v6lg8PiGrSzjUJuy3oODQuxRg4jKeXiY842PMBASBgR+Y3L6zEuAO811OETE8ooaLHbtMX6jyvr/jTmnQI8Tt7gjf65zi283nuOgcodTLggFJu82xwY3b/D47+SInwtdJzVbpXg3wb4GRMQh3O9jhDratAkBE5CF9de78uX/9MM2BHnYF4DeBUR2Hx8e2HWy7hd1tQbNHUNhI16HFLmOjqzyTMfAPbWzYezH4ELerA3hBiHlvhO+0TpE0WyTMNqfMq6TM5gcUAQYr3T5eaT/Bt+vP8EbnCKXeRmOgeLjDkf55fmr6FT5z4CVO2tfIlGr01nxoQNA0CJoBltPBNlvYdhvTDPDV119E5EGNbubgrzzoD3jgm683m/58Wcfg8YpGGsSiDWy3QdCAoAMGAUYrwFrtMtZe5ZnMm/ydme/y0fHLjKbXMQ0fJ7C56Y5zvnma883T3HDGcIPw+/6eUjfDhc5h/qLxNK91jlHo5ggwiIUdDvcv8KnpH/DpA9/jpH2dbKmGUfAxegGGDYYVQB2sVocoTaKRFuFQVwdPRLZfsKff3Zc3c/EjXwH4KpDQ6HrcBUCTaLhJpNkgqAEeGBkwzACqASHDY2JohWezBt5MCLcXwvNDrDbytPwos+4kf9N8in6rQtpqMhle/pFNgS0/ylVnkr9pPMX3WydZ8gbwMYmEXGbyi/zE1Ot85sBLfChyjWy5CgUfGpvJPw5GFIIGUO8R7TaJRRpEI20cN6wDKI9co6lLUPtJs7Wnj3diMxf//Ue2ArDZ9OeXNbQeL8vyiUXrRM064VaToBpgBAFGNIDwRtL1532Mix6jt1f4WOgCn578HqeGZ+mLVQGo9FJc6hzifPMpLnQOU+ql3/M7eoHFvDfMS60P8d3Wk9xyR3GDMCGzy4HMKs9NXuT5kRc52Z4lc7lC73Wf3i0IamBYYCQCjCQErYCgGhDtVInFasSidR1AeSza7Q6tVkeB2CeKpepef4u/vJmTH9kKgJr+7AB22CEWrRH1ahjVDn4F6EHggF+EwDHwm2z05e7zGDu2zHMjb9CaiuB0bV5fPkylk2Ktm+fVzjFGmusMhkokzA4xc+MEud7L8Eb7KN9tneKqM0kziGEaASOpIk+PX+Fnh7/Hh9tXyc5W6M76UA8wwmDEDYx4sHFJwgQcCCoBkXaNWLxGLFbDNEe1D0Aei/VimQPxEQVij6vXm7iut+fngjxgc6D7LgDmzp97HjX92RFi0QbxaJWYU4Fyj6AUQBt665uJvwlBC4KOAamAkOcwlVjkk8Ov0/KjtLsRLq1M0/BizHvDvNw+yUR4hcFQiWl7kY5vc805wMutk+9ZHeiLVzk1MsvPHPw+p6Nv03+9hH/Fp3cNaINhGxixACNhYFjgNzZfRwmsWpt4f4V4rEo47OI4ahkqj97C7VUOTKgA2OtuL67ul7f6mbnz556fPPvCt7atANhs+vM1DasdUPJZPqlkiVS0RLRQwV9nYwXANTAcNp7HaIORNjAngJSBOQLx5MaO/U4qQtVJ0XDiXF2foOXHuOoc4AftJ5iyl+i3qpR6aV5rH+PV9jGWuoP4mKQjTY4P3ORT069ubCp0C1jpAP+gAUkIGgbUIKgZ+KUAww8IuoC3sSphlTwS42WS8TKJWEMFgDwWs9fnmZkeZ3ioX8HYoxqNFq++8dZ+estfmzt/7tv30xzoflcAXkBNf3aEiN0hnVwnaRQIVxv4lY2ld/IGZh8YOQMjB0bWwEhbBAmbXiyCl41CYDGVqvPcxFusN7PUnAS3awMUe1kudA5zODLPUKj4ztez7gHafoTo5qa/s1MXODN8i1wIms4E5oBHONbB6rQItVyodwmqPkHVIKgEBCXwSwG0AvxCQLRRJJ0pkEquU61n6fV0NUkevb998XV+/ud+knAopGDs0ePrefvqbqP7bg50zyN/7vy5O7sN5TEzDEglK2TTa6StAlbUg3EDs9/A6AfyYYJMDCeeohNJ4dhJHCuJ68fo+hF6RYtkssxkosFzB66w1szRcGOU2ynmvWEudA4TMro0/RiXnBmKvSyW4TOeXuNjE5d4ZuQGedNirXCSjpPAsjzsjIOdaxGlhe01sDsNou0aoWYDq+YQrG9sAjQyEDEapCNrZFIF1ktjNFtqCyyPZ4b4F3/1Mp949jSJREwB2SNcz+N737/Iyur6fnz7X507f+7fTJ59obnVKwBq+rND2GGHbGqVTHqFmF3BHIUgYuOF47QTWVp2Hy0jR7uXodVJ0mkkcZ0kjhej243S65lk0usMDb7FE/k11g5cYr2V4eLKDNVukkudada7GQJMbrmjeEGIoWSJJ0dmeXbibUajHtXiDEurR3CcJJblbrQjDreIRlpEIk2idp1Yf43YQJVEt0KsXcau1ghH25h5j3RqjVxnmXTqAO1OQpsB5bFYXlnnm//hL3n6zAmOHJpUQHa5xaU1vvvSG3v91r8Pcqc50D/esgJg7vy5EeC3NLx2hkS8SjazTDa9hhmCBqPUIoPUe/00nDyNcp5mO0e7naHdSdBx4rieje+bBJtNMerNLIbhMzJ2kaeG5lhu5Ci20twqj3DbG2K127fxfX6CRLjN0f55np24zKFMhW5jiMXloxSKY3jd/3Qvv2kGhEM97HCHSKRJPFYjFq1tXu+vkEoWSdkFUql1Iok2OXeVXGaFaq2fVjuuAyuPhed1+e5Lb/DGxav092Xpy2fpy2ewLF2a2ul836dSrVMsVlgvValWdXsx8Ftz58/9i8mzLyxv1QrAV1DTnx0y+/fIZdZJJup43RiLjZOUq8NUaoPUG/3Um3marTSuG6Xnv3+bh1Y7yWphgkSszEj/dZ4eneV2dYBKO0WpnX6ne5ZpBIyllzkz9jYnB5aJeAlurx2iXB16T/Lf+DAaOG4Ix01SbyYxjCFCoS6xSItEvEoqWSSTWifrL5ENVgmFPDKpdVKJCu1OjCDQKoA8Ps1mm2azzdz8soIhu3qOuJmz79oc6K4FwNz5cx8CvqCY7gzhkAcYNJr9tDsJytUhypVh6s0cHSd2zxvqfN+g3syxUpjhYLzC4UyRj4xd5XZ1gLobx+tuDI1MtMGJoRucGrpFf6hHpTDBemmUjnP3a6ZBAJ4XwvPS1Bpp1svDJGINsukJspllkoka7U4Wy/IxzYBeTwWAiMgW+MLc+XO/O3n2hYsPuwLwNR7imQGytQKg2UrT7UZoOzHqjSyOG32ga+ieF6ZcGSSVmGJ4rMHJ/kVujlxjpd7PUr2fsNllKr/M6dFZptMVeq0+1tYnabYy71xKuN/fV/FyNJopipUhMqkyYOC4UR1YEZGtc+eW/c88cAGw2fTn04rlzuF5YUrVgXf+/rDL5m0nzlpxgmRyndHsPKeGbnK9OEa5nSIba3Bq+BonBpZIYrNSmqRaG6D7kLftdXsh6o0srXYa0wzeWS0QEZEt8+m7NQcyPyD5m8DvKIY7rADohnFdG9e1t+Sa+Z1LAeulCcJenCO5VT48fJ3xzBpTuSVODt1iPNqiUx9gvTROx9m6zXq9nonnWXiehe9rkUlEZIv9zmYuv+8VgF8GPqT47X2ua1MqD5PNDDPYd43jA7cpt1NkYg1msgXCvTirpQPUGzndricisnt8aDOX/5/3vAKgpj/7T7OdplwZw/SSHMqu8fzhl/n4gTcZjjq06gOUKsM4rtr2iojsMl/dzOn3VgCw0UhAT8rYR7rdMJXqIM3GAAMRl2cmrnBqaJ6Ib1OpDdNoZRQkEZHdZ2Qzp9+9AFDTn/2r1U5TqQ1j96KMJWsMRh28dppqbQDPsxUgEZHd6bc2c/tdVwC+ipr+7EteN0y90U+nnaPrZum0s9QbAzSaWe3SFxHZvX7sZX3zh2b/dzYMyD4UBNBoZanWB1gvT1KtDVNr9NFx9aAUEZFd7pc3c/w7fvguADX92ec6ToxqbZBFa+M2vXqjj15PQ0JEZJf7keZA5rtm/59GTX/2vW7XpFwbYHF5mpW1KRqttIIiIrI3fHoz17+3AAD+qWIjAJ1OglojT62Rp6vNfyIie8k/fU8BMHf+3DPAacVFABw3QrsTo92JfeATBUVEZNc5vZnz31kB+FXFREREZF/4VQBj7vy5NLDEHrn1rxfAv38zqcMrIiJb5udPNrD2Tif0JjAaAj7/45K/YZqYloVpWRjG7nnXAfDMIS1b7yS+Dw0noNaG1WpAt6eYiPywkAVDGYN0DJIRA1OnsR0lGo+xm/J/EAT4vR5+r0fg+z/8nxPA50PAyXf/WysUwo7FMHbx6Ds8rMG682x8dNwuXFsJuHTbx+kqKiKREJwYNzk0bGCHFI+da/duiA58H7fdptd9z0n3ZAiYAjAMg3A0SsjWrm/Zxo9QCJ4YN5jot/jLSz1qbcVE9q90DD51wiIVVSxkG6dfpkkkkaDrunidDsFGa9cpEzgIYMfjSv7yyKSi8JlTOvGJPgP6DMijErJt7Hj8zpcHTWAqZNtYIa09yaNfDfj4URPDUCxkn83IjI2xryV/edSsUOjOZH/KNEwza0dVgsrj0Z8yODaqCkD2l2OjBv0pjXt5TJOvaBTDNLNmKBxGUzB5nE6Mm4S041n2iZC5MeZFHhvDIBQOY5qWpWDIYxUNw5ERFaGyPxweMYiGFQd5vEzLUgEgO8P/387dqzYVgHEc/p+TaI2xwSpBrQQVrFqNQUUQXRwc3ITcjZNX4X049xIKtoOLgm7SiogOfn/hcUhEBEHQNqY5zzM7vYRzfu9bk7OuANj+YbIBUPi1CVwBwPZPrRRlGW9/XAFgAhq2f6btCmAEuALA9jtl+0cAgCsA9dv+zx71wUYAgCsAtbJ0uEjLD60iAMAVgHpt//72jwAAVwBs/yAAwBUA2z8IAHAFwPYPAgBXAFcAbP8gAHAFANs/CABcAcD2DwIAVwCYGidt/wgAcAWgftt/3/aPAABXAGq2/R+y/SMAwBWA2m3/53o+qAgAcAWgdtv/Xts/AgC21vlemb1z5sB0au1OBsc8UhEAsOV2NZNrSz6yTKerS2XmmuaAAIBtcXh/kTOL/hTAdDl9pMjigs8lAgC21cXjZTotc2A6dFrJpRMepQgA2HaNMrnRb2ShbePi/1poF7nRb6ThSYoAgMlozyU3B2V6B0UA/0fvYJGbgzJt/zEVAQCT1Wwk15fL9HsigMnq94pcXy7TbJgFO/gZagTsdBeOlTm6UOXhZpWnL6tUlZmw9YpitPUvLxbpdkQnAgCmQrczeii/+5Q82vyWJ8+rfPlqLvy7Xc3RD/ycWXTuZ8ai9sWDe/YlZs63Knn7MXnzocqbj8nrD1XefYrrAH/c8ttzSadVZH5PMt8qsm9PUlr4cQGAnaEsRl/P6rR+PLk9wQF+eU4aAQAIAABAAAAAAgAAEAAAgAAAAAQAACAAAAABAAAIAABAAAAAAgAAEAAAgAAAAAQAACAAAAABAAAIAAAQAACAAAAABAAAIAAAAAEAAAgAAEAAAAACAAAQAACAAAAABAAAIAAAAAEAAAgAAEAAAAACAAAQAAAgAAAAAQAACAAAQAAAAAIAABAAAIAAAAAEAAAgAAAAAQAACAAAQAAAAAIAABAAAIAAAAAEAAAgAABAAAAAAgAAEAAAgAAAAAQAACAAAAABAAAIAABAAAAAAgAAEAAAgAAAAAQAACAAAAABAAAIAABAAACAAAAABAAAIAAAAAEAAAgAAEAAAAACAAAQAACAAAAABAAAIAAAAAEAAAgAAEAAAAACAAAQAACAAAAAAWAEACAAAAABAAAIAABAAAAAAgAAEAAAgAAAAAQAACAAAAABAAAIAABAAAAAAgAAEAAAgAAAAAQAACAAAEAAAAACAAAQAACAAAAABAAAIAAAAAEAAAgAAEAAAAACAAAQAACAAAAABAAAIAAAAAEAAAgAAEAAAIAAAAAEAAAgAAAAAQAACAAAQAAAAAIAABAAAIAAAAAEAAAgAAAAAQAACAAAQAAAAAIAABAAAIAAAAABAAAIAABg5gNgwxgAoFY2yiRr5gAAtbImAACgpgGwkqQyCwCohSrJStkdDFeT3DUPAKiFu93BcPXHtwBuJ3lsJgAw0x6P3/mjrwF2B8P3SW4lWTcbAJhJ60lujd/5P38HoDsYPkpyJcmdJJ/NCQBmwufxu/3K+F2fJCl+9y9fPLh3ZBwDl5NcSnLA/ABgx3g13vjvJ1ntDobPjAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA+HvfAf0qWhLKyXDeAAAAAElFTkSuQmCC"
 
 /***/ }),
-/* 83 */
+/* 139 */
 /***/ (function(module, exports) {
 
 module.exports = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAUCAIAAADDbMD2AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAAYSURBVHjaYvj//z8TAwMDtTAAAAD//wMA71YDJExDBIIAAAAASUVORK5CYII="
 
 /***/ }),
-/* 84 */
+/* 140 */
 /***/ (function(module, exports) {
 
 module.exports = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAeCAIAAABi9+OQAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAAaSURBVHjaYvj//z8TAwMD1fHv378Z8JgNGAAUhAkkiYPT2gAAAABJRU5ErkJggg=="
 
 /***/ }),
-/* 85 */
+/* 141 */
 /***/ (function(module, exports) {
 
 module.exports = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAUCAIAAADDbMD2AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAAXSURBVHjaYvj//z8TAwMDNTADAwMDYADvTgMizMESewAAAABJRU5ErkJggg=="
 
 /***/ }),
-/* 86 */
+/* 142 */
 /***/ (function(module, exports) {
 
 module.exports = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAeCAIAAABi9+OQAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAAeSURBVHjaYvj//z8TAwMDRfj3798MJJjDwMDAABgAiuwJIvhyWmkAAAAASUVORK5CYII="
 
 /***/ }),
-/* 87 */
+/* 143 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16331,14 +19818,14 @@ exports.createDecorator = createDecorator;
 
 
 /***/ }),
-/* 88 */
+/* 144 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(3)(
   /* script */
-  __webpack_require__(53),
+  __webpack_require__(109),
   /* template */
-  __webpack_require__(105),
+  __webpack_require__(161),
   /* scopeId */
   null,
   /* cssModules */
@@ -16365,14 +19852,14 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 89 */
+/* 145 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(3)(
   /* script */
-  __webpack_require__(54),
+  __webpack_require__(110),
   /* template */
-  __webpack_require__(109),
+  __webpack_require__(165),
   /* scopeId */
   null,
   /* cssModules */
@@ -16399,14 +19886,14 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 90 */
+/* 146 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(3)(
   /* script */
-  __webpack_require__(55),
+  __webpack_require__(111),
   /* template */
-  __webpack_require__(112),
+  __webpack_require__(168),
   /* scopeId */
   null,
   /* cssModules */
@@ -16433,14 +19920,14 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 91 */
+/* 147 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(3)(
   /* script */
-  __webpack_require__(56),
+  __webpack_require__(112),
   /* template */
-  __webpack_require__(113),
+  __webpack_require__(169),
   /* scopeId */
   null,
   /* cssModules */
@@ -16467,14 +19954,14 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 92 */
+/* 148 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(3)(
   /* script */
-  __webpack_require__(57),
+  __webpack_require__(113),
   /* template */
-  __webpack_require__(107),
+  __webpack_require__(163),
   /* scopeId */
   null,
   /* cssModules */
@@ -16501,14 +19988,14 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 93 */
+/* 149 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(3)(
   /* script */
-  __webpack_require__(58),
+  __webpack_require__(114),
   /* template */
-  __webpack_require__(111),
+  __webpack_require__(167),
   /* scopeId */
   null,
   /* cssModules */
@@ -16535,14 +20022,14 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 94 */
+/* 150 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(3)(
   /* script */
-  __webpack_require__(59),
+  __webpack_require__(115),
   /* template */
-  __webpack_require__(114),
+  __webpack_require__(170),
   /* scopeId */
   null,
   /* cssModules */
@@ -16569,14 +20056,14 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 95 */
+/* 151 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(3)(
   /* script */
   null,
   /* template */
-  __webpack_require__(106),
+  __webpack_require__(162),
   /* scopeId */
   null,
   /* cssModules */
@@ -16603,14 +20090,14 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 96 */
+/* 152 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(3)(
   /* script */
-  __webpack_require__(60),
+  __webpack_require__(116),
   /* template */
-  __webpack_require__(115),
+  __webpack_require__(171),
   /* scopeId */
   null,
   /* cssModules */
@@ -16637,14 +20124,14 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 97 */
+/* 153 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(3)(
   /* script */
-  __webpack_require__(61),
+  __webpack_require__(117),
   /* template */
-  __webpack_require__(108),
+  __webpack_require__(164),
   /* scopeId */
   null,
   /* cssModules */
@@ -16671,14 +20158,14 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 98 */
+/* 154 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(3)(
   /* script */
-  __webpack_require__(62),
+  __webpack_require__(118),
   /* template */
-  __webpack_require__(110),
+  __webpack_require__(166),
   /* scopeId */
   null,
   /* cssModules */
@@ -16705,14 +20192,14 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 99 */
+/* 155 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(3)(
   /* script */
-  __webpack_require__(63),
+  __webpack_require__(119),
   /* template */
-  __webpack_require__(104),
+  __webpack_require__(160),
   /* scopeId */
   null,
   /* cssModules */
@@ -16739,14 +20226,14 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 100 */
+/* 156 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(3)(
   /* script */
-  __webpack_require__(64),
+  __webpack_require__(120),
   /* template */
-  __webpack_require__(116),
+  __webpack_require__(172),
   /* scopeId */
   null,
   /* cssModules */
@@ -16773,14 +20260,14 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 101 */
+/* 157 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(3)(
   /* script */
-  __webpack_require__(66),
+  __webpack_require__(122),
   /* template */
-  __webpack_require__(103),
+  __webpack_require__(159),
   /* scopeId */
   null,
   /* cssModules */
@@ -16807,7 +20294,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 102 */
+/* 158 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -16851,7 +20338,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       },
       expression: "name"
     }
-  }), _vm._v(" "), (_vm.displayCheckbox()) ? _c('el-checkbox', {
+  }), _vm._v(" "), (_vm.displayCheckbox() || (_vm.structureTree == null)) ? _c('el-checkbox', {
     staticClass: "structuremanagementpanel-checkbox",
     model: {
       value: (_vm.featured),
@@ -16880,45 +20367,39 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       expression: "nameshortened"
     }
   }), _vm._v(" "), _c('hr'), _vm._v(" "), _c('div', {
-    staticStyle: {
-      "min-width": "100%"
-    }
-  }, [_c('div', {
     class: {
       'structuremanagementpanel-freezed': _vm.displayinput
     }
-  }, [_vm._v("Наименование подразделения для документов")]), _vm._v(" "), _c('el-input', {
-    attrs: {
-      "disabled": "true",
-      "type": "textarea",
-      "rows": 4
-    },
-    model: {
-      value: (_vm.subject_name_full),
-      callback: function($$v) {
-        _vm.subject_name_full = $$v
-      },
-      expression: "subject_name_full"
+  }, [_vm._v("Наименование подразделения для документов")]), _vm._v(" "), _c('div', {
+    class: {
+      'structuremanagementpanel-freezed': _vm.displayinput
     }
-  }), _vm._v(" "), _c('div', [_c('el-select', {
-    staticStyle: {
-      "width": "100%"
+  }, [_c('el-select', {
+    staticClass: "structuremanagementpanel-document-select",
+    class: {
+      'structuremanagementpanel-freezed': _vm.displayinput
     },
     attrs: {
       "filterable": "",
+      "filter-method": _vm.filterMethod,
       "no-data-text": "Не найдено",
       "no-match-text": "Не найдено",
       "clearable": "",
       "placeholder": "Часть"
     },
+    on: {
+      "change": function($event) {
+        _vm.onSubjectChange(_vm.subject1)
+      }
+    },
     model: {
-      value: (_vm.current_subject),
+      value: (_vm.subject1),
       callback: function($$v) {
-        _vm.current_subject = $$v
+        _vm.subject1 = $$v
       },
-      expression: "current_subject"
+      expression: "subject1"
     }
-  }, _vm._l((_vm.all_subjects), function(subject) {
+  }, _vm._l((_vm.filteredSubjects), function(subject) {
     return _c('el-option', {
       key: subject.id,
       attrs: {
@@ -16926,29 +20407,399 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         "value": subject.id
       }
     })
-  }))], 1), _vm._v(" "), _c('div', {
-    staticStyle: {
-      "text-align": "center"
-    }
-  }, [(_vm.subject_name_parts.length < 15) ? _c('el-button', {
-    attrs: {
-      "type": "success",
-      "round": "",
-      "size": "mini"
+  })), _vm._v(" "), _c('el-select', {
+    staticClass: "structuremanagementpanel-document-select",
+    class: {
+      'structuremanagementpanel-freezed': _vm.displayinput
     },
-    on: {
-      "click": _vm.add_subject
-    }
-  }, [_vm._v("Добавить")]) : _vm._e(), _vm._v(" "), (_vm.subject_name_parts.length > 0) ? _c('el-button', {
     attrs: {
-      "type": "danger",
-      "round": "",
-      "size": "mini"
+      "filterable": "",
+      "filter-method": _vm.filterMethod,
+      "no-data-text": "Не найдено",
+      "no-match-text": "Не найдено",
+      "clearable": "",
+      "placeholder": "Часть"
     },
-    on: {
-      "click": _vm.remove_last_subject
+    model: {
+      value: (_vm.subject2),
+      callback: function($$v) {
+        _vm.subject2 = $$v
+      },
+      expression: "subject2"
     }
-  }, [_vm._v("Удалить последнее")]) : _vm._e()], 1)], 1), _vm._v(" "), _c('hr'), _vm._v(" "), _c('div', {
+  }, _vm._l((_vm.filteredSubjects), function(subject) {
+    return (_vm.filterByGender(subject)) ? _c('el-option', {
+      key: subject.id,
+      attrs: {
+        "label": subject.name1,
+        "value": subject.id
+      }
+    }) : _vm._e()
+  })), _vm._v(" "), _c('el-select', {
+    staticClass: "structuremanagementpanel-document-select",
+    class: {
+      'structuremanagementpanel-freezed': _vm.displayinput
+    },
+    attrs: {
+      "filterable": "",
+      "filter-method": _vm.filterMethod,
+      "no-data-text": "Не найдено",
+      "no-match-text": "Не найдено",
+      "clearable": "",
+      "placeholder": "Часть"
+    },
+    model: {
+      value: (_vm.subject3),
+      callback: function($$v) {
+        _vm.subject3 = $$v
+      },
+      expression: "subject3"
+    }
+  }, _vm._l((_vm.filteredSubjects), function(subject) {
+    return (_vm.filterByGender(subject)) ? _c('el-option', {
+      key: subject.id,
+      attrs: {
+        "label": subject.name1,
+        "value": subject.id
+      }
+    }) : _vm._e()
+  })), _vm._v(" "), _c('el-select', {
+    staticClass: "structuremanagementpanel-document-select",
+    class: {
+      'structuremanagementpanel-freezed': _vm.displayinput
+    },
+    attrs: {
+      "filterable": "",
+      "filter-method": _vm.filterMethod,
+      "no-data-text": "Не найдено",
+      "no-match-text": "Не найдено",
+      "clearable": "",
+      "placeholder": "Часть"
+    },
+    model: {
+      value: (_vm.subject4),
+      callback: function($$v) {
+        _vm.subject4 = $$v
+      },
+      expression: "subject4"
+    }
+  }, _vm._l((_vm.filteredSubjects), function(subject) {
+    return (_vm.filterByGender(subject)) ? _c('el-option', {
+      key: subject.id,
+      attrs: {
+        "label": subject.name1,
+        "value": subject.id
+      }
+    }) : _vm._e()
+  })), _vm._v(" "), _c('el-select', {
+    staticClass: "structuremanagementpanel-document-select",
+    class: {
+      'structuremanagementpanel-freezed': _vm.displayinput
+    },
+    attrs: {
+      "filterable": "",
+      "filter-method": _vm.filterMethod,
+      "no-data-text": "Не найдено",
+      "no-match-text": "Не найдено",
+      "clearable": "",
+      "placeholder": "Часть"
+    },
+    model: {
+      value: (_vm.subject5),
+      callback: function($$v) {
+        _vm.subject5 = $$v
+      },
+      expression: "subject5"
+    }
+  }, _vm._l((_vm.filteredSubjects), function(subject) {
+    return (_vm.filterByGender(subject)) ? _c('el-option', {
+      key: subject.id,
+      attrs: {
+        "label": subject.name1,
+        "value": subject.id
+      }
+    }) : _vm._e()
+  })), _vm._v(" "), _c('el-select', {
+    staticClass: "structuremanagementpanel-document-select",
+    class: {
+      'structuremanagementpanel-freezed': _vm.displayinput
+    },
+    attrs: {
+      "filterable": "",
+      "filter-method": _vm.filterMethod,
+      "no-data-text": "Не найдено",
+      "no-match-text": "Не найдено",
+      "clearable": "",
+      "placeholder": "Часть"
+    },
+    model: {
+      value: (_vm.subject6),
+      callback: function($$v) {
+        _vm.subject6 = $$v
+      },
+      expression: "subject6"
+    }
+  }, _vm._l((_vm.filteredSubjects), function(subject) {
+    return (_vm.filterByGender(subject)) ? _c('el-option', {
+      key: subject.id,
+      attrs: {
+        "label": subject.name1,
+        "value": subject.id
+      }
+    }) : _vm._e()
+  })), _vm._v(" "), _c('el-select', {
+    staticClass: "structuremanagementpanel-document-select",
+    class: {
+      'structuremanagementpanel-freezed': _vm.displayinput
+    },
+    attrs: {
+      "filterable": "",
+      "filter-method": _vm.filterMethod,
+      "no-data-text": "Не найдено",
+      "no-match-text": "Не найдено",
+      "clearable": "",
+      "placeholder": "Часть"
+    },
+    model: {
+      value: (_vm.subject7),
+      callback: function($$v) {
+        _vm.subject7 = $$v
+      },
+      expression: "subject7"
+    }
+  }, _vm._l((_vm.filteredSubjects), function(subject) {
+    return (_vm.filterByGender(subject)) ? _c('el-option', {
+      key: subject.id,
+      attrs: {
+        "label": subject.name1,
+        "value": subject.id
+      }
+    }) : _vm._e()
+  })), _vm._v(" "), _c('el-select', {
+    staticClass: "structuremanagementpanel-document-select",
+    class: {
+      'structuremanagementpanel-freezed': _vm.displayinput
+    },
+    attrs: {
+      "filterable": "",
+      "filter-method": _vm.filterMethod,
+      "no-data-text": "Не найдено",
+      "no-match-text": "Не найдено",
+      "clearable": "",
+      "placeholder": "Часть"
+    },
+    model: {
+      value: (_vm.subject8),
+      callback: function($$v) {
+        _vm.subject8 = $$v
+      },
+      expression: "subject8"
+    }
+  }, _vm._l((_vm.filteredSubjects), function(subject) {
+    return (_vm.filterByGender(subject)) ? _c('el-option', {
+      key: subject.id,
+      attrs: {
+        "label": subject.name1,
+        "value": subject.id
+      }
+    }) : _vm._e()
+  })), _vm._v(" "), _c('el-select', {
+    staticClass: "structuremanagementpanel-document-select",
+    class: {
+      'structuremanagementpanel-freezed': _vm.displayinput
+    },
+    attrs: {
+      "filterable": "",
+      "filter-method": _vm.filterMethod,
+      "no-data-text": "Не найдено",
+      "no-match-text": "Не найдено",
+      "clearable": "",
+      "placeholder": "Часть"
+    },
+    model: {
+      value: (_vm.subject9),
+      callback: function($$v) {
+        _vm.subject9 = $$v
+      },
+      expression: "subject9"
+    }
+  }, _vm._l((_vm.filteredSubjects), function(subject) {
+    return (_vm.filterByGender(subject)) ? _c('el-option', {
+      key: subject.id,
+      attrs: {
+        "label": subject.name1,
+        "value": subject.id
+      }
+    }) : _vm._e()
+  })), _vm._v(" "), _c('el-select', {
+    staticClass: "structuremanagementpanel-document-select",
+    class: {
+      'structuremanagementpanel-freezed': _vm.displayinput
+    },
+    attrs: {
+      "filterable": "",
+      "filter-method": _vm.filterMethod,
+      "no-data-text": "Не найдено",
+      "no-match-text": "Не найдено",
+      "clearable": "",
+      "placeholder": "Часть"
+    },
+    model: {
+      value: (_vm.subject10),
+      callback: function($$v) {
+        _vm.subject10 = $$v
+      },
+      expression: "subject10"
+    }
+  }, _vm._l((_vm.filteredSubjects), function(subject) {
+    return (_vm.filterByGender(subject)) ? _c('el-option', {
+      key: subject.id,
+      attrs: {
+        "label": subject.name1,
+        "value": subject.id
+      }
+    }) : _vm._e()
+  })), _vm._v(" "), _c('el-select', {
+    staticClass: "structuremanagementpanel-document-select",
+    class: {
+      'structuremanagementpanel-freezed': _vm.displayinput
+    },
+    attrs: {
+      "filterable": "",
+      "filter-method": _vm.filterMethod,
+      "no-data-text": "Не найдено",
+      "no-match-text": "Не найдено",
+      "clearable": "",
+      "placeholder": "Часть"
+    },
+    model: {
+      value: (_vm.subject11),
+      callback: function($$v) {
+        _vm.subject11 = $$v
+      },
+      expression: "subject11"
+    }
+  }, _vm._l((_vm.filteredSubjects), function(subject) {
+    return (_vm.filterByGender(subject)) ? _c('el-option', {
+      key: subject.id,
+      attrs: {
+        "label": subject.name1,
+        "value": subject.id
+      }
+    }) : _vm._e()
+  })), _vm._v(" "), _c('el-select', {
+    staticClass: "structuremanagementpanel-document-select",
+    class: {
+      'structuremanagementpanel-freezed': _vm.displayinput
+    },
+    attrs: {
+      "filterable": "",
+      "filter-method": _vm.filterMethod,
+      "no-data-text": "Не найдено",
+      "no-match-text": "Не найдено",
+      "clearable": "",
+      "placeholder": "Часть"
+    },
+    model: {
+      value: (_vm.subject12),
+      callback: function($$v) {
+        _vm.subject12 = $$v
+      },
+      expression: "subject12"
+    }
+  }, _vm._l((_vm.filteredSubjects), function(subject) {
+    return (_vm.filterByGender(subject)) ? _c('el-option', {
+      key: subject.id,
+      attrs: {
+        "label": subject.name1,
+        "value": subject.id
+      }
+    }) : _vm._e()
+  })), _vm._v(" "), _c('el-select', {
+    staticClass: "structuremanagementpanel-document-select",
+    class: {
+      'structuremanagementpanel-freezed': _vm.displayinput
+    },
+    attrs: {
+      "filterable": "",
+      "filter-method": _vm.filterMethod,
+      "no-data-text": "Не найдено",
+      "no-match-text": "Не найдено",
+      "clearable": "",
+      "placeholder": "Часть"
+    },
+    model: {
+      value: (_vm.subject13),
+      callback: function($$v) {
+        _vm.subject13 = $$v
+      },
+      expression: "subject13"
+    }
+  }, _vm._l((_vm.filteredSubjects), function(subject) {
+    return (_vm.filterByGender(subject)) ? _c('el-option', {
+      key: subject.id,
+      attrs: {
+        "label": subject.name1,
+        "value": subject.id
+      }
+    }) : _vm._e()
+  })), _vm._v(" "), _c('el-select', {
+    staticClass: "structuremanagementpanel-document-select",
+    class: {
+      'structuremanagementpanel-freezed': _vm.displayinput
+    },
+    attrs: {
+      "filterable": "",
+      "filter-method": _vm.filterMethod,
+      "no-data-text": "Не найдено",
+      "no-match-text": "Не найдено",
+      "clearable": "",
+      "placeholder": "Часть"
+    },
+    model: {
+      value: (_vm.subject14),
+      callback: function($$v) {
+        _vm.subject14 = $$v
+      },
+      expression: "subject14"
+    }
+  }, _vm._l((_vm.filteredSubjects), function(subject) {
+    return (_vm.filterByGender(subject)) ? _c('el-option', {
+      key: subject.id,
+      attrs: {
+        "label": subject.name1,
+        "value": subject.id
+      }
+    }) : _vm._e()
+  })), _vm._v(" "), _c('el-select', {
+    staticClass: "structuremanagementpanel-document-select",
+    class: {
+      'structuremanagementpanel-freezed': _vm.displayinput
+    },
+    attrs: {
+      "filterable": "",
+      "filter-method": _vm.filterMethod,
+      "no-data-text": "Не найдено",
+      "no-match-text": "Не найдено",
+      "clearable": "",
+      "placeholder": "Часть"
+    },
+    model: {
+      value: (_vm.subject15),
+      callback: function($$v) {
+        _vm.subject15 = $$v
+      },
+      expression: "subject15"
+    }
+  }, _vm._l((_vm.filteredSubjects), function(subject) {
+    return (_vm.filterByGender(subject)) ? _c('el-option', {
+      key: subject.id,
+      attrs: {
+        "label": subject.name1,
+        "value": subject.id
+      }
+    }) : _vm._e()
+  }))], 1), _vm._v(" "), _c('hr'), _vm._v(" "), _c('div', {
     class: {
       'structuremanagementpanel-freezed': _vm.displayinput
     }
@@ -17163,7 +21014,7 @@ if (true) {
 }
 
 /***/ }),
-/* 103 */
+/* 159 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -17199,45 +21050,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.reloadPage()
       }
     }
-  }, [_vm._v("Кадры")]), _vm._v(" "), (_vm.displaySelectmodewarning) ? _c('div', {
-    staticClass: "topmenu-mode"
-  }, [_vm._v("\n                Выберите подразделение слева или сверху для добавления в список.\n                "), _c('el-button', {
-    attrs: {
-      "size": "mini",
-      "type": "danger",
-      "round": "",
-      "plain": ""
-    },
-    on: {
-      "click": _vm.cancelmode
-    }
-  }, [_vm._v("Отмена")])], 1) : _vm._e(), _vm._v(" "), (_vm.displaySelectmodewarning) ? _c('div', {
-    staticClass: "topmenu-mode"
-  }, [_vm._v("\n                Выберите подразделение.\n                "), _c('el-button', {
-    attrs: {
-      "size": "mini",
-      "type": "success",
-      "round": "",
-      "plain": ""
-    },
-    on: {
-      "click": _vm.successmode
-    }
-  }, [_vm._v("Готово")])], 1) : _vm._e(), _vm._v(" "), (_vm.displayAppointpersonmodewarning) ? _c('div', {
-    staticClass: "topmenu-mode"
-  }, [_vm._v("\n                Откройте подразделение и выберите должность\n                "), _c('el-button', {
-    attrs: {
-      "size": "mini",
-      "type": "danger",
-      "round": "",
-      "plain": ""
-    },
-    on: {
-      "click": function($event) {
-        _vm.cancelpersonappoint()
-      }
-    }
-  }, [_vm._v("Отмена")])], 1) : _vm._e()]), _vm._v(" "), (!_vm.modepanelVisible()) ? _c('div', {
+  }, [_vm._v("Кадры")])]), _vm._v(" "), (!_vm.modepanelVisible()) ? _c('div', {
     attrs: {
       "id": "topmenu-featuredlist"
     }
@@ -17285,7 +21098,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     on: {
       "click": _vm.restoreCurrentDate
     }
-  }, [_vm._v(" " + _vm._s(_vm.beautifyDate(_vm.getdate())))])]), _vm._v(" "), _c('div', {
+  }, [_vm._v(" " + _vm._s(_vm.beautifyDate(_vm.getdate())))])]), _vm._v(" "), (_vm.structureEdit() && _vm.structureMode() && _vm.value5) ? _c('div', {
     staticClass: "topmenu-rightblock-decreename",
     attrs: {
       "title": "Нажмите, чтобы открыть меню проекта приказа"
@@ -17293,9 +21106,30 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     on: {
       "click": _vm.selectCurrentDecree
     }
-  }, [_vm._v(_vm._s(_vm.getDecreeNameAlt()))]), _vm._v(" "), _c('div', {
+  }, [_vm._v(_vm._s(_vm.getDecreeNameAlt()))]) : _vm._e(), _vm._v(" "), _c('div', {
     staticClass: "topmenu-rightblock-login"
-  }, [_vm._v("Вы вошли как " + _vm._s(_vm.login))])]), _vm._v(" "), (!_vm.modepanelVisible()) ? _c('div', [_c('el-button', {
+  }, [_vm._v("Вы вошли как " + _vm._s(_vm.login))]), _vm._v(" "), (_vm.structureMode()) ? _c('div', {
+    staticStyle: {
+      "text-align": "center"
+    }
+  }, [_c('el-switch', {
+    attrs: {
+      "active-text": "Редактирование",
+      "inactive-text": "Чтение",
+      "inactive-color": "#13ce66",
+      "active-color": "#ff4949"
+    },
+    on: {
+      "change": _vm.changeusereditorflag
+    },
+    model: {
+      value: (_vm.value5),
+      callback: function($$v) {
+        _vm.value5 = $$v
+      },
+      expression: "value5"
+    }
+  })], 1) : _vm._e()]), _vm._v(" "), (!_vm.modepanelVisible()) ? _c('div', [_c('el-button', {
     staticClass: "topmenu-rightblock-button",
     on: {
       "click": function($event) {
@@ -17314,7 +21148,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "topmenu-rightblock-button"
   }, [_vm._v("Меню")]), _vm._v(" "), _c('el-dropdown-menu', {
     slot: "dropdown"
-  }, [(_vm.structureEdit() && _vm.structureMode()) ? _c('el-dropdown-item', {
+  }, [(_vm.structureEdit() && _vm.structureMode() && _vm.value5) ? _c('el-dropdown-item', {
     attrs: {
       "command": "decrees"
     }
@@ -17334,11 +21168,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "command": "modalAboutPanelVisible"
     }
-  }, [_vm._v("О программе")]), _vm._v(" "), (_vm.user.id == 1) ? _c('el-dropdown-item', {
-    attrs: {
-      "command": "rewrite"
-    }
-  }, [_vm._v("Обновление БД")]) : _vm._e(), _vm._v(" "), _c('el-dropdown-item', {
+  }, [_vm._v("О программе")]), _vm._v(" "), _c('el-dropdown-item', {
     attrs: {
       "command": "logout"
     }
@@ -17526,33 +21356,37 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.modalDecreesSignedMenuVisible = $event
       }
     }
-  }, [_vm._v("\n            Список подписанных приказов\n            "), _c('div', [_c('div', [_vm._v("\n                    Фильтр:\n                ")]), _vm._v(" "), _c('div', [_c('div', {
+  }, [_vm._v("\n            Список подписанных приказов\n            "), _c('div', [_c('div', [_vm._v("\n                    Фильтр:\n                ")]), _vm._v(" "), _c('div', {
     staticClass: "decreeoperation-row"
   }, [_c('div', {
     staticClass: "decreeoperation-row-text"
-  }, [_vm._v("Дата приказа c - по:")]), _vm._v(" "), _c('el-date-picker', {
+  }, [_vm._v("Дата приказа c :")]), _vm._v(" "), _c('el-input', {
     attrs: {
-      "type": "date",
-      "format": "dd.MM.yyyy"
+      "suffix-icon": "el-icon-date",
+      "type": "date"
     },
     model: {
-      value: (_vm.decree_find_parameters.dates.minDate),
+      value: (_vm.decreeFilterDatesignedStart),
       callback: function($$v) {
-        _vm.decree_find_parameters.dates.minDate = $$v
+        _vm.decreeFilterDatesignedStart = $$v
       },
-      expression: "decree_find_parameters.dates.minDate"
+      expression: "decreeFilterDatesignedStart"
     }
-  }), _vm._v(" "), _c('el-date-picker', {
+  })], 1), _vm._v(" "), _c('div', {
+    staticClass: "decreeoperation-row"
+  }, [_c('div', {
+    staticClass: "decreeoperation-row-text"
+  }, [_vm._v("Дата приказа по:")]), _vm._v(" "), _c('el-input', {
     attrs: {
-      "type": "date",
-      "format": "dd.MM.yyyy"
+      "suffix-icon": "el-icon-date",
+      "type": "date"
     },
     model: {
-      value: (_vm.decree_find_parameters.dates.maxDate),
+      value: (_vm.decreeFilterDatesignedEnd),
       callback: function($$v) {
-        _vm.decree_find_parameters.dates.maxDate = $$v
+        _vm.decreeFilterDatesignedEnd = $$v
       },
-      expression: "decree_find_parameters.dates.maxDate"
+      expression: "decreeFilterDatesignedEnd"
     }
   })], 1), _vm._v(" "), _c('div', {
     staticClass: "decreeoperation-row"
@@ -17560,11 +21394,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "decreeoperation-row-text"
   }, [_vm._v("Номер приказа:")]), _vm._v(" "), _c('el-input', {
     model: {
-      value: (_vm.decree_find_parameters.number),
+      value: (_vm.decreeFilterNumber),
       callback: function($$v) {
-        _vm.decree_find_parameters.number = $$v
+        _vm.decreeFilterNumber = $$v
       },
-      expression: "decree_find_parameters.number"
+      expression: "decreeFilterNumber"
     }
   })], 1), _vm._v(" "), _c('div', {
     staticClass: "decreeoperation-row"
@@ -17572,39 +21406,43 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "decreeoperation-row-text"
   }, [_vm._v("Название приказа:")]), _vm._v(" "), _c('el-input', {
     model: {
-      value: (_vm.decree_find_parameters.name),
+      value: (_vm.decreeFilterName),
       callback: function($$v) {
-        _vm.decree_find_parameters.name = $$v
+        _vm.decreeFilterName = $$v
       },
-      expression: "decree_find_parameters.name"
+      expression: "decreeFilterName"
     }
   })], 1), _vm._v(" "), _c('div', {
     staticClass: "decreeoperation-row"
   }, [_c('div', {
     staticClass: "decreeoperation-row-text"
-  }, [_vm._v("Начало действия приказа с - по:")]), _vm._v(" "), _c('el-date-picker', {
+  }, [_vm._v("Начало действия приказа с:")]), _vm._v(" "), _c('el-input', {
     attrs: {
-      "type": "date",
-      "format": "dd.MM.yyyy"
+      "suffix-icon": "el-icon-date",
+      "type": "date"
     },
     model: {
-      value: (_vm.decree_find_parameters.date_started.minDate),
+      value: (_vm.decreeFilterDateactiveStart),
       callback: function($$v) {
-        _vm.decree_find_parameters.date_started.minDate = $$v
+        _vm.decreeFilterDateactiveStart = $$v
       },
-      expression: "decree_find_parameters.date_started.minDate"
+      expression: "decreeFilterDateactiveStart"
     }
-  }), _vm._v(" "), _c('el-date-picker', {
+  })], 1), _vm._v(" "), _c('div', {
+    staticClass: "decreeoperation-row"
+  }, [_c('div', {
+    staticClass: "decreeoperation-row-text"
+  }, [_vm._v("Начало действия приказа по:")]), _vm._v(" "), _c('el-input', {
     attrs: {
-      "type": "date",
-      "format": "dd.MM.yyyy"
+      "suffix-icon": "el-icon-date",
+      "type": "date"
     },
     model: {
-      value: (_vm.decree_find_parameters.date_started.maxDate),
+      value: (_vm.decreeFilterDateactiveEnd),
       callback: function($$v) {
-        _vm.decree_find_parameters.date_started.maxDate = $$v
+        _vm.decreeFilterDateactiveEnd = $$v
       },
-      expression: "decree_find_parameters.date_started.maxDate"
+      expression: "decreeFilterDateactiveEnd"
     }
   })], 1), _vm._v(" "), _c('div', {
     staticClass: "decreeoperation-row"
@@ -17612,117 +21450,35 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "decreeoperation-row-text"
   }, [_vm._v("Рабочее название приказа:")]), _vm._v(" "), _c('el-input', {
     model: {
-      value: (_vm.decree_find_parameters.nickname),
+      value: (_vm.decreeFilterNickname),
       callback: function($$v) {
-        _vm.decree_find_parameters.nickname = $$v
+        _vm.decreeFilterNickname = $$v
       },
-      expression: "decree_find_parameters.nickname"
+      expression: "decreeFilterNickname"
     }
-  })], 1), _vm._v(" "), _c('div', [(_vm.user.id == 1) ? _c('el-checkbox', {
-    model: {
-      value: (_vm.decree_find_parameters.rewrite),
-      callback: function($$v) {
-        _vm.decree_find_parameters.rewrite = $$v
-      },
-      expression: "decree_find_parameters.rewrite"
-    }
-  }, [_vm._v("rewrite datebase without null values")]) : _vm._e()], 1)]), _vm._v(" "), _c('div', [_c('el-button', {
+  })], 1), _vm._v(" "), _c('div', [_c('el-button', {
     on: {
       "click": function($event) {
         _vm.filterSignedDecree()
       }
     }
-  }, [_vm._v("Поиск")])], 1), _vm._v(" "), _c('div', _vm._l((_vm.all_decrees), function(decreeElement) {
+  }, [_vm._v("Поиск")])], 1), _vm._v(" "), _c('div', _vm._l((_vm.decreesSignedList.slice().reverse()), function(decreeElement) {
     return _c('div', {
       staticClass: "decreeoperation-signed-decree-block"
-    }, [_c('div', {
-      staticClass: "decreeoperation-row"
-    }, [_c('label', {
+    }, [_c('div', [_c('label', {
       staticClass: "decreeoperation-signed-row-label"
-    }, [_vm._v("Название приказа")]), _vm._v(" "), _c('el-input', {
-      attrs: {
-        "size": "mini",
-        "readonly": "true"
-      },
-      model: {
-        value: (decreeElement.name),
-        callback: function($$v) {
-          decreeElement.name = $$v
-        },
-        expression: "decreeElement.name"
-      }
-    })], 1), _vm._v(" "), _c('div', {
-      staticClass: "decreeoperation-row"
-    }, [_c('label', {
+    }, [_vm._v("Название приказа")]), _vm._v(" " + _vm._s(decreeElement.name) + "\n                        ")]), _vm._v(" "), _c('div', [_c('label', {
       staticClass: "decreeoperation-signed-row-label"
-    }, [_vm._v("Номер приказа")]), _vm._v(" "), _c('el-input', {
-      attrs: {
-        "size": "mini",
-        "readonly": "true"
-      },
-      model: {
-        value: (decreeElement.number),
-        callback: function($$v) {
-          decreeElement.number = $$v
-        },
-        expression: "decreeElement.number"
-      }
-    })], 1), _vm._v(" "), _c('div', {
-      staticClass: "decreeoperation-row"
-    }, [_c('label', {
+    }, [_vm._v("Номер приказа")]), _vm._v(" " + _vm._s(decreeElement.number) + "\n                        ")]), _vm._v(" "), _c('div', [_c('label', {
       staticClass: "decreeoperation-signed-row-label"
-    }, [_vm._v("Рабочее название приказа")]), _vm._v(" "), _c('el-input', {
-      attrs: {
-        "size": "mini",
-        "readonly": "true"
-      },
-      model: {
-        value: (decreeElement.nickname),
-        callback: function($$v) {
-          decreeElement.nickname = $$v
-        },
-        expression: "decreeElement.nickname"
-      }
-    })], 1), _vm._v(" "), _c('div', {
-      staticClass: "decreeoperation-row"
-    }, [_c('label', {
+    }, [_vm._v("Рабочее название приказа")]), _vm._v(" " + _vm._s(decreeElement.nickname) + "\n                        ")]), _vm._v(" "), _c('div', [_c('label', {
       staticClass: "decreeoperation-signed-row-label"
-    }, [_vm._v("Приказ подписан")]), _vm._v(" "), _c('el-date-picker', {
-      attrs: {
-        "size": "mini",
-        "typeof": "date",
-        "readonly": "true",
-        "format": "dd.MM.yyyy"
-      },
-      model: {
-        value: (decreeElement.datesigned),
-        callback: function($$v) {
-          decreeElement.datesigned = $$v
-        },
-        expression: "decreeElement.datesigned"
-      }
-    })], 1), _vm._v(" "), _c('div', {
-      staticClass: "decreeoperation-row"
-    }, [_c('label', {
+    }, [_vm._v("Приказ подписан")]), _vm._v(" " + _vm._s(_vm.beautifyDate(_vm.toDateInputValue(decreeElement.datesigned))) + "\n                        ")]), _vm._v(" "), _c('div', [_c('label', {
       staticClass: "decreeoperation-signed-row-label"
-    }, [_vm._v("Начало действия приказа")]), _vm._v(" "), _c('el-date-picker', {
-      attrs: {
-        "size": "mini",
-        "typeof": "date",
-        "readonly": "true",
-        "format": "dd.MM.yyyy"
-      },
-      model: {
-        value: (decreeElement.dateactive),
-        callback: function($$v) {
-          decreeElement.dateactive = $$v
-        },
-        expression: "decreeElement.dateactive"
-      }
-    })], 1), _vm._v(" "), _c('div', [_c('el-button', {
+    }, [_vm._v("Начало действия приказа")]), _vm._v(" " + _vm._s(_vm.beautifyDate(_vm.toDateInputValue(decreeElement.dateactive))) + "\n                        ")]), _vm._v(" "), _c('div', [_c('el-button', {
       on: {
         "click": function($event) {
-          _vm.selectSignedDecree($event, decreeElement)
+          _vm.selectSignedDecree($event, decreeElement.id)
         }
       }
     }, [_vm._v("Просмотр приказа")])], 1)])
@@ -17834,7 +21590,37 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     on: {
       "click": _vm.decreehistoryPrint
     }
-  }, [_vm._v("Перечень Word")]), _vm._v(" "), _c('div', {
+  }, [_vm._v("Перечень Word")]), _vm._v(" "), (_vm.special_acces) ? _c('el-button', {
+    staticStyle: {
+      "background": "rgba(255, 201, 246, 0.46)",
+      "border-color": "#82848a",
+      "color": "tan"
+    },
+    attrs: {
+      "round": ""
+    },
+    on: {
+      "click": _vm.checkDecreeOperations
+    }
+  }, [_vm._v("Проверить повторы")]) : _vm._e(), _vm._v(" "), (_vm.special_acces) ? _c('el-button', {
+    staticStyle: {
+      "background": "rgba(255, 66, 0, 0.46)",
+      "border-color": "#82848a",
+      "color": "black"
+    },
+    attrs: {
+      "round": ""
+    },
+    on: {
+      "click": _vm.unsigned_decree
+    }
+  }, [_vm._v("Отменить")]) : _vm._e(), _vm._v(" "), _c('el-alert', {
+    attrs: {
+      "title": _vm.checkedDecreeResualt,
+      "type": "info",
+      "closable": true
+    }
+  }), _vm._v(" "), _c('div', {
     staticClass: "decreeoperation-panel"
   }, _vm._l((_vm.decreeSignedOperations), function(decreeOperation) {
     return _c('div', {
@@ -18089,7 +21875,7 @@ if (true) {
 }
 
 /***/ }),
-/* 104 */
+/* 160 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -18162,7 +21948,7 @@ if (true) {
 }
 
 /***/ }),
-/* 105 */
+/* 161 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -18213,13 +21999,25 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       staticClass: "adminpanel-row"
     }, [_c('b', [_vm._v("Должность ")]), _vm._v(" " + _vm._s(_vm.getPositiontype(user.positiontype)) + "\n                            ")]), _vm._v(" "), (user.admin == '1') ? _c('div', [_vm._v("\n                                С правами администратора\n                            ")]) : _c('div', [_vm._v("\n                                Без прав администратора\n                            ")]), _vm._v(" "), _c('b', [_vm._v("Подразделение ")]), _vm._v(" " + _vm._s(user.structurename) + "\n                            "), _c('br'), _vm._v(" "), _c('div', [_c('div', [_c('b', [_vm._v("Доступы:")])]), _vm._v(" "), _c('div', [_c('span', {
       staticClass: "adminpanel-row-label"
+    }, [_vm._v("Редактирование прохождения службы")]), _c('span', {
+      staticClass: "adminpanel-row-right"
+    }, [_vm._v(_vm._s(_vm.hasRightString(user.personneleditor)))])]), _vm._v(" "), _c('div', [_c('span', {
+      staticClass: "adminpanel-row-label"
+    }, [_vm._v("Доступ к чтению прохождения службы")]), _c('span', {
+      staticClass: "adminpanel-row-right"
+    }, [_vm._v(_vm._s(_vm.hasRightString(user.personnelread)))])]), _vm._v(" "), _c('div', [_c('span', {
+      staticClass: "adminpanel-row-label"
     }, [_vm._v("Редактирование оргштатной работы")]), _c('span', {
       staticClass: "adminpanel-row-right"
     }, [_vm._v(_vm._s(_vm.hasRightString(user.structureeditor)))])]), _vm._v(" "), _c('div', [_c('span', {
       staticClass: "adminpanel-row-label"
     }, [_vm._v("Доступ к чтению оргштатной работы")]), _c('span', {
       staticClass: "adminpanel-row-right"
-    }, [_vm._v(_vm._s(_vm.hasRightString(user.structureread)))])])]), _vm._v(" "), _c('div', {
+    }, [_vm._v(_vm._s(_vm.hasRightString(user.structureread)))])]), _vm._v(" "), _c('div', [_c('span', {
+      staticClass: "adminpanel-row-label"
+    }, [_vm._v("Редактирование кадров всех подразделений")]), _c('span', {
+      staticClass: "adminpanel-row-right"
+    }, [_vm._v(_vm._s(_vm.hasRightString(user.masterpersonneleditor)))])])]), _vm._v(" "), _c('div', {
       staticClass: "adminpanel-submit"
     }, [_c('el-button', {
       attrs: {
@@ -18439,6 +22237,36 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_vm._v("\n                                    Организационно-штатная работа\n                                ")]), _vm._v(" "), _c('el-button', {
     staticClass: "eld-eld-body-submenu-button",
     class: {
+      'eld-eld-body-submenu-button-selected': _vm.newUser.rights.menu == 2
+    },
+    on: {
+      "click": function($event) {
+        _vm.updateRightsMenu(_vm.newUser.rights, 2)
+      }
+    }
+  }, [_vm._v("\n                                    Электронное личное дело\n                                ")]), _vm._v(" "), _c('el-button', {
+    staticClass: "eld-eld-body-submenu-button",
+    class: {
+      'eld-eld-body-submenu-button-selected': _vm.newUser.rights.menu == 3
+    },
+    on: {
+      "click": function($event) {
+        _vm.updateRightsMenu(_vm.newUser.rights, 3)
+      }
+    }
+  }, [_vm._v("\n                                    Кандидаты\n                                ")]), _vm._v(" "), _c('el-button', {
+    staticClass: "eld-eld-body-submenu-button",
+    class: {
+      'eld-eld-body-submenu-button-selected': _vm.newUser.rights.menu == 4
+    },
+    on: {
+      "click": function($event) {
+        _vm.updateRightsMenu(_vm.newUser.rights, 4)
+      }
+    }
+  }, [_vm._v("\n                                    Структура в лицах\n                                ")]), _vm._v(" "), _c('el-button', {
+    staticClass: "eld-eld-body-submenu-button",
+    class: {
       'eld-eld-body-submenu-button-selected': _vm.newUser.rights.menu == 5
     },
     on: {
@@ -18510,6 +22338,1310 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       },
       expression: "newUser.rights.orgreadall"
     }
+  })], 1)]) : _vm._e(), _vm._v(" "), (_vm.newUser.rights.menu == 2) ? _c('div', [_c('br'), _vm._v(" "), _c('div', [_c('el-button', {
+    on: {
+      "click": function($event) {
+        _vm.grantEldAllAccess(_vm.newUser.rights)
+      }
+    }
+  }, [_vm._v("Предоставить все доступы")])], 1), _vm._v(" "), _c('div', [_c('b', [_vm._v("\n                                        Общие доступы\n                                    ")])]), _vm._v(" "), _c('div', {
+    staticClass: "adminpanel-row"
+  }, [_c('el-switch', {
+    attrs: {
+      "active-value": 1,
+      "inactive-value": 0,
+      "active-text": "Редактирование личных дел работников своего и подчиненных подразделений"
+    },
+    on: {
+      "change": _vm.forceUpdate
+    },
+    model: {
+      value: (_vm.newUser.rights.peopleedit),
+      callback: function($$v) {
+        _vm.newUser.rights.peopleedit = $$v
+      },
+      expression: "newUser.rights.peopleedit"
+    }
+  })], 1), _vm._v(" "), _c('div', {
+    staticClass: "adminpanel-row"
+  }, [_c('el-switch', {
+    attrs: {
+      "active-value": 1,
+      "inactive-value": 0,
+      "active-text": "Просмотр личных дел работников своего и подчиненных подразделений"
+    },
+    on: {
+      "change": _vm.forceUpdate
+    },
+    model: {
+      value: (_vm.newUser.rights.peopleread),
+      callback: function($$v) {
+        _vm.newUser.rights.peopleread = $$v
+      },
+      expression: "newUser.rights.peopleread"
+    }
+  })], 1), _vm._v(" "), _c('div', {
+    staticClass: "adminpanel-row"
+  }, [_c('el-switch', {
+    attrs: {
+      "active-value": 1,
+      "inactive-value": 0,
+      "active-text": "Просмотр личных дел работников всех подразделений"
+    },
+    on: {
+      "change": _vm.forceUpdate
+    },
+    model: {
+      value: (_vm.newUser.rights.peoplereadall),
+      callback: function($$v) {
+        _vm.newUser.rights.peoplereadall = $$v
+      },
+      expression: "newUser.rights.peoplereadall"
+    }
+  })], 1), _vm._v(" "), _c('div', {
+    staticClass: "eld-eld-body-row-flex"
+  }, [_c('div', [_c('div', [_c('b', [_vm._v("\n                                                Доступ к чтению\n                                            ")])]), _vm._v(" "), _c('div', [_c('div', {
+    staticClass: "adminpanel-row"
+  }, [_c('el-switch', {
+    attrs: {
+      "active-value": 1,
+      "inactive-value": 0,
+      "active-text": "Главная страница"
+    },
+    on: {
+      "change": _vm.forceUpdate
+    },
+    model: {
+      value: (_vm.newUser.rights.peoplereadmain),
+      callback: function($$v) {
+        _vm.newUser.rights.peoplereadmain = $$v
+      },
+      expression: "newUser.rights.peoplereadmain"
+    }
+  })], 1), _vm._v(" "), _c('div', {
+    staticClass: "adminpanel-row"
+  }, [_c('el-switch', {
+    attrs: {
+      "active-value": 1,
+      "inactive-value": 0,
+      "active-text": "Паспорт"
+    },
+    on: {
+      "change": _vm.forceUpdate
+    },
+    model: {
+      value: (_vm.newUser.rights.peoplereadpassport),
+      callback: function($$v) {
+        _vm.newUser.rights.peoplereadpassport = $$v
+      },
+      expression: "newUser.rights.peoplereadpassport"
+    }
+  })], 1), _vm._v(" "), _c('div', {
+    staticClass: "adminpanel-row"
+  }, [_c('el-switch', {
+    attrs: {
+      "active-value": 1,
+      "inactive-value": 0,
+      "active-text": "Фотографии"
+    },
+    on: {
+      "change": _vm.forceUpdate
+    },
+    model: {
+      value: (_vm.newUser.rights.peoplereadphoto),
+      callback: function($$v) {
+        _vm.newUser.rights.peoplereadphoto = $$v
+      },
+      expression: "newUser.rights.peoplereadphoto"
+    }
+  })], 1), _vm._v(" "), _c('div', {
+    staticClass: "adminpanel-row"
+  }, [_c('el-switch', {
+    attrs: {
+      "active-value": 1,
+      "inactive-value": 0,
+      "active-text": "Удостоверения"
+    },
+    on: {
+      "change": _vm.forceUpdate
+    },
+    model: {
+      value: (_vm.newUser.rights.peoplereadcertificate),
+      callback: function($$v) {
+        _vm.newUser.rights.peoplereadcertificate = $$v
+      },
+      expression: "newUser.rights.peoplereadcertificate"
+    }
+  })], 1), _vm._v(" "), _c('div', {
+    staticClass: "adminpanel-row"
+  }, [_c('el-switch', {
+    attrs: {
+      "active-value": 1,
+      "inactive-value": 0,
+      "active-text": "Родственники"
+    },
+    on: {
+      "change": _vm.forceUpdate
+    },
+    model: {
+      value: (_vm.newUser.rights.peoplereadrelative),
+      callback: function($$v) {
+        _vm.newUser.rights.peoplereadrelative = $$v
+      },
+      expression: "newUser.rights.peoplereadrelative"
+    }
+  })], 1), _vm._v(" "), _c('div', {
+    staticClass: "adminpanel-row"
+  }, [_c('el-switch', {
+    attrs: {
+      "active-value": 1,
+      "inactive-value": 0,
+      "active-text": "Образование"
+    },
+    on: {
+      "change": _vm.forceUpdate
+    },
+    model: {
+      value: (_vm.newUser.rights.peoplereadeducation),
+      callback: function($$v) {
+        _vm.newUser.rights.peoplereadeducation = $$v
+      },
+      expression: "newUser.rights.peoplereadeducation"
+    }
+  })], 1), _vm._v(" "), _c('div', {
+    staticClass: "adminpanel-row"
+  }, [_c('el-switch', {
+    attrs: {
+      "active-value": 1,
+      "inactive-value": 0,
+      "active-text": "Образование УГЗ"
+    },
+    on: {
+      "change": _vm.forceUpdate
+    },
+    model: {
+      value: (_vm.newUser.rights.peoplereadeducationucp),
+      callback: function($$v) {
+        _vm.newUser.rights.peoplereadeducationucp = $$v
+      },
+      expression: "newUser.rights.peoplereadeducationucp"
+    }
+  })], 1), _vm._v(" "), _c('div', {
+    staticClass: "adminpanel-row"
+  }, [_c('el-switch', {
+    attrs: {
+      "active-value": 1,
+      "inactive-value": 0,
+      "active-text": "Трудовая деятельность"
+    },
+    on: {
+      "change": _vm.forceUpdate
+    },
+    model: {
+      value: (_vm.newUser.rights.peoplereadjob),
+      callback: function($$v) {
+        _vm.newUser.rights.peoplereadjob = $$v
+      },
+      expression: "newUser.rights.peoplereadjob"
+    }
+  })], 1), _vm._v(" "), _c('div', {
+    staticClass: "adminpanel-row"
+  }, [_c('el-switch', {
+    attrs: {
+      "active-value": 1,
+      "inactive-value": 0,
+      "active-text": "Выслуга лет на льготных условиях"
+    },
+    on: {
+      "change": _vm.forceUpdate
+    },
+    model: {
+      value: (_vm.newUser.rights.peoplereadjobprivelege),
+      callback: function($$v) {
+        _vm.newUser.rights.peoplereadjobprivelege = $$v
+      },
+      expression: "newUser.rights.peoplereadjobprivelege"
+    }
+  })], 1), _vm._v(" "), _c('div', {
+    staticClass: "adminpanel-row"
+  }, [_c('el-switch', {
+    attrs: {
+      "active-value": 1,
+      "inactive-value": 0,
+      "active-text": "Выслуга лет"
+    },
+    on: {
+      "change": _vm.forceUpdate
+    },
+    model: {
+      value: (_vm.newUser.rights.peoplereadjobpension),
+      callback: function($$v) {
+        _vm.newUser.rights.peoplereadjobpension = $$v
+      },
+      expression: "newUser.rights.peoplereadjobpension"
+    }
+  })], 1), _vm._v(" "), _c('div', {
+    staticClass: "adminpanel-row"
+  }, [_c('el-switch', {
+    attrs: {
+      "active-value": 1,
+      "inactive-value": 0,
+      "active-text": "Листы нетрудоспособности"
+    },
+    on: {
+      "change": _vm.forceUpdate
+    },
+    model: {
+      value: (_vm.newUser.rights.peoplereadill),
+      callback: function($$v) {
+        _vm.newUser.rights.peoplereadill = $$v
+      },
+      expression: "newUser.rights.peoplereadill"
+    }
+  })], 1), _vm._v(" "), _c('div', {
+    staticClass: "adminpanel-row"
+  }, [_c('el-switch', {
+    attrs: {
+      "active-value": 1,
+      "inactive-value": 0,
+      "active-text": "Диспансеризация"
+    },
+    on: {
+      "change": _vm.forceUpdate
+    },
+    model: {
+      value: (_vm.newUser.rights.peoplereaddispanserization),
+      callback: function($$v) {
+        _vm.newUser.rights.peoplereaddispanserization = $$v
+      },
+      expression: "newUser.rights.peoplereaddispanserization"
+    }
+  })], 1), _vm._v(" "), _c('div', {
+    staticClass: "adminpanel-row"
+  }, [_c('el-switch', {
+    attrs: {
+      "active-value": 1,
+      "inactive-value": 0,
+      "active-text": "Военно-врачебная комиссия"
+    },
+    on: {
+      "change": _vm.forceUpdate
+    },
+    model: {
+      value: (_vm.newUser.rights.peoplereadvvk),
+      callback: function($$v) {
+        _vm.newUser.rights.peoplereadvvk = $$v
+      },
+      expression: "newUser.rights.peoplereadvvk"
+    }
+  })], 1), _vm._v(" "), _c('div', {
+    staticClass: "adminpanel-row"
+  }, [_c('el-switch', {
+    attrs: {
+      "active-value": 1,
+      "inactive-value": 0,
+      "active-text": "ПФЛ"
+    },
+    on: {
+      "change": _vm.forceUpdate
+    },
+    model: {
+      value: (_vm.newUser.rights.peoplereadpfl),
+      callback: function($$v) {
+        _vm.newUser.rights.peoplereadpfl = $$v
+      },
+      expression: "newUser.rights.peoplereadpfl"
+    }
+  })], 1), _vm._v(" "), _c('div', {
+    staticClass: "adminpanel-row"
+  }, [_c('el-switch', {
+    attrs: {
+      "active-value": 1,
+      "inactive-value": 0,
+      "active-text": "Звания"
+    },
+    on: {
+      "change": _vm.forceUpdate
+    },
+    model: {
+      value: (_vm.newUser.rights.peoplereadrank),
+      callback: function($$v) {
+        _vm.newUser.rights.peoplereadrank = $$v
+      },
+      expression: "newUser.rights.peoplereadrank"
+    }
+  })], 1), _vm._v(" "), _c('div', {
+    staticClass: "adminpanel-row"
+  }, [_c('el-switch', {
+    attrs: {
+      "active-value": 1,
+      "inactive-value": 0,
+      "active-text": "Контракты"
+    },
+    on: {
+      "change": _vm.forceUpdate
+    },
+    model: {
+      value: (_vm.newUser.rights.peoplereadcontract),
+      callback: function($$v) {
+        _vm.newUser.rights.peoplereadcontract = $$v
+      },
+      expression: "newUser.rights.peoplereadcontract"
+    }
+  })], 1), _vm._v(" "), _c('div', {
+    staticClass: "adminpanel-row"
+  }, [_c('el-switch', {
+    attrs: {
+      "active-value": 1,
+      "inactive-value": 0,
+      "active-text": "Дополнительные соглашения по отпускам"
+    },
+    on: {
+      "change": _vm.forceUpdate
+    },
+    model: {
+      value: (_vm.newUser.rights.peoplereadcontractvacation),
+      callback: function($$v) {
+        _vm.newUser.rights.peoplereadcontractvacation = $$v
+      },
+      expression: "newUser.rights.peoplereadcontractvacation"
+    }
+  })], 1), _vm._v(" "), _c('div', {
+    staticClass: "adminpanel-row"
+  }, [_c('el-switch', {
+    attrs: {
+      "active-value": 1,
+      "inactive-value": 0,
+      "active-text": "Стаж государственных служащих"
+    },
+    on: {
+      "change": _vm.forceUpdate
+    },
+    model: {
+      value: (_vm.newUser.rights.peoplereadcontractstate),
+      callback: function($$v) {
+        _vm.newUser.rights.peoplereadcontractstate = $$v
+      },
+      expression: "newUser.rights.peoplereadcontractstate"
+    }
+  })], 1), _vm._v(" "), _c('div', {
+    staticClass: "adminpanel-row"
+  }, [_c('el-switch', {
+    attrs: {
+      "active-value": 1,
+      "inactive-value": 0,
+      "active-text": "Отпуска"
+    },
+    on: {
+      "change": _vm.forceUpdate
+    },
+    model: {
+      value: (_vm.newUser.rights.peoplereadvacation),
+      callback: function($$v) {
+        _vm.newUser.rights.peoplereadvacation = $$v
+      },
+      expression: "newUser.rights.peoplereadvacation"
+    }
+  })], 1), _vm._v(" "), _c('div', {
+    staticClass: "adminpanel-row"
+  }, [_c('el-switch', {
+    attrs: {
+      "active-value": 1,
+      "inactive-value": 0,
+      "active-text": "Награды и поощрения"
+    },
+    on: {
+      "change": _vm.forceUpdate
+    },
+    model: {
+      value: (_vm.newUser.rights.peoplereadreward),
+      callback: function($$v) {
+        _vm.newUser.rights.peoplereadreward = $$v
+      },
+      expression: "newUser.rights.peoplereadreward"
+    }
+  })], 1), _vm._v(" "), _c('div', {
+    staticClass: "adminpanel-row"
+  }, [_c('el-switch', {
+    attrs: {
+      "active-value": 1,
+      "inactive-value": 0,
+      "active-text": "Аттестация"
+    },
+    on: {
+      "change": _vm.forceUpdate
+    },
+    model: {
+      value: (_vm.newUser.rights.peoplereadattestation),
+      callback: function($$v) {
+        _vm.newUser.rights.peoplereadattestation = $$v
+      },
+      expression: "newUser.rights.peoplereadattestation"
+    }
+  })], 1), _vm._v(" "), _c('div', {
+    staticClass: "adminpanel-row"
+  }, [_c('el-switch', {
+    attrs: {
+      "active-value": 1,
+      "inactive-value": 0,
+      "active-text": "Иностранные языки"
+    },
+    on: {
+      "change": _vm.forceUpdate
+    },
+    model: {
+      value: (_vm.newUser.rights.peoplereadlanguage),
+      callback: function($$v) {
+        _vm.newUser.rights.peoplereadlanguage = $$v
+      },
+      expression: "newUser.rights.peoplereadlanguage"
+    }
+  })], 1), _vm._v(" "), _c('div', {
+    staticClass: "adminpanel-row"
+  }, [_c('el-switch', {
+    attrs: {
+      "active-value": 1,
+      "inactive-value": 0,
+      "active-text": "Научные труды, звания, изобретения"
+    },
+    on: {
+      "change": _vm.forceUpdate
+    },
+    model: {
+      value: (_vm.newUser.rights.peoplereadscience),
+      callback: function($$v) {
+        _vm.newUser.rights.peoplereadscience = $$v
+      },
+      expression: "newUser.rights.peoplereadscience"
+    }
+  })], 1), _vm._v(" "), _c('div', {
+    staticClass: "adminpanel-row"
+  }, [_c('el-switch', {
+    attrs: {
+      "active-value": 1,
+      "inactive-value": 0,
+      "active-text": "Участие в выборных органах"
+    },
+    on: {
+      "change": _vm.forceUpdate
+    },
+    model: {
+      value: (_vm.newUser.rights.peoplereadelection),
+      callback: function($$v) {
+        _vm.newUser.rights.peoplereadelection = $$v
+      },
+      expression: "newUser.rights.peoplereadelection"
+    }
+  })], 1), _vm._v(" "), _c('div', {
+    staticClass: "adminpanel-row"
+  }, [_c('el-switch', {
+    attrs: {
+      "active-value": 1,
+      "inactive-value": 0,
+      "active-text": "Служебные командировки"
+    },
+    on: {
+      "change": _vm.forceUpdate
+    },
+    model: {
+      value: (_vm.newUser.rights.peoplereadworktrip),
+      callback: function($$v) {
+        _vm.newUser.rights.peoplereadworktrip = $$v
+      },
+      expression: "newUser.rights.peoplereadworktrip"
+    }
+  })], 1), _vm._v(" "), _c('div', {
+    staticClass: "adminpanel-row"
+  }, [_c('el-switch', {
+    attrs: {
+      "active-value": 1,
+      "inactive-value": 0,
+      "active-text": "Взыскания"
+    },
+    on: {
+      "change": _vm.forceUpdate
+    },
+    model: {
+      value: (_vm.newUser.rights.peoplereadpenalty),
+      callback: function($$v) {
+        _vm.newUser.rights.peoplereadpenalty = $$v
+      },
+      expression: "newUser.rights.peoplereadpenalty"
+    }
+  })], 1), _vm._v(" "), _c('div', {
+    staticClass: "adminpanel-row"
+  }, [_c('el-switch', {
+    attrs: {
+      "active-value": 1,
+      "inactive-value": 0,
+      "active-text": "Физическая подготовка"
+    },
+    on: {
+      "change": _vm.forceUpdate
+    },
+    model: {
+      value: (_vm.newUser.rights.peoplereadphysical),
+      callback: function($$v) {
+        _vm.newUser.rights.peoplereadphysical = $$v
+      },
+      expression: "newUser.rights.peoplereadphysical"
+    }
+  })], 1), _vm._v(" "), _c('div', {
+    staticClass: "adminpanel-row"
+  }, [_c('el-switch', {
+    attrs: {
+      "active-value": 1,
+      "inactive-value": 0,
+      "active-text": "Водительские удостоверения"
+    },
+    on: {
+      "change": _vm.forceUpdate
+    },
+    model: {
+      value: (_vm.newUser.rights.peoplereaddriver),
+      callback: function($$v) {
+        _vm.newUser.rights.peoplereaddriver = $$v
+      },
+      expression: "newUser.rights.peoplereaddriver"
+    }
+  })], 1), _vm._v(" "), _c('div', {
+    staticClass: "adminpanel-row"
+  }, [_c('el-switch', {
+    attrs: {
+      "active-value": 1,
+      "inactive-value": 0,
+      "active-text": "Разрешения и лицензии"
+    },
+    on: {
+      "change": _vm.forceUpdate
+    },
+    model: {
+      value: (_vm.newUser.rights.peoplereadpermission),
+      callback: function($$v) {
+        _vm.newUser.rights.peoplereadpermission = $$v
+      },
+      expression: "newUser.rights.peoplereadpermission"
+    }
+  })], 1), _vm._v(" "), _c('div', {
+    staticClass: "adminpanel-row"
+  }, [_c('el-switch', {
+    attrs: {
+      "active-value": 1,
+      "inactive-value": 0,
+      "active-text": "Льготы"
+    },
+    on: {
+      "change": _vm.forceUpdate
+    },
+    model: {
+      value: (_vm.newUser.rights.peoplereadprivelege),
+      callback: function($$v) {
+        _vm.newUser.rights.peoplereadprivelege = $$v
+      },
+      expression: "newUser.rights.peoplereadprivelege"
+    }
+  })], 1), _vm._v(" "), _c('div', {
+    staticClass: "adminpanel-row"
+  }, [_c('el-switch', {
+    attrs: {
+      "active-value": 1,
+      "inactive-value": 0,
+      "active-text": "Ранения, контузии и другие увечья"
+    },
+    on: {
+      "change": _vm.forceUpdate
+    },
+    model: {
+      value: (_vm.newUser.rights.peoplereadwound),
+      callback: function($$v) {
+        _vm.newUser.rights.peoplereadwound = $$v
+      },
+      expression: "newUser.rights.peoplereadwound"
+    }
+  })], 1)])]), _vm._v(" "), _c('div', [_c('div', [_c('b', [_vm._v("\n                                                Доступ к редактированию\n                                            ")])]), _vm._v(" "), _c('div', [_c('div', {
+    staticClass: "adminpanel-row"
+  }, [_c('el-switch', {
+    attrs: {
+      "active-value": 1,
+      "inactive-value": 0,
+      "active-text": "Главная страница"
+    },
+    on: {
+      "change": _vm.forceUpdate
+    },
+    model: {
+      value: (_vm.newUser.rights.peopleeditmain),
+      callback: function($$v) {
+        _vm.newUser.rights.peopleeditmain = $$v
+      },
+      expression: "newUser.rights.peopleeditmain"
+    }
+  })], 1), _vm._v(" "), _c('div', {
+    staticClass: "adminpanel-row"
+  }, [_c('el-switch', {
+    attrs: {
+      "active-value": 1,
+      "inactive-value": 0,
+      "active-text": "Паспорт"
+    },
+    on: {
+      "change": _vm.forceUpdate
+    },
+    model: {
+      value: (_vm.newUser.rights.peopleeditpassport),
+      callback: function($$v) {
+        _vm.newUser.rights.peopleeditpassport = $$v
+      },
+      expression: "newUser.rights.peopleeditpassport"
+    }
+  })], 1), _vm._v(" "), _c('div', {
+    staticClass: "adminpanel-row"
+  }, [_c('el-switch', {
+    attrs: {
+      "active-value": 1,
+      "inactive-value": 0,
+      "active-text": "Фотографии"
+    },
+    on: {
+      "change": _vm.forceUpdate
+    },
+    model: {
+      value: (_vm.newUser.rights.peopleeditphoto),
+      callback: function($$v) {
+        _vm.newUser.rights.peopleeditphoto = $$v
+      },
+      expression: "newUser.rights.peopleeditphoto"
+    }
+  })], 1), _vm._v(" "), _c('div', {
+    staticClass: "adminpanel-row"
+  }, [_c('el-switch', {
+    attrs: {
+      "active-value": 1,
+      "inactive-value": 0,
+      "active-text": "Удостоверения"
+    },
+    on: {
+      "change": _vm.forceUpdate
+    },
+    model: {
+      value: (_vm.newUser.rights.peopleeditcertificate),
+      callback: function($$v) {
+        _vm.newUser.rights.peopleeditcertificate = $$v
+      },
+      expression: "newUser.rights.peopleeditcertificate"
+    }
+  })], 1), _vm._v(" "), _c('div', {
+    staticClass: "adminpanel-row"
+  }, [_c('el-switch', {
+    attrs: {
+      "active-value": 1,
+      "inactive-value": 0,
+      "active-text": "Родственники"
+    },
+    on: {
+      "change": _vm.forceUpdate
+    },
+    model: {
+      value: (_vm.newUser.rights.peopleeditrelative),
+      callback: function($$v) {
+        _vm.newUser.rights.peopleeditrelative = $$v
+      },
+      expression: "newUser.rights.peopleeditrelative"
+    }
+  })], 1), _vm._v(" "), _c('div', {
+    staticClass: "adminpanel-row"
+  }, [_c('el-switch', {
+    attrs: {
+      "active-value": 1,
+      "inactive-value": 0,
+      "active-text": "Образование"
+    },
+    on: {
+      "change": _vm.forceUpdate
+    },
+    model: {
+      value: (_vm.newUser.rights.peopleediteducation),
+      callback: function($$v) {
+        _vm.newUser.rights.peopleediteducation = $$v
+      },
+      expression: "newUser.rights.peopleediteducation"
+    }
+  })], 1), _vm._v(" "), _c('div', {
+    staticClass: "adminpanel-row"
+  }, [_c('el-switch', {
+    attrs: {
+      "active-value": 1,
+      "inactive-value": 0,
+      "active-text": "Образование УГЗ"
+    },
+    on: {
+      "change": _vm.forceUpdate
+    },
+    model: {
+      value: (_vm.newUser.rights.peopleediteducationucp),
+      callback: function($$v) {
+        _vm.newUser.rights.peopleediteducationucp = $$v
+      },
+      expression: "newUser.rights.peopleediteducationucp"
+    }
+  })], 1), _vm._v(" "), _c('div', {
+    staticClass: "adminpanel-row"
+  }, [_c('el-switch', {
+    attrs: {
+      "active-value": 1,
+      "inactive-value": 0,
+      "active-text": "Трудовая деятельность"
+    },
+    on: {
+      "change": _vm.forceUpdate
+    },
+    model: {
+      value: (_vm.newUser.rights.peopleeditjob),
+      callback: function($$v) {
+        _vm.newUser.rights.peopleeditjob = $$v
+      },
+      expression: "newUser.rights.peopleeditjob"
+    }
+  })], 1), _vm._v(" "), _c('div', {
+    staticClass: "adminpanel-row"
+  }, [_c('el-switch', {
+    attrs: {
+      "active-value": 1,
+      "inactive-value": 0,
+      "active-text": "Выслуга лет на льготных условиях"
+    },
+    on: {
+      "change": _vm.forceUpdate
+    },
+    model: {
+      value: (_vm.newUser.rights.peopleeditjobprivelege),
+      callback: function($$v) {
+        _vm.newUser.rights.peopleeditjobprivelege = $$v
+      },
+      expression: "newUser.rights.peopleeditjobprivelege"
+    }
+  })], 1), _vm._v(" "), _c('div', {
+    staticClass: "adminpanel-row"
+  }, [_c('el-switch', {
+    attrs: {
+      "active-value": 1,
+      "inactive-value": 0,
+      "active-text": "Выслуга лет"
+    },
+    on: {
+      "change": _vm.forceUpdate
+    },
+    model: {
+      value: (_vm.newUser.rights.peopleeditjobpension),
+      callback: function($$v) {
+        _vm.newUser.rights.peopleeditjobpension = $$v
+      },
+      expression: "newUser.rights.peopleeditjobpension"
+    }
+  })], 1), _vm._v(" "), _c('div', {
+    staticClass: "adminpanel-row"
+  }, [_c('el-switch', {
+    attrs: {
+      "active-value": 1,
+      "inactive-value": 0,
+      "active-text": "Листы нетрудоспособности"
+    },
+    on: {
+      "change": _vm.forceUpdate
+    },
+    model: {
+      value: (_vm.newUser.rights.peopleeditill),
+      callback: function($$v) {
+        _vm.newUser.rights.peopleeditill = $$v
+      },
+      expression: "newUser.rights.peopleeditill"
+    }
+  })], 1), _vm._v(" "), _c('div', {
+    staticClass: "adminpanel-row"
+  }, [_c('el-switch', {
+    attrs: {
+      "active-value": 1,
+      "inactive-value": 0,
+      "active-text": "Диспансеризация"
+    },
+    on: {
+      "change": _vm.forceUpdate
+    },
+    model: {
+      value: (_vm.newUser.rights.peopleeditdispanserization),
+      callback: function($$v) {
+        _vm.newUser.rights.peopleeditdispanserization = $$v
+      },
+      expression: "newUser.rights.peopleeditdispanserization"
+    }
+  })], 1), _vm._v(" "), _c('div', {
+    staticClass: "adminpanel-row"
+  }, [_c('el-switch', {
+    attrs: {
+      "active-value": 1,
+      "inactive-value": 0,
+      "active-text": "Военно-врачебная комиссия"
+    },
+    on: {
+      "change": _vm.forceUpdate
+    },
+    model: {
+      value: (_vm.newUser.rights.peopleeditvvk),
+      callback: function($$v) {
+        _vm.newUser.rights.peopleeditvvk = $$v
+      },
+      expression: "newUser.rights.peopleeditvvk"
+    }
+  })], 1), _vm._v(" "), _c('div', {
+    staticClass: "adminpanel-row"
+  }, [_c('el-switch', {
+    attrs: {
+      "active-value": 1,
+      "inactive-value": 0,
+      "active-text": "ПФЛ"
+    },
+    on: {
+      "change": _vm.forceUpdate
+    },
+    model: {
+      value: (_vm.newUser.rights.peopleeditpfl),
+      callback: function($$v) {
+        _vm.newUser.rights.peopleeditpfl = $$v
+      },
+      expression: "newUser.rights.peopleeditpfl"
+    }
+  })], 1), _vm._v(" "), _c('div', {
+    staticClass: "adminpanel-row"
+  }, [_c('el-switch', {
+    attrs: {
+      "active-value": 1,
+      "inactive-value": 0,
+      "active-text": "Звания"
+    },
+    on: {
+      "change": _vm.forceUpdate
+    },
+    model: {
+      value: (_vm.newUser.rights.peopleeditrank),
+      callback: function($$v) {
+        _vm.newUser.rights.peopleeditrank = $$v
+      },
+      expression: "newUser.rights.peopleeditrank"
+    }
+  })], 1), _vm._v(" "), _c('div', {
+    staticClass: "adminpanel-row"
+  }, [_c('el-switch', {
+    attrs: {
+      "active-value": 1,
+      "inactive-value": 0,
+      "active-text": "Контракты"
+    },
+    on: {
+      "change": _vm.forceUpdate
+    },
+    model: {
+      value: (_vm.newUser.rights.peopleeditcontract),
+      callback: function($$v) {
+        _vm.newUser.rights.peopleeditcontract = $$v
+      },
+      expression: "newUser.rights.peopleeditcontract"
+    }
+  })], 1), _vm._v(" "), _c('div', {
+    staticClass: "adminpanel-row"
+  }, [_c('el-switch', {
+    attrs: {
+      "active-value": 1,
+      "inactive-value": 0,
+      "active-text": "Дополнительные соглашения по отпускам"
+    },
+    on: {
+      "change": _vm.forceUpdate
+    },
+    model: {
+      value: (_vm.newUser.rights.peopleeditcontractvacation),
+      callback: function($$v) {
+        _vm.newUser.rights.peopleeditcontractvacation = $$v
+      },
+      expression: "newUser.rights.peopleeditcontractvacation"
+    }
+  })], 1), _vm._v(" "), _c('div', {
+    staticClass: "adminpanel-row"
+  }, [_c('el-switch', {
+    attrs: {
+      "active-value": 1,
+      "inactive-value": 0,
+      "active-text": "Стаж государственных служащих"
+    },
+    on: {
+      "change": _vm.forceUpdate
+    },
+    model: {
+      value: (_vm.newUser.rights.peopleeditcontractstate),
+      callback: function($$v) {
+        _vm.newUser.rights.peopleeditcontractstate = $$v
+      },
+      expression: "newUser.rights.peopleeditcontractstate"
+    }
+  })], 1), _vm._v(" "), _c('div', {
+    staticClass: "adminpanel-row"
+  }, [_c('el-switch', {
+    attrs: {
+      "active-value": 1,
+      "inactive-value": 0,
+      "active-text": "Отпуска"
+    },
+    on: {
+      "change": _vm.forceUpdate
+    },
+    model: {
+      value: (_vm.newUser.rights.peopleeditvacation),
+      callback: function($$v) {
+        _vm.newUser.rights.peopleeditvacation = $$v
+      },
+      expression: "newUser.rights.peopleeditvacation"
+    }
+  })], 1), _vm._v(" "), _c('div', {
+    staticClass: "adminpanel-row"
+  }, [_c('el-switch', {
+    attrs: {
+      "active-value": 1,
+      "inactive-value": 0,
+      "active-text": "Награды и поощрения"
+    },
+    on: {
+      "change": _vm.forceUpdate
+    },
+    model: {
+      value: (_vm.newUser.rights.peopleeditreward),
+      callback: function($$v) {
+        _vm.newUser.rights.peopleeditreward = $$v
+      },
+      expression: "newUser.rights.peopleeditreward"
+    }
+  })], 1), _vm._v(" "), _c('div', {
+    staticClass: "adminpanel-row"
+  }, [_c('el-switch', {
+    attrs: {
+      "active-value": 1,
+      "inactive-value": 0,
+      "active-text": "Аттестация"
+    },
+    on: {
+      "change": _vm.forceUpdate
+    },
+    model: {
+      value: (_vm.newUser.rights.peopleeditattestation),
+      callback: function($$v) {
+        _vm.newUser.rights.peopleeditattestation = $$v
+      },
+      expression: "newUser.rights.peopleeditattestation"
+    }
+  })], 1), _vm._v(" "), _c('div', {
+    staticClass: "adminpanel-row"
+  }, [_c('el-switch', {
+    attrs: {
+      "active-value": 1,
+      "inactive-value": 0,
+      "active-text": "Иностранные языки"
+    },
+    on: {
+      "change": _vm.forceUpdate
+    },
+    model: {
+      value: (_vm.newUser.rights.peopleeditlanguage),
+      callback: function($$v) {
+        _vm.newUser.rights.peopleeditlanguage = $$v
+      },
+      expression: "newUser.rights.peopleeditlanguage"
+    }
+  })], 1), _vm._v(" "), _c('div', {
+    staticClass: "adminpanel-row"
+  }, [_c('el-switch', {
+    attrs: {
+      "active-value": 1,
+      "inactive-value": 0,
+      "active-text": "Научные труды, звания, изобретения"
+    },
+    on: {
+      "change": _vm.forceUpdate
+    },
+    model: {
+      value: (_vm.newUser.rights.peopleeditscience),
+      callback: function($$v) {
+        _vm.newUser.rights.peopleeditscience = $$v
+      },
+      expression: "newUser.rights.peopleeditscience"
+    }
+  })], 1), _vm._v(" "), _c('div', {
+    staticClass: "adminpanel-row"
+  }, [_c('el-switch', {
+    attrs: {
+      "active-value": 1,
+      "inactive-value": 0,
+      "active-text": "Участие в выборных органах"
+    },
+    on: {
+      "change": _vm.forceUpdate
+    },
+    model: {
+      value: (_vm.newUser.rights.peopleeditelection),
+      callback: function($$v) {
+        _vm.newUser.rights.peopleeditelection = $$v
+      },
+      expression: "newUser.rights.peopleeditelection"
+    }
+  })], 1), _vm._v(" "), _c('div', {
+    staticClass: "adminpanel-row"
+  }, [_c('el-switch', {
+    attrs: {
+      "active-value": 1,
+      "inactive-value": 0,
+      "active-text": "Служебные командировки"
+    },
+    on: {
+      "change": _vm.forceUpdate
+    },
+    model: {
+      value: (_vm.newUser.rights.peopleeditworktrip),
+      callback: function($$v) {
+        _vm.newUser.rights.peopleeditworktrip = $$v
+      },
+      expression: "newUser.rights.peopleeditworktrip"
+    }
+  })], 1), _vm._v(" "), _c('div', {
+    staticClass: "adminpanel-row"
+  }, [_c('el-switch', {
+    attrs: {
+      "active-value": 1,
+      "inactive-value": 0,
+      "active-text": "Взыскания"
+    },
+    on: {
+      "change": _vm.forceUpdate
+    },
+    model: {
+      value: (_vm.newUser.rights.peopleeditpenalty),
+      callback: function($$v) {
+        _vm.newUser.rights.peopleeditpenalty = $$v
+      },
+      expression: "newUser.rights.peopleeditpenalty"
+    }
+  })], 1), _vm._v(" "), _c('div', {
+    staticClass: "adminpanel-row"
+  }, [_c('el-switch', {
+    attrs: {
+      "active-value": 1,
+      "inactive-value": 0,
+      "active-text": "Физическая подготовка"
+    },
+    on: {
+      "change": _vm.forceUpdate
+    },
+    model: {
+      value: (_vm.newUser.rights.peopleeditphysical),
+      callback: function($$v) {
+        _vm.newUser.rights.peopleeditphysical = $$v
+      },
+      expression: "newUser.rights.peopleeditphysical"
+    }
+  })], 1), _vm._v(" "), _c('div', {
+    staticClass: "adminpanel-row"
+  }, [_c('el-switch', {
+    attrs: {
+      "active-value": 1,
+      "inactive-value": 0,
+      "active-text": "Водительские удостоверения"
+    },
+    on: {
+      "change": _vm.forceUpdate
+    },
+    model: {
+      value: (_vm.newUser.rights.peopleeditdriver),
+      callback: function($$v) {
+        _vm.newUser.rights.peopleeditdriver = $$v
+      },
+      expression: "newUser.rights.peopleeditdriver"
+    }
+  })], 1), _vm._v(" "), _c('div', {
+    staticClass: "adminpanel-row"
+  }, [_c('el-switch', {
+    attrs: {
+      "active-value": 1,
+      "inactive-value": 0,
+      "active-text": "Разрешения и лицензии"
+    },
+    on: {
+      "change": _vm.forceUpdate
+    },
+    model: {
+      value: (_vm.newUser.rights.peopleeditpermission),
+      callback: function($$v) {
+        _vm.newUser.rights.peopleeditpermission = $$v
+      },
+      expression: "newUser.rights.peopleeditpermission"
+    }
+  })], 1), _vm._v(" "), _c('div', {
+    staticClass: "adminpanel-row"
+  }, [_c('el-switch', {
+    attrs: {
+      "active-value": 1,
+      "inactive-value": 0,
+      "active-text": "Льготы"
+    },
+    on: {
+      "change": _vm.forceUpdate
+    },
+    model: {
+      value: (_vm.newUser.rights.peopleeditprivelege),
+      callback: function($$v) {
+        _vm.newUser.rights.peopleeditprivelege = $$v
+      },
+      expression: "newUser.rights.peopleeditprivelege"
+    }
+  })], 1), _vm._v(" "), _c('div', {
+    staticClass: "adminpanel-row"
+  }, [_c('el-switch', {
+    attrs: {
+      "active-value": 1,
+      "inactive-value": 0,
+      "active-text": "Ранения, контузии и другие увечья"
+    },
+    on: {
+      "change": _vm.forceUpdate
+    },
+    model: {
+      value: (_vm.newUser.rights.peopleeditwound),
+      callback: function($$v) {
+        _vm.newUser.rights.peopleeditwound = $$v
+      },
+      expression: "newUser.rights.peopleeditwound"
+    }
+  })], 1)])])])]) : _vm._e(), _vm._v(" "), (_vm.newUser.rights.menu == 3) ? _c('div', [_c('div', {
+    staticClass: "adminpanel-row"
+  }, [_c('el-switch', {
+    attrs: {
+      "active-value": 1,
+      "inactive-value": 0,
+      "active-text": "Редактирование кабинетов кандидатов на службу"
+    },
+    on: {
+      "change": _vm.forceUpdate
+    },
+    model: {
+      value: (_vm.newUser.rights.candidateedit),
+      callback: function($$v) {
+        _vm.newUser.rights.candidateedit = $$v
+      },
+      expression: "newUser.rights.candidateedit"
+    }
+  })], 1), _vm._v(" "), _c('div', {
+    staticClass: "adminpanel-row"
+  }, [_c('el-switch', {
+    attrs: {
+      "active-value": 1,
+      "inactive-value": 0,
+      "active-text": "Блокировка доступа к кабинетам кандидатов на службу"
+    },
+    on: {
+      "change": _vm.forceUpdate
+    },
+    model: {
+      value: (_vm.newUser.rights.candidateblock),
+      callback: function($$v) {
+        _vm.newUser.rights.candidateblock = $$v
+      },
+      expression: "newUser.rights.candidateblock"
+    }
+  })], 1), _vm._v(" "), _c('div', {
+    staticClass: "adminpanel-row"
+  }, [_c('el-switch', {
+    attrs: {
+      "active-value": 1,
+      "inactive-value": 0,
+      "active-text": "Просмотр кабинетов кандидатов на службу"
+    },
+    on: {
+      "change": _vm.forceUpdate
+    },
+    model: {
+      value: (_vm.newUser.rights.candidateread),
+      callback: function($$v) {
+        _vm.newUser.rights.candidateread = $$v
+      },
+      expression: "newUser.rights.candidateread"
+    }
+  })], 1)]) : _vm._e(), _vm._v(" "), (_vm.newUser.rights.menu == 4) ? _c('div', [_c('div', {
+    staticClass: "adminpanel-row"
+  }, [_c('el-switch', {
+    attrs: {
+      "active-value": 1,
+      "inactive-value": 0,
+      "active-text": "Просмотр структуры в лицах своего и подчиненных подразделений"
+    },
+    on: {
+      "change": _vm.forceUpdate
+    },
+    model: {
+      value: (_vm.newUser.rights.peopleorgread),
+      callback: function($$v) {
+        _vm.newUser.rights.peopleorgread = $$v
+      },
+      expression: "newUser.rights.peopleorgread"
+    }
+  })], 1), _vm._v(" "), _c('div', {
+    staticClass: "adminpanel-row"
+  }, [_c('el-switch', {
+    attrs: {
+      "active-value": 1,
+      "inactive-value": 0,
+      "active-text": "Просмотр структуры в лицах всех подразделений"
+    },
+    on: {
+      "change": _vm.forceUpdate
+    },
+    model: {
+      value: (_vm.newUser.rights.peopleorgreadall),
+      callback: function($$v) {
+        _vm.newUser.rights.peopleorgreadall = $$v
+      },
+      expression: "newUser.rights.peopleorgreadall"
+    }
+  })], 1)]) : _vm._e(), _vm._v(" "), (_vm.newUser.rights.menu == 5) ? _c('div', [_c('div', {
+    staticClass: "adminpanel-row"
+  }, [_c('el-switch', {
+    attrs: {
+      "active-value": 1,
+      "inactive-value": 0,
+      "active-text": "Редактирование проектов приказов"
+    },
+    on: {
+      "change": _vm.forceUpdate
+    },
+    model: {
+      value: (_vm.newUser.rights.peopledecreeedit),
+      callback: function($$v) {
+        _vm.newUser.rights.peopledecreeedit = $$v
+      },
+      expression: "newUser.rights.peopledecreeedit"
+    }
+  })], 1), _vm._v(" "), _c('div', {
+    staticClass: "adminpanel-row"
+  }, [_c('el-switch', {
+    attrs: {
+      "active-value": 1,
+      "inactive-value": 0,
+      "active-text": "Просмотр проектов приказов"
+    },
+    on: {
+      "change": _vm.forceUpdate
+    },
+    model: {
+      value: (_vm.newUser.rights.peopledecreeread),
+      callback: function($$v) {
+        _vm.newUser.rights.peopledecreeread = $$v
+      },
+      expression: "newUser.rights.peopledecreeread"
+    }
   })], 1)]) : _vm._e()]), _vm._v(" "), _c('div'), _vm._v(" "), (!_vm.userEditMode()) ? _c('el-button', {
     staticClass: "adminpanel-submit",
     on: {
@@ -18571,7 +23703,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     })
   })), _vm._v(" "), (_vm.rightsRights != null) ? _c('div', [_c('div', {
     staticClass: "adminpanel-row"
-  }, [_vm._v("\n                                          Роль "), _c('el-select', {
+  }, [_vm._v("\n                                Роль "), _c('el-select', {
     attrs: {
       "placeholder": "Роль",
       "loading-text": "...",
@@ -18799,7 +23931,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.updatePositiontypeRights()
       }
     }
-  }, [_vm._v("\n                                              Сохранить\n                                          ")])], 1)]) : _vm._e()], 1)])], 1)], 1), _vm._v(" "), _c('el-tab-pane', {
+  }, [_vm._v("\n                                    Сохранить\n                                ")])], 1)]) : _vm._e()], 1)])], 1)], 1), _vm._v(" "), _c('el-tab-pane', {
     attrs: {
       "label": "Звания",
       "name": "second"
@@ -19969,7 +25101,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       },
       expression: "newPositiontypeName"
     }
-  }), _vm._v(" "), _vm._v("\n                    Сокращенное наименование\n                    "), _c('el-input', {
+  }), _vm._v("\n                    Сокращенное наименование\n                    "), _c('el-input', {
     model: {
       value: (_vm.newPositiontypeNameshort),
       callback: function($$v) {
@@ -20199,79 +25331,472 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_vm._v("Добавить")])], 1)], 1)], 1), _vm._v(" "), _c('el-tab-pane', {
     attrs: {
-      "label": "Области",
-      "name": "ninth"
+      "label": "Вилки званий",
+      "name": "seventh"
     }
   }, [_c('el-tabs', {
     on: {
-      "tab-click": _vm.handleClickStructureregion
+      "tab-click": _vm.handleClickAltrankconditiongroup
     },
     model: {
-      value: (_vm.activeNameStructureregion),
+      value: (_vm.activeNameAltrankconditiongroup),
       callback: function($$v) {
-        _vm.activeNameStructureregion = $$v
+        _vm.activeNameAltrankconditiongroup = $$v
       },
-      expression: "activeNameStructureregion"
+      expression: "activeNameAltrankconditiongroup"
     }
   }, [_c('el-tab-pane', {
     attrs: {
-      "label": "Список областей",
-      "name": "srfirst"
+      "label": "Список вилок званий",
+      "name": "arcgfirst"
     }
-  }, [(_vm.activeName === 'ninth') ? _c('div', _vm._l((_vm.structureregions), function(structureregion) {
+  }, _vm._l((_vm.altrankconditiongroups), function(altrankconditiongroup) {
     return _c('div', {
-      staticClass: "adminpanel-structureregion"
+      staticClass: "adminpanel-altrankconditiongroup"
     }, [_c('el-input', {
-      staticClass: "adminpanel-structureregion-input",
+      staticClass: "adminpanel-altrankconditiongroup-input",
       on: {
-        "input": _vm.startStructureregionUpdate
+        "input": _vm.startAltrankconditiongroupUpdate
       },
       model: {
-        value: (structureregion.name),
+        value: (altrankconditiongroup.name),
         callback: function($$v) {
-          structureregion.name = $$v
+          altrankconditiongroup.name = $$v
         },
-        expression: "structureregion.name"
+        expression: "altrankconditiongroup.name"
       }
     }), _vm._v(" "), _c('el-button', {
-      staticClass: "adminpanel-structureregion-button",
+      staticClass: "adminpanel-altrankconditiongroup-button",
       on: {
         "click": function($event) {
-          _vm.updateStructureregion(structureregion)
+          _vm.updateAltrankconditiongroup(altrankconditiongroup)
         }
       }
     }, [_c('i', {
       staticClass: "el-icon-check"
     })]), _vm._v(" "), _c('el-button', {
-      staticClass: "adminpanel-structureregion-button",
+      staticClass: "adminpanel-altrankconditiongroup-button",
       attrs: {
         "disabled": ""
       }
     }, [_c('i', {
       staticClass: "el-icon-close"
     })])], 1)
-  })) : _vm._e()]), _vm._v(" "), _c('el-tab-pane', {
+  })), _vm._v(" "), _c('el-tab-pane', {
     attrs: {
-      "label": "Добавить область",
-      "name": "srsecond"
+      "label": "Добавить вилку званий",
+      "name": "arcgsecond"
     }
   }, [_c('el-input', {
     attrs: {
-      "placeholder": "Название области"
+      "placeholder": "Наименование вилки званий"
     },
     model: {
-      value: (_vm.newStructureregionName),
+      value: (_vm.newAltrankconditiongroup),
       callback: function($$v) {
-        _vm.newStructureregionName = $$v
+        _vm.newAltrankconditiongroup = $$v
       },
-      expression: "newStructureregionName"
+      expression: "newAltrankconditiongroup"
     }
   }), _vm._v(" "), _c('el-button', {
     staticClass: "adminpanel-submit",
     on: {
-      "click": _vm.addStructureregion
+      "click": _vm.addAltrankconditiongroup
     }
   }, [_vm._v("Добавить")])], 1)], 1)], 1), _vm._v(" "), _c('el-tab-pane', {
+    attrs: {
+      "label": "Условия вилок званий",
+      "name": "eighth"
+    }
+  }, [_c('el-tabs', {
+    on: {
+      "tab-click": _vm.handleClickAltrankcondition
+    },
+    model: {
+      value: (_vm.activeNameAltrankcondition),
+      callback: function($$v) {
+        _vm.activeNameAltrankcondition = $$v
+      },
+      expression: "activeNameAltrankcondition"
+    }
+  }, [_c('el-tab-pane', {
+    attrs: {
+      "label": "Список условий для вилок званий",
+      "name": "arcfirst"
+    }
+  }, _vm._l((_vm.altrankconditions), function(altrankcondition) {
+    return _c('div', {
+      staticClass: "adminpanel-altrankcondition"
+    }, [_c('el-input', {
+      staticClass: "adminpanel-altrankcondition-input",
+      on: {
+        "input": _vm.startAltrankconditionUpdate
+      },
+      model: {
+        value: (altrankcondition.name),
+        callback: function($$v) {
+          altrankcondition.name = $$v
+        },
+        expression: "altrankcondition.name"
+      }
+    }), _vm._v(" "), _c('el-select', {
+      staticClass: "adminpanel-altrankcondition-input",
+      on: {
+        "change": _vm.startAltrankconditionUpdate
+      },
+      model: {
+        value: (altrankcondition.group),
+        callback: function($$v) {
+          altrankcondition.group = $$v
+        },
+        expression: "altrankcondition.group"
+      }
+    }, _vm._l((_vm.altrankconditiongroups), function(altrankconditiongroup) {
+      return _c('el-option', {
+        key: altrankconditiongroup.id,
+        attrs: {
+          "label": altrankconditiongroup.name,
+          "value": altrankconditiongroup.id
+        }
+      })
+    })), _vm._v(" "), _c('el-button', {
+      staticClass: "adminpanel-altrankcondition-button",
+      on: {
+        "click": function($event) {
+          _vm.updateAltrankcondition(altrankcondition)
+        }
+      }
+    }, [_c('i', {
+      staticClass: "el-icon-check"
+    })]), _vm._v(" "), _c('el-button', {
+      staticClass: "adminpanel-altrankcondition-button",
+      attrs: {
+        "disabled": ""
+      }
+    }, [_c('i', {
+      staticClass: "el-icon-close"
+    })])], 1)
+  })), _vm._v(" "), _c('el-tab-pane', {
+    attrs: {
+      "label": "Добавить условие для вилки званий",
+      "name": "arcsecond"
+    }
+  }, [_c('el-input', {
+    attrs: {
+      "placeholder": "Наименование условия для вилки званий"
+    },
+    model: {
+      value: (_vm.newAltrankcondition),
+      callback: function($$v) {
+        _vm.newAltrankcondition = $$v
+      },
+      expression: "newAltrankcondition"
+    }
+  }), _vm._v(" "), _c('el-select', {
+    staticClass: "adminpanel-altrankcondition-input",
+    model: {
+      value: (_vm.newAltrankconditionaltrankconditiongroup),
+      callback: function($$v) {
+        _vm.newAltrankconditionaltrankconditiongroup = $$v
+      },
+      expression: "newAltrankconditionaltrankconditiongroup"
+    }
+  }, _vm._l((_vm.altrankconditiongroups), function(altrankconditiongroup) {
+    return _c('el-option', {
+      key: altrankconditiongroup.id,
+      attrs: {
+        "label": altrankconditiongroup.name,
+        "value": altrankconditiongroup.id
+      }
+    })
+  })), _vm._v(" "), _c('el-button', {
+    staticClass: "adminpanel-submit",
+    on: {
+      "click": _vm.addAltrankcondition
+    }
+  }, [_vm._v("Добавить")])], 1)], 1)], 1), _vm._v(" "), _c('el-tab-pane', {
+    attrs: {
+      "label": "Место нахождения",
+      "name": "ninth"
+    }
+  }, [_c('div', [_c('el-tabs', {
+    on: {
+      "tab-click": _vm.handleClickSubject
+    },
+    model: {
+      value: (_vm.activeNameLocationtype),
+      callback: function($$v) {
+        _vm.activeNameLocationtype = $$v
+      },
+      expression: "activeNameLocationtype"
+    }
+  }, [_c('el-tab-pane', {
+    attrs: {
+      "label": "Список наименований",
+      "name": "loctype"
+    }
+  }, [_c('div', {
+    staticClass: "adminpanel-subject-category-container"
+  }, [_vm._l((_vm.locationtypes), function(locationtype) {
+    return _c('div', {
+      staticClass: "adminpanel-subject-category"
+    }, [_vm._v("\n                                " + _vm._s(locationtype.locationtypename) + "\n                            ")])
+  }), _vm._v(" "), _c('div', {
+    staticClass: "adminpanel-subject-category",
+    class: {
+      'adminpanel-subject-category-active': _vm.newSubjectCategoryFiltered == 0
+    },
+    on: {
+      "click": function($event) {
+        _vm.newSubjectCategoryFiltered = 0
+      }
+    }
+  }, [_vm._v("\n                                Все\n                            ")])], 2), _vm._v(" "), _c('div', {
+    staticClass: "adminpanel-subject-category-container"
+  }, _vm._l((_vm.subjectcategories), function(subjectcategory) {
+    return (_vm.newSubjectCategoryFiltered != 0 && (subjectcategory.category == _vm.newSubjectCategoryFiltered || subjectcategory.id == _vm.newSubjectCategoryFiltered || (_vm.fatherSubjectcategoryid(_vm.newSubjectCategoryFiltered) == subjectcategory.id))) ? _c('div', {
+      staticClass: "adminpanel-subject-category",
+      class: {
+        'adminpanel-subject-category-active': _vm.newSubjectCategoryFiltered == subjectcategory.id
+      },
+      on: {
+        "click": function($event) {
+          _vm.newSubjectCategoryFiltered = subjectcategory.id
+        }
+      }
+    }, [_vm._v("\n                                " + _vm._s(subjectcategory.name) + "\n                            ")]) : _vm._e()
+  })), _vm._v(" "), _c('br'), _vm._v(" "), _c('div', {
+    staticClass: "adminpanel-subject-filter-container"
+  }, [_c('el-input', {
+    staticClass: "adminpanel-subject-filter-name",
+    attrs: {
+      "placeholder": "Поиск в разделе"
+    },
+    model: {
+      value: (_vm.newSubjectName1Filtered),
+      callback: function($$v) {
+        _vm.newSubjectName1Filtered = $$v
+      },
+      expression: "newSubjectName1Filtered"
+    }
+  })], 1), _vm._v(" "), _c('hr'), _vm._v(" "), (_vm.activeName === 'thirdsecond') ? _c('div', [_c('div', {
+    staticClass: "adminpanel-subject"
+  }, [_c('div', {
+    staticClass: "adminpanel-subject-text"
+  }, [_vm._v("\n                                    Именительный падеж\n                                ")]), _vm._v(" "), _c('div', {
+    staticClass: "adminpanel-subject-text"
+  }, [_vm._v("\n                                    Родительный падеж\n                                ")]), _vm._v(" "), _c('div', {
+    staticClass: "adminpanel-subject-text"
+  }, [_vm._v("\n                                    Дательный падеж\n                                ")]), _vm._v(" "), _c('div', {
+    staticClass: "adminpanel-subject-text"
+  }, [_vm._v("\n                                    Винительный падеж\n                                ")]), _vm._v(" "), _c('div', {
+    staticClass: "adminpanel-subject-text"
+  }, [_vm._v("\n                                    Творительный падеж\n                                ")]), _vm._v(" "), _c('div', {
+    staticClass: "adminpanel-subject-text"
+  }, [_vm._v("\n                                    Предложный падеж\n                                ")]), _vm._v(" "), _c('div', {
+    staticClass: "adminpanel-subject-text"
+  }, [_vm._v("\n                                    Род\n                                ")]), _vm._v(" "), _c('div', {
+    staticClass: "adminpanel-subject-text"
+  }, [_vm._v("\n                                    Категория\n                                ")]), _vm._v(" "), _c('div', {
+    staticClass: "adminpanel-subject-text"
+  }, [_vm._v("\n                                    Действия\n                                ")])]), _vm._v(" "), _c('hr'), _vm._v(" "), _c('div', {
+    staticClass: "adminpanel-subject-container"
+  }, _vm._l((_vm.subjects), function(subject) {
+    return ((_vm.newSubjectCategoryFiltered == 0 || subject.category == _vm.newSubjectCategoryFiltered) && (_vm.newSubjectName1Filtered.length == 0 || subject.name1.startsWith(_vm.newSubjectName1Filtered)) &&
+      (_vm.newSubjectGenderFiltered == 0 || subject.gender == _vm.newSubjectGenderFiltered)) ? _c('div', {
+      staticClass: "adminpanel-subject"
+    }, [_c('div', {
+      staticClass: "adminpanel-subject-text"
+    }, [_vm._v("\n                                        " + _vm._s(subject.name1) + "\n                                    ")]), _vm._v(" "), _c('div', {
+      staticClass: "adminpanel-subject-text"
+    }, [_vm._v("\n                                        " + _vm._s(subject.name2) + "\n                                    ")]), _vm._v(" "), _c('div', {
+      staticClass: "adminpanel-subject-text"
+    }, [_vm._v("\n                                        " + _vm._s(subject.name3) + "\n                                    ")]), _vm._v(" "), _c('div', {
+      staticClass: "adminpanel-subject-text"
+    }, [_vm._v("\n                                        " + _vm._s(subject.name4) + "\n                                    ")]), _vm._v(" "), _c('div', {
+      staticClass: "adminpanel-subject-text"
+    }, [_vm._v("\n                                        " + _vm._s(subject.name5) + "\n                                    ")]), _vm._v(" "), _c('div', {
+      staticClass: "adminpanel-subject-text"
+    }, [_vm._v("\n                                        " + _vm._s(subject.name6) + "\n                                    ")]), _vm._v(" "), _c('div', {
+      staticClass: "adminpanel-subject-text"
+    }, [_vm._v("\n                                        " + _vm._s(_vm.getSubjectgender(subject.gender)) + "\n                                    ")]), _vm._v(" "), _c('div', {
+      staticClass: "adminpanel-subject-text"
+    }, [_vm._v("\n                                        " + _vm._s(_vm.getSubjectcategory(subject.category)) + "\n                                    ")]), _vm._v(" "), _c('el-button', {
+      staticClass: "adminpanel-subject-button",
+      on: {
+        "click": function($event) {
+          _vm.updateSubject(subject)
+        }
+      }
+    }, [_c('i', {
+      staticClass: "el-icon-edit"
+    })]), _vm._v(" "), _c('el-button', {
+      staticClass: "adminpanel-subject-button",
+      attrs: {
+        "disabled": ""
+      }
+    }, [_c('i', {
+      staticClass: "el-icon-close"
+    })]), _vm._v(" "), _c('div')], 1) : _vm._e()
+  }))]) : _vm._e()]), _vm._v(" "), _c('el-tab-pane', {
+    attrs: {
+      "label": _vm.addeditSubjectName(),
+      "name": "susecond"
+    }
+  }, [_c('div', [_vm._v("\n                            Наименование в\n                        ")]), _vm._v(" "), _c('div', {
+    staticClass: "adminpanel-subject-input-row"
+  }, [_c('div', {
+    staticClass: "adminpanel-subject-input-text"
+  }, [_vm._v("\n                                именительном падеже (кто/что)\n                            ")]), _vm._v(" "), _c('el-input', {
+    staticClass: "adminpanel-subject-input",
+    attrs: {
+      "placeholder": "Наименование в именительном падеже"
+    },
+    on: {
+      "input": function($event) {
+        _vm.onSubjectName1Change()
+      }
+    },
+    model: {
+      value: (_vm.newSubjectName1),
+      callback: function($$v) {
+        _vm.newSubjectName1 = $$v
+      },
+      expression: "newSubjectName1"
+    }
+  })], 1), _vm._v(" "), _c('div', {
+    staticClass: "adminpanel-subject-input-row"
+  }, [_c('div', {
+    staticClass: "adminpanel-subject-input-text"
+  }, [_vm._v("\n                                родительном падеже (нет кого/чего)\n                            ")]), _vm._v(" "), _c('el-input', {
+    attrs: {
+      "placeholder": "Наименование в родительном падеже"
+    },
+    model: {
+      value: (_vm.newSubjectName2),
+      callback: function($$v) {
+        _vm.newSubjectName2 = $$v
+      },
+      expression: "newSubjectName2"
+    }
+  })], 1), _vm._v(" "), _c('div', {
+    staticClass: "adminpanel-subject-input-row"
+  }, [_c('div', {
+    staticClass: "adminpanel-subject-input-text"
+  }, [_vm._v("\n                                дательном падеже (дать кому/чему)\n                            ")]), _vm._v(" "), _c('el-input', {
+    attrs: {
+      "placeholder": "Наименование в дательном падеже"
+    },
+    model: {
+      value: (_vm.newSubjectName3),
+      callback: function($$v) {
+        _vm.newSubjectName3 = $$v
+      },
+      expression: "newSubjectName3"
+    }
+  })], 1), _vm._v(" "), _c('div', {
+    staticClass: "adminpanel-subject-input-row"
+  }, [_c('div', {
+    staticClass: "adminpanel-subject-input-text"
+  }, [_vm._v("\n                                винительном падеже (винить кого/что)\n                            ")]), _vm._v(" "), _c('el-input', {
+    attrs: {
+      "placeholder": "Наименование в винительном падеже"
+    },
+    model: {
+      value: (_vm.newSubjectName4),
+      callback: function($$v) {
+        _vm.newSubjectName4 = $$v
+      },
+      expression: "newSubjectName4"
+    }
+  })], 1), _vm._v(" "), _c('div', {
+    staticClass: "adminpanel-subject-input-row"
+  }, [_c('div', {
+    staticClass: "adminpanel-subject-input-text"
+  }, [_vm._v("\n                                творительном падеже (творить кем/чем)\n                            ")]), _vm._v(" "), _c('el-input', {
+    attrs: {
+      "placeholder": "Наименование в творительном падеже"
+    },
+    model: {
+      value: (_vm.newSubjectName5),
+      callback: function($$v) {
+        _vm.newSubjectName5 = $$v
+      },
+      expression: "newSubjectName5"
+    }
+  })], 1), _vm._v(" "), _c('div', {
+    staticClass: "adminpanel-subject-input-row"
+  }, [_c('div', {
+    staticClass: "adminpanel-subject-input-text"
+  }, [_vm._v("\n                                предложном падеже (о ком/о чем)\n                            ")]), _vm._v(" "), _c('el-input', {
+    attrs: {
+      "placeholder": "Наименование в предложном падеже"
+    },
+    model: {
+      value: (_vm.newSubjectName6),
+      callback: function($$v) {
+        _vm.newSubjectName6 = $$v
+      },
+      expression: "newSubjectName6"
+    }
+  })], 1), _vm._v(" "), _c('br'), _vm._v(" "), _c('div', [_vm._v("\n                            Род\n                        ")]), _vm._v(" "), _c('el-select', {
+    model: {
+      value: (_vm.newSubjectGender),
+      callback: function($$v) {
+        _vm.newSubjectGender = $$v
+      },
+      expression: "newSubjectGender"
+    }
+  }, _vm._l((_vm.subjectgenders), function(subjectgender) {
+    return _c('el-option', {
+      key: subjectgender.id,
+      attrs: {
+        "nullable": "",
+        "label": subjectgender.name,
+        "value": subjectgender.id
+      }
+    })
+  })), _vm._v(" "), _c('div', [_vm._v("\n                            Категория\n                        ")]), _vm._v(" "), _c('el-select', {
+    model: {
+      value: (_vm.newSubjectCategory),
+      callback: function($$v) {
+        _vm.newSubjectCategory = $$v
+      },
+      expression: "newSubjectCategory"
+    }
+  }, _vm._l((_vm.subjectcategories), function(subjectcategory) {
+    return _c('el-option', {
+      key: subjectcategory.id,
+      attrs: {
+        "nullable": "",
+        "label": subjectcategory.name,
+        "value": subjectcategory.id
+      }
+    })
+  })), _vm._v(" "), (_vm.newSubjectCategory != null && (_vm.newSubjectCategory == 1 || _vm.newSubjectCategory == 7)) ? _c('el-checkbox', {
+    model: {
+      value: (_vm.newSubjectDropword),
+      callback: function($$v) {
+        _vm.newSubjectDropword = $$v
+      },
+      expression: "newSubjectDropword"
+    }
+  }, [_vm._v("Отбрасывать слово при полном наименовании (чтобы избежать начальник отдела Отдела информационных технологий)")]) : _vm._e(), _vm._v(" "), (_vm.newSubjectId == 0) ? _c('div', [_c('el-button', {
+    staticClass: "adminpanel-submit",
+    on: {
+      "click": _vm.addSubject
+    }
+  }, [_vm._v("Добавить")])], 1) : _c('div', [_c('el-button', {
+    staticClass: "adminpanel-submit",
+    on: {
+      "click": _vm.addSubject
+    }
+  }, [_vm._v("Отредактировать")]), _vm._v(" "), _c('el-button', {
+    staticClass: "adminpanel-submit",
+    on: {
+      "click": _vm.updateSubjectCancel
+    }
+  }, [_vm._v("Отменить редактирование")])], 1)], 1)], 1)], 1)]), _vm._v(" "), _c('el-tab-pane', {
     attrs: {
       "label": "Метки типов подразделений",
       "name": "tenth"
@@ -20345,6 +25870,124 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     on: {
       "click": _vm.addStructuretype
     }
+  }, [_vm._v("Добавить")])], 1)], 1)], 1), _vm._v(" "), _c('el-tab-pane', {
+    attrs: {
+      "label": "Штатная комиссия",
+      "name": "twelve"
+    }
+  }, [_c('el-tabs', {
+    on: {
+      "tab-click": _vm.handleClickStaff
+    },
+    model: {
+      value: (_vm.staffComission),
+      callback: function($$v) {
+        _vm.staffComission = $$v
+      },
+      expression: "staffComission"
+    }
+  }, [_c('el-tab-pane', {
+    attrs: {
+      "label": "Список штатной комиссии",
+      "name": "staffcommfirst"
+    }
+  }, [(_vm.activeName === 'twelve') ? _c('div', _vm._l((_vm.staffComissionList), function(person) {
+    return _c('div', {
+      staticClass: "adminpanel-illcode",
+      staticStyle: {
+        "margin-bottom": "3px"
+      }
+    }, [_c('el-input', {
+      staticClass: "adminpanel-illcode-input",
+      on: {
+        "input": _vm.startStaffComissionUpdate
+      },
+      model: {
+        value: (person.fio),
+        callback: function($$v) {
+          person.fio = $$v
+        },
+        expression: "person.fio"
+      }
+    }), _vm._v(" "), _c('div', {
+      staticClass: "adminpanel-illcode-button",
+      staticStyle: {
+        "line-height": "0px"
+      }
+    }, [_c('el-row', {
+      staticStyle: {
+        "height": "20px"
+      }
+    }, [_c('el-button', {
+      staticStyle: {
+        "height": "20px",
+        "padding-bottom": "0px",
+        "padding-top": "0px"
+      },
+      on: {
+        "click": function($event) {
+          _vm.upStaffPerson(person)
+        }
+      }
+    }, [_c('i', {
+      staticClass: "el-icon-arrow-up"
+    })])], 1), _vm._v(" "), _c('el-row', {
+      staticStyle: {
+        "height": "20px"
+      }
+    }, [_c('el-button', {
+      staticStyle: {
+        "height": "20px",
+        "padding-bottom": "0px",
+        "padding-top": "0px"
+      },
+      on: {
+        "click": function($event) {
+          _vm.downStaffPerson(person)
+        }
+      }
+    }, [_c('i', {
+      staticClass: "el-icon-arrow-down"
+    })])], 1)], 1), _vm._v(" "), _c('el-button', {
+      staticClass: "adminpanel-illcode-button",
+      on: {
+        "click": function($event) {
+          _vm.updateStaffPerson(person)
+        }
+      }
+    }, [_c('i', {
+      staticClass: "el-icon-check"
+    })]), _vm._v(" "), _c('el-button', {
+      staticClass: "adminpanel-illcode-button",
+      on: {
+        "click": function($event) {
+          _vm.removeStaffPerson(person)
+        }
+      }
+    }, [_c('i', {
+      staticClass: "el-icon-close"
+    })])], 1)
+  })) : _vm._e()]), _vm._v(" "), _c('el-tab-pane', {
+    attrs: {
+      "label": "Добавить члена штатной комиссии",
+      "name": "staffcommsecond"
+    }
+  }, [_c('el-input', {
+    attrs: {
+      "placeholder": "ФИО"
+    },
+    model: {
+      value: (_vm.newStaffComissionName.fio),
+      callback: function($$v) {
+        _vm.newStaffComissionName.fio = $$v
+      },
+      expression: "newStaffComissionName.fio"
+    }
+  }), _vm._v(" "), _c('el-button', {
+    staticClass: "adminpanel-submit",
+    on: {
+      "click": _vm.addStaffPerson
+    }
   }, [_vm._v("Добавить")])], 1)], 1)], 1)], 1)], 1)
 },staticRenderFns: []}
 module.exports.render._withStripped = true
@@ -20356,7 +25999,7 @@ if (true) {
 }
 
 /***/ }),
-/* 106 */
+/* 162 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -20371,7 +26014,7 @@ if (true) {
 }
 
 /***/ }),
-/* 107 */
+/* 163 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -20387,7 +26030,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }), _vm._v(" "), _c('positionslist', {
     attrs: {
-      "visible": _vm.currentStructure
+      "visible": _vm.positionsListVisible
     }
   })], 1)
 },staticRenderFns: []}
@@ -20400,7 +26043,7 @@ if (true) {
 }
 
 /***/ }),
-/* 108 */
+/* 164 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -21776,7 +27419,7 @@ if (true) {
 }
 
 /***/ }),
-/* 109 */
+/* 165 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -21806,11 +27449,11 @@ if (true) {
 }
 
 /***/ }),
-/* 110 */
+/* 166 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return (_vm.visible.id > 0) ? _c('div', {
+  return (_vm.visible > 0) ? _c('div', {
     staticClass: "widget",
     staticStyle: {
       "overflow-y": "scroll",
@@ -21818,48 +27461,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_c('div', {
     staticClass: "widget-title"
-  }, [_vm._v("\n        " + _vm._s(_vm.visible.name) + "\n    ")]), _vm._v(" "), _c('div', {
-    staticClass: "widget-title-block"
-  }, [_c('div', {
-    staticClass: "widget-content widget-content-inline"
-  }, [_vm._l((_vm.visible.actual_positions), function(current_position) {
-    return [_c('div', {
-      staticClass: "position"
-    }, [_c('div', {
-      staticClass: "department-div"
-    }, [_c('div', {
-      staticClass: "position-grid"
-    }, [_c('div', {
-      staticClass: "position-grid-main"
-    }, [_c('div', {
-      staticClass: "position-leftblock"
-    }, [_c('div', {
-      staticClass: "position-sof"
-    }, [_c('div', [_vm._v(_vm._s(_vm.softs.get(current_position.sourceoffinancing).valueOf()))])]), _vm._v(" "), _vm._m(0, true)]), _vm._v(" "), _c('div', {
-      staticClass: "position-name"
-    }, [_c('div', {
-      staticClass: "position-nameblock"
-    }, [_c('div', {
-      staticClass: "position-nameblock-name"
-    }, [_c('div', {
-      attrs: {
-        "title": current_position.positiontype_data.name
-      }
-    }, [(current_position.positiontype_data.nameshort.length == 0) ? _c('div', [_vm._v("\n                                                    " + _vm._s(current_position.positiontype_data.name) + "\n                                                ")]) : _c('div', [_vm._v("\n                                                    " + _vm._s(current_position.positiontype_data.nameshort) + "\n                                                ")]), _vm._v(" "), (current_position.part == 1) ? _c('span', [_vm._v("\n                                                    (" + _vm._s(current_position.partval) + " ставки)\n                                                ")]) : _vm._e()])]), _vm._v(" "), _c('div', {
-      staticClass: "position-nameblock-rank"
-    })])]), _vm._v(" "), _c('div', {
-      staticClass: "position-rightblock"
-    }, [_c('div', {
-      attrs: {
-        "title": current_position.last_decree.dateactive
-      }
-    }, [_c('i', {
-      staticClass: "el-icon-info",
-      attrs: {
-        "size": "small"
-      }
-    })])])])])])])]
-  })], 2)]), _vm._v(" "), _vm._l((_vm.posdepgroups), function(posdepgroup) {
+  }, [_vm._v("\n        " + _vm._s(_vm.grandparent) + "\n    ")]), _vm._v(" "), _vm._l((_vm.posdepgroups), function(posdepgroup) {
     return _c('div', [_c('i', {
       staticClass: "el-icon-close widget-close",
       on: {
@@ -21957,7 +27559,113 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }, [_c('div', {
       staticClass: "position-name position-transfer"
     }, [_vm._v("\n                        Перевести в распоряжение начальника подразделения\n                    ")])]) : _vm._e()]) : _vm._e(), _vm._v(" "), _vm._l((posdepgroup.posdeps), function(posdep) {
-      return [(!_vm.personsMode()) ? _c('div', [_c('div', {
+      return [(!_vm.personsMode()) ? _c('div', [(_vm.compactView()) ? _c('div', {
+        class: {
+          'department-div': !posdep.isposition
+        }
+      }, [_c('div', {
+        staticClass: "position",
+        class: {
+          'position-expiresoon': posdep.expiresoon, 'position-willbeadded': _vm.isDecreeAddSigned(posdep), 'position-willbedeleted': _vm.isDecreeDeleteSigned(posdep), 'position-head': posdep.headingthisstructure
+        }
+      }, [_c('div', {
+        staticClass: "position-photo",
+        class: {
+          'position-nophoto': !_vm.hasPhoto(posdep)
+        }
+      }), _vm._v(" "), _c('div', {
+        staticClass: "position-grid-compact"
+      }, [_c('div', {
+        staticClass: "position-grid-top-compact"
+      }, [_c('div', {
+        staticClass: "position-sof-compact"
+      }, _vm._l((posdep.sofmapstring), function(str) {
+        return _c('div', [_vm._v(_vm._s(str))])
+      })), _vm._v(" "), _c('div', {
+        staticClass: "position-name-compact"
+      }, [_c('div', {
+        staticClass: "position-nameblock-compact"
+      }, [_c('div', {
+        staticClass: "position-nameblock-name-compact"
+      }, [_c('div', {
+        attrs: {
+          "title": _vm.positiontypeToString(posdep.positiontype)
+        }
+      }, [_vm._v("\n                                                    " + _vm._s(_vm.positiontypeToStringShort(posdep.positiontype)) + "\n                                                ")])]), _vm._v(" "), _c('div', {
+        staticClass: "position-nameblock-rank-compact"
+      }, [_vm._v("\n                                                " + _vm._s(_vm.rankToString(posdep.rankcap)) + "\n                                            ")]), _vm._v(" "), _c('div', {
+        staticClass: "position-nameblock-category-compact"
+      }), _vm._v(" "), _c('div', {
+        staticClass: "position-nameblock-compact-bottom"
+      }), _vm._v(" "), (posdep.replacedbycivilquantity > 0) ? _c('div', {
+        staticClass: "position-nameblock-replaced-compact"
+      }, [_vm._v("\n                                                Может замещаться гражданским персоналом: " + _vm._s(posdep.replacedbycivilquantity) + "\n                                                "), (posdep.replacedbycivilpositiontypeobject != null && _vm.positiontypeGetId(posdep.positiontype) != posdep.replacedbycivilpositiontype) ? _c('span', {
+        staticClass: "position-nameblock-name-alt-compact"
+      }, [_vm._v("\n                                                    (" + _vm._s(_vm.positiontypeToString(posdep.replacedbycivilpositiontypeobject)) + ")\n                                                ")]) : _vm._e()]) : _vm._e()])]), _vm._v(" "), _c('div', {
+        staticClass: "position-quantity-compact"
+      }, [_c('span', {
+        staticClass: "position-nameblock-compact-quantity"
+      }, [_vm._v(_vm._s(posdep.quantity))]), _vm._v(" "), _vm._l((posdep.altranksquantitystring), function(str) {
+        return _c('div', [_vm._v("\n                                            " + _vm._s(str) + "\n                                        ")])
+      })], 2)]), _vm._v(" "), _c('div', {
+        staticClass: "position-grid-bottom-compact"
+      }, [_c('div', {
+        staticClass: "position-dateactiveblock-compact"
+      }, _vm._l((posdep.dateactive), function(str) {
+        return _c('div', {
+          staticClass: "position-dateactive-descr-green"
+        }, [_vm._v(_vm._s(str))])
+      })), _vm._v(" "), _c('div', {
+        staticClass: "position-dateinactiveblock-compact"
+      }, _vm._l((posdep.dateinactive), function(str) {
+        return _c('div', {
+          staticClass: "position-dateinactive-descr-red"
+        }, [_vm._v(_vm._s(str))])
+      }))]), _vm._v(" "), (_vm.isDeletedUnsigned(posdep) || _vm.isNotSignedAndWillBeCreated(posdep) || _vm.isNotSignedAndCreated(posdep) || _vm.isWillBeDeletedUnsigned(posdep)) ? _c('span', {
+        staticClass: "position-isnotsignedandwillbecreated"
+      }, [_vm._v(" (Приказ не подписан)")]) : _vm._e()]), _vm._v(" "), (!posdep.headingthisstructure) ? _c('el-dropdown', {
+        staticClass: "position-settings",
+        attrs: {
+          "placement": "top"
+        },
+        on: {
+          "command": _vm.handleCommand
+        }
+      }, [_c('div', [_vm._v("Действия")]), _vm._v(" "), _c('el-dropdown-menu', {
+        slot: "dropdown"
+      }, [(_vm.hasAccessToEdit && _vm.isUnsignedCreate(posdep)) ? _c('el-dropdown-item', {
+        attrs: {
+          "command": _vm.renamedecreePositionID(posdep.id)
+        }
+      }, [_vm._v("Редактировать должность")]) : _vm._e(), _vm._v(" "), (_vm.hasAccessToEdit && !_vm.isUnsigned(posdep)) ? _c('el-dropdown-item', {
+        attrs: {
+          "command": _vm.renamePositionID(posdep.id)
+        }
+      }, [_vm._v("Изменить должность")]) : _vm._e(), _vm._v(" "), (_vm.hasAccessToEdit && _vm.isUnsigned(posdep)) ? _c('el-dropdown-item', {
+        attrs: {
+          "command": _vm.removedecreePositionID(posdep.id)
+        }
+      }, [_vm._v("Убрать из проекта приказа")]) : _vm._e(), _vm._v(" "), (_vm.hasAccessToEdit && !_vm.isUnsigned(posdep)) ? _c('el-dropdown-item', {
+        attrs: {
+          "command": _vm.removePositionID(posdep.id)
+        }
+      }, [_vm._v("Сократить должность")]) : _vm._e()], 1)], 1) : _vm._e(), _vm._v(" "), _c('el-popover', {
+        attrs: {
+          "placement": "right",
+          "title": "Описание должности",
+          "width": "300",
+          "trigger": "hover"
+        }
+      }, [_c('el-button', {
+        staticClass: "position-info",
+        slot: "reference"
+      }, [_c('div', [_vm._v("Инфо")])]), _vm._v(" "), _c('div', {
+        staticClass: "positionslist-inforow"
+      }, [_vm._v("Предельное звание — " + _vm._s(_vm.rankToString(posdep.rankcap)))]), _vm._v(" "), _c('div', {
+        staticClass: "positionslist-inforow"
+      }, [_vm._v("Категория — " + _vm._s(_vm.positioncategoryToString(posdep.positioncategory)))]), _vm._v(" "), _c('div', {
+        staticClass: "positionslist-inforow"
+      }, [_vm._v("Источник финансирования — " + _vm._s(_vm.sofToString(posdep.sof)))])], 1)], 1)]) : _c('div', {
         class: {
           'department-div': !posdep.isposition
         }
@@ -22141,9 +27849,59 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         attrs: {
           "command": _vm.addNewPosition
         }
-      }, [_vm._v("Ввести должность")])], 1)], 1)], 1) : _vm._e()]) : _vm._e()]) : _vm._e()]
+      }, [_vm._v("Ввести должность")])], 1)], 1)], 1) : _vm._e()]) : _vm._e()]) : _c('div', [_c('div', {
+        class: {
+          'department-div': !posdep.isposition
+        }
+      }, [_c('div', {
+        staticClass: "position-person",
+        class: {
+          'position-person-expiresoon': posdep.expiresoon, 'position-person-willbeadded': _vm.isDecreeAddSigned(posdep), 'position-person-willbedeleted': _vm.isDecreeDeleteSigned(posdep), 'position-person-head': posdep.headingthisstructure
+        },
+        on: {
+          "click": function($event) {
+            _vm.selectPosdep(posdep)
+          }
+        }
+      }, [_c('div', {
+        staticClass: "position-person-grid"
+      }, [_c('div', {
+        staticClass: "position-person-grid-main"
+      }, [_c('div', {
+        staticClass: "position-person-leftblock"
+      }, [_c('div', {
+        staticClass: "position-person-sof"
+      }, _vm._l((posdep.sofmapstring), function(str) {
+        return _c('div', [_vm._v(_vm._s(str))])
+      }))]), _vm._v(" "), _c('div', {
+        staticClass: "position-person-nameblock"
+      }, [_c('div', {
+        staticClass: "position-person-nameblock-name",
+        attrs: {
+          "title": _vm.positiontypeToString(posdep.positiontype)
+        }
+      }, [_vm._v("\n                                            " + _vm._s(_vm.positiontypeToStringShort(posdep.positiontype)) + "\n                                            "), (posdep.part > 0) ? _c('span', [_vm._v("\n                                                (" + _vm._s(posdep.partval) + " ставки)\n                                            ")]) : _vm._e(), _vm._v(" "), (posdep.replacedbycivilpositiontypeobject != null && _vm.positiontypeGetId(posdep.positiontype) != posdep.replacedbycivilpositiontype) ? _c('span', [_vm._v("\n                                                (" + _vm._s(_vm.positiontypeToString(posdep.replacedbycivilpositiontypeobject)) + ")\n                                            ")]) : _vm._e(), _vm._v(" "), _c('span', [_vm._v("\n                                                (" + _vm._s(_vm.rankToString(posdep.rankcap)) + ")\n                                            ")])]), _vm._v(" "), _c('div', {
+        staticClass: "position-person-nameblock-category"
+      }, [_vm._v("\n                                            " + _vm._s(_vm.positioncategoryToString(posdep.positioncategory)) + "\n                                            " + _vm._s(_vm.displayClassCivilIfAvaiable(posdep)) + "\n                                        ")]), _vm._v(" "), (posdep.replacedbycivilpositiontypeobject != null) ? _c('div', {
+        staticClass: "position-person-nameblock-replaced"
+      }, [_vm._v("\n                                            Может быть замещен категорией " + _vm._s(_vm.positioncategoryReplacedToString(posdep.replacedbycivilpositioncategoryobjects)) + " " + _vm._s(_vm.displayClassIfAvaiable(posdep)) + "\n                                        ")]) : _vm._e()]), _vm._v(" "), _c('div', {
+        staticClass: "position-person-rightblock"
+      }, [(_vm.getPerson(posdep) != null) ? void 0 : _vm._e()], 2)]), _vm._v(" "), _c('div', {
+        staticClass: "position-person-grid-person"
+      }, [(_vm.getPerson(posdep) != null) ? _c('div', [_c('div', {
+        staticClass: "position-person-grid-person-top"
+      }, [_c('div', [_vm._v("\n                                                " + _vm._s(_vm.getPerson(posdep).surname) + " " + _vm._s(_vm.getPerson(posdep).name) + " " + _vm._s(_vm.getPerson(posdep).fathername) + " (" + _vm._s(_vm.getPerson(posdep).age) + " лет " + _vm._s(_vm.beautifyDate(_vm.getPerson(posdep).birthdateString)) + ")\n                                            ")]), _vm._v(" "), _c('div', [(_vm.getPerson(posdep).actualRank != null) ? _c('span', [_vm._v(_vm._s(_vm.getPerson(posdep).actualRank.name.toLowerCase()))]) : _vm._e()])]), _vm._v(" "), _c('div', {
+        staticClass: "position-person-grid-person-bottom"
+      }, [_c('div'), _vm._v(" "), _c('div', [(_vm.hasPhotopreview(_vm.getPerson(posdep).id)) ? _c('div', [_c('img', {
+        staticClass: "position-person-grid-person-bottom-image",
+        attrs: {
+          "src": _vm.getPhotopreview(_vm.getPerson(posdep).id).photo64
+        }
+      })]) : _vm._e()]), _vm._v(" "), _c('div')])]) : _c('div', {
+        staticClass: "position-person-noperson"
+      }, [_vm._v("\n                                        Вакант\n                                    ")])])])])])])]
     })], 2)])
-  }), _vm._v(" "), _c('div', [(_vm.visible.children_structures.length > 0) ? _c('div', {
+  }), _vm._v(" "), _c('div', [((_vm.structureInfos != null & _vm.structureInfos.length > 0) || _vm.previous != null) ? _c('div', {
     staticClass: "widget-title"
   }, [_vm._v("\n            Подразделения\n        ")]) : _vm._e(), _vm._v(" "), _c('div', {
     staticClass: "widget-content widget-content-inline"
@@ -22156,8 +27914,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_c('div', {
     staticClass: "position-structure-back"
-  }, [_vm._v("\n                    ←\n                ")])]) : _vm._e(), _vm._v(" "), _vm._l((_vm.visible.children_structures), function(info) {
-    return (_vm.visible.children_structures.length > 0) ? _c('div', {
+  }, [_vm._v("\n                    ←\n                ")])]) : _vm._e(), _vm._v(" "), _vm._l((_vm.structureInfos), function(info) {
+    return (_vm.structureInfos != null & _vm.structureInfos.length > 0) ? _c('div', {
       staticClass: "position-structure",
       on: {
         "click": function($event) {
@@ -22166,7 +27924,17 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       }
     }, [_c('div', {
       staticClass: "position-structure-title"
-    }, [_vm._v("\n                    " + _vm._s(info.name) + "\n                ")])]) : _vm._e()
+    }, [_vm._v("\n                    " + _vm._s(info.name) + "\n                ")]), _vm._v(" "), _c('div', {
+      attrs: {
+        "title": "В скобках указана численность должностей, приказы которых еще не подписаны"
+      }
+    }, [_vm._v("\n                    Общая численность " + _vm._s(+info.positionCountSigned.toFixed(2)) + "\n                    "), (info.positionCountUnsigned.toFixed(2) != 0) ? _c('span', [_vm._v("(" + _vm._s(+info.positionCountUnsigned.toFixed(2)) + ")")]) : _vm._e()]), _vm._v(" "), _c('div', [_vm._v("\n                    Численность по бюджетам:\n                ")]), _vm._v(" "), _vm._l((info.sofsReady), function(sofReady) {
+      return _c('div', {
+        attrs: {
+          "title": "В скобках указана численность должностей, приказы которых еще не подписаны"
+        }
+      }, [_vm._v("\n                    " + _vm._s(sofReady) + "\n                ")])
+    }), _vm._v(" "), _c('br'), _vm._v(" "), (info != null && (info.positionAddFuture > 0 || info.positionRemoveFuture > 0)) ? _c('div', [_vm._v("\n                    Вводится " + _vm._s(+info.positionAddFuture.toFixed(2)) + ", сокращается " + _vm._s(+info.positionRemoveFuture.toFixed(2)) + "\n                ")]) : _vm._e()], 2) : _vm._e()
   })], 2)]), _vm._v(" "), _c('el-dialog', {
     directives: [{
       name: "draggable",
@@ -22254,13 +28022,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "click": _vm.decertificatecancelbutton
     }
   }, [_vm._v("Отмена")])], 1)], 1)], 2) : _vm._e()
-},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "position-mrd"
-  }, [_c('div', {
-    staticClass: "position-mrd-title"
-  }, [_vm._v("Метки рода деятельности")])])
-}]}
+},staticRenderFns: []}
 module.exports.render._withStripped = true
 if (true) {
   module.hot.accept()
@@ -22270,7 +28032,7 @@ if (true) {
 }
 
 /***/ }),
-/* 111 */
+/* 167 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -22341,7 +28103,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_c('img', {
     attrs: {
-      "src": __webpack_require__(82),
+      "src": __webpack_require__(138),
       "id": "login-logo"
     }
   })])
@@ -22355,7 +28117,7 @@ if (true) {
 }
 
 /***/ }),
-/* 112 */
+/* 168 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -22429,7 +28191,7 @@ if (true) {
 }
 
 /***/ }),
-/* 113 */
+/* 169 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -22537,7 +28299,7 @@ if (true) {
 }
 
 /***/ }),
-/* 114 */
+/* 170 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -22551,12 +28313,14 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "widget-title"
   }, [_vm._v("\n        Выберите режим работы\n    ")]), _vm._v(" "), _c('div', {
     staticClass: "modepanel-container "
-  }, [(_vm.structureModeAccess) ? _c('div', {
+  }, [(_vm.structureModeAccess()) ? _c('div', {
     staticClass: "modepanel-element modepanel-element-org",
     on: {
-      "click": _vm.org
+      "click": function($event) {
+        _vm.org()
+      }
     }
-  }, [_vm._v("\n            Организационно-штатная работа\n        ")]) : _c('div', [_c('i', [_vm._v("Загрузка...")])])])]) : _vm._e()
+  }, [_vm._v("\n            Организационно-штатная работа\n        ")]) : _vm._e(), _vm._v(" "), (!_vm.structureEdit() && !_vm.personnelRead()) ? _c('div', [_c('i', [_vm._v("Загрузка...")])]) : _vm._e()])]) : _vm._e()
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (true) {
@@ -22567,7 +28331,7 @@ if (true) {
 }
 
 /***/ }),
-/* 115 */
+/* 171 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -23037,7 +28801,14 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     on: {
       "click": _vm.request
     }
-  }, [_vm._v("Запрос")]), _vm._v(" "), (_vm.loading) ? _c('div', {
+  }, [_vm._v("Запрос")]), _vm._v(" "), (_vm.loading) ? _c('el-button', {
+    attrs: {
+      "disabled": !_vm.loading
+    },
+    on: {
+      "click": _vm.stoped
+    }
+  }, [_vm._v("Stoped")]) : _vm._e(), _vm._v(" "), (_vm.loading) ? _c('div', {
     staticClass: "pmrequest-spinner fingerprint-spinner"
   }, [_c('div', {
     staticClass: "spinner-ring"
@@ -23304,6 +29075,104 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     on: {
       "click": _vm.request
     }
+  }, [_vm._v("Запрос")]), _vm._v(" "), (_vm.loading) ? _c('el-button', {
+    attrs: {
+      "disabled": !_vm.loading
+    },
+    on: {
+      "click": _vm.stoped
+    }
+  }, [_vm._v("Stoped")]) : _vm._e(), _vm._v(" "), (_vm.loading) ? _c('div', {
+    staticClass: "pmrequest-spinner fingerprint-spinner"
+  }, [_c('div', {
+    staticClass: "spinner-ring"
+  }), _vm._v(" "), _c('div', {
+    staticClass: "spinner-ring"
+  }), _vm._v(" "), _c('div', {
+    staticClass: "spinner-ring"
+  }), _vm._v(" "), _c('div', {
+    staticClass: "spinner-ring"
+  }), _vm._v(" "), _c('div', {
+    staticClass: "spinner-ring"
+  }), _vm._v(" "), _c('div', {
+    staticClass: "spinner-ring"
+  }), _vm._v(" "), _c('div', {
+    staticClass: "spinner-ring"
+  }), _vm._v(" "), _c('div', {
+    staticClass: "spinner-ring"
+  }), _vm._v(" "), _c('div', {
+    staticClass: "spinner-ring"
+  })]) : _vm._e()], 1)], 2) : _vm._e(), _vm._v(" "), (_vm.type == 3) ? _c('div', [_vm._m(2), _vm._v(" "), _c('div', {
+    staticClass: "pmrequest-row"
+  }, [_c('div', {
+    staticClass: "pmrequest-label"
+  }, [_vm._v("\n                Подразделению\n            ")]), _vm._v(" "), _c('el-button', {
+    attrs: {
+      "size": "mini"
+    },
+    on: {
+      "click": _vm.addStructure
+    }
+  }, [_vm._v("Добавить подразделение")])], 1), _vm._v(" "), _vm._l((_vm.structureTrees), function(sub, key, index) {
+    return _c('div', {
+      staticClass: "pmrequest-structure-element"
+    }, [_vm._v("\n            " + _vm._s(key + 1) + " - " + _vm._s(sub.tree) + "\n            "), _c('el-button', {
+      attrs: {
+        "size": "mini"
+      },
+      on: {
+        "click": function($event) {
+          _vm.removeStructure(sub.id)
+        }
+      }
+    }, [_vm._v("Удалить")])], 1)
+  }), _vm._v(" "), _c('div', {
+    staticClass: "pmrequest-row"
+  }, [_c('div', {
+    staticClass: "pmrequest-label"
+  }, [_vm._v("\n                Метки типов подразделений\n            ")]), _vm._v(" "), _c('el-select', {
+    staticClass: "pmrequest-select",
+    attrs: {
+      "placeholder": "Метки типов подразделений",
+      "multiple": "",
+      "filterable": "",
+      "no-match-text": "Не найдено"
+    },
+    model: {
+      value: (_vm.structuretype),
+      callback: function($$v) {
+        _vm.structuretype = $$v
+      },
+      expression: "structuretype"
+    }
+  }, _vm._l((_vm.structuretypes), function(stype) {
+    return _c('el-option', {
+      key: stype.id,
+      attrs: {
+        "title": stype.name,
+        "label": stype.name,
+        "value": stype.id
+      }
+    })
+  })), _vm._v(" "), (_vm.structuretype.length > 0) ? _c('el-button', {
+    attrs: {
+      "icon": "el-icon-circle-close-outline",
+      "size": "mini"
+    },
+    on: {
+      "click": function($event) {
+        _vm.clear(_vm.structuretype)
+      }
+    }
+  }) : _vm._e()], 1), _vm._v(" "), _c('div', {
+    staticClass: "pmrequest-row"
+  }, [_c('el-button', {
+    attrs: {
+      "disabled": _vm.loading
+    },
+    on: {
+      "click": _vm.request
+    }
   }, [_vm._v("Запрос")]), _vm._v(" "), (_vm.loading) ? _c('div', {
     staticClass: "pmrequest-spinner fingerprint-spinner"
   }, [_c('div', {
@@ -23324,7 +29193,1473 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "spinner-ring"
   }), _vm._v(" "), _c('div', {
     staticClass: "spinner-ring"
-  })]) : _vm._e()], 1)], 2) : _vm._e(), _vm._v(" "), _c('el-dialog', {
+  })]) : _vm._e()], 1)], 2) : _vm._e(), _vm._v(" "), (_vm.type == 4) ? _c('div', [_c('div', {
+    staticClass: "pmrequest-row"
+  }, [_c('div', {
+    staticClass: "pmrequest-label"
+  }, [_vm._v("\n                Подразделение\n            ")]), _vm._v(" "), _c('el-button', {
+    attrs: {
+      "size": "mini"
+    },
+    on: {
+      "click": _vm.addStructure
+    }
+  }, [_vm._v("Добавить подразделение")]), _vm._v(" "), (_vm.structureTrees.length > 0) ? _c('el-button', {
+    attrs: {
+      "icon": "el-icon-circle-close-outline",
+      "size": "mini"
+    },
+    on: {
+      "click": function($event) {
+        _vm.clear(_vm.structureTrees)
+      }
+    }
+  }) : _vm._e(), _vm._v(" "), _c('div', {
+    staticStyle: {
+      "margin-left": "200px"
+    }
+  }, [_vm._v("\n                Люди с заархивированными личными делами\n            ")]), _vm._v(" "), _c('el-checkbox', {
+    staticClass: "checkbox-big",
+    staticStyle: {
+      "margin-left": "10px"
+    },
+    model: {
+      value: (_vm.removed),
+      callback: function($$v) {
+        _vm.removed = $$v
+      },
+      expression: "removed"
+    }
+  })], 1), _vm._v(" "), _vm._l((_vm.structureTrees), function(sub, key, index) {
+    return _c('div', {
+      staticClass: "pmrequest-structure-element"
+    }, [_vm._v("\n            " + _vm._s(key + 1) + " - " + _vm._s(sub.tree) + "\n            "), _c('el-button', {
+      attrs: {
+        "size": "mini"
+      },
+      on: {
+        "click": function($event) {
+          _vm.removeStructure(sub.id)
+        }
+      }
+    }, [_vm._v("Удалить")])], 1)
+  }), _vm._v(" "), (_vm.structureTrees.length > 0 || _vm.removed == true) ? _c('div', [_c('el-collapse', {
+    staticClass: "eld-eld-side-element",
+    attrs: {
+      "accordion": ""
+    }
+  }, [_c('el-collapse-item', {
+    staticClass: "eld-eld-side-element-folder",
+    attrs: {
+      "title": "Образование",
+      "name": "1"
+    }
+  }, [_c('div', {
+    staticStyle: {
+      "margin-bottom": "4px",
+      "box-shadow": "5px 5px 3px rgba(0,0,0,0.6)",
+      "padding": "10px",
+      "border-radius": "10px",
+      "background": "#eeece0"
+    }
+  }, [(_vm.education_datas.all_specializations.length > 0) ? _c('el-select', {
+    staticClass: "eld-eld-body-select-long-request",
+    attrs: {
+      "multiple": "",
+      "filterable": "",
+      "placeholder": "Выберите специализацию",
+      "no-match-text": "Не найдено"
+    },
+    model: {
+      value: (_vm.education_request.specializationList),
+      callback: function($$v) {
+        _vm.education_request.specializationList = $$v
+      },
+      expression: "education_request.specializationList"
+    }
+  }, _vm._l((_vm.education_datas.all_specializations), function(item) {
+    return _c('el-option', {
+      key: item,
+      attrs: {
+        "label": item,
+        "value": item
+      }
+    })
+  })) : _vm._e(), _vm._v(" "), (_vm.education_datas.all_cvalifications.length > 0) ? _c('el-select', {
+    staticClass: "eld-eld-body-select-long-request",
+    attrs: {
+      "multiple": "",
+      "filterable": "",
+      "placeholder": "Выберите квалификацию",
+      "no-match-text": "Не найдено"
+    },
+    model: {
+      value: (_vm.education_request.cvalificationList),
+      callback: function($$v) {
+        _vm.education_request.cvalificationList = $$v
+      },
+      expression: "education_request.cvalificationList"
+    }
+  }, _vm._l((_vm.education_datas.all_cvalifications), function(item) {
+    return _c('el-option', {
+      key: item,
+      attrs: {
+        "label": item,
+        "value": item
+      }
+    })
+  })) : _vm._e()], 1), _vm._v(" "), _c('div', {
+    staticStyle: {
+      "margin-bottom": "4px",
+      "box-shadow": "5px 5px 3px rgba(0,0,0,0.6)",
+      "padding": "10px",
+      "border-radius": "10px",
+      "background": "#f6b0b0",
+      "display": "flex",
+      "justify-content": "space-between"
+    }
+  }, [_vm._v("\n                        Уровень образования:\n                        "), (_vm.education_datas.all_levels.length > 0) ? _c('el-select', {
+    attrs: {
+      "multiple": "",
+      "filterable": "",
+      "placeholder": "Выберите специализацию",
+      "no-match-text": "Не найдено"
+    },
+    model: {
+      value: (_vm.education_request.educationLevel),
+      callback: function($$v) {
+        _vm.education_request.educationLevel = $$v
+      },
+      expression: "education_request.educationLevel"
+    }
+  }, _vm._l((_vm.education_datas.all_levels), function(item) {
+    return _c('el-option', {
+      key: item,
+      attrs: {
+        "label": item,
+        "value": item
+      }
+    })
+  })) : _vm._e()], 1), _vm._v(" "), _c('el-button', {
+    attrs: {
+      "type": "success",
+      "plain": ""
+    },
+    on: {
+      "click": _vm.education_request_button
+    }
+  }, [_vm._v("Отправить запрос")]), _vm._v(" "), (_vm.education_resualt.length > 0) ? _c('div', {
+    staticClass: "pmrequest-row"
+  }, [_c('el-button', {
+    attrs: {
+      "disabled": _vm.loading
+    },
+    on: {
+      "click": _vm.educationDownload
+    }
+  }, [_vm._v("Скачать")])], 1) : _vm._e(), _vm._v(" "), _c('el-table', {
+    attrs: {
+      "data": _vm.education_resualt,
+      "empty-text": "Сотрудников не найдено"
+    }
+  }, [_c('el-table-column', {
+    attrs: {
+      "prop": "person.numpersonal",
+      "label": "Номер"
+    }
+  }), _vm._v(" "), _c('el-table-column', {
+    attrs: {
+      "prop": "person",
+      "label": "ФИО",
+      "sortable": "",
+      "formatter": _vm.formatting.formatter_el_table_fullname
+    }
+  }), _vm._v(" "), _c('el-table-column', {
+    attrs: {
+      "prop": "education.speciality",
+      "label": "Специальность",
+      "sortable": ""
+    }
+  }), _vm._v(" "), _c('el-table-column', {
+    attrs: {
+      "prop": "education.qualification",
+      "label": "Квалификация",
+      "sortable": ""
+    }
+  }), _vm._v(" "), _c('el-table-column', {
+    attrs: {
+      "prop": "education.end",
+      "label": "Дата окончания",
+      "sortable": "",
+      "formatter": _vm.formatting.formatter_el_table_collumn_date
+    }
+  })], 1), _vm._v(" "), (_vm.education_resualt.length > 0) ? _c('div', {
+    staticClass: "pmrequest-row"
+  }, [_c('el-button', {
+    attrs: {
+      "disabled": _vm.loading
+    },
+    on: {
+      "click": _vm.educationDownload
+    }
+  }, [_vm._v("Скачать")])], 1) : _vm._e()], 1), _vm._v(" "), _c('el-collapse-item', {
+    staticClass: "eld-eld-side-element-folder",
+    attrs: {
+      "title": "Звание",
+      "name": "2"
+    }
+  }, [_c('div', {
+    staticStyle: {
+      "margin-bottom": "4px",
+      "box-shadow": "5px 5px 3px rgba(0,0,0,0.6)",
+      "padding": "10px",
+      "border-radius": "10px",
+      "background": "#f6b0b0"
+    }
+  }, [_c('span', {
+    staticClass: "demo-input-label"
+  }, [_vm._v("Срок истечения выслуги в звании, с-по:")]), _vm._v(" "), _c('el-date-picker', {
+    attrs: {
+      "placeholder": "С:",
+      "type": "date",
+      "format": "dd.MM.yyyy"
+    },
+    model: {
+      value: (_vm.rank_request.first_rank_date),
+      callback: function($$v) {
+        _vm.rank_request.first_rank_date = $$v
+      },
+      expression: "rank_request.first_rank_date"
+    }
+  }), _vm._v(" "), _c('el-date-picker', {
+    attrs: {
+      "placeholder": "По:",
+      "type": "date",
+      "format": "dd.MM.yyyy"
+    },
+    model: {
+      value: (_vm.rank_request.last_rank_date),
+      callback: function($$v) {
+        _vm.rank_request.last_rank_date = $$v
+      },
+      expression: "rank_request.last_rank_date"
+    }
+  })], 1), _vm._v(" "), _c('el-button', {
+    attrs: {
+      "type": "success",
+      "plain": ""
+    },
+    on: {
+      "click": _vm.rank_request_button
+    }
+  }, [_vm._v("Отправить запрос")]), _vm._v(" "), (_vm.rank_resualt.length > 0) ? _c('div', {
+    staticClass: "pmrequest-row"
+  }, [_c('el-button', {
+    attrs: {
+      "disabled": _vm.loading
+    },
+    on: {
+      "click": _vm.rankDownload
+    }
+  }, [_vm._v("Скачать")])], 1) : _vm._e(), _vm._v(" "), _c('el-table', {
+    attrs: {
+      "data": _vm.rank_resualt,
+      "empty-text": "Сотрудников не найдено"
+    }
+  }, [_c('el-table-column', {
+    attrs: {
+      "prop": "person.numpersonal",
+      "label": "Номер"
+    }
+  }), _vm._v(" "), _c('el-table-column', {
+    attrs: {
+      "prop": "person",
+      "label": "ФИО",
+      "sortable": "",
+      "formatter": _vm.formatting.formatter_el_table_fullname
+    }
+  }), _vm._v(" "), _c('el-table-column', {
+    attrs: {
+      "prop": "rank.name",
+      "label": "Звание",
+      "sortable": ""
+    }
+  }), _vm._v(" "), _c('el-table-column', {
+    attrs: {
+      "prop": "date_end",
+      "label": "Дата повышения",
+      "sortable": "",
+      "formatter": _vm.formatting.formatter_el_table_collumn_date
+    }
+  })], 1), _vm._v(" "), (_vm.rank_resualt.length > 0) ? _c('div', {
+    staticClass: "pmrequest-row"
+  }, [_c('el-button', {
+    attrs: {
+      "disabled": _vm.loading
+    },
+    on: {
+      "click": _vm.rankDownload
+    }
+  }, [_vm._v("Скачать")])], 1) : _vm._e()], 1), _vm._v(" "), _c('el-collapse-item', {
+    staticClass: "eld-eld-side-element-folder",
+    attrs: {
+      "title": "Контракт",
+      "name": "3"
+    }
+  }, [_c('div', {
+    staticStyle: {
+      "margin-bottom": "4px",
+      "box-shadow": "5px 5px 3px rgba(0,0,0,0.6)",
+      "padding": "10px",
+      "border-radius": "10px",
+      "background": "#f6b0b0"
+    }
+  }, [_c('span', {
+    staticClass: "demo-input-label"
+  }, [_vm._v("Срок истечения контракта, до:")]), _vm._v(" "), _c('el-date-picker', {
+    attrs: {
+      "placeholder": "Выберите дату",
+      "type": "daterange",
+      "format": "dd.MM.yyyy"
+    },
+    model: {
+      value: (_vm.contract_request.last_contract_date),
+      callback: function($$v) {
+        _vm.contract_request.last_contract_date = $$v
+      },
+      expression: "contract_request.last_contract_date"
+    }
+  })], 1), _vm._v(" "), _c('el-button', {
+    attrs: {
+      "type": "success",
+      "plain": ""
+    },
+    on: {
+      "click": _vm.contract_request_button
+    }
+  }, [_vm._v("Отправить запрос")]), _vm._v(" "), (_vm.contruct_resualt.length > 0) ? _c('div', {
+    staticClass: "pmrequest-row"
+  }, [_c('el-button', {
+    attrs: {
+      "disabled": _vm.loading
+    },
+    on: {
+      "click": _vm.contructDownload
+    }
+  }, [_vm._v("Скачать")])], 1) : _vm._e(), _vm._v(" "), _c('el-table', {
+    attrs: {
+      "data": _vm.contruct_resualt,
+      "empty-text": "Сотрудников не найдено"
+    }
+  }, [_c('el-table-column', {
+    attrs: {
+      "prop": "person.numpersonal",
+      "label": "Номер"
+    }
+  }), _vm._v(" "), _c('el-table-column', {
+    attrs: {
+      "prop": "person",
+      "label": "ФИО",
+      "sortable": "",
+      "formatter": _vm.formatting.formatter_el_table_fullname
+    }
+  }), _vm._v(" "), _c('el-table-column', {
+    attrs: {
+      "prop": "contract.orderid",
+      "label": "Номер приказа",
+      "sortable": ""
+    }
+  }), _vm._v(" "), _c('el-table-column', {
+    attrs: {
+      "prop": "contract.dateend",
+      "label": "Дата окончания",
+      "sortable": "",
+      "formatter": _vm.formatting.formatter_el_table_collumn_date
+    }
+  })], 1), _vm._v(" "), (_vm.contruct_resualt.length > 0) ? _c('div', {
+    staticClass: "pmrequest-row"
+  }, [_c('el-button', {
+    attrs: {
+      "disabled": _vm.loading
+    },
+    on: {
+      "click": _vm.contructDownload
+    }
+  }, [_vm._v("Скачать")])], 1) : _vm._e()], 1), _vm._v(" "), _c('el-collapse-item', {
+    staticClass: "eld-eld-side-element-folder",
+    attrs: {
+      "title": "Отпуск",
+      "name": "4"
+    }
+  }, [_c('div', {
+    staticStyle: {
+      "margin-bottom": "4px",
+      "box-shadow": "5px 5px 3px rgba(0,0,0,0.6)",
+      "padding": "10px",
+      "border-radius": "10px",
+      "background": "#eeece0"
+    }
+  }, [_c('span', {
+    staticClass: "demo-input-label"
+  }, [_vm._v("отпуска в период:")]), _vm._v(" "), _c('el-date-picker', {
+    attrs: {
+      "placeholder": "Выберите дату",
+      "type": "daterange",
+      "format": "dd.MM.yyyy"
+    },
+    model: {
+      value: (_vm.vacation_request.date_range),
+      callback: function($$v) {
+        _vm.vacation_request.date_range = $$v
+      },
+      expression: "vacation_request.date_range"
+    }
+  })], 1), _vm._v(" "), _c('div', {
+    staticStyle: {
+      "margin-bottom": "4px",
+      "box-shadow": "5px 5px 3px rgba(0,0,0,0.6)",
+      "padding": "10px",
+      "border-radius": "10px",
+      "background": "#f6b0b0"
+    }
+  }, [_c('el-switch', {
+    attrs: {
+      "active-text": "С какого числа отпуска",
+      "inactive-text": "Количество не отгулявших дней"
+    },
+    model: {
+      value: (_vm.vacation_request.dates_count),
+      callback: function($$v) {
+        _vm.vacation_request.dates_count = $$v
+      },
+      expression: "vacation_request.dates_count"
+    }
+  })], 1), _vm._v(" "), _c('el-button', {
+    attrs: {
+      "type": "success",
+      "plain": ""
+    },
+    on: {
+      "click": _vm.vacation_request_button
+    }
+  }, [_vm._v("Отправить запрос")]), _vm._v(" "), (_vm.vacation_resualt.length > 0) ? _c('div', {
+    staticClass: "pmrequest-row"
+  }, [_c('el-button', {
+    attrs: {
+      "disabled": _vm.loading
+    },
+    on: {
+      "click": _vm.vacationDownload
+    }
+  }, [_vm._v("Скачать")])], 1) : _vm._e(), _vm._v(" "), _c('el-table', {
+    attrs: {
+      "data": _vm.vacation_resualt,
+      "empty-text": "Сотрудников не найдено"
+    }
+  }, [_c('el-table-column', {
+    attrs: {
+      "prop": "person.numpersonal",
+      "label": "Номер"
+    }
+  }), _vm._v(" "), _c('el-table-column', {
+    attrs: {
+      "prop": "person",
+      "label": "ФИО",
+      "sortable": "",
+      "formatter": _vm.formatting.formatter_el_table_fullname
+    }
+  }), _vm._v(" "), _c('el-table-column', {
+    attrs: {
+      "prop": "count",
+      "label": "Кол",
+      "sortable": ""
+    }
+  }), _vm._v(" "), _c('el-table-column', {
+    attrs: {
+      "prop": "date_start",
+      "label": "Дата начала",
+      "sortable": "",
+      "formatter": _vm.formatting.formatter_el_table_collumn_date
+    }
+  }), _vm._v(" "), _c('el-table-column', {
+    attrs: {
+      "prop": "education.main",
+      "label": "Оставшихся дней",
+      "sortable": ""
+    }
+  }), _vm._v(" "), _c('el-table-column', {
+    attrs: {
+      "prop": "education.durationmax",
+      "label": "Максимальное количество дней",
+      "sortable": ""
+    }
+  })], 1), _vm._v(" "), (_vm.vacation_resualt.length > 0) ? _c('div', {
+    staticClass: "pmrequest-row"
+  }, [_c('el-button', {
+    attrs: {
+      "disabled": _vm.loading
+    },
+    on: {
+      "click": _vm.vacationDownload
+    }
+  }, [_vm._v("Скачать")])], 1) : _vm._e()], 1), _vm._v(" "), _c('el-collapse-item', {
+    staticClass: "eld-eld-side-element-folder",
+    attrs: {
+      "title": "Награды",
+      "name": "5"
+    }
+  }, [_c('div', {
+    staticStyle: {
+      "margin-bottom": "4px",
+      "box-shadow": "5px 5px 3px rgba(0,0,0,0.6)",
+      "padding": "10px",
+      "border-radius": "10px",
+      "background": "#eeece0"
+    }
+  }, [(_vm.award_datas.award_type.length > 0) ? _c('el-select', {
+    staticClass: "eld-eld-body-select-long-request",
+    attrs: {
+      "multiple": "",
+      "filterable": "",
+      "placeholder": "Выберите тип награды",
+      "no-match-text": "Не найдено"
+    },
+    model: {
+      value: (_vm.award_request.awards_type),
+      callback: function($$v) {
+        _vm.award_request.awards_type = $$v
+      },
+      expression: "award_request.awards_type"
+    }
+  }, _vm._l((_vm.award_datas.award_type), function(item) {
+    return _c('el-option', {
+      key: item,
+      attrs: {
+        "label": item,
+        "value": item
+      }
+    })
+  })) : _vm._e(), _vm._v(" "), (_vm.award_datas.awards.length > 0) ? _c('el-select', {
+    staticClass: "eld-eld-body-select-long-request",
+    attrs: {
+      "multiple": "",
+      "filterable": "",
+      "placeholder": "Выберите название награды",
+      "no-match-text": "Не найдено"
+    },
+    model: {
+      value: (_vm.award_request.awards),
+      callback: function($$v) {
+        _vm.award_request.awards = $$v
+      },
+      expression: "award_request.awards"
+    }
+  }, _vm._l((_vm.award_datas.awards), function(item) {
+    return _c('el-option', {
+      key: item,
+      attrs: {
+        "label": item,
+        "value": item
+      }
+    })
+  })) : _vm._e(), _vm._v(" "), _c('el-switch', {
+    attrs: {
+      "active-text": "сотрудник имеет награды данных категорий",
+      "inactive-text": "сотрудник не имеет награды данных категорий"
+    },
+    model: {
+      value: (_vm.award_request.keep),
+      callback: function($$v) {
+        _vm.award_request.keep = $$v
+      },
+      expression: "award_request.keep"
+    }
+  })], 1), _vm._v(" "), _c('div', {
+    staticStyle: {
+      "margin-bottom": "4px",
+      "box-shadow": "5px 5px 3px rgba(0,0,0,0.6)",
+      "padding": "10px",
+      "border-radius": "10px",
+      "background": "#f6b0b0"
+    }
+  }, [_c('span', {
+    staticClass: "demo-input-label"
+  }, [_vm._v("Минимальное количество наград:")]), _vm._v(" "), _c('el-input-number', {
+    attrs: {
+      "min": 0,
+      "placeholder": "Выберите минимальное количество наград"
+    },
+    model: {
+      value: (_vm.award_request.min_awards_number),
+      callback: function($$v) {
+        _vm.award_request.min_awards_number = $$v
+      },
+      expression: "award_request.min_awards_number"
+    }
+  }), _vm._v(" "), _c('el-switch', {
+    attrs: {
+      "active-text": "награды других органов",
+      "inactive-text": ""
+    },
+    model: {
+      value: (_vm.award_request.others),
+      callback: function($$v) {
+        _vm.award_request.others = $$v
+      },
+      expression: "award_request.others"
+    }
+  })], 1), _vm._v(" "), _c('el-button', {
+    attrs: {
+      "type": "success",
+      "plain": ""
+    },
+    on: {
+      "click": _vm.award_request_button
+    }
+  }, [_vm._v("Отправить запрос")]), _vm._v(" "), (_vm.award_response.length > 0) ? _c('div', {
+    staticClass: "pmrequest-row"
+  }, [_c('el-button', {
+    attrs: {
+      "disabled": _vm.loading
+    },
+    on: {
+      "click": _vm.awardDownload
+    }
+  }, [_vm._v("Скачать")])], 1) : _vm._e(), _vm._v(" "), _c('el-table', {
+    attrs: {
+      "data": _vm.award_response,
+      "empty-text": "Сотрудников не найдено"
+    }
+  }, [_c('el-table-column', {
+    attrs: {
+      "prop": "person.numpersonal",
+      "label": "Номер"
+    }
+  }), _vm._v(" "), _c('el-table-column', {
+    attrs: {
+      "prop": "person",
+      "label": "ФИО",
+      "sortable": "",
+      "formatter": _vm.formatting.formatter_el_table_fullname
+    }
+  }), _vm._v(" "), _c('el-table-column', {
+    attrs: {
+      "prop": "award_type.name",
+      "label": "Тип награды",
+      "sortable": ""
+    }
+  }), _vm._v(" "), _c('el-table-column', {
+    attrs: {
+      "prop": "award.name",
+      "label": "название награды",
+      "sortable": ""
+    }
+  }), _vm._v(" "), _c('el-table-column', {
+    attrs: {
+      "prop": "award_new.orderwho",
+      "label": "Орган",
+      "sortable": ""
+    }
+  }), _vm._v(" "), _c('el-table-column', {
+    attrs: {
+      "prop": "award_new.rewarddate",
+      "label": "Дата присваения",
+      "sortable": "",
+      "formatter": _vm.formatter_el_table_collumn_date
+    }
+  })], 1), _vm._v(" "), (_vm.award_response.length > 0) ? _c('div', {
+    staticClass: "pmrequest-row"
+  }, [_c('el-button', {
+    attrs: {
+      "disabled": _vm.loading
+    },
+    on: {
+      "click": _vm.awardDownload
+    }
+  }, [_vm._v("Скачать")])], 1) : _vm._e()], 1), _vm._v(" "), _c('el-collapse-item', {
+    staticClass: "eld-eld-side-element-folder",
+    attrs: {
+      "title": "Удостоверение",
+      "name": "6"
+    }
+  }, [_c('div', {
+    staticStyle: {
+      "margin-bottom": "4px",
+      "box-shadow": "5px 5px 3px rgba(0,0,0,0.6)",
+      "padding": "10px",
+      "border-radius": "10px",
+      "background": "#f6b0b0"
+    }
+  }, [_c('span', {
+    staticClass: "demo-input-label"
+  }, [_vm._v("Дата окончания удостоверения:")]), _vm._v(" "), _c('el-date-picker', {
+    attrs: {
+      "placeholder": "Выберите дату",
+      "type": "date",
+      "format": "dd.MM.yyyy"
+    },
+    model: {
+      value: (_vm.certificate_request.data_end),
+      callback: function($$v) {
+        _vm.certificate_request.data_end = $$v
+      },
+      expression: "certificate_request.data_end"
+    }
+  }), _vm._v(" "), _c('el-switch', {
+    attrs: {
+      "active-text": "Удостоверение не соответствует должности",
+      "inactive-text": ""
+    },
+    model: {
+      value: (_vm.certificate_request.position_conformity),
+      callback: function($$v) {
+        _vm.certificate_request.position_conformity = $$v
+      },
+      expression: "certificate_request.position_conformity"
+    }
+  })], 1), _vm._v(" "), _c('el-button', {
+    attrs: {
+      "type": "success",
+      "plain": ""
+    },
+    on: {
+      "click": _vm.certificate_request_button
+    }
+  }, [_vm._v("Отправить запрос")]), _vm._v(" "), (_vm.certificate_response.length > 0) ? _c('div', {
+    staticClass: "pmrequest-row"
+  }, [_c('el-button', {
+    attrs: {
+      "disabled": _vm.loading
+    },
+    on: {
+      "click": _vm.certificateDownload
+    }
+  }, [_vm._v("Скачать")])], 1) : _vm._e(), _vm._v(" "), _c('el-table', {
+    attrs: {
+      "data": _vm.certificate_response,
+      "empty-text": "Сотрудников не найдено"
+    }
+  }, [_c('el-table-column', {
+    attrs: {
+      "prop": "person.numpersonal",
+      "label": "Номер"
+    }
+  }), _vm._v(" "), _c('el-table-column', {
+    attrs: {
+      "prop": "person",
+      "label": "ФИО",
+      "sortable": "",
+      "formatter": _vm.formatting.formatter_el_table_fullname
+    }
+  }), _vm._v(" "), _c('el-table-column', {
+    attrs: {
+      "prop": "certificate.numud",
+      "label": "номер удостоверения",
+      "sortable": ""
+    }
+  }), _vm._v(" "), _c('el-table-column', {
+    attrs: {
+      "prop": "certificate.expirationdate",
+      "label": "Дата окончания",
+      "sortable": "",
+      "formatter": _vm.formatting.formatter_el_table_collumn_date
+    }
+  })], 1), _vm._v(" "), (_vm.certificate_response.length > 0) ? _c('div', {
+    staticClass: "pmrequest-row"
+  }, [_c('el-button', {
+    attrs: {
+      "disabled": _vm.loading
+    },
+    on: {
+      "click": _vm.certificateDownload
+    }
+  }, [_vm._v("Скачать")])], 1) : _vm._e()], 1), _vm._v(" "), _c('el-collapse-item', {
+    staticClass: "eld-eld-side-element-folder",
+    attrs: {
+      "title": "Аттестация",
+      "name": "7"
+    }
+  }, [_c('div', {
+    staticStyle: {
+      "margin-bottom": "4px",
+      "box-shadow": "5px 5px 3px rgba(0,0,0,0.6)",
+      "padding": "10px",
+      "border-radius": "10px",
+      "background": "#f6b0b0"
+    }
+  }, [_c('span', {
+    staticClass: "demo-input-label"
+  }, [_vm._v("Дата последеней аттестации:")]), _vm._v(" "), _c('el-date-picker', {
+    attrs: {
+      "placeholder": "С:",
+      "type": "date",
+      "format": "dd.MM.yyyy"
+    },
+    model: {
+      value: (_vm.attestation_request.lastdatestart),
+      callback: function($$v) {
+        _vm.attestation_request.lastdatestart = $$v
+      },
+      expression: "attestation_request.lastdatestart"
+    }
+  }), _vm._v(" "), _c('el-date-picker', {
+    attrs: {
+      "placeholder": "По:",
+      "type": "date",
+      "format": "dd.MM.yyyy"
+    },
+    model: {
+      value: (_vm.attestation_request.lastdateend),
+      callback: function($$v) {
+        _vm.attestation_request.lastdateend = $$v
+      },
+      expression: "attestation_request.lastdateend"
+    }
+  }), _vm._v(" "), _c('el-switch', {
+    attrs: {
+      "active-text": "Аттестация просрочена",
+      "inactive-text": ""
+    },
+    model: {
+      value: (_vm.attestation_request.overdue),
+      callback: function($$v) {
+        _vm.attestation_request.overdue = $$v
+      },
+      expression: "attestation_request.overdue"
+    }
+  })], 1), _vm._v(" "), _c('el-button', {
+    attrs: {
+      "type": "success",
+      "plain": ""
+    },
+    on: {
+      "click": _vm.attestation_request_button
+    }
+  }, [_vm._v("Отправить запрос")]), _vm._v(" "), (_vm.attestation_response.length > 0) ? _c('div', {
+    staticClass: "pmrequest-row"
+  }, [_c('el-button', {
+    attrs: {
+      "disabled": _vm.loading
+    },
+    on: {
+      "click": _vm.attestationDownload
+    }
+  }, [_vm._v("Скачать")])], 1) : _vm._e(), _vm._v(" "), _c('el-table', {
+    attrs: {
+      "data": _vm.attestation_response,
+      "empty-text": "Сотрудников не найдено"
+    }
+  }, [_c('el-table-column', {
+    attrs: {
+      "prop": "person.numpersonal",
+      "label": "Номер"
+    }
+  }), _vm._v(" "), _c('el-table-column', {
+    attrs: {
+      "prop": "person",
+      "label": "ФИО",
+      "sortable": "",
+      "formatter": _vm.formatting.formatter_el_table_fullname
+    }
+  }), _vm._v(" "), _c('el-table-column', {
+    attrs: {
+      "prop": "attestation.result",
+      "label": "Результат"
+    }
+  }), _vm._v(" "), _c('el-table-column', {
+    attrs: {
+      "prop": "attestation.date",
+      "label": "Дата проведения",
+      "sortable": "",
+      "formatter": _vm.formatting.formatter_el_table_collumn_date
+    }
+  }), _vm._v(" "), _c('el-table-column', {
+    attrs: {
+      "prop": "attestation.validity",
+      "label": "Дата окончания",
+      "sortable": "",
+      "formatter": _vm.formatting.formatter_el_table_collumn_date
+    }
+  })], 1), _vm._v(" "), (_vm.attestation_response.length > 0) ? _c('div', {
+    staticClass: "pmrequest-row"
+  }, [_c('el-button', {
+    attrs: {
+      "disabled": _vm.loading
+    },
+    on: {
+      "click": _vm.attestationDownload
+    }
+  }, [_vm._v("Скачать")])], 1) : _vm._e()], 1), _vm._v(" "), _c('el-collapse-item', {
+    staticClass: "eld-eld-side-element-folder",
+    attrs: {
+      "title": "Иностранные языки",
+      "name": "8"
+    }
+  }, [_c('div', {
+    staticStyle: {
+      "margin-bottom": "4px",
+      "box-shadow": "5px 5px 3px rgba(0,0,0,0.6)",
+      "padding": "10px",
+      "border-radius": "10px",
+      "background": "#eeece0"
+    }
+  }, [(_vm.language_datas.language.length > 0) ? _c('el-select', {
+    staticClass: "eld-eld-body-select-long-request",
+    attrs: {
+      "multiple": "",
+      "filterable": "",
+      "placeholder": "Выберите иностранные языки",
+      "no-match-text": "Не найдено"
+    },
+    model: {
+      value: (_vm.language_request.languages),
+      callback: function($$v) {
+        _vm.language_request.languages = $$v
+      },
+      expression: "language_request.languages"
+    }
+  }, _vm._l((_vm.language_datas.language), function(item) {
+    return _c('el-option', {
+      key: item,
+      attrs: {
+        "label": item,
+        "value": item
+      }
+    })
+  })) : _vm._e(), _vm._v(" "), (_vm.language_datas.language_skill.length > 0) ? _c('el-select', {
+    staticClass: "eld-eld-body-select-long-request",
+    attrs: {
+      "multiple": "",
+      "filterable": "",
+      "placeholder": "Выберите уровень владения",
+      "no-match-text": "Не найдено"
+    },
+    model: {
+      value: (_vm.language_request.skills),
+      callback: function($$v) {
+        _vm.language_request.skills = $$v
+      },
+      expression: "language_request.skills"
+    }
+  }, _vm._l((_vm.language_datas.language_skill), function(item) {
+    return _c('el-option', {
+      key: item,
+      attrs: {
+        "label": item,
+        "value": item
+      }
+    })
+  })) : _vm._e()], 1), _vm._v(" "), _c('el-button', {
+    attrs: {
+      "type": "success",
+      "plain": ""
+    },
+    on: {
+      "click": _vm.language_request_button
+    }
+  }, [_vm._v("Отправить запрос")]), _vm._v(" "), (_vm.language_response.length > 0) ? _c('div', {
+    staticClass: "pmrequest-row"
+  }, [_c('el-button', {
+    attrs: {
+      "disabled": _vm.loading
+    },
+    on: {
+      "click": _vm.languageDownload
+    }
+  }, [_vm._v("Скачать")])], 1) : _vm._e(), _vm._v(" "), _c('el-table', {
+    attrs: {
+      "data": _vm.language_response,
+      "empty-text": "Сотрудников не найдено"
+    }
+  }, [_c('el-table-column', {
+    attrs: {
+      "prop": "person.numpersonal",
+      "label": "Номер"
+    }
+  }), _vm._v(" "), _c('el-table-column', {
+    attrs: {
+      "prop": "person",
+      "label": "ФИО",
+      "sortable": "",
+      "formatter": _vm.formatting.formatter_el_table_fullname
+    }
+  }), _vm._v(" "), _c('el-table-column', {
+    attrs: {
+      "prop": "languages",
+      "label": "язык",
+      "sortable": ""
+    }
+  }), _vm._v(" "), _c('el-table-column', {
+    attrs: {
+      "prop": "skill",
+      "label": "уровень владения",
+      "sortable": ""
+    }
+  })], 1), _vm._v(" "), (_vm.language_response.length > 0) ? _c('div', {
+    staticClass: "pmrequest-row"
+  }, [_c('el-button', {
+    attrs: {
+      "disabled": _vm.loading
+    },
+    on: {
+      "click": _vm.languageDownload
+    }
+  }, [_vm._v("Скачать")])], 1) : _vm._e()], 1), _vm._v(" "), _c('el-collapse-item', {
+    staticClass: "eld-eld-side-element-folder",
+    attrs: {
+      "title": "Выборные органы",
+      "name": "10"
+    }
+  }, [_c('div', {
+    staticStyle: {
+      "margin-bottom": "4px",
+      "box-shadow": "5px 5px 3px rgba(0,0,0,0.6)",
+      "padding": "10px",
+      "border-radius": "10px",
+      "background": "#eeece0"
+    }
+  }, [(_vm.election_datas.location.length > 0) ? _c('el-select', {
+    staticClass: "eld-eld-body-select-long-request",
+    attrs: {
+      "multiple": "",
+      "filterable": "",
+      "placeholder": "Выберите территорию",
+      "no-match-text": "Не найдено"
+    },
+    model: {
+      value: (_vm.election_request.locations),
+      callback: function($$v) {
+        _vm.election_request.locations = $$v
+      },
+      expression: "election_request.locations"
+    }
+  }, _vm._l((_vm.election_datas.location), function(item) {
+    return _c('el-option', {
+      key: item,
+      attrs: {
+        "label": item,
+        "value": item
+      }
+    })
+  })) : _vm._e(), _vm._v(" "), (_vm.election_datas.rank.length > 0) ? _c('el-select', {
+    staticClass: "eld-eld-body-select-long-request",
+    attrs: {
+      "multiple": "",
+      "filterable": "",
+      "placeholder": "Выберите должность",
+      "no-match-text": "Не найдено"
+    },
+    model: {
+      value: (_vm.election_request.ranks),
+      callback: function($$v) {
+        _vm.election_request.ranks = $$v
+      },
+      expression: "election_request.ranks"
+    }
+  }, _vm._l((_vm.election_datas.rank), function(item) {
+    return _c('el-option', {
+      key: item,
+      attrs: {
+        "label": item,
+        "value": item
+      }
+    })
+  })) : _vm._e(), _vm._v(" "), (_vm.election_datas.place.length > 0) ? _c('el-select', {
+    staticClass: "eld-eld-body-select-long-request",
+    attrs: {
+      "multiple": "",
+      "filterable": "",
+      "placeholder": "Выберите орган",
+      "no-match-text": "Не найдено"
+    },
+    model: {
+      value: (_vm.election_request.places),
+      callback: function($$v) {
+        _vm.election_request.places = $$v
+      },
+      expression: "election_request.places"
+    }
+  }, _vm._l((_vm.election_datas.place), function(item) {
+    return _c('el-option', {
+      key: item,
+      attrs: {
+        "label": item,
+        "value": item
+      }
+    })
+  })) : _vm._e()], 1), _vm._v(" "), _c('div', {
+    staticStyle: {
+      "margin-bottom": "4px",
+      "box-shadow": "5px 5px 3px rgba(0,0,0,0.6)",
+      "padding": "10px",
+      "border-radius": "10px",
+      "background": "#f6b0b0"
+    }
+  }, [_c('div', [_c('span', {
+    staticClass: "demo-input-label"
+  }, [_vm._v("Выберите период начала участия:")]), _vm._v(" "), _c('el-date-picker', {
+    attrs: {
+      "type": "daterange",
+      "start-placeholder": "С",
+      "end-placeholder": "По",
+      "format": "dd.MM.yyyy"
+    },
+    model: {
+      value: (_vm.election_request.startperiod),
+      callback: function($$v) {
+        _vm.election_request.startperiod = $$v
+      },
+      expression: "election_request.startperiod"
+    }
+  })], 1), _vm._v(" "), _c('div', [_c('span', {
+    staticClass: "demo-input-label"
+  }, [_vm._v("Выберите период выбытия:")]), _vm._v(" "), _c('el-date-picker', {
+    attrs: {
+      "type": "daterange",
+      "start-placeholder": "С",
+      "end-placeholder": "По",
+      "format": "dd.MM.yyyy"
+    },
+    model: {
+      value: (_vm.election_request.endperiod),
+      callback: function($$v) {
+        _vm.election_request.endperiod = $$v
+      },
+      expression: "election_request.endperiod"
+    }
+  })], 1)]), _vm._v(" "), _c('el-button', {
+    attrs: {
+      "type": "success",
+      "plain": ""
+    },
+    on: {
+      "click": _vm.election_request_button
+    }
+  }, [_vm._v("Отправить запрос")]), _vm._v(" "), (_vm.election_response.length > 0) ? _c('div', {
+    staticClass: "pmrequest-row"
+  }, [_c('el-button', {
+    attrs: {
+      "disabled": _vm.loading
+    },
+    on: {
+      "click": _vm.electionDownload
+    }
+  }, [_vm._v("Скачать")])], 1) : _vm._e(), _vm._v(" "), _c('el-table', {
+    attrs: {
+      "data": _vm.election_response,
+      "empty-text": "Сотрудников не найдено"
+    }
+  }, [_c('el-table-column', {
+    attrs: {
+      "prop": "person.numpersonal",
+      "label": "Номер"
+    }
+  }), _vm._v(" "), _c('el-table-column', {
+    attrs: {
+      "prop": "person",
+      "label": "ФИО",
+      "sortable": "",
+      "formatter": _vm.formatting.formatter_el_table_fullname
+    }
+  }), _vm._v(" "), _c('el-table-column', {
+    attrs: {
+      "prop": "election.location",
+      "label": "Территория",
+      "sortable": ""
+    }
+  }), _vm._v(" "), _c('el-table-column', {
+    attrs: {
+      "prop": "election.electionwho",
+      "label": "Должность",
+      "sortable": ""
+    }
+  }), _vm._v(" "), _c('el-table-column', {
+    attrs: {
+      "prop": "election.electionwhat",
+      "label": "Орган",
+      "sortable": ""
+    }
+  }), _vm._v(" "), _c('el-table-column', {
+    attrs: {
+      "prop": "election.electiondate",
+      "label": "Вступление",
+      "sortable": "",
+      "formatter": _vm.formatting.formatter_el_table_collumn_date
+    }
+  }), _vm._v(" "), _c('el-table-column', {
+    attrs: {
+      "prop": "election.electiondateend",
+      "label": "Выбытие",
+      "sortable": "",
+      "formatter": _vm.formatting.formatter_el_table_collumn_date
+    }
+  })], 1), _vm._v(" "), (_vm.election_response.length > 0) ? _c('div', {
+    staticClass: "pmrequest-row"
+  }, [_c('el-button', {
+    attrs: {
+      "disabled": _vm.loading
+    },
+    on: {
+      "click": _vm.electionDownload
+    }
+  }, [_vm._v("Скачать")])], 1) : _vm._e()], 1), _vm._v(" "), _c('el-collapse-item', {
+    staticClass: "eld-eld-side-element-folder",
+    attrs: {
+      "title": "Служебные командировки",
+      "name": "11"
+    }
+  }, [_c('div', {
+    staticStyle: {
+      "margin-bottom": "4px",
+      "box-shadow": "5px 5px 3px rgba(0,0,0,0.6)",
+      "padding": "10px",
+      "border-radius": "10px",
+      "background": "#eeece0"
+    }
+  }, [(_vm.trips_datas.countres.length > 0) ? _c('el-select', {
+    staticClass: "eld-eld-body-select-long-request",
+    attrs: {
+      "multiple": "",
+      "filterable": "",
+      "placeholder": "Выберите территорию",
+      "no-match-text": "Не найдено"
+    },
+    model: {
+      value: (_vm.trip_request.country),
+      callback: function($$v) {
+        _vm.trip_request.country = $$v
+      },
+      expression: "trip_request.country"
+    }
+  }, _vm._l((_vm.trips_datas.countres), function(item) {
+    return _c('el-option', {
+      key: item,
+      attrs: {
+        "label": item,
+        "value": item
+      }
+    })
+  })) : _vm._e(), _vm._v(" "), (_vm.trips_datas.reasons.length > 0) ? _c('el-select', {
+    staticClass: "eld-eld-body-select-long-request",
+    attrs: {
+      "multiple": "",
+      "filterable": "",
+      "placeholder": "Выберите должность",
+      "no-match-text": "Не найдено"
+    },
+    model: {
+      value: (_vm.trip_request.reason),
+      callback: function($$v) {
+        _vm.trip_request.reason = $$v
+      },
+      expression: "trip_request.reason"
+    }
+  }, _vm._l((_vm.trips_datas.reasons), function(item) {
+    return _c('el-option', {
+      key: item,
+      attrs: {
+        "label": item,
+        "value": item
+      }
+    })
+  })) : _vm._e()], 1), _vm._v(" "), _c('div', {
+    staticStyle: {
+      "margin-bottom": "4px",
+      "box-shadow": "5px 5px 3px rgba(0,0,0,0.6)",
+      "padding": "10px",
+      "border-radius": "10px",
+      "background": "#f6b0b0"
+    }
+  }, [_c('div', [_c('span', {
+    staticClass: "demo-input-label"
+  }, [_vm._v("Выберите период загранпоездки:")]), _vm._v(" "), _c('el-date-picker', {
+    attrs: {
+      "type": "daterange",
+      "start-placeholder": "С",
+      "end-placeholder": "По",
+      "format": "dd.MM.yyyy"
+    },
+    model: {
+      value: (_vm.trip_request.period),
+      callback: function($$v) {
+        _vm.trip_request.period = $$v
+      },
+      expression: "trip_request.period"
+    }
+  })], 1)]), _vm._v(" "), _c('el-button', {
+    attrs: {
+      "type": "success",
+      "plain": ""
+    },
+    on: {
+      "click": _vm.trip_request_button
+    }
+  }, [_vm._v("Отправить запрос")]), _vm._v(" "), (_vm.trip_response.length > 0) ? _c('div', {
+    staticClass: "pmrequest-row"
+  }, [_c('el-button', {
+    attrs: {
+      "disabled": _vm.loading
+    },
+    on: {
+      "click": _vm.tripDownload
+    }
+  }, [_vm._v("Скачать")])], 1) : _vm._e(), _vm._v(" "), _c('el-table', {
+    attrs: {
+      "data": _vm.trip_response,
+      "empty-text": "Сотрудников не найдено"
+    }
+  }, [_c('el-table-column', {
+    attrs: {
+      "prop": "person.numpersonal",
+      "label": "Номер"
+    }
+  }), _vm._v(" "), _c('el-table-column', {
+    attrs: {
+      "prop": "person",
+      "label": "ФИО",
+      "sortable": "",
+      "formatter": _vm.formatting.formatter_el_table_fullname
+    }
+  }), _vm._v(" "), _c('el-table-column', {
+    attrs: {
+      "prop": "country",
+      "label": "Страна",
+      "sortable": ""
+    }
+  }), _vm._v(" "), _c('el-table-column', {
+    attrs: {
+      "prop": "trip.tripdate",
+      "label": "Дата",
+      "sortable": "",
+      "formatter": _vm.formatting.formatter_el_table_collumn_date
+    }
+  }), _vm._v(" "), _c('el-table-column', {
+    attrs: {
+      "prop": "trip.days",
+      "label": "Дней",
+      "sortable": ""
+    }
+  }), _vm._v(" "), _c('el-table-column', {
+    attrs: {
+      "prop": "trip.reason",
+      "label": "Причина",
+      "sortable": ""
+    }
+  })], 1), _vm._v(" "), (_vm.trip_response.length > 0) ? _c('div', {
+    staticClass: "pmrequest-row"
+  }, [_c('el-button', {
+    attrs: {
+      "disabled": _vm.loading
+    },
+    on: {
+      "click": _vm.tripDownload
+    }
+  }, [_vm._v("Скачать")])], 1) : _vm._e()], 1), _vm._v(" "), _c('el-collapse-item', {
+    staticClass: "eld-eld-side-element-folder",
+    attrs: {
+      "title": "Взыскания",
+      "name": "12"
+    }
+  }, [_c('div', {
+    staticStyle: {
+      "margin-bottom": "4px",
+      "box-shadow": "5px 5px 3px rgba(0,0,0,0.6)",
+      "padding": "10px",
+      "border-radius": "10px",
+      "background": "#eeece0"
+    }
+  }, [(_vm.punishment_datas.type.length > 0) ? _c('el-select', {
+    staticClass: "eld-eld-body-select-long-request",
+    attrs: {
+      "multiple": "",
+      "filterable": "",
+      "placeholder": "Выберите тип",
+      "no-match-text": "Не найдено"
+    },
+    model: {
+      value: (_vm.punishment_request.types),
+      callback: function($$v) {
+        _vm.punishment_request.types = $$v
+      },
+      expression: "punishment_request.types"
+    }
+  }, _vm._l((_vm.punishment_datas.type), function(item) {
+    return _c('el-option', {
+      key: item.id,
+      attrs: {
+        "label": item.name,
+        "value": item.id
+      }
+    })
+  })) : _vm._e()], 1), _vm._v(" "), _c('el-button', {
+    attrs: {
+      "type": "success",
+      "plain": ""
+    },
+    on: {
+      "click": _vm.punishment_request_button
+    }
+  }, [_vm._v("Отправить запрос")]), _vm._v(" "), (_vm.punishment_response.length > 0) ? _c('div', {
+    staticClass: "pmrequest-row"
+  }, [_c('el-button', {
+    attrs: {
+      "disabled": _vm.loading
+    },
+    on: {
+      "click": _vm.punishmentDownload
+    }
+  }, [_vm._v("Скачать")])], 1) : _vm._e(), _vm._v(" "), _c('el-table', {
+    attrs: {
+      "data": _vm.punishment_response,
+      "empty-text": "Сотрудников не найдено"
+    }
+  }, [_c('el-table-column', {
+    attrs: {
+      "prop": "person.numpersonal",
+      "label": "Номер"
+    }
+  }), _vm._v(" "), _c('el-table-column', {
+    attrs: {
+      "prop": "person",
+      "label": "ФИО",
+      "sortable": "",
+      "formatter": _vm.formatting.formatter_el_table_fullname
+    }
+  }), _vm._v(" "), _c('el-table-column', {
+    attrs: {
+      "prop": "penalty_string",
+      "label": "Тип",
+      "sortable": ""
+    }
+  }), _vm._v(" "), _c('el-table-column', {
+    attrs: {
+      "prop": "penalty.violation",
+      "label": "Нарушение",
+      "sortable": ""
+    }
+  }), _vm._v(" "), _c('el-table-column', {
+    attrs: {
+      "prop": "penalty.orderwho",
+      "label": "Чей приказ",
+      "sortable": ""
+    }
+  }), _vm._v(" "), _c('el-table-column', {
+    attrs: {
+      "prop": "penalty.orderdate",
+      "label": "Дата",
+      "sortable": "",
+      "formatter": _vm.formatting.formatter_el_table_collumn_date
+    }
+  })], 1), _vm._v(" "), (_vm.punishment_response.length > 0) ? _c('div', {
+    staticClass: "pmrequest-row"
+  }, [_c('el-button', {
+    attrs: {
+      "disabled": _vm.loading
+    },
+    on: {
+      "click": _vm.punishmentDownload
+    }
+  }, [_vm._v("Скачать")])], 1) : _vm._e()], 1)], 1)], 1) : _vm._e()], 2) : _vm._e(), _vm._v(" "), _c('el-dialog', {
     attrs: {
       "visible": _vm.exceldialogvisible,
       "width": "60%",
@@ -23580,6 +30915,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('div', {
     staticClass: "pmrequest-label"
   }, [_vm._v("\n                Поиск по:\n            ")])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "pmrequest-row"
+  }, [_c('div', {
+    staticClass: "pmrequest-label"
+  }, [_vm._v("\n                Поиск по:\n            ")])])
 }]}
 module.exports.render._withStripped = true
 if (true) {
@@ -23590,24 +30931,214 @@ if (true) {
 }
 
 /***/ }),
-/* 116 */
+/* 172 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', [_c('div', {
-    staticStyle: {
-      "max-width": "98%"
-    }
-  }, [_c('el-tree', {
-    attrs: {
-      "data": _vm.newTreeStructures,
-      "props": _vm.defaultPropsTree,
-      "node-key": "id"
-    },
-    on: {
-      "node-click": _vm.testfunc
-    }
-  })], 1), _vm._v(" "), _c('div', {
+  return _c('div', [_vm._l((_vm.structures), function(structure) {
+    return (!_vm.isDeletedSigned(structure)) ? _c('div', {
+      key: structure,
+      staticClass: "sidebar-structure",
+      class: ( _obj = {
+        'sidebar-structure-user': _vm.isUserStructure(structure),
+        'sidebar-selected': _vm.isSelected(structure.id),
+        'sidebar-structure-wc': structure.hasChildren
+      }, _obj[structure.levelchild] = _vm.displayIt, _obj )
+    }, [_c('a', {
+      staticClass: "sidebar-structuretext",
+      on: {
+        "click": function($event) {
+          _vm.openStructure($event, structure)
+        },
+        "contextmenu": function($event) {
+          _vm.openStructureDB($event, structure)
+        }
+      }
+    }, [_c('div', {
+      staticClass: "sidebar-levelstyle",
+      class: {
+        'sidebar-structure-title-childrenhas': structure.hasChildren
+      },
+      attrs: {
+        "title": structure.name
+      }
+    }, [_vm._v("\n                " + _vm._s(structure.nameshortened) + "\n            ")]), _vm._v(" "), (_vm.isNotSignedAndCreated(structure)) ? _c('span', {
+      staticClass: "sidebar-notsignedandcreated"
+    }, [_vm._v(" (Создано, но приказ не подписан)")]) : _vm._e(), _vm._v(" "), (_vm.isSignedAndWillBeCreated(structure)) ? _c('span', {
+      staticClass: "sidebar-issignedandwillbecreated"
+    }, [_vm._v(" (Будет создано " + _vm._s(_vm.beautifyDate(_vm.signedAndWillBeCreatedTime(structure))) + ")")]) : _vm._e(), _vm._v(" "), (_vm.isNotSignedAndWillBeCreated(structure)) ? _c('span', {
+      staticClass: "sidebar-isnotsignedandwillbecreated"
+    }, [_vm._v(" (Будет создано " + _vm._s(_vm.beautifyDate(_vm.notSignedAndWillBeCreatedTime(structure))) + ", но приказ не подписан)")]) : _vm._e(), _vm._v(" "), (_vm.isDeletedUnsigned(structure)) ? _c('span', {
+      staticClass: "sidebar-isdeletedunsigned"
+    }, [_vm._v(" (Упразднено, но приказ не подписан)")]) : _vm._e(), _vm._v(" "), (_vm.isWillBeDeletedSigned(structure)) ? _c('span', {
+      staticClass: "sidebar-iswillbedeletedsigned"
+    }, [_vm._v(" (Будет упразднено " + _vm._s(_vm.beautifyDate(_vm.willBeDeletedSignedTime(structure))) + ")")]) : _vm._e(), _vm._v(" "), (_vm.isWillBeDeletedUnsigned(structure)) ? _c('span', {
+      staticClass: "sidebar-iswillbedeletedunsigned"
+    }, [_vm._v(" (Будет упразднено " + _vm._s(_vm.beautifyDate(_vm.willBeDeletedUnsignedTime(structure))) + ", но приказ не подписан)")]) : _vm._e(), _vm._v(" "), (_vm.isChangedUnsigned(structure)) ? _c('span', {
+      staticClass: "sidebar-isdeletedunsigned"
+    }, [_vm._v(" (Изменено, но приказ не подписан)")]) : _vm._e()]), _vm._v(" "), (_vm.priorityAvailable) ? _c('span', {
+      staticClass: "sidebar-arrow",
+      on: {
+        "click": function($event) {
+          _vm.priorityUp(structure)
+        }
+      }
+    }, [_vm._v("↑")]) : _vm._e(), _vm._v(" "), (_vm.priorityAvailable) ? _c('span', {
+      staticClass: "sidebar-arrow",
+      on: {
+        "click": function($event) {
+          _vm.priorityDown(structure)
+        }
+      }
+    }, [_vm._v("↓")]) : _vm._e(), _vm._v(" "), (_vm.priorityAvailable) ? _c('el-input', {
+      staticClass: "sidebar-input",
+      on: {
+        "input": function($event) {
+          _vm.priorityChangeValue()
+        }
+      },
+      model: {
+        value: (structure.priority),
+        callback: function($$v) {
+          structure.priority = $$v
+        },
+        expression: "structure.priority"
+      }
+    }) : _vm._e(), _vm._v(" "), (_vm.priorityAvailable) ? _c('span', {
+      staticClass: "sidebar-arrow",
+      on: {
+        "click": function($event) {
+          _vm.priorityChange(structure)
+        }
+      }
+    }, [_vm._v("✓")]) : _vm._e(), _vm._v(" "), (_vm.isSelected(structure.id)) ? _c('el-dropdown', {
+      staticClass: "sidebar-structuredropdown",
+      attrs: {
+        "show-timeout": 50,
+        "hide-timeout": 500,
+        "placement": "right-start"
+      },
+      on: {
+        "command": _vm.handleCommand,
+        "visible-change": _vm.onVisibleChange
+      }
+    }, [_c('div', {
+      staticClass: "el-dropdown-link sidebar-icon"
+    }, [_vm._v("Дейст- вия")]), _vm._v(" "), _c('el-dropdown-menu', {
+      staticClass: "sidebar-action",
+      slot: "dropdown"
+    }, [_c('div', {
+      staticClass: "sidebar-action-left"
+    }, [(structure.hasChildren) ? _c('el-dropdown-item', {
+      staticClass: "popover-inforow popover-dropdown",
+      attrs: {
+        "command": _vm.subordinate(structure.id)
+      }
+    }, [_vm._v("Отобразить подчиненные подразделения"), (_vm.displaysChildren(structure)) ? _c('i', {
+      staticClass: "el-icon-check sidebar-structurechecked"
+    }) : _vm._e()]) : _vm._e(), _vm._v(" "), (_vm.addNewStructureAvailable) ? _c('el-dropdown-item', {
+      staticClass: "popover-inforow popover-dropdown",
+      attrs: {
+        "command": _vm.addStructure(structure.id)
+      }
+    }, [_vm._v("Добавить подчиненное подразделение")]) : _vm._e(), _vm._v(" "), (_vm.removeStructureAvailable && !_vm.isNotCreatedYet(structure) && !_vm.isChangedUnsigned(structure)) ? _c('el-dropdown-item', {
+      staticClass: "popover-inforow popover-dropdown",
+      attrs: {
+        "command": _vm.removeStructureID(structure.id)
+      }
+    }, [_vm._v("Упразднить подразделение")]) : _vm._e(), _vm._v(" "), (_vm.renameStructureAvailable && !_vm.isNotCreatedYet(structure) && !_vm.isChangedUnsigned(structure)) ? _c('el-dropdown-item', {
+      staticClass: "popover-inforow popover-dropdown",
+      attrs: {
+        "command": _vm.renameStructureID(structure.id)
+      }
+    }, [_vm._v("Изменить подразделение")]) : _vm._e(), _vm._v(" "), (_vm.renameStructurenodecreeAvailable && !_vm.isNotCreatedYet(structure) && !_vm.isChangedUnsigned(structure)) ? _c('el-dropdown-item', {
+      staticClass: "popover-inforow popover-dropdown",
+      attrs: {
+        "command": _vm.renameStructureIDnodecree(structure.id)
+      }
+    }, [_vm._v("Изменить подразделение (без приказа)")]) : _vm._e(), _vm._v(" "), (_vm.removedecreeStructureAvailable && _vm.isChangedUnsigned(structure)) ? _c('el-dropdown-item', {
+      staticClass: "popover-inforow popover-dropdown",
+      attrs: {
+        "command": _vm.renamedecreeStructureID(structure.id)
+      }
+    }, [_vm._v("Редактировать")]) : _vm._e(), _vm._v(" "), (_vm.removedecreeStructureAvailable && _vm.isNotCreatedYet(structure)) ? _c('el-dropdown-item', {
+      staticClass: "popover-inforow popover-dropdown",
+      attrs: {
+        "command": _vm.renamedecreeStructureID(structure.id)
+      }
+    }, [_vm._v("Редактировать")]) : _vm._e(), _vm._v(" "), (_vm.removedecreeStructureAvailable && _vm.isUnsigned(structure)) ? _c('el-dropdown-item', {
+      staticClass: "popover-inforow popover-dropdown",
+      attrs: {
+        "command": _vm.removedecreeStructureID(structure.id)
+      }
+    }, [_vm._v("Убрать из проекта приказа")]) : _vm._e(), _vm._v(" "), (_vm.copyStructureAvailable) ? _c('el-dropdown-item', {
+      staticClass: "popover-inforow popover-dropdown",
+      attrs: {
+        "command": _vm.copyStructureID(structure.id)
+      }
+    }, [_vm._v("Копировать")]) : _vm._e(), _vm._v(" "), (_vm.renameStructureAvailable) ? _c('el-dropdown-item', {
+      staticClass: "popover-inforow popover-dropdown",
+      attrs: {
+        "command": _vm.pasteStructureID(structure.id)
+      }
+    }, [_vm._v("Вставить")]) : _vm._e(), _vm._v(" "), _c('el-dropdown-item', {
+      staticClass: "popover-inforow popover-dropdown",
+      attrs: {
+        "command": _vm.printStaffID(structure.id)
+      }
+    }, [_vm._v("Вывести штат")]), _vm._v(" "), _c('el-dropdown-item', {
+      staticClass: "popover-inforow popover-dropdown",
+      attrs: {
+        "command": _vm.printStructurestaffID(structure.id)
+      }
+    }, [_vm._v("Вывести штатную структуру")]), _vm._v(" "), _c('el-dropdown-item', {
+      staticClass: "popover-inforow popover-dropdown",
+      attrs: {
+        "command": _vm.printOrderHistoryID(structure.id)
+      }
+    }, [_vm._v("История приказов"), _c('div', [_vm._v(_vm._s(_vm.checkSidebar()))])])], 1), _vm._v(" "), _c('div', {
+      staticClass: "sidebar-action-right"
+    }, [_c('div', {
+      staticClass: "popover-inforow"
+    }, [_c('label', {
+      staticClass: "popover-label"
+    }, [_vm._v("Начало действия приказа")]), _vm._v(" " + _vm._s(_vm.beautifyDate(_vm.getDecreeStartDate(structure))))]), _vm._v(" "), _c('div', {
+      staticClass: "popover-inforow"
+    }, [_c('label', {
+      staticClass: "popover-label"
+    }, [_vm._v("Номер приказа")]), _vm._v(" "), (_vm.isSignedAndCreated(structure) || _vm.isSignedAndWillBeCreated(structure)) ? _c('span', [_vm._v(_vm._s(_vm.getDecreeName(structure)))]) : _vm._e()]), _vm._v(" "), _c('div', {
+      staticClass: "popover-inforow"
+    }, [_c('label', {
+      staticClass: "popover-label"
+    }, [_vm._v("Приказ "), (_vm.isSignedAndCreated(structure) || _vm.isSignedAndWillBeCreated(structure)) ? _c('span', [_vm._v("подписан")]) : _c('span', [_vm._v("не подписан")])])]), _vm._v(" "), _c('hr', {
+      staticClass: "popover-inforow-hr "
+    }), _vm._v(" "), (structure.rank > 0) ? _c('div', {
+      staticClass: "popover-inforow"
+    }, [_c('label', {
+      staticClass: "popover-label"
+    }, [_vm._v("Разряд")]), _vm._v(" " + _vm._s(structure.rank) + " ")]) : _vm._e(), _vm._v(" "), _c('div', {
+      staticClass: "popover-inforow"
+    }, [_c('label', {
+      staticClass: "popover-label"
+    }, [_vm._v("Тип подразделения")]), _vm._v(" " + _vm._s(structure.structuretypeString) + " ")]), _vm._v(" "), _c('div', {
+      staticClass: "popover-inforow"
+    }, [_c('label', {
+      staticClass: "popover-label"
+    }, [_vm._v("Область")]), _vm._v("  " + _vm._s(structure.structureregionString) + " ")]), _vm._v(" "), _c('div', {
+      staticClass: "popover-inforow"
+    }, [_c('label', {
+      staticClass: "popover-label"
+    }, [_vm._v("Населенный пункт")]), _vm._v("  " + _vm._s(structure.city) + " ")]), _vm._v(" "), _c('div', {
+      staticClass: "popover-inforow"
+    }, [_c('label', {
+      staticClass: "popover-label"
+    }, [_vm._v("Улица")]), _vm._v("  " + _vm._s(structure.street) + " ")]), _vm._v(" "), _c('hr', {
+      staticClass: "popover-inforow-hr "
+    }), _vm._v(" "), _c('div', {
+      staticClass: "popover-inforow popover-inforow-debug"
+    }, [_vm._v("ID — " + _vm._s(structure.id) + " ")])])])], 1) : _vm._e()], 1) : _vm._e()
+    var _obj;
+  }), _vm._v(" "), _c('div', {
     staticClass: "sidebar-buttongroup"
   }, [_c('el-button', {
     staticClass: "sidebar-button",
@@ -23678,7 +31209,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       },
       expression: "structureprintheading"
     }
-  }), _vm._v(" Главы отделов прикреплены к отделам\n            ")], 1), _vm._v(" "), _c('div', {
+  }), _vm._v(" Главы отделов прикреплены к отделам\n        ")], 1), _vm._v(" "), _c('div', {
     staticClass: "loading-row"
   }, [_c('el-button', {
     attrs: {
@@ -23721,14 +31252,14 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.vizibleOrderHistory = $event
       }
     }
-  }, [_c('div', [_c('b', [_c('center', [_vm._v("Истор\nия приказов:\n                \n                ")])], 1), _vm._v("\n                ор\n                \n                "), _c('el-collapse', {
+  }, [_c('div', [_c('b', [_c('center', [_vm._v("История приказов:")])], 1), _vm._v(" "), _c('el-collapse', {
     attrs: {
       "accordion": ""
     }
   }, [_vm._l((_vm.orders_list), function(order, index) {
     return [_c('el-collapse-item', [_c('template', {
       slot: "title"
-    }, [_vm._v("\n                                " + _vm._s(order.name) + "\n                                "), (order.decree.historycal == 1) ? _c('el-button', {
+    }, [_vm._v(_vm._s(order.name) + "  \n                        "), (order.decree.historycal == 1) ? _c('el-button', {
       staticClass: "dellll_buttom",
       on: {
         "click": function($event) {
@@ -23743,7 +31274,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         }
       }
     }, [_vm._v("Удалить")]) : _vm._e()], 1), _vm._v(" "), _vm._l((order.orders), function(decree_options) {
-      return _c('ul', [_c('li', [_vm._v("\n                                    " + _vm._s(_vm.orderType(decree_options.created, decree_options.changed, decree_options.deleted)) + "\n                                    " + _vm._s(decree_options.changedtext) + "\n                                    от " + _vm._s(_vm.toDateInputValue(decree_options.metaDateActive)) + "\n                                ")])])
+      return _c('ul', [_c('li', [_vm._v("\n                                " + _vm._s(_vm.orderType(decree_options.created, decree_options.changed, decree_options.deleted)) + "\n                                " + _vm._s(decree_options.changedtext) + "\n                                от " + _vm._s(_vm.toDateInputValue(decree_options.metaDateActive)) + "\n                            ")])])
     })], 2)]
   })], 2)], 1), _vm._v(" "), _c('div', {
     staticClass: "flex_full"
@@ -23782,7 +31313,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.appendHistoryDecree(_vm.newDecreeDateS, _vm.newDecreeNumber)
       }
     }
-  }, [_vm._v(_vm._s(_vm.buttom_name))])], 1)])], 1)
+  }, [_vm._v(_vm._s(_vm.buttom_name))])], 1)])], 2)
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (true) {
@@ -23793,13 +31324,13 @@ if (true) {
 }
 
 /***/ }),
-/* 117 */
+/* 173 */
 /***/ (function(module, exports, __webpack_require__) {
 
 !function(e,t){ true?module.exports=t():"function"==typeof define&&define.amd?define([],t):"object"==typeof exports?exports.vueTextMask=t():e.vueTextMask=t()}(this,function(){return function(e){function t(n){if(r[n])return r[n].exports;var i=r[n]={exports:{},id:n,loaded:!1};return e[n].call(i.exports,i,i.exports,t),i.loaded=!0,i.exports}var r={};return t.m=e,t.c=r,t.p="",t(0)}([function(e,t,r){"use strict";function n(e){return e&&e.__esModule?e:{default:e}}Object.defineProperty(t,"__esModule",{value:!0}),t.conformToMask=void 0;var i=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var r=arguments[t];for(var n in r)Object.prototype.hasOwnProperty.call(r,n)&&(e[n]=r[n])}return e},o=r(2);Object.defineProperty(t,"conformToMask",{enumerable:!0,get:function(){return n(o).default}});var a=r(5),u=n(a);t.default={render:function(e){var t=this;return e("input",{ref:"input",domProps:{value:this.value},on:{input:function(e){return t.updateValue(e.target.value)},focus:function(e){return t.emitEvent(e)},blur:function(e){return t.emitEvent(e)},keypress:function(e){return t.emitEvent(e)},click:function(e){return t.emitEvent(e)}}})},name:"masked-input",props:{value:{type:String,required:!1,default:""},mask:{type:[Array,Function,Boolean,Object],required:!0},guide:{type:Boolean,required:!1},placeholderChar:{type:String,required:!1},keepCharPositions:{type:Boolean,required:!1},pipe:{type:Function,required:!1},showMask:{type:Boolean,required:!1}},mounted:function(){this.initMask()},methods:{createTextMaskInputElement:u.default,setTextMaskInputElement:function(){this.textMaskInputElement=this.createTextMaskInputElement(i({inputElement:this.$refs.input},this.$options.propsData))},initMask:function(){this.setTextMaskInputElement(),this.textMaskInputElement.update(this.value)},bind:function(){this.setTextMaskInputElement(),this.updateValue(this.value)},updateValue:function(e){this.textMaskInputElement.update(e),this.$emit("input",this.$refs.input.value)},emitEvent:function(e){this.$emit(e.type,e)}},watch:{mask:function(e,t){this.mask!==t&&this.bind()},guide:function(){this.bind()},placeholderChar:function(){this.bind()},keepCharPositions:function(){this.bind()},pipe:function(){this.bind()},showMask:function(){this.bind()}}}},function(e,t){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.placeholderChar="_"},function(e,t,r){"use strict";function n(){var e=arguments.length>0&&void 0!==arguments[0]?arguments[0]:a,t=arguments.length>1&&void 0!==arguments[1]?arguments[1]:a,r=arguments.length>2&&void 0!==arguments[2]?arguments[2]:{},n=r.guide,u=void 0===n||n,s=r.previousConformedValue,l=void 0===s?a:s,f=r.placeholderChar,d=void 0===f?o.placeholderChar:f,c=r.placeholder,p=void 0===c?(0,i.convertMaskToPlaceholder)(t,d):c,h=r.currentCaretPosition,v=r.keepCharPositions,m=u===!1&&void 0!==l,g=e.length,y=l.length,b=p.length,k=t.length,C=g-y,x=C>0,P=h+(x?-C:0),M=P+Math.abs(C);if(v===!0&&!x){for(var O=a,T=P;T<M;T++)p[T]===d&&(O+=d);e=e.slice(0,P)+O+e.slice(P,g)}for(var w=e.split(a).map(function(e,t){return{char:e,isNew:t>=P&&t<M}}),E=g-1;E>=0;E--){var j=w[E].char;if(j!==d){var V=E>=P&&y===k;j===p[V?E-C:E]&&w.splice(E,1)}}var S=a,_=!1;e:for(var I=0;I<b;I++){var N=p[I];if(N===d){if(w.length>0)for(;w.length>0;){var q=w.shift(),A=q.char,$=q.isNew;if(A===d&&m!==!0){S+=d;continue e}if(t[I].test(A)){if(v===!0&&$!==!1&&l!==a&&u!==!1&&x){for(var B=w.length,F=null,R=0;R<B;R++){var J=w[R];if(J.char!==d&&J.isNew===!1)break;if(J.char===d){F=R;break}}null!==F?(S+=A,w.splice(F,1)):I--}else S+=A;continue e}_=!0}m===!1&&(S+=p.substr(I,b));break}S+=N}if(m&&x===!1){for(var L=null,W=0;W<S.length;W++)p[W]===d&&(L=W);S=null!==L?S.substr(0,L+1):a}return{conformedValue:S,meta:{someCharsRejected:_}}}Object.defineProperty(t,"__esModule",{value:!0}),t.default=n;var i=r(3),o=r(1),a=""},function(e,t,r){"use strict";function n(){var e=arguments.length>0&&void 0!==arguments[0]?arguments[0]:s,t=arguments.length>1&&void 0!==arguments[1]?arguments[1]:u.placeholderChar;if(e.indexOf(t)!==-1)throw new Error("Placeholder character must not be used as part of the mask. Please specify a character that is not present in your mask as your placeholder character.\n\n"+("The placeholder character that was received is: "+JSON.stringify(t)+"\n\n")+("The mask that was received is: "+JSON.stringify(e)));return e.map(function(e){return e instanceof RegExp?t:e}).join("")}function i(e){return"string"==typeof e||e instanceof String}function o(e){return"number"==typeof e&&void 0===e.length&&!isNaN(e)}function a(e){for(var t=[],r=void 0;r=e.indexOf(l),r!==-1;)t.push(r),e.splice(r,1);return{maskWithoutCaretTraps:e,indexes:t}}Object.defineProperty(t,"__esModule",{value:!0}),t.convertMaskToPlaceholder=n,t.isString=i,t.isNumber=o,t.processCaretTraps=a;var u=r(1),s=[],l="[]"},function(e,t){"use strict";function r(e){var t=e.previousConformedValue,r=void 0===t?i:t,o=e.previousPlaceholder,a=void 0===o?i:o,u=e.currentCaretPosition,s=void 0===u?0:u,l=e.conformedValue,f=e.rawValue,d=e.placeholderChar,c=e.placeholder,p=e.indexesOfPipedChars,h=void 0===p?n:p,v=e.caretTrapIndexes,m=void 0===v?n:v;if(0===s)return 0;var g=f.length,y=r.length,b=c.length,k=l.length,C=g-y,x=C>0,P=0===y,M=C>1&&!x&&!P;if(M)return s;var O=x&&(r===l||l===c),T=0,w=void 0,E=void 0;if(O)T=s-C;else{var j=l.toLowerCase(),V=f.toLowerCase(),S=V.substr(0,s).split(i),_=S.filter(function(e){return j.indexOf(e)!==-1});E=_[_.length-1];var I=a.substr(0,_.length).split(i).filter(function(e){return e!==d}).length,N=c.substr(0,_.length).split(i).filter(function(e){return e!==d}).length,q=N!==I,A=void 0!==a[_.length-1]&&void 0!==c[_.length-2]&&a[_.length-1]!==d&&a[_.length-1]!==c[_.length-1]&&a[_.length-1]===c[_.length-2];!x&&(q||A)&&I>0&&c.indexOf(E)>-1&&void 0!==f[s]&&(w=!0,E=f[s]);for(var $=h.map(function(e){return j[e]}),B=$.filter(function(e){return e===E}).length,F=_.filter(function(e){return e===E}).length,R=c.substr(0,c.indexOf(d)).split(i).filter(function(e,t){return e===E&&f[t]!==e}).length,J=R+F+B+(w?1:0),L=0,W=0;W<k;W++){var D=j[W];if(T=W+1,D===E&&L++,L>=J)break}}if(x){for(var z=T,G=T;G<=b;G++)if(c[G]===d&&(z=G),c[G]===d||m.indexOf(G)!==-1||G===b)return z}else if(w){for(var H=T-1;H>=0;H--)if(l[H]===E||m.indexOf(H)!==-1||0===H)return H}else for(var K=T;K>=0;K--)if(c[K-1]===d||m.indexOf(K)!==-1||0===K)return K}Object.defineProperty(t,"__esModule",{value:!0}),t.default=r;var n=[],i=""},function(e,t,r){"use strict";function n(e){return e&&e.__esModule?e:{default:e}}function i(e){var t={previousConformedValue:void 0,previousPlaceholder:void 0};return{state:t,update:function(r){var n=arguments.length>1&&void 0!==arguments[1]?arguments[1]:e,i=n.inputElement,l=n.mask,d=n.guide,g=n.pipe,b=n.placeholderChar,k=void 0===b?h.placeholderChar:b,C=n.keepCharPositions,x=void 0!==C&&C,P=n.showMask,M=void 0!==P&&P;if("undefined"==typeof r&&(r=i.value),r!==t.previousConformedValue){("undefined"==typeof l?"undefined":s(l))===y&&void 0!==l.pipe&&void 0!==l.mask&&(g=l.pipe,l=l.mask);var O=void 0,T=void 0;if(l instanceof Array&&(O=(0,p.convertMaskToPlaceholder)(l,k)),l!==!1){var w=a(r),E=i.selectionEnd,j=t.previousConformedValue,V=t.previousPlaceholder,S=void 0;if(("undefined"==typeof l?"undefined":s(l))===v){if(T=l(w,{currentCaretPosition:E,previousConformedValue:j,placeholderChar:k}),T===!1)return;var _=(0,p.processCaretTraps)(T),I=_.maskWithoutCaretTraps,N=_.indexes;T=I,S=N,O=(0,p.convertMaskToPlaceholder)(T,k)}else T=l;var q={previousConformedValue:j,guide:d,placeholderChar:k,pipe:g,placeholder:O,currentCaretPosition:E,keepCharPositions:x},A=(0,c.default)(w,T,q),$=A.conformedValue,B=("undefined"==typeof g?"undefined":s(g))===v,F={};B&&(F=g($,u({rawValue:w},q)),F===!1?F={value:j,rejected:!0}:(0,p.isString)(F)&&(F={value:F}));var R=B?F.value:$,J=(0,f.default)({previousConformedValue:j,previousPlaceholder:V,conformedValue:R,placeholder:O,rawValue:w,currentCaretPosition:E,placeholderChar:k,indexesOfPipedChars:F.indexesOfPipedChars,caretTrapIndexes:S}),L=R===O&&0===J,W=M?O:m,D=L?W:R;t.previousConformedValue=D,t.previousPlaceholder=O,i.value!==D&&(i.value=D,o(i,J))}}}}}function o(e,t){document.activeElement===e&&(b?k(function(){return e.setSelectionRange(t,t,g)},0):e.setSelectionRange(t,t,g))}function a(e){if((0,p.isString)(e))return e;if((0,p.isNumber)(e))return String(e);if(void 0===e||null===e)return m;throw new Error("The 'value' provided to Text Mask needs to be a string or a number. The value received was:\n\n "+JSON.stringify(e))}Object.defineProperty(t,"__esModule",{value:!0});var u=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var r=arguments[t];for(var n in r)Object.prototype.hasOwnProperty.call(r,n)&&(e[n]=r[n])}return e},s="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e};t.default=i;var l=r(4),f=n(l),d=r(2),c=n(d),p=r(3),h=r(1),v="function",m="",g="none",y="object",b="undefined"!=typeof navigator&&/Android/i.test(navigator.userAgent),k="undefined"!=typeof requestAnimationFrame?requestAnimationFrame:setTimeout}])});
 
 /***/ }),
-/* 118 */
+/* 174 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*eslint-env browser*/
@@ -23828,7 +31359,7 @@ for (var key in styles) {
   clientOverlay.style[key] = styles[key];
 }
 
-var ansiHTML = __webpack_require__(48);
+var ansiHTML = __webpack_require__(104);
 var colors = {
   reset: ['transparent', 'transparent'],
   black: '181818',
@@ -23843,7 +31374,7 @@ var colors = {
 };
 ansiHTML.setColors(colors);
 
-var Entities = __webpack_require__(69).AllHtmlEntities;
+var Entities = __webpack_require__(125).AllHtmlEntities;
 var entities = new Entities();
 
 exports.showProblems =
@@ -23884,7 +31415,7 @@ function problemType (type) {
 
 
 /***/ }),
-/* 119 */
+/* 175 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -24022,66 +31553,66 @@ module.exports = function(hash, moduleMap, options) {
 
 
 /***/ }),
-/* 120 */
+/* 176 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = (__webpack_require__(5))(0);
 
 /***/ }),
-/* 121 */
+/* 177 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = (__webpack_require__(5))(194);
 
 /***/ }),
-/* 122 */
+/* 178 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = (__webpack_require__(5))(195);
 
 /***/ }),
-/* 123 */
+/* 179 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = (__webpack_require__(5))(201);
 
 /***/ }),
-/* 124 */
+/* 180 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = (__webpack_require__(5))(203);
 
 /***/ }),
-/* 125 */
+/* 181 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = (__webpack_require__(5))(204);
 
 /***/ }),
-/* 126 */
+/* 182 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = (__webpack_require__(5))(205);
 
 /***/ }),
-/* 127 */
+/* 183 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = (__webpack_require__(5))(3);
 
 /***/ }),
-/* 128 */
+/* 184 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = (__webpack_require__(5))(46);
 
 /***/ }),
-/* 129 */
+/* 185 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(17);
 __webpack_require__(16);
-module.exports = __webpack_require__(15);
+__webpack_require__(15);
+module.exports = __webpack_require__(14);
 
 
 /***/ })

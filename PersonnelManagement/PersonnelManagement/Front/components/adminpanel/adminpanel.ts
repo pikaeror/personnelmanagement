@@ -22,6 +22,8 @@ import PositionManagement from '../../classes/positionmanagement';
 import Rights from '../../classes/rights';
 import Role from '../../classes/role';
 import User from '../../classes/user';
+import Locationtype from '../../classes/locationtype';
+import StaffComission from '../../classes/StaffComission';
 Vue.component(Button.name, Button);
 Vue.component(Input.name, Input);
 Vue.component(Select.name, Select);
@@ -69,6 +71,7 @@ const fetchSubjectsDelay: number = 9000;
 const fetchStructureregionDelay = 9000;
 const fetchStructuretypeDelay = 9000;
 const fetchIllcodeDelay = 9000;
+const fetchStaffComissionDelay = 9000;
 const updateDelayAfterEdit: number = 24000;
 const delayMinimum: number = -20000;
 
@@ -169,6 +172,10 @@ export default class AdminpanelComponent extends Vue {
     illcodes: Structuretype[];
     illcodeStopUpdateTimer: number;
 
+    newStaffComissionName: StaffComission;
+    staffComissionList: StaffComission[];
+    staffComissionStopUpdateTimer: number;
+
     activeAdminSection: string;
     addUserResult: string;
     
@@ -186,6 +193,8 @@ export default class AdminpanelComponent extends Vue {
     activeNameStructureregion: string;
     activeNameStructuretype: string;
     activeNameIllcode: string;
+    activeNameLocationtype: string;
+    staffComission: string;
 
     head: boolean;
     headid: number;
@@ -311,11 +320,17 @@ export default class AdminpanelComponent extends Vue {
 
             newStructuretypeName: "",
             structuretypes: [],
+            locationtypes: [],
+
             structuretypeStopUpdateTimer: 0,
 
             newIllcodeName: "",
             illcodes: [],
             illcodeStopUpdateTimer: 0,
+
+            newStaffComissionName: new StaffComission(),
+            staffComissionList: [],
+            staffComissionStopUpdateTimer: 0,
 
             testSwitch: "1",
             activeName: "first",
@@ -331,6 +346,8 @@ export default class AdminpanelComponent extends Vue {
             activeNameStructureregion: "srfirst",
             activeNameStructuretype: "stfirst",
             activeNameIllcode: "icfirst",
+            activeNameLocationtype: "loctype",
+            staffComission: "staffcommfirst",
 
             head: false,
             headid: 0,
@@ -385,6 +402,7 @@ export default class AdminpanelComponent extends Vue {
         this.fetchAltrankconditions();
         this.fetchStructureregions();
         this.fetchStructuretypes();
+        this.fetchStaffComission();
         setInterval(this.fetchUsers, fetchUserDelay); //$(element).is(':visible')
         setInterval(this.fetchRanks, fetchRanksDelay);
         setInterval(this.fetchSofs, fetchSofsDelay);
@@ -396,6 +414,8 @@ export default class AdminpanelComponent extends Vue {
         setInterval(this.fetchAltrankconditions, fetchAltrankconditionDelay);
         setInterval(this.fetchStructureregions, fetchStructureregionDelay);
         setInterval(this.fetchStructuretypes, fetchStructuretypeDelay);
+        // setInterval(this.fetchIllcodes, fetchIllcodeDelay);
+        setInterval(this.fetchStaffComission, fetchStaffComissionDelay);
 
         this.filteredSubjects = this.subjects.filter(option => (option.category == 1 || option.category == 7));
     }
@@ -474,6 +494,22 @@ export default class AdminpanelComponent extends Vue {
         }
     }
 
+    get locationtypes(): Locationtype[] {
+        return this.$store.state.locationtypes;
+    }
+
+    getLocationtype(locationtype: number): string{
+        if(locationtype == null || locationtype == 0){
+            return "";
+        }
+        let ltype: Locationtype = this.locationtypes.find(p => p.id == locationtype);
+        if (ltype != null) {
+            return ltype.locationtypename;
+        } else {
+            return "";
+        }
+    }
+
     fetchUsers(force?: boolean) {
         //$('adminpanel-container').
         if (($('#adminpanel-container').is(':visible') && this.activeNameUser === 'ufirst'
@@ -482,19 +518,7 @@ export default class AdminpanelComponent extends Vue {
             .then(response => response.json() as Promise<User[]>)
             .then(data => {
                 data.forEach(u => {
-                    //if (u.admin == "1") { u.admin = "1" };
-                    ////if (u.admin == null) { u.admin = "0" };
-                    //if (u.structureeditor == "1") { u.structureeditor = "1" };
-                    //if (u.structureread == "1") { u.structureread = "1" };
-                    ////if (u.structure_editor == null) { u.structure_editor = "0" };
-                    //if (u.masterpersonneleditor == "1") { u.masterpersonneleditor = "1" };
-                    ////if (u.master_personnel_editor == null) { u.master_personnel_editor = "0" };
-                    //if (u.personneleditor == "1") { u.personneleditor = "1" };
-                    //if (u.personnelread == "1") { u.personnelread = "1" };
-                    ////if (u.personnel_editor == null) { u.personnel_editor = "0" };
-                    ////if (u.structure == null) { u.structure = "1" };
                     u.structurename = this.structuresAll[u.structure];
-
                     //alert(u.firstname);
                 });
                 this.users = data;
@@ -503,18 +527,14 @@ export default class AdminpanelComponent extends Vue {
         if (this.userStopUpdateTimer > delayMinimum) {
             this.userStopUpdateTimer -= fetchUserDelay;
         }
-        
     }
 
-
     stopUpdate() {
-
     }
 
     get ranksOrdered() {
         return this.ranks.sort((a, b) => (a.order > b.order) ? 1 : ((b.order > a.order) ? -1 : 0)); 
     }
-
 
     startUserUpdate() {
         this.userStopUpdateTimer = updateDelayAfterEdit;
@@ -526,6 +546,14 @@ export default class AdminpanelComponent extends Vue {
 
     startStructuretypeUpdate() {
         this.structuretypeStopUpdateTimer = updateDelayAfterEdit;
+    }
+
+    startIllcodeUpdate() {
+        this.illcodeStopUpdateTimer = updateDelayAfterEdit;
+    }
+
+    startStaffComissionUpdate() {
+        this.staffComissionStopUpdateTimer = updateDelayAfterEdit;
     }
 
     startStructureregionUpdate() {
@@ -559,7 +587,6 @@ export default class AdminpanelComponent extends Vue {
         if (user.positiontype == null) {
             user.positiontype = 0;
         }
-
         this.userStopUpdateTimer = 0;
         fetch('/api/Users', {
             method: 'post',
@@ -580,9 +607,7 @@ export default class AdminpanelComponent extends Vue {
                 (<any>Vue).forceStructureUpdate = true;
                 (<any>Vue).notify(response);
             });
-        
     }
-
     /**
      * Обнуляем пароль пользователя. Чтобы при следующем входе вводил новый пароль. 
      * @param event
@@ -655,7 +680,6 @@ export default class AdminpanelComponent extends Vue {
                 (<any>Vue).notify(response);
                 //Vue.$forceUpdate();
             });
-        
     }
 
     isAdmin(user: User) {
@@ -683,7 +707,6 @@ export default class AdminpanelComponent extends Vue {
         if (this.rankStopUpdateTimer > delayMinimum) {
             this.rankStopUpdateTimer -= fetchRanksDelay;
         }
-        
     }
 
     fetchSofs() {
@@ -730,7 +753,6 @@ export default class AdminpanelComponent extends Vue {
             this.subjectStopUpdateTimer -= fetchSubjectsDelay;
         }
     }
-
 
     fetchPositiontypes() {
         if ($('#adminpanel-container').is(':visible') && this.activeNamePositiontype === 'pfirst'
@@ -783,7 +805,6 @@ export default class AdminpanelComponent extends Vue {
                     this.positioncategories = data;
                     //this.positioncategoriesnocivil = data; //this.positioncategories.filter(d => d.civil == 0);
                     this.positioncategoriesnocivil = this.positioncategories.filter(d => d.civil == 0);
-
                 })
         }
         if (this.positioncategoryStopUpdateTimer > delayMinimum) {
@@ -821,7 +842,6 @@ export default class AdminpanelComponent extends Vue {
                     //data.forEach(r => {
                     //});
                     this.altrankconditiongroups = data;
-
                 })
         }
         if (this.altrankconditiongroupStopUpdateTimer > delayMinimum) {
@@ -838,7 +858,6 @@ export default class AdminpanelComponent extends Vue {
                     //data.forEach(r => {
                     //});
                     this.altrankconditions = data;
-
                 })
         }
         if (this.altrankconditionStopUpdateTimer > delayMinimum) {
@@ -875,6 +894,41 @@ export default class AdminpanelComponent extends Vue {
         }
         if (this.structuretypeStopUpdateTimer > delayMinimum) {
             this.structuretypeStopUpdateTimer -= fetchStructuretypeDelay;
+        }
+    }
+
+/*    fetchIllcodes() {
+        if ($('#adminpanel-container').is(':visible') && this.activeNameIllcode === 'icfirst'
+            && this.illcodeStopUpdateTimer <= 0) {
+            fetch('api/Illcode', { credentials: 'include' })
+                .then(response => response.json() as Promise<Illcode[]>)
+                .then(data => {
+                    this.illcodes = data.sort((s1, s2) => {
+                        if (s1.name > s2.name) { return 1 };
+                        if (s1.name < s2.name) { return -1 };
+                        return 0;
+                    });
+                })
+        }
+        if (this.illcodeStopUpdateTimer > delayMinimum) {
+            this.illcodeStopUpdateTimer -= fetchIllcodeDelay;
+        }
+    }*/
+
+    fetchStaffComission() {
+        if ($('#adminpanel-container').is(':visible') && this.staffComission === 'staffcommfirst'
+            && this.staffComissionStopUpdateTimer <= 0) {
+            fetch('api/StaffComission', { method: 'get', credentials: 'include' })
+                .then(response => response.json() as Promise<StaffComission[]>)
+                .then(data => {
+                    this.staffComissionList = data;
+                    /*this.staffComissionList.sort((s1, s2) =>
+                        s1.rank - s2.rank
+                    );*/
+                })
+        }
+        if (this.staffComissionStopUpdateTimer > delayMinimum) {
+            this.staffComissionStopUpdateTimer -= fetchStaffComissionDelay;
         }
     }
 
@@ -975,7 +1029,6 @@ export default class AdminpanelComponent extends Vue {
         this.newSubjectGender = subject.gender;
         this.newSubjectCategory = subject.category;
         this.newSubjectDropword = this.numberToBool(subject.dropword);
-
     }
 
     addeditSubjectName(): string {
@@ -1080,7 +1133,6 @@ export default class AdminpanelComponent extends Vue {
             .then((response) => {
                 (<any>Vue).notify(response);
             });
-
     }
 
     addAltrankconditiongroup(event: any) {
@@ -1100,7 +1152,6 @@ export default class AdminpanelComponent extends Vue {
             .then((response) => {
                 (<any>Vue).notify(response);
             });
-
     }
 
     addAltrankcondition(event: any) {
@@ -1158,6 +1209,118 @@ export default class AdminpanelComponent extends Vue {
             .then(response => { return response.json(); })
             .then((response) => {
                 (<any>Vue).notify(response);
+            });
+    }
+
+    addIllcode(event: any) {
+        if (event) event.preventDefault();
+        fetch('/api/Illcode', {
+            method: 'post',
+            body: JSON.stringify(<Illcode>{
+                name: this.newIllcodeName,
+            }),
+            credentials: 'include',
+            headers: new Headers({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            })
+        })
+            .then(response => { return response.json(); })
+            .then((response) => {
+                (<any>Vue).notify(response);
+            });
+    }
+
+    addStaffPerson(event: any) {
+        if (event) event.preventDefault();
+        fetch('/api/StaffComission/Add', {
+            method: 'post',
+            body: JSON.stringify(<StaffComission>this.newStaffComissionName),
+            credentials: 'include',
+            headers: new Headers({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            })
+        })
+            .then(response => { return response.json(); })
+            .then((response) => {
+                (<any>Vue).notify(response);
+                this.staffComissionStopUpdateTimer = -1;
+                this.fetchStaffComission();
+                this.newStaffComissionName = new StaffComission();
+                this.staffComission = 'staffcommfirst';
+            });
+    }
+
+    upStaffPerson(person: StaffComission) {
+        fetch('/api/StaffComission/UP', {
+            method: 'post',
+            body: JSON.stringify(<StaffComission>person),
+            credentials: 'include',
+            headers: new Headers({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            })
+        })
+            .then(response => { return response.json(); })
+            .then((response) => {
+                (<any>Vue).notify(response);
+                this.staffComissionStopUpdateTimer = -1;
+                this.fetchStaffComission();
+            });
+    }
+
+    downStaffPerson(person: StaffComission) {
+        fetch('/api/StaffComission/DOWN', {
+            method: 'post',
+            body: JSON.stringify(<StaffComission>person),
+            credentials: 'include',
+            headers: new Headers({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            })
+        })
+            .then(response => { return response.json(); })
+            .then((response) => {
+                (<any>Vue).notify(response);
+                this.staffComissionStopUpdateTimer = -1;
+                this.fetchStaffComission();
+            });
+    }
+
+    removeStaffPerson(person: StaffComission) {
+        fetch('/api/StaffComission/Remove', {
+            method: 'post',
+            body: JSON.stringify(<StaffComission>person),
+            credentials: 'include',
+            headers: new Headers({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            })
+        })
+            .then(response => { return response.json(); })
+            .then((response) => {
+                (<any>Vue).notify(response);
+                this.staffComissionStopUpdateTimer = -1;
+                this.fetchStaffComission();
+            });
+    }
+
+    updateStaffPerson(person: StaffComission) {
+        fetch('/api/StaffComission/Update', {
+            method: 'post',
+            body: JSON.stringify(<StaffComission>person),
+            credentials: 'include',
+            headers: new Headers({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            })
+        })
+            .then(response => { return response.json(); })
+            .then((response) => {
+                (<any>Vue).notify(response);
+                this.staffComissionStopUpdateTimer = -1;
+                this.fetchStaffComission();
             });
     }
 
@@ -1224,6 +1387,10 @@ export default class AdminpanelComponent extends Vue {
 
     }
 
+    handleClickStaff(tab, event) {
+
+    }
+
     updatePositiontype(positiontype: Positiontype) {
         fetch('/api/Positiontype', {
             method: 'post',
@@ -1247,7 +1414,6 @@ export default class AdminpanelComponent extends Vue {
                 this.$store.commit("updatePositiontypes");
                 this.fetchPositiontypesForced();
             });
-        
     }
 
     editPositiontype(positiontype: Positiontype) {
@@ -1417,12 +1583,8 @@ export default class AdminpanelComponent extends Vue {
             .then((response) => {
 
             })
-            
-
         this.modalPositioneditMenuVisible = false;
     }
-
-    
 
     updateStructuretype(structuretype: Structuretype) {
         fetch('/api/Structuretype', {
@@ -1442,7 +1604,6 @@ export default class AdminpanelComponent extends Vue {
                 (<any>Vue).notify(response);
                 this.$store.commit("updateStructuretypes");
             });
-
     }
 
     updateRank(rank: Rank) {
@@ -1553,7 +1714,6 @@ export default class AdminpanelComponent extends Vue {
                 (<any>Vue).notify(response);
                 this.$store.commit("updateStructureregions");
             });
-
     }
 
     updateAltrankconditiongroup(altrankconditiongroup: Altrankconditiongroup) {
@@ -1574,7 +1734,6 @@ export default class AdminpanelComponent extends Vue {
                 (<any>Vue).notify(response);
                 this.$store.commit("updateAltrankconditiongroups");
             });
-
     }
 
     updateAltrankcondition(altrankcondition: Altrankcondition) {
@@ -1615,11 +1774,8 @@ export default class AdminpanelComponent extends Vue {
         this.headingStructureTree = null;
         if (this.newUser != null) {
             this.newUser.structure = 0; 
-            //this.newUser.structure = ""; 
-            // this.headid.toString()
         }
     }
-
 
     prepareTrees() {
         let getString: string = "";
@@ -1634,7 +1790,6 @@ export default class AdminpanelComponent extends Vue {
                     if (data.length > 0) {
                         this.headingStructureTree = data[0];
                     }
-
                 });
         }
     }

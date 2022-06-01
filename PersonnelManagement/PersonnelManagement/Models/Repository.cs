@@ -8,6 +8,7 @@ using System.Text;
 using System.Diagnostics;
 using PersonnelManagement.Services;
 using System.Runtime.CompilerServices;
+using PersonnelManagement.Udostoverenia;
 using System.Collections;
 using Itenso.TimePeriod;
 using System.Text.RegularExpressions;
@@ -15,33 +16,37 @@ using System.Security.Cryptography.X509Certificates;
 using DocumentFormat.OpenXml.InkML;
 using PersonnelManagement.Utils;
 using System.Globalization;
-using PersonnelManagement.USERS;
 
 namespace PersonnelManagement.Models
 {
     public class Repository
     {
-        private orgContext context;
-        private userContext contetUser;
+        private pmContext context;
+        private certContext certContext;
 
-        public Repository(orgContext ctx, userContext ctu)
+        public Repository(pmContext ctx, certContext cctx)
         {
             context = ctx;
-            contetUser = ctu;
+            certContext = cctx; 
         }
 
-        public orgContext GetContext()
+        public Repository(pmContext ctx)
+        {
+            context = ctx;
+            certContext = null;
+        }
+
+        public pmContext GetContext()
         {
             return this.context;
         }
 
-        public userContext GetContextUser()
-        {
-            return this.contetUser;
-        }
-
         // Поля для быстрого доступка к таблицам из контекста базы данных
+
+        public IQueryable<User> Users => context.User;
+        public IQueryable<Session> Sessions => context.Session;
         public IQueryable<Structure> Structures => context.Structure;
+        public IQueryable<Department> Departments => context.Department;
         public IQueryable<Position> Positions => context.Position;
         public IQueryable<Rank> Ranks => context.Rank;
         public IQueryable<Sourceoffinancing> Sourcesoffinancings => context.Sourceoffinancing;
@@ -56,20 +61,38 @@ namespace PersonnelManagement.Models
         public IQueryable<Altrankconditiongroup> Altrankconditiongroups => context.Altrankconditiongroup;
         public IQueryable<Altrank> Altranks => context.Altrank;
         public IQueryable<Positionhistory> Positionhistories => context.Positionhistory;
+        public IQueryable<Departmentrename> Departmentrenames => context.Departmentrename;
         public IQueryable<Structureregion> Structureregions => context.Structureregion;
         public IQueryable<Structuretype> Structuretypes => context.Structuretype;
+        public IQueryable<Dismissalclauses> Dismissalclauses => context.Dismissalclauses;
         public IQueryable<Country> Countries => context.Country;
+        public IQueryable<Agency> Agencies => certContext.Agency;
+        public IQueryable<Base> Bases => certContext.Base;
+        public IQueryable<Blankform> Blankforms => certContext.Blankform;
+        public IQueryable<Issuingauthority> Issuingauthorities => certContext.Issuingauthority;
+        public IQueryable<Post> Posts => certContext.Post;
+        /*public IQueryable<Udostoverenia.Rank> cRanks => certContext.Rank;*/
+        public IQueryable<Certificate> Certificates => certContext.Certificate;
+        public IQueryable<Rejectreason> Rejectreasons => certContext.Rejectreason;
+        public IQueryable<Drivertype> Drivertypes => context.Drivertype;
+        public IQueryable<Drivercategory> Drivercategories => context.Drivercategory;
+        public IQueryable<Prooftype> Prooftypes => context.Prooftype;
         public IQueryable<Region> Regions => context.Region;
         public IQueryable<Area> Areas => context.Area;
+        public IQueryable<Transfertype> Transfertypes => context.Transfertype;
         public IQueryable<Subject> Subjects => context.Subject;
         public IQueryable<Subjectgender> Subjectgenders => context.Subjectgender;
         public IQueryable<Subjectcategory> Subjectcategories => context.Subjectcategory;
+        public IQueryable<Setpersondatatype> Setpersondatatypes => context.Setpersondatatype;
         public IQueryable<Ordernumbertype> Ordernumbertypes => context.Ordernumbertype;
         public IQueryable<Streettype> Streettypes => context.Streettype;
         public IQueryable<Citytype> Citytypes => context.Citytype;
         public IQueryable<Areaother> Areaothers => context.Areaother;
         public IQueryable<Externalorderwhotype> Externalorderwhotypes => context.Externalorderwhotype;
         public IQueryable<Citysubstate> Citysubstates => context.Citysubstate;
+        public IQueryable<Role> Roles => context.Role;
+        public IQueryable<Rights> Rights => context.Rights;
+        public IQueryable<Rightsstructure> Rightsstructures => context.Rightsstructure;
 
         // Таймер. Используется для подсчета времени необходимого для следующего обновления локальных версий таблиц (StructuresLocal и иные). 
         private static Stopwatch stopWatch = Stopwatch.StartNew();
@@ -194,6 +217,28 @@ namespace PersonnelManagement.Models
         {
             AltrankconditionsGetLastTime = stopWatch.ElapsedMilliseconds;
             AltrankconditionsLocalObject = Altrankconditions.ToDictionary(altrankcondition => altrankcondition.Id);
+        }
+
+
+        private static long AltrankconditiongroupsGetLastTime = -ALTRANKCONDITIONGROUPS_GET_DELAY - 1;
+        private const long ALTRANKCONDITIONGROUPS_GET_DELAY = 90000; // in ms, 90 секунд, так как явление крайне редкое
+        private static Dictionary<int, Altrankconditiongroup> AltrankconditiongroupsLocalObject = null;
+        /// <summary>
+        /// Локальная версия таблицы из базы данных, которую мы или периодически обновляем или обновляем после внесения изменений. Необходима для улучшения быстродействия (уменьшения запросов в базу данных)
+        /// </summary>
+        /// <returns></returns>
+        public Dictionary<int, Altrankconditiongroup> AltrankconditiongroupsLocal() // 
+        {
+            if (stopWatch.ElapsedMilliseconds > AltrankconditiongroupsGetLastTime + ALTRANKCONDITIONGROUPS_GET_DELAY)
+            {
+                UpdateAltrankconditiongroupsLocal();
+            }
+            return AltrankconditiongroupsLocalObject;
+        }
+        public void UpdateAltrankconditiongroupsLocal()
+        {
+            AltrankconditiongroupsGetLastTime = stopWatch.ElapsedMilliseconds;
+            AltrankconditiongroupsLocalObject = Altrankconditiongroups.ToDictionary(altrankconditiongroup => altrankconditiongroup.Id);
         }
 
 
@@ -444,6 +489,93 @@ namespace PersonnelManagement.Models
             PositionsGetLastTime = stopWatch.ElapsedMilliseconds;
         }
 
+        private static long SessionsGetLastTime = -SESSIONS_GET_DELAY - 1;
+        private const long SESSIONS_GET_DELAY = 28000; // in ms
+        private static Dictionary<string, Session> SessionsLocalObject = null;
+        /// <summary>
+        /// Локальная версия таблицы из базы данных, которую мы или периодически обновляем или обновляем после внесения изменений. Необходима для улучшения быстродействия (уменьшения запросов в базу данных)
+        /// </summary>
+        /// <returns></returns>
+        public Dictionary<string, Session> SessionsLocal() // 
+        {
+            if (stopWatch.ElapsedMilliseconds > SessionsGetLastTime + SESSIONS_GET_DELAY)
+            {
+                UpdateSessionsLocal();
+            }
+            return SessionsLocalObject;
+        }
+        public void UpdateSessionsLocal()
+        {
+            SessionsGetLastTime = stopWatch.ElapsedMilliseconds;
+            SessionsLocalObject = Sessions.ToDictionary(session => session.Id);
+        }
+
+
+
+        private static long UsersGetLastTime = -USERS_GET_DELAY - 1;
+        private const long USERS_GET_DELAY = 14000; // in ms
+        private static Dictionary<int, User> UsersLocalObject = null;
+        /// <summary>
+        /// Локальная версия таблицы из базы данных, которую мы или периодически обновляем или обновляем после внесения изменений. Необходима для улучшения быстродействия (уменьшения запросов в базу данных)
+        /// </summary>
+        /// <returns></returns>
+        public Dictionary<int, User> UsersLocal() // 
+        {
+            if (stopWatch.ElapsedMilliseconds > UsersGetLastTime + USERS_GET_DELAY)
+            {
+                UpdateUsersLocal();
+            }
+            return UsersLocalObject;
+        }
+        public void UpdateUsersLocal()
+        {
+            UsersGetLastTime = stopWatch.ElapsedMilliseconds;
+            UsersLocalObject = Users.ToDictionary(user => user.Id);
+        }
+
+        private static long RightsGetLastTime = -RIGHTS_GET_DELAY - 1; 
+        private const long RIGHTS_GET_DELAY = 14000; // in ms
+        private static Dictionary<int, Rights> RightsLocalObject = null;
+        /// <summary>
+        /// Локальная версия таблицы из базы данных, которую мы или периодически обновляем или обновляем после внесения изменений. Необходима для улучшения быстродействия (уменьшения запросов в базу данных)
+        /// </summary>
+        /// <returns></returns>
+        public Dictionary<int, Rights> RightsLocal() // 
+        {
+            if (stopWatch.ElapsedMilliseconds > RightsGetLastTime + RIGHTS_GET_DELAY)
+            {
+                UpdateRightsLocal();
+            }
+            return RightsLocalObject;
+        }
+        public void UpdateRightsLocal()
+        {
+            RightsGetLastTime = stopWatch.ElapsedMilliseconds;
+            RightsLocalObject = Rights.ToDictionary(rights => rights.Id);
+        }
+
+        private static long RolesGetLastTime = -ROLES_GET_DELAY - 1;
+        private const long ROLES_GET_DELAY = 14000; // in ms
+        private static Dictionary<int, Role> RolesLocalObject = null;
+        /// <summary>
+        /// Локальная версия таблицы из базы данных, которую мы или периодически обновляем или обновляем после внесения изменений. Необходима для улучшения быстродействия (уменьшения запросов в базу данных)
+        /// </summary>
+        /// <returns></returns>
+        public Dictionary<int, Role> RolesLocal() // 
+        {
+            if (stopWatch.ElapsedMilliseconds > RolesGetLastTime + ROLES_GET_DELAY)
+            {
+                UpdateRolesLocal();
+            }
+            return RolesLocalObject;
+        }
+        public void UpdateRolesLocal()
+        {
+            RolesGetLastTime = stopWatch.ElapsedMilliseconds;
+            RolesLocalObject = Roles.ToDictionary(role => role.Id);
+        }
+
+
         private static long SubjectsGetLastTime = -SUBJECTS_GET_DELAY - 1;
         private const long SUBJECTS_GET_DELAY = 21000; // in ms
         private static Dictionary<int, Subject> SubjectsLocalObject = null;
@@ -463,6 +595,216 @@ namespace PersonnelManagement.Models
         {
             SubjectsGetLastTime = stopWatch.ElapsedMilliseconds;
             SubjectsLocalObject = Subjects.ToDictionary(subject => subject.Id);
+        }
+
+
+
+        private static long CertificatesGetLastTime = -CERTIFICATES_GET_DELAY - 1;
+        private const long CERTIFICATES_GET_DELAY = 21000; // in ms
+        private static Dictionary<int, Certificate> CertificatesLocalObject = null;
+        /// <summary>
+        /// Локальная версия таблицы из базы данных, которую мы или периодически обновляем или обновляем после внесения изменений. Необходима для улучшения быстродействия (уменьшения запросов в базу данных)
+        /// </summary>
+        /// <returns></returns>
+        public Dictionary<int, Certificate> CertificatesLocal() // 
+        {
+            if (stopWatch.ElapsedMilliseconds > CertificatesGetLastTime + CERTIFICATES_GET_DELAY)
+            {
+                UpdateCertificatesLocal();
+            }
+            return CertificatesLocalObject;
+        }
+        public void UpdateCertificatesLocal()
+        {
+            CertificatesGetLastTime = stopWatch.ElapsedMilliseconds;
+            CertificatesLocalObject = Certificates.ToDictionary(certificate => certificate.Id);
+        }
+
+        /// <summary>
+        /// Добавляет нового пользователя
+        /// </summary>
+        /// <param name="user"></param>
+        public void SaveUser(User user)
+        {
+            context.User.Add(user);
+            context.SaveChanges();
+            UpdateUsersLocal();
+            Rights rights = user.Rights;
+            if (rights != null)
+            {
+                rights.User = user.Id;
+                context.Rights.Add(rights);
+                context.SaveChanges();
+                UpdateRightsLocal();
+
+                // Раньше права доступа хранились в user напрямую, а теперь в rights, привязанному к этому пользователю
+                // Этот код неоходим для методов, которые используют старые привязки к полям в user.
+                user.Admin = user.Rights.Admin;
+                user.Masterpersonneleditor = user.Rights.Peopleorgreadall;
+                user.Structureeditor = user.Rights.Orgedit;
+                user.Structureread = user.Rights.Orgread;
+                user.Personneleditor = user.Rights.Peopleedit;
+                user.Personnelread = user.Rights.Peopleread;
+                context.SaveChanges();
+                UpdateUsersLocal();
+            }
+        }
+
+        /// <summary>
+        /// Удаляет пользователя
+        /// </summary>
+        /// <param name="user"></param>
+        public void DeleteUser(User user)
+        {
+            User contextUser = Users.First(u => u.Id == user.Id);
+            int userId = contextUser.Id;
+            context.User.Remove(contextUser);
+            context.SaveChanges();
+            UpdateUsersLocal();
+
+            Rights contextRights = Rights.FirstOrDefault(r => r.User == userId);
+            if (contextRights != null)
+            {
+                context.Rights.Remove(contextRights);
+                context.SaveChanges();
+
+            }
+        }
+
+        /// <summary>
+        /// Обнуляет пароль пользователя. Новый пароль сохраняется после первого ввода
+        /// </summary>
+        /// <param name="user"></param>
+        public void NullifyPassUser(User user)
+        {
+            User contextUser = Users.First(u => u.Id == user.Id);
+            contextUser.Salt = null;
+            contextUser.Password = null;
+            context.SaveChanges();
+            UpdateUsersLocal();
+        }
+
+        public void AddRights(User user, Rights rights)
+        {
+            context.Rights.Add(rights);
+            SaveChanges();
+            UpdateRightsLocal();
+        }
+
+        public void ChangeRights(User user, Rights rights)
+        {
+            Rights rightsContext = context.Rights.FirstOrDefault(p => p.Id == rights.Id);
+            if (rights == null)
+            {
+                return;
+            }
+            
+            //rightsContext.User = rights.User;
+            //rightsContext.Position = rights.Position;
+            //rightsContext.Role = rights.Role;
+            //rightsContext.Admin = rights.Admin;
+            //rightsContext.Orgedit = rights.Orgedit;
+            //rightsContext.Orgread = rights.Orgread;
+            //rightsContext.Orgreadall = rights.Orgreadall;
+            //rightsContext.Peopleedit = rights.Peopleedit;
+            //rightsContext.Peopleread = rights.Peopleread;
+            //rightsContext.Peoplereadall = rights.Peoplereadall;
+            //rightsContext.Candidateedit = rights.Candidateedit;
+            //rightsContext.Candidateread = rights.Candidateread;
+            //rightsContext.Peopleorgread = rights.Peopleorgread;
+            //rightsContext.Peopleorgreadall = rights.Peopleorgreadall;
+            //rightsContext.Peopledecreeread = rights.Peopledecreeread;
+            //rightsContext.Peopledecreeedit = rights.Peopledecreeedit;
+            rights.CopyFields(rightsContext);
+
+            SaveChanges();
+            UpdateRightsLocal();
+        }
+
+        /// <summary>
+        /// Возможно, стоит проводить операцию на фронтэнде
+        /// </summary>
+        /// <param name="positiontypeid"></param>
+        /// <param name="userid"></param>
+        public void TransferPositiontypeRightsToUser(int positiontypeid, int userid)
+        {
+            Rights rights = RightsLocal().Values.FirstOrDefault(r => r.User == userid);
+            // Права до этого не существовали
+            if (rights == null)
+            {
+
+            // Права существовали до этого
+            } else
+            {
+
+            }
+        }
+
+        public Rights GenerateBaseUserRights(User user)
+        {
+            Rights rights = RightsLocal().Values.FirstOrDefault(r => r.User == user.Id && user.Id > 0);
+            // Права уже существовали для пользователя, так что мы не создаем новые. 
+            if (rights != null)
+            {
+                return rights;
+            }
+            rights = new Rights();
+            rights.User = user.Id;
+            if (user.Positiontype > 0)
+            {
+                Rights positiontypeRights = RightsLocal().Values.FirstOrDefault(r => r.Position == user.Positiontype);
+                if (positiontypeRights != null)
+                {
+                    rights.Role = positiontypeRights.Role;
+                }
+            }
+            rights.Admin = user.Admin.GetValueOrDefault();
+            rights.Orgedit = user.Structureeditor.GetValueOrDefault();
+            rights.Orgread = user.Structureread;
+            rights.Orgreadall = user.Structureeditor.GetValueOrDefault();
+            rights.Peopleread = user.Personnelread;
+            rights.Peopleedit = user.Personneleditor.GetValueOrDefault();
+            rights.Peoplereadall = user.Personneleditor.GetValueOrDefault();
+            rights.Candidateedit = user.Personneleditor.GetValueOrDefault();
+            rights.Candidateread = user.Personnelread;
+            rights.Peopleorgread = user.Personnelread;
+            rights.Peopleorgreadall = user.Masterpersonneleditor.GetValueOrDefault();
+            rights.Peopledecreeread = user.Personnelread;
+            rights.Peopledecreeedit = user.Personneleditor.GetValueOrDefault();
+
+            context.Rights.Add(rights);
+            SaveChanges();
+            UpdateRightsLocal();
+
+            return rights;
+        }
+
+        public void DeleteRights(User user, Rights rights)
+        {
+            int minusid = -rights.Id;
+            Rights rightsContext = context.Rights.FirstOrDefault(p => p.Id == minusid);
+            if (rightsContext == null)
+            {
+                return;
+            }
+            context.Rights.Remove(rightsContext);
+
+            SaveChanges();
+            UpdateRightsLocal();
+        }
+
+        
+
+        /// <summary>
+        /// Запомнить текущее положение пользователя в оргштатной структуре. Какие подразделения открыты.
+        /// </summary>
+        /// <param name="getString"></param>
+        /// <param name="user"></param>
+        public void RememberUserStructureTree(string getString, User user)
+        {
+            context.User.First(u => u.Id == user.Id).Currentstructuretree = getString;
+            context.SaveChanges();
+            UpdateUsersLocal();
         }
 
         /// <summary>
@@ -491,6 +833,46 @@ namespace PersonnelManagement.Models
             //Position position = Positions.First(p => p.Id == positionid);
             Position position = PositionsLocal()[positionid];
             return Structures.First(s => s.Id == position.Structure);
+        }
+
+        /// <summary>
+        /// Обновляет настройки пользователя
+        /// </summary>
+        /// <param name="user"></param>
+        /// <param name="userSettings"></param>
+        public void UpdateUserSettings(User user, UserSettings userSettings)
+        {
+            User contextUser = Users.First(u => u.Id == user.Id);
+            if (userSettings.UpdatePositioncompact > 0)
+            {
+                contextUser.Positioncompact = Convert.ToSByte(userSettings.PositioncompactValue);
+            }
+
+            if (userSettings.UpdateDate > 0)
+            {
+                contextUser.Date = userSettings.DateValue;
+            }
+            if (userSettings.UpdateSidebarDisplay > 0)
+            {
+                contextUser.Sidebardisplay = Convert.ToSByte(userSettings.SidebarDisplayValue);
+            }
+
+           
+            context.SaveChanges();
+            UpdateUsersLocal();
+        }
+
+        /// <summary>
+        /// Устанавливает орг-штатный проект приказа, над которым работает пользователь
+        /// </summary>
+        /// <param name="user"></param>
+        /// <param name="id">ID приказа</param>
+        public void DecreesSelectActive(User user, int id)
+        {
+            User contextUser = Users.First(u => u.Id == user.Id);
+            contextUser.Decree = id;
+            context.SaveChanges();
+            UpdateUsersLocal();
         }
 
         /// <summary>
@@ -1367,6 +1749,7 @@ namespace PersonnelManagement.Models
         public void RemoveStructure(StructureManagement structureManagement, User user)
         {
             Decree decree = GetDecreeByUser(user);
+            IEnumerable<Decreeoperation> all_operations_by_decree = DecreeoperationsLocal().Values.Where(r => r.Decree == decree.Id);
             Decreeoperation operation = new Decreeoperation();
             operation.Decree = decree.Id;
             operation.Deleted = 1;
@@ -1376,7 +1759,7 @@ namespace PersonnelManagement.Models
                 operation.Dateactive = structureManagement.Dateactive;
                 operation.Datecustom = 1;
             }
-            context.Decreeoperation.Add(operation);
+            if(!operation.isEqual(all_operations_by_decree)) { context.Decreeoperation.Add(operation); all_operations_by_decree = all_operations_by_decree.Append(operation); }
 
             int structureid = structureManagement.Parent;
             List<StructureInfo> structureInfos = GetStructureInfos(structureid, user, false, false , false, true);
@@ -1403,7 +1786,7 @@ namespace PersonnelManagement.Models
                         operationStruct.Dateactive = structureManagement.Dateactive;
                         operationStruct.Datecustom = 1;
                     }
-                    context.Decreeoperation.Add(operationStruct);
+                    if (!operationStruct.isEqual(all_operations_by_decree)) { context.Decreeoperation.Add(operationStruct); all_operations_by_decree = all_operations_by_decree.Append(operationStruct); }
                 }
             }
 
@@ -1432,7 +1815,7 @@ namespace PersonnelManagement.Models
                     operationPosition.Dateactive = dateCustom;
                     operationPosition.Datecustom = 1;
                 }
-                context.Decreeoperation.Add(operationPosition);
+                if (!operationPosition.isEqual(all_operations_by_decree)) { context.Decreeoperation.Add(operationPosition); all_operations_by_decree = all_operations_by_decree.Append(operationPosition); }
                 //context.SaveChanges();
             }
             //RemovePosition
@@ -1489,7 +1872,7 @@ namespace PersonnelManagement.Models
         /// <param name="user"></param>
         public void AddNewDecree(DecreeManagement decreeManagement, User user)
         {
-            User contextUser = this.contetUser.User.First(u => u.Id == user.Id);
+            User contextUser = Users.First(u => u.Id == user.Id);
             DateTime date = contextUser.Date.GetValueOrDefault();
 
             Decree decree = new Decree();
@@ -1506,7 +1889,7 @@ namespace PersonnelManagement.Models
 
             UpdateDateactives(decree.Id);
             UpdateDecreesLocal();
-            contetUser.UpdateUsersLocal();
+            UpdateUsersLocal();
         }
 
         /// <summary>
@@ -1543,7 +1926,7 @@ namespace PersonnelManagement.Models
 
             UpdateDateactives(decree_from_history.Id);
             UpdateDecreeoperationsLocal();
-            contetUser.UpdateUsersLocal();
+            UpdateUsersLocal();
             return decree_from_history;
         }
 
@@ -1554,7 +1937,7 @@ namespace PersonnelManagement.Models
         /// <param name="user"></param>
         public void RemoveDecree(DecreeManagement decreeManagement, User user)
         {
-            User contextUser = this.contetUser.User.First(u => u.Id == user.Id);
+            User contextUser = Users.First(u => u.Id == user.Id);
             Decree decree = Decrees.First(d => d.Id == decreeManagement.Id);
             contextUser.Decree = 0;
             decree.Declined = 1;
@@ -1569,7 +1952,7 @@ namespace PersonnelManagement.Models
             context.SaveChanges();
 
             UpdateDecreesLocal();
-            contetUser.UpdateUsersLocal();
+            UpdateUsersLocal();
         }
 
         public void RemoveDecreeOperationWithItsSubject(DecreeoperationManagement decreeoperation)
@@ -1639,7 +2022,7 @@ namespace PersonnelManagement.Models
 
         public void AcceptDecree(DecreeManagement decreeManagement, User user)
         {
-            User contextUser = this.contetUser.User.First(u => u.Id == user.Id);
+            User contextUser = Users.First(u => u.Id == user.Id);
             Decree decree = Decrees.First(d => d.Id == decreeManagement.Id);
             UpdateStructuresLocal();
             foreach (Decreeoperation p in DecreeoperationsLocal().Values.ToList().FindAll(r => r.Decree == decree.Id))
@@ -1672,13 +2055,13 @@ namespace PersonnelManagement.Models
             context.SaveChanges();
 
             UpdateDateactives(decree.Id);
-            contetUser.UpdateUsersLocal();
+            UpdateUsersLocal();
             UpdateStructuresLocal();
         }
 
         public void UpdateDecree(DecreeManagement decreeManagement, User user)
         {
-            User contextUser = this.contetUser.User.First(u => u.Id == user.Id);
+            User contextUser = Users.First(u => u.Id == user.Id);
             Decree decree = Decrees.First(d => d.Id == decreeManagement.Id);
             //contextUser.Decree = 0;
             decree.Name = decreeManagement.Name;
@@ -1689,7 +2072,7 @@ namespace PersonnelManagement.Models
             context.SaveChanges();
 
             UpdateDateactives(decree.Id);
-            contetUser.UpdateUsersLocal();
+            UpdateUsersLocal();
         }
 
         public List<DecreeManagement> GetFilteredDecrees(User user, DecreeManagement filter)
@@ -1703,7 +2086,7 @@ namespace PersonnelManagement.Models
                     DecreeManagement decreeManagement = new DecreeManagement();
                     decreeManagement.Id = decree.Id;
                     decreeManagement.Signed = 1;
-                    decreeManagement.User = decree.User;
+                    decreeManagement.User = decree.User.GetValueOrDefault();
                     decreeManagement.Nickname = decree.Nickname;
                     decreeManagement.Name = decree.Name;
                     decreeManagement.Number = decree.Number;
@@ -2388,7 +2771,7 @@ namespace PersonnelManagement.Models
         public void RemovePosition(Position position, User user, bool datecustom, DateTime dateactive)
         {
             Decree decree = GetDecreeByUser(user);
-
+            IEnumerable<Decreeoperation> all_operations_by_decree = DecreeoperationsLocal().Values.Where(r => r.Decree == decree.Id);
             List<PositionPart> positionParts = new List<PositionPart>();
 
             Decreeoperation operation = new Decreeoperation();
@@ -2400,6 +2783,7 @@ namespace PersonnelManagement.Models
                 operation.Dateactive = dateactive;
                 operation.Datecustom = 1;
             }
+            if (operation.isEqual(all_operations_by_decree)) { return; }
 
             context.Decreeoperation.Add(operation);
             context.SaveChanges();
@@ -3284,19 +3668,74 @@ namespace PersonnelManagement.Models
             return doms;
         }
 
+        public void UpdateUser(User user)
+        {
+            User contextUser = Users.First(u => u.Id == user.Id);
+            Rights contextRights = contextUser.GetRights(this);
+            contextUser.Admin = user.Admin;
+            contextUser.Name = user.Name;
+            contextUser.Structure = user.Structure;
+            contextUser.Firstname = user.Firstname;
+            contextUser.Surname = user.Surname;
+            contextUser.Patronymic = user.Patronymic;
+            contextUser.Positiontype = user.Positiontype;
+            contextUser.Onlyreadflagtoeditor = user.Onlyreadflagtoeditor;
+            if (user.Onlyreadflagtoeditor == 0)
+                contextUser.Decree = null;
+
+            if (contextRights != null)
+            {
+                ChangeRights(user, user.Rights);
+                // Раньше права доступа хранились в user напрямую, а теперь в rights, привязанному к этому пользователю
+                // Этот код неоходим для методов, которые используют старые привязки к полям в user.
+                contextUser.Admin = user.Rights.Admin;
+                contextUser.Masterpersonneleditor = user.Rights.Peopleorgreadall;
+                contextUser.Structureeditor = user.Rights.Orgedit;
+                contextUser.Structureread = user.Rights.Orgread;
+                contextUser.Personneleditor = user.Rights.Peopleedit;
+                contextUser.Personnelread = user.Rights.Peopleread;
+            }
+
+            context.SaveChanges();
+            UpdateUsersLocal();
+            UpdateRightsLocal();
+
+            //User contextUser = Users.First(u => u.Id == user.Id);
+            //contextUser.Admin = user.Admin;
+            //contextUser.Name = user.Name;
+            //contextUser.Structure = user.Structure;
+            //contextUser.Masterpersonneleditor = user.Masterpersonneleditor;
+            //contextUser.Structureeditor = user.Structureeditor;
+            //contextUser.Structureread = user.Structureread;
+            //contextUser.Personneleditor = user.Personneleditor;
+            //contextUser.Personnelread = user.Personnelread;
+            //contextUser.Firstname = user.Firstname;
+            //contextUser.Surname = user.Surname;
+            //contextUser.Patronymic = user.Patronymic;
+            //contextUser.Positiontype = user.Positiontype;
+
+            ////if (contextUser.Fullmode == 1) // Для режима структурной работы поддерживаем опцию включенной.
+            ////{
+            ////    contextUser.Sidebardisplay = 1;
+            ////}
+
+            //context.SaveChanges();
+            //UpdateUsersLocal();
+        }
+
         /**
          * True if success, false otherwise
          */
         public bool SwitchUser(User user)
         {
-            User contextUser = this.contetUser.User.First(u => u.Id == user.Id);
+            User contextUser = Users.First(u => u.Id == user.Id);
             if (contextUser.Mode == 0)
             {
                 if (contextUser.Personnelread > 0 || contextUser.Admin.GetValueOrDefault() > 0 || contextUser.Masterpersonneleditor.GetValueOrDefault() > 0)
                 {
                     contextUser.Mode = 1;
                     context.SaveChanges();
-                    contetUser.UpdateUsersLocal();
+                    UpdateUsersLocal();
                     return true;
                 } else
                 {
@@ -3308,7 +3747,7 @@ namespace PersonnelManagement.Models
                 {
                     contextUser.Mode = 0;
                     context.SaveChanges();
-                    contetUser.UpdateUsersLocal();
+                    UpdateUsersLocal();
                     return true;
                 }
                 else
@@ -3323,12 +3762,12 @@ namespace PersonnelManagement.Models
          */
         public bool OrgUser(User user)
         {
-            User contextUser = this.contetUser.User.First(u => u.Id == user.Id);
+            User contextUser = Users.First(u => u.Id == user.Id);
             if (contextUser.Structureread > 0 || contextUser.Admin.GetValueOrDefault() > 0 || contextUser.Masterpersonneleditor.GetValueOrDefault() > 0)
             {
                 contextUser.Mode = 0;
                 context.SaveChanges();
-                contetUser.UpdateUsersLocal();
+                UpdateUsersLocal();
                 return true;
             }
             else
@@ -3342,12 +3781,12 @@ namespace PersonnelManagement.Models
          */
         public bool PeopleUser(User user)
         {
-            User contextUser = this.contetUser.User.First(u => u.Id == user.Id);
+            User contextUser = Users.First(u => u.Id == user.Id);
             if (contextUser.Personnelread > 0 || contextUser.Admin.GetValueOrDefault() > 0 || contextUser.Masterpersonneleditor.GetValueOrDefault() > 0)
             {
                 contextUser.Mode = 1;
                 context.SaveChanges();
-                contetUser.UpdateUsersLocal();
+                UpdateUsersLocal();
                 return true;
             }
             else
@@ -3568,6 +4007,21 @@ namespace PersonnelManagement.Models
             context.SaveChanges();
         }
 
+        public void AddAltrankconditiongroup(Altrankconditiongroup altrankconditiongroup)
+        {
+            context.Altrankconditiongroup.Add(altrankconditiongroup);
+            context.SaveChanges();
+        }
+
+        public void UpdateAltrankconditiongroup(Altrankconditiongroup altrankconditiongroup)
+        {
+            //context.Altrankconditiongroup.Add(altrankconditiongroup);
+            Altrankconditiongroup contextAltrankconditiongroup = context.Altrankconditiongroup.First(a => a.Id == altrankconditiongroup.Id);
+            contextAltrankconditiongroup.Name = altrankconditiongroup.Name;
+
+            context.SaveChanges();
+        }
+
         public void AddAltrankcondition(Altrankcondition altrankcondition)
         {
             context.Altrankcondition.Add(altrankcondition);
@@ -3594,118 +4048,6 @@ namespace PersonnelManagement.Models
             context.SaveChanges();
         }
 
-        /**
-         * Returns ; separated altranks information: "conditiongroup:condition=rank,condition rank;conditiongroup:condition rank,condition rank,condition rank"; - "если отсутствует...:ученая степень подполковник
-         */
-        public string GetAltranksList(IEnumerable<Position> positions, bool disabletracking = false)
-        {
-            if (disabletracking)
-            {
-                context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
-            }
-
-
-            string altranks = "";
-            foreach (Position position in positions)
-            {
-                IEnumerable<Altrank> altrankRequest = AltranksLocal().Values.Where(a => a.Position == position.Id);
-                //IEnumerable<Altrank> altrankRequest = Altranks.Where(a => a.Position == position.Id);
-                string altrankString = "";
-                bool first = true;
-                foreach (Altrank altrank in altrankRequest)
-                {
-                    Altrankcondition altrankcondition = AltrankconditionsLocal().GetValue(altrank.Altrankcondition);
-                    //Altrankcondition altrankcondition = Altrankconditions.FirstOrDefault(a => a.Id == altrank.Altrankcondition);
-                    string conditionName = altrankcondition.Name;
-                    string rankName = Ranks.FirstOrDefault(r => r.Id == altrank.Rank).Name;
-
-                    /**
-                     * First time we are typing condition group
-                     */
-                    if (first)
-                    {
-                        string conditiongroupname = AltrankconditiongroupsLocal().GetValue(altrankcondition.Group).Name;
-                        //string conditiongroupname = Altrankconditiongroups.FirstOrDefault(a => a.Id == altrankcondition.Group).Name;
-                        altrankString += conditiongroupname + ":";
-                        first = false;
-                    }
-
-                    altrankString += conditionName + " " + rankName + ",";
-                }
-                if (!String.IsNullOrEmpty(altrankString))
-                {
-                    altrankString = altrankString.Remove(altrankString.Length - 1);
-                }
-                altranks += altrankString + ";";
-            }
-            if (!String.IsNullOrEmpty(altranks))
-            {
-                altranks = altranks.Remove(altranks.Length - 1);
-            }
-            return altranks;
-        }
-
-        /**
-         * "conditiongroup:condition=rank,condition=rank" - "1:1=2,2=4"
-         */
-        public string GetAltrankList(Position position, bool disabletracking = false)
-        {
-            if (disabletracking)
-            {
-                context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
-            }
-            string altranks = "";
-            IEnumerable<Altrank> altrankRequest = Altranks.Where(a => a.Position == position.Id);
-            string altrankString = "";
-            bool first = true;
-            foreach (Altrank altrank in altrankRequest)
-            {
-                Altrankcondition altrankcondition = Altrankconditions.FirstOrDefault(a => a.Id == altrank.Altrankcondition);
-                string conditionName = altrankcondition.Id.ToString();
-                string rankName = Ranks.FirstOrDefault(r => r.Id == altrank.Rank).Id.ToString();
-
-                /**
-                    * First time we are typing condition group
-                    */
-                if (first)
-                {
-                    string conditiongroupname = Altrankconditiongroups.FirstOrDefault(a => a.Id == altrankcondition.Group).Id.ToString();
-                    altrankString += conditiongroupname + ":";
-                    first = false;
-                }
-
-                altrankString += conditionName + "=" + rankName + ",";
-            }
-            if (!String.IsNullOrEmpty(altrankString))
-            {
-                altrankString = altrankString.Remove(altrankString.Length - 1);
-            }
-            altranks += altrankString + ";";
-            return altranks;
-        }
-
-        private static long AltrankconditiongroupsGetLastTime = -ALTRANKCONDITIONGROUPS_GET_DELAY - 1;
-        private const long ALTRANKCONDITIONGROUPS_GET_DELAY = 90000; // in ms, 90 секунд, так как явление крайне редкое
-        private static Dictionary<int, Altrankconditiongroup> AltrankconditiongroupsLocalObject = null;
-        /// <summary>
-        /// Локальная версия таблицы из базы данных, которую мы или периодически обновляем или обновляем после внесения изменений. Необходима для улучшения быстродействия (уменьшения запросов в базу данных)
-        /// </summary>
-        /// <returns></returns>
-        public Dictionary<int, Altrankconditiongroup> AltrankconditiongroupsLocal() // 
-        {
-            if (stopWatch.ElapsedMilliseconds > AltrankconditiongroupsGetLastTime + ALTRANKCONDITIONGROUPS_GET_DELAY)
-            {
-                UpdateAltrankconditiongroupsLocal();
-            }
-            return AltrankconditiongroupsLocalObject;
-        }
-        public void UpdateAltrankconditiongroupsLocal()
-        {
-            AltrankconditiongroupsGetLastTime = stopWatch.ElapsedMilliseconds;
-            AltrankconditiongroupsLocalObject = Altrankconditiongroups.ToDictionary(altrankconditiongroup => altrankconditiongroup.Id);
-        }
-
-
         public void UpdateStructureregion(Structureregion structureregion)
         {
             Structureregion contextStructureregion = context.Structureregion.First(s => s.Id == structureregion.Id);
@@ -3726,6 +4068,23 @@ namespace PersonnelManagement.Models
             context.SaveChanges();
         }
 
+        public void AddSession(Session session)
+        {
+            context.Session.Add(session);
+            context.SaveChanges();
+            UpdateSessionsLocal();
+        }
+
+        public void RemoveSessions(List<Session> list)
+        {
+            foreach (Session session in list)
+            {
+                context.Session.Remove(session);
+            }
+            context.SaveChanges();
+            UpdateSessionsLocal();
+        }
+
         public void SaveChanges()
         {
             context.SaveChanges();
@@ -3738,7 +4097,7 @@ namespace PersonnelManagement.Models
         {
             DateTime dateTime = DateTime.Now;
             List<Session> list = null;
-            foreach (Session session in this.contetUser.Session)
+            foreach (Session session in Sessions)
             {
                 if (session.Expires < dateTime)
                 {
@@ -3751,8 +4110,22 @@ namespace PersonnelManagement.Models
             }
             if (list != null)
             {
-                contetUser.RemoveSessions(list);
+                RemoveSessions(list);
             }
+        }
+
+        /**
+         * Remove session with a specified id.
+         */
+        public void RemoveSession(string id)
+        {
+            Session session = context.Session.First(ses => ses.Id == id);
+            User user = context.User.First(r => r.Id == session.Userid);
+            user.Onlyreadflagtoeditor = 0;
+            context.Session.Remove(session);
+            context.User.Update(user);
+            context.SaveChanges();
+            UpdateSessionsLocal();
         }
 
         public int GetStructureType(Structure structure)
@@ -3786,19 +4159,6 @@ namespace PersonnelManagement.Models
             {
                 return false;
             }
-        }
-
-        public void AddCountry(Country country)
-        {
-            context.Country.Add(country);
-            context.SaveChanges();
-        }
-
-        public void UpdateCountry(Country country)
-        {
-            Country contextCountry = context.Country.First(el => el.Id == country.Id);
-            contextCountry.Name = country.Name;
-            context.SaveChanges();
         }
 
         /**
@@ -7061,6 +7421,96 @@ namespace PersonnelManagement.Models
             return mrds;
         }
 
+        /**
+         * Returns ; separated altranks information: "conditiongroup:condition=rank,condition rank;conditiongroup:condition rank,condition rank,condition rank"; - "если отсутствует...:ученая степень подполковник
+         */
+        public string GetAltranksList(IEnumerable<Position> positions, bool disabletracking = false)
+        {
+            if (disabletracking)
+            {
+                context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
+            }
+
+
+            string altranks = "";
+            foreach(Position position in positions)
+            {
+                IEnumerable<Altrank> altrankRequest = AltranksLocal().Values.Where(a => a.Position == position.Id);
+                //IEnumerable<Altrank> altrankRequest = Altranks.Where(a => a.Position == position.Id);
+                string altrankString = "";
+                bool first = true;
+                foreach(Altrank altrank in altrankRequest)
+                {
+                    Altrankcondition altrankcondition = AltrankconditionsLocal().GetValue(altrank.Altrankcondition);
+                    //Altrankcondition altrankcondition = Altrankconditions.FirstOrDefault(a => a.Id == altrank.Altrankcondition);
+                    string conditionName = altrankcondition.Name;
+                    string rankName = Ranks.FirstOrDefault(r => r.Id == altrank.Rank).Name;
+
+                    /**
+                     * First time we are typing condition group
+                     */
+                    if (first)
+                    {
+                        string conditiongroupname = AltrankconditiongroupsLocal().GetValue(altrankcondition.Group).Name;
+                        //string conditiongroupname = Altrankconditiongroups.FirstOrDefault(a => a.Id == altrankcondition.Group).Name;
+                        altrankString += conditiongroupname + ":";
+                        first = false;
+                    }
+
+                    altrankString += conditionName + " " + rankName + ",";
+                }
+                if (!String.IsNullOrEmpty(altrankString))
+                {
+                    altrankString = altrankString.Remove(altrankString.Length - 1);
+                }
+                altranks += altrankString + ";";
+            }
+            if (!String.IsNullOrEmpty(altranks))
+            {
+                altranks = altranks.Remove(altranks.Length - 1);
+            }
+            return altranks;
+        }
+
+        /**
+         * "conditiongroup:condition=rank,condition=rank" - "1:1=2,2=4"
+         */
+        public string GetAltrankList(Position position, bool disabletracking = false)
+        {
+            if (disabletracking)
+            {
+                context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
+            }
+            string altranks = "";
+            IEnumerable<Altrank> altrankRequest = Altranks.Where(a => a.Position == position.Id);
+            string altrankString = "";
+            bool first = true;
+            foreach (Altrank altrank in altrankRequest)
+            {
+                Altrankcondition altrankcondition = Altrankconditions.FirstOrDefault(a => a.Id == altrank.Altrankcondition);
+                string conditionName = altrankcondition.Id.ToString();
+                string rankName = Ranks.FirstOrDefault(r => r.Id == altrank.Rank).Id.ToString();
+
+                /**
+                    * First time we are typing condition group
+                    */
+                if (first)
+                {
+                    string conditiongroupname = Altrankconditiongroups.FirstOrDefault(a => a.Id == altrankcondition.Group).Id.ToString();
+                    altrankString += conditiongroupname + ":";
+                    first = false;
+                }
+
+                altrankString += conditionName + "=" + rankName + ",";
+            }
+            if (!String.IsNullOrEmpty(altrankString))
+            {
+                altrankString = altrankString.Remove(altrankString.Length - 1);
+            }
+            altranks += altrankString + ";";
+            return altranks;
+        }
+
         public bool GetPositionsDecreeNowOrFuture(Decreeoperation deco, DateTime dateTime)
         {
             return DecreesLocal().Values.FirstOrDefault(decree => decree.Id == deco.Decree && decree.Signed > 0) != null;
@@ -8106,6 +8556,683 @@ namespace PersonnelManagement.Models
             return structuresFiltered;
         }
 
+        /**
+         * Выдает информацию о должностях, основанную на запросе.
+         */
+        public List<PmrequestPosition> GetPmrequestPositionsAddRemove(Pmrequest pmrequest, User user)
+        {
+            context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
+            DateTime date = user.Date.GetValueOrDefault();
+
+            Dictionary<int, Positiontype> positiontypesLocal = PositiontypesLocal();
+            Dictionary<int, Sourceoffinancing> sofsLocal = SourceoffinancingsLocal();
+            Dictionary<int, Mrd> mrdsLocal = MrdsLocal();
+            Dictionary<int, Positionmrd> positionmrdsLocal = LocalizeObject<Positionmrd>(Positionmrds.Select(p => p.Id).ToList(), Positionmrds.ToList());
+            Dictionary<int, Rank> ranksLocal = LocalizeObject<Rank>(Ranks.Select(p => p.Id).ToList(), Ranks.ToList());
+
+            List<PmrequestPosition> list = new List<PmrequestPosition>();
+            IEnumerable<Position> positions = null;
+            List<int> structuretypes = null;
+
+            int[] structuresArray = new int[] { pmrequest.Id };
+            //int[] structuresArray = pmrequest.Structures.Split(',').Select(int.Parse).ToArray();
+            structuresArray = FilterStructuresByReadability(user, structuresArray.ToList()).ToArray();
+
+            HashSet<int> structures = new HashSet<int>();
+            foreach (int i in structuresArray)
+            {
+                structures.UnionWith(GetStructuresSiblings(i, null, date));
+            }
+            List<Position> positionsTemp = new List<Position>();
+            foreach (int i in structures)
+            {
+                List<Position> valuesToAdd = new List<Position>();
+                if (PositionsStructureAsKeyLocal().ContainsKey(i))
+                {
+                    valuesToAdd = PositionsStructureAsKeyLocal()[i];
+                }
+                //List<Position> positionsToAdd = new List<Position>(PositionsLocal().Values.Where(p => p.Structure == i));
+                positionsTemp.AddRange(valuesToAdd);
+            }
+
+            positions = FilterDeletedPositions(positionsTemp, user.Date.GetValueOrDefault()).ToList();
+
+            positions = positions.Where(p => IsSignedAndWillCreated(p, user.Date.GetValueOrDefault()) || IsSignedAndWillDeleted(p, user.Date.GetValueOrDefault())).ToList();
+
+
+
+
+            /**
+             * W R I T I N G    I N F O R M A T I O N
+             */
+            List<AltrankPrintable> printables = new List<AltrankPrintable>();
+            pmrequest.AltrankPrintables = printables;
+            //positions = positions.ToList();
+            int index = 0;
+            foreach (Position position in positions)
+            {
+                try
+                {
+
+                    PmrequestPosition pmrequestPosition = new PmrequestPosition();
+                    pmrequestPosition.position = position;
+                    pmrequestPosition.Id = position.Id;
+                    if (positiontypesLocal.ContainsKey(position.Positiontype))
+                    {
+                        pmrequestPosition.Positiontype = positiontypesLocal[position.Positiontype].Name;
+                    }
+                    else
+                    {
+                        pmrequestPosition.Positiontype = "Должность не определена";
+                    }
+                    //pmrequestPosition.Positiontype += position.Id; - Нужно было для отладки
+                    pmrequestPosition.Tree = FormTree(position, date, true);
+
+                    pmrequestPosition.Part = position.Part;
+                    pmrequestPosition.Partval = position.Partval;
+
+                    string rank = "Гражданская должность";
+                    if (position.Cap.GetValueOrDefault() != 0)
+                    {
+                        rank = ranksLocal[position.Cap.GetValueOrDefault()].Name;
+                        if (rank == null)
+                        {
+                            rank = "Гражданская должность";
+                        }
+                    }
+                    pmrequestPosition.Rank = rank;
+                    pmrequestPosition.Positioncategory = PositioncategoriesLocal()[position.Positioncategory].Name;
+                    pmrequestPosition.Sof = sofsLocal[position.Sourceoffinancing].Name;
+                    pmrequestPosition.Mrds = GetMrdsNamesLocal(position.Id, mrdsLocal, positionmrdsLocal);
+
+                    if (position.Replacedbycivil > 0)
+                    {
+                        pmrequestPosition.ReplacedByCivil = "Может";
+                        pmrequestPosition.ReplacedByCivilPositiontype = positiontypesLocal[position.Replacedbycivilpositiontype].Name;
+                        if (PositioncategoriesLocal().ContainsKey(position.Replacedbycivilpositioncategory))
+                        {
+                            pmrequestPosition.ReplacedByCivilPositioncategory = PositioncategoriesLocal()[position.Replacedbycivilpositioncategory].Name;
+                        }
+                        if (position.Replacedbycivildatelimit > 0)
+                        {
+                            pmrequestPosition.ReplacedByCivilDate = position.Replacedbycivildate.GetValueOrDefault().ToString("yyyy.MM.dd");
+                        }
+
+                        if (position.Civildecree > 0)
+                        {
+                            pmrequestPosition.ReplacedByCivilDecree = position.Civildecreenumber;
+                            pmrequestPosition.ReplacedByCivilDecreeDate = position.Civildecreedate.GetValueOrDefault().ToString("yyyy.MM.dd");
+                        }
+                    }
+                    else
+                    {
+                        pmrequestPosition.ReplacedByCivil = "Не может";
+                        pmrequestPosition.ReplacedByCivilPositiontype = "";
+                        pmrequestPosition.ReplacedByCivilPositioncategory = "";
+                        pmrequestPosition.ReplacedByCivilDecreeDate = "";
+                        pmrequestPosition.ReplacedByCivilDate = "";
+                        pmrequestPosition.ReplacedByCivilDecree = "";
+                    }
+
+
+                    DecreeOperationsRequest request = GetDecreeOperationsRequest(position, user.Date.GetValueOrDefault());
+                    List<DecreeoperationManagement> doms = RequestDecreeOperations(request);
+
+                    if (IsSignedAndWillCreated(doms))
+                    {
+                        pmrequestPosition.Signed = "Будет введена";
+                    }
+                    else
+                    {
+                        pmrequestPosition.Signed = "Будет сокращена";
+                    }
+
+                    if (position.Decertificate > 0)
+                    {
+                        pmrequestPosition.DecertificateDate = position.Decertificatedate.GetValueOrDefault().ToString("yyyy.MM.dd");
+                    }
+                    else
+                    {
+                        pmrequestPosition.DecertificateDate = "Не подлежит";
+                    }
+
+                    if (position.Civilrankhigh > 0)
+                    {
+                        pmrequestPosition.CivilClassHigh = position.Civilrankhigh.ToString();
+                        pmrequestPosition.CivilClassLow = position.Civilranklow.ToString();
+                    }
+                    else
+                    {
+                        pmrequestPosition.CivilClassHigh = "";
+                        pmrequestPosition.CivilClassLow = "";
+                    }
+
+                    DecreeoperationManagement dom = doms.FirstOrDefault(d => d.MetaPurposeForSubject == Keys.DECREE_OPERATION_META_PURPOSE_CREATE_SUBJECT_IN_FUTURE ||
+                        d.MetaPurposeForSubject == Keys.DECREE_OPERATION_META_PURPOSE_DELETE_SUBJECT_IN_FUTURE );
+
+                    
+                    pmrequestPosition.DateCreated = dom.MetaDateActive.ToString("dd.MM.yyyy");
+                    pmrequestPosition.DecreeCreationName = dom.MetaDecreeName;
+                    pmrequestPosition.DecreeCreationUnofficialName = dom.MetaDecreeNameUnofficial;
+                    pmrequestPosition.DecreeCreationNumber = dom.MetaDecreeNumber;
+
+                    /**
+                     * Has altranks.
+                     */
+                    if (position.Altrank > 0)
+                    {
+                        pmrequest.AnyAltranks = true;
+                        AltrankInner altrankInner = new AltrankInner(position, this);
+                        AltrankPrintable altrankPrintable = printables.FirstOrDefault(p => p.Altrankconditiongroup.Id == altrankInner.Altrankconditiongroup.Id);
+                        if (altrankPrintable == null)
+                        {
+                            altrankPrintable = new AltrankPrintable();
+                            altrankPrintable.Altrankconditiongroup = altrankInner.Altrankconditiongroup;
+                            altrankPrintable.Altrankconditionnames = altrankInner.Conditions.Select(c => c.Name).ToList();
+                            altrankPrintable.Altranknames = new Dictionary<int, List<string>>();
+                            printables.Add(altrankPrintable);
+                        }
+                        altrankPrintable.Altranknames.Add(position.Id, altrankInner.Ranks.Select(c => c.Name).ToList());
+                    }
+
+                    pmrequestPosition.Heading = "";
+                    if (position.Head > 0)
+                    {
+
+                        Structure headingStructure = StructuresLocal().GetValue(position.Headid);
+                        //Structure headingStructure = Structures.FirstOrDefault(s => s.Id == position.Headid);
+                        if (headingStructure != null)
+                        {
+                            pmrequestPosition.Heading = headingStructure.Name;
+                        }
+
+                    }
+
+                    pmrequestPosition.Curation = "";
+                    if (position.Curator > 0)
+                    {
+                        int[] curationids = position.Curatorlist.Split(',').Select(int.Parse).ToArray();
+                        foreach (int id in curationids)
+                        {
+                            Structure structure = StructuresLocal().GetValue(id);
+                            //Structure structure = Structures.FirstOrDefault(s => s.Id == id);
+                            if (structure != null)
+                            {
+                                pmrequestPosition.Curation += structure.Name + ", ";
+                            }
+
+                        }
+                        if (pmrequestPosition.Curation.Length > 0)
+                        {
+                            pmrequestPosition.Curation = pmrequestPosition.Curation.Substring(0, pmrequestPosition.Curation.Length - 2);
+                        }
+                    }
+
+                    if (position.Notice != null)
+                    {
+                        pmrequestPosition.Notice = position.Notice;
+                    }
+                    else
+                    {
+                        pmrequestPosition.Notice = "";
+                    }
+
+
+                    //pmrequestPosition.Signed = IsNotSignedAndCreated();
+                    list.Add(pmrequestPosition);
+                    index++;
+                }
+                catch (Exception ex)
+                {
+
+                }
+
+            }
+            pmrequest.AltrankPrintables = printables;
+
+            return list;
+        }
+
+        /**
+         * Выдает информацию о должностях, основанную на запросе.
+         */
+        public List<PmrequestPosition> GetPmrequestPositions(Pmrequest pmrequest, User user)
+        {
+            context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
+            DateTime date = user.Date.GetValueOrDefault();
+
+            Dictionary<int, Structure> struct_local = context.Structure.ToDictionary(r => r.Id);
+
+            Dictionary<int, Positiontype> positiontypesLocal = PositiontypesLocal();
+            Dictionary<int, Sourceoffinancing> sofsLocal = SourceoffinancingsLocal();
+            Dictionary<int, Mrd> mrdsLocal = MrdsLocal();
+            Dictionary<int, Positionmrd> positionmrdsLocal = LocalizeObject<Positionmrd>(Positionmrds.Select(p => p.Id).ToList(), Positionmrds.ToList());
+            Dictionary<int, Rank> ranksLocal = LocalizeObject<Rank>(Ranks.Select(p => p.Id).ToList(), Ranks.ToList());
+            //Positiontypes.Select(i => i.)
+            //bool hasAccess = IdentityService.CanReadStructure(sessionid, repository, staffManagement.Id);
+
+            List<PmrequestPosition> list = new List<PmrequestPosition>();
+            IEnumerable<Position> positions = null;
+            List<int> structuretypes = null;
+
+            if (pmrequest.Structuretypes != null && pmrequest.Structuretypes.Length > 0)
+            {
+                structuretypes = pmrequest.Structuretypes.Split(',').Select(int.Parse).ToList();
+                structuretypes = FilterStructuresByReadability(user, structuretypes);
+
+            }
+
+            /**
+             * Include only specified structures
+             */
+            if (pmrequest.Structures != null && pmrequest.Structures.Length > 0)
+            {
+                int[] structuresArray = pmrequest.Structures.Split(',').Select(int.Parse).ToArray();
+                structuresArray = FilterStructuresByReadability(user, structuresArray.ToList()).ToArray();
+
+                HashSet<int> structures = new HashSet<int>();
+                foreach (int i in structuresArray)
+                {
+                    structures.UnionWith(GetStructuresSiblings(i, null, date));
+                }
+                List<Position> positionsTemp = new List<Position>();
+                foreach (int i in structures)
+                {
+                    List<Position> valuesToAdd = new List<Position>();
+                    if (PositionsStructureAsKeyLocal().ContainsKey(i))
+                    {
+                        valuesToAdd = PositionsStructureAsKeyLocal()[i];
+                    }
+                    //List<Position> positionsToAdd = new List<Position>(PositionsLocal().Values.Where(p => p.Structure == i));
+                    positionsTemp.AddRange(valuesToAdd);
+                }
+
+                positions = FilterDeletedPositions(positionsTemp, user.Date.GetValueOrDefault()).ToList(); 
+            /**
+             * Include all structures
+             */
+            } else
+            {
+                List<int> structuresArray = new List<int>();
+                foreach(Structure structure in FilterDeletedStructures(struct_local.Values.Where(s => s.Parentstructure == 0), user.Date.GetValueOrDefault()))
+                {
+                    structuresArray.Add(StructureBaseId(structure));
+                }
+                HashSet<int> structures = new HashSet<int>();
+                foreach (int i in structuresArray)
+                {
+                    structures.UnionWith(GetStructuresSiblings(i, null, date));
+                }
+                List<Position> positionsTemp = new List<Position>();
+                foreach (int i in structures)
+                {
+                    List<Position> valuesToAdd = new List<Position>();
+                    if (PositionsStructureAsKeyLocal().ContainsKey(i))
+                    {
+                        valuesToAdd = PositionsStructureAsKeyLocal()[i];
+                    }
+                    //List<Position> positionsToAdd = new List<Position>(PositionsLocal().Values.Where(p => p.Structure == i));
+                    positionsTemp.AddRange(valuesToAdd);
+                }
+                positions = FilterDeletedPositions(positionsTemp, user.Date.GetValueOrDefault()).ToList();
+                //positions = FilterDeletedPositionsQueryable(Positions, user.Date.GetValueOrDefault());
+            }
+
+            /*Dictionary<int, Structure> struct_local = context.Structure.ToDictionary(r => r.Id);*/
+
+            if (structuretypes != null)
+            {
+                List<Position> input = positions.ToList();
+                positions = positions.Where(p => {
+                //positions = positions.AsParallel().Where(p => {
+                    if (p.Structure == 0)
+                    {
+                        return false;
+                    }
+                    //Structure structure = Structures.FirstOrDefault(s => s.Id == p.Structure);
+                    Structure structure = null;
+                    if (struct_local.ContainsKey(p.Structure))
+                    {
+                        structure = struct_local[p.Structure];
+                    } else
+                    {
+                        return false;
+                    }
+
+                    return structuretypes.Contains(GetStructureType(structure));
+                });
+
+                List<Position> output = new List<Position>();
+                foreach(Position time in input)
+                {
+                    Structure str = struct_local.GetValue(time.Structure),
+                    curent = GetActualStructureInfo(str, user.Date.GetValueOrDefault());
+                    if (structuretypes.Contains(curent.Structuretype))
+                        output.Add(time);
+                }
+                positions = output;
+            }
+
+
+            /**
+             * Include only replaced by civils
+             */
+            if (pmrequest.Replacedbycivil > 0)
+            {
+                positions = positions.Where(p => p.Replacedbycivil > 0);
+            }
+
+            if (pmrequest.Notopchs > 0)
+            {
+                positions = positions.Where(p => p.Opchs == 0);
+            }
+
+
+            /**
+             * Exclude replaced by civils
+             */
+            if (pmrequest.Replacedbycivilnot > 0)
+            {
+                positions = positions.Where(p => p.Replacedbycivil == 0);
+            }
+
+            if (pmrequest.Civil > 0)
+            {
+                positions = positions.Where(p => p.Cap.GetValueOrDefault() == 0);
+            }
+
+            if (pmrequest.Decertificate > 0)
+            {
+                positions = positions.Where(p => p.Decertificate > 0);
+            }
+
+            if (pmrequest.Decertificateexpired > 0)
+            {
+                positions = positions.Where(p => p.Decertificate > 0 && user.Date.GetValueOrDefault() > p.Decertificatedate);
+            }
+
+            if (pmrequest.Replacedbycivildateavailable > 0)
+            {
+                positions = positions.Where(p => p.Replacedbycivildatelimit > 0);
+            }
+
+            if (pmrequest.Replacedbycivildateexpired > 0)
+            {
+                positions = positions.Where(p => p.Replacedbycivildatelimit > 0 && user.Date.GetValueOrDefault() > p.Replacedbycivildate);
+            }
+
+            /**
+             * 
+             */
+            if (pmrequest.Signed > 0 || pmrequest.Notsigned > 0 || pmrequest.Willbenotsigned > 0 || pmrequest.Willbesigned > 0)
+            {
+                if (pmrequest.Signed == 0)
+                {
+                    positions = positions.Except(positions.Where(p => IsSignedAndCreated(p, user.Date.GetValueOrDefault())));
+                }
+                if ( pmrequest.Notsigned == 0)
+                {
+                    positions = positions.Except(positions.Where(p => IsNotSignedAndCreated(p, user.Date.GetValueOrDefault())));
+                } 
+            }
+
+            if (pmrequest.Ranks != null && pmrequest.Ranks.Length > 0)
+            {
+                int[] ranks = pmrequest.Ranks.Split(',').Select(int.Parse).ToArray();
+                positions = positions.Where(p => ranks.Contains(p.Cap.GetValueOrDefault()));
+            }
+
+            if (pmrequest.Positiontypes != null && pmrequest.Positiontypes.Length > 0)
+            {
+                int[] positiontypes = pmrequest.Positiontypes.Split(',').Select(int.Parse).ToArray();
+                positions = positions.Where(p => positiontypes.Contains(p.Positiontype));
+            }
+            if (pmrequest.Positioncategories != null && pmrequest.Positioncategories.Length > 0)
+            {
+                int[] positioncategories = pmrequest.Positioncategories.Split(',').Select(int.Parse).ToArray();
+                positions = positions.Where(p => positioncategories.Contains(p.Positioncategory));
+            }
+
+            if (pmrequest.Civilclasshigh > 0 && pmrequest.Civilclasslow > 0)
+            {
+                foreach (Position pos in positions)
+                {
+                    int civilrankhigh = pos.Civilrankhigh;
+                    int pmcivilrankhigh = pmrequest.Civilclasshigh;
+                }
+                positions = positions.Where(p => p.Civilrankhigh > 0 && pmrequest.Civilclasshigh <= p.Civilrankhigh && pmrequest.Civilclasslow >= p.Civilranklow);
+
+            }
+
+            if (pmrequest.Sofs != null && pmrequest.Sofs.Length > 0)
+            {
+                int[] sofs = pmrequest.Sofs.Split(',').Select(int.Parse).ToArray();
+                positions = positions.Where(p => sofs.Contains(p.Sourceoffinancing)).ToList();
+            }
+            if (pmrequest.Mrds != null && pmrequest.Mrds.Length > 0)
+            {
+                int[] mrds = pmrequest.Mrds.Split(',').Select(int.Parse).ToArray();
+                //IEnumerable<int> pmids = Positionmrds.Where(pm => pm.Position == p.Id).Select(pm => pm.Mrd);
+                positions = positions.Where(p => {
+                    IEnumerable<int> pmids = positionmrdsLocal.Values.Where(pm => pm.Position == p.Id).Select(pm => pm.Mrd);
+                    foreach (int pmid in pmids)
+                    {
+
+                        if (mrds.FirstOrDefault(m => m == pmid) != 0)
+                        {
+                            return true;
+                        }
+                    }
+                    return false;
+                }).ToList();
+            }
+
+
+            /**
+             * W R I T I N G    I N F O R M A T I O N
+             */
+            List<AltrankPrintable> printables = new List<AltrankPrintable>();
+            pmrequest.AltrankPrintables = printables;
+            //positions = positions.ToList();
+            int index = 0;
+            foreach (Position position in positions)
+            {
+                try
+                {
+
+                    if (IsSignedAndWillCreated(position, user.Date.GetValueOrDefault()))
+                    {
+                        continue;
+                    }
+                
+                PmrequestPosition pmrequestPosition = new PmrequestPosition();
+                pmrequestPosition.position = position;
+                pmrequestPosition.Id = position.Id;
+                if (positiontypesLocal.ContainsKey(position.Positiontype))
+                    {
+                        pmrequestPosition.Positiontype = positiontypesLocal[position.Positiontype].Name;
+                    } else
+                    {
+                        pmrequestPosition.Positiontype = "Должность не определена";
+                    }
+                    //pmrequestPosition.Positiontype += position.Id; - Нужно было для отладки
+                pmrequestPosition.Tree = FormTree(position, date, true);
+
+                pmrequestPosition.Part = position.Part;
+                pmrequestPosition.Partval = position.Partval;
+
+                string rank = "Гражданская должность";
+                if (position.Cap.GetValueOrDefault() != 0)
+                {
+                    rank = ranksLocal[position.Cap.GetValueOrDefault()].Name;
+                    if (rank == null)
+                    {
+                        rank = "Гражданская должность";
+                    }
+                }
+                pmrequestPosition.Rank = rank;
+                pmrequestPosition.Positioncategory = PositioncategoriesLocal()[position.Positioncategory].Name;
+                pmrequestPosition.Sof = sofsLocal[position.Sourceoffinancing].Name;
+                pmrequestPosition.Mrds = GetMrdsNamesLocal(position.Id, mrdsLocal, positionmrdsLocal);
+
+                Structure structureForStructuretype = struct_local.GetValue(position.Structure);
+                pmrequestPosition.Structuremrd = "";
+                if (structureForStructuretype != null)
+                {
+                    Structure actualStructureForStructuretype = GetActualStructureInfo(structureForStructuretype, date);
+                    int structuretypeid = GetStructureType(actualStructureForStructuretype);
+                    if (structuretypeid > 0) 
+                    {
+                        Structuretype structuretype = StructuretypesLocal().GetValue(structuretypeid);
+                        pmrequestPosition.Structuremrd = structuretype.Name;
+                    }
+                    
+                }
+                
+
+                if (position.Replacedbycivil > 0)
+                {
+                    pmrequestPosition.ReplacedByCivil = "Может";
+                    pmrequestPosition.ReplacedByCivilPositiontype = positiontypesLocal[position.Replacedbycivilpositiontype].Name;
+                    if (PositioncategoriesLocal().ContainsKey(position.Replacedbycivilpositioncategory))
+                    {
+                        pmrequestPosition.ReplacedByCivilPositioncategory = PositioncategoriesLocal()[position.Replacedbycivilpositioncategory].Name;
+                    }
+                    if (position.Replacedbycivildatelimit > 0)
+                    {
+                        pmrequestPosition.ReplacedByCivilDate = position.Replacedbycivildate.GetValueOrDefault().ToString("yyyy.MM.dd");
+                    }
+
+                    if (position.Civildecree > 0)
+                    {
+                        pmrequestPosition.ReplacedByCivilDecree = position.Civildecreenumber;
+                        pmrequestPosition.ReplacedByCivilDecreeDate = position.Civildecreedate.GetValueOrDefault().ToString("yyyy.MM.dd");
+                    }
+                } else
+                {
+                    pmrequestPosition.ReplacedByCivil = "Не может";
+                    pmrequestPosition.ReplacedByCivilPositiontype = "";
+                    pmrequestPosition.ReplacedByCivilPositioncategory = "";
+                    pmrequestPosition.ReplacedByCivilDecreeDate = "";
+                    pmrequestPosition.ReplacedByCivilDate = "";
+                    pmrequestPosition.ReplacedByCivilDecree = "";
+                }
+
+                
+                DecreeOperationsRequest request = GetDecreeOperationsRequest(position, user.Date.GetValueOrDefault()); 
+                List<DecreeoperationManagement> doms = RequestDecreeOperations(request);
+                    
+                if (IsSignedAndCreated(doms))
+                {
+                    pmrequestPosition.Signed = "Должность введена";
+                }
+                else
+                {
+                    pmrequestPosition.Signed = "Должность введена, но приказ не подписан";
+                }
+
+                if (position.Decertificate > 0)
+                {
+                    pmrequestPosition.DecertificateDate = position.Decertificatedate.GetValueOrDefault().ToString("yyyy.MM.dd");
+                } else
+                {
+                    pmrequestPosition.DecertificateDate = "Не подлежит";
+                }
+
+                if (position.Civilrankhigh > 0)
+                {
+                    pmrequestPosition.CivilClassHigh = position.Civilrankhigh.ToString();
+                    pmrequestPosition.CivilClassLow = position.Civilranklow.ToString();
+                } else
+                {
+                    pmrequestPosition.CivilClassHigh = "";
+                    pmrequestPosition.CivilClassLow = "";
+                }
+
+                DecreeoperationManagement dom = doms.FirstOrDefault(d => d.MetaPurposeForSubject == Keys.DECREE_OPERATION_META_PURPOSE_CREATED_SUBJECT ||
+                    d.MetaPurposeForSubject == Keys.DECREE_OPERATION_META_PURPOSE_CREATED_SUBJECT_NOT_SIGNED || d.MetaPurposeForSubject == Keys.DECREE_OPERATION_META_PURPOSE_CREATE_SUBJECT_IN_FUTURE ||
+                    d.MetaPurposeForSubject == Keys.DECREE_OPERATION_META_PURPOSE_CREATE_SUBJECT_IN_FUTURE_NOT_SIGNED);
+
+                pmrequestPosition.DateCreated = dom.MetaDateActive.ToString("yyyy.MM.dd");
+                pmrequestPosition.DecreeCreationName = dom.MetaDecreeName;
+                pmrequestPosition.DecreeCreationUnofficialName = dom.MetaDecreeNameUnofficial;
+                pmrequestPosition.DecreeCreationNumber = dom.MetaDecreeNumber;
+
+                /**
+                 * Has altranks.
+                 */
+                if (position.Altrank > 0)
+                {
+                    pmrequest.AnyAltranks = true;
+                    AltrankInner altrankInner = new AltrankInner(position, this);
+                    AltrankPrintable altrankPrintable = printables.FirstOrDefault(p => p.Altrankconditiongroup.Id == altrankInner.Altrankconditiongroup.Id);
+                    if (altrankPrintable == null)
+                    {
+                        altrankPrintable = new AltrankPrintable();
+                        altrankPrintable.Altrankconditiongroup = altrankInner.Altrankconditiongroup;
+                        altrankPrintable.Altrankconditionnames = altrankInner.Conditions.Select(c => c.Name).ToList();
+                        altrankPrintable.Altranknames = new Dictionary<int, List<string>>();
+                        printables.Add(altrankPrintable);
+                    }
+                    altrankPrintable.Altranknames.Add(position.Id, altrankInner.Ranks.Select(c => c.Name).ToList());
+                }
+
+                pmrequestPosition.Heading = "";
+                if (position.Head > 0)
+                {
+                    
+                    Structure headingStructure = struct_local.GetValue(position.Headid);
+                    //Structure headingStructure = Structures.FirstOrDefault(s => s.Id == position.Headid);
+                    if (headingStructure != null)
+                    {
+                        pmrequestPosition.Heading = headingStructure.Name;
+                    }
+                    
+                }
+
+                pmrequestPosition.Curation = "";
+                if (position.Curator > 0)
+                {
+                    int[] curationids = position.Curatorlist.Split(',').Select(int.Parse).ToArray();
+                    foreach (int id in curationids)
+                    {
+                        Structure structure = struct_local.GetValue(id);
+                        //Structure structure = Structures.FirstOrDefault(s => s.Id == id);
+                        if (structure != null)
+                        {
+                            pmrequestPosition.Curation += structure.Name + ", ";
+                        }
+                        
+                    }
+                    if (pmrequestPosition.Curation.Length > 0)
+                    {
+                        pmrequestPosition.Curation = pmrequestPosition.Curation.Substring(0, pmrequestPosition.Curation.Length - 2);
+                    }
+                }
+
+                if (position.Notice != null)
+                {
+                    pmrequestPosition.Notice = position.Notice;
+                } else
+                {
+                    pmrequestPosition.Notice = "";
+                }
+
+
+                //pmrequestPosition.Signed = IsNotSignedAndCreated();
+                list.Add(pmrequestPosition);
+                index++;
+                } catch (Exception ex)
+                {
+
+                } 
+
+            }
+            pmrequest.AltrankPrintables = printables;
+            
+            return list;
+        }
+
         public List<Structure> GetAllStructureFromOneOriginal(Structure structure)
         {
             Structure originalStructure = structure;
@@ -8229,6 +9356,420 @@ namespace PersonnelManagement.Models
             }
 
             return actualStructuresMap.Values;
+        }
+
+        public Pmresult GetPmresult(List<PmrequestPosition> pmrequestPositions, Pmrequest pmrequest)
+        {
+            Pmresult pmresult = new Pmresult();
+            List<Position> positions = null;
+            List<Position> positionsvar = null;
+            if (pmrequest.Ranksexpanded > 0)
+            {
+                positions = pmrequestPositions.Select(p => p.position).Where(pp => PositioncategoriesLocal().Values.First(pc => pc.Id == pp.Positioncategory).Variable == 0).ToList();
+                positionsvar = pmrequestPositions.Select(p => p.position).Where(pp => PositioncategoriesLocal().Values.First(pc => pc.Id == pp.Positioncategory).Variable > 0).ToList();
+            } else
+            {
+                positions = pmrequestPositions.Select(p => p.position).ToList();
+                positionsvar = new List<Position>();
+            }
+
+            foreach (Position position in positions)
+            {
+                pmresult.Count += position.Partval;
+            }
+
+            foreach (Position position in positionsvar)
+            {
+                pmresult.Count += position.Partval;
+                pmresult.Countvar += position.Partval;
+            }
+
+            pmresult.Ranksexpanded = pmrequest.Ranksexpanded;
+            List<Rank> requestedRanks = new List<Rank>();
+            requestedRanks.AddRange(Ranks); // because we need fetch all ranks
+
+
+            requestedRanks = requestedRanks.OrderBy(r => r.Order).ToList();
+            Dictionary<int, PmresultSinglerank> rankInfos = new Dictionary<int, PmresultSinglerank>(); // int - order
+            foreach (Rank rank in Ranks.OrderBy(r => r.Order))
+            {
+                rankInfos.Add(rank.Order.GetValueOrDefault(), new PmresultSinglerank());
+            }
+            Dictionary<int, double> civil = new Dictionary<int, double>();
+            foreach (Position position in positions)
+            {
+                if (position.Cap.GetValueOrDefault() == 0) // CIVIL
+                {
+
+                    if (!civil.ContainsKey(position.Positioncategory))
+                    {
+                        civil.Add(position.Positioncategory, position.Partval);
+                    }
+                    else
+                    {
+                        civil[position.Positioncategory] += position.Partval;
+                    }
+                }
+                else if (position.Altrank > 0) // HAS ALTRANKS
+                {
+                    AltrankInner altrankInner = new AltrankInner(position, this);
+                    rankInfos[position.Cap.GetValueOrDefault()].Defaultcount++;
+                    rankInfos[position.Cap.GetValueOrDefault()].Absolutecount++;
+                    rankInfos[position.Cap.GetValueOrDefault()].Reduce++;
+                    rankInfos[altrankInner.RanksMinMax.Value.Order.GetValueOrDefault()].Maxcount++;
+                    int dif = altrankInner.RanksMinMax.Value.Order.GetValueOrDefault() - position.Cap.GetValueOrDefault();
+                    // Upcount
+                    if (!rankInfos[position.Cap.GetValueOrDefault()].Upcount.ContainsKey(altrankInner.Altrankconditiongroup.Id))
+                    {
+                        rankInfos[position.Cap.GetValueOrDefault()].Upcount.Add(altrankInner.Altrankconditiongroup.Id, new Dictionary<int, int>());
+                    }
+                    if (!rankInfos[position.Cap.GetValueOrDefault()].Upcount[altrankInner.Altrankconditiongroup.Id].ContainsKey(dif))
+                    {
+                        rankInfos[position.Cap.GetValueOrDefault()].Upcount[altrankInner.Altrankconditiongroup.Id].Add(dif, 1);
+                    } else
+                    {
+                        rankInfos[position.Cap.GetValueOrDefault()].Upcount[altrankInner.Altrankconditiongroup.Id][dif] += 1;
+                    }
+
+                    if (!rankInfos[position.Cap.GetValueOrDefault()].UpcountUnited.ContainsKey(dif))
+                    {
+                        rankInfos[position.Cap.GetValueOrDefault()].UpcountUnited.Add(dif, 1);
+                    }
+                    else
+                    {
+                        rankInfos[position.Cap.GetValueOrDefault()].UpcountUnited[dif] += 1;
+                    }
+
+                    // Came from other ranks
+                    if (!rankInfos[position.Cap.GetValueOrDefault() + dif].CameFromUnited.ContainsKey(dif))
+                    {
+                        rankInfos[position.Cap.GetValueOrDefault() + dif].CameFromUnited.Add(dif, 1);
+                    }
+                    else
+                    {
+                        rankInfos[position.Cap.GetValueOrDefault() + dif].CameFromUnited[dif] += 1;
+                    }
+
+                    bool sumunitedcalculated = false;
+                    while (dif > 0)
+                    {
+                        rankInfos[position.Cap.GetValueOrDefault() + dif].Absolutecount++;
+
+                        // Came from other ranks
+                        if (!rankInfos[position.Cap.GetValueOrDefault() + dif].CameFrom.ContainsKey(altrankInner.Altrankconditiongroup.Id))
+                        {
+                            rankInfos[position.Cap.GetValueOrDefault() + dif].CameFrom.Add(altrankInner.Altrankconditiongroup.Id, new Dictionary<int, int>());
+                        }
+                        if (!rankInfos[position.Cap.GetValueOrDefault() + dif].CameFrom[altrankInner.Altrankconditiongroup.Id].ContainsKey(dif))
+                        {
+                            rankInfos[position.Cap.GetValueOrDefault() + dif].CameFrom[altrankInner.Altrankconditiongroup.Id].Add(dif, 1);
+                        }
+                        else
+                        {
+                            rankInfos[position.Cap.GetValueOrDefault() + dif].CameFrom[altrankInner.Altrankconditiongroup.Id][dif] += 1;
+                        }
+
+                        // Сколько переменных должностей прошлой мимо этой должности.  1) этап от начала 2) количество таких прошедших 
+                        if (!rankInfos[position.Cap.GetValueOrDefault() + dif].ComethroughUnited.ContainsKey(dif))
+                        {
+                            rankInfos[position.Cap.GetValueOrDefault() + dif].ComethroughUnited.Add(dif, 1);
+                        }
+                        else
+                        {
+                            rankInfos[position.Cap.GetValueOrDefault() + dif].ComethroughUnited[dif] += 1;
+                        }
+
+                        dif--;
+                    }
+                        
+                } else // HASN'T
+                {
+                    rankInfos[position.Cap.GetValueOrDefault()].Defaultcount++;
+                    rankInfos[position.Cap.GetValueOrDefault()].Absolutecount++;
+                    rankInfos[position.Cap.GetValueOrDefault()].Maxcount++;
+                }
+                    
+            }
+
+            /**
+             *  Переменный состав.
+             */
+            foreach (Position position in positionsvar)
+            {
+                rankInfos[position.Cap.GetValueOrDefault()].Defaultcountvar++;
+            }
+
+            /**
+                * We generated separate information block for each rank
+                */
+            List<PmresultSinglerank> pmresultSingleranks = new List<PmresultSinglerank>();
+            foreach (Rank requestedRank in requestedRanks)
+            {
+                //PmresultSinglerank pmresultSinglerank = new PmresultSinglerank();
+                PmresultSinglerank pmresultSinglerank = rankInfos[requestedRank.Order.GetValueOrDefault()];
+                pmresultSinglerank.Rank = requestedRank;
+                pmresultSingleranks.Add(pmresultSinglerank);
+            }
+
+            pmresult.Civil = "";
+            // Государственные служащие=1,Cлужащие=5
+            foreach(KeyValuePair<int, double> civilPair in civil)
+            {
+                pmresult.Civil += PositioncategoriesLocal().Values.First(p => p.Id == civilPair.Key).Name + "=" + civilPair.Value.ToString() + "@";
+            }
+            if (pmresult.Civil.Length > 0)
+            {
+                pmresult.Civil = pmresult.Civil.Substring(0, pmresult.Civil.Length - 1);
+            }
+
+
+            if (!(pmrequest.Ranks == null || pmrequest.Ranks.Length == 0))
+            {
+                IEnumerable<int> ids = pmrequest.Ranks.Split(',').Select(Int32.Parse);
+                List<PmresultSinglerank> remove = new List<PmresultSinglerank>();
+                foreach (PmresultSinglerank pmresultSinglerank in pmresultSingleranks)
+                {
+                    if (!ids.Contains(pmresultSinglerank.Rank.Id))
+                    {
+                        remove.Add(pmresultSinglerank);
+                    }
+                }
+                pmresultSingleranks.RemoveAll(r => remove.Contains(r));
+            }
+
+
+
+
+            // Paste info
+            if (pmresultSingleranks.Count > 0)
+            {
+                pmresult.Ranks = "";
+                pmresult.Defaultcount = "";
+                pmresult.Defaultcountvar = "";
+                pmresult.Absolutecount = "";
+                pmresult.Maxcount = "";
+                pmresult.Mincount = "";
+                pmresult.Uprankready = "";
+                pmresult.Uprankunited = "";
+                pmresult.Unitedlengthmax = "";
+                pmresult.Sumunited = "";
+
+                /**
+                 * Calculate max difference
+                 */
+                int absoluteUnitedlengthmax = 0;
+                foreach (PmresultSinglerank pmresultSinglerank in pmresultSingleranks)
+                {
+                    
+                    if (pmresultSinglerank.UpcountUnited.Count > absoluteUnitedlengthmax)
+                    {
+                        absoluteUnitedlengthmax = pmresultSinglerank.UpcountUnited.Count;
+                    }
+                    if (pmresultSinglerank.CameFromUnited.Count > absoluteUnitedlengthmax)
+                    {
+                        absoluteUnitedlengthmax = pmresultSinglerank.CameFromUnited.Count;
+                    }
+                }
+
+                foreach (PmresultSinglerank pmresultSinglerank in pmresultSingleranks)
+                {
+                    pmresult.Ranks += pmresultSinglerank.Rank.Name + "@";
+                    pmresult.Defaultcount += pmresultSinglerank.Defaultcount + "@";
+                    pmresult.Defaultcountvar += pmresultSinglerank.Defaultcountvar + "@";
+                    pmresult.Absolutecount += pmresultSinglerank.Absolutecount + "@";
+                    int mincount = pmresultSinglerank.Defaultcount - pmresultSinglerank.Reduce;
+                    pmresult.Mincount += mincount + "@";
+                    //int maxcount = pmresultSinglerank.Absolutecount - pmresultSinglerank.Reduce;
+                    pmresult.Maxcount += pmresultSinglerank.Maxcount + "@";
+
+                    
+                    // Из них при наличии ученой степени степени получить звание майор внутренней службы 10 ед., подполковник внутренней службы 20 ед. &
+                    if (pmresultSinglerank.Upcount != null && pmresultSinglerank.Upcount.Count > 0)
+                    {
+                        pmresult.Uprankready += "Из них ";
+                        foreach (KeyValuePair<int, Dictionary<int, int>> up in pmresultSinglerank.Upcount)
+                        {
+                            pmresult.Uprankready += Altrankconditiongroups.First(ar => ar.Id == up.Key).Name.ToLower() + " могут получить звание ";
+                            foreach (KeyValuePair<int, int> rankcount in up.Value)
+                            {
+                                Rank rank = Ranks.First(r => r.Order == pmresultSinglerank.Rank.Order + rankcount.Key);
+                                pmresult.Uprankready += rank.Name.ToLower() + " " + rankcount.Value + " ед., ";
+                            }
+                        }
+                        pmresult.Uprankready = pmresult.Uprankready.Substring(0, pmresult.Uprankready.Length - 2);
+                    }
+                    pmresult.Uprankready += "&";
+
+                    //public string Uprankunited { get; set; } // Капитан внутренней службы:1:5;Майор внутренней службы:2:5;
+
+                    int unitedlengthmax = 0;
+                    if (pmresultSinglerank.UpcountUnited.Count > pmresultSinglerank.CameFromUnited.Count)
+                    {
+                        unitedlengthmax = pmresultSinglerank.UpcountUnited.Count;
+                    } else
+                    {
+                        unitedlengthmax = pmresultSinglerank.CameFromUnited.Count;
+                    }
+                    pmresult.Unitedlengthmax += unitedlengthmax + "@";
+
+                    bool anyupcountunited = false;
+                    // Капитан внутренней службы:1:5;Майор внутренней службы:2:5;
+                    foreach (KeyValuePair<int, int> up in pmresultSinglerank.UpcountUnited)
+                    {
+                        pmresult.Uprankunited += Ranks.First(r => r.Order == pmresultSinglerank.Rank.Order + up.Key).Name + ':';
+                        pmresult.Uprankunited += up.Key.ToString() + ':';
+                        pmresult.Uprankunited += up.Value.ToString() + ';';
+                        anyupcountunited = true;
+                    }
+                    if (anyupcountunited)
+                    {
+                        pmresult.Uprankunited = pmresult.Uprankunited.Substring(0, pmresult.Uprankunited.Length - 1);
+                    }
+                    pmresult.Uprankunited += "@";
+
+                    bool anycomefromunited = false;
+                    //    public string Comefromunited { get; set; } // Старший лейтенант внутренней службы:1:5;Капитан внутренней службы:2:5;
+                    foreach (KeyValuePair<int, int> comefrom in pmresultSinglerank.CameFromUnited)
+                    {
+                        pmresult.Comefromunited += Ranks.First(r => r.Order == pmresultSinglerank.Rank.Order - comefrom.Key).Name + ':';
+                        pmresult.Comefromunited += comefrom.Key.ToString() + ':';
+                        pmresult.Comefromunited += comefrom.Value.ToString() + ';';
+                        anycomefromunited = true;
+                    }
+                    if (anycomefromunited)
+                    {
+                        pmresult.Comefromunited = pmresult.Comefromunited.Substring(0, pmresult.Comefromunited.Length - 1);
+                    }
+                    pmresult.Comefromunited += "@";
+
+
+                    bool anysumunited = false;
+                    /**
+                     * Calculate sum united. 100:120:100,100:100:100,
+                     */
+                    for (int i = 1; i <= absoluteUnitedlengthmax; i++)
+                    {
+                        int newdefaultcount = pmresultSinglerank.Defaultcount - pmresultSinglerank.Reduce;
+                        if (pmresultSinglerank.ComethroughUnited.ContainsKey(i))
+                        {
+                            newdefaultcount += pmresultSinglerank.ComethroughUnited[i];
+                        }
+                        pmresult.Sumunited += newdefaultcount.ToString() + ":";
+                        anysumunited = true;
+                    }
+                    if (anysumunited)
+                    {
+                        pmresult.Sumunited = pmresult.Sumunited.Substring(0, pmresult.Sumunited.Length - 1);
+                    }
+                    pmresult.Sumunited += "@";
+                }
+                pmresult.Ranks = pmresult.Ranks.Substring(0, pmresult.Ranks.Length - 1);
+                pmresult.Defaultcount = pmresult.Defaultcount.Substring(0, pmresult.Defaultcount.Length - 1);
+                pmresult.Defaultcountvar = pmresult.Defaultcountvar.Substring(0, pmresult.Defaultcountvar.Length - 1);
+                pmresult.Absolutecount = pmresult.Absolutecount.Substring(0, pmresult.Absolutecount.Length - 1);
+                pmresult.Maxcount = pmresult.Maxcount.Substring(0, pmresult.Maxcount.Length - 1);
+                pmresult.Mincount = pmresult.Mincount.Substring(0, pmresult.Mincount.Length - 1);
+                pmresult.Uprankready = pmresult.Uprankready.Substring(0, pmresult.Uprankready.Length - 1);
+                pmresult.Uprankunited = pmresult.Uprankunited.Substring(0, pmresult.Uprankunited.Length - 1);
+                pmresult.Comefromunited = pmresult.Comefromunited.Substring(0, pmresult.Comefromunited.Length - 1);
+                pmresult.Sumunited = pmresult.Sumunited.Substring(0, pmresult.Sumunited.Length - 1);
+                pmresult.Unitedlengthmax = pmresult.Unitedlengthmax.Substring(0, pmresult.Unitedlengthmax.Length - 1);
+
+                /**
+                 * Additional calculations for Ranks expanded.
+                 */
+                if (pmresult.Ranksexpanded > -1) // -1 Because it is calculated for all cases for now.
+                {
+                    pmresult.Uppedcount = "";
+                    pmresult.Uppedmap = "";
+
+                    // Fullfil uppedmap
+                    // Карта: Название=Айди;На сколько ранков максимум доступен подъем.  При наличии классности=1;2
+                    Dictionary<int, int> uppedmap = new Dictionary<int, int>();
+                    foreach (PmresultSinglerank pmresultSinglerank in pmresultSingleranks)
+                    {
+                        if (pmresultSinglerank.Upcount != null && pmresultSinglerank.Upcount.Count > 0)
+                        {
+                            foreach (KeyValuePair<int, Dictionary<int, int>> up in pmresultSinglerank.Upcount)
+                            {
+                                if (!uppedmap.ContainsKey(up.Key))
+                                {
+                                    uppedmap.Add(up.Key, 1);
+                                }
+                                foreach (KeyValuePair<int, int> rankcount in up.Value)
+                                {
+                                    if (rankcount.Key > uppedmap[up.Key])
+                                    {
+                                        uppedmap[up.Key] = rankcount.Key;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    if (pmresult.Uppedmap.Length > 0)
+                    {
+                        pmresult.Uppedmap = pmresult.Uppedmap.Substring(0, pmresult.Uppedmap.Length - 1);
+                    }
+
+                    bool anyGroup = false;
+                    // Fullfil 
+                    //При наличии классности=1:100;2:120&При наличии ученой степени=1:5, 
+                    foreach (PmresultSinglerank pmresultSinglerank in pmresultSingleranks)
+                    {
+                        //bool anyFrom = pmresultSinglerank.CameFrom.Count > 0; // Доходят ли какие должности до этого звания
+                        //bool anyUp = pmresultSinglerank.Upcount.Count > 0; // Есть ли должности, которые стартуют с этого звания и уходят вверх. 
+
+                        
+                        // group id - max up.
+                        foreach (KeyValuePair<int,int> uppedPart in uppedmap)
+                        {
+                            pmresult.Uppedcount += Altrankconditiongroups.First(ar => ar.Id == uppedPart.Key).Name.ToLower() + "=";
+                            int up = 1;
+                            bool anyUpped = false;
+                            while (up <= uppedPart.Value)
+                            {
+                                pmresult.Uppedcount += up + ":";
+                                int count = pmresultSinglerank.Defaultcount - pmresultSinglerank.Reduce ;
+                                if (pmresultSinglerank.CameFrom.ContainsKey(uppedPart.Key))
+                                {
+                                    bool anyPlus = false;
+                                    foreach (KeyValuePair<int,int> cameFromPair in pmresultSinglerank.CameFrom[uppedPart.Key])
+                                    {
+                                        if (!anyPlus && cameFromPair.Key == up)
+                                        {
+                                            count += cameFromPair.Value;
+                                        }
+                                        anyPlus = true;
+                                    }
+                                    //count += pmresultSinglerank.CameFrom[uppedPart.Key][up];
+                                }
+                                pmresult.Uppedcount += count;
+                                pmresult.Uppedcount += ";";
+                                anyUpped = true;
+                                up += 1;
+                            }
+                            if (anyUpped)
+                            {
+                                pmresult.Uppedcount = pmresult.Uppedcount.Substring(0, pmresult.Uppedcount.Length - 1);
+                            }
+
+                            pmresult.Uppedcount += "&";
+                            anyGroup = true;
+                        }
+                        if (anyGroup)
+                        {
+                            pmresult.Uppedcount = pmresult.Uppedcount.Substring(0, pmresult.Uppedcount.Length - 1);
+                        }
+
+                        pmresult.Uppedcount += "@";
+                    }
+                    pmresult.Uppedcount = pmresult.Uppedcount.Substring(0, pmresult.Uppedcount.Length - 1);
+                    
+                }
+            }
+            
+
+            return pmresult;
         }
 
         public static T Clone<T>(T source)
@@ -9100,6 +10641,130 @@ namespace PersonnelManagement.Models
             return decreeoperationManagements;
         }
 
+        public int DateDiffsToYears(IEnumerable<DateDiff> dateDiffs)
+        {
+            int days = 0;
+            int months = 0;
+            int years = 0;
+            foreach (DateDiff dateDiff in dateDiffs)
+            {
+                years += dateDiff.ElapsedYears;
+                months += dateDiff.ElapsedMonths;
+                days += dateDiff.ElapsedDays;
+            }
+            while (days > 29)
+            {
+                days -= 30;
+                months += 1;
+            }
+            while (months > 11)
+            {
+                months -= 12;
+                years += 1;
+            }
+            return years;
+        }
+
+        public int DateDiffsToMonths(IEnumerable<DateDiff> dateDiffs)
+        {
+            int days = 0;
+            int months = 0;
+            int years = 0;
+            foreach (DateDiff dateDiff in dateDiffs)
+            {
+                years += dateDiff.ElapsedYears;
+                months += dateDiff.ElapsedMonths;
+                days += dateDiff.ElapsedDays;
+            }
+            while (days > 29)
+            {
+                days -= 30;
+                months += 1;
+            }
+            while (months > 11)
+            {
+                months -= 12;
+                years += 1;
+            }
+            return months;
+        }
+
+        public int DateDiffsToDays(IEnumerable<DateDiff> dateDiffs)
+        {
+            int days = 0;
+            int months = 0;
+            int years = 0;
+            foreach (DateDiff dateDiff in dateDiffs)
+            {
+                years += dateDiff.ElapsedYears;
+                months += dateDiff.ElapsedMonths;
+                days += dateDiff.ElapsedDays;
+            }
+            while (days > 29)
+            {
+                days -= 30;
+                months += 1;
+            }
+            while (months > 11)
+            {
+                months -= 12;
+                years += 1;
+            }
+            return days;
+        }
+
+        public void AddCountry(Country country)
+        {
+            context.Country.Add(country);
+            context.SaveChanges();
+        }
+
+        public void UpdateCountry(Country country)
+        {
+            Country contextCountry = context.Country.First(el => el.Id == country.Id);
+            contextCountry.Name = country.Name;
+            context.SaveChanges();
+        }
+
+        public void AddDrivertype(Drivertype drivertype)
+        {
+            context.Drivertype.Add(drivertype);
+            context.SaveChanges();
+        }
+
+        public void UpdateDrivertype(Drivertype drivertype)
+        {
+            Drivertype contextDrivertype = context.Drivertype.First(el => el.Id == drivertype.Id);
+            contextDrivertype.Name = drivertype.Name;
+            context.SaveChanges();
+        }
+
+        public void AddDrivercategory(Drivercategory drivercategory)
+        {
+            context.Drivercategory.Add(drivercategory);
+            context.SaveChanges();
+        }
+
+        public void UpdateDrivercategory(Drivercategory drivercategory)
+        {
+            Drivercategory contextDrivercategory = context.Drivercategory.First(el => el.Id == drivercategory.Id);
+            contextDrivercategory.Name = drivercategory.Name;
+            context.SaveChanges();
+        }
+
+        public void AddProoftype(Prooftype prooftype)
+        {
+            context.Prooftype.Add(prooftype);
+            context.SaveChanges();
+        }
+
+        public void UpdateProoftype(Prooftype prooftype)
+        {
+            Prooftype contextProoftype = context.Prooftype.First(el => el.Id == prooftype.Id);
+            contextProoftype.Name = prooftype.Name;
+            context.SaveChanges();
+        }
+
         public string CreatePassword(int length)
         {
             //const string valid = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
@@ -9113,1140 +10778,86 @@ namespace PersonnelManagement.Models
             return res.ToString();
         }
 
-        /**
-         * Выдает информацию о должностях, основанную на запросе.
-         */
-        public List<PmrequestPosition> GetPmrequestPositionsAddRemove(Pmrequest pmrequest, User user)
+        public CertificateManager GetCertificate(Certificate certificate)
         {
-            context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
-            DateTime date = user.Date.GetValueOrDefault();
-
-            Dictionary<int, Positiontype> positiontypesLocal = PositiontypesLocal();
-            Dictionary<int, Sourceoffinancing> sofsLocal = SourceoffinancingsLocal();
-            Dictionary<int, Mrd> mrdsLocal = MrdsLocal();
-            Dictionary<int, Positionmrd> positionmrdsLocal = LocalizeObject<Positionmrd>(Positionmrds.Select(p => p.Id).ToList(), Positionmrds.ToList());
-            Dictionary<int, Rank> ranksLocal = LocalizeObject<Rank>(Ranks.Select(p => p.Id).ToList(), Ranks.ToList());
-
-            List<PmrequestPosition> list = new List<PmrequestPosition>();
-            IEnumerable<Position> positions = null;
-            List<int> structuretypes = null;
-
-            int[] structuresArray = new int[] { pmrequest.Id };
-            //int[] structuresArray = pmrequest.Structures.Split(',').Select(int.Parse).ToArray();
-            structuresArray = FilterStructuresByReadability(user, structuresArray.ToList()).ToArray();
-
-            HashSet<int> structures = new HashSet<int>();
-            foreach (int i in structuresArray)
+            CertificateManager certificateManager = new CertificateManager();
+            certificateManager.Numud = certificate.NumUd.ToString();
+            certificateManager.Status = certificate.Status.GetValueOrDefault();
+            certificateManager.Certificatecommiteddate = certificate.CertificateCommitedDate.GetValueOrDefault();
+            certificateManager.Expirationdate = certificate.ExpirationDate.GetValueOrDefault();
+            certificateManager.FullName = certificate.FullName;
+            Blankform blankform = Blankforms.FirstOrDefault(b => b.Id == certificate.Blank.GetValueOrDefault());
+            if (blankform != null)
             {
-                structures.UnionWith(GetStructuresSiblings(i, null, date));
-            }
-            List<Position> positionsTemp = new List<Position>();
-            foreach (int i in structures)
-            {
-                List<Position> valuesToAdd = new List<Position>();
-                if (PositionsStructureAsKeyLocal().ContainsKey(i))
-                {
-                    valuesToAdd = PositionsStructureAsKeyLocal()[i];
-                }
-                //List<Position> positionsToAdd = new List<Position>(PositionsLocal().Values.Where(p => p.Structure == i));
-                positionsTemp.AddRange(valuesToAdd);
+                certificateManager.Blank = blankform.Name;
             }
 
-            positions = FilterDeletedPositions(positionsTemp, user.Date.GetValueOrDefault()).ToList();
-
-            positions = positions.Where(p => IsSignedAndWillCreated(p, user.Date.GetValueOrDefault()) || IsSignedAndWillDeleted(p, user.Date.GetValueOrDefault())).ToList();
-
-
-
-
-            /**
-             * W R I T I N G    I N F O R M A T I O N
-             */
-            List<AltrankPrintable> printables = new List<AltrankPrintable>();
-            pmrequest.AltrankPrintables = printables;
-            //positions = positions.ToList();
-            int index = 0;
-            foreach (Position position in positions)
+            Agency issuingauthority = Agencies.FirstOrDefault(a => a.Id == certificate.Issuingauthority.GetValueOrDefault());
+            if (issuingauthority != null)
             {
-                try
-                {
-
-                    PmrequestPosition pmrequestPosition = new PmrequestPosition();
-                    pmrequestPosition.position = position;
-                    pmrequestPosition.Id = position.Id;
-                    if (positiontypesLocal.ContainsKey(position.Positiontype))
-                    {
-                        pmrequestPosition.Positiontype = positiontypesLocal[position.Positiontype].Name;
-                    }
-                    else
-                    {
-                        pmrequestPosition.Positiontype = "Должность не определена";
-                    }
-                    //pmrequestPosition.Positiontype += position.Id; - Нужно было для отладки
-                    pmrequestPosition.Tree = FormTree(position, date, true);
-
-                    pmrequestPosition.Part = position.Part;
-                    pmrequestPosition.Partval = position.Partval;
-
-                    string rank = "Гражданская должность";
-                    if (position.Cap.GetValueOrDefault() != 0)
-                    {
-                        rank = ranksLocal[position.Cap.GetValueOrDefault()].Name;
-                        if (rank == null)
-                        {
-                            rank = "Гражданская должность";
-                        }
-                    }
-                    pmrequestPosition.Rank = rank;
-                    pmrequestPosition.Positioncategory = PositioncategoriesLocal()[position.Positioncategory].Name;
-                    pmrequestPosition.Sof = sofsLocal[position.Sourceoffinancing].Name;
-                    pmrequestPosition.Mrds = GetMrdsNamesLocal(position.Id, mrdsLocal, positionmrdsLocal);
-
-                    if (position.Replacedbycivil > 0)
-                    {
-                        pmrequestPosition.ReplacedByCivil = "Может";
-                        pmrequestPosition.ReplacedByCivilPositiontype = positiontypesLocal[position.Replacedbycivilpositiontype].Name;
-                        if (PositioncategoriesLocal().ContainsKey(position.Replacedbycivilpositioncategory))
-                        {
-                            pmrequestPosition.ReplacedByCivilPositioncategory = PositioncategoriesLocal()[position.Replacedbycivilpositioncategory].Name;
-                        }
-                        if (position.Replacedbycivildatelimit > 0)
-                        {
-                            pmrequestPosition.ReplacedByCivilDate = position.Replacedbycivildate.GetValueOrDefault().ToString("yyyy.MM.dd");
-                        }
-
-                        if (position.Civildecree > 0)
-                        {
-                            pmrequestPosition.ReplacedByCivilDecree = position.Civildecreenumber;
-                            pmrequestPosition.ReplacedByCivilDecreeDate = position.Civildecreedate.GetValueOrDefault().ToString("yyyy.MM.dd");
-                        }
-                    }
-                    else
-                    {
-                        pmrequestPosition.ReplacedByCivil = "Не может";
-                        pmrequestPosition.ReplacedByCivilPositiontype = "";
-                        pmrequestPosition.ReplacedByCivilPositioncategory = "";
-                        pmrequestPosition.ReplacedByCivilDecreeDate = "";
-                        pmrequestPosition.ReplacedByCivilDate = "";
-                        pmrequestPosition.ReplacedByCivilDecree = "";
-                    }
-
-
-                    DecreeOperationsRequest request = GetDecreeOperationsRequest(position, user.Date.GetValueOrDefault());
-                    List<DecreeoperationManagement> doms = RequestDecreeOperations(request);
-
-                    if (IsSignedAndWillCreated(doms))
-                    {
-                        pmrequestPosition.Signed = "Будет введена";
-                    }
-                    else
-                    {
-                        pmrequestPosition.Signed = "Будет сокращена";
-                    }
-
-                    if (position.Decertificate > 0)
-                    {
-                        pmrequestPosition.DecertificateDate = position.Decertificatedate.GetValueOrDefault().ToString("yyyy.MM.dd");
-                    }
-                    else
-                    {
-                        pmrequestPosition.DecertificateDate = "Не подлежит";
-                    }
-
-                    if (position.Civilrankhigh > 0)
-                    {
-                        pmrequestPosition.CivilClassHigh = position.Civilrankhigh.ToString();
-                        pmrequestPosition.CivilClassLow = position.Civilranklow.ToString();
-                    }
-                    else
-                    {
-                        pmrequestPosition.CivilClassHigh = "";
-                        pmrequestPosition.CivilClassLow = "";
-                    }
-
-                    DecreeoperationManagement dom = doms.FirstOrDefault(d => d.MetaPurposeForSubject == Keys.DECREE_OPERATION_META_PURPOSE_CREATE_SUBJECT_IN_FUTURE ||
-                        d.MetaPurposeForSubject == Keys.DECREE_OPERATION_META_PURPOSE_DELETE_SUBJECT_IN_FUTURE);
-
-
-                    pmrequestPosition.DateCreated = dom.MetaDateActive.ToString("dd.MM.yyyy");
-                    pmrequestPosition.DecreeCreationName = dom.MetaDecreeName;
-                    pmrequestPosition.DecreeCreationUnofficialName = dom.MetaDecreeNameUnofficial;
-                    pmrequestPosition.DecreeCreationNumber = dom.MetaDecreeNumber;
-
-                    /**
-                     * Has altranks.
-                     */
-                    if (position.Altrank > 0)
-                    {
-                        pmrequest.AnyAltranks = true;
-                        AltrankInner altrankInner = new AltrankInner(position, this);
-                        AltrankPrintable altrankPrintable = printables.FirstOrDefault(p => p.Altrankconditiongroup.Id == altrankInner.Altrankconditiongroup.Id);
-                        if (altrankPrintable == null)
-                        {
-                            altrankPrintable = new AltrankPrintable();
-                            altrankPrintable.Altrankconditiongroup = altrankInner.Altrankconditiongroup;
-                            altrankPrintable.Altrankconditionnames = altrankInner.Conditions.Select(c => c.Name).ToList();
-                            altrankPrintable.Altranknames = new Dictionary<int, List<string>>();
-                            printables.Add(altrankPrintable);
-                        }
-                        altrankPrintable.Altranknames.Add(position.Id, altrankInner.Ranks.Select(c => c.Name).ToList());
-                    }
-
-                    pmrequestPosition.Heading = "";
-                    if (position.Head > 0)
-                    {
-
-                        Structure headingStructure = StructuresLocal().GetValue(position.Headid);
-                        //Structure headingStructure = Structures.FirstOrDefault(s => s.Id == position.Headid);
-                        if (headingStructure != null)
-                        {
-                            pmrequestPosition.Heading = headingStructure.Name;
-                        }
-
-                    }
-
-                    pmrequestPosition.Curation = "";
-                    if (position.Curator > 0)
-                    {
-                        int[] curationids = position.Curatorlist.Split(',').Select(int.Parse).ToArray();
-                        foreach (int id in curationids)
-                        {
-                            Structure structure = StructuresLocal().GetValue(id);
-                            //Structure structure = Structures.FirstOrDefault(s => s.Id == id);
-                            if (structure != null)
-                            {
-                                pmrequestPosition.Curation += structure.Name + ", ";
-                            }
-
-                        }
-                        if (pmrequestPosition.Curation.Length > 0)
-                        {
-                            pmrequestPosition.Curation = pmrequestPosition.Curation.Substring(0, pmrequestPosition.Curation.Length - 2);
-                        }
-                    }
-
-                    if (position.Notice != null)
-                    {
-                        pmrequestPosition.Notice = position.Notice;
-                    }
-                    else
-                    {
-                        pmrequestPosition.Notice = "";
-                    }
-
-
-                    //pmrequestPosition.Signed = IsNotSignedAndCreated();
-                    list.Add(pmrequestPosition);
-                    index++;
-                }
-                catch (Exception ex)
-                {
-
-                }
-
+                certificateManager.Issuingauthority = issuingauthority.Name;
             }
-            pmrequest.AltrankPrintables = printables;
 
-            return list;
+            Agency agency = Agencies.FirstOrDefault(a => a.Id == certificate.Agency.GetValueOrDefault());
+            if (agency != null)
+            {
+                certificateManager.Agency = agency.Name;
+            }
+
+            Post post = Posts.FirstOrDefault(p => p.Id == certificate.Post.GetValueOrDefault());
+            if (post != null)
+            {
+                certificateManager.Post = post.Name;
+            }
+            
+
+            return certificateManager;
         }
 
-        /**
-         * Выдает информацию о должностях, основанную на запросе.
-         */
-        public List<PmrequestPosition> GetPmrequestPositions(Pmrequest pmrequest, User user)
+        public string GetPositionRank(int Positiontype)
         {
-            context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
-            DateTime date = user.Date.GetValueOrDefault();
-
-            Dictionary<int, Structure> struct_local = context.Structure.ToDictionary(r => r.Id);
-
-            Dictionary<int, Positiontype> positiontypesLocal = PositiontypesLocal();
-            Dictionary<int, Sourceoffinancing> sofsLocal = SourceoffinancingsLocal();
-            Dictionary<int, Mrd> mrdsLocal = MrdsLocal();
-            Dictionary<int, Positionmrd> positionmrdsLocal = LocalizeObject<Positionmrd>(Positionmrds.Select(p => p.Id).ToList(), Positionmrds.ToList());
-            Dictionary<int, Rank> ranksLocal = LocalizeObject<Rank>(Ranks.Select(p => p.Id).ToList(), Ranks.ToList());
-            //Positiontypes.Select(i => i.)
-            //bool hasAccess = IdentityService.CanReadStructure(sessionid, repository, staffManagement.Id);
-
-            List<PmrequestPosition> list = new List<PmrequestPosition>();
-            IEnumerable<Position> positions = null;
-            List<int> structuretypes = null;
-
-            if (pmrequest.Structuretypes != null && pmrequest.Structuretypes.Length > 0)
-            {
-                structuretypes = pmrequest.Structuretypes.Split(',').Select(int.Parse).ToList();
-                structuretypes = FilterStructuresByReadability(user, structuretypes);
-
-            }
-
-            /**
-             * Include only specified structures
-             */
-            if (pmrequest.Structures != null && pmrequest.Structures.Length > 0)
-            {
-                int[] structuresArray = pmrequest.Structures.Split(',').Select(int.Parse).ToArray();
-                structuresArray = FilterStructuresByReadability(user, structuresArray.ToList()).ToArray();
-
-                HashSet<int> structures = new HashSet<int>();
-                foreach (int i in structuresArray)
-                {
-                    structures.UnionWith(GetStructuresSiblings(i, null, date));
-                }
-                List<Position> positionsTemp = new List<Position>();
-                foreach (int i in structures)
-                {
-                    List<Position> valuesToAdd = new List<Position>();
-                    if (PositionsStructureAsKeyLocal().ContainsKey(i))
-                    {
-                        valuesToAdd = PositionsStructureAsKeyLocal()[i];
-                    }
-                    //List<Position> positionsToAdd = new List<Position>(PositionsLocal().Values.Where(p => p.Structure == i));
-                    positionsTemp.AddRange(valuesToAdd);
-                }
-
-                positions = FilterDeletedPositions(positionsTemp, user.Date.GetValueOrDefault()).ToList();
-                /**
-                 * Include all structures
-                 */
-            }
-            else
-            {
-                List<int> structuresArray = new List<int>();
-                foreach (Structure structure in FilterDeletedStructures(struct_local.Values.Where(s => s.Parentstructure == 0), user.Date.GetValueOrDefault()))
-                {
-                    structuresArray.Add(StructureBaseId(structure));
-                }
-                HashSet<int> structures = new HashSet<int>();
-                foreach (int i in structuresArray)
-                {
-                    structures.UnionWith(GetStructuresSiblings(i, null, date));
-                }
-                List<Position> positionsTemp = new List<Position>();
-                foreach (int i in structures)
-                {
-                    List<Position> valuesToAdd = new List<Position>();
-                    if (PositionsStructureAsKeyLocal().ContainsKey(i))
-                    {
-                        valuesToAdd = PositionsStructureAsKeyLocal()[i];
-                    }
-                    //List<Position> positionsToAdd = new List<Position>(PositionsLocal().Values.Where(p => p.Structure == i));
-                    positionsTemp.AddRange(valuesToAdd);
-                }
-                positions = FilterDeletedPositions(positionsTemp, user.Date.GetValueOrDefault()).ToList();
-                //positions = FilterDeletedPositionsQueryable(Positions, user.Date.GetValueOrDefault());
-            }
-
-            /*Dictionary<int, Structure> struct_local = context.Structure.ToDictionary(r => r.Id);*/
-
-            if (structuretypes != null)
-            {
-                List<Position> input = positions.ToList();
-                positions = positions.Where(p => {
-                    //positions = positions.AsParallel().Where(p => {
-                    if (p.Structure == 0)
-                    {
-                        return false;
-                    }
-                    //Structure structure = Structures.FirstOrDefault(s => s.Id == p.Structure);
-                    Structure structure = null;
-                    if (struct_local.ContainsKey(p.Structure))
-                    {
-                        structure = struct_local[p.Structure];
-                    }
-                    else
-                    {
-                        return false;
-                    }
-
-                    return structuretypes.Contains(GetStructureType(structure));
-                });
-
-                List<Position> output = new List<Position>();
-                foreach (Position time in input)
-                {
-                    Structure str = struct_local.GetValue(time.Structure),
-                    curent = GetActualStructureInfo(str, user.Date.GetValueOrDefault());
-                    if (structuretypes.Contains(curent.Structuretype))
-                        output.Add(time);
-                }
-                positions = output;
-            }
-
-
-            /**
-             * Include only replaced by civils
-             */
-            if (pmrequest.Replacedbycivil > 0)
-            {
-                positions = positions.Where(p => p.Replacedbycivil > 0);
-            }
-
-            if (pmrequest.Notopchs > 0)
-            {
-                positions = positions.Where(p => p.Opchs == 0);
-            }
-
-
-            /**
-             * Exclude replaced by civils
-             */
-            if (pmrequest.Replacedbycivilnot > 0)
-            {
-                positions = positions.Where(p => p.Replacedbycivil == 0);
-            }
-
-            if (pmrequest.Civil > 0)
-            {
-                positions = positions.Where(p => p.Cap.GetValueOrDefault() == 0);
-            }
-
-            if (pmrequest.Decertificate > 0)
-            {
-                positions = positions.Where(p => p.Decertificate > 0);
-            }
-
-            if (pmrequest.Decertificateexpired > 0)
-            {
-                positions = positions.Where(p => p.Decertificate > 0 && user.Date.GetValueOrDefault() > p.Decertificatedate);
-            }
-
-            if (pmrequest.Replacedbycivildateavailable > 0)
-            {
-                positions = positions.Where(p => p.Replacedbycivildatelimit > 0);
-            }
-
-            if (pmrequest.Replacedbycivildateexpired > 0)
-            {
-                positions = positions.Where(p => p.Replacedbycivildatelimit > 0 && user.Date.GetValueOrDefault() > p.Replacedbycivildate);
-            }
-
-            /**
-             * 
-             */
-            if (pmrequest.Signed > 0 || pmrequest.Notsigned > 0 || pmrequest.Willbenotsigned > 0 || pmrequest.Willbesigned > 0)
-            {
-                if (pmrequest.Signed == 0)
-                {
-                    positions = positions.Except(positions.Where(p => IsSignedAndCreated(p, user.Date.GetValueOrDefault())));
-                }
-                if (pmrequest.Notsigned == 0)
-                {
-                    positions = positions.Except(positions.Where(p => IsNotSignedAndCreated(p, user.Date.GetValueOrDefault())));
-                }
-            }
-
-            if (pmrequest.Ranks != null && pmrequest.Ranks.Length > 0)
-            {
-                int[] ranks = pmrequest.Ranks.Split(',').Select(int.Parse).ToArray();
-                positions = positions.Where(p => ranks.Contains(p.Cap.GetValueOrDefault()));
-            }
-
-            if (pmrequest.Positiontypes != null && pmrequest.Positiontypes.Length > 0)
-            {
-                int[] positiontypes = pmrequest.Positiontypes.Split(',').Select(int.Parse).ToArray();
-                positions = positions.Where(p => positiontypes.Contains(p.Positiontype));
-            }
-            if (pmrequest.Positioncategories != null && pmrequest.Positioncategories.Length > 0)
-            {
-                int[] positioncategories = pmrequest.Positioncategories.Split(',').Select(int.Parse).ToArray();
-                positions = positions.Where(p => positioncategories.Contains(p.Positioncategory));
-            }
-
-            if (pmrequest.Civilclasshigh > 0 && pmrequest.Civilclasslow > 0)
-            {
-                foreach (Position pos in positions)
-                {
-                    int civilrankhigh = pos.Civilrankhigh;
-                    int pmcivilrankhigh = pmrequest.Civilclasshigh;
-                }
-                positions = positions.Where(p => p.Civilrankhigh > 0 && pmrequest.Civilclasshigh <= p.Civilrankhigh && pmrequest.Civilclasslow >= p.Civilranklow);
-
-            }
-
-            if (pmrequest.Sofs != null && pmrequest.Sofs.Length > 0)
-            {
-                int[] sofs = pmrequest.Sofs.Split(',').Select(int.Parse).ToArray();
-                positions = positions.Where(p => sofs.Contains(p.Sourceoffinancing)).ToList();
-            }
-            if (pmrequest.Mrds != null && pmrequest.Mrds.Length > 0)
-            {
-                int[] mrds = pmrequest.Mrds.Split(',').Select(int.Parse).ToArray();
-                //IEnumerable<int> pmids = Positionmrds.Where(pm => pm.Position == p.Id).Select(pm => pm.Mrd);
-                positions = positions.Where(p => {
-                    IEnumerable<int> pmids = positionmrdsLocal.Values.Where(pm => pm.Position == p.Id).Select(pm => pm.Mrd);
-                    foreach (int pmid in pmids)
-                    {
-
-                        if (mrds.FirstOrDefault(m => m == pmid) != 0)
-                        {
-                            return true;
-                        }
-                    }
-                    return false;
-                }).ToList();
-            }
-
-
-            /**
-             * W R I T I N G    I N F O R M A T I O N
-             */
-            List<AltrankPrintable> printables = new List<AltrankPrintable>();
-            pmrequest.AltrankPrintables = printables;
-            //positions = positions.ToList();
-            int index = 0;
-            foreach (Position position in positions)
-            {
-                try
-                {
-
-                    if (IsSignedAndWillCreated(position, user.Date.GetValueOrDefault()))
-                    {
-                        continue;
-                    }
-
-                    PmrequestPosition pmrequestPosition = new PmrequestPosition();
-                    pmrequestPosition.position = position;
-                    pmrequestPosition.Id = position.Id;
-                    if (positiontypesLocal.ContainsKey(position.Positiontype))
-                    {
-                        pmrequestPosition.Positiontype = positiontypesLocal[position.Positiontype].Name;
-                    }
-                    else
-                    {
-                        pmrequestPosition.Positiontype = "Должность не определена";
-                    }
-                    //pmrequestPosition.Positiontype += position.Id; - Нужно было для отладки
-                    pmrequestPosition.Tree = FormTree(position, date, true);
-
-                    pmrequestPosition.Part = position.Part;
-                    pmrequestPosition.Partval = position.Partval;
-
-                    string rank = "Гражданская должность";
-                    if (position.Cap.GetValueOrDefault() != 0)
-                    {
-                        rank = ranksLocal[position.Cap.GetValueOrDefault()].Name;
-                        if (rank == null)
-                        {
-                            rank = "Гражданская должность";
-                        }
-                    }
-                    pmrequestPosition.Rank = rank;
-                    pmrequestPosition.Positioncategory = PositioncategoriesLocal()[position.Positioncategory].Name;
-                    pmrequestPosition.Sof = sofsLocal[position.Sourceoffinancing].Name;
-                    pmrequestPosition.Mrds = GetMrdsNamesLocal(position.Id, mrdsLocal, positionmrdsLocal);
-
-                    Structure structureForStructuretype = struct_local.GetValue(position.Structure);
-                    pmrequestPosition.Structuremrd = "";
-                    if (structureForStructuretype != null)
-                    {
-                        Structure actualStructureForStructuretype = GetActualStructureInfo(structureForStructuretype, date);
-                        int structuretypeid = GetStructureType(actualStructureForStructuretype);
-                        if (structuretypeid > 0)
-                        {
-                            Structuretype structuretype = StructuretypesLocal().GetValue(structuretypeid);
-                            pmrequestPosition.Structuremrd = structuretype.Name;
-                        }
-
-                    }
-
-
-                    if (position.Replacedbycivil > 0)
-                    {
-                        pmrequestPosition.ReplacedByCivil = "Может";
-                        pmrequestPosition.ReplacedByCivilPositiontype = positiontypesLocal[position.Replacedbycivilpositiontype].Name;
-                        if (PositioncategoriesLocal().ContainsKey(position.Replacedbycivilpositioncategory))
-                        {
-                            pmrequestPosition.ReplacedByCivilPositioncategory = PositioncategoriesLocal()[position.Replacedbycivilpositioncategory].Name;
-                        }
-                        if (position.Replacedbycivildatelimit > 0)
-                        {
-                            pmrequestPosition.ReplacedByCivilDate = position.Replacedbycivildate.GetValueOrDefault().ToString("yyyy.MM.dd");
-                        }
-
-                        if (position.Civildecree > 0)
-                        {
-                            pmrequestPosition.ReplacedByCivilDecree = position.Civildecreenumber;
-                            pmrequestPosition.ReplacedByCivilDecreeDate = position.Civildecreedate.GetValueOrDefault().ToString("yyyy.MM.dd");
-                        }
-                    }
-                    else
-                    {
-                        pmrequestPosition.ReplacedByCivil = "Не может";
-                        pmrequestPosition.ReplacedByCivilPositiontype = "";
-                        pmrequestPosition.ReplacedByCivilPositioncategory = "";
-                        pmrequestPosition.ReplacedByCivilDecreeDate = "";
-                        pmrequestPosition.ReplacedByCivilDate = "";
-                        pmrequestPosition.ReplacedByCivilDecree = "";
-                    }
-
-
-                    DecreeOperationsRequest request = GetDecreeOperationsRequest(position, user.Date.GetValueOrDefault());
-                    List<DecreeoperationManagement> doms = RequestDecreeOperations(request);
-
-                    if (IsSignedAndCreated(doms))
-                    {
-                        pmrequestPosition.Signed = "Должность введена";
-                    }
-                    else
-                    {
-                        pmrequestPosition.Signed = "Должность введена, но приказ не подписан";
-                    }
-
-                    if (position.Decertificate > 0)
-                    {
-                        pmrequestPosition.DecertificateDate = position.Decertificatedate.GetValueOrDefault().ToString("yyyy.MM.dd");
-                    }
-                    else
-                    {
-                        pmrequestPosition.DecertificateDate = "Не подлежит";
-                    }
-
-                    if (position.Civilrankhigh > 0)
-                    {
-                        pmrequestPosition.CivilClassHigh = position.Civilrankhigh.ToString();
-                        pmrequestPosition.CivilClassLow = position.Civilranklow.ToString();
-                    }
-                    else
-                    {
-                        pmrequestPosition.CivilClassHigh = "";
-                        pmrequestPosition.CivilClassLow = "";
-                    }
-
-                    DecreeoperationManagement dom = doms.FirstOrDefault(d => d.MetaPurposeForSubject == Keys.DECREE_OPERATION_META_PURPOSE_CREATED_SUBJECT ||
-                        d.MetaPurposeForSubject == Keys.DECREE_OPERATION_META_PURPOSE_CREATED_SUBJECT_NOT_SIGNED || d.MetaPurposeForSubject == Keys.DECREE_OPERATION_META_PURPOSE_CREATE_SUBJECT_IN_FUTURE ||
-                        d.MetaPurposeForSubject == Keys.DECREE_OPERATION_META_PURPOSE_CREATE_SUBJECT_IN_FUTURE_NOT_SIGNED);
-
-                    pmrequestPosition.DateCreated = dom.MetaDateActive.ToString("yyyy.MM.dd");
-                    pmrequestPosition.DecreeCreationName = dom.MetaDecreeName;
-                    pmrequestPosition.DecreeCreationUnofficialName = dom.MetaDecreeNameUnofficial;
-                    pmrequestPosition.DecreeCreationNumber = dom.MetaDecreeNumber;
-
-                    /**
-                     * Has altranks.
-                     */
-                    if (position.Altrank > 0)
-                    {
-                        pmrequest.AnyAltranks = true;
-                        AltrankInner altrankInner = new AltrankInner(position, this);
-                        AltrankPrintable altrankPrintable = printables.FirstOrDefault(p => p.Altrankconditiongroup.Id == altrankInner.Altrankconditiongroup.Id);
-                        if (altrankPrintable == null)
-                        {
-                            altrankPrintable = new AltrankPrintable();
-                            altrankPrintable.Altrankconditiongroup = altrankInner.Altrankconditiongroup;
-                            altrankPrintable.Altrankconditionnames = altrankInner.Conditions.Select(c => c.Name).ToList();
-                            altrankPrintable.Altranknames = new Dictionary<int, List<string>>();
-                            printables.Add(altrankPrintable);
-                        }
-                        altrankPrintable.Altranknames.Add(position.Id, altrankInner.Ranks.Select(c => c.Name).ToList());
-                    }
-
-                    pmrequestPosition.Heading = "";
-                    if (position.Head > 0)
-                    {
-
-                        Structure headingStructure = struct_local.GetValue(position.Headid);
-                        //Structure headingStructure = Structures.FirstOrDefault(s => s.Id == position.Headid);
-                        if (headingStructure != null)
-                        {
-                            pmrequestPosition.Heading = headingStructure.Name;
-                        }
-
-                    }
-
-                    pmrequestPosition.Curation = "";
-                    if (position.Curator > 0)
-                    {
-                        int[] curationids = position.Curatorlist.Split(',').Select(int.Parse).ToArray();
-                        foreach (int id in curationids)
-                        {
-                            Structure structure = struct_local.GetValue(id);
-                            //Structure structure = Structures.FirstOrDefault(s => s.Id == id);
-                            if (structure != null)
-                            {
-                                pmrequestPosition.Curation += structure.Name + ", ";
-                            }
-
-                        }
-                        if (pmrequestPosition.Curation.Length > 0)
-                        {
-                            pmrequestPosition.Curation = pmrequestPosition.Curation.Substring(0, pmrequestPosition.Curation.Length - 2);
-                        }
-                    }
-
-                    if (position.Notice != null)
-                    {
-                        pmrequestPosition.Notice = position.Notice;
-                    }
-                    else
-                    {
-                        pmrequestPosition.Notice = "";
-                    }
-
-
-                    //pmrequestPosition.Signed = IsNotSignedAndCreated();
-                    list.Add(pmrequestPosition);
-                    index++;
-                }
-                catch (Exception ex)
-                {
-
-                }
-
-            }
-            pmrequest.AltrankPrintables = printables;
-
-            return list;
+            return PositiontypesLocal().Values.FirstOrDefault(el => el.Id == Positiontype).Name;
         }
 
-        public Pmresult GetPmresult(List<PmrequestPosition> pmrequestPositions, Pmrequest pmrequest)
+        public Structure getParentForUserExcert(User user, Dictionary<int, Structure> str = null)
         {
-            Pmresult pmresult = new Pmresult();
-            List<Position> positions = null;
-            List<Position> positionsvar = null;
-            if (pmrequest.Ranksexpanded > 0)
-            {
-                positions = pmrequestPositions.Select(p => p.position).Where(pp => PositioncategoriesLocal().Values.First(pc => pc.Id == pp.Positioncategory).Variable == 0).ToList();
-                positionsvar = pmrequestPositions.Select(p => p.position).Where(pp => PositioncategoriesLocal().Values.First(pc => pc.Id == pp.Positioncategory).Variable > 0).ToList();
-            }
-            else
-            {
-                positions = pmrequestPositions.Select(p => p.position).ToList();
-                positionsvar = new List<Position>();
-            }
-
-            foreach (Position position in positions)
-            {
-                pmresult.Count += position.Partval;
-            }
-
-            foreach (Position position in positionsvar)
-            {
-                pmresult.Count += position.Partval;
-                pmresult.Countvar += position.Partval;
-            }
-
-            pmresult.Ranksexpanded = pmrequest.Ranksexpanded;
-            List<Rank> requestedRanks = new List<Rank>();
-            requestedRanks.AddRange(Ranks); // because we need fetch all ranks
-
-
-            requestedRanks = requestedRanks.OrderBy(r => r.Order).ToList();
-            Dictionary<int, PmresultSinglerank> rankInfos = new Dictionary<int, PmresultSinglerank>(); // int - order
-            foreach (Rank rank in Ranks.OrderBy(r => r.Order))
-            {
-                rankInfos.Add(rank.Order.GetValueOrDefault(), new PmresultSinglerank());
-            }
-            Dictionary<int, double> civil = new Dictionary<int, double>();
-            foreach (Position position in positions)
-            {
-                if (position.Cap.GetValueOrDefault() == 0) // CIVIL
-                {
-
-                    if (!civil.ContainsKey(position.Positioncategory))
-                    {
-                        civil.Add(position.Positioncategory, position.Partval);
-                    }
-                    else
-                    {
-                        civil[position.Positioncategory] += position.Partval;
-                    }
-                }
-                else if (position.Altrank > 0) // HAS ALTRANKS
-                {
-                    AltrankInner altrankInner = new AltrankInner(position, this);
-                    rankInfos[position.Cap.GetValueOrDefault()].Defaultcount++;
-                    rankInfos[position.Cap.GetValueOrDefault()].Absolutecount++;
-                    rankInfos[position.Cap.GetValueOrDefault()].Reduce++;
-                    rankInfos[altrankInner.RanksMinMax.Value.Order.GetValueOrDefault()].Maxcount++;
-                    int dif = altrankInner.RanksMinMax.Value.Order.GetValueOrDefault() - position.Cap.GetValueOrDefault();
-                    // Upcount
-                    if (!rankInfos[position.Cap.GetValueOrDefault()].Upcount.ContainsKey(altrankInner.Altrankconditiongroup.Id))
-                    {
-                        rankInfos[position.Cap.GetValueOrDefault()].Upcount.Add(altrankInner.Altrankconditiongroup.Id, new Dictionary<int, int>());
-                    }
-                    if (!rankInfos[position.Cap.GetValueOrDefault()].Upcount[altrankInner.Altrankconditiongroup.Id].ContainsKey(dif))
-                    {
-                        rankInfos[position.Cap.GetValueOrDefault()].Upcount[altrankInner.Altrankconditiongroup.Id].Add(dif, 1);
-                    }
-                    else
-                    {
-                        rankInfos[position.Cap.GetValueOrDefault()].Upcount[altrankInner.Altrankconditiongroup.Id][dif] += 1;
-                    }
-
-                    if (!rankInfos[position.Cap.GetValueOrDefault()].UpcountUnited.ContainsKey(dif))
-                    {
-                        rankInfos[position.Cap.GetValueOrDefault()].UpcountUnited.Add(dif, 1);
-                    }
-                    else
-                    {
-                        rankInfos[position.Cap.GetValueOrDefault()].UpcountUnited[dif] += 1;
-                    }
-
-                    // Came from other ranks
-                    if (!rankInfos[position.Cap.GetValueOrDefault() + dif].CameFromUnited.ContainsKey(dif))
-                    {
-                        rankInfos[position.Cap.GetValueOrDefault() + dif].CameFromUnited.Add(dif, 1);
-                    }
-                    else
-                    {
-                        rankInfos[position.Cap.GetValueOrDefault() + dif].CameFromUnited[dif] += 1;
-                    }
-
-                    bool sumunitedcalculated = false;
-                    while (dif > 0)
-                    {
-                        rankInfos[position.Cap.GetValueOrDefault() + dif].Absolutecount++;
-
-                        // Came from other ranks
-                        if (!rankInfos[position.Cap.GetValueOrDefault() + dif].CameFrom.ContainsKey(altrankInner.Altrankconditiongroup.Id))
-                        {
-                            rankInfos[position.Cap.GetValueOrDefault() + dif].CameFrom.Add(altrankInner.Altrankconditiongroup.Id, new Dictionary<int, int>());
-                        }
-                        if (!rankInfos[position.Cap.GetValueOrDefault() + dif].CameFrom[altrankInner.Altrankconditiongroup.Id].ContainsKey(dif))
-                        {
-                            rankInfos[position.Cap.GetValueOrDefault() + dif].CameFrom[altrankInner.Altrankconditiongroup.Id].Add(dif, 1);
-                        }
-                        else
-                        {
-                            rankInfos[position.Cap.GetValueOrDefault() + dif].CameFrom[altrankInner.Altrankconditiongroup.Id][dif] += 1;
-                        }
-
-                        // Сколько переменных должностей прошлой мимо этой должности.  1) этап от начала 2) количество таких прошедших 
-                        if (!rankInfos[position.Cap.GetValueOrDefault() + dif].ComethroughUnited.ContainsKey(dif))
-                        {
-                            rankInfos[position.Cap.GetValueOrDefault() + dif].ComethroughUnited.Add(dif, 1);
-                        }
-                        else
-                        {
-                            rankInfos[position.Cap.GetValueOrDefault() + dif].ComethroughUnited[dif] += 1;
-                        }
-
-                        dif--;
-                    }
-
-                }
-                else // HASN'T
-                {
-                    rankInfos[position.Cap.GetValueOrDefault()].Defaultcount++;
-                    rankInfos[position.Cap.GetValueOrDefault()].Absolutecount++;
-                    rankInfos[position.Cap.GetValueOrDefault()].Maxcount++;
-                }
-
-            }
-
-            /**
-             *  Переменный состав.
-             */
-            foreach (Position position in positionsvar)
-            {
-                rankInfos[position.Cap.GetValueOrDefault()].Defaultcountvar++;
-            }
-
-            /**
-                * We generated separate information block for each rank
-                */
-            List<PmresultSinglerank> pmresultSingleranks = new List<PmresultSinglerank>();
-            foreach (Rank requestedRank in requestedRanks)
-            {
-                //PmresultSinglerank pmresultSinglerank = new PmresultSinglerank();
-                PmresultSinglerank pmresultSinglerank = rankInfos[requestedRank.Order.GetValueOrDefault()];
-                pmresultSinglerank.Rank = requestedRank;
-                pmresultSingleranks.Add(pmresultSinglerank);
-            }
-
-            pmresult.Civil = "";
-            // Государственные служащие=1,Cлужащие=5
-            foreach (KeyValuePair<int, double> civilPair in civil)
-            {
-                pmresult.Civil += PositioncategoriesLocal().Values.First(p => p.Id == civilPair.Key).Name + "=" + civilPair.Value.ToString() + "@";
-            }
-            if (pmresult.Civil.Length > 0)
-            {
-                pmresult.Civil = pmresult.Civil.Substring(0, pmresult.Civil.Length - 1);
-            }
-
-
-            if (!(pmrequest.Ranks == null || pmrequest.Ranks.Length == 0))
-            {
-                IEnumerable<int> ids = pmrequest.Ranks.Split(',').Select(Int32.Parse);
-                List<PmresultSinglerank> remove = new List<PmresultSinglerank>();
-                foreach (PmresultSinglerank pmresultSinglerank in pmresultSingleranks)
-                {
-                    if (!ids.Contains(pmresultSinglerank.Rank.Id))
-                    {
-                        remove.Add(pmresultSinglerank);
-                    }
-                }
-                pmresultSingleranks.RemoveAll(r => remove.Contains(r));
-            }
-
-
-
-
-            // Paste info
-            if (pmresultSingleranks.Count > 0)
-            {
-                pmresult.Ranks = "";
-                pmresult.Defaultcount = "";
-                pmresult.Defaultcountvar = "";
-                pmresult.Absolutecount = "";
-                pmresult.Maxcount = "";
-                pmresult.Mincount = "";
-                pmresult.Uprankready = "";
-                pmresult.Uprankunited = "";
-                pmresult.Unitedlengthmax = "";
-                pmresult.Sumunited = "";
-
-                /**
-                 * Calculate max difference
-                 */
-                int absoluteUnitedlengthmax = 0;
-                foreach (PmresultSinglerank pmresultSinglerank in pmresultSingleranks)
-                {
-
-                    if (pmresultSinglerank.UpcountUnited.Count > absoluteUnitedlengthmax)
-                    {
-                        absoluteUnitedlengthmax = pmresultSinglerank.UpcountUnited.Count;
-                    }
-                    if (pmresultSinglerank.CameFromUnited.Count > absoluteUnitedlengthmax)
-                    {
-                        absoluteUnitedlengthmax = pmresultSinglerank.CameFromUnited.Count;
-                    }
-                }
-
-                foreach (PmresultSinglerank pmresultSinglerank in pmresultSingleranks)
-                {
-                    pmresult.Ranks += pmresultSinglerank.Rank.Name + "@";
-                    pmresult.Defaultcount += pmresultSinglerank.Defaultcount + "@";
-                    pmresult.Defaultcountvar += pmresultSinglerank.Defaultcountvar + "@";
-                    pmresult.Absolutecount += pmresultSinglerank.Absolutecount + "@";
-                    int mincount = pmresultSinglerank.Defaultcount - pmresultSinglerank.Reduce;
-                    pmresult.Mincount += mincount + "@";
-                    //int maxcount = pmresultSinglerank.Absolutecount - pmresultSinglerank.Reduce;
-                    pmresult.Maxcount += pmresultSinglerank.Maxcount + "@";
-
-
-                    // Из них при наличии ученой степени степени получить звание майор внутренней службы 10 ед., подполковник внутренней службы 20 ед. &
-                    if (pmresultSinglerank.Upcount != null && pmresultSinglerank.Upcount.Count > 0)
-                    {
-                        pmresult.Uprankready += "Из них ";
-                        foreach (KeyValuePair<int, Dictionary<int, int>> up in pmresultSinglerank.Upcount)
-                        {
-                            pmresult.Uprankready += Altrankconditiongroups.First(ar => ar.Id == up.Key).Name.ToLower() + " могут получить звание ";
-                            foreach (KeyValuePair<int, int> rankcount in up.Value)
-                            {
-                                Rank rank = Ranks.First(r => r.Order == pmresultSinglerank.Rank.Order + rankcount.Key);
-                                pmresult.Uprankready += rank.Name.ToLower() + " " + rankcount.Value + " ед., ";
-                            }
-                        }
-                        pmresult.Uprankready = pmresult.Uprankready.Substring(0, pmresult.Uprankready.Length - 2);
-                    }
-                    pmresult.Uprankready += "&";
-
-                    //public string Uprankunited { get; set; } // Капитан внутренней службы:1:5;Майор внутренней службы:2:5;
-
-                    int unitedlengthmax = 0;
-                    if (pmresultSinglerank.UpcountUnited.Count > pmresultSinglerank.CameFromUnited.Count)
-                    {
-                        unitedlengthmax = pmresultSinglerank.UpcountUnited.Count;
-                    }
-                    else
-                    {
-                        unitedlengthmax = pmresultSinglerank.CameFromUnited.Count;
-                    }
-                    pmresult.Unitedlengthmax += unitedlengthmax + "@";
-
-                    bool anyupcountunited = false;
-                    // Капитан внутренней службы:1:5;Майор внутренней службы:2:5;
-                    foreach (KeyValuePair<int, int> up in pmresultSinglerank.UpcountUnited)
-                    {
-                        pmresult.Uprankunited += Ranks.First(r => r.Order == pmresultSinglerank.Rank.Order + up.Key).Name + ':';
-                        pmresult.Uprankunited += up.Key.ToString() + ':';
-                        pmresult.Uprankunited += up.Value.ToString() + ';';
-                        anyupcountunited = true;
-                    }
-                    if (anyupcountunited)
-                    {
-                        pmresult.Uprankunited = pmresult.Uprankunited.Substring(0, pmresult.Uprankunited.Length - 1);
-                    }
-                    pmresult.Uprankunited += "@";
-
-                    bool anycomefromunited = false;
-                    //    public string Comefromunited { get; set; } // Старший лейтенант внутренней службы:1:5;Капитан внутренней службы:2:5;
-                    foreach (KeyValuePair<int, int> comefrom in pmresultSinglerank.CameFromUnited)
-                    {
-                        pmresult.Comefromunited += Ranks.First(r => r.Order == pmresultSinglerank.Rank.Order - comefrom.Key).Name + ':';
-                        pmresult.Comefromunited += comefrom.Key.ToString() + ':';
-                        pmresult.Comefromunited += comefrom.Value.ToString() + ';';
-                        anycomefromunited = true;
-                    }
-                    if (anycomefromunited)
-                    {
-                        pmresult.Comefromunited = pmresult.Comefromunited.Substring(0, pmresult.Comefromunited.Length - 1);
-                    }
-                    pmresult.Comefromunited += "@";
-
-
-                    bool anysumunited = false;
-                    /**
-                     * Calculate sum united. 100:120:100,100:100:100,
-                     */
-                    for (int i = 1; i <= absoluteUnitedlengthmax; i++)
-                    {
-                        int newdefaultcount = pmresultSinglerank.Defaultcount - pmresultSinglerank.Reduce;
-                        if (pmresultSinglerank.ComethroughUnited.ContainsKey(i))
-                        {
-                            newdefaultcount += pmresultSinglerank.ComethroughUnited[i];
-                        }
-                        pmresult.Sumunited += newdefaultcount.ToString() + ":";
-                        anysumunited = true;
-                    }
-                    if (anysumunited)
-                    {
-                        pmresult.Sumunited = pmresult.Sumunited.Substring(0, pmresult.Sumunited.Length - 1);
-                    }
-                    pmresult.Sumunited += "@";
-                }
-                pmresult.Ranks = pmresult.Ranks.Substring(0, pmresult.Ranks.Length - 1);
-                pmresult.Defaultcount = pmresult.Defaultcount.Substring(0, pmresult.Defaultcount.Length - 1);
-                pmresult.Defaultcountvar = pmresult.Defaultcountvar.Substring(0, pmresult.Defaultcountvar.Length - 1);
-                pmresult.Absolutecount = pmresult.Absolutecount.Substring(0, pmresult.Absolutecount.Length - 1);
-                pmresult.Maxcount = pmresult.Maxcount.Substring(0, pmresult.Maxcount.Length - 1);
-                pmresult.Mincount = pmresult.Mincount.Substring(0, pmresult.Mincount.Length - 1);
-                pmresult.Uprankready = pmresult.Uprankready.Substring(0, pmresult.Uprankready.Length - 1);
-                pmresult.Uprankunited = pmresult.Uprankunited.Substring(0, pmresult.Uprankunited.Length - 1);
-                pmresult.Comefromunited = pmresult.Comefromunited.Substring(0, pmresult.Comefromunited.Length - 1);
-                pmresult.Sumunited = pmresult.Sumunited.Substring(0, pmresult.Sumunited.Length - 1);
-                pmresult.Unitedlengthmax = pmresult.Unitedlengthmax.Substring(0, pmresult.Unitedlengthmax.Length - 1);
-
-                /**
-                 * Additional calculations for Ranks expanded.
-                 */
-                if (pmresult.Ranksexpanded > -1) // -1 Because it is calculated for all cases for now.
-                {
-                    pmresult.Uppedcount = "";
-                    pmresult.Uppedmap = "";
-
-                    // Fullfil uppedmap
-                    // Карта: Название=Айди;На сколько ранков максимум доступен подъем.  При наличии классности=1;2
-                    Dictionary<int, int> uppedmap = new Dictionary<int, int>();
-                    foreach (PmresultSinglerank pmresultSinglerank in pmresultSingleranks)
-                    {
-                        if (pmresultSinglerank.Upcount != null && pmresultSinglerank.Upcount.Count > 0)
-                        {
-                            foreach (KeyValuePair<int, Dictionary<int, int>> up in pmresultSinglerank.Upcount)
-                            {
-                                if (!uppedmap.ContainsKey(up.Key))
-                                {
-                                    uppedmap.Add(up.Key, 1);
-                                }
-                                foreach (KeyValuePair<int, int> rankcount in up.Value)
-                                {
-                                    if (rankcount.Key > uppedmap[up.Key])
-                                    {
-                                        uppedmap[up.Key] = rankcount.Key;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    if (pmresult.Uppedmap.Length > 0)
-                    {
-                        pmresult.Uppedmap = pmresult.Uppedmap.Substring(0, pmresult.Uppedmap.Length - 1);
-                    }
-
-                    bool anyGroup = false;
-                    // Fullfil 
-                    //При наличии классности=1:100;2:120&При наличии ученой степени=1:5, 
-                    foreach (PmresultSinglerank pmresultSinglerank in pmresultSingleranks)
-                    {
-                        //bool anyFrom = pmresultSinglerank.CameFrom.Count > 0; // Доходят ли какие должности до этого звания
-                        //bool anyUp = pmresultSinglerank.Upcount.Count > 0; // Есть ли должности, которые стартуют с этого звания и уходят вверх. 
-
-
-                        // group id - max up.
-                        foreach (KeyValuePair<int, int> uppedPart in uppedmap)
-                        {
-                            pmresult.Uppedcount += Altrankconditiongroups.First(ar => ar.Id == uppedPart.Key).Name.ToLower() + "=";
-                            int up = 1;
-                            bool anyUpped = false;
-                            while (up <= uppedPart.Value)
-                            {
-                                pmresult.Uppedcount += up + ":";
-                                int count = pmresultSinglerank.Defaultcount - pmresultSinglerank.Reduce;
-                                if (pmresultSinglerank.CameFrom.ContainsKey(uppedPart.Key))
-                                {
-                                    bool anyPlus = false;
-                                    foreach (KeyValuePair<int, int> cameFromPair in pmresultSinglerank.CameFrom[uppedPart.Key])
-                                    {
-                                        if (!anyPlus && cameFromPair.Key == up)
-                                        {
-                                            count += cameFromPair.Value;
-                                        }
-                                        anyPlus = true;
-                                    }
-                                    //count += pmresultSinglerank.CameFrom[uppedPart.Key][up];
-                                }
-                                pmresult.Uppedcount += count;
-                                pmresult.Uppedcount += ";";
-                                anyUpped = true;
-                                up += 1;
-                            }
-                            if (anyUpped)
-                            {
-                                pmresult.Uppedcount = pmresult.Uppedcount.Substring(0, pmresult.Uppedcount.Length - 1);
-                            }
-
-                            pmresult.Uppedcount += "&";
-                            anyGroup = true;
-                        }
-                        if (anyGroup)
-                        {
-                            pmresult.Uppedcount = pmresult.Uppedcount.Substring(0, pmresult.Uppedcount.Length - 1);
-                        }
-
-                        pmresult.Uppedcount += "@";
-                    }
-                    pmresult.Uppedcount = pmresult.Uppedcount.Substring(0, pmresult.Uppedcount.Length - 1);
-
-                }
-            }
-
-
-            return pmresult;
+            str = str != null ? str : StructuresLocal();
+            return getStructuresForUserExcert(user: user, str: str, parentstructureonly: true).Last();
         }
 
-        /// <summary>
-        /// Поиск пользователей по логину, фамилии и/или имени
-        /// </summary>
-        /// <param name="user"></param>
-        /// <param name="fio"></param>
-        /// <returns></returns>
-        public List<UserManager> GetUsersSearch(User user, string fio)
+        public IEnumerable<Structure> getStructuresForUserExcert(User user, Dictionary<int, Structure> str = null, bool parentstructureonly = false)
         {
-            if (fio == null)
+            str = str != null ? str : StructuresLocal();
+            Dictionary<int, Structure> structures_output_dic = new Dictionary<int, Structure>();
+            Structure struct_user = str[user.Structure.GetValueOrDefault()], time_struct;
+            struct_user = struct_user.Parentstructure == 0 ? struct_user : str[struct_user.Parentstructure];
+            DateTime actualdate = user.Date.GetValueOrDefault();
+            struct_user = GetActualStructureInfo(struct_user.Id, actualdate, str.Values);
+            IEnumerable<Structure> iteration_list = struct_user.Nameshortened == "ЦА МЧС" ? str.Values.Where(r => r.Featured == 1) : str.Values.Where(r => r.Parentstructure == struct_user.Id);
+            foreach (Structure time in iteration_list)
             {
-                return new List<UserManager>();
-            }
-
-            List<UserManager> users = new List<UserManager>();
-            List<int> structureIds = new List<int>(); // Все айди структур, которые подошли бы под поиск.
-            IEnumerable<Structure> possibleStructures = StructuresLocal().Values.Where(n => n.Name.ToLower().Contains(fio.ToLower()));
-            possibleStructures = FilterDeletedStructures(possibleStructures, user.Date.GetValueOrDefault());
-            foreach (Structure structure in possibleStructures)
-            {
-                Structure baseStructure = GetOriginalStructure(structure);
-                if (baseStructure != null)
+                time_struct = GetActualStructureInfo(time.Id, actualdate, str.Values);
+                if (time_struct != null && !structures_output_dic.ContainsKey(time_struct.Id))
                 {
-                    structureIds.Add(baseStructure.Id);
+                    structures_output_dic.Add(time_struct.Id, time_struct);
+                    if(parentstructureonly)
+                    {
+                        return new List<Structure>() { GetActualStructureInfo(structures_output_dic.Values.Last().Id, actualdate, str.Values) };
+                    }
                 }
             }
+            return (structures_output_dic != null ? structures_output_dic.Values.ToList() : new List<Structure>());
+        }
 
-            users.AddRange(UserManager.UsersToUserManagers(this, user, this.contetUser.User.Where(p => (p.Surname + " " + p.Firstname + " " + p.Patronymic).ToLower().Contains(fio.ToLower()))));
-            users.AddRange(UserManager.UsersToUserManagers(this, user, this.contetUser.User.Where(p => structureIds.Contains(p.Structure.GetValueOrDefault()))));
-            users = users.DistinctBy(p => p.Id).ToList();
-
-            return users;
+        public IEnumerable<FeaturedStructure> getStructuresForUserExcert(User user)
+        {
+            IEnumerable<FeaturedStructure> output = new List<FeaturedStructure>();
+            Dictionary<int, Structure> str = StructuresLocal();
+            foreach (Structure time in getStructuresForUserExcert(user: user, str: str))
+            {
+                output = output.Append(new FeaturedStructure() { Id = time.Id.ToString(), Name = time.Nameshortened });
+            }
+            return output != null ? output : new List<FeaturedStructure>();
         }
 
         /// <summary>
@@ -10268,7 +10879,7 @@ namespace PersonnelManagement.Models
                     userManager.StructureString = actualStructure.Name;
                     userManager.StructureTreeString = FormTree(actualStructure, true, date);
                 }
-
+                
             }
             else
             {
@@ -10297,18 +10908,36 @@ namespace PersonnelManagement.Models
         }
 
         /// <summary>
-        /// Инициализируем rightsstructures - данные, к каким подразделениям внутри основного подразделения кадровика имеется доступ, а к каким нет
+        /// Поиск пользователей по логину, фамилии и/или имени
         /// </summary>
-        /// <param name="repository"></param>
-        public void InitializeRightsstructures(User user, Repository repository)
+        /// <param name="user"></param>
+        /// <param name="fio"></param>
+        /// <returns></returns>
+        public List<UserManager> GetUsersSearch(User user, string fio)
         {
-            List<Rightsstructure> rightsstructures = new List<Rightsstructure>();
-            IEnumerable<Rightsstructure> existingRightstructures = this.contetUser.Rightsstructure.Where(r => r.Rights == contetUser.RightsLocal().Values.FirstOrDefault(d => d.User == user.Id).Id);
+            if (fio == null)
+            {
+                return new List<UserManager>();
+            }
 
+            List<UserManager> users = new List<UserManager>();
+            List<int> structureIds = new List<int>(); // Все айди структур, которые подошли бы под поиск.
+            IEnumerable<Structure> possibleStructures = StructuresLocal().Values.Where(n => n.Name.ToLower().Contains(fio.ToLower()));
+            possibleStructures = FilterDeletedStructures(possibleStructures, user.Date.GetValueOrDefault());
+            foreach (Structure structure in possibleStructures)
+            {
+                Structure baseStructure = GetOriginalStructure(structure);
+                if (baseStructure != null)
+                {
+                    structureIds.Add(baseStructure.Id);
+                }
+            }
 
-            List<Structure> allStructures = repository.GetChildrenList(user.Structure.GetValueOrDefault());
-            allStructures = repository.FilterDeletedStructures(allStructures, user.Date.GetValueOrDefault()).ToList();
+            users.AddRange(UserManager.UsersToUserManagers(this, user, Users.Where(p => (p.Surname + " " + p.Firstname + " " + p.Patronymic).ToLower().Contains(fio.ToLower()))));
+            users.AddRange(UserManager.UsersToUserManagers(this, user, Users.Where(p => structureIds.Contains(p.Structure.GetValueOrDefault()))));
+            users = users.DistinctBy(p => p.Id).ToList();
+
+            return users;
         }
-
     }
 }

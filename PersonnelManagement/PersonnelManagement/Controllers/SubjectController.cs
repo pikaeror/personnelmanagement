@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PersonnelManagement.Models;
 using PersonnelManagement.Services;
-using PersonnelManagement.USERS;
 
 namespace PersonnelManagement.Controllers
 {
@@ -23,7 +22,7 @@ namespace PersonnelManagement.Controllers
             this.repository = repository;
 
         }
-
+        
         [HttpGet()]
         public IEnumerable<Subject> GetData()
         {
@@ -93,16 +92,6 @@ namespace PersonnelManagement.Controllers
                 return new ObjectResult(Keys.SUCCESS_SHORT + ":Наименование успешно изменено");
             }
             //return new ObjectResult(Keys.ERROR_SHORT + ":Произошла какая-то оказия");
-        }
-
-        [HttpPost("elementSubject/{id}")]
-        public Elementsubject getElementSubject([FromRoute] int id)
-        {
-            if(id != 0)
-            {
-                return repository.GetContext().Elementsubject.Where(r => r.Id == id).FirstOrDefault();
-            }
-            return new Elementsubject();
         }
 
     }

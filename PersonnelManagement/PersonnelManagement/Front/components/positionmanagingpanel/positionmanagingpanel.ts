@@ -1721,4 +1721,8 @@ export default class PositionmanagingpanelComponent extends Vue {
 
         this.filteredSubjects = [...new Set(this.filteredSubjects)];
     }
+
+    checkerbyeditormode() {
+        return this.$store.state.user.onlyreadflagtoeditor == 1 ? true : false;
+    }
 }

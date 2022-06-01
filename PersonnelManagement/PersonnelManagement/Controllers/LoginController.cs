@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PersonnelManagement.Models;
 using PersonnelManagement.Services;
-using PersonnelManagement.USERS;
 
 namespace PersonnelManagement.Controllers
 {
@@ -17,14 +16,12 @@ namespace PersonnelManagement.Controllers
 
         private IdentityService identityService;
         private Repository repository;
-        private userContext userContext;
         //private static string salt = IdentityService.GenerateSalt();
 
         public LoginController(IdentityService identityService, Repository repository)
         {
             this.identityService = identityService;
             this.repository = repository;
-            this.userContext = repository.GetContextUser();
         }
 
 
@@ -42,7 +39,7 @@ namespace PersonnelManagement.Controllers
                 return new ObjectResult(Keys.ERROR_SHORT + ":Введите пароль");
             }
 
-            User user = userContext.User.FirstOrDefault(r => r.Name.GetHashCode() == login.GetHashCode());
+            User user = repository.Users.FirstOrDefault(r => r.Name == login);
             /**
              * Login exists
              */
@@ -55,9 +52,8 @@ namespace PersonnelManagement.Controllers
                     string hash = IdentityService.CalculateHash(password, salt);
                     user.Password = hash;
                     user.Salt = salt;
-                    userContext.User.Update(user);
-                    userContext.SaveChanges();
-                    userContext.UpdateUsersLocal();
+                    repository.SaveChanges();
+                    repository.UpdateUsersLocal();
                     return new ObjectResult(Keys.SUCCESS_SHORT + ":Пароль изменен. Выполните вход.");
                 } else if (user.Password != null)
                 {
@@ -79,7 +75,7 @@ namespace PersonnelManagement.Controllers
                         }
                         user.Fullmode = 0; // Режим по умолчанию не выбран
                         repository.SaveChanges();
-                        repository.GetContextUser().UpdateUsersLocal();
+                        repository.UpdateUsersLocal();
                         return new ObjectResult(Keys.IDENTITY_SESSIONID_PREFIX + ":" + sessionId + ":" + Keys.SUCCESS_SHORT + ":Вход выполнен");
                     } else
                     {

@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PersonnelManagement.Models;
 using PersonnelManagement.Services;
-using PersonnelManagement.USERS;
 
 namespace PersonnelManagement.Controllers
 {
@@ -14,14 +13,11 @@ namespace PersonnelManagement.Controllers
     [Route("api/Subjectcategory")]
     public class SubjectcategoryController : Controller
     {
-
         private Repository repository;
-
 
         public SubjectcategoryController(Repository repository)
         {
             this.repository = repository;
-
         }
 
         [HttpGet()]
@@ -41,7 +37,5 @@ namespace PersonnelManagement.Controllers
             List<Subjectcategory> empty = new List<Subjectcategory>();
             return empty;
         }
-
-
     }
 }

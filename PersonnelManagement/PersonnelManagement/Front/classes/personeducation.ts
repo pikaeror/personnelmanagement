@@ -11,6 +11,7 @@ export default class Personeducation {
     educationstage: number;
     name: string;
     name2: string;
+    name3: string;
     location: string;
     city: string;
     faculty: string;

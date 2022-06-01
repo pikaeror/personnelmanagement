@@ -9,7 +9,6 @@ using System.Text.RegularExpressions;
 using DocumentFormat.OpenXml;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Wordprocessing;
-using PersonnelManagement.USERS;
 
 namespace PersonnelManagement.Models
 {
@@ -40,7 +39,7 @@ namespace PersonnelManagement.Models
 
             TableCreator(body, repository, results);
 
-            createSignature(body);
+            createSignature(body, repository);
 
             appendDecreeHistory(body, results);
         }
@@ -334,16 +333,6 @@ namespace PersonnelManagement.Models
 
             TableProperties header_property = new TableProperties(new TableBorders(new InsideVerticalBorder() { Val = new EnumValue<BorderValues>(BorderValues.Single), Size = 6 }));
             table.AppendChild<TableProperties>(header_property);
-            TableGrid tableGrid = new TableGrid(new GridColumn() { Width = "426" },
-                                                new GridColumn() { Width = "1500" },
-                                                new GridColumn() { Width = "142" },
-                                                new GridColumn() { Width = "283" },
-                                                new GridColumn() { Width = "1845" },
-                                                new GridColumn() { Width = "1276" },
-                                                new GridColumn() { Width = "783" },
-                                                new GridColumn() { Width = "1343" },
-                                                new GridColumn() { Width = "2269" });
-            table.AppendChild<TableGrid>(tableGrid);
 
             double full_positions = 0;
             writeResualt(table, repository, results.m_full_staff, out full_positions, flag_first_structure: true);
@@ -635,7 +624,7 @@ namespace PersonnelManagement.Models
             table.Append(row);
         }
 
-        protected static void createSignature(Body body)
+        protected static void createSignature(Body body, Repository repository)
         {
             Paragraph par = new Paragraph(new Run(new Text("")));
             body.Append(par);
@@ -643,13 +632,16 @@ namespace PersonnelManagement.Models
             Table table = new Table(new TableProperties(new TableWidth() { Width = "2594", Type = TableWidthUnitValues.Pct },
                                                         new TableIndentation() { Width = 4688, Type = TableWidthUnitValues.Dxa }));
 
-            List<string> signature_names = new List<string> { "В.Н.Малахов", "А.М.Юржиц", "Д.Н.Турчин", "С.Л.Новик", "Е.Э.Дешковец", "С.Д.Ефремов", "О.В.Шабайлова" };
-            foreach (string i in signature_names)
+            //List<string> signature_names = new List<string> { "В.Н.Малахов", "А.М.Юржиц", "Д.Н.Турчин", "С.Л.Новик", "Е.Э.Дешковец", "С.Д.Ефремов", "О.В.Шабайлова" };
+            List<string> signature_names = new List<string> { "Э.А.Ярошук", "С.Д.Ефремов", "В.П.Осипович", "С.Л.Новик", "И.В.Гайшун", "Д.Н.Турчин", "Е.Э.Дешковец", "О.В.Шабайлова", "Е.И.Чура" };
+            List<Staffcomission> all_comission = repository.GetContext().Staffcomission.ToList();
+            all_comission.Sort((a, b) => a.Rank.CompareTo(b.Rank));
+            foreach (Staffcomission i in all_comission)
             {
                 TableRow row = new TableRow(new TableRowProperties());
                 writeHeaderCell(row, "", FontSize, "25", BorderValues.None, BorderValues.Single, left_aling: true);
                 writeHeaderCell(row, "", FontSize, "2", BorderValues.None, BorderValues.None, left_aling: true);
-                writeHeaderCell(row, i, FontSize, "25", BorderValues.None, BorderValues.None, left_aling: true);
+                writeHeaderCell(row, i.Fio, FontSize, "25", BorderValues.None, BorderValues.None, left_aling: true);
                 row.TableRowProperties.AppendChild(new TableRowHeight() { Val = 500, HeightType = HeightRuleValues.Exact });
                 table.Append(row);
             }

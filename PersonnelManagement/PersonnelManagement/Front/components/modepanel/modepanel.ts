@@ -86,6 +86,7 @@ export default class CandidatesComponent extends Vue {
         this.$store.commit("updateUserAppearance", appearance);
         this.$store.commit("setModepanelVisible", 0);
         this.$store.commit("setpersondecree", null);
+        this.$store.commit("setmailmodeprevios", false);
         this.orgMode();
 
         fetch('api/Identity/Fullmode1', { credentials: 'include' })
@@ -158,6 +159,7 @@ export default class CandidatesComponent extends Vue {
     decreeMode() {
         fetch('api/Identity/Decree', { credentials: 'include' })
     }
+
 
     toggleDecreeOperationElement() {
         let toggle: number = this.$store.state.decreeoperationelementVisible;

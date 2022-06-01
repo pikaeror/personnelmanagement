@@ -10,7 +10,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PersonnelManagement.Models;
 using PersonnelManagement.Services;
-using PersonnelManagement.USERS;
 
 namespace PersonnelManagement.Controllers
 {
@@ -20,12 +19,10 @@ namespace PersonnelManagement.Controllers
     {
 
         private Repository repository;
-        private DecreeWorker decreeWorker;
 
         public DecreesController(Repository repository)
         {
             this.repository = repository;
-            this.decreeWorker = new DecreeWorker(ref repository);
         }
 
         // Is allowed to edit structures.
@@ -66,7 +63,7 @@ namespace PersonnelManagement.Controllers
             {
                 // return repository.GetDecree 
                 user = IdentityService.GetUserBySessionID(sessionid, repository);
-                repository.GetContextUser().DecreesSelectActive(user, id);
+                repository.DecreesSelectActive(user, id);
             }
         }
 
@@ -158,26 +155,26 @@ namespace PersonnelManagement.Controllers
             return new ObjectResult(Keys.ERROR_SHORT + ":Произошла какая-то оказия");
         }
 
-        [HttpPost("Finder")]
-        public IEnumerable<Decree> decreeFinder([FromBody] DecreeFinder decreeFinder)
+        [HttpPost("unsigned")]
+        public IActionResult unsignedDecree([FromBody] int decree_id)
         {
             string sessionid = Request.Cookies[Keys.COOKIES_SESSION];
             User user = null;
-            List<Decree> output = new List<Decree>();
-            //DateTime start = DateTime.Now;
             if (IdentityService.IsLogined(sessionid, repository))
             {
                 user = IdentityService.GetUserBySessionID(sessionid, repository);
                 bool hasAccess = IdentityService.canEditStructures(sessionid, repository);
-                if (hasAccess)
+                if (hasAccess && (user.Id == 1 || user.Id == 49))
                 {
-                    //decreeWorker.reWriteDecreesNull(user, decreeFinder.rewrite);
-                    output = decreeWorker.FinderByFinder(decreeFinder);
+                    Decree actual_decree = repository.GetContext().Decree.Where(r => r.Id == decree_id).First();
+                    actual_decree.Signed = 0;
+                    repository.GetContext().Decree.Update(actual_decree);
+                    repository.GetContext().SaveChanges();
+                    repository.UpdateDecreesLocal();
+                    return new ObjectResult(Keys.SUCCESS_SHORT + ":Завершено! Отменен приказ - " + actual_decree.Number);
                 }
             }
-            //DateTime end = DateTime.Now;
-            //DateTime delta = end - start;
-            return output;
+            return new ObjectResult(Keys.ERROR_SHORT + ":Отказано в доступе");
         }
 
         public MemoryStream GenerateDocument(DecreeManagement decreeManagement)

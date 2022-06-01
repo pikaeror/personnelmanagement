@@ -4,18 +4,6 @@
             <div id="topmenu-logoblock">
                 <img id="topmenu-logo" @click="reloadPage()" src="/img/icons/firefighter.png" />
                 <div id="topmenu-appname" @click="reloadPage()">Кадры</div>
-                <div class="topmenu-mode" v-if="displaySelectmodewarning">
-                    Выберите подразделение слева или сверху для добавления в список.
-                    <el-button size="mini" type="danger" round plain @click="cancelmode">Отмена</el-button>
-                </div>
-                <div class="topmenu-mode" v-if="displaySelectmodewarning">
-                    Выберите подразделение.
-                    <el-button size="mini" type="success" round plain @click="successmode">Готово</el-button>
-                </div>
-                <div class="topmenu-mode" v-if="displayAppointpersonmodewarning">
-                    Откройте подразделение и выберите должность
-                    <el-button size="mini" type="danger" round plain @click="cancelpersonappoint()">Отмена</el-button>
-                </div>
             </div>
             <div id="topmenu-featuredlist" v-if="!modepanelVisible()">
                 <div class="topmenu-featured" v-for="featuredstruct in featured" @click="openFeatured($event, featuredstruct.id,featuredstruct.name)" v-if="structureModeAccess()">
@@ -34,8 +22,18 @@
                         <span v-if="getFullmodeselected()" title="Нажмите, чтобы сменить режим работы" class="topmenu-rightblock-mode" @click="changeFullmode()">Сменить режим работы</span>
                         <span class="topmenu-rightblock-date-date" @click="restoreCurrentDate" title="Нажмите, чтобы установить текущую дату"> {{beautifyDate(getdate())}}</span>
                     </div>
-                    <div class="topmenu-rightblock-decreename" title="Нажмите, чтобы открыть меню проекта приказа" @click="selectCurrentDecree">{{getDecreeNameAlt()}}</div>
+                    <div class="topmenu-rightblock-decreename" title="Нажмите, чтобы открыть меню проекта приказа" v-if="structureEdit() && structureMode() && value5" @click="selectCurrentDecree">{{getDecreeNameAlt()}}</div>
                     <div class="topmenu-rightblock-login">Вы вошли как {{login}}</div>
+
+                    <div v-if="structureMode()" style="text-align: center;">
+                        <el-switch @change="changeusereditorflag"
+                                   v-model="value5"
+                                   active-text="Редактирование"
+                                   inactive-text="Чтение"
+                                   inactive-color="#13ce66"
+                                   active-color="#ff4949">
+                        </el-switch>
+                    </div>
                 </div>
 
                 <div v-if="!modepanelVisible()">
@@ -47,12 +45,13 @@
                 <el-dropdown @command="topmenudropdown" :hide-timeout="500" :show-timeout="100">
                     <el-button class="topmenu-rightblock-button">Меню</el-button>
                     <el-dropdown-menu slot="dropdown">
-                        <el-dropdown-item v-if="structureEdit() && structureMode()" command="decrees">Проекты приказов{{getDecreeName()}}</el-dropdown-item>
+                        <el-dropdown-item v-if="structureEdit() && structureMode() && value5" command="decrees">Проекты приказов{{getDecreeName()}}</el-dropdown-item>
                         <el-dropdown-item v-if="structureEdit() && structureMode()" command="decreesvisible">Подписанные приказы</el-dropdown-item>
+                        <!--<el-dropdown-item v-if="personMode() && personnelRead()" command="eld">Электронное личное дело</el-dropdown-item>-->
+                        <!--<el-dropdown-item v-if="personMode() && personnelRead()" command="candidates">Кандидаты</el-dropdown-item>-->
                         <el-dropdown-item v-if="isAdmin()" command="modalAdminVisible">Панель управления</el-dropdown-item>
                         <el-dropdown-item command="modalSettingsPanelVisible">Настройки</el-dropdown-item>
                         <el-dropdown-item command="modalAboutPanelVisible">О программе</el-dropdown-item>
-                        <el-dropdown-item v-if="user.id == 1" command="rewrite">Обновление БД</el-dropdown-item>
                         <el-dropdown-item command="logout">Выйти</el-dropdown-item>
                     </el-dropdown-menu>
                 </el-dropdown>
@@ -60,6 +59,7 @@
                 <el-dialog :visible.sync="adminVisible" width="80%" @close="onAdminPanelClose" v-draggable>
                     <admin-panel :visible.sync="adminVisible" :visiblevar.sync="modalAdminVisible" />
                 </el-dialog>
+
             </div>
             <el-dialog :visible.sync="modalStructureManagingPanelTopMenuVisible" width="40%" v-draggable>
                 <structuremanagingpanel :visible.sync="modalStructureManagingPanelTopMenuVisible" :parent="null" :type="'addnewstructure'" />
@@ -99,118 +99,39 @@
                     <div>
                         Фильтр:
                     </div>
+                    <div class="decreeoperation-row"><div class="decreeoperation-row-text">Дата приказа c :</div> <el-input suffix-icon="el-icon-date" v-model="decreeFilterDatesignedStart" type="date"></el-input></div>
+                    <div class="decreeoperation-row"><div class="decreeoperation-row-text">Дата приказа по:</div> <el-input suffix-icon="el-icon-date" v-model="decreeFilterDatesignedEnd" type="date"></el-input></div>
+                    <div class="decreeoperation-row"><div class="decreeoperation-row-text">Номер приказа:</div> <el-input v-model="decreeFilterNumber"></el-input></div>
+                    <div class="decreeoperation-row"><div class="decreeoperation-row-text">Название приказа:</div> <el-input v-model="decreeFilterName"></el-input></div>
+                    <div class="decreeoperation-row"><div class="decreeoperation-row-text">Начало действия приказа с:</div> <el-input suffix-icon="el-icon-date" v-model="decreeFilterDateactiveStart" type="date"></el-input></div>
+                    <div class="decreeoperation-row"><div class="decreeoperation-row-text">Начало действия приказа по:</div> <el-input suffix-icon="el-icon-date" v-model="decreeFilterDateactiveEnd" type="date"></el-input></div>
+                    <div class="decreeoperation-row"><div class="decreeoperation-row-text">Рабочее название приказа:</div> <el-input v-model="decreeFilterNickname"></el-input></div>
                     <div>
-                        <div class="decreeoperation-row">
-                            <div class="decreeoperation-row-text">Дата приказа c - по:</div>
-                            <el-date-picker v-model="decree_find_parameters.dates.minDate"
-                                            type="date"
-                                            format="dd.MM.yyyy">
-                            </el-date-picker>
-                            <el-date-picker v-model="decree_find_parameters.dates.maxDate"
-                                            type="date"
-                                            format="dd.MM.yyyy">
-                            </el-date-picker>
-                        </div>
-                        <div class="decreeoperation-row">
-                            <div class="decreeoperation-row-text">Номер приказа:</div>
-                            <el-input v-model="decree_find_parameters.number"></el-input>
-                        </div>
-                        <div class="decreeoperation-row">
-                            <div class="decreeoperation-row-text">Название приказа:</div>
-                            <el-input v-model="decree_find_parameters.name"></el-input>
-                        </div>
-                        <div class="decreeoperation-row">
-                            <div class="decreeoperation-row-text">Начало действия приказа с - по:</div>
-                            <el-date-picker v-model="decree_find_parameters.date_started.minDate"
-                                            type="date"
-                                            format="dd.MM.yyyy">
-                            </el-date-picker>
-                            <el-date-picker v-model="decree_find_parameters.date_started.maxDate"
-                                            type="date"
-                                            format="dd.MM.yyyy">
-                            </el-date-picker>
-                        </div>
-                        <div class="decreeoperation-row">
-                            <div class="decreeoperation-row-text">Рабочее название приказа:</div>
-                            <el-input v-model="decree_find_parameters.nickname"></el-input>
-                        </div>
-                        <div>
-                            <el-checkbox v-if="user.id == 1" v-model="decree_find_parameters.rewrite">rewrite datebase without null values</el-checkbox>
-                        </div>
+                        <el-button @click="filterSignedDecree()" >Поиск</el-button>
                     </div>
                     <div>
-                        <el-button @click="filterSignedDecree()">Поиск</el-button>
-                    </div>
-                    <div>
-                        <div v-for="decreeElement in all_decrees" class="decreeoperation-signed-decree-block">
-                            <div class="decreeoperation-row">
-                                <label class="decreeoperation-signed-row-label">Название приказа</label>
-                                <el-input size="mini"
-                                          v-model="decreeElement.name"
-                                          readonly="true">
-                                </el-input>
-                            </div>
-                            <div class="decreeoperation-row">
-                                <label class="decreeoperation-signed-row-label">Номер приказа</label>
-                                <el-input size="mini"
-                                          v-model="decreeElement.number"
-                                          readonly="true">
-                                </el-input>
-                            </div>
-                            <div class="decreeoperation-row">
-                                <label class="decreeoperation-signed-row-label">Рабочее название приказа</label>
-                                <el-input size="mini"
-                                          v-model="decreeElement.nickname"
-                                          readonly="true">
-                                </el-input>
-                            </div>
-                            <div class="decreeoperation-row">
-                                <label class="decreeoperation-signed-row-label">Приказ подписан</label>
-                                <el-date-picker size="mini"
-                                                typeof="date"
-                                                v-model="decreeElement.datesigned"
-                                                readonly="true"
-                                                format="dd.MM.yyyy">
-                                </el-date-picker>
-                            </div>
-                            <div class="decreeoperation-row">
-                                <label class="decreeoperation-signed-row-label">Начало действия приказа</label>
-                                <el-date-picker size="mini"
-                                                typeof="date"
-                                                v-model="decreeElement.dateactive"
-                                                readonly="true"
-                                                format="dd.MM.yyyy">
-                                </el-date-picker>
+                        <div v-for="decreeElement in decreesSignedList.slice().reverse()" class="decreeoperation-signed-decree-block">
+                            <div>
+                                <label class="decreeoperation-signed-row-label">Название приказа</label> {{decreeElement.name}}
                             </div>
                             <div>
-                                <el-button @click="selectSignedDecree($event, decreeElement)">Просмотр приказа</el-button>
+                                <label class="decreeoperation-signed-row-label">Номер приказа</label> {{decreeElement.number}}
+                            </div>
+                            <div>
+                                <label class="decreeoperation-signed-row-label">Рабочее название приказа</label> {{decreeElement.nickname}}
+                            </div>
+                            <div>
+                                <label class="decreeoperation-signed-row-label">Приказ подписан</label> {{beautifyDate(toDateInputValue(decreeElement.datesigned))}}
+                            </div>
+                            <div>
+                                <label class="decreeoperation-signed-row-label">Начало действия приказа</label> {{beautifyDate(toDateInputValue(decreeElement.dateactive))}}
+                            </div>
+                            <div>
+                                <el-button @click="selectSignedDecree($event, decreeElement.id)">Просмотр приказа</el-button>
                             </div>
 
                         </div>
                     </div>
-                    <!--<div>
-        <div v-for="decreeElement in decreesSignedList.slice().reverse()" class="decreeoperation-signed-decree-block">
-            <div>
-                <label class="decreeoperation-signed-row-label">Название приказа</label> {{decreeElement.name}}
-            </div>
-            <div>
-                <label class="decreeoperation-signed-row-label">Номер приказа</label> {{decreeElement.number}}
-            </div>
-            <div>
-                <label class="decreeoperation-signed-row-label">Рабочее название приказа</label> {{decreeElement.nickname}}
-            </div>
-            <div>
-                <label class="decreeoperation-signed-row-label">Приказ подписан</label> {{beautifyDate(toDateInputValue(decreeElement.datesigned))}}
-            </div>
-            <div>
-                <label class="decreeoperation-signed-row-label">Начало действия приказа</label> {{beautifyDate(toDateInputValue(decreeElement.dateactive))}}
-            </div>
-            <div>
-                <el-button @click="selectSignedDecree($event, decreeElement.id)">Просмотр приказа</el-button>
-            </div>
-
-        </div>
-    </div>-->
                 </div>
             </el-dialog>
 
@@ -224,6 +145,9 @@
 
                 <el-button @click="decreeUpdateSigned" class="decrees-margintop" type="success" round>Сохранить изменения</el-button>
                 <el-button @click="decreehistoryPrint" style="background:#82848a;border-color:#82848a;color:#fff" round>Перечень Word</el-button>
+                <el-button v-if="special_acces" @click="checkDecreeOperations" style="background: rgba(255, 201, 246, 0.46); border-color:#82848a; color: tan" round>Проверить повторы</el-button>
+                <el-button v-if="special_acces" @click="unsigned_decree" style="background: rgba(255, 66, 0, 0.46); border-color:#82848a; color: black" round>Отменить</el-button>
+                <el-alert :title="checkedDecreeResualt" type="info" :closable="true"></el-alert>
                 <div class="decreeoperation-panel">
                     <div v-bind:class="{ [decreeOperationVisualRank(decreeOperation.visualRank)]: displayIt}" class="decreeoperation-element" v-for="decreeOperation in decreeSignedOperations">
                         <div>
@@ -242,8 +166,8 @@
                             <span class="decreeoperation-label-bold">Вступает в силу с </span> {{beautifyDate(toDateInputValue(decreeOperation.dateactive))}}
                         </div>
                         <!--<div v-if="hasNewName(decreeOperation)">
-                    <span class="decreeoperation-label-bold">Новое название </span> — {{decreeOperation.changedtext}}
-                </div>-->
+                <span class="decreeoperation-label-bold">Новое название </span> — {{decreeOperation.changedtext}}
+            </div>-->
 
 
                     </div>

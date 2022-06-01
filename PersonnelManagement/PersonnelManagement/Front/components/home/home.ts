@@ -20,7 +20,11 @@ Vue.use(Element);
     components: {
         Departmentslist: require('../departmentslist/departmentslist.vue.html'),
         Positionslist: require('../positionslist/positionslist.vue.html'),
+        // Eld: require('../eld/eld.vue.html'),
+        // Candidates: require('../candidates/candidates.vue.html'),
         Modepanel: require('../modepanel/modepanel.vue.html'),
+        // derceeoperationelement: require('../decreeoperationelement/decreeoperationelement.vue.html'),
+        // decreeoperationtemplatecreator: require('../decreeoperationtemplatecreator/decreeoperationtemplatecreator.vue.html'),
     }
 })
 export default class HomeComponent extends Vue {
@@ -65,12 +69,28 @@ export default class HomeComponent extends Vue {
         return this.$store.state.positionsListId != null && !isNaN(this.$store.state.positionsListId) && this.$store.state.positionsListId != 0; 
     }
 
+    get eldVisible() {
+        return this.$store.state.eldVisible;
+    }
+
+    get candidatesVisible() {
+        return this.$store.state.candidatesVisible;
+    }
+
     get modepanelVisible() {
         return this.$store.state.modepanelVisible;
     }
 
-    get currentStructure() {
-        return this.$store.state.currentStructure;
+    get decreeoperationelementVisible() {
+        return this.$store.state.decreeoperationelementVisible;
+    }
+
+    get decreecreatorfunction() {
+        return this.$store.state.decreeoperationtemplatecreatorVisible;
+    }
+
+    get persondecree() {
+        return this.$store.state.persondecree;
     }
 
     close() {

@@ -102,6 +102,12 @@ export default class Person {
     fathernamesubject: number;
     surnamesubject: number;
     gendersubject: number;
+    fullbirthlocation: string;
+    language: string;
+    phonenumber: string;
+    citizenship: string;
+    issuedby: string;
+    sportsmanship: string;
 
     // Краткое наименование подразделения сотрудника - например, управление кадров
     structurename: string;

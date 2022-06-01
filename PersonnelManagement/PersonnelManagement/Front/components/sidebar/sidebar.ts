@@ -11,8 +11,6 @@ import Staffmanagement from '../../classes/staffmanagement';
 import download from 'downloadjs';
 import Order from '../../classes/OrderHistrory/FullHistory';
 import DecreeHistroryElementToAppending from '../../classes/OrderHistrory/DecreeHistroryElementToAppending';
-
-import newTree from '../../classes/NewStructure/structureTree';
 Vue.component(Tree.name, Tree);
 Vue.component(Dropdown.name, Dropdown);
 Vue.component(DropdownItem.name, DropdownItem);
@@ -66,7 +64,6 @@ const fetchStructureDelay: number = 7000;
     }
 })
 export default class SidebarComponent extends Vue {
-    newTreeStructures: newTree;
     structures: Structure[];
     decreeoperations: Decreeoperation[];
     userStructure: string;
@@ -154,11 +151,6 @@ export default class SidebarComponent extends Vue {
 
     data() {
         return {
-            newTreeStructures: new newTree(),
-            defaultPropsTree: {
-                children: 'children_structures',
-                label: 'nameshortened'
-            },
             structures: [],
             level: 1,
             parentsWithDisplayedChildren: [],
@@ -543,7 +535,8 @@ export default class SidebarComponent extends Vue {
     }
 
     renameStructureIDnodecree(id): any {
-        return this.renameStructurenodecree + "_" + id;
+        if (this.checkerbyeditormode())
+            return this.renameStructurenodecree + "_" + id;
     }
 
     removeStructureID(id): any {
@@ -1110,17 +1103,6 @@ export default class SidebarComponent extends Vue {
                 });
                 this.showSubordinatesTop(negative);
             });
-        fetch('api/Structure_Tree_Controller/CurrentTree', {
-            method: 'post',
-            credentials: 'include',
-            headers: new Headers({
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            })
-        }).then(response => response.json() as Promise<newTree>)
-            .then(data => {
-                this.newTreeStructures = data;
-            });
     }
 
     addNewStructureCommand() {
@@ -1347,10 +1329,8 @@ export default class SidebarComponent extends Vue {
         }
     }
 
-    testfunc(date) {
-        var g = 0;
-        /*this.$store.commit("setPositionsListId", -date.id);
-        this.$store.commit("setPositionsListTitle", date.name);*/
-        this.$store.commit("setcurrentStructure", date);
+    checkerbyeditormode() {
+        // console.log(["checker", this.$store.state.user.onlyreadflagtoeditor]);
+        return this.$store.state.user.onlyreadflagtoeditor == 1 ? true : false;
     }
 }

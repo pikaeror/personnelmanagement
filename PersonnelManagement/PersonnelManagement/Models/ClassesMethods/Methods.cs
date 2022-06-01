@@ -2,23 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace PersonnelManagement.Models
 {
     public partial class Decree
     {
-        public Decree()
-        {
-            Name = "";
-            Signed = 0;
-            Declined = 0;
-            Dateactive = new DateTime();
-            Datesigned = new DateTime();
-            User = 0;
-            Nickname = "";
-            Number = "";
-            Historycal = 0;
-        }
+        public Decree() { }
 
         public Decree(Decree decree)
         {
@@ -49,6 +39,224 @@ namespace PersonnelManagement.Models
             Changedtype = decreeoperation.Changedtype;
             Dateactive = decreeoperation.Dateactive;
             Datecustom = decreeoperation.Datecustom;
+        }
+
+        public bool isEqual(Decreeoperation decreeoperation)
+        {
+            return (this.Decree == decreeoperation.Decree &&
+                    this.Subject == decreeoperation.Subject &&
+                    this.Created == decreeoperation.Created &&
+                    this.Deleted == decreeoperation.Deleted &&
+                    this.Changed == decreeoperation.Changed &&
+                    this.Changedtype == decreeoperation.Changedtype &&
+                    /*this.Dateactive.GetValueOrDefault().Ticks == decreeoperation.Dateactive.GetValueOrDefault().Ticks &&*/
+                    this.Datecustom == decreeoperation.Datecustom);
+        }
+
+        public bool isEqual(in IEnumerable<Decreeoperation> decreeoperations)
+        {
+            foreach(Decreeoperation element in decreeoperations)
+            {
+                if(this.isEqual(element)) { return true; }
+            }
+            return false;
+        }
+    }
+
+    public partial class Structure
+    {
+        public Structure() { }
+
+        public Structure(Structure structure)
+        {
+            Id = structure.Id;
+            Name = structure.Name;
+            Parentstructure = structure.Parentstructure;
+            Featured = structure.Featured;
+            Nameshortened = structure.Nameshortened;
+            Structuretype = structure.Structuretype;
+            Structureregion = structure.Structureregion;
+            City = structure.City;
+            Street = structure.Street;
+            Rank = structure.Rank;
+            Department = structure.Department;
+            Curator = structure.Curator;
+            Head = structure.Head;
+            Changeorigin = structure.Changeorigin;
+            Changestructurelast = structure.Changestructurelast;
+            Changestructurerename = structure.Changestructurerename;
+            Changestructureall = structure.Changestructureall;
+            Changestructurerank = structure.Changestructurerank;
+            Changestructurelocation = structure.Changestructurelocation;
+            Changestructureparent = structure.Changestructureparent;
+            Priority = structure.Priority;
+            Printreward = structure.Printreward;
+            Main = structure.Main;
+            Name1 = structure.Name1;
+            Name2 = structure.Name2;
+            Name3 = structure.Name3;
+            Name4 = structure.Name4;
+            Name5 = structure.Name5;
+            Name6 = structure.Name6;
+            Separatestructure = structure.Separatestructure;
+            Subject1 = structure.Subject1;
+            Subject2 = structure.Subject2;
+            Subject3 = structure.Subject3;
+            Subject4 = structure.Subject4;
+            Subject5 = structure.Subject5;
+            Subject6 = structure.Subject6;
+            Subject7 = structure.Subject7;
+            Subject8 = structure.Subject8;
+            Subject9 = structure.Subject9;
+            Subject10 = structure.Subject10;
+            Subject11 = structure.Subject11;
+            Subject12 = structure.Subject12;
+            Subject13 = structure.Subject13;
+            Subject14 = structure.Subject14;
+            Subject15 = structure.Subject15;
+            Subjectnumber = structure.Subjectnumber;
+            Subjectnotice = structure.Subjectnotice;
+            Subjectgender = structure.Subjectgender;
+        }
+
+        public List<int> getSubjectsList()
+        {
+            List<int> output = new List<int> { Subject1,
+                Subject2,
+                Subject3,
+                Subject4,
+                Subject5,
+                Subject6,
+                Subject7,
+                Subject8,
+                Subject9,
+                Subject10,
+                Subject11,
+                Subject12,
+                Subject13,
+                Subject14,
+                Subject15 };
+            return output;
+        }
+    }
+
+    public partial class Position
+    {
+        public Position() { }
+
+        public Position(Position position)
+        {
+            Id = position.Id;
+            Cap = position.Cap;
+            Dateactive = position.Dateactive;
+            Dateinactive = position.Dateinactive;
+            Sourceoffinancing = position.Sourceoffinancing;
+            Positiontype = position.Positiontype;
+            Notice = position.Notice;
+            Positioncategory = position.Positioncategory;
+            Replacedbycivil = position.Replacedbycivil;
+            Replacedbycivilpositioncategory = position.Replacedbycivilpositioncategory;
+            Replacedbycivilpositiontype = position.Replacedbycivilpositiontype;
+            Altrank = position.Altrank;
+            Origin = position.Origin;
+            Decertificate = position.Decertificate;
+            Decertificatedate = position.Decertificatedate;
+            Civilranklow = position.Civilranklow;
+            Civilrankhigh = position.Civilrankhigh;
+            Replacedbycivildatelimit = position.Replacedbycivildatelimit;
+            Replacedbycivildate = position.Replacedbycivildate;
+            Structure = position.Structure;
+            Civildecree = position.Civildecree;
+            Civildecreenumber = position.Civildecreenumber;
+            Civildecreedate = position.Civildecreedate;
+            Curator = position.Curator;
+            Head = position.Head;
+            Curatorlist = position.Curatorlist;
+            Headid = position.Headid;
+            Opchs = position.Opchs;
+            Part = position.Part;
+            Partval = position.Partval;
+            Subject1 = position.Subject1;
+            Subject2 = position.Subject2;
+            Subject3 = position.Subject3;
+            Subject4 = position.Subject4;
+            Subject5 = position.Subject5;
+            Subject6 = position.Subject6;
+            Subject7 = position.Subject7;
+            Subject8 = position.Subject8;
+            Subject9 = position.Subject9;
+            Subject10 = position.Subject10;
+            Subject11 = position.Subject11;
+            Subject12 = position.Subject12;
+            Subject13 = position.Subject13;
+            Subject14 = position.Subject14;
+            Subject15 = position.Subject15;
+            Subject16 = position.Subject16;
+            Subject17 = position.Subject17;
+            Subject18 = position.Subject18;
+            Subject19 = position.Subject19;
+            Subject20 = position.Subject20;
+            Name1 = position.Name1;
+            Name2 = position.Name2;
+            Name3 = position.Name3;
+            Name4 = position.Name4;
+            Name5 = position.Name5;
+            Name6 = position.Name6;
+        }
+
+        public List<int> getSubjectsList()
+        {
+            List<int> output = new List<int> { Subject1,
+                Subject2,
+                Subject3,
+                Subject4,
+                Subject5,
+                Subject6,
+                Subject7,
+                Subject8,
+                Subject9,
+                Subject10,
+                Subject11,
+                Subject12,
+                Subject13,
+                Subject14,
+                Subject15,
+                Subject16,
+                Subject17,
+                Subject18,
+                Subject19,
+                Subject20 };
+            return output;
+        }
+
+        public List<int> getFirstPathSubjectsList()
+        {
+            List<int> output = new List<int> { Subject1,
+                Subject2,
+                Subject3,
+                Subject4,
+                Subject5,
+                Subject6,
+                Subject7,
+                Subject8,
+                Subject9,
+                Subject10, };
+            return output;
+        }
+
+        public List<int> getSecondPathSubjectsList()
+        {
+            List<int> output = new List<int> { Subject11,
+                Subject12,
+                Subject13,
+                Subject14,
+                Subject15,
+                Subject16,
+                Subject17,
+                Subject18,
+                Subject19,
+                Subject20, };
+            return output;
         }
     }
 
@@ -217,6 +425,51 @@ namespace PersonnelManagement.Models
                 Subject19,
                 Subject20 };
             return output;
+        }
+    }
+
+    public class CheckedOperations
+    {
+        private Repository m_repository { get; set; }
+        private pmContext context { get; set; }
+        private DbSet<Decreeoperation> decreeoperations { get; set; }
+        public Decree current_decree { get; set; }
+        public IEnumerable<Decreeoperation> current_operations { get; set; }
+
+        public int count_repited { get; set; }
+        public CheckedOperations(Repository repository, int decree_key)
+        {
+            this.m_repository = repository;
+            this.context = m_repository.GetContext();
+            this.decreeoperations = context.Decreeoperation;
+            this.current_decree = repository.DecreesLocal()[decree_key];
+            this.current_operations = repository.DecreeoperationsLocal().Values.Where(r => r.Decree == current_decree.Id);
+            count_repited = 0;
+        }
+
+        public void rewrite()
+        {
+            Dictionary<int, Decreeoperation> to_deleted = new Dictionary<int, Decreeoperation>();
+            Decreeoperation external_oper, internal_oper;
+            for(int i = 0; i < current_operations.Count(); i++)
+            {
+                external_oper = current_operations.ElementAt(i);
+                if(to_deleted.ContainsKey(external_oper.Id)) { continue; }
+                for(int j = i + 1; j < current_operations.Count(); j++)
+                {
+                    internal_oper = current_operations.ElementAt(j);
+                    if(external_oper.Id != internal_oper.Id &&
+                       external_oper.isEqual(internal_oper) &&
+                       !to_deleted.ContainsKey(internal_oper.Id))
+                    {
+                        to_deleted.Add(internal_oper.Id, internal_oper);
+                    }
+                }
+            }
+            count_repited = to_deleted.Count;
+            decreeoperations.RemoveRange(to_deleted.Values);
+            context.SaveChanges();
+            m_repository.UpdateDecreeoperationsLocal();
         }
     }
 }

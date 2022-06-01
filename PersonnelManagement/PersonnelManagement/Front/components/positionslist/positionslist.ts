@@ -22,8 +22,6 @@ import Pmrequest from '../../classes/pmrequest';
 import download from 'downloadjs';
 import Order from '../../classes/OrderHistrory/FullHistory';
 
-import formatting from '../../classes/formating_functions/el_table_formatter';
-import newStructureTree from '../../classes/NewStructure/structureTree';
 // rand.create();
 Vue.component(Button.name, Button);
 Vue.component(Input.name, Input);
@@ -157,8 +155,8 @@ Vue.component('Positionmanagingpanel', require('../positionmanagingpanel/positio
 })
 export default class PositionslistComponent extends Vue {
 
-    @Prop({ default: new newStructureTree() })
-    visible: newStructureTree;
+    @Prop({ default: 0 })
+    visible: number;
 
     structureinfo: StructureInfo;
     previous: StructureInfo;
@@ -178,7 +176,6 @@ export default class PositionslistComponent extends Vue {
     posdepsDecrees: PosDep[][];
 
 
-    softs: Map<number, string>;
     mrdsReady: Map<number, string[]>;
     altranksReady: Map<number, string[]>;
     altranksGroupsReady: Map<number, string>;
@@ -242,7 +239,11 @@ export default class PositionslistComponent extends Vue {
 
     structureInfos: StructureInfo[];
 
-    formating = formatting;
+    /**
+     * Прохождение службы
+     */
+    persons: Person[];
+    photosPreview: Personphoto[];
 
     data() {
         return {
@@ -265,7 +266,6 @@ export default class PositionslistComponent extends Vue {
             posdepsDecrees: [],
             posdepsPadding: [],
 
-            softs: new Map<number, string>(),
             mrdsReady: new Map<number, string[]>(),
             altranksReady: new Map<number, string[]>(),
             altranksGroupsReady: new Map<number, string[]>(),
@@ -328,13 +328,18 @@ export default class PositionslistComponent extends Vue {
             decertificateDate: "",
 
             structureInfos: [],
+
+            /**
+             * Прохождение службы
+             */
+            persons: [],
+            photosPreview: [],
         }
     }
 
     mounted() {
         setInterval(this.forceFetch, fetchPositionForceDelay);
         setInterval(this.fetchPositionsRegular, fetchPositionDelay);
-        setInterval(this.getsofs, fetchPositionDelay);
         this.posdepgroups = new Array();
         this.posdeps = new Array();
         this.posdepsBeforeNew = new Array();
@@ -835,38 +840,44 @@ export default class PositionslistComponent extends Vue {
             }
 
             if (this.isDeletedUnsigned(posdep)) {
-                let p: PosDep = positionsCompactUnsigned.find(p => p.positiontype.id == posdep.positiontype.id && p.positioncategory == posdep.positioncategory);
+                let p: PosDep = positionsCompactUnsigned.find(p => p.positiontype.id == posdep.positiontype.id && p.positioncategory.id == posdep.positioncategory.id);
                 if (p == null) {
                     let clone: PosDep = _.cloneDeep(posdep);
                     this.clearifyClone(clone);
                     positionsCompactUnsigned.push(clone);
                     posdep.cloned = true;
                 } else {
-                    this.putToDateinactiveMap(p.dateinactivemap, posdep); 
+                    //this.putToSofmap(p.sofmap, posdep, padding);
+                    this.putToDateinactiveMap(p.dateinactivemap, posdep);
+                    p.quantity += posdep.partval;
                 }
             }
 
             if (this.isWillBeDeletedSigned(posdep)) {
-                let p: PosDep = positionsCompactSigned.find(p => p.positiontype.id == posdep.positiontype.id && p.positioncategory == posdep.positioncategory);
+                let p: PosDep = positionsCompactSigned.find(p => p.positiontype.id == posdep.positiontype.id && p.positioncategory.id == posdep.positioncategory.id);
                 if (p == null) {
                     let clone: PosDep = _.cloneDeep(posdep);
                     this.clearifyClone(clone);
                     positionsCompactSigned.push(clone);
                     posdep.cloned = true;
                 } else {
-                    this.putToDateinactiveMap(p.dateinactivemap, posdep); 
+                    //this.putToSofmap(p.sofmap, posdep, padding);
+                    this.putToDateinactiveMap(p.dateinactivemap, posdep);
+                    p.quantity += posdep.partval;
                 }
             }
 
             if (this.isWillBeDeletedUnsigned(posdep)) {
-                let p: PosDep = positionsCompactUnsigned.find(p => p.positiontype.id == posdep.positiontype.id && p.positioncategory == posdep.positioncategory);
+                let p: PosDep = positionsCompactUnsigned.find(p => p.positiontype.id == posdep.positiontype.id && p.positioncategory.id == posdep.positioncategory.id);
                 if (p == null) {
                     let clone: PosDep = _.cloneDeep(posdep);
                     this.clearifyClone(clone);
                     positionsCompactUnsigned.push(clone);
                     posdep.cloned = true;
                 } else {
+                    //this.putToSofmap(p.sofmap, posdep, padding);
                     this.putToDateinactiveMap(p.dateinactivemap, posdep);
+                    p.quantity += posdep.partval;
                 }
             }
 
@@ -948,7 +959,7 @@ export default class PositionslistComponent extends Vue {
      * @param posdep
      */
     clearifyClone(posdep: PosDep) {
-        posdep.quantity = 0;
+        //posdep.quantity = 0;
         posdep.replacedbycivilquantity = 0;
         posdep.sofmap = new Map<string, number>();
         posdep.dateactivemap = new Map<string, number>();
@@ -1058,8 +1069,7 @@ export default class PositionslistComponent extends Vue {
 
 
     close() {
-        this.visible = new newStructureTree();
-        this.$store.commit("setcurrentStructure", this.visible);
+        this.$store.commit("setPositionsListId", 0);
     }
 
     rankToString(rank: Rank): string {
@@ -1416,7 +1426,8 @@ export default class PositionslistComponent extends Vue {
     }
 
     decertificatePositionID(id): any {
-        return this.decertificatePosition + "_" + id;
+        if (this.checkerbyeditormode())
+            return this.decertificatePosition + "_" + id;
     }
 
     addDepartmentID(id): any {
@@ -2034,6 +2045,13 @@ export default class PositionslistComponent extends Vue {
         }
     }
 
+    getPerson(posdep: PosDep) {
+        let person: Person = this.persons.find(d => d.position == posdep.id);
+        return person;
+        // if
+        //return null;
+    }
+
     appoint(position: PosDep) {
         let toggle: number = 1;
         let toggleReverse: number = 0;
@@ -2052,13 +2070,44 @@ export default class PositionslistComponent extends Vue {
 
     takeoff(person: Person) {
         let id: string = person.id.toString();
-        fetch('api/Person/Takeoff' + id, { credentials: 'include' })
+        /*fetch('api/Person/Takeoff' + id, { credentials: 'include' })
             .then(response => {
                 return response.json() as Promise<number>;
             })
             .then(response => {
-            })
+            })*/
 
+    }
+
+    hasPhotopreview(personid: number): boolean {
+        if (this.photosPreview == null || this.photosPreview.length == 0) {
+            return false;
+        }
+        if (this.photosPreview.find(p => p.person == personid)) {
+            return true;
+        }
+        return false;
+    }
+
+    getPhotopreview(personid: number): Personphoto {
+        return this.photosPreview.find(p => p.person == personid);
+    }
+
+    /**
+     * После загрузки с базы данных нам нужно Даты превратить в string эквивалент
+     */
+    prepareToImport(person: Person): void {
+        //person.birthdateString = this.toDateInputValue(new Date());
+        person.birthdateString = this.toDateInputValue(person.birthdate);
+        person.passportdatestartString = this.toDateInputValue(person.passportdatestart);
+        person.passportdateendString = this.toDateInputValue(person.passportdateend);
+        person.age = this.getAge(person.birthdateString).toString();
+    }
+
+    prepareToExport(person: Person): void {
+        person.birthdate = new Date(person.birthdateString);
+        person.passportdatestart = new Date(person.passportdatestartString);
+        person.passportdateend = new Date(person.passportdateendString);
     }
 
     getAge(dateString) {
@@ -2134,6 +2183,52 @@ export default class PositionslistComponent extends Vue {
             })
     }
 
+    selectPosdep(position: PosDep) {
+        // Если назначаем на должность через ЭЛД
+        if (this.$store.state.modeappointperson) {
+            this.$store.commit("setModeappointedperson", position.id);
+            this.$store.commit("setModeappointperson", false);
+
+            let appearance = {
+                positioncompact: this.$store.state.positioncompact,
+                sidebardisplay: 0,
+            }
+
+            this.$store.commit("setEldVisible", 1);
+            this.$store.commit("setPositionsListId", position.id);
+
+            this.$store.commit("updateUserAppearance", appearance);
+        } else
+
+        // Если назначаем на должность через проекты приказов ЭЛД
+        if (this.$store.state.modeappointpersondecree) {
+            if (this.$store.state.mailmodeprevios) {
+                this.$store.commit("setdecreeoperationtemplatecreatorVisible", this.$store.state.persondecree != null ? true : false);
+                this.$store.commit("setdecreeoperationelementVisible", true);
+                this.$store.commit("setmailmodeprevios", false);
+                this.$store.commit("setchosenPosition", position);
+            } else {
+                this.$store.commit("setModeappointedpersondecree", position.id);
+            }
+
+            this.$store.commit("setModeappointpersondecree", false);
+
+            let appearance = {
+                positioncompact: this.$store.state.positioncompact,
+                sidebardisplay: 0,
+            }
+
+            //this.$store.commit("setModeappointpersondecreeenablepersondecree", true); // При помощи этого посылаем информацию topmenu о том, что необходимо вернуть отображение меню проекта приказов.
+            //this.$store.commit("setEldVisible", 1); - поменять на 
+            this.$store.commit("setPositionsListId", 0);
+
+            this.$store.commit("updateUserAppearance", appearance);
+        } else if (this.getPerson(position) != null) {
+            //@click="openProfile(getPerson(posdep))"
+            this.openProfile(this.getPerson(position));
+        }
+    }
+
     appointPersonToStructure() {
         // Если назначаем на должность через проекты приказов ЭЛД
         if (this.$store.state.modeappointpersonstructuredecree) {
@@ -2153,16 +2248,9 @@ export default class PositionslistComponent extends Vue {
         }
     }
 
-    getsofs() {
-        var sofs: Sourceoffinancing[] = this.$store.state.sofs;
-        var output = new Map<number, string>();
-        sofs.forEach(r => {
-            var time = r.name.split(' ');
-            time = [time[0][0].toUpperCase(), time[1][0].toUpperCase()];
-            output.set(r.id, time.join(''));
-        })
-        this.softs = output;
-        /*var t = new Date();
-        t.toDateString()*/
+
+    checkerbyeditormode() {
+        return this.$store.state.user.onlyreadflagtoeditor == 1 ? true : false;
     }
+
 }

@@ -345,4 +345,7 @@ export default class DepartmentslistComponent extends Vue {
         //alert('Послушай, скажи мне друг. Ты всюду был, ты знаешь всё на свете. Не то что я, гуляка человек.' );
     }
 
+    checkerbyeditormode() {
+        return this.$store.state.user.onlyreadflagtoeditor == 1 ? true : false;
+    }
 }

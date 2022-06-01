@@ -4,8 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using PersonnelManagement.USERS;
-
 
 namespace PersonnelManagement.Models
 {
@@ -406,7 +404,7 @@ namespace PersonnelManagement.Models
 
         private void removeHistoryDecreeOperation(List<DecreeoperationManagement> decreeoperations)
         {
-            orgContext time_context = m_repository.GetContext();
+            pmContext time_context = m_repository.GetContext();
             foreach (DecreeoperationManagement i in decreeoperations)
             {
                 Decreeoperation decree_to_remove = m_repository.DecreeoperationsLocal()[i.Id];
@@ -421,7 +419,7 @@ namespace PersonnelManagement.Models
         {
             if (deleted_decreeoperetions == order.orders.Count)
                 return;
-            orgContext time_context = m_repository.GetContext();
+            pmContext time_context = m_repository.GetContext();
             Decree decree_to_remove = m_repository.DecreesLocal()[order.decree.Id];
             time_context.Decree.Remove(decree_to_remove);
             time_context.SaveChanges();
@@ -430,7 +428,7 @@ namespace PersonnelManagement.Models
 
         private void editHistoryDecreeOperation(Order old_order, DecreeHistroryElementToAppending template_new_decree)
         {
-            orgContext time_context = m_repository.GetContext();
+            pmContext time_context = m_repository.GetContext();
             List<DecreeoperationManagement> time = old_order.orders.Where(s => s.Subject == m_repository.GetOriginalStructure(template_new_decree.structure_id).Id * (-1)).ToList();
             foreach (DecreeoperationManagement i in time)
             {
@@ -446,7 +444,7 @@ namespace PersonnelManagement.Models
 
         private void editHistoryDecree(Order old_order, DecreeHistroryElementToAppending template_new_decree)
         {
-            orgContext time_context = m_repository.GetContext();
+            pmContext time_context = m_repository.GetContext();
             Decree decree_to_edit = m_repository.DecreesLocal()[old_order.decree.Id];
             decree_to_edit.Dateactive = template_new_decree.date.GetValueOrDefault();
             decree_to_edit.Datesigned = template_new_decree.date.GetValueOrDefault();

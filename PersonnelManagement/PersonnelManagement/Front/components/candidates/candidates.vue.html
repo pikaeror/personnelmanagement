@@ -1,0 +1,258 @@
+﻿<template>
+    <div v-if="visible > 0" class="widget" style="overflow-y: scroll; max-height: 900px;">
+        <div class="candidates-top-block">
+            <div class="candidates-title">
+                Кандидаты и личные кабинеты
+            </div>
+        </div>
+        <el-collapse v-model="activeMode" class="candidates-accordeon" accordion>
+            <el-collapse-item name="1">
+                <template slot="title">
+                    <span class="candidates-accordeon-title">
+                        Поиск
+                    </span>
+                </template>
+                <el-input placeholder="Введите фамилию, имя, отчетство или их часть" v-model="searchtext"></el-input><el-button @click="searchCabinetes(searchtext)">Поиск</el-button>
+            </el-collapse-item>
+            <el-collapse-item name="2">
+                <template slot="title">
+                    <span class="candidates-accordeon-title">
+                        Создать новый личный кабинет
+                    </span>
+                </template>
+                <div>
+                    Фамилия
+                    <el-input v-model="newUsersurname"></el-input>
+                </div>
+                <div>
+                    Имя собственное
+                    <el-input  v-model="newUsername"></el-input>
+                </div>
+                <div>
+                    Отчество
+                    <el-input v-model="newUserpatronymic"></el-input>
+                </div>
+                <div>
+                    Идентификационный номер <small>(ввод букв на латинской раскладке)</small>
+                    <el-input v-model="newUserind" @input="identchange($event)" ref="newUserindInput"></el-input>
+                </div>
+                <div>
+                    Цель создания
+                    <el-select clearable placeholder="Цель создания" v-model="newReasonid">
+                        <el-option key="1" label="На службу" value="1">
+                        </el-option>
+                        <el-option key="2" label="На работу ГС" value="2">
+                        </el-option>
+                        <el-option key="3" label="На работу рабочим/служащим" value="3">
+                        </el-option>
+                    </el-select>
+                </div>
+                <div>
+                    Форма декларации
+                    <el-select clearable placeholder="Форма декларации" v-model="newDeclarationid">
+                        <el-option key="1" label="1-ая форма декларации" value="1">
+                        </el-option>
+                        <el-option key="2" label="2-ая форма декларации" value="2">
+                        </el-option>
+                        <el-option key="3" label="3-ья форма декларации" value="3">
+                        </el-option>
+                    </el-select>
+                </div>
+                <div>
+
+                </div>
+                <el-button @click="createCabinet()">Создать</el-button>
+            </el-collapse-item>
+        </el-collapse>
+        <hr class="candidates-hr" />
+        <div>
+            <div>
+                <el-button @click="toggleDisplayCabinetes()">
+                    <template v-if="!displayCabinetes">
+                        Отобразить список личных кабинетов
+                    </template>
+                    <template v-if="displayCabinetes">
+                        Скрыть список личных кабинетов
+                    </template>
+                </el-button>
+            </div>
+            <div v-if="displayCabinetes" class="candidates-cabinetes">
+                <div v-for="cabinete in cabinetes" class="candidates-cabinetes-element" @click="openCabinete(cabinete.id)">
+                    <div class="candidates-cabinetes-element-delete">
+                        <el-button size="mini" @click="openCabinete(cabinete.id)">Открыть</el-button>
+                        <!--<el-button size="mini" @click="deleteCabinete(cabinete.id)">Удалить</el-button>-->
+                    </div>
+                    <div>
+                        {{cabinete.usersurname}} {{cabinete.username}} {{cabinete.userpatronymic}} | {{cabinete.userind}}
+                        |
+                        Дата создания: {{printDateCabinet(cabinete)}}
+                        |
+                        <template v-if="cabinete.status == 0">
+                            Активен
+                        </template>
+                        <template v-if="cabinete.status == 1">
+                            Прошел
+                        </template>
+                        <template v-if="cabinete.status == 2">
+                            Забракован
+                        </template>
+                    </div>
+
+                </div>
+            </div>
+            <hr class="candidates-hr" />
+            <div v-if="activecabinete != null" class="candidates-cabinete">
+                <div class="candidates-cabinete-close">
+                    <el-button size="mini" class="candidates-cabinete-close-button" @click="closeCabinete()">Закрыть</el-button>
+                </div>
+                <div class="candidates-cabinete-title">
+                    Личный кабинет
+                </div>
+                <div class="candidates-cabinete-subtitle">
+                    Кандидат {{activecabinete.usersurname}} {{activecabinete.username}} {{activecabinete.userpatronymic}}
+                </div>
+                <div class="candidates-cabinete-info">
+                    <div class="candidates-cabinete-info-element">
+                        Статус:
+                        <template v-if="activecabinete.status == 0">
+                            Активен
+                        </template>
+                        <template v-if="activecabinete.status == 1">
+                            Прошел
+                        </template>
+                        <template v-if="activecabinete.status == 2">
+                            Забракован
+                        </template>
+                    </div>
+                    <div class="candidates-cabinete-info-element">
+
+                        <template v-if="activecabinete.reasonid == 1">
+                            На службу
+                        </template>
+                        <template v-if="activecabinete.reasonid == 2">
+                            На работу ГС
+                        </template>
+                        <template v-if="activecabinete.reasonid == 3">
+                            На работу рабочим/служащим
+                        </template>
+                    </div>
+                    <div class="candidates-cabinete-info-element">
+                        Идентификационный номер {{activecabinete.userind}}
+                    </div>
+                    <div class="candidates-cabinete-info-element">
+                        Пароль входа {{activecabinete.accesscode}}
+                    </div>
+                    <div class="candidates-cabinete-info-element">
+                        Подразделение, в которое обратился кандидат: {{activecabinete.userCompact.structureTree}}
+                    </div>
+                </div>
+                <div class="candidates-cabinete-content">
+                    <div class="candidates-cabinete-actions">
+                        <el-button size="medium" @click="loginData">Распечатать данные для входа</el-button>
+                        <el-button size="medium" @click="predeleteCabinete()">Забраковать кандидата</el-button>
+                        <div v-if="blockmode">
+                            Введите причину для блокировки
+                            <el-input v-model="blockreason"></el-input>
+                            <el-button @click="deleteCabinete(activecabinete.id)">Подтвердить</el-button>
+                            <el-button @click="predeleteCabineteCancel()">Отмена</el-button>
+                        </div>
+                    </div>
+                    <div class="candidates-cabinete-document" v-if="getAutobiography(activecabinete) != null">
+                        <div class="candidates-cabinete-document-title">
+                            Автобиография
+                        </div>
+                        <div class="candidates-cabinete-document-actions">
+                            <el-button size="small" class="candidates-cabinete-document-button" @click="displayAutobiography(activecabinete)">Просмотр</el-button>
+
+                            <el-button size="small" class="candidates-cabinete-document-button" @click="toggleautobiography(activecabinete)">
+                                <template v-if="getAutobiography(activecabinete).autobiographylockunlock == 0">
+                                    Заблокировать
+                                </template>
+                                <template v-else>
+                                    Разблокировать
+                                </template>
+                            </el-button>
+                            <el-button size="small" class="candidates-cabinete-document-button" :disabled="getAutobiography(activecabinete).autobiographylockunlock == 0" @click="displayAutobiography(activecabinete)">Печать</el-button>
+                        </div>
+                    </div>
+
+                    <!--Модальный диалог автобиографии-->
+                    
+
+                    <div class="candidates-cabinete-document" v-if="getProfile(activecabinete) != null">
+                        <div class="candidates-cabinete-document-title">
+                            Анкета
+                        </div>
+                        <div class="candidates-cabinete-document-actions" id="printTest">
+                            <el-button size="small" class="candidates-cabinete-document-button" @click="displayProfile(activecabinete)">Просмотр</el-button>
+                            <el-button size="small" class="candidates-cabinete-document-button" @click="toggleprofile(activecabinete)">
+                                <template v-if="getProfile(activecabinete).profilelockunlock == 0">
+                                    Заблокировать
+                                </template>
+                                <template v-else>
+                                    Разблокировать
+                                </template>
+                            </el-button>
+                            <el-button size="small" class="candidates-cabinete-document-button" :disabled="getProfile(activecabinete).profilelockunlock == 0" @click="displayProfile(activecabinete)">Печать</el-button>
+                        </div>
+                    </div>
+
+                    <!--Анкета-->
+                    
+                    <!--Анкета-->
+
+
+
+                    <div class="candidates-cabinete-document" v-if="getSheet(activecabinete) != null && activecabinete.reasonid != 1">
+                        <div class="candidates-cabinete-document-title">
+                            Личный листок по учету кадров
+                        </div>
+                        <div class="candidates-cabinete-document-actions">
+                            <el-button size="small" class="candidates-cabinete-document-button" @click="displaySheet(activecabinete)">Просмотр</el-button>
+                            <el-button size="small" class="candidates-cabinete-document-button" @click="togglesheet(activecabinete)">
+                                <template v-if="getSheet(activecabinete).sheetlockunlock == 0">
+                                    Заблокировать
+                                </template>
+                                <template v-else>
+                                    Разблокировать
+                                </template>
+                            </el-button>
+                            <el-button size="small" class="candidates-cabinete-document-button" :disabled="getSheet(activecabinete).sheetlockunlock == 0" @click="displaySheet(activecabinete)">Печать</el-button>
+                        </div>
+                    </div>
+                    <!--Личный листок по учету кадров просмотр-->
+                    
+                    <!--Личный листок по учету кадров просмотр-->
+
+
+
+                    <div class="candidates-cabinete-document" v-if="getDeclaration(activecabinete) != null && activecabinete.reasonid != 3">
+                        <div class="candidates-cabinete-document-title">
+                            Декларация
+                        </div>
+                        <div class="candidates-cabinete-document-actions">
+                            <el-button size="small" class="candidates-cabinete-document-button" @click="displayDeclaration(activecabinete)">Просмотр</el-button>
+                            <el-button size="small" class="candidates-cabinete-document-button" @click="toggledeclaration(activecabinete)">
+                                <template v-if="getDeclaration(activecabinete).declarationlockunlock == 0">
+                                    Заблокировать
+                                </template>
+                                <template v-else>
+                                    Разблокировать
+                                </template>
+                            </el-button>
+                            <el-button size="small" class="candidates-cabinete-document-button" :disabled="getDeclaration(activecabinete).declarationlockunlock == 0" @click="displayDeclaration(activecabinete)">Печать</el-button>
+                        </div>
+                    </div>
+                    <!--Просмотр деклараций начало-->
+                    
+                    <!--Просмотр деклараций-->
+                    <!--Просмотр деклараций конец-->
+                    <div class="candidates-cabinete-remove ">
+                        <el-button class="candidates-cabinete-remove-button " type="primary" plain :disabled="!allowAccept(activecabinete)">Заархивировать данные и удалить личный кабинет</el-button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+<script src="./candidates.ts"></script>

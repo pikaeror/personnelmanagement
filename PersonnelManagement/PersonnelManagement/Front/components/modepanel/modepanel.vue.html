@@ -5,10 +5,10 @@
             Выберите режим работы
         </div>
         <div class="modepanel-container ">
-            <div class="modepanel-element modepanel-element-org" @click="org" v-if="structureModeAccess">
+            <div class="modepanel-element modepanel-element-org" @click="org()" v-if="structureModeAccess()">
                 Организационно-штатная работа
             </div>
-            <div v-else><i>Загрузка...</i></div>
+            <div v-if="!structureEdit() && !personnelRead()"><i>Загрузка...</i></div>
         </div>
     </div>
 </template>

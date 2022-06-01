@@ -1,8 +1,11 @@
-﻿export default class Punishment_Parameters {
+﻿import Penalty from "../penalty";
+import Penaltytype from "../penaltytype";
+
+export default class Punishment_Parameters {
     constructor() {
         this.type = [];
-        this.who = [];
+        this.penaltytype = [];
     }
-    type: string[];
-    who: string[];
+    type: Penalty[];
+    penaltytype: Penaltytype[];
 }

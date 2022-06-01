@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Net.Http.Headers;
 using PersonnelManagement.Models;
 using PersonnelManagement.Services;
-using PersonnelManagement.USERS;
 
 namespace PersonnelManagement.Controllers
 {
@@ -84,7 +83,7 @@ namespace PersonnelManagement.Controllers
             if (IdentityService.IsLogined(Request.Cookies[Keys.COOKIES_SESSION], repository))
             {
                 User dbUser = IdentityService.GetUserBySessionID(sessionid, repository);
-                user = dbUser.GetUserModel(repository.GetContextUser());
+                user = dbUser.GetUserModel(repository);
             }
             else
             {
@@ -158,10 +157,10 @@ namespace PersonnelManagement.Controllers
             if (IdentityService.IsLogined(Request.Cookies[Keys.COOKIES_SESSION], repository))
             {
                 user = IdentityService.GetUserBySessionID(sessionid, repository);
-                User contextUser = repository.GetContextUser().User.First(u => u.Id == user.Id);
+                User contextUser = repository.Users.First(u => u.Id == user.Id);
                 contextUser.Fullmode = id; // пока что ставим мод напрямую.
                 repository.SaveChanges();
-                repository.GetContextUser().UpdateUsersLocal();
+                repository.UpdateUsersLocal();
                 //repository.ChangeFullmode(user, id);
                 return new ObjectResult(Keys.SUCCESS_SHORT + ":Режим изменен");
             }
@@ -187,7 +186,7 @@ namespace PersonnelManagement.Controllers
             }
 
 
-            repository.GetContextUser().UpdateUserSettings(user, userSettings);
+            repository.UpdateUserSettings(user, userSettings);
             return new ObjectResult(Keys.SUCCESS_SHORT + ":Пользовательские настройки сохранены");
         }
 

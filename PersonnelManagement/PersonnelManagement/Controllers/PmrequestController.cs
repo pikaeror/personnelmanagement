@@ -13,8 +13,11 @@ using Microsoft.AspNetCore.Mvc;
 using PersonnelManagement.Models;
 using PersonnelManagement.Services;
 using PersonnelManagement.Utils;
-using PersonnelManagement.USERS;
 using X14 = DocumentFormat.OpenXml.Office2010.Excel;
+using System.Threading;
+using System.Diagnostics;
+using System.Reflection;
+using System.Runtime.InteropServices;
 
 namespace PersonnelManagement.Controllers
 {
@@ -23,10 +26,12 @@ namespace PersonnelManagement.Controllers
     public class PmrequestController : Controller
     {
         private Repository repository;
+        private pmContext context;
 
         public PmrequestController(Repository repository)
         {
             this.repository = repository;
+            this.context = repository.GetContext();
         }
 
         // Is allowed to edit structures.
@@ -43,6 +48,23 @@ namespace PersonnelManagement.Controllers
             return false;
         }
 
+        private void setThread(string session_id, int PID = -1)
+        {
+            Session session = context.Session.First(r => r.Id == session_id);
+            session.LastPidrequest = PID;
+            context.Session.Update(session);
+            context.SaveChanges();
+        }
+
+        private int getThread(string session_id)
+        {
+            var t = context.SaveChanges();
+            Session session = context.Session.First(r => r.Id == session_id);
+            return session.LastPidrequest;
+        }
+
+/*        [DllImport("Kernel32", EntryPoint = "GetCurrentThreadId", ExactSpelling = true)]
+        public static extern Int32 GetCurrentWin32ThreadId();*/
 
         // POST: api/Pmrequest
         [HttpPost]
@@ -57,8 +79,6 @@ namespace PersonnelManagement.Controllers
             {
                 user = IdentityService.GetUserBySessionID(sessionid, repository);
 
-
-
                 //int[] structuresArray = pmrequest.Structures.Split(',').Select(int.Parse).ToArray();
                 //structuresArray = FilterStructuresByReadability(user, structuresArray.ToList()).ToArray();
 
@@ -66,14 +86,32 @@ namespace PersonnelManagement.Controllers
                 if (!hasAccess)
                 {
                     return new ObjectResult(Keys.ERROR_SHORT + ":Отказано в доступе");
-
                 }
             }
             else
             {
                 return new ObjectResult(Keys.ERROR_SHORT + ":Отказано в доступе");
             }
+            IActionResult output = new ObjectResult("");
+            
+            Thread current = new Thread(() => { output = worker(new Repository(repository.GetContext()), pmrequest, user); });
+            setThread(sessionid, current.ManagedThreadId);
+            current.Start();
+            //var h = GetNativeThreadId(current);
+            current.Join();
+            if(getThread(sessionid) == current.ManagedThreadId)
+            {
+                setThread(sessionid);
+                return output;
+            }
+            return new ObjectResult("");
 
+            foreach (ProcessThread t in Process.GetCurrentProcess().Threads)
+            {
+                System.Console.WriteLine(t.StartTime.ToString());
+            }
+            // current.Abort();
+            // setThread(sessionid, current.)
             /**
              *  По должностям.
              */
@@ -86,7 +124,6 @@ namespace PersonnelManagement.Controllers
                 List<PmrequestPosition> positions = repository.GetPmrequestPositions(pmrequest, user);
                 List<PmrequestPosition> positionsAllranks = null;
                 
-
                 if (pmrequest.AnyAltranks)
                 {
                     positionsAllranks = repository.GetPmrequestPositions(clone, user);
@@ -104,6 +141,7 @@ namespace PersonnelManagement.Controllers
                     Pmmemory.tempFiles.TryRemove(user.Id, out _);
                 }
                 Pmmemory.tempFiles.TryAdd(user.Id, mem.ToArray());
+                setThread(sessionid);
                 return new ObjectResult(pmresult);
                 // return File(mem, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "test.xlsx");
             /**
@@ -125,6 +163,7 @@ namespace PersonnelManagement.Controllers
                         Pmmemory.tempFiles.TryRemove(user.Id, out _);
                     }
                     Pmmemory.tempFiles.TryAdd(user.Id, mem.ToArray());
+                    setThread(sessionid);
                     return new ObjectResult(pmresult);
                     //return File(GenerateDocument(structures, pmrequest), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "test.xlsx");
                 /**
@@ -141,11 +180,13 @@ namespace PersonnelManagement.Controllers
                         Pmmemory.tempFiles.TryRemove(user.Id, out _);
                     }
                     Pmmemory.tempFiles.TryAdd(user.Id, mem.ToArray());
+                    setThread(sessionid);
                     return new ObjectResult(pmresult);
                 }
 
             } else if (pmrequest.Type.Equals(Keys.PMREQUEST_TYPE_LOAD))
             {
+                setThread(sessionid);
                 return File(Pmmemory.tempFiles[user.Id], "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "test.xlsx");
 
             /**
@@ -182,7 +223,130 @@ namespace PersonnelManagement.Controllers
                 //Pmmemory.tempFiles.TryAdd(user.Id, mem.ToArray());
                 //return new ObjectResult(pmresult);
                 //return File(Pmmemory.tempFiles[user.Id], "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "test.xlsx");
-                 return File(mem, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "test.xlsx");
+                setThread(sessionid);
+                return File(mem, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "test.xlsx");
+                /**
+                 * По подразделениям.
+                 */
+            }
+            setThread(sessionid);
+            return new ObjectResult(Keys.ERROR_SHORT + ":Произошла какая-то оказия");
+        }
+
+        [HttpPost("Stoped")]
+        public IActionResult terminateThread()
+        {
+            setThread(Request.Cookies[Keys.COOKIES_SESSION]);
+            //int thread_id = getThread(Request.Cookies[Keys.COOKIES_SESSION]);
+            return new ObjectResult(Keys.ERROR_SHORT);
+        }
+
+        public static int GetNativeThreadId(Thread thread)
+        {
+            var f = typeof(Thread).GetField("DONT_USE_InternalThread",
+                BindingFlags.GetField | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.FlattenHierarchy);
+
+            var pInternalThread = (IntPtr)f.GetValue(thread);
+            var nativeId = Marshal.ReadInt32(pInternalThread, (IntPtr.Size == 8) ? 0x022C : 0x0160); // found by analyzing the memory
+            return nativeId;
+        }
+
+        public static void worker(ref Tuple<Repository, Pmrequest, User, IActionResult> input)
+        {
+            PmrequestController.worker(input.Item1, input.Item2, input.Item3);
+        }
+
+        public static IActionResult worker(Repository repository, Pmrequest pmrequest, User user)
+        {
+            IActionResult output = null;
+            PmrequestController time = new PmrequestController(repository);
+            if (pmrequest.Type.Equals(Keys.PMREQUEST_TYPE_POSITION))
+            {
+                Pmrequest clone = Repository.Clone<Pmrequest>(pmrequest);
+                clone.Ranks = "";
+                pmrequest.AnyAltranks = false;
+                List<Position> positionsAll = new List<Position>(repository.Positions);
+                List<PmrequestPosition> positions = repository.GetPmrequestPositions(pmrequest, user);
+                List<PmrequestPosition> positionsAllranks = null;
+
+                if (pmrequest.AnyAltranks)
+                {
+                    positionsAllranks = repository.GetPmrequestPositions(clone, user);
+                }
+                else
+                {
+                    positionsAllranks = positions;
+                }
+
+                Pmresult pmresult = repository.GetPmresult(positionsAllranks, pmrequest);
+
+                MemoryStream mem = time.GenerateDocument(positions, pmrequest);
+                if (Pmmemory.tempFiles.ContainsKey(user.Id))
+                {
+                    Pmmemory.tempFiles.TryRemove(user.Id, out _);
+                }
+                Pmmemory.tempFiles.TryAdd(user.Id, mem.ToArray());
+                return new ObjectResult(pmresult);
+            }
+            else if (pmrequest.Type.Equals(Keys.PMREQUEST_TYPE_STRUCTURE))
+            {
+                /**
+                 * Простой вывод запроса по подразделениям
+                 */
+                if (pmrequest.Structurecountmode == 0)
+                {
+                    List<PmrequestStructure> structures = repository.GetPmrequestStructures(pmrequest, user);
+                    Pmresult pmresult = new Pmresult();
+                    pmresult.Count = structures.Count;
+                    MemoryStream mem = time.GenerateDocument(structures, pmrequest);
+                    if (Pmmemory.tempFiles.ContainsKey(user.Id))
+                    {
+                        Pmmemory.tempFiles.TryRemove(user.Id, out _);
+                    }
+                    Pmmemory.tempFiles.TryAdd(user.Id, mem.ToArray());
+                    return new ObjectResult(pmresult);
+                }
+                else
+                {
+                    List<PmrequestStructure> structures = repository.GetPmrequestStructuresCount(pmrequest, user);
+                    Pmresult pmresult = new Pmresult();
+                    pmresult.Count = structures.Count;
+                    MemoryStream mem = time.GenerateStructureCountDocument(structures, pmrequest, user);
+                    if (Pmmemory.tempFiles.ContainsKey(user.Id))
+                    {
+                        Pmmemory.tempFiles.TryRemove(user.Id, out _);
+                    }
+                    Pmmemory.tempFiles.TryAdd(user.Id, mem.ToArray());
+                    return new ObjectResult(pmresult);
+                }
+
+            }
+            else if (pmrequest.Type.Equals(Keys.PMREQUEST_TYPE_LOAD))
+            {
+                return time.File(Pmmemory.tempFiles[user.Id], "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "test.xlsx");
+            }
+            else if (pmrequest.Type.Equals(Keys.PMREQUEST_TYPE_ADDREMOVE))
+            {
+                if (pmrequest.Id < 0)
+                {
+                    pmrequest.Id = -pmrequest.Id;
+                }
+
+
+                Pmrequest clone = Repository.Clone<Pmrequest>(pmrequest);
+                clone.Ranks = "";
+                pmrequest.AnyAltranks = false;
+                List<Position> positionsAll = new List<Position>(repository.Positions);
+                List<PmrequestPosition> positions = repository.GetPmrequestPositionsAddRemove(pmrequest, user);
+                List<PmrequestPosition> positionsAllranks = null;
+
+
+                positionsAllranks = positions;
+
+                pmrequest.Displaytreeseparately = 1;
+                pmrequest.AddRemove = true;
+                MemoryStream mem = time.GenerateDocument(positions, pmrequest);
+                return time.File(mem, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "test.xlsx");
                 /**
                  * По подразделениям.
                  */
@@ -190,7 +354,6 @@ namespace PersonnelManagement.Controllers
             return new ObjectResult(Keys.ERROR_SHORT + ":Произошла какая-то оказия");
         }
 
-        
         /// <summary>
         /// PRINT INFO ABOUT POSITIONS
         /// </summary>
@@ -208,7 +371,6 @@ namespace PersonnelManagement.Controllers
             var mem = new MemoryStream();
             using (SpreadsheetDocument document = SpreadsheetDocument.Create(mem, SpreadsheetDocumentType.Workbook, true))
             {
-
                 WorkbookPart workbookPart = document.AddWorkbookPart();
                 workbookPart.Workbook = new Workbook();
                 WorksheetPart worksheetPart = workbookPart.AddNewPart<WorksheetPart>();
@@ -219,7 +381,6 @@ namespace PersonnelManagement.Controllers
                 Worksheet worksheet = new Worksheet();
                 DocumentFormat.OpenXml.Spreadsheet.SheetData sheetData = new DocumentFormat.OpenXml.Spreadsheet.SheetData();
 
-               
                 Columns columns = new Columns();
                 columns.Append(new Column() { Min = (UInt32Value)1U, Max = (UInt32Value)100U, Width = 20, CustomWidth = true });
                 worksheet.Append(columns);
@@ -230,11 +391,7 @@ namespace PersonnelManagement.Controllers
                 Sheets sheets = workbookPart.Workbook.AppendChild(new Sheets());
                 Sheet sheet = new Sheet() { Id = workbookPart.GetIdOfPart(worksheetPart), SheetId = 1, Name = "Результат запроса" };
 
-                
-
                 sheets.Append(sheet);
-
-                
 
                 UInt32 rowIndex = 1;
 
@@ -255,8 +412,6 @@ namespace PersonnelManagement.Controllers
                     rowIndex, count.ToString());
                 row.AppendChild(countCell);
                 AddBold(document, countCell);
-
-
 
                 List<string[]> trees = null;
                 int treemaxlength = 0;
@@ -279,6 +434,7 @@ namespace PersonnelManagement.Controllers
                         }
                     }
                 }
+
                 List<AltrankPrintable> printables = pmrequest.AltrankPrintables;
                 int index = 0;
                 bool firstTime = true;
@@ -800,6 +956,8 @@ namespace PersonnelManagement.Controllers
                 bool ranks = true;
                 bool tree = true;
 
+
+                int index = 0;
                 Row rowPrev = null;
                 PmrequestStructure structureFirst = structures.FirstOrDefault();
                 List<int> skipCategory = new List<int>();
@@ -996,7 +1154,6 @@ namespace PersonnelManagement.Controllers
              * Information selector
              */
 
-
             /**
              * Document generator
              */
@@ -1043,9 +1200,6 @@ namespace PersonnelManagement.Controllers
                     rowIndex, structures.Count.ToString());
                 row.AppendChild(countCell);
                 AddBold(document, countCell);
-
-
-                
 
                 List<string[]> trees = null;
                 int treemaxlength = 0;
@@ -1240,9 +1394,6 @@ namespace PersonnelManagement.Controllers
                         AddBold(document, cell);
                     }
 
-
-                    
-
                     foreach (KeyValuePair<Sourceoffinancing, double> sofs in structure.SofSigned)
                     {// Тут может быть ошибка с выводом
                         column++;
@@ -1315,11 +1466,9 @@ namespace PersonnelManagement.Controllers
                         AddBold(document, cell);
                     }
 
-
                     index++;
                     firstTime = false;
                 }
-
                 workbookPart.Workbook.Save();
             }
             mem.Position = 0;

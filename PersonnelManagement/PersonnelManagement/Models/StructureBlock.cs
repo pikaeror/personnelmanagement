@@ -13,7 +13,6 @@ using Microsoft.AspNetCore.Mvc;
 using PersonnelManagement.Controllers;
 using PersonnelManagement.Models;
 using PersonnelManagement.Utils;
-using PersonnelManagement.USERS;
 using PersonnelManagement.Services;
 using X14 = DocumentFormat.OpenXml.Office2010.Excel;
 
@@ -169,13 +168,11 @@ namespace PersonnelManagement.Models
             {
                 int originalId = repository.GetStructureOriginalId(structureExpanded.Id); ;
                 //int level = structureExpanded.Level; - from 0...
-                Structure time_struct = repository.GetActualStructureInfo(structureExpanded.Id, user.Date.GetValueOrDefault());
-                PrintEnumElement peeDom = new PrintEnumElement {
-                    InEnum = true,
-                    Position = null,
-                    Structure = time_struct,
-                    Name = time_struct.Name
-                };
+                PrintEnumElement peeDom = new PrintEnumElement();
+                peeDom.InEnum = true;
+                peeDom.Position = null;
+                peeDom.Structure = repository.GetActualStructureInfo(structureExpanded.Id, user.Date.GetValueOrDefault());
+                peeDom.Name = peeDom.Structure.Name;
                 elements.Add(peeDom);
 
                 int originID = peeDom.Structure.Id;
@@ -635,11 +632,10 @@ namespace PersonnelManagement.Models
             Alignment alignment = null;
             if (center)
             {
-                alignment = new Alignment {
-                    Vertical = VerticalAlignmentValues.Center,
-                    Horizontal = HorizontalAlignmentValues.Center,
-                    WrapText = true
-                };
+                alignment = new Alignment();
+                alignment.Vertical = VerticalAlignmentValues.Center;
+                alignment.Horizontal = HorizontalAlignmentValues.Center;
+                alignment.WrapText = true;
             }
             
 
@@ -722,7 +718,7 @@ namespace PersonnelManagement.Models
 
         private string ColumnLetter(int intCol)
         {
-            intCol--;
+            intCol = intCol - 1;
             var intFirstLetter = ((intCol) / 676) + 64;
             var intSecondLetter = ((intCol % 676) / 26) + 64;
             var intThirdLetter = (intCol % 26) + 65;

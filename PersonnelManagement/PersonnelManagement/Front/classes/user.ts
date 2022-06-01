@@ -26,6 +26,7 @@ export default class User {
     patronymic: string;
     positiontype: number;
     fullmode: number;
+    onlyreadflagtoeditor: number;
 
     structurename: string;
     rights: Rights = new Rights();

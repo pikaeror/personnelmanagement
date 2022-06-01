@@ -7,7 +7,6 @@ import Structuretype from '../../classes/structuretype';
 import StructureTree from '../../classes/structuretree';
 import Subject from '../../classes/subject';
 import Subjectgender from '../../classes/subjectgender';
-import elementsubject from '../../classes/Subject_classes/elementsubject';
 Vue.component(Button.name, Button);
 Vue.component(Checkbox.name, Checkbox);
 Vue.component(Input.name, Input);
@@ -58,18 +57,12 @@ class StructureManagement {
     subjectnumber: number;
     subjectnotice: string;
     subjectgender: number;
-    subjectindex: number;
 }
 
 @Component({
 
 })
 export default class StructuremanagingpanelComponent extends Vue {
-    subject_name_parts: number[];
-    subject_name_full: string;
-    all_subjects: Subject[];
-    current_subject: number;
-
     id: number;
     status: string;
     name: string;
@@ -135,11 +128,6 @@ export default class StructuremanagingpanelComponent extends Vue {
 
     data() {
         return {
-            subject_name_parts: [],
-            subject_name_full: "",
-            all_subjects: [],
-            current_subject: null,
-
             id: 0,
             status: "renamestructure",
             name: "",
@@ -314,7 +302,6 @@ export default class StructuremanagingpanelComponent extends Vue {
 
         this.filteredSubjects = this.subjects.filter(option => (option.category == 2 || option.category == 8));
         (<any>this.$refs.inputstructuremanagementname).focus();
-        this.all_subjects = this.filteredSubjects;
     }
 
     @Watch('visible')
@@ -448,7 +435,6 @@ export default class StructuremanagingpanelComponent extends Vue {
                 subjectnumber: this.prepareNumToExport(this.subjectnumber),
                 subjectnotice: this.subjectnotice,
                 subjectgender: this.prepareNumToExport(this.subjectgender),
-                
             }),
             credentials: 'include',
             headers: new Headers({
@@ -631,21 +617,6 @@ export default class StructuremanagingpanelComponent extends Vue {
                 }
 
                 this.subjectnotice = data.subjectnotice;
-                fetch('api/Subject/elementSubject/' + data.subjectindex, {
-                    method: 'post',
-                    credentials: 'include',
-                    headers: new Headers({
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/json'
-                    })
-                })
-                    .then(response => response.json() as Promise<elementsubject>)
-                    .then(data => {
-                        var time: elementsubject = new elementsubject();
-                        time.setElementByPromis(data);
-                        this.subject_name_parts = time.getSubjectStructure();
-                        this.full_subject_name();
-                    });
             });
     }
 
@@ -763,25 +734,5 @@ export default class StructuremanagingpanelComponent extends Vue {
         }
 
         this.filteredSubjects = [...new Set(this.filteredSubjects)];
-    }
-
-    full_subject_name() {
-        var name: string[] = [""]
-        this.subject_name_parts.forEach(r => {
-            name.push(this.getSubject(r).name)
-        });
-        this.subject_name_full = name.join(" ");
-    }
-
-    add_subject() {
-        if (this.current_subject != null && this.current_subject != 0)
-            this.subject_name_parts.push(this.current_subject);
-        this.current_subject = null;
-        this.full_subject_name();
-    }
-
-    remove_last_subject() {
-        this.subject_name_parts.pop();
-        this.full_subject_name();
     }
 }

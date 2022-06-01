@@ -7,24 +7,102 @@
         </el-checkbox>
         <div v-bind:class="{'structuremanagementpanel-freezed': displayinput}">Полное название подразделения:</div>
         <el-input v-model="name" v-bind:class="{'structuremanagementpanel-freezed': displayinput}" class="structuremanagementpanel-input" :placeholder="getplaceholdername" ref="inputstructuremanagementname"></el-input>
-        <el-checkbox v-model="featured" v-if="displayCheckbox()" class="structuremanagementpanel-checkbox">Отображать сверху</el-checkbox>
+        <el-checkbox v-model="featured" v-if="displayCheckbox() || (structureTree == null)" class="structuremanagementpanel-checkbox">Отображать сверху</el-checkbox>
         <div v-bind:class="{'structuremanagementpanel-freezed': displayinput}">Сокращенное название подразделения:</div>
         <el-input v-model="nameshortened" v-bind:class="{'structuremanagementpanel-freezed': displayinput}" class="structuremanagementpanel-input" placeholder="Сокращенное название"></el-input>
         <hr />
-        <div style="min-width: 100%;">
-            <div v-bind:class="{'structuremanagementpanel-freezed': displayinput}">Наименование подразделения для документов</div>
-            <el-input disabled="true" type="textarea" v-model="subject_name_full" :rows="4"></el-input>
-            <div>
-                <el-select filterable no-data-text="Не найдено" no-match-text="Не найдено" clearable v-model="current_subject" placeholder="Часть" style="width: 100%;">
-                    <el-option v-for="subject in all_subjects"
-                               :key="subject.id" :label="subject.name1" :value="subject.id">
-                    </el-option>
-                </el-select>
-            </div>
-            <div style="text-align: center;">
-                <el-button v-if="subject_name_parts.length < 15" type="success" round @click="add_subject" size="mini">Добавить</el-button>
-                <el-button v-if="subject_name_parts.length > 0" type="danger" round @click="remove_last_subject" size="mini">Удалить последнее</el-button>
-            </div>
+        <div v-bind:class="{'structuremanagementpanel-freezed': displayinput}">Наименование подразделения для документов</div>
+        <div v-bind:class="{'structuremanagementpanel-freezed': displayinput}">
+            <el-select v-bind:class="{'structuremanagementpanel-freezed': displayinput}" class="structuremanagementpanel-document-select" @change="onSubjectChange(subject1)"
+                       filterable :filter-method="filterMethod" no-data-text="Не найдено" no-match-text="Не найдено" clearable v-model="subject1" placeholder="Часть" >
+                <el-option v-for="subject in filteredSubjects"
+                           :key="subject.id" :label="subject.name1" :value="subject.id">
+                </el-option>
+            </el-select>
+            <el-select v-bind:class="{'structuremanagementpanel-freezed': displayinput}" class="structuremanagementpanel-document-select"
+                       filterable :filter-method="filterMethod" no-data-text="Не найдено" no-match-text="Не найдено" clearable v-model="subject2" placeholder="Часть">
+                <el-option v-for="subject in filteredSubjects" v-if="filterByGender(subject)"
+                           :key="subject.id" :label="subject.name1" :value="subject.id">
+                </el-option>
+            </el-select>
+            <el-select v-bind:class="{'structuremanagementpanel-freezed': displayinput}" class="structuremanagementpanel-document-select"
+                       filterable :filter-method="filterMethod" no-data-text="Не найдено" no-match-text="Не найдено" clearable v-model="subject3" placeholder="Часть">
+                <el-option v-for="subject in filteredSubjects" v-if="filterByGender(subject)"
+                           :key="subject.id" :label="subject.name1" :value="subject.id">
+                </el-option>
+            </el-select>
+            <el-select v-bind:class="{'structuremanagementpanel-freezed': displayinput}" class="structuremanagementpanel-document-select"
+                       filterable :filter-method="filterMethod" no-data-text="Не найдено" no-match-text="Не найдено" clearable v-model="subject4" placeholder="Часть">
+                <el-option v-for="subject in filteredSubjects" v-if="filterByGender(subject)"
+                           :key="subject.id" :label="subject.name1" :value="subject.id">
+                </el-option>
+            </el-select>
+            <el-select v-bind:class="{'structuremanagementpanel-freezed': displayinput}" class="structuremanagementpanel-document-select"
+                       filterable :filter-method="filterMethod" no-data-text="Не найдено" no-match-text="Не найдено" clearable v-model="subject5" placeholder="Часть">
+                <el-option v-for="subject in filteredSubjects" v-if="filterByGender(subject)"
+                           :key="subject.id" :label="subject.name1" :value="subject.id">
+                </el-option>
+            </el-select>
+            <el-select v-bind:class="{'structuremanagementpanel-freezed': displayinput}" class="structuremanagementpanel-document-select"
+                       filterable :filter-method="filterMethod" no-data-text="Не найдено" no-match-text="Не найдено" clearable v-model="subject6" placeholder="Часть">
+                <el-option v-for="subject in filteredSubjects" v-if="filterByGender(subject)"
+                           :key="subject.id" :label="subject.name1" :value="subject.id">
+                </el-option>
+            </el-select>
+            <el-select v-bind:class="{'structuremanagementpanel-freezed': displayinput}" class="structuremanagementpanel-document-select"
+                       filterable :filter-method="filterMethod" no-data-text="Не найдено" no-match-text="Не найдено" clearable v-model="subject7" placeholder="Часть">
+                <el-option v-for="subject in filteredSubjects" v-if="filterByGender(subject)"
+                           :key="subject.id" :label="subject.name1" :value="subject.id">
+                </el-option>
+            </el-select>
+            <el-select v-bind:class="{'structuremanagementpanel-freezed': displayinput}" class="structuremanagementpanel-document-select"
+                       filterable :filter-method="filterMethod" no-data-text="Не найдено" no-match-text="Не найдено" clearable v-model="subject8" placeholder="Часть">
+                <el-option v-for="subject in filteredSubjects" v-if="filterByGender(subject)"
+                           :key="subject.id" :label="subject.name1" :value="subject.id">
+                </el-option>
+            </el-select>
+            <el-select v-bind:class="{'structuremanagementpanel-freezed': displayinput}" class="structuremanagementpanel-document-select"
+                       filterable :filter-method="filterMethod" no-data-text="Не найдено" no-match-text="Не найдено" clearable v-model="subject9" placeholder="Часть">
+                <el-option v-for="subject in filteredSubjects" v-if="filterByGender(subject)"
+                           :key="subject.id" :label="subject.name1" :value="subject.id">
+                </el-option>
+            </el-select>
+            <el-select v-bind:class="{'structuremanagementpanel-freezed': displayinput}" class="structuremanagementpanel-document-select"
+                       filterable :filter-method="filterMethod" no-data-text="Не найдено" no-match-text="Не найдено" clearable v-model="subject10" placeholder="Часть">
+                <el-option v-for="subject in filteredSubjects" v-if="filterByGender(subject)"
+                           :key="subject.id" :label="subject.name1" :value="subject.id">
+                </el-option>
+            </el-select>
+            <el-select v-bind:class="{'structuremanagementpanel-freezed': displayinput}" class="structuremanagementpanel-document-select"
+                       filterable :filter-method="filterMethod" no-data-text="Не найдено" no-match-text="Не найдено" clearable v-model="subject11" placeholder="Часть">
+                <el-option v-for="subject in filteredSubjects" v-if="filterByGender(subject)"
+                           :key="subject.id" :label="subject.name1" :value="subject.id">
+                </el-option>
+            </el-select>
+            <el-select v-bind:class="{'structuremanagementpanel-freezed': displayinput}" class="structuremanagementpanel-document-select"
+                       filterable :filter-method="filterMethod" no-data-text="Не найдено" no-match-text="Не найдено" clearable v-model="subject12" placeholder="Часть">
+                <el-option v-for="subject in filteredSubjects" v-if="filterByGender(subject)"
+                           :key="subject.id" :label="subject.name1" :value="subject.id">
+                </el-option>
+            </el-select>
+            <el-select v-bind:class="{'structuremanagementpanel-freezed': displayinput}" class="structuremanagementpanel-document-select"
+                       filterable :filter-method="filterMethod" no-data-text="Не найдено" no-match-text="Не найдено" clearable v-model="subject13" placeholder="Часть">
+                <el-option v-for="subject in filteredSubjects" v-if="filterByGender(subject)"
+                           :key="subject.id" :label="subject.name1" :value="subject.id">
+                </el-option>
+            </el-select>
+            <el-select v-bind:class="{'structuremanagementpanel-freezed': displayinput}" class="structuremanagementpanel-document-select"
+                       filterable :filter-method="filterMethod" no-data-text="Не найдено" no-match-text="Не найдено" clearable v-model="subject14" placeholder="Часть">
+                <el-option v-for="subject in filteredSubjects" v-if="filterByGender(subject)"
+                           :key="subject.id" :label="subject.name1" :value="subject.id">
+                </el-option>
+            </el-select>
+            <el-select v-bind:class="{'structuremanagementpanel-freezed': displayinput}" class="structuremanagementpanel-document-select"
+                       filterable :filter-method="filterMethod" no-data-text="Не найдено" no-match-text="Не найдено" clearable v-model="subject15" placeholder="Часть">
+                <el-option v-for="subject in filteredSubjects" v-if="filterByGender(subject)"
+                           :key="subject.id" :label="subject.name1" :value="subject.id">
+                </el-option>
+            </el-select>
         </div>
         <hr />
         <!--<div v-bind:class="{'structuremanagementpanel-freezed': displayinput}">Полное название подразделения для документов в именительном падеже</div>

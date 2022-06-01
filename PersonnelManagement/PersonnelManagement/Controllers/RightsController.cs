@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PersonnelManagement.Models;
 using PersonnelManagement.Services;
-using PersonnelManagement.USERS;
 
 namespace PersonnelManagement.Controllers
 {
@@ -35,7 +34,7 @@ namespace PersonnelManagement.Controllers
                 bool isAllowedToRead = IdentityService.CanReadCommonData(user);
                 if (isAllowedToRead)
                 {
-                    Rights rights = repository.GetContextUser().RightsLocal().Values.FirstOrDefault(r => r.Position == id);
+                    Rights rights = repository.RightsLocal().Values.FirstOrDefault(r => r.Position == id);
                     if (rights == null)
                     {
                         return new Rights();
@@ -73,17 +72,17 @@ namespace PersonnelManagement.Controllers
             }
             if (rights.Id == 0)
             {
-                repository.GetContextUser().AddRights(user, rights);
+                repository.AddRights(user, rights);
                 return new ObjectResult(Keys.SUCCESS_SHORT + ":Права добавлены");
             }
             else if (rights.Id > 0)
             {
-                repository.GetContextUser().ChangeRights(user, rights);
+                repository.ChangeRights(user, rights);
                 return new ObjectResult(Keys.SUCCESS_SHORT + ":Права изменены");
             }
             else if (rights.Id < 0)
             {
-                repository.GetContextUser().DeleteRights(user, rights);
+                repository.DeleteRights(user, rights);
                 return new ObjectResult(Keys.SUCCESS_SHORT + ":Права удалены");
             }
 

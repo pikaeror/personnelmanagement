@@ -25,6 +25,7 @@
     birthcitysubstate: number;
     birthcitytype: string;
     birthcity: string;
+    birthlocation: string;
     birthadditional: string;
     birthadditionaldisplay: boolean; // отображать ли текстовое поле "край, станица" и др.
     nodata: number;
@@ -39,6 +40,7 @@
     deathadditional: string;
     deathadditionaldisplay: boolean; // отображать ли текстовое поле "край, станица" и др.
 
+    fullbirthlocation: string;
     birthdayString: string;
     nodataBool: boolean;
     deathBool: boolean;

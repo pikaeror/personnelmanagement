@@ -1,69 +1,69 @@
 ﻿<template>
     <div>
-        <div style="max-width: 98%">
-            <el-tree :data="newTreeStructures" :props="defaultPropsTree" node-key="id" @node-click="testfunc">
-                <!--<span class="custom-tree-node" slot-scope="{ node, data }">-->
-                    <!--<span> {{ node.label }}</span>-->
-                <!--</span>-->
-            </el-tree>
-        </div>
+
         <!--<transition-group name="slide-fade" tag="div">-->
-        <!--<div class="sidebar-structure" v-bind:class="{ [structure.levelchild]: displayIt, 'sidebar-structure-user': isUserStructure(structure), 'sidebar-selected' : isSelected(structure.id), 'sidebar-structure-wc': structure.hasChildren }" v-for="structure in structures" v-bind:key="structure" v-if="!isDeletedSigned(structure)">
-        <a class="sidebar-structuretext" @click="openStructure($event, structure)" @contextmenu="openStructureDB($event, structure)">
+        <div class="sidebar-structure" v-bind:class="{ [structure.levelchild]: displayIt, 'sidebar-structure-user': isUserStructure(structure), 'sidebar-selected' : isSelected(structure.id), 'sidebar-structure-wc': structure.hasChildren }" v-for="structure in structures" v-bind:key="structure" v-if="!isDeletedSigned(structure)">
+            <a class="sidebar-structuretext" @click="openStructure($event, structure)" @contextmenu="openStructureDB($event, structure)">
 
-            <div v-bind:class="{'sidebar-structure-title-childrenhas': structure.hasChildren}" class="sidebar-levelstyle" :title="structure.name">
-                {{structure.nameshortened}}
-            </div>
-            <span class="sidebar-notsignedandcreated" v-if="isNotSignedAndCreated(structure)"> (Создано, но приказ не подписан)</span>
-            <span class="sidebar-issignedandwillbecreated" v-if="isSignedAndWillBeCreated(structure)"> (Будет создано {{beautifyDate(signedAndWillBeCreatedTime(structure))}})</span>
-            <span class="sidebar-isnotsignedandwillbecreated" v-if="isNotSignedAndWillBeCreated(structure)"> (Будет создано {{beautifyDate(notSignedAndWillBeCreatedTime(structure))}}, но приказ не подписан)</span>
-            <span class="sidebar-isdeletedunsigned" v-if="isDeletedUnsigned(structure)"> (Упразднено, но приказ не подписан)</span>
-            <span class="sidebar-iswillbedeletedsigned" v-if="isWillBeDeletedSigned(structure)"> (Будет упразднено {{beautifyDate(willBeDeletedSignedTime(structure))}})</span>
-            <span class="sidebar-iswillbedeletedunsigned" v-if="isWillBeDeletedUnsigned(structure)"> (Будет упразднено {{beautifyDate(willBeDeletedUnsignedTime(structure))}}, но приказ не подписан)</span>
-            <span class="sidebar-isdeletedunsigned" v-if="isChangedUnsigned(structure)"> (Изменено, но приказ не подписан)</span>
-        </a>
-        <span class="sidebar-arrow" v-if="priorityAvailable" @click="priorityUp(structure)">↑</span>
-        <span class="sidebar-arrow" v-if="priorityAvailable" @click="priorityDown(structure)">↓</span>
-
-        <el-input class="sidebar-input" v-if="priorityAvailable" v-model="structure.priority" @input="priorityChangeValue()"></el-input>z
-        <span class="sidebar-arrow" v-if="priorityAvailable" @click="priorityChange(structure)">✓</span>
-
-        <el-dropdown class="sidebar-structuredropdown" @command="handleCommand" :show-timeout="50" :hide-timeout="500" placement="right-start" @visible-change="onVisibleChange" v-if="isSelected(structure.id)">
-            <div class="el-dropdown-link sidebar-icon">Дейст- вия</div>
-            <el-dropdown-menu slot="dropdown" class="sidebar-action">
-                <div class="sidebar-action-left">
-                    <el-dropdown-item class="popover-inforow popover-dropdown" v-if="structure.hasChildren" :command="subordinate(structure.id)">Отобразить подчиненные подразделения<i v-if="displaysChildren(structure)" class="el-icon-check sidebar-structurechecked"></i></el-dropdown-item>
-                    <el-dropdown-item class="popover-inforow popover-dropdown" v-if="addNewStructureAvailable" :command="addStructure(structure.id)">Добавить подчиненное подразделение</el-dropdown-item>
-                    <el-dropdown-item class="popover-inforow popover-dropdown" v-if="removeStructureAvailable && !isNotCreatedYet(structure) && !isChangedUnsigned(structure)" :command="removeStructureID(structure.id)">Упразднить подразделение</el-dropdown-item>
-                    <el-dropdown-item class="popover-inforow popover-dropdown" v-if="renameStructureAvailable && !isNotCreatedYet(structure) && !isChangedUnsigned(structure)" :command="renameStructureID(structure.id)">Изменить подразделение</el-dropdown-item>
-                    <el-dropdown-item class="popover-inforow popover-dropdown" v-if="renameStructurenodecreeAvailable && !isNotCreatedYet(structure) && !isChangedUnsigned(structure)" :command="renameStructureIDnodecree(structure.id)">Изменить подразделение (без приказа)</el-dropdown-item>
-                    <el-dropdown-item class="popover-inforow popover-dropdown" v-if="removedecreeStructureAvailable && isChangedUnsigned(structure)" :command="renamedecreeStructureID(structure.id)">Редактировать</el-dropdown-item>
-                    <el-dropdown-item class="popover-inforow popover-dropdown" v-if="removedecreeStructureAvailable && isNotCreatedYet(structure)" :command="renamedecreeStructureID(structure.id)">Редактировать</el-dropdown-item>
-                    <el-dropdown-item class="popover-inforow popover-dropdown" v-if="removedecreeStructureAvailable && isUnsigned(structure)" :command="removedecreeStructureID(structure.id)">Убрать из проекта приказа</el-dropdown-item>
-                    <el-dropdown-item class="popover-inforow popover-dropdown" v-if="copyStructureAvailable" :command="copyStructureID(structure.id)">Копировать</el-dropdown-item>
-                    <el-dropdown-item class="popover-inforow popover-dropdown" v-if="renameStructureAvailable" :command="pasteStructureID(structure.id)">Вставить</el-dropdown-item>
-                    <el-dropdown-item class="popover-inforow popover-dropdown" :command="printStaffID(structure.id)">Вывести штат</el-dropdown-item>
-                    <el-dropdown-item class="popover-inforow popover-dropdown" :command="printStructurestaffID(structure.id)">Вывести штатную структуру</el-dropdown-item>
-                    <el-dropdown-item class="popover-inforow popover-dropdown" :command="printOrderHistoryID(structure.id)">История приказов<div>{{checkSidebar()}}</div></el-dropdown-item>
-
+                <div v-bind:class="{'sidebar-structure-title-childrenhas': structure.hasChildren}" class="sidebar-levelstyle" :title="structure.name">
+                    {{structure.nameshortened}}
                 </div>
-                <div class="sidebar-action-right">
-                    <div class="popover-inforow"><label class="popover-label">Начало действия приказа</label> {{beautifyDate(getDecreeStartDate(structure))}}</div>
-                    <div class="popover-inforow"><label class="popover-label">Номер приказа</label> <span v-if="isSignedAndCreated(structure) || isSignedAndWillBeCreated(structure)">{{getDecreeName(structure)}}</span> </div>
-                    <div class="popover-inforow"><label class="popover-label">Приказ <span v-if="isSignedAndCreated(structure) || isSignedAndWillBeCreated(structure)">подписан</span><span v-else>не подписан</span></label> </div>
-                    <hr class="popover-inforow-hr " />
-                    <div class="popover-inforow" v-if="structure.rank > 0 "><label class="popover-label">Разряд</label> {{structure.rank}} </div>
-                    <div class="popover-inforow"><label class="popover-label">Тип подразделения</label> {{structure.structuretypeString}} </div>
-                    <div class="popover-inforow"><label class="popover-label">Область</label>  {{structure.structureregionString}} </div>
-                    <div class="popover-inforow"><label class="popover-label">Населенный пункт</label>  {{structure.city}} </div>
-                    <div class="popover-inforow"><label class="popover-label">Улица</label>  {{structure.street}} </div>
-                    <hr class="popover-inforow-hr " />
-                    <div class="popover-inforow popover-inforow-debug">ID — {{structure.id}} </div>
-                </div>
-            </el-dropdown-menu>
-        </el-dropdown>
+                <span class="sidebar-notsignedandcreated" v-if="isNotSignedAndCreated(structure)"> (Создано, но приказ не подписан)</span>
+                <span class="sidebar-issignedandwillbecreated" v-if="isSignedAndWillBeCreated(structure)"> (Будет создано {{beautifyDate(signedAndWillBeCreatedTime(structure))}})</span>
+                <span class="sidebar-isnotsignedandwillbecreated" v-if="isNotSignedAndWillBeCreated(structure)"> (Будет создано {{beautifyDate(notSignedAndWillBeCreatedTime(structure))}}, но приказ не подписан)</span>
+                <span class="sidebar-isdeletedunsigned" v-if="isDeletedUnsigned(structure)"> (Упразднено, но приказ не подписан)</span>
+                <span class="sidebar-iswillbedeletedsigned" v-if="isWillBeDeletedSigned(structure)"> (Будет упразднено {{beautifyDate(willBeDeletedSignedTime(structure))}})</span>
+                <span class="sidebar-iswillbedeletedunsigned" v-if="isWillBeDeletedUnsigned(structure)"> (Будет упразднено {{beautifyDate(willBeDeletedUnsignedTime(structure))}}, но приказ не подписан)</span>
+                <span class="sidebar-isdeletedunsigned" v-if="isChangedUnsigned(structure)"> (Изменено, но приказ не подписан)</span>
+            </a>
+            <span class="sidebar-arrow" v-if="priorityAvailable" @click="priorityUp(structure)">↑</span>
+            <span class="sidebar-arrow" v-if="priorityAvailable" @click="priorityDown(structure)">↓</span>
 
-    </div>-->
+            <el-input class="sidebar-input" v-if="priorityAvailable" v-model="structure.priority" @input="priorityChangeValue()"></el-input>
+            <span class="sidebar-arrow" v-if="priorityAvailable" @click="priorityChange(structure)">✓</span>
+
+            <el-dropdown class="sidebar-structuredropdown" @command="handleCommand" :show-timeout="50" :hide-timeout="500" placement="right-start" @visible-change="onVisibleChange" v-if="isSelected(structure.id)">
+                <div class="el-dropdown-link sidebar-icon">Дейст- вия</div>
+                <el-dropdown-menu slot="dropdown" class="sidebar-action">
+                    <div class="sidebar-action-left">
+                        <el-dropdown-item class="popover-inforow popover-dropdown" v-if="structure.hasChildren" :command="subordinate(structure.id)">Отобразить подчиненные подразделения<i v-if="displaysChildren(structure)" class="el-icon-check sidebar-structurechecked"></i></el-dropdown-item>
+                        <el-dropdown-item class="popover-inforow popover-dropdown" v-if="addNewStructureAvailable" :command="addStructure(structure.id)">Добавить подчиненное подразделение</el-dropdown-item>
+                        <el-dropdown-item class="popover-inforow popover-dropdown" v-if="removeStructureAvailable && !isNotCreatedYet(structure) && !isChangedUnsigned(structure)" :command="removeStructureID(structure.id)">Упразднить подразделение</el-dropdown-item>
+                        <el-dropdown-item class="popover-inforow popover-dropdown" v-if="renameStructureAvailable && !isNotCreatedYet(structure) && !isChangedUnsigned(structure)" :command="renameStructureID(structure.id)">Изменить подразделение</el-dropdown-item>
+                        <el-dropdown-item class="popover-inforow popover-dropdown" v-if="renameStructurenodecreeAvailable && !isNotCreatedYet(structure) && !isChangedUnsigned(structure)" :command="renameStructureIDnodecree(structure.id)">Изменить подразделение (без приказа)</el-dropdown-item>
+                        <el-dropdown-item class="popover-inforow popover-dropdown" v-if="removedecreeStructureAvailable && isChangedUnsigned(structure)" :command="renamedecreeStructureID(structure.id)">Редактировать</el-dropdown-item>
+                        <el-dropdown-item class="popover-inforow popover-dropdown" v-if="removedecreeStructureAvailable && isNotCreatedYet(structure)" :command="renamedecreeStructureID(structure.id)">Редактировать</el-dropdown-item>
+                        <el-dropdown-item class="popover-inforow popover-dropdown" v-if="removedecreeStructureAvailable && isUnsigned(structure)" :command="removedecreeStructureID(structure.id)">Убрать из проекта приказа</el-dropdown-item>
+                        <el-dropdown-item class="popover-inforow popover-dropdown" v-if="copyStructureAvailable" :command="copyStructureID(structure.id)">Копировать</el-dropdown-item>
+                        <el-dropdown-item class="popover-inforow popover-dropdown" v-if="renameStructureAvailable" :command="pasteStructureID(structure.id)">Вставить</el-dropdown-item>
+                        <el-dropdown-item class="popover-inforow popover-dropdown" :command="printStaffID(structure.id)">Вывести штат</el-dropdown-item>
+                        <el-dropdown-item class="popover-inforow popover-dropdown" :command="printStructurestaffID(structure.id)">Вывести штатную структуру</el-dropdown-item>
+                        <el-dropdown-item class="popover-inforow popover-dropdown" :command="printOrderHistoryID(structure.id)">История приказов<div>{{checkSidebar()}}</div></el-dropdown-item>
+                        <!--<el-dropdown-item class="popover-inforow popover-dropdown" :command="appendOldestDecree(structure.id)">Дополнить историю приказов</el-dropdown-item>-->
+                    </div>
+                    <div class="sidebar-action-right">
+                        <div class="popover-inforow"><label class="popover-label">Начало действия приказа</label> {{beautifyDate(getDecreeStartDate(structure))}}</div>
+                        <div class="popover-inforow"><label class="popover-label">Номер приказа</label> <span v-if="isSignedAndCreated(structure) || isSignedAndWillBeCreated(structure)">{{getDecreeName(structure)}}</span> </div>
+                        <div class="popover-inforow"><label class="popover-label">Приказ <span v-if="isSignedAndCreated(structure) || isSignedAndWillBeCreated(structure)">подписан</span><span v-else>не подписан</span></label> </div>
+                        <hr class="popover-inforow-hr " />
+                        <div class="popover-inforow" v-if="structure.rank > 0 "><label class="popover-label">Разряд</label> {{structure.rank}} </div>
+                        <div class="popover-inforow"><label class="popover-label">Тип подразделения</label> {{structure.structuretypeString}} </div>
+                        <div class="popover-inforow"><label class="popover-label">Область</label>  {{structure.structureregionString}} </div>
+                        <div class="popover-inforow"><label class="popover-label">Населенный пункт</label>  {{structure.city}} </div>
+                        <div class="popover-inforow"><label class="popover-label">Улица</label>  {{structure.street}} </div>
+                        <hr class="popover-inforow-hr " />
+                        <div class="popover-inforow popover-inforow-debug">ID — {{structure.id}} </div>
+                    </div>
+
+
+
+                    <!--
+                <el-dropdown-item command="d" disabled>Action 4</el-dropdown-item>
+                <el-dropdown-item command="e" divided>Action 5</el-dropdown-item>-->
+                </el-dropdown-menu>
+            </el-dropdown>
+
+        </div>
         <!--</transition-group>-->
         <!--<el-dropdown class="sidebar-more" placement="top" @command="handleExtented" :show-timeout="0" :hide-timeout="500">
         <span class="el-dropdown-link">
@@ -109,19 +109,13 @@
         <el-dialog :visible.sync="vizibleOrderHistory" width="60%" v-draggable>
             <div>
                 <!--<b><center>История приказов {{post_counter_order_history}}:</center></b>-->
-                <b><center>Истор
-ия приказов:
-                
-                </center></b>
-                ор
-                
+                <b><center>История приказов:</center></b>
                 <el-collapse accordion>
                     <template v-for="(order, index) in orders_list">
                         <el-collapse-item>
-                            <template slot="title">
-                                {{order.name}}
-                                <el-button class="dellll_buttom" @click="pre_edit_item_from_orderlist(order)" v-if="order.decree.historycal == 1">Редактировать</el-button>
-                                <el-button class="dellll_buttom" @click="remove_item_from_orderlist(order)" v-if="order.decree.historycal == 1">Удалить</el-button>
+                            <template slot="title">{{order.name}}  
+                            <el-button class="dellll_buttom" @click="pre_edit_item_from_orderlist(order)" v-if="order.decree.historycal == 1">Редактировать</el-button>
+                            <el-button class="dellll_buttom" @click="remove_item_from_orderlist(order)" v-if="order.decree.historycal == 1">Удалить</el-button>
                             </template>
                             <ul v-for="decree_options in order.orders">
                                 <li>

@@ -3,14 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.IO;
-using System.Linq;
 using System.Linq.Expressions;
 using System.Text.RegularExpressions;
 using DocumentFormat.OpenXml;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Wordprocessing;
 using Remotion.Linq.Parsing.Structure.IntermediateModel;
-using PersonnelManagement.USERS;
 
 namespace PersonnelManagement.Models
 {
@@ -44,7 +42,7 @@ namespace PersonnelManagement.Models
 
             TableCreator(body, repository, results, user);
 
-            createSignature(body);
+            createSignature(body, repository);
             //appendDecreeHistory(body: body, name: "");
         }
 
@@ -391,12 +389,14 @@ namespace PersonnelManagement.Models
 
             if (flag_counter_writer)
                 WriteCounter(table,
-                    new ChangeDecreeItem(add: results.addition_operations.ToString(),
-                                         remove: results.forgote_operations.ToString()));
+                    new ChangeDecreeItem(name: "ИТОГО в " + results.m_structure.Nameshortened.ToString(),
+                                         add: results.addition_operations == 0 ? "-" : results.addition_operations.ToString(),
+                                         remove: results.forgote_operations == 0 ? "-" : results.forgote_operations.ToString()));
             else if(forgot_header)
                 WriteCounter(table,
-                    new ChangeDecreeItem(add: results.addition_operations.ToString(),
-                                         remove: results.forgote_operations.ToString()));
+                    new ChangeDecreeItem(name: "ВСЕГО в " + results.m_structure.Nameshortened.ToString(),
+                                         add: results.addition_operations == 0 ? "-" : results.addition_operations.ToString(),
+                                         remove: results.forgote_operations == 0 ? "-" : results.forgote_operations.ToString()));
             WritePosition(table,
                 new ChangeDecreeItem());
         }
@@ -433,10 +433,10 @@ namespace PersonnelManagement.Models
         {
             TableRow row = new TableRow(new TableHeader());
             row.AppendChild(new TableHeader() { Val = OnOffOnlyValues.Off });
-            writeHeaderCell(row, results.name, FontSize, "70", BorderValues.None, BorderValues.None);
+            writeHeaderCell(row, results.name, FontSize, "70", BorderValues.None, BorderValues.None, bold: true, left_aling: true);
             writeHeaderCell(row, results.rankname, FontSize, "35", BorderValues.None, BorderValues.None);
-            writeHeaderCell(row, results.add_number, FontSize, "15", BorderValues.Single, BorderValues.None);
-            writeHeaderCell(row, results.remove_number, FontSize, "15", BorderValues.Single, BorderValues.None);
+            writeHeaderCell(row, results.add_number, FontSize, "15", BorderValues.Single, BorderValues.None, bold: true);
+            writeHeaderCell(row, results.remove_number, FontSize, "15", BorderValues.Single, BorderValues.None, bold: true);
             writeHeaderCell(row, results.source_flag, FontSize, "16", BorderValues.None, BorderValues.None);
             writeHeaderCell(row, results.note, "16", "20", BorderValues.None, BorderValues.None);
             table.Append(row);

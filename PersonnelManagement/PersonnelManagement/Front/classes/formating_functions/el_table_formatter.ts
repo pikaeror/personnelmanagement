@@ -16,15 +16,6 @@ module formatting {
         }
         return output;
     }
-
-    export function dateFormater(date: Date): string {
-        var output = "";
-        try {
-            output = date.toLocaleDateString('ru-Ru', { day: '2-digit', month: '2-digit', year: 'numeric' });
-        } catch (e) {
-        }
-        return output;
-    }
 }
 
 export default formatting;

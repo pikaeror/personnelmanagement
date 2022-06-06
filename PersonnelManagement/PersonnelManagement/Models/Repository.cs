@@ -16,6 +16,7 @@ using System.Security.Cryptography.X509Certificates;
 using DocumentFormat.OpenXml.InkML;
 using PersonnelManagement.Utils;
 using System.Globalization;
+using System.Threading;
 
 namespace PersonnelManagement.Models
 {
@@ -10939,5 +10940,7 @@ namespace PersonnelManagement.Models
 
             return users;
         }
+
+        public static Dictionary<int, CancellationTokenSource> ThreadArray = new Dictionary<int, CancellationTokenSource>();
     }
 }

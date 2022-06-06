@@ -50,15 +50,18 @@ namespace PersonnelManagement.Controllers
 
         private void setThread(string session_id, int PID = -1)
         {
-            Session session = context.Session.First(r => r.Id == session_id);
+            pmContext context_t = repository.GetContext();
+            Session session = context_t.Session.First(r => r.Id == session_id);
             session.LastPidrequest = PID;
-            context.Session.Update(session);
-            context.SaveChanges();
+            try
+            {
+                context_t.Session.Update(session);
+                context_t.SaveChanges();
+            } catch { }
         }
 
         private int getThread(string session_id)
         {
-            var t = context.SaveChanges();
             Session session = context.Session.First(r => r.Id == session_id);
             return session.LastPidrequest;
         }
@@ -93,17 +96,55 @@ namespace PersonnelManagement.Controllers
                 return new ObjectResult(Keys.ERROR_SHORT + ":Отказано в доступе");
             }
             IActionResult output = new ObjectResult("");
-            
-            Thread current = new Thread(() => { output = worker(new Repository(repository.GetContext()), pmrequest, user); });
+            CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
+            CancellationToken token = cancellationTokenSource.Token;
+            Task f = new Task(() => { output = worker(repository, pmrequest, user); }, token);
+            /*Thread current = new Thread(() => { output = worker(repository, pmrequest, user); }),
+                time = Thread.CurrentThread
             setThread(sessionid, current.ManagedThreadId);
-            current.Start();
+            Repository.ThreadArray.Add(current.ManagedThreadId, current);
+            current.Start();;*/
+            setThread(sessionid, f.Id);
+            Repository.ThreadArray.Add(f.Id, cancellationTokenSource);
+            try {
+                f.Start();
+                while (!f.IsCompletedSuccessfully) {
+                    if (token.IsCancellationRequested || !Repository.ThreadArray.ContainsKey(f.Id)) {
+                        //cancellationTokenSource.Cancel();
+                        token.ThrowIfCancellationRequested();
+                    }
+                }
+            } catch (AggregateException ae) {
+                foreach (Exception e in ae.InnerExceptions)
+                {
+                    if (e is TaskCanceledException)
+                        Console.WriteLine("Операция прервана");
+                    else
+                        Console.WriteLine(e.Message);
+                }
+            } finally {
+                cancellationTokenSource.Dispose();
+            }
+            return output;
             //var h = GetNativeThreadId(current);
-            current.Join();
-            if(getThread(sessionid) == current.ManagedThreadId)
+            /*while(current.IsAlive)
             {
+                if (!Repository.ThreadArray.ContainsKey(current.ManagedThreadId))
+                {
+                    current.Priority = ThreadPriority.Lowest;
+                    try { current.Abort(); } catch { }                    
+                    time.Priority = ThreadPriority.Lowest;
+                    time.Interrupt();
+                }
+            }*/
+            //current.Join();
+            /*if(Repository.ThreadArray.ContainsKey(current.ManagedThreadId))
+            {
+                Repository.ThreadArray.Remove(current.ManagedThreadId);
                 setThread(sessionid);
                 return output;
             }
+            time.Abort();*/
             return new ObjectResult("");
 
             foreach (ProcessThread t in Process.GetCurrentProcess().Threads)
@@ -236,8 +277,16 @@ namespace PersonnelManagement.Controllers
         [HttpPost("Stoped")]
         public IActionResult terminateThread()
         {
+            //setThread(Request.Cookies[Keys.COOKIES_SESSION]);
+            int thread_id = getThread(Request.Cookies[Keys.COOKIES_SESSION]);
+            if(Repository.ThreadArray.ContainsKey(thread_id))
+            {
+                CancellationTokenSource time = Repository.ThreadArray[thread_id];
+                time.Cancel();
+                //time.Abort();
+                Repository.ThreadArray.Remove(thread_id);
+            }
             setThread(Request.Cookies[Keys.COOKIES_SESSION]);
-            //int thread_id = getThread(Request.Cookies[Keys.COOKIES_SESSION]);
             return new ObjectResult(Keys.ERROR_SHORT);
         }
 

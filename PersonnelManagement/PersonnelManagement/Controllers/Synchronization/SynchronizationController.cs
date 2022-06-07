@@ -6,9 +6,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using PersonnelManagement.Models;
 using PersonnelManagement.Services;
-using System.Net;
-using System.Net.Http;
-using System.Net.Http.Headers;
 
 namespace PersonnelManagement.Controllers
 {
@@ -25,22 +22,28 @@ namespace PersonnelManagement.Controllers
         }
 
         [HttpPost("front/a{address}p{port}")]
-        public IActionResult sendThisDataBaseToServer([FromRoute] string address, [FromRoute] string port)
+        public Synchronization sendThisDataBaseToServer([FromRoute] string address, [FromRoute] string port)
         {
+            Synchronization output = new Synchronization(repository.GetContext());
+            return output;
+            /*WebRequest request = WebRequest.Create(string.Format("http://{0}:{1}/", address, port));
+            request.Method = "POST";
+            //request.
+
             HttpClient client = new HttpClient();
             client.BaseAddress = new Uri(string.Format("http://{0}:{1}/", address, port));
             client.DefaultRequestHeaders.Accept.Clear();
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            client.PostAsync("api/Synchronization/back", HttpPostAttribute);
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));*/
+            //client.PostAsync("api/Synchronization/back");
             //HttpResponseMessage httpResponse = client.PostAsJsonAsync();
-            return new ObjectResult("");
+            //return new ObjectResult("");
         }
 
         [HttpPost("back")]
-        public bool getDataFromServer([FromBody] Object data_for_sync)
+        public IActionResult getDataFromServer([FromBody] Synchronization data_for_sync)
         {
 
-            return false;
+            return new ObjectResult("");
         }
     }
 }

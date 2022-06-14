@@ -7,52 +7,52 @@ namespace PersonnelManagement.Models
 {
     public class Synchronization
     {
-        private List<Altrank> altranks { get; set; }
-        private List<Altrankcondition> altrankconditions { get; set; }
-        private List<Altrankconditiongroup> altrankconditiongroups { get; set; }
-        private List<Area> areas { get; set; }
-        private List<Areaother> areaothers { get; set; }
-        private List<Citysubstate> citysubstates { get; set; }
-        private List<Citytype> citytypes { get; set; }
-        private List<Civildecree> civildecrees { get; set; }
-        private List<Country> countries { get; set; }
-        private List<Decree> decrees { get; set; }
-        private List<Decreeoperation> decreeoperations { get; set; }
-        private List<Department> departments { get; set; }
-        private List<Departmentrename> departmentrenames { get; set; }
-        private List<Dismissalclauses> dismissalclauses { get; set; }
-        private List<Drivercategory> drivercategories { get; set; }
-        private List<Drivertype> drivertypes { get; set; }
-        private List<Elementsubject> elementsubjects { get; set; }
-        private List<Externalorderwhotype> externalorderwhotypes { get; set; }
-        private List<Mrd> mrds { get; set; }
-        private List<Ordernumbertype> ordernumbertypes { get; set; }
-        private List<Position> positions { get; set; }
-        private List<Positioncategory> positioncategories { get; set; }
-        private List<Positioncategoryrank> positioncategoryranks { get; set; }
-        private List<Positionhistory> positionhistories { get; set; }
-        private List<Positionmrd> positionmrds { get; set; }
-        private List<Positiontype> positiontypes { get; set; }
-        private List<Prooftype> prooftypes { get; set; }
-        private List<Rank> ranks { get; set; }
-        private List<Region> regions { get; set; }
-        private List<Rights> rights { get; set; }
-        private List<Rightsstructure> rightsstructures { get; set; }
-        private List<Role> roles { get; set; }
-        private List<Session> sessions { get; set; }
-        private List<Setpersondatatype> setpersondatatypes { get; set; }
-        private List<Sourceoffinancing> sourceoffinancings { get; set; }
-        private List<Staffcomission> staffcomissions { get; set; }
-        private List<Streettype> streettypes { get; set; }
-        private List<Structure> structures { get; set; }
-        private List<Structureregion> structureregions { get; set; }
-        private List<Structuretype> structuretypes { get; set; }
-        private List<Subject> subjects { get; set; }
-        private List<Subjectcategory> subjectcategories { get; set; }
-        private List<Subjectexport> subjectexports { get; set; }
-        private List<Subjectgender> subjectgenders { get; set; }
-        private List<Transfertype> transfertypes { get; set; }
-        private List<User> users { get; set; }
+        public List<Altrank> altranks { get; set; }
+        public List<Altrankcondition> altrankconditions { get; set; }
+        public List<Altrankconditiongroup> altrankconditiongroups { get; set; }
+        public List<Area> areas { get; set; }
+        public List<Areaother> areaothers { get; set; }
+        public List<Citysubstate> citysubstates { get; set; }
+        public List<Citytype> citytypes { get; set; }
+        public List<Civildecree> civildecrees { get; set; }
+        public List<Country> countries { get; set; }
+        public List<Decree> decrees { get; set; }
+        public List<Decreeoperation> decreeoperations { get; set; }
+        public List<Department> departments { get; set; }
+        public List<Departmentrename> departmentrenames { get; set; }
+        public List<Dismissalclauses> dismissalclauses { get; set; }
+        public List<Drivercategory> drivercategories { get; set; }
+        public List<Drivertype> drivertypes { get; set; }
+        public List<Elementsubject> elementsubjects { get; set; }
+        public List<Externalorderwhotype> externalorderwhotypes { get; set; }
+        public List<Mrd> mrds { get; set; }
+        public List<Ordernumbertype> ordernumbertypes { get; set; }
+        public List<Position> positions { get; set; }
+        public List<Positioncategory> positioncategories { get; set; }
+        public List<Positioncategoryrank> positioncategoryranks { get; set; }
+        public List<Positionhistory> positionhistories { get; set; }
+        public List<Positionmrd> positionmrds { get; set; }
+        public List<Positiontype> positiontypes { get; set; }
+        public List<Prooftype> prooftypes { get; set; }
+        public List<Rank> ranks { get; set; }
+        public List<Region> regions { get; set; }
+        public List<Rights> rights { get; set; }
+        public List<Rightsstructure> rightsstructures { get; set; }
+        public List<Role> roles { get; set; }
+        public List<Session> sessions { get; set; }
+        public List<Setpersondatatype> setpersondatatypes { get; set; }
+        public List<Sourceoffinancing> sourceoffinancings { get; set; }
+        public List<Staffcomission> staffcomissions { get; set; }
+        public List<Streettype> streettypes { get; set; }
+        public List<Structure> structures { get; set; }
+        public List<Structureregion> structureregions { get; set; }
+        public List<Structuretype> structuretypes { get; set; }
+        public List<Subject> subjects { get; set; }
+        public List<Subjectcategory> subjectcategories { get; set; }
+        public List<Subjectexport> subjectexports { get; set; }
+        public List<Subjectgender> subjectgenders { get; set; }
+        public List<Transfertype> transfertypes { get; set; }
+        public List<User> users { get; set; }
         public Synchronization()
         {
             altranks = new List<Altrank>() { };
@@ -104,101 +104,101 @@ namespace PersonnelManagement.Models
         }
         public Synchronization(Synchronization synchronization)
         {
-            altranks = synchronization.altranks;
-            altrankconditions = synchronization.altrankconditions;
-            altrankconditiongroups = synchronization.altrankconditiongroups;
-            areas = synchronization.areas;
-            areaothers = synchronization.areaothers;
-            citysubstates = synchronization.citysubstates;
-            citytypes = synchronization.citytypes;
-            civildecrees = synchronization.civildecrees;
-            countries = synchronization.countries;
-            decrees = synchronization.decrees;
-            decreeoperations = synchronization.decreeoperations;
-            departments = synchronization.departments;
-            departmentrenames = synchronization.departmentrenames;
-            dismissalclauses = synchronization.dismissalclauses;
-            drivercategories = synchronization.drivercategories;
-            drivertypes = synchronization.drivertypes;
-            elementsubjects = synchronization.elementsubjects;
-            externalorderwhotypes = synchronization.externalorderwhotypes;
-            mrds = synchronization.mrds;
-            ordernumbertypes = synchronization.ordernumbertypes;
-            positions = synchronization.positions;
-            positioncategories = synchronization.positioncategories;
-            positioncategoryranks = synchronization.positioncategoryranks;
-            positionhistories = synchronization.positionhistories;
-            positionmrds = synchronization.positionmrds;
-            positiontypes = synchronization.positiontypes;
-            prooftypes = synchronization.prooftypes;
-            ranks = synchronization.ranks;
-            regions = synchronization.regions;
-            rights = synchronization.rights;
-            rightsstructures = synchronization.rightsstructures;
-            roles = synchronization.roles;
-            sessions = synchronization.sessions;
-            setpersondatatypes = synchronization.setpersondatatypes;
-            sourceoffinancings = synchronization.sourceoffinancings;
-            staffcomissions = synchronization.staffcomissions;
-            streettypes = synchronization.streettypes;
-            structures = synchronization.structures;
-            structureregions = synchronization.structureregions;
-            structuretypes = synchronization.structuretypes;
-            subjects = synchronization.subjects;
-            subjectcategories = synchronization.subjectcategories;
-            subjectexports = synchronization.subjectexports;
-            subjectgenders = synchronization.subjectgenders;
-            transfertypes = synchronization.transfertypes;
-            users = synchronization.users;
+            altranks                = new List<Altrank>(synchronization.altranks);
+            altrankconditions       = new List<Altrankcondition>(synchronization.altrankconditions);
+            altrankconditiongroups  = new List<Altrankconditiongroup>(synchronization.altrankconditiongroups);
+            areas                   = new List<Area>(synchronization.areas);
+            areaothers              = new List<Areaother>(synchronization.areaothers);
+            citysubstates           = new List<Citysubstate>(synchronization.citysubstates);
+            citytypes               = new List<Citytype>(synchronization.citytypes);
+            civildecrees            = new List<Civildecree>(synchronization.civildecrees);
+            countries               = new List<Country>(synchronization.countries);
+            decrees                 = new List<Decree>(synchronization.decrees);
+            decreeoperations        = new List<Decreeoperation>(synchronization.decreeoperations);
+            departments             = new List<Department>(synchronization.departments);
+            departmentrenames       = new List<Departmentrename>(synchronization.departmentrenames);
+            dismissalclauses        = new List<Dismissalclauses>(synchronization.dismissalclauses);
+            drivercategories        = new List<Drivercategory>(synchronization.drivercategories);
+            drivertypes             = new List<Drivertype>(synchronization.drivertypes);
+            elementsubjects         = new List<Elementsubject>(synchronization.elementsubjects);
+            externalorderwhotypes   = new List<Externalorderwhotype>(synchronization.externalorderwhotypes);
+            mrds                    = new List<Mrd>(synchronization.mrds);
+            ordernumbertypes        = new List<Ordernumbertype>(synchronization.ordernumbertypes);
+            positions               = new List<Position>(synchronization.positions);
+            positioncategories      = new List<Positioncategory>(synchronization.positioncategories);
+            positioncategoryranks   = new List<Positioncategoryrank>(synchronization.positioncategoryranks);
+            positionhistories       = new List<Positionhistory>(synchronization.positionhistories);
+            positionmrds            = new List<Positionmrd>(synchronization.positionmrds);
+            positiontypes           = new List<Positiontype>(synchronization.positiontypes);
+            prooftypes              = new List<Prooftype>(synchronization.prooftypes);
+            ranks                   = new List<Rank>(synchronization.ranks);
+            regions                 = new List<Region>(synchronization.regions);
+            rights                  = new List<Rights>(synchronization.rights);
+            rightsstructures        = new List<Rightsstructure>(synchronization.rightsstructures);
+            roles                   = new List<Role>(synchronization.roles);
+            sessions                = new List<Session>(synchronization.sessions);
+            setpersondatatypes      = new List<Setpersondatatype>(synchronization.setpersondatatypes);
+            sourceoffinancings      = new List<Sourceoffinancing>(synchronization.sourceoffinancings);
+            staffcomissions         = new List<Staffcomission>(synchronization.staffcomissions);
+            streettypes             = new List<Streettype>(synchronization.streettypes);
+            structures              = new List<Structure>(synchronization.structures);
+            structureregions        = new List<Structureregion>(synchronization.structureregions);
+            structuretypes          = new List<Structuretype>(synchronization.structuretypes);
+            subjects                = new List<Subject>(synchronization.subjects);
+            subjectcategories       = new List<Subjectcategory>(synchronization.subjectcategories);
+            subjectexports          = new List<Subjectexport>(synchronization.subjectexports);
+            subjectgenders          = new List<Subjectgender>(synchronization.subjectgenders);
+            transfertypes           = new List<Transfertype>(synchronization.transfertypes);
+            users                   = new List<User>(synchronization.users);
         }
         public Synchronization(pmContext pmContext)
         {
-            altranks = pmContext.Altrank.ToList();
-            altrankconditions = pmContext.Altrankcondition.ToList();
-            altrankconditiongroups = pmContext.Altrankconditiongroup.ToList();
-            areas = pmContext.Area.ToList();
-            areaothers = pmContext.Areaother.ToList();
-            citysubstates = pmContext.Citysubstate.ToList();
-            citytypes = pmContext.Citytype.ToList();
-            civildecrees = pmContext.Civildecree.ToList();
-            countries = pmContext.Country.ToList();
-            decrees = pmContext.Decree.ToList();
-            decreeoperations = pmContext.Decreeoperation.ToList();
-            departments = pmContext.Department.ToList();
-            departmentrenames = pmContext.Departmentrename.ToList();
-            dismissalclauses = pmContext.Dismissalclauses.ToList();
-            drivercategories = pmContext.Drivercategory.ToList();
-            drivertypes = pmContext.Drivertype.ToList();
-            elementsubjects = pmContext.Elementsubject.ToList();
-            externalorderwhotypes = pmContext.Externalorderwhotype.ToList();
-            mrds = pmContext.Mrd.ToList();
-            ordernumbertypes = pmContext.Ordernumbertype.ToList();
-            positions = pmContext.Position.ToList();
-            positioncategories = pmContext.Positioncategory.ToList();
-            positioncategoryranks = pmContext.Positioncategoryrank.ToList();
-            positionhistories = pmContext.Positionhistory.ToList();
-            positionmrds = pmContext.Positionmrd.ToList();
-            positiontypes = pmContext.Positiontype.ToList();
-            prooftypes = pmContext.Prooftype.ToList();
-            ranks = pmContext.Rank.ToList();
-            regions = pmContext.Region.ToList();
-            rights = pmContext.Rights.ToList();
-            rightsstructures = pmContext.Rightsstructure.ToList();
-            roles = pmContext.Role.ToList();
-            sessions = pmContext.Session.ToList();
-            setpersondatatypes = pmContext.Setpersondatatype.ToList();
-            sourceoffinancings = pmContext.Sourceoffinancing.ToList();
-            staffcomissions = pmContext.Staffcomission.ToList();
-            streettypes = pmContext.Streettype.ToList();
-            structures = pmContext.Structure.ToList();
-            structureregions = pmContext.Structureregion.ToList();
-            structuretypes = pmContext.Structuretype.ToList();
-            subjects = pmContext.Subject.ToList();
-            subjectcategories = pmContext.Subjectcategory.ToList();
-            subjectexports = pmContext.Subjectexport.ToList();
-            subjectgenders = pmContext.Subjectgender.ToList();
-            transfertypes = pmContext.Transfertype.ToList();
-            users = pmContext.User.ToList();
+            altranks                = new List<Altrank>(pmContext.Altrank.ToList());
+            altrankconditions       = new List<Altrankcondition>(pmContext.Altrankcondition.ToList());
+            altrankconditiongroups  = new List<Altrankconditiongroup>(pmContext.Altrankconditiongroup.ToList());
+            areas                   = new List<Area>(pmContext.Area.ToList());
+            areaothers              = new List<Areaother>(pmContext.Areaother.ToList());
+            citysubstates           = new List<Citysubstate>(pmContext.Citysubstate.ToList());
+            citytypes               = new List<Citytype>(pmContext.Citytype.ToList());
+            civildecrees            = new List<Civildecree>(pmContext.Civildecree.ToList());
+            countries               = new List<Country>(pmContext.Country.ToList());
+            decrees                 = new List<Decree>(pmContext.Decree.ToList());
+            decreeoperations        = new List<Decreeoperation>(pmContext.Decreeoperation.ToList());
+            departments             = new List<Department>(pmContext.Department.ToList());
+            departmentrenames       = new List<Departmentrename>(pmContext.Departmentrename.ToList());
+            dismissalclauses        = new List<Dismissalclauses>(pmContext.Dismissalclauses.ToList());
+            drivercategories        = new List<Drivercategory>(pmContext.Drivercategory.ToList());
+            drivertypes             = new List<Drivertype>(pmContext.Drivertype.ToList());
+            elementsubjects         = new List<Elementsubject>(pmContext.Elementsubject.ToList());
+            externalorderwhotypes   = new List<Externalorderwhotype>(pmContext.Externalorderwhotype.ToList());
+            mrds                    = new List<Mrd>(pmContext.Mrd.ToList());
+            ordernumbertypes        = new List<Ordernumbertype>(pmContext.Ordernumbertype.ToList());
+            positions               = new List<Position>(pmContext.Position.ToList());
+            positioncategories      = new List<Positioncategory>(pmContext.Positioncategory.ToList());
+            positioncategoryranks   = new List<Positioncategoryrank>(pmContext.Positioncategoryrank.ToList());
+            positionhistories       = new List<Positionhistory>(pmContext.Positionhistory.ToList());
+            positionmrds            = new List<Positionmrd>(pmContext.Positionmrd.ToList());
+            positiontypes           = new List<Positiontype>(pmContext.Positiontype.ToList());
+            prooftypes              = new List<Prooftype>(pmContext.Prooftype.ToList());
+            ranks                   = new List<Rank>(pmContext.Rank.ToList());
+            regions                 = new List<Region>(pmContext.Region.ToList());
+            rights                  = new List<Rights>(pmContext.Rights.ToList());
+            rightsstructures        = new List<Rightsstructure>(pmContext.Rightsstructure.ToList());
+            roles                   = new List<Role>(pmContext.Role.ToList());
+            sessions                = new List<Session>(pmContext.Session.ToList());
+            setpersondatatypes      = new List<Setpersondatatype>(pmContext.Setpersondatatype.ToList());
+            sourceoffinancings      = new List<Sourceoffinancing>(pmContext.Sourceoffinancing.ToList());
+            staffcomissions         = new List<Staffcomission>(pmContext.Staffcomission.ToList());
+            streettypes             = new List<Streettype>(pmContext.Streettype.ToList());
+            structures              = new List<Structure>(pmContext.Structure.ToList());
+            structureregions        = new List<Structureregion>(pmContext.Structureregion.ToList());
+            structuretypes          = new List<Structuretype>(pmContext.Structuretype.ToList());
+            subjects                = new List<Subject>(pmContext.Subject.ToList());
+            subjectcategories       = new List<Subjectcategory>(pmContext.Subjectcategory.ToList());
+            subjectexports          = new List<Subjectexport>(pmContext.Subjectexport.ToList());
+            subjectgenders          = new List<Subjectgender>(pmContext.Subjectgender.ToList());
+            transfertypes           = new List<Transfertype>(pmContext.Transfertype.ToList());
+            users                   = new List<User>(pmContext.User.ToList());
         }
 
         public void update(Repository repository)

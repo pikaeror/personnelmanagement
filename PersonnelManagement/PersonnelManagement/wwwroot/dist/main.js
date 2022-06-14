@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "ce5e6bc72f9eaaae88f3"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "47a86a447270339c14f4"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -5029,6 +5029,10 @@ let AdminpanelComponent = class AdminpanelComponent extends __WEBPACK_IMPORTED_M
             activeNameIllcode: "icfirst",
             activeNameLocationtype: "loctype",
             staffComission: "staffcommfirst",
+            sync: "synchronize",
+            adress: "",
+            port: "",
+            uploading_loading: false,
             head: false,
             headid: 0,
             headingStructureTree: null,
@@ -6014,6 +6018,8 @@ let AdminpanelComponent = class AdminpanelComponent extends __WEBPACK_IMPORTED_M
     }
     handleClickStaff(tab, event) {
     }
+    handleClickSync(tab, event) {
+    }
     updatePositiontype(positiontype) {
         fetch('/api/Positiontype', {
             method: 'post',
@@ -6722,6 +6728,23 @@ let AdminpanelComponent = class AdminpanelComponent extends __WEBPACK_IMPORTED_M
         rights.peopleeditwound = 1;
         rights.peoplereadwound = 1;
         this.forceUpdate();
+    }
+    loaddatabase() {
+        var connector = `api/Synchronization/front/a/${this.adress}/p/${this.port}`;
+        console.log(connector);
+        this.uploading_loading = true;
+        fetch(connector, {
+            method: 'post',
+            credentials: 'include',
+            headers: new Headers({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            })
+        })
+            .then(response => { return response.json(); })
+            .then((response) => {
+            this.uploading_loading = false;
+        });
     }
 };
 __decorate([
@@ -25988,7 +26011,86 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     on: {
       "click": _vm.addStaffPerson
     }
-  }, [_vm._v("Добавить")])], 1)], 1)], 1)], 1)], 1)
+  }, [_vm._v("Добавить")])], 1)], 1)], 1), _vm._v(" "), _c('el-tab-pane', {
+    attrs: {
+      "label": "Синхронизация",
+      "name": "thirteen"
+    }
+  }, [_c('el-tabs', {
+    on: {
+      "tab-click": _vm.handleClickSync
+    },
+    model: {
+      value: (_vm.sync),
+      callback: function($$v) {
+        _vm.sync = $$v
+      },
+      expression: "sync"
+    }
+  }, [_c('el-tab-pane', {
+    attrs: {
+      "label": "С внешней БД",
+      "name": "synchronize"
+    }
+  }, [(_vm.activeName === 'thirteen') ? _c('div', [_c('el-input', {
+    attrs: {
+      "placeholder": "IP adress"
+    },
+    model: {
+      value: (_vm.adress),
+      callback: function($$v) {
+        _vm.adress = $$v
+      },
+      expression: "adress"
+    }
+  }, [_c('template', {
+    slot: "prepend"
+  }, [_vm._v("\n                                http://\n                            ")]), _vm._v(" "), _c('el-select', {
+    staticStyle: {
+      "width": "120px"
+    },
+    attrs: {
+      "placeholder": "Port"
+    },
+    slot: "append",
+    model: {
+      value: (_vm.port),
+      callback: function($$v) {
+        _vm.port = $$v
+      },
+      expression: "port"
+    }
+  }, [_c('el-option', {
+    attrs: {
+      "label": "80",
+      "value": "80"
+    }
+  }), _vm._v(" "), _c('el-option', {
+    attrs: {
+      "label": "8080",
+      "value": "8080"
+    }
+  }), _vm._v(" "), _c('el-option', {
+    attrs: {
+      "label": "50001",
+      "value": "50001"
+    }
+  })], 1)], 2), _vm._v(" "), _c('div', {
+    staticStyle: {
+      "text-align": "center"
+    }
+  }, [_c('el-button', {
+    attrs: {
+      "type": "primary",
+      "loading": _vm.uploading_loading,
+      "round": ""
+    },
+    on: {
+      "click": _vm.loaddatabase
+    }
+  }, [_vm._v("Upload"), _c('i', {
+    staticClass: "el-icon-upload el-icon-right"
+  })])], 1)], 1) : _vm._e()])], 1)], 1)], 1)], 1)
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (true) {

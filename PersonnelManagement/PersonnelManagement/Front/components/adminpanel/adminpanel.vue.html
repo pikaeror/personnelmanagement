@@ -914,22 +914,22 @@
                 </el-tabs>
             </el-tab-pane>
             <!--<el-tab-pane label="Коды заболеваний" name="eleventh">
-                <el-tabs v-model="activeNameIllcode" @tab-click="handleClickIllcode">
-                    <el-tab-pane label="Список кодов заболеваний" name="icfirst">
-                        <div v-if="activeName === 'eleventh'">
-                            <div class="adminpanel-illcode" v-for="illcode in illcodes">
-                                <el-input class="adminpanel-illcode-input" @input="startIllcodeUpdate" v-model="illcode.name"></el-input>
-                                <el-button class="adminpanel-illcode-button" @click="updateIllcode(illcode)"><i class="el-icon-check"></i></el-button>
-                                <el-button class="adminpanel-illcode-button" disabled><i class="el-icon-close"></i></el-button>
-                            </div>
-                        </div>
-                    </el-tab-pane>
-                    <el-tab-pane label="Добавить код заболевания" name="icsecond">
-                        <el-input v-model="newIllcodeName" placeholder="Код заболевания"></el-input>
-                        <el-button class="adminpanel-submit" @click="addIllcode">Добавить</el-button>
-                    </el-tab-pane>
-                </el-tabs>
-            </el-tab-pane>-->
+        <el-tabs v-model="activeNameIllcode" @tab-click="handleClickIllcode">
+            <el-tab-pane label="Список кодов заболеваний" name="icfirst">
+                <div v-if="activeName === 'eleventh'">
+                    <div class="adminpanel-illcode" v-for="illcode in illcodes">
+                        <el-input class="adminpanel-illcode-input" @input="startIllcodeUpdate" v-model="illcode.name"></el-input>
+                        <el-button class="adminpanel-illcode-button" @click="updateIllcode(illcode)"><i class="el-icon-check"></i></el-button>
+                        <el-button class="adminpanel-illcode-button" disabled><i class="el-icon-close"></i></el-button>
+                    </div>
+                </div>
+            </el-tab-pane>
+            <el-tab-pane label="Добавить код заболевания" name="icsecond">
+                <el-input v-model="newIllcodeName" placeholder="Код заболевания"></el-input>
+                <el-button class="adminpanel-submit" @click="addIllcode">Добавить</el-button>
+            </el-tab-pane>
+        </el-tabs>
+    </el-tab-pane>-->
             <el-tab-pane label="Штатная комиссия" name="twelve">
                 <el-tabs v-model="staffComission" @tab-click="handleClickStaff">
                     <el-tab-pane label="Список штатной комиссии" name="staffcommfirst">
@@ -952,6 +952,27 @@
                     <el-tab-pane label="Добавить члена штатной комиссии" name="staffcommsecond">
                         <el-input v-model="newStaffComissionName.fio" placeholder="ФИО"></el-input>
                         <el-button class="adminpanel-submit" @click="addStaffPerson">Добавить</el-button>
+                    </el-tab-pane>
+                </el-tabs>
+            </el-tab-pane>
+            <el-tab-pane label="Синхронизация" name="thirteen">
+                <el-tabs v-model="sync" @tab-click="handleClickSync">
+                    <el-tab-pane label="С внешней БД" name="synchronize">
+                        <div v-if="activeName === 'thirteen'">
+                            <el-input placeholder="IP adress" v-model="adress">
+                                <template slot="prepend">
+                                    http://
+                                </template>
+                                <el-select slot="append" v-model="port" placeholder="Port" style="width: 120px;">
+                                    <el-option label="80" value="80"></el-option>
+                                    <el-option label="8080" value="8080"></el-option>
+                                    <el-option label="50001" value="50001"></el-option>
+                                </el-select>
+                            </el-input>
+                            <div style="text-align: center;">
+                                <el-button type="primary" @click="loaddatabase" :loading="uploading_loading" round>Upload<i class="el-icon-upload el-icon-right"></i></el-button>
+                            </div>
+                        </div>
                     </el-tab-pane>
                 </el-tabs>
             </el-tab-pane>

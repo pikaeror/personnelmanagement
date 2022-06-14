@@ -195,6 +195,11 @@ export default class AdminpanelComponent extends Vue {
     activeNameIllcode: string;
     activeNameLocationtype: string;
     staffComission: string;
+    sync: string;
+
+    adress: string;
+    port: string;
+    uploading_loading: boolean;
 
     head: boolean;
     headid: number;
@@ -348,6 +353,11 @@ export default class AdminpanelComponent extends Vue {
             activeNameIllcode: "icfirst",
             activeNameLocationtype: "loctype",
             staffComission: "staffcommfirst",
+            sync: "synchronize",
+
+            adress: "",
+            port: "",
+            uploading_loading: false,
 
             head: false,
             headid: 0,
@@ -1391,6 +1401,10 @@ export default class AdminpanelComponent extends Vue {
 
     }
 
+    handleClickSync(tab, event) {
+
+    }
+
     updatePositiontype(positiontype: Positiontype) {
         fetch('/api/Positiontype', {
             method: 'post',
@@ -2139,5 +2153,23 @@ export default class AdminpanelComponent extends Vue {
         rights.peopleeditwound = 1;
         rights.peoplereadwound = 1;
         this.forceUpdate();
+    }
+
+    loaddatabase() {
+        var connector: string = `api/Synchronization/front/a/${this.adress}/p/${this.port}`;
+        console.log(connector);
+        this.uploading_loading = true;
+        fetch(connector, {
+            method: 'post',
+            credentials: 'include',
+            headers: new Headers({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            })
+        })
+            .then(response => { return response.json(); })
+            .then((response) => {
+                this.uploading_loading = false;
+            });
     }
 }
